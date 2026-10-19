@@ -1,0 +1,36 @@
+node_modules/
+.next/
+out/
+coverage/
+*.tsbuildinfo
+.env*
+!.env.example
+.DS_Store
+next-env.d.ts
+
+# Generated outputs and logs
+dist/
+build/
+.turbo/
+*.log
+
+# Credentials and local service configuration
+*.pem
+*.key
+*.p12
+*.pfx
+.npmrc
+.netrc
+.aws/
+.ssh/
+credentials.json
+secrets.json
+
+# Local editor, hosting, and agent state
+.idea/
+.vscode/
+.vercel/
+.codex/
+.agents/
+*.swp
+*.swo
