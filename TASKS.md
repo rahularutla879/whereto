@@ -7,6 +7,7 @@ Status baseline: October 19, 2026. Checked means implemented, not necessarily ve
 - [x] Homepage, outing request, example request, preference controls/reset, result cards, expandable itinerary, and empty states. Source inspected; browser/visual behavior unverified this session.
 - [x] Local 29-category planner with fictional venues/events, date handling, mock schedules/capacity, budget/travel caps, and preference ranking. Existing suite passed 49/49 tests; see HANDOVER.md for coverage limits.
 - [x] Lightweight documentation and continuity system.
+- [x] Owner-approved private GitHub repository and verified initial source/documentation backup. GitHub setup and checkpoint details are recorded in HANDOVER.md.
 
 ## Stage 1 — basic planning with real venues and route information (current)
 

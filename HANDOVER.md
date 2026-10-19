@@ -1,6 +1,6 @@
 # Where To? — handover
 
-Last verified: October 19, 2026. This session changed documentation only.
+Last verified: October 19, 2026. GitHub backup setup changed Git metadata, ignore rules, and continuity documentation only; application code and README are unchanged.
 
 ## Current state
 
@@ -13,8 +13,9 @@ Last verified: October 19, 2026. This session changed documentation only.
 
 - `npm test` passed **49 of 49 tests** on October 19, 2026 (`lib/planner.test.ts`). Tests cover all catalog categories, deterministic/distinct results, unsupported requests/cities, dates, schedule conflicts, budgets (including zero), travel limits, capacities, and preference ranking.
 - Source inspection confirms the frontend controls and responsive styles exist. Browser interactions, visual layout, accessibility, and end-to-end behavior were **not tested in this session**. README browser examples are instructions, not proof of execution.
-- Lint, TypeScript checks, and production build were not run in this documentation-only session. No prior results are asserted.
-- Documentation checks confirmed all six continuity files, required content, the original Next.js rules block, and an unchanged README/application baseline.
+- `npm run lint` and `npm run typecheck` passed during GitHub backup setup. Production build and browser checks were not run in this setup session.
+- Pre-setup SHA-256 file comparisons confirmed application code, configuration, dependency manifests/lockfile, README, and the original Next.js rules block are unchanged. The initial staged file review covered all 23 files, including a credential-pattern scan with no findings.
+- The initial commit `ae24a307ae0aa2c0e56229961d6a09eea932320a` was pushed and verified through GitHub. Repository privacy and the expected project files were checked remotely. A follow-up documentation commit records this setup; `prototype-v0.1` identifies the final setup checkpoint.
 
 ## Known limitations and open risks
 
@@ -22,7 +23,13 @@ Last verified: October 19, 2026. This session changed documentation only.
 - Events exist only on fictional November 7 and November 14, 2026 fixtures. Regular venue opening hours and availability are unchecked. See README for mock timing and cost assumptions.
 - Travel uses invented neighborhood zones; ranking chooses among venue combinations in the requested activity order, not an optimized real route. Fewer than three results can be valid.
 - No additional confirmed bug is recorded here; passing unit tests do not prove the absence of defects or browser issues.
-- `git status --short --branch` failed: **not a Git repository**. No Git diff/history/remotes were available. GitHub connection is unknown; Git was not initialized. This session used a pre-edit file snapshot to review scope.
+
+## Version control and backup
+
+- Git was initialized in the existing folder on `main`, with no prior Git history or remote to replace. GitHub CLI was installed and authenticated through browser sign-in.
+- Owner-approved private repository: [rahularutla879/whereto](https://github.com/rahularutla879/whereto). `origin` uses `https://github.com/rahularutla879/whereto.git`; local `main` tracks `origin/main`.
+- `.gitignore` excludes environment files (except a placeholder-only `.env.example`), dependencies, build outputs, logs, credential files, and local editor/agent/hosting settings. Excluded files remain on the computer. No `.env` file was present and no credentials were found in the reviewed commit candidates; pattern scanning is not a guarantee against all possible secrets.
+- This backs up committed source and documentation. Future edits require another commit and push; saving files locally does not automatically back them up. No application deployment was performed.
 
 ## Continue from here
 

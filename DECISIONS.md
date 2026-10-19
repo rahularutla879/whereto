@@ -1,6 +1,6 @@
 # Technical decisions
 
-This is an initial record from source inspection on October 19, 2026, not a reconstruction of project history. No Git history is available. Reasons below are limited to code comments, documented behavior, or explicit owner requirements.
+This record began with source inspection on October 19, 2026, before Git was initialized; it does not reconstruct earlier project history. Reasons below are limited to code comments, documented behavior, or explicit owner requirements.
 
 ## Confirmed current choices
 
@@ -20,6 +20,9 @@ This is an initial record from source inspection on October 19, 2026, not a reco
 
 - Real venue/event data and routing providers: evaluate in Stage 1; no vendor commitment or paid-service approval exists in this record.
 - AI interpretation/conversation, interactive map, storage, saved versions, and sharing: product roadmap only. Provider, database, authentication, and hosting choices remain open.
-- Git initialization and any GitHub connection: separate setup work if requested; neither is established by the current folder.
+
+## October 19, 2026 — private GitHub backup
+
+At the owner's request and after explicit approval to create the repository, initialize Git in the existing folder and use the private [rahularutla879/whereto](https://github.com/rahularutla879/whereto) repository as `origin`. Use `main` and the `prototype-v0.1` checkpoint tag. Preserve application files and exclude credentials, environment files, generated outputs, dependencies, and local settings. Browser-based GitHub CLI authentication keeps passwords and access tokens out of chat and the repository. No deployment or automatic backup service is configured.
 
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.
