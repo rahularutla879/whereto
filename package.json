@@ -4,11 +4,13 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:backend": "backend/.venv/bin/python -m uvicorn backend.main:app --reload --reload-dir backend --host 127.0.0.1 --port 8000",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test lib/planner.test.ts"
+    "test": "tsx --test lib/*.test.ts app/api/health/*.test.ts",
+    "test:backend": "backend/.venv/bin/python -m unittest discover -s backend -p 'test_*.py' -v"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

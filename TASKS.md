@@ -1,6 +1,22 @@
 # Milestones and tasks
 
-Status baseline: October 19, 2026. Checked means implemented, not necessarily verified. Verification evidence belongs in [HANDOVER.md](HANDOVER.md). Stages are product goals, not claims that integrations already exist.
+Status baseline: October 20, 2026. Checked means implemented, not necessarily verified. Verification evidence belongs in [HANDOVER.md](HANDOVER.md). Stages are product goals, not claims that integrations already exist.
+
+## Original roadmap — environment setup verification
+
+Verified October 19, 2026; details and limits are recorded in HANDOVER.md.
+
+- [x] Task 02 — VS Code present (1.85.1, in Downloads); Applications placement and terminal shortcut are optional.
+- [x] Task 03 — Homebrew installed (7.0.10).
+- [x] Task 04 — Git, Node.js, npm, and Python installed; checked Next.js/npm and FastAPI Python version requirements are satisfied. FastAPI installation is deferred until backend work.
+
+## Original roadmap — Task 23: initialize the Python backend
+
+- [x] Verify existing Python 3.12; create an ignored backend virtual environment and install essential dependencies.
+- [x] Add FastAPI `GET /health` and server-side Next.js `GET /api/health` communication without changing the planner or design.
+- [x] Document local startup and add backend/communication tests; pass automated tests, lint, TypeScript, build, and live HTTP communication checks. See HANDOVER.md for browser verification and limits.
+
+Task 23 is complete. Task 24 has not started. These backend foundations do not complete a real-data product integration milestone.
 
 ## Prototype baseline — implemented
 

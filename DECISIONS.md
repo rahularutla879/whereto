@@ -25,4 +25,10 @@ This record began with source inspection on October 19, 2026, before Git was ini
 
 At the owner's request and after explicit approval to create the repository, initialize Git in the existing folder and use the private [rahularutla879/whereto](https://github.com/rahularutla879/whereto) repository as `origin`. Use `main` and the `prototype-v0.1` checkpoint tag. Preserve application files and exclude credentials, environment files, generated outputs, dependencies, and local settings. Browser-based GitHub CLI authentication keeps passwords and access tokens out of chat and the repository. No deployment or automatic backup service is configured.
 
+## October 20, 2026 — minimal Python backend (Task 23)
+
+Use the existing Python 3.12 installation, an ignored `backend/.venv`, and plain FastAPI plus Uvicorn without optional extras. Pin the tested dependencies, including transitive packages, in `backend/requirements.txt`. Use Python's standard `unittest` and HTTP libraries for the backend test and the existing Node test runner for Next.js communication; no additional test framework is needed. Implementation follows the maintainers' [FastAPI first steps](https://fastapi.tiangolo.com/tutorial/first-steps/) and [Uvicorn settings](https://uvicorn.dev/settings/), plus the installed Next.js route-handler documentation.
+
+Keep the boundary limited to health checks. Next.js contacts Python server-side, avoiding a public backend address in browser code and unnecessary CORS configuration. Use uncached checks, a short timeout, and a generic 503 response for an unavailable or unhealthy backend. The homepage and mock planner remain independent. Use two Terminal windows with npm scripts rather than adding a process manager; the existing `npm run dev` command is preserved. Planning migration belongs to Tasks 24–29.
+
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.

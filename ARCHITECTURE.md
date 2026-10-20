@@ -1,6 +1,6 @@
 # Current architecture
 
-Source baseline: October 19, 2026. A single-page Next.js App Router application with a client component and local planning modules. Next.js serves/renders the page; itinerary generation runs synchronously in the client. No backend planning endpoint or external service is implemented.
+Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; itinerary generation runs synchronously in the client. The backend only exposes health status; no backend planning endpoint or external service is implemented.
 
 ```text
 Root layout + global styles
@@ -18,6 +18,14 @@ Budget/travel filtering -> schedule stops -> rank/deduplicate
 Up to 3 cards + expandable details, or explanatory empty state
 ```
 
+## Backend health boundary (Task 23)
+
+`Browser or HTTP client -> Next.js GET /api/health -> FastAPI GET /health`
+
+FastAPI runs locally through Uvicorn on `127.0.0.1:8000`. Next.js calls it server-side using `BACKEND_URL`, defaulting to that address; the variable is never sent to browser code. The homepage does not call the health endpoint or depend on backend availability. No CORS middleware is needed for this server-to-server call.
+
+The Next.js route disables fetch/response caching, validates the expected status, and enforces a three-second timeout. Success returns `{"status":"ok","backend":"ok"}`; connection failures, timeouts, invalid JSON/status, and upstream HTTP errors return HTTP 503 `{"status":"error","backend":"unavailable"}` without exposing internal errors. Tests use local HTTP servers; Python's standard test library avoids extra backend test packages.
+
 ## Input to itinerary
 
 1. app/page.tsx handles form submission and calls makePlans. Preferences override corresponding parsed values; blank fields use recognized text or defaults (Baltimore, four people, no budget/travel cap, balanced ranking).
@@ -31,6 +39,12 @@ Up to 3 cards + expandable details, or explanatory empty state
 
 | File | Responsibility |
 | --- | --- |
+| backend/main.py | FastAPI application and health endpoint |
+| backend/requirements.txt | Pinned essential backend dependencies and required transitive packages |
+| backend/test_health.py | Uvicorn HTTP health test |
+| app/api/health/route.ts | Server-side health communication with timeout and failure response |
+| app/api/health/route.test.ts | HTTP communication and failure tests |
+| .env.example | Optional server-only backend address |
 | app/layout.tsx | Root HTML, metadata, global stylesheet import |
 | app/page.tsx | Homepage, request/preferences state, submit behavior, result/empty states, PlanCard expansion |
 | app/globals.css | Tailwind import, colors, typography, responsive layout, reduced-motion styles |

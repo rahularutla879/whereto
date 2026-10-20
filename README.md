@@ -2,11 +2,11 @@
 
 **Less planning. More hanging out.**
 
-A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. This first version is a frontend demo: the planner uses deterministic local rules and fictional Baltimore venues. It does not connect to an AI service or any external API.
+A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The planner uses deterministic local rules and fictional Baltimore venues. A minimal Python FastAPI backend provides a health check through a server-side Next.js endpoint. Planning still runs locally in the browser; no AI or external service is connected.
 
-## Start the website — beginner instructions
+## Start the application — beginner instructions
 
-You need **Node.js 20.9 or newer** and **npm**. They are already installed on the computer used to create this project. If you're using another computer, install the LTS version from [nodejs.org](https://nodejs.org/) first.
+You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are already installed on this computer; Python 3.12.1 was verified without reinstalling it.
 
 1. Open the **Terminal** app.
 2. Go to this project folder by typing the following, then press **Enter**:
@@ -23,15 +23,42 @@ You need **Node.js 20.9 or newer** and **npm**. They are already installed on th
 
    This downloads the packages listed in `package.json` into this project's `node_modules` folder. It doesn't install tools globally.
 
-4. Start the website:
+4. The backend environment and dependencies are already installed on this computer. On a **fresh copy only**, set them up once from the same project folder:
 
    ```sh
+   python3 --version
+   python3 -m venv backend/.venv
+   backend/.venv/bin/python -m pip install -r backend/requirements.txt
+   ```
+
+   Confirm the version is Python 3.12 before creating the environment. These commands install packages inside the project, not globally. Do not recreate an existing working environment.
+
+5. Start the backend in this Terminal window:
+
+   ```sh
+   npm run dev:backend
+   ```
+
+   Wait for “Application startup complete.” Keep this window open.
+
+6. Open a **second Terminal window**, then start the website:
+
+   ```sh
+   cd /Users/rahularutla/Documents/whereto
    npm run dev
    ```
 
-5. Keep Terminal open. Open your web browser and visit **[http://localhost:3000](http://localhost:3000)**. If Terminal shows a different port because 3000 is busy, use the address it prints instead.
+7. Keep both windows open. Open **[http://localhost:3000](http://localhost:3000)** in your browser. If Next.js prints a different port because 3000 is busy, use that port instead.
 
-6. To stop the website, click in Terminal and press **Control + C**.
+8. Verify the connection by opening **[http://localhost:3000/api/health](http://localhost:3000/api/health)**. You should see `{"status":"ok","backend":"ok"}`. This means Next.js successfully contacted Python. The direct backend check at **[http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)** returns `{"status":"ok"}`.
+
+9. To stop the application, press **Control + C in each Terminal window**.
+
+The two commands avoid an extra process-management dependency. `npm run dev` still starts just the frontend.
+
+The planner also works when the backend is stopped; only `/api/health` then returns HTTP 503 with `{"status":"error","backend":"unavailable"}`. Health requests are uncached and time out after three seconds.
+
+The default backend address is `http://127.0.0.1:8000`. No configuration is required. For a different backend address, copy `.env.example` to `.env.local`, change `BACKEND_URL`, and restart Next.js. This setting is server-only. Do not add `NEXT_PUBLIC_` to it. The connection is server-to-server, so no browser CORS configuration is needed.
 
 You can edit files and see changes in the browser while the development server is running. Starting it does not publish your site on the internet. No accounts, API keys, or `.env` file are needed.
 
@@ -114,6 +141,13 @@ There is no authentication, payment integration, database, external API integrat
 
 ## Project files
 
+- `backend/main.py` — minimal FastAPI application with `GET /health`.
+- `backend/requirements.txt` — exact tested backend dependency versions, including required transitive packages.
+- `backend/test_health.py` — real backend HTTP test using Python’s standard test library.
+- `backend/.venv/` — local Python environment, excluded from Git.
+- `app/api/health/route.ts` — server-side Next.js health endpoint calling Python.
+- `app/api/health/route.test.ts` — HTTP communication and failure tests.
+- `.env.example` — optional backend address example, with no secrets.
 - `app/page.tsx` — homepage, request form, optional preferences, result cards.
 - `app/globals.css` — Tailwind setup, responsive styles, and reduced-motion support.
 - `app/layout.tsx` — page title, description, and root layout.
@@ -129,18 +163,21 @@ Run these from the project folder:
 
 ```sh
 npm test
+npm run test:backend
 npm run lint
 npm run typecheck
 npm run build
 ```
 
-`npm test` checks the planner's behavior. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
+`npm test` checks the planner and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` starts a temporary backend on an available local port and checks the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
 
-To run a production build **locally**, run `npm run build` and then `npm start`. This still does not deploy anything.
+To run a production build **locally**, run `npm run build` and then `npm start`. Keep the backend running in the other Terminal to verify `/api/health`. This still does not deploy anything.
 
 ## Troubleshooting
 
 - **“command not found: npm”**: install Node.js LTS, close Terminal, and reopen it.
 - **“Cannot find module”**: run `npm install` in this folder, then try again.
 - **The browser can't connect**: keep `npm run dev` running and use the exact Local URL printed in Terminal.
+- **Health check says backend unavailable**: run `npm run dev:backend` in the first Terminal and wait for startup. Check that port 8000 is free and `BACKEND_URL` matches if you changed it.
+- **“No module named uvicorn” or missing `backend/.venv/bin/python`**: follow the fresh-copy backend setup in step 4.
 - **No plans appear**: check the explanation, try Baltimore, leave budget/travel blank, and click Try an example. Very low limits can exclude every sample combination.
