@@ -35,4 +35,8 @@ Keep the boundary limited to health checks. Next.js contacts Python server-side,
 
 Keep Pydantic types in `backend/models.py`, with reusable scalar constraints and discriminated venue/event records. Preserve current response JSON names and use resolved typed requests rather than duplicating UI form strings or porting text parsing. Retain existing frontend limits, allow unknown optional venue information, and default data-quality metadata to unknown rather than claiming verification. Use a test against actual TypeScript planner outputs to detect cross-language drift without copying its catalog or algorithm. No new dependency, endpoint, frontend integration, or database is needed. Schema validity does not prove supported location, real availability, or request feasibility; those remain future planner responsibilities.
 
+## October 20, 2026 — shared fictional catalog (Task 25)
+
+Use a compact JSON fixture for catalog values and tier/date definitions, consumed by both runtimes with small record expansion adapters. Keep TypeScript keyword patterns and planning logic in place. This prevents independently maintained data copies without adding build or synchronization tools. Python adds explicit provenance through Task 24 models; absent hours and availability stay unknown. Compare every expanded record across runtimes and preserve pre-change output fingerprints to detect accidental behavior changes.
+
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.

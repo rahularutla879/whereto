@@ -1,6 +1,6 @@
 # Where To? — handover
 
-Last verified: October 20, 2026. Original roadmap Task 24 adds validated backend planning data contracts on top of Task 23’s health connection. Homepage design and mock planning code are unchanged.
+Last verified: October 20, 2026. Original roadmap Task 25 makes the shared fictional catalog available to Python through the Task 24 models. Homepage design and planning behavior are unchanged.
 
 ## Current state
 
@@ -46,6 +46,17 @@ Last verified: October 20, 2026. Original roadmap Task 24 adds validated backend
 - Limitations: models are ready for future FastAPI endpoints but are not connected to a planning route. Text parsing, UI override precedence, request-to-result feasibility, dinner scheduling, and itinerary generation remain in TypeScript. Schema validity does not prove real availability. Current payloads have no machine-readable provenance; future producers must explicitly mark mock values fictional. Unknown optional venue fields require deliberate UI handling before future integration. Transport modes are defined but no mode-specific routing exists. The cross-language contract test uses the already-installed frontend dependencies.
 - No blocker remains for Task 24. No Python reinstall, environment recreation, database, maps, AI, accounts, paid API, deployment, or Task 25 work was performed.
 
+## October 20, 2026 — original roadmap Task 25
+
+- Acceptance criteria met: inspected project guidance, safeguards, continuity docs, frontend catalog/parser/planner/tests, Task 24 models, and backend health tests. Initial Git status was clean.
+- Added `data/mock-venues.json` as the single source for catalog names, labels, prices, durations, event starts/dates, and tier neighborhoods/zones/experience/capacity. `lib/mock-data.ts` imports it while retaining keyword patterns and the existing record expansion. No synchronization tool, new dependency, backend call, or UI change was needed.
+- Preserved **51 ordinary venues and 72 scheduled event occurrences** (36 event/ticket-tier identities on each of November 7 and November 14, 2026), in identical order with identical IDs and values. All **29 supported categories currently have samples**; support is defined separately from sample availability. No new venues or dates were invented.
+- Added `backend/mock_data.py`: validates the JSON and every expanded record using Pydantic and the Task 24 discriminated venue/event models; supports category/kind/date retrieval, stable ID lookup, and listing categories with samples. Missing supported samples return an empty list; unsupported IDs and malformed criteria raise errors. No feasibility filtering, routing, ranking, parser, generator, or planning endpoint was added.
+- Small mapping adjustment: Python adds explicit fictional provenance for supplied values, a fixture source reference, and a fictional schedule status for events. Ordinary opening hours/availability remain null and their schedule status unknown because the frontend never supplied them. Zone travel metadata describes simulated travel inputs; the formula remains only in the TypeScript planner.
+- Checks passed: `npm run test:backend` **25/25**; `npm test` **50/50**; `npm run lint`; `npm run typecheck`; `npm run build`. New tests cover loading, validation/invalid fixtures, category and ID retrieval, exact event dates/times, missing categories without fabrication, provenance, independent loads, and frontend parity. All 123 Python records match actual TypeScript records field for field; fixed SHA-256 baselines captured before editing also confirm unchanged frontend records and 33 representative planner outputs (including the homepage example and all categories).
+- Full Git diff, including all new files, reviewed. Homepage/styles/artwork, parser/planner, both health endpoints, Task 24 models, dependencies, Python environment, and release tags are unchanged. Browser interactions and visual layout were not rerun; behavior preservation is supported by exact output comparisons, existing functional tests, source review, and the production build.
+- No genuine blocker remains. Task 26's Python itinerary generator and all real-data/service integration remain unimplemented.
+
 ## Known limitations and open risks
 
 - Baltimore only; one to four distinct activities. Conservative keywords can reject ordinary phrasing, negation, alternatives, and specific times. Repeated activity categories are collapsed.
@@ -64,6 +75,6 @@ Last verified: October 20, 2026. Original roadmap Task 24 adds validated backend
 
 Current milestone: **Stage 1 — real venues and route information**, not complete. Some Stage 2 behavior exists only against mock data; Stage 3 remains planned. See [TASKS.md](TASKS.md).
 
-Task 24 is complete. Stop here until the owner requests Task 25. Later tasks will address backend planning work; no planning logic has moved to Python. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
+Task 25 is complete. Stop here until the owner requests Task 26. Later tasks will address backend planning work; no planning logic has moved to Python. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
 
 For a fresh session: follow AGENTS.md, inspect the current code and Git status again, and use README.md for exact startup/check commands. Dependencies are already present; no API keys or `.env` file are needed for the prototype. Do not install packages merely to read or update these documents.

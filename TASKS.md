@@ -25,7 +25,17 @@ Task 23 is complete. These backend foundations do not complete a real-data produ
 - [x] Validate inputs and response consistency, preserve current JSON names, and test optional/unknown/fictional information, schedules, serialization, and FastAPI schema compatibility.
 - [x] Pass backend and frontend tests, lint, TypeScript checks, and production build; review the complete diff and update relevant documentation. Evidence is in HANDOVER.md.
 
-Task 24 is complete. Task 25 has not started. No planning endpoint or Python planner is implemented.
+Task 24 is complete. No planning endpoint or Python planner is implemented.
+
+## Original roadmap — Task 25: create the Python mock venue dataset
+
+- [x] Inspect and preserve the existing fictional venue/event data and all 29 supported categories.
+- [x] Extract one shared JSON source; load and validate Python venue/event records using Task 24 models, with explicit fictional provenance and unknown hours.
+- [x] Add reusable category/kind/date/ID retrieval and distinguish supported categories from categories with sample records; add no planning or optimization logic.
+- [x] Test loading, validation, scheduled events, missing samples, and exact frontend consistency; pass backend/frontend tests, lint, TypeScript checks, and production build.
+- [x] Review the complete diff and update continuity/architecture documentation. Evidence is in HANDOVER.md.
+
+Task 25 is complete. Task 26 has not started. The frontend still plans locally; no Python itinerary generator or planning endpoint is implemented.
 
 ## Prototype baseline — implemented
 

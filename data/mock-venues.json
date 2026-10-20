@@ -1,0 +1,450 @@
+{
+  "fictional": true,
+  "notice": "All identities, prices (USD/person), durations, capacities, experience tiers, neighborhood zones and event schedules are fictional. Zones support simulated travel only; no real routes, opening hours or availability are provided.",
+  "timezone": "America/New_York",
+  "currency": "USD",
+  "eventDates": [
+    "2026-11-07",
+    "2026-11-14"
+  ],
+  "tiers": [
+    {
+      "neighborhood": "Harbor East",
+      "zone": 0,
+      "experience": 1,
+      "capacity": 4
+    },
+    {
+      "neighborhood": "Fells Point",
+      "zone": 1,
+      "experience": 2,
+      "capacity": 8
+    },
+    {
+      "neighborhood": "Mount Vernon",
+      "zone": 2,
+      "experience": 3,
+      "capacity": 20
+    }
+  ],
+  "catalog": {
+    "bowling": {
+      "label": "Bowling",
+      "names": [
+        "Lucky Duck Lanes",
+        "Sidekick Bowling Club",
+        "The Golden Pin"
+      ],
+      "prices": [
+        14,
+        22,
+        30
+      ],
+      "duration": 75
+    },
+    "drinks": {
+      "label": "Drinks",
+      "names": [
+        "The Little Lime",
+        "Good Company Social",
+        "Juniper & Tonic"
+      ],
+      "prices": [
+        8,
+        12,
+        18
+      ],
+      "duration": 45
+    },
+    "movie": {
+      "label": "Movie",
+      "names": [
+        "Pocket Picturehouse",
+        "The Saturday Cinema",
+        "Velvet Screen"
+      ],
+      "prices": [
+        10,
+        15,
+        22
+      ],
+      "duration": 120
+    },
+    "food": {
+      "label": "Food",
+      "names": [
+        "Corner Slice",
+        "Gather Kitchen",
+        "The Supper Spot"
+      ],
+      "prices": [
+        12,
+        20,
+        32
+      ],
+      "duration": 60
+    },
+    "coffee": {
+      "label": "Coffee",
+      "names": [
+        "Daylight Coffee",
+        "Sunday Kind Café",
+        "Paper Cup Studio"
+      ],
+      "prices": [
+        4,
+        6,
+        9
+      ],
+      "duration": 30
+    },
+    "outdoors": {
+      "label": "Outdoors",
+      "names": [
+        "Harbor Pocket Park",
+        "Waterside Walk",
+        "Greenway Gardens"
+      ],
+      "prices": [
+        0,
+        0,
+        5
+      ],
+      "duration": 45
+    },
+    "art": {
+      "label": "Art gallery",
+      "names": [
+        "Little Frame Gallery",
+        "Color House",
+        "The Makers' Loft"
+      ],
+      "prices": [
+        0,
+        10,
+        20
+      ],
+      "duration": 60
+    },
+    "museum": {
+      "label": "Museum",
+      "names": [
+        "Curiosity Museum",
+        "Harbor Discovery Hall",
+        "The Wonder Collection"
+      ],
+      "prices": [
+        8,
+        16,
+        26
+      ],
+      "duration": 90
+    },
+    "karaoke": {
+      "label": "Karaoke",
+      "names": [
+        "Pocket Mic Rooms",
+        "Chorus Club",
+        "Encore Singing Lounge"
+      ],
+      "prices": [
+        10,
+        18,
+        28
+      ],
+      "duration": 60
+    },
+    "arcade": {
+      "label": "Arcade",
+      "names": [
+        "Pixel Pocket",
+        "Extra Life Arcade",
+        "High Score Hall"
+      ],
+      "prices": [
+        10,
+        18,
+        28
+      ],
+      "duration": 60
+    },
+    "escape": {
+      "label": "Escape room",
+      "names": [
+        "The Puzzle Door",
+        "Clue Collective",
+        "The Last Key"
+      ],
+      "prices": [
+        18,
+        28,
+        38
+      ],
+      "duration": 60
+    },
+    "miniGolf": {
+      "label": "Mini golf",
+      "names": [
+        "Tiny Tee Garden",
+        "Happy Putt",
+        "The Putting Parlor"
+      ],
+      "prices": [
+        8,
+        14,
+        22
+      ],
+      "duration": 60
+    },
+    "shopping": {
+      "label": "Shopping",
+      "names": [
+        "Pocket Market",
+        "The Browse Arcade",
+        "Harbor Boutique Walk"
+      ],
+      "prices": [
+        0,
+        0,
+        0
+      ],
+      "duration": 60
+    },
+    "zoo": {
+      "label": "Zoo",
+      "names": [
+        "Little Wild Gardens",
+        "Harbor Animal Park",
+        "Canopy Wildlife Center"
+      ],
+      "prices": [
+        12,
+        20,
+        30
+      ],
+      "duration": 120
+    },
+    "hiking": {
+      "label": "Hiking",
+      "names": [
+        "Pine Loop Trail",
+        "Lookout Ridge",
+        "Fern Valley Trail"
+      ],
+      "prices": [
+        0,
+        0,
+        6
+      ],
+      "duration": 90
+    },
+    "picnic": {
+      "label": "Picnic",
+      "names": [
+        "Clover Picnic Green",
+        "Waterside Picnic Lawn",
+        "The Garden Blanket"
+      ],
+      "prices": [
+        0,
+        8,
+        16
+      ],
+      "duration": 60
+    },
+    "skating": {
+      "label": "Skating",
+      "names": [
+        "Little Loop Rink",
+        "Glide House",
+        "The Silver Rink"
+      ],
+      "prices": [
+        10,
+        18,
+        28
+      ],
+      "duration": 75
+    },
+    "baseball": {
+      "label": "Baseball game",
+      "names": [
+        "Harbor Herons vs. Bay Foxes",
+        "Harbor Herons Club Seats",
+        "Harbor Herons Suite Experience"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 180,
+      "eventStart": 840
+    },
+    "basketball": {
+      "label": "Basketball game",
+      "names": [
+        "Bay Comets Basketball",
+        "Bay Comets Club Seats",
+        "Bay Comets Courtside"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 120,
+      "eventStart": 1080
+    },
+    "football": {
+      "label": "Football game",
+      "names": [
+        "Harbor Oaks Football",
+        "Harbor Oaks Club Seats",
+        "Harbor Oaks Suite"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 180,
+      "eventStart": 780
+    },
+    "soccer": {
+      "label": "Soccer match",
+      "names": [
+        "Bay Lanterns Soccer",
+        "Bay Lanterns Club Seats",
+        "Bay Lanterns Sideline"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 120,
+      "eventStart": 960
+    },
+    "hockey": {
+      "label": "Hockey game",
+      "names": [
+        "Harbor Gliders Hockey",
+        "Harbor Gliders Club Seats",
+        "Harbor Gliders Suite"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 120,
+      "eventStart": 1080
+    },
+    "sports": {
+      "label": "Sporting event",
+      "names": [
+        "Harbor Athletics Exhibition",
+        "Harbor Athletics Club Seats",
+        "Harbor Athletics Suite"
+      ],
+      "prices": [
+        18,
+        35,
+        65
+      ],
+      "duration": 120,
+      "eventStart": 900
+    },
+    "concert": {
+      "label": "Concert",
+      "names": [
+        "Paper Satellites Live",
+        "Paper Satellites Balcony",
+        "Paper Satellites Front Row"
+      ],
+      "prices": [
+        20,
+        40,
+        70
+      ],
+      "duration": 120,
+      "eventStart": 1140
+    },
+    "theater": {
+      "label": "Theater",
+      "names": [
+        "The Lantern Letters — Stage Play",
+        "The Lantern Letters — Circle",
+        "The Lantern Letters — Front Row"
+      ],
+      "prices": [
+        18,
+        35,
+        60
+      ],
+      "duration": 120,
+      "eventStart": 1170
+    },
+    "musical": {
+      "label": "Musical",
+      "names": [
+        "Paper Moon — The Musical",
+        "Paper Moon — Circle",
+        "Paper Moon — Front Row"
+      ],
+      "prices": [
+        20,
+        38,
+        65
+      ],
+      "duration": 120,
+      "eventStart": 1140
+    },
+    "ballet": {
+      "label": "Ballet",
+      "names": [
+        "The Willow Ballet",
+        "The Willow Ballet — Circle",
+        "The Willow Ballet — Front Row"
+      ],
+      "prices": [
+        18,
+        35,
+        60
+      ],
+      "duration": 120,
+      "eventStart": 1140
+    },
+    "opera": {
+      "label": "Opera",
+      "names": [
+        "The Harbor Aria — Opera",
+        "The Harbor Aria — Circle",
+        "The Harbor Aria — Front Row"
+      ],
+      "prices": [
+        20,
+        40,
+        70
+      ],
+      "duration": 120,
+      "eventStart": 1140
+    },
+    "comedy": {
+      "label": "Comedy show",
+      "names": [
+        "Small Laughs Showcase",
+        "Small Laughs Club Seats",
+        "Small Laughs Front Row"
+      ],
+      "prices": [
+        12,
+        22,
+        35
+      ],
+      "duration": 90,
+      "eventStart": 1200
+    }
+  }
+}
