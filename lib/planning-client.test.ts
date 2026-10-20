@@ -39,3 +39,11 @@ test("client reports invalid API input and network errors clearly", async () => 
   assert.equal(result.plans.length, 0);
   assert.match(result.message, /Python planner unavailable/);
 });
+
+test("clock labels distinguish noon, midnight and the allowed end-of-day boundary", () => {
+  assert.equal(formatTime(0), "12:00 AM");
+  assert.equal(formatTime(720), "12:00 PM");
+  assert.equal(formatTime(1380), "11:00 PM");
+  assert.equal(formatTime(1439), "11:59 PM");
+  assert.equal(formatTime(1440), "12:00 AM");
+});

@@ -204,4 +204,7 @@ With both servers running, click Try an example → Plan my outing → View plan
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Task 28 is complete; Task 29 has not started.
+Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–29 are complete. Task 30 has not started.
+
+
+Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.

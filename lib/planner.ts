@@ -72,6 +72,6 @@ export function formatDuration(minutes: number | null) {
 }
 export function formatTime(minutes: number | null) {
   if (minutes === null) return "Unknown";
-  const hours = Math.floor(minutes / 60);
+  const hours = Math.floor(minutes / 60) % 24;
   return `${hours % 12 || 12}:${String(minutes % 60).padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"}`;
 }

@@ -1,6 +1,6 @@
 # Where To? — handover
 
-Last verified: October 20, 2026. Task 28 connects the existing homepage to Python generation/ranking. Homepage styling is preserved; feasibility labels and errors now reflect Python evidence. Earlier dated sections are historical checkpoints.
+Last verified: October 20, 2026. Task 29 verifies the complete Tasks 23–28 mock system, fixes midnight clock labels and improves two preference hint colors. The homepage design and Python planning behavior are preserved. Earlier dated sections are historical checkpoints.
 
 ## Current state
 
@@ -91,6 +91,37 @@ Last verified: October 20, 2026. Task 28 connects the existing homepage to Pytho
 - Complete Git diff, including new API/client/tests/static examples and the exact preserved legacy reference, reviewed; `git diff --check` passed. Shared venue/event fixture, dependencies, request parser, CSS and artwork are unchanged.
 - CSS, artwork, homepage sections and preference controls are preserved. Only result/state copy and metadata rendering changed. README has exact two-Terminal startup and repeatable success/failure checks. No Task 29, AI, maps, database, authentication, deployment or external provider work was started. Release tags remain unchanged.
 
+## October 20, 2026 — original roadmap Task 29
+
+- Acceptance criteria met: inspect Tasks 23–28 and existing tests, verify real Python communication and displayed evidence, exercise constraints/modes/errors/loading/duplicate submission, complete meaningful mobile/tablet/desktop and basic keyboard/accessibility checks, make only demonstrated fixes, rerun required checks, review and back up the focused diff. No Task 30 work, dependency, activity, service, algorithm or design change was introduced. Initial Git status was clean.
+- Inspected AGENTS.md, safeguards, continuity/roadmap/architecture/decisions/README, frontend parser/adapter/form/cards/styles, FastAPI/models/generator/ranker, shared fixture/loader and test coverage. Read installed Next.js testing guidance before editing tests. Existing tests already cover all 29 categories, model/dataset integrity, schedules, missing costs/hours, hard limits and upstream failures; expanded only the missing midnight display regression.
+- All final checks passed: **75/75 backend tests**, **56/56 frontend tests**, `npm run lint`, `npm run typecheck`, `npm run build`, backend `pip check`, direct Python and proxied Next.js health HTTP checks. The new clock-label test first reproduced the failure, then passed after the fix. The existing real-Python integration test now also checks the exact-midnight fixture route, preserved four-activity order, distinct IDs, four-hour elapsed duration and 15 simulated travel minutes. No checks were skipped.
+- Browser used the production build on port 3010 and an owned FastAPI process on 8010 because existing user servers occupied 3000/8000; those existing processes were preserved. A temporary standard-library forwarding relay on 8001 recorded actual Python payloads/responses and optionally delayed forwarding by three seconds. It had no mock responses or planning algorithm. The final rebuilt browser checks and health calls also passed with Next.js connected directly to FastAPI, bypassing the relay. Diagnostic scripts/logs stay outside the repository in this chat's work folder.
+- Network evidence: 19 recorded real FastAPI planning responses were independently checked for complete ordered activities, at most three distinct options, no known violations, budget/travel caps, capacity, group total, fixed dates/starts, travel gaps and midnight. **33 observed browser card instances** matched returned Python candidate IDs, prices and feasibility labels. Backend request logs confirm actual POSTs. Stopping only the owned Python process removed existing cards and displayed the explicit unavailable error; restarting restored planning. There was no TypeScript fallback.
+
+| Browser journey | Observed result |
+| --- | --- |
+| Bowling, drinks and a movie | Three ordered provisional routes; details preserved venue names, costs, times, two fictional 5-minute legs, and unknown opening hours |
+| Dinner and karaoke | Food then karaoke, dinner at 5 PM; no omitted activity |
+| Coffee and a walk | Coffee then Outdoors, fictional quotes and provisional hours |
+| Baseball, November 7 | Correct fictional event date and fixed 2–5 PM schedule; FITS MOCK DATA and real-availability disclaimer |
+| Baseball without date / November 8 | Date prompt / no matching mock records; no substitution |
+| Dinner then baseball / concert or theater | Impossible fixed timing / ambiguous wording rejected without partial plans |
+| Unsupported skydiving / five activities / February 30 | Clear explanation and no generated cards |
+| Budget-friendly / Balanced / Best experience, Coffee | First prices $4 / $6 / $9; keyboard arrow selection worked; $4 hard cap still won in experience mode |
+| Dinner/karaoke, 12 / 21 people | One full route with capacity 20 at both stops and $720 group total / no route for 21 |
+| Travel 0 for Coffee/walk; budget 25 + travel 5 for Dinner/karaoke | No route / one route at $22 per person and 5 travel minutes |
+| Zero budget | Coffee rejected; a walk returned two distinct free provisional options, without padding a third |
+| Manual date / reset / details | Native date override November 7 superseded November 8 text; reset removed overrides; Enter expanded and collapsed details |
+| Empty request / people 0 | Browser validation focused the relevant field with a readable message; no invalid planning request was submitted |
+| Delayed double-click | Planning… button disabled with aria-busy, live loading message; exactly one request counted, then results returned |
+
+- Responsive interaction checks: **390×844 mobile**, **768×1024 tablet**, **1280×900 desktop** (plus a larger desktop evidence capture). Tested submission/preferences/details at each size; content width matched viewport width with no horizontal overflow. Rebuilt mobile browser confirmed the corrected midnight result. Temporary viewport overrides were reset. Final browser console inspection showed no errors.
+- Basic accessibility: keyboard skip link became visible and moved to the planner; Tab reached the labeled request; Enter operated preferences, submit, expansion and collapse; arrows changed spending radios; results received focus with a visible outline. Checked native required/range messages and live status/busy/expanded attributes. Primary action contrast measured about 11.45:1, card descriptions 4.52:1 and detail text 4.85:1. Two faint preference hints measured 2.91:1 and 4.16:1; changed only their colors to the existing detail-text green, now approximately 4.85:1 and 4.63:1 on their respective backgrounds. This is a focused basic check, not a complete WCAG certification or screen-reader/cross-browser audit.
+- Demonstrated defect fixed: `Comedy, drinks, coffee and art on 2026-11-07` correctly ends at minute 1440 in Python, but the card showed **11:00 PM–12:00 PM**. Normalizing the display hour to 0–23 now shows **11:00 PM–12:00 AM**; noon and ordinary times are unchanged. Planning/scheduling code is unchanged. Only this formatter, two hint colors, the relevant regression checks and continuity documentation changed.
+- Expected limitations, not new defects: all fixture evidence is fictional; ordinary opening hours remain unknown/provisional; fixture events exist only on November 7 and 14. The unchanged conservative parser rejects some natural wording (for example “an outdoor activity” asks to simplify; “coffee and a walk” works) rather than silently omitting part. AI interpretation remains future work. No genuine blocker remains for Task 29.
+- Full Git diff including all changed tests and documentation reviewed; whitespace check passed. Homepage layout/artwork/controls, shared data, Python engine, dependencies and release tags are preserved. Task 29 is complete; stop before Task 30.
+
 ## Known limitations and open risks
 
 - Frontend: Baltimore only; one to four distinct activities. Conservative keywords can reject ordinary phrasing, negation, alternatives, and specific times. Repeated activity categories are collapsed.
@@ -109,6 +140,6 @@ Last verified: October 20, 2026. Task 28 connects the existing homepage to Pytho
 
 Current milestone: **Stage 1 — real venues and route information**, not complete. Some Stage 2 behavior exists only against mock data; Stage 3 remains planned. See [TASKS.md](TASKS.md).
 
-Task 28 is complete. Stop before Task 29. Submitted requests run through Python; the TypeScript engine is isolated for historical tests only. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
+Task 29 is complete. Stop before Task 30. Submitted requests run through Python; the TypeScript engine is isolated for historical tests only. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
 
 For a fresh session: follow AGENTS.md, inspect the current code and Git status again, and use README.md for exact startup/check commands. Dependencies are already present; no API keys or `.env` file are needed for the prototype. Do not install packages merely to read or update these documents.

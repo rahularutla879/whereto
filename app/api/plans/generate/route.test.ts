@@ -5,7 +5,7 @@ import { createServer } from "node:http";
 import { once } from "node:events";
 import { POST } from "./route";
 import { generateOuting, adaptRanking } from "../../../../lib/planning-client";
-import { EMPTY_PREFERENCES, resolveOuting } from "../../../../lib/planner";
+import { EMPTY_PREFERENCES, formatTime, resolveOuting } from "../../../../lib/planner";
 
 const context = { today: "2026-11-01" };
 const send: typeof fetch = async (_url, init) => POST(new Request("http://localhost/api/plans/generate", init));
@@ -77,6 +77,19 @@ test("frontend interpreter → Next.js proxy → real Python planner → display
       assert.equal(missing.plans.length, 0);
       assert.match(missing.message, /No mock records/);
       assert.ok((await run("Concert on 2026-11-08", { date: "2026-11-07" })).plans.length);
+    }
+    // Real fixture route finishes exactly at midnight; display must not say noon.
+    {
+      const r = await run("Comedy, drinks, coffee and art on 2026-11-07");
+      assert.equal(r.plans.length, 3);
+      assert.equal(new Set(r.plans.map(p => p.id)).size, r.plans.length);
+      for (const p of r.plans) {
+        assert.deepEqual(p.venues.map(v => v.activity), ["comedy", "drinks", "coffee", "art"]);
+        assert.equal(p.stops.at(-1)!.end, 1440);
+        assert.equal(formatTime(p.stops.at(-1)!.end), "12:00 AM");
+        assert.equal(p.duration, 240);
+        assert.equal(p.travel, 15);
+      }
     }
     // invalid and unsupported requests have clear messages
     {

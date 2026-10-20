@@ -67,7 +67,18 @@ Task 27 is complete and is reused by Task 28.
 - [x] Test API, frontend integration, backend failures and the browser journey with both servers; pass all required checks and review the full diff.
 - [x] Update startup/architecture/handover documentation and back up the tested changes to the existing private repository.
 
-Task 28 is complete. Stop before Task 29. Real-data integrations remain future work.
+Task 28 is complete and has been verified by Task 29. Real-data integrations remain future work.
+
+## Original roadmap — Task 29: verify the complete mock planning system
+
+- [x] Inspect Tasks 23–28, project safeguards, shared data, current frontend/backend and existing tests.
+- [x] Verify real Python requests and displayed results for all required journeys, constraints, modes, distinctness and honest fictional/provisional states.
+- [x] Exercise invalid/missing/contradictory inputs, backend shutdown/recovery, delayed loading and counted duplicate submission protection.
+- [x] Perform meaningful mobile/tablet/desktop, manual-preference, detail-expansion and basic keyboard/accessibility checks.
+- [x] Fix the demonstrated midnight display defect and two faint preference hint colors; add focused midnight regression coverage without new dependencies or planner changes.
+- [x] Pass all backend/frontend tests, lint, TypeScript and production build; review the full diff and record evidence in HANDOVER.md.
+
+Task 29 is complete. Stop before Task 30. Fictional-data limitations remain explicit; no AI or real-data integration was started.
 
 ## Prototype baseline — implemented
 
