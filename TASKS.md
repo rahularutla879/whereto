@@ -45,7 +45,18 @@ Task 25 is complete. The frontend still plans locally using the same shared data
 - [x] Add candidate-specific Pydantic contracts and lazy enumeration without truncation; defer final filtering, scheduling, scoring, ranking, and frontend integration.
 - [x] Pass backend/frontend tests, lint, TypeScript checks, and production build; review the full diff and update relevant documentation. See HANDOVER.md for evidence and limits.
 
-Task 26 is complete. Stop before Tasks 27 and 28. No planning endpoint or frontend connection is implemented.
+Task 26 is complete. No planning endpoint or frontend connection is implemented.
+
+## Original roadmap — Task 27: filter and rank Python itineraries
+
+- [x] Inspect project guidance, Task 24 models, shared dataset, Task 26 generator, TypeScript planner/tests and continuity documents.
+- [x] Evaluate hard budgets (person/group), travel (total/leg), capacity, ordered activities, opening/availability windows, event timing, dinner and outing time bounds.
+- [x] Calculate costs, travel, durations and schedules with provenance; separate confirmed recommendations, provisional alternatives and known violations.
+- [x] Normalize deterministic affordability/quality/convenience scores for all three spending modes; select up to three distinct options with structured explanations and actionable empty results.
+- [x] Reuse the candidate generator and shared records; allow replacement price/travel providers without new dependencies, services or frontend integration.
+- [x] Add backend correctness/integration tests; pass backend/frontend tests, lint, TypeScript checks and production build; review the full diff and update relevant documentation.
+
+Task 27 is complete. Stop before Task 28. The frontend still uses its unchanged TypeScript planner; no Python planning endpoint is exposed.
 
 ## Prototype baseline — implemented
 

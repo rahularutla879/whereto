@@ -136,7 +136,12 @@ class OutingRequest(ContractModel):
     people: GroupSize = 4
     date: OutingDate | None = None
     budget: Annotated[Money, Field(le=100000)] | None = None
-    travel: TravelMinutes | None = None
+    travel: TravelMinutes | None = None  # Existing total inter-stop cap.
+    groupBudget: Money | None = None
+    maxLegTravel: TravelMinutes | None = None
+    startTime: StartMinute = 600
+    endTime: EndMinute = 1440
+    requireAvailability: bool = Field(default=False, strict=True)
     cost: CostPreference = CostPreference.balanced
     transport: TransportationMode | None = None
     dinner: bool = Field(default=False, strict=True)
@@ -145,8 +150,27 @@ class OutingRequest(ContractModel):
 
     @model_validator(mode="after")
     def validate_activities(self):
+        if self.endTime <= self.startTime:
+            raise ValueError("Outing end must be after its earliest start")
         if any(activity in EVENT_ACTIVITIES for activity in self.activities) and self.date is None:
             raise ValueError("Scheduled events require an exact outing date")
+        return self
+
+
+class TimeWindow(ContractModel):
+    """Single-day local window; null date means a daily recurring window.
+
+    None window list means unknown; an empty list explicitly means closed.
+    Windows do not span midnight. Date-scoped windows need an exact request date.
+    """
+    date: OutingDate | None = None
+    start: StartMinute
+    end: EndMinute
+
+    @model_validator(mode="after")
+    def validate_window(self):
+        if self.end <= self.start:
+            raise ValueError("Window must end after its start")
         return self
 
 
@@ -165,6 +189,8 @@ class Venue(ContractModel):
     source: Nonblank | None = None  # Source/reference when known; no lookup occurs.
     openingHours: Nonblank | None = None
     availability: Nonblank | None = None
+    openingWindows: list[TimeWindow] | None = None
+    availabilityWindows: list[TimeWindow] | None = None
 
     @model_validator(mode="after")
     def validate_kind(self):
@@ -355,4 +381,115 @@ class CandidateGenerationResult(ContractModel):
                     or candidate.date != self.request.date
                     or candidate.allowRevisits != self.request.allowRevisits):
                 raise ValueError("Candidates must preserve the resolved request")
+        return self
+
+
+class ConstraintIssue(ContractModel):
+    code: Nonblank
+    field: Nonblank
+    message: Nonblank
+    status: Literal["unknown", "violation"]
+    venueId: str | None = None
+
+
+class PriceQuote(ContractModel):
+    amount: Money | None = None  # USD/person, same inclusions as the fixture.
+    status: DataStatus = DataStatus.unknown
+    source: Nonblank | None = None
+
+
+class TravelQuote(ContractModel):
+    minutes: Annotated[int, Field(strict=True, ge=0)] | None = None
+    status: DataStatus = DataStatus.unknown
+    source: Nonblank | None = None
+
+
+class PlannedStop(ContractModel):
+    venue: VenueInformation
+    start: StartMinute | None = None
+    end: EndMinute | None = None
+    duration: DurationMinutes | None = None
+
+
+    @model_validator(mode="after")
+    def validate_calculated_stop(self):
+        if self.duration != self.venue.duration:
+            raise ValueError("Calculated duration must preserve the venue evidence")
+        if self.start is not None and self.end is not None:
+            if self.end <= self.start or self.duration != self.end - self.start:
+                raise ValueError("Calculated stop times must match the supplied duration")
+        if isinstance(self.venue, ScheduledEvent) and self.start != self.venue.start:
+            raise ValueError("Calculated event start must preserve the fixed schedule")
+        return self
+
+
+class RecommendationReason(ContractModel):
+    code: Literal["score", "cost", "travel", "quality", "feasibility", "diversity"]
+    message: Nonblank
+
+
+class RankedItinerary(ContractModel):
+    candidate: CandidateItinerary
+    feasibility: Literal["confirmed", "provisional", "violated"]
+    issues: list[ConstraintIssue]
+    stops: list[PlannedStop]
+    prices: list[PriceQuote]
+    legs: list[TravelQuote]
+    knownCostPerPerson: Money
+    knownGroupCost: Money
+    costPerPerson: Money | None
+    groupCost: Money | None
+    totalTravel: TravelMinutes | None
+    activityDuration: DurationMinutes | None
+    elapsedDuration: DurationMinutes | None
+    score: Annotated[float, Field(ge=0, le=1)] = 0
+    components: dict[str, float] = Field(default_factory=dict)
+    explanations: list[RecommendationReason] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_evaluation(self):
+        expected = ("violated" if any(i.status == "violation" for i in self.issues)
+                    else "provisional" if self.issues else "confirmed")
+        if self.feasibility == "confirmed" and any(value is None for value in (
+                self.costPerPerson, self.groupCost, self.totalTravel, self.activityDuration,
+                self.elapsedDuration, *(s.start for s in self.stops), *(s.end for s in self.stops))):
+            raise ValueError("Confirmed evaluations require complete calculations")
+        if self.feasibility != expected:
+            raise ValueError("Feasibility must agree with constraint evidence")
+        if [s.venue for s in self.stops] != self.candidate.venues:
+            raise ValueError("Evaluated stops must preserve candidate venues")
+        if len(self.prices) != len(self.stops) or len(self.legs) != len(self.stops) - 1:
+            raise ValueError("A quote is required for every stop and leg, including unknown quotes")
+        return self
+
+
+class RankingResult(ContractModel):
+    request: OutingRequest
+    plans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
+    provisionalPlans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
+    errors: list[PlanningError] = Field(default_factory=list)
+    rejectionReasons: dict[str, int] = Field(default_factory=dict)
+    message: Nonblank
+    notes: list[str] = Field(default_factory=list)
+
+    @model_validator(mode="after")
+    def validate_selection(self):
+        selected = self.plans + self.provisionalPlans
+        if len(selected) > 3:
+            raise ValueError("At most three total options")
+        identities = [tuple(v.id for v in p.candidate.venues) for p in selected]
+        if len(set(identities)) != len(identities):
+            raise ValueError("Options must have distinct ordered venues")
+        if any(p.feasibility != "confirmed" for p in self.plans):
+            raise ValueError("Recommended plans must have confirmed constraint feasibility")
+        if any(p.feasibility != "provisional" for p in self.provisionalPlans):
+            raise ValueError("Provisional alternatives must remain explicit")
+        for plan in selected:
+            c = plan.candidate
+            if ([v.activity for v in c.venues] != self.request.activities
+                    or c.people != self.request.people or c.date != self.request.date
+                    or c.allowRevisits != self.request.allowRevisits):
+                raise ValueError("Selected plans must preserve request")
+        if self.plans and self.errors:
+            raise ValueError("Successful recommendations cannot have failure errors")
         return self

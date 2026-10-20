@@ -142,9 +142,12 @@ There is no authentication, payment integration, database, external API integrat
 ## Project files
 
 - `data/mock-venues.json` — shared fictional catalog values for TypeScript and Python.
-- `backend/mock_data.py` — validated fixture loader and venue/event retrieval; no Python planner.
+- `backend/mock_data.py` — validated shared fixture loader and venue/event retrieval.
 - `backend/test_mock_data.py` — dataset validation, lookup, missing samples, and frontend consistency tests.
-- `backend/models.py` — validated planning data contracts for future endpoints; no Python planner yet.
+- `backend/models.py` — validated request, venue, candidate and ranking contracts for future endpoints.
+- `backend/planner.py` — standalone Python candidate generation (Task 26).
+- `backend/ranking.py` — standalone filtering, scheduling and ranking (Task 27); no frontend connection. Ordinary outings remain explicitly provisional because the fixture has no opening hours.
+- `backend/test_ranking.py` — hard constraints, modes, unknown data, stable/distinct selection and generator integration tests.
 - `backend/test_models.py` — model validation and comparison with actual frontend planner results.
 - `backend/main.py` — minimal FastAPI application with `GET /health`.
 - `backend/requirements.txt` — exact tested backend dependency versions, including required transitive packages.
@@ -174,7 +177,7 @@ npm run typecheck
 npm run build
 ```
 
-`npm test` checks the planner and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` validates the shared dataset, retrieval helpers and planning data models, compares them with actual TypeScript planner results (using the installed frontend dependencies), and starts a temporary backend on an available local port to check the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
+`npm test` checks the planner and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` validates the shared dataset, retrieval helpers, planning models, candidate generation and filtering/ranking, compares them with actual TypeScript planner results (using the installed frontend dependencies), and starts a temporary backend on an available local port to check the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
 
 To run a production build **locally**, run `npm run build` and then `npm start`. Keep the backend running in the other Terminal to verify `/api/health`. This still does not deploy anything.
 

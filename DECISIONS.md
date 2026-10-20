@@ -43,4 +43,10 @@ Use a compact JSON fixture for catalog values and tier/date definitions, consume
 
 Use separate additive candidate contracts rather than weakening fully scheduled final-plan validation or inventing ordinary schedules/travel totals. Reuse Task 24 request/venue/event/error/scalar types and the Task 25 loader. Allow repeated request activity entries and require explicit `allowRevisits` for duplicate record IDs. Enumerate lazily in fixture/request order without truncation; provide a collected structured result for the current small dataset. Prune only identity and fixed-event incompatibilities here; defer final feasibility, scheduling, filtering and ranking to Task 27, and frontend integration to Task 28.
 
+## October 20, 2026 — Python constraint evaluation and ranking (Task 27)
+
+Use a separate evaluation/ranking module over Task 26 candidates, with additive Pydantic contracts for nullable calculations and explicit confirmed/provisional/violated states. Keep unknown-hours alternatives separate from confirmed recommendations; do not invent hours or availability to make the fixture pass. A known event schedule is sufficient for mock scheduling unless availability is explicitly required or supplied. Confirmed always means checked against supplied evidence, not real-world verification. Leave legacy frontend result contracts and TypeScript behavior unchanged until Task 28.
+
+Use earliest-finish scheduling for ordered single-day windows/fixed events, Decimal budget comparisons, injectable price/travel quote functions, normalized weighted scores and stable record-ID ties. Prefer stop diversity among near-scoring remaining candidates (within 0.15), with at most three combined confirmed/provisional options and no known-violating options. These small candidate sets need no optimization library, external service or new dependency. Preserve the existing total travel/per-person limits while adding optional backend per-leg/group limits.
+
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.

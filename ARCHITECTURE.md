@@ -1,6 +1,6 @@
 # Current architecture
 
-Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; user-facing itinerary generation runs synchronously in the client. Python also has a standalone unranked candidate generator (Task 26). The backend only exposes health status; no backend planning endpoint or external service is implemented.
+Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; user-facing itinerary generation runs synchronously in the client. Python also has standalone candidate generation (Task 26) and constraint evaluation/ranking (Task 27). The backend only exposes health status; no backend planning endpoint or external service is implemented.
 
 ```text
 Root layout + global styles
@@ -40,7 +40,9 @@ The Next.js route disables fetch/response caching, validates the expected status
 | File | Responsibility |
 | --- | --- |
 | backend/models.py | Pydantic request, venue/event, final-plan and candidate contracts, scalar types, and integrity validation |
-| backend/planner.py | Deterministic ordered Python candidate generation and lazy traversal (Task 26); no final feasibility or ranking |
+| backend/planner.py | Deterministic ordered Python candidate generation and lazy traversal (Task 26) |
+| backend/ranking.py | Candidate evaluation, schedules, cost/travel adapters, normalized scores and distinct selection (Task 27) |
+| backend/test_ranking.py | Hard limits, uncertainty, scheduling, scoring, distinct selection and generator integration |
 | backend/test_planner.py | Generator completeness, identity, event timing, uncertainty, validation and lazy traversal tests |
 | backend/test_models.py | Request/schedule/result tests, live TypeScript contract comparison, and FastAPI schema compatibility |
 | backend/main.py | FastAPI application and health endpoint |
@@ -94,7 +96,7 @@ Models reject unknown field names and invalid numeric values, including boolean 
 
 `data/mock-venues.json -> lib/mock-data.ts` (browser) and `backend/mock_data.py` (Python).
 
-The JSON contains the 29 activity definitions, three fictional tiers, and two unchanged event dates. Both runtimes expand these small definitions in the same category/tier/date order into 51 ordinary venue records and 72 event occurrences. This avoids storing expanded duplicates or independently editable catalogs. TypeScript keeps its regular expressions and the existing public exports; no build tool, dependency, endpoint, or backend connection was added. The mock travel formula stays in `lib/planner.ts`; only its fictional zone inputs are shared. Opening hours and actual availability were never supplied and remain unknown.
+The JSON contains the 29 activity definitions, three fictional tiers, and two unchanged event dates. Both runtimes expand these small definitions in the same category/tier/date order into 51 ordinary venue records and 72 event occurrences. This avoids storing expanded duplicates or independently editable catalogs. TypeScript keeps its regular expressions and the existing public exports; no build tool, dependency, endpoint, or backend connection was added. The fictional zone inputs are shared; Task 27 also implements the same deterministic travel convention in Python. Opening hours and actual availability were never supplied and remain unknown.
 
 `load_mock_venues()` resolves the fixture relative to the module, validates its schema and all expanded records with the Task 24 `VenueInformation` union, and returns fresh models. An optional fixture path supports tests; invalid data raises errors instead of returning a partial catalog. Python adds a source reference and explicit `fictional` data-quality statuses to supplied values; events have fictional schedules, while ordinary venue schedules stay unknown. No existing contract field or model changed. All money is USD/person and event clock values remain minutes after midnight in America/New_York.
 
@@ -126,6 +128,57 @@ result = generate_candidates(request)  # 18 distinct-identity ordered candidates
 for candidate in iter_itinerary_candidates(request):
     pass  # Future feasibility stage consumes these; no frontend connection yet.
 ```
+
+## Python filtering and ranking (Task 27)
+
+`recommend_plans(OutingRequest) -> generate_candidates -> evaluate_candidate -> score_candidates -> distinct selection -> RankingResult`
+
+The standalone `backend/ranking.py` consumes Task 26 candidates and the same Task 24/25 records. `rank_candidates(request, iterable)` also accepts an existing candidate stream. No planning endpoint, text parser, frontend integration or dependency was added. The existing TypeScript planner is untouched; its exact catalog/output parity tests still pass. Its order, capacity, dinner-at-17:00, fixed events, midnight cutoff and zone simulation conventions carry over. Python uses normalized weighted scores instead of TypeScript's differently scaled strategy formulas, and considers alternate candidates when strategy winners would coincide.
+
+Request additions are optional and backend-only: `groupBudget` (USD group activity cap), `maxLegTravel` (minutes per leg), `startTime` (earliest start, default 600), `endTime` (latest finish, default 1440), and `requireAvailability` (default false). Existing `budget` remains per person and `travel` remains total inter-stop travel. Both budget caps apply simultaneously when supplied; zero is a real cap. Start/end use the existing local minute types. Events still need an exact date. Transport is retained, but the simulation has no mode-specific routing.
+
+`TimeWindow` adds structured daily or date-specific local `[start,end]` windows to venue `openingWindows` and `availabilityWindows`. A null list means unknown; `[]` explicitly means closed/unavailable. Supplied schedules, capacities and durations with unknown data-quality status remain provisional, as do quotes with unknown status. Dates must match; date-specific windows cannot establish feasibility for an unspecified day. Windows cannot span midnight. Free-form `openingHours`/`availability` text is preserved, but cannot establish a machine-checkable schedule. No hours or availability were fabricated in the shared fixture. Known event schedules establish the event's mock time window without a separate ordinary opening schedule; supplied event hours and availability are also honored. Explicitly required availability always needs structured evidence. This is not a reservation or inventory system.
+
+Evaluation checks supported location and preserves all activity occurrences, order, people, date and revisit permission. Known capacity, per-person/group budget, total/per-leg travel, opening/availability windows, dinner timing, exact event starts/dates/durations, earliest start, latest end and midnight are hard constraints. Earliest-finish scheduling intersects windows and permits waiting; stop durations must fit one continuous window. Starting later cannot improve feasibility for these ordered, single-day constraints. Unknown durations/travel propagate unknown times; only positive duration/zero travel lower bounds are used to detect definite conflicts, never to invent an exact schedule. A later fixed event can anchor subsequent times again.
+
+`RankedItinerary` retains the complete candidate and supplied metadata, planned stops with nullable start/end/duration, individual `PriceQuote`/`TravelQuote` provenance, known cost subtotals per person/group, complete cost totals when calculable, leg/total travel, activity duration, elapsed duration (including waiting), typed constraint issues, score components and structured recommendation reasons. Incomplete totals stay null. Decimal arithmetic enforces inclusive monetary caps without float boundary errors. Violated routes that exceed one day have no day-bounded total/timing value emitted.
+
+Feasibility has three explicit states:
+
+- `confirmed`: all evaluated hard constraints can be checked against supplied data. Fictional or estimated evidence retains its status; this never means verified real-world feasibility.
+- `provisional`: no known violation, but evidence is missing. These alternatives appear only in `provisionalPlans`, with specific missing fields/actions; they are not confirmed recommendations.
+- `violated`: at least one known hard violation. These are excluded from both selections, even if other fields are unknown.
+
+`RankingResult.plans` contains confirmed recommendations only. `plans` plus `provisionalPlans` total at most three. Confirmed plans take priority. Today's ordinary venues have unknown hours, so ordinary/mixed outings produce provisional alternatives and an `insufficient_data` error when no confirmed plan exists. Event-only outings can pass against the fictional schedule/capacity data; `requireAvailability=True` keeps them provisional until availability evidence exists. No alternatives are returned merely to fill three slots. Empty results retain actionable errors and deterministic reason counts (one count per code per evaluated candidate). Missing pools/unsupported locations preserve the generator's errors.
+
+Scoring runs only after known violations are removed. Affordability (complete per-person price, lower is better), quality (mean supplied experience tier, higher is better), and convenience (total travel, lower is better) use min/max normalization over the full eligible pool to `[0,1]`. A constant known component earns 1; an unknown component earns 0 and is never treated as free/instant/average quality. Scores are relative to this request's candidate pool, not comparable across different requests. Weights are:
+
+| Mode | Affordability | Quality | Convenience |
+| --- | --- | --- | --- |
+| Budget-friendly (`budget`) | 0.75 | 0.10 | 0.15 |
+| Balanced (`balanced`) | 0.35 | 0.40 | 0.25 |
+| Best Experience (`experience`) | 0.10 | 0.75 | 0.15 |
+
+Mandatory budgets are unchanged by mode. Ties use ordered record IDs, then candidate ID. Select the highest score first; subsequent choices prefer more changed stop identities among candidates within 0.15 of the best remaining score, then score and stable IDs. This provides variety without admitting a known violation or a large score drop for diversity. Exact ordered venue duplicates are removed. Record identity is the available measure of distinctness; the fixture has no physical-building aliases or real review scores.
+
+Price and travel providers are injectable callables returning validated quote models. The default price provider reads the existing per-person field/status/source; the default travel provider uses exactly `5 + abs(zone difference) * 8` with explicit fictional provenance. Missing zones yield unknown travel. Providers receive the request (including people and transport), allowing future sourced estimates without rewriting scheduling/scoring. Provider failures are not silently converted into success or fabricated values. Current costs exclude transport, taxes, tips, fees and extras; travel excludes the first/last trip. No real routing is called.
+
+Backend example (not a new API or frontend flow):
+
+```python
+from backend.models import OutingRequest
+from backend.ranking import recommend_plans
+
+result = recommend_plans(OutingRequest(
+    activities=["baseball", "concert"], date="2026-11-07",
+    budget=100, groupBudget=400, maxLegTravel=25, travel=30,
+    cost="balanced",
+))
+# result.plans: only confirmed against supplied mock evidence
+# result.provisionalPlans: separate alternatives requiring more information
+```
+
+Legacy `Itinerary`/`PlanningResult` validation remains unchanged for TypeScript compatibility. The richer Task 27 contracts support nullable calculations, repeated categories and explicit provisional alternatives instead of forcing incomplete evidence into a fully scheduled legacy card. Task 28 must deliberately handle this distinction before any frontend connection.
 
 ## Future architecture — not implemented
 

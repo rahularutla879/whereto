@@ -16,8 +16,13 @@ from backend.models import (
 )
 
 
+def supports_location(location: str) -> bool:
+    """Shared coverage check for generation and independent candidate evaluation."""
+    return re.fullmatch(r"baltimore(?:\s*,?\s*(?:md|maryland))?", location, re.IGNORECASE) is not None
+
+
 def _pools(request: OutingRequest) -> tuple[list[list[Venue | ScheduledEvent]], list[PlanningError]]:
-    if not re.fullmatch(r"baltimore(?:\s*,?\s*(?:md|maryland))?", request.location, re.IGNORECASE):
+    if not supports_location(request.location):
         return [], [PlanningError(code="unsupported_location", field="location",
                                   message="The fictional catalog only covers Baltimore.")]
     records = load_mock_venues()
