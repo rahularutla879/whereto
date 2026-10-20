@@ -1,6 +1,6 @@
 # Where To? — handover
 
-Last verified: October 20, 2026. Original roadmap Task 25 makes the shared fictional catalog available to Python through the Task 24 models. Homepage design and planning behavior are unchanged.
+Last verified: October 20, 2026. Original roadmap Task 26 adds deterministic Python candidate generation using the shared fictional catalog and Pydantic contracts. Homepage design and planning behavior are unchanged.
 
 ## Current state
 
@@ -57,9 +57,20 @@ Last verified: October 20, 2026. Original roadmap Task 25 makes the shared ficti
 - Full Git diff, including all new files, reviewed. Homepage/styles/artwork, parser/planner, both health endpoints, Task 24 models, dependencies, Python environment, and release tags are unchanged. Browser interactions and visual layout were not rerun; behavior preservation is supported by exact output comparisons, existing functional tests, source review, and the production build.
 - No genuine blocker remains. Task 26's Python itinerary generator and all real-data/service integration remain unimplemented.
 
+## October 20, 2026 — original roadmap Task 26
+
+- Acceptance criteria met: inspected project rules, continuity documents, TypeScript planner/catalog/contracts, Task 24 models, Task 25 loader/fixture, and existing tests before changes. Initial Git status was clean.
+- Added `backend/planner.py`. `generate_candidates(OutingRequest(...))` returns a validated `CandidateGenerationResult` containing all unranked candidates or structured errors. Matching pools come exclusively from `load_mock_venues()` / `get_mock_venues()`. Fixture order and requested activity order determine traversal; stable IDs encode the request and ordered record IDs. Missing records never produce partial outings or substitutes. Unsupported categories/empty input are rejected by Pydantic; unsupported locations return an error.
+- `iter_itinerary_candidates()` yields lazily using depth-first traversal and prunes identity/fixed-time conflicts before constructing complete candidates. No candidate cap or silent truncation is applied. The convenience result collects at most 81 combinations from today's three-matches-per-category/date, four-stop fixture; use the iterator for larger catalogs.
+- Small compatible contract additions: resolved requests now allow explicitly repeated category entries and add strict `allowRevisits=False`. New candidate stop/itinerary/result models reuse the Task 24 venue/event union, request, scalar types, and errors. Fully scheduled `Itinerary`/`PlanningResult` validation is unchanged. Candidates need a separate model because final plans require known times, totals, capacity checks, and at most three results. Ordinary candidate times remain null; event starts/dates and known ends come only from the dataset. Unknown event duration leaves its end null. Full record metadata/provenance is preserved.
+- Duplicate record IDs are excluded unless revisits are explicit. Revisit permission never permits attending the same overlapping event twice. Fixed events must be chronological and nonoverlapping, with room for known intervening activity durations. Unknown durations use only a positive lower bound for conflict detection; no exact time or real availability is claimed. Travel feasibility, ordinary scheduling/opening hours, dinner timing, capacity/budget filtering, scoring, ranking, and top-three selection are deferred to Task 27.
+- Checks passed: `npm run test:backend` **41/41** (16 new generator tests); `npm test` **50/50**; `npm run lint`; `npm run typecheck`; `npm run build`. Generator tests cover every category, complete ordered products, repeats/revisits, exact event dates and missing dates, conflicting/reversed events, intervening durations, missing fixture samples, unsupported inputs/locations, duplicate prevention, unknown values, Pydantic round trips/rejections, determinism, lazy traversal, independent candidate records, and absence of Task 27 filtering/ranking. Existing parity/fingerprint tests still confirm unchanged frontend records and 33 representative outputs.
+- Complete Git diff, including new files, reviewed. No frontend source, fixture, health endpoint, dependency, or release-tag changes. No planning API or frontend connection was added. Browser/visual checks were not rerun for this backend-only change; frontend behavior preservation is supported by unchanged source, passing regression/fingerprint tests, and build.
+- No genuine blocker remains. All data is fictional. Candidates are possible combinations, not confirmed feasible or recommended outings. Tasks 27 and 28 have not started.
+
 ## Known limitations and open risks
 
-- Baltimore only; one to four distinct activities. Conservative keywords can reject ordinary phrasing, negation, alternatives, and specific times. Repeated activity categories are collapsed.
+- Frontend: Baltimore only; one to four distinct activities. Conservative keywords can reject ordinary phrasing, negation, alternatives, and specific times. Repeated activity categories are collapsed.
 - Events exist only on fictional November 7 and November 14, 2026 fixtures. Regular venue opening hours and availability are unchecked. See README for mock timing and cost assumptions.
 - Travel uses invented neighborhood zones; ranking chooses among venue combinations in the requested activity order, not an optimized real route. Fewer than three results can be valid.
 - No additional confirmed bug is recorded here; passing unit tests do not prove the absence of defects or browser issues.
@@ -75,6 +86,6 @@ Last verified: October 20, 2026. Original roadmap Task 25 makes the shared ficti
 
 Current milestone: **Stage 1 — real venues and route information**, not complete. Some Stage 2 behavior exists only against mock data; Stage 3 remains planned. See [TASKS.md](TASKS.md).
 
-Task 25 is complete. Stop here until the owner requests Task 26. Later tasks will address backend planning work; no planning logic has moved to Python. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
+Task 26 is complete. Stop here until the owner requests Task 27. Python generates unranked candidates only; final feasibility, scheduling, ranking, and frontend integration remain future work. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
 
 For a fresh session: follow AGENTS.md, inspect the current code and Git status again, and use README.md for exact startup/check commands. Dependencies are already present; no API keys or `.env` file are needed for the prototype. Do not install packages merely to read or update these documents.

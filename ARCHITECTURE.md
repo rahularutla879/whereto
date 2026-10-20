@@ -1,6 +1,6 @@
 # Current architecture
 
-Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; itinerary generation runs synchronously in the client. The backend only exposes health status; no backend planning endpoint or external service is implemented.
+Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; user-facing itinerary generation runs synchronously in the client. Python also has a standalone unranked candidate generator (Task 26). The backend only exposes health status; no backend planning endpoint or external service is implemented.
 
 ```text
 Root layout + global styles
@@ -39,7 +39,9 @@ The Next.js route disables fetch/response caching, validates the expected status
 
 | File | Responsibility |
 | --- | --- |
-| backend/models.py | Central Pydantic contracts, reusable scalar types, enums, and response validation (Task 24) |
+| backend/models.py | Pydantic request, venue/event, final-plan and candidate contracts, scalar types, and integrity validation |
+| backend/planner.py | Deterministic ordered Python candidate generation and lazy traversal (Task 26); no final feasibility or ranking |
+| backend/test_planner.py | Generator completeness, identity, event timing, uncertainty, validation and lazy traversal tests |
 | backend/test_models.py | Request/schedule/result tests, live TypeScript contract comparison, and FastAPI schema compatibility |
 | backend/main.py | FastAPI application and health endpoint |
 | backend/requirements.txt | Pinned essential backend dependencies and required transitive packages |
@@ -68,7 +70,7 @@ React state holds requests, preferences, results, and expanded cards in memory. 
 `backend/models.py` is the single Python definition module. It uses the Pydantic dependency already pinned for FastAPI; no new dependencies or runtime routes were added. Models can be imported by future FastAPI endpoints. An isolated OpenAPI test verifies request/response schema generation without adding a planning route to the application.
 
 - `ActivityType` carries the exact 29 TypeScript activity IDs, including `miniGolf`. `CostPreference` uses `budget`, `balanced`, and `experience` for the existing Budget-friendly, Balanced, and Best experience controls.
-- `OutingRequest` represents **resolved** inputs: ordered, distinct `activities` (one to four), `location` (default Baltimore), `people` (default four), optional `date`, `budget`, `travel`, `transport`, `cost` (default balanced), and `dinner` (default false). A future boundary must resolve text/defaults/UI overrides before constructing this model; this task does not port the parser or the UI's string-valued `Preferences` object.
+- `OutingRequest` represents **resolved** inputs: ordered `activities` (one to four; repeated entries permitted since Task 26), `location` (default Baltimore), `people` (default four), optional `date`, `budget`, `travel`, `transport`, `cost` (default balanced), and `dinner` (default false), plus `allowRevisits` (default false, Task 26). A future boundary must resolve text/defaults/UI overrides before constructing this model; this task does not port the parser or the UI's string-valued `Preferences` object.
 - Group size, location, calendar dates, money, start/end times, duration, capacity, and travel limits use reusable validated scalar types rather than wrapper objects or duplicate definitions. Groups accept whole numbers 1–100, budgets accept finite USD/person values 0–100,000, and travel accepts whole minutes 0–1440, matching existing form/planner limits. No limit is inferred from the fictional catalog's maximum capacity of 20.
 - `activities`, resolved `location`/`people`, an explicitly supplied date, budget, and travel cap are mandatory constraints. `cost` only ranks feasible options. `transport` is an optional preference with walking/cycling/driving/transit values for future use; null is intentional because today's mock formula has no transport mode. It does not implement routing. `dinner` records the parsed dinner timing requirement for future scheduling; the models do not generate a schedule.
 - Null budget/travel means **no cap**; zero means a real hard limit. Null request date means a flexible day for regular venues; scheduled activity categories require an exact valid `YYYY-MM-DD` date. No schema restriction to fixture dates or Baltimore is imposed: supported location, fixture availability, and feasibility remain planner decisions. Task 25 loads the shared fixture separately; no catalog values are embedded in the models.
@@ -99,6 +101,31 @@ The JSON contains the 29 activity definitions, three fictional tiers, and two un
 `SUPPORTED_ACTIVITIES` comes from the 29-value `ActivityType` enum. `available_activities()` reports only categories present in the records; currently all 29 have samples. `get_mock_venues(activity, event_date=..., kind=...)` retrieves matching records in fixture order. With no date it returns all event occurrences; with a date it keeps only exact event matches plus ordinary venues (without asserting opening hours). Supported categories with no records return `[]`; unsupported IDs, invalid dates and invalid kinds raise errors. `get_mock_venue(id)` returns the exact record or `None`. No capacity/budget feasibility, travel calculation, ranking or itinerary generation is implemented.
 
 `backend/test_mock_data.py` compares every record with the actual frontend exports and checks fixed fingerprints of pre-migration frontend records and 33 representative planner results. Those fingerprints guard legacy values/results without maintaining a second editable dataset. Deliberate future catalog or result changes require explicitly updating the baseline. Missing-sample tests remove a category from a temporary fixture and prove support remains without fabricating replacement venues.
+
+## Python candidate generation (Task 26)
+
+`OutingRequest -> validated shared fixture -> activity/date pools -> depth-first ordered combinations -> CandidateItinerary`
+
+`backend/planner.py` offers `generate_candidates(request)` for a serializable `CandidateGenerationResult` and `iter_itinerary_candidates(request)` for lazy consumption. Both preserve every requested activity occurrence and fixture order. They use the existing loader/retrieval functions; there is no copied dataset. Missing records return structured `no_availability` errors in the collected result, unsupported locations return `unsupported_location`, and identity/fixed-time incompatibility returns `infeasible`. Invalid activity IDs and missing required event dates remain request validation errors. The iterator yields nothing for unavailable requests; use the collected result when explanations are needed.
+
+Traversal retains only the current route and candidate pools, prunes duplicate IDs (unless `allowRevisits=True`) and fixed-time conflicts early, and yields each candidate independently. There is no truncation, sorting, optimization, or top-three selection. The collected API materializes all results, at most 81 for the current fixture/request limits; callers working with larger catalogs can stream via the iterator. Stable candidate IDs hash canonical request JSON and ordered venue IDs. IDs express source record identity, not independently verified physical venue identity; the fixture supplies no separate building/event-alias identifiers.
+
+Candidate contracts reuse `OutingRequest`, `VenueInformation`, `PlanningError`, and validated scalar types. `CandidateStop` retains venue/start/end with nullable times; `CandidateItinerary` retains ID, ordered venues/stops, people, date, and revisit permission. `CandidateGenerationResult` carries the resolved request, candidates, errors, and explanation, validating request/order consistency. They intentionally omit final-plan display copy, price/travel/duration totals and ranking. Existing `Itinerary`/`PlanningResult` contracts remain strict final outputs; candidate objects are not payloads for today's frontend. Conversion to final plans and handling repeats in final plans belong to later work.
+
+Ordinary stop times stay null. Scheduled stops copy the event's exact date/start and compute an end only from its supplied duration. Events on other dates never enter the pools. Fixed events must follow the requested order without overlap and must allow known intervening activity durations; unknown durations contribute only the positive lower bound implied by the model, without assigning a time. Revisit permission cannot override conflicting event times. No travel, opening-hour, capacity, budget, dinner-time, or complete-day feasibility is evaluated here. These candidates must pass Task 27 before being presented as feasible plans. Full original venue/event records retain fictional labels, sources, stable IDs and unknown fields. No route, endpoint, frontend call, third-party API or dependency was added.
+
+Example backend use (not an API endpoint):
+
+```python
+from backend.models import OutingRequest
+from backend.planner import generate_candidates, iter_itinerary_candidates
+
+request = OutingRequest(activities=["coffee", "museum", "coffee"])
+result = generate_candidates(request)  # 18 distinct-identity ordered candidates
+# Stream candidates instead of collecting them for larger future catalogs:
+for candidate in iter_itinerary_candidates(request):
+    pass  # Future feasibility stage consumes these; no frontend connection yet.
+```
 
 ## Future architecture — not implemented
 

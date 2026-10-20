@@ -25,7 +25,7 @@ Task 23 is complete. These backend foundations do not complete a real-data produ
 - [x] Validate inputs and response consistency, preserve current JSON names, and test optional/unknown/fictional information, schedules, serialization, and FastAPI schema compatibility.
 - [x] Pass backend and frontend tests, lint, TypeScript checks, and production build; review the complete diff and update relevant documentation. Evidence is in HANDOVER.md.
 
-Task 24 is complete. No planning endpoint or Python planner is implemented.
+Task 24 is complete. Its contracts are reused by the later Task 26 candidate generator; no planning endpoint is implemented.
 
 ## Original roadmap — Task 25: create the Python mock venue dataset
 
@@ -35,7 +35,17 @@ Task 24 is complete. No planning endpoint or Python planner is implemented.
 - [x] Test loading, validation, scheduled events, missing samples, and exact frontend consistency; pass backend/frontend tests, lint, TypeScript checks, and production build.
 - [x] Review the complete diff and update continuity/architecture documentation. Evidence is in HANDOVER.md.
 
-Task 25 is complete. Task 26 has not started. The frontend still plans locally; no Python itinerary generator or planning endpoint is implemented.
+Task 25 is complete. The frontend still plans locally using the same shared dataset.
+
+## Original roadmap — Task 26: build the Python itinerary generator
+
+- [x] Inspect the TypeScript planner, Task 24 contracts, Task 25 loader/shared fixture, and project safeguards.
+- [x] Generate deterministic ordered candidates, including repeated categories and explicit revisit handling, using validated shared records only.
+- [x] Preserve identity, provenance, uncertainty, exact event dates/times; reject incompatible fixed events and explain missing records without partial outings.
+- [x] Add candidate-specific Pydantic contracts and lazy enumeration without truncation; defer final filtering, scheduling, scoring, ranking, and frontend integration.
+- [x] Pass backend/frontend tests, lint, TypeScript checks, and production build; review the full diff and update relevant documentation. See HANDOVER.md for evidence and limits.
+
+Task 26 is complete. Stop before Tasks 27 and 28. No planning endpoint or frontend connection is implemented.
 
 ## Prototype baseline — implemented
 

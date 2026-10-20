@@ -75,7 +75,7 @@ class RequestTests(unittest.TestCase):
     def test_invalid_inputs(self):
         cases = [
             {"activities": []}, {"activities": ["coffee"] * 5},
-            {"activities": ["coffee", "coffee"]}, {"activities": ["skydiving"]},
+            {"activities": ["skydiving"]}, {"allowRevisits": "yes"},
             {"people": 0}, {"people": -1}, {"people": 101}, {"people": 2.5},
             {"people": True}, {"people": "4"}, {"budget": -1},
             {"budget": 100001}, {"budget": float("inf")}, {"budget": float("nan")},

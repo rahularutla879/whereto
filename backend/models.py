@@ -1,4 +1,4 @@
-"""Task 24 contract; no parsing, catalog lookup, routing, or plan generation.
+"""Backend contracts; no parsing, catalog lookup, routing, or plan generation.
 
 Requests contain resolved inputs, not the UI's blank/string form controls.
 JSON response names match lib/planner.ts and lib/mock-data.ts. All clock values
@@ -140,11 +140,11 @@ class OutingRequest(ContractModel):
     cost: CostPreference = CostPreference.balanced
     transport: TransportationMode | None = None
     dinner: bool = Field(default=False, strict=True)
+    # Repeating a category requests another stop; repeating an ID needs permission.
+    allowRevisits: bool = Field(default=False, strict=True)
 
     @model_validator(mode="after")
     def validate_activities(self):
-        if len(set(self.activities)) != len(self.activities):
-            raise ValueError("Activities must be distinct and remain in requested order")
         if any(activity in EVENT_ACTIVITIES for activity in self.activities) and self.date is None:
             raise ValueError("Scheduled events require an exact outing date")
         return self
@@ -271,4 +271,88 @@ class PlanningResult(ContractModel):
         for plan in self.plans:
             if [venue.activity for venue in plan.venues] != self.activities:
                 raise ValueError("Plans must preserve every requested activity in order")
+        return self
+
+
+class CandidateStop(ContractModel):
+    """Only dataset event times are assigned; ordinary stop times stay unknown."""
+
+    venue: VenueInformation
+    start: StartMinute | None = None
+    end: EndMinute | None = None
+
+    @model_validator(mode="after")
+    def validate_fixed_times(self):
+        if isinstance(self.venue, ScheduledEvent):
+            expected_end = (self.venue.start + self.venue.duration
+                            if self.venue.duration is not None else None)
+            if self.start != self.venue.start or self.end != expected_end:
+                raise ValueError("Candidate event times must match the supplied record")
+        elif self.start is not None or self.end is not None:
+            raise ValueError("Ordinary candidate stop times must remain unknown")
+        return self
+
+
+def fixed_times_compatible(venues: list[Venue | ScheduledEvent]) -> bool:
+    """Necessary timing check only; no travel or ordinary opening-hour claims.
+
+    Known intervening durations must fit between fixed events. Unknown durations
+    use only the model's positive-duration lower bound, never a fabricated time.
+    """
+    earliest = None
+    for venue in venues:
+        if isinstance(venue, ScheduledEvent):
+            if earliest is not None and venue.start < earliest:
+                return False
+            earliest = venue.start + (venue.duration if venue.duration is not None else 1)
+        elif earliest is not None:
+            earliest += venue.duration if venue.duration is not None else 1
+    return True
+
+
+class CandidateItinerary(ContractModel):
+    """Unranked outing, deliberately separate from a fully scheduled Itinerary.
+
+    Budget, capacity, travel and ordinary schedules have not been evaluated.
+    Venue records retain all source fields and data-quality labels.
+    """
+
+    id: Nonblank
+    venues: list[VenueInformation] = Field(min_length=1, max_length=4)
+    stops: list[CandidateStop] = Field(min_length=1, max_length=4)
+    people: GroupSize
+    date: OutingDate | None = None
+    allowRevisits: bool = Field(default=False, strict=True)
+
+    @model_validator(mode="after")
+    def validate_candidate(self):
+        if self.venues != [stop.venue for stop in self.stops]:
+            raise ValueError("Candidate venues must match stop order")
+        if not self.allowRevisits and len({v.id for v in self.venues}) != len(self.venues):
+            raise ValueError("Repeated record identity requires explicit revisit permission")
+        if any(isinstance(v, ScheduledEvent) and v.eventDate != self.date for v in self.venues):
+            raise ValueError("Candidate events must match the requested date")
+        if not fixed_times_compatible(self.venues):
+            raise ValueError("Candidate fixed event times conflict in requested order")
+        return self
+
+
+class CandidateGenerationResult(ContractModel):
+    request: OutingRequest
+    candidates: list[CandidateItinerary] = Field(default_factory=list)
+    errors: list[PlanningError] = Field(default_factory=list)
+    message: Nonblank
+
+    @model_validator(mode="after")
+    def validate_candidates(self):
+        if bool(self.candidates) == bool(self.errors):
+            raise ValueError("Return candidates or structured errors")
+        if len({c.id for c in self.candidates}) != len(self.candidates):
+            raise ValueError("Candidate IDs must be distinct")
+        for candidate in self.candidates:
+            if ([v.activity for v in candidate.venues] != self.request.activities
+                    or candidate.people != self.request.people
+                    or candidate.date != self.request.date
+                    or candidate.allowRevisits != self.request.allowRevisits):
+                raise ValueError("Candidates must preserve the resolved request")
         return self

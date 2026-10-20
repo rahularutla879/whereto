@@ -39,4 +39,8 @@ Keep Pydantic types in `backend/models.py`, with reusable scalar constraints and
 
 Use a compact JSON fixture for catalog values and tier/date definitions, consumed by both runtimes with small record expansion adapters. Keep TypeScript keyword patterns and planning logic in place. This prevents independently maintained data copies without adding build or synchronization tools. Python adds explicit provenance through Task 24 models; absent hours and availability stay unknown. Compare every expanded record across runtimes and preserve pre-change output fingerprints to detect accidental behavior changes.
 
+## October 20, 2026 — unranked Python candidates (Task 26)
+
+Use separate additive candidate contracts rather than weakening fully scheduled final-plan validation or inventing ordinary schedules/travel totals. Reuse Task 24 request/venue/event/error/scalar types and the Task 25 loader. Allow repeated request activity entries and require explicit `allowRevisits` for duplicate record IDs. Enumerate lazily in fixture/request order without truncation; provide a collected structured result for the current small dataset. Prune only identity and fixed-event incompatibilities here; defer final feasibility, scheduling, filtering and ranking to Task 27, and frontend integration to Task 28.
+
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.
