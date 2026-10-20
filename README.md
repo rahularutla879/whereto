@@ -141,6 +141,8 @@ There is no authentication, payment integration, database, external API integrat
 
 ## Project files
 
+- `backend/models.py` — validated planning data contracts for future endpoints; no Python planner yet.
+- `backend/test_models.py` — model validation and comparison with actual frontend planner results.
 - `backend/main.py` — minimal FastAPI application with `GET /health`.
 - `backend/requirements.txt` — exact tested backend dependency versions, including required transitive packages.
 - `backend/test_health.py` — real backend HTTP test using Python’s standard test library.
@@ -169,7 +171,7 @@ npm run typecheck
 npm run build
 ```
 
-`npm test` checks the planner and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` starts a temporary backend on an available local port and checks the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
+`npm test` checks the planner and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` validates the planning data models, compares them with actual TypeScript planner results (using the installed frontend dependencies), and starts a temporary backend on an available local port to check the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
 
 To run a production build **locally**, run `npm run build` and then `npm start`. Keep the backend running in the other Terminal to verify `/api/health`. This still does not deploy anything.
 

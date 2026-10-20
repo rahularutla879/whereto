@@ -16,7 +16,16 @@ Verified October 19, 2026; details and limits are recorded in HANDOVER.md.
 - [x] Add FastAPI `GET /health` and server-side Next.js `GET /api/health` communication without changing the planner or design.
 - [x] Document local startup and add backend/communication tests; pass automated tests, lint, TypeScript, build, and live HTTP communication checks. See HANDOVER.md for browser verification and limits.
 
-Task 23 is complete. Task 24 has not started. These backend foundations do not complete a real-data product integration milestone.
+Task 23 is complete. These backend foundations do not complete a real-data product integration milestone.
+
+## Original roadmap — Task 24: define backend data structures
+
+- [x] Inspect the working TypeScript contracts, catalog, planner, tests, and project guidance.
+- [x] Define reusable Pydantic request, activity, constraint, venue/event, stop, itinerary, result/error, and data-quality types in one backend module.
+- [x] Validate inputs and response consistency, preserve current JSON names, and test optional/unknown/fictional information, schedules, serialization, and FastAPI schema compatibility.
+- [x] Pass backend and frontend tests, lint, TypeScript checks, and production build; review the complete diff and update relevant documentation. Evidence is in HANDOVER.md.
+
+Task 24 is complete. Task 25 has not started. No planning endpoint or Python planner is implemented.
 
 ## Prototype baseline — implemented
 

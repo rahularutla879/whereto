@@ -1,6 +1,6 @@
 # Where To? — handover
 
-Last verified: October 20, 2026. Original roadmap Task 23 adds a minimal Python backend and server-side Next.js health connection. Homepage design and mock planning code are unchanged.
+Last verified: October 20, 2026. Original roadmap Task 24 adds validated backend planning data contracts on top of Task 23’s health connection. Homepage design and mock planning code are unchanged.
 
 ## Current state
 
@@ -36,6 +36,16 @@ Last verified: October 20, 2026. Original roadmap Task 23 adds a minimal Python 
 - Full Git diff, including new files and pre-existing documentation changes, reviewed. Homepage, styles, artwork, planner, and npm dependencies/lockfile remain unchanged. No credentials or environment files are included beyond the placeholder-only `.env.example`.
 - Earlier uncommitted Tasks 02–04 documentation was preserved and included with the continuity updates. Task 24 and planning migration have not started. No external service, AI, map, or database was added. The `prototype-v0.1` tag must remain at `f62ff7ae85ca85f3ef6fbf169046c22c720950ed`.
 
+## October 20, 2026 — original roadmap Task 24
+
+- Acceptance criteria met: inspected AGENTS.md, safeguards, continuity documents, TypeScript contracts/parser/catalog/planner/UI, existing backend, and tests before implementation. Initial Git status was clean.
+- Added one definition module, `backend/models.py`, using existing Pydantic. It contains resolved outing requests, all 29 activity IDs, cost and transport preferences, reusable group/location/date/time/budget/travel types, venues and scheduled events, itinerary stops and complete itineraries, planning results/errors, and explicit unknown/fictional/estimated/verified data-quality metadata. See ARCHITECTURE.md for contract details and a request example.
+- Validation preserves existing limits (1–100 people, $0–$100,000/person, 0–1440 total inter-stop travel minutes, one to four ordered distinct activities), requires exact dates for scheduled categories, rejects invalid dates/times/numbers, and checks response schedules, fixed event dates/starts, known capacity, costs, order, and duration. Unknown information remains optional; null limits and zero limits differ. Cost preferences remain ranking choices, separate from mandatory constraints.
+- Checks passed: `npm run test:backend` **16/16** (15 model tests plus the existing real Uvicorn HTTP health test); `npm test` **50/50**; `npm run lint`; `npm run typecheck`; `npm run build`. The contract test runs the actual unchanged TypeScript planner across all 29 categories plus representative combinations, event/capacity/zero-limit/failure cases and confirms JSON round trips. Request serialization and isolated FastAPI OpenAPI schema generation also pass. No new test dependency was installed.
+- Full Git diff, including both new Python files and all documentation edits, reviewed. Frontend source/design, mock parser/planner/catalog, both health endpoints, dependency manifests/lockfile, existing Python environment, and release tags are unchanged. Browser checks were not rerun for this model-only task; automated regressions and production build passed.
+- Limitations: models are ready for future FastAPI endpoints but are not connected to a planning route. Text parsing, UI override precedence, request-to-result feasibility, dinner scheduling, and itinerary generation remain in TypeScript. Schema validity does not prove real availability. Current payloads have no machine-readable provenance; future producers must explicitly mark mock values fictional. Unknown optional venue fields require deliberate UI handling before future integration. Transport modes are defined but no mode-specific routing exists. The cross-language contract test uses the already-installed frontend dependencies.
+- No blocker remains for Task 24. No Python reinstall, environment recreation, database, maps, AI, accounts, paid API, deployment, or Task 25 work was performed.
+
 ## Known limitations and open risks
 
 - Baltimore only; one to four distinct activities. Conservative keywords can reject ordinary phrasing, negation, alternatives, and specific times. Repeated activity categories are collapsed.
@@ -54,6 +64,6 @@ Last verified: October 20, 2026. Original roadmap Task 23 adds a minimal Python 
 
 Current milestone: **Stage 1 — real venues and route information**, not complete. Some Stage 2 behavior exists only against mock data; Stage 3 remains planned. See [TASKS.md](TASKS.md).
 
-Task 23 is complete. Stop here until the owner requests the next original-roadmap task. Tasks 24–29 will address backend planning work; no planning logic has moved to Python. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
+Task 24 is complete. Stop here until the owner requests Task 25. Later tasks will address backend planning work; no planning logic has moved to Python. The product integration milestones in TASKS.md remain incomplete and no provider is selected.
 
 For a fresh session: follow AGENTS.md, inspect the current code and Git status again, and use README.md for exact startup/check commands. Dependencies are already present; no API keys or `.env` file are needed for the prototype. Do not install packages merely to read or update these documents.

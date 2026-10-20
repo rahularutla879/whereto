@@ -39,6 +39,8 @@ The Next.js route disables fetch/response caching, validates the expected status
 
 | File | Responsibility |
 | --- | --- |
+| backend/models.py | Central Pydantic contracts, reusable scalar types, enums, and response validation (Task 24) |
+| backend/test_models.py | Request/schedule/result tests, live TypeScript contract comparison, and FastAPI schema compatibility |
 | backend/main.py | FastAPI application and health endpoint |
 | backend/requirements.txt | Pinned essential backend dependencies and required transitive packages |
 | backend/test_health.py | Uvicorn HTTP health test |
@@ -57,6 +59,31 @@ The Next.js route disables fetch/response caching, validates the expected status
 | next.config.ts, tsconfig.json, eslint.config.mjs, postcss.config.mjs | Framework, TypeScript, lint, and stylesheet tooling |
 
 React state holds requests, preferences, results, and expanded cards in memory. There is no database, browser persistence, account system, or cross-session history. Icons use lucide-react; illustrations and fonts need no external media service.
+
+## Backend data contract (Task 24)
+
+`backend/models.py` is the single Python definition module. It uses the Pydantic dependency already pinned for FastAPI; no new dependencies or runtime routes were added. Models can be imported by future FastAPI endpoints. An isolated OpenAPI test verifies request/response schema generation without adding a planning route to the application.
+
+- `ActivityType` carries the exact 29 TypeScript activity IDs, including `miniGolf`. `CostPreference` uses `budget`, `balanced`, and `experience` for the existing Budget-friendly, Balanced, and Best experience controls.
+- `OutingRequest` represents **resolved** inputs: ordered, distinct `activities` (one to four), `location` (default Baltimore), `people` (default four), optional `date`, `budget`, `travel`, `transport`, `cost` (default balanced), and `dinner` (default false). A future boundary must resolve text/defaults/UI overrides before constructing this model; this task does not port the parser or the UI's string-valued `Preferences` object.
+- Group size, location, calendar dates, money, start/end times, duration, capacity, and travel limits use reusable validated scalar types rather than wrapper objects or duplicate definitions. Groups accept whole numbers 1–100, budgets accept finite USD/person values 0–100,000, and travel accepts whole minutes 0–1440, matching existing form/planner limits. No limit is inferred from the fictional catalog's maximum capacity of 20.
+- `activities`, resolved `location`/`people`, an explicitly supplied date, budget, and travel cap are mandatory constraints. `cost` only ranks feasible options. `transport` is an optional preference with walking/cycling/driving/transit values for future use; null is intentional because today's mock formula has no transport mode. It does not implement routing. `dinner` records the parsed dinner timing requirement for future scheduling; the models do not generate a schedule.
+- Null budget/travel means **no cap**; zero means a real hard limit. Null request date means a flexible day for regular venues; scheduled activity categories require an exact valid `YYYY-MM-DD` date. No schema restriction to fixture dates or Baltimore is imposed: supported location, fixture availability, and feasibility remain planner decisions. No fixture catalog is copied into Python.
+- `Venue` and `ScheduledEvent` form a discriminated union using `kind`. Scheduled categories require event records with `eventDate` and fixed `start`. Other venue fields retain TypeScript names: `id`, `name`, `activity`, `neighborhood`, `price`, `duration`, `zone`, `experience`, `capacity`. Unknown optional information is null; it must never be interpreted as zero cost, unlimited capacity, or verified availability. Optional `source`, `openingHours`, and `availability` preserve missing information honestly; they do not perform any lookup.
+- `ItineraryStop` preserves `{venue, start, end}`. `Itinerary` preserves every existing Plan field, including `venues`, `stops`, per-person `price`, total inter-stop `travel`, elapsed `duration`, `people`, card copy/theme, and ISO `date` or the legacy `"Any day"` label. Start times are whole minutes 0–1439; end may be 1440 (midnight). All times are Baltimore local time, `America/New_York`, matching the current single-day planner. No UTC conversion or timezone inference is performed.
+- Response integrity checks enforce positive stop duration, known venue duration, fixed event starts and dates, non-overlap, known capacity, matching venue/stop order, distinct activity categories, elapsed itinerary duration, room for travel within schedule gaps, and consistent known per-person costs. These checks validate supplied schedules; they do not select venues, calculate mock routes, or generate itineraries. Request-to-result hard-limit enforcement and dinner scheduling remain responsibilities of the future planner.
+- `PlanningResult` retains `{plans, message, location, activities, notes}` and adds optional structured `errors` (`PlanningError`: code/message/optional field). At most three distinct plans are allowed, every plan preserves all activities in order, and errors cannot accompany partial plans. Legacy empty results with only the explanatory message remain valid.
+- `DataStatus` and `DataQuality` distinguish unknown, fictional, estimated, and verified identity/price/capacity/duration/schedule/travel/experience values. Venue and itinerary `dataQuality` default to unknown, never verified. Producers must explicitly label fixture values fictional; existing legacy payloads lack this metadata, so parsing them does not automatically identify their source. Mixed statuses are possible, and null values always remain unknown. Metadata is descriptive, not independent verification. Costs exclude transport, tax, tips, fees, and extras; travel excludes getting to the first stop and returning home. Elapsed duration includes waiting.
+
+Example resolved request (not a new endpoint):
+
+```json
+{"activities":["food","concert"],"location":"Baltimore","people":4,"date":"2026-11-07","budget":60,"travel":30,"cost":"balanced","dinner":true}
+```
+
+Models reject unknown field names and invalid numeric values, including boolean quantities and non-finite costs. JSON dates serialize to ISO strings and enum values to the existing frontend IDs. `model_dump(mode="json", exclude_unset=True)` round-trips current TypeScript result payloads without injecting optional metadata. Default serialization includes optional fields/defaults for a future richer contract. Unknown venue information will require deliberate frontend rendering before a future endpoint sends nulls to today's UI; no such integration is implemented here.
+
+`backend/test_models.py` executes the unchanged TypeScript planner for all 29 categories and representative multi-stop, event, capacity, zero-limit, and failure cases, then validates and round-trips its actual results. This one contract test needs the already-installed frontend Node dependencies; the other model tests use Python plus existing backend dependencies. The frontend and Python definitions remain separate because they serve different runtimes; this check detects drift without copying the catalog.
 
 ## Future architecture — not implemented
 

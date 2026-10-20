@@ -31,4 +31,8 @@ Use the existing Python 3.12 installation, an ignored `backend/.venv`, and plain
 
 Keep the boundary limited to health checks. Next.js contacts Python server-side, avoiding a public backend address in browser code and unnecessary CORS configuration. Use uncached checks, a short timeout, and a generic 503 response for an unavailable or unhealthy backend. The homepage and mock planner remain independent. Use two Terminal windows with npm scripts rather than adding a process manager; the existing `npm run dev` command is preserved. Planning migration belongs to Tasks 24–29.
 
+## October 20, 2026 — backend contracts without planner migration (Task 24)
+
+Keep Pydantic types in `backend/models.py`, with reusable scalar constraints and discriminated venue/event records. Preserve current response JSON names and use resolved typed requests rather than duplicating UI form strings or porting text parsing. Retain existing frontend limits, allow unknown optional venue information, and default data-quality metadata to unknown rather than claiming verification. Use a test against actual TypeScript planner outputs to detect cross-language drift without copying its catalog or algorithm. No new dependency, endpoint, frontend integration, or database is needed. Schema validity does not prove supported location, real availability, or request feasibility; those remain future planner responsibilities.
+
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.
