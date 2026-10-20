@@ -1,0 +1,396 @@
+{
+  "plans": [
+    {
+      "id": "bowling-0-drinks-0-movie-0",
+      "title": "Big fun. Small spend.",
+      "description": "All the good times, a little easier on the wallet.",
+      "theme": "peach",
+      "label": "THE BUDGET PICK",
+      "venues": [
+        {
+          "id": "bowling-0",
+          "name": "Lucky Duck Lanes",
+          "activity": "bowling",
+          "neighborhood": "Harbor East",
+          "price": 14,
+          "duration": 75,
+          "zone": 0,
+          "experience": 1,
+          "capacity": 4,
+          "kind": "venue"
+        },
+        {
+          "id": "drinks-0",
+          "name": "The Little Lime",
+          "activity": "drinks",
+          "neighborhood": "Harbor East",
+          "price": 8,
+          "duration": 45,
+          "zone": 0,
+          "experience": 1,
+          "capacity": 4,
+          "kind": "venue"
+        },
+        {
+          "id": "movie-0",
+          "name": "Pocket Picturehouse",
+          "activity": "movie",
+          "neighborhood": "Harbor East",
+          "price": 10,
+          "duration": 120,
+          "zone": 0,
+          "experience": 1,
+          "capacity": 4,
+          "kind": "venue"
+        }
+      ],
+      "stops": [
+        {
+          "venue": {
+            "id": "bowling-0",
+            "name": "Lucky Duck Lanes",
+            "activity": "bowling",
+            "neighborhood": "Harbor East",
+            "price": 14,
+            "duration": 75,
+            "zone": 0,
+            "experience": 1,
+            "capacity": 4,
+            "kind": "venue"
+          },
+          "start": 600,
+          "end": 675
+        },
+        {
+          "venue": {
+            "id": "drinks-0",
+            "name": "The Little Lime",
+            "activity": "drinks",
+            "neighborhood": "Harbor East",
+            "price": 8,
+            "duration": 45,
+            "zone": 0,
+            "experience": 1,
+            "capacity": 4,
+            "kind": "venue"
+          },
+          "start": 680,
+          "end": 725
+        },
+        {
+          "venue": {
+            "id": "movie-0",
+            "name": "Pocket Picturehouse",
+            "activity": "movie",
+            "neighborhood": "Harbor East",
+            "price": 10,
+            "duration": 120,
+            "zone": 0,
+            "experience": 1,
+            "capacity": 4,
+            "kind": "venue"
+          },
+          "start": 730,
+          "end": 850
+        }
+      ],
+      "price": 32,
+      "travel": 10,
+      "duration": 250,
+      "people": 4,
+      "date": "2026-11-07",
+      "feasibility": "preview",
+      "issues": [],
+      "groupCost": 128,
+      "prices": [
+        {
+          "amount": 14,
+          "status": "fictional"
+        },
+        {
+          "amount": 8,
+          "status": "fictional"
+        },
+        {
+          "amount": 10,
+          "status": "fictional"
+        }
+      ],
+      "legs": [
+        {
+          "minutes": 5,
+          "status": "fictional"
+        },
+        {
+          "minutes": 5,
+          "status": "fictional"
+        }
+      ]
+    },
+    {
+      "id": "bowling-1-drinks-1-movie-1",
+      "title": "A little of everything.",
+      "description": "Your happy medium of fun, comfort, and cost.",
+      "theme": "lavender",
+      "label": "THE SWEET SPOT",
+      "venues": [
+        {
+          "id": "bowling-1",
+          "name": "Sidekick Bowling Club",
+          "activity": "bowling",
+          "neighborhood": "Fells Point",
+          "price": 22,
+          "duration": 75,
+          "zone": 1,
+          "experience": 2,
+          "capacity": 8,
+          "kind": "venue"
+        },
+        {
+          "id": "drinks-1",
+          "name": "Good Company Social",
+          "activity": "drinks",
+          "neighborhood": "Fells Point",
+          "price": 12,
+          "duration": 45,
+          "zone": 1,
+          "experience": 2,
+          "capacity": 8,
+          "kind": "venue"
+        },
+        {
+          "id": "movie-1",
+          "name": "The Saturday Cinema",
+          "activity": "movie",
+          "neighborhood": "Fells Point",
+          "price": 15,
+          "duration": 120,
+          "zone": 1,
+          "experience": 2,
+          "capacity": 8,
+          "kind": "venue"
+        }
+      ],
+      "stops": [
+        {
+          "venue": {
+            "id": "bowling-1",
+            "name": "Sidekick Bowling Club",
+            "activity": "bowling",
+            "neighborhood": "Fells Point",
+            "price": 22,
+            "duration": 75,
+            "zone": 1,
+            "experience": 2,
+            "capacity": 8,
+            "kind": "venue"
+          },
+          "start": 600,
+          "end": 675
+        },
+        {
+          "venue": {
+            "id": "drinks-1",
+            "name": "Good Company Social",
+            "activity": "drinks",
+            "neighborhood": "Fells Point",
+            "price": 12,
+            "duration": 45,
+            "zone": 1,
+            "experience": 2,
+            "capacity": 8,
+            "kind": "venue"
+          },
+          "start": 680,
+          "end": 725
+        },
+        {
+          "venue": {
+            "id": "movie-1",
+            "name": "The Saturday Cinema",
+            "activity": "movie",
+            "neighborhood": "Fells Point",
+            "price": 15,
+            "duration": 120,
+            "zone": 1,
+            "experience": 2,
+            "capacity": 8,
+            "kind": "venue"
+          },
+          "start": 730,
+          "end": 850
+        }
+      ],
+      "price": 49,
+      "travel": 10,
+      "duration": 250,
+      "people": 4,
+      "date": "2026-11-07",
+      "feasibility": "preview",
+      "issues": [],
+      "groupCost": 196,
+      "prices": [
+        {
+          "amount": 22,
+          "status": "fictional"
+        },
+        {
+          "amount": 12,
+          "status": "fictional"
+        },
+        {
+          "amount": 15,
+          "status": "fictional"
+        }
+      ],
+      "legs": [
+        {
+          "minutes": 5,
+          "status": "fictional"
+        },
+        {
+          "minutes": 5,
+          "status": "fictional"
+        }
+      ]
+    },
+    {
+      "id": "bowling-2-drinks-2-movie-2",
+      "title": "Make a night of it.",
+      "description": "A few little upgrades for a memorable get-together.",
+      "theme": "mint",
+      "label": "THE TREAT-YOURSELF PICK",
+      "venues": [
+        {
+          "id": "bowling-2",
+          "name": "The Golden Pin",
+          "activity": "bowling",
+          "neighborhood": "Mount Vernon",
+          "price": 30,
+          "duration": 75,
+          "zone": 2,
+          "experience": 3,
+          "capacity": 20,
+          "kind": "venue"
+        },
+        {
+          "id": "drinks-2",
+          "name": "Juniper & Tonic",
+          "activity": "drinks",
+          "neighborhood": "Mount Vernon",
+          "price": 18,
+          "duration": 45,
+          "zone": 2,
+          "experience": 3,
+          "capacity": 20,
+          "kind": "venue"
+        },
+        {
+          "id": "movie-2",
+          "name": "Velvet Screen",
+          "activity": "movie",
+          "neighborhood": "Mount Vernon",
+          "price": 22,
+          "duration": 120,
+          "zone": 2,
+          "experience": 3,
+          "capacity": 20,
+          "kind": "venue"
+        }
+      ],
+      "stops": [
+        {
+          "venue": {
+            "id": "bowling-2",
+            "name": "The Golden Pin",
+            "activity": "bowling",
+            "neighborhood": "Mount Vernon",
+            "price": 30,
+            "duration": 75,
+            "zone": 2,
+            "experience": 3,
+            "capacity": 20,
+            "kind": "venue"
+          },
+          "start": 600,
+          "end": 675
+        },
+        {
+          "venue": {
+            "id": "drinks-2",
+            "name": "Juniper & Tonic",
+            "activity": "drinks",
+            "neighborhood": "Mount Vernon",
+            "price": 18,
+            "duration": 45,
+            "zone": 2,
+            "experience": 3,
+            "capacity": 20,
+            "kind": "venue"
+          },
+          "start": 680,
+          "end": 725
+        },
+        {
+          "venue": {
+            "id": "movie-2",
+            "name": "Velvet Screen",
+            "activity": "movie",
+            "neighborhood": "Mount Vernon",
+            "price": 22,
+            "duration": 120,
+            "zone": 2,
+            "experience": 3,
+            "capacity": 20,
+            "kind": "venue"
+          },
+          "start": 730,
+          "end": 850
+        }
+      ],
+      "price": 70,
+      "travel": 10,
+      "duration": 250,
+      "people": 4,
+      "date": "2026-11-07",
+      "feasibility": "preview",
+      "issues": [],
+      "groupCost": 280,
+      "prices": [
+        {
+          "amount": 30,
+          "status": "fictional"
+        },
+        {
+          "amount": 18,
+          "status": "fictional"
+        },
+        {
+          "amount": 22,
+          "status": "fictional"
+        }
+      ],
+      "legs": [
+        {
+          "minutes": 5,
+          "status": "fictional"
+        },
+        {
+          "minutes": 5,
+          "status": "fictional"
+        }
+      ]
+    }
+  ],
+  "location": "Baltimore",
+  "activities": [
+    "bowling",
+    "drinks",
+    "movie"
+  ],
+  "notes": [
+    "Planning date: 2026-11-07. Relative days use Baltimore's calendar; the date preference overrides the request.",
+    "Mock group size: 4. Every stop has an invented capacity of at least 4. Budget-friendly is ranked first; hard limits always apply."
+  ],
+  "message": "3 sample plans for 4 people in Baltimore"
+}

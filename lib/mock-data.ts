@@ -1,4 +1,5 @@
-// Shared fictional values; keyword patterns and planning stay in TypeScript.
+// Shared fictional values and keyword patterns for interpretation and legacy regression tests.
+// Live planning runs exclusively in Python.
 import fixture from "../data/mock-venues.json";
 
 export const MOCK_EVENT_DATES = fixture.eventDates;

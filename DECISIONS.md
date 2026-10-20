@@ -50,3 +50,8 @@ Use a separate evaluation/ranking module over Task 26 candidates, with additive 
 Use earliest-finish scheduling for ordered single-day windows/fixed events, Decimal budget comparisons, injectable price/travel quote functions, normalized weighted scores and stable record-ID ties. Prefer stop diversity among near-scoring remaining candidates (within 0.15), with at most three combined confirmed/provisional options and no known-violating options. These small candidate sets need no optimization library, external service or new dependency. Preserve the existing total travel/per-person limits while adding optional backend per-leg/group limits.
 
 Record future significant decisions with date, choice, reason, and relevant tradeoffs. Do not turn options into commitments without an actual decision.
+
+
+## October 20, 2026 — Task 28 Python execution
+
+Reuse the Task 23 server-side proxy convention for a validated planning POST. Preserve the existing TypeScript interpreter and manual overrides; keep planning exclusively in Task 26–27 Python. Adapt the ranking envelope for existing cards without recalculating or re-ranking. Show provisional alternatives and fictional-data feasibility explicitly, and keep null values unknown. Retain the old engine only under `lib/legacy` for historical regression tests. Use fixed illustration data for initial inspiration cards; an unavailable backend must clear results and show an error. Preserve the established visual design and add no dependencies. Weighted Python ranking intentionally replaces separate TypeScript strategy picks; README and ARCHITECTURE explain the difference. Stop before Task 29.

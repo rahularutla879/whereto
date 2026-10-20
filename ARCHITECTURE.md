@@ -1,39 +1,38 @@
+> Current execution path (Task 28): homepage → Next.js POST /api/plans/generate → FastAPI → Task 26 generator → Task 27 ranking. Earlier task sections below describe historical checkpoints. TypeScript no longer executes planning in the app.
+
 # Current architecture
 
-Source baseline: October 20, 2026. A single-page Next.js App Router application with a client component and local planning modules, plus a minimal FastAPI backend. Next.js serves/renders the page; user-facing itinerary generation runs synchronously in the client. Python also has standalone candidate generation (Task 26) and constraint evaluation/ranking (Task 27). The backend only exposes health status; no backend planning endpoint or external service is implemented.
+Source baseline: October 20, 2026, Task 28. Next.js serves the existing React homepage, interprets input and displays results. FastAPI generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset. No external service is connected.
 
 ```text
-Root layout + global styles
+Homepage text + manual preferences
           |
-Homepage: request text + optional preferences (React state)
+resolveOuting -> existing parser/date/override rules
           |
-makePlans -> parse activities/location + resolve date
+Browser POST /api/plans/generate
           |
-Validate input -> fictional catalog -> capacity/date filtering
+Next.js server proxy -> FastAPI validated OutingRequest
           |
-Enumerate venue combinations in requested activity order
+Task 26 candidates -> Task 27 constraints, scheduling, ranking
           |
-Budget/travel filtering -> schedule stops -> rank/deduplicate
-          |
-Up to 3 cards + expandable details, or explanatory empty state
+RankingResult -> display adapter -> existing cards or clear error
 ```
 
 ## Backend health boundary (Task 23)
 
 `Browser or HTTP client -> Next.js GET /api/health -> FastAPI GET /health`
 
-FastAPI runs locally through Uvicorn on `127.0.0.1:8000`. Next.js calls it server-side using `BACKEND_URL`, defaulting to that address; the variable is never sent to browser code. The homepage does not call the health endpoint or depend on backend availability. No CORS middleware is needed for this server-to-server call.
+FastAPI runs locally through Uvicorn on `127.0.0.1:8000`. Next.js calls it server-side using `BACKEND_URL`, defaulting to that address; the variable is never sent to browser code. The homepage does not call the health endpoint; its planning POST does require backend availability. No CORS middleware is needed for this server-to-server call.
 
 The Next.js route disables fetch/response caching, validates the expected status, and enforces a three-second timeout. Success returns `{"status":"ok","backend":"ok"}`; connection failures, timeouts, invalid JSON/status, and upstream HTTP errors return HTTP 503 `{"status":"error","backend":"unavailable"}` without exposing internal errors. Tests use local HTTP servers; Python's standard test library avoids extra backend test packages.
 
 ## Input to itinerary
 
-1. app/page.tsx handles form submission and calls makePlans. Preferences override corresponding parsed values; blank fields use recognized text or defaults (Baltimore, four people, no budget/travel cap, balanced ranking).
-2. lib/request.ts recognizes catalog keywords, preserves first-mentioned activity order, and reports unmatched text. Dates use Baltimore's calendar; an explicit reference day supports repeatable tests.
-3. lib/planner.ts rejects unsupported cities/wording, invalid limits, and more than four distinct activities. Events require an exact matching fixture date. Candidate pools must have adequate mock capacity.
-4. It enumerates venue combinations without reordering activities. Mock travel per leg is `5 + abs(zone difference) * 8` minutes. Total activity cost and total inter-stop travel must fit hard limits.
-5. Scheduling starts ordinary stops at 10 AM, delays food to at least 5 PM when the request says dinner, and respects fixed event starts, travel, and a midnight finish. Duration includes waiting between stops.
-6. Budget, balanced, and experience scores each select a best candidate; the selected preference comes first and duplicate winners are omitted. Cards show mock per-person cost, group total, travel, and scheduled stops. No result is persisted.
+1. `app/page.tsx` calls asynchronous `generateOuting`; an in-flight guard and disabled button prevent duplicate submissions.
+2. `lib/planner.ts` resolves text/manual preferences with the unchanged `lib/request.ts` keyword/date parser. Unsupported wording or invalid values receive the existing explanations. Blank fields use recognized text or defaults: Baltimore, four people, unlimited budget/travel, balanced mode.
+3. The Next.js proxy forwards structured JSON to FastAPI. `OutingRequest` validates the API input; Tasks 26–27 enforce exact event dates, capacity, ordered activities, budgets, simulated travel and scheduling.
+4. Python preserves 10 AM ordinary starts, dinner no earlier than 5 PM, fixed events, travel and midnight finish. Missing hours remain unknown; ordinary suggestions are provisional. Costs and schedules are fictional.
+5. Python ranks under the selected mode and returns at most three distinct confirmed/provisional options. The adapter preserves that order and all calculated fields; unknown values show “Unknown”. Failures show messages without a TypeScript fallback.
 
 ## Key files
 
@@ -45,7 +44,14 @@ The Next.js route disables fetch/response caching, validates the expected status
 | backend/test_ranking.py | Hard limits, uncertainty, scheduling, scoring, distinct selection and generator integration |
 | backend/test_planner.py | Generator completeness, identity, event timing, uncertainty, validation and lazy traversal tests |
 | backend/test_models.py | Request/schedule/result tests, live TypeScript contract comparison, and FastAPI schema compatibility |
-| backend/main.py | FastAPI application and health endpoint |
+| backend/main.py | FastAPI health and validated planning POST |
+| backend/test_api.py | Real HTTP API behavior, validation and unknown-data tests |
+| app/api/plans/generate/route.ts | Uncached server-side planning proxy and failure handling |
+| app/api/plans/generate/route.test.ts | Real Python/proxy/client integration and upstream failure tests |
+| lib/planning-client.ts | Async planning request and ranking-to-card adapter |
+| lib/planning-client.test.ts | Active interpretation, overrides, unknown formatting and client errors |
+| lib/legacy/planner.ts | Retired engine for historical regression tests only |
+| data/demo-plans.json | Fixed initial inspiration cards; never a fallback |
 | backend/requirements.txt | Pinned essential backend dependencies and required transitive packages |
 | backend/test_health.py | Uvicorn HTTP health test |
 | app/api/health/route.ts | Server-side health communication with timeout and failure response |
@@ -60,8 +66,8 @@ The Next.js route disables fetch/response caching, validates the expected status
 | lib/mock-data.ts | Typed catalog adapter, keyword patterns, existing frontend record expansion |
 | backend/mock_data.py | Validated shared fixture loading and category/kind/date/ID retrieval |
 | backend/test_mock_data.py | Fixture/lookup/provenance tests, frontend parity, pre-migration output fingerprints |
-| lib/planner.ts | Validation, combinations, mock travel, scheduling, ranking, display helpers |
-| lib/planner.test.ts | Automated planner and parser behavior tests |
+| lib/planner.ts | Input resolution/validation, request/card types and display formatting |
+| lib/planner.test.ts | Historical TypeScript planner and parser regression tests |
 | package.json | Dependencies and development/check commands |
 | next.config.ts, tsconfig.json, eslint.config.mjs, postcss.config.mjs | Framework, TypeScript, lint, and stylesheet tooling |
 
@@ -183,3 +189,18 @@ Legacy `Itinerary`/`PlanningResult` validation remains unchanged for TypeScript 
 ## Future architecture — not implemented
 
 Stages 1–3 in [TASKS.md](TASKS.md) need real venue/event lookup and route information, richer constraints and optimization, then a map, editing, conversation, saved versions, and sharing. Server-side credential handling will be needed if selected providers require secrets. API boundaries, providers, AI model, map library, storage, authentication, and hosting remain undecided; this is not a committed design.
+
+
+## Task 28 — live Python planning boundary
+
+`lib/planner.ts` retains the original parser orchestration, Baltimore calendar, exact-date handling, inferred people/budget, dinner flag, manual override precedence and input validation. `lib/request.ts` is unchanged. `resolveOuting` produces an `OutingPayload`; blank limits become JSON null, while zero stays zero. Requests use the existing Pydantic camelCase fields (`activities`, `location`, `people`, `date`, `budget`, `travel`, `cost`, `dinner`). Other Task 27 constraints retain their backend defaults and are not exposed as new controls.
+
+The client POSTs resolved JSON to `/api/plans/generate`. Its Next.js route forwards that payload to the same FastAPI path using server-only `BACKEND_URL`, uncached, with a 10-second timeout. The browser uses a 15-second timeout. The existing health proxy is unchanged. No CORS or public backend URL is needed. FastAPI validates `OutingRequest`, calls `recommend_plans`, and validates its returned `RankingResult`; it adds no algorithm or fixture. The sync route lets FastAPI execute CPU work outside its async event loop.
+
+HTTP 200 contains the unmodified ranking contract, including empty/infeasible outcomes and separate `plans` / `provisionalPlans`. Validation uses 422 (`invalid_request` or `unsupported_request`, message and field issues). Malformed JSON at Next.js returns 400; transport/upstream failure, timeout or malformed success returns 503. The browser clears generated cards on errors and never calls the legacy engine. An in-flight ref and disabled submit button prevent duplicate submissions and announce loading.
+
+`adaptRanking` validates consumed response fields, combines confirmed then provisional options without re-ranking, and supplies presentation titles/themes. It maps `candidate.id` → card `id`, `stops[].venue` → card `venues`, `costPerPerson` → `price`, `groupCost` → group total, `totalTravel` → `travel`, `elapsedDuration` → `duration`, null date → “Any day”. Prices and per-leg travel use returned quotes, not UI calculations. Stops/venue provenance stay attached; null prices, durations, capacities, travel and times show “Unknown”. Constraint issue text is displayed, with `openingHours` humanized as “Opening hours”. Confirmed means only fits supplied fictional evidence; unknown hours produce provisional alternatives, not confirmed recommendations.
+
+Python’s weighted ranking/diversity differs deliberately from the retired algorithm: all options follow the selected mode, rather than one pick per mode. Balanced can favor premium tiers. Confirmed options precede provisional ones. These Task 27 differences are exposed rather than replaced with legacy results. No hard constraint is relaxed.
+
+`lib/legacy/planner.ts` is a regression reference imported only by historical tests; no application import exists. Its retained tests and cross-runtime fixture fingerprints do not test live execution; the new HTTP and real-Python frontend integration tests do. `data/demo-plans.json` contains fixed pre-submission inspiration cards to preserve the initial design; it is never a fallback for a submitted request. CSS, artwork and responsive layout remain unchanged. No dependencies were added.

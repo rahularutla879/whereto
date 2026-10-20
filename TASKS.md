@@ -56,7 +56,18 @@ Task 26 is complete. No planning endpoint or frontend connection is implemented.
 - [x] Reuse the candidate generator and shared records; allow replacement price/travel providers without new dependencies, services or frontend integration.
 - [x] Add backend correctness/integration tests; pass backend/frontend tests, lint, TypeScript checks and production build; review the full diff and update relevant documentation.
 
-Task 27 is complete. Stop before Task 28. The frontend still uses its unchanged TypeScript planner; no Python planning endpoint is exposed.
+Task 27 is complete and is reused by Task 28.
+
+## Original roadmap — Task 28: connect the website to Python
+
+- [x] Preserve the homepage design, parser, manual override precedence and formatting.
+- [x] Add validated FastAPI planning POST and reuse Task 23’s server-side Next.js proxy pattern.
+- [x] Render Task 26–27 ranked results, unknown values, explicit fictional feasibility/provisional labels and clear errors; never fall back to TypeScript.
+- [x] Add loading/duplicate-submit protection; isolate the retired planner for regression tests and keep static inspiration cards.
+- [x] Test API, frontend integration, backend failures and the browser journey with both servers; pass all required checks and review the full diff.
+- [x] Update startup/architecture/handover documentation and back up the tested changes to the existing private repository.
+
+Task 28 is complete. Stop before Task 29. Real-data integrations remain future work.
 
 ## Prototype baseline — implemented
 

@@ -1,0 +1,79 @@
+import { resolveOuting, EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
+
+// Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
+// selection, scores, schedules, prices and travel all come from Python.
+type Ranked = {
+  candidate: { id: string; venues: DisplayVenue[]; people: number; date: string | null };
+  feasibility: "confirmed" | "provisional";
+  stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
+  costPerPerson: number | null; groupCost: number | null;
+  totalTravel: number | null; elapsedDuration: number | null;
+  issues: { message: string }[];
+};
+type Ranking = { request: { location: string; activities: PlannerResult["activities"]; cost: string };
+  plans: Ranked[]; provisionalPlans: Ranked[]; message: string; notes: string[]; errors: { message: string }[] };
+
+export function adaptRanking(value: unknown): PlannerResult {
+  // Reject broken upstream responses instead of displaying misleading empty success.
+  const data = value as Ranking;
+  if (!data || !data.request || !Array.isArray(data.request.activities) || typeof data.request.location !== "string"
+    || !Array.isArray(data.plans) || !Array.isArray(data.provisionalPlans) || typeof data.message !== "string"
+    || !Array.isArray(data.notes) || !data.notes.every(n => typeof n === "string") || !Array.isArray(data.errors)
+    || data.plans.length + data.provisionalPlans.length > 3) throw new Error("Invalid planning response");
+  const nullableNumber = (n: unknown) => n === null || (typeof n === "number" && Number.isFinite(n) && n >= 0);
+  const selected = [...data.plans, ...data.provisionalPlans];
+  for (const p of selected) {
+    if (!p.candidate || typeof p.candidate.id !== "string" || !Array.isArray(p.stops) || !p.stops.length
+      || !Array.isArray(p.candidate.venues) || p.stops.length !== data.request.activities.length
+      || !Array.isArray(p.issues) || !p.issues.every(i => typeof i.message === "string")
+      || !Array.isArray(p.prices) || p.prices.length !== p.stops.length
+      || !Array.isArray(p.legs) || p.legs.length !== p.stops.length - 1
+      || ![p.costPerPerson, p.groupCost, p.totalTravel, p.elapsedDuration].every(nullableNumber)
+      || !Number.isInteger(p.candidate.people) || p.candidate.people < 1
+      || !(p.candidate.date === null || typeof p.candidate.date === "string")
+      || !p.stops.every((s, i) => s.venue && typeof s.venue.id === "string" && typeof s.venue.name === "string"
+        && s.venue.activity === data.request.activities[i] && nullableNumber(s.start) && nullableNumber(s.end)
+        && nullableNumber(s.venue.duration) && nullableNumber(s.venue.capacity)
+        && typeof s.venue.dataQuality === "object" && s.venue.dataQuality !== null)
+      || !p.prices.every(q => nullableNumber(q.amount) && typeof q.status === "string")
+      || !p.legs.every(q => nullableNumber(q.minutes) && typeof q.status === "string")) throw new Error("Invalid itinerary response");
+  }
+  if (data.plans.some(p => p.feasibility !== "confirmed") || data.provisionalPlans.some(p => p.feasibility !== "provisional")) throw new Error("Invalid feasibility response");
+  const firstTitle = data.request.cost === "budget" ? "Big fun. Small spend." : data.request.cost === "experience" ? "Make a night of it." : "A little of everything.";
+  const titles = [firstTitle, "More good times.", "A different kind of day."];
+  const themes = ["lavender", "peach", "mint"] as const;
+  const plans: Plan[] = selected.map((p, i) => ({
+    id: p.candidate.id, title: titles[i], theme: themes[i],
+    label: `${data.request.cost.toUpperCase()} · OPTION ${i + 1}`,
+    description: p.feasibility === "confirmed" ? "Fits the supplied fictional data. Real availability is unverified." : "Provisional: missing information needs checking before this plan can be confirmed.",
+    venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
+    travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date ?? "Any day",
+    feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
+  }));
+  return { plans, location: data.request.location, activities: data.request.activities,
+    message: plans.length ? data.message : [data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))].join(" "), notes: data.notes };
+}
+
+export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
+  context?: { today: string }, send: typeof fetch = fetch): Promise<PlannerResult> {
+  const resolved = resolveOuting(text, preferences, context);
+  if (resolved.error) return resolved.error;
+  const failure = (message: string): PlannerResult => ({ plans: [], message, location: resolved.payload.location,
+    activities: resolved.payload.activities, notes: [] });
+  try {
+    const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(resolved.payload), cache: "no-store", signal: AbortSignal.timeout(15000) });
+    if (!response.ok) {
+      if (response.status === 400 || response.status === 422) {
+        const error = await response.json();
+        return failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again.");
+      }
+      return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
+    }
+    const result = adaptRanking(await response.json());
+    result.notes = [...resolved.notes, ...result.notes];
+    return result;
+  } catch {
+    return failure("Python planner unavailable or returned an invalid response. Start the backend and try again. No plan was generated.");
+  }
+}

@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { EMPTY_PREFERENCES, EXAMPLE_REQUEST, makePlans, legTravel, type Preferences } from "./planner";
+import { EMPTY_PREFERENCES, EXAMPLE_REQUEST, makePlans, legTravel, type Preferences } from "./legacy/planner";
 import { CATALOG, type Activity } from "./mock-data";
 import { resolveDate } from "./request";
 

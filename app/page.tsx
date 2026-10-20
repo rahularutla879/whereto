@@ -3,7 +3,10 @@
 import { useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
-import { EMPTY_PREFERENCES, EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, makePlans, type Activity, type CostPreference, type Plan, type Preferences } from "@/lib/planner";
+import { EMPTY_PREFERENCES, EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type Preferences, type PlannerResult } from "@/lib/planner";
+
+import { generateOuting } from "@/lib/planning-client";
+import demoPlans from "@/data/demo-plans.json";
 
 const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: CircleDot, drinks: Wine, movie: Popcorn, food: Utensils, coffee: Coffee, outdoors: Footprints, art: Palette, museum: Landmark, karaoke: Mic, arcade: Gamepad2, escape: Puzzle, shopping: ShoppingBag,
   hiking: TreePine, picnic: TreePine, zoo: TreePine,
@@ -11,7 +14,7 @@ const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: Cir
   concert: Music, theater: Theater, musical: Theater, ballet: Theater, opera: Music, comedy: Laugh,
 };
 const activityLabels = ACTIVITY_LABELS;
-const money = (amount: number) => new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
+const money = (amount: number | null) => amount === null ? "Unknown" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
 
 function PlanCard({ plan, index }: { plan: Plan; index: number }) {
   const [expanded, setExpanded] = useState(false);
@@ -19,7 +22,7 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
   const PosterIcon = activityIcons[plan.venues[0].activity] ?? Sparkles;
   return <article className={`plan-card ${plan.theme}`}>
     <div className="card-visual">
-      <span className="card-number">0{index + 1}</span><span className="demo-pill">DEMO PLAN</span>
+      <span className="card-number">0{index + 1}</span><span className="demo-pill">{plan.feasibility === "preview" ? "DEMO PLAN" : plan.feasibility === "provisional" ? "PROVISIONAL" : "FITS MOCK DATA"}</span>
       {classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabels[plan.venues[0].activity]}</span></div>}
     </div>
     <div className="card-body">
@@ -35,9 +38,10 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
       {expanded && <div className="plan-details" id={`details-${plan.id}`}>
         <p className="details-heading">Your sample itinerary</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date} · {plan.people} {plan.people === 1 ? "person" : "people"}</p>
-        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong><span>{venue.kind === "event" ? `Mock event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood} · {formatDuration(venue.duration)}</span><span>{money(venue.price)} per person · mock capacity: {venue.capacity}</span></div></li>)}</ol>
-        <div className="details-total"><span>Sample group total</span><strong>~{money(plan.price * plan.people)}</strong></div>
-        <p className="details-note">~{plan.travel} min of travel between stops. Prices, capacities, schedules, durations, and travel are made up for this demo. Total duration includes waiting for scheduled events. Transport, tax, tips, and extras are excluded. No real opening hours, event schedules, or availability checked.</p>
+        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong><span>{venue.kind === "event" ? `Mock event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{money(plan.prices[i]?.amount ?? null)} per person ({plan.prices[i]?.status ?? "unknown"}) · mock capacity: {venue.capacity ?? "Unknown"}</span>{venue.dataQuality && <span>Data: price {venue.dataQuality.price}; schedule {venue.dataQuality.schedule}; duration {venue.dataQuality.duration}; capacity {venue.dataQuality.capacity}.</span>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({plan.legs[i - 1]?.status ?? "unknown"}).</span>}</div></li>)}</ol>
+        {plan.issues.map(issue => <p className="details-note" key={issue}>{issue}</p>)}
+        <div className="details-total"><span>Sample group total</span><strong>~{money(plan.groupCost)}</strong></div>
+        <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. Prices, capacities, schedules, durations, and travel are made up for this demo. Total duration includes waiting for scheduled events. Transport, tax, tips, and extras are excluded. No real opening hours, event schedules, or availability checked.</p>
       </div>}
     </div>
   </article>;
@@ -47,17 +51,23 @@ export default function Home() {
   const [request, setRequest] = useState("");
   const [preferences, setPreferences] = useState<Preferences>({ ...EMPTY_PREFERENCES });
   const [preferencesOpen, setPreferencesOpen] = useState(false);
-  const [result, setResult] = useState(() => makePlans(EXAMPLE_REQUEST, { ...EMPTY_PREFERENCES, cost: "budget" }));
+  const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
+  const [loading, setLoading] = useState(false);
+  const pending = useRef(false);
   const [generated, setGenerated] = useState(false);
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: keyof Preferences, value: string) {
     setPreferences((previous) => ({ ...previous, [key]: value }));
   }
-  function submit(event: FormEvent<HTMLFormElement>) {
+  async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing, or use the example."); requestRef.current?.reportValidity(); return; }
-    setResult(makePlans(request, preferences));
+    if (pending.current) return;
+    pending.current = true;
+    setLoading(true);
+    try { setResult(await generateOuting(request, preferences)); }
+    finally { pending.current = false; setLoading(false); }
     setGenerated(true);
     requestAnimationFrame(() => resultsRef.current?.focus({ preventScroll: false }));
   }
@@ -82,7 +92,7 @@ export default function Home() {
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button">Plan my outing <ArrowRight size={18} /></button></div>
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferences({ ...EMPTY_PREFERENCES })}>Reset preferences</button></div>
             <div className="preferences-grid">
@@ -101,7 +111,7 @@ export default function Home() {
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p>{generated ? (result.plans.length ? result.message : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? "Sample results" : "Demo itineraries"}</span></div>
-        <div className="result-status" role="status" aria-live="polite">{generated && <span className={result.plans.length ? undefined : "sr-only"}>{result.message} {result.plans.length > 0 && "All venues, events, schedules, capacities, and prices are mock data."}</span>}</div>
+        <div className="result-status" role="status" aria-live="polite">{loading && "Contacting the Python planner…"}{generated && !loading && <span className={result.plans.length ? undefined : "sr-only"}>{result.message} {result.plans.length > 0 && "All venues, events, schedules, capacities, and prices are mock data."}</span>}</div>
         {generated && result.notes.map((note) => <p className="result-note" key={note}><CircleHelp size={16} />{note}</p>)}
         {result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{result.message}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
         <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional mock data, not verified availability.</p>

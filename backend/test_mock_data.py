@@ -123,7 +123,7 @@ class MockDataTests(unittest.TestCase):
     def test_frontend_record_parity_and_pre_migration_baseline(self):
         script = """
 import { CATALOG, MOCK_EVENT_DATES, VENUES } from './lib/mock-data';
-import { makePlans, EMPTY_PREFERENCES, EXAMPLE_REQUEST } from './lib/planner';
+import { makePlans, EMPTY_PREFERENCES, EXAMPLE_REQUEST } from './lib/legacy/planner';
 const cases = [EXAMPLE_REQUEST, ...Object.values(CATALOG).map(v => v.label + ' on 2026-11-07'),
   'Dinner and karaoke', 'Baseball and concert on 2026-11-14', 'Art and outdoors'];
 console.log(JSON.stringify({venues:VENUES, activities:Object.keys(CATALOG), dates:MOCK_EVENT_DATES,

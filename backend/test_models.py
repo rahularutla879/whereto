@@ -197,7 +197,7 @@ class ResultTests(unittest.TestCase):
             with self.assertRaises(ValidationError):
                 PlanningResult(**{**data, "errors": [], "plans": plans, "activities": activities})
 
-    def test_models_work_in_fastapi_openapi_without_adding_routes(self):
+    def test_models_work_in_fastapi_openapi(self):
         app = FastAPI()
 
         @app.post("/contract-test", response_model=PlanningResult)
@@ -209,14 +209,14 @@ class ResultTests(unittest.TestCase):
         self.assertIn("PlanningResult", schema["components"]["schemas"])
         self.assertIn("ScheduledEvent", schema["components"]["schemas"])
         from backend.main import app as actual_app
-        self.assertEqual(set(actual_app.openapi()["paths"]), {"/health"})
+        self.assertEqual(set(actual_app.openapi()["paths"]), {"/health", "/api/plans/generate"})
 
     def test_current_typescript_catalog_and_planner_contract(self):
         # Execute the source of truth instead of maintaining a second Python catalog.
         root = Path(__file__).resolve().parent.parent
         script = """
 import { CATALOG } from './lib/mock-data';
-import { makePlans, EMPTY_PREFERENCES } from './lib/planner';
+import { makePlans, EMPTY_PREFERENCES } from './lib/legacy/planner';
 const run = (text, prefs = {}) => makePlans(text, {...EMPTY_PREFERENCES, ...prefs}, {today:'2026-11-01'});
 console.log(JSON.stringify({activities:Object.keys(CATALOG), results:[
   ...Object.values(CATALOG).map(v => run(v.label + ' on 2026-11-07')),
