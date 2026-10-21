@@ -153,3 +153,13 @@ Work on one focused task at a time. Update status only with implementation evide
 - [x] Complete real-Qwen smoke (13 Task 32 + 8 Task 31 cases), full regression checks (114 backend/74 frontend), lint, TypeScript, production build, diff review and private GitHub backup.
 
 Stop after Task 32. Task 33 has not started.
+
+### Focused correction before Task 33 — natural-language-only planning
+
+- [x] Reproduce and trace untouched-preference failure; confirm the live backend still returned the old Task 31 date guard while the current checkout resolved the same request.
+- [x] Restart the current backend with reload; keep natural-language planning independent of manual controls.
+- [x] Display the existing successful structured interpretation in controls, with separate deliberate manual markers and no extra model calls.
+- [x] Test subsequent requests, clearing/reset, zero/Balanced precedence, missing essentials and failures; verify in real development/production browsers.
+- [x] Pass 115 backend/81 frontend tests, lint, TypeScript and production build; review the complete diff and back up to the private repository.
+
+This is a Task 32 follow-up correction. Task 33 remains unstarted.

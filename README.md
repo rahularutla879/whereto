@@ -76,7 +76,11 @@ Try these requests too:
 - `We're 6 friends in Baltimore. We want food and a movie.`
 - `A walk and coffee in Baltimore for 2 people`
 
-**Set preferences** lets you override the location, day, group size, maximum budget per person, maximum total travel time between stops, and cost preference. A zero budget is supported for free activities. Blank fields preserve text constraints. The initial Balanced selection does not erase a text cost preference; clicking a cost option explicitly overrides it, including Balanced. Reset preferences clears that explicit choice. Missing location and group size remain unknown and require text or manual input, rather than defaulting to Baltimore/four people. The cost preference changes Python’s ranking of all returned options. Group size also filters mock capacity.
+You can plan entirely through your request without opening **Set preferences**. For example: `We're 6 friends in Baltimore. We want coffee, museum, then coffee tomorrow, under $100 per person, with at most 30 minutes total travel. Best experience.`
+
+After successful interpretation, **Set preferences** displays the resolved location, date, group size, budget/travel caps and cost mode. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified caps/date remain blank; Balanced is the existing default when no cost mode is stated.
+
+Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location or group size receives an explanation and can be supplied in the request itself. Budget/travel limits and group capacity remain hard constraints, while cost mode ranks eligible plans.
 
 ## Planner review and improvements
 
@@ -201,6 +205,7 @@ To run a production build **locally**, run `npm run build` and then `npm start`.
 - **The browser can't connect**: keep `npm run dev` running and use the exact Local URL printed in Terminal.
 - **Health check says backend unavailable**: run `npm run dev:backend` in the first Terminal and wait for startup. Check that port 8000 is free and `BACKEND_URL` matches if you changed it.
 - **“No module named uvicorn” or missing `backend/.venv/bin/python`**: follow the fresh-copy backend setup in step 4.
+- **Old “Relative dates are not resolved yet” message after updating the project:** the running Python process may still have old code loaded. Stop that backend in its Terminal with Control+C, then run `npm run dev:backend` from the current project folder and retry. The startup command watches backend changes.
 - **“AI interpretation unavailable”**: open the existing Ollama app, confirm `ollama list` includes `qwen3:4b`, and keep the Python backend running. No keyword fallback exists.
 - **“Python planner unavailable”**: start `npm run dev:backend`, wait for startup, then retry. No browser fallback exists.
 - **No plans appear**: check the explanation, try Baltimore, leave budget/travel blank, and click Try an example. Very low limits can exclude every sample combination.

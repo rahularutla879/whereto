@@ -38,6 +38,25 @@ class InterpretationTests(unittest.TestCase):
         self.assertTrue(all([v.activity for v in p.candidate.venues] == ['coffee', 'museum', 'coffee'] for p in plans))
         self.assertTrue(all(p.candidate.venues[0].id != p.candidate.venues[2].id for p in plans))
 
+    def test_complete_text_only_request_preserves_all_constraints(self):
+        text = ("We're 6 friends in Baltimore. We want coffee, museum, then coffee tomorrow, "
+                "under $100 per person, with at most 30 minutes total travel. Best experience.")
+        provider = Mock()
+        provider.interpret.return_value = Interpretation(activities=['coffee', 'museum', 'coffee'],
+            people=6, location='Baltimore', date=None, budget_per_person=100, currency='USD',
+            travel_total_minutes=30, cost='experience', preferences=['experience'], date_expressions=['tomorrow'])
+        result = interpret_request(InterpretationInput(text=text), provider,
+                                   now=datetime(2026, 10, 21, 12, tzinfo=timezone.utc))
+        self.assertFalse(result.issues)
+        request = result.request
+        self.assertEqual((request.location, request.people, request.date, request.budget, request.travel, request.cost),
+                         ('Baltimore', 6, date(2026, 10, 22), 100, 30, 'experience'))
+        plans = recommend_plans(request).provisionalPlans
+        self.assertTrue(plans)
+        self.assertTrue(all([v.activity for v in p.candidate.venues] == ['coffee', 'museum', 'coffee'] for p in plans))
+        self.assertTrue(all(p.costPerPerson <= 100 and p.totalTravel <= 30 for p in plans))
+        self.assertTrue(all(p.candidate.people == 6 and p.candidate.date == date(2026, 10, 22) for p in plans))
+
     def test_explicit_multiplicity_preserves_occurrences(self):
         r = self.run_request('coffee twice then museum', activities=['coffee', 'coffee', 'museum'])
         self.assertFalse(r.issues)

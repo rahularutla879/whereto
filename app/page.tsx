@@ -3,8 +3,9 @@
 import { useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
-import { EMPTY_PREFERENCES, EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type Preferences, type PlannerResult } from "@/lib/planner";
+import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
 
+import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
 import { generateOuting } from "@/lib/planning-client";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
@@ -52,7 +53,8 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
 
 export default function Home() {
   const [request, setRequest] = useState("");
-  const [preferences, setPreferences] = useState<Preferences>({ ...EMPTY_PREFERENCES });
+  const [preferenceState, setPreferenceState] = useState(emptyPreferenceState);
+  const preferences = preferenceState.values;
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
   const [loading, setLoading] = useState(false);
@@ -60,8 +62,8 @@ export default function Home() {
   const [generated, setGenerated] = useState(false);
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
-  function updatePreference(key: keyof Preferences, value: string) {
-    setPreferences((previous) => ({ ...previous, [key]: value, ...(key === "cost" ? { costExplicit: true } : {}) }));
+  function updatePreference(key: PreferenceField, value: string) {
+    setPreferenceState(previous => editPreference(previous, key, value));
   }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -69,7 +71,11 @@ export default function Home() {
     if (pending.current) return;
     pending.current = true;
     setLoading(true);
-    try { setResult(await generateOuting(request, preferences)); }
+    try {
+      setResult(await generateOuting(request, manualPreferences(preferenceState), {
+        onInterpreted: values => setPreferenceState(previous => displayInterpretedPreferences(previous, values)),
+      }));
+    }
     finally { pending.current = false; setLoading(false); }
     setGenerated(true);
     requestAnimationFrame(() => resultsRef.current?.focus({ preventScroll: false }));
@@ -97,7 +103,7 @@ export default function Home() {
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
           <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
-            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferences({ ...EMPTY_PREFERENCES })}>Reset preferences</button></div>
+            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferenceState(emptyPreferenceState())}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="Baltimore, MD" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
               <label><span><CalendarDays size={14} /> Date</span><input type="date" value={preferences.date} onChange={(e) => updatePreference("date", e.target.value)} /><small>Events must match a fictional schedule date</small></label>
@@ -105,7 +111,7 @@ export default function Home() {
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
               <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
-            </div><p className="preference-note">These settings take priority over your request. Leave them blank to use your words. Missing location or group size needs your input.</p>
+            </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         </form>
         <p className="planner-disclaimer"><CircleHelp size={13} /> A preview of what’s possible. Local sample data, no live searches or bookings.</p>

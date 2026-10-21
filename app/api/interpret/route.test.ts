@@ -6,6 +6,7 @@ import { once } from "node:events";
 import { POST } from "./route";
 import { POST as planPOST } from "../plans/generate/route";
 import { generateOuting } from "../../../lib/planning-client";
+import { displayInterpretedPreferences, emptyPreferenceState, manualPreferences } from "../../../lib/preferences";
 import { EMPTY_PREFERENCES } from "../../../lib/planner";
 
 test("raw text → interpretation proxy → Python provider → validated request → Python engine → cards", async () => {
@@ -38,7 +39,10 @@ test("raw text → interpretation proxy → Python provider → validated reques
     paths.push(String(url));
     return (url === "/api/interpret" ? POST : planPOST)(new Request(`http://localhost${url}`, init));
   };
-  const run = (preferences = EMPTY_PREFERENCES) => generateOuting(requestText, preferences, undefined, send);
+  let controls = emptyPreferenceState();
+  const run = (preferences = manualPreferences(controls)) => generateOuting(requestText, preferences, {
+    onInterpreted: values => { controls = displayInterpretedPreferences(controls, values); },
+  }, send);
   try {
     let ready = false;
     for (let i = 0; i < 100; i++) {
@@ -51,6 +55,10 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.equal(result.plans.length, 3);
     assert.deepEqual(paths, ["/api/interpret", "/api/plans/generate"]);
     assert.equal(modelCalls, 1);
+    assert.equal(controls.values.location, "Baltimore");
+    assert.equal(controls.values.people, "2");
+    assert.equal(controls.values.budget, "30");
+    assert.deepEqual(manualPreferences(controls), EMPTY_PREFERENCES);
     assert.deepEqual(result.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
     assert.match(result.plans[0].id, /^candidate-/);
     assert.equal(result.plans[0].people, 2);
@@ -66,6 +74,9 @@ test("raw text → interpretation proxy → Python provider → validated reques
     const relative = await run();
     assert.equal(relative.plans.length, 3);
     assert.ok(relative.plans.every(p => p.date === tomorrow));
+    assert.equal(controls.values.date, tomorrow);
+    assert.equal(controls.values.budget, ""); // Previous auto-populated $30 is not a new manual cap.
+    assert.deepEqual(manualPreferences(controls), EMPTY_PREFERENCES);
     assert.deepEqual(paths, ["/api/interpret", "/api/plans/generate"]);
     requestText += " between 6 and 9 PM";
     const window = await run();

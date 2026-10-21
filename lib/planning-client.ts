@@ -1,3 +1,4 @@
+import { interpretedPreferences } from "./preferences";
 import { recommendationCopy } from "./recommendation-copy";
 import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
 
@@ -63,9 +64,9 @@ export function adaptRanking(value: unknown): PlannerResult {
 }
 
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
-  context?: { today: string }, send: typeof fetch = fetch): Promise<PlannerResult> {
+  context?: { today?: string; onInterpreted?: (values: Preferences) => void }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
-  void context; // Kept for source compatibility; relative dates are deferred.
+  // `today` remains source-compatible; only the Python resolver owns the clock.
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
     activities: [], notes: [] });
   try {
@@ -78,6 +79,8 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     if (extraction.issues.length || !extraction.request) {
       return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), notes: extraction.notes };
     }
+    const extractedPreferences = interpretedPreferences(extraction.request);
+    context?.onInterpreted?.(extractedPreferences);
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(extraction.request), cache: "no-store", signal: AbortSignal.timeout(15000) });
     if (!response.ok) {
