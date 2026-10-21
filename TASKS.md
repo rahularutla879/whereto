@@ -78,7 +78,18 @@ Task 28 is complete and has been verified by Task 29. Real-data integrations rem
 - [x] Fix the demonstrated midnight display defect and two faint preference hint colors; add focused midnight regression coverage without new dependencies or planner changes.
 - [x] Pass all backend/frontend tests, lint, TypeScript and production build; review the full diff and record evidence in HANDOVER.md.
 
-Task 29 is complete. Stop before Task 30. Fictional-data limitations remain explicit; no AI or real-data integration was started.
+Task 29 is complete. Its verification predates Task 30 below; fictional-data limitations remain explicit.
+
+## Original roadmap — Task 30: set up the AI model
+
+- [x] Inspect project and hardware; verify existing Ollama without reinstalling/upgrading.
+- [x] Compare suitable small models; evaluate installed Llama 3.2 and download Qwen3 4B with explicit owner approval.
+- [x] Verify Qwen3 4B locally with two runs of the four required samples and eight additional requests; record timings and semantic limitations.
+- [x] Implement a standalone configurable AI provider protocol and Ollama adapter, safe errors and opt-in smoke check; preserve the current application path.
+- [x] Add 11 mocked tests including provider substitution; pass backend/frontend tests, lint, TypeScript and production build.
+- [x] Update documentation and review the complete source diff; back up tested changes to the existing private repository.
+
+Task 30 is complete. Stop before Task 31; the website still uses the current rule-based interpreter.
 
 ## Prototype baseline — implemented
 

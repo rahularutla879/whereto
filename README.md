@@ -2,7 +2,7 @@
 
 **Less planning. More hanging out.**
 
-A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules and fictional Baltimore venues. The website sends resolved requests through a server-side Next.js proxy to FastAPI, which generates, filters and ranks the plans. No AI or external service is connected.
+A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules and fictional Baltimore venues. The website sends resolved requests through a server-side Next.js proxy to FastAPI, which generates, filters and ranks the plans. The website does not use AI yet; Task 30 provides a separate, verified local Ollama integration for Python.
 
 ## Start the application — beginner instructions
 
@@ -204,7 +204,49 @@ With both servers running, click Try an example → Plan my outing → View plan
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–29 are complete. Task 30 has not started.
+Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–30 are complete. Task 31 has not started; the current website still uses its rule-based interpreter.
 
 
 Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.
+
+## Standalone local AI check (Task 30)
+
+The Python AI module is separate from the website. The current parser and **Plan my outing** button still use the existing rules and Python planner. Ollama is optional for normal application use and automated tests.
+
+The selected model is **Qwen3 4B** (`qwen3:4b`, tested ID `359d7dd4bcda`), downloaded with owner approval. It occupies about 2.5 GB on disk; Ollama reported about 3.2 GB loaded on the M2 Mac with a 4096-token context. No Ollama reinstall or upgrade was needed. The four required requests were extracted correctly in two consecutive runs; the first call took about 5.5 seconds and warm calls about 1.6–1.9 seconds. This is a small local evaluation, not a guarantee for arbitrary requests.
+
+From the project folder, with Ollama open, run:
+
+```sh
+backend/.venv/bin/python -m backend.ai.smoke
+```
+
+This sends four example requests to the installed model, prints extracted JSON and approximate seconds per request, and checks communication/schema validity. Review the printed values for accuracy: a valid JSON object can still contain invented or omitted information. This command never installs or downloads anything. If Ollama is stopped, open the existing Ollama app (or run `ollama serve` in another Terminal). `ollama list` shows installed model names; do not download a missing model without checking its size and approving the download first.
+
+For configuration, export settings in the same Terminal before running Python. `.env.example` lists all names; Python does not automatically read `.env.local`.
+
+```sh
+export AI_PROVIDER=ollama
+export AI_MODEL=qwen3:4b
+export AI_BASE_URL=http://127.0.0.1:11434
+export AI_TIMEOUT_SECONDS=60
+```
+
+`AI_MODEL` selects an installed model. The timeout is in seconds and must be positive. Keep these settings server-side; never use `NEXT_PUBLIC_`. No account, credential, Ollama Python SDK or new backend dependency is needed.
+
+Reusable Python use (separate from the live planner):
+
+```python
+from backend.ai import AIError, create_provider
+
+provider = create_provider()
+try:
+    partial = provider.interpret("Three friends want coffee under $15 each.")
+    print(partial.model_dump(mode="json"))
+except AIError as error:
+    print(str(error))
+```
+
+Activity phrases are not supported-category IDs, and unknown group sizes/budgets/dates/locations remain nullable. Do not pass this partial extraction directly to the planner. Task 31 will handle safe interpretation integration, ambiguity, defaults and manual preferences. Clear errors explain an unavailable Ollama service, missing model, timeout or invalid reply. The normal backend tests mock AI responses and verify replaceable providers without requiring Ollama.
+
+Observed limitation: the extra request “People want a quiet indoor activity tomorrow” kept the date null but dropped “tomorrow”. Activity phrases still need category mapping, and vague preferences still need clarification. Schema checks cannot prove that nothing was omitted. Task 31 must address these before connecting AI to the planner. No browser/visual checks were repeated for this standalone backend addition.

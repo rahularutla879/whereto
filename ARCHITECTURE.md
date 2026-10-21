@@ -2,7 +2,7 @@
 
 # Current architecture
 
-Source baseline: October 20, 2026, Task 28. Next.js serves the existing React homepage, interprets input and displays results. FastAPI generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset. No external service is connected.
+Source baseline: October 20, 2026. Next.js serves the existing React homepage, interprets input and displays results. FastAPI generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset. Task 30 adds a standalone local AI boundary; the application execution path above is unchanged.
 
 ```text
 Homepage text + manual preferences
@@ -38,6 +38,10 @@ The Next.js route disables fetch/response caching, validates the expected status
 
 | File | Responsibility |
 | --- | --- |
+| backend/ai/__init__.py | Vendor-independent interpretation contract, provider protocol, environment settings and factory |
+| backend/ai/ollama.py | Ollama HTTP adapter, extraction prompt/examples, schema validation and safe errors |
+| backend/ai/smoke.py | Opt-in real local model communication check; never run by ordinary tests |
+| backend/test_ai.py | Mocked AI responses, configuration, failure handling and provider substitution |
 | backend/models.py | Pydantic request, venue/event, final-plan and candidate contracts, scalar types, and integrity validation |
 | backend/planner.py | Deterministic ordered Python candidate generation and lazy traversal (Task 26) |
 | backend/ranking.py | Candidate evaluation, schedules, cost/travel adapters, normalized scores and distinct selection (Task 27) |
@@ -204,3 +208,17 @@ HTTP 200 contains the unmodified ranking contract, including empty/infeasible ou
 Python’s weighted ranking/diversity differs deliberately from the retired algorithm: all options follow the selected mode, rather than one pick per mode. Balanced can favor premium tiers. Confirmed options precede provisional ones. These Task 27 differences are exposed rather than replaced with legacy results. No hard constraint is relaxed.
 
 `lib/legacy/planner.ts` is a regression reference imported only by historical tests; no application import exists. Its retained tests and cross-runtime fixture fingerprints do not test live execution; the new HTTP and real-Python frontend integration tests do. `data/demo-plans.json` contains fixed pre-submission inspiration cards to preserve the initial design; it is never a fallback for a submitted request. CSS, artwork and responsive layout remain unchanged. No dependencies were added.
+
+## Standalone local AI boundary (Task 30)
+
+`Python caller -> create_provider() -> AIProvider.interpret(text) -> Interpretation`
+
+This path is not imported by FastAPI, the parser, candidate generator, ranker or frontend. No new endpoint exists. Ollama is the first and only implemented provider; a future provider implements the same one-method `Protocol` and is selected in the factory. No provider framework or extra dependency is needed. Model-specific HTTP messages, schema format, prompt/examples, context/output limits and generation options stay in `backend/ai/ollama.py`. Existing `backend/models.py` remains vendor-independent and unchanged.
+
+`Interpretation` is a partial extraction with ordered activity phrases, nullable people, nullable numeric per-person budget, nullable exact date/location and stated preferences. All fields are required in the response; unspecified scalar values must be null. Activities are phrases, not resolved catalog IDs. It reuses existing vendor-independent scalar validation. The schema rejects extra fields, negative budgets, invalid dates and invalid group sizes. Pydantic verifies structure and ranges, not truthfulness or completeness.
+
+Task 31 must resolve ambiguity, normalize supported activities, preserve negation/order, apply reference dates/defaults/manual overrides, and check semantic accuracy before constructing an `OutingRequest`. Task 30 supplies no conversion into the planning engine. Hosted providers can later use the same `Interpretation` contract without frontend or itinerary-optimization changes; none is implemented now.
+
+`AI_PROVIDER`, `AI_MODEL`, `AI_BASE_URL` and `AI_TIMEOUT_SECONDS` are read when creating the provider. Settings are exported process environment values; Python does not auto-load Next.js `.env.local`. Calls use standard-library HTTP with a configurable socket timeout, non-streaming JSON schema output and local Pydantic validation. No automatic retries or model downloads occur. Requests bypass system HTTP proxies. Missing model/API (404), other HTTP failures, unavailable service, timeouts, malformed JSON, truncated/incomplete and schema-invalid replies raise `AIError` with a safe actionable message rather than accepting partial results. Real smoke commands are documented in README; ordinary tests mock the transport and can substitute another provider without a running model.
+
+The selected default is `qwen3:4b` (tested `359d7dd4bcda`, Q4_K_M). Ollama owns downloaded weights outside the repository; Git stores only code/configuration examples and documentation. The adapter requests `think: false` (verified without thinking content), temperature 0, 4096 context, 512 output tokens and five-minute keep-alive. It keeps no conversation history between requests. Approximately 2.5 GB on disk / 3.2 GB loaded was observed on the M2 Mac. No model is pulled by the module or smoke command. Tests use `AISettings` overrides and a fake provider to verify replacement without machine-specific paths or model files.
