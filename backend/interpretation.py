@@ -1,6 +1,6 @@
 """AI extraction -> conservative validation/overrides -> resolved planner contract.
 
-No venue selection, routing, date resolution or itinerary calculations live here.
+Date/time resolution delegates to date_resolution; no itinerary arithmetic lives here.
 """
 import re
 from datetime import datetime
@@ -8,6 +8,7 @@ from typing import Annotated
 
 from pydantic import Field, ValidationError
 
+from backend.date_resolution import resolve_datetime
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
                             OutingRequest)
@@ -42,8 +43,6 @@ ALIASES = {
 # Semantic guard only: if AI drops/reorders a clear catalog occurrence, refuse.
 # Never constructs an interpretation or sends a keyword-derived plan.
 OCCURRENCES = re.compile(r"\b(?:" + "|".join(re.escape(a) for a in sorted(ALIASES, key=len, reverse=True)) + r")\b", re.I)
-DATE_WORDING = re.compile(r"\b(?:today|tonight|tomorrow|(?:this|next)\s+(?:weekend|week|month|[a-z]+day)|(?:mon|tues|wednes|thurs|fri|satur|sun)day|\d{4}-\d{2}-\d{2}|(?:January|February|March|April|May|June|July|August|September|October|November|December)\s+\d{1,2}(?:st|nd|rd|th)?(?:,?\s+\d{4})?)\b", re.I)
-
 
 class ManualPreferences(ContractModel):
     location: str = ""
@@ -67,7 +66,8 @@ class InterpretationResult(ContractModel):
     issues: list[str]
 
 
-def interpret_request(value: InterpretationInput, provider: AIProvider | None = None) -> InterpretationResult:
+def interpret_request(value: InterpretationInput, provider: AIProvider | None = None, *,
+                      now: datetime | None = None) -> InterpretationResult:
     ai = (provider if provider is not None else create_provider()).interpret(value.text)
     # Validate alternative providers too, rather than trusting a Python annotation.
     ai = Interpretation.model_validate(ai)
@@ -94,8 +94,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     ai.preferences = [phrase for phrase in ai.preferences if phrase.casefold() in raw.casefold()]
     ai.date_expressions = [phrase for phrase in ai.date_expressions if phrase.casefold() in raw.casefold()]
     ai.time_expressions = [phrase for phrase in ai.time_expressions if phrase.casefold() in raw.casefold()]
-    # Preserve dates independently of model fidelity (not relative-date resolution).
-    ai.date_expressions = list(dict.fromkeys([*ai.date_expressions, *[m.group() for m in DATE_WORDING.finditer(raw)]]))
     issues = [*ai.uncertainties, *grounding_issues]
     notes = ["AI interpretation; itinerary calculations use the Python planner and fictional catalog."]
     if ai.preferences:
@@ -162,7 +160,19 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         ai.cost = CostPreference.budget
     location = chosen("location", ai.location)
     people = chosen("people", ai.people)
-    date = chosen("date", ai.date)
+    dates = resolve_datetime(raw, ai.date_expressions, ai.time_expressions, location,
+                             manual_date=manual.date.strip(), now=now)
+    ai.date_expressions = dates.date_expressions
+    ai.time_expressions = dates.time_expressions
+    date = chosen("date", dates.date)
+    notes.extend(dates.notes)
+    issues.extend(dates.issues)
+    if ai.date is not None and not dates.date_expressions and not manual.date.strip():
+        issues.append("AI returned a date without date evidence. Choose an exact Date in Set preferences.")
+    if (ai.start_time is not None or ai.end_time is not None) and not dates.time_expressions:
+        issues.append("AI returned a time without original time wording. State an explicit outing window.")
+    if len(activities) > 1 and any(re.match(r"\s+(?:at|after|before)\s+(?:\d+|noon|midnight)\b", raw[end:], re.I) for _, end in spans):
+        issues.append("Stop-specific times need clarification. State one overall outing window for this planner.")
     budget = chosen("budget", ai.budget_per_person)
     travel = chosen("travel", ai.travel_total_minutes)
     cost = manual.cost if manual.costExplicit or manual.cost != CostPreference.balanced else ai.cost or CostPreference.balanced
@@ -170,19 +180,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         issues.append("Location is unknown. Add Baltimore to the request or select it in Set preferences.")
     if people is None:
         issues.append("Group size is unknown. State how many people or set Number of people.")
-    if not manual.date.strip() and ai.date_expressions:
-        # Even if the model invents an exact date for 'tomorrow', do not accept it.
-        def exact_date_expression(expr):
-            for fmt in ("%Y-%m-%d", "%B %d, %Y", "%B %d %Y"):
-                try:
-                    return datetime.strptime(expr, fmt).date() == ai.date
-                except ValueError:
-                    pass
-            return False
-        if ai.date is None or not all(exact_date_expression(expr) for expr in ai.date_expressions):
-            issues.append("Date wording preserved: " + ", ".join(ai.date_expressions) + ". Choose an exact Date in Set preferences; Relative dates are not resolved yet.")
-    if not manual.date.strip() and ai.date is not None and not ai.date_expressions:
-        issues.append("AI returned a date without date evidence. Choose an exact Date in Set preferences.")
     if (ai.budget_per_person is not None or ai.budget_group is not None) and ai.currency != "USD":
         if ai.budget_group is not None or not manual.budget.strip():
             issues.append("Budget currency is unknown or unsupported. This fictional catalog uses USD; no conversion was made.")
@@ -196,8 +193,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I) and re.search(r"\d+\s*(?:minutes?|mins?|hours?)\b", raw, re.I):
         if ai.travel_total_minutes is None and ai.travel_leg_minutes is None and not manual.travel.strip():
             issues.append("AI did not capture the stated travel limit. Set Maximum travel time or state a total/per-leg cap clearly.")
-    if ai.time_expressions and ai.start_time is None and ai.end_time is None:
-        issues.append("Time wording needs an explicit outing start/end time: " + ", ".join(ai.time_expressions))
     if ai.transport:
         notes.append(f"Requested transport: {ai.transport.value}. Mock travel is mode-independent; no real route or mode-specific time is verified.")
     for field, val in (("people", people), ("budget", budget), ("travel", travel)):
@@ -212,8 +207,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
                 maxLegTravel=ai.travel_leg_minutes, cost=cost, transport=ai.transport,
-                startTime=ai.start_time if ai.start_time is not None else 600,
-                endTime=ai.end_time if ai.end_time is not None else 1440,
+                startTime=dates.start, endTime=dates.end,
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)
         except (ValueError, TypeError, ValidationError):
             issues.append("Check group size (1–100), USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")

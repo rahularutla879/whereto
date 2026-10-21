@@ -101,7 +101,7 @@ Task 30 is complete and its provider interface is reused by Task 31.
 - [x] Add automated coverage, real Qwen smoke (including tomorrow), browser integration check; pass backend/frontend tests, lint, TypeScript and build.
 - [x] Review full diff, update documentation and back up source to the existing private repository.
 
-Task 31 is complete. Stop before Tasks 32–36. Relative dates remain unresolved; no confirmation redesign, multi-turn clarification or new infrastructure was added.
+Task 31 is complete. Task 32 below supersedes its unresolved-date behavior; no confirmation redesign, multi-turn clarification or new infrastructure was added.
 
 ## Prototype baseline — implemented
 
@@ -142,3 +142,14 @@ Stage acceptance: agreed constraints, budgets, modes, and optimization work agai
 Stage acceptance: users can inspect routes on a map, revise plans directly or conversationally, restore saved versions, and share the intended version with appropriate access controls. Changes preserve hard constraints or clearly explain conflicts.
 
 Work on one focused task at a time. Update status only with implementation evidence, and record verification separately. No dates or technology commitments are implied by this tracker.
+
+## Original roadmap — Task 32: resolve relative dates and times
+
+- [x] Inspect Task 31 extraction, manual controls, contracts, scheduling, tests and documentation.
+- [x] Resolve supported calendar/time phrases deterministically before the planner; preserve original wording and ignore AI arithmetic.
+- [x] Document local timezone/fallback, this/next, weekend/evening defaults and manual Date precedence.
+- [x] Explain past/conflicting/overnight/DST-ambiguous requests without relaxing single-day constraints.
+- [x] Cover fixed calendar boundaries and actual interpretation/proxy/client/engine integration, including omitted tomorrow.
+- [x] Complete real-Qwen smoke (13 Task 32 + 8 Task 31 cases), full regression checks (114 backend/74 frontend), lint, TypeScript, production build, diff review and private GitHub backup.
+
+Stop after Task 32. Task 33 has not started.

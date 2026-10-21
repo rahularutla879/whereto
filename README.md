@@ -100,11 +100,15 @@ This is a local AI interpreter with conservative validation, not guaranteed unde
 All scheduled events have **invented entries only on November 7 and November 14, 2026**. These dates are fixture data, not real schedules. Expand **Supported activities & fictional event dates** under the planner to see the catalog and instructions.
 
 - Set the Date preference or type a date such as `2026-11-07` or `November 7, 2026`.
-- Relative expressions such as tomorrow, tonight and weekdays are preserved without resolution. Select an exact Date preference to proceed. Full relative-date resolution belongs to Task 32. A separate source-text date guard also preserves common expressions if the model omits them.
+- Today, tonight, tomorrow, tomorrow evening, and weekdays resolve in Baltimore local time. “This Friday” means upcoming Friday including today; “next Friday” means Friday in the following Monday–Sunday week. This rule also applies to Saturday/Sunday and the other weekdays.
+- This/next weekend asks you to choose Saturday or Sunday. Saturday night means the upcoming Saturday with a disclosed 6 PM start default. Explicit clock bounds override that default.
+- Type clock windows such as `at 6 PM`, `18:00`, `noon`, `from 6 PM to midnight`, or `between 6 and 9 PM`. `after 6 PM` starts no earlier than 6:01 PM; `before 10 PM` ends no later than 9:59 PM. Ambiguous `at 7` needs AM/PM. Missing-year spoken dates need a year.
+- Dates use Python calendar arithmetic, never AI guesses. Baltimore uses America/New_York; unknown location timezones use a disclosed UTC fallback reference. The fictional catalog still only covers Baltimore.
+- Past starts/dates, conflicting windows and overnight outings such as 10 PM–1 AM get an explanation. Nothing silently shifts to another day. DST-ambiguous/nonexistent times or windows crossing a clock change need a different window.
 - Multiple or invalid dates require correction. The Date preference takes priority over dates in the text.
 - Events without a date, or without a matching fixture on that date, produce a message. No different date or activity is substituted.
 - Regular venue suggestions need no event fixture; real opening hours and availability remain unchecked.
-- Mock regular stops begin at 10 AM, and dinner begins no earlier than 5 PM. Event start times are fixed. Stops follow the order you list, include mock travel, cannot overlap, and must finish by midnight. Total duration includes waiting between scheduled stops.
+- Without requested times, mock regular stops begin at 10 AM (or the current local minute if later today); evening/night defaults to 6 PM. Dinner begins no earlier than 5 PM. Event start times are fixed. Stops follow the order you list, include mock travel, cannot overlap, and must finish by midnight. Total duration includes waiting between scheduled stops.
 
 ### Preferences that change plans
 
@@ -126,7 +130,7 @@ First click **Reset preferences** so old settings do not override your request. 
 | `Concert in Baltimore for 4 people on 2026-11-08` | No matching fixture; no date substitution |
 | `Dinner and skydiving in Baltimore for 2 people` | Unsupported explanation; no dinner-only plan |
 | `Something competitive then cocktails in Baltimore for 6 people` | Suggestions labeled separately; no invented chosen activity |
-| `Coffee in Baltimore for 2 people tomorrow` | Preserves tomorrow and asks for exact Date |
+| `Coffee in Baltimore for 2 people tomorrow` | Resolves tomorrow in Baltimore local time and plans that date |
 | `Coffee` | Asks for unknown location and group size |
 | `Coffee in Baltimore for 2 people`, budget `0` | No affordable coffee plan; cap is honored |
 
@@ -151,6 +155,7 @@ There is no authentication, payment integration, database, external API integrat
 - `backend/test_models.py` — model validation and comparison with actual frontend planner results.
 - `backend/main.py` — health, AI interpretation and validated planning endpoints.
 - `backend/interpretation.py` — provider-independent normalization, grounding guards and manual precedence.
+- `backend/date_resolution.py` — deterministic calendar/time resolution; policy and limitations in ARCHITECTURE.md.
 - `app/api/interpret/route.ts` — server-side interpretation proxy.
 - `backend/requirements.txt` — exact tested backend dependency versions, including required transitive packages.
 - `backend/test_health.py` — real backend HTTP test using Python’s standard test library.
@@ -207,12 +212,12 @@ With both servers running, click Try an example → Plan my outing → View plan
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–31 are complete. The active website uses local AI interpretation and Python planning.
+Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–32 are complete. The active website uses local AI interpretation and Python planning.
 
 
 Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.
 
-## Local AI checks (Tasks 30–31)
+## Local AI checks (Tasks 30–32)
 
 The **Plan my outing** button uses the Python AI interface. Ollama/Qwen3 must be available for the default configuration; automated suites mock the model and require no running Ollama.
 
@@ -258,8 +263,14 @@ For the focused Task 31 semantic/integration check, run:
 backend/.venv/bin/python -u -m backend.ai.smoke_interpretation
 ```
 
-It checks eight actual model requests, prints extraction, validation issues and Python plan counts, and exits unsuccessfully when the tested expectations fail. It covers explicit stops, repeats, separate lunch/dinner, indirect preferences, missing values, constraints, manual date override and the previously observed “tomorrow” failure. In the Task 31 run, tomorrow was retained by Qwen and also protected by the service guard; it remained unresolved. This does not complete Task 32 or prove arbitrary-language accuracy. At the expanded schema/examples, observed warm calls were roughly 4.4–5.8 seconds; a first revised-provider call took about 12.7 seconds. Adapter context/output limits are now 8192/1024 tokens, still with thinking disabled and the same installed model.
+It checks eight actual model requests, prints extraction, validation issues and Python plan counts, and exits unsuccessfully when the tested expectations fail. It covers explicit stops, repeats, separate lunch/dinner, indirect preferences, missing values, constraints, manual date override and the previously observed “tomorrow” failure. In the Task 31 run, tomorrow was retained by Qwen and also protected by the service guard; it remained unresolved. Task 32 now resolves these expressions deterministically; finite tests do not prove arbitrary-language accuracy. At the expanded schema/examples, observed warm calls were roughly 4.4–5.8 seconds; a first revised-provider call took about 12.7 seconds. Adapter context/output limits are now 8192/1024 tokens, still with thinking disabled and the same installed model.
 
-The AI output contains nullable scalar constraints, original activity/date/time wording, preferences, suggestions and uncertainties. Suggestions never automatically become itinerary stops. Only USD catalog costs are supported; no currency conversion is performed. Text group budgets and per-leg travel caps are passed to the existing backend fields. Explicit start/end bounds use minutes since midnight; ambiguous or stop-specific times need rephrasing. Transport is preserved, but fictional travel remains mode-independent. Non-numeric tastes are recorded in notes, not presented as verified venue attributes.
+The AI output contains nullable scalar constraints, original activity/date/time wording, preferences, suggestions and uncertainties. Suggestions never automatically become itinerary stops. Only USD catalog costs are supported; no currency conversion is performed. Text group budgets and per-leg travel caps are passed to the existing backend fields. Python resolves original date/time phrases into calendar dates and minutes since midnight; ambiguous or stop-specific times need rephrasing. AI-calculated calendar/time fields are ignored. Transport is preserved, but fictional travel remains mode-independent. Non-numeric tastes are recorded in notes, not presented as verified venue attributes.
 
-Task 31 verification and current limitations are recorded in HANDOVER.md. Stop before Tasks 32–36.
+For the focused Task 32 check against the installed Qwen3 4B, run:
+
+```sh
+backend/.venv/bin/python -u -m backend.ai.smoke_dates
+```
+
+It uses a fixed aware reference clock and checks 13 date/time requests, original model phrase preservation, clarification outcomes and actual Python planning. No model is downloaded. Task 32 verification and current limitations are recorded in HANDOVER.md. Stop before Task 33.

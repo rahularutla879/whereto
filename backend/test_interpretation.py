@@ -1,4 +1,5 @@
 import unittest
+from datetime import datetime, timezone, date
 from unittest.mock import Mock, patch
 
 from backend.ai import AIError, Interpretation
@@ -24,7 +25,7 @@ class InterpretationTests(unittest.TestCase):
         provider = Mock()
         provider.interpret.return_value = Interpretation(**fields)
         value = InterpretationInput(text=text, preferences=manual or {})
-        result = interpret_request(value, provider)
+        result = interpret_request(value, provider, now=datetime(2026, 10, 21, 12, tzinfo=timezone.utc))
         provider.interpret.assert_called_once_with(text)
         return result
 
@@ -106,15 +107,16 @@ class InterpretationTests(unittest.TestCase):
                              time_expressions=['after 2 pm', 'until 8 pm'], travel_leg_minutes=10)
         self.assertFalse(r.issues)
         self.assertEqual((r.request.groupBudget, r.request.transport, r.request.startTime, r.request.endTime, r.request.maxLegTravel),
-                         (60, 'driving', 840, 1200, 10))
+                         (60, 'driving', 841, 1200, 10))
         self.assertIn('mode-independent', ' '.join(r.notes))
 
     def test_relative_date_guard_repairs_observed_tomorrow_omission(self):
         r = self.run_request('coffee tomorrow')
         self.assertIsNone(r.interpretation.date)
         self.assertIn('tomorrow', r.interpretation.date_expressions)
-        self.assertIsNone(r.request)
-        self.assertIn('not resolved yet', ' '.join(r.issues))
+        self.assertFalse(r.issues)
+        self.assertEqual(r.request.date, date(2026, 10, 22))
+        self.assertTrue(recommend_plans(r.request).provisionalPlans)
 
     def test_unsupported_ambiguous_and_invalid_requests(self):
         for text, fields in [

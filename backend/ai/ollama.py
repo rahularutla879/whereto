@@ -34,11 +34,16 @@ travel_total_minutes and travel_leg_minutes: stated caps only, convert hours to
 minutes. transport: walking/cycling/driving/transit only if stated.
 cost: budget/balanced/experience only if stated/implied by cost/quality wording.
 location: stated city only; do not assume Baltimore.
-date: only a full explicitly stated exact date, normalized YYYY-MM-DD, otherwise
-null. date_expressions: copy ALL date wording including tomorrow, tonight,
-this Saturday, next week, month/day without a year. NEVER resolve relative dates.
-time_expressions: copy all time wording. start_time/end_time are minutes since
-midnight for explicit outing start/end bounds only (after 2 pm => 840).
+date: always null. Python alone validates and normalizes calendar dates.
+date_expressions: copy ALL original date wording VERBATIM, including explicit ISO
+and spoken dates, tomorrow, tonight, this Saturday, next week, month/day without
+a year. Explicit dates MUST also be copied, never just normalized into date.
+NEVER resolve relative dates or calculate calendar values.
+time_expressions: copy complete original time phrases VERBATIM, including after,
+before, between/from, AM/PM, and both endpoints. Keep 'between 6 and 9 PM' intact.
+Preserve date day-parts such as 'tomorrow evening' and 'Saturday night' in
+date_expressions. Never calculate dates or clock minutes. start_time/end_time:
+always null; Python resolves original wording deterministically.
 Ambiguous times or stop-specific times go in uncertainties; never discard them.
 No date, time, location, people or money stated means null, never a default.
 Return all schema fields, with empty lists for absent phrases/uncertainties.
@@ -54,6 +59,12 @@ EXAMPLES = [
     ("Four people want bowling then dinner in Baltimore under $60 each.",
      {**example(), "activities": ["bowling", "dinner"], "people": 4,
       "location": "Baltimore", "budget_per_person": 60, "currency": "USD"}),
+    ("Coffee for two people in Baltimore on November 7, 2026 after 6 PM before 10 PM.",
+     {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
+      "date_expressions": ["November 7, 2026"], "time_expressions": ["after 6 PM", "before 10 PM"]}),
+    ("Coffee for two people in Baltimore tomorrow evening.",
+     {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
+      "date_expressions": ["tomorrow evening"]}),
     ("A group wants coffee tomorrow.",
      {**example(), "activities": ["coffee"], "date_expressions": ["tomorrow"]}),
     ("Two people want coffee, museum, then coffee in Baltimore.",

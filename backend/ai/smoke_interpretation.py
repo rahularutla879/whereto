@@ -1,4 +1,4 @@
-"""Opt-in actual local model/service smoke; no model downloads or date resolution."""
+"""Opt-in actual local model/service smoke; no model downloads."""
 import json
 from time import perf_counter
 from backend.ai import create_provider
@@ -35,7 +35,7 @@ def main():
             failures.append('lost tomorrow')
         if text == 'A group wants coffee.' and (result.interpretation.people is not None or result.interpretation.location is not None):
             failures.append('invented missing fields')
-    print(json.dumps({'failures': failures, 'note': 'Finite semantic smoke only. Relative dates remain unresolved; Task 32 is not implemented.'}), flush=True)
+    print(json.dumps({'failures': failures, 'note': 'Finite semantic smoke only. Dates now resolve deterministically; see smoke_dates for focused Task 32 coverage.'}), flush=True)
     return bool(failures)
 
 

@@ -10,13 +10,14 @@ import { EMPTY_PREFERENCES } from "../../../lib/planner";
 
 test("raw text → interpretation proxy → Python provider → validated request → Python engine → cards", async () => {
   let modelCalls = 0;
+  let requestText = "coffee, museum, then coffee in Baltimore for 2 people under $30 each";
   let modelStatus = 200;
   let modelContent = JSON.stringify({ activities: ["coffee", "museum", "coffee"], people: 2,
     location: "Baltimore", date: null, budget_per_person: 30, currency: "USD", preferences: [] });
   const model = createServer(async (req, res) => {
     let body = "";
     for await (const chunk of req) body += chunk;
-    assert.equal(JSON.parse(body).messages.at(-1).content, "coffee, museum, then coffee in Baltimore for 2 people under $30 each");
+    assert.equal(JSON.parse(body).messages.at(-1).content, requestText);
     modelCalls++;
     res.writeHead(modelStatus, { "Content-Type": "application/json" });
     res.end(JSON.stringify({ done: true, message: { content: modelContent } }));
@@ -37,7 +38,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     paths.push(String(url));
     return (url === "/api/interpret" ? POST : planPOST)(new Request(`http://localhost${url}`, init));
   };
-  const run = () => generateOuting("coffee, museum, then coffee in Baltimore for 2 people under $30 each", EMPTY_PREFERENCES, undefined, send);
+  const run = (preferences = EMPTY_PREFERENCES) => generateOuting(requestText, preferences, undefined, send);
   try {
     let ready = false;
     for (let i = 0; i < 100; i++) {
@@ -54,6 +55,30 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.match(result.plans[0].id, /^candidate-/);
     assert.equal(result.plans[0].people, 2);
     assert.ok(result.plans.every(p => p.price! <= 30));
+    // Model deliberately omits tomorrow: the source guard and deterministic
+    // resolver must carry the local calendar date through real HTTP to cards.
+    modelContent = JSON.stringify({ activities: ["coffee"], people: 2,
+      location: "Baltimore", date: null, budget_per_person: null, preferences: [] });
+    requestText = "coffee in Baltimore for 2 people tomorrow";
+    const localDate = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+    const tomorrow = new Date(Date.parse(`${localDate}T00:00:00Z`) + 86400000).toISOString().slice(0, 10);
+    paths.length = 0;
+    const relative = await run();
+    assert.equal(relative.plans.length, 3);
+    assert.ok(relative.plans.every(p => p.date === tomorrow));
+    assert.deepEqual(paths, ["/api/interpret", "/api/plans/generate"]);
+    requestText += " between 6 and 9 PM";
+    const window = await run();
+    assert.ok(window.plans.length > 0);
+    assert.ok(window.plans.every(p => p.stops.every(stop => stop.start! >= 1080 && stop.end! <= 1260)));
+    const override = await run({ ...EMPTY_PREFERENCES, date: "2099-01-01" });
+    assert.ok(override.plans.every(p => p.date === "2099-01-01"));
+    requestText = "coffee in Baltimore for 2 people tomorrow from 10 PM to 1 AM";
+    paths.length = 0;
+    const overnight = await run();
+    assert.equal(overnight.plans.length, 0);
+    assert.match(overnight.message, /Overnight/);
+    assert.deepEqual(paths, ["/api/interpret"]);
     modelContent = "{}";
     paths.length = 0;
     assert.match((await run()).message, /AI interpretation unavailable/);
