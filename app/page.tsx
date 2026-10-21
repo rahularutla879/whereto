@@ -58,7 +58,7 @@ export default function Home() {
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: keyof Preferences, value: string) {
-    setPreferences((previous) => ({ ...previous, [key]: value }));
+    setPreferences((previous) => ({ ...previous, [key]: value, ...(key === "cost" ? { costExplicit: true } : {}) }));
   }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -71,7 +71,7 @@ export default function Home() {
     setGenerated(true);
     requestAnimationFrame(() => resultsRef.current?.focus({ preventScroll: false }));
   }
-  const preferencesCount = [preferences.location, preferences.date, preferences.people, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.cost !== "balanced" ? 1 : 0);
+  const preferencesCount = [preferences.location, preferences.date, preferences.people, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
 
   return <>
     <a className="skip-link" href="#planner">Skip to planner</a>
@@ -101,8 +101,8 @@ export default function Home() {
               <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
-              <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
-            </div><p className="preference-note">These settings take priority over your request. Leave them blank to use your words or the demo defaults.</p>
+              <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
+            </div><p className="preference-note">These settings take priority over your request. Leave them blank to use your words. Missing location or group size needs your input.</p>
           </div>
         </form>
         <p className="planner-disclaimer"><CircleHelp size={13} /> A preview of what’s possible. Local sample data, no live searches or bookings.</p>
@@ -111,7 +111,7 @@ export default function Home() {
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p>{generated ? (result.plans.length ? result.message : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? "Sample results" : "Demo itineraries"}</span></div>
-        <div className="result-status" role="status" aria-live="polite">{loading && "Contacting the Python planner…"}{generated && !loading && <span className={result.plans.length ? undefined : "sr-only"}>{result.message} {result.plans.length > 0 && "All venues, events, schedules, capacities, and prices are mock data."}</span>}</div>
+        <div className="result-status" role="status" aria-live="polite">{loading && "Interpreting your request and contacting the Python planner…"}{generated && !loading && <span className={result.plans.length ? undefined : "sr-only"}>{result.message} {result.plans.length > 0 && "All venues, events, schedules, capacities, and prices are mock data."}</span>}</div>
         {generated && result.notes.map((note) => <p className="result-note" key={note}><CircleHelp size={16} />{note}</p>)}
         {result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{result.message}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
         <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional mock data, not verified availability.</p>
@@ -119,7 +119,7 @@ export default function Home() {
 
       <section className="how-section shell" id="how-it-works" aria-labelledby="how-title"><div className="how-intro"><span className="tiny-spark"><Sparkles size={21} /></span><h2 id="how-title">Less back-and-forth.<br /><em>More “see you there.”</em></h2></div><div className="how-step"><span>01</span><h3>Give us the gist.</h3><p>Your people, your place, your idea of a good time.</p></div><div className="how-step"><span>02</span><h3>Find your kind of plan.</h3><p>Explore three options that bring it all together.</p></div><div className="how-step"><span>03</span><h3>Take it to the group chat.</h3><p>Pick a favorite. Check the real-world details. Go hang out.</p></div></section>
 
-      <section id="about-demo" className="about-demo shell"><div><span className="status-dot" /><strong>A small demo. A big idea.</strong></div><p>Where To? is a first look at an AI-powered outing planner. This version runs entirely on local rules and a small set of fictional Baltimore venues. It recognizes everyday outings, sports, concerts, and performances. Scheduled events require a matching mock date; unknown activities get an explanation instead of unrelated plans. No AI service, live availability, verified prices, or bookings are connected.</p><a href="#planner">Give it a go <ArrowDown size={14} /></a></section>
+      <section id="about-demo" className="about-demo shell"><div><span className="status-dot" /><strong>A small demo. A big idea.</strong></div><p>Where To? is a first look at an AI-powered outing planner. This version uses a local AI interpreter and the Python planner with fictional Baltimore venues. It supports everyday outings, sports, concerts, and performances. Scheduled events require a matching mock date; unclear or unsupported requests get an explanation. Live availability, verified prices, and bookings are not connected.</p><a href="#planner">Give it a go <ArrowDown size={14} /></a></section>
     </main>
     <footer className="site-footer shell"><a href="#" className="brand footer-brand">where to<span className="brand-question">?</span></a><p>Good company. Great plans. Less effort.</p><span>Made for getting together <span aria-hidden="true">↗</span></span></footer>
   </>;

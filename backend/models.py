@@ -145,11 +145,15 @@ class OutingRequest(ContractModel):
     cost: CostPreference = CostPreference.balanced
     transport: TransportationMode | None = None
     dinner: bool = Field(default=False, strict=True)
+    dinnerStops: list[Annotated[int, Field(strict=True, ge=0, le=3)]] | None = None
     # Repeating a category requests another stop; repeating an ID needs permission.
     allowRevisits: bool = Field(default=False, strict=True)
 
     @model_validator(mode="after")
     def validate_activities(self):
+        if self.dinnerStops is not None and any(
+                i >= len(self.activities) or self.activities[i] != ActivityType.food for i in self.dinnerStops):
+            raise ValueError("Dinner stop indexes must identify requested food stops")
         if self.endTime <= self.startTime:
             raise ValueError("Outing end must be after its earliest start")
         if any(activity in EVENT_ACTIVITIES for activity in self.activities) and self.date is None:

@@ -4,7 +4,7 @@ export { ACTIVITY_LABELS, MOCK_EVENT_DATES, VENUES } from "./mock-data";
 export type { Activity, Venue } from "./mock-data";
 
 export type CostPreference = "budget" | "balanced" | "experience";
-export type Preferences = { location: string; date: string; people: string; budget: string; travel: string; cost: CostPreference };
+export type Preferences = { location: string; date: string; people: string; budget: string; travel: string; cost: CostPreference; costExplicit?: boolean };
 export type OutingPayload = { activities: Activity[]; location: string; people: number; date: string | null;
   budget: number | null; travel: number | null; cost: CostPreference; dinner: boolean };
 export type Quality = Record<string, string>;
@@ -22,11 +22,11 @@ export type Plan = {
 };
 export type PlannerResult = { plans: Plan[]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };
-export const EXAMPLE_REQUEST = "We're 4 friends in Baltimore. We want bowling, drinks, and a movie this Saturday.";
+export const EXAMPLE_REQUEST = "We're 4 friends in Baltimore. We want bowling, drinks, and a movie.";
 export const EMPTY_PREFERENCES: Preferences = { location: "", date: "", people: "", budget: "", travel: "", cost: "balanced" };
 export const SUPPORTED_ACTIVITIES = Object.values(ACTIVITY_LABELS).join(", ");
 
-// An explicit reference day keeps relative-date tests deterministic. The UI uses Baltimore's day.
+// Historical Task 28 resolver retained for regression tests; the application uses Python AI.
 export function resolveOuting(request: string, preferences: Preferences = EMPTY_PREFERENCES, context = { today: todayInBaltimore() }): ResolvedOuting {
   const parsed = parseRequest(request);
   const activities = parsed.activities;

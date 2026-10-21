@@ -4,13 +4,21 @@ import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { once } from "node:events";
 import { POST } from "./route";
-import { generateOuting, adaptRanking } from "../../../../lib/planning-client";
+import { adaptRanking } from "../../../../lib/planning-client";
 import { EMPTY_PREFERENCES, formatTime, resolveOuting } from "../../../../lib/planner";
 
 const context = { today: "2026-11-01" };
+// Preserve Task 28 contract regression independently of the new AI boundary.
+const generateOuting = async (text: string, prefs: Parameters<typeof resolveOuting>[1], ctx: { today: string }, send: typeof fetch) => {
+  const resolved = resolveOuting(text, prefs, ctx);
+  if (resolved.error) return resolved.error;
+  const response = await send("/api/plans/generate", { method: "POST", body: JSON.stringify(resolved.payload) });
+  if (!response.ok) return { plans: [], message: (await response.json()).message, location: "", activities: [], notes: [] };
+  return adaptRanking(await response.json());
+};
 const send: typeof fetch = async (_url, init) => POST(new Request("http://localhost/api/plans/generate", init));
 
-test("frontend interpreter → Next.js proxy → real Python planner → display cards", async () => {
+test("historical resolved request → Next.js proxy → real Python planner → display cards", async () => {
   // Keep the test alive while Node fetch retries a closed pooled connection.
   const keepAlive = setInterval(() => {}, 1000);
   const reservation = createServer();

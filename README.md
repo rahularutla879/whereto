@@ -2,7 +2,7 @@
 
 **Less planning. More hanging out.**
 
-A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules and fictional Baltimore venues. The website sends resolved requests through a server-side Next.js proxy to FastAPI, which generates, filters and ranks the plans. The website does not use AI yet; Task 30 provides a separate, verified local Ollama integration for Python.
+A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules and fictional Baltimore venues. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
 
 ## Start the application — beginner instructions
 
@@ -33,7 +33,7 @@ You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are 
 
    Confirm the version is Python 3.12 before creating the environment. These commands install packages inside the project, not globally. Do not recreate an existing working environment.
 
-5. Start the backend in this Terminal window:
+5. Open the existing **Ollama** app so the installed `qwen3:4b` model is available. No model download is needed on this computer. Start the backend in this Terminal window:
 
    ```sh
    npm run dev:backend
@@ -56,7 +56,7 @@ You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are 
 
 The two commands avoid an extra process-management dependency. `npm run dev` still starts just the frontend.
 
-Planning requires both servers. If Python is stopped, Plan my outing shows “Python planner unavailable” and no generated plans. It never falls back to the retired browser planner. The initial three inspiration cards are a fixed illustration, not a generated response. Health checks time out after three seconds; planning has a ten-second server timeout and a fifteen-second browser timeout.
+Planning requires both servers and the local AI service. If Python is stopped, Plan my outing shows an unavailable-service explanation and no generated plans. It never falls back to the retired browser planner. The initial three inspiration cards are a fixed illustration, not a generated response. Health checks time out after three seconds. AI has a 60-second default provider timeout, a 70-second proxy timeout and a 75-second browser timeout. After interpretation, planning keeps its ten-second proxy and fifteen-second browser timeouts. Increase the AI timeout only alongside those outer limits.
 
 The default backend address is `http://127.0.0.1:8000`. No configuration is required. For a different backend address, copy `.env.example` to `.env.local`, change `BACKEND_URL`, and restart Next.js. This setting is server-only. Do not add `NEXT_PUBLIC_` to it. The connection is server-to-server, so no browser CORS configuration is needed.
 
@@ -66,17 +66,17 @@ You can edit files and see changes in the browser while the development server i
 
 Click **Try an example**, then **Plan my outing**. Or type:
 
-> We're 4 friends in Baltimore. We want bowling, drinks, and a movie this Saturday.
+> We're 4 friends in Baltimore. We want bowling, drinks, and a movie.
 
 You will get up to three distinct Python-generated demo plans. Ordinary outings are labeled **PROVISIONAL** because the fictional catalog has no opening hours. Event-only plans may show **FITS MOCK DATA**, meaning their constraints fit the supplied fiction; real availability is unverified. Expand a card to see missing-information messages and data-quality labels. Use **View plan** to expand each itinerary and see its fictional venues, sample durations, per-person costs, and estimated group total.
 
 Try these requests too:
 
-- `Coffee and art in Baltimore for 2 people tomorrow`
-- `We're 6 friends in Baltimore. We want food and a movie on Friday.`
-- `A walk and coffee in Baltimore this Sunday`
+- `Coffee and art in Baltimore for 2 people`
+- `We're 6 friends in Baltimore. We want food and a movie.`
+- `A walk and coffee in Baltimore for 2 people`
 
-**Set preferences** lets you override the location, day, group size, maximum budget per person, maximum total travel time between stops, and cost preference. A zero budget is supported for free activities. Reset preferences to clear overrides. The cost preference changes Python’s ranking of all returned options. Group size also filters mock capacity.
+**Set preferences** lets you override the location, day, group size, maximum budget per person, maximum total travel time between stops, and cost preference. A zero budget is supported for free activities. Blank fields preserve text constraints. The initial Balanced selection does not erase a text cost preference; clicking a cost option explicitly overrides it, including Balanced. Reset preferences clears that explicit choice. Missing location and group size remain unknown and require text or manual input, rather than defaulting to Baltimore/four people. The cost preference changes Python’s ranking of all returned options. Group size also filters mock capacity.
 
 ## Planner review and improvements
 
@@ -91,16 +91,16 @@ Museums and galleries are separate. A baseball request cannot be replaced with a
 
 ### Unknown requests
 
-There is **no unrelated activity fallback**. If the parser cannot understand part of a request (including an unknown activity mixed with a supported one), it returns an explanation and no partial plan. More than four activities are rejected instead of silently dropping extras. Ambiguous wording such as “concert or theater,” negations, and “concert after dinner” asks you to simplify: list the activities in the order you want, e.g. `Dinner and concert`.
+There is **no unrelated activity fallback**. Unsupported phrases, alternatives, exclusions, unresolved uncertainty and requests over four stops get an explanation instead of a partial plan. AI suggestions for “something competitive” are labeled suggestions and require an explicit activity choice. Every requested occurrence stays separate: `coffee, museum, then coffee` produces three stops; `lunch and dinner` produces two meal stops. Dinner timing applies only to the dinner stop.
 
-This is a conservative keyword parser, not an AI service. It may ask you to rephrase ordinary descriptions, named artists/teams, specific times, or other wording it cannot understand. Use the preference controls for exact dates, group size, and limits. It does not claim to understand arbitrary natural language. Requests are not sent to an external service or saved.
+This is a local AI interpreter with conservative validation, not guaranteed understanding of arbitrary language. Exact phrase normalization and source-grounding guards can ask you to rephrase valid wording. Unknown venue qualities remain unverified. There is no keyword fallback, automatic retry, conversation history, hosted AI call, or saving of outing requests. Ordinary tests mock AI; real-model smoke checks are opt-in.
 
 ### Fictional dates and timing
 
 All scheduled events have **invented entries only on November 7 and November 14, 2026**. These dates are fixture data, not real schedules. Expand **Supported activities & fictional event dates** under the planner to see the catalog and instructions.
 
 - Set the Date preference or type a date such as `2026-11-07` or `November 7, 2026`.
-- Simple weekdays, today/tonight, and tomorrow resolve using the current calendar day in **America/New_York** (Baltimore). A weekday means its next occurrence, including today; “next Saturday” means the next future Saturday. An explicit reference day is injected in automated tests.
+- Relative expressions such as tomorrow, tonight and weekdays are preserved without resolution. Select an exact Date preference to proceed. Full relative-date resolution belongs to Task 32. A separate source-text date guard also preserves common expressions if the model omits them.
 - Multiple or invalid dates require correction. The Date preference takes priority over dates in the text.
 - Events without a date, or without a matching fixture on that date, produce a message. No different date or activity is substituted.
 - Regular venue suggestions need no event fixture; real opening hours and availability remain unchecked.
@@ -119,17 +119,17 @@ First click **Reset preferences** so old settings do not override your request. 
 
 | Request / setting | Expected result |
 | --- | --- |
-| `Dinner and karaoke in Baltimore` | Food and karaoke stops, no missing karaoke |
-| `Museum and coffee in Baltimore` | Museum and coffee, not an art-gallery substitution |
-| `Baseball game in Baltimore on 2026-11-07` | Only fictional baseball events on that date, with mock start times |
-| `Baseball game in Baltimore on 2026-11-08` | No matching mock event; no unrelated plan |
-| `Concert in Baltimore` | Asks for a date and shows the fictional fixture dates |
-| `Dinner and skydiving in Baltimore` | Explains unsupported wording; no dinner-only plan |
-| `Concert and theater on 2026-11-07` | Explains timing constraints; overlapping shows cannot fit |
-| `Dinner and karaoke`, budget `25` | Only plans costing at most $25 per person |
-| `Dinner and karaoke`, 12 people | Only mock options with capacity for at least 12 |
-| `Bowling and drinks`, budget `30`, travel `5` | Removes routes over five total mock travel minutes |
-| `Dinner and karaoke`, no limits, switch Budget-friendly / Best experience | The first recommendation and price change |
+| `Dinner and karaoke in Baltimore for 4 people` | Both stops, dinner no earlier than 5 PM |
+| `Coffee, museum, then coffee in Baltimore for 2 people` | Three ordered stops, with distinct coffee venues |
+| `Lunch and dinner in Baltimore for 2 people` | Two food stops, only dinner constrained to 5 PM |
+| `Baseball game in Baltimore for 4 people on 2026-11-07` | Fictional events on that exact date |
+| `Concert in Baltimore for 4 people on 2026-11-08` | No matching fixture; no date substitution |
+| `Dinner and skydiving in Baltimore for 2 people` | Unsupported explanation; no dinner-only plan |
+| `Something competitive then cocktails in Baltimore for 6 people` | Suggestions labeled separately; no invented chosen activity |
+| `Coffee in Baltimore for 2 people tomorrow` | Preserves tomorrow and asks for exact Date |
+| `Coffee` | Asks for unknown location and group size |
+| `Coffee in Baltimore for 2 people`, budget `0` | No affordable coffee plan; cap is honored |
+
 
 ## About the sample data
 
@@ -149,7 +149,9 @@ There is no authentication, payment integration, database, external API integrat
 - `backend/ranking.py` — filtering, scheduling and ranking (Task 27), called by the live API. Ordinary outings remain explicitly provisional because the fixture has no opening hours.
 - `backend/test_ranking.py` — hard constraints, modes, unknown data, stable/distinct selection and generator integration tests.
 - `backend/test_models.py` — model validation and comparison with actual frontend planner results.
-- `backend/main.py` — FastAPI `GET /health` and validated `POST /api/plans/generate`.
+- `backend/main.py` — health, AI interpretation and validated planning endpoints.
+- `backend/interpretation.py` — provider-independent normalization, grounding guards and manual precedence.
+- `app/api/interpret/route.ts` — server-side interpretation proxy.
 - `backend/requirements.txt` — exact tested backend dependency versions, including required transitive packages.
 - `backend/test_health.py` — real backend HTTP test using Python’s standard test library.
 - `backend/.venv/` — local Python environment, excluded from Git.
@@ -160,7 +162,7 @@ There is no authentication, payment integration, database, external API integrat
 - `app/globals.css` — Tailwind setup, responsive styles, and reduced-motion support.
 - `app/layout.tsx` — page title, description, and root layout.
 - `components/artwork.tsx` — original SVG illustrations. No remote images or font downloads.
-- `lib/planner.ts` — preserved input interpretation, manual overrides, resolved request and display types, formatting.
+- `lib/planner.ts` — display types/formatting plus historical resolver retained for regression tests only.
 - `lib/planning-client.ts` — asynchronous proxy request and Python-to-card display adapter; no planning algorithm.
 - `lib/legacy/planner.ts` — retired algorithm, isolated for historical regression/contract tests only.
 - `data/demo-plans.json` — fixed inspiration cards, never used as a request fallback.
@@ -168,7 +170,7 @@ There is no authentication, payment integration, database, external API integrat
 - `app/api/plans/generate/route.test.ts` — real Python/proxy/client integration and upstream failure tests.
 - `backend/test_api.py` — actual HTTP planning API validation and behavior tests.
 - `lib/mock-data.ts` — typed adapter for the shared fixture plus activity keyword patterns.
-- `lib/request.ts` — conservative activity recognition and calendar-date resolution.
+- `lib/request.ts` — historical keyword/date resolver, used only by regression references.
 - `lib/planner.test.ts` — tests for parsing, distinct plans, budgets, travel caps, and unsupported cities.
 
 ## Checks
@@ -194,26 +196,27 @@ To run a production build **locally**, run `npm run build` and then `npm start`.
 - **The browser can't connect**: keep `npm run dev` running and use the exact Local URL printed in Terminal.
 - **Health check says backend unavailable**: run `npm run dev:backend` in the first Terminal and wait for startup. Check that port 8000 is free and `BACKEND_URL` matches if you changed it.
 - **“No module named uvicorn” or missing `backend/.venv/bin/python`**: follow the fresh-copy backend setup in step 4.
+- **“AI interpretation unavailable”**: open the existing Ollama app, confirm `ollama list` includes `qwen3:4b`, and keep the Python backend running. No keyword fallback exists.
 - **“Python planner unavailable”**: start `npm run dev:backend`, wait for startup, then retry. No browser fallback exists.
 - **No plans appear**: check the explanation, try Baltimore, leave budget/travel blank, and click Try an example. Very low limits can exclude every sample combination.
 
 
 ## Task 28 verification you can repeat
 
-With both servers running, click Try an example → Plan my outing → View plan. You should see provisional Python results and fictional prices, times and unknown-hours messages. To test confirmed fictional-data feasibility, enter `Baseball and concert on 2026-11-07`. For no matching event, use `Concert on 2026-11-08`. For no affordable plan, enter `Coffee` and set Maximum budget to `0`.
+With both servers running, click Try an example → Plan my outing → View plan. You should see provisional Python results and fictional prices, times and unknown-hours messages. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–30 are complete. Task 31 has not started; the current website still uses its rule-based interpreter.
+Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–31 are complete. The active website uses local AI interpretation and Python planning.
 
 
 Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.
 
-## Standalone local AI check (Task 30)
+## Local AI checks (Tasks 30–31)
 
-The Python AI module is separate from the website. The current parser and **Plan my outing** button still use the existing rules and Python planner. Ollama is optional for normal application use and automated tests.
+The **Plan my outing** button uses the Python AI interface. Ollama/Qwen3 must be available for the default configuration; automated suites mock the model and require no running Ollama.
 
-The selected model is **Qwen3 4B** (`qwen3:4b`, tested ID `359d7dd4bcda`), downloaded with owner approval. It occupies about 2.5 GB on disk; Ollama reported about 3.2 GB loaded on the M2 Mac with a 4096-token context. No Ollama reinstall or upgrade was needed. The four required requests were extracted correctly in two consecutive runs; the first call took about 5.5 seconds and warm calls about 1.6–1.9 seconds. This is a small local evaluation, not a guarantee for arbitrary requests.
+The selected model is **Qwen3 4B** (`qwen3:4b`, tested ID `359d7dd4bcda`), downloaded with owner approval. It occupies about 2.5 GB on disk; Task 30 reported about 3.2 GB loaded on the M2 Mac with its then-4096-token context. No Ollama reinstall or upgrade was needed. In Task 30, the four required requests were extracted correctly in two consecutive runs; the first call took about 5.5 seconds and warm calls about 1.6–1.9 seconds. This is a small local evaluation, not a guarantee for arbitrary requests.
 
 From the project folder, with Ollama open, run:
 
@@ -247,6 +250,16 @@ except AIError as error:
     print(str(error))
 ```
 
-Activity phrases are not supported-category IDs, and unknown group sizes/budgets/dates/locations remain nullable. Do not pass this partial extraction directly to the planner. Task 31 will handle safe interpretation integration, ambiguity, defaults and manual preferences. Clear errors explain an unavailable Ollama service, missing model, timeout or invalid reply. The normal backend tests mock AI responses and verify replaceable providers without requiring Ollama.
+Activity phrases are not supported-category IDs, and unknown group sizes/budgets/dates/locations remain nullable. Do not pass this partial extraction directly to the planner. Task 31 uses `interpret_request` to normalize and validate extraction, preserve unknowns, and apply manual preferences before constructing `OutingRequest`. Clear errors explain an unavailable Ollama service, missing model, timeout or invalid reply. The normal backend tests mock AI responses and verify replaceable providers without requiring Ollama.
 
-Observed limitation: the extra request “People want a quiet indoor activity tomorrow” kept the date null but dropped “tomorrow”. Activity phrases still need category mapping, and vague preferences still need clarification. Schema checks cannot prove that nothing was omitted. Task 31 must address these before connecting AI to the planner. No browser/visual checks were repeated for this standalone backend addition.
+For the focused Task 31 semantic/integration check, run:
+
+```sh
+backend/.venv/bin/python -u -m backend.ai.smoke_interpretation
+```
+
+It checks eight actual model requests, prints extraction, validation issues and Python plan counts, and exits unsuccessfully when the tested expectations fail. It covers explicit stops, repeats, separate lunch/dinner, indirect preferences, missing values, constraints, manual date override and the previously observed “tomorrow” failure. In the Task 31 run, tomorrow was retained by Qwen and also protected by the service guard; it remained unresolved. This does not complete Task 32 or prove arbitrary-language accuracy. At the expanded schema/examples, observed warm calls were roughly 4.4–5.8 seconds; a first revised-provider call took about 12.7 seconds. Adapter context/output limits are now 8192/1024 tokens, still with thinking disabled and the same installed model.
+
+The AI output contains nullable scalar constraints, original activity/date/time wording, preferences, suggestions and uncertainties. Suggestions never automatically become itinerary stops. Only USD catalog costs are supported; no currency conversion is performed. Text group budgets and per-leg travel caps are passed to the existing backend fields. Explicit start/end bounds use minutes since midnight; ambiguous or stop-specific times need rephrasing. Transport is preserved, but fictional travel remains mode-independent. Non-numeric tastes are recorded in notes, not presented as verified venue attributes.
+
+Task 31 verification and current limitations are recorded in HANDOVER.md. Stop before Tasks 32–36.

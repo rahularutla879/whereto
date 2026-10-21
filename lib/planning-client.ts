@@ -1,4 +1,4 @@
-import { resolveOuting, EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
+import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
 
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
 // selection, scores, schedules, prices and travel all come from Python.
@@ -56,13 +56,22 @@ export function adaptRanking(value: unknown): PlannerResult {
 
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
   context?: { today: string }, send: typeof fetch = fetch): Promise<PlannerResult> {
-  const resolved = resolveOuting(text, preferences, context);
-  if (resolved.error) return resolved.error;
-  const failure = (message: string): PlannerResult => ({ plans: [], message, location: resolved.payload.location,
-    activities: resolved.payload.activities, notes: [] });
+  // Raw text goes to Python AI; the legacy keyword resolver is never called.
+  void context; // Kept for source compatibility; relative dates are deferred.
+  const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
+    activities: [], notes: [] });
   try {
+    const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ text, preferences }), cache: "no-store", signal: AbortSignal.timeout(75000) });
+    const extraction = await interpreted.json();
+    if (!interpreted.ok) return failure(typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated.");
+    if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
+      || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
+    if (extraction.issues.length || !extraction.request) {
+      return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), notes: extraction.notes };
+    }
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(resolved.payload), cache: "no-store", signal: AbortSignal.timeout(15000) });
+      body: JSON.stringify(extraction.request), cache: "no-store", signal: AbortSignal.timeout(15000) });
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
@@ -71,9 +80,9 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
     }
     const result = adaptRanking(await response.json());
-    result.notes = [...resolved.notes, ...result.notes];
+    result.notes = [...extraction.notes, ...result.notes];
     return result;
   } catch {
-    return failure("Python planner unavailable or returned an invalid response. Start the backend and try again. No plan was generated.");
+    return failure("AI interpretation or Python planner unavailable, timed out, or returned an invalid response. Check both services and retry. No plan was generated.");
   }
 }

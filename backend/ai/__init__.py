@@ -1,18 +1,19 @@
-"""Standalone AI boundary for Task 30; not used by the planning API yet."""
+"""Provider-independent partial AI extraction for the interpretation service."""
 
 import os
 from typing import Protocol
 
 from pydantic import BaseModel, ConfigDict, Field
 
-from backend.models import GroupSize, Money, Nonblank, OutingDate
+from backend.models import (ActivityType, CostPreference, EndMinute, GroupSize, Money,
+                            Nonblank, OutingDate, StartMinute, TransportationMode, TravelMinutes)
 
 
 class Interpretation(BaseModel):
     """Partial extraction, never a resolved planning request or verified facts.
 
-    Activity phrases remain unnormalized. Task 31 must handle supported-category
-    mapping, ambiguity, defaults, overrides and semantic checks before planning.
+    Activity phrases remain unnormalized. The interpretation service handles
+    supported-category mapping, ambiguity, overrides and semantic guards.
     Required nullable fields distinguish missing information from model defaults.
     """
 
@@ -23,6 +24,19 @@ class Interpretation(BaseModel):
     date: OutingDate | None
     location: Nonblank | None
     preferences: list[Nonblank]
+    # Additive fields preserve the Task 30 provider method and original fields.
+    suggested_activities: list[ActivityType] = Field(default_factory=list)
+    budget_group: Money | None = None
+    currency: Nonblank | None = None
+    travel_total_minutes: TravelMinutes | None = None
+    travel_leg_minutes: TravelMinutes | None = None
+    transport: TransportationMode | None = None
+    cost: CostPreference | None = None
+    date_expressions: list[Nonblank] = Field(default_factory=list)
+    time_expressions: list[Nonblank] = Field(default_factory=list)
+    start_time: StartMinute | None = None
+    end_time: EndMinute | None = None
+    uncertainties: list[Nonblank] = Field(default_factory=list)
 
 
 class AIError(RuntimeError):

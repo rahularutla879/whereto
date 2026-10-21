@@ -5,7 +5,7 @@ import { EMPTY_PREFERENCES, formatDuration, formatTime, resolveOuting } from "./
 
 const context = { today: "2026-11-01" };
 
-test("active interpreter preserves manual precedence, inference, date resolution and zero limits", () => {
+test("historical interpreter regression preserves manual precedence, inference, date resolution and zero limits", () => {
   const inferred = resolveOuting("Dinner and karaoke for 2 people $25 per person tomorrow", EMPTY_PREFERENCES, context);
   assert.deepEqual(inferred.payload, { activities: ["food", "karaoke"], location: "Baltimore", people: 2,
     budget: 25, travel: null, date: "2026-11-02", cost: "balanced", dinner: true });
@@ -18,26 +18,33 @@ test("active interpreter preserves manual precedence, inference, date resolution
   assert.equal(formatDuration(null), "Unknown");
 });
 
-test("invalid and unsupported text or preferences never send a partial request", async () => {
-  const unexpected: typeof fetch = async () => { throw new Error("Unexpected network request"); };
-  for (const [text, prefs] of [
-    ["Dinner and skydiving", {}], ["Concert", {}], ["Coffee", { people: "0" }],
-    ["Coffee", { budget: "-1" }], ["Coffee", { travel: "1.5" }], ["Coffee in Boston", {}],
-    ["Concert on 2026-02-30", {}], ["Concert or theater on 2026-11-07", {}],
-  ] as const) {
-    const result = await generateOuting(text, { ...EMPTY_PREFERENCES, ...prefs }, context, unexpected);
-    assert.equal(result.plans.length, 0);
-    assert.doesNotMatch(result.message, /unavailable/);
-  }
+test("AI issues stop planning and raw text/manual controls reach the interpretation endpoint", async () => {
+  let calls = 0;
+  const send: typeof fetch = async (url, init) => {
+    calls++;
+    assert.equal(url, "/api/interpret");
+    const body = JSON.parse(init!.body as string);
+    assert.equal(body.text, "Something competitive tomorrow");
+    assert.equal(body.preferences.costExplicit, true);
+    return Response.json({ interpretation: {}, request: null, notes: ["Suggestions only"], issues: ["Choose exact activities and date."] });
+  };
+  const r = await generateOuting("Something competitive tomorrow", { ...EMPTY_PREFERENCES, costExplicit: true }, context, send);
+  assert.equal(calls, 1);
+  assert.equal(r.plans.length, 0);
+  assert.match(r.message, /exact activities/);
+  assert.deepEqual(r.notes, ["Suggestions only"]);
 });
 
-test("client reports invalid API input and network errors clearly", async () => {
-  const invalid: typeof fetch = async () => Response.json({ message: "Invalid request: correct the date." }, { status: 422 });
-  assert.match((await generateOuting("Coffee", EMPTY_PREFERENCES, context, invalid)).message, /correct the date/);
-  const offline: typeof fetch = async () => { throw new TypeError("Network failed"); };
-  const result = await generateOuting("Coffee", EMPTY_PREFERENCES, context, offline);
-  assert.equal(result.plans.length, 0);
-  assert.match(result.message, /Python planner unavailable/);
+test("AI failures and invalid output produce clear errors without planning fallback", async () => {
+  for (const send of [
+    async () => Response.json({ message: "Local model timed out" }, { status: 503 }),
+    async () => Response.json({}),
+    async () => { throw new TypeError("Network failed"); },
+  ] as typeof fetch[]) {
+    const r = await generateOuting("Coffee", EMPTY_PREFERENCES, context, send);
+    assert.equal(r.plans.length, 0);
+    assert.match(r.message, /timed out|unavailable/);
+  }
 });
 
 test("clock labels distinguish noon, midnight and the allowed end-of-day boundary", () => {

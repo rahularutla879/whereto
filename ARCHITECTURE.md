@@ -1,13 +1,15 @@
-> Current execution path (Task 28): homepage → Next.js POST /api/plans/generate → FastAPI → Task 26 generator → Task 27 ranking. Earlier task sections below describe historical checkpoints. TypeScript no longer executes planning in the app.
+> Current execution path (Task 31): homepage → Next.js/FastAPI POST /api/interpret → replaceable local AI provider → validated request/manual merge → POST /api/plans/generate → Task 26 generator → Task 27 ranking. Earlier task sections below describe historical checkpoints. TypeScript no longer interprets submitted text or executes planning in the app.
 
 # Current architecture
 
-Source baseline: October 20, 2026. Next.js serves the existing React homepage, interprets input and displays results. FastAPI generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset. Task 30 adds a standalone local AI boundary; the application execution path above is unchanged.
+Source baseline: October 20, 2026. Next.js serves the existing React homepage, proxies raw text/manual controls, and displays results. FastAPI interprets requests through the Task 30 AI provider, validates/merges them in the Task 31 service, then generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset.
 
 ```text
 Homepage text + manual preferences
           |
-resolveOuting -> existing parser/date/override rules
+Browser POST /api/interpret -> Next.js proxy -> FastAPI AI extraction
+          |
+Validated supported activities/constraints + manual overrides (or issues)
           |
 Browser POST /api/plans/generate
           |
@@ -222,3 +224,20 @@ Task 31 must resolve ambiguity, normalize supported activities, preserve negatio
 `AI_PROVIDER`, `AI_MODEL`, `AI_BASE_URL` and `AI_TIMEOUT_SECONDS` are read when creating the provider. Settings are exported process environment values; Python does not auto-load Next.js `.env.local`. Calls use standard-library HTTP with a configurable socket timeout, non-streaming JSON schema output and local Pydantic validation. No automatic retries or model downloads occur. Requests bypass system HTTP proxies. Missing model/API (404), other HTTP failures, unavailable service, timeouts, malformed JSON, truncated/incomplete and schema-invalid replies raise `AIError` with a safe actionable message rather than accepting partial results. Real smoke commands are documented in README; ordinary tests mock the transport and can substitute another provider without a running model.
 
 The selected default is `qwen3:4b` (tested `359d7dd4bcda`, Q4_K_M). Ollama owns downloaded weights outside the repository; Git stores only code/configuration examples and documentation. The adapter requests `think: false` (verified without thinking content), temperature 0, 4096 context, 512 output tokens and five-minute keep-alive. It keeps no conversation history between requests. Approximately 2.5 GB on disk / 3.2 GB loaded was observed on the M2 Mac. No model is pulled by the module or smoke command. Tests use `AISettings` overrides and a fake provider to verify replacement without machine-specific paths or model files.
+
+
+## Task 31 — active AI interpretation pipeline (supersedes historical parser path above)
+
+`Homepage raw text + manual strings → POST /api/interpret (Next.js) → POST /api/interpret (FastAPI) → AIProvider.interpret → Interpretation → grounding/normalization/manual merge → OutingRequest → POST /api/plans/generate proxy → existing Python generator/evaluator/ranker → existing cards`.
+
+The interpretation endpoint returns `{interpretation, request, notes, issues}`. HTTP 200 can carry `request: null` with actionable issues, preserving partial extraction for later tasks without planning it. Invalid inputs return 422; unavailable/invalid/timed-out AI returns safe 503. The sync endpoint runs provider I/O outside the event loop. No keyword fallback or retry exists. Browser and proxy AI timeouts are 75/70 seconds around the provider's default 60; planning timeouts remain 15/10 seconds. BACKEND_URL stays server-only.
+
+`backend/interpretation.py` accepts a replaceable provider, validates its output, translates exact activity aliases, grounds phrases in source order, checks known explicit occurrences/multiplicity for omission, and preserves common raw date expressions independently of the model. It rejects unsupported phrases as a whole and does not choose suggestions. Grounding core location/group values prevents model defaults becoming facts. Numeric/currency and time/date guards are deliberately conservative; finite checks cannot prove arbitrary-language completeness. Ambiguity/exclusions/alternatives are surfaced as issues rather than silently choosing. Unknown location/group requires text or manual values, avoiding OutingRequest's legacy defaults. Null budget/travel stays uncapped; zero stays zero. No relative-date resolver is called.
+
+Task 30's one-method protocol remains unchanged. Interpretation adds nullable group budget/currency/travel caps/transport/cost/start/end and raw date/time expressions, suggested category IDs and uncertainties. Required original nullable fields remain intact. Additive fields have defaults for older provider implementations; that does not guarantee they support richer constraints. Vendor messages and options stay inside Ollama. The same Qwen3 4B model uses 8192 context and 1024 output tokens with thinking disabled to fit the expanded extraction/examples.
+
+Manual nonblank fields override corresponding text fields. `costExplicit` tracks actual selection so initial Balanced does not erase text affordability/experience; clicking Balanced deliberately does. Reset clears explicitness. Manual per-person budget and text group budget remain independent caps. No activity override/confirmation UI is added. Preferences/suggestions/uncertainty remain distinct; venue tastes are unverified notes, not new ranking signals. Transport reaches the existing request, with an explicit note that mock routing is mode-independent.
+
+Only one small planner extension is needed: optional `OutingRequest.dinnerStops` indexes scope the existing 5 PM dinner rule to the requested dinner occurrence. Omitted indexes retain legacy `dinner` behavior for existing callers. Repeated categories already work in Tasks 26–27 and require distinct record IDs unless revisits are explicit; no generator, scoring or selection algorithm was rewritten. The fixture, styles, artwork and card structure are preserved. The initial example omits a relative weekday so it remains actionable without implementing Task 32.
+
+Tests cover the service, provider errors, manual precedence, repeated stops and meal timing, missing/unsupported/ambiguous requests and real HTTP wiring through a fake Ollama server into actual Python planning. Historical parser tests remain explicitly regression-only. `backend.ai.smoke_interpretation` is a separate opt-in eight-case actual Qwen test. A production browser check with actual Qwen verifies button submission, ordered cards, details and relative-date/manual behavior. See HANDOVER.md for evidence and limits.

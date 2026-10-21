@@ -100,7 +100,7 @@ def evaluate_candidate(
             leg = legs[i - 1]
             earliest += leg.minutes or 0
             exact = exact and leg.minutes is not None
-        if request.dinner and v.activity == "food":
+        if (i in request.dinnerStops if request.dinnerStops is not None else request.dinner and v.activity == "food"):
             earliest = max(earliest, 17 * 60)
         duration = v.duration
         if duration is None or v.dataQuality.duration == DataStatus.unknown:

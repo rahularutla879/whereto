@@ -89,7 +89,19 @@ Task 29 is complete. Its verification predates Task 30 below; fictional-data lim
 - [x] Add 11 mocked tests including provider substitution; pass backend/frontend tests, lint, TypeScript and production build.
 - [x] Update documentation and review the complete source diff; back up tested changes to the existing private repository.
 
-Task 30 is complete. Stop before Task 31; the website still uses the current rule-based interpreter.
+Task 30 is complete and its provider interface is reused by Task 31.
+
+## Original roadmap — Task 31: build and integrate the AI prompt interpreter
+
+- [x] Inspect project, frontend input flow, Task 24 contracts, Task 30 provider and Python engine before changes.
+- [x] Add provider-independent interpretation service and FastAPI/Next.js endpoint; submit raw text from Plan my outing.
+- [x] Preserve ordered/repeated stops, nullable unknowns, raw date/time wording, explicit constraints, preferences, suggestions and uncertainty.
+- [x] Apply explicit manual overrides, including zero limits and explicitly chosen Balanced; blank/default fields preserve text.
+- [x] Refuse unsupported/ambiguous/invalid/model-failure requests without keyword fallback; reuse existing Python engine.
+- [x] Add automated coverage, real Qwen smoke (including tomorrow), browser integration check; pass backend/frontend tests, lint, TypeScript and build.
+- [x] Review full diff, update documentation and back up source to the existing private repository.
+
+Task 31 is complete. Stop before Tasks 32–36. Relative dates remain unresolved; no confirmation redesign, multi-turn clarification or new infrastructure was added.
 
 ## Prototype baseline — implemented
 

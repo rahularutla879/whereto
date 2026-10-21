@@ -9,7 +9,7 @@
     "start": "next start",
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
-    "test": "tsx --test lib/*.test.ts app/api/health/*.test.ts app/api/plans/generate/*.test.ts",
+    "test": "tsx --test lib/*.test.ts app/api/health/*.test.ts app/api/plans/generate/*.test.ts app/api/interpret/*.test.ts",
     "test:backend": "backend/.venv/bin/python -m unittest discover -s backend -p 'test_*.py' -v"
   },
   "dependencies": {
