@@ -80,11 +80,30 @@ test("historical resolved request → Next.js proxy → real Python planner → 
       const r = await run("Baseball and concert on 2026-11-07");
       assert.ok(r.plans.length);
       assert.ok(r.plans.every(p => p.feasibility === "confirmed" && p.date === "2026-11-07"));
-      assert.match(r.plans[0].description, /fictional/);
+      assert.match(r.plans[0].description, /Best fit for Balanced/);
       const missing = await run("Concert on 2026-11-08");
       assert.equal(missing.plans.length, 0);
       assert.match(missing.message, /No mock records/);
       assert.ok((await run("Concert on 2026-11-08", { date: "2026-11-07" })).plans.length);
+    }
+    // Descriptions reuse real Python scores and distinguish tied café orders.
+    {
+      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({
+        activities: ["coffee", "museum", "coffee"], location: "Baltimore", people: 6,
+        budget: 100, travel: 30, cost: "experience", date: "2026-11-07",
+      }) }));
+      const raw = await response.json();
+      const before = structuredClone(raw);
+      const plans = adaptRanking(raw).plans;
+      assert.deepEqual(raw, before, "describing options must not mutate Python results");
+      assert.deepEqual(plans.map(p => p.price), [41, 41, 31]);
+      assert.match(plans[0].label, /JOINT TOP MATCH/);
+      assert.match(plans[0].description, /Best Experience.*highest sample venue quality/);
+      assert.match(plans[1].label, /DIFFERENT STOP ORDER/);
+      assert.match(plans[1].description, /Same cost, travel and sample quality.*Paper Cup Studio/);
+      assert.match(plans[2].label, /LOWEST COST/);
+      assert.match(plans[2].description, /\$31\.00.*Harbor Discovery Hall/);
+      assert.equal(new Set(plans.map(p => p.description)).size, 3);
     }
     // Real fixture route finishes exactly at midnight; display must not say noon.
     {

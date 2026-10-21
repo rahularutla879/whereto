@@ -1,3 +1,4 @@
+import { recommendationCopy } from "./recommendation-copy";
 import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
 
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
@@ -9,6 +10,7 @@ type Ranked = {
   costPerPerson: number | null; groupCost: number | null;
   totalTravel: number | null; elapsedDuration: number | null;
   issues: { message: string }[];
+  score?: number; components?: { quality?: number };
 };
 type Ranking = { request: { location: string; activities: PlannerResult["activities"]; cost: string };
   plans: Ranked[]; provisionalPlans: Ranked[]; message: string; notes: string[]; errors: { message: string }[] };
@@ -39,13 +41,21 @@ export function adaptRanking(value: unknown): PlannerResult {
       || !p.legs.every(q => nullableNumber(q.minutes) && typeof q.status === "string")) throw new Error("Invalid itinerary response");
   }
   if (data.plans.some(p => p.feasibility !== "confirmed") || data.provisionalPlans.some(p => p.feasibility !== "provisional")) throw new Error("Invalid feasibility response");
+  const normalized = (value: unknown) => typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 1 ? value : null;
+  const copy = recommendationCopy(selected.map(p => ({
+    score: normalized(p.score),
+    quality: p.stops.every(s => typeof s.venue.experience === "number" && Number.isFinite(s.venue.experience) && s.venue.experience >= 0)
+      ? normalized(p.components?.quality) : null,
+    cost: p.costPerPerson, travel: p.totalTravel,
+    venues: p.stops.map(s => ({ id: s.venue.id, name: s.venue.name })),
+  })), data.request.cost);
   const firstTitle = data.request.cost === "budget" ? "Big fun. Small spend." : data.request.cost === "experience" ? "Make a night of it." : "A little of everything.";
   const titles = [firstTitle, "More good times.", "A different kind of day."];
   const themes = ["lavender", "peach", "mint"] as const;
   const plans: Plan[] = selected.map((p, i) => ({
     id: p.candidate.id, title: titles[i], theme: themes[i],
-    label: `${data.request.cost.toUpperCase()} · OPTION ${i + 1}`,
-    description: p.feasibility === "confirmed" ? "Fits the supplied fictional data. Real availability is unverified." : "Provisional: missing information needs checking before this plan can be confirmed.",
+    label: `${copy[i].label} · OPTION ${i + 1}`,
+    description: copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
     travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date ?? "Any day",
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,

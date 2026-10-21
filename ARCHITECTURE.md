@@ -246,3 +246,8 @@ Tests cover the service, provider errors, manual precedence, repeated stops and 
 ## Focused results presentation correction after Task 31
 
 `lib/results-presentation.ts` translates existing result text only at rendering time. A single live status announces a plain-language plan count. `ResultsInformation` consolidates the fictional-data disclosure and native, keyboard-operable About these estimates disclosure. Routine missing opening hours is secondary; all other plan issues and unknown price/travel/timing/capacity remain visible by the affected card, even with itinerary details closed. Failure reasons remain in the main empty state. Raw response messages, issues, provenance and all calculations remain unchanged. No backend, API contract or interpreter changes; Task 32 remains unstarted.
+
+
+## Focused recommendation-card explanations after Task 31
+
+`adaptRanking` reuses existing Python `score` and `components.quality`, plus returned costs/travel and venue identities, to feed `lib/recommendation-copy.ts`. It only writes card labels/descriptions; no score, calculation, selection, order or API payload changes. Superlatives compare the displayed options, require known comparison values, and acknowledge ties. An all-equal cost/travel/quality pair is described by its actual venue or ordering difference; a single option or insufficient evidence gets factual neutral wording. The quality claim also requires supplied venue experience values, so the engine's zero placeholder for unknown quality does not become a factual quality comparison. No AI call or parsing of technical explanation prose is added. Sample-data disclosures and material warnings remain separate from these short choice explanations.
