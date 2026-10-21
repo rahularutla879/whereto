@@ -9,7 +9,6 @@ from typing import Annotated, Literal
 from pydantic import AwareDatetime, Field, ValidationError
 
 from backend.date_resolution import DATE_WORDING, TIME_WORDING, resolve_datetime
-from backend.planner import supports_location
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
                             OutingRequest, EVENT_ACTIVITIES)
@@ -53,6 +52,9 @@ class ManualPreferences(ContractModel):
     travel: str = ""
     cost: CostPreference = CostPreference.balanced
     costExplicit: bool = Field(default=False, strict=True)
+
+
+LOCATION_QUESTION = "Where would you like to go? Enter a city or location to continue."
 
 
 ClarificationField = Literal["location", "people", "date", "activities", "time"]
@@ -176,7 +178,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             continue
         uncertainties.append(issue)
         if field:
-            ask(field, {"people": "How many people are coming?", "location": "Which city is the outing in?",
+            ask(field, {"people": "How many people are coming?", "location": LOCATION_QUESTION,
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",
                         "time": "What overall time window do you mean (for example, from 6 PM to 10 PM)?"}[field], "ambiguous")
     issues = [*uncertainties, *grounding_issues]
@@ -332,16 +334,9 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if any(activity in EVENT_ACTIVITIES for activity in activities) and date is None and not dates.issues:
         issues.append("Scheduled events require an exact date.")
         ask("date", "What date is the event outing? Enter YYYY-MM-DD or a specific day.")
-    if location and not supports_location(location.strip()):
-        message = "This fictional catalog supports Baltimore only. Edit the location to plan there; no city was substituted."
-        issues.append(message)
-        if saved and answers.location and not manual.location.strip():
-            ask("location", "That city is outside this fictional catalog. Which supported city should we use?", "ambiguous")
-        else:
-            unsupported.append(message)
     if location is None:
-        ask("location", "Which city is the outing in?")
-        issues.append("Location is unknown. Add Baltimore to the request or select it in Set preferences.")
+        ask("location", LOCATION_QUESTION)
+        issues.append(LOCATION_QUESTION)
     if people is None:
         ask("people", "How many people are coming? (1–100)")
         issues.append("Group size is unknown. State how many people or set Number of people.")

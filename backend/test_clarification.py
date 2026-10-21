@@ -182,16 +182,36 @@ class ClarificationTests(unittest.TestCase):
         self.assertIn('past', ' '.join(done.issues))
         provider.interpret.assert_not_called()
 
-    def test_invalid_activity_or_unsupported_city_answer_keeps_original(self):
+    def test_invalid_activity_answer_keeps_original(self):
         r = self.initial('an outing in Baltimore for 2 people', activities=[], location='Baltimore', people=2)
         invalid = self.answer(r, {'activities': 'banana'})
         self.assertIsNotNone(invalid.pending)
         done = self.answer(invalid, {'activities': 'museum'})
         self.assertEqual(done.request.activities, ['museum'])
-        r = self.initial('coffee for 2 people', people=2)
-        invalid = self.answer(r, {'location': 'Boston'})
-        self.assertIsNotNone(invalid.pending)
-        self.assertEqual(self.answer(invalid, {'location': 'Baltimore'}).request.people, 2)
+
+    def test_missing_location_is_neutral_and_another_city_reaches_planner(self):
+        text = 'coffee, museum, then coffee for 2 people under $80 each'
+        for uncertainties in ([], ['Location is unknown']):
+            with self.subTest(uncertainties=uncertainties):
+                r = self.initial(text, people=2, activities=['coffee', 'museum', 'coffee'],
+                    budget_per_person=80, currency='USD', uncertainties=uncertainties)
+                self.assertIsNone(r.interpretation.location)
+                self.assertEqual([q.field for q in r.questions], ['location'])
+                self.assertEqual(r.questions[0].question,
+                    'Where would you like to go? Enter a city or location to continue.')
+                self.assertNotIn('Baltimore', ' '.join(r.issues + [q.question for q in r.questions]))
+                done = self.answer(r, {'location': 'Boston'})
+                self.assertFalse(done.issues)
+                self.assertFalse(done.questions)
+                self.assertEqual(done.pending.text, text)
+                self.assertEqual(done.request.location, 'Boston')
+                self.assertEqual(done.request.activities, ['coffee', 'museum', 'coffee'])
+                self.assertEqual((done.request.people, done.request.budget), (2, 80))
+                result = recommend_plans(done.request)
+                self.assertEqual(result.request.location, 'Boston')
+                self.assertFalse(result.plans)
+                self.assertFalse(result.provisionalPlans)
+                self.assertTrue(any(error.code == 'unsupported_location' for error in result.errors))
 
     def test_changed_original_is_new_request_and_calls_provider(self):
         r = self.initial()

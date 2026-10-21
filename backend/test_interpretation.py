@@ -95,7 +95,7 @@ class InterpretationTests(unittest.TestCase):
         self.assertIsNone(r.interpretation.date)
         self.assertIsNone(r.request)
         self.assertIn('Group size is unknown', ' '.join(r.issues))
-        self.assertIn('Location is unknown', ' '.join(r.issues))
+        self.assertIn('Enter a city or location to continue', ' '.join(r.issues))
 
     def test_indirect_suggestions_never_become_explicit_stops(self):
         r = self.run_request('something competitive then cocktails', activities=['something competitive', 'cocktails'],

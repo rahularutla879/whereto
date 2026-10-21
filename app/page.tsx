@@ -135,7 +135,7 @@ export default function Home() {
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferenceState(emptyPreferenceState())}>Reset preferences</button></div>
             <div className="preferences-grid">
-              <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="Baltimore, MD" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
+              <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
               <label><span><CalendarDays size={14} /> Date</span><input type="date" value={preferences.date} onChange={(e) => updatePreference("date", e.target.value)} /><small>Events must match a fictional schedule date</small></label>
               <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
@@ -152,7 +152,7 @@ export default function Home() {
             <div className="preferences-grid">{clarification.questions.map(question => <label key={question.field}>
               <span>{question.question}</span>
               <input aria-label={question.question} type="text" maxLength={question.field === "activities" ? 500 : question.field === "time" ? 150 : 80}
-                value={answers[question.field] ?? ""} placeholder={question.field === "location" ? "e.g. Baltimore" : question.field === "people" ? "e.g. 4" : question.field === "date" ? "e.g. 2026-11-07 or Saturday" : question.field === "activities" ? "e.g. coffee, museum, then coffee" : "e.g. from 6 PM to 10 PM"}
+                value={answers[question.field] ?? ""} placeholder={question.field === "location" ? "City or location" : question.field === "people" ? "e.g. 4" : question.field === "date" ? "e.g. 2026-11-07 or Saturday" : question.field === "activities" ? "e.g. coffee, museum, then coffee" : "e.g. from 6 PM to 10 PM"}
                 onChange={event => setAnswers(previous => ({ ...previous, [question.field]: event.target.value }))} />
             </label>)}</div>
             <div className="planner-actions"><button className="secondary-button" type="button" onClick={cancelClarification}>Cancel follow-up</button>
