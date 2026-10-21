@@ -5,7 +5,7 @@ import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, typ
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
 // selection, scores, schedules, prices and travel all come from Python.
 type Ranked = {
-  candidate: { id: string; venues: DisplayVenue[]; people: number; date: string | null };
+  candidate: { id: string; venues: DisplayVenue[]; people: number; date: string };
   feasibility: "confirmed" | "provisional";
   stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
   costPerPerson: number | null; groupCost: number | null;
@@ -33,7 +33,7 @@ export function adaptRanking(value: unknown): PlannerResult {
       || !Array.isArray(p.legs) || p.legs.length !== p.stops.length - 1
       || ![p.costPerPerson, p.groupCost, p.totalTravel, p.elapsedDuration].every(nullableNumber)
       || !Number.isInteger(p.candidate.people) || p.candidate.people < 1
-      || !(p.candidate.date === null || typeof p.candidate.date === "string")
+      || !(typeof p.candidate.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(p.candidate.date))
       || !p.stops.every((s, i) => s.venue && typeof s.venue.id === "string" && typeof s.venue.name === "string"
         && s.venue.activity === data.request.activities[i] && nullableNumber(s.start) && nullableNumber(s.end)
         && nullableNumber(s.venue.duration) && nullableNumber(s.venue.capacity)
@@ -56,7 +56,7 @@ export function adaptRanking(value: unknown): PlannerResult {
     label: `${copy[i].label} · OPTION ${i + 1}`,
     description: copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
-    travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date ?? "Any day",
+    travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
   }));
   return { plans, location: data.request.location, activities: data.request.activities,

@@ -39,7 +39,14 @@ class AITests(unittest.TestCase):
         request = self.open.call_args.args[0]
         payload = json.loads(request.data)
         self.assertEqual(request.full_url, "http://127.0.0.1:11434/api/chat")
-        self.assertEqual(payload["format"], Interpretation.model_json_schema())
+        expected_schema = Interpretation.model_json_schema()
+        expected_schema["required"].extend(["budget_group", "currency", "travel_total_minutes",
+                                            "travel_leg_minutes", "transport", "cost"])
+        self.assertEqual(payload["format"], expected_schema)
+        self.assertNotIn('"$defs"', payload["messages"][0]["content"])
+        self.assertEqual(result, Interpretation(**extraction()))
+        self.assertIsNone(result.travel_total_minutes)
+        self.assertEqual(result.time_expressions, [])
         self.assertFalse(payload["stream"])
         self.assertFalse(payload["think"])
         self.assertEqual(payload["options"]["temperature"], 0)

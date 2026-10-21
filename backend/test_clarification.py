@@ -31,34 +31,34 @@ class ClarificationTests(unittest.TestCase):
         return response
 
     def test_complete_text_only_and_optional_budget(self):
-        r = self.initial('coffee in Baltimore for 2 people', location='Baltimore', people=2)
+        r = self.initial('coffee in Baltimore for 2 people on 2026-11-07', location='Baltimore', people=2)
         self.assertFalse(r.questions)
         self.assertIsNone(r.request.budget)
-        self.assertIsNone(r.request.date)
+        self.assertEqual(r.request.date, date(2026, 11, 7))
         self.assertTrue(recommend_plans(r.request).provisionalPlans)
 
     def test_absent_optional_model_uncertainty_does_not_trigger_question(self):
-        r = self.initial('coffee in Baltimore for 2 people', location='Baltimore', people=2,
+        r = self.initial('coffee in Baltimore for 2 people on 2026-11-07', location='Baltimore', people=2,
             uncertainties=['No budget specified', 'Experience preference unknown'])
         self.assertFalse(r.issues)
         self.assertFalse(r.questions)
         self.assertIsNotNone(r.request)
 
     def test_stated_ambiguous_optional_constraint_is_not_treated_as_absent(self):
-        r = self.initial('coffee in Baltimore for 2 people under 50 each', location='Baltimore', people=2,
+        r = self.initial('coffee in Baltimore for 2 people under 50 each on 2026-11-07', location='Baltimore', people=2,
             uncertainties=['Budget unknown: currency is unclear'])
         self.assertIsNone(r.request)
         self.assertIn('currency', ' '.join(r.issues))
 
     def test_group_answer_cannot_clear_an_ambiguous_group_budget(self):
-        r = self.initial('coffee in Baltimore with group budget under 50 total', location='Baltimore',
+        r = self.initial('coffee in Baltimore with group budget under 50 total on 2026-11-07', location='Baltimore',
             uncertainties=['Group budget currency is unclear'])
         done = self.answer(r, {'people': '4'})
         self.assertIsNone(done.request)
         self.assertIn('currency', ' '.join(done.issues))
 
     def test_activity_answer_keeps_original_stop_time_ambiguity(self):
-        r = self.initial('something fun then coffee at 7 PM in Baltimore for 2 people',
+        r = self.initial('something fun then coffee at 7 PM in Baltimore for 2 people on 2026-11-07',
             activities=['something fun', 'coffee'], location='Baltimore', people=2)
         done = self.answer(r, {'activities': 'museum'})
         self.assertIsNone(done.request)
@@ -67,7 +67,7 @@ class ClarificationTests(unittest.TestCase):
         self.assertEqual(complete.request.activities, ['museum', 'coffee'])
 
     def test_missing_city(self):
-        r = self.initial('coffee for 2 people', people=2)
+        r = self.initial('coffee for 2 people on 2026-11-07', people=2)
         self.assertEqual([q.field for q in r.questions], ['location'])
         done = self.answer(r, {'location': 'Baltimore'})
         self.assertFalse(done.issues)
@@ -75,17 +75,17 @@ class ClarificationTests(unittest.TestCase):
         self.assertEqual(done.request.location, 'Baltimore')
 
     def test_missing_group_and_invalid_answers_remain_recoverable(self):
-        r = self.initial('coffee in Baltimore', location='Baltimore')
+        r = self.initial('coffee in Baltimore on 2026-11-07', location='Baltimore')
         for invalid in ['many', '0', '101', '2.5']:
             r = self.answer(r, {'people': invalid})
             self.assertIsNone(r.request)
             self.assertEqual(r.questions[0].field, 'people')
-            self.assertEqual(r.pending.text, 'coffee in Baltimore')
+            self.assertEqual(r.pending.text, 'coffee in Baltimore on 2026-11-07')
         done = self.answer(r, {'people': '6 people'})
         self.assertEqual(done.request.people, 6)
 
     def test_simple_word_answer_needs_no_model(self):
-        r = self.initial('coffee in Baltimore', location='Baltimore')
+        r = self.initial('coffee in Baltimore on 2026-11-07', location='Baltimore')
         self.assertEqual(self.answer(r, {'people': 'four people'}).request.people, 4)
 
     def test_events_require_date_and_no_matching_date_is_feasibility(self):
@@ -128,7 +128,7 @@ class ClarificationTests(unittest.TestCase):
         self.assertEqual(done.pending.text, text)
 
     def test_group_ambiguity_does_not_ask_for_activities(self):
-        r = self.initial('coffee in Baltimore for four or six people', location='Baltimore',
+        r = self.initial('coffee in Baltimore for four or six people on 2026-11-07', location='Baltimore',
             uncertainties=['Group size is ambiguous'])
         self.assertEqual([q.field for q in r.questions], ['people'])
         self.assertEqual(self.answer(r, {'people': '4'}).request.activities, ['coffee'])
@@ -142,7 +142,7 @@ class ClarificationTests(unittest.TestCase):
             ('Baltimore', 3, date(2026, 11, 7), 0, 0, 'balanced'))
 
     def test_unclear_choice_keeps_previously_chosen_stop(self):
-        r = self.initial('something competitive then cocktails in Baltimore for 6 people',
+        r = self.initial('something competitive then cocktails in Baltimore for 6 people on 2026-11-07',
             activities=['something competitive', 'cocktails'], location='Baltimore', people=6,
             preferences=['competitive'], suggested_activities=['bowling'])
         self.assertEqual([q.field for q in r.questions], ['activities'])
@@ -151,10 +151,10 @@ class ClarificationTests(unittest.TestCase):
         self.assertEqual(done.request.activities, ['bowling', 'drinks'])
 
     def test_activity_alternatives_and_no_activity(self):
-        r = self.initial('coffee or museum in Baltimore for 2 people', activities=['coffee', 'museum'], location='Baltimore', people=2)
+        r = self.initial('coffee or museum in Baltimore for 2 people on 2026-11-07', activities=['coffee', 'museum'], location='Baltimore', people=2)
         done = self.answer(r, {'activities': 'coffee, museum, then coffee'})
         self.assertEqual(done.request.activities, ['coffee', 'museum', 'coffee'])
-        r = self.initial('an outing in Baltimore for 2 people', activities=[], location='Baltimore', people=2)
+        r = self.initial('an outing in Baltimore for 2 people on 2026-11-07', activities=[], location='Baltimore', people=2)
         self.assertEqual(self.answer(r, {'activities': 'museum'}).request.activities, ['museum'])
 
     def test_unsupported_does_not_start_question_loop(self):
@@ -183,14 +183,14 @@ class ClarificationTests(unittest.TestCase):
         provider.interpret.assert_not_called()
 
     def test_invalid_activity_answer_keeps_original(self):
-        r = self.initial('an outing in Baltimore for 2 people', activities=[], location='Baltimore', people=2)
+        r = self.initial('an outing in Baltimore for 2 people on 2026-11-07', activities=[], location='Baltimore', people=2)
         invalid = self.answer(r, {'activities': 'banana'})
         self.assertIsNotNone(invalid.pending)
         done = self.answer(invalid, {'activities': 'museum'})
         self.assertEqual(done.request.activities, ['museum'])
 
     def test_missing_location_is_neutral_and_another_city_reaches_planner(self):
-        text = 'coffee, museum, then coffee for 2 people under $80 each'
+        text = 'coffee, museum, then coffee for 2 people under $80 each on 2026-11-07'
         for uncertainties in ([], ['Location is unknown']):
             with self.subTest(uncertainties=uncertainties):
                 r = self.initial(text, people=2, activities=['coffee', 'museum', 'coffee'],
@@ -218,7 +218,7 @@ class ClarificationTests(unittest.TestCase):
         provider = Mock()
         provider.interpret.return_value = Interpretation(activities=['museum'], location='Baltimore', people=2,
             date=None, budget_per_person=None, preferences=[])
-        done = interpret_request(InterpretationInput(text='museum in Baltimore for 2 people', pending=r.pending), provider, now=NOW)
+        done = interpret_request(InterpretationInput(text='museum in Baltimore for 2 people on 2026-11-07', pending=r.pending), provider, now=NOW)
         provider.interpret.assert_called_once()
         self.assertEqual(done.request.activities, ['museum'])
 

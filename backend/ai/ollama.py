@@ -28,11 +28,16 @@ people: numeric stated group size only (a couple=2); otherwise null.
 budget_per_person / budget_group: explicit numeric caps only, zero is valid.
 Affordable/cheap implies cost=budget, not a numeric cap. Ambiguous budget scope
 or currency goes in uncertainties. Dollar sign means USD in this US prototype;
+Whenever a budget is stated, include currency (USD for $); never omit it.
 other explicit currencies must be preserved, never converted. currency is null
 when no currency is stated. Do not invent budgets or group sizes.
 travel_total_minutes and travel_leg_minutes: stated caps only, convert hours to
-minutes. transport: walking/cycling/driving/transit only if stated.
+minutes. "total travel" MUST use travel_total_minutes, never travel_leg_minutes.
+transport: walking/cycling/driving/transit only if stated.
 cost: budget/balanced/experience only if stated/implied by cost/quality wording.
+Budget-friendly/affordable means cost=budget; best experience means cost=experience.
+Always include budget_group: use the stated group-total cap EVEN WHEN a per-person
+cap is also stated; use null only when no group-total cap is stated.
 location: stated city only; do not assume Baltimore.
 date: always null. Python alone validates and normalizes calendar dates.
 date_expressions: copy ALL original date wording VERBATIM, including explicit ISO
@@ -46,19 +51,25 @@ date_expressions. Never calculate dates or clock minutes. start_time/end_time:
 always null; Python resolves original wording deterministically.
 Ambiguous times or stop-specific times go in uncertainties; never discard them.
 No date, time, location, people or money stated means null, never a default.
-Return all schema fields, with empty lists for absent phrases/uncertainties.
+Always include the required schema fields. Include optional fields whenever stated;
+omit optional null/empty fields when absent (schema defaults restore them).
+Return one compact JSON object without indentation or unnecessary whitespace.
 """
 
 def example():
     return Interpretation(activities=[], people=None, budget_per_person=None, date=None,
-                          location=None, preferences=[]).model_dump(mode="json")
+                          location=None, preferences=[]).model_dump(mode="json", exclude={
+                              "suggested_activities", "date_expressions", "time_expressions",
+                              "start_time", "end_time", "uncertainties"})
 
 
-# Full examples teach nulls and avoid inventing uncertainty for clear requests.
+# Examples retain unknown core facts and every explicit planning constraint.
 EXAMPLES = [
-    ("Four people want bowling then dinner in Baltimore under $60 each.",
+    ("Four people want bowling then dinner in Baltimore under $60 each and $200 total, at most 15 minutes total travel, driving. Budget-friendly.",
      {**example(), "activities": ["bowling", "dinner"], "people": 4,
-      "location": "Baltimore", "budget_per_person": 60, "currency": "USD"}),
+      "location": "Baltimore", "budget_per_person": 60, "currency": "USD",
+      "budget_group": 200, "travel_total_minutes": 15, "transport": "driving",
+      "cost": "budget", "preferences": ["Budget-friendly"]}),
     ("Coffee for two people in Baltimore on November 7, 2026 after 6 PM before 10 PM.",
      {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
       "date_expressions": ["November 7, 2026"], "time_expressions": ["after 6 PM", "before 10 PM"]}),
@@ -89,10 +100,14 @@ class OllamaProvider:
         if not isinstance(text, str) or not text.strip():
             raise ValueError("Provide a nonempty outing request.")
         schema = Interpretation.model_json_schema()
+        # Always visit scalar planning constraints; only absent phrase arrays and
+        # unused AI-computed clocks may be omitted. Defaults restore those fields.
+        schema["required"] = [*schema["required"], "budget_group", "currency",
+                              "travel_total_minutes", "travel_leg_minutes", "transport", "cost"]
         payload = {
             "model": self.settings.model,
             "messages": [
-                {"role": "system", "content": SYSTEM_PROMPT + json.dumps(schema)},
+                {"role": "system", "content": SYSTEM_PROMPT},
                 *[message for text_example, result_example in EXAMPLES for message in (
                     {"role": "user", "content": text_example},
                     {"role": "assistant", "content": json.dumps(result_example)},

@@ -282,10 +282,16 @@ It uses a fixed aware reference clock and checks 13 date/time requests, original
 
 ## Follow-up questions (Task 33)
 
-Type your outing normally; Set preferences remains optional. If an essential detail is missing, answer the short question below the request and click **Continue planning**. When both city and group size are missing, supply them together. For example, `Coffee` asks for a city and number of people; `Baltimore` and `4` are enough to continue. You do not need to repeat “Coffee”.
+Type your outing normally; Set preferences remains optional. If an essential detail is missing, answer the short question below the request and click **Continue planning**. When both city and group size are missing, supply them together. For example, `Coffee` asks for a city, number of people and day; `Baltimore`, `4` and `Tomorrow` are enough to continue. You do not need to repeat “Coffee”.
 
-Scheduled events need a date. Weekend requests need Saturday, Sunday or an exact date. Unclear activities and clock windows may need a specific choice. Budget, travel caps, spending preferences and an exact date for ordinary flexible-day venues are optional; leaving them out does not trigger a question. Unsupported cities/activities, overnight outings and unavailable event dates get explanations without invented replacements.
+Every outing needs a specific date before itineraries can be generated. If it is missing, answer “What day are you planning to go?” with Today, Tomorrow, This Saturday, Next Friday or a supported exact date. Weekend requests need Saturday, Sunday or an exact date. Unclear activities and clock windows may need a specific choice. Budget, travel caps, spending preferences and an exact start time remain optional; leaving them out does not trigger a question. Unsupported cities/activities, overnight outings and unavailable event dates get explanations without invented replacements.
 
 Your original text, ordered/repeated stops, resolved date context, explicit caps and preferences are kept while you answer. Follow-up answers use deterministic validation without another model call. Settings you deliberately change still win; automatically displayed values do not become manual settings. Invalid answers and service errors keep the request available to correct or retry. Edit the original text or use **Try an example** to replace the outing; **Cancel follow-up** clears the pending clarification. Refreshing or closing the page clears this temporary state.
 
 Follow-up fields accept simple city names, numbers (also one–twenty), supported activity names and the existing date/time wording. More complex corrections, currencies or constraints can require editing the original request. All planning still uses the same fictional catalog and Python engine.
+
+### Required dates and response speed — Task 33 follow-up
+
+A date in your original words or deliberately selected in Set preferences is used without another question. Missing city, group and date details are collected together; simple answers resume the original outing without another model call. A date does not verify the fictional venues’ hours, availability, prices or travel. There is no flexible-date comparison feature.
+
+The measured bottleneck was local AI processing, rather than itinerary calculations. The same model now receives the schema once and can omit absent optional JSON fields; validation restores their existing defaults and preserves stated constraints. Measured before/after timings are recorded in HANDOVER.md; latency varies with device/model state. Date/ranking computation is milliseconds, and follow-up completion remains fast because it does not call the model again. No background warming service or new model is required.

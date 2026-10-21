@@ -161,6 +161,11 @@ class OutingRequest(ContractModel):
         return self
 
 
+class PlanningRequest(OutingRequest):
+    """Public/final planning requires a date; partial candidate analysis may not."""
+    date: OutingDate = Field(...)
+
+
 class TimeWindow(ContractModel):
     """Single-day local window; null date means a daily recurring window.
 
@@ -481,6 +486,8 @@ class RankingResult(ContractModel):
         selected = self.plans + self.provisionalPlans
         if len(selected) > 3:
             raise ValueError("At most three total options")
+        if selected and self.request.date is None:
+            raise ValueError("Final itinerary options require an exact outing date")
         identities = [tuple(v.id for v in p.candidate.venues) for p in selected]
         if len(set(identities)) != len(identities):
             raise ValueError("Options must have distinct ordered venues")

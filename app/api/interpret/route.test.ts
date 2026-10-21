@@ -11,7 +11,7 @@ import { EMPTY_PREFERENCES } from "../../../lib/planner";
 
 test("raw text → interpretation proxy → Python provider → validated request → Python engine → cards", async () => {
   let modelCalls = 0;
-  let requestText = "coffee, museum, then coffee in Baltimore for 2 people under $30 each";
+  let requestText = "coffee, museum, then coffee in Baltimore for 2 people under $30 each on 2026-11-07";
   let modelStatus = 200;
   let modelContent = JSON.stringify({ activities: ["coffee", "museum", "coffee"], people: 2,
     location: "Baltimore", date: null, budget_per_person: 30, currency: "USD", preferences: [] });
@@ -124,6 +124,26 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(resumed.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
     assert.equal(modelCalls, startCalls + 1);
     assert.equal(completed, 1);
+    assert.equal(retained, null);
+    // All ordinary outings need a date; no planning call before it is resolved.
+    requestText = "coffee, museum, then coffee in Baltimore for 2 people under $80 each";
+    modelContent = JSON.stringify({ activities: ["coffee", "museum", "coffee"], people: 2,
+      location: "Baltimore", date: null, budget_per_person: 80, currency: "USD", preferences: [] });
+    paths.length = 0;
+    const beforeDateCalls = modelCalls;
+    const needsDate = await continueRun();
+    assert.equal(needsDate.plans.length, 0);
+    assert.match(needsDate.message, /What day are you planning to go/);
+    assert.deepEqual(paths, ["/api/interpret"]);
+    assert.equal(modelCalls, beforeDateCalls + 1);
+    const ambiguousDay = await continueRun({ date: "this weekend" });
+    assert.equal(ambiguousDay.plans.length, 0);
+    assert.match(ambiguousDay.message, /Saturday or Sunday/);
+    const dated = await continueRun({ date: "Tomorrow" });
+    assert.equal(dated.plans.length, 3);
+    assert.ok(dated.plans.every(p => p.date === tomorrow && p.price! <= 80));
+    assert.deepEqual(dated.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
+    assert.equal(modelCalls, beforeDateCalls + 1);
     assert.equal(retained, null);
     modelContent = "{}";
     paths.length = 0;

@@ -3,7 +3,7 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from backend.models import OutingRequest, RankingResult
+from backend.models import PlanningRequest, RankingResult
 from backend.ranking import recommend_plans
 from backend.ai import AIError
 from backend.interpretation import InterpretationInput, InterpretationResult, interpret_request
@@ -31,7 +31,7 @@ async def invalid_request(request: Request, exc: RequestValidationError):
 
 
 @app.post("/api/plans/generate", response_model=RankingResult)
-def generate_plan(request: OutingRequest) -> RankingResult:
+def generate_plan(request: PlanningRequest) -> RankingResult:
     return recommend_plans(request)
 
 

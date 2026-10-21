@@ -41,7 +41,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
     const run = (text: string, prefs = {}) => generateOuting(text, { ...EMPTY_PREFERENCES, ...prefs }, context, send);
     // normal request preserves returned Python IDs, order, totals, times and quality
     {
-      const r = await run("Bowling, drinks and a movie in Baltimore");
+      const r = await run("Bowling, drinks and a movie in Baltimore on 2026-11-07");
       assert.equal(r.plans.length, 3);
       const p = r.plans[0];
       assert.match(p.id, /^candidate-/);
@@ -53,24 +53,24 @@ test("historical resolved request → Next.js proxy → real Python planner → 
       assert.equal(p.feasibility, "provisional");
       assert.match(p.issues.join(" "), /Opening hours/);
       assert.equal(p.venues[0].dataQuality?.price, "fictional");
-      const raw = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify(resolveOuting("Bowling, drinks and a movie in Baltimore", EMPTY_PREFERENCES, context).payload) }));
+      const raw = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify(resolveOuting("Bowling, drinks and a movie in Baltimore on 2026-11-07", EMPTY_PREFERENCES, context).payload) }));
       assert.equal(raw.headers.get("cache-control"), "no-store");
       assert.deepEqual(adaptRanking(await raw.json()).plans, r.plans);
     }
     // different activities and all three preferences affect Python results
     {
       const ids = [];
-      for (const cost of ["budget", "balanced", "experience"]) ids.push((await run("Coffee", { cost })).plans[0].venues[0].id);
+      for (const cost of ["budget", "balanced", "experience"]) ids.push((await run("Coffee on 2026-11-07", { cost })).plans[0].venues[0].id);
       assert.deepEqual(ids, ["coffee-0", "coffee-1", "coffee-2"]);
-      assert.equal((await run("Museum")).plans[0].venues[0].activity, "museum");
+      assert.equal((await run("Museum on 2026-11-07")).plans[0].venues[0].activity, "museum");
     }
     // manual overrides, hard budget, travel, capacity and infeasible messages
     {
-      const r = await run("Dinner and karaoke for 2 people", { budget: "25", travel: "5", people: "4" });
+      const r = await run("Dinner and karaoke for 2 people on 2026-11-07", { budget: "25", travel: "5", people: "4" });
       assert.ok(r.plans.length);
       assert.ok(r.plans.every(p => p.price! <= 25 && p.travel! <= 5 && p.people === 4 && p.stops[0].start! >= 1020));
       for (const prefs of [{ budget: "0" }, { travel: "0" }, { people: "21" }]) {
-        const empty = await run("Dinner and karaoke", prefs);
+        const empty = await run("Dinner and karaoke on 2026-11-07", prefs);
         assert.equal(empty.plans.length, 0);
         assert.match(empty.message, /No candidate|cannot|exceed/);
       }
@@ -133,7 +133,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
     }
     // unknown price, times and travel remain unknown in the card adapter
     {
-      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"]}' }));
+      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"],"date":"2026-11-07"}' }));
       const raw = await response.json();
       const p = raw.provisionalPlans[0];
       p.costPerPerson = p.groupCost = p.elapsedDuration = null;
@@ -145,12 +145,16 @@ test("historical resolved request → Next.js proxy → real Python planner → 
       assert.equal(display.groupCost, null);
       assert.equal(display.stops[0].end, null);
       assert.match(display.issues.join(" "), /Price is unknown/);
+      for (const undated of [null, "Any day", ""]) {
+        raw.provisionalPlans[0].candidate.date = undated;
+        assert.throws(() => adaptRanking(raw), /Invalid itinerary response/);
+      }
     }
     backend.kill();
     await once(backend, "exit");
     // stopped Python produces an explicit error and no legacy fallback
     {
-      const r = await run("Coffee");
+      const r = await run("Coffee on 2026-11-07");
       assert.equal(r.plans.length, 0);
       assert.match(r.message, /Python planner unavailable/);
     }
@@ -179,7 +183,7 @@ test("proxy rejects failed, malformed and stalled upstream responses", async () 
   try {
     for (const [nextStatus, nextBody] of [[500, '{}'], [200, 'not json'], [200, '{}'], [422, '{}']] as const) {
       status = nextStatus; body = nextBody;
-      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"]}' }));
+      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"],"date":"2026-11-07"}' }));
       assert.equal(response.status, 503);
       assert.equal((await response.json()).code, "backend_unavailable");
     }

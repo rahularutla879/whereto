@@ -239,6 +239,10 @@ def _select(ranked: list[RankedItinerary], count: int) -> list[RankedItinerary]:
 def rank_candidates(request: OutingRequest, candidates: Iterable[CandidateItinerary], *,
                     price_provider: PriceProvider = mock_price,
                     travel_provider: TravelProvider = simulated_travel) -> RankingResult:
+    if request.date is None:
+        return RankingResult(request=request, errors=[PlanningError(code="missing_date", field="date",
+            message="What day are you planning to go?")], message="An exact outing date is required before planning.",
+            notes=["The catalog is fictional; a date does not establish real availability."])
     evaluated = [evaluate_candidate(request, c, price_provider=price_provider,
                                     travel_provider=travel_provider) for c in candidates]
     reasons = Counter(i.code for p in evaluated for i in
@@ -268,6 +272,8 @@ def rank_candidates(request: OutingRequest, candidates: Iterable[CandidateItiner
 
 def recommend_plans(request: OutingRequest, *, price_provider: PriceProvider = mock_price,
                     travel_provider: TravelProvider = simulated_travel) -> RankingResult:
+    if request.date is None:
+        return rank_candidates(request, (), price_provider=price_provider, travel_provider=travel_provider)
     generated = generate_candidates(request)
     if generated.errors:
         return RankingResult(request=request, errors=generated.errors, message=generated.message,

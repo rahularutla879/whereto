@@ -49,7 +49,7 @@ class PlanningApiTests(unittest.TestCase):
             return json.load(response)
 
     def options(self, payload):
-        data = self.post(payload)
+        data = self.post({"date": "2026-11-07", **payload})
         return data, data["plans"] + data["provisionalPlans"]
 
     def test_multi_activity_keeps_python_evidence_and_order(self):
@@ -100,7 +100,7 @@ class PlanningApiTests(unittest.TestCase):
         records = [v.model_copy(update={"price": None, "duration": None})
                    for v in get_mock_venues("coffee")]
         with patch("backend.planner.load_mock_venues", return_value=records):
-            result = generate_plan(OutingRequest(activities=["coffee"]))
+            result = generate_plan(OutingRequest(activities=["coffee"], date="2026-11-07"))
         self.assertFalse(result.plans)
         self.assertTrue(result.provisionalPlans)
         for plan in result.provisionalPlans:
@@ -110,7 +110,7 @@ class PlanningApiTests(unittest.TestCase):
             self.assertTrue({"unknown_price", "unknown_duration"} <= {i.code for i in plan.issues})
 
     def test_invalid_and_unsupported_requests(self):
-        for payload in ({}, {"activities": []}, {"activities": ["coffee"], "people": 0},
+        for payload in ({}, {"activities": ["coffee"]}, {"activities": ["coffee"], "date": None}, {"activities": []}, {"activities": ["coffee"], "people": 0},
                         {"activities": ["coffee"], "budget": -1}, {"activities": ["concert"]},
                         {"activities": ["concert"], "date": "2026-02-30"},
                         {"activities": ["coffee"], "unexpected": True}):

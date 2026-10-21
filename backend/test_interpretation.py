@@ -3,6 +3,7 @@ from datetime import datetime, timezone, date
 from unittest.mock import Mock, patch
 
 from backend.ai import AIError, Interpretation
+from backend.date_resolution import DATE_WORDING
 from backend.interpretation import InterpretationInput, interpret_request
 from backend.main import interpret_outing
 from backend.ranking import recommend_plans
@@ -22,6 +23,8 @@ class InterpretationTests(unittest.TestCase):
             text += " for 2 people"
         if fields["location"] == "Baltimore":
             text += " in Baltimore"
+        if not DATE_WORDING.search(text) and fields["activities"] != ["concert"]:
+            text += " on 2026-11-07"
         provider = Mock()
         provider.interpret.return_value = Interpretation(**fields)
         value = InterpretationInput(text=text, preferences=manual or {})
@@ -175,7 +178,7 @@ class InterpretationTests(unittest.TestCase):
     def test_endpoint_success_does_not_call_engine(self):
         with patch('backend.interpretation.create_provider') as factory, patch('backend.main.recommend_plans') as engine:
             factory.return_value.interpret.return_value = extraction()
-            r = interpret_outing(InterpretationInput(text='coffee for 2 people in Baltimore'))
+            r = interpret_outing(InterpretationInput(text='coffee for 2 people in Baltimore on 2026-11-07'))
         self.assertIsNotNone(r.request)
         engine.assert_not_called()
 

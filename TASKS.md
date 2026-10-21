@@ -174,3 +174,13 @@ This was a Task 32 follow-up correction before Task 33.
 - [x] Review complete diff, update continuity documentation and push tested changes to the existing private repository, preserving release tags.
 
 Task 33 is complete. Stop here; Task 34 has not started.
+
+### Task 33 focused follow-up — mandatory date and response speed
+
+- [x] Measure the real Ollama/FastAPI/production Next.js pipeline cold and warm for complete, missing city/group/date and model-free follow-up scenarios.
+- [x] Reduce redundant model prompt/output work while retaining structured validation, semantic extraction and provider replacement.
+- [x] Require a valid date for every published outing, reuse natural-language date answers, and prevent candidate work while clarification is pending.
+- [x] Preserve manual precedence, auto display, repeated stops, constraints, neutral location questions, cancellation/retry and duplicate protection.
+- [x] Pass 149 backend/87 frontend tests, lint, TypeScript, production build and real-browser acceptance scenarios; review diff and back up tested work.
+
+Task 33 remains complete with the updated policy. Task 34 has not started.

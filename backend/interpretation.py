@@ -11,7 +11,7 @@ from pydantic import AwareDatetime, Field, ValidationError
 from backend.date_resolution import DATE_WORDING, TIME_WORDING, resolve_datetime
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
-                            OutingRequest, EVENT_ACTIVITIES)
+                            PlanningRequest)
 
 
 # Exact phrase normalization, not a fallback text interpreter. Unknown phrases
@@ -33,7 +33,7 @@ ALIASES = {
     "shopping": "shopping", "thrifting": "shopping", "zoo": "zoo",
     "hiking": "hiking", "hike": "hiking", "trail": "hiking", "picnic": "picnic",
     "skating": "skating", "ice skating": "skating", "roller skating": "skating",
-    "baseball": "baseball", "baseball game": "baseball", "basketball": "basketball", "basketball game": "basketball",
+    "baseball": "baseball", "baseball game": "baseball", "watch a baseball game": "baseball", "basketball": "basketball", "basketball game": "basketball",
     "football": "football", "football game": "football", "soccer": "soccer", "soccer game": "soccer", "soccer match": "soccer",
     "hockey": "hockey", "hockey game": "hockey", "sports event": "sports", "sporting event": "sports", "sports game": "sports",
     "concert": "concert", "live music": "concert", "gig": "concert",
@@ -91,7 +91,7 @@ class InterpretationInput(ContractModel):
 
 class InterpretationResult(ContractModel):
     interpretation: Interpretation
-    request: OutingRequest | None
+    request: PlanningRequest | None
     notes: list[str]
     issues: list[str]
     questions: list[ClarificationQuestion] = Field(default_factory=list)
@@ -155,6 +155,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             setattr(ai, field, None)
             if field == "budget_group" or not manual.budget.strip():
                 grounding_issues.append("AI returned a budget without numeric evidence. State the amount and currency explicitly.")
+    # Existing catalog policy: an unqualified $ amount denotes USD. Restore
+    # this explicit source evidence after numeric grounding, never convert an
+    # explicitly different/ambiguous currency or invent a budget.
+    other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)
+    if (ai.currency is None and (ai.budget_per_person is not None or ai.budget_group is not None)
+            and re.search(r"\$\s*\d", raw) and not other_currency):
+        ai.currency = "USD"
     ai.preferences = [phrase for phrase in ai.preferences if phrase.casefold() in raw.casefold()]
     ai.date_expressions = [phrase for phrase in ai.date_expressions if phrase.casefold() in raw.casefold()]
     ai.time_expressions = [phrase for phrase in ai.time_expressions if phrase.casefold() in raw.casefold()]
@@ -331,9 +338,10 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     budget = chosen("budget", ai.budget_per_person)
     travel = chosen("travel", ai.travel_total_minutes)
     cost = manual.cost if manual.costExplicit or manual.cost != CostPreference.balanced else ai.cost or CostPreference.balanced
-    if any(activity in EVENT_ACTIVITIES for activity in activities) and date is None and not dates.issues:
-        issues.append("Scheduled events require an exact date.")
-        ask("date", "What date is the event outing? Enter YYYY-MM-DD or a specific day.")
+    if date is None and (not dates.issues or (not dates.date_expressions and not manual.date.strip())):
+        questions = [q for q in questions if q.field != "date"]
+        issues.append("What day are you planning to go?")
+        ask("date", "What day are you planning to go?")
     if location is None:
         ask("location", LOCATION_QUESTION)
         issues.append(LOCATION_QUESTION)
@@ -371,7 +379,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     resolved = None
     if not issues:
         try:
-            resolved = OutingRequest(
+            resolved = PlanningRequest(
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,

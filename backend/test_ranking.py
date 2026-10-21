@@ -43,14 +43,14 @@ class RankingTests(unittest.TestCase):
                             (dict(budget=9), "violated"), (dict(groupBudget=39), "violated"),
                             (dict(budget=10, groupBudget=0), "violated")):
             with self.subTest(args=args):
-                p = evaluate(OutingRequest(activities=["coffee"], **args), [v])
+                p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"], **args), [v])
                 self.assertEqual(p.feasibility, state)
                 self.assertEqual((p.costPerPerson, p.groupCost), (10, 40))
-        p = evaluate(OutingRequest(activities=["art"], budget=0), [ordinary("art", price=0.0)])
+        p = evaluate(OutingRequest(date="2026-11-07", activities=["art"], budget=0), [ordinary("art", price=0.0)])
         self.assertEqual(p.feasibility, "confirmed")
 
     def test_decimal_budget_boundary(self):
-        req = OutingRequest(activities=["coffee", "museum"], budget=0.3, groupBudget=1.2)
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"], budget=0.3, groupBudget=1.2)
         p = evaluate(req, [ordinary(price=0.1), ordinary("museum", price=0.2)])
         self.assertEqual(p.feasibility, "confirmed")
         self.assertEqual(p.costPerPerson, 0.3)
@@ -60,22 +60,22 @@ class RankingTests(unittest.TestCase):
         for args, state in ((dict(travel=10, maxLegTravel=5), "confirmed"),
                             (dict(travel=9), "violated"), (dict(maxLegTravel=4), "violated"),
                             (dict(travel=0), "violated")):
-            p = evaluate(OutingRequest(activities=[v.activity for v in venues], **args), venues)
+            p = evaluate(OutingRequest(date="2026-11-07", activities=[v.activity for v in venues], **args), venues)
             self.assertEqual(p.feasibility, state)
             self.assertEqual(p.totalTravel, 10)
             self.assertEqual([q.minutes for q in p.legs], [5, 5])
             self.assertTrue(all(q.status == "fictional" and "Fictional" in q.source for q in p.legs))
-        req = OutingRequest(activities=["coffee"], travel=0, maxLegTravel=0)
+        req = OutingRequest(date="2026-11-07", activities=["coffee"], travel=0, maxLegTravel=0)
         self.assertEqual(evaluate(req, venues[:1]).feasibility, "confirmed")
 
     def test_capacity_boundary_and_missing_capacity(self):
         for capacity, state in ((4, "confirmed"), (3, "violated"), (None, "provisional")):
-            p = evaluate(OutingRequest(activities=["coffee"]), [ordinary(capacity=capacity)])
+            p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"]), [ordinary(capacity=capacity)])
             self.assertEqual(p.feasibility, state)
-        self.assertFalse(recommend_plans(OutingRequest(activities=["coffee"], people=21)).plans)
+        self.assertFalse(recommend_plans(OutingRequest(date="2026-11-07", activities=["coffee"], people=21)).plans)
 
     def test_opening_hours_waiting_closure_and_exact_finish(self):
-        req = OutingRequest(activities=["coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee"])
         for windows, state, start in (([TimeWindow(start=720, end=750)], "confirmed", 720),
                                       ([TimeWindow(start=720, end=749)], "violated", 600),
                                       ([], "violated", 600), (None, "provisional", 600)):
@@ -100,7 +100,7 @@ class RankingTests(unittest.TestCase):
             p = evaluate(req, [v.model_copy(update={"availabilityWindows": windows})])
             self.assertEqual(p.feasibility, state)
         # Known closure is honored even without requireAvailability.
-        self.assertEqual(evaluate(OutingRequest(activities=["coffee"]),
+        self.assertEqual(evaluate(OutingRequest(date="2026-11-07", activities=["coffee"]),
                                   [ordinary(availabilityWindows=[])]).feasibility, "violated")
 
     def test_fixed_events_travel_conflict_and_waiting(self):
@@ -122,20 +122,20 @@ class RankingTests(unittest.TestCase):
         self.assertIn("event_conflict", self.codes(p))
 
     def test_dinner_and_explicit_start_end_and_midnight(self):
-        req = OutingRequest(activities=["food"], dinner=True)
+        req = OutingRequest(date="2026-11-07", activities=["food"], dinner=True)
         p = evaluate(req, [ordinary("food")])
         self.assertEqual(p.stops[0].start, 1020)
-        p = evaluate(OutingRequest(activities=["coffee"], startTime=1410), [ordinary(duration=30)])
+        p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"], startTime=1410), [ordinary(duration=30)])
         self.assertEqual(p.stops[0].end, 1440)
         self.assertEqual(p.feasibility, "confirmed")
-        p = evaluate(OutingRequest(activities=["coffee"], startTime=1411), [ordinary(duration=30)])
+        p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"], startTime=1411), [ordinary(duration=30)])
         self.assertEqual(p.feasibility, "violated")
         req = OutingRequest(activities=["food", "baseball"], date="2026-11-07", dinner=True)
         p = evaluate(req, [ordinary("food"), get_mock_venues("baseball", event_date=req.date)[0]])
         self.assertIn("event_conflict", self.codes(p))
 
     def test_unknown_cost_duration_travel_and_lower_bound_violations(self):
-        req = OutingRequest(activities=["coffee", "museum"], budget=1, travel=0)
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"], budget=1, travel=0)
         p = evaluate(req, [ordinary(price=None, duration=None, zone=None), ordinary("museum")])
         self.assertIsNone(p.costPerPerson)
         self.assertIsNone(p.groupCost)
@@ -144,7 +144,7 @@ class RankingTests(unittest.TestCase):
         self.assertIsNone(p.elapsedDuration)
         self.assertIn("budget_exceeded", self.codes(p))  # Known subtotal already too high.
         self.assertTrue({"unknown_price", "unknown_duration", "unknown_travel"} <= self.codes(p))
-        p = evaluate(OutingRequest(activities=["coffee"]), [ordinary(duration=None)])
+        p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"]), [ordinary(duration=None)])
         self.assertEqual(p.feasibility, "provisional")
         self.assertIsNone(p.stops[0].end)
 
@@ -157,7 +157,7 @@ class RankingTests(unittest.TestCase):
         self.assertIn("unknown_availability", self.codes(p))
 
     def test_request_order_and_context_mismatch_rejected(self):
-        req = OutingRequest(activities=["coffee", "museum"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"])
         c = candidate(req, [ordinary(), ordinary("museum")])
         for changed in (req.model_copy(update={"activities": list(reversed(req.activities))}),
                         req.model_copy(update={"people": 5}),
@@ -166,7 +166,7 @@ class RankingTests(unittest.TestCase):
         self.assertEqual([s.venue.activity for s in evaluate_candidate(req, c).stops], req.activities)
 
     def test_independent_ranking_checks_catalog_location(self):
-        req = OutingRequest(activities=["coffee"], location="Boston")
+        req = OutingRequest(date="2026-11-07", activities=["coffee"], location="Boston")
         result = rank_candidates(req, [candidate(req, [ordinary()])])
         self.assertFalse(result.plans + result.provisionalPlans)
         self.assertIn("unsupported_location", result.rejectionReasons)
@@ -175,18 +175,18 @@ class RankingTests(unittest.TestCase):
         records = [ordinary(tier=i) for i in range(3)]
         first = {}
         for mode in ("budget", "balanced", "experience"):
-            req = OutingRequest(activities=["coffee"], cost=mode)
+            req = OutingRequest(date="2026-11-07", activities=["coffee"], cost=mode)
             result = rank_candidates(req, [candidate(req, [v]) for v in records])
             first[mode] = result.plans[0].candidate.venues[0].experience
             self.assertTrue(all(0 <= n <= 1 for p in result.plans for n in p.components.values()))
             self.assertTrue(all(p.explanations for p in result.plans))
         self.assertEqual(first, {"budget": 1, "balanced": 2, "experience": 3})
-        req = OutingRequest(activities=["coffee"], cost="experience", budget=records[0].price)
+        req = OutingRequest(date="2026-11-07", activities=["coffee"], cost="experience", budget=records[0].price)
         result = rank_candidates(req, [candidate(req, [v]) for v in records])
         self.assertTrue(all(p.costPerPerson <= req.budget for p in result.plans))
 
     def test_stable_ties_independent_of_traversal_order(self):
-        req = OutingRequest(activities=["coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee"])
         records = [ordinary(tier=i, price=5.0, experience=2.0, zone=0) for i in range(3)]
         candidates = [candidate(req, [v]) for v in records]
         a = rank_candidates(req, candidates)
@@ -196,7 +196,7 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(RankingResult.model_validate_json(a.model_dump_json()), a)
 
     def test_distinct_top_three_and_no_duplicate_padding(self):
-        req = OutingRequest(activities=["coffee", "museum"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"])
         records = [ordinary(v.activity, int(v.id.rsplit("-", 1)[1])) for v in load_mock_venues() if v.kind == "venue"]
         with patch("backend.planner.load_mock_venues", return_value=records):
             result = recommend_plans(req)
@@ -214,13 +214,13 @@ class RankingTests(unittest.TestCase):
             options = result.plans + result.provisionalPlans
             self.assertEqual(len(options), 3)
             self.assertTrue(all(p.candidate.venues[0].activity == activity for p in options))
-        req = OutingRequest(activities=["coffee", "museum", "coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum", "coffee"])
         result = recommend_plans(req)
         self.assertEqual(len(result.provisionalPlans), 3)
         self.assertTrue(all([v.activity for v in p.candidate.venues] == req.activities for p in result.provisionalPlans))
 
     def test_mock_unknown_hours_are_never_confirmed(self):
-        result = recommend_plans(OutingRequest(activities=["coffee", "museum"]))
+        result = recommend_plans(OutingRequest(date="2026-11-07", activities=["coffee", "museum"]))
         self.assertFalse(result.plans)
         self.assertEqual(result.errors[0].code, "insufficient_data")
         self.assertEqual(len(result.provisionalPlans), 3)
@@ -228,18 +228,18 @@ class RankingTests(unittest.TestCase):
         self.assertTrue(all("unknown_openingHours" in self.codes(p) for p in result.provisionalPlans))
 
     def test_no_feasible_result_has_actionable_reasons(self):
-        result = recommend_plans(OutingRequest(activities=["coffee"], budget=0))
+        result = recommend_plans(OutingRequest(date="2026-11-07", activities=["coffee"], budget=0))
         self.assertFalse(result.plans + result.provisionalPlans)
         self.assertIn("budget_exceeded", result.rejectionReasons)
         self.assertTrue(any("increase" in e.message for e in result.errors))
         for req, code in ((OutingRequest(activities=["concert"], date="2026-11-08"), "no_availability"),
-                          (OutingRequest(activities=["coffee"], location="Boston"), "unsupported_location")):
+                          (OutingRequest(date="2026-11-07", activities=["coffee"], location="Boston"), "unsupported_location")):
             result = recommend_plans(req)
             self.assertFalse(result.plans + result.provisionalPlans)
             self.assertEqual(result.errors[0].code, code)
 
     def test_replaceable_quotes_drive_constraints_and_totals(self):
-        req = OutingRequest(activities=["coffee", "museum"], budget=4, maxLegTravel=2)
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"], budget=4, maxLegTravel=2)
         venues = [ordinary(), ordinary("museum")]
         p = evaluate(req, venues,
                      price_provider=lambda *args: PriceQuote(amount=2.0, status="estimated", source="test price adapter"),
@@ -249,7 +249,7 @@ class RankingTests(unittest.TestCase):
         self.assertTrue(all(q.status == "estimated" for q in p.prices + p.legs))
 
     def test_confirmed_options_precede_better_scoring_provisional_options(self):
-        req = OutingRequest(activities=["coffee"], cost="budget")
+        req = OutingRequest(date="2026-11-07", activities=["coffee"], cost="budget")
         confirmed = ordinary(tier=2)
         provisional = ordinary(tier=0, openingWindows=None)
         result = rank_candidates(req, [candidate(req, [provisional]), candidate(req, [confirmed])])
@@ -258,13 +258,13 @@ class RankingTests(unittest.TestCase):
         self.assertFalse(result.errors)
 
     def test_missing_quality_does_not_become_an_invented_review(self):
-        req = OutingRequest(activities=["coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee"])
         p = rank_candidates(req, [candidate(req, [ordinary(experience=None)])]).plans[0]
         self.assertEqual(p.components["quality"], 0)
         self.assertFalse(any(r.code == "quality" for r in p.explanations))
 
     def test_split_windows_cannot_be_added_into_a_continuous_visit(self):
-        req = OutingRequest(activities=["coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee"])
         v = ordinary(duration=30, openingWindows=[TimeWindow(start=600, end=620),
                                                  TimeWindow(start=640, end=660)])
         self.assertEqual(evaluate(req, [v]).feasibility, "violated")
@@ -280,14 +280,14 @@ class RankingTests(unittest.TestCase):
         self.assertIn("time_window", self.codes(evaluate(req, [closed])))
 
     def test_explicit_revisits_survive_evaluation_and_results(self):
-        req = OutingRequest(activities=["coffee", "coffee"], allowRevisits=True)
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "coffee"], allowRevisits=True)
         c = candidate(req, [ordinary(), ordinary()])
         result = rank_candidates(req, [c])
         self.assertEqual(len(result.plans), 1)
         self.assertEqual(result.plans[0].totalTravel, 5)
 
     def test_supplied_values_with_unknown_evidence_are_provisional(self):
-        req = OutingRequest(activities=["coffee"])
+        req = OutingRequest(date="2026-11-07", activities=["coffee"])
         v = ordinary()
         quality = v.dataQuality.model_copy(update={"capacity": DataStatus.unknown, "duration": DataStatus.unknown,
                                                  "schedule": DataStatus.unknown, "price": DataStatus.unknown})
@@ -299,7 +299,7 @@ class RankingTests(unittest.TestCase):
         for args in (dict(groupBudget=-1), dict(maxLegTravel=-1), dict(startTime=720, endTime=600),
                      dict(requireAvailability="yes"), dict(maxLegTravel=True)):
             with self.assertRaises(ValidationError):
-                OutingRequest(activities=["coffee"], **args)
+                OutingRequest(date="2026-11-07", activities=["coffee"], **args)
         with self.assertRaises(ValidationError):
             TimeWindow(start=600, end=600)
 
