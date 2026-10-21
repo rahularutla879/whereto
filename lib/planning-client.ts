@@ -63,26 +63,44 @@ export function adaptRanking(value: unknown): PlannerResult {
     message: plans.length ? data.message : [data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))].join(" "), notes: data.notes };
 }
 
+export type ClarificationField = "location" | "people" | "date" | "activities" | "time";
+export type ClarificationAnswers = Partial<Record<ClarificationField, string>>;
+export type PendingOuting = {
+  pending: { text: string; interpretation: unknown; answers: ClarificationAnswers; referenceTime: string };
+  questions: { field: ClarificationField; question: string; kind: "essential" | "ambiguous" }[];
+};
+
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
-  context?: { today?: string; onInterpreted?: (values: Preferences) => void }, send: typeof fetch = fetch): Promise<PlannerResult> {
+  context?: { today?: string; onInterpreted?: (values: Preferences) => void;
+    continuation?: PendingOuting; answers?: ClarificationAnswers;
+    onClarification?: (value: PendingOuting | null) => void; onComplete?: () => void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
   // `today` remains source-compatible; only the Python resolver owns the clock.
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
     activities: [], notes: [] });
   try {
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, preferences }), cache: "no-store", signal: AbortSignal.timeout(75000) });
+      body: JSON.stringify({ text, preferences, ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
     if (!interpreted.ok) return failure(typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated.");
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
+    if (extraction.pending) {
+      const fields = ["location", "people", "date", "activities", "time"];
+      if (extraction.pending.text !== text || !extraction.pending.interpretation
+        || typeof extraction.pending.referenceTime !== "string" || !extraction.pending.answers
+        || !Array.isArray(extraction.questions) || !extraction.questions.every((q: PendingOuting["questions"][number]) =>
+          q && fields.includes(q.field) && typeof q.question === "string" && ["essential", "ambiguous"].includes(q.kind))) throw new Error("Invalid clarification response");
+      context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
+    } else if (extraction.issues.length) context?.onClarification?.(null);
     if (extraction.issues.length || !extraction.request) {
       return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), notes: extraction.notes };
     }
+    context?.signal?.throwIfAborted();
     const extractedPreferences = interpretedPreferences(extraction.request);
     context?.onInterpreted?.(extractedPreferences);
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(extraction.request), cache: "no-store", signal: AbortSignal.timeout(15000) });
+      body: JSON.stringify(extraction.request), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(15000)]) : AbortSignal.timeout(15000) });
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
@@ -92,6 +110,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     }
     const result = adaptRanking(await response.json());
     result.notes = [...extraction.notes, ...result.notes];
+    context?.onComplete?.();
     return result;
   } catch {
     return failure("AI interpretation or Python planner unavailable, timed out, or returned an invalid response. Check both services and retry. No plan was generated.");

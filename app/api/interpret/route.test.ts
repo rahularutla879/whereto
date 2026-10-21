@@ -5,7 +5,7 @@ import { spawn } from "node:child_process";
 import { once } from "node:events";
 import { POST } from "./route";
 import { POST as planPOST } from "../plans/generate/route";
-import { generateOuting } from "../../../lib/planning-client";
+import { generateOuting, type PendingOuting } from "../../../lib/planning-client";
 import { displayInterpretedPreferences, emptyPreferenceState, manualPreferences } from "../../../lib/preferences";
 import { EMPTY_PREFERENCES } from "../../../lib/planner";
 
@@ -90,6 +90,41 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.equal(overnight.plans.length, 0);
     assert.match(overnight.message, /Overnight/);
     assert.deepEqual(paths, ["/api/interpret"]);
+    // Incomplete -> invalid answer -> complete, through actual HTTP boundaries.
+    requestText = "coffee, museum, then coffee tomorrow under $80 each";
+    modelContent = JSON.stringify({ activities: ["coffee", "museum", "coffee"], people: null,
+      location: null, date: null, budget_per_person: 80, currency: "USD", preferences: [] });
+    let retained: PendingOuting | null = null;
+    let completed = 0;
+    const startCalls = modelCalls;
+    const continueRun = (answers = {}, transport = send) => generateOuting(requestText, EMPTY_PREFERENCES, {
+      continuation: retained ?? undefined, answers,
+      onClarification: value => { retained = value; }, onComplete: () => { completed++; retained = null; },
+    }, transport);
+    paths.length = 0;
+    const incomplete = await continueRun();
+    assert.equal(incomplete.plans.length, 0);
+    assert.deepEqual(paths, ["/api/interpret"]);
+    assert.ok(retained);
+    assert.equal(modelCalls, startCalls + 1);
+    const invalid = await continueRun({ location: "Baltimore", people: "many" });
+    assert.equal(invalid.plans.length, 0);
+    assert.match(invalid.message, /whole number/);
+    assert.equal(modelCalls, startCalls + 1);
+    const plannerDown: typeof fetch = (url, init) => url === "/api/plans/generate"
+      ? Promise.resolve(Response.json({ message: "Unavailable" }, { status: 503 })) : send(url, init);
+    const failedPlan = await continueRun({ people: "3" }, plannerDown);
+    assert.match(failedPlan.message, /planner unavailable/);
+    assert.ok(retained); // Valid interpretation survives planner failure for a model-free retry.
+    assert.equal(completed, 0);
+    const resumed = await continueRun();
+    assert.equal(resumed.plans.length, 3);
+    assert.equal(resumed.plans[0].people, 3);
+    assert.equal(resumed.plans[0].date, tomorrow);
+    assert.deepEqual(resumed.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
+    assert.equal(modelCalls, startCalls + 1);
+    assert.equal(completed, 1);
+    assert.equal(retained, null);
     modelContent = "{}";
     paths.length = 0;
     assert.match((await run()).message, /AI interpretation unavailable/);

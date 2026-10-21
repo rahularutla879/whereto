@@ -6,7 +6,8 @@ import { CardArtwork, HeroArtwork } from "@/components/artwork";
 import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
 
 import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
-import { generateOuting } from "@/lib/planning-client";
+import { PlanningSession } from "@/lib/planning-session";
+import { generateOuting, type PendingOuting, type ClarificationAnswers } from "@/lib/planning-client";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
 import demoPlans from "@/data/demo-plans.json";
@@ -58,27 +59,56 @@ export default function Home() {
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
   const [loading, setLoading] = useState(false);
-  const pending = useRef(false);
+  const session = useRef(new PlanningSession());
+  const [clarification, setClarification] = useState<PendingOuting | null>(null);
+  const [answers, setAnswers] = useState<ClarificationAnswers>({});
+  const followupRef = useRef<HTMLDivElement>(null);
   const [generated, setGenerated] = useState(false);
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: PreferenceField, value: string) {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
+  function cancelClarification() {
+    session.current.cancel();
+    setLoading(false);
+    setClarification(null);
+    setAnswers({});
+  }
+  async function runPlanning(followup: boolean) {
+    const controller = session.current.begin();
+    if (!controller) return;
+    setLoading(true);
+    let needsAnswer = false;
+    const original = followup && clarification ? clarification.pending.text : request;
+    try {
+      const next = await generateOuting(original, manualPreferences(preferenceState), {
+        continuation: followup ? clarification ?? undefined : undefined,
+        answers: followup ? answers : undefined,
+        signal: controller.signal,
+        onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
+        onClarification: value => {
+          if (!session.current.current(controller)) return;
+          needsAnswer = !!value?.questions.length;
+          setClarification(value);
+        },
+        onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); } },
+      });
+      if (!session.current.current(controller)) return;
+      setResult(next);
+      setGenerated(true);
+      requestAnimationFrame(() => {
+        if (needsAnswer) followupRef.current?.querySelector("input")?.focus();
+        else resultsRef.current?.focus({ preventScroll: false });
+      });
+    } finally {
+      if (session.current.finish(controller)) setLoading(false);
+    }
+  }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing, or use the example."); requestRef.current?.reportValidity(); return; }
-    if (pending.current) return;
-    pending.current = true;
-    setLoading(true);
-    try {
-      setResult(await generateOuting(request, manualPreferences(preferenceState), {
-        onInterpreted: values => setPreferenceState(previous => displayInterpretedPreferences(previous, values)),
-      }));
-    }
-    finally { pending.current = false; setLoading(false); }
-    setGenerated(true);
-    requestAnimationFrame(() => resultsRef.current?.focus({ preventScroll: false }));
+    await runPlanning(!!clarification);
   }
   const preferencesCount = [preferences.location, preferences.date, preferences.people, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
 
@@ -99,9 +129,9 @@ export default function Home() {
         <form className="planner" onSubmit={submit}>
           <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">LOCAL DEMO</span></div>
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
-          <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
-          <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { cancelClarification(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
+          <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { cancelClarification(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferenceState(emptyPreferenceState())}>Reset preferences</button></div>
             <div className="preferences-grid">
@@ -114,6 +144,21 @@ export default function Home() {
             </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         </form>
+        {clarification && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
+          <p className="details-heading">{clarification.questions.length ? "A little more detail" : "Your request is ready to retry"}</p>
+          <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>
+          {generated && <p role="status">{result.message}</p>}
+          <form onSubmit={event => { event.preventDefault(); void runPlanning(true); }}>
+            <div className="preferences-grid">{clarification.questions.map(question => <label key={question.field}>
+              <span>{question.question}</span>
+              <input aria-label={question.question} type="text" maxLength={question.field === "activities" ? 500 : question.field === "time" ? 150 : 80}
+                value={answers[question.field] ?? ""} placeholder={question.field === "location" ? "e.g. Baltimore" : question.field === "people" ? "e.g. 4" : question.field === "date" ? "e.g. 2026-11-07 or Saturday" : question.field === "activities" ? "e.g. coffee, museum, then coffee" : "e.g. from 6 PM to 10 PM"}
+                onChange={event => setAnswers(previous => ({ ...previous, [question.field]: event.target.value }))} />
+            </label>)}</div>
+            <div className="planner-actions"><button className="secondary-button" type="button" onClick={cancelClarification}>Cancel follow-up</button>
+              <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Continue planning"}<ArrowRight size={18} /></button></div>
+          </form>
+        </div>}
         <p className="planner-disclaimer"><CircleHelp size={13} /> A preview of what’s possible. Local sample data, no live searches or bookings.</p>
         <details className="catalog-help"><summary>Supported activities &amp; fictional event dates</summary><p>{SUPPORTED_ACTIVITIES}.</p><p>Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Group capacities are mock limits (4, 8, or 20 people); prices are per person. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p></details>
       </section>
@@ -121,7 +166,7 @@ export default function Home() {
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? "Sample results" : "Demo itineraries"}</span></div>
         {generated && <ResultsInformation notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
-        {result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{failureMessage(result.message)}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
+        {clarification?.questions.length ? <div className="empty-state" role="status"><CircleHelp size={28} /><h3>Just a little more detail.</h3><p>Answer the questions below your request to continue. Your original details are kept.</p></div> : result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{failureMessage(result.message)}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 

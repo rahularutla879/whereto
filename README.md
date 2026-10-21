@@ -80,7 +80,7 @@ You can plan entirely through your request without opening **Set preferences**. 
 
 After successful interpretation, **Set preferences** displays the resolved location, date, group size, budget/travel caps and cost mode. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified caps/date remain blank; Balanced is the existing default when no cost mode is stated.
 
-Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location or group size receives an explanation and can be supplied in the request itself. Budget/travel limits and group capacity remain hard constraints, while cost mode ranks eligible plans.
+Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location or group size opens a short follow-up below your request. Answer there to continue automatically. Budget/travel limits and group capacity remain hard constraints, while cost mode ranks eligible plans.
 
 ## Planner review and improvements
 
@@ -97,7 +97,7 @@ Museums and galleries are separate. A baseball request cannot be replaced with a
 
 There is **no unrelated activity fallback**. Unsupported phrases, alternatives, exclusions, unresolved uncertainty and requests over four stops get an explanation instead of a partial plan. AI suggestions for “something competitive” are labeled suggestions and require an explicit activity choice. Every requested occurrence stays separate: `coffee, museum, then coffee` produces three stops; `lunch and dinner` produces two meal stops. Dinner timing applies only to the dinner stop.
 
-This is a local AI interpreter with conservative validation, not guaranteed understanding of arbitrary language. Exact phrase normalization and source-grounding guards can ask you to rephrase valid wording. Unknown venue qualities remain unverified. There is no keyword fallback, automatic retry, conversation history, hosted AI call, or saving of outing requests. Ordinary tests mock AI; real-model smoke checks are opt-in.
+This is a local AI interpreter with conservative validation, not guaranteed understanding of arbitrary language. Exact phrase normalization and source-grounding guards can ask you to rephrase valid wording. Unknown venue qualities remain unverified. There is no keyword fallback, automatic retry, hosted AI call, or permanent saving of outing requests. A pending clarification stays only in the current page’s memory. Ordinary tests mock AI; real-model smoke checks are opt-in.
 
 ### Fictional dates and timing
 
@@ -217,7 +217,7 @@ With both servers running, click Try an example → Plan my outing → View plan
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–32 are complete. The active website uses local AI interpretation and Python planning.
+Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–33 are complete. The active website uses local AI interpretation and Python planning.
 
 
 Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.
@@ -278,4 +278,14 @@ For the focused Task 32 check against the installed Qwen3 4B, run:
 backend/.venv/bin/python -u -m backend.ai.smoke_dates
 ```
 
-It uses a fixed aware reference clock and checks 13 date/time requests, original model phrase preservation, clarification outcomes and actual Python planning. No model is downloaded. Task 32 verification and current limitations are recorded in HANDOVER.md. Stop before Task 33.
+It uses a fixed aware reference clock and checks 13 date/time requests, original model phrase preservation, clarification outcomes and actual Python planning. No model is downloaded. Task 32 verification and current limitations are recorded in HANDOVER.md. Task 33 adds the follow-up interaction described below.
+
+## Follow-up questions (Task 33)
+
+Type your outing normally; Set preferences remains optional. If an essential detail is missing, answer the short question below the request and click **Continue planning**. When both city and group size are missing, supply them together. For example, `Coffee` asks for a city and number of people; `Baltimore` and `4` are enough to continue. You do not need to repeat “Coffee”.
+
+Scheduled events need a date. Weekend requests need Saturday, Sunday or an exact date. Unclear activities and clock windows may need a specific choice. Budget, travel caps, spending preferences and an exact date for ordinary flexible-day venues are optional; leaving them out does not trigger a question. Unsupported cities/activities, overnight outings and unavailable event dates get explanations without invented replacements.
+
+Your original text, ordered/repeated stops, resolved date context, explicit caps and preferences are kept while you answer. Follow-up answers use deterministic validation without another model call. Settings you deliberately change still win; automatically displayed values do not become manual settings. Invalid answers and service errors keep the request available to correct or retry. Edit the original text or use **Try an example** to replace the outing; **Cancel follow-up** clears the pending clarification. Refreshing or closing the page clears this temporary state.
+
+Follow-up fields accept simple city names, numbers (also one–twenty), supported activity names and the existing date/time wording. More complex corrections, currencies or constraints can require editing the original request. All planning still uses the same fictional catalog and Python engine.

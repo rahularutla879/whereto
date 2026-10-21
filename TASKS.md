@@ -152,7 +152,7 @@ Work on one focused task at a time. Update status only with implementation evide
 - [x] Cover fixed calendar boundaries and actual interpretation/proxy/client/engine integration, including omitted tomorrow.
 - [x] Complete real-Qwen smoke (13 Task 32 + 8 Task 31 cases), full regression checks (114 backend/74 frontend), lint, TypeScript, production build, diff review and private GitHub backup.
 
-Stop after Task 32. Task 33 has not started.
+Task 32 completed at this checkpoint; Task 33 is recorded below.
 
 ### Focused correction before Task 33 — natural-language-only planning
 
@@ -162,4 +162,15 @@ Stop after Task 32. Task 33 has not started.
 - [x] Test subsequent requests, clearing/reset, zero/Balanced precedence, missing essentials and failures; verify in real development/production browsers.
 - [x] Pass 115 backend/81 frontend tests, lint, TypeScript and production build; review the complete diff and back up to the private repository.
 
-This is a Task 32 follow-up correction. Task 33 remains unstarted.
+This was a Task 32 follow-up correction before Task 33.
+
+## Original roadmap — Task 33: intelligent missing-information handling
+
+- [x] Inspect Tasks 31–32, optional/manual preference provenance, actual planner requirements and existing regressions.
+- [x] Ask targeted questions for missing city/group, scheduled-event dates, ambiguous weekends, activity choices and clock windows; leave missing optional caps/preferences alone.
+- [x] Retain the original extraction/text/calendar reference and merge validated answers without another AI call; preserve repeated/ordered stops and hard constraints.
+- [x] Keep manual precedence, support cancellation/replacement, reject invalid answers, retain retry state after failures, and block duplicate/late submissions.
+- [x] Pass 136 backend and 87 frontend tests, lint, TypeScript and production build; verify real Ollama/Python/Next.js browser flows.
+- [x] Review complete diff, update continuity documentation and push tested changes to the existing private repository, preserving release tags.
+
+Task 33 is complete. Stop here; Task 34 has not started.

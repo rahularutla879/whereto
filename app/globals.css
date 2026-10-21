@@ -189,3 +189,7 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 
 .activity-poster { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 9px; background-image: radial-gradient(circle at 80% 30%, #ffffff40 0 65px, transparent 66px); }
 .activity-poster > span { font-size: 10px; letter-spacing: 1.2px; }
+
+.clarification-panel { margin-top: 16px; padding: 24px; border: 1px solid #d9d3e5; border-radius: 20px; background: #faf8ff; }
+.clarification-panel > p { margin-bottom: 16px; }
+.clarification-panel .planner-actions { margin-top: 20px; }
