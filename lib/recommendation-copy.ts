@@ -26,7 +26,7 @@ export function recommendationCopy(plans: RecommendationFacts[], preference: str
   const quality = winners("quality", true);
   const mode = ({ budget: "Budget-friendly", balanced: "Balanced", experience: "Best Experience" } as Record<string, string>)[preference];
 
-  return plans.map((plan, i) => {
+  const explanations = plans.map((plan, i) => {
     const sameValue = plans.findIndex((other, j) => j < i &&
       close(plan.cost, other.cost) && close(plan.travel, other.travel) && close(plan.quality, other.quality));
     if (sameValue >= 0) {
@@ -68,4 +68,37 @@ export function recommendationCopy(plans: RecommendationFacts[], preference: str
     return { label: plans.length === 1 ? "YOUR ITINERARY" : "ALTERNATIVE PLAN",
       description: [venueDetail, facts ? `${facts}.` : ""].filter(Boolean).join(" ") || "An option for the activities you requested." };
   });
+  return explanations.map((explanation, i) => {
+    // Headline and badge share the same evidence-backed classification. Keep
+    // the existing detailed explanation intact underneath the short title.
+    const titles: Record<string, string> = {
+      "TOP MATCH": "Best Match for You",
+      "JOINT TOP MATCH": "Joint Best Match",
+      "LOWEST COST": "Lowest Cost per Person",
+      "JOINT LOWEST COST": "Lowest Cost (Tie)",
+      "SHORTEST TRAVEL": "Shortest Travel Time",
+      "JOINT SHORTEST TRAVEL": "Shortest Travel (Tie)",
+      "TOP SAMPLE VENUES": "Top Sample Venue Quality",
+      "JOINT TOP SAMPLE VENUES": "Top Sample Quality (Tie)",
+      "DIFFERENT STOP ORDER": "Same Places, New Order",
+      "DIFFERENT VENUES": "Same Value, New Places",
+      "ANOTHER OPTION": "Same Plan, Same Value",
+      "YOUR ITINERARY": "Your Itinerary",
+    };
+    let title = titles[explanation.label] ?? "Alternative Itinerary";
+    const plan = plans[i];
+    if (explanation.label === "JOINT TOP MATCH") {
+      // Equal overall scores can still have different prices/travel. State
+      // those facts without implying one tied recommendation is uniquely best.
+      if (known(plan.cost) && top.some(j => known(plans[j].cost) && !close(plans[j].cost, plan.cost))) {
+        title = `Joint Best at ${dollars(plan.cost)}`;
+      } else if (known(plan.travel) && top.some(j => known(plans[j].travel) && !close(plans[j].travel, plan.travel))) {
+        title = `Joint Best, ${plan.travel}-Min Travel`;
+      }
+    } else if (explanation.label === "ALTERNATIVE PLAN" && known(plan.cost)) {
+      title = `Outing at ${dollars(plan.cost)}`;
+    }
+    return { ...explanation, title };
+  });
+
 }

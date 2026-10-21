@@ -49,11 +49,9 @@ export function adaptRanking(value: unknown): PlannerResult {
     cost: p.costPerPerson, travel: p.totalTravel,
     venues: p.stops.map(s => ({ id: s.venue.id, name: s.venue.name })),
   })), data.request.cost);
-  const firstTitle = data.request.cost === "budget" ? "Big fun. Small spend." : data.request.cost === "experience" ? "Make a night of it." : "A little of everything.";
-  const titles = [firstTitle, "More good times.", "A different kind of day."];
   const themes = ["lavender", "peach", "mint"] as const;
   const plans: Plan[] = selected.map((p, i) => ({
-    id: p.candidate.id, title: titles[i], theme: themes[i],
+    id: p.candidate.id, title: copy[i].title, theme: themes[i],
     label: `${copy[i].label} · OPTION ${i + 1}`,
     description: copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,

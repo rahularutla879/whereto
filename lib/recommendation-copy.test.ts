@@ -100,3 +100,60 @@ test("joint cost and travel winners are labeled as ties when other characteristi
   assert.equal(travel[1].label, "JOINT SHORTEST TRAVEL");
   assert.equal(travel[2].label, "JOINT SHORTEST TRAVEL");
 });
+
+test("headlines use the actual best match, cheapest and shortest plans in any order", () => {
+  const cheap = plan("cheap", { score: 0.2, cost: 0, travel: 20 });
+  const quick = plan("quick", { score: 0.4, cost: 30, travel: 0 });
+  const best = plan("best", { score: 0.9, cost: 40, travel: 10 });
+  for (const ordered of [[cheap, quick, best], [best, cheap, quick], [quick, best, cheap]]) {
+    const copy = recommendationCopy(ordered, "balanced");
+    assert.equal(copy[ordered.indexOf(best)].title, "Best Match for You");
+    assert.equal(copy[ordered.indexOf(cheap)].title, "Lowest Cost per Person");
+    assert.equal(copy[ordered.indexOf(quick)].title, "Shortest Travel Time");
+  }
+});
+
+test("tied recommendations use honest route and venue headlines", () => {
+  const a = venue("a", "First Café"), b = venue("b", "Second Café"), museum = venue("m", "Museum");
+  const tied = recommendationCopy([
+    plan("a", { score: 0.9, cost: 41, travel: 18, venues: [a, museum, b] }),
+    plan("b", { score: 0.9, cost: 41, travel: 18, venues: [b, museum, a] }),
+    plan("c", { score: 0.4, cost: 31, travel: 18, quality: 0.2 }),
+  ], "experience");
+  assert.deepEqual(tied.map(p => p.title), ["Joint Best Match", "Same Places, New Order", "Lowest Cost per Person"]);
+  assert.match(tied[1].description, /Same cost, travel and sample quality.*Second Café/);
+  const venues = recommendationCopy([plan("a"), plan("b")], "balanced");
+  assert.equal(venues[1].title, "Same Value, New Places");
+  const duplicate = recommendationCopy([plan("a"), plan("a")], "balanced");
+  assert.equal(duplicate[1].title, "Same Plan, Same Value");
+});
+
+test("equal top scores with differing costs or travel get factual distinct headlines", () => {
+  const cost = recommendationCopy([
+    plan("a", { score: 0.9, cost: 40, quality: 0.5 }),
+    plan("b", { score: 0.9, cost: 60, quality: 0.8 }),
+  ], "experience");
+  assert.deepEqual(cost.map(p => p.title), ["Joint Best at $40.00", "Joint Best at $60.00"]);
+  const travel = recommendationCopy([
+    plan("a", { score: 0.9, travel: 10, quality: 0.5 }),
+    plan("b", { score: 0.9, travel: 20, quality: 0.8 }),
+  ], "balanced");
+  assert.deepEqual(travel.map(p => p.title), ["Joint Best, 10-Min Travel", "Joint Best, 20-Min Travel"]);
+  assert.ok([...cost, ...travel].every(p => p.title.length <= 30));
+});
+
+test("cheapest ties and missing evidence never imply unique superiority", () => {
+  const cheap = recommendationCopy([
+    plan("best", { score: 0.9, cost: 80 }),
+    plan("a", { score: 0.5, cost: 20, quality: 0.2 }),
+    plan("b", { score: 0.3, cost: 20, quality: 0.1 }),
+  ], "budget");
+  assert.equal(cheap[1].title, "Lowest Cost (Tie)");
+  assert.equal(cheap[2].title, "Lowest Cost (Tie)");
+  const unknown = plan("unknown", { score: null, quality: null, cost: null, travel: null });
+  const partial = recommendationCopy([plan("known"), unknown], "experience");
+  assert.equal(partial[0].title, "Outing at $40.00");
+  assert.equal(partial[1].title, "Alternative Itinerary");
+  assert.equal(recommendationCopy([unknown], "balanced")[0].title, "Your Itinerary");
+  assert.doesNotMatch(partial.map(p => p.title).join(" "), /best|lowest|shortest|top/i);
+});

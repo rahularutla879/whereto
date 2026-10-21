@@ -104,6 +104,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
       assert.match(plans[2].label, /LOWEST COST/);
       assert.match(plans[2].description, /\$31\.00.*Harbor Discovery Hall/);
       assert.equal(new Set(plans.map(p => p.description)).size, 3);
+      assert.deepEqual(plans.map(p => p.title), ["Joint Best Match", "Same Places, New Order", "Lowest Cost per Person"]);
     }
     // Real fixture route finishes exactly at midnight; display must not say noon.
     {
