@@ -68,7 +68,7 @@ Click **Try an example**, then **Plan my outing**. Or type:
 
 > We're 4 friends in Baltimore. We want bowling, drinks, and a movie.
 
-You will get up to three distinct Python-generated demo plans. Ordinary outings are labeled **PROVISIONAL** because the fictional catalog has no opening hours. Event-only plans may show **FITS MOCK DATA**, meaning their constraints fit the supplied fiction; real availability is unverified. Expand a card to see missing-information messages and data-quality labels. Use **View plan** to expand each itinerary and see its fictional venues, sample durations, per-person costs, and estimated group total.
+You will get up to three distinct demo plans, introduced by a simple count such as **Found 3 possible plans.** A visible **Sample results** label and short disclosure explain that the venues, prices, travel times and event schedules are fictional. **About these estimates** expands to explain unchecked opening hours/availability, excluded costs and transport assumptions. Important plan-specific unknowns or conflicts remain visible beside the affected card. Use **View plan** to expand the itinerary and see its sample venues, durations, per-person costs and group total.
 
 Try these requests too:
 
@@ -203,7 +203,7 @@ To run a production build **locally**, run `npm run build` and then `npm start`.
 
 ## Task 28 verification you can repeat
 
-With both servers running, click Try an example → Plan my outing → View plan. You should see provisional Python results and fictional prices, times and unknown-hours messages. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
+With both servers running, click Try an example → Plan my outing → View plan. You should see sample results, fictional prices/times and an expandable About these estimates section. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 

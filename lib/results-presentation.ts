@@ -1,0 +1,78 @@
+import type { Plan } from "./planner";
+
+// Presentation only. Keep every request, result and calculation unchanged.
+export const DEMO_DISCLOSURE = "Venues, prices, travel times, and event schedules are fictional.";
+export const OPENING_HOURS_ISSUE = "Opening hours cannot be checked; obtain structured windows for the requested day.";
+
+export function resultsSummary(count: number) {
+  return `Found ${count} possible ${count === 1 ? "plan" : "plans"}.`;
+}
+
+export function consumerMessage(message: string) {
+  return message
+    .replace(/\d+ confirmed mock recommendations; \d+ provisional alternatives\.\s*/g, "")
+    .replace("No candidate satisfies all known limits. Review rejection reasons and adjust the relevant constraint.", "No plan fits all your current preferences. Try adjusting a limit or choosing different activities.")
+    .replace("No confirmed recommendation. Obtain the missing evidence listed in provisional alternatives.", "Some details still need checking before you go.")
+    .replaceAll(OPENING_HOURS_ISSUE, "Opening hours have not been checked. Check them before you go.")
+    .replaceAll("availability cannot be checked; obtain structured windows for the requested day.", "Availability for this plan has not been checked. Confirm each stop can host your group at these times.")
+    .replaceAll("Obtain group capacity before confirming this stop.", "Check that this stop can accommodate your group.")
+    .replaceAll("Schedule provenance is unknown; obtain schedule evidence before confirmation.", "The schedule has not been checked. Confirm the times before choosing this plan.")
+    .replaceAll("Travel evidence is missing; obtain a travel estimate before confirming timing.", "Travel time has not been checked. Confirm you can get between the stops in time.")
+    .replaceAll("Obtain the activity duration before confirming the schedule.", "Check how long this activity takes before relying on the schedule.")
+    .replaceAll("Price is incomplete or unsourced; obtain a price before confirming costs.", "Some prices have not been checked. Confirm the cost before choosing this plan.")
+    .replaceAll("Mock travel is mode-independent; no real route or mode-specific time is verified.", "Travel times are sample estimates and do not change with your chosen transport.")
+    .replaceAll("openingHours", "opening hours")
+    .replaceAll("groupBudget", "the total group budget")
+    .replaceAll("maxLegTravel", "the travel limit between two stops")
+    .replaceAll("Known activity costs exceed budget", "Estimated activity costs exceed your per-person budget")
+    .replaceAll("Known activity costs exceed the total group budget", "Estimated activity costs exceed your total group budget")
+    .replace(/No mock records/g, "No sample activities")
+    .replace(/\b(?:shared-catalog|Shared catalog|shared catalog|fictional catalog)\b/g, "sample data")
+    .replace(/\b(?:candidate|Candidate)\b/g, "plan")
+    .replace(/\bfixture\b/g, "sample")
+    .replace(/AI interpretation or Python planner unavailable[^.]*\./g, "We could not create your plans. Please try again.")
+    .replace(/Python planner unavailable[^.]*\./g, "We could not create your plans. Please try again.")
+    .replace(/AI interpretation unavailable[^.]*\./g, "We could not read your request just now. Please try again.")
+    .replace(/(?:Start the (?:Python )?backend and local AI service|Start the backend|Check both services|Check the local AI service and settings),? (?:then )?(?:and )?(?:try again|retry)\./g, "")
+    .replaceAll("AI suggestions, not requested stops:", "Suggested activities to choose from:")
+    .replace(/AI (?:could not|did not)/g, "We could not")
+    .replace(/AI may have omitted/g, "We may have missed")
+    .replace(/AI returned/g, "We could not verify")
+    .replaceAll("Manual people overrides the text interpretation.", "Using the group size you selected.")
+    .replace(/Manual (\w+) overrides the text interpretation\./g, "Using your selected $1.")
+    .replace(/\s+/g, " ").trim();
+}
+
+export function failureMessage(message: string) {
+  // Routine unchecked hours are already in About these estimates; keep the
+  // actual failed constraint here, with a fallback for an otherwise empty error.
+  return consumerMessage(message.replaceAll(OPENING_HOURS_ISSUE, ""))
+    || "We could not find a plan for this request. Try adjusting your preferences or choosing different activities.";
+}
+
+export function estimateNotes(notes: string[]) {
+  // These known system notes are replaced by the single disclosure/estimates
+  // area. Keep all other notes, including suggestions and manual selections.
+  const boilerplate = /^(?:AI interpretation; itinerary calculations|All shared-catalog venues|Shared catalog data is fictional|Costs exclude transport|Travel excludes the first\/last trip|Confirmed means constraints checked)/;
+  return [...new Set(notes.filter(note => !boilerplate.test(note)).map(consumerMessage))];
+}
+
+export function planWarnings(plan: Plan): string[] {
+  // Only the routine missing-opening-hours disclosure moves to the common
+  // estimates section. Every other issue (including future conflicts) stays by
+  // its plan, visible even while itinerary details are closed.
+  const warnings = plan.issues.filter(issue => issue !== OPENING_HOURS_ISSUE).map(consumerMessage);
+  if (plan.price === null || plan.groupCost === null || plan.prices.some(q => q.amount === null)) {
+    warnings.push("Some prices are unknown, so the total cost and fit with your budget still need checking.");
+  }
+  if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) {
+    warnings.push("Travel time is unknown, so check whether you can get between these stops in time.");
+  }
+  if (plan.duration === null || plan.stops.some(stop => stop.start === null || stop.end === null || stop.venue.duration === null)) {
+    warnings.push("Some timings are unknown. Check the schedule before choosing this plan.");
+  }
+  if (plan.venues.some(venue => venue.capacity === null)) {
+    warnings.push("Check that each stop can accommodate your group; some group-size limits are unknown.");
+  }
+  return [...new Set(warnings)];
+}

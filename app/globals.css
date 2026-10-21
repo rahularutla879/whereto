@@ -127,8 +127,15 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .details-total { display: flex; justify-content: space-between; gap: 10px; font-size: 11px; border-top: 1px solid #e6e8dc; padding-top: 12px; }
 .details-note { font-size: 9px; line-height: 1.8; color: #7e846f; margin: 12px 0 18px; }
 .sample-notice { text-align: center; color: #8c907e; font-size: 9px; line-height: 1.7; margin: 18px 0 0; }
-.result-status:empty { display: none; }.result-status { font-size: 11px; color: #627151; line-height: 1.6; margin-bottom: 15px; }
-.result-note { display: flex; gap: 8px; align-items: start; padding: 12px 15px; border: 1px solid #e3dfc7; border-radius: 7px; background: #f2efdf; color: #6b6f50; font-size: 11px; line-height: 1.7; margin: 0 0 16px; }.result-note svg { flex-shrink: 0; margin-top: 2px; }
+.results-information { margin: 0 0 22px; padding: 12px 15px; border: 1px solid #dfe3d7; border-radius: 7px; background: #f6f7f1; color: #55634d; font-size: 12px; line-height: 1.7; }
+.results-information > p { margin: 0; }
+.estimates-details summary { cursor: pointer; width: fit-content; padding: 8px 0; font-weight: 600; }
+.estimates-details summary:focus-visible { outline: 2px solid #526c47; outline-offset: 3px; border-radius: 2px; }
+.estimates-details ul { margin: 3px 0 0; padding-left: 20px; }
+.estimates-details li + li { margin-top: 6px; }
+.plan-warning { border-left: 3px solid #946333; background: #faf0e3; padding: 10px 12px; margin: 14px 0; font-size: 12px; line-height: 1.6; color: #684321; overflow-wrap: anywhere; }
+.plan-warning ul { margin: 5px 0 0; padding-left: 16px; }
+@media (max-width: 460px) { .estimates-details summary { min-height: 44px; padding-block: 11px; } }
 .empty-state { background: #eeefe5; border: 1px dashed #bcc7aa; border-radius: 12px; padding: 40px 24px; text-align: center; }.empty-state > svg { margin: 0 auto 12px; }.empty-state h3 { font-family: Georgia, serif; font-weight: 400; font-size: 25px; margin: 0 0 10px; }.empty-state p { max-width: 480px; margin: 0 auto 20px; color: #6e7862; line-height: 1.8; }
 .secondary-button { display: inline-flex; align-items: center; gap: 10px; border: 1px solid #aab79d; background: #fffefa; padding: 11px 15px; border-radius: 6px; font-size: 12px; }
 .how-section { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 30px; border-top: 1px solid #e1e3d7; border-bottom: 1px solid #e1e3d7; padding: 34px 0; margin-top: 53px; }
