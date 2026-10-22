@@ -8,7 +8,7 @@ from urllib.request import ProxyHandler, Request, build_opener
 
 from pydantic import ValidationError
 
-from backend.ai import AIError, AISettings, Interpretation
+from backend.ai import AIError, AISettings, Interpretation, parse_interpretation
 
 
 SYSTEM_PROMPT = """You extract an outing request into the supplied JSON schema.
@@ -38,6 +38,9 @@ cost: budget/balanced/experience only if stated/implied by cost/quality wording.
 Budget-friendly/affordable means cost=budget; best experience means cost=experience.
 Always include budget_group: use the stated group-total cap EVEN WHEN a per-person
 cap is also stated; use null only when no group-total cap is stated.
+NEVER calculate budget_group by multiplying people and budget_per_person.
+A numeric maximum budget does NOT imply cost=budget; absent quality wording means cost=null.
+"between stops" is travel_leg_minutes, NEVER travel_total_minutes.
 location: stated city only; do not assume Baltimore.
 date: always null. Python alone validates and normalizes calendar dates.
 date_expressions: copy ALL original date wording VERBATIM, including explicit ISO
@@ -47,8 +50,8 @@ NEVER resolve relative dates or calculate calendar values.
 time_expressions: copy complete original time phrases VERBATIM, including after,
 before, between/from, AM/PM, and both endpoints. Keep 'between 6 and 9 PM' intact.
 Preserve date day-parts such as 'tomorrow evening' and 'Saturday night' in
-date_expressions. Never calculate dates or clock minutes. start_time/end_time:
-always null; Python resolves original wording deterministically.
+date_expressions. Never calculate dates or clock minutes. Omit start_time and
+end_time; Python resolves original wording deterministically.
 Ambiguous times or stop-specific times go in uncertainties; never discard them.
 No date, time, location, people or money stated means null, never a default.
 Always include the required schema fields. Include optional fields whenever stated;
@@ -70,12 +73,18 @@ EXAMPLES = [
       "location": "Baltimore", "budget_per_person": 60, "currency": "USD",
       "budget_group": 200, "travel_total_minutes": 15, "transport": "driving",
       "cost": "budget", "preferences": ["Budget-friendly"]}),
-    ("Coffee for two people in Baltimore on November 7, 2026 after 6 PM before 10 PM.",
+    ("Coffee for two people in Baltimore on November 7, 2026 after 6 PM before 10 PM, maximum $25 each and 10 minutes between stops.",
      {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
-      "date_expressions": ["November 7, 2026"], "time_expressions": ["after 6 PM", "before 10 PM"]}),
+      "date_expressions": ["November 7, 2026"], "time_expressions": ["after 6 PM", "before 10 PM"],
+      "budget_per_person": 25, "currency": "USD", "travel_leg_minutes": 10}),
     ("Coffee for two people in Baltimore tomorrow evening.",
      {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
       "date_expressions": ["tomorrow evening"]}),
+    ("Two people want art in Baltimore tomorrow under $0 each, 0 minutes total travel. Budget-friendly.",
+     {**example(), "activities": ["art"], "people": 2, "location": "Baltimore",
+      "budget_per_person": 0, "budget_group": None, "currency": "USD",
+      "travel_total_minutes": 0, "cost": "budget", "preferences": ["Budget-friendly"],
+      "date_expressions": ["tomorrow"]}),
     ("A group wants coffee tomorrow.",
      {**example(), "activities": ["coffee"], "date_expressions": ["tomorrow"]}),
     ("Two people want coffee, museum, then coffee in Baltimore.",
@@ -100,6 +109,10 @@ class OllamaProvider:
         if not isinstance(text, str) or not text.strip():
             raise ValueError("Provide a nonempty outing request.")
         schema = Interpretation.model_json_schema()
+        # This adapter never computes clocks; omit those unused output keys.
+        # They remain in the shared contract for other providers/older sessions.
+        for field in ("start_time", "end_time"):
+            schema["properties"].pop(field)
         # Always visit scalar planning constraints; only absent phrase arrays and
         # unused AI-computed clocks may be omitted. Defaults restore those fields.
         schema["required"] = [*schema["required"], "budget_group", "currency",
@@ -110,7 +123,7 @@ class OllamaProvider:
                 {"role": "system", "content": SYSTEM_PROMPT},
                 *[message for text_example, result_example in EXAMPLES for message in (
                     {"role": "user", "content": text_example},
-                    {"role": "assistant", "content": json.dumps(result_example)},
+                    {"role": "assistant", "content": json.dumps(result_example, separators=(",", ":"))},
                 )],
                 {"role": "user", "content": text},
             ],
@@ -147,6 +160,6 @@ class OllamaProvider:
             content = result["message"]["content"]
             if not isinstance(content, str):
                 raise ValueError("Missing JSON content")
-            return Interpretation.model_validate_json(content)
+            return parse_interpretation(content)
         except (KeyError, TypeError, ValueError, ValidationError) as error:
             raise AIError("Ollama returned incomplete or invalid structured output; no interpretation was accepted.") from error

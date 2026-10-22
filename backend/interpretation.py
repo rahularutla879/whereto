@@ -99,12 +99,115 @@ class InterpretationResult(ContractModel):
     unsupported: list[str] = Field(default_factory=list)
 
 
+# These bounded source checks validate explicit evidence; they never construct
+# an extraction. Unrecognized language remains the provider's responsibility.
+NUMBER_WORDS = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
+NUMBER = r"(?:\d+(?:\.\d+)?|" + "|".join(NUMBER_WORDS) + r")"
+GROUP_EVIDENCE = re.compile(rf"\b({NUMBER})\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of ({NUMBER})\b|\bwe(?:'re| are) ({NUMBER})\b", re.I)
+MONEY_EVIDENCE = re.compile(
+    r"(?:[$€£¥₹]|\b(?:USD|EUR|GBP|CAD|AUD|INR|JPY)\s*|(?=-?\d[\d,]*(?:\.\d+)?\s*(?:dollars?|USD)\b))"
+    r"\s*(-?\d[\d,]*(?:\.\d+)?)\s*(?:(?:dollars?|USD)\s*)?"
+    r"(per[ -]person|per head|each|a person|a head|total|for (?:the |our )?(?:whole )?group)?", re.I)
+LOCATION_ALTERNATIVES = re.compile(r"\bin\s+[a-z]+(?:\s+[a-z]+)?\s+(?:or|and in)\s+[a-z]+", re.I)
+TRAVEL_EVIDENCE = re.compile(r"(?<![\w.-])(-?\d+(?:\.\d+)?)\s*(minutes?|mins?|hours?|hrs?|miles?|kilometers?|km)\s*(of )?(total travel|travel total|total between stops|total|travel|between stops|between activities|per leg|each leg|per stop)\b", re.I)
+
+
+def source_constraint_issues(raw, ai, manual, answers, ask):
+    issues = []
+    def issue(message):
+        if message not in issues:
+            issues.append(message)
+
+    if not (manual.people.strip() or answers.people):
+        counts = set()
+        for match in GROUP_EVIDENCE.finditer(raw):
+            token = next(v for v in match.groups() if v).lower()
+            counts.add(NUMBER_WORDS.index(token) if token in NUMBER_WORDS else float(token))
+        if (len(counts) > 1 or (counts and counts != {ai.people})
+                or re.search(rf"\b{NUMBER}\s+or\s+{NUMBER}\s+(?:people|friends|persons)\b", raw, re.I)):
+            issue("The stated group size is conflicting or was not captured correctly. Confirm how many people are coming.")
+            ask("people", "How many people are coming? Enter one whole number from 1 to 100.", "ambiguous")
+    if not (manual.location.strip() or answers.location) and LOCATION_ALTERNATIVES.search(raw):
+        issue("More than one location was stated. Choose one city for this outing.")
+        ask("location", LOCATION_QUESTION, "ambiguous")
+
+    # A minimum is not the planner's maximum-cap contract. Never reinterpret it.
+    spending_text = re.sub(r"\b(?:no|not) more than\b", "at most", raw, flags=re.I)
+    if re.search(r"\b(?:minimum|at least|no less than|more than)\s*(?:[$€£¥₹]|(?:USD|EUR|GBP)\s*|\d+(?:\.\d+)?\s*(?:dollars|per person|each))", spending_text, re.I):
+        issue("Minimum spending requirements are unsupported and may conflict with your maximum. Edit the request to state the maximum budget you want enforced.")
+    money = {"budget_per_person": [], "budget_group": []}
+    for match in MONEY_EVIDENCE.finditer(raw):
+        if not re.fullmatch(r"-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?", match[1]):
+            issue("The budget amount is unclear. Use an amount such as $60 per person or $1,000 total.")
+            continue
+        amount = float(match[1].replace(",", ""))
+        scope = (match[2] or "").lower()
+        prefix = raw[max(0, match.start() - 25):match.start()].lower()
+        group = scope == "total" or "group" in scope or bool(re.search(r"(?:group (?:budget|cap)|total budget)\s*$", prefix))
+        money["budget_group" if group else "budget_per_person"].append(amount)
+        if not scope and not group and not manual.budget.strip():
+            issue("Budget scope is unclear. State USD per person or a total group budget, or set Maximum budget.")
+    for field, amounts in money.items():
+        if field == "budget_per_person" and manual.budget.strip():
+            continue
+        amount = getattr(ai, field)
+        if (amounts and (any(n < 0 for n in amounts) or amount != min(amounts))) or (amount is not None and not amounts):
+            issue("The budget amount or its per-person/group meaning was not captured correctly. State one maximum USD amount per person and/or one total group cap.")
+
+    travel_context = re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I)
+    if travel_context and re.search(r"\d+\s*(?:seconds?|secs?|meters?|metres?|feet|yards?)\b", raw, re.I):
+        issue("That travel unit is unsupported. State a maximum travel time in minutes or hours, total or between stops.")
+    if travel_context and re.search(r"\b(?:minimum|at least)\s+\d+\s*(?:minutes?|hours?)", raw, re.I):
+        issue("Minimum travel requirements are unsupported. State a maximum travel time instead.")
+    travel_matches = list(TRAVEL_EVIDENCE.finditer(raw))
+    if travel_context and not travel_matches and re.search(r"\d[^.;]{0,20}\b(?:minutes?|mins?|hours?|hrs?)\b", raw, re.I):
+        issue("The travel amount or its total/between-stops meaning is unclear. Use a number of minutes or hours and name the limit's scope.")
+    supported_travel = {"travel_total_minutes": [], "travel_leg_minutes": []}
+    for match in travel_matches:
+        if not travel_context and match[4].lower() == "total":
+            issue("An overall outing-duration limit cannot be treated as travel. State an overall start and end time instead.")
+            continue
+        per_leg = bool(re.search(r"between|per leg|each leg|per stop", match[4], re.I)) and "total" not in match[4].lower()
+        field = "travel_leg_minutes" if per_leg else "travel_total_minutes"
+        if field == "travel_total_minutes" and manual.travel.strip():
+            continue
+        unit = match[2].lower()
+        amount = float(match[1]) * (60 if unit.startswith(("hour", "hr")) else 1)
+        if unit.startswith(("mile", "kilometer", "km")):
+            issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total or between stops.")
+            continue
+        supported_travel[field].append(amount)
+    for field, amounts in supported_travel.items():
+        if field == "travel_total_minutes" and manual.travel.strip():
+            continue
+        value = getattr(ai, field)
+        if (amounts and (any(n < 0 for n in amounts) or value != min(amounts))) or (value is not None and not amounts):
+            issue("The travel limit or its total/between-stops meaning could not be verified. State a maximum number of minutes total travel or between stops.")
+    if re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I) and re.search(r"\b(?:miles?|kilometers?|km)\b", raw, re.I):
+        issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total or between stops.")
+    if ai.transport and not re.search({"walking": r"\bwalk(?:ing)?\b|on foot", "cycling": r"\bcycl(?:e|ing)\b|\bbik(?:e|ing)\b", "driving": r"\bdriv(?:e|ing)\b|by car", "transit": r"\btransit\b|\bbus\b|\btrain\b"}[ai.transport.value], raw, re.I):
+        issue("A transport preference could not be verified in your words. State the intended transport or rephrase and retry.")
+    if not (manual.costExplicit or manual.cost != CostPreference.balanced):
+        evidence = {"budget": r"\b(?:affordable|cheap|budget.friendly|low.cost)\b", "balanced": r"\bbalanced\b", "experience": r"\b(?:best experience|premium|upscale|luxury|high quality)\b"}
+        stated = {mode for mode, pattern in evidence.items() if re.search(pattern, raw, re.I)}
+        inferred = ai.cost.value if ai.cost else None
+        if len(stated) > 1 or (stated and stated != {inferred}):
+            issue("The spending preference is conflicting or was not captured correctly. Choose Budget-friendly, Balanced or Best experience in preferences.")
+        elif ai.cost and not re.search({"budget": r"affordable|cheap|budget.friendly|low.cost|on a budget|budget (?:mode|preference|outing)", "balanced": r"balanced|balance", "experience": r"experience|quality|premium|upscale|luxury"}[ai.cost.value], raw, re.I):
+            issue("A spending preference could not be verified in your words. State Budget-friendly, Balanced or Best experience, or choose it in preferences.")
+    if ai.transport is None and re.search(r"\b(?:driving|by car|by bus|by bike|public transit)\b", raw, re.I):
+        issue("The stated transport preference was not captured. State walking, cycling, driving or transit and retry.")
+    if re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\b(?:wheelchair|accessible|vegan|halal|kosher|private room)\b", raw, re.I):
+        issue("The catalog cannot verify your accessibility, dietary or venue requirement. Edit the request to remove it only if it is optional; otherwise this prototype cannot safely plan it.")
+    return issues
+
+
 def interpret_request(value: InterpretationInput, provider: AIProvider | None = None, *,
                       now: datetime | None = None) -> InterpretationResult:
     saved = value.pending if value.pending and value.pending.text == value.text else None
     reference = saved.referenceTime if saved else now or datetime.now(timezone.utc)
     ai = saved.interpretation.model_copy(deep=True) if saved else (provider if provider is not None else create_provider()).interpret(value.text)
-    ai = Interpretation.model_validate(ai)
+    ai = Interpretation.model_validate(ai).model_copy(deep=True)
     answers = saved.answers.model_copy(deep=True) if saved else ClarificationAnswers()
     if saved:
         for key, answer in value.answers.model_dump().items():
@@ -147,36 +250,43 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         evidence = re.search(rf"\b{number}\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of {number}\b|\bwe(?:'re| are) {number}\b", raw, re.I)
         if not evidence and not (ai.people == 2 and re.search(r"\bcouple\b", raw, re.I)):
             ai.people = None
-    if (not manual.budget.strip() or ai.budget_group is not None) and ai.currency == "USD" and re.search(r"€|£|\b(?:EUR|GBP|euros?|pounds?)\b", raw, re.I):
+    other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|CHF|SEK|NOK|DKK|ZAR|BRL|KRW|RUB|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)
+    if (not manual.budget.strip() or ai.budget_group is not None) and ai.currency == "USD" and other_currency:
         grounding_issues.append("The request names a non-USD currency. This catalog cannot convert currency.")
-    for field in ("budget_per_person", "budget_group"):
-        amount = getattr(ai, field)
-        if amount is not None and (not re.search(r"[$€£]|\b(?:budget|USD|EUR|GBP|dollars?|euros?|pounds?|bucks|spend|each|per person|total)\b", raw, re.I) or not any(float(n) == amount for n in re.findall(r"(?<![\w.])\d+(?:\.\d+)?", raw))):
-            setattr(ai, field, None)
-            if field == "budget_group" or not manual.budget.strip():
-                grounding_issues.append("AI returned a budget without numeric evidence. State the amount and currency explicitly.")
     # Existing catalog policy: an unqualified $ amount denotes USD. Restore
-    # this explicit source evidence after numeric grounding, never convert an
-    # explicitly different/ambiguous currency or invent a budget.
-    other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)
+    # this explicit source evidence; scope/amount checks below still apply.
+    # Never convert an explicitly different currency or invent a budget.
     if (ai.currency is None and (ai.budget_per_person is not None or ai.budget_group is not None)
             and re.search(r"\$\s*\d", raw) and not other_currency):
         ai.currency = "USD"
     ai.preferences = [phrase for phrase in ai.preferences if phrase.casefold() in raw.casefold()]
+    if ai.cost is None and any(p.casefold() in {"affordable", "cheap", "low-cost", "budget-friendly"} for p in ai.preferences):
+        ai.cost = CostPreference.budget
     ai.date_expressions = [phrase for phrase in ai.date_expressions if phrase.casefold() in raw.casefold()]
     ai.time_expressions = [phrase for phrase in ai.time_expressions if phrase.casefold() in raw.casefold()]
     # Uncertainties stay blocking unless the corresponding explicit correction resolves them.
     uncertainties = []
     for issue in ai.uncertainties:
+        # Some providers repeat a supported, already-resolved mode as a bare
+        # uncertainty. Only exact grounded labels with matching extraction clear;
+        # actual questions/conflicts and unverified venue qualities still block.
+        resolved_modes = {"best experience": CostPreference.experience,
+                          "budget-friendly": CostPreference.budget,
+                          "balanced": CostPreference.balanced}
+        label = issue.strip().casefold()
+        if label in resolved_modes and ai.cost == resolved_modes[label] and label in raw.casefold():
+            continue
         # A model may describe absent optional settings as uncertainty. Absence
         # alone is not a planning requirement; explicit ambiguous caps still block.
-        if re.search(r"budget", issue, re.I) and ai.budget_per_person is None and ai.budget_group is None:
+        if (re.search(r"budget", issue, re.I) and ai.budget_per_person is None and ai.budget_group is None
+                and re.search(r"unknown|unspecified|not (?:provided|specified|stated)|no budget", issue, re.I)):
             if not re.search(r"[$€£]|\b(?:USD|EUR|GBP|dollars?|euros?|pounds?)\b|\bbudget\D{0,15}\d|\d+(?:\.\d+)?\s*(?:each|per person|total)\b|\b(?:under|spend|up to)\s+\d", raw, re.I):
                 continue
-        if re.search(r"travel", issue, re.I) and ai.travel_total_minutes is None and ai.travel_leg_minutes is None:
+        if (re.search(r"travel", issue, re.I) and ai.travel_total_minutes is None and ai.travel_leg_minutes is None
+                and re.search(r"unknown|unspecified|not (?:provided|specified|stated)|no travel", issue, re.I)):
             if not re.search(r"\b(?:travel|between stops|between activities)\b|\d+\s*(?:minutes?|mins?|hours?)\b", raw, re.I):
                 continue
-        if re.search(r"experience|preference", issue, re.I) and re.search(r"unknown|not (?:provided|specified)|unspecified|missing", issue, re.I):
+        if ai.cost is None and re.search(r"experience|preference", issue, re.I) and re.search(r"unknown|not (?:provided|specified)|unspecified|missing", issue, re.I):
             continue
         field = None if re.search(r"budget|currency|travel|price|cost", issue, re.I) else next((field for field, pattern in [("people", r"group size|people|party size|number of persons"), ("location", r"location|city"),
                       ("date", r"date|weekend"), ("activities", r"activit|stop|choice"), ("time", r"time|clock")]
@@ -188,7 +298,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             ask(field, {"people": "How many people are coming?", "location": LOCATION_QUESTION,
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",
                         "time": "What overall time window do you mean (for example, from 6 PM to 10 PM)?"}[field], "ambiguous")
-    issues = [*uncertainties, *grounding_issues]
+    issues = [*uncertainties, *grounding_issues, *source_constraint_issues(raw, ai, manual, answers, ask)]
     notes = ["AI interpretation; itinerary calculations use the Python planner and fictional catalog."]
     if ai.preferences:
         notes.append("Stated preferences: " + ", ".join(ai.preferences) + ". Only supported categories and planning constraints are enforced; venue qualities are unverified.")
@@ -231,7 +341,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             activities.append(category)
     # Negative/alternative wording needs clarification; do not count it as a stop.
     exclusion_text = re.sub(r"\b(?:no|not) more than\b", "at most", activity_raw, flags=re.I)
-    # Date and numeric alternatives belong to their own clarification fields.
+    # Location, date and numeric alternatives belong to their own fields.
+    exclusion_text = LOCATION_ALTERNATIVES.sub(" ", exclusion_text)
     exclusion_text = re.sub(rf"(?:{DATE_WORDING.pattern})\s+or\s+(?:{DATE_WORDING.pattern})", " ", exclusion_text, flags=re.I)
     number_word = r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)"
     exclusion_text = re.sub(rf"\b{number_word}\s+or\s+{number_word}\b", " ", exclusion_text, flags=re.I)
@@ -266,8 +377,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             return selected
         return inferred
 
-    if ai.cost is None and any(p.casefold() in {"affordable", "cheap", "low-cost", "budget-friendly"} for p in ai.preferences):
-        ai.cost = CostPreference.budget
     location = chosen("location", answers.location or ai.location)
     people_answer = answers.people
     if people_answer:
@@ -353,16 +462,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             message = "Budget currency is unknown or unsupported. This fictional catalog uses USD; no conversion was made."
             issues.append(message)
             unsupported.append(message)
-    money_mentions = re.findall(r"(?:[$€£]|\b(?:USD|EUR|GBP)\s*)\s*(\d+(?:\.\d+)?)", raw, re.I)
-    if money_mentions and not manual.budget.strip():
-        extracted_amounts = {ai.budget_per_person, ai.budget_group}
-        if any(float(amount) not in extracted_amounts for amount in money_mentions):
-            issues.append("AI did not preserve every explicit budget amount. State one per-person cap and/or one group cap.")
-        if not re.search(r"\b(?:per person|each|a person|total|group budget|for (?:the |our )?(?:whole )?group)\b", raw, re.I):
-            issues.append("Budget scope is unclear. State USD per person or a total group budget, or set Maximum budget.")
-    if re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I) and re.search(r"\d+\s*(?:minutes?|mins?|hours?)\b", raw, re.I):
-        if ai.travel_total_minutes is None and ai.travel_leg_minutes is None and not manual.travel.strip():
-            issues.append("AI did not capture the stated travel limit. Set Maximum travel time or state a total/per-leg cap clearly.")
     if ai.transport:
         notes.append(f"Requested transport: {ai.transport.value}. Mock travel is mode-independent; no real route or mode-specific time is verified.")
     for field, val in (("people", people), ("budget", budget), ("travel", travel)):
@@ -390,7 +489,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             issues.append("Check group size (1–100), USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")
     # Keep the original grounded extraction; follow-up corrections remain separate.
     original = saved.interpretation if saved else ai.model_copy(deep=True)
-    pending = PendingClarification(text=value.text, interpretation=original, answers=answers, referenceTime=reference) if (resolved is not None or (issues and questions)) and not unsupported else None
+    pending = PendingClarification(text=value.text, interpretation=original, answers=answers, referenceTime=reference) if (resolved is not None or (issues and (questions or saved))) and not unsupported else None
     return InterpretationResult(interpretation=ai, request=resolved, notes=notes,
         issues=list(dict.fromkeys(issues)), questions=questions if pending else [],
         pending=pending, unsupported=unsupported)

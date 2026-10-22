@@ -113,7 +113,7 @@ class ClarificationTests(unittest.TestCase):
         self.assertEqual((done.request.startTime, done.request.dinnerStops, done.request.activities), (1080, [1], ['food', 'food']))
 
     def test_combined_essentials_and_repeated_activities_constraints_survive(self):
-        text = 'coffee, museum, then coffee tomorrow under $80 each, $200 total, 30 minutes total travel, driving, best experience'
+        text = 'coffee, museum, then coffee tomorrow under $80 each, $200 total, 30 minutes total travel, 20 minutes between stops, driving, best experience'
         r = self.initial(text, activities=['coffee', 'museum', 'coffee'], budget_per_person=80,
             budget_group=200, currency='USD', travel_total_minutes=30, travel_leg_minutes=20,
             transport='driving', cost='experience', preferences=['best experience'])

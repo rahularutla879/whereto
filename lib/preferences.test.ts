@@ -88,3 +88,28 @@ test("missing essential information and AI failures never populate guessed contr
     assert.match(result.message, /Group size|AI unavailable/);
   }
 });
+
+test("validation failure during a pending answer preserves manual, automatic and follow-up state", async () => {
+  const state = editPreference(displayInterpretedPreferences(emptyPreferenceState(), interpretedPreferences(request)), "budget", "50");
+  const before = structuredClone(state);
+  const pending = { pending: { text: "coffee", interpretation: { activities: ["coffee"] },
+    answers: {}, referenceTime: "2026-10-21T12:00:00Z" },
+    questions: [{ field: "date" as const, question: "What day?", kind: "essential" as const }] };
+  let changes = 0;
+  const paths: string[] = [];
+  const failed = await generateOuting("coffee", manualPreferences(state), {
+    continuation: pending, answers: { date: "tomorrow" },
+    onInterpreted: () => { changes++; }, onClarification: () => { changes++; }, onComplete: () => { changes++; },
+  }, async (url, init) => {
+    paths.push(String(url));
+    const sent = JSON.parse(String(init?.body));
+    assert.deepEqual(sent.pending, pending.pending);
+    assert.equal(sent.preferences.budget, "50");
+    return Response.json({ message: "Please check your request and try again." }, { status: 422 });
+  });
+  assert.equal(failed.plans.length, 0);
+  assert.deepEqual(paths, ["/api/interpret"]);
+  assert.equal(changes, 0);
+  assert.deepEqual(state, before);
+  assert.equal(pending.questions[0].field, "date");
+});

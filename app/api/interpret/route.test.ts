@@ -145,6 +145,33 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(dated.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
     assert.equal(modelCalls, beforeDateCalls + 1);
     assert.equal(retained, null);
+    // Task 34: real proxy/provider/Python pipeline rejects valid JSON with
+    // incorrect semantics, malformed shapes and unknown critical fields.
+    requestText = "Two people want coffee in Baltimore on 2026-11-07, maximum $40 each and 15 minutes between stops";
+    const validExtraction = { activities: ["coffee"], people: 2, location: "Baltimore", date: null,
+      budget_per_person: 40, currency: "USD", travel_leg_minutes: 15, preferences: [] };
+    const beforeControls = structuredClone(controls);
+    for (const changes of [
+      { budget_per_person: 40, budget_group: 40 },
+      { travel_leg_minutes: null, travel_total_minutes: 15 },
+      { people: "2" }, { cost: "luxury" }, { minimum_budget: 10 },
+      { activities: { coffee: true } }, { transport: "driving" },
+    ]) {
+      modelContent = JSON.stringify({ ...validExtraction, ...changes });
+      paths.length = 0;
+      const callsBefore: number = modelCalls;
+      const rejected = await run();
+      assert.equal(rejected.plans.length, 0);
+      assert.deepEqual(paths, ["/api/interpret"]);
+      assert.equal(modelCalls, callsBefore + 1);
+      assert.deepEqual(controls, beforeControls);
+      assert.doesNotMatch(rejected.message, /ValidationError|Traceback|minimum_budget/);
+    }
+    requestText = "Two people want coffee in Baltimore on 2026-11-07, maximum $40 each but minimum $80 each";
+    modelContent = JSON.stringify({ ...validExtraction, travel_leg_minutes: null });
+    paths.length = 0;
+    assert.match((await run()).message, /Minimum spending/);
+    assert.deepEqual(paths, ["/api/interpret"]);
     modelContent = "{}";
     paths.length = 0;
     assert.match((await run()).message, /AI interpretation unavailable/);

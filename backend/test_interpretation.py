@@ -124,7 +124,7 @@ class InterpretationTests(unittest.TestCase):
         self.assertEqual(r.interpretation.date_expressions, ['tomorrow'])
 
     def test_group_budget_currency_mode_and_time_bounds(self):
-        r = self.run_request('coffee with $60 total, driving after 2 pm until 8 pm', budget_group=60, currency='USD',
+        r = self.run_request('coffee with $60 total, 10 minutes between stops, driving after 2 pm until 8 pm', budget_group=60, currency='USD',
                              transport='driving', start_time=840, end_time=1200,
                              time_expressions=['after 2 pm', 'until 8 pm'], travel_leg_minutes=10)
         self.assertFalse(r.issues)

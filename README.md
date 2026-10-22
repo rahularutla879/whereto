@@ -295,3 +295,18 @@ Follow-up fields accept simple city names, numbers (also one–twenty), supporte
 A date in your original words or deliberately selected in Set preferences is used without another question. Missing city, group and date details are collected together; simple answers resume the original outing without another model call. A date does not verify the fictional venues’ hours, availability, prices or travel. There is no flexible-date comparison feature.
 
 The measured bottleneck was local AI processing, rather than itinerary calculations. The same model now receives the schema once and can omit absent optional JSON fields; validation restores their existing defaults and preserves stated constraints. Measured before/after timings are recorded in HANDOVER.md; latency varies with device/model state. Date/ranking computation is milliseconds, and follow-up completion remains fast because it does not call the model again. No background warming service or new model is required.
+
+
+### Interpretation validation (Task 34)
+
+The app checks the AI's structured answer before planning. If a date, city or group size is unclear, answer the existing follow-up. For conflicting budgets, unsupported requirements or an unreliable interpretation, use the explanation to edit your request or set the relevant preference. Minimum spending and travel distance limits are unsupported; use maximum USD budgets and minutes/hours of travel. Automatic preference values come only from a validated request; settings you deliberately change still take priority.
+
+An unavailable AI service or invalid AI response produces a retry message and no itinerary. There is no backup keyword interpreter. Date answers continue without another AI call. Checks cover common explicit wording, but unusual phrases may need rephrasing; fictional catalog results never verify real availability or venue requirements.
+
+Optional actual-model Task 34 verification, with Ollama running:
+
+```sh
+backend/.venv/bin/python -m backend.ai.smoke_validation
+```
+
+Normal `npm test` and `npm run test:backend` remain independent of a running AI model.

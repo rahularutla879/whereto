@@ -109,6 +109,11 @@ class PlanningApiTests(unittest.TestCase):
             self.assertIsNone(plan.stops[0].end)
             self.assertTrue({"unknown_price", "unknown_duration"} <= {i.code for i in plan.issues})
 
+    def test_past_date_is_rejected_before_final_planning(self):
+        data = self.post({"activities": ["coffee"], "date": "2000-01-01"}, 422)
+        self.assertIn("date or time window", data["message"])
+        self.assertNotIn("Traceback", str(data))
+
     def test_invalid_and_unsupported_requests(self):
         for payload in ({}, {"activities": ["coffee"]}, {"activities": ["coffee"], "date": None}, {"activities": []}, {"activities": ["coffee"], "people": 0},
                         {"activities": ["coffee"], "budget": -1}, {"activities": ["concert"]},

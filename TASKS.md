@@ -173,7 +173,7 @@ This was a Task 32 follow-up correction before Task 33.
 - [x] Pass 136 backend and 87 frontend tests, lint, TypeScript and production build; verify real Ollama/Python/Next.js browser flows.
 - [x] Review complete diff, update continuity documentation and push tested changes to the existing private repository, preserving release tags.
 
-Task 33 is complete. Stop here; Task 34 has not started.
+Task 33 is complete. Stop here; Task 34 is recorded below.
 
 ### Task 33 focused follow-up — mandatory date and response speed
 
@@ -183,4 +183,15 @@ Task 33 is complete. Stop here; Task 34 has not started.
 - [x] Preserve manual precedence, auto display, repeated stops, constraints, neutral location questions, cancellation/retry and duplicate protection.
 - [x] Pass 149 backend/87 frontend tests, lint, TypeScript, production build and real-browser acceptance scenarios; review diff and back up tested work.
 
-Task 33 remains complete with the updated policy. Task 34 has not started.
+Task 33 remains complete with the updated policy. Task 34 is recorded below.
+
+
+## Original roadmap — Task 34: strengthen interpretation and response validation
+
+- [x] Inspect and document existing schema, source, date, clarification, preferences and feasibility guarantees and gaps.
+- [x] Strengthen the existing provider-independent trust boundary; reject malformed/unknown data, ungrounded constraints and demonstrable scope/intent conflicts without fallback or additional AI calls.
+- [x] Preserve manual overrides, independent constraints, zero caps, repeated activity order, required dates, deterministic follow-ups and unchanged planner/UI behavior.
+- [x] Add deterministic regression and real HTTP integration tests; verify actual Qwen and browser scenarios, including clarification completion.
+- [x] Record 171 backend/88 frontend passes, real-model/browser evidence and measured latency tradeoff; review full diff and push tested changes to the existing private repository, preserving tags.
+
+Stop after Task 34. Task 35 is not started.

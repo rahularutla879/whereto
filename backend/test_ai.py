@@ -40,6 +40,8 @@ class AITests(unittest.TestCase):
         payload = json.loads(request.data)
         self.assertEqual(request.full_url, "http://127.0.0.1:11434/api/chat")
         expected_schema = Interpretation.model_json_schema()
+        for field in ("start_time", "end_time"):
+            expected_schema["properties"].pop(field)
         expected_schema["required"].extend(["budget_group", "currency", "travel_total_minutes",
                                             "travel_leg_minutes", "transport", "cost"])
         self.assertEqual(payload["format"], expected_schema)

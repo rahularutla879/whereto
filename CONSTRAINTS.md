@@ -16,3 +16,11 @@
 - Cost/experience preferences rank only feasible candidates; they cannot override hard constraints. Fewer than three distinct results is acceptable.
 
 See [ARCHITECTURE.md](ARCHITECTURE.md) for the current implementation and [HANDOVER.md](HANDOVER.md) for evidence and limitations.
+
+
+## Task 34 interpretation safeguards
+
+- Trust AI output only after the existing strict structured contract, bounded source checks, manual precedence and deterministic date resolution produce an effective request. Unknown fields and duplicate JSON keys are rejected, including unknown critical constraints.
+- Do not derive a group budget by multiplying a per-person budget, swap travel scopes, infer spending mode from a numeric cap, or silently interpret a minimum as a maximum. Unsupported currencies/distance units and recognized mandatory venue requirements require an explanation.
+- Keep manual overrides and follow-up answers separate from automatic display values. Validation failures must not populate guessed controls, send partial plans or invoke the retired interpreter. Follow-ups remain deterministic and use no extra AI calls.
+- Every published outing needs a valid date/window; recheck expiry at the public planning boundary. Validation establishes bounded interpretation confidence, not arbitrary-language completeness or real-world availability.
