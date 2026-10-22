@@ -358,3 +358,12 @@ Trailing spelled-out party counts such as “for two.” are accepted only as gr
 Task 35 UI refinement: the existing `preferencesOpen` flag still starts false. Only the identity-guarded `onComplete` callback (after a valid planning response, including honest infeasibility) now collapses it. Interpretation/validation failures, service failures, pending questions and ordinary edits never close it. Edit details uses the existing expand-and-focus action; clarification remains a separate visible panel. No extra editor or preference state was added. Summary spacing is tighter and absent optional fields are omitted, while explicit zero caps, deliberate Balanced and supplied additional hard constraints remain visible.
 
 `OutingDateField` preserves the native date input and ISO `YYYY-MM-DD` value. Numeric day/month presentation is controlled by browser locale; the observed `07/11/2026` corresponds to the same November 7 value used by Python. A readable selected-date description uses the same formatter as the summary and is linked with `aria-describedby`; empty dates explain browser formatting. Date parsing, timezone resolution, API payloads and validation are unchanged.
+
+
+## Task 36 — focused reliability corrections
+
+Party-size grounding and conflict detection share `GROUP_EVIDENCE`, including numeric/spelled “for four” before common location/date/constraint clauses and punctuation. This validates a model-supplied count only; it does not infer missing counts or treat duration/money numbers as people. Conflicting source counts remain clarification cases.
+
+Recognized minimum spending remains unsupported and blocking. Its concrete explanation supersedes competing model budget uncertainties and amount/scope diagnostics; it never selects a budget interpretation. Maximum-only validation and independent constraints are unchanged. Ungrounded model activity strings receive fixed user-facing errors/questions instead of echoed provider text. Genuine source activity phrases remain readable. The provider prompt, public contracts, continuation state, manual provenance, date resolver, planning engines and dependencies are unchanged.
+
+`backend.ai.smoke_reliability` adds an opt-in bounded actual-Qwen acceptance/timing matrix; normal tests remain deterministic. Temporary request-count/timing wrappers used during verification live outside the repository. See HANDOVER for test results, cold/warm methodology, browser verification and retained fictional-data limitations.

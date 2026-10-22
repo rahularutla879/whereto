@@ -223,3 +223,14 @@ Task 35 is complete. Stop here; Task 36 is not started.
 - [x] Verify native date locale formatting and add readable selected-date guidance, preserving ISO values and existing resolver/validation.
 - [x] Pass 99 frontend/175 backend tests, lint, TypeScript and production build; verify desktop/mobile edit/regenerate, stale cards, invalid edits, repeated stops, pending questions and keyboard interaction with real services.
 - [x] Review scoped diff, update relevant continuity notes and commit/push to existing private repository with tags preserved. Stop before Task 36.
+
+## Original roadmap — Task 36: comprehensive AI interpretation testing
+
+- [x] Inspect instructions, continuity documents and existing coverage; establish 175 backend/99 frontend baseline and reproduce the exact Task 35 conflict request with real Qwen.
+- [x] Run a focused acceptance matrix across extraction, dates/DST, clarification, hard constraints, preferences, summary edits, service failures and fictional-data limitations without duplicating existing broad edge-case tests.
+- [x] Fix discarded nontrailing party counts, competing minimum-budget explanations and ungrounded model activity text in errors; add six focused deterministic regression tests.
+- [x] Pass 181 backend/99 frontend tests, ESLint, TypeScript and production build; pass 20 real-Qwen runs and 10 production-browser journeys at 1280×720 and 390×844.
+- [x] Measure cold/warm AI separately from model-free follow-up/regeneration; count browser model/candidate requests and preserve existing architecture, dataset, dependencies and release tags.
+- [x] Review the full diff, document acceptance evidence/limitations and commit/push tested changes to the existing private repository.
+
+Task 36 is complete. Task 37 may begin in a separate session; it was not started here.
