@@ -8,6 +8,7 @@ import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIE
 import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
 import { PlanningSession } from "@/lib/planning-session";
 import { generateOuting, type PendingOuting, type ClarificationAnswers } from "@/lib/planning-client";
+import { ClarificationField } from "@/components/clarification-field";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
 import demoPlans from "@/data/demo-plans.json";
@@ -149,12 +150,9 @@ export default function Home() {
           <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>
           {generated && <p role="status">{result.message}</p>}
           <form onSubmit={event => { event.preventDefault(); void runPlanning(true); }}>
-            <div className="preferences-grid">{clarification.questions.map(question => <label key={question.field}>
-              <span>{question.question}</span>
-              <input aria-label={question.question} type="text" maxLength={question.field === "activities" ? 500 : question.field === "time" ? 150 : 80}
-                value={answers[question.field] ?? ""} placeholder={question.field === "location" ? "City or location" : question.field === "people" ? "e.g. 4" : question.field === "date" ? "e.g. 2026-11-07 or Saturday" : question.field === "activities" ? "e.g. coffee, museum, then coffee" : "e.g. from 6 PM to 10 PM"}
-                onChange={event => setAnswers(previous => ({ ...previous, [question.field]: event.target.value }))} />
-            </label>)}</div>
+            <div className="preferences-grid">{clarification.questions.map(question => <ClarificationField
+              key={question.field} question={question} value={answers[question.field] ?? ""}
+              onChange={value => setAnswers(previous => ({ ...previous, [question.field]: value }))} />)}</div>
             <div className="planner-actions"><button className="secondary-button" type="button" onClick={cancelClarification}>Cancel follow-up</button>
               <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Continue planning"}<ArrowRight size={18} /></button></div>
           </form>

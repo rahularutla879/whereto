@@ -195,3 +195,10 @@ Task 33 remains complete with the updated policy. Task 34 is recorded below.
 - [x] Record 172 backend/88 frontend passes, real-model/browser evidence and measured latency tradeoff; review full diff and push tested changes to the existing private repository, preserving tags.
 
 Stop after Task 34. Task 35 is not started.
+
+
+### Focused usability follow-up — date answer examples
+
+- [x] Keep the missing-date question; show only resolver-supported examples beside date follow-ups, including correction attempts.
+- [x] Preserve existing parsing/answers/overrides/continuation; add rendered date/non-date regression tests.
+- [x] Pass 90 frontend/172 backend tests, lint, TypeScript and production build; verify invalid/ambiguous answers → “tomorrow” → planning in a real browser, review diff and push tested changes. Task 35 remains unstarted.
