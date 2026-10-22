@@ -70,8 +70,18 @@ export type PendingOuting = {
   questions: { field: ClarificationField; question: string; kind: "essential" | "ambiguous" }[];
 };
 
+export type ValidatedOuting = {
+  request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
+    budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
+    groupBudget: number | null; maxLegTravel: number | null; transport: string | null;
+    dinnerStops: number[] | null };
+  continuation: PendingOuting;
+  explicitCost: boolean;
+  explicitTime: boolean;
+};
+
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
-  context?: { today?: string; onInterpreted?: (values: Preferences) => void;
+  context?: { onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
     continuation?: PendingOuting; answers?: ClarificationAnswers;
     onClarification?: (value: PendingOuting | null) => void; onComplete?: () => void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
@@ -99,6 +109,10 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     context?.signal?.throwIfAborted();
     const extractedPreferences = interpretedPreferences(extraction.request);
     context?.onInterpreted?.(extractedPreferences);
+    if (extraction.pending) context?.onValidated?.({ request: extraction.request,
+      continuation: { pending: extraction.pending, questions: [] },
+      explicitCost: !!preferences.costExplicit || preferences.cost !== "balanced" || extraction.interpretation?.cost != null,
+      explicitTime: !!extraction.interpretation?.time_expressions?.length || !!extraction.pending.answers?.time });
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify(extraction.request), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(15000)]) : AbortSignal.timeout(15000) });
     if (!response.ok) {

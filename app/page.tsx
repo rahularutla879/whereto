@@ -7,10 +7,11 @@ import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIE
 
 import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
 import { PlanningSession } from "@/lib/planning-session";
-import { generateOuting, type PendingOuting, type ClarificationAnswers } from "@/lib/planning-client";
+import { generateOuting, type ValidatedOuting, type PendingOuting, type ClarificationAnswers } from "@/lib/planning-client";
 import { ClarificationField } from "@/components/clarification-field";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
+import { OutingSummary, activityEditText } from "@/components/outing-summary";
 import demoPlans from "@/data/demo-plans.json";
 
 const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: CircleDot, drinks: Wine, movie: Popcorn, food: Utensils, coffee: Coffee, outdoors: Footprints, art: Palette, museum: Landmark, karaoke: Mic, arcade: Gamepad2, escape: Puzzle, shopping: ShoppingBag,
@@ -54,6 +55,8 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
 }
 
 export default function Home() {
+  const [validated, setValidated] = useState<ValidatedOuting | null>(null);
+  const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
   const [preferenceState, setPreferenceState] = useState(emptyPreferenceState);
   const preferences = preferenceState.values;
@@ -68,7 +71,21 @@ export default function Home() {
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: PreferenceField, value: string) {
+    invalidateResults();
     setPreferenceState(previous => editPreference(previous, key, value));
+  }
+  function invalidateResults() {
+    session.current.cancel();
+    setLoading(false);
+    setDirty(true);
+    setResult({ plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
+  }
+  function replaceRequest() {
+    cancelClarification();
+    setValidated(null);
+    setDirty(false);
+    setPreferenceState(previous => displayInterpretedPreferences(previous, emptyPreferenceState().values));
+    setResult({ plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
   }
   function cancelClarification() {
     session.current.cancel();
@@ -80,13 +97,15 @@ export default function Home() {
     const controller = session.current.begin();
     if (!controller) return;
     setLoading(true);
+    setResult({ plans: [], message: "Planning…", location: "", activities: [], notes: [] });
     let needsAnswer = false;
     const original = followup && clarification ? clarification.pending.text : request;
     try {
       const next = await generateOuting(original, manualPreferences(preferenceState), {
-        continuation: followup ? clarification ?? undefined : undefined,
-        answers: followup ? answers : undefined,
+        continuation: followup ? clarification ?? validated?.continuation : undefined,
+        answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
         signal: controller.signal,
+        onValidated: value => { if (session.current.current(controller)) { setValidated(value); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
           if (!session.current.current(controller)) return;
@@ -109,7 +128,7 @@ export default function Home() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing, or use the example."); requestRef.current?.reportValidity(); return; }
-    await runPlanning(!!clarification);
+    await runPlanning(!!clarification || !!validated);
   }
   const preferencesCount = [preferences.location, preferences.date, preferences.people, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
 
@@ -130,11 +149,11 @@ export default function Home() {
         <form className="planner" onSubmit={submit}>
           <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">LOCAL DEMO</span></div>
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
-          <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { cancelClarification(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
-          <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { cancelClarification(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
+          <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
-            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => setPreferenceState(emptyPreferenceState())}>Reset preferences</button></div>
+            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
               <label><span><CalendarDays size={14} /> Date</span><input type="date" value={preferences.date} onChange={(e) => updatePreference("date", e.target.value)} /><small>Every outing needs a date; event schedules are fictional</small></label>
@@ -142,9 +161,11 @@ export default function Home() {
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
               <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
+              {validated && <label className="activity-editor"><span>Activities in order</span><input aria-describedby="activity-edit-help" value={answers.activities ?? activityEditText(validated.request)} maxLength={500} onChange={e => { invalidateResults(); setAnswers(previous => ({ ...previous, activities: e.target.value })); }} /><small id="activity-edit-help">Separate stops with commas, including repeats. Use “dinner” to keep dinner timing. Up to four stops.</small></label>}
             </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         </form>
+        {validated && <OutingSummary value={validated} dirty={dirty} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
         {clarification && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
           <p className="details-heading">{clarification.questions.length ? "A little more detail" : "Your request is ready to retry"}</p>
           <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>

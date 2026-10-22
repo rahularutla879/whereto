@@ -103,7 +103,8 @@ class InterpretationResult(ContractModel):
 # an extraction. Unrecognized language remains the provider's responsibility.
 NUMBER_WORDS = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
 NUMBER = r"(?:\d+(?:\.\d+)?|" + "|".join(NUMBER_WORDS) + r")"
-GROUP_EVIDENCE = re.compile(rf"\b({NUMBER})\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of ({NUMBER})\b|\bwe(?:'re| are) ({NUMBER})\b", re.I)
+FOR_GROUP = r"\bfor (one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)(?=[.!?]?\s*$)"
+GROUP_EVIDENCE = re.compile(rf"\b({NUMBER})\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of ({NUMBER})\b|\bwe(?:'re| are) ({NUMBER})\b|{FOR_GROUP}", re.I)
 MONEY_EVIDENCE = re.compile(
     r"(?:[$€£¥₹]|\b(?:USD|EUR|GBP|CAD|AUD|INR|JPY)\s*|(?=-?\d[\d,]*(?:\.\d+)?\s*(?:dollars?|USD)\b))"
     r"\s*(-?\d[\d,]*(?:\.\d+)?)\s*(?:(?:dollars?|USD)\s*)?"
@@ -248,6 +249,11 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         words = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten", "eleven", "twelve"]
         number = rf"(?:{ai.people}" + ("|" + words[ai.people] if ai.people < len(words) else "") + ")"
         evidence = re.search(rf"\b{number}\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of {number}\b|\bwe(?:'re| are) {number}\b", raw, re.I)
+        # A trailing “for two” is explicit party wording, including the Task 35
+        # acceptance request. Verify the extracted number; never infer a count.
+        trailing_group = re.search(FOR_GROUP, raw, re.I)
+        if trailing_group and words.index(trailing_group[1].lower()) == ai.people:
+            evidence = trailing_group
         if not evidence and not (ai.people == 2 and re.search(r"\bcouple\b", raw, re.I)):
             ai.people = None
     other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|CHF|SEK|NOK|DKK|ZAR|BRL|KRW|RUB|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)

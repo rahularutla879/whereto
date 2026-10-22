@@ -202,3 +202,15 @@ Stop after Task 34. Task 35 is not started.
 - [x] Keep the missing-date question; show only resolver-supported examples beside date follow-ups, including correction attempts.
 - [x] Preserve existing parsing/answers/overrides/continuation; add rendered date/non-date regression tests.
 - [x] Pass 90 frontend/172 backend tests, lint, TypeScript and production build; verify invalid/ambiguous answers → “tomorrow” → planning in a real browser, review diff and push tested changes. Task 35 remains unstarted.
+
+
+## Original roadmap — Task 35: editable AI interpretation summary
+
+- [x] Inspect authoritative interpretation, preferences/manual provenance, dates, clarification, validation and Python planner before changes.
+- [x] Show compact resolved effective outing details automatically; distinguish unspecified optional choices from defaults.
+- [x] Reuse existing preferences and clarification answers for corrections, ordered/repeated activities and model-free regeneration through existing server validation.
+- [x] Preserve manual settings/new-request replacement, zero/Balanced, hard constraints, pending corrections/retry/cancel/reset, duplicate protection and immediate stale-card removal.
+- [x] Pass 175 backend/95 frontend tests, lint, TypeScript and production build; verify real Ollama/FastAPI/Next.js scenarios A–F, narrow layout and keyboard focus/navigation. Separate wide-desktop viewport was not exercised; see HANDOVER.md.
+- [x] Review complete diff, update continuity documentation and push tested changes to the existing private repository, preserving tags.
+
+Task 35 is complete. Stop here; Task 36 is not started.
