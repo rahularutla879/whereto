@@ -214,3 +214,12 @@ Stop after Task 34. Task 35 is not started.
 - [x] Review complete diff, update continuity documentation and push tested changes to the existing private repository, preserving tags.
 
 Task 35 is complete. Stop here; Task 36 is not started.
+
+
+### Task 35 focused UI refinement — compact overview and collapsible editor
+
+- [x] Keep initial preferences collapsed; collapse only after successful planning/regeneration, preserving deliberate opening and failure/clarification access.
+- [x] Keep Edit details focused on the existing controls; tighten summary spacing and omit unspecified optional rows without duplicating state.
+- [x] Verify native date locale formatting and add readable selected-date guidance, preserving ISO values and existing resolver/validation.
+- [x] Pass 99 frontend/175 backend tests, lint, TypeScript and production build; verify desktop/mobile edit/regenerate, stale cards, invalid edits, repeated stops, pending questions and keyboard interaction with real services.
+- [x] Review scoped diff, update relevant continuity notes and commit/push to existing private repository with tags preserved. Stop before Task 36.

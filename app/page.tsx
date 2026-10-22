@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type FormEvent } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, CalendarDays, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
 import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
 
@@ -9,6 +9,7 @@ import { emptyPreferenceState, editPreference, manualPreferences, displayInterpr
 import { PlanningSession } from "@/lib/planning-session";
 import { generateOuting, type ValidatedOuting, type PendingOuting, type ClarificationAnswers } from "@/lib/planning-client";
 import { ClarificationField } from "@/components/clarification-field";
+import { OutingDateField } from "@/components/outing-date-field";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
 import { OutingSummary, activityEditText } from "@/components/outing-summary";
@@ -112,7 +113,7 @@ export default function Home() {
           needsAnswer = !!value?.questions.length;
           setClarification(value);
         },
-        onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); } },
+        onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); setPreferencesOpen(false); } },
       });
       if (!session.current.current(controller)) return;
       setResult(next);
@@ -156,7 +157,7 @@ export default function Home() {
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
-              <label><span><CalendarDays size={14} /> Date</span><input type="date" value={preferences.date} onChange={(e) => updatePreference("date", e.target.value)} /><small>Every outing needs a date; event schedules are fictional</small></label>
+              <OutingDateField value={preferences.date} onChange={value => updatePreference("date", value)} />
               <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>

@@ -196,10 +196,11 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 
 .clarification-panel .clarification-date-help { font-size: 12px; line-height: 1.5; }
 
-.outing-summary { margin-top: 16px; padding: 20px 24px; border: 1px solid #dbddcf; border-radius: 16px; background: #fffefa; }
+.outing-summary { margin-top: 16px; padding: 16px 20px; border: 1px solid #dbddcf; border-radius: 16px; background: #fffefa; }
 .outing-summary h3 { font-size: 18px; }
-.outing-summary dl { display: flex; flex-wrap: wrap; gap: 14px 28px; margin: 16px 0 0; }
+.outing-summary dl { display: flex; flex-wrap: wrap; gap: 10px 24px; margin: 12px 0 0; }
 .outing-summary dt { font-size: 11px; color: #68755e; margin-bottom: 4px; }
 .outing-summary dd { font-size: 13px; margin: 0; overflow-wrap: anywhere; }
 .outing-summary p { font-size: 13px; line-height: 1.6; }
 .activity-editor { grid-column: 1 / -1; }
+.preferences-grid #outing-date-help { font-size: 11px; }

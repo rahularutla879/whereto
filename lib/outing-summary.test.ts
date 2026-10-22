@@ -16,8 +16,8 @@ test("summary displays resolved effective values and repeats without inventing o
   const fields = Object.fromEntries(outingDetails(value));
   assert.equal(fields.Date, "November 7, 2026");
   assert.equal(fields.Activities, "Coffee → Museum → Coffee");
-  assert.equal(fields.Budget, "Not specified");
-  assert.equal(fields.Experience, "Not specified (Balanced ranking)");
+  assert.equal(fields.Budget, undefined);
+  assert.equal(fields.Experience, undefined);
   assert.equal(fields["Time window"], undefined);
   assert.equal(fields["Group budget"], "$80 maximum total");
   assert.equal(activityEditText(value.request), "coffee, museum, coffee");
