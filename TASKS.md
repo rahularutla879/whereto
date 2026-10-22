@@ -1,5 +1,437 @@
 # Milestones and tasks
 
+## Authoritative original roadmap
+
+The authoritative source is [the original Word roadmap](docs/original-roadmap.docx), preserved byte for byte from the owner’s document. The checklist below transcribes its exact task wording and sequence, with the original phase/section headings, objectives, tools and completion tests. These source descriptions are plans, not permission to install tools, activate services or incur costs.
+
+Status as of October 22, 2026: Tasks 01–36 are completed per the owner’s current status; existing implementation notes and verification evidence are preserved in the historical tracker below and HANDOVER.md. A completed task does not claim that all technologies in its original description were adopted (for example, progress is tracked here rather than docs/ROADMAP.md). Task 37 is **in progress** until project identity, access and billing status are verified. Tasks 38–135 are pending; existing prototype overlap does not complete those later tasks.
+
+The original section completion tests apply to the whole section, not to each individual task. In particular, the real-venue/route completion test for section 1D belongs to Tasks 37–46 together; Task 37 requires only the Cloud project. Original cost/provider statements below are historical roadmap text, not current pricing verification.
+
+### Phase 0 — Set up everything
+
+Objective: Prepare your Mac and create a clean, secure project where Codex can work.
+
+Tools: Codex, GitHub, VS Code, Node.js, Python, Git.
+
+Expected cost: $0, assuming existing Codex access is sufficient.
+
+#### 0.1 — Set up the development environment
+
+- [x] Task 01 — Install Codex. Open the ChatGPT desktop app, access Codex, and sign in.
+
+- [x] Task 02 — Install VS Code. This is where we can inspect the project files, although Codex will write most of them.
+
+- [x] Task 03 — Install Homebrew. A package manager that makes installing development tools easier on macOS.
+
+- [x] Task 04 — Install Git, Node.js, and Python. Have Codex verify that the installed versions are compatible with our framework.
+
+- [x] Task 05 — Create the whereto folder. This will contain the entire application.
+
+Completion test: Codex can access our project folder, run Terminal commands, and create a sample file.
+
+#### 0.2 — Create our GitHub repository
+
+- [x] Task 06 — Create a GitHub account or sign in.
+
+- [x] Task 07 — Create a private repository named whereto.
+
+- [x] Task 08 — Connect the local project to GitHub.
+
+- [x] Task 09 — Configure Git and .gitignore. Make sure passwords, API keys, and secret configuration files cannot accidentally be committed.
+
+- [x] Task 10 — Make the first commit and push.
+
+GitHub becomes our code backup and version history. Every major working milestone will have a checkpoint that we can return to if something breaks.
+
+Completion test: The private GitHub repository contains our project files, and Codex can commit changes.
+
+#### 0.3 — Establish the development rules
+
+- [x] Task 11 — Create README.md. Simple instructions for starting, testing, and understanding the project.
+
+- [x] Task 12 — Create AGENTS.md. Tell Codex to use beginner-friendly explanations, small changes, secure coding practices, and automated testing.
+
+- [x] Task 13 — Set the technology stack. Next.js, TypeScript, Tailwind, FastAPI, PostgreSQL, and provider adapters.
+
+- [x] Task 14 — Create a progress file. Use docs/ROADMAP.md to track milestones and completed features.
+
+- [x] Task 15 — Establish a testing routine. Codex should test every meaningful change, explain any failures, and update the documentation.
+
+Completion test: We have a reproducible development project with clear rules, instead of a folder containing unrelated pieces of code.
+
+#### Checkpoint 0 — Development environment ready
+
+At this point, we can begin building the actual app.
+
+### Phase 1 — Build Stage 1: The basic MVP
+
+Objective: A user describes an outing, and the app produces useful combinations of real places with actual travel-time estimates.
+
+#### 1A. Build the frontend
+
+Tools: Codex, Next.js, TypeScript, Tailwind CSS.
+
+- [x] Task 16 — Initialize the Next.js application. Create the frontend and verify it opens in the browser.
+
+- [x] Task 17 — Design our homepage. Add the Where To? name, tagline, and natural-language input box.
+
+- [x] Task 18 — Add the Generate Plan button. Make it trigger a real application action instead of being decorative.
+
+- [x] Task 19 — Add loading, error, and empty states. Users should know when their plan is being generated or something fails.
+
+- [x] Task 20 — Build itinerary result cards. Display venue names, order of activities, travel estimates, and schedule.
+
+- [x] Task 21 — Build a detailed itinerary view. Clicking a plan reveals all its stops and venue information.
+
+- [x] Task 22 — Make everything mobile-responsive. Test on phone-sized and desktop-sized screens.
+
+Completion test: We have an attractive website with a working interface, initially using realistic mock venue data.
+
+#### 1B. Build the backend
+
+Tools: Codex, Python, FastAPI, Pydantic, Pytest.
+
+- [x] Task 23 — Initialize the Python backend. Create a health-check endpoint and connect it to the frontend.
+
+- [x] Task 24 — Define our data structures. Create models for outing requests, activities, venues, constraints, itinerary stops, and complete itineraries.
+
+- [x] Task 25 — Build a sample venue dataset. Include bowling alleys, bars, restaurants, movie theaters, and other common activities in a fictional testing environment.
+
+- [x] Task 26 — Build a deterministic itinerary generator. Combine matching venues into possible multi-stop plans.
+
+- [x] Task 27 — Add basic filtering and ranking. Remove obviously unsuitable combinations and select three distinct options.
+
+- [x] Task 28 — Connect the frontend to the generator. The Generate button should now return results produced by our backend.
+
+- [x] Task 29 — Write automated tests. Verify valid requests, invalid inputs, impossible routes, and correct activity order.
+
+Completion test: The app generates three itineraries from mock data using working application logic—not prewritten cards.
+
+#### 1C. Add natural-language understanding
+
+Tools: Codex, Ollama or a hosted AI model, Pydantic.
+
+- [x] Task 30 — Set up the AI model. Begin with local Ollama if its accuracy and speed are acceptable on the Mac; otherwise evaluate a hosted model.
+
+- [x] Task 31 — Build the prompt interpreter. Extract activities, location, date, time, number of people, budget, and travel constraints.
+
+- [x] Task 32 — Resolve natural date expressions. Understand phrases such as "tomorrow evening" and "next Saturday" using the location's timezone.
+
+- [x] Task 33 — Ask only necessary follow-up questions. Never force users through a long questionnaire when enough information is already provided.
+
+- [x] Task 34 — Validate the AI output. Reject malformed or inconsistent data and handle unclear requests safely.
+
+- [x] Task 35 — Build an editable request summary. Show the interpreted constraints so users can correct mistakes without rewriting everything.
+
+- [x] Task 36 — Create a natural-language test suite. Test requests containing multiple activities, unusual phrasing, missing constraints, and conflicting instructions.
+
+Completion test: Someone can type, "Four friends, bowling and drinks in Baltimore, Saturday after six, short drives," and the application understands the requirements correctly.
+
+#### 1D. Integrate real venues and travel times
+
+Tools: Google Cloud Console, Places API (New), Routes API, Google Maps Platform.
+
+This is where the app becomes genuinely useful.
+
+- [ ] Task 37 — Create a Google Cloud project.
+
+  Status: **In progress** — project creation/access and billing verification pending.
+
+- [ ] Task 38 — Enable the necessary mapping APIs. Start with Places and Routes; use Maps JavaScript API when we build the interactive map.
+
+- [ ] Task 39 — Configure billing safeguards. Restrict API keys, set appropriate quotas and budgets, and add app-level request limits.
+
+- [ ] Task 40 — Implement real venue search. Search by activity and geographical area.
+
+- [ ] Task 41 — Normalize venue data. Extract provider IDs, names, locations, ratings when available, hours, websites, and other supported fields.
+
+- [ ] Task 42 — Add deduplication and relevance checks. Avoid repeated venues and misleading matches.
+
+- [ ] Task 43 — Build the route calculator. Request actual driving or walking durations between candidate places.
+
+- [ ] Task 44 — Filter infeasible combinations. Reject excessive travel times and known opening-hour conflicts.
+
+- [ ] Task 45 — Add accurate source labeling. Distinguish verified data from estimates and unknown availability.
+
+- [ ] Task 46 — Integrate real venue and route data with the existing planner. Keep mock-data mode available for testing and development.
+
+Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.
+
+Google for Developers
+
+Completion test: Entering a Baltimore outing request produces real venues, actual routing estimates, and source links. The app never invents a movie showtime, reservation, or price it hasn't verified.
+
+#### 1E. Save plans and launch our first MVP
+
+Tools: Supabase PostgreSQL, GitHub, Vercel or other frontend hosting, Python backend hosting.
+
+- [ ] Task 47 — Create a Supabase project. Set up the hosted PostgreSQL database.
+
+- [ ] Task 48 — Create the initial database tables. Plans, constraints, generated itineraries, itinerary stops, and source metadata.
+
+- [ ] Task 49 — Save and retrieve plans. A browser refresh should not destroy a saved itinerary.
+
+- [ ] Task 50 — Configure safe database access. Keep privileged credentials on the server, validate requests, and protect write operations.
+
+- [ ] Task 51 — Add usage limits and basic error logging.
+
+- [ ] Task 52 — Choose production-compatible hosting. Deploy the frontend and backend to services permitted for our intended usage.
+
+- [ ] Task 53 — Configure environment variables and HTTPS. No secret keys in public frontend code or GitHub.
+
+- [ ] Task 54 — Perform end-to-end testing. Generate, open, save, refresh, and view a plan on a phone.
+
+- [ ] Task 55 — Invite initial testers. Collect feedback on recommendation quality, travel feasibility, and usefulness.
+
+Supabase currently offers a free plan that includes a PostgreSQL database suitable for small prototypes.
+
+Supabase Docs
+
+One hosting consideration: Vercel's free Hobby plan is restricted to non-commercial use. Since we're ultimately building a business, we'll review the appropriate hosting tier before a commercial launch.
+
+Vercel
+
+#### Checkpoint 1 — Stage 1 complete
+
+We have a real, publicly accessible outing planner that accepts natural-language requests and generates multi-stop itineraries using real venue and route data.
+
+### Phase 2 — Build Stage 2: Smart planning and optimization
+
+Objective: Generate plans that match individual priorities, not just places that happen to be close together.
+
+#### 2A. Build the complete preference system
+
+Tools: Codex, Next.js, Pydantic, PostgreSQL.
+
+- [ ] Task 56 — Expand the planning schema. Support budget, group size, dates, activities, travel, quality, cuisine, accessibility, atmosphere, and other relevant variables.
+
+- [ ] Task 57 — Classify constraints. Separate mandatory rules from flexible preferences.
+
+- [ ] Task 58 — Add an optional manual preference panel. Users can enter or adjust preferences without typing.
+
+- [ ] Task 59 — Synchronize text and manual inputs. A user can describe an outing naturally and then adjust the extracted settings.
+
+- [ ] Task 60 — Support activity-specific preferences. For example, "Cheap bowling, premium dinner."
+
+- [ ] Task 61 — Support unknown and unspecified values. Don't silently invent information when the user hasn't supplied it.
+
+- [ ] Task 62 — Add conflict detection. Identify contradictory requirements and offer clear alternatives.
+
+Completion test: Users can combine natural-language requests with manual settings, and the app correctly preserves every constraint.
+
+#### 2B. Build budget and cost intelligence
+
+Tools: Codex, FastAPI, PostgreSQL, available venue-price sources.
+
+- [ ] Task 63 — Add the three spending modes. Budget-friendly, Balanced, and Best Experience.
+
+- [ ] Task 64 — Add a continuous cost-versus-experience slider. Users can position themselves anywhere between saving money and maximizing quality.
+
+- [ ] Task 65 — Support strict maximum budgets. Per person and per group.
+
+- [ ] Task 66 — Create an activity-level budget allocator. Let users spend more on selected activities.
+
+- [ ] Task 67 — Build a cost estimation service. Store provider-supported prices or clearly identified estimates where available.
+
+- [ ] Task 68 — Calculate known cost breakdowns. Include per-person cost, group cost, and known additional fees.
+
+- [ ] Task 69 — Handle missing prices correctly. Don't mark a plan within budget if critical venue costs are unknown.
+
+- [ ] Task 70 — Build the cost comparison interface. Show estimated prices, confidence/source information, and differences between plans.
+
+For these first stages, we will not promise live prices for every venue. Comprehensive menu data, movie ticket prices, and booking availability require additional provider coverage in Stage 6.
+
+Completion test: A user can request a cheap outing, a premium outing, or a carefully balanced outing, and receive appropriately ranked options without the app misrepresenting unavailable prices.
+
+#### 2C. Improve itinerary optimization
+
+Tools: Python, Pytest, routing provider, optional OR-Tools.
+
+- [ ] Task 71 — Create the optimization scoring system. Evaluate venue quality, travel convenience, price, and preference match.
+
+- [ ] Task 72 — Guarantee hard-constraint filtering. Known violations must be excluded before the app ranks results.
+
+- [ ] Task 73 — Implement scheduling logic. Calculate arrival, activity duration, departure, and subsequent travel.
+
+- [ ] Task 74 — Add configurable timing buffers. Allow for parking, waiting, and transitions.
+
+- [ ] Task 75 — Handle fixed-time events. Only schedule specific movie showtimes or reservations when actual timing data is available.
+
+- [ ] Task 76 — Optimize activity order. Reorder flexible activities to reduce travel or improve timing.
+
+- [ ] Task 77 — Support fixed activity order. Respect requests such as "bowling first, movie last."
+
+- [ ] Task 78 — Optimize candidate selection. Avoid unnecessarily expensive route calculations and inefficient venue combinations.
+
+- [ ] Task 79 — Diversify recommendations. Produce meaningfully different plans rather than three slight variations of the same outing.
+
+- [ ] Task 80 — Explain recommendations. Show verified, understandable reasons for each option.
+
+- [ ] Task 81 — Implement infeasibility explanations. Suggest which constraints could be relaxed when no valid plan exists.
+
+- [ ] Task 82 — Test complex scenarios. Include conflicting budgets, closed venues, long travel times, special requirements, and constrained schedules.
+
+We can begin with straightforward Python algorithms. If the constraints become sufficiently complex, we can add OR-Tools without changing how users interact with the product.
+
+#### 2D. Upgrade the user experience
+
+Tools: Codex, Next.js, Tailwind CSS, Playwright.
+
+- [ ] Task 83 — Build comparison cards. Compare price, total travel, overall duration, ratings, and suitability.
+
+- [ ] Task 84 — Add explanation panels. Users can understand why one plan was recommended over another.
+
+- [ ] Task 85 — Add quick filters. Cheaper, closer, better rated, less travel, or change the activity mix.
+
+- [ ] Task 86 — Re-optimize when preferences change. Updating a slider or constraint should generate new recommendations.
+
+- [ ] Task 87 — Test on mobile. Ensure advanced options are tucked away unless the user wants them.
+
+- [ ] Task 88 — Run Stage 2 acceptance tests and save a GitHub release checkpoint.
+
+#### Checkpoint 2 — Stage 2 complete
+
+The app understands detailed constraints, supports all three spending modes, evaluates trade-offs, optimizes activity combinations, and clearly explains its recommendations.
+
+### Phase 3 — Build Stage 3: The interactive itinerary planner
+
+Objective: Users can modify their plans freely without starting the search again.
+
+#### 3A. Build the interactive map
+
+Tools: Google Maps JavaScript API, Next.js, Codex.
+
+- [ ] Task 89 — Integrate an interactive map. Display the actual venue locations.
+
+- [ ] Task 90 — Add numbered venue markers. Show each activity stop in itinerary order.
+
+- [ ] Task 91 — Draw the travel route. Display the planned journey using routing-provider data.
+
+- [ ] Task 92 — Synchronize the map and itinerary cards. Selecting a place in either view highlights it in both.
+
+- [ ] Task 93 — Show venue details. Address, supported ratings, hours, links, and available price information.
+
+- [ ] Task 94 — Add transport-mode switching. Recalculate routes using supported driving, walking, or transit options.
+
+- [ ] Task 95 — Design mobile map navigation. Use a simple Map/Plan switch or expandable map.
+
+- [ ] Task 96 — Test map accuracy and rendering performance.
+
+Completion test: Users can visually inspect the full route and tap any venue to learn more.
+
+#### 3B. Build the manual itinerary editor
+
+Tools: Next.js, FastAPI, PostgreSQL, routing provider.
+
+- [ ] Task 97 — Implement Replace Venue. Show suitable alternatives for a specific stop.
+
+- [ ] Task 98 — Implement Add Activity. Insert an activity anywhere in the itinerary.
+
+- [ ] Task 99 — Implement Remove Activity. Delete a stop and recalculate the remaining route.
+
+- [ ] Task 100 — Implement Reorder Activities. Support buttons and drag-and-drop on compatible devices.
+
+- [ ] Task 101 — Implement Lock Activity. Preserve chosen venues and fixed times during subsequent planning.
+
+- [ ] Task 102 — Build incremental recalculation. Update the affected routes, timing, and cost estimates without unnecessarily rebuilding everything.
+
+- [ ] Task 103 — Detect edit conflicts. Warn users when an edit violates hard constraints or collides with a locked activity.
+
+- [ ] Task 104 — Build Undo and Redo. Allow users to revert changes.
+
+- [ ] Task 105 — Add edit previews. Show how travel time, price, and schedule would change before applying an edit.
+
+- [ ] Task 106 — Test every editing action. Verify that venue identities, times, costs, and locked stops remain consistent.
+
+Completion test: Someone can manually build an itinerary from recommendations, change its structure, and always see updated calculations.
+
+#### 3C. Add natural-language itinerary editing
+
+Tools: Codex, AI model, Pydantic, FastAPI.
+
+- [ ] Task 107 — Create an AI editing endpoint. Accept requests referring to an existing plan.
+
+- [ ] Task 108 — Interpret editing instructions. Support replace, add, remove, reorder, lock, and time changes.
+
+- [ ] Task 109 — Build structured editing commands. The AI must output validated operations rather than directly modify database records.
+
+- [ ] Task 110 — Preserve existing constraints. Don't discard the original budget, travel limit, or locked venues.
+
+- [ ] Task 111 — Generate edit previews. Display proposed changes for approval.
+
+- [ ] Task 112 — Recalculate the updated plan. Run the scheduling and optimization engines.
+
+- [ ] Task 113 — Explain conflicts and alternatives. For example, explain why moving the movie later may be impossible without verified showtime data.
+
+- [ ] Task 114 — Add conversational editing history. Users can refer to previous changes within the current plan.
+
+- [ ] Task 115 — Run language and regression tests. Verify that the AI edits only the intended parts.
+
+Completion test: A user can type "Keep bowling, find a better bar, and reduce travel to 10 minutes per stop," review the proposed changes, and apply them.
+
+#### 3D. Add persistence, history, and sharing
+
+Tools: Supabase PostgreSQL, FastAPI, GitHub.
+
+- [ ] Task 116 — Build plan versioning. Save snapshots or change records for every approved edit.
+
+- [ ] Task 117 — Create a plan history view. Display previous versions and their differences.
+
+- [ ] Task 118 — Implement Restore Version. Revert to an earlier itinerary when needed.
+
+- [ ] Task 119 — Create secure shareable links. Friends can view an itinerary without creating an account.
+
+- [ ] Task 120 — Add owner-only editing. Shared read-only links must not provide editing access.
+
+- [ ] Task 121 — Support plan duplication. Users can copy an itinerary and modify their own version.
+
+- [ ] Task 122 — Add a simple export option. Produce a readable itinerary or printable view with venue links.
+
+- [ ] Task 123 — Secure shared data. Use unguessable share tokens, appropriate expiration/revocation controls, and protect private plan details.
+
+- [ ] Task 124 — Test editing permissions and plan recovery.
+
+Completion test: Users can save a plan, return to it, restore an older version, and share a view-only link with friends.
+
+#### 3E. Production testing and release
+
+Tools: Codex, GitHub, Pytest, Playwright, hosting dashboards.
+
+- [ ] Task 125 — Create comprehensive backend unit tests. Cover natural-language interpretation, constraints, ranking, routing, scheduling, and editing.
+
+- [ ] Task 126 — Create browser interaction tests. Cover plan creation, manual adjustments, map interactions, saving, and sharing.
+
+- [ ] Task 127 — Test cross-device layouts. Check desktop, mobile, and tablet screen sizes.
+
+- [ ] Task 128 — Perform accessibility testing. Keyboard navigation, readable text, button labels, and sufficient visual contrast.
+
+- [ ] Task 129 — Add monitoring and operational safeguards. Error logging, performance monitoring, API quotas, and request rate limits.
+
+- [ ] Task 130 — Add privacy and legal basics. Explain how plan/location data is handled, publish appropriate policies, and review venue-data and map-provider terms.
+
+- [ ] Task 131 — Perform basic security testing. Validate API authorization, secret handling, input limits, and potential abuse.
+
+- [ ] Task 132 — Test with real users. Include different budgets, activity combinations, locations, and group sizes.
+
+- [ ] Task 133 — Fix critical defects and usability issues.
+
+- [ ] Task 134 — Deploy the completed Stage 3 release.
+
+- [ ] Task 135 — Tag the release in GitHub and update documentation.
+
+#### Checkpoint 3 — Stages 1–3 complete
+
+We have a deployed, responsive web application capable of generating, optimizing, editing, saving, and sharing itineraries built from real venue and routing data.
+
+---
+
+## Historical implementation tracker
+
+The following pre-recovery tracker is retained verbatim, including historical status statements and task references. Use the authoritative checklist above for the single numbered roadmap sequence and current next task. These historical sections are evidence, not additional roadmap tasks.
+
+# Milestones and tasks
+
 Status baseline: October 20, 2026. Checked means implemented, not necessarily verified. Verification evidence belongs in [HANDOVER.md](HANDOVER.md). Stages are product goals, not claims that integrations already exist.
 
 ## Original roadmap — environment setup verification
