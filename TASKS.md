@@ -4,7 +4,7 @@
 
 The authoritative source is [the original Word roadmap](docs/original-roadmap.docx), preserved byte for byte from the owner’s document. The checklist below transcribes its exact task wording and sequence, with the original phase/section headings, objectives, tools and completion tests. These source descriptions are plans, not permission to install tools, activate services or incur costs.
 
-Status as of October 22, 2026: Tasks 01–36 are completed per the owner’s current status; existing implementation notes and verification evidence are preserved in the historical tracker below and HANDOVER.md. A completed task does not claim that all technologies in its original description were adopted (for example, progress is tracked here rather than docs/ROADMAP.md). Task 37 is **in progress** until project identity, access and billing status are verified. Tasks 38–135 are pending; existing prototype overlap does not complete those later tasks.
+Status as of October 22, 2026: Tasks 01–36 are completed per the owner’s current status; existing implementation notes and verification evidence are preserved in the historical tracker below and HANDOVER.md. A completed task does not claim that all technologies in its original description were adopted (for example, progress is tracked here rather than docs/ROADMAP.md). Task 37 is **complete**: its project identity, access and unlinked billing status were verified in Google Cloud Console. Tasks 38–135 are pending; existing prototype overlap does not complete those later tasks.
 
 The original section completion tests apply to the whole section, not to each individual task. In particular, the real-venue/route completion test for section 1D belongs to Tasks 37–46 together; Task 37 requires only the Cloud project. Original cost/provider statements below are historical roadmap text, not current pricing verification.
 
@@ -134,9 +134,9 @@ Tools: Google Cloud Console, Places API (New), Routes API, Google Maps Platform.
 
 This is where the app becomes genuinely useful.
 
-- [ ] Task 37 — Create a Google Cloud project.
+- [x] Task 37 — Create a Google Cloud project.
 
-  Status: **In progress** — project creation/access and billing verification pending.
+  Status: **Complete** — created and opened **Where To**, project ID **`where-to-512422`**, on October 22, 2026. The project’s Billing page confirms **no billing account linked**. No mapping APIs, API keys, service-account credentials, trial or paid services were activated by this task. [Open project](https://console.cloud.google.com/welcome?project=where-to-512422).
 
 - [ ] Task 38 — Enable the necessary mapping APIs. Start with Places and Routes; use Maps JavaScript API when we build the interactive map.
 
