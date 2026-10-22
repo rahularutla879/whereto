@@ -293,7 +293,23 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                       if re.search(pattern, issue, re.I)), None)
         if field and (getattr(answers, field) or (field in {"people", "location", "date"} and getattr(manual, field).strip())):
             continue
-        uncertainties.append(issue)
+        # Provider prose is untrusted diagnostic data. Do not show raw model
+        # JSON, schema names or exception text in the website's explanation.
+        messages = {
+            "people": "The group size is unclear. Confirm how many people are coming.",
+            "location": "The location is unclear. Choose one city for this outing.",
+            "date": "The outing date is unclear. Choose an exact date to continue.",
+            "activities": "The activity choices are unclear. List the stops you want in order, including repeats.",
+            "time": "The time window is unclear. State an overall start and end time with AM/PM.",
+        }
+        if field:
+            uncertainties.append(messages[field])
+        elif re.search(r"budget|currency|price|cost|experience|preference", issue, re.I):
+            uncertainties.append("The budget, currency or spending preference is unclear. State a maximum USD amount per person or for the group, and choose a spending preference if needed.")
+        elif re.search(r"travel", issue, re.I):
+            uncertainties.append("The travel requirement is unclear. State a maximum time in minutes or hours, total or between stops.")
+        else:
+            uncertainties.append("Part of your request is unclear or unsupported. Rephrase with explicit activities and constraints; no plan was generated.")
         if field:
             ask(field, {"people": "How many people are coming?", "location": LOCATION_QUESTION,
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",

@@ -192,6 +192,6 @@ Task 33 remains complete with the updated policy. Task 34 is recorded below.
 - [x] Strengthen the existing provider-independent trust boundary; reject malformed/unknown data, ungrounded constraints and demonstrable scope/intent conflicts without fallback or additional AI calls.
 - [x] Preserve manual overrides, independent constraints, zero caps, repeated activity order, required dates, deterministic follow-ups and unchanged planner/UI behavior.
 - [x] Add deterministic regression and real HTTP integration tests; verify actual Qwen and browser scenarios, including clarification completion.
-- [x] Record 171 backend/88 frontend passes, real-model/browser evidence and measured latency tradeoff; review full diff and push tested changes to the existing private repository, preserving tags.
+- [x] Record 172 backend/88 frontend passes, real-model/browser evidence and measured latency tradeoff; review full diff and push tested changes to the existing private repository, preserving tags.
 
 Stop after Task 34. Task 35 is not started.

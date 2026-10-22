@@ -198,6 +198,16 @@ class ValidationTests(unittest.TestCase):
         self.assertEqual(initial.pending.answers.date, '')
         provider.interpret.assert_not_called()
 
+    def test_provider_diagnostics_never_become_website_explanations(self):
+        for diagnostic in ['Traceback: private exception details', '{"internal_field": "bad"}',
+                           'budget_per_person invalid', 'location schema ValidationError']:
+            result = self.run_case(uncertainties=[diagnostic])
+            self.assertIsNone(result.request)
+            self.assertTrue(result.issues)
+            explanation = ' '.join(result.issues)
+            for private in ['Traceback', 'private exception', 'internal_field', 'budget_per_person', 'ValidationError']:
+                self.assertNotIn(private, explanation)
+
     def test_invalid_provider_never_invokes_planning_or_leaks_details(self):
         for body in [None, {}, {**BASE, 'secret_field': 'private details'}]:
             with patch('backend.interpretation.create_provider') as factory, patch('backend.main.recommend_plans') as planner:
