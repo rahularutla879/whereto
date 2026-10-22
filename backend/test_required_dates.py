@@ -64,7 +64,7 @@ class RequiredDateTests(unittest.TestCase):
 
     def test_ambiguous_invalid_and_past_answers_are_recoverable(self):
         initial = self.initial('coffee, museum, then coffee in Baltimore for 2 people')
-        for expression in ['this weekend', '2026-02-30', '2026-10-20', 'November 7', 'whenever']:
+        for expression in ['this weekend', '2026-02-30', '2026-10-20', 'March 11', 'whenever']:
             with self.subTest(expression=expression):
                 invalid = self.answer(initial, {'date': expression})
                 self.assertIsNone(invalid.request)

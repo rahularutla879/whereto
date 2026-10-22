@@ -179,7 +179,7 @@ class ClarificationTests(unittest.TestCase):
             answers={'location': 'Baltimore'}), provider,
             now=datetime(2026, 10, 23, 15, tzinfo=timezone.utc))
         self.assertIsNone(done.request)
-        self.assertIn('past', ' '.join(done.issues))
+        self.assertEqual(next(q for q in done.questions if q.field == 'date').reason, 'past_date')
         provider.interpret.assert_not_called()
 
     def test_invalid_activity_answer_keeps_original(self):

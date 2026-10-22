@@ -103,10 +103,11 @@ This is a local AI interpreter with conservative validation, not guaranteed unde
 
 All scheduled events have **invented entries only on November 7 and November 14, 2026**. These dates are fixture data, not real schedules. Expand **Supported activities & fictional event dates** under the planner to see the catalog and instructions.
 
-- Set the Date preference or type a date such as `2026-11-07` or `November 7, 2026`.
+- Set the Date preference or type an ISO date, a full English month name, or a standard abbreviation: `nov 11`, `Nov. 11`, `11 Nov`, `Nov 11, 2026`, or `11 November 2026` (case-insensitive; Sep and Sept both work).
+- Without a year, the app uses the current local calendar year only if that month/day is valid and today or later. If it has passed this year, it asks which year; reply with just a four-digit year, such as `2027`. It never silently moves the date to next year. February 29 needs a valid leap year.
 - Today, tonight, tomorrow, tomorrow evening, and weekdays resolve in Baltimore local time. “This Friday” means upcoming Friday including today; “next Friday” means Friday in the following Monday–Sunday week. This rule also applies to Saturday/Sunday and the other weekdays.
 - This/next weekend asks you to choose Saturday or Sunday. Saturday night means the upcoming Saturday with a disclosed 6 PM start default. Explicit clock bounds override that default.
-- Type clock windows such as `at 6 PM`, `18:00`, `noon`, `from 6 PM to midnight`, or `between 6 and 9 PM`. `after 6 PM` starts no earlier than 6:01 PM; `before 10 PM` ends no later than 9:59 PM. Ambiguous `at 7` needs AM/PM. Missing-year spoken dates need a year.
+- Type clock windows such as `at 6 PM`, `18:00`, `noon`, `from 6 PM to midnight`, or `between 6 and 9 PM`. `after 6 PM` starts no earlier than 6:01 PM; `before 10 PM` ends no later than 9:59 PM. Ambiguous `at 7` needs AM/PM.
 - Dates use Python calendar arithmetic, never AI guesses. Baltimore uses America/New_York; unknown location timezones use a disclosed UTC fallback reference. The fictional catalog still only covers Baltimore.
 - Past starts/dates, conflicting windows and overnight outings such as 10 PM–1 AM get an explanation. Nothing silently shifts to another day. DST-ambiguous/nonexistent times or windows crossing a clock change need a different window.
 - Multiple or invalid dates require correction. The Date preference takes priority over dates in the text.

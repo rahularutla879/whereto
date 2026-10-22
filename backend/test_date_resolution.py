@@ -56,7 +56,7 @@ class DateResolutionTests(unittest.TestCase):
             r = self.resolve(expression)
             self.assertFalse(r.issues)
             self.assertEqual(r.date, date(2028, 2, 29))
-        for expression in ('2027-02-29', 'November 31, 2026', 'November 7', 'tomorrow on 2026-11-07', 'next week'):
+        for expression in ('2027-02-29', 'November 31, 2026', 'March 11', 'tomorrow on 2026-11-07', 'next week'):
             self.assertTrue(self.resolve(expression).issues, expression)
         r = self.resolve('tomorrow this weekend', manual_date='2026-11-07')
         self.assertFalse(r.issues)

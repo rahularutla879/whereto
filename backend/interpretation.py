@@ -8,7 +8,8 @@ from typing import Annotated, Literal
 
 from pydantic import AwareDatetime, Field, ValidationError
 
-from backend.date_resolution import DATE_WORDING, TIME_WORDING, resolve_datetime
+from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
+                                     complete_year_answer, resolve_datetime)
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
                             PlanningRequest)
@@ -80,6 +81,8 @@ class ClarificationQuestion(ContractModel):
     field: ClarificationField
     question: str
     kind: Literal["essential", "ambiguous"] = "essential"
+    reason: CalendarReason | None = None
+    helpText: str | None = None
 
 
 class InterpretationInput(ContractModel):
@@ -219,6 +222,9 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if saved:
         for key, answer in value.answers.model_dump().items():
             if answer.strip():
+                if key == 'date':
+                    context = answers.date or saved.text
+                    answer = complete_year_answer(context, answer.strip())
                 setattr(answers, key, answer.strip())
     raw, manual = value.text, value.preferences
     activity_raw = raw
@@ -242,9 +248,15 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     questions = []
     unsupported = []
 
-    def ask(field, question, kind="essential"):
-        if not any(q.field == field for q in questions):
-            questions.append(ClarificationQuestion(field=field, question=question, kind=kind))
+    def ask(field, question, kind="essential", *, reason=None, help_text=None):
+        item = ClarificationQuestion(field=field, question=question, kind=kind,
+                                     reason=reason, helpText=help_text)
+        for index, existing in enumerate(questions):
+            if existing.field == field:
+                if reason is not None:
+                    questions[index] = item
+                return
+        questions.append(item)
 
     grounding_issues = [activity_answer_issue] if activity_answer_issue else []
     # Unspecified core facts must not acquire model defaults. Conservative
@@ -301,8 +313,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         if ai.cost is None and re.search(r"experience|preference", issue, re.I) and re.search(r"unknown|not (?:provided|specified)|unspecified|missing", issue, re.I):
             continue
         field = None if re.search(r"budget|currency|travel|price|cost", issue, re.I) else next((field for field, pattern in [("people", r"group size|people|party size|number of persons"), ("location", r"location|city"),
-                      ("date", r"date|weekend"), ("activities", r"activit|stop|choice"), ("time", r"time|clock")]
+                      ("date", r"date|weekend|\byear\b"), ("activities", r"activit|stop|choice"), ("time", r"time|clock")]
                       if re.search(pattern, issue, re.I)), None)
+        # The resolver validates/infer years from source wording. A provider's
+        # year uncertainty must not force a year question after that succeeds;
+        # retain other date uncertainties and all independent semantic guards.
+        if field == "date" and re.search(r"\byear\b", issue, re.I):
+            continue
         if field and (getattr(answers, field) or (field in {"people", "location", "date"} and getattr(manual, field).strip())):
             continue
         # Provider prose is untrusted diagnostic data. Do not show raw model
@@ -451,14 +468,15 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             manual_date=dates.date.isoformat(), now=now)
         dates.start, dates.end = current.start, current.end
         dates.issues.extend(current.issues)
-    if dates.issues:
-        if any(issue.startswith("Date wording") or "selected date" in issue or "Past-date" in issue for issue in dates.issues):
-            ask("date", "Which date should we use? Choose Saturday or Sunday for a weekend, or enter YYYY-MM-DD.", "ambiguous")
-        if any(not (issue.startswith("Date wording") or "selected date" in issue or "Past-date" in issue) for issue in dates.issues):
-            if any("Overnight" in issue for issue in dates.issues):
-                unsupported.extend(issue for issue in dates.issues if "Overnight" in issue)
-            else:
-                ask("time", "What overall time window should we use? Include AM/PM, for example from 6 PM to 10 PM.", "ambiguous")
+        dates.problems.extend(current.problems)
+    calendar_fields = set()
+    for problem in dates.problems:
+        if problem.reason == 'overnight':
+            unsupported.append(problem.message)
+        elif problem.field not in calendar_fields:
+            ask(problem.field, problem.question, "ambiguous",
+                reason=problem.reason, help_text=problem.guidance)
+            calendar_fields.add(problem.field)
     ai.date_expressions = dates.date_expressions
     ai.time_expressions = dates.time_expressions
     date = chosen("date", dates.date)
@@ -479,7 +497,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if date is None and (not dates.issues or (not dates.date_expressions and not manual.date.strip())):
         questions = [q for q in questions if q.field != "date"]
         issues.append("What day are you planning to go?")
-        ask("date", "What day are you planning to go?")
+        ask("date", "What day are you planning to go?", reason="missing_date", help_text=DATE_HELP)
     if location is None:
         ask("location", LOCATION_QUESTION)
         issues.append(LOCATION_QUESTION)

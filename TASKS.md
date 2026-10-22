@@ -234,3 +234,11 @@ Task 35 is complete. Stop here; Task 36 is not started.
 - [x] Review the full diff, document acceptance evidence/limitations and commit/push tested changes to the existing private repository.
 
 Task 36 is complete. Task 37 may begin in a separate session; it was not started here.
+
+### Focused date correction after Task 36
+
+- [x] Accept full English month names and standard abbreviations, optional periods, either day/month order and explicit years.
+- [x] Infer only a valid current-local-year date today or later; ask for the year of a passed month/day and a leap year for yearless February 29 where needed. Never silently advance a year.
+- [x] Continue year-only answers deterministically with preserved context; send reason-specific date/year/weekend/time questions and guidance through the existing clarification fields.
+- [x] Pass 194 backend/102 frontend tests, ESLint, TypeScript and production build; verify the exact six-person dinner request, corrections, preference synchronization and manual priority in the real Qwen/FastAPI/Next.js browser.
+- [x] Review the complete diff, update relevant documentation and commit/push the tested correction while preserving release tags. No Task 37 work.

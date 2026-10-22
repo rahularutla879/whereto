@@ -80,3 +80,21 @@ test("malformed backend output does not discard an existing clarification", asyn
     onClarification: () => { updates++; } }, async () => Response.json({ issues: [], notes: [], request: {} }));
   assert.equal(updates, 0);
 });
+
+test("contextual date reasons and year-only answers pass through the existing continuation", async () => {
+  const question = { field: "date" as const, kind: "ambiguous" as const, reason: "missing_year",
+    question: "March 11 has already passed this year. Which year would you like to plan for?",
+    helpText: "Enter a four-digit year, for example 2027." };
+  let current: PendingOuting | null = null;
+  let calls = 0;
+  await generateOuting(saved.pending.text, EMPTY_PREFERENCES, { continuation: saved,
+    answers: { date: "2027" }, onClarification: value => { current = value; } }, async (url, init) => {
+    calls++;
+    assert.equal(url, "/api/interpret");
+    assert.equal(JSON.parse(init!.body as string).answers.date, "2027");
+    return Response.json({ interpretation: {}, ...saved, questions: [question], request: null,
+      issues: [question.question], notes: [] });
+  });
+  assert.equal(calls, 1); // An unresolved answer must never reach planning.
+  assert.deepEqual((current as PendingOuting | null)?.questions, [question]);
+});

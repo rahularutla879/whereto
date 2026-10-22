@@ -67,7 +67,8 @@ export type ClarificationField = "location" | "people" | "date" | "activities" |
 export type ClarificationAnswers = Partial<Record<ClarificationField, string>>;
 export type PendingOuting = {
   pending: { text: string; interpretation: unknown; answers: ClarificationAnswers; referenceTime: string };
-  questions: { field: ClarificationField; question: string; kind: "essential" | "ambiguous" }[];
+  questions: { field: ClarificationField; question: string; kind: "essential" | "ambiguous";
+    reason?: string | null; helpText?: string | null }[];
 };
 
 export type ValidatedOuting = {
@@ -100,7 +101,8 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       if (extraction.pending.text !== text || !extraction.pending.interpretation
         || typeof extraction.pending.referenceTime !== "string" || !extraction.pending.answers
         || !Array.isArray(extraction.questions) || !extraction.questions.every((q: PendingOuting["questions"][number]) =>
-          q && fields.includes(q.field) && typeof q.question === "string" && ["essential", "ambiguous"].includes(q.kind))) throw new Error("Invalid clarification response");
+          q && fields.includes(q.field) && typeof q.question === "string" && ["essential", "ambiguous"].includes(q.kind)
+          && (q.reason == null || typeof q.reason === "string") && (q.helpText == null || typeof q.helpText === "string"))) throw new Error("Invalid clarification response");
       context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
     } else if (extraction.issues.length) context?.onClarification?.(null);
     if (extraction.issues.length || !extraction.request) {
