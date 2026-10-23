@@ -1,12 +1,12 @@
 # Task 39 — billing and provider safeguards
 
-Status: **partially complete / awaiting owner authorization**. Checked October 22–23, 2026 in the existing signed-in Cloud Console. No billing authorization or permission to make Google data requests is implied. Task 40 has not started.
+Status: **partially complete / awaiting secure credential strategy**. Latest continuation checked October 23, 2026 in the existing signed-in Cloud Console; the Free Trial section below supersedes the earlier unlinked-billing checkpoint. No paid-upgrade authorization or permission to make Google data requests is implied. Task 40 has not started.
 
 ## Verified Cloud state
 
-Project **Where To**, ID **`where-to-512422`**. Places API (New), `places.googleapis.com`, and Routes API, `routes.googleapis.com`, both show API Enabled. Maps JavaScript API, `maps-backend.googleapis.com`, still offers “enable this API” and is disabled. The project Billing page explicitly reports no linked billing account. Credentials lists no API keys, no OAuth clients and no service accounts. None were created.
+Project **Where To**, ID **`where-to-512422`**. Places API (New), `places.googleapis.com`, and Routes API, `routes.googleapis.com`, both show API Enabled. Maps JavaScript API, `maps-backend.googleapis.com`, still offers “enable this API” and is disabled. The project is now linked to the owner-created Free Trial billing account. Earlier unlinked-billing evidence below is historical; see the continuation section. Credentials lists no API keys, no OAuth clients and no service accounts. None were created.
 
-Only Console administration, public documentation and local test traffic were used. No live Places/Routes data request, billing link, trial enrollment, card entry, paid signup/terms acceptance or other API activation occurred.
+Only Console administration, public documentation and local checks were performed by the agent. The owner separately completed trial signup and project billing linkage. The agent made no live Places/Routes request, paid upgrade, card entry, financial terms acceptance or other API activation.
 
 ## Actual project quotas: before and after
 
@@ -58,7 +58,7 @@ A route request and a matrix request are different: a 3-origin × 3-destination 
 
 Both APIs require billing for use, even where an allowance applies: [Places setup](https://developers.google.com/maps/documentation/places/web-service/get-api-key), [Routes setup](https://developers.google.com/maps/documentation/routes/get-api-key). Free allowances do **not** guarantee no charges, particularly for higher tiers, other linked projects or credential abuse.
 
-## Budget: proposed, not created
+## Earlier budget proposal — historical, superseded by continuation
 
 The [project Budgets and alerts page](https://console.cloud.google.com/billing/budgets?project=where-to-512422) asks to **select a billing account** before any budget can be created. The project is unlinked. A project-scoped billing budget/alerts cannot be finished for this project in that state. This is a billing-authorization blocker, not a quota-permission error.
 
@@ -105,4 +105,65 @@ Passed: **204 backend tests**, **102 frontend tests**, ESLint, TypeScript checks
 
 No real-model smoke test or local planner browser/visual regression was rerun; existing HTTP/AI-fixture/interpretation/planning regressions passed. Cloud browser verification covers actual project/API/billing/credentials/quota states. Full diff/new-file and secret-pattern review is required before commit; release tags must be preserved.
 
-Stop at **Task 39 partial**: quotas and local safeguards are established; budget setup awaits billing approval, credentials await secure egress/secret handling, and live use awaits separate explicit authorization. Before Task 40 uses real data, close these blockers, reverify saved limits/alerts/restrictions and plan a bounded field mask/SKU. Do not begin Task 40 now.
+Earlier stopping point: **Task 39 partial**. The owner has since completed trial signup; see the continuation for the remaining credential blocker. Live use still needs separate explicit authorization. Before Task 40 uses real data, close these blockers, reverify saved limits/alerts/restrictions and plan a bounded field mask/SKU. Do not begin Task 40 now.
+
+
+## October 23 continuation — Free Trial and quota review
+
+The owner personally enrolled in the Free Trial and authorized a **$50** monthly alert budget (Part 2), superseding the old $5 proposal; the completion-report reference to $5 was treated as stale. No paid upgrade or live Maps traffic is authorized.
+
+### Billing verification
+
+- The project welcome page explicitly says **You're in free trial**, **0 out of $300 credits used**, and **Expires 21 January 2027**. The billing-account banner independently displays **$300.00 credit and 90 days remaining**. These are observed values, not an assumed signup balance or calculated expiration. Usage reporting can lag.
+- Opening this project's linked Billing page leads to **My Billing Account**. That account's Account management table explicitly lists **Where To / where-to-512422** under Projects linked to this billing account. Its type label is **Direct** (direct billing, not proof of a paid account); the explicit Free Trial banner and Upgrade control establish current trial status. No billing-account ID or personal financial information is committed.
+- Google documents that the Free Trial does not automatically upgrade: without an upgrade, it ends when credit is exhausted or the trial expires and associated resources stop. That is a trial-wide protection, not a configurable $50 monthly limit. Never click Upgrade without separate owner authorization. [Free Trial behavior](https://docs.cloud.google.com/free/docs/free-cloud-features).
+- The budget form offers **Spend cap enforcement (available for limited services)**. Google's current eligible-service list includes Gemini API, Agent Platform, Cloud Run and Cloud Run functions, **not Places or Routes**. No usable Maps monthly spend-cap budget was established, and no spend-cap feature was activated. Alerts are not a hard cap and can arrive after usage costs accrue. [Eligibility and limitations](https://docs.cloud.google.com/billing/docs/how-to/budgets-spend-caps).
+
+### Budget saved and independently verified
+
+The owner explicitly approved **account-wide scope** after the project picker listed Where To with a disabled checkbox and left only **All projects (1)** available. No cause for this Console scope limitation was established. This broader scope is intentional and approved; it is **not a project-only budget**.
+
+Saved budget **Where To development**, **Monthly**, specified amount **$50 USD**, alerts-only, all projects/all services on the linked account. The independent budget listing shows **This billing account**, **50%, 90% and 100%**, **$0.00/$50.00**, **No credits used**, and spend-cap status **Not applicable**. Reopened saved settings verify actual-cost triggers at **$25, $45 and $50**, both **Savings programmes** and **Other savings** unchecked, and **Email alerts to billing admins and users** checked. Promotional/free credits are therefore excluded from the budget calculation: it watches usage cost before credits, rather than just a post-credit amount payable. This is actual reported cost, not forecasted cost; reporting can lag over 24 hours. [Budget cost basis](https://docs.cloud.google.com/billing/docs/how-to/budgets).
+
+The billing account currently has only Where To linked; **any projects linked later will also count toward this same $50 budget**. Separate project-owner email is disabled for this account-wide scope; notifications use the enabled billing-admin/user recipient roles. Individual recipient delivery was not independently verified. No custom Monitoring channel or Pub/Sub topic was added. Configuration is verified; no notification email delivery test or billable threshold test was performed. No old $5 budget was created. This alert budget neither pauses APIs nor caps spending.
+
+### Quotas reverified, no changes
+
+All **17 reductions in the table above remain active** after signup, including zero daily quotas for seven unused Places methods. All displayed measurable usage is zero; per-user quotas remain Unlimited. The quota table now labels these quotas **Adjustable: No**. No edit or increase was submitted, and the reason for that label was not established; owner approval alone must not be assumed to make increases available. Do not upgrade to paid to obtain quota changes without explicit authorization.
+
+Current official pricing rechecked: Search Pro/Details Pro each have 5,000 free monthly events per SKU; Details Essentials and Routes/Matrix Essentials each have 10,000; Enterprise categories have 1,000. Paid prices and relevant categories remain as in the cost table. Do not use the obsolete $200 monthly-credit summary still present on some usage pages. Places charges depend on the highest requested field tier; matrix billing counts origins × destinations. The account's $300 trial credit is separate from these SKU allowances. [Current pricing](https://developers.google.com/maps/billing-and-pricing/pricing), [Places billing](https://developers.google.com/maps/documentation/places/web-service/usage-and-billing), [Routes billing](https://developers.google.com/maps/documentation/routes/usage-and-billing).
+
+### Proposed development limits — NOT applied
+
+The initial limits protected a project with no billing safeguards. Twenty searches/day allows only five four-activity tests per chosen method. Three candidates/activity and 27 matrix elements constrain discovery quality. A reasonable next controlled trial is around ten four-activity outings per active testing day, with up to two searches per activity, five candidates/activity and selective details for at most twelve venues. This is a proposal for approval, not permission for live work.
+
+| Google quota | Current day / minute | Proposed day / minute |
+| --- | --- | --- |
+| Text Search (separate method) | 20 / 10 requests | **100 / 20 requests** |
+| Nearby Search (separate method) | 20 / 10 requests | **100 / 20 requests** |
+| Place Details | 40 / 10 requests | **150 / 30 requests** |
+| Compute Routes | 20 / 10 requests | **50 / 10 requests** |
+| Route Matrix | 300 / 60 elements | **1,000 / 150 elements** |
+
+Keep unused methods at zero/day and per-user quotas unchanged. Two searches × four activities × ten outings = 80 searches/day, leaving modest headroom. Twelve details × ten outings = 120/day. Three adjacent 5 × 5 matrices = **75 elements/outing**, or 750 across ten outings. Matrix results must be reused across candidate combinations; 1,000/day is a ceiling, not a target. Ordinary route calls remain selective.
+
+Proposed application ceilings, also **NOT applied**: searches 4 → **8/outing**; candidates 3 → **5/activity**; matrix 27 → **75 elements/outing**; all attempts 20 → **30/outing**; session attempts 50 → **250**; session elements 300 → **1,000**. Keep concurrency **1**, retries **0**, duplicate prevention, error counting and live lock unchanged. A session means one process; restarting still resets it.
+
+These maxima are not calibrated to make every possible daily workload free. For example, 1,000 matrix elements/day over 30 days is 30,000 elements: Essentials' 10,000 free allowance would leave 20,000 × $0.005 = **$100** in usage cost at current list rates, before trial credit, excluding other APIs. Pro/Enterprise features can cost more. Prefer a reviewed set of active test days and least-cost required fields/features; review the credit and gross usage reports between sessions. Do not consume trial credit merely because it is available. A $50 alert cannot stop this workload at $50.
+
+### Credential recommendation and existing application controls
+
+The current Mac has no verified stable public outbound IP; future hosting is unselected. Billing signup does not solve that restriction. No IP was invented, no unrestricted key created, and no credential test or live Maps request was made.
+
+Google now recommends **OAuth 2.0 over API keys for supported server-side services**. Both APIs support OAuth; Routes client libraries support Application Default Credentials. A safe future option is a dedicated minimally privileged service account with short-lived tokens: an attached identity on a suitable Google-hosted backend or workload identity federation elsewhere, and approved service-account impersonation for local development. Use narrow supported Places scopes, verify the exact Routes scope and IAM restrictions separately, and prove minimum necessary access before creating an identity. Use the correct project for billing/quota. Do not use the owner's broad ADC identity or download a service-account JSON private key as a shortcut. No service account, IAM grant, OAuth setup, SDK or hosting service was added in this continuation. [Server security guidance](https://developers.google.com/maps/api-security-best-practices), [Places authorization scopes](https://developers.google.com/maps/documentation/places/web-service/reference/rpc/google.maps.places.v1), [Routes RPC reference](https://developers.google.com/maps/documentation/routes/reference/rpc/google.maps.routing.v2), [Routes ADC support](https://developers.google.com/maps/documentation/routes/client-libraries).
+
+If API keys are chosen instead, create separate Places-only and Routes-only backend credentials restricted to verified public egress IPs, with separate dev/production usage and an approved secret store outside the source tree. Do not provision a static-IP service or broaden IP ranges as an incidental step. Secure local OAuth/impersonation can be evaluated before hosting, so a paid hosting selection is not inherently required; the unresolved choice is the authorized credential/identity strategy. No credential values belong in Git, logs, frontend components, public environment variables or browser bundles.
+
+Application source, environment examples, dependency manifests, mock planner/data and provider limits are unchanged from commit `9192f23`. The existing ten focused budget/isolation tests passed again. Live mode is still rejected and `require_live_provider()` always refuses. Full frontend/backend regressions, real-model smoke tests and local browser/visual checks were not rerun for this cloud/documentation-only continuation.
+
+
+### Final continuation status and next approval
+
+**Implemented/verified:** Free Trial linkage/status/observed balance and expiry; saved approved $50 account-wide gross actual-cost email alerts; all 17 earlier quota reductions; existing local budget tests and live lock. **Proposed only:** quota/application-limit increases and future credential/identity strategy. **Deferred:** API keys/OAuth/service accounts, because a stable-IP key strategy or a separately reviewed minimal OAuth identity/permissions setup has not been established. **Task 39 remains partial on credentials**, with no budget-authorization blocker left. No paid upgrade or live usage is authorized; Task 40 has not started.
+
+To continue credential setup, choose and authorize either a verified suitable public-egress/IP-restricted key arrangement with approved secret storage, or a concrete minimal service-account/OAuth impersonation plan for local development. Any required IAM grants must be reviewed before creating access; no broad owner credentials or unrestricted temporary key. Hosting is not required merely to research/prepare the local OAuth option. Approval of proposed limits does not authorize live calls, and current Console adjustability must be rechecked without upgrading the billing account.
