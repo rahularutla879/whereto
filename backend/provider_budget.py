@@ -74,6 +74,11 @@ class OutingBudget:
         self._elements = 0
         self._seen: set[tuple[str, str]] = set()
 
+    @property
+    def settings(self) -> ProviderSettings:
+        """Immutable session limits for discovery request sizing."""
+        return self._session.settings
+
     def check_candidates(self, count: int) -> None:
         if type(count) is not int or count < 0:
             raise ValueError("Candidate count must be a nonnegative integer.")
