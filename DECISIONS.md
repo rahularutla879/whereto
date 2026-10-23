@@ -108,3 +108,10 @@ A paired timing check exposed avoidable generation of unused AI clock fields. Ex
 ## October 22, 2026 — conservative missing-year dates
 
 Resolve English named month/day dates in the existing Task 32 local calendar, accepting standard abbreviations and optional periods. A valid date today or later can use the reference year; a passed month/day must ask for a year, with no automatic next-year rollover. A year-only answer supplies that year for the saved unambiguous month/day and is revalidated (including leap days). Explicit past dates stay rejected. Use structured resolver reasons through the existing clarification fields so date/year/weekend/time questions and help match the actual problem. Preserve manual date priority and model-free continuation; add no date-parsing dependency, model arithmetic or extra AI call.
+
+
+## October 23, 2026 — Task 39 cost safeguards before real providers
+
+Lower actual project day/rate quotas using standard Cloud quota administration, which works without billing even when Maps-specific pages redirect to signup. Disable unused Places methods through zero daily quotas. Keep billing, trial enrollment, budget creation and credentials deferred at their explicit authorization/security boundaries. Document actual values separately from pricing allowances; neither rate quotas nor alerts promise a dollar ceiling.
+
+Prepare one small process-local request-budget module using existing Pydantic/unittest and standard-library locking, with one instance owned by FastAPI. Lock mode to mock at configuration/startup; do not add a live enabling flag or speculative Google adapter. Count attempts before I/O, matrix elements as origins × destinations, failures without refunds and duplicate attempts without retries. Keep existing exhaustive fictional planning untouched. Restarts/multiple workers weaken session totals; deployment-wide accounting is future work. See [verified safeguards and blockers](docs/billing-safeguards.md).

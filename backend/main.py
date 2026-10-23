@@ -9,6 +9,11 @@ from backend.ranking import recommend_plans
 from backend.ai import AIError
 from backend.interpretation import InterpretationInput, InterpretationResult, interpret_request
 
+from backend.provider_budget import ProviderBudget
+
+# One process-wide session for future venue/travel adapters; mock pipeline is unchanged.
+provider_budget = ProviderBudget()
+
 app = FastAPI(title="Where To? backend")
 
 

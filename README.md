@@ -311,3 +311,10 @@ backend/.venv/bin/python -m backend.ai.smoke_validation
 ```
 
 Normal `npm test` and `npm run test:backend` remain independent of a running AI model.
+
+
+## Google API safeguards (Task 39, partial)
+
+Keep using the same local startup commands above. Real venue/route requests are disabled in code; no Google key or billing setup is needed for the fictional planner. Leave `VENUE_DATA_MODE` unset (default `mock`) or set it to `mock` in the backend Terminal. Any other value prevents backend startup; remove that override to resume mock mode. Python does not automatically read Next.js environment files.
+
+Lower project quotas and local request-budget checks are implemented. Billing is unlinked; a $5 alert budget is only proposed and credentials are deferred. See [verified settings, costs and exact owner approval steps](docs/billing-safeguards.md). No payment or account action is needed to continue locally. Task 40 has not started.

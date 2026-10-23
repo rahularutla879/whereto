@@ -24,3 +24,12 @@ See [ARCHITECTURE.md](ARCHITECTURE.md) for the current implementation and [HANDO
 - Do not derive a group budget by multiplying a per-person budget, swap travel scopes, infer spending mode from a numeric cap, or silently interpret a minimum as a maximum. Unsupported currencies/distance units and recognized mandatory venue requirements require an explanation.
 - Keep manual overrides and follow-up answers separate from automatic display values. Validation failures must not populate guessed controls, send partial plans or invoke the retired interpreter. Follow-ups remain deterministic and use no extra AI calls.
 - Every published outing needs a valid date/window; recheck expiry at the public planning boundary. Validation establishes bounded interpretation confidence, not arbitrary-language completeness or real-world availability.
+
+
+## Task 39 — external venue/travel usage lock
+
+- `where-to-512422` has Places API (New) and Routes API enabled but **billing unlinked**, no credentials and no saved budget. Maps JavaScript remains disabled. Lower quotas are verified; exact values and remaining approval steps are in [docs/billing-safeguards.md](docs/billing-safeguards.md). Task 39 is partial; Task 40 has not started.
+- Keep `VENUE_DATA_MODE` absent or `mock`; live provider access is deliberately locked off in code. Do not link billing, start a trial, enter payment details, accept financial terms or issue live provider requests without explicit authorization. Billing setup does not itself authorize live use.
+- Future adapters must use the shared process/outing budget before every request/page/retry and enforce candidate/matrix limits before routing. No hidden SDK retries, per-itinerary network calls or silent activity omissions. Mock planning and local AI behavior retain their existing rules.
+- Future credentials must be backend-only, restricted to necessary APIs and verified public egress IPs, with an approved untracked secret location. No invented local/host IP, unrestricted key, `NEXT_PUBLIC_*` key, browser key or committed secret. Defer credentials while appropriate restrictions cannot be established.
+- Quotas, free allowances and process-local limits do not guarantee a hard monthly spending ceiling. Proposed $5 alerts at 50%, 90%, 100% are notifications, may lag accrued charges, and are not configured yet. Reverify quotas, budget recipients and credential restrictions after financial setup and before any approved live use.

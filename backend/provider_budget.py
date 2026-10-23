@@ -1,0 +1,135 @@
+"""Task 39 accounting for future venue/travel providers; no network transport.
+
+One budget per backend process, one outing budget per plan. Every future attempt
+must reserve before I/O, including pagination and failed attempts. Mock planning
+and the separate local AI interpreter do not consume this budget.
+"""
+
+from contextlib import contextmanager
+import os
+from threading import Lock
+from typing import Iterator, Literal
+
+from pydantic import BaseModel, ConfigDict, Field
+
+
+class ProviderLimitError(RuntimeError):
+    """Safe explanation for the future provider boundary to return to the user."""
+
+
+class ProviderSettings(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
+    # Deliberate code-level lock: no environment flag can activate live usage.
+    mode: Literal["mock"] = "mock"
+    searches_per_outing: int = Field(default=4, ge=0, le=4)
+    candidates_per_activity: int = Field(default=3, ge=1, le=3)
+    matrix_elements_per_outing: int = Field(default=27, ge=0, le=27)
+    requests_per_outing: int = Field(default=20, ge=0, le=20)
+    concurrent_requests: int = Field(default=1, ge=1, le=1)
+    retries: int = Field(default=0, ge=0, le=0)
+    requests_per_session: int = Field(default=50, ge=0, le=50)
+    matrix_elements_per_session: int = Field(default=300, ge=0, le=300)
+
+    @classmethod
+    def from_env(cls) -> "ProviderSettings":
+        # Same explicit process-environment convention as AISettings; no dotenv.
+        return cls(mode=os.environ.get("VENUE_DATA_MODE", "mock"))
+
+    def require_live_provider(self) -> None:
+        raise ProviderLimitError(
+            "Real venue and route requests are disabled. Continue with fictional "
+            "data until billing, alerts, restricted credentials and safeguards "
+            "are verified and the owner explicitly authorizes live use."
+        )
+
+
+Operation = Literal["search", "details", "route", "matrix"]
+
+
+class ProviderBudget:
+    """Thread-safe process/session counters. Restarting resets them, not billing.
+
+    Reservation accounts for attempts; it does not authorize live use. A future
+    adapter must ALSO call require_live_provider before any network operation.
+    No automatic retries, waiting queue, response cache or persistent counters.
+    """
+
+    def __init__(self, settings: ProviderSettings | None = None):
+        self.settings = ProviderSettings.model_validate(
+            (settings or ProviderSettings.from_env()).model_dump())
+        self._lock = Lock()
+        self._requests = 0
+        self._elements = 0
+        self._active = 0
+
+    def outing(self) -> "OutingBudget":
+        return OutingBudget(self)
+
+
+class OutingBudget:
+    def __init__(self, session: ProviderBudget):
+        self._session = session
+        self._requests = 0
+        self._searches = 0
+        self._elements = 0
+        self._seen: set[tuple[str, str]] = set()
+
+    def check_candidates(self, count: int) -> None:
+        if type(count) is not int or count < 0:
+            raise ValueError("Candidate count must be a nonnegative integer.")
+        if count > self._session.settings.candidates_per_activity:
+            raise ProviderLimitError(
+                "Too many venue candidates for one activity; narrow the search "
+                "before calculating routes. No route request was started."
+            )
+
+    @contextmanager
+    def reserve(self, operation: Operation, request_id: str, *,
+                origins: int = 0, destinations: int = 0) -> Iterator[None]:
+        """request_id identifies an exact request within this outing, never a key.
+
+        Matrix accounting charges the full origins × destinations, not one HTTP
+        request or the number of results that happen to succeed. Errors retain
+        consumed counters and request identity, so retries cannot loop for free.
+        """
+        if operation not in ("search", "details", "route", "matrix"):
+            raise ValueError("Unsupported provider operation.")
+        if not isinstance(request_id, str) or not request_id.strip() or len(request_id) > 200:
+            raise ValueError("A bounded nonblank request identity is required.")
+        if any(type(n) is not int or n < 0 for n in (origins, destinations)):
+            raise ValueError("Matrix dimensions must be nonnegative integers.")
+        if operation == "matrix":
+            if not origins or not destinations:
+                raise ValueError("A route matrix needs positive origins and destinations.")
+        elif origins or destinations:
+            raise ValueError("Only matrix requests may specify dimensions.")
+        elements = origins * destinations
+        session = self._session
+        limits = session.settings
+        with session._lock:
+            if (operation, request_id) in self._seen:
+                raise ProviderLimitError("This provider request was already attempted. Reuse its result or stop; automatic retries are disabled.")
+            if session._active >= limits.concurrent_requests:
+                raise ProviderLimitError("Another external request is running. Wait for it to finish before continuing.")
+            if session._requests >= limits.requests_per_session:
+                raise ProviderLimitError("Local testing session request limit reached. Stop and review usage before starting a new session.")
+            if self._requests >= limits.requests_per_outing:
+                raise ProviderLimitError("This outing's provider request limit was reached. Narrow the request.")
+            if operation == "search" and self._searches >= limits.searches_per_outing:
+                raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
+            if self._elements + elements > limits.matrix_elements_per_outing:
+                raise ProviderLimitError("This outing's route matrix element limit would be exceeded. Reduce candidates before requesting routes.")
+            if session._elements + elements > limits.matrix_elements_per_session:
+                raise ProviderLimitError("Local testing session route matrix element limit reached. Stop and review usage.")
+            self._seen.add((operation, request_id))
+            self._requests += 1
+            self._searches += operation == "search"
+            self._elements += elements
+            session._requests += 1
+            session._elements += elements
+            session._active += 1
+        try:
+            yield
+        finally:
+            with session._lock:
+                session._active -= 1
