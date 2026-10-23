@@ -1,6 +1,6 @@
 # Task 39 — billing and provider safeguards
 
-Status: **Tasks 39–40 complete; discovery disabled by default**. Task 40 adds an isolated, explicitly gated backend discovery adapter; exactly two authorized live Text Search attempts occurred (400, then 200). See the Task 40 section at the end and [venue discovery](venue-discovery.md). Earlier Task 39 checkpoints below are historical. Latest authentication continuation verified October 23, 2026 through official documentation, Cloud administration and non-billable OAuth/IAM checks. Later dated sections supersede earlier checkpoints. No paid-upgrade authorization or permission to make Google data requests is implied. Task 40 has not started.
+Status: **Tasks 39–40 complete; discovery disabled by default**. Task 40 adds an isolated, explicitly gated backend discovery adapter; exactly two authorized live Text Search attempts occurred (400, then 200). See the Task 40 section at the end and [venue discovery](venue-discovery.md). Earlier Task 39 checkpoints below are historical; later dated sections supersede them. Safeguards were reverified October 23, 2026. Task 40's live allowance is exhausted; further requests need separate authorization. No paid upgrade is authorized. Task 41 has not started.
 
 ## Verified Cloud state
 
