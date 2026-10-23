@@ -1,12 +1,12 @@
 # Task 39 — billing and provider safeguards
 
-Status: **partially complete / awaiting secure credential strategy**. Latest continuation checked October 23, 2026 in the existing signed-in Cloud Console; the Free Trial section below supersedes the earlier unlinked-billing checkpoint. No paid-upgrade authorization or permission to make Google data requests is implied. Task 40 has not started.
+Status: **Task 39 complete; live usage remains disabled**. Latest authentication continuation verified October 23, 2026 through official documentation, Cloud administration and non-billable OAuth/IAM checks. Later dated sections supersede earlier checkpoints. No paid-upgrade authorization or permission to make Google data requests is implied. Task 40 has not started.
 
 ## Verified Cloud state
 
-Project **Where To**, ID **`where-to-512422`**. Places API (New), `places.googleapis.com`, and Routes API, `routes.googleapis.com`, both show API Enabled. Maps JavaScript API, `maps-backend.googleapis.com`, still offers “enable this API” and is disabled. The project is now linked to the owner-created Free Trial billing account. Earlier unlinked-billing evidence below is historical; see the continuation section. Credentials lists no API keys, no OAuth clients and no service accounts. None were created.
+Project **Where To**, ID **`where-to-512422`**. Places API (New), `places.googleapis.com`, and Routes API, `routes.googleapis.com`, both show API Enabled. Maps JavaScript API, `maps-backend.googleapis.com`, still offers “enable this API” and is disabled. The project is now linked to the owner-created Free Trial billing account. Earlier unlinked-billing evidence below is historical; see the continuation section. There are no API keys or application OAuth clients. One dedicated keyless service account and local impersonated ADC are now configured; see the final authentication section.
 
-Only Console administration, public documentation and local checks were performed by the agent. The owner separately completed trial signup and project billing linkage. The agent made no live Places/Routes request, paid upgrade, card entry, financial terms acceptance or other API activation.
+Only Cloud administration, OAuth/IAM authentication, public documentation and local checks were performed by the agent. The owner separately completed trial signup and project billing linkage. The agent made no live Places/Routes request, paid upgrade, card entry or financial terms acceptance. Only the two identity APIs recorded in the authentication section were additionally enabled.
 
 ## Actual project quotas: before and after
 
@@ -162,8 +162,64 @@ If API keys are chosen instead, create separate Places-only and Routes-only back
 Application source, environment examples, dependency manifests, mock planner/data and provider limits are unchanged from commit `9192f23`. The existing ten focused budget/isolation tests passed again. Live mode is still rejected and `require_live_provider()` always refuses. Full frontend/backend regressions, real-model smoke tests and local browser/visual checks were not rerun for this cloud/documentation-only continuation.
 
 
-### Final continuation status and next approval
+### Earlier continuation status — superseded by authentication setup
 
 **Implemented/verified:** Free Trial linkage/status/observed balance and expiry; saved approved $50 account-wide gross actual-cost email alerts; all 17 earlier quota reductions; existing local budget tests and live lock. **Proposed only:** quota/application-limit increases and future credential/identity strategy. **Deferred:** API keys/OAuth/service accounts, because a stable-IP key strategy or a separately reviewed minimal OAuth identity/permissions setup has not been established. **Task 39 remains partial on credentials**, with no budget-authorization blocker left. No paid upgrade or live usage is authorized; Task 40 has not started.
 
 To continue credential setup, choose and authorize either a verified suitable public-egress/IP-restricted key arrangement with approved secret storage, or a concrete minimal service-account/OAuth impersonation plan for local development. Any required IAM grants must be reviewed before creating access; no broad owner credentials or unrestricted temporary key. Hosting is not required merely to research/prepare the local OAuth option. Approval of proposed limits does not authorize live calls, and current Console adjustability must be rechecked without upgrading the billing account.
+
+
+## October 23 authentication completion — Task 39 complete
+
+### Chosen authentication and verified permissions
+
+Use **local Application Default Credentials (ADC) with service-account impersonation** for the trusted Python backend. Both APIs explicitly support OAuth 2.0. The interactive official setup pages expose the full instructions after **3. Make your first request → OAuth token**; the initial static page omits these details. Routes requires `https://www.googleapis.com/auth/cloud-platform`; Places accepts it too. Places also supports narrower `maps-platform.places.textsearch`, `.nearbysearch` and `.details` scopes for separate future Places token requests. No narrower standard Routes scope was verified; do not substitute the unrelated Routes Preferred scope. [Routes setup](https://developers.google.com/maps/documentation/routes/get-api-key?setupProd=configure), [Places setup](https://developers.google.com/maps/documentation/places/web-service/get-api-key?setupProd=configure), [Places method scopes](https://developers.google.com/maps/documentation/places/web-service/reference/rpc/google.maps.places.v1).
+
+Configured and independently read back:
+
+- Service account: `whereto-local-maps@where-to-512422.iam.gserviceaccount.com`.
+- Runtime project role: `projects/where-to-512422/roles/wheretoMapsConsumer`, containing **only `serviceusage.services.use`**. This is the permission required to consume the project's quota/billing. A one-permission custom role avoids the monitoring/service-inspection permissions bundled into Service Usage Consumer. No runtime Owner, Editor, resource-management, IAM-management, billing-management or quota-editing role was granted. [Quota-project permission and custom roles](https://docs.cloud.google.com/docs/quotas/set-quota-project).
+- The signed-in owner has `roles/iam.serviceAccountTokenCreator` **on this service account only**. The role includes `iam.serviceAccounts.getAccessToken` and token/signing permissions; no project-wide Token Creator grant or service-account self-impersonation grant was added. Administrator setup uses the owner's existing project Owner role, not a new grant. [Local Python impersonation](https://docs.cloud.google.com/docs/authentication/set-up-adc-local-dev-environment), [token creation](https://docs.cloud.google.com/iam/docs/create-short-lived-credentials-direct).
+- Enabled `iam.googleapis.com` and `iamcredentials.googleapis.com` for documented identity administration/impersonation. These are authentication services, not venue/routing integrations. IAM API use is free; no hosting or additional paid service was provisioned. [IAM pricing](https://cloud.google.com/iam/pricing).
+
+OAuth scopes and IAM grants serve different purposes. The shared `cloud-platform` scope is broad; the dedicated account's minimal IAM role limits its permissions. **This is not an API-key-style allowlist for only two APIs**: `serviceusage.services.use` allows project API consumption, and any later added IAM roles could expand access. Do not add resource roles or enable further provider services incidentally. Future Places adapters should use the narrower supported Places scopes where practical. No claim is made that OAuth tokens alone enforce the application's request limits.
+
+Direct owner-user ADC would expose the owner's authority to the application and was not selected as its target identity. IP-restricted API keys remain an alternative when a suitable public egress IP is verified; the current Mac has no established stable address. Impersonation works without inventing an IP, downloading a private key or choosing paid hosting. Attached service identity/federation remains a future deployment choice.
+
+Administrator setup required the existing owner's `serviceusage.services.enable`, `iam.roles.create`, `iam.serviceAccounts.create`, `resourcemanager.projects.setIamPolicy` and `iam.serviceAccounts.setIamPolicy` permissions. Those setup permissions were not granted to the runtime identity. Runtime token refresh needs the source owner's `iam.serviceAccounts.getAccessToken` permission on the target; project consumption uses the target's `serviceusage.services.use`. Read-only quota inspection used the administrator, not the runtime identity.
+
+### Local credential storage and safe checks
+
+Installed Google Cloud CLI **590.0.0** using Google's documented Homebrew cask. Homebrew installed its Python 3.13/runtime dependencies and updated required certificate/OpenSSL packages; the application's existing Python virtual environment and dependency files were unchanged. The owner personally completed the CLI login and ADC browser approvals.
+
+Local ADC is at `~/.config/gcloud/application_default_credentials.json`, outside the repository, verified as `impersonated_service_account` targeting only the account above, with file mode **0600**. **A sensitive, reusable user OAuth refresh credential exists inside this ADC file**, and the CLI has its own local login store. Short-lived access tokens do not make those source credentials short-lived or harmless: anyone who steals the source refresh credential could exercise the source user's permitted access. Keep this trusted Mac and credential file protected; never copy it into source, frontend, logs, Git or documentation. No API key, service-account JSON private key, app OAuth client or token file was created.
+
+Google's bundled Python authentication library successfully discovered ADC, selected the expected impersonated identity and refreshed it into a valid token with **less than 60 minutes remaining**. The verification transport allowed only `oauth2.googleapis.com` and `iamcredentials.googleapis.com`; tokens remained in memory and were neither printed nor explicitly saved. This proves the identity/token flow, **not successful Places/Routes authorization or responses**, which were intentionally not tested. No Google client/library was added to the FastAPI application and no live adapter was implemented.
+
+Quota attribution was verified with Google's supported Python setting `GOOGLE_CLOUD_QUOTA_PROJECT=where-to-512422`; the service account also belongs to this same project. When a future approved adapter is introduced, set this in that backend Terminal (or pass the quota project explicitly in the authentication library):
+
+```sh
+cd /Users/rahularutla/Documents/whereto
+export GOOGLE_CLOUD_PROJECT=where-to-512422
+export GOOGLE_CLOUD_QUOTA_PROJECT=where-to-512422
+```
+
+These non-secret variables were set for the isolated verification process, not written into application configuration or the owner's shell profile. Current mock startup needs no authentication action. If local ADC later needs reauthorization, the tested Google command is:
+
+```sh
+gcloud auth application-default login --impersonate-service-account=whereto-local-maps@where-to-512422.iam.gserviceaccount.com --project=where-to-512422 --scopes=https://www.googleapis.com/auth/cloud-platform
+```
+
+Complete Google's browser approval personally with the project owner's account. Do not add an optional positional account argument: that combination failed in this installed CLI because the impersonation source flow does not return the ID token its account-validation path expects. Retrying without that argument succeeded. The CLI's `application-default set-quota-project` command rejected impersonated ADC as non-user credentials; no hand-edit or insecure workaround was used. The environment/programmatic method above is separately documented and verified. [Supported quota attribution](https://docs.cloud.google.com/docs/quotas/set-quota-project).
+
+### Quotas, billing and final verification
+
+All **36 Places/Routes quota values** were compared before and after identity setup through read-only Service Usage administration; they are identical, including all **17 prior reductions** and unchanged per-user values. Missing protobuf numeric values represent zero for the seven disabled daily methods. No quota or application ceiling changed and no quota increase/edit was submitted.
+
+Console still shows **Adjustable: No** with disabled row checkboxes for Places. Read-only Cloud Quotas metadata for all 36 quotas separately reports **`isFixed=false` and `quotaIncreaseEligibility.isEligible=true`**. Therefore these are not established to be permanently fixed provider limits; the precise reason for the Console discrepancy remains unconfirmed. The current administrator has project Owner access, and no new IAM role was added to overcome the display. Google's **Free Trial policy expressly prohibits quota-increase requests**. Metadata eligibility is not an approval or an exception to that rule. Proposed increases remain unapplied and must not be attempted as a bypass. Any future change requires owner approval, a billing account legitimately eligible under Google's rules and, where required, provider quota review/support. A paid upgrade is not authorized or needed to complete Task 39. [Trial restrictions](https://docs.cloud.google.com/free/docs/free-cloud-features#during-free-trial), [quota metadata](https://docs.cloud.google.com/docs/quotas/reference/rest/v1/projects.locations.services.quotaInfos), [quota permissions/review](https://docs.cloud.google.com/docs/quotas/view-manage).
+
+The live Console again confirms Free Trial **$300.00 remaining**, **90 days remaining**, and the welcome page's observed expiry **January 21, 2027**; no paid upgrade. Project billing linkage was independently confirmed through Cloud Billing administration. The existing **Where To development $50 monthly account-wide budget** was listed and reopened: actual thresholds **50/90/100% ($25/$45/$50)**, both savings/credit categories unchecked, billing-admin/user email alerts checked. No settings changed and email delivery was not tested. An optional budget-API read was blocked with `SERVICE_DISABLED`; it was not enabled because Console verification sufficed. Alerts remain notifications, not spending caps.
+
+Final API/inventory checks: Places and Routes enabled; Maps JavaScript disabled; **API key inventory empty**; service account has **zero user-managed keys**. Read-back confirms its sole runtime role and sole explicit impersonation binding. All **10 focused provider-budget/mock-isolation tests passed**. Application code, configuration, dependencies, fixtures and fictional-data planner are unchanged; the live guard remains unconditional. Full backend/frontend suites, lint, TypeScript, build, actual-model tests and planner browser checks were not rerun for this Cloud/local-authentication/documentation-only continuation. Initial system-Python administration checks hit a certificate-store error; Homebrew Python with trusted certificates succeeded without disabling TLS verification.
+
+**Task 39 is complete**: billing alerts, existing conservative quotas, application guards and a verified keyless local credential arrangement are established. This does **not** authorize or begin Task 40, live Google requests, quota/application-limit increases, paid-account upgrade or deployment. Any live integration still requires explicit owner approval, bounded field masks/features, correct quota attribution and mandatory use of the existing guard/budget boundaries. Keep using the fictional planner normally; no further owner login action is currently pending.
