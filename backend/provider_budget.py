@@ -8,6 +8,7 @@ and the separate local AI interpreter do not consume this budget.
 from contextlib import contextmanager
 import os
 from threading import Lock
+from time import monotonic
 from typing import Iterator, Literal
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -61,6 +62,7 @@ class ProviderBudget:
         self._requests = 0
         self._elements = 0
         self._active = 0
+        self._matrix_window: list[tuple[float, int]] = []
 
     def outing(self) -> "OutingBudget":
         return OutingBudget(self)
@@ -97,6 +99,69 @@ class OutingBudget:
         request or the number of results that happen to succeed. Errors retain
         consumed counters and request identity, so retries cannot loop for free.
         """
+        with self._reserve_batch([(operation, request_id, origins, destinations)]):
+            yield
+
+    @contextmanager
+    def reserve_matrices(self, matrices: list[tuple[str, int, int]]) -> Iterator[None]:
+        """Admit a complete routing plan atomically, before authentication/I/O.
+
+        All planned attempts remain charged locally even if a failure stops the
+        batch early. This conservative reservation prevents partial budget work.
+        """
+        if not matrices:
+            raise ValueError("A matrix reservation needs at least one request.")
+        with self._reserve_batch([("matrix", key, rows, cols) for key, rows, cols in matrices]):
+            yield
+
+    @contextmanager
+    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]]) -> Iterator[None]:
+        for operation, request_id, origins, destinations in attempts:
+            self._validate_attempt(operation, request_id, origins, destinations)
+        identities = {(op, key) for op, key, _, _ in attempts}
+        if len(identities) != len(attempts):
+            raise ProviderLimitError("Duplicate provider requests are not allowed.")
+        elements = sum(rows * cols for _, _, rows, cols in attempts)
+        requests = len(attempts)
+        searches = sum(op == "search" for op, _, _, _ in attempts)
+        session = self._session
+        limits = session.settings
+        with session._lock:
+            if identities & self._seen:
+                raise ProviderLimitError("This provider request was already attempted. Reuse its result or stop; automatic retries are disabled.")
+            if session._active >= limits.concurrent_requests:
+                raise ProviderLimitError("Another external request is running. Wait for it to finish before continuing.")
+            if session._requests + requests > limits.requests_per_session:
+                raise ProviderLimitError("Local testing session request limit reached. Stop and review usage before starting a new session.")
+            if self._requests + requests > limits.requests_per_outing:
+                raise ProviderLimitError("This outing's provider request limit was reached. Narrow the request.")
+            if self._searches + searches > limits.searches_per_outing:
+                raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
+            if self._elements + elements > limits.matrix_elements_per_outing:
+                raise ProviderLimitError("This outing's route matrix element limit would be exceeded. Reduce candidates before requesting routes.")
+            if session._elements + elements > limits.matrix_elements_per_session:
+                raise ProviderLimitError("Local testing session route matrix element limit reached. Stop and review usage.")
+            now = monotonic()
+            session._matrix_window = [(t, n) for t, n in session._matrix_window if now - t < 60]
+            if elements + sum(n for _, n in session._matrix_window) > 60:
+                raise ProviderLimitError("Local route matrix minute quota reached. Stop and review usage; no automatic retry is scheduled.")
+            self._seen.update(identities)
+            self._requests += requests
+            self._searches += searches
+            self._elements += elements
+            session._requests += requests
+            session._elements += elements
+            if elements:
+                session._matrix_window.append((now, elements))
+            session._active += 1
+        try:
+            yield
+        finally:
+            with session._lock:
+                session._active -= 1
+
+    @staticmethod
+    def _validate_attempt(operation, request_id, origins, destinations):
         if operation not in ("search", "details", "route", "matrix"):
             raise ValueError("Unsupported provider operation.")
         if not isinstance(request_id, str) or not request_id.strip() or len(request_id) > 200:
@@ -108,33 +173,3 @@ class OutingBudget:
                 raise ValueError("A route matrix needs positive origins and destinations.")
         elif origins or destinations:
             raise ValueError("Only matrix requests may specify dimensions.")
-        elements = origins * destinations
-        session = self._session
-        limits = session.settings
-        with session._lock:
-            if (operation, request_id) in self._seen:
-                raise ProviderLimitError("This provider request was already attempted. Reuse its result or stop; automatic retries are disabled.")
-            if session._active >= limits.concurrent_requests:
-                raise ProviderLimitError("Another external request is running. Wait for it to finish before continuing.")
-            if session._requests >= limits.requests_per_session:
-                raise ProviderLimitError("Local testing session request limit reached. Stop and review usage before starting a new session.")
-            if self._requests >= limits.requests_per_outing:
-                raise ProviderLimitError("This outing's provider request limit was reached. Narrow the request.")
-            if operation == "search" and self._searches >= limits.searches_per_outing:
-                raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
-            if self._elements + elements > limits.matrix_elements_per_outing:
-                raise ProviderLimitError("This outing's route matrix element limit would be exceeded. Reduce candidates before requesting routes.")
-            if session._elements + elements > limits.matrix_elements_per_session:
-                raise ProviderLimitError("Local testing session route matrix element limit reached. Stop and review usage.")
-            self._seen.add((operation, request_id))
-            self._requests += 1
-            self._searches += operation == "search"
-            self._elements += elements
-            session._requests += 1
-            session._elements += elements
-            session._active += 1
-        try:
-            yield
-        finally:
-            with session._lock:
-                session._active -= 1
