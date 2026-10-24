@@ -86,7 +86,7 @@ def _attributions(value):
 
 DIRECT_FIELDS = {
     "name": "resourceName", "formattedAddress": "address", "location": "coordinates",
-    "types": "providerTypes", "rating": "rating", "userRatingCount": "ratingCount",
+    "types": "providerTypes", "primaryType": "primaryType", "rating": "rating", "userRatingCount": "ratingCount",
     "websiteUri": "websiteUrl", "googleMapsUri": "mapsUrl", "utcOffsetMinutes": "utcOffsetMinutes",
 }
 PRICE_LEVELS = {"PRICE_LEVEL_" + name.upper(): name for name in

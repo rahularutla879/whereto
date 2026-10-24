@@ -127,6 +127,7 @@ class VenueFacts(VenueIdentity):
     address: Nonblank | None = None
     coordinates: Coordinates | None = None
     providerTypes: list[Nonblank] | None = None
+    primaryType: Nonblank | None = None
     rating: Annotated[Number, Field(ge=1, le=5)] | None = None
     ratingCount: Annotated[Integer, Field(ge=0)] | None = None
     regularOpeningHours: OpeningHours | None = None

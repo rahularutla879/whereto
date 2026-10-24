@@ -1,6 +1,6 @@
 # Task 39 — billing and provider safeguards
 
-Status: **Tasks 39–40 complete; discovery disabled by default**. Task 40 adds an isolated, explicitly gated backend discovery adapter; exactly two authorized live Text Search attempts occurred (400, then 200). See the Task 40 section at the end and [venue discovery](venue-discovery.md). Earlier Task 39 checkpoints below are historical; later dated sections supersede them. Safeguards were reverified October 23, 2026. Task 40's live allowance is exhausted; further requests need separate authorization. No paid upgrade is authorized. Task 41 adds offline normalization only; no new live requests or safeguard changes. Task 42 has not started.
+Status: **Tasks 39–42 complete; discovery disabled by default**. Task 40 adds an isolated, explicitly gated backend discovery adapter; exactly two authorized live Text Search attempts occurred (400, then 200). See the Task 40 section at the end and [venue discovery](venue-discovery.md). Earlier Task 39 checkpoints below are historical; later dated sections supersede them. Safeguards were reverified October 23, 2026. Task 40's live allowance is exhausted; further requests need separate authorization. No paid upgrade is authorized. Tasks 41–42 add offline normalization and candidate quality checks; no new live requests, fields, dependencies or safeguard changes. The Task 42 tests use synthetic responses only. Cloud quotas/billing were not rechecked or changed for this offline work. Task 43 has not started.
 
 ## Verified Cloud state
 

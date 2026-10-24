@@ -33,7 +33,7 @@ def main() -> int:
         result = PlacesDiscovery(ProviderBudget().outing()).discover(request)
         # Diagnostic counts only: no user coordinates or provider content stored/logged.
         print(json.dumps({"provider": result.provider, "candidate_count": len(result.candidates),
-                          "excluded_count": result.excluded_count, "notice": result.notice}))
+                          "excluded_count": result.excluded_count, "reason_counts": result.diagnostics, "notice": result.notice}))
         return 0
     except (DiscoveryError, ProviderLimitError) as exc:
         print(str(exc), file=sys.stderr)
