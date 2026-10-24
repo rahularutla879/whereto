@@ -1,6 +1,6 @@
 # Task 43 — backend route calculator
 
-Implemented October 24, 2026. This is an isolated Python integration prepared for later feasibility work. The website still uses fictional venues/travel. **No live Places or Routes request was made for Task 43.** Real Routes authentication and response behavior still need a separately authorized small live verification.
+Implemented October 24, 2026. This is an isolated Python integration prepared for later feasibility work. The website still uses fictional venues/travel. **The initial implementation used no live requests.** A subsequent separately authorized driving verification succeeded with one live request and four elements; see the ledger below. Walking remains mock-tested only.
 
 ## Interface and data
 
@@ -71,4 +71,28 @@ Safe codes distinguish disabled operation, application limits, invalid requests,
 
 **Live access is disabled by default**, checked in calculator and transport before authentication. `WHERETO_ROUTES_DEV=1` is a separate local-development gate for a future explicitly authorized verification only; it is not set in startup, environment examples or this task's running environment. `VENUE_DATA_MODE` remains mock-only, and the generic live-provider lock stays unconditional. Places' development gate does not activate routing. No public route endpoint or live-test command was added. Authorization for Task 40's old two requests does not extend to Routes.
 
-Offline verification: run `backend/.venv/bin/python -m unittest backend.test_routes backend.test_provider_budget -v` from `/Users/rahularutla/Documents/whereto`. Tests use invented responses, scoped flags and patched transports/authentication; sockets are forbidden in route tests. Full regression evidence and browser/live limitations are in HANDOVER.md. A small controlled live Routes check is ready to plan after separate owner authorization and read-only safeguard/usage review; it has **not** been performed.
+Offline verification: run `backend/.venv/bin/python -m unittest backend.test_routes backend.test_provider_budget -v` from `/Users/rahularutla/Documents/whereto`. Tests use invented responses, scoped flags and patched transports/authentication; sockets are forbidden in route tests. Full regression evidence and browser/live limitations are in HANDOVER.md. The authorized driving check below has now been performed. Its one-request allowance is exhausted; further live requests require separate authorization.
+
+
+## Authorized live verification — October 24, 2026
+
+**Result: successful. Exactly ONE live Compute Route Matrix request, FOUR requested/returned matrix elements, HTTP 200. Zero Places calls, retries or additional routing requests. The allowance is exhausted.** This follows the owner's updated explicit one-request/four-element authorization; the earlier two-element proposal made no live request.
+
+Public reference locations: **A = Fort McHenry National Monument and Historic Shrine**, with coordinates from [Recreation.gov](https://www.recreation.gov/gateways/2695); **B = Washington Monument in Baltimore's Mount Vernon neighborhood**, with published degree/minute/second coordinates from the [National Gallery of Art](https://heald.nga.gov/mediawiki/index.php/Washington_Monument_%28Baltimore%2C_MD%29), converted arithmetically to decimal degrees. These are landmark reference points, not user locations, verified entrances, opening-hours checks or accessibility guarantees. No Places/geocoding request obtained the inputs.
+
+The temporary verification process used existing `matrix_body([A,B], [A,B], "drive")`, the existing shared `OutingBudget.reserve("matrix", ..., origins=2, destinations=2)`, `routes_transport.compute_matrix` and `parse_matrix`. It deliberately included all four cells as authorized. Normal `GoogleRouteCalculator` behavior still removes self-pairs and purchases only needed transitions; no code was changed to force this verification shape into normal planning. Test-only settings lowered both process and outing ceilings to **one request/four elements**, beneath all unchanged project/application limits. A send guard allowed only the fixed Routes endpoint once and the existing OAuth/IAM authentication hosts, rejecting Places or any second Routes send. An exclusive local run marker prevented accidental repeat execution.
+
+| Pair | Validation outcome |
+| --- | --- |
+| A → B | Successful provider status/ROUTE_EXISTS; positive, sensible distance and duration; seconds/minutes consistent. |
+| B → A | Successful provider status/ROUTE_EXISTS; positive, sensible distance and duration; independently mapped and different from A → B. |
+| A → A and B → B | Successful provider status/ROUTE_EXISTS; zero distance and duration, appropriately accepted as self-pairs. |
+
+
+No provider, authentication, permission, quota, timeout, incomplete-element or mapping errors occurred. Existing local impersonated ADC successfully authenticated the actual Routes request. Its file hash remained unchanged, and the local permission/type/target checks passed. The fixed field mask remained `originIndex,destinationIndex,status,condition,distanceMeters,duration`; DRIVE/TRAFFIC_UNAWARE, no traffic model/tolls/premium options, zero redirects/retries. These are ordinary driving estimates, not live traffic predictions or guaranteed times. This check does not live-verify walking or Task 44 feasibility.
+
+The route gate was enabled only inside the single verification process and removed in `finally` immediately after the transport operation, before response validation. Both route/Places development switches were absent afterward; the disabled-route guard was exercised successfully. No environment/profile/config file, credential, IAM, quota, alert, billing-plan or account change. No persistent cache or raw provider request/response/credential was stored in the repository; the table records operational validation outcomes only. Numerical route metrics were used transiently for validation/reporting and were not copied into Git fixtures or documentation. [Routes content policies](https://developers.google.com/maps/documentation/routes/policies).
+
+Safeguard review used local code/settings/ADC metadata and the existing verified billing records: Free Trial originally $300, recorded expiry January 21, 2027; existing $50 account-wide alerts at $25/$45/$50; matrix cloud quotas 300/day and 60/minute. Those settings were not changed. Current remaining credit, aggregate usage and posted charges were **not freshly measured**. At the previously documented Essentials first-tier rate, four elements correspond to **$0.02 before allowances/trial credit**, an estimate rather than a receipt. No cloud administration API was enabled or queried as part of this check.
+
+Post-test focused offline route/budget checks: **33/33 passed**. No repository application code changed, so full frontend/build/browser/Ollama suites were not rerun. The initial Task 43 implementation's full regression results remain in HANDOVER.md. The fictional planner is unchanged; Task 44 remains unstarted.
