@@ -183,11 +183,15 @@ class TimeWindow(ContractModel):
         return self
 
 
-class Venue(ContractModel):
-    kind: Literal["venue"] = "venue"
+class VenueIdentity(ContractModel):
+    """Shared identity/category only; a building is not a scheduled event."""
     id: Nonblank
     name: Nonblank
     activity: ActivityType
+
+
+class Venue(VenueIdentity):
+    kind: Literal["venue"] = "venue"
     neighborhood: Nonblank | None = None
     price: Money | None = None  # USD/person; None is unknown, never free.
     duration: DurationMinutes | None = None

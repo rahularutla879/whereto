@@ -12,6 +12,7 @@ from pydantic import BaseModel, ConfigDict, Field, StringConstraints, Validation
 
 from backend.models import ActivityType
 from backend.provider_budget import OutingBudget
+from backend.venue_models import Coordinates
 
 PROJECT = "where-to-512422"
 SERVICE_ACCOUNT = f"whereto-local-maps@{PROJECT}.iam.gserviceaccount.com"
@@ -30,11 +31,6 @@ class DiscoveryError(RuntimeError):
 
 class DiscoveryModel(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True)
-
-
-class Coordinates(DiscoveryModel):
-    latitude: Annotated[Number, Field(ge=-90, le=90)]
-    longitude: Annotated[Number, Field(ge=-180, le=180)]
 
 
 class SearchArea(DiscoveryModel):

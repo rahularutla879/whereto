@@ -1,6 +1,6 @@
 # Task 40 venue discovery
 
-Task 40 adds isolated backend discovery, not real-data itineraries. The website still uses the fictional catalog. No new FastAPI route or frontend/geolocation control was added. Tasks 41–46 remain unstarted.
+Task 40 adds isolated backend discovery, not real-data itineraries. The website still uses the fictional catalog. No new FastAPI route or frontend/geolocation control was added. Task 41 adds offline normalization below; Tasks 42–46 remain unstarted.
 
 ## Development use
 
@@ -75,7 +75,7 @@ places.id,places.displayName,places.formattedAddress,places.location,places.addr
 
 Highest tier: **Text Search Pro**. Official global pricing checked October 23, 2026: 5,000 free events/month for this SKU; first paid tier **$32 per 1,000 requests ($0.032 each)**, subject to account-wide usage, applicable terms and changing prices. Two successful chargeable requests would have a $0.064 list-price estimate before free allowance/credits. This is not a measured charge; one of our two attempts returned HTTP 400, and billing treatment/posted cost was not independently measured. Results per page do not change the requested field tier. No Enterprise ratings/hours/websites/prices/reviews are requested.
 
-Each candidate contains `provider="google_places"`, untouched `provider_id`, display name, address, validated coordinates and any attributions. It is a discovery-only contract, not a normalized planner `Venue` or a feasible itinerary. There is no invented hours/availability/showtime/capacity/price/route/travel evidence. Task 41 will add the normalized venue contract and deliberate handling of supported optional details, unknowns and field costs.
+Each candidate contains `provider="google_places"`, untouched `provider_id`, display name, address, validated coordinates and any attributions. It is a discovery-only contract, not a normalized planner `Venue` or a feasible itinerary. There is no invented hours/availability/showtime/capacity/price/route/travel evidence. Task 41 now adds a separate offline canonical conversion with deliberate handling of optional details, unknowns and field costs; see the section below.
 
 Official references: [Text Search guide](https://developers.google.com/maps/documentation/places/web-service/text-search), [method reference and rectangle limit](https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places/searchText), [field tiers](https://developers.google.com/maps/documentation/places/web-service/data-fields), [field masks](https://developers.google.com/maps/documentation/places/web-service/choose-fields), [current pricing](https://developers.google.com/maps/billing-and-pricing/pricing), [OAuth scopes](https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places/searchText#authorization-scopes).
 
@@ -99,3 +99,71 @@ Both used the fixed field mask above, no pagination, no expensive optional field
 Preflight reverified all 36 quota values, including the 17 prior reductions, and both enabled APIs through read-only Service Usage administration. Console reverified the existing Free Trial ($300/90 days displayed), $50 account-wide monthly budget, actual alerts at $25/$45/$50, excluded credits and billing-admin/user recipients. An optional Cloud Billing administration API inspection returned **403 SERVICE_DISABLED**; it was left disabled and Console supplied the verification instead. That administration failure is separate from Places access and is not evidence of an unlinked billing account. No upgrade, quota increase, new role, new project, new key or financial terms action occurred. Alert delivery and posted charges were not tested.
 
 Offline tests cover query mappings, geographic evidence, city/neighborhood/coordinates/radius, destination precedence, independent start/travel fields, parsing/empty/malformed results, provider errors, missing/expired/wrong-identity ADC, timeouts, disabled gates, exact masks, no redirects/retries, budgets and mock isolation. All fixtures are synthetic. Full backend and frontend regression results are recorded in HANDOVER.md. No browser planner/geolocation journey, actual Ollama smoke or frontend visual checks were performed for this backend-only task.
+
+## Task 41 canonical venue facts — October 24, 2026
+
+Task 41 is an **offline normalization layer**, separate from field selection and network access. `backend/venue_models.py` defines `VenueFacts`; `backend/venue_normalization.py` converts Google Place objects into it. The website/planner continues using the shared fictional catalog. No live Google request, new field mask, enrichment transport, quota change, database or cache was introduced. Tasks 42–46 are unstarted.
+
+### Model boundaries and mapping
+
+The existing `Venue`/`ScheduledEvent` contract describes planner stops: USD/person cost, duration, capacity, fictional routing zone, and (for event categories) a dated session with a start. Google's Place describes a **physical building/business**, including stadiums and theaters; its hours do not establish a game, showtime, reservation, ticket inventory or bookable session. Converting it directly into `ScheduledEvent` would require inventing those facts. `VenueFacts` is the canonical physical-place contract for future real discovery, not a second planner or an alternative session schema. Both reuse the small `VenueIdentity` base (`id`, `name`, existing `ActivityType`); coordinate validation is also shared with Task 40. Existing mock record values and public planner payloads are preserved.
+
+| Google input | Canonical `VenueFacts` field | Behavior |
+| --- | --- | --- |
+| `id` | `id` | Original provider ID, never generated, truncated or trimmed; whitespace-invalid IDs rejected. Identity is scoped by `provider`. |
+| Source adapter | `provider`, `evidence` | `google_places`, `provider_supplied`; means supplied by the provider, not independently verified. Test responses are synthetic. |
+| Caller activity | `activity` | Existing 29-category enum; derived search context, **not** provider-confirmed relevance. No type matching/ranking here. |
+| `displayName.text` | `name` | Nonblank human-readable name. `name` resource path is never used as a fallback. |
+| `name` | `resourceName` | Optional `places/<id>` resource path; must agree with `id`. |
+| `formattedAddress`, `location` | `address`, `coordinates` | Nullable address and finite latitude/longitude; valid ranges −90…90 and −180…180. No inferred location. |
+| `types` | `providerTypes` | Nullable list of supplied type strings, including unfamiliar future types; no invented classifications. |
+| `rating`, `userRatingCount` | `rating`, `ratingCount` | Nullable rating 1…5 and nonnegative integer count. No mapping to the mock `experience` tier. |
+| `regularOpeningHours` | `regularOpeningHours` | Typical venue hours, structured periods and optional localized descriptions. |
+| `currentOpeningHours` | `currentOpeningHours` | Separate current/exceptional hours snapshot, including dated periods and special dates when supplied. |
+| `websiteUri`, `googleMapsUri` | `websiteUrl`, `mapsUrl` | Nullable HTTP(S) URLs. Credentials in URLs and other schemes are rejected; links are not fetched. |
+| `priceLevel` | `priceLevel` | Nullable free/inexpensive/moderate/expensive/very_expensive indicator; unspecified becomes null. |
+| `priceRange.startPrice`, `.endPrice` | `priceRange.start`, `.end` | Nullable exact decimal amounts and source currencies. End may be absent; supplied bounds must be ordered and share a currency. This is **not** a per-person quote or ticket price. |
+| `timeZone.id`, `.version` | `timeZone` | Supplied IANA zone (validated with the installed timezone database) and optional provider version. Unknown zones reject safely. No inferred Baltimore zone. |
+| `utcOffsetMinutes` | `utcOffsetMinutes` | Separate nullable offset −840…840, including zero. An offset alone is not an IANA zone or future DST rule. |
+| `attributions[].provider`, `.providerUri` | `attributions[].provider`, `.uri` | Required supplied credit information, with HTTP(S) URI validation. No attribution is invented. |
+| Local receipt clock | `observedAt` | Timezone-aware timestamps by supplied scalar/list path. Derived ingestion metadata, not Google's update time, licensing permission or proof of freshness. |
+
+`addressComponents` remains Task 40's geographic-check input; the validated formatted address is the canonical address. Raw geographic component payloads, reviews, photos, AI summaries and unknown provider extensions are not copied into canonical records. No unsupported details are requested to populate the schema.
+
+A new canonical record requires an original ID, readable name and valid caller category. Other facts are optional and remain **null** if missing or explicitly null. Empty arrays retain their supplied meaning; no missing rating/price becomes zero and no absent hours mean open. A zero **rating count** is valid; zero is not a valid supplied rating. Booleans, numeric strings and nonfinite values are rejected for ordinary numeric fields. Google Money's documented int64 string encoding is parsed explicitly, with exact nanos and protobuf zero semantics only for a missing component of an otherwise supplied amount; a missing entire price/amount is never free. Normalized schemas forbid unknown canonical fields. Google extension fields are ignored by the provider adapter.
+
+Structured hours retain Sunday-based weekday numbers, local hour/minute, optional exact dates, truncated flags, open-ended periods, localized descriptions, explicit `openNow`, special dates and timezone-aware next-open/close timestamps. Date/weekday disagreements, invalid dates/clock values, reversed dated periods and malformed structures reject safely. Missing required point components are rejected conservatively rather than repaired. Overnight/week-boundary periods and Google's open-only 24-hour representation are preserved; **no scheduling evaluation** occurs. `periods: null` is unknown; explicitly returned `periods: []` is an empty provider schedule, not unknown. `openNow` is an observation at response time, never future availability. Localized text does not become executable windows.
+
+### Pure conversion and later partial enrichment
+
+- `normalize_google_place(raw, activity, observed_at=...)` validates one raw Google Place object. Malformed supported fields reject the entire record with a fixed `NormalizationError` that excludes raw input/credentials.
+- `normalize_google_places(records, activity, observed_at=...)` isolates invalid entries in an already bounded collection, returning `(valid_records, rejected_count)` in input order. It does not deduplicate, rank, refill or issue requests. Task 40's transport/geographic parser retains its existing fail-closed behavior for malformed discovery responses.
+- `normalize_discovery_candidates(result, activity, observed_at=...)` bridges Task 40's minimal six-field in-memory DTO into the same canonical model. Because the DTO contains only those fields, optional Enterprise facts remain null. No changes to the discovery command or its output are needed.
+- `normalize_google_place(partial_raw, activity, existing=facts, observed_at=...)` accepts a later partial response containing the **same Google ID** without requiring the name again. It revalidates all fields/instances, refuses a different provider/ID/category/evidence, retains missing/null/unspecified existing facts, and ignores older field observations. Nested missing/null values also retain existing facts. Supplied lists (including complete hours-period lists) replace whole snapshots; individual period lists are never stitched together. Nested scalar/list paths retain separate observation times, so a new `openNow` does not make retained periods or next-open timestamps fresh. A future evaluator must check the relevant observations before using a composite record. Credits accumulate without dropping previous supplied attributions. Inputs remain unchanged. These are pure in-memory merge mechanics, **not** a cache or a live enrichment pipeline.
+
+A future optional Details adapter, if separately authorized, should accept one stable ID plus an explicit reviewed field allowlist and the existing shared outing budget. It must check disabled-by-default live authorization **before authentication**, reserve `details` before any attempt, use existing backend-only impersonated authentication/quota attribution, enforce candidate/session/concurrency limits, and keep zero retries. It should return a partial Place for the pure function above, never call Details automatically for every candidate. No Details transport/stub, enabling setting or speculative new limit was added in Task 41.
+
+### Current field costs
+
+Reviewed the official [field-tier matrix](https://developers.google.com/maps/documentation/places/web-service/data-fields), [Text Search field masks](https://developers.google.com/maps/documentation/places/web-service/text-search), [Place representation](https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places), [field-mask guidance](https://developers.google.com/maps/documentation/places/web-service/choose-fields) and [global pricing](https://developers.google.com/maps/billing-and-pricing/pricing) on October 24, 2026. The current six-field mask shown above is **unchanged**. Support in a parser does not request or enable a field.
+
+| Fields | Text Search tier | Place Details tier if used later | Requested today? |
+| --- | --- | --- | --- |
+| `id`, resource `name`, `attributions` | Essentials IDs Only | Essentials IDs Only | `id`, `attributions` only |
+| `formattedAddress`, `location`, `addressComponents`, `types` | Pro | Essentials | First three only |
+| `displayName`, `googleMapsUri`, `timeZone`, `utcOffsetMinutes` | Pro | Pro | `displayName` only |
+| `rating`, `userRatingCount`, `regularOpeningHours`, `currentOpeningHours`, `websiteUri`, `priceLevel`, `priceRange` | Enterprise | Enterprise | **No**; synthetic-response tests only |
+
+Billing follows the highest requested SKU tier, not how many returned values are populated. The currently used Text Search Pro list rate remains **$32/1,000** with **5,000** free monthly events; Text Search Enterprise is **$35/1,000** with **1,000** free events. Future Details Enterprise is a separate **$20/1,000** SKU with **1,000** free events. These are global first paid-tier list rates, before allowances/credits and subject to account terms and changes; no posted charges were measured. Enterprise is a field-triggered billing category, not a schema subscription to enable. No reviews, photos, atmosphere fields or summaries are needed. Existing alerts are not hard caps; all quotas/application ceilings/authentication/live locks remain unchanged.
+
+### Storage, display and refresh rules
+
+Reviewed the official [Places policies](https://developers.google.com/maps/documentation/places/web-service/policies), [non-EEA service-specific terms §14](https://cloud.google.com/maps-platform/terms/maps-service-terms) and [Place ID guidance](https://developers.google.com/maps/documentation/places/web-service/place-id) on October 24, 2026. Account-specific agreements and billing location govern; EEA terms differ. This implementation takes the conservative transient-memory approach and introduces **no persistent storage**.
+
+- Place IDs are exempt from the content caching restriction and may be retained indefinitely. Google recommends refreshing IDs older than 12 months; IDs can change/become obsolete. No refresh requests were added.
+- The non-EEA Places terms specifically permit caching latitude/longitude for **up to 30 consecutive calendar days**, then require deleting them. This exception is not permission to cache the entire record for 30 days. We do not implement even that coordinate cache here.
+- Names, addresses, types, ratings/counts, hours, websites, Maps links and price indicators remain restricted Places content. Do not persist raw or normalized content, logs, snapshots, production fixtures or future saved itineraries containing it without a separately reviewed applicable permission. Renaming fields into a provider-neutral model does not remove Google's restrictions. Keep attribution attached during permitted transient use; no general retention exception is assumed for attribution payloads.
+- Places content may be displayed without a map with the required **Google Maps** attribution/logo under the current guidelines. On a map, it must use a Google map; do not mix it with a non-Google map. Supplied third-party credits must also accompany their content. Provider identity text alone is insufficient. Public Terms of Use and Privacy Policy obligations also apply before frontend integration. Task 41 adds no public provider display or Task 45 labeling system.
+- A receipt timestamp does not authorize retention or promise validity. Recheck applicable terms and permitted refresh behavior before future persistence/public display. Hours/ratings/prices can change; never reuse them indefinitely or treat cached `openNow` as a future booking. Any refresh/enrichment must remain optional, separately authorized and budgeted; no automatic refresh exists.
+
+Task 41 uses only invented Google-shaped fixtures in automated tests. No new live Google Places/Routes calls occurred. Backend/frontend regression results and limitations are recorded in HANDOVER.md. Task 42 will add venue deduplication and relevance checks; none were implemented here.
