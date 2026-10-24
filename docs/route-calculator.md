@@ -8,7 +8,9 @@ Implemented October 24, 2026. This is an isolated Python integration prepared fo
 
 `RoutePoint.from_venue(VenueFacts)` reuses existing canonical Google IDs and refuses fictional/non-Google evidence. Alternatively, construct a point with already validated venue coordinates and the same stable venue identifier. Route requests revalidate supplied models, reject conflicting locations under one ID, unknown fields, empty candidate groups and unsupported modes. Validation failures are Pydantic input errors; budget/gate failures are safe `RouteError(code, message)` exceptions.
 
-Each returned `RouteLeg` contains `origin_id`, `destination_id`, `mode`, `duration_seconds`, `duration_minutes` (seconds / 60 without rounding), `distance_meters`, `status`, `provider`, `estimate_type`, `error_code` and optional numeric `provider_status_code`. The array contains one result per distinct directed required pair, in first-needed order; callers can index by the two IDs and reuse it across combinations. A-to-B and B-to-A remain independent. Failed/unknown routes have null metrics, including distance, and never become zero-minute routes.
+Each returned `RouteLeg` contains `origin_id`, `destination_id`, `mode`, `duration_seconds`, `duration_minutes` (seconds / 60 without rounding), `distance_meters`, `status`, `provider`, `estimate_type`, `error_code` and optional numeric `provider_status_code`. Task 44 additionally retains exact protobuf `duration_nanoseconds` on parsed successful provider legs for hard comparisons, without changing existing metrics. The array contains one result per distinct directed required pair, in first-needed order; callers can index by the two IDs and reuse it across combinations. A-to-B and B-to-A remain independent. Failed/unknown routes have null metrics, including distance, and never become zero-minute routes.
+
+Task 44's separate pure [feasibility evaluator](feasibility.md) consumes these legs and already supplied venue hours; it performs no provider calls and does not activate real-data planning.
 
 | Status | Meaning |
 | --- | --- |

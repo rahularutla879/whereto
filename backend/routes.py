@@ -3,6 +3,7 @@
 No planner connection, geocoding, feasibility filtering, persistence or logging.
 """
 from collections import defaultdict
+from decimal import Decimal
 from hashlib import sha256
 import json
 import os
@@ -87,6 +88,8 @@ class RouteLeg(RouteModel):
     destination_id: str
     mode: Mode
     duration_seconds: Annotated[float, Field(strict=True, ge=0, allow_inf_nan=False)] | None = None
+    # Exact protobuf duration retained for hard constraints (up to nine decimals).
+    duration_nanoseconds: Annotated[int, Field(strict=True, ge=0)] | None = None
     duration_minutes: Annotated[float, Field(strict=True, ge=0, allow_inf_nan=False)] | None = None
     distance_meters: Annotated[int, Field(strict=True, ge=0)] | None = None
     status: Literal["ok", "same_location", "unreachable", "error", "unknown"]
@@ -103,6 +106,9 @@ class RouteLeg(RouteModel):
                 raise ValueError("Successful routes require consistent distance and duration.")
         elif any(v is not None for v in metrics):
             raise ValueError("Failed or unknown routes must not supply travel metrics.")
+        if self.duration_nanoseconds is not None and (
+                self.duration_seconds is None or float(Decimal(self.duration_nanoseconds) / 10**9) != self.duration_seconds):
+            raise ValueError("Exact duration must agree with seconds.")
         return self
 
 
@@ -228,6 +234,7 @@ def parse_matrix(data, origins, destinations, mode) -> list[RouteLeg]:
                 continue
             seconds = float(duration[:-1])
             legs.append(_leg(a, b, mode, "ok", duration_seconds=seconds,
+                             duration_nanoseconds=int(Decimal(duration[:-1]) * 10**9),
                              duration_minutes=seconds / 60, distance_meters=distance))
     return legs
 
