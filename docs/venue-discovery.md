@@ -1,3 +1,5 @@
+> Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
+
 # Task 40 venue discovery
 
 Task 40 adds isolated backend discovery, not real-data itineraries. The website still uses the fictional catalog. No new FastAPI route or frontend/geolocation control was added. Task 41 adds offline normalization below; Task 42 adds candidate quality checks. Tasks 43–45 are complete; Task 46 remains unstarted. Historical checkpoints below describe their state at that time.
@@ -222,3 +224,10 @@ The separate [backend route calculator](route-calculator.md) can consume Task 41
 ## Task 45 evidence and display boundary
 
 Use `venue_labels` for individual normalized observations and `distinct_venue_labels` for Task 42 merged records. Labels distinguish provider-reported identity/address/coordinates from provisional optional enrichment and missing evidence; original contributing IDs, receipt times, credits and available links survive. No field-mask expansion or enrichment requests occur. [Evidence contract, official attribution/source-link guidance and Task 46 consumption rules](evidence-labeling.md). Current website remains fictional; Task 46 is unstarted.
+
+
+## Task 46 — connected local planner
+
+Discovery now feeds the existing candidate walker/evaluator/ranking through `backend/real_planning.py` under a deliberate local real-mode gate. Mock remains default. The six-field Pro discovery mask, three-candidate/four-search limits, normalization, geographic validation, deduplication and relevance rules are retained. Repeated categories reuse one search; explicit dinner context adds “dinner” to the food query without an extra call/field tier. Category context does not verify activity/session/meal availability. No pagination, refill or fictional fallback exists.
+
+The real result cards expose source links, Google Maps/third-party attribution and provisional unknown evidence. A separate on-demand Details endpoint can fetch contacts using `id,nationalPhoneNumber,internationalPhoneNumber,websiteUri,attributions`; those contacts trigger Place Details Enterprise, with a separate disabled-default switch and six-attempt outing sublimit under existing request budgets. Task 46 live verification makes zero Details calls. [Full integration, enabling/disabling, pricing/policies and limitations](real-planning.md). Historical sections above retain their task-specific locks/checkpoints.

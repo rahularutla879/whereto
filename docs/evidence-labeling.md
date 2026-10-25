@@ -1,3 +1,5 @@
+> Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
+
 # Task 45 — source and verification labels
 
 `backend/evidence.py` is a pure, transient adapter layer. It reads existing Task

@@ -1,3 +1,5 @@
+> Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
+
 # Task 43 — backend route calculator
 
 Implemented October 24, 2026. This is an isolated Python integration prepared for later feasibility work. The website still uses fictional venues/travel. **The initial implementation used no live requests.** A subsequent separately authorized driving verification succeeded with one live request and four elements; see the ledger below. Walking remains mock-tested only.
@@ -103,3 +105,8 @@ Post-test focused offline route/budget checks: **33/33 passed**. No repository a
 ## Task 45 display boundary
 
 `route_labels` adds duration/distance estimate labels and Google Maps attribution requirements without changing `RouteLeg`, direction, mode, precision or provider metadata. Traffic-unaware driving and beta walking limitations remain explicit; failures/missing routes never become zero travel. Local identity transitions have local provenance. Pair with `feasibility_labels` over Task 44 results for scoped constraint messages. [Evidence and attribution contract](evidence-labeling.md). No new calls, mask/feature/cost/limit changes or Task 46 integration.
+
+
+## Task 46 — planner connection
+
+The existing route calculator now serves deliberately enabled local real planning. Its exact adjacent-group batching, direction/mode/source metadata, unknown/failure states, unchanged 27-element ceiling and full-plan admission are preserved. Optional authorized first-stop routing stays separate. Task 44 exact seconds decide hard limits; the shared minute scheduler uses floor minutes only as a conservative lower bound for time-window rejection, while result quotes round up for display. Real visit times remain unknown when durations/sessions are absent. No automatic retries or alternate fictional travel exist. [Integration and combined Task 46 live ledger](real-planning.md). The Task 43 allowance above remains exhausted and is separate from the owner's Task 46 allowance.

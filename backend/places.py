@@ -1,4 +1,4 @@
-"""Development-only Text Search discovery. No planner connection or persistence."""
+"""Bounded Text Search discovery for isolated diagnostics and local real planning."""
 
 from hashlib import sha256
 import json
@@ -67,6 +67,7 @@ class TravelConstraints(DiscoveryModel):
 
 class DiscoveryRequest(DiscoveryModel):
     activity: ActivityType
+    meal: Literal["dinner"] | None = None
     destination: SearchArea | None = None
     current_location: SearchArea | None = Field(default=None, repr=False)
     starting_location: StartingLocation | None = Field(default=None, repr=False)
@@ -74,6 +75,8 @@ class DiscoveryRequest(DiscoveryModel):
 
     @model_validator(mode="after")
     def location_required(self):
+        if self.meal is not None and self.activity != ActivityType.food:
+            raise ValueError("Meal context requires a food activity.")
         if self.destination is None and self.current_location is None:
             raise ValueError("Specify a destination or optionally share current-location coordinates.")
         if self.current_location is not None and (
@@ -104,7 +107,7 @@ QUERIES = {
 
 def search_body(request: DiscoveryRequest, limit: int) -> dict:
     area = request.area
-    query = QUERIES[request.activity.value]
+    query = "dinner restaurants" if request.meal == "dinner" else QUERIES[request.activity.value]
     body = {"textQuery": f"{query} in {area.name}" if area.name else query,
             "pageSize": limit, "languageCode": "en"}
     if area.coordinates is not None:
@@ -178,7 +181,8 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
 
 
 def require_development_discovery() -> None:
-    if os.environ.get("WHERETO_PLACES_DEV") != "1":
+    from backend.provider_budget import local_real_enabled
+    if not local_real_enabled() and os.environ.get("WHERETO_PLACES_DEV") != "1":
         raise DiscoveryError("disabled", "Real discovery is disabled. Enable only for an authorized local development test.")
 
 

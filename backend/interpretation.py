@@ -88,6 +88,7 @@ class ClarificationQuestion(ContractModel):
 class InterpretationInput(ContractModel):
     text: Annotated[Nonblank, Field(max_length=4000)]
     preferences: ManualPreferences = Field(default_factory=ManualPreferences)
+    hasCurrentLocation: bool = Field(default=False, strict=True)
     pending: PendingClarification | None = None
     answers: ClarificationAnswers = Field(default_factory=ClarificationAnswers)
 
@@ -424,6 +425,15 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         return inferred
 
     location = chosen("location", answers.location or ai.location)
+    if location is None and value.hasCurrentLocation and re.search(r"\bnear me\b", raw, re.I):
+        location = "near me"
+    first_limits = re.findall(r"\b(?:within|under|maximum|at most)\s+(\d+)\s*(minutes?|mins?|hours?|hrs?)\s+(?:of|from)\s+(?:me|my (?:current |starting )?location)\b", raw, re.I)
+    if (re.search(r"\d+(?:\.\d+)?\s*(?:minutes?|mins?|hours?|hrs?)\s+(?:of|from)\s+(?:me|my (?:current |starting )?location)\b", raw, re.I)
+            and not first_limits):
+        issues.append("The first-stop travel limit is unclear. State within 10 minutes of me, or enter a maximum in Optional starting location. No limit was ignored.")
+    if re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
+        issues.append("Set the search radius in meters in Optional starting location and remove the distance wording from the request. No radius was silently assumed.")
+    first_limit = min((int(n) * (60 if unit.lower().startswith(("hour", "hr")) else 1) for n, unit in first_limits), default=None)
     people_answer = answers.people
     if people_answer:
         words = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
@@ -529,7 +539,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
-                maxLegTravel=ai.travel_leg_minutes, cost=cost, transport=ai.transport,
+                maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=first_limit, cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)
         except (ValueError, TypeError, ValidationError):

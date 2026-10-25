@@ -1,4 +1,4 @@
-"""Task 39 accounting for future venue/travel providers; no network transport.
+"""Shared venue/travel/contact attempt accounting; no network transport.
 
 One budget per backend process, one outing budget per plan. Every future attempt
 must reserve before I/O, including pagination and failed attempts. Mock planning
@@ -20,9 +20,10 @@ class ProviderLimitError(RuntimeError):
 
 class ProviderSettings(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
-    # Deliberate code-level lock: no environment flag can activate live usage.
-    mode: Literal["mock"] = "mock"
+    # Real planning requires a separate, explicitly local development opt-in.
+    mode: Literal["mock", "real"] = "mock"
     searches_per_outing: int = Field(default=4, ge=0, le=4)
+    details_per_outing: int = Field(default=6, ge=0, le=6)
     candidates_per_activity: int = Field(default=3, ge=1, le=3)
     matrix_elements_per_outing: int = Field(default=27, ge=0, le=27)
     requests_per_outing: int = Field(default=20, ge=0, le=20)
@@ -37,6 +38,8 @@ class ProviderSettings(BaseModel):
         return cls(mode=os.environ.get("VENUE_DATA_MODE", "mock"))
 
     def require_live_provider(self) -> None:
+        if self.mode == "real" and local_real_enabled():
+            return
         raise ProviderLimitError(
             "Real venue and route requests are disabled. Continue with fictional "
             "data until billing, alerts, restricted credentials and safeguards "
@@ -73,6 +76,7 @@ class OutingBudget:
         self._session = session
         self._requests = 0
         self._searches = 0
+        self._details = 0
         self._elements = 0
         self._seen: set[tuple[str, str]] = set()
 
@@ -80,6 +84,10 @@ class OutingBudget:
     def settings(self) -> ProviderSettings:
         """Immutable session limits for discovery request sizing."""
         return self._session.settings
+
+    def usage(self) -> dict[str, int]:
+        return {"placesSearchRequests": self._searches, "placesDetailsRequests": self._details,
+                "reservedMatrixElements": self._elements, "providerAttempts": self._requests}
 
     def check_candidates(self, count: int) -> None:
         if type(count) is not int or count < 0:
@@ -124,6 +132,7 @@ class OutingBudget:
         elements = sum(rows * cols for _, _, rows, cols in attempts)
         requests = len(attempts)
         searches = sum(op == "search" for op, _, _, _ in attempts)
+        details = sum(op == "details" for op, _, _, _ in attempts)
         session = self._session
         limits = session.settings
         with session._lock:
@@ -135,6 +144,8 @@ class OutingBudget:
                 raise ProviderLimitError("Local testing session request limit reached. Stop and review usage before starting a new session.")
             if self._requests + requests > limits.requests_per_outing:
                 raise ProviderLimitError("This outing's provider request limit was reached. Narrow the request.")
+            if self._details + details > limits.details_per_outing:
+                raise ProviderLimitError("This outing’s contact-detail request limit was reached. Use the Google Maps venue link instead.")
             if self._searches + searches > limits.searches_per_outing:
                 raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
             if self._elements + elements > limits.matrix_elements_per_outing:
@@ -148,6 +159,7 @@ class OutingBudget:
             self._seen.update(identities)
             self._requests += requests
             self._searches += searches
+            self._details += details
             self._elements += elements
             session._requests += requests
             session._elements += elements
@@ -173,3 +185,12 @@ class OutingBudget:
                 raise ValueError("A route matrix needs positive origins and destinations.")
         elif origins or destinations:
             raise ValueError("Only matrix requests may specify dimensions.")
+
+
+def local_real_enabled() -> bool:
+    """Local-only two-part opt-in. Never activated by a production environment."""
+    return (os.environ.get("VENUE_DATA_MODE", "mock") == "real"
+            and os.environ.get("WHERETO_REAL_DEV") == "1"
+            and os.environ.get("WHERETO_ENV", "development") == "development"
+            and os.environ.get("NODE_ENV") != "production"
+            and not any(os.environ.get(k) for k in ("VERCEL", "RENDER", "K_SERVICE", "WEBSITE_HOSTNAME")))

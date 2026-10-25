@@ -139,6 +139,7 @@ class OutingRequest(ContractModel):
     travel: TravelMinutes | None = None  # Existing total inter-stop cap.
     groupBudget: Money | None = None
     maxLegTravel: TravelMinutes | None = None
+    maxFirstLegTravel: TravelMinutes | None = None
     startTime: StartMinute = 600
     endTime: EndMinute = 1440
     requireAvailability: bool = Field(default=False, strict=True)
@@ -200,6 +201,12 @@ class Venue(VenueIdentity):
     capacity: Capacity | None = None  # Unknown capacity is not proof of suitability.
     dataQuality: DataQuality = Field(default_factory=DataQuality)
     source: Nonblank | None = None  # Source/reference when known; no lookup occurs.
+    # Explicit bridge for physical Google buildings, including event categories.
+    # A physical place never supplies an invented ScheduledEvent.
+    providerPlaceId: Nonblank | None = None
+    address: Nonblank | None = None
+    mapsUrl: Nonblank | None = None
+    evidenceLabels: dict = Field(default_factory=dict)
     openingHours: Nonblank | None = None
     availability: Nonblank | None = None
     openingWindows: list[TimeWindow] | None = None
@@ -207,6 +214,10 @@ class Venue(VenueIdentity):
 
     @model_validator(mode="after")
     def validate_kind(self):
+        if self.providerPlaceId is not None:
+            if self.id != self.providerPlaceId or self.kind != "venue" or self.dataQuality.identity != DataStatus.verified:
+                raise ValueError("Physical provider venues require original identity and explicit provenance")
+            return self
         if (self.activity in EVENT_ACTIVITIES) != (self.kind == "event"):
             raise ValueError("Scheduled activity categories must use event records")
         return self
@@ -458,6 +469,9 @@ class RankedItinerary(ContractModel):
     score: Annotated[float, Field(ge=0, le=1)] = 0
     components: dict[str, float] = Field(default_factory=dict)
     explanations: list[RecommendationReason] = Field(default_factory=list)
+    routeEvidence: list[dict] = Field(default_factory=list)
+    firstLeg: dict | None = None
+    feasibilityEvidence: dict = Field(default_factory=dict)
 
     @model_validator(mode="after")
     def validate_evaluation(self):
@@ -484,6 +498,9 @@ class RankingResult(ContractModel):
     rejectionReasons: dict[str, int] = Field(default_factory=dict)
     message: Nonblank
     notes: list[str] = Field(default_factory=list)
+    dataMode: Literal["mock", "real"] = "mock"
+    diagnostics: dict = Field(default_factory=dict)
+    detailsToken: str | None = None
 
     @model_validator(mode="after")
     def validate_selection(self):

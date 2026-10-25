@@ -11,9 +11,10 @@ type Ranked = {
   costPerPerson: number | null; groupCost: number | null;
   totalTravel: number | null; elapsedDuration: number | null;
   issues: { message: string }[];
+  firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { request: { location: string; activities: PlannerResult["activities"]; cost: string };
+type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; request: { location: string; activities: PlannerResult["activities"]; cost: string };
   plans: Ranked[]; provisionalPlans: Ranked[]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -23,6 +24,11 @@ export function adaptRanking(value: unknown): PlannerResult {
     || !Array.isArray(data.plans) || !Array.isArray(data.provisionalPlans) || typeof data.message !== "string"
     || !Array.isArray(data.notes) || !data.notes.every(n => typeof n === "string") || !Array.isArray(data.errors)
     || data.plans.length + data.provisionalPlans.length > 3) throw new Error("Invalid planning response");
+  const real = data.dataMode === "real";
+  if (data.dataMode !== undefined && !["mock", "real"].includes(data.dataMode)) throw new Error("Invalid data mode");
+  if ([...data.plans, ...data.provisionalPlans].some(p => p.stops?.some(s => real
+    ? !s.venue?.providerPlaceId || s.venue.id !== s.venue.providerPlaceId || s.venue.dataQuality?.identity !== "verified"
+    : !!s.venue?.providerPlaceId))) throw new Error("Mixed venue data modes");
   const nullableNumber = (n: unknown) => n === null || (typeof n === "number" && Number.isFinite(n) && n >= 0);
   const selected = [...data.plans, ...data.provisionalPlans];
   for (const p of selected) {
@@ -52,14 +58,16 @@ export function adaptRanking(value: unknown): PlannerResult {
   })), data.request.cost);
   const themes = ["lavender", "peach", "mint"] as const;
   const plans: Plan[] = selected.map((p, i) => ({
-    id: p.candidate.id, title: copy[i].title, theme: themes[i],
-    label: `${copy[i].label} · OPTION ${i + 1}`,
-    description: copy[i].description,
+    dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
+    firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
+    id: p.candidate.id, title: real ? `Real outing option ${i + 1}` : copy[i].title, theme: themes[i],
+    label: `${real ? "PROVISIONAL REAL VENUES" : copy[i].label} · OPTION ${i + 1}`,
+    description: real ? `${p.stops.map(s => s.venue.name).join(" → ")}. ${p.totalTravel === null ? "Travel not fully verified" : `${p.totalTravel} estimated minutes between stops`}.` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
     travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
   }));
-  return { plans, location: data.request.location, activities: data.request.activities,
+  return { dataMode: data.dataMode ?? "mock", plans, location: data.request.location, activities: data.request.activities,
     message: plans.length ? data.message : [data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))].join(" "), notes: data.notes };
 }
 
@@ -74,7 +82,7 @@ export type PendingOuting = {
 export type ValidatedOuting = {
   request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
-    groupBudget: number | null; maxLegTravel: number | null; transport: string | null;
+    groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; transport: string | null;
     dinnerStops: number[] | null };
   continuation: PendingOuting;
   explicitCost: boolean;
@@ -82,7 +90,7 @@ export type ValidatedOuting = {
 };
 
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
-  context?: { onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
+  context?: { locationContext?: LocationContext; onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
     continuation?: PendingOuting; answers?: ClarificationAnswers;
     onClarification?: (value: PendingOuting | null) => void; onComplete?: () => void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
@@ -91,7 +99,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     activities: [], notes: [] });
   try {
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, preferences, ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
+      body: JSON.stringify({ text, preferences, ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
     if (!interpreted.ok) return failure(typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated.");
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
@@ -111,12 +119,13 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     context?.signal?.throwIfAborted();
     const extractedPreferences = interpretedPreferences(extraction.request);
     context?.onInterpreted?.(extractedPreferences);
-    if (extraction.pending) context?.onValidated?.({ request: extraction.request,
+    if (extraction.pending) context?.onValidated?.({ request: { ...extraction.request,
+      ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravel: context.locationContext.maxFirstLegTravel } : {}) },
       continuation: { pending: extraction.pending, questions: [] },
       explicitCost: !!preferences.costExplicit || preferences.cost !== "balanced" || extraction.interpretation?.cost != null,
       explicitTime: !!extraction.interpretation?.time_expressions?.length || !!extraction.pending.answers?.time });
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(extraction.request), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(15000)]) : AbortSignal.timeout(15000) });
+      body: JSON.stringify({ ...extraction.request, ...(context?.locationContext ?? {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
@@ -125,10 +134,17 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
     }
     const result = adaptRanking(await response.json());
-    result.notes = [...extraction.notes, ...result.notes];
+    result.notes = [...extraction.notes.filter((note: string) => result.dataMode !== "real" || !note.includes("Mock travel is mode-independent")), ...result.notes];
     context?.onComplete?.();
     return result;
   } catch {
     return failure("AI interpretation or Python planner unavailable, timed out, or returned an invalid response. Check both services and retry. No plan was generated.");
   }
 }
+
+
+export type LocationContext = {
+  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true };
+  currentArea?: { coordinates: { latitude: number; longitude: number } };
+  searchRadius?: number; maxFirstLegTravel?: number;
+};

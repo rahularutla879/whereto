@@ -9,7 +9,7 @@ export function formatOutingDate(date: string) {
   return new Date(`${date}T12:00:00`).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" });
 }
 
-export function outingDetails(value: ValidatedOuting): [string, string][] {
+export function outingDetails(value: ValidatedOuting, real = false): [string, string][] {
   const r = value.request;
   const details: [string, string][] = [
     ["Location", r.location],
@@ -20,16 +20,17 @@ export function outingDetails(value: ValidatedOuting): [string, string][] {
   if (r.budget !== null) details.push(["Budget", `$${r.budget} maximum / person`]);
   if (r.travel !== null) details.push(["Travel", `${r.travel} min maximum total between stops`]);
   if (value.explicitCost) details.push(["Experience", ({ budget: "Cheap", balanced: "Balanced", experience: "Best Experience" })[r.cost]]);
-  if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} (Baltimore time)`]);
+  if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} ${real ? "(destination local time where known; otherwise calendar reference shown in notes)" : "(Baltimore time)"}`]);
   if (r.groupBudget != null) details.push(["Group budget", `$${r.groupBudget} maximum total`]);
   if (r.maxLegTravel != null) details.push(["Each journey", `${r.maxLegTravel} min maximum`]);
-  if (r.transport) details.push(["Transport", `${r.transport} (simulated travel is mode-independent)`]);
+  if (real && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravel} min maximum from your shared start`]);
+  if (r.transport) details.push(["Transport", `${r.transport}${real ? " (Google Maps estimates)" : " (simulated travel is mode-independent)"}`]);
   return details;
 }
 
-export function OutingSummary({ value, dirty, onEdit }: { value: ValidatedOuting; dirty: boolean; onEdit: () => void }) {
+export function OutingSummary({ value, dirty, onEdit, real = false }: { value: ValidatedOuting; dirty: boolean; onEdit: () => void; real?: boolean }) {
   return <section className="outing-summary" aria-labelledby="outing-summary-title">
     <div className="preferences-intro"><h3 id="outing-summary-title">Your outing</h3><button type="button" onClick={onEdit} aria-controls="preferences">Edit details</button></div>
-    {dirty ? <p role="status">Details changed. Regenerate plans to validate your edits. Previous recommendations are hidden.</p> : <dl>{outingDetails(value).map(([label, detail]) => <div key={label}><dt>{label}</dt><dd>{detail}</dd></div>)}</dl>}
+    {dirty ? <p role="status">Details changed. Regenerate plans to validate your edits. Previous recommendations are hidden.</p> : <dl>{outingDetails(value, real).map(([label, detail]) => <div key={label}><dt>{label}</dt><dd>{detail}</dd></div>)}</dl>}
   </section>;
 }

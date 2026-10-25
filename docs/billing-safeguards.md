@@ -1,3 +1,5 @@
+> Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
+
 # Task 39 — billing and provider safeguards
 
 Status: **Tasks 39–42 complete; discovery disabled by default**. Task 40 adds an isolated, explicitly gated backend discovery adapter; exactly two authorized live Text Search attempts occurred (400, then 200). See the Task 40 section at the end and [venue discovery](venue-discovery.md). Earlier Task 39 checkpoints below are historical; later dated sections supersede them. Safeguards were reverified October 23, 2026. Task 40's live allowance is exhausted; further requests need separate authorization. No paid upgrade is authorized. Tasks 41–42 add offline normalization and candidate quality checks; no new live requests, fields, dependencies or safeguard changes. The Task 42 tests use synthetic responses only. Cloud quotas/billing were not rechecked or changed for this offline work. Task 43 has not started.
@@ -254,3 +256,14 @@ Local settings/credential metadata and existing previously verified records were
 ## October 24 Task 45 — offline evidence labeling
 
 Pure source/verification adapters and synthetic tests only: zero live Places/Routes calls, token refreshes or Cloud administration. Existing field masks/tiers, billing settings/alerts, quotas, application budgets, credentials and disabled-default gates are unchanged. No Details/Enterprise request, extra route lookup, persistent cache or dependency was added. Official policy pages were read as documentation. Cloud posted costs/credit balance were not rechecked. The approximately $40–$50/month planning target remains unchanged. Task 46 integration is deferred; see [evidence labeling](evidence-labeling.md).
+
+
+## Task 46 — October 25, 2026 local planner safeguards
+
+The owner authorized bounded end-to-end verification (four Text Search requests/27 matrix elements maximum, no retries or Details). Existing project APIs/quota limits were freshly read through Cloud administration: SearchText 20/day and 10/minute; GetPlace 40/day and 10/minute; matrix 300 elements/day and 60/minute. No changes were submitted. Existing runtime ADC's impersonated type, exact target and restrictive permissions were checked without exposing credential content.
+
+Cloud Console still showed the Free Trial ($300 credit/88 days at the pre-test inspection), $0.00 recorded spend against the saved $50 monthly account-wide budget, and 50%/90%/100% alerts. Those displayed figures can lag usage and do not prove zero accrued charges. The read-only Budget API returned 403 to the existing CLI identity; the saved settings were verified in Console instead, without broadening IAM or changing the budget/account.
+
+Real planner access requires two deliberate local backend switches and refuses production/known hosting environments. All existing request/candidate/matrix/session/concurrency/retry ceilings remain. On-demand contacts have a separate disabled-default switch and a six-attempt sublimit inside existing budgets. Contact fields trigger Place Details Enterprise: current global first-tier $20/1,000 requests after 1,000 free/month (checked against Google's official pricing October 25). No live Details request is part of Task 46. [Current flow, pricing and final ledger](real-planning.md).
+
+Task 46 final ledger: **4 live Text Search requests, 2 Route Matrix requests / 18 billable elements, 0 Details, 0 retries**, all six provider requests HTTP 200. Estimated first-tier gross usage $0.218 before allowances/credit; no posted-cost claim. Console also confirmed actual-spend alerts at $25/$45/$50, excluded savings/credits, billing-admin/user email notifications enabled, and account-wide scope (project-owner toggle unavailable for that scope). No setting was saved or changed. Live processes stopped and mock restored. [Detailed findings and closed allowance](real-planning.md#bounded-live-verification-ledger--october-25-2026).

@@ -73,3 +73,12 @@ test("dinner occurrence and explicit time window survive summary and editable se
   assert.equal(Object.fromEntries(outingDetails(dinner)).Activities, "Coffee → Dinner → Coffee");
   assert.equal(Object.fromEntries(outingDetails(dinner))["Time window"], "5:00 PM–10:00 PM (Baltimore time)");
 });
+
+
+test("real outing summary labels provider routes and avoids a fictional timezone claim", () => {
+  const real = { ...value, explicitTime: true, request: { ...value.request, location: "Washington, DC", transport: "driving" } };
+  const details = Object.fromEntries(outingDetails(real, true));
+  assert.equal(details.Transport, "driving (Google Maps estimates)");
+  assert.doesNotMatch(details["Time window"], /Baltimore/);
+  assert.match(Object.fromEntries(outingDetails(real)).Transport, /simulated/);
+});

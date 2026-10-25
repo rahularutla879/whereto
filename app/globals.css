@@ -204,3 +204,16 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .outing-summary p { font-size: 13px; line-height: 1.6; }
 .activity-editor { grid-column: 1 / -1; }
 .preferences-grid #outing-date-help { font-size: 11px; }
+
+/* Task 46: compact opt-in location/contact controls use the existing palette. */
+.location-controls { margin: 12px 0; font-size: 13px; }
+.location-controls summary, .venue-details button { cursor: pointer; }
+.location-controls p { margin: 10px 0; }
+.location-controls input { width: 100%; padding: 10px; border: 1px solid #b9b0bc; border-radius: 8px; }
+.venue-contact { background: #fffaf5; padding: 12px; border-radius: 10px; margin-top: 8px; overflow-wrap: anywhere; }
+.venue-contact p { margin: 8px 0; }
+.venue-contact a, .provider-credits a { text-decoration: underline; }
+.google-attribution { white-space: nowrap; font-family: sans-serif; font-style: normal; font-weight: 400; font-size: 12px; letter-spacing: normal; color: #1f1f1f; }
+.provider-credits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
+.plan-details[hidden], .venue-contact[hidden] { display: none; }
+.plan-details li div > .provider-credits { display: flex; }

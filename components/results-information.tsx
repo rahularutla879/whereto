@@ -1,8 +1,9 @@
 import * as React from "react";
 import { DEMO_DISCLOSURE, estimateNotes } from "../lib/results-presentation";
 
-export function ResultsInformation({ notes, needsChecking }: { notes: string[]; needsChecking: boolean }) {
+export function ResultsInformation({ notes, needsChecking, real = false }: { notes: string[]; needsChecking: boolean; real?: boolean }) {
   const extraNotes = estimateNotes(notes);
+  if (real) return <aside className="results-information" aria-label="About these real results"><p>Real venues from <span translate="no">Google Maps</span>. These are provisional options; prices, opening hours, activity sessions and reservations require confirmation.</p><details className="estimates-details"><summary>About these estimates</summary><ul>{extraNotes.map(note => <li key={note}>{note}</li>)}</ul></details></aside>;
   return <aside className="results-information" aria-label="About these sample results">
     <p>{DEMO_DISCLOSURE}{needsChecking && " Opening hours and availability still need checking."}</p>
     <details className="estimates-details">

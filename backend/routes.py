@@ -1,6 +1,6 @@
 """Bounded route calculation contracts and pure adjacent-group matrix planning.
 
-No planner connection, geocoding, feasibility filtering, persistence or logging.
+No geocoding, feasibility filtering, persistence or payload logging.
 """
 from collections import defaultdict
 from decimal import Decimal
@@ -124,7 +124,8 @@ class RouteCalculator(Protocol):
 
 
 def require_development_routes():
-    if os.environ.get("WHERETO_ROUTES_DEV") != "1":
+    from backend.provider_budget import local_real_enabled
+    if not local_real_enabled() and os.environ.get("WHERETO_ROUTES_DEV") != "1":
         raise RouteError("disabled", "Real routing is disabled. Separate owner authorization is required for a local live test.")
 
 

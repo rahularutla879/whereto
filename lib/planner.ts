@@ -10,17 +10,22 @@ export type OutingPayload = { activities: Activity[]; location: string; people: 
 export type Quality = Record<string, string>;
 export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neighborhood"> & {
   price: number | null; duration: number | null; capacity: number | null; neighborhood: string | null;
+  providerPlaceId?: string | null; address?: string | null; mapsUrl?: string | null;
+  evidenceLabels?: { claims?: Record<string, { message: string }>; attribution?: { third_party?: { provider?: string | null; uri?: string | null }[] } };
   eventDate?: string; dataQuality?: Quality; source?: string | null;
 };
 export type Stop = { venue: DisplayVenue; start: number | null; end: number | null };
 export type Plan = {
+  dataMode?: "mock" | "real"; location?: string; detailsToken?: string;
+  firstLeg?: { minutes: number | null; labels?: unknown } | null;
+  routeEvidence?: { route: { mode: string }; labels: { claims: Record<string, { message: string }> } }[];
   id: string; title: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
   venues: DisplayVenue[]; stops: Stop[]; price: number | null; groupCost: number | null;
   travel: number | null; duration: number | null; people: number; date: string;
   feasibility: "confirmed" | "provisional" | "preview"; issues: string[];
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
-export type PlannerResult = { plans: Plan[]; message: string; location: string; activities: Activity[]; notes: string[] };
+export type PlannerResult = { dataMode?: "mock" | "real"; plans: Plan[]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };
 export const EXAMPLE_REQUEST = "We're 4 friends in Baltimore. We want bowling, drinks, and a movie.";
 export const EMPTY_PREFERENCES: Preferences = { location: "", date: "", people: "", budget: "", travel: "", cost: "balanced" };

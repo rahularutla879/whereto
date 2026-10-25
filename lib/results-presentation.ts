@@ -58,6 +58,17 @@ export function estimateNotes(notes: string[]) {
 }
 
 export function planWarnings(plan: Plan): string[] {
+  if (plan.dataMode === "real") {
+    const warnings = [
+      "Prices are unknown; total cost and fit with your budget are not verified.",
+      "Opening hours, visit durations and exact timing need checking.",
+      "Confirm activity suitability, reservations and space for your group before you go.",
+    ];
+    if (plan.venues.some(v => ["movie", "concert", "theater", "musical", "ballet", "opera", "comedy", "sports", "baseball", "basketball", "football", "soccer", "hockey"].includes(v.activity))) warnings.push("Movie showtimes and event sessions are not verified. No ticket or reservation is confirmed.");
+    if (plan.issues.some(issue => issue.startsWith("Dinner service"))) warnings.push("Dinner service and hours are not verified. Confirm the restaurant serves dinner before choosing.");
+    if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) warnings.push("Travel time is missing for a required leg; travel constraints are not fully verified.");
+    return warnings;
+  }
   // Only the routine missing-opening-hours disclosure moves to the common
   // estimates section. Every other issue (including future conflicts) stays by
   // its plan, visible even while itinerary details are closed.

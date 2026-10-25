@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
 import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
@@ -13,6 +13,10 @@ import { OutingDateField } from "@/components/outing-date-field";
 import { ResultsInformation } from "@/components/results-information";
 import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
 import { OutingSummary, activityEditText } from "@/components/outing-summary";
+import { LocationControls } from "@/components/location-controls";
+import { VenueDetails, GoogleCredits } from "@/components/venue-details";
+import { VenueDetailsSession } from "@/lib/venue-details";
+import type { LocationContext } from "@/lib/planning-client";
 import demoPlans from "@/data/demo-plans.json";
 
 const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: CircleDot, drinks: Wine, movie: Popcorn, food: Utensils, coffee: Coffee, outdoors: Footprints, art: Palette, museum: Landmark, karaoke: Mic, arcade: Gamepad2, escape: Puzzle, shopping: ShoppingBag,
@@ -23,14 +27,15 @@ const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: Cir
 const activityLabels = ACTIVITY_LABELS;
 const money = (amount: number | null) => amount === null ? "Unknown" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
 
-function PlanCard({ plan, index }: { plan: Plan; index: number }) {
+function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; detailsSession: VenueDetailsSession }) {
+  const real = plan.dataMode === "real";
   const [expanded, setExpanded] = useState(false);
   const warnings = planWarnings(plan);
   const classic = plan.venues.map((venue) => venue.activity).join(",") === "bowling,drinks,movie";
   const PosterIcon = activityIcons[plan.venues[0].activity] ?? Sparkles;
   return <article className={`plan-card ${plan.theme}`}>
     <div className="card-visual">
-      <span className="card-number">0{index + 1}</span><span className="demo-pill">{plan.feasibility === "preview" ? "DEMO PLAN" : "SAMPLE PLAN"}</span>
+      <span className="card-number">0{index + 1}</span><span className="demo-pill">{real ? "REAL VENUES · PROVISIONAL" : plan.feasibility === "preview" ? "DEMO PLAN" : "SAMPLE PLAN"}</span>
       {classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabels[plan.venues[0].activity]}</span></div>}
     </div>
     <div className="card-body">
@@ -42,20 +47,26 @@ function PlanCard({ plan, index }: { plan: Plan; index: number }) {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabels[venue.activity]}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
       })}</div>
-      <div className="card-facts"><span><MapPin size={14} /> Baltimore</span><span><Clock3 size={14} /> ~{formatDuration(plan.duration)}</span></div>
-      <div className="card-bottom"><div><strong>~{money(plan.price)}</strong><span> / person</span><small>Sample price</small></div><button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
-      {expanded && <div className="plan-details" id={`details-${plan.id}`}>
-        <p className="details-heading">Your sample itinerary</p>
+      <div className="card-facts"><span><MapPin size={14} /> {plan.location ?? "Baltimore"}</span><span><Clock3 size={14} /> ~{formatDuration(plan.duration)}</span></div>
+      <div className="card-bottom"><div><strong>~{money(plan.price)}</strong><span> / person</span><small>{real ? "Price not verified" : "Sample price"}</small></div><button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
+      {real && <GoogleCredits credits={plan.venues.flatMap(venue => venue.evidenceLabels?.attribution?.third_party ?? []).filter((credit, i, credits) => credits.findIndex(c => c.provider === credit.provider && c.uri === credit.uri) === i)} />}
+      <div hidden={!expanded} className="plan-details" id={`details-${plan.id}`}>
+        <p className="details-heading">{real ? "Your provisional itinerary" : "Your sample itinerary"}</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date} · {plan.people} {plan.people === 1 ? "person" : "people"}</p>
-        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{money(plan.prices[i]?.amount ?? null)} per person ({plan.prices[i]?.status ?? "unknown"}) · sample group limit: {venue.capacity ?? "Unknown"}</span>{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({plan.legs[i - 1]?.status ?? "unknown"}).</span>}</div></li>)}</ol>
-        <div className="details-total"><span>Sample group total</span><strong>~{money(plan.groupCost)}</strong></div>
+        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong><span>{real ? "Provider-sourced venue · suitability needs confirmation" : venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{real ? venue.address ?? "Address unknown" : venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{money(plan.prices[i]?.amount ?? null)} per person ({plan.prices[i]?.status ?? "unknown"}) · {real ? "group capacity" : "sample group limit"}: {venue.capacity ?? "Unknown"}</span>{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
+        <div className="details-total"><span>{real ? "Group total not verified" : "Sample group total"}</span><strong>~{money(plan.groupCost)}</strong></div>
         <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
-      </div>}
+        {real && plan.firstLeg && <p>From your starting point: {plan.firstLeg.minutes ?? "Unknown"} minutes (Google Maps estimate), separate from inter-stop travel.</p>}
+      </div>
     </div>
   </article>;
 }
 
 export default function Home() {
+  const [dataMode, setDataMode] = useState<"mock" | "real" | "unavailable">("unavailable");
+  const [locationContext, setLocationContext] = useState<LocationContext>({});
+  const detailsSession = useRef(new VenueDetailsSession());
+  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) setDataMode(value.mode); }).catch(() => {}); return () => { active = false; }; }, []);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -77,12 +88,14 @@ export default function Home() {
   }
   function invalidateResults() {
     session.current.cancel();
+    detailsSession.current.clear();
     setLoading(false);
     setDirty(true);
     setResult({ plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
     cancelClarification();
+    detailsSession.current.clear();
     setValidated(null);
     setDirty(false);
     setPreferenceState(previous => displayInterpretedPreferences(previous, emptyPreferenceState().values));
@@ -97,6 +110,7 @@ export default function Home() {
   async function runPlanning(followup: boolean) {
     const controller = session.current.begin();
     if (!controller) return;
+    detailsSession.current.clear();
     setLoading(true);
     setResult({ plans: [], message: "Planning…", location: "", activities: [], notes: [] });
     let needsAnswer = false;
@@ -105,7 +119,7 @@ export default function Home() {
       const next = await generateOuting(original, manualPreferences(preferenceState), {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
-        signal: controller.signal,
+        signal: controller.signal, locationContext: dataMode === "real" ? locationContext : undefined,
         onValidated: value => { if (session.current.current(controller)) { setValidated(value); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
@@ -148,15 +162,17 @@ export default function Home() {
 
       <section className="planner-section shell" id="planner" aria-labelledby="planner-title">
         <form className="planner" onSubmit={submit}>
-          <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">LOCAL DEMO</span></div>
+          <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">{dataMode === "real" ? "REAL DATA · LOCAL DEV" : dataMode === "mock" ? "MOCK DATA" : "MODE UNAVAILABLE"}</span></div>
+          {dataMode === "unavailable" && <p role="status">Checking the planner connection. If this stays unavailable, start the backend and reload this page before planning.</p>}
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          {dataMode === "real" && <LocationControls onChange={value => { invalidateResults(); setLocationContext(value); }} />}
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
-              <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>Fictional Baltimore venues only</small></label>
+              <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>{dataMode === "real" ? "Destination city/neighborhood; separate from your start" : "Fictional Baltimore venues only"}</small></label>
               <OutingDateField value={preferences.date} onChange={value => updatePreference("date", value)} />
               <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
@@ -166,7 +182,7 @@ export default function Home() {
             </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         </form>
-        {validated && <OutingSummary value={validated} dirty={dirty} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
+        {validated && <OutingSummary real={dataMode === "real"} value={validated} dirty={dirty} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
         {clarification && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
           <p className="details-heading">{clarification.questions.length ? "A little more detail" : "Your request is ready to retry"}</p>
           <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>
@@ -179,21 +195,22 @@ export default function Home() {
               <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Continue planning"}<ArrowRight size={18} /></button></div>
           </form>
         </div>}
-        <p className="planner-disclaimer"><CircleHelp size={13} /> A preview of what’s possible. Local sample data, no live searches or bookings.</p>
-        <details className="catalog-help"><summary>Supported activities &amp; fictional event dates</summary><p>{SUPPORTED_ACTIVITIES}.</p><p>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Group capacities are mock limits (4, 8, or 20 people); prices are per person. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p></details>
+        <p className="planner-disclaimer"><CircleHelp size={13} /> {dataMode === "real" ? "Real venues and route estimates. Prices, hours and availability require confirmation. No bookings." : "A preview of what’s possible. Local sample data, no live searches or bookings."}</p>
+        <details className="catalog-help"><summary>Supported activities &amp; {dataMode === "real" ? "data limitations" : "fictional event dates"}</summary><p>{SUPPORTED_ACTIVITIES}.</p><p hidden={dataMode === "real"}>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p hidden={dataMode === "real"}>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Group capacities are mock limits (4, 8, or 20 people); prices are per person. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p>{dataMode === "real" && <p>List up to four stops, in order, including repeated activities. Every outing needs a date. Real event venues do not establish scheduled performances or movie showtimes. Prices, hours, durations, group capacity and reservations need confirmation. Driving is used unless you request walking. No budget is verified while prices are unknown.</p>}</details>
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
-        <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? "Sample results" : "Demo itineraries"}</span></div>
-        {generated && <ResultsInformation notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
-        {clarification?.questions.length ? <div className="empty-state" role="status"><CircleHelp size={28} /><h3>Just a little more detail.</h3><p>Answer the questions below your request to continue. Your original details are kept.</p></div> : result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{failureMessage(result.message)}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
+        <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
+        {generated && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        {clarification?.questions.length ? <div className="empty-state" role="status"><CircleHelp size={28} /><h3>Just a little more detail.</h3><p>Answer the questions below your request to continue. Your original details are kept.</p></div> : result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{failureMessage(result.message)}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 
       <section className="how-section shell" id="how-it-works" aria-labelledby="how-title"><div className="how-intro"><span className="tiny-spark"><Sparkles size={21} /></span><h2 id="how-title">Less back-and-forth.<br /><em>More “see you there.”</em></h2></div><div className="how-step"><span>01</span><h3>Give us the gist.</h3><p>Your people, your place, your idea of a good time.</p></div><div className="how-step"><span>02</span><h3>Find your kind of plan.</h3><p>Explore three options that bring it all together.</p></div><div className="how-step"><span>03</span><h3>Take it to the group chat.</h3><p>Pick a favorite. Check the real-world details. Go hang out.</p></div></section>
 
-      <section id="about-demo" className="about-demo shell"><div><span className="status-dot" /><strong>A small demo. A big idea.</strong></div><p>Where To? is a first look at an AI-powered outing planner. This version uses local AI to help plan outings with fictional Baltimore venues. It supports everyday outings, sports, concerts, and performances. Scheduled events require a matching mock date; unclear or unsupported requests get an explanation. Live availability, verified prices, and bookings are not connected.</p><a href="#planner">Give it a go <ArrowDown size={14} /></a></section>
+      <section id="about-demo" className="about-demo shell"><div><span className="status-dot" /><strong>A small demo. A big idea.</strong></div><p>Where To? is a first look at an AI-powered outing planner. This version uses local AI with fictional Baltimore venues by default. Deliberately enabled local real mode uses Google Maps venues and route estimates, with missing information clearly marked. It supports everyday outings, sports, concerts, and performances. Mock scheduled events require a matching fixture date; real event venues do not verify a session. Unclear or unsupported requests get an explanation. Live availability, verified prices, and bookings are not connected.</p><a href="#planner">Give it a go <ArrowDown size={14} /></a></section>
     </main>
+    <nav className="shell" aria-label="Policies"><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a></nav>
     <footer className="site-footer shell"><a href="#" className="brand footer-brand">where to<span className="brand-question">?</span></a><p>Good company. Great plans. Less effort.</p><span>Made for getting together <span aria-hidden="true">↗</span></span></footer>
   </>;
 }

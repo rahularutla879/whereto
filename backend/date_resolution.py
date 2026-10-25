@@ -225,7 +225,7 @@ def _wall_issue(day: date, minute: int, zone: ZoneInfo) -> str | None:
 def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: list[str],
                      location: str | None, *, manual_date: str = '', now: datetime | None = None) -> DateResolution:
     result = DateResolution()
-    zone = ZoneInfo('America/New_York' if location and supports_location(location.strip()) else 'UTC')
+    zone = ZoneInfo('America/New_York' if location and (supports_location(location.strip()) or re.fullmatch(r'Washington\s*,?\s*(?:DC|D\.C\.)', location.strip(), re.I)) else 'UTC')
     result.timezone = zone.key
     reference = now if now is not None else datetime.now(timezone.utc)
     if reference.tzinfo is None or reference.utcoffset() is None:

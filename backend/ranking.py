@@ -42,6 +42,7 @@ def evaluate_candidate(
     request: OutingRequest, candidate: CandidateItinerary, *,
     price_provider: PriceProvider = mock_price,
     travel_provider: TravelProvider = simulated_travel,
+    real_data: bool = False,
 ) -> RankedItinerary:
     """Keep violations and missing evidence separate; never fill missing facts.
 
@@ -57,7 +58,7 @@ def evaluate_candidate(
                                       venueId=venue.id if venue else None,
                                       status="unknown" if unknown else "violation"))
 
-    if not supports_location(request.location):
+    if not real_data and not supports_location(request.location):
         issue("unsupported_location", "location", "The fictional catalog only covers Baltimore; choose Baltimore.")
     if ([v.activity for v in venues] != request.activities
             or candidate.people != request.people or candidate.date != request.date
@@ -208,7 +209,7 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
     return sorted(candidates, key=lambda p: (-p.score, tuple(v.id for v in p.candidate.venues), p.candidate.id))
 
 
-def _select(ranked: list[RankedItinerary], count: int) -> list[RankedItinerary]:
+def _select(ranked: list[RankedItinerary], count: int, *, min_changed: int = 1) -> list[RankedItinerary]:
     """Best first, then greedy diversity among options within 0.15 of best remaining.
 
     Prefer more different stop identities; never select an ineligible route to
@@ -232,7 +233,8 @@ def _select(ranked: list[RankedItinerary], count: int) -> list[RankedItinerary]:
                 code="diversity", message=f"Changes at least {changed} stop identities versus earlier options; selected within 0.15 of the best remaining score."))
         selected.append(choice)
         identity = tuple(v.id for v in choice.candidate.venues)
-        remaining = [p for p in remaining if tuple(v.id for v in p.candidate.venues) != identity]
+        remaining = [p for p in remaining if tuple(v.id for v in p.candidate.venues) != identity
+                     and sum(a.id != b.id for a, b in zip(p.candidate.venues, choice.candidate.venues)) >= min_changed]
     return selected
 
 

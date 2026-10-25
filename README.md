@@ -2,7 +2,35 @@
 
 **Less planning. More hanging out.**
 
-A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules and fictional Baltimore venues. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
+A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules, with fictional Baltimore venues by default and deliberate local real-data mode for Google Maps venues/routes. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
+
+## Task 46: real venues in local development
+
+Mock remains the safe default. The website badge says **MOCK DATA** or **REAL DATA · LOCAL DEV**. Real results contain Google Maps venues and driving/walking estimates; prices, hours, visit duration, showtimes and reservations still need confirmation. They are provisional options, not bookings or verified budget matches.
+
+From `/Users/rahularutla/Documents/whereto`, stop the backend with Control+C, then deliberately start real mode in that Terminal:
+
+```sh
+cd /Users/rahularutla/Documents/whereto
+VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development npm run dev:backend
+```
+
+Keep the existing `npm run dev` frontend running in the second Terminal and reload the page. Existing local Ollama and protected impersonated ADC must be available. No source-code change is needed. Do not use these switches in production or hosting settings. Generating real plans makes billable Google requests within the existing application/Cloud limits; do not repeat the completed Task 46 live verification without a new allowance.
+
+To turn real mode off, stop that backend with Control+C and run:
+
+```sh
+unset VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
+npm run dev:backend
+```
+
+Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
+
+In real mode, **Optional starting location** offers **Use my current location**, separate from your destination. Permission is requested only when you click it. If unavailable, enter a city/neighborhood in Set preferences; an exact manual starting point is also supported for first-stop travel. Explicit destinations win over device location. The optional first-stop cap and near-me radius have their own controls. Your coordinates stay in page/request memory and are not logged or saved.
+
+Expand **View plan**, then **View details** for a real venue. Name, address and Google Maps link are available. Phone/official website lookup is separately disabled by default because it uses Place Details Enterprise ($0.02/request after the applicable allowance). For a separately authorized future contact test, add `WHERETO_CONTACT_DETAILS_DEV=1` to the real-mode backend command above. Never turn it on for the Task 46 live check: that allowance permits zero Details calls. Missing contacts have clear labels; the Google Maps link remains usable. No reservation is confirmed.
+
+[Full real-data flow, safeguards, limitations, pricing and tests](docs/real-planning.md). Historical checkpoints below describe the mock prototype unless stated otherwise.
 
 ## Start the application — beginner instructions
 
@@ -62,7 +90,7 @@ The default backend address is `http://127.0.0.1:8000`. No configuration is requ
 
 You can edit files and see changes in the browser while the development server is running. Starting it does not publish your site on the internet. No accounts, API keys, or `.env` file are needed.
 
-## Try the planner
+## Try the mock planner
 
 Click **Try an example**, then **Plan my outing**. Or type:
 
@@ -142,11 +170,11 @@ First click **Reset preferences** so old settings do not override your request. 
 
 ## About the sample data
 
-**Every venue is fictional.** Event schedules, start times, capacities, prices, neighborhood assignments, durations, and travel times are invented to demonstrate the interface. They are not verified quotes, actual routes, current availability, or opening hours.
+**Every venue in mock mode is fictional.** Event schedules, start times, capacities, prices, neighborhood assignments, durations, and travel times are invented to demonstrate the interface. They are not verified quotes, actual routes, current availability, or opening hours.
 
 Costs are per person, in USD. The group total is the sample per-person cost multiplied by the group size. Estimates exclude transport fares, taxes, tips, booking fees, and extras. Travel is the total between stops using a simple made-up neighborhood model; it excludes getting to the first stop and returning home. The displayed itinerary duration includes activities, inter-stop travel, and any waiting for scheduled events. Shopping prices exclude purchases; the free picnic option requires bringing your own food. No real bookings or reservations are made.
 
-There is no authentication, payment integration, database, external API integration, or production deployment.
+There is no user-account authentication, payment integration, database or production deployment. Task 46 adds deliberately enabled backend Google APIs using the existing keyless local authentication.
 
 ## Project files
 
@@ -315,6 +343,6 @@ Normal `npm test` and `npm run test:backend` remain independent of a running AI 
 
 ## Google API safeguards and discovery (Tasks 39–40)
 
-Keep using the same local startup commands above. Real discovery is disabled by default and disconnected from the website; routes remain locked; no Google key or billing setup is needed for the fictional planner. Leave `VENUE_DATA_MODE` unset (default `mock`) or set it to `mock` in the backend Terminal. Any other value prevents backend startup; remove that override to resume mock mode. Python does not automatically read Next.js environment files.
+Keep using the same local startup commands above. Real providers are disabled by default; Task 46 connects them to the website only under the deliberate local switches above. No Google credential or billing setup is needed for the fictional planner. Leave `VENUE_DATA_MODE` unset (default `mock`) or set it to `mock` in the backend Terminal. Unknown mode values prevent backend startup; remove that override to resume mock mode. Python does not automatically read Next.js environment files.
 
 Lower project quotas and local request-budget checks are implemented. The owner linked Free Trial billing; a $50/month account-wide alert budget is saved, and keyless local OAuth authentication is configured outside the project. Mock mode does not use those credentials. Alerts track actual usage before credits at $25/$45/$50 and do not stop requests; future linked projects would share the budget. See [verified settings, costs and exact owner approval steps](docs/billing-safeguards.md). No payment or account action is needed to continue locally. Task 40 provides an isolated backend development adapter. Its two authorized live verification attempts are complete; do not run additional live tests without separate authorization. Leave `WHERETO_PLACES_DEV` unset for normal use. See [discovery behavior and developer reference](docs/venue-discovery.md).
