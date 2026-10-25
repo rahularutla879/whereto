@@ -2,6 +2,19 @@
 
 # Current architecture
 
+Task 45 adds `backend/evidence.py`, pure adapters over existing Task 40–44 data.
+`Source`, `Claim`, `EvidenceLabels` and `DisplayAttribution` separate original
+provider identities/links/credits from field-level certainty and receipt times.
+`venue_labels` covers canonical fields (including missing nested values);
+`distinct_venue_labels` preserves Task 42 merged contributors; `route_labels`
+labels estimates paired with the unchanged directional route contract;
+`feasibility_labels` translates Task 44 outcomes without evaluating constraints.
+Fictional-fixture and user-detail adapters preserve source distinctions. Existing
+models, provider masks, endpoints and mock planner/UI are unchanged. Labels and
+provider content stay in memory; no storage, new requests or Task 46 integration.
+See [evidence labeling](docs/evidence-labeling.md) for states, attribution and
+consumption rules. The following baseline and historical sections remain valid.
+
 Source baseline: October 20, 2026. Next.js serves the existing React homepage, proxies raw text/manual controls, and displays results. FastAPI interprets requests through the Task 30 AI provider, validates/merges them in the Task 31 service, then generates and ranks itineraries using Tasks 26–27 and the shared fictional dataset.
 
 ```text

@@ -1,6 +1,6 @@
 # Task 40 venue discovery
 
-Task 40 adds isolated backend discovery, not real-data itineraries. The website still uses the fictional catalog. No new FastAPI route or frontend/geolocation control was added. Task 41 adds offline normalization below; Task 42 adds candidate quality checks. Tasks 43–46 remain unstarted.
+Task 40 adds isolated backend discovery, not real-data itineraries. The website still uses the fictional catalog. No new FastAPI route or frontend/geolocation control was added. Task 41 adds offline normalization below; Task 42 adds candidate quality checks. Tasks 43–45 are complete; Task 46 remains unstarted. Historical checkpoints below describe their state at that time.
 
 ## Development use
 
@@ -217,3 +217,8 @@ The optional canonical `primaryType` mapping adds no requested field. Existing f
 ## Task 43 routing boundary
 
 The separate [backend route calculator](route-calculator.md) can consume Task 41 canonical Google venue IDs or validated venue coordinates after Task 42 candidate checks. It does not invoke discovery, buy missing details or expand candidate pools. Multiple activity associations can share a locally labeled same-venue transition. Destination area, optional explicitly authorized start, venue candidates and separate first-leg/inter-stop travel constraints retain their distinct meanings. Discovery behavior, field mask and live gate are unchanged. No new Places request occurred. Full feasibility is Task 44; public source labeling is Task 45 and real-data planner integration is Task 46.
+
+
+## Task 45 evidence and display boundary
+
+Use `venue_labels` for individual normalized observations and `distinct_venue_labels` for Task 42 merged records. Labels distinguish provider-reported identity/address/coordinates from provisional optional enrichment and missing evidence; original contributing IDs, receipt times, credits and available links survive. No field-mask expansion or enrichment requests occur. [Evidence contract, official attribution/source-link guidance and Task 46 consumption rules](evidence-labeling.md). Current website remains fictional; Task 46 is unstarted.

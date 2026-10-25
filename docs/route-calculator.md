@@ -98,3 +98,8 @@ The route gate was enabled only inside the single verification process and remov
 Safeguard review used local code/settings/ADC metadata and the existing verified billing records: Free Trial originally $300, recorded expiry January 21, 2027; existing $50 account-wide alerts at $25/$45/$50; matrix cloud quotas 300/day and 60/minute. Those settings were not changed. Current remaining credit, aggregate usage and posted charges were **not freshly measured**. At the previously documented Essentials first-tier rate, four elements correspond to **$0.02 before allowances/trial credit**, an estimate rather than a receipt. No cloud administration API was enabled or queried as part of this check.
 
 Post-test focused offline route/budget checks: **33/33 passed**. No repository application code changed, so full frontend/build/browser/Ollama suites were not rerun. The initial Task 43 implementation's full regression results remain in HANDOVER.md. The fictional planner is unchanged; Task 44 remains unstarted.
+
+
+## Task 45 display boundary
+
+`route_labels` adds duration/distance estimate labels and Google Maps attribution requirements without changing `RouteLeg`, direction, mode, precision or provider metadata. Traffic-unaware driving and beta walking limitations remain explicit; failures/missing routes never become zero travel. Local identity transitions have local provenance. Pair with `feasibility_labels` over Task 44 results for scoped constraint messages. [Evidence and attribution contract](evidence-labeling.md). No new calls, mask/feature/cost/limit changes or Task 46 integration.

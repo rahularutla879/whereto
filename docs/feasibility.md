@@ -156,3 +156,8 @@ catalog/planner-output fingerprints. No existing planner helper or behavior chan
 Task 45 will implement accurate source labeling and distinguish verified evidence,
 estimates and unknown availability. Task 46 will integrate real venue/route data
 with the planner while retaining mock mode. Neither is implemented here.
+
+
+## Task 45 display boundary
+
+Task 45 is now complete. `feasibility_labels` translates this evaluator's supplied results into fixed, safe human-readable messages, preserving every check state and stop index without rerunning decisions. The original result retains exact backend reason/evidence references; public labels exclude them. A violated constraint stays rejected alongside unknowns, and satisfied checks do not verify prices, reservations or availability. [Evidence contract and Task 46 guidance](evidence-labeling.md). Task 46 remains unstarted.
