@@ -46,7 +46,8 @@ def main():
             counts['ai'] += 1
             pattern = r'\b(bowling|dinner|coffee|museum|movie|concert)\b'
             activities = [m[0] for m in re.finditer(pattern, text, re.I)]
-            return Interpretation(activities=activities or ['coffee'], people=2 if '2 people' in text else None,
+            group = re.search(r'\b(\d+) people\b', text)
+            return Interpretation(activities=activities or ['coffee'], people=int(group[1]) if group else None,
                 budget_per_person=None, date=None, location='Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
                 preferences=[], transport='walking' if 'walking' in text else None)
 

@@ -17,6 +17,7 @@ from backend.routes import AuthorizedStart, GoogleRouteCalculator, RoutePoint, R
 
 
 class PlannerInput(PlanningRequest):
+    manualStartingPlace: str | None = Field(default=None, max_length=200, exclude=True, repr=False)
     startingLocation: AuthorizedStart | None = Field(default=None, repr=False, exclude=True)
     currentArea: SearchArea | None = Field(default=None, repr=False, exclude=True)
     searchRadius: float | None = Field(default=None, gt=0, le=50000, strict=True, allow_inf_nan=False)
@@ -29,6 +30,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget) -> RankingResult:
     outing = session.outing()
     # Do not echo precise authorized starting coordinates in result/request IDs.
     public = PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius"}))
+    if request.manualStartingPlace and request.manualStartingPlace.strip():
+        return empty(public, "Manual starting-place lookup is not enabled yet. Use my current location, or clear the starting place to plan without first-stop travel. Your destination was not changed.")
     if request.allowRevisits:
         return empty(public, "Real outings currently require distinct venues. Repeated activity types are supported, but returning to the same venue is not yet supported.")
     if request.transport is not None and request.transport.value not in ("driving", "walking"):
@@ -147,11 +150,26 @@ def real_plans(request: PlannerInput, session: ProviderBudget) -> RankingResult:
                     rejections[issue.message] = rejections.get(issue.message, 0) + 1
         else:
             evaluated.append(plan)
-    diverse = _select(score_candidates(public, evaluated), 3,
-                      min_changed=max(1, (len(request.activities) + 1) // 2))
+    ranked = score_candidates(public, evaluated)
+    # Keep genuinely useful shared stops when only one activity has alternatives.
+    varying = sum(len({p.candidate.venues[i].id for p in ranked}) > 1 for i in range(len(request.activities)))
+    min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
+    diverse = _select(ranked, 3, min_changed=min_changed)
+    batches, shown = [], {p.candidate.id for p in diverse}
+    # At most six extra pre-evaluated combinations, no new searches/routes.
+    for _ in range(2):
+        previous = [p for p in ranked if p.candidate.id in shown]
+        remaining = [p for p in ranked if p.candidate.id not in shown and all(
+            sum(a.id != b.id for a, b in zip(p.candidate.venues, old.candidate.venues)) >= min_changed for old in previous)]
+        batch = _select(remaining, 3, min_changed=min_changed)
+        if not batch:
+            break
+        batches.append(batch)
+        shown.update(p.candidate.id for p in batch)
     from backend.venue_details import details_sessions
-    details_token = details_sessions.create([v.id for p in diverse for v in p.candidate.venues], outing) if diverse else None
+    details_token = details_sessions.create([v.id for p in ranked if p.candidate.id in shown for v in p.candidate.venues], outing) if diverse else None
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
+        alternativeBatches=batches,
         diagnostics=diagnostics, message=f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No complete real outing is available.")],
         notes=["Real venues from Google Maps; activity categories reflect search context and need confirmation.",

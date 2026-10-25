@@ -5,7 +5,7 @@ from unittest.mock import Mock
 from zoneinfo import ZoneInfo
 
 from backend.ai import Interpretation
-from backend.date_resolution import resolve_datetime
+from backend.date_resolution import resolve_datetime, complete_year_answer
 from backend.interpretation import InterpretationInput, interpret_request
 from backend.ranking import recommend_plans
 
@@ -13,6 +13,34 @@ REFERENCE = datetime(2026, 10, 21, 12, tzinfo=ZoneInfo('America/New_York'))
 
 
 class DateResolutionTests(unittest.TestCase):
+    def test_qualified_weekday_dates_and_independent_conflicts(self):
+        for text in ('Saturday, November 7, 2026', 'Saturday November 7 2026', 'Saturday, 2026-11-07', 'Saturday, 7 Nov 2026'):
+            r = self.resolve(text, date_expressions=['Saturday'] if 'Saturday' in text else [])
+            self.assertEqual(r.date, date(2026, 11, 7))
+            self.assertFalse(r.issues)
+        for text in ('Friday, November 7, 2026', 'Saturday and November 7, 2026', 'Saturday, November 7, 2026 and tomorrow'):
+            self.assertTrue(self.resolve(text).issues, text)
+        self.assertTrue(self.resolve('Saturday, November 31, 2026').issues)
+        self.assertEqual(complete_year_answer('Saturday, November 7', '2026'), 'Saturday, november 7, 2026')
+
+    def test_exact_manual_prompt_through_interpretation_and_clarification(self):
+        prompt = 'Plan bowling followed by dinner in Baltimore on Saturday, November 7, 2026, for 4 people.'
+        for phrases in ([], ['Saturday', 'November 7, 2026'], ['Saturday, November 7, 2026']):
+            provider = Mock()
+            provider.interpret.return_value = Interpretation(activities=['bowling', 'dinner'], people=4,
+                budget_per_person=None, date=None, location='Baltimore', preferences=[], date_expressions=phrases)
+            value = InterpretationInput(text=prompt)
+            r = interpret_request(value, provider, now=REFERENCE)
+            self.assertFalse(r.issues)
+            self.assertFalse(r.questions)
+            self.assertEqual(r.request.date, date(2026, 11, 7))
+            self.assertEqual(r.request.activities, ['bowling', 'food'])
+            # Existing continuation and manual priority also retain the date.
+            continued = interpret_request(InterpretationInput(text=prompt, pending=r.pending), provider, now=REFERENCE)
+            self.assertEqual(continued.request.date, r.request.date)
+            manual = interpret_request(InterpretationInput(text=prompt, preferences={'date': '2026-11-14'}), provider, now=REFERENCE)
+            self.assertEqual(manual.request.date, date(2026, 11, 14))
+
     def resolve(self, text, now=REFERENCE, **kw):
         return resolve_datetime(text, kw.pop('date_expressions', []), kw.pop('time_expressions', []),
                                 kw.pop('location', 'Baltimore'), now=now, **kw)

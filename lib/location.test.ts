@@ -13,6 +13,10 @@ test("rendering location controls and venue details never requests permission or
   assert.match(html, /Use my current location/);
   assert.match(html, /city\/neighborhood/);
   assert.match(html, /Maximum travel to first stop/);
+  assert.match(html, /Starting place, address, neighborhood or ZIP code/);
+  assert.match(html, /approximate area, not your exact position/);
+  assert.match(html, /Address lookup is not enabled yet/);
+  assert.doesNotMatch(html, /latitude|longitude|starting coordinates/i);
   const venue = { id: "real", providerPlaceId: "real", name: "Venue", address: "Synthetic address" } as DisplayVenue;
   const session = new VenueDetailsSession(); session.get = () => { throw new Error("Prefetched contact data"); };
   const details = renderToStaticMarkup(createElement(VenueDetails, { venue, token: "token", session }));

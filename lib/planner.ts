@@ -25,7 +25,7 @@ export type Plan = {
   feasibility: "confirmed" | "provisional" | "preview"; issues: string[];
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
-export type PlannerResult = { dataMode?: "mock" | "real"; plans: Plan[]; message: string; location: string; activities: Activity[]; notes: string[] };
+export type PlannerResult = { dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };
 export const EXAMPLE_REQUEST = "We're 4 friends in Baltimore. We want bowling, drinks, and a movie.";
 export const EMPTY_PREFERENCES: Preferences = { location: "", date: "", people: "", budget: "", travel: "", cost: "balanced" };

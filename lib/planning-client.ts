@@ -15,7 +15,7 @@ type Ranked = {
   score?: number; components?: { quality?: number };
 };
 type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; request: { location: string; activities: PlannerResult["activities"]; cost: string };
-  plans: Ranked[]; provisionalPlans: Ranked[]; message: string; notes: string[]; errors: { message: string }[] };
+  plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
   // Reject broken upstream responses instead of displaying misleading empty success.
@@ -31,6 +31,8 @@ export function adaptRanking(value: unknown): PlannerResult {
     : !!s.venue?.providerPlaceId))) throw new Error("Mixed venue data modes");
   const nullableNumber = (n: unknown) => n === null || (typeof n === "number" && Number.isFinite(n) && n >= 0);
   const selected = [...data.plans, ...data.provisionalPlans];
+  if (data.alternativeBatches !== undefined && (!Array.isArray(data.alternativeBatches) || data.alternativeBatches.length > 2
+    || (!real && data.alternativeBatches.length) || data.alternativeBatches.some(batch => !Array.isArray(batch) || batch.length < 1 || batch.length > 3))) throw new Error("Invalid additional options");
   for (const p of selected) {
     if (!p.candidate || typeof p.candidate.id !== "string" || !Array.isArray(p.stops) || !p.stops.length
       || !Array.isArray(p.candidate.venues) || p.stops.length !== data.request.activities.length
@@ -60,15 +62,18 @@ export function adaptRanking(value: unknown): PlannerResult {
   const plans: Plan[] = selected.map((p, i) => ({
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
     firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
-    id: p.candidate.id, title: real ? `Real outing option ${i + 1}` : copy[i].title, theme: themes[i],
+    id: p.candidate.id, title: real ? p.stops.map(s => s.venue.name).join(" → ") : copy[i].title, theme: themes[i],
     label: `${real ? "PROVISIONAL REAL VENUES" : copy[i].label} · OPTION ${i + 1}`,
-    description: real ? `${p.stops.map(s => s.venue.name).join(" → ")}. ${p.totalTravel === null ? "Travel not fully verified" : `${p.totalTravel} estimated minutes between stops`}.` : copy[i].description,
+    description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. Prices and ratings are unavailable and did not determine the ranking.` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
     travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
   }));
-  return { dataMode: data.dataMode ?? "mock", plans, location: data.request.location, activities: data.request.activities,
-    message: plans.length ? data.message : [data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))].join(" "), notes: data.notes };
+  const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
+  const identities = [...plans, ...alternativeBatches.flat()].map(p => p.venues.map(v => v.id).join("\u0000"));
+  if (new Set(identities).size !== identities.length) throw new Error("Duplicate itinerary options");
+  return { dataMode: data.dataMode ?? "mock", plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
+    message: plans.length ? data.message : [...new Set([data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))])].join(" "), notes: data.notes };
 }
 
 export type ClarificationField = "location" | "people" | "date" | "activities" | "time";
@@ -144,6 +149,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 
 
 export type LocationContext = {
+  manualStartingPlace?: string;
   startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
   searchRadius?: number; maxFirstLegTravel?: number;

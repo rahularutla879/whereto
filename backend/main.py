@@ -67,7 +67,7 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             return JSONResponse(status_code=422, content={"code": "invalid_provider_data", "message": "Google returned incomplete or invalid venue or route information. No fictional fallback was used."})
         except (ProviderLimitError, DiscoveryError, RouteError) as error:
             return JSONResponse(status_code=422, content={"code": getattr(error, "code", "application_limit"), "message": str(error) + " No fictional fallback was used.", "diagnostics": getattr(error, "diagnostics", {})})
-    if any(value is not None for value in (request.startingLocation, request.currentArea, request.searchRadius, request.maxFirstLegTravel)):
+    if any(value is not None for value in (request.startingLocation, request.currentArea, request.searchRadius, request.maxFirstLegTravel, request.manualStartingPlace)):
         return JSONResponse(status_code=422, content={"code": "unsupported_request", "message": "Starting-point travel and search-radius checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored limit."})
     return recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel"})))
 

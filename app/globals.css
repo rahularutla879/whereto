@@ -217,3 +217,14 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .provider-credits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .plan-details[hidden], .venue-contact[hidden] { display: none; }
 .plan-details li div > .provider-credits { display: flex; }
+
+/* Local activity symbols and actual stop names; no venue-photo requests. */
+.real-route-poster { padding: 56px 25px 16px; display: grid; gap: 8px; color: var(--ink); }
+.real-route-poster > div { display: flex; align-items: center; gap: 10px; min-width: 0; }
+.real-route-poster svg { flex-shrink: 0; }
+.real-route-poster span { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-size: 13px; }
+.real-route-poster small { font-size: 10px; opacity: .75; }
+.card-visual:has(.real-route-poster) { height: auto; min-height: 190px; }
+.more-options { margin-top: 24px; }
+.more-options p { color: var(--muted); font-size: 13px; margin-top: 10px; }
+.card-bottom strong { overflow-wrap: anywhere; }

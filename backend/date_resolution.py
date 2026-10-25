@@ -20,8 +20,9 @@ MONTH_NUMBERS['sept'] = 9
 MONTH = '(?:' + '|'.join(sorted(MONTH_NUMBERS, key=len, reverse=True)) + r')\.?'
 DAY = r'\d{1,2}(?:st|nd|rd|th)?'
 WEEKDAY = r'(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)'
+EXPLICIT_DATE = rf'(?:\d{{4}}-\d{{2}}-\d{{2}}|{MONTH}\s+{DAY}(?:(?:,\s*|\s+)\d{{4}})?|{DAY}\s+(?:of\s+)?{MONTH}(?:(?:,\s*|\s+)\d{{4}})?)'
 DATE_WORDING = re.compile(
-    rf'\b(?:\d{{4}}-\d{{2}}-\d{{2}}|{MONTH}\s+{DAY}(?:(?:,\s*|\s+)\d{{4}})?|'
+    rf'\b(?:{WEEKDAY}\s*,?\s+{EXPLICIT_DATE}|\d{{4}}-\d{{2}}-\d{{2}}|{MONTH}\s+{DAY}(?:(?:,\s*|\s+)\d{{4}})?|'
     rf'{DAY}\s+(?:of\s+)?{MONTH}(?:(?:,\s*|\s+)\d{{4}})?|'
     rf'tomorrow(?:\s+(?:evening|night))?|today|tonight|'
     rf'(?:(?:this|next)\s+)?{WEEKDAY}(?:\s+(?:evening|night))?|'
@@ -122,18 +123,28 @@ def complete_year_answer(context: str, answer: str) -> str:
     if not re.fullmatch(r'\d{4}', answer):
         return answer
     phrases = [m.group() for m in DATE_WORDING.finditer(context)]
-    parts = [_named_date_parts(phrase) for phrase in phrases]
+    parts = [_named_date_parts(re.sub(rf'^{WEEKDAY}\s*,?\s+', '', phrase, flags=re.I)) for phrase in phrases]
     if parts and all(part is not None for part in parts):
         days = {(part[0], part[1]) for part in parts}
         if len(days) == 1:
             month, day = next(iter(days))
-            return f'{MONTHS[month - 1]} {day}, {answer}'
+            weekdays = {m[0] for phrase in phrases if (m := re.match(WEEKDAY, phrase, re.I))}
+            if len(weekdays) > 1:
+                return answer
+            prefix = next(iter(weekdays)) + ', ' if weekdays else ''
+            return f'{prefix}{MONTHS[month - 1]} {day}, {answer}'
     return answer
 
 
 def _date_expression(expression: str, today: date) -> date:
     text = re.sub(r'^on\s+', '', expression.lower().strip())
     text = re.sub(r'\s+(evening|night)$', '', text)
+    qualified = re.fullmatch(rf'({WEEKDAY})\s*,?\s+({EXPLICIT_DATE})', text, re.I)
+    if qualified:
+        resolved = _date_expression(qualified[2], today)
+        if resolved.weekday() != 'monday tuesday wednesday thursday friday saturday sunday'.split().index(qualified[1].lower()):
+            raise DateExpressionError('date_conflict', 'The weekday and calendar date disagree. Which date should we use?')
+        return resolved
     if text in {'today', 'tonight'}:
         return today
     if text == 'tomorrow':
@@ -231,7 +242,12 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
     if reference.tzinfo is None or reference.utcoffset() is None:
         raise ValueError('The reference clock must include a timezone.')
     local_now = reference.astimezone(zone)
-    result.date_expressions = list(dict.fromkeys([*date_expressions, *[m.group() for m in DATE_WORDING.finditer(raw)]]))
+    raw_dates = [m.group() for m in DATE_WORDING.finditer(raw)]
+    # Models may extract the two halves of a qualified calendar date. Resolve
+    # that single source phrase together, not a relative weekday plus a date.
+    qualified_dates = [p.casefold() for p in raw_dates if re.fullmatch(rf'{WEEKDAY}\s*,?\s+{EXPLICIT_DATE}', p, re.I)]
+    extracted = [p for p in date_expressions if p in raw_dates or not any(p.casefold() in q for q in qualified_dates)]
+    result.date_expressions = list(dict.fromkeys([*extracted, *raw_dates]))
     clock_source = DATE_WORDING.sub(lambda m: ' ' * len(m.group()), raw)
     result.time_expressions = list(dict.fromkeys([*time_expressions, *[m.group() for m in TIME_WORDING.finditer(clock_source)]]))
     if result.date_expressions or manual_date:

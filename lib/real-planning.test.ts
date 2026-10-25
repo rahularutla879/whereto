@@ -10,6 +10,7 @@ import { POST as plan } from "../app/api/plans/generate/route";
 import { POST as details } from "../app/api/venues/details/route";
 import { GET as mode } from "../app/api/planning-mode/route";
 import { VenueDetailsSession, safeWebsite } from "./venue-details";
+import { nextOptions } from "./option-batches";
 
 test("offline real mode: AI → HTTP backend → Google fixtures → existing planner → proxies/cards/contact details", async () => {
   const listener = createServer(); listener.listen(0, "127.0.0.1"); await once(listener, "listening");
@@ -30,11 +31,33 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
       await new Promise(r => setTimeout(r, 50));
     }
     assert.equal((await (await mode()).json()).mode, "real");
-    const result = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
+    let asked = false;
+    const result = await generateOuting("Plan bowling followed by dinner in Baltimore on Saturday, November 7, 2026, for 4 people.", EMPTY_PREFERENCES, { onClarification: value => { asked = !!value?.questions.length; } }, send);
+    assert.equal(asked, false);
+    assert.equal(result.plans[0].date, "2026-11-07");
+    assert.equal(result.plans[0].people, 4);
     assert.equal(result.dataMode, "real");
     assert.equal(result.plans.length, 3);
     assert.deepEqual(result.plans[0].venues.map(v => v.activity), ["bowling", "food"]);
     assert.ok(result.plans.every(p => p.price === null && p.feasibility === "provisional"));
+    assert.ok(result.plans.every(p => !p.title.includes("Real outing option") && p.title.includes(p.venues[0].name)));
+    assert.match(result.plans[0].description, /Prices and ratings are unavailable/);
+    const countsBefore = await (await fetch(`${base}/__test/counts`)).json();
+    const second = nextOptions(result), third = nextOptions(second);
+    assert.equal(result.alternativeBatches?.length, 2);
+    assert.equal(third.alternativeBatches?.length, 0);
+    assert.equal(nextOptions(third), third);
+    const all = [...result.plans, ...second.plans, ...third.plans];
+    assert.equal(new Set(all.map(p => p.venues.map(v => v.id).join("/"))).size, 9);
+    assert.ok(all.every(p => p.date === "2026-11-07" && p.people === 4));
+    assert.deepEqual(await (await fetch(`${base}/__test/counts`)).json(), countsBefore);
+    const manual = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, { locationContext: { manualStartingPlace: "Inner Harbor, Baltimore" } }, send);
+    assert.equal(manual.plans.length, 0);
+    assert.match(manual.message, /lookup is not enabled/);
+    assert.equal(manual.message.match(/lookup is not enabled/g)?.length, 1);
+    const countsAfter = await (await fetch(`${base}/__test/counts`)).json();
+    assert.equal(countsAfter.searches, countsBefore.searches);
+    assert.equal(countsAfter.elements, countsBefore.elements);
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).details, 0);
     const p = result.plans[0], venue = p.venues[0];
     assert.equal(venue.id, venue.providerPlaceId);

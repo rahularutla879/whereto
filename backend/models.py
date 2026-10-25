@@ -501,12 +501,16 @@ class RankingResult(ContractModel):
     dataMode: Literal["mock", "real"] = "mock"
     diagnostics: dict = Field(default_factory=dict)
     detailsToken: str | None = None
+    alternativeBatches: list[Annotated[list[RankedItinerary], Field(min_length=1, max_length=3)]] = Field(default_factory=list, max_length=2)
 
     @model_validator(mode="after")
     def validate_selection(self):
-        selected = self.plans + self.provisionalPlans
-        if len(selected) > 3:
+        initial = self.plans + self.provisionalPlans
+        selected = initial + [p for batch in self.alternativeBatches for p in batch]
+        if len(initial) > 3:
             raise ValueError("At most three total options")
+        if self.alternativeBatches and (self.dataMode != "real" or not initial or any(p.feasibility != "provisional" for batch in self.alternativeBatches for p in batch)):
+            raise ValueError("Additional options require provisional real plans")
         if selected and self.request.date is None:
             raise ValueError("Final itinerary options require an exact outing date")
         identities = [tuple(v.id for v in p.candidate.venues) for p in selected]

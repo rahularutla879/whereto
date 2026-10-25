@@ -52,6 +52,48 @@ class RealPlanningTests(unittest.TestCase):
         self.assertNotIn('"latitude":', result.model_dump_json())
         type(result).model_validate_json(result.model_dump_json())
 
+    def test_bounded_additional_options_reuse_all_evidence_and_preserve_limits(self):
+        result = self.run_plan(budget=0, maxLegTravel=10, travel=10)
+        all_plans = result.provisionalPlans + [p for batch in result.alternativeBatches for p in batch]
+        self.assertEqual(len(result.alternativeBatches), 2)
+        self.assertEqual(len(all_plans), 9)
+        self.assertEqual(len({tuple(v.id for v in p.candidate.venues) for p in all_plans}), 9)
+        self.assertEqual(self.search.call_count, 2)
+        self.assertEqual(self.matrix.call_count, 1)
+        self.assertEqual(result.diagnostics['matrixElements'], 9)
+        self.assertTrue(all(p.totalTravel <= 10 and any(i.code == 'unverified_budget' for i in p.issues) for p in all_plans))
+        serialized = result.model_dump(mode='json')
+        serialized['alternativeBatches'][0][0] = serialized['provisionalPlans'][0]
+        with self.assertRaises(ValueError):
+            type(result).model_validate(serialized)
+        # Same constraints reject alternatives as well as initial options.
+        rejected = self.run_plan(maxLegTravel=0)
+        self.assertFalse(rejected.provisionalPlans)
+        self.assertFalse(rejected.alternativeBatches)
+
+    def test_shared_venues_preserved_when_only_one_activity_has_choices(self):
+        def limited(body):
+            result = search_fixture(body)
+            if 'bowling' in body['textQuery'] or 'museum' in body['textQuery']:
+                result['places'] = result['places'][:1]
+            return result
+        self.search.side_effect = limited
+        result = self.run_plan(activities=['bowling', 'food', 'museum'])
+        self.assertEqual(len(result.provisionalPlans), 3)
+        self.assertEqual(len({p.candidate.venues[0].id for p in result.provisionalPlans}), 1)
+        self.assertEqual(len({p.candidate.venues[1].id for p in result.provisionalPlans}), 3)
+        self.assertFalse(result.alternativeBatches)
+
+    def test_manual_starting_place_is_not_silently_ignored_or_geocoded(self):
+        for text in ('Inner Harbor, Baltimore', '21201', '1 Synthetic Street, Baltimore'):
+            result = self.run_plan(manualStartingPlace=text, maxFirstLegTravel=10)
+            self.assertFalse(result.provisionalPlans)
+            self.assertIn('lookup is not enabled', result.message)
+            self.assertEqual(result.request.location, 'Baltimore')
+            self.assertNotIn(text, result.model_dump_json())
+        self.assertEqual(self.search.call_count, 0)
+        self.assertEqual(self.matrix.call_count, 0)
+
     def test_all_29_categories_no_fabricated_events(self):
         for activity in ActivityType:
             self.session = ProviderBudget()

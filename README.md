@@ -26,9 +26,11 @@ npm run dev:backend
 
 Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
 
-In real mode, **Optional starting location** offers **Use my current location**, separate from your destination. Permission is requested only when you click it. If unavailable, enter a city/neighborhood in Set preferences; an exact manual starting point is also supported for first-stop travel. Explicit destinations win over device location. The optional first-stop cap and near-me radius have their own controls. Your coordinates stay in page/request memory and are not logged or saved.
+In real mode, **Optional starting location** offers **Use my current location**, separate from your destination. Permission is requested only when you click it. If unavailable, enter a city/neighborhood in Set preferences; the normal interface accepts a starting place/address/neighborhood/ZIP rather than coordinates. Manual lookup is not enabled yet; entering one gives a clear explanation and cannot silently bypass first-stop constraints. Explicit destinations win over device location. The optional first-stop cap and near-me radius have their own controls. Your coordinates stay in page/request memory and are not logged or saved.
 
 Expand **View plan**, then **View details** for a real venue. Name, address and Google Maps link are available. Phone/official website lookup is separately disabled by default because it uses Place Details Enterprise ($0.02/request after the applicable allowance). For a separately authorized future contact test, add `WHERETO_CONTACT_DETAILS_DEV=1` to the real-mode backend command above. Never turn it on for the Task 46 live check: that allowance permits zero Details calls. Missing contacts have clear labels; the Google Maps link remains usable. No reservation is confirmed.
+
+**Stabilization:** qualified dates such as “Saturday, November 7, 2026” are preserved. Real cards explain their travel/venue-variety ranking, use venue-based titles and local activity symbols, and say “Price not available.” **Show different options** uses up to six additional already evaluated combinations, with no new Google calls; it stops when the pool is exhausted. Manual geocoding remains deferred pending API/authentication/quota approval.
 
 [Full real-data flow, safeguards, limitations, pricing and tests](docs/real-planning.md). Historical checkpoints below describe the mock prototype unless stated otherwise.
 
