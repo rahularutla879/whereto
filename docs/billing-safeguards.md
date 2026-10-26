@@ -267,3 +267,22 @@ Cloud Console still showed the Free Trial ($300 credit/88 days at the pre-test i
 Real planner access requires two deliberate local backend switches and refuses production/known hosting environments. All existing request/candidate/matrix/session/concurrency/retry ceilings remain. On-demand contacts have a separate disabled-default switch and a six-attempt sublimit inside existing budgets. Contact fields trigger Place Details Enterprise: current global first-tier $20/1,000 requests after 1,000 free/month (checked against Google's official pricing October 25). No live Details request is part of Task 46. [Current flow, pricing and final ledger](real-planning.md).
 
 Task 46 final ledger: **4 live Text Search requests, 2 Route Matrix requests / 18 billable elements, 0 Details, 0 retries**, all six provider requests HTTP 200. Estimated first-tier gross usage $0.218 before allowances/credit; no posted-cost claim. Console also confirmed actual-spend alerts at $25/$45/$50, excluded savings/credits, billing-admin/user email notifications enabled, and account-wide scope (project-owner toggle unavailable for that scope). No setting was saved or changed. Live processes stopped and mock restored. [Detailed findings and closed allowance](real-planning.md#bounded-live-verification-ledger--october-25-2026).
+
+## October 26, 2026 — authorized Text Search daily quota adjustment
+
+Manual real-data testing exhausted the project's custom 20/day Text Search allowance. Read-only Cloud Monitoring diagnosis identified `places.googleapis.com/SearchTextRequest`, limit `SearchTextRequestPerDayPerProject`, as the exhausted Google quota; this was not the application's 50-attempt process limit. The owner clarified the conflicting initial targets and explicitly authorized **40/day while preserving the actual current minute limit**.
+
+Using the existing administrator CLI identity and project `where-to-512422`, one Service Usage consumer-override PATCH changed only the existing Text Search daily override from **20 to 40**. The update specified only `overrideValue`, used no force/safety-check override and no mutation retry, and completed successfully. A subsequent read-only operation check and complete before/after comparison of all **36 Places/Routes quota values** verified exactly one change:
+
+| Quota | Before | Verified after |
+| --- | --- | --- |
+| Places Text Search per project/day | 20 requests | **40 requests** |
+| Places Text Search per project/minute | 10 requests | **10 requests** |
+| Route Matrix per project/day | 300 elements | **300 elements** |
+| Route Matrix per project/minute | 60 elements | **60 elements** |
+
+The request's reference to an existing 20/minute limit was incorrect; fresh administration reads confirmed 10/minute, which was preserved. All other Places/Routes quotas, application request/candidate/element/concurrency/retry limits, and default-disabled real/contact gates remain unchanged. No application source or credentials changed. No backend restart, billable Places/Routes/Details call or availability retry occurred. Increasing a configured allowance does not establish that today's usage has reset or that real planning will now succeed; no provider-data request was made to test availability.
+
+Google accepted this specific update to an existing below-default consumer override (the reported daily default remains 75,000). This supersedes earlier uncertainty about whether this particular edit would be accepted; it is not proof that general Free Trial quota-increase requests are available. No billing-account/plan change, paid upgrade, API enablement, IAM change, budget edit or alert edit was requested. The existing Free Trial and saved $50 budget with $25/$45/$50 alerts were left untouched; current credit balance, posted charges and budget settings were not freshly inspected. Alerts remain notifications, not a hard spending cap, and the approximately $40–$50/month development target remains in force. This quota change grants no additional live-test authorization.
+
+Verification for this administration/documentation-only change: successful operation completion, read-only 36-value quota comparison, full Git diff and whitespace review. Application tests/build/browser checks were not rerun because application files are unchanged. Temporary administration helpers/snapshots remain outside the repository and contain no saved access tokens. Task 47 was not started.
