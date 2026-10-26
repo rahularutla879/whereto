@@ -33,6 +33,17 @@ def request(**kwargs):
 
 
 class DiscoveryTests(unittest.TestCase):
+    def test_bowling_uses_strict_type_without_changing_other_searches(self):
+        body = search_body(request(), 10)
+        self.assertEqual(body['includedType'], 'bowling_alley')
+        self.assertIs(body['strictTypeFiltering'], True)
+        self.assertEqual(body['pageSize'], 10)
+        for activity in ActivityType:
+            if activity != ActivityType.bowling:
+                other = search_body(DiscoveryRequest(activity=activity, destination={'name': 'Washington, DC'}), 10)
+                self.assertNotIn('includedType', other)
+                self.assertNotIn('strictTypeFiltering', other)
+
     def test_activity_queries_cover_all_existing_categories(self):
         self.assertEqual(set(QUERIES), {a.value for a in ActivityType})
         for activity, query in {"food": "restaurants", "movie": "movie theaters", "drinks": "bars",

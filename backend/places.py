@@ -110,6 +110,10 @@ def search_body(request: DiscoveryRequest, limit: int) -> dict:
     query = "dinner restaurants" if request.meal == "dinner" else QUERIES[request.activity.value]
     body = {"textQuery": f"{query} in {area.name}" if area.name else query,
             "pageSize": limit, "languageCode": "en"}
+    if request.activity == ActivityType.bowling:
+        # Text alone can return other entertainment businesses. Bowling has a
+        # specific supported type; do not treat a broad arcade as a bowling stop.
+        body.update(includedType="bowling_alley", strictTypeFiltering=True)
     if area.coordinates is not None:
         # Zero is Google's point-bias mode, NOT an invented user search radius.
         body["locationBias"] = {"circle": {"center": area.coordinates.model_dump(),

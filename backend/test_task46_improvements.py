@@ -45,6 +45,23 @@ class ImprovementTests(unittest.TestCase):
         self.assertTrue(all(p.stops[0].venue.ratingCount is not None for p in result.provisionalPlans))
         self.assertNotIn('"latitude":', result.model_dump_json())
 
+    def test_arcade_false_positive_never_reaches_bowling_itineraries(self):
+        def response(body):
+            data = search_fixture(body)
+            if body['textQuery'].startswith('bowling'):
+                candidate = data['places'][0]
+                candidate.update(displayName={'text': 'Example Racing Arcade'},
+                                 types=['video_arcade', 'bar'], primaryType='video_arcade')
+            return data
+        self.search.side_effect = response
+        result = real_plans(outing(), self.session)
+        self.assertEqual(result.diagnostics['discoveredCounts'], [9, 10])
+        self.assertEqual(result.diagnostics['matrixElements'], 36)
+        self.assertEqual(self.search.call_count, 2)
+        for plan in result.provisionalPlans:
+            self.assertNotEqual(plan.stops[0].venue.name, 'Example Racing Arcade')
+        self.assertTrue(self.search.call_args_list[0].args[0]['strictTypeFiltering'])
+
     def test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget(self):
         result=real_plans(outing(maxLegTravel=10,budget=0),self.session)
         token=result.optionsToken

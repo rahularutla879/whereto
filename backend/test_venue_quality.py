@@ -24,6 +24,15 @@ def venue(identity='a', activity='bowling', name='Harbor Bowling Lanes', **field
 
 
 class QualityTests(unittest.TestCase):
+    def test_arcade_is_not_bowling_without_specific_support(self):
+        # Invented businesses, not a captured Google response.
+        for fields in ({'name': 'Example Racing Arcade'},
+                       {'name': 'Example Games', 'types': ['video_arcade', 'bar']}):
+            self.assertEqual(relevance(venue(**fields)).status, 'mismatch')
+        self.assertEqual(relevance(venue(name='Example Arcade', types=['bowling_alley', 'video_arcade'])).status, 'strong')
+        self.assertEqual(relevance(venue(name='Example Bowling Arcade', types=['video_arcade'])).status, 'uncertain')
+        self.assertEqual(relevance(venue(name='Example Entertainment')).status, 'uncertain')
+
     def setUp(self):
         guard = patch('requests.sessions.Session.request', side_effect=AssertionError('Network forbidden'))
         guard.start()

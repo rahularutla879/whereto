@@ -178,6 +178,8 @@ This is where the app becomes genuinely useful.
 
   Consolidated improvement — October 26, 2026: up to ten discovered venues/activity, whole-sequence routing shortlists, same-budget option continuation/one expansion, primary-venue diversity, separately gated Google ratings/counts, on-demand contacts, explicit manual origin lookup/precision confirmation, and uncluttered real cards with preserved critical warnings. Approved matrix ceilings: application 150/outing and 1,500/process; Cloud 2,000/day and 150/minute, verified with unrelated quotas preserved. Zero live billable Google requests; new provider behavior awaits separate live verification. [Deferred evidence](docs/deferred-venue-features.md), [current flow/costs](docs/real-planning.md), and HANDOVER.md record checks. This remains Task 46; roadmap numbering and release tags are preserved. Task 47 has not started.
 
+  Controlled verification — October 26, 2026: two rating-enabled activity searches, one landmark search, two contact Details requests and one matrix/18 elements, all HTTP 200, no retries. Mock restored. Bowling false-positive filtering corrected and verified offline; 383 backend/124 frontend tests, lint, TypeScript and build passed. Ten live candidates/category and live corrected bowling selection were not established. [Exact ledger and verification boundaries](docs/real-planning.md#october-26-controlled-live-verification). No Task 47 work.
+
 Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.
 
 Google for Developers

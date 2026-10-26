@@ -99,6 +99,8 @@ def relevance(venue: VenueFacts) -> Relevance:
         return Relevance(status='mismatch', reason='unrelated_business_type')
     if re.search(r'\b(?:' + pattern + r')\b', name):
         return Relevance(status='uncertain', reason='name_support_only')
+    if activity == 'bowling' and ('video_arcade' in types or re.search(r'\barcades?\b', name)):
+        return Relevance(status='mismatch', reason='arcade_without_bowling_evidence')
     # A narrow, mutually incompatible building type is enough to reject obvious
     # wrong searches. Broad/multi-purpose places remain uncertain.
     exclusive = {'movie_theater', 'bowling_alley', 'zoo', 'art_gallery', 'museum',
