@@ -11,6 +11,7 @@ from google.auth.exceptions import GoogleAuthError, TransportError
 from google.auth.transport.requests import Request
 import requests
 
+from backend.provider_budget import local_real_enabled
 from backend.places import (DiscoveryError, ENDPOINT, FIELD_MASK, PROJECT,
                             SERVICE_ACCOUNT, require_development_discovery)
 
@@ -56,8 +57,15 @@ def access_token(session: requests.Session) -> str:
         raise DiscoveryError("authentication", "Local impersonated authentication is missing, expired or unavailable. Check the existing ADC setup; no Places request was sent.") from None
 
 
-def text_search(body: dict) -> dict:
+def text_search(body: dict, *, field_mask: str | None = None) -> dict:
     require_development_discovery()
+    mask = field_mask if field_mask is not None else (FIELD_MASK + ",places.rating,places.userRatingCount" if
+        os.environ.get("WHERETO_RATINGS_DEV") == "1" and local_real_enabled() else FIELD_MASK)
+    allowed = {FIELD_MASK}
+    if local_real_enabled() and os.environ.get("WHERETO_RATINGS_DEV") == "1":
+        allowed.add(FIELD_MASK + ",places.rating,places.userRatingCount")
+    if mask not in allowed:
+        raise DiscoveryError("invalid_request", "Unsupported Places field selection.")
     with requests.Session() as session:
         # Plain Session has zero adapter retries. Do not use AuthorizedSession,
         # whose authentication recovery could resend a billable Places request.
@@ -67,7 +75,7 @@ def text_search(body: dict) -> dict:
             response = session.post(
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,
-                         "X-Goog-FieldMask": FIELD_MASK, "Content-Type": "application/json"})
+                         "X-Goog-FieldMask": mask, "Content-Type": "application/json"})
             errors = {
                 400: ("invalid_request", "Google rejected the discovery query or location."),
                 401: ("authentication", "Google rejected the OAuth token. No automatic retry was made."),

@@ -8,6 +8,8 @@ import { EMPTY_PREFERENCES } from "./planner";
 import { POST as interpret } from "../app/api/interpret/route";
 import { POST as plan } from "../app/api/plans/generate/route";
 import { POST as details } from "../app/api/venues/details/route";
+import { POST as options } from "../app/api/plans/options/route";
+import { POST as startingPlaces } from "../app/api/starting-places/route";
 import { GET as mode } from "../app/api/planning-mode/route";
 import { VenueDetailsSession, safeWebsite } from "./venue-details";
 import { nextOptions } from "./option-batches";
@@ -22,7 +24,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port)]);
   const send: typeof fetch = async (path, init) => {
     const request = new Request(`http://localhost${path}`, init);
-    return path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
+    return path === "/api/starting-places" ? startingPlaces(request) : path === "/api/plans/options" ? options(request) : path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
   };
   const scenario = (name: string) => fetch(`${base}/__test/scenario`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });
   try {
@@ -41,7 +43,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.deepEqual(result.plans[0].venues.map(v => v.activity), ["bowling", "food"]);
     assert.ok(result.plans.every(p => p.price === null && p.feasibility === "provisional"));
     assert.ok(result.plans.every(p => !p.title.includes("Real outing option") && p.title.includes(p.venues[0].name)));
-    assert.match(result.plans[0].description, /Prices and ratings are unavailable/);
+    assert.match(result.plans[0].description, /Google ratings and their counts/);
     assert.equal(result.plans[0].label, "OPTION 1 · BOWLING + DINNER");
     assert.equal(result.plans[0].title, result.plans[0].venues.map(v => v.name).join(" & "));
     const countsBefore = await (await fetch(`${base}/__test/counts`)).json();
@@ -53,13 +55,26 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(new Set(all.map(p => p.venues.map(v => v.id).join("/"))).size, 9);
     assert.ok(all.every(p => p.date === "2026-11-07" && p.people === 4));
     assert.deepEqual(await (await fetch(`${base}/__test/counts`)).json(), countsBefore);
+    assert.equal(countsBefore.elements, 36);
+    assert.equal(new Set(result.plans.map(p => p.venues[0].id)).size, 3);
+    let expanded = result;
+    const ids = new Set(all.map(p => p.id));
+    for (let i = 0; i < 5; i++) {
+      const response = await send("/api/plans/options", { method: "POST", body: JSON.stringify({ token: result.optionsToken }) });
+      assert.ok(response.ok);
+      expanded = adaptRanking(await response.json());
+      for (const p of [...expanded.plans, ...(expanded.alternativeBatches ?? []).flat()]) { assert.ok(!ids.has(p.id)); ids.add(p.id); }
+      if ((await (await fetch(`${base}/__test/counts`)).json()).elements === 100) break;
+    }
+    assert.ok(ids.size > 9);
+    assert.equal((await (await fetch(`${base}/__test/counts`)).json()).searches, 2);
     const manual = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, { locationContext: { manualStartingPlace: "Inner Harbor, Baltimore" } }, send);
     assert.equal(manual.plans.length, 0);
-    assert.match(manual.message, /lookup is not enabled/);
-    assert.equal(manual.message.match(/lookup is not enabled/g)?.length, 1);
+    assert.match(manual.message, /Find and confirm/);
+    assert.equal(manual.message.match(/Find and confirm/g)?.length, 1);
     const countsAfter = await (await fetch(`${base}/__test/counts`)).json();
     assert.equal(countsAfter.searches, countsBefore.searches);
-    assert.equal(countsAfter.elements, countsBefore.elements);
+    assert.equal(countsAfter.elements, 100);
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).details, 0);
     const p = result.plans[0], venue = p.venues[0];
     assert.equal(venue.id, venue.providerPlaceId);
@@ -69,6 +84,15 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(first.telephoneUrl, "tel:+12025550100");
     assert.deepEqual(await contacts.get(p.detailsToken!, venue.id, send), first);
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).details, 1);
+    const lookup = await send("/api/starting-places", { method: "POST", body: JSON.stringify({ query: "Synthetic ZIP area" }) });
+    assert.ok(lookup.ok);
+    const matches = (await lookup.json()).matches;
+    assert.equal(matches[1].precision, "postal_area");
+    await scenario("normal");
+    const located = await generateOuting("Bowling then dinner in Washington, DC for 2 people on 2026-11-07", EMPTY_PREFERENCES, { locationContext: { startingLocation: { point: { id: "authorized-start", coordinates: matches[1].coordinates }, explicitly_authorized: true, precision: "postal_area" }, maxFirstLegTravel: 10 } }, send);
+    assert.equal(located.plans.length, 3);
+    assert.equal(located.location, "Washington, DC");
+    assert.equal(located.plans[0].firstLeg?.approximate, true);
     for (const name of ["empty", "quota", "authentication"]) {
       await scenario(name);
       let retained: ValidatedOuting | undefined;

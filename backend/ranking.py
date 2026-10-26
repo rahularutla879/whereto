@@ -180,7 +180,14 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
         raise ValueError("Only candidates without known violations may be scored")
 
     def quality(p):
-        values = [v.experience for v in p.candidate.venues]
+        venues = p.candidate.venues
+        if all(v.providerPlaceId for v in venues):
+            # Fixed prior and bounded count confidence prevent one five-star vote
+            # outranking established evidence. Missing ratings contribute no evidence.
+            values = [((v.rating * v.ratingCount + 3.5 * 50) / (v.ratingCount + 50) - 1) / 4
+                      for v in venues if v.rating is not None and v.ratingCount is not None and v.ratingCount > 0]
+            return sum(values) / len(venues) if values else None
+        values = [v.experience for v in venues]
         return sum(values) / len(values) if all(v is not None for v in values) else None
 
     measures = [(p.costPerPerson, quality(p), p.totalTravel) for p in candidates]
@@ -201,7 +208,10 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
         if p.totalTravel is not None:
             p.explanations.append(RecommendationReason(code="travel", message=f"{p.totalTravel} inter-stop travel minutes; data status is retained on every travel quote."))
         if values[1] is not None:
-            p.explanations.append(RecommendationReason(code="quality", message=f"Mean supplied experience value {values[1]:g}; fixture values are fictional tiers, not reviews."))
+            p.explanations.append(RecommendationReason(code="quality", message=(
+                "Google rating evidence weighted by rating count with a 50-rating prior; missing evidence adds no quality score."
+                if all(v.providerPlaceId for v in p.candidate.venues) else
+                f"Mean supplied experience value {values[1]:g}; fixture values are fictional tiers, not reviews.")))
         if p.feasibility == "provisional":
             p.explanations.append(RecommendationReason(code="feasibility", message="Provisional alternative only: unresolved constraints are listed in issues; feasibility is not confirmed."))
         else:
@@ -209,7 +219,7 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
     return sorted(candidates, key=lambda p: (-p.score, tuple(v.id for v in p.candidate.venues), p.candidate.id))
 
 
-def _select(ranked: list[RankedItinerary], count: int, *, min_changed: int = 1) -> list[RankedItinerary]:
+def _select(ranked: list[RankedItinerary], count: int, *, min_changed: int = 1, prefer_primary: bool = False, primary_used: set[str] | None = None) -> list[RankedItinerary]:
     """Best first, then greedy diversity among options within 0.15 of best remaining.
 
     Prefer more different stop identities; never select an ineligible route to
@@ -219,13 +229,14 @@ def _select(ranked: list[RankedItinerary], count: int, *, min_changed: int = 1) 
     remaining = list(ranked)
     while remaining and len(selected) < count:
         if not selected:
-            choice = remaining[0]
+            near = [p for p in remaining if p.score >= remaining[0].score - 0.15]
+            choice = next((p for p in near if p.candidate.venues[0].id not in (primary_used or set())), remaining[0]) if prefer_primary else remaining[0]
         else:
             near = [p for p in remaining if p.score >= remaining[0].score - 0.15]
             def distance(p):
                 return min(sum(a.id != b.id for a, b in zip(p.candidate.venues, s.candidate.venues))
                            for s in selected)
-            choice = min(near, key=lambda p: (-distance(p), -p.score, tuple(v.id for v in p.candidate.venues)))
+            choice = min(near, key=lambda p: (-int(prefer_primary and p.candidate.venues[0].id not in (primary_used or set()) and all(p.candidate.venues[0].id != s.candidate.venues[0].id for s in selected)), -distance(p), -p.score, tuple(v.id for v in p.candidate.venues)))
         if selected:
             changed = min(sum(a.id != b.id for a, b in zip(choice.candidate.venues, s.candidate.venues))
                           for s in selected)

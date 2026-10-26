@@ -240,7 +240,7 @@ class NormalizationTests(unittest.TestCase):
         self.assertEqual(updated.regularOpeningHours.periods, [])
 
     def test_discovery_bridge_no_requests_and_unchanged_field_mask(self):
-        expected_mask = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions"
+        expected_mask = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType"
         self.assertEqual(FIELD_MASK, expected_mask)
         with patch("backend.places_transport.text_search", side_effect=AssertionError("network")), \
              patch("backend.places_transport.access_token", side_effect=AssertionError("auth")), \

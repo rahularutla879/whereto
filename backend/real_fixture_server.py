@@ -19,14 +19,20 @@ def main():
     parser.add_argument('--port', type=int, default=8016)
     args = parser.parse_args()
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
-                      WHERETO_CONTACT_DETAILS_DEV='1', NODE_ENV='development')
+                      WHERETO_CONTACT_DETAILS_DEV='1', WHERETO_START_LOOKUP_DEV='1', WHERETO_RATINGS_DEV='1', NODE_ENV='development')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
     scenario = {'name': 'normal'}
 
-    def search(body):
+    def search(body, **kwargs):
         counts['searches'] += 1
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
+        if kwargs:
+            result = search_fixture({'textQuery': 'cafes in Baltimore', 'pageSize': 3})
+            for i, place in enumerate(result['places']):
+                place['types'] = [['street_address'], ['postal_code'], ['neighborhood']][i]
+                place['displayName']['text'] = ['Synthetic address', 'Synthetic ZIP area', 'Synthetic neighborhood'][i]
+            return result
         result = search_fixture(body)
         if scenario['name'] == 'long_names':
             for place in result['places']:

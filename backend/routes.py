@@ -55,6 +55,7 @@ class RoutePoint(RouteModel):
 
 class AuthorizedStart(RouteModel):
     point: RoutePoint = Field(repr=False)
+    precision: Literal["device", "address_or_place", "postal_area", "neighborhood", "city", "approximate_area"] = "device"
     explicitly_authorized: Literal[True]
 
     @field_validator("explicitly_authorized", mode="before")
@@ -66,7 +67,8 @@ class AuthorizedStart(RouteModel):
 
 
 class RouteRequest(RouteModel):
-    activity_groups: Annotated[list[Annotated[list[RoutePoint], Field(min_length=1, max_length=3)]], Field(min_length=1, max_length=4)] = Field(repr=False)
+    activity_groups: Annotated[list[Annotated[list[RoutePoint], Field(min_length=1, max_length=10)]], Field(min_length=1, max_length=4)] = Field(repr=False)
+    required_pairs: list[tuple[str, str]] | None = Field(default=None, max_length=150)
     mode: Mode
     starting_location: AuthorizedStart | None = Field(default=None, repr=False)
 
@@ -172,6 +174,11 @@ def plan_matrices(request: RouteRequest):
         for a in origins:
             for b in destinations:
                 pairs.setdefault((a.id, b.id), (a, b))
+    if request.required_pairs is not None:
+        required = set(request.required_pairs)
+        if not required <= pairs.keys():
+            raise RouteError("invalid_request", "Requested routing pairs must follow the activity sequence.")
+        pairs = {key: pair for key, pair in pairs.items() if key in required}
     pending = defaultdict(dict)
     points = {}
     for key, (a, b) in pairs.items():

@@ -11,11 +11,11 @@ type Ranked = {
   stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
   costPerPerson: number | null; groupCost: number | null;
   totalTravel: number | null; elapsedDuration: number | null;
-  issues: { message: string }[];
+  issues: { code?: string; field?: string; status?: string; message: string }[];
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; request: { location: string; activities: PlannerResult["activities"]; cost: string; dinner?: boolean; dinnerStops?: number[] | null };
+type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; request: { location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -63,10 +63,12 @@ export function adaptRanking(value: unknown): PlannerResult {
   const headlines = real ? realHeadlines(selected.map(p => p.stops.map(s => s.venue)), data.request.dinnerStops ?? (data.request.dinner ? data.request.activities.flatMap((a, i) => a === "food" ? [i] : []) : [])) : [];
   const plans: Plan[] = selected.map((p, i) => ({
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
+    constraintIssues: p.issues,
+    hardBudget: data.request.budget != null || data.request.groupBudget != null,
     firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
     id: p.candidate.id, title: real ? headlines[i].title : copy[i].title, fullTitle: real ? headlines[i].fullTitle : undefined, theme: themes[i],
     label: real ? headlines[i].label : `${copy[i].label} · OPTION ${i + 1}`,
-    description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. Prices and ratings are unavailable and did not determine the ranking.` : copy[i].description,
+    description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. ${p.stops.some(s => s.venue.rating != null && (s.venue.ratingCount ?? 0) > 0) ? "Google ratings and their counts also inform ranking." : "No rating evidence was used."}` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
     travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
@@ -74,7 +76,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
   const identities = [...plans, ...alternativeBatches.flat()].map(p => p.venues.map(v => v.id).join("\u0000"));
   if (new Set(identities).size !== identities.length) throw new Error("Duplicate itinerary options");
-  return { dataMode: data.dataMode ?? "mock", plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
+  return { dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
     message: plans.length ? data.message : [...new Set([data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))])].join(" "), notes: data.notes };
 }
 
@@ -155,7 +157,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 
 export type LocationContext = {
   manualStartingPlace?: string;
-  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true };
+  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
   searchRadius?: number; maxFirstLegTravel?: number;
 };

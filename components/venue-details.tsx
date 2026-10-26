@@ -1,4 +1,5 @@
 "use client";
+import { VenueRating } from "./real-venue-facts";
 import { useState } from "react";
 import type { DisplayVenue } from "../lib/planner";
 import { safeWebsite, type Credit, type ContactDetails, VenueDetailsSession } from "../lib/venue-details";
@@ -23,7 +24,7 @@ export function VenueDetails({ venue, token, session }: { venue: DisplayVenue; t
   return <div className="venue-details">
     <button type="button" className="plan-link" aria-expanded={open} onClick={toggle}>{open ? "Close details" : "View details"}</button>
     <div hidden={!open} className="venue-contact" role="region" aria-label={`${venue.name} details`}>
-      <strong>{venue.name}</strong><p>{venue.address ?? "Address unavailable"}</p>
+      <strong>{venue.name}</strong>{venue.address && <p>{venue.address}</p>}<VenueRating venue={venue} />
       {loading && <p role="status">Loading contact information…</p>}
       {error && <p role="status">{error}</p>}
       {!loading && <><p>{contact?.telephoneUrl ? <a href={contact.telephoneUrl}>{contact.phone}</a> : "Phone number unavailable"}</p>

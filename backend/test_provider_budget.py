@@ -38,9 +38,9 @@ class ProviderBudgetTests(unittest.TestCase):
 
     def test_four_searches_and_three_candidates(self):
         outing = ProviderBudget().outing()
-        outing.check_candidates(3)
+        outing.check_candidates(10)
         with self.assertRaisesRegex(ProviderLimitError, "candidates"):
-            outing.check_candidates(4)
+            outing.check_candidates(11)
         for n in range(4):
             with outing.reserve("search", str(n)):
                 pass
@@ -49,14 +49,14 @@ class ProviderBudgetTests(unittest.TestCase):
                 self.fail("Must reject before provider I/O")
 
     def test_matrix_products_accumulate_and_rejected_attempt_does_not_consume(self):
-        outing = ProviderBudget().outing()
+        outing = ProviderBudget(ProviderSettings(matrix_elements_per_outing=27)).outing()
         for n in range(3):
             with outing.reserve("matrix", str(n), origins=3, destinations=3):
                 pass
         with self.assertRaisesRegex(ProviderLimitError, "element limit"):
             with outing.reserve("matrix", "excess", origins=1, destinations=1):
                 self.fail("Over budget")
-        other = ProviderBudget().outing()
+        other = ProviderBudget(ProviderSettings(matrix_elements_per_outing=27)).outing()
         with self.assertRaises(ProviderLimitError):
             with other.reserve("matrix", "same", origins=6, destinations=6):
                 pass

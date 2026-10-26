@@ -20,17 +20,25 @@ Keep the existing `npm run dev` frontend running in the second Terminal and relo
 To turn real mode off, stop that backend with Control+C and run:
 
 ```sh
-unset VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
+unset VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_RATINGS_DEV WHERETO_START_LOOKUP_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
 npm run dev:backend
 ```
 
 Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
 
-In real mode, **Optional starting location** offers **Use my current location**, separate from your destination. Permission is requested only when you click it. If unavailable, enter a city/neighborhood in Set preferences; the normal interface accepts a starting place/address/neighborhood/ZIP rather than coordinates. Manual lookup is not enabled yet; entering one gives a clear explanation and cannot silently bypass first-stop constraints. Explicit destinations win over device location. The optional first-stop cap and near-me radius have their own controls. Your coordinates stay in page/request memory and are not logged or saved.
+In real mode, **Optional starting location** offers **Use my current location** or an explicit **Find starting place** action. Enter an address, landmark, ZIP code, neighborhood or city, then select the intended match. Area matches are representative points, not your actual address. Your destination remains separate; first-stop travel is shown separately. No permission or lookup happens merely from opening the website or typing.
 
-Expand **View plan**, then **View details** for a real venue. Name, address and Google Maps link are available. Phone/official website lookup is separately disabled by default because it uses Place Details Enterprise ($0.02/request after the applicable allowance). For a separately authorized future contact test, add `WHERETO_CONTACT_DETAILS_DEV=1` to the real-mode backend command above. Never turn it on for the Task 46 live check: that allowance permits zero Details calls. Missing contacts have clear labels; the Google Maps link remains usable. No reservation is confirmed.
+Phone/websites, ratings and manual lookup each retain an explicit local opt-in, off by default. For a **separately authorized future controlled live test**, stop the backend and use this combined command from the same project folder:
 
-**Stabilization:** qualified dates such as “Saturday, November 7, 2026” are preserved. Real cards explain their travel/venue-variety ranking, use dynamic venue-pair titles (shortened venue highlights for three/four stops), and show simple OPTION + activity labels. Verification stays in a separate badge. Local activity symbols and “Price not available” remain. **Show different options** uses up to six additional already evaluated combinations, with no new Google calls; it stops when the pool is exhausted. Manual geocoding remains deferred pending API/authentication/quota approval.
+```sh
+VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_RATINGS_DEV=1 WHERETO_CONTACT_DETAILS_DEV=1 WHERETO_START_LOOKUP_DEV=1 npm run dev:backend
+```
+
+This implementation pass made no billable provider calls; the new rating/lookup capabilities still need separate live verification. Existing protected keyless credentials are reused. No new API or key is needed for manual lookup: it uses Places Text Search. Contact calls happen only when you open **View details**, under **View plan**. They use Place Details Enterprise. Ratings use optional Text Search Enterprise fields. Both tiers and costs are explained in the linked guide. Do not put the switches in production or a shell profile. Use the unset/normal-start command above to deactivate them.
+
+Real discovery supports up to **10 relevant venues per distinct activity** without pagination. Geographic shortlists normally route 36/32/48 elements for two/three/four stops, rather than every discovered pair. **Show different options** first consumes checked combinations, then can explore unused combinations and make one bounded route expansion using the same outing budget. No itinerary repeats. When coverage or budgets run out, the website says so without claiming the city has no more venues.
+
+Ordinary real results omit unavailable price/capacity/timetable placeholders. Hard budgets remain visibly unverified; important dinner, movie/event and missing-route warnings remain. Actual venue-based headlines, Google ratings when present, source attribution and the mock design are preserved. [Deferred evidence and when warnings remain](docs/deferred-venue-features.md).
 
 [Full real-data flow, safeguards, limitations, pricing and tests](docs/real-planning.md). Historical checkpoints below describe the mock prototype unless stated otherwise.
 

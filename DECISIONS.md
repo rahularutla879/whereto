@@ -196,3 +196,12 @@ Replace coordinate entry with natural starting-place text and an explicit unavai
 
 
 Task 46 headline refinement: derive real titles from the selected records, using full pairs for two stops and bounded ordered name highlights for three/four. Expand colliding abbreviations and use supplied addresses for same-name disambiguation. Keep full names in the existing details/tooltip and constrain only the rendered heading to three lines. Use request-grounded dinner/category eyebrows, keeping provisional status in a separate badge. Preserve existing mock recommendation copy and all provider/request limits; this is presentation, not a ranking/provider change.
+
+
+## October 26, 2026 — consolidated Task 46 quality and cost controls
+
+Discover ten relevant venues with one bounded search/category and Pro type evidence; shortlist using whole-sequence geographic costs before the existing directed matrix/evaluator/ranking flow. Route only missing required pairs on one bounded expansion, retaining outing/process budgets and seen combinations in a ten-minute active-computation continuation; no cross-outing cache or budget refill. Approved limits are 150/outing and 1,500/process matrix elements; Cloud 2,000/day and 150/minute. Preserve unrelated limits, zero retries, mock default, production refusal and billing/security setup.
+
+Optional rating/count fields in the existing searches are cheaper at the Enterprise incremental rate than separate shortlisted-venue Details enrichment. Extend existing quality scoring with a disclosed 50-rating/3.5 prior; ratings cannot establish hard feasibility. Contacts remain on demand behind the existing gate/six-Details sublimit. Resolve manual origins with already-enabled Places Text Search Pro and explicit match/precision confirmation instead of enabling Geocoding or adding keys/permissions. Geocoding v4 OAuth is a later alternative requiring separate approval if Places coverage proves inadequate.
+
+Hide unsupported optional real-card rows while retaining structured uncertainty and critical budget/route/event/dinner/known-failure warnings. Record deferred evidence instead of treating absence as $0 or confirmation. The original Pinstripes trace was not retained: report demonstrated selection weaknesses without inventing one historical cause. All new provider behavior is fixture-tested with no billable live verification in this pass. Task 47 remains unstarted.

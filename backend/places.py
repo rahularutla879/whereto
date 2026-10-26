@@ -18,7 +18,7 @@ PROJECT = "where-to-512422"
 SERVICE_ACCOUNT = f"whereto-local-maps@{PROJECT}.iam.gserviceaccount.com"
 ENDPOINT = "https://places.googleapis.com/v1/places:searchText"
 # ID/attributions: IDs Only. Other fields: Text Search Pro (not Details tiers).
-FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions"
+FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType"
 Text = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=200)]
 Number = Annotated[float, Field(strict=True, allow_inf_nan=False)]
 
@@ -133,6 +133,10 @@ class DiscoveryCandidate(DiscoveryModel):
     address: Annotated[str, StringConstraints(min_length=1, max_length=1000)]
     coordinates: Coordinates
     attributions: list[dict] = Field(default_factory=list)
+    types: list[str] | None = None
+    primaryType: str | None = None
+    rating: float | None = Field(default=None, ge=1, le=5, strict=True, allow_inf_nan=False)
+    userRatingCount: int | None = Field(default=None, ge=0, strict=True)
 
     @field_validator("provider_id")
     @classmethod
@@ -168,7 +172,8 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
             candidate = DiscoveryCandidate(
                 provider_id=place["id"], display_name=place["displayName"]["text"],
                 address=place["formattedAddress"], coordinates=place["location"],
-                attributions=place.get("attributions", []))
+                attributions=place.get("attributions", []), types=place.get("types"),
+                primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
             reason = geographic_reason(area, candidate.coordinates, place.get("addressComponents", []))
             if reason:
                 excluded += 1
@@ -218,6 +223,17 @@ class PlacesDiscovery:
             if rejected:
                 diagnostics['invalid_normalized_venue'] = diagnostics.get('invalid_normalized_venue', 0) + rejected
                 geographic_exclusions += rejected
+            if request.meal == "dinner":
+                relevant = []
+                for venue in normalized:
+                    types = set(venue.providerTypes or []) | ({venue.primaryType} if venue.primaryType else set())
+                    restaurant = bool(types & {"restaurant", "diner", "food_court", "bar_and_grill"}) or any(t.endswith("_restaurant") for t in types)
+                    if types & {"cafe", "coffee_shop", "coffee_stand", "bakery"} and not restaurant:
+                        diagnostics['dinner_cafe_without_restaurant_evidence'] = diagnostics.get('dinner_cafe_without_restaurant_evidence', 0) + 1
+                        geographic_exclusions += 1
+                    else:
+                        relevant.append(venue)
+                normalized = relevant
             records.extend(normalized)
         quality = assess_candidates(records)
         for reason, count in quality.diagnostics.items():

@@ -102,7 +102,7 @@ class DiscoveryTests(unittest.TestCase):
         candidate = result.candidates[0]
         self.assertEqual(candidate.provider_id, "original-google-id")
         self.assertEqual(candidate.provider, "google_places")
-        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions"})
+        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions", "types", "primaryType", "rating", "userRatingCount"})
 
     def test_name_matches_do_not_override_geographic_evidence(self):
         wrong = place("Washington", "DC")
@@ -216,7 +216,7 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(kwargs["headers"]["X-Goog-FieldMask"], FIELD_MASK)
         self.assertNotIn("*", FIELD_MASK)
         self.assertEqual(set(FIELD_MASK.split(",")), {"places.id", "places.displayName", "places.formattedAddress",
-                         "places.location", "places.addressComponents", "places.attributions"})
+                         "places.location", "places.addressComponents", "places.attributions", "places.types", "places.primaryType"})
         self.assertFalse(kwargs["allow_redirects"])
         self.assertEqual(kwargs["timeout"], (5, 15))
         self.assertEqual(self.session.mount.call_args.args[1].max_retries.total, 0)

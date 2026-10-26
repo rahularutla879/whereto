@@ -131,7 +131,7 @@ class RouteTests(unittest.TestCase):
                      {'id': 'a', 'place_id': 'id', 'coordinates': {'latitude': 0, 'longitude': 0}}):
             with self.subTest(data=data), self.assertRaises(ValidationError):
                 RoutePoint(**data)
-        for groups in ([], [[]], [[point('a')]*4], [[point('a')]]*5, [[point('a')], [RoutePoint(id='a', place_id='other')]]):
+        for groups in ([], [[]], [[point('a')]*11], [[point('a')]]*5, [[point('a')], [RoutePoint(id='a', place_id='other')]]):
             with self.assertRaises(ValidationError):
                 RouteRequest(activity_groups=groups, mode='drive')
         with self.assertRaises(ValidationError):
@@ -202,13 +202,14 @@ class RouteTests(unittest.TestCase):
                 self.assertIsNone(parse_matrix([item], [point('a')], [point('b')], 'drive')[0].duration_seconds)
 
     def test_27_elements_and_whole_plan_exhaustion_before_any_io(self):
+        self.calculator = GoogleRouteCalculator(ProviderBudget(ProviderSettings(matrix_elements_per_outing=27)).outing())
         groups = [[point(f'{i}_{j}') for j in range(3)] for i in range(4)]
         result = self.calculator.calculate(route_request(groups))
         self.assertEqual((result.matrix_elements, result.matrix_requests), (27, 3))
         start = AuthorizedStart(point=point('start'), explicitly_authorized=True)
         self.post.reset_mock()
         with self.assertRaises(RouteError) as caught:
-            GoogleRouteCalculator(ProviderBudget().outing()).calculate(route_request(groups, starting_location=start))
+            GoogleRouteCalculator(ProviderBudget(ProviderSettings(matrix_elements_per_outing=27)).outing()).calculate(route_request(groups, starting_location=start))
         self.assertEqual(caught.exception.code, 'application_limit')
         self.post.assert_not_called()
         with self.assertRaises(RouteError):
@@ -220,7 +221,7 @@ class RouteTests(unittest.TestCase):
                 with self.assertRaises(RouteError):
                     GoogleRouteCalculator(ProviderBudget(settings).outing()).calculate(route_request([[point('a')], [point('b')], [point('c')]]))
         self.post.assert_not_called()
-        session = ProviderBudget()
+        session = ProviderBudget(ProviderSettings(matrix_elements_per_minute=60))
         for n in range(2):
             with session.outing().reserve('matrix', str(n), origins=3, destinations=9):
                 pass
@@ -229,7 +230,7 @@ class RouteTests(unittest.TestCase):
         self.post.assert_not_called()
 
     def test_minute_admission_expires_without_sleep_or_automatic_retry(self):
-        session = ProviderBudget()
+        session = ProviderBudget(ProviderSettings(matrix_elements_per_minute=60))
         with patch('backend.provider_budget.monotonic', return_value=100):
             for n in range(2):
                 with session.outing().reserve('matrix', str(n), origins=3, destinations=9):

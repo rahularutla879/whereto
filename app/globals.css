@@ -235,3 +235,10 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 /* Reserve one feedback slot while loading, asking a question or showing failure. */
 .planning-feedback { min-height: 230px; }
 .planning-feedback .secondary-button { margin: 4px; }
+
+/* Existing card/layout surfaces, including explicit starting-place matches. */
+.starting-matches { list-style: none; padding: 0; display: grid; gap: .75rem; }
+.starting-matches li { border: 1px solid var(--line, #dedbd4); border-radius: .75rem; padding: .8rem; min-width: 0; overflow-wrap: anywhere; }
+.starting-matches button { max-width: 100%; white-space: normal; }
+.venue-rating { color: #4f4a40; font-weight: 600; }
+.card-bottom > .plan-link { margin-left: auto; }

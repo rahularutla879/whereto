@@ -26,7 +26,7 @@ class RealPlanningTests(unittest.TestCase):
         self.search = patch('backend.places_transport.text_search', side_effect=search_fixture).start()
         self.matrix = patch('backend.routes_transport.compute_matrix', side_effect=matrix_fixture).start()
         self.addCleanup(patch.stopall)
-        self.session = ProviderBudget()
+        self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
 
     def run_plan(self, **kwargs):
         return real_plans(outing(**kwargs), self.session)
@@ -88,7 +88,7 @@ class RealPlanningTests(unittest.TestCase):
         for text in ('Inner Harbor, Baltimore', '21201', '1 Synthetic Street, Baltimore'):
             result = self.run_plan(manualStartingPlace=text, maxFirstLegTravel=10)
             self.assertFalse(result.provisionalPlans)
-            self.assertIn('lookup is not enabled', result.message)
+            self.assertIn('Find and confirm', result.message)
             self.assertEqual(result.request.location, 'Baltimore')
             self.assertNotIn(text, result.model_dump_json())
         self.assertEqual(self.search.call_count, 0)
@@ -96,7 +96,7 @@ class RealPlanningTests(unittest.TestCase):
 
     def test_all_29_categories_no_fabricated_events(self):
         for activity in ActivityType:
-            self.session = ProviderBudget()
+            self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
             result = self.run_plan(activities=[activity])
             self.assertTrue(result.provisionalPlans, activity)
             self.assertTrue(all(p.candidate.venues[0].kind == 'venue' for p in result.provisionalPlans))
@@ -127,12 +127,12 @@ class RealPlanningTests(unittest.TestCase):
     def test_travel_limits_exact_seconds_no_rounding_rejection(self):
         self.matrix.side_effect = lambda body: [dict(e, duration='120s') for e in matrix_fixture(body)]
         self.assertTrue(self.run_plan(maxLegTravel=2, travel=2).provisionalPlans)
-        self.session = ProviderBudget()
+        self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         self.matrix.side_effect = lambda body: [dict(e, duration='120.000000001s') for e in matrix_fixture(body)]
         result = self.run_plan(maxLegTravel=2)
         self.assertFalse(result.provisionalPlans)
         self.assertIn('per-leg', str(result.errors))
-        self.session = ProviderBudget()
+        self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         self.assertFalse(self.run_plan(travel=0).provisionalPlans)
 
     def test_missing_route_never_invents_travel(self):
@@ -148,12 +148,12 @@ class RealPlanningTests(unittest.TestCase):
         self.assertFalse(result.provisionalPlans)
         self.assertIn('first stop', str(result.errors))
         self.assertNotIn('"latitude":', result.model_dump_json())
-        self.session = ProviderBudget()
+        self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         result = self.run_plan(startingLocation=start, maxFirstLegTravel=10)
         self.assertTrue(result.provisionalPlans[0].firstLeg)
         self.assertEqual(result.request.maxFirstLegTravel, 10)
         self.assertEqual(result.diagnostics['matrixElements'], 12)
-        self.session = ProviderBudget()
+        self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         self.search.reset_mock()
         self.assertFalse(self.run_plan(maxFirstLegTravel=5).provisionalPlans)
         self.search.assert_not_called()
@@ -178,7 +178,7 @@ class RealPlanningTests(unittest.TestCase):
 
     def test_empty_partial_invalid_discovery_never_mock_fallback(self):
         for response in ({'places': []}, {'places': [{'id': 'bad'}]}):
-            self.session = ProviderBudget()
+            self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
             self.search.return_value = response; self.search.side_effect = None
             if response['places']:
                 with self.assertRaises(DiscoveryError): self.run_plan()

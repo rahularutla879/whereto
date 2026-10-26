@@ -101,3 +101,29 @@ def venue_details(request: ContactRequest):
         return JSONResponse(content=details_sessions.get(request.token, request.placeId), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
         return JSONResponse(status_code=422, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+
+
+class OptionsRequest(BaseModel):
+    token: str = Field(min_length=1, max_length=100)
+
+
+@app.post("/api/plans/options")
+def more_options(request: OptionsRequest):
+    from backend.real_planning import more_real_plans
+    try:
+        provider_budget.settings.require_live_provider()
+        return JSONResponse(content=more_real_plans(request.token).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
+    except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
+        message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
+        return JSONResponse(status_code=422, content={"message": message + " No fictional fallback was used."}, headers={"Cache-Control": "no-store"})
+
+
+from backend.starting_places import StartingPlaceQuery, lookup_starting_places
+
+
+@app.post("/api/starting-places")
+def starting_places(request: StartingPlaceQuery):
+    try:
+        return JSONResponse(content=lookup_starting_places(request, provider_budget), headers={"Cache-Control": "no-store"})
+    except (ProviderLimitError, DiscoveryError) as error:
+        return JSONResponse(status_code=422, content={"message": str(error)}, headers={"Cache-Control": "no-store"})

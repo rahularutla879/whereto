@@ -208,5 +208,6 @@ def normalize_discovery_candidates(result, activity: ActivityType | str, *, obse
     """
     records = [{"id": candidate.provider_id, "displayName": {"text": candidate.display_name},
                 "formattedAddress": candidate.address, "location": candidate.coordinates.model_dump(),
-                "attributions": candidate.attributions} for candidate in result.candidates]
+                "attributions": candidate.attributions, "types": candidate.types, "primaryType": candidate.primaryType,
+                "rating": candidate.rating, "userRatingCount": candidate.userRatingCount} for candidate in result.candidates]
     return normalize_google_places(records, activity, observed_at=observed_at)

@@ -203,6 +203,9 @@ class Venue(VenueIdentity):
     source: Nonblank | None = None  # Source/reference when known; no lookup occurs.
     # Explicit bridge for physical Google buildings, including event categories.
     # A physical place never supplies an invented ScheduledEvent.
+    rating: Annotated[float, Field(strict=True, ge=1, le=5, allow_inf_nan=False)] | None = None
+    ratingCount: Annotated[int, Field(strict=True, ge=0)] | None = None
+    relevanceStrength: Literal["strong", "uncertain"] | None = None
     providerPlaceId: Nonblank | None = None
     address: Nonblank | None = None
     mapsUrl: Nonblank | None = None
@@ -501,6 +504,8 @@ class RankingResult(ContractModel):
     dataMode: Literal["mock", "real"] = "mock"
     diagnostics: dict = Field(default_factory=dict)
     detailsToken: str | None = None
+    optionsToken: str | None = None
+    canExpand: bool = False
     alternativeBatches: list[Annotated[list[RankedItinerary], Field(min_length=1, max_length=3)]] = Field(default_factory=list, max_length=2)
 
     @model_validator(mode="after")

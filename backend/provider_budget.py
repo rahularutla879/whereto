@@ -24,18 +24,27 @@ class ProviderSettings(BaseModel):
     mode: Literal["mock", "real"] = "mock"
     searches_per_outing: int = Field(default=4, ge=0, le=4)
     details_per_outing: int = Field(default=6, ge=0, le=6)
-    candidates_per_activity: int = Field(default=3, ge=1, le=3)
-    matrix_elements_per_outing: int = Field(default=27, ge=0, le=27)
+    candidates_per_activity: int = Field(default=10, ge=1, le=10)
+    matrix_elements_per_outing: int = Field(default=150, ge=0, le=150)
     requests_per_outing: int = Field(default=20, ge=0, le=20)
     concurrent_requests: int = Field(default=1, ge=1, le=1)
     retries: int = Field(default=0, ge=0, le=0)
     requests_per_session: int = Field(default=50, ge=0, le=50)
-    matrix_elements_per_session: int = Field(default=300, ge=0, le=300)
+    matrix_elements_per_session: int = Field(default=1500, ge=0, le=1500)
+
+    matrix_elements_per_minute: int = Field(default=150, ge=0, le=150)
+    lookups_per_session: int = Field(default=10, ge=0, le=10)
 
     @classmethod
     def from_env(cls) -> "ProviderSettings":
         # Same explicit process-environment convention as AISettings; no dotenv.
-        return cls(mode=os.environ.get("VENUE_DATA_MODE", "mock"))
+        values = {field: int(os.environ[env]) for field, env in {
+            "candidates_per_activity": "WHERETO_CANDIDATES",
+            "matrix_elements_per_outing": "WHERETO_MATRIX_OUTING",
+            "matrix_elements_per_session": "WHERETO_MATRIX_SESSION",
+            "matrix_elements_per_minute": "WHERETO_MATRIX_MINUTE",
+        }.items() if env in os.environ}
+        return cls(mode=os.environ.get("VENUE_DATA_MODE", "mock"), **values)
 
     def require_live_provider(self) -> None:
         if self.mode == "real" and local_real_enabled():
@@ -47,7 +56,7 @@ class ProviderSettings(BaseModel):
         )
 
 
-Operation = Literal["search", "details", "route", "matrix"]
+Operation = Literal["search", "lookup", "details", "route", "matrix"]
 
 
 class ProviderBudget:
@@ -66,6 +75,8 @@ class ProviderBudget:
         self._elements = 0
         self._active = 0
         self._matrix_window: list[tuple[float, int]] = []
+        self._search_window = []
+        self._lookups = 0
 
     def outing(self) -> "OutingBudget":
         return OutingBudget(self)
@@ -131,7 +142,7 @@ class OutingBudget:
             raise ProviderLimitError("Duplicate provider requests are not allowed.")
         elements = sum(rows * cols for _, _, rows, cols in attempts)
         requests = len(attempts)
-        searches = sum(op == "search" for op, _, _, _ in attempts)
+        searches = sum(op in ("search", "lookup") for op, _, _, _ in attempts)
         details = sum(op == "details" for op, _, _, _ in attempts)
         session = self._session
         limits = session.settings
@@ -153,14 +164,22 @@ class OutingBudget:
             if session._elements + elements > limits.matrix_elements_per_session:
                 raise ProviderLimitError("Local testing session route matrix element limit reached. Stop and review usage.")
             now = monotonic()
+            session._search_window = [t for t in session._search_window if now - t < 60]
+            lookups = sum(op == "lookup" for op, _, _, _ in attempts)
+            if len(session._search_window) + searches > 10:
+                raise ProviderLimitError("Local Places minute limit reached. Wait before a new deliberate search; no retry is scheduled.")
+            if session._lookups + lookups > limits.lookups_per_session:
+                raise ProviderLimitError("Starting-place lookup session limit reached. Stop and review usage.")
             session._matrix_window = [(t, n) for t, n in session._matrix_window if now - t < 60]
-            if elements + sum(n for _, n in session._matrix_window) > 60:
+            if elements + sum(n for _, n in session._matrix_window) > limits.matrix_elements_per_minute:
                 raise ProviderLimitError("Local route matrix minute quota reached. Stop and review usage; no automatic retry is scheduled.")
             self._seen.update(identities)
             self._requests += requests
             self._searches += searches
             self._details += details
             self._elements += elements
+            session._search_window.extend([now] * searches)
+            session._lookups += lookups
             session._requests += requests
             session._elements += elements
             if elements:
@@ -174,7 +193,7 @@ class OutingBudget:
 
     @staticmethod
     def _validate_attempt(operation, request_id, origins, destinations):
-        if operation not in ("search", "details", "route", "matrix"):
+        if operation not in ("search", "lookup", "details", "route", "matrix"):
             raise ValueError("Unsupported provider operation.")
         if not isinstance(request_id, str) or not request_id.strip() or len(request_id) > 200:
             raise ValueError("A bounded nonblank request identity is required.")

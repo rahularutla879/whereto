@@ -19,6 +19,8 @@ import { VenueDetails, GoogleCredits } from "@/components/venue-details";
 import { VenueDetailsSession } from "@/lib/venue-details";
 import type { LocationContext } from "@/lib/planning-client";
 import { nextOptions } from "@/lib/option-batches";
+import { RealVenueFacts } from "@/components/real-venue-facts";
+import { adaptRanking } from "@/lib/planning-client";
 import { PlanCost } from "@/components/plan-cost";
 import demoPlans from "@/data/demo-plans.json";
 
@@ -53,16 +55,16 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabels[venue.activity]}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
       })}</div>
-      <div className="card-facts"><span><MapPin size={14} /> {plan.location ?? "Baltimore"}</span><span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span></div>
-      <div className="card-bottom"><div><PlanCost amount={plan.price} /><small>{real ? "Cost not verified" : "Sample price"}</small></div><button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
+      <div className="card-facts"><span><MapPin size={14} /> {plan.location ?? "Baltimore"}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
+      <div className="card-bottom">{!real && <div><PlanCost amount={plan.price} /><small>Sample price</small></div>}<button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
       {real && <GoogleCredits credits={plan.venues.flatMap(venue => venue.evidenceLabels?.attribution?.third_party ?? []).filter((credit, i, credits) => credits.findIndex(c => c.provider === credit.provider && c.uri === credit.uri) === i)} />}
       <div hidden={!expanded} className="plan-details" id={`details-${plan.id}`}>
         <p className="details-heading">{real ? "Your provisional itinerary" : "Your sample itinerary"}</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date} · {plan.people} {plan.people === 1 ? "person" : "people"}</p>
-        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong><span>{real ? "Provider-sourced venue · suitability needs confirmation" : venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{real ? venue.address ?? "Address unknown" : venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`} · {real ? "group capacity" : "sample group limit"}: {venue.capacity ?? "Unknown"}</span>{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
-        <div className="details-total"><span>{real ? "Group total" : "Sample group total"}</span><PlanCost amount={plan.groupCost} group /></div>
+        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`} · sample group limit: {venue.capacity ?? "Unknown"}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
+        {!real && <div className="details-total"><span>Sample group total</span><PlanCost amount={plan.groupCost} group /></div>}
         <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
-        {real && plan.firstLeg && <p>From your starting point: {plan.firstLeg.minutes ?? "Unknown"} minutes (Google Maps estimate), separate from inter-stop travel.</p>}
+        {real && plan.firstLeg && <p>From your starting point: {plan.firstLeg.minutes ?? "Unknown"} minutes (Google Maps estimate{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.</p>}
       </div>
     </div>
   </article>;
@@ -97,7 +99,7 @@ export default function Home() {
     detailsSession.current.clear();
     setLoading(false);
     setDirty(true);
-    setResult({ plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
+    setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
     cancelClarification();
@@ -105,7 +107,7 @@ export default function Home() {
     setValidated(null);
     setDirty(false);
     setPreferenceState(previous => displayInterpretedPreferences(previous, emptyPreferenceState().values));
-    setResult({ plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
+    setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
   }
   function cancelClarification() {
     session.current.cancel();
@@ -114,10 +116,30 @@ export default function Home() {
     setAnswers({});
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Follow-up canceled. Edit your request or plan again.", location: "", activities: [], notes: [] });
   }
+  const [optionsNotice, setOptionsNotice] = useState("");
+  async function showDifferent() {
+    if (result.alternativeBatches?.length) { setResult(nextOptions); setOptionsNotice(""); return; }
+    if (!result.optionsToken || !result.canExpand) return;
+    const controller = session.current.begin();
+    if (!controller) return;
+    setLoading(true); setOptionsNotice("Checking different combinations within this search…");
+    try {
+      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken }), cache: "no-store", signal: controller.signal });
+      const data = await response.json();
+      if (!response.ok) throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable.");
+      const next = adaptRanking(data);
+      if (!session.current.current(controller)) return;
+      if (next.plans.length) { setResult(next); setOptionsNotice(""); }
+      else { setResult(previous => ({ ...previous, canExpand: false })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
+    } catch (error) {
+      if (session.current.current(controller)) { setResult(previous => ({ ...previous, canExpand: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
+    } finally { if (session.current.finish(controller)) setLoading(false); }
+  }
   async function runPlanning(followup: boolean) {
     const controller = session.current.begin();
     if (!controller) return;
     detailsSession.current.clear();
+    setOptionsNotice("");
     setLoading(true);
     setGenerated(true);
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Planning…", location: "", activities: [], notes: [] });
@@ -181,9 +203,9 @@ export default function Home() {
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>{dataMode === "real" ? "Destination city/neighborhood; separate from your start" : "Fictional Baltimore venues only"}</small></label>
-              <OutingDateField value={preferences.date} onChange={value => updatePreference("date", value)} />
+              <OutingDateField real={dataMode === "real"} value={preferences.date} onChange={value => updatePreference("date", value)} />
               <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
-              <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>Sample activities only; excludes extras</small></label>
+              <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>{dataMode === "real" ? "Hard limit; compliance needs actual venue prices" : "Sample activities only; excludes extras"}</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
               <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
               {validated && <label className="activity-editor"><span>Activities in order</span><input aria-describedby="activity-edit-help" value={answers.activities ?? activityEditText(validated.request)} maxLength={500} onChange={e => { invalidateResults(); setAnswers(previous => ({ ...previous, activities: e.target.value })); }} /><small id="activity-edit-help">Separate stops with commas, including repeats. Use “dinner” to keep dinner timing. Up to four stops.</small></label>}
@@ -211,7 +233,7 @@ export default function Home() {
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && !loading && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {!loading && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
-        {generated && result.dataMode === "real" && result.plans.length > 0 && <div className="more-options"><button type="button" className="secondary-button" disabled={!result.alternativeBatches?.length || dirty || loading} onClick={() => { setResult(nextOptions); requestAnimationFrame(() => resultsRef.current?.focus()); }}>Show different options</button><p role="status">{result.alternativeBatches?.length ? "Uses already checked combinations from the same venue search. No new search requests." : "No more distinct options in this search. Try a different destination or activity for a new search."}</p></div>}
+        {generated && result.dataMode === "real" && result.plans.length > 0 && <div className="more-options"><button type="button" className="secondary-button" disabled={(!result.alternativeBatches?.length && !result.canExpand) || dirty || loading} onClick={showDifferent}>Show different options</button><p role="status">{optionsNotice || (result.alternativeBatches?.length ? "Uses already checked combinations. No new provider requests." : result.canExpand ? "Checks unused combinations first; may calculate more routes within the same search budget." : "No more distinct options within this search coverage. Other venues may exist outside the checked pool.")}</p></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 
