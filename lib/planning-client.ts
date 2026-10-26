@@ -1,5 +1,6 @@
 import { interpretedPreferences } from "./preferences";
 import { recommendationCopy } from "./recommendation-copy";
+import { realHeadlines } from "./real-headlines";
 import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, type DisplayVenue } from "./planner";
 
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
@@ -14,7 +15,7 @@ type Ranked = {
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; request: { location: string; activities: PlannerResult["activities"]; cost: string };
+type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; request: { location: string; activities: PlannerResult["activities"]; cost: string; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -59,11 +60,12 @@ export function adaptRanking(value: unknown): PlannerResult {
     venues: p.stops.map(s => ({ id: s.venue.id, name: s.venue.name })),
   })), data.request.cost);
   const themes = ["lavender", "peach", "mint"] as const;
+  const headlines = real ? realHeadlines(selected.map(p => p.stops.map(s => s.venue)), data.request.dinnerStops ?? (data.request.dinner ? data.request.activities.flatMap((a, i) => a === "food" ? [i] : []) : [])) : [];
   const plans: Plan[] = selected.map((p, i) => ({
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
     firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
-    id: p.candidate.id, title: real ? p.stops.map(s => s.venue.name).join(" → ") : copy[i].title, theme: themes[i],
-    label: `${real ? "PROVISIONAL REAL VENUES" : copy[i].label} · OPTION ${i + 1}`,
+    id: p.candidate.id, title: real ? headlines[i].title : copy[i].title, fullTitle: real ? headlines[i].fullTitle : undefined, theme: themes[i],
+    label: real ? headlines[i].label : `${copy[i].label} · OPTION ${i + 1}`,
     description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. Prices and ratings are unavailable and did not determine the ranking.` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
     travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,

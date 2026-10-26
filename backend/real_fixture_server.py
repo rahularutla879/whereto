@@ -27,6 +27,9 @@ def main():
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
         result = search_fixture(body)
+        if scenario['name'] == 'long_names':
+            for place in result['places']:
+                place['displayName']['text'] += ' A Very Long Synthetic Venue Name For Responsive Headline Verification'
         if scenario['name'] == 'empty': result['places'] = []
         if scenario['name'] == 'partial': result['places'] = result['places'][:1]
         return result

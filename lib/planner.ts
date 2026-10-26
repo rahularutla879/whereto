@@ -19,7 +19,7 @@ export type Plan = {
   dataMode?: "mock" | "real"; location?: string; detailsToken?: string;
   firstLeg?: { minutes: number | null; labels?: unknown } | null;
   routeEvidence?: { route: { mode: string }; labels: { claims: Record<string, { message: string }> } }[];
-  id: string; title: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
+  id: string; title: string; fullTitle?: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
   venues: DisplayVenue[]; stops: Stop[]; price: number | null; groupCost: number | null;
   travel: number | null; duration: number | null; people: number; date: string;
   feasibility: "confirmed" | "provisional" | "preview"; issues: string[];

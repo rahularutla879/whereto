@@ -42,6 +42,8 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.ok(result.plans.every(p => p.price === null && p.feasibility === "provisional"));
     assert.ok(result.plans.every(p => !p.title.includes("Real outing option") && p.title.includes(p.venues[0].name)));
     assert.match(result.plans[0].description, /Prices and ratings are unavailable/);
+    assert.equal(result.plans[0].label, "OPTION 1 · BOWLING + DINNER");
+    assert.equal(result.plans[0].title, result.plans[0].venues.map(v => v.name).join(" & "));
     const countsBefore = await (await fetch(`${base}/__test/counts`)).json();
     const second = nextOptions(result), third = nextOptions(second);
     assert.equal(result.alternativeBatches?.length, 2);

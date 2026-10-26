@@ -45,7 +45,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
     </div>
     <div className="card-body">
       <p className="card-label">{plan.label}</p>
-      <h3>{plan.title}</h3>
+      <h3 className={real ? "real-plan-title" : undefined} title={plan.fullTitle}>{plan.title}</h3>
       <p className="card-description">{plan.description}</p>
       {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Before you choose</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
       <div className="activity-route">{plan.venues.map((venue, i) => {
