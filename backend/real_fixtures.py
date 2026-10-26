@@ -43,3 +43,26 @@ def paginated_search_fixture(body, **kwargs):
     if not offset:
         result['nextPageToken'] = 'synthetic-next-page'
     return result
+
+
+def bowling_diagnostic_fixture(body, **kwargs):
+    """Invented DC coverage: two strict matches, four new supported matches.
+
+    This models provider filtering/coverage, not actual Washington businesses.
+    """
+    from copy import deepcopy
+    bowling = body['textQuery'].startswith('bowling')
+    places = search_fixture({**body, 'pageSize':9} if bowling else body, **kwargs)['places']
+    for i, p in enumerate(places):
+        p.update(rating=4.5, userRatingCount=200,
+                 location={'latitude':38.90 + i*.001,'longitude':-77.04})
+    if not bowling: return {'places':places}
+    if body.get('strictTypeFiltering'):
+        return {'places':places[:2]}
+    places[2].update(displayName={'text':'Synthetic Bowling and Games Arcade'},types=['video_arcade'],primaryType='video_arcade')
+    places[3].update(displayName={'text':'Synthetic Multi Activity Center'},types=['bowling_alley','video_arcade'],primaryType='video_arcade')
+    places[6].update(displayName={'text':'Synthetic Racing Arcade'},types=['video_arcade'],primaryType='video_arcade')
+    places[7]['addressComponents'] = [{'longText':'Arlington','types':['locality']}, {'longText':'Virginia','shortText':'VA','types':['administrative_area_level_1']}]
+    # One duplicate of an unsupported arcade must still be counted as a duplicate.
+    places[8] = deepcopy(places[6])
+    return {'places':places}

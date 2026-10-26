@@ -114,7 +114,7 @@ def search_body(request: DiscoveryRequest, limit: int) -> dict:
         query = "bowling centers" if request.activity == ActivityType.bowling else "restaurants serving dinner" if request.meal == "dinner" else query + " venues"
     body = {"textQuery": f"{query} in {area.name}" if area.name else query,
             "pageSize": limit, "languageCode": "en"}
-    if request.activity == ActivityType.bowling:
+    if request.activity == ActivityType.bowling and request.search_variant == "initial":
         # Text alone can return other entertainment businesses. Bowling has a
         # specific supported type; do not treat a broad arcade as a bowling stop.
         body.update(includedType="bowling_alley", strictTypeFiltering=True)
@@ -161,6 +161,7 @@ class DiscoveryResult(DiscoveryModel):
     venues: list[DistinctVenue] = Field(default_factory=list, exclude=True, repr=False)
     diagnostics: dict[str, int] = Field(default_factory=dict, exclude=True, repr=False)
     stages: dict = Field(default_factory=dict, exclude=True, repr=False)
+    audit: dict = Field(default_factory=dict, exclude=True, repr=False)
     paging: dict = Field(default_factory=dict, exclude=True, repr=False)
     notice: str = ("Discovery candidates only. Hours, prices, availability and travel are unknown. "
                    "Area names are checked conservatively against provider address components; "
@@ -179,7 +180,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
     if len(places) > limit:
         raise DiscoveryError("invalid_response", "Google exceeded the requested candidate limit.")
     candidates, excluded = [], 0
-    diagnostics = {}
+    diagnostics, geography_reasons = {}, {}
     for place in places:
         try:
             candidate = DiscoveryCandidate(
@@ -191,11 +192,14 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
             if reason:
                 excluded += 1
                 diagnostics[reason] = diagnostics.get(reason, 0) + 1
+                from backend.venue_geography import geographic_detail
+                detail = geographic_detail(area, candidate.coordinates, place.get("addressComponents", []))
+                geography_reasons[detail] = geography_reasons.get(detail, 0) + 1
                 continue
             candidates.append(candidate)
         except (KeyError, TypeError, AttributeError, ValidationError):
             raise DiscoveryError("invalid_response", "Google returned incomplete or invalid venue data.") from None
-    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates)}, paging={"next": token})
+    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates), "geographyRejectedByReason": geography_reasons}, paging={"next": token})
 
 
 def require_development_discovery() -> None:
@@ -226,11 +230,20 @@ class PlacesDiscovery:
             raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
         if requests and any(r.area != requests[0].area for r in requests):
             raise DiscoveryError("mixed_areas", "Use one explicit discovery area per outing.")
-        records, diagnostics, geographic_exclusions, stages, paging = [], {}, 0, {}, {}
+        records, diagnostics, geographic_exclusions, stages, paging, audit = [], {}, 0, {}, {}, {}
         for request in requests:
             result = self._search(request)
             paging[request.activity] = {"variant": request.search_variant, "next": result.paging.get("next")}
             stages[request.activity.value] = {**result.stages}
+            audit[request.activity.value] = {
+                'googleResultsReceived': result.stages['returned'],
+                'geographyRejected': result.excluded_count,
+                'geographyReasons': result.stages['geographyRejectedByReason'],
+                'searchRequests': 1, 'pagesFollowed': int(request.page_token is not None),
+                'searchStrategies': {('bowling_strict_type' if request.search_variant == 'initial' else 'bowling_text_evidence') if request.activity == 'bowling' else 'category_' + request.search_variant: 1},
+                'requestedPageSize': min(10, self.outing.settings.candidates_per_activity),
+                'geographyPolicy': 'verified_named_area' if request.area.name else 'authorized_radius' if request.area.radius_m else 'coordinate_bias_only',
+            }
             geographic_exclusions += result.excluded_count
             for reason, count in result.diagnostics.items():
                 diagnostics[reason] = diagnostics.get(reason, 0) + count
@@ -238,6 +251,8 @@ class PlacesDiscovery:
             if rejected:
                 diagnostics['invalid_normalized_venue'] = diagnostics.get('invalid_normalized_venue', 0) + rejected
                 geographic_exclusions += rejected
+            audit[request.activity.value]["normalizationRejected"] = rejected
+            before_meal = len(normalized)
             stages[request.activity.value]["afterNormalization"] = len(normalized)
             if request.meal == "dinner":
                 relevant = []
@@ -251,13 +266,25 @@ class PlacesDiscovery:
                         relevant.append(venue)
                 normalized = relevant
             stages[request.activity.value]["afterMealFilter"] = len(normalized)
+            audit[request.activity.value]["mealRejected"] = before_meal - len(normalized)
             records.extend(normalized)
-        quality = assess_candidates(records)
+        # The unfiltered bowling refinement must bring affirmative type/name
+        # evidence; a generic entertainment-center match alone is insufficient.
+        quality = assess_candidates(records, require_support={r.activity for r in requests
+            if r.activity == ActivityType.bowling and r.search_variant == 'alternative'})
         for reason, count in quality.diagnostics.items():
             diagnostics[reason] = diagnostics.get(reason, 0) + count
         for activity in stages:
             stages[activity].update(quality.stages.get(activity, {}))
             stages[activity]["afterDeduplicationAndRelevance"] = sum(activity in v.activities for v in quality.venues)
+            row = audit[activity]
+            row.update(duplicatesRemoved=quality.stages.get(activity, {}).get('duplicatesRemoved', 0),
+                       relevanceRejectedByReason={**quality.stages.get(activity, {}).get('relevanceRejectedByReason', {}),
+                           **({'dinner_cafe_without_restaurant_evidence': row['mealRejected']} if row['mealRejected'] else {})},
+                       eligibleRetained=stages[activity]['afterDeduplicationAndRelevance'], candidateCapExcluded=0)
+            row['latestSearch'] = {'newEligibleMatches': row['eligibleRetained'], 'previouslyKnownMatches': 0,
+                                   'newlyRetained': row['eligibleRetained']}
+            row['relevanceRejected'] = sum(row['relevanceRejectedByReason'].values())
         candidates = [DiscoveryCandidate(provider_id=v.facts.id, display_name=v.facts.name,
                       address=v.facts.address, coordinates=v.facts.coordinates,
                       attributions=[{'provider': a.provider, 'providerUri': str(a.uri) if a.uri else None}
@@ -268,7 +295,7 @@ class PlacesDiscovery:
             self.outing.check_candidates(sum(activity in v.activities for v in quality.venues))
         return DiscoveryResult(candidates=candidates, venues=quality.venues,
                                excluded_count=geographic_exclusions + quality.excluded_count,
-                               diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging)
+                               diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging, audit=audit)
 
     def _search(self, request: DiscoveryRequest) -> DiscoveryResult:
         limit = min(10, self.outing.settings.candidates_per_activity)

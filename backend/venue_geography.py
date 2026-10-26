@@ -34,3 +34,16 @@ def geographic_reason(area, coordinates: Coordinates, components: list[dict]) ->
     if area.radius_m is not None and distance_m(area.coordinates, coordinates) > area.radius_m:
         return 'outside_radius'
     return None
+
+
+def geographic_detail(area, coordinates, components):
+    """Fixed aggregate categories only; no area names or coordinates returned."""
+    reason = geographic_reason(area, coordinates, components)
+    if reason == 'outside_radius':
+        return reason
+    if reason == 'area_unverified':
+        local = {'locality', 'postal_town', 'neighborhood', 'sublocality',
+                 *(f'sublocality_level_{i}' for i in range(1, 6))}
+        types = {t for c in components for t in c.get('types', [])}
+        return 'different_named_area_or_region' if types & local else 'missing_local_area_evidence'
+    return 'geography_unverified'

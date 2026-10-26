@@ -12,6 +12,7 @@ from backend.models import (PlanningRequest, RankingResult, PlanningError, Venue
                             ConstraintIssue, PriceQuote, TravelQuote, DataStatus)
 from backend.places import DiscoveryError, DiscoveryRequest, PlacesDiscovery, SearchArea
 from backend.planner import _walk
+from backend.planning_diagnostics import empty_coverage, planning_coverage, merge_discovery_audits, coverage_notes
 from backend.provider_budget import ProviderBudget, ProviderLimitError
 from backend.routing_shortlist import expansion_width
 from backend.ranking import evaluate_candidate, score_candidates, _select
@@ -80,6 +81,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "excludedCandidates": discovery.excluded_count,
                    "discoveryStages": discovery.stages, "discoveryReasons": discovery.diagnostics,
                    "usageCategories": ["Text Search Enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "Text Search Pro", "Compute Route Matrix Essentials"]}
+    diagnostics['venuePipeline'] = empty_coverage(discovery, {a.value: {v.id for v in p} for a, p in zip(request.activities, pools)})
+    diagnostics['configuredLimits'] = {'candidatesPerActivity': outing.settings.candidates_per_activity,
+        'searchesPerOuting': outing.settings.searches_per_outing, 'matrixElementsPerOuting': outing.settings.matrix_elements_per_outing}
     if any(not pool for pool in pools):
         from backend.option_sessions import option_sessions
         if "token" not in context:
@@ -88,10 +92,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         result = empty(public, "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.", diagnostics)
         result.optionsToken = context["token"]
         result.canDiscover = can_discover(context)
+        result.notes += coverage_notes(diagnostics["venuePipeline"])
         return result
     from backend.routing_shortlist import shortlist
     all_pools = pools
     pools = shortlist(all_pools, facts, context["width"], request.startingLocation)
+    for activity, row in diagnostics['venuePipeline'].items():
+        count = len({v.id for pool in pools for v in pool if v.activity == activity})
+        row.update(shortlistedForRouting=count, notInCheckedCompletePath=count)
     # Reuse Task 26 ordered product and identity checks. A multi-activity physical
     # venue can serve either category, but is never presented as two visits.
     # Explicit revisits are currently deliberately unsupported for real outings.
@@ -108,7 +116,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     missing = [key for key in required if key not in context["routes"]]
     # Reuse evaluated alternatives. A bounded stage fills a checked pool with
     # fewer than three options; initial infeasibility may expand once below.
-    if missing and context.get("unseenEligible", 0) < 3 and not context.get("routedThisAction") and not context.get("stopped"):
+    primary_evidence_needed = context.get('eligiblePrimary', 3) < min(3, len(all_pools[0]))
+    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped"):
         selected, _, _ = select_stage(route_request, context["routes"], outing, facts)
         context["routedThisAction"] = True
         if selected:
@@ -143,6 +152,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
 
     evaluated, rejections, rejection_codes = [], {}, {}
     checked = 0
+    travel_sets = {state: {} for state in ('compatible', 'violated', 'unverified')}
     for candidate in candidates:
         needed = [(a.id, b.id) for a, b in zip(candidate.venues, candidate.venues[1:])]
         if request.startingLocation:
@@ -174,6 +184,11 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             max_first_leg_exclusive=request.maxFirstLegTravelExclusive,
             starting_location=request.startingLocation, max_first_leg_minutes=request.maxFirstLegTravel,
             evaluated_at=datetime.now(timezone.utc)))
+        travel_checks = [c for c in evidence.checks if c.kind == 'travel']
+        travel_state = ('violated' if any(c.state == 'infeasible' for c in travel_checks) else
+                        'compatible' if all(routes[key].status in ('ok', 'same_location') for key in needed) else 'unverified')
+        for v in candidate.venues:
+            travel_sets[travel_state].setdefault(v.activity.value, set()).add(v.id)
         labels = feasibility_labels(evidence)
         for check, label in zip(evidence.checks, labels.checks):
             if check.state != "feasible":
@@ -222,8 +237,11 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
     diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
-    if len(diverse) < 3 and not context["expanded"] and not context.get("stopped") and any(len(p) > len(q) for p, q in zip(all_pools, pools)):
+    context['eligiblePrimary'] = diagnostics['eligiblePrimaryCandidates']
+    primary_shortage = context['eligiblePrimary'] < min(3, len(all_pools[0]))
+    if (len(diverse) < 3 or primary_shortage) and not context["expanded"] and not context.get("stopped") and any(len(p) > len(q) for p, q in zip(all_pools, pools)):
         context["expanded"] = True
+        context["primaryCoverageExpanded"] = primary_shortage
         context["routedThisAction"] = False
         context["width"] = expansion_width(session.settings, len(request.activities))
         return real_plans(request, session, context=context)
@@ -254,6 +272,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     details_sessions.extend(details_token, list(facts))
     context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in evaluated)
     context["routedThisAction"] = False
+    diagnostics['venuePipeline'] = planning_coverage(discovery, all_pools, pools, request.activities,
+        routes, travel_sets, evaluated, ranked, diverse, [p for p in ranked if p.candidate.id in shown], context)
+    diagnostics['primaryCoverageExpansion'] = context.get('primaryCoverageExpanded', False)
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
         (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
@@ -261,7 +282,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=route_notice if not diverse and route_notice else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
+        notes=[f"Current application ceilings: {outing.settings.candidates_per_activity} retained venues per activity; {outing.settings.searches_per_outing} searches and {outing.settings.matrix_elements_per_outing} route elements per outing."] + coverage_notes(diagnostics["venuePipeline"]) + ([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
                "Real venues from Google Maps; activity categories reflect search context and need confirmation.",
                "Real prices, group capacity, activity durations, hours, showtimes and reservations are unknown. No budget is confirmed.",
                "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
@@ -363,7 +384,7 @@ def expand_venue_discovery(context):
             for a in accepted:
                 used[a] += 1
     from backend.places import DiscoveryResult
-    context['discovery'] = DiscoveryResult(candidates=[], venues=retained, paging={**old.paging, **found.paging},
+    context['discovery'] = DiscoveryResult(candidates=[], venues=retained, audit=merge_discovery_audits(old, found, retained), paging={**old.paging, **found.paging},
         excluded_count=old.excluded_count + found.excluded_count,
         diagnostics={key: old.diagnostics.get(key, 0) + found.diagnostics.get(key, 0) for key in old.diagnostics.keys() | found.diagnostics.keys()},
         stages={'initial': old.stages, 'expansion': found.stages,

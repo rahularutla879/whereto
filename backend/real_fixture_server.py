@@ -10,7 +10,7 @@ from time import sleep
 from unittest.mock import patch
 
 from backend.ai import Interpretation
-from backend.real_fixtures import paginated_search_fixture, search_fixture, matrix_fixture, details_fixture
+from backend.real_fixtures import bowling_diagnostic_fixture, paginated_search_fixture, search_fixture, matrix_fixture, details_fixture
 from backend.places import DiscoveryError
 
 
@@ -36,7 +36,8 @@ def main():
             if scenario['name'] == 'single_start': result['places'] = result['places'][:1]
             if scenario['name'] == 'lookup_empty': result['places'] = []
             return result
-        result = paginated_search_fixture(body) if scenario["name"] == "expanded" else search_fixture(body)
+        result = (bowling_diagnostic_fixture(body) if scenario["name"] == "bowling_diagnostic" else
+                  paginated_search_fixture(body) if scenario["name"] == "expanded" else search_fixture(body))
         if scenario['name'] == 'long_names':
             for place in result['places']:
                 place['displayName']['text'] += ' A Very Long Synthetic Venue Name For Responsive Headline Verification'
@@ -48,7 +49,12 @@ def main():
     def matrix(body):
         if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
-        return [] if scenario['name'] == 'missing_routes' else matrix_fixture(body)
+        result = matrix_fixture(body)
+        if scenario['name'] == 'bowling_diagnostic':
+            for element in result:
+                origin = body['origins'][element['originIndex']]['waypoint'].get('placeId','')
+                if origin == 'Fixture_bowling_5': element['duration'] = '900s'
+        return [] if scenario['name'] == 'missing_routes' else result
 
     def details(place_id):
         counts['details'] += 1

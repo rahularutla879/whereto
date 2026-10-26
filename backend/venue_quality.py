@@ -195,7 +195,7 @@ def _merge(records):
     return VenueFacts.model_validate(payload)
 
 
-def assess_candidates(records: list[VenueFacts]) -> QualityResult:
+def assess_candidates(records: list[VenueFacts], *, require_support: set[ActivityType] | None = None) -> QualityResult:
     """Geographically accepted canonical observations, in provider search order.
 
     Output order follows first occurrence. Group identity, fact selection and
@@ -214,27 +214,33 @@ def assess_candidates(records: list[VenueFacts]) -> QualityResult:
             groups.append(group)
         else:
             target.extend(group)
-    venues = []
+    venues, rejected_by_activity = [], {}
     for group in sorted(groups, key=lambda g: min(item[0] for item in g)):
         sources = sorted([item[1] for item in group], key=lambda v: (v.id, _key(v)))
         facts = _merge(sources)
         verdicts = {}
+        diagnostics['duplicate_place_id'] += len(sources) - len({(v.provider, v.id) for v in sources})
+        diagnostics['corroborated_alias'] += len({(v.provider, v.id) for v in sources}) - 1
         for activity in sorted({v.activity for v in sources}, key=lambda a: a.value):
             # Merge identity facts before evaluating associations: a second query
             # can supply the evidence missing from the first observation.
             candidate = VenueFacts.model_validate({**facts.model_dump(), 'activity': activity})
             verdict = relevance(candidate)
+            if activity in (require_support or set()) and verdict.reason == 'insufficient_activity_evidence':
+                verdict = Relevance(status='mismatch', reason='activity_evidence_required')
             diagnostics[verdict.reason] += sum(v.activity == activity for v in sources)
             if verdict.status != 'mismatch':
                 verdicts[activity] = verdict
+            else:
+                rejected_by_activity.setdefault(activity, Counter())[verdict.reason] += 1
         if not verdicts:
             continue
         activities = list(verdicts)
         facts = VenueFacts.model_validate({**facts.model_dump(), 'activity': activities[0]})
-        diagnostics['duplicate_place_id'] += len(sources) - len({(v.provider, v.id) for v in sources})
-        diagnostics['corroborated_alias'] += len({(v.provider, v.id) for v in sources}) - 1
         venues.append(DistinctVenue(facts=facts, sources=sources, activities=activities, relevance=verdicts))
     return QualityResult(venues=venues, excluded_count=len(records)-len(venues),
         stages={a.value: {"afterDeduplication": sum(any(source.activity == a for _, source in group) for group in groups),
-                         "afterRelevance": sum(a in v.activities for v in venues)} for a in {v.activity for v in records}},
+                         "afterRelevance": sum(a in v.activities for v in venues),
+                         "relevanceRejectedByReason": dict(rejected_by_activity.get(a, {})),
+                         "duplicatesRemoved": sum(v.activity == a for v in records) - sum(any(source.activity == a for _, source in group) for group in groups)} for a in {v.activity for v in records}},
                          diagnostics={k: v for k, v in sorted(diagnostics.items()) if v})
