@@ -18,7 +18,7 @@ PROJECT = "where-to-512422"
 SERVICE_ACCOUNT = f"whereto-local-maps@{PROJECT}.iam.gserviceaccount.com"
 ENDPOINT = "https://places.googleapis.com/v1/places:searchText"
 # ID/attributions: IDs Only. Other fields: Text Search Pro (not Details tiers).
-FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType"
+FIELD_MASK = "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType,nextPageToken"
 Text = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=200)]
 Number = Annotated[float, Field(strict=True, allow_inf_nan=False)]
 
@@ -69,6 +69,7 @@ class DiscoveryRequest(DiscoveryModel):
     activity: ActivityType
     meal: Literal["dinner"] | None = None
     search_variant: Literal["initial", "alternative"] = "initial"
+    page_token: str | None = Field(default=None, min_length=1, max_length=4096, repr=False)
     destination: SearchArea | None = None
     current_location: SearchArea | None = Field(default=None, repr=False)
     starting_location: StartingLocation | None = Field(default=None, repr=False)
@@ -160,6 +161,7 @@ class DiscoveryResult(DiscoveryModel):
     venues: list[DistinctVenue] = Field(default_factory=list, exclude=True, repr=False)
     diagnostics: dict[str, int] = Field(default_factory=dict, exclude=True, repr=False)
     stages: dict = Field(default_factory=dict, exclude=True, repr=False)
+    paging: dict = Field(default_factory=dict, exclude=True, repr=False)
     notice: str = ("Discovery candidates only. Hours, prices, availability and travel are unknown. "
                    "Area names are checked conservatively against provider address components; "
                    "unverifiable matches are excluded. Without a radius, coordinates are a bias only. "
@@ -170,6 +172,9 @@ class DiscoveryResult(DiscoveryModel):
 def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
     if not isinstance(data, dict) or not isinstance(data.get("places", []), list):
         raise DiscoveryError("invalid_response", "Google returned an invalid discovery response.")
+    token = data.get("nextPageToken")
+    if token is not None and (not isinstance(token, str) or not token.strip() or len(token) > 4096):
+        raise DiscoveryError("invalid_response", "Google returned invalid search pagination data.")
     places = data.get("places", [])
     if len(places) > limit:
         raise DiscoveryError("invalid_response", "Google exceeded the requested candidate limit.")
@@ -190,7 +195,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
             candidates.append(candidate)
         except (KeyError, TypeError, AttributeError, ValidationError):
             raise DiscoveryError("invalid_response", "Google returned incomplete or invalid venue data.") from None
-    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates)})
+    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates)}, paging={"next": token})
 
 
 def require_development_discovery() -> None:
@@ -221,9 +226,10 @@ class PlacesDiscovery:
             raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
         if requests and any(r.area != requests[0].area for r in requests):
             raise DiscoveryError("mixed_areas", "Use one explicit discovery area per outing.")
-        records, diagnostics, geographic_exclusions, stages = [], {}, 0, {}
+        records, diagnostics, geographic_exclusions, stages, paging = [], {}, 0, {}, {}
         for request in requests:
             result = self._search(request)
+            paging[request.activity] = {"variant": request.search_variant, "next": result.paging.get("next")}
             stages[request.activity.value] = {**result.stages}
             geographic_exclusions += result.excluded_count
             for reason, count in result.diagnostics.items():
@@ -262,11 +268,13 @@ class PlacesDiscovery:
             self.outing.check_candidates(sum(activity in v.activities for v in quality.venues))
         return DiscoveryResult(candidates=candidates, venues=quality.venues,
                                excluded_count=geographic_exclusions + quality.excluded_count,
-                               diagnostics=dict(sorted(diagnostics.items())), stages=stages)
+                               diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging)
 
     def _search(self, request: DiscoveryRequest) -> DiscoveryResult:
-        limit = self.outing.settings.candidates_per_activity
+        limit = min(10, self.outing.settings.candidates_per_activity)
         body = search_body(request, limit)
+        if request.page_token:
+            body["pageToken"] = request.page_token
         identity = sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
         with self.outing.reserve("search", identity):
             from backend.places_transport import text_search

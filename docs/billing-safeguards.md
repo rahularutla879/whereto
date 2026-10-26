@@ -1,3 +1,5 @@
+> Current application ceilings and the unchanged Cloud quotas are recorded in [Task 46 approved application-limit expansion](#task-46-approved-application-limit-expansion). Older dated ceilings below are historical.
+
 > Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
 
 # Task 39 — billing and provider safeguards
@@ -330,3 +332,30 @@ The explicit Search for more venues action may make at most two additional same-
 An invented ten-by-ten two-stop outing supports 15 additional clicks (48 displayed pairs) and 100 pairs at exhaustion using 2 searches / 100 route elements, not a fresh provider workload per click. An explicit sparse-pool refinement may raise searches to 3–4; unchanged candidate/routing caps remain authoritative. At the already documented gross first-tier rates, four Enterprise searches plus 100 route elements would be **$0.640 before free allowances/credits**, excluding optional contacts/origin lookup/first legs. This is a burst example, not a monthly spending guarantee or new live authorization. More complicated outings may stop earlier at 150 elements. Failed attempts remain charged, with no retries or budget replenishment.
 
 Future live verification requires separate bounded authorization and aggregate stage diagnostics, not stored raw venue responses. See [acceptance scope and limits](real-planning.md#task-46-manual-acceptance-fixes). Do not increase quotas/candidate limits merely to promise 15 clicks; evidence of real coverage, exclusions and route feasibility is needed first. Task 47 has not started.
+
+## Task 46 approved application-limit expansion
+
+October 26, 2026, explicit owner authorization changes **application settings only**:
+
+| Setting | Previous | New ceiling |
+| --- | --- | --- |
+| Text Searches/outing | 4 | **10** |
+| Retained relevant candidates/distinct activity | 10 | **20** |
+| Matrix elements/outing | 150 | **300** |
+| All provider attempts/outing | 20 | **30** |
+| All provider attempts/process | 50 | **50**, unchanged |
+| Matrix elements/process | 1,500 | **1,500**, unchanged |
+| Matrix elements/rolling minute | 150 | **150**, unchanged |
+| On-demand contact Details/outing | 6 | **6**, unchanged |
+
+Thirty attempts fit ten searches, six contact requests and fourteen matrix HTTP requests. Ten+six would leave only four routing attempts under the former total of twenty, insufficient for staged exploration of three/four-stop outings or irregular directed rectangles. Discovery/routing admission leaves unused contact headroom; all operations still share 50 process attempts. Ratings enrich an existing search mask, not another request. Manual origin matching remains a separately bounded explicit operation sharing process/search-minute counters; its ten-lookups/process allowance and three matches/request are unchanged. Failed attempts remain charged, concurrency stays one, automatic retries stay zero.
+
+An existing **read-only** administration helper confirmed project `where-to-512422` at 2026-10-26 17:11 UTC: Text Search **40/day and 10/minute**, Route Matrix **2,000 elements/day and 150/minute**, GetPlace **40/day and 10/minute**. No quota override, billing/account/Free Trial/alert, API enablement, IAM, credential or deployment setting was changed. The saved $25/$45/$50 budget alerts and $40–$50/month target remain; balance/posted charges/budget configuration were not freshly inspected. Local counters cannot establish remaining Cloud daily quota; Cloud admission remains authoritative across processes.
+
+Initial searches still ask for ten results, never twenty automatically. Explicit expansion fetches at most two same-area pages/refinements per click; every page is a charged search attempt under the original outing budget, with at most six pages/category across two query variants. The field mask adds only the response cursor to existing discovery fields; optional ratings retain Enterprise pricing. Tokens remain transient, excluded from response/diagnostics. Google supports 1–20 results/page and requires other query parameters to remain unchanged when paginating: [official search reference](https://developers.google.com/maps/documentation/places/web-service/reference/rest/v1/places/searchText).
+
+Initial two-/three-/four-stop workloads remain **2/3/4 searches and 36/32/48 matrix elements**, normally **1/2/3 matrix HTTP requests**, plus **6/4/4** elements and normally one request for an authorized origin. Subsequent route stages add at most **64** unseen directed elements at a time, atomically admitted against all cumulative and rolling-minute limits. A minute pause keeps unsent work available for a later explicit action, without waiting automatically, retrying a failed provider request or replenishing an outing. A hard limit can yield fewer plans and limited coverage, never weaker hard travel constraints.
+
+Gross first paid-tier rates, rechecked against [official global pricing](https://developers.google.com/maps/billing-and-pricing/pricing) October 26: Pro Text Search **$0.032/request**, Enterprise Text Search **$0.035/request**, Enterprise Details **$0.020/request**, Essentials Matrix **$0.005/element**, before account-wide free allowances/trial credits. Initial outings with ratings remain **$0.250/$0.265/$0.380**, plus **$0.030/$0.020/$0.020** for origin routing. Ten Enterprise searches + 300 elements + six contact requests is a theoretical **$1.97 gross/outing**, versus **$1.01** under the old four-search/150-element/six-contact ceilings. One manual lookup adds **$0.032**; ratings add only **$0.003/search** over Pro. A two-category pool reaching twenty relevant venues in two pages/category typically needs four searches ($0.140 with ratings), not ten. These are ceilings, not targets or posted invoices. Quotas and alerts do not enforce a monthly spending cap; thirty-one maximum outings alone would be $61.07 gross before allowances, above the target. Keep ordinary testing small and review actual spend; no assumption of unused free credits.
+
+**Zero live billable Google calls** during this expansion. All provider tests/browser journeys use invented responses and fail-on-network guards; no raw live response, token, precise personal location, asset/license or new dependency is stored. Real mode and optional gates default off. The earlier live allowance remains closed. No Task 47 work.

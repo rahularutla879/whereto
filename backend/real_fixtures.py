@@ -33,3 +33,13 @@ def matrix_fixture(body):
 def details_fixture(place_id):
     return {'placeId': place_id, 'phone': '+1 (202) 555-0100', 'telephoneUrl': 'tel:+12025550100',
             'website': 'https://example.com/venue', 'attributions': [{'provider': 'Synthetic contact credit', 'uri': 'https://example.com'}]}
+
+
+def paginated_search_fixture(body, **kwargs):
+    """Twenty invented relevant venues, ten/page with opaque synthetic cursors."""
+    offset = 10 if body.get('pageToken') == 'synthetic-next-page' else 0
+    result = search_fixture({**body, 'pageSize': 20}, **kwargs)
+    result['places'] = result['places'][offset:offset + body['pageSize']]
+    if not offset:
+        result['nextPageToken'] = 'synthetic-next-page'
+    return result

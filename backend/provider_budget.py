@@ -22,11 +22,11 @@ class ProviderSettings(BaseModel):
     model_config = ConfigDict(extra="forbid", frozen=True, strict=True)
     # Real planning requires a separate, explicitly local development opt-in.
     mode: Literal["mock", "real"] = "mock"
-    searches_per_outing: int = Field(default=4, ge=0, le=4)
+    searches_per_outing: int = Field(default=10, ge=0, le=10)
     details_per_outing: int = Field(default=6, ge=0, le=6)
-    candidates_per_activity: int = Field(default=10, ge=1, le=10)
-    matrix_elements_per_outing: int = Field(default=150, ge=0, le=150)
-    requests_per_outing: int = Field(default=20, ge=0, le=20)
+    candidates_per_activity: int = Field(default=20, ge=1, le=20)
+    matrix_elements_per_outing: int = Field(default=300, ge=0, le=300)
+    requests_per_outing: int = Field(default=30, ge=0, le=30)
     concurrent_requests: int = Field(default=1, ge=1, le=1)
     retries: int = Field(default=0, ge=0, le=0)
     requests_per_session: int = Field(default=50, ge=0, le=50)
@@ -39,6 +39,8 @@ class ProviderSettings(BaseModel):
     def from_env(cls) -> "ProviderSettings":
         # Same explicit process-environment convention as AISettings; no dotenv.
         values = {field: int(os.environ[env]) for field, env in {
+            "searches_per_outing": "WHERETO_SEARCHES_OUTING",
+            "requests_per_outing": "WHERETO_REQUESTS_OUTING",
             "candidates_per_activity": "WHERETO_CANDIDATES",
             "matrix_elements_per_outing": "WHERETO_MATRIX_OUTING",
             "matrix_elements_per_session": "WHERETO_MATRIX_SESSION",
@@ -99,6 +101,25 @@ class OutingBudget:
     def usage(self) -> dict[str, int]:
         return {"placesSearchRequests": self._searches, "placesDetailsRequests": self._details,
                 "reservedMatrixElements": self._elements, "providerAttempts": self._requests}
+
+    def routing_capacity(self) -> dict[str, int]:
+        """Advisory capacity; atomic reservation still decides before any I/O.
+
+        Keep six on-demand contacts available in the outing attempt allowance.
+        Other outings/manual searches share the unchanged process ceiling.
+        """
+        session = self._session
+        with session._lock:
+            now = monotonic()
+            used_minute = sum(n for t, n in session._matrix_window if now - t < 60)
+            return {
+                "elements": max(0, min(self.settings.matrix_elements_per_outing - self._elements,
+                                       self.settings.matrix_elements_per_session - session._elements)),
+                "minuteElements": max(0, self.settings.matrix_elements_per_minute - used_minute),
+                "attempts": max(0, min(self.settings.requests_per_outing - self._requests -
+                                      (self.settings.details_per_outing - self._details),
+                                      self.settings.requests_per_session - session._requests)),
+            }
 
     def check_candidates(self, count: int) -> None:
         if type(count) is not int or count < 0:

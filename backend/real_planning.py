@@ -13,6 +13,7 @@ from backend.models import (PlanningRequest, RankingResult, PlanningError, Venue
 from backend.places import DiscoveryError, DiscoveryRequest, PlacesDiscovery, SearchArea
 from backend.planner import _walk
 from backend.provider_budget import ProviderBudget, ProviderLimitError
+from backend.routing_shortlist import expansion_width
 from backend.ranking import evaluate_candidate, score_candidates, _select
 from backend.routes import AuthorizedStart, GoogleRouteCalculator, RoutePoint, RouteRequest, RouteError
 
@@ -57,7 +58,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             raise
         context = {"outing": outing, "request": request, "session": session, "discovery": discovery,
                    "routes": {}, "seen": set(), "width": 6 if len(request.activities) <= 2 else 4,
-                   "expanded": False, "discoveryExpanded": False, "area": area, "matrixRequests": 0, "usedPrimary": set()}
+                   "expanded": False, "discoveryPages": {a: 1 for a in dict.fromkeys(request.activities)}, "area": area, "matrixRequests": 0, "usedPrimary": set()}
     else:
         discovery = context["discovery"]
     pools, facts = [], {}
@@ -102,18 +103,31 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     from backend.routes import plan_matrices, RouteResult
     route_request = RouteRequest(activity_groups=[[RoutePoint(id=v.id, place_id=v.id) for v in pool] for pool in pools],
                                  mode=mode, starting_location=request.startingLocation)
+    from backend.routing_expansion import select_stage
     required, _ = plan_matrices(route_request)
     missing = [key for key in required if key not in context["routes"]]
-    try:
-        if missing:
-            additional = GoogleRouteCalculator(outing).calculate(route_request.model_copy(update={"required_pairs": missing}))
-            context["matrixRequests"] += additional.matrix_requests
-            if any(leg.error_code in ("quota", "authentication", "permission", "provider", "timeout", "invalid_response", "invalid_request", "not_requested") for leg in additional.legs):
-                context["stopped"] = True
-            context["routes"].update({(leg.origin_id, leg.destination_id): leg for leg in additional.legs})
-    except RouteError as error:
-        error.diagnostics = {**outing.usage(), "providerLatencyMs": round((perf_counter() - started) * 1000)}
-        raise
+    # Reuse evaluated alternatives. A bounded stage fills a checked pool with
+    # fewer than three options; initial infeasibility may expand once below.
+    if missing and context.get("unseenEligible", 0) < 3 and not context.get("routedThisAction") and not context.get("stopped"):
+        selected, _, _ = select_stage(route_request, context["routes"], outing, facts)
+        context["routedThisAction"] = True
+        if selected:
+            try:
+                additional = GoogleRouteCalculator(outing).calculate(route_request.model_copy(update={"required_pairs": selected}))
+                context["matrixRequests"] += additional.matrix_requests
+                if any(leg.error_code in ("quota", "authentication", "permission", "provider", "timeout", "invalid_response", "invalid_request", "not_requested") for leg in additional.legs):
+                    context["stopped"] = True
+                context["routes"].update({(leg.origin_id, leg.destination_id): leg for leg in additional.legs})
+            except RouteError as error:
+                error.diagnostics = {**outing.usage(), "providerLatencyMs": round((perf_counter() - started) * 1000)}
+                raise
+    capacity = outing.routing_capacity()
+    pending = sum(key not in context["routes"] for key in required)
+    diagnostics.update(unroutedPairs=pending, routingCapacity=capacity)
+    coverage_pending = pending or any(len(p) > len(q) for p, q in zip(all_pools, pools))
+    route_notice = ("The remaining route budget limits checked coverage. Other suitable venues may exist." if coverage_pending and (not capacity['elements'] or not capacity['attempts']) else
+                    "The local route minute allowance is used. Wait at least a minute, then choose Show different options to check unsent routes. No retry is scheduled." if pending and not capacity['minuteElements'] else
+                    "More routes can be checked in bounded stages within this outing's remaining budget." if pending else "")
     routes = context["routes"]
     routed = RouteResult(legs=list(routes.values()), matrix_elements=outing.usage()["reservedMatrixElements"], matrix_requests=context["matrixRequests"])
     diagnostics.update(outing.usage())
@@ -128,7 +142,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                            source="Google Maps route estimate; display rounded up to whole minutes")
 
     evaluated, rejections, rejection_codes = [], {}, {}
+    checked = 0
     for candidate in candidates:
+        needed = [(a.id, b.id) for a, b in zip(candidate.venues, candidate.venues[1:])]
+        if request.startingLocation:
+            needed.append((request.startingLocation.point.id, candidate.venues[0].id))
+        if any(key not in routes for key in needed):
+            continue  # No guessed routes and no recommendation without required evidence.
+        checked += 1
         # Task 27 schedules known durations and ranks unknown components honestly.
         # Exact Task 44 seconds enforce travel caps, never rounded display minutes.
         uncapped = public.model_copy(update={"travel": None, "maxLegTravel": None, "allowRevisits": False})
@@ -188,7 +209,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                     rejections[issue.message] = rejections.get(issue.message, 0) + 1
         else:
             evaluated.append(plan)
-    diagnostics.update(evaluatedCombinations=len(candidates), eligibleCombinations=len(evaluated),
+    diagnostics.update(candidateCombinations=len(candidates), evaluatedCombinations=checked,
+                       uncheckedCombinations=len(candidates) - checked, eligibleCombinations=len(evaluated),
                        eligiblePrimaryCandidates=len({p.candidate.venues[0].id for p in evaluated}),
                        routeOutcomeCounts={status: sum(leg.status == status for leg in routed.legs) for status in {leg.status for leg in routed.legs}},
                        rejectedConstraints=rejection_codes, previouslyOfferedCombinations=len(context["seen"]),
@@ -202,7 +224,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     if len(diverse) < 3 and not context["expanded"] and not context.get("stopped") and any(len(p) > len(q) for p, q in zip(all_pools, pools)):
         context["expanded"] = True
-        context["width"] = {1: 10, 2: 10, 3: 8, 4: 6}[len(request.activities)]
+        context["routedThisAction"] = False
+        context["width"] = expansion_width(session.settings, len(request.activities))
         return real_plans(request, session, context=context)
     batches, shown = [], {p.candidate.id for p in diverse}
     primary_used = context["usedPrimary"] | {p.candidate.venues[0].id for p in diverse}
@@ -214,6 +237,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         batch = _select(remaining, 3, min_changed=min_changed, prefer_primary=True, primary_used=primary_used)
         if not batch:
             break
+        if len(batch) < 3 and capacity["elements"] > 0 and capacity["attempts"] > 0 and (pending or (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools)))):
+            break  # Retain leftovers for a full batch after the next explicit stage.
         batches.append(batch)
         primary_used.update(p.candidate.venues[0].id for p in batch)
         shown.update(p.candidate.id for p in batch)
@@ -227,18 +252,21 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         context["token"] = option_sessions.create(context)
     details_token = context["detailsToken"]
     details_sessions.extend(details_token, list(facts))
-    can_expand = not context.get("stopped") and (any(p.candidate.id not in context["seen"] for p in evaluated) or (
-        not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))
+    context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in evaluated)
+    context["routedThisAction"] = False
+    can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
+        capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
+        (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
-        diagnostics=diagnostics, message=f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
+        diagnostics=diagnostics, message=route_notice if not diverse and route_notice else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
+        notes=([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
                "Real venues from Google Maps; activity categories reflect search context and need confirmation.",
                "Real prices, group capacity, activity durations, hours, showtimes and reservations are unknown. No budget is confirmed.",
                "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
                "Inter-stop travel excludes the first trip and return home. An explicitly shared start is shown separately.",
-               f"Up to {session.settings.candidates_per_activity} candidates per activity are searched. These results do not cover every venue in the city."])
+               f"Up to {session.settings.candidates_per_activity} relevant candidates per activity can be retained through explicit search expansion. These results do not cover every venue in the city."])
 
 
 def empty(request, message, diagnostics=None):
@@ -262,14 +290,14 @@ def more_real_plans(token, *, expand_discovery=False):
             raise DiscoveryError("date_expired", "The outing date or time window is no longer valid. Start a new search with a future date.")
         if context.get("stopped"):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
+        context["routedThisAction"] = False
         if expand_discovery:
             expand_venue_discovery(context)
         result = real_plans(context["request"], context["session"], context=context)
         if not result.provisionalPlans and not context["expanded"]:
             context["expanded"] = True
-            # At most 100/128/108 inter-stop elements for two/three/four
-            # activities, plus at most 10/8/6 first legs. Reuse all old pairs.
-            context["width"] = {1: 10, 2: 10, 3: 8, 4: 6}[len(context["request"].activities)]
+            # Larger inventory is staged, never sent as an all-pairs matrix.
+            context["width"] = expansion_width(context["session"].settings, len(context["request"].activities))
             result = real_plans(context["request"], context["session"], context=context)
         return result
     except (DiscoveryError, ProviderLimitError, RouteError):
@@ -279,36 +307,52 @@ def more_real_plans(token, *, expand_discovery=False):
         lock.release()
 
 
+def discovery_activities(context):
+    settings = context['session'].settings
+    return [a for a in dict.fromkeys(context['request'].activities)
+            if sum(a in v.activities for v in context['discovery'].venues) < settings.candidates_per_activity
+            and context['discoveryPages'].get(a, 0) < 6
+            and (context['discovery'].paging.get(a, {}).get('next')
+                 or context['discovery'].paging.get(a, {}).get('variant', 'initial') == 'initial')]
+
+
 def can_discover(context):
-    if context.get('discoveryExpanded') or context.get('stopped'):
+    if context.get('stopped'):
         return False
     settings = context['session'].settings
     usage = context['outing'].usage()
     return (usage['placesSearchRequests'] < settings.searches_per_outing
-            and usage['providerAttempts'] < settings.requests_per_outing
-            and any(sum(a in v.activities for v in context['discovery'].venues) < settings.candidates_per_activity
-                    for a in dict.fromkeys(context['request'].activities)))
+            and usage['providerAttempts'] < settings.requests_per_outing -
+                (settings.details_per_outing - usage['placesDetailsRequests'])
+            and bool(discovery_activities(context)))
 
 
 def expand_venue_discovery(context):
-    """One explicit same-area query refinement, reusing the ORIGINAL budget.
+    """Explicit same-area pages/refinement, ORIGINAL budget and retained IDs.
 
-    No pagination, widened geography, automatic replenishment or candidate cap
-    increase. Keep known candidates; fill free slots with validated new IDs.
+    Ten results/page; preserve all query parameters when following a token.
+    No automatic page loop, widened geography or replenished budget. At most
+    six pages/category across initial and alternative queries, also bounded by
+    the shared search ceiling. Tokens stay in the expiring active computation.
     """
     if not can_discover(context):
-        raise DiscoveryError('coverage_limit', 'More venue searches are unavailable within this search budget or ten-candidate limit. Other venues may exist.')
-    context['discoveryExpanded'] = True
+        raise DiscoveryError('coverage_limit', 'More venue searches are unavailable within the retained-candidate or request limits. Other venues may exist.')
     request, outing = context['request'], context['outing']
     old = context['discovery']
     counts = {a: sum(a in v.activities for v in old.venues) for a in dict.fromkeys(request.activities)}
-    available = outing.settings.searches_per_outing - outing.usage()['placesSearchRequests']
-    # Primary activity first, then other sparse categories. At most two extra
-    # requests/action, also bounded by the original four-search outing ceiling.
-    activities = [a for a in counts if counts[a] < outing.settings.candidates_per_activity][:min(2, available)]
-    found = PlacesDiscovery(outing).discover_many([DiscoveryRequest(activity=a, destination=context['area'],
-        meal='dinner' if a == 'food' and (request.dinner or request.dinnerStops) else None,
-        search_variant='alternative') for a in activities])
+    available = min(outing.settings.searches_per_outing - outing.usage()['placesSearchRequests'],
+                    outing.settings.requests_per_outing - outing.usage()['providerAttempts'] -
+                    (outing.settings.details_per_outing - outing.usage()['placesDetailsRequests']))
+    activities = discovery_activities(context)[:min(2, available)]
+    queries = []
+    for a in activities:
+        cursor = old.paging.get(a, {})
+        queries.append(DiscoveryRequest(activity=a, destination=context['area'],
+            meal='dinner' if a == 'food' and (request.dinner or request.dinnerStops) else None,
+            search_variant=cursor.get('variant', 'initial') if cursor.get('next') else 'alternative',
+            page_token=cursor.get('next')))
+        context['discoveryPages'][a] = context['discoveryPages'].get(a, 0) + 1
+    found = PlacesDiscovery(outing).discover_many(queries)
     from backend.venue_quality import assess_candidates
     merged = assess_candidates([source for v in old.venues + found.venues for source in v.sources])
     retained, used = [], {a: 0 for a in counts}
@@ -319,12 +363,13 @@ def expand_venue_discovery(context):
             for a in accepted:
                 used[a] += 1
     from backend.places import DiscoveryResult
-    context['discovery'] = DiscoveryResult(candidates=[], venues=retained,
+    context['discovery'] = DiscoveryResult(candidates=[], venues=retained, paging={**old.paging, **found.paging},
         excluded_count=old.excluded_count + found.excluded_count,
         diagnostics={key: old.diagnostics.get(key, 0) + found.diagnostics.get(key, 0) for key in old.diagnostics.keys() | found.diagnostics.keys()},
         stages={'initial': old.stages, 'expansion': found.stages,
                 'retainedCounts': {a.value: n for a, n in used.items()},
                 'newAssociations': sum(used[a] - counts[a] for a in counts),
                 'candidateCapExcludedAssociations': sum(len(v.activities) for v in merged.venues) - sum(used.values())})
+    context['unseenEligible'] = 0
     context['expanded'] = False
     context['width'] = 6 if len(request.activities) <= 2 else 4

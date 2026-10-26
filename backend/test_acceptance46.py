@@ -121,7 +121,7 @@ class OptionsAcceptance(unittest.TestCase):
             if body['textQuery'].startswith('bowling alleys'):data['places']=data['places'][:2]
             return data
         self.search.side_effect=responses
-        session=ProviderBudget();r=real_plans(outing(),session)
+        session=ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=10));r=real_plans(outing(),session)
         context,_=option_sessions.get(r.optionsToken);budget=context['outing']
         self.assertTrue(r.canDiscover);self.assertEqual(self.search.call_count,2)
         r=more_real_plans(r.optionsToken,expand_discovery=True)
@@ -156,7 +156,7 @@ class OptionsAcceptance(unittest.TestCase):
             if body['textQuery'].startswith('bowling alleys'):data['places']=[]
             return data
         self.search.side_effect=response
-        r=real_plans(outing(),ProviderBudget())
+        r=real_plans(outing(),ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=10)))
         self.assertFalse(r.provisionalPlans);self.assertTrue(r.canDiscover)
         self.assertEqual(self.matrix.call_count,0)
         r=more_real_plans(r.optionsToken,expand_discovery=True)
@@ -203,7 +203,7 @@ class OptionsAcceptance(unittest.TestCase):
                 for place in data['places']:place['id']+='New'
             return data
         self.search.side_effect=response
-        r=real_plans(outing(),ProviderBudget());context,_=option_sessions.get(r.optionsToken)
+        r=real_plans(outing(),ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=10)));context,_=option_sessions.get(r.optionsToken)
         original={v.facts.id for v in context['discovery'].venues if 'bowling' in v.activities}
         token=r.detailsToken;budget=context['outing']
         r=more_real_plans(r.optionsToken,expand_discovery=True)
@@ -241,9 +241,9 @@ class OptionsAcceptance(unittest.TestCase):
         self.assertEqual(r.diagnostics['discoveryStages']['bowling']['returned'],10)
         self.assertEqual(r.diagnostics['primaryCandidates'],6)
         for _ in range(6):
-            try:r=more_real_plans(r.optionsToken)
-            except (ProviderLimitError, RouteError):break
-        else:self.fail('Expected cumulative routing budget limit')
+            if not r.canExpand: break
+            r=more_real_plans(r.optionsToken)
+        self.assertFalse(r.canExpand)
         self.assertEqual(session._elements,36)
         self.assertEqual(self.search.call_count,2)
         self.assertNotIn('latitude',str(r.diagnostics));self.assertNotIn('Fixture_',str(r.diagnostics))

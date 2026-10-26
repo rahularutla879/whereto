@@ -168,15 +168,15 @@ class DiscoveryTests(unittest.TestCase):
             self.assertEqual(transport.call_count, 1)
 
     @patch.dict(os.environ, {"WHERETO_PLACES_DEV": "1"})
-    def test_four_search_limit_and_shared_session(self):
+    def test_ten_search_limit_and_shared_session(self):
         session = ProviderBudget()
         adapter = PlacesDiscovery(session.outing())
         with patch("backend.places_transport.text_search", return_value={}) as transport:
-            for activity in ("food", "movie", "museum", "coffee"):
+            for activity in ("food", "movie", "museum", "coffee", "drinks", "karaoke", "concert", "art", "outdoors", "baseball"):
                 adapter.discover(DiscoveryRequest(activity=activity, destination={"name": "Baltimore"}))
             with self.assertRaisesRegex(ProviderLimitError, "search limit"):
                 adapter.discover(request())
-            self.assertEqual(transport.call_count, 4)
+            self.assertEqual(transport.call_count, 10)
 
     @patch.dict(os.environ, {"WHERETO_PLACES_DEV": "1"})
     def test_lower_candidate_limit_is_sent(self):
@@ -227,7 +227,7 @@ class TransportTests(unittest.TestCase):
         self.assertEqual(kwargs["headers"]["X-Goog-FieldMask"], FIELD_MASK)
         self.assertNotIn("*", FIELD_MASK)
         self.assertEqual(set(FIELD_MASK.split(",")), {"places.id", "places.displayName", "places.formattedAddress",
-                         "places.location", "places.addressComponents", "places.attributions", "places.types", "places.primaryType"})
+                         "places.location", "places.addressComponents", "places.attributions", "places.types", "places.primaryType", "nextPageToken"})
         self.assertFalse(kwargs["allow_redirects"])
         self.assertEqual(kwargs["timeout"], (5, 15))
         self.assertEqual(self.session.mount.call_args.args[1].max_retries.total, 0)

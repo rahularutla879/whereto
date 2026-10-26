@@ -36,16 +36,16 @@ class ProviderBudgetTests(unittest.TestCase):
         with self.assertRaises(ValidationError):
             ProviderSettings().searches_per_outing = 10
 
-    def test_four_searches_and_three_candidates(self):
+    def test_ten_searches_and_twenty_candidates(self):
         outing = ProviderBudget().outing()
-        outing.check_candidates(10)
+        outing.check_candidates(20)
         with self.assertRaisesRegex(ProviderLimitError, "candidates"):
-            outing.check_candidates(11)
-        for n in range(4):
+            outing.check_candidates(21)
+        for n in range(10):
             with outing.reserve("search", str(n)):
                 pass
         with self.assertRaisesRegex(ProviderLimitError, "search limit"):
-            with outing.reserve("search", "fifth"):
+            with outing.reserve("search", "eleventh"):
                 self.fail("Must reject before provider I/O")
 
     def test_matrix_products_accumulate_and_rejected_attempt_does_not_consume(self):

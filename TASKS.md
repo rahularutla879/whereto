@@ -182,6 +182,8 @@ This is where the app becomes genuinely useful.
 
   Manual acceptance fixes — October 26, 2026: explicit same-budget sparse discovery refinement and aggregate stage diagnostics; source-backed strict between-venue travel limits; automatic manual-start lookup/confirmation and pending submission resume/cancellation. Invented ten-by-ten fixture covers 15 full alternative clicks and all 100 distinct pairs within 100 elements. No live Google calls, quota/billing changes or Task 47 work. Final checks are recorded in HANDOVER.md and [provider notes](docs/real-planning.md#task-46-manual-acceptance-fixes).
 
+  Approved application-limit expansion — October 26, 2026: ten searches, twenty retained candidates/activity, 300 route elements and thirty attempts/outing, with unchanged 50-attempt/1,500-element process and 150-element minute ceilings. Explicit bounded pagination, staged routing, contact headroom and original-budget continuation tested offline. Actual Cloud quotas verified unchanged via read-only administration; no billable Google calls or Task 47 work. See HANDOVER.md and current provider documentation for verification.
+
 Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.
 
 Google for Developers

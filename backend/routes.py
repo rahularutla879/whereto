@@ -12,7 +12,7 @@ from typing import Annotated, Literal, Protocol
 
 from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator, model_validator
 
-from backend.provider_budget import OutingBudget, ProviderLimitError
+from backend.provider_budget import OutingBudget, ProviderLimitError, ProviderSettings
 from backend.venue_models import Coordinates, VenueFacts
 
 Mode = Literal["drive", "walk"]
@@ -20,6 +20,9 @@ Identity = Annotated[str, StringConstraints(strict=True, min_length=1, max_lengt
 PlaceID = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_-]+$")]
 FIELD_MASK = "originIndex,destinationIndex,status,condition,distanceMeters,duration"
 ENDPOINT = "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix"
+# Derive contract bounds from the single approved candidate setting.
+MAX_CANDIDATES = ProviderSettings.model_fields["candidates_per_activity"].default
+MAX_REQUIRED_PAIRS = 3 * MAX_CANDIDATES ** 2 + MAX_CANDIDATES
 
 
 class RouteError(RuntimeError):
@@ -67,8 +70,8 @@ class AuthorizedStart(RouteModel):
 
 
 class RouteRequest(RouteModel):
-    activity_groups: Annotated[list[Annotated[list[RoutePoint], Field(min_length=1, max_length=10)]], Field(min_length=1, max_length=4)] = Field(repr=False)
-    required_pairs: list[tuple[str, str]] | None = Field(default=None, max_length=150)
+    activity_groups: Annotated[list[Annotated[list[RoutePoint], Field(min_length=1, max_length=MAX_CANDIDATES)]], Field(min_length=1, max_length=4)] = Field(repr=False)
+    required_pairs: list[tuple[str, str]] | None = Field(default=None, max_length=MAX_REQUIRED_PAIRS)
     mode: Mode
     starting_location: AuthorizedStart | None = Field(default=None, repr=False)
 

@@ -10,7 +10,7 @@ from time import sleep
 from unittest.mock import patch
 
 from backend.ai import Interpretation
-from backend.real_fixtures import search_fixture, matrix_fixture, details_fixture
+from backend.real_fixtures import paginated_search_fixture, search_fixture, matrix_fixture, details_fixture
 from backend.places import DiscoveryError
 
 
@@ -36,7 +36,7 @@ def main():
             if scenario['name'] == 'single_start': result['places'] = result['places'][:1]
             if scenario['name'] == 'lookup_empty': result['places'] = []
             return result
-        result = search_fixture(body)
+        result = paginated_search_fixture(body) if scenario["name"] == "expanded" else search_fixture(body)
         if scenario['name'] == 'long_names':
             for place in result['places']:
                 place['displayName']['text'] += ' A Very Long Synthetic Venue Name For Responsive Headline Verification'
@@ -82,8 +82,11 @@ def main():
             os.environ['WHERETO_START_LOOKUP_DEV'] = '0' if scenario['name'] == 'lookup_disabled' else '1'
             # Tests reset only process-local admission, never real accounting.
             from backend import main as api
-            from backend.provider_budget import ProviderBudget
-            api.provider_budget = ProviderBudget()
+            from backend.provider_budget import ProviderBudget, ProviderSettings
+            api.provider_budget = ProviderBudget(ProviderSettings.from_env().model_copy(update={'candidates_per_activity':10})) if scenario['name']=='minute_pause' else ProviderBudget()
+            if scenario['name']=='minute_pause':
+                from time import monotonic
+                api.provider_budget._matrix_window.append((monotonic(),150))
             return {'ok': True}
         import uvicorn
         uvicorn.run(app, host='127.0.0.1', port=args.port, log_level='warning', access_log=False)

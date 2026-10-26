@@ -234,5 +234,5 @@ class EvidenceTests(unittest.TestCase):
                 require_development_routes()
             with self.assertRaises(DiscoveryError):
                 require_development_discovery()
-        self.assertEqual(FIELD_MASK, "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType")
+        self.assertEqual(FIELD_MASK, "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType,nextPageToken")
         self.assertEqual(ROUTE_MASK, "originIndex,destinationIndex,status,condition,distanceMeters,duration")

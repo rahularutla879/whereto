@@ -192,14 +192,15 @@ class RealPlanningTests(unittest.TestCase):
             with self.assertRaises(DiscoveryError): self.run_plan()
         self.search.side_effect = search_fixture
         self.session = ProviderBudget(ProviderSettings(mode='real', matrix_elements_per_outing=8))
-        with self.assertRaisesRegex(Exception, 'matrix element limit'): self.run_plan()
-        self.matrix.assert_not_called()
+        result = self.run_plan()
+        self.assertLessEqual(result.diagnostics['matrixElements'], 8)
+        self.assertTrue(all(p.routeEvidence for p in result.provisionalPlans))
 
-    def test_four_activity_start_exceeds_27_before_any_routing(self):
+    def test_four_activity_start_is_staged_within_lower_27_cap(self):
         start = {'point': {'id': 'start', 'place_id': 'Explicit_Start'}, 'explicitly_authorized': True}
-        with self.assertRaisesRegex(Exception, 'matrix element limit'):
-            self.run_plan(activities=['coffee', 'museum', 'bowling', 'food'], startingLocation=start)
-        self.matrix.assert_not_called()
+        result = self.run_plan(activities=['coffee', 'museum', 'bowling', 'food'], startingLocation=start)
+        self.assertLessEqual(result.diagnostics['matrixElements'], 27)
+        self.assertTrue(all(p.firstLeg and len(p.routeEvidence) == 3 for p in result.provisionalPlans))
 
     def test_modes_and_production_guard_before_network(self):
         for changes in ({'WHERETO_REAL_DEV': ''}, {'WHERETO_ENV': 'production'}, {'NODE_ENV': 'production'}, {'VERCEL': '1'}):

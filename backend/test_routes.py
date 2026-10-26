@@ -131,7 +131,7 @@ class RouteTests(unittest.TestCase):
                      {'id': 'a', 'place_id': 'id', 'coordinates': {'latitude': 0, 'longitude': 0}}):
             with self.subTest(data=data), self.assertRaises(ValidationError):
                 RoutePoint(**data)
-        for groups in ([], [[]], [[point('a')]*11], [[point('a')]]*5, [[point('a')], [RoutePoint(id='a', place_id='other')]]):
+        for groups in ([], [[]], [[point('a')]*21], [[point('a')]]*5, [[point('a')], [RoutePoint(id='a', place_id='other')]]):
             with self.assertRaises(ValidationError):
                 RouteRequest(activity_groups=groups, mode='drive')
         with self.assertRaises(ValidationError):

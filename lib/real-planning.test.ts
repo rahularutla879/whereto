@@ -14,7 +14,7 @@ import { GET as mode } from "../app/api/planning-mode/route";
 import { VenueDetailsSession, safeWebsite } from "./venue-details";
 import { StartingConfirmation } from "./starting-confirmation";
 import { StartingPlaceSession } from "./starting-places";
-import { nextOptions } from "./option-batches";
+import { expandedOptions, nextOptions } from "./option-batches";
 
 test("offline real mode: AI → HTTP backend → Google fixtures → existing planner → proxies/cards/contact details", async () => {
   const listener = createServer(); listener.listen(0, "127.0.0.1"); await once(listener, "listening");
@@ -129,8 +129,35 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(moreVenues.ok, true);
     const expandedData = await moreVenues.json();
     assert.deepEqual(expandedData.diagnostics.discoveredCounts, [10,10]);
-    assert.equal((await (await fetch(`${base}/__test/counts`)).json()).searches - beforeDiscovery.searches, 1);
+    assert.equal((await (await fetch(`${base}/__test/counts`)).json()).searches - beforeDiscovery.searches, 2);
     assert.equal(adaptRanking(expandedData).canDiscover, false);
+    await scenario("expanded");
+    const expansionBaseline = await (await fetch(`${base}/__test/counts`)).json();
+    const firstTwenty = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
+    const page = await send("/api/plans/options", { method: "POST", body: JSON.stringify({ token: firstTwenty.optionsToken, expandDiscovery: true }) });
+    assert.equal(page.ok, true);
+    const twentyData = await page.json();
+    assert.deepEqual(twentyData.diagnostics.discoveredCounts, [20,20]);
+    assert.equal(JSON.stringify(twentyData).includes("synthetic-next-page"), false);
+    let twenty = expandedOptions(firstTwenty, adaptRanking(twentyData));
+    const shown = new Set(firstTwenty.plans.map(p => p.venues.map(v => v.id).join("|")));
+    const checkNew = () => { for (const p of twenty.plans) { const key = p.venues.map(v => v.id).join("|"); assert.equal(shown.has(key), false); shown.add(key); } };
+    checkNew();
+    for (let i = 0; i < 15; i++) {
+      if (twenty.alternativeBatches?.length) twenty = nextOptions(twenty);
+      else {
+        const response = await send("/api/plans/options", { method: "POST", body: JSON.stringify({ token: twenty.optionsToken }) });
+        assert.equal(response.ok, true); twenty = adaptRanking(await response.json());
+      }
+      assert.equal(twenty.plans.length, 3); checkNew();
+    }
+    const expandedUsage = await (await fetch(`${base}/__test/counts`)).json();
+    assert.equal(expandedUsage.searches - expansionBaseline.searches, 4);
+    assert.ok(expandedUsage.elements - expansionBaseline.elements <= 150);
+    await scenario("minute_pause");
+    const paused = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
+    assert.equal(paused.plans.length, 0); assert.equal(paused.canExpand, true); assert.equal(paused.canDiscover, false);
+    assert.ok(paused.optionsToken); assert.match(paused.message, /minute/);
     for (const name of ["empty", "quota", "authentication"]) {
       await scenario(name);
       let retained: ValidatedOuting | undefined;
