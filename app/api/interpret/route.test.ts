@@ -99,7 +99,9 @@ test("raw text → interpretation proxy → Python provider → validated reques
     const startCalls = modelCalls;
     const continueRun = (answers = {}, transport = send) => generateOuting(requestText, EMPTY_PREFERENCES, {
       continuation: retained ?? undefined, answers,
-      onClarification: value => { retained = value; }, onComplete: () => { completed++; retained = null; },
+      onClarification: value => { assert.ok(value === null || value.questions.length > 0); retained = value; },
+      onValidated: value => { retained = value.continuation; },
+      onComplete: () => { completed++; retained = null; },
     }, transport);
     paths.length = 0;
     const incomplete = await continueRun();
@@ -116,6 +118,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     const failedPlan = await continueRun({ people: "3" }, plannerDown);
     assert.match(failedPlan.message, /planner unavailable/);
     assert.ok(retained); // Valid interpretation survives planner failure for a model-free retry.
+    assert.equal(failedPlan.requestFailed, true);
     assert.equal(completed, 0);
     const resumed = await continueRun();
     assert.equal(resumed.plans.length, 3);

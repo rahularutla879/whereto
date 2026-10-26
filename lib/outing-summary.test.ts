@@ -30,6 +30,9 @@ test("dirty summary clearly withholds previous constraints until revalidation", 
   const html = renderToStaticMarkup(createElement(OutingSummary, { value, dirty: true, onEdit() {} }));
   assert.match(html, /Previous recommendations are hidden/);
   assert.doesNotMatch(html, /November 7/);
+  const loading = renderToStaticMarkup(createElement(OutingSummary, { value, dirty: true, loading: true, onEdit() {} }));
+  assert.match(loading, /Checking your updated details/);
+  assert.doesNotMatch(loading, /Regenerate|Previous recommendations/);
 });
 test("structured regeneration sends continuation and explicit edits to validation, then the exact validated request to planner", async () => {
   const corrected = { ...value.request, location: "Baltimore", date: "2026-11-14", people: 2, budget: 40, activities: ["museum", "coffee", "coffee"] };

@@ -103,7 +103,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
   // `today` remains source-compatible; only the Python resolver owns the clock.
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
-    activities: [], notes: [] });
+    activities: [], notes: [], requestFailed: true });
   try {
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, preferences, ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
@@ -118,10 +118,13 @@ export async function generateOuting(text: string, preferences: Preferences = EM
         || !Array.isArray(extraction.questions) || !extraction.questions.every((q: PendingOuting["questions"][number]) =>
           q && fields.includes(q.field) && typeof q.question === "string" && ["essential", "ambiguous"].includes(q.kind)
           && (q.reason == null || typeof q.reason === "string") && (q.helpText == null || typeof q.helpText === "string"))) throw new Error("Invalid clarification response");
-      context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
+      // A continuation is also returned for complete requests. Keep it in
+      // onValidated for regeneration/retry; only actual questions are visible.
+      if (extraction.questions.length) context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
+      else if (extraction.issues.length) context?.onClarification?.(null);
     } else if (extraction.issues.length) context?.onClarification?.(null);
     if (extraction.issues.length || !extraction.request) {
-      return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), notes: extraction.notes };
+      return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), requestFailed: false, notes: extraction.notes };
     }
     context?.signal?.throwIfAborted();
     const extractedPreferences = interpretedPreferences(extraction.request);

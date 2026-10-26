@@ -231,3 +231,7 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 
 /* Bound only real headings; full stop names remain in the itinerary details. */
 .card-body .real-plan-title { overflow-wrap: anywhere; display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 3; line-clamp: 3; overflow: hidden; line-height: 1.15; height: 3.45em; }
+
+/* Reserve one feedback slot while loading, asking a question or showing failure. */
+.planning-feedback { min-height: 230px; }
+.planning-feedback .secondary-button { margin: 4px; }

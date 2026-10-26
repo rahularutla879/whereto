@@ -3,7 +3,7 @@ import test from "node:test";
 import { spawn } from "node:child_process";
 import { createServer } from "node:http";
 import { once } from "node:events";
-import { generateOuting, adaptRanking } from "./planning-client";
+import { generateOuting, adaptRanking, type ValidatedOuting } from "./planning-client";
 import { EMPTY_PREFERENCES } from "./planner";
 import { POST as interpret } from "../app/api/interpret/route";
 import { POST as plan } from "../app/api/plans/generate/route";
@@ -71,9 +71,21 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).details, 1);
     for (const name of ["empty", "quota", "authentication"]) {
       await scenario(name);
-      const failure = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
+      let retained: ValidatedOuting | undefined;
+      const retryText = "Bowling then dinner in Baltimore for 2 people on 2026-11-07";
+      const failure = await generateOuting(retryText, EMPTY_PREFERENCES, { onValidated: value => { retained = value; } }, send);
       assert.equal(failure.plans.length, 0);
       assert.match(failure.message, /matching real venues|quota or authentication/);
+      if (name === "quota") {
+        assert.equal(failure.requestFailed, true);
+        assert.ok(retained);
+        const count = await (await fetch(`${base}/__test/counts`)).json();
+        await scenario("normal");
+        const recovered = await generateOuting(retryText, EMPTY_PREFERENCES, { continuation: retained.continuation }, send);
+        assert.equal(recovered.plans.length, 3);
+        assert.notEqual(recovered.requestFailed, true);
+        assert.equal((await (await fetch(`${base}/__test/counts`)).json()).ai, count.ai, "retry reuses validated interpretation rather than another AI call");
+      }
     }
     await scenario("partial");
     const partial = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);

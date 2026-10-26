@@ -28,9 +28,9 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
   return details;
 }
 
-export function OutingSummary({ value, dirty, onEdit, real = false }: { value: ValidatedOuting; dirty: boolean; onEdit: () => void; real?: boolean }) {
+export function OutingSummary({ value, dirty, onEdit, real = false, loading = false }: { value: ValidatedOuting; dirty: boolean; onEdit: () => void; real?: boolean; loading?: boolean }) {
   return <section className="outing-summary" aria-labelledby="outing-summary-title">
     <div className="preferences-intro"><h3 id="outing-summary-title">Your outing</h3><button type="button" onClick={onEdit} aria-controls="preferences">Edit details</button></div>
-    {dirty ? <p role="status">Details changed. Regenerate plans to validate your edits. Previous recommendations are hidden.</p> : <dl>{outingDetails(value, real).map(([label, detail]) => <div key={label}><dt>{label}</dt><dd>{detail}</dd></div>)}</dl>}
+    {dirty ? <p role="status">{loading ? "Checking your updated details…" : "Details changed. Regenerate plans to validate your edits. Previous recommendations are hidden."}</p> : <dl>{outingDetails(value, real).map(([label, detail]) => <div key={label}><dt>{label}</dt><dd>{detail}</dd></div>)}</dl>}
   </section>;
 }

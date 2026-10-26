@@ -6,6 +6,7 @@ All provider/AI boundaries are replaced; an actual requests send raises.
 import argparse
 import os
 import re
+from time import sleep
 from unittest.mock import patch
 
 from backend.ai import Interpretation
@@ -35,6 +36,7 @@ def main():
         return result
 
     def matrix(body):
+        if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
         return [] if scenario['name'] == 'missing_routes' else matrix_fixture(body)
 

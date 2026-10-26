@@ -11,7 +11,8 @@ import { generateOuting, type ValidatedOuting, type PendingOuting, type Clarific
 import { ClarificationField } from "@/components/clarification-field";
 import { OutingDateField } from "@/components/outing-date-field";
 import { ResultsInformation } from "@/components/results-information";
-import { failureMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
+import { planWarnings, resultsSummary } from "@/lib/results-presentation";
+import { PlanningFeedback } from "@/components/planning-feedback";
 import { OutingSummary, activityEditText } from "@/components/outing-summary";
 import { LocationControls } from "@/components/location-controls";
 import { VenueDetails, GoogleCredits } from "@/components/venue-details";
@@ -111,13 +112,15 @@ export default function Home() {
     setLoading(false);
     setClarification(null);
     setAnswers({});
+    setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Follow-up canceled. Edit your request or plan again.", location: "", activities: [], notes: [] });
   }
   async function runPlanning(followup: boolean) {
     const controller = session.current.begin();
     if (!controller) return;
     detailsSession.current.clear();
     setLoading(true);
-    setResult({ plans: [], message: "Planning…", location: "", activities: [], notes: [] });
+    setGenerated(true);
+    setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Planning…", location: "", activities: [], notes: [] });
     let needsAnswer = false;
     const original = followup && clarification ? clarification.pending.text : request;
     try {
@@ -125,7 +128,7 @@ export default function Home() {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
         signal: controller.signal, locationContext: dataMode === "real" ? locationContext : undefined,
-        onValidated: value => { if (session.current.current(controller)) { setValidated(value); setDirty(false); } },
+        onValidated: value => { if (session.current.current(controller)) { setValidated(value); setClarification(null); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
           if (!session.current.current(controller)) return;
@@ -135,7 +138,7 @@ export default function Home() {
         onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); setPreferencesOpen(false); } },
       });
       if (!session.current.current(controller)) return;
-      setResult(next);
+      setResult({ ...next, dataMode: next.dataMode ?? (dataMode === "real" ? "real" : "mock") });
       setGenerated(true);
       requestAnimationFrame(() => {
         if (needsAnswer) followupRef.current?.querySelector("input")?.focus();
@@ -173,7 +176,7 @@ export default function Home() {
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
           {dataMode === "real" && <LocationControls onChange={value => { invalidateResults(); setLocationContext(value); }} />}
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? "Planning…" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? "Planning…" : result.requestFailed ? "Retry" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
@@ -187,9 +190,9 @@ export default function Home() {
             </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         </form>
-        {validated && <OutingSummary real={dataMode === "real"} value={validated} dirty={dirty} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
-        {clarification && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
-          <p className="details-heading">{clarification.questions.length ? "A little more detail" : "Your request is ready to retry"}</p>
+        {validated && <OutingSummary real={dataMode === "real"} value={validated} dirty={dirty} loading={loading} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
+        {!loading && !!clarification?.questions.length && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
+          <p className="details-heading">A little more detail</p>
           <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>
           {generated && <p role="status">{result.message}</p>}
           <form onSubmit={event => { event.preventDefault(); void runPlanning(true); }}>
@@ -197,7 +200,7 @@ export default function Home() {
               key={question.field} question={question} value={answers[question.field] ?? ""}
               onChange={value => setAnswers(previous => ({ ...previous, [question.field]: value }))} />)}</div>
             <div className="planner-actions"><button className="secondary-button" type="button" onClick={cancelClarification}>Cancel follow-up</button>
-              <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{loading ? "Planning…" : "Continue planning"}<ArrowRight size={18} /></button></div>
+              <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{result.requestFailed ? "Retry" : "Continue planning"}<ArrowRight size={18} /></button></div>
           </form>
         </div>}
         <p className="planner-disclaimer"><CircleHelp size={13} /> {dataMode === "real" ? "Real venues and route estimates. Prices, hours and availability require confirmation. No bookings." : "A preview of what’s possible. Local sample data, no live searches or bookings."}</p>
@@ -206,8 +209,8 @@ export default function Home() {
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
-        {generated && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
-        {clarification?.questions.length ? <div className="empty-state" role="status"><CircleHelp size={28} /><h3>Just a little more detail.</h3><p>Answer the questions below your request to continue. Your original details are kept.</p></div> : result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <div className="empty-state"><MapPin size={28} /><h3>Let’s tweak the plan.</h3><p>{failureMessage(result.message)}</p><button type="button" className="secondary-button" onClick={() => requestRef.current?.focus()}>Edit your request <ArrowUpRight size={16} /></button></div>}
+        {generated && !loading && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        {!loading && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && result.dataMode === "real" && result.plans.length > 0 && <div className="more-options"><button type="button" className="secondary-button" disabled={!result.alternativeBatches?.length || dirty || loading} onClick={() => { setResult(nextOptions); requestAnimationFrame(() => resultsRef.current?.focus()); }}>Show different options</button><p role="status">{result.alternativeBatches?.length ? "Uses already checked combinations from the same venue search. No new search requests." : "No more distinct options in this search. Try a different destination or activity for a new search."}</p></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
