@@ -271,6 +271,55 @@ No names, IDs, queries, addresses, coordinates, cursor values, raw provider payl
 
 `Washington, DC` produces a named-area query. The existing nonlocal rectangle bias avoids server-IP bias; Google may ignore that bias when the text names an area. Returned locality/region components must still match the explicit destination. Useful nearby Maryland/Virginia businesses can therefore be excluded; the fixture demonstrates this without silently expanding geography. This is address-component validation, not a downloaded official city-boundary polygon. A DC-metropolitan search with an agreed broader boundary is **not implemented by this fix** and needs explicit geographic scope before changes. Device location or an invented city center never overrides the destination.
 
-Unknown without fresh provider evidence: how many DC bowling matches the strict query actually returns; whether pages exist; which candidates fail geography or relevance; how much the alternative overlaps; available ratings and directions; and which real venues are inside the routing/score windows. **Proposed separate diagnostic, not performed or authorized here:** at most **two Pro Text Search requests**, pageSize **10** each, one strict initial bowling query and one unfiltered bowling refinement, same explicit DC area, original shared budget, ratings disabled, **zero Routes/Details/other provider methods and zero retries**. Compare volatile ID sets and retain only aggregate stage counts; do not save raw responses. It isolates discovery/geographic/relevance overlap economically. If more than two eligible primaries survive but actual routing/ranking still narrows them, a separately bounded route check would require its own authorization.
+Before the diagnostic below, remaining live unknowns included strict-query coverage, pagination, geography/relevance exclusions, query overlap, ratings, directions and the routing/score windows. **Historical proposal (subsequently authorized and completed below):** at most **two Pro Text Search requests**, pageSize **10** each, one strict initial bowling query and one unfiltered bowling refinement, same explicit DC area, original shared budget, ratings disabled, **zero Routes/Details/other provider methods and zero retries**. Compare volatile ID sets and retain only aggregate stage counts; do not save raw responses. It isolates discovery/geographic/relevance overlap economically. If more than two eligible primaries survive but actual routing/ranking still narrows them, a separately bounded route check would require its own authorization.
 
 Verification and browser evidence: see the final Task 46 bowling diagnosis entry in HANDOVER.md. Mock remains default; optional live gates stay off. No new dependency or asset/license change.
+
+
+## October 26 controlled live DC bowling diagnostic
+
+Completed against `cec63656b81e1ee7927c65be45854d9364850e65`, after the owner separately authorized two Pro Text Searches with at most ten results each. This allowance is **consumed and closed**. No further request is authorized by this record.
+
+Authentication used the existing protected impersonated ADC; the expected identity refreshed successfully without printing credentials. Read-only administration confirmed Text Search **40/day and 10/minute**. Monitoring showed **17 successful searches since 07:00 UTC** (the current Pacific-midnight quota window) before this test, with no recent search-quota errors; this delayed metric is not an authoritative remaining-quota balance. The preliminary Cloud Resource Manager project-information GET returned **429 RATE_LIMIT_EXCEEDED**; a direct Service Usage GET using the known project ID succeeded. No administration retry, quota override, billing/Free Trial/alert/IAM change or API enablement was made.
+
+The isolated diagnostic shared one existing outing budget, lowered only for this process to **two searches/two attempts, ten candidates per search, zero Details and zero matrix elements**. A send-level allowlist checked exact request bodies and the existing Pro mask; a one-shot marker and aggregate attempt ledger prevented reuse. Retries and redirects were disabled. No server or persistent environment setting was enabled.
+
+### Queries and filtering
+
+Both requests used `pageSize: 10`, `languageCode: en`, the current nonlocal rectangle bias (latitude −90 to 90; longitude −90 to 90), and the explicit destination in the text. This bias is **not a DC boundary or a user location**. Existing post-response address-component validation required the named Washington/DC locality and region; it is not polygon containment. No radius, city center, current location or metropolitan expansion was invented.
+
+- Primary: **“bowling alleys in Washington, DC”**, `includedType: bowling_alley`, `strictTypeFiltering: true`.
+- Alternative: **“bowling centers in Washington, DC”**, no included type or strict-type parameter; affirmative bowling type/name evidence still required by the existing relevance policy.
+
+Exact mask: `places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType,nextPageToken`. No ratings, Enterprise fields, Details or other enrichment.
+
+| Stage | Primary | Alternative |
+| --- | ---: | ---: |
+| Google results received | 10 | 10 |
+| Passed named-area geography | 2 | 2 |
+| Geography rejected: different named area/region | 8 | 8 |
+| Outside-area results in Maryland / Virginia | 4 / 4 | 4 / 4 |
+| Normalization failures | 0 | 0 |
+| After normalization and within-page deduplication | 2 | 2 |
+| Duplicate Google IDs within page | 0 | 0 |
+| Bowling relevance rejected, all reason categories | 0 | 0 |
+| Accepted bowling venues | 2 | 2 |
+| Accepted with supplied bowling type / name-only evidence | 2 / 0 | 2 / 0 |
+| Results carrying both bowling and arcade types | 8 | 7 |
+| Accepted in-DC venues carrying both types | 0 | 0 |
+| Next-page token present, not followed | Yes | Yes |
+| HTTP status / provider latency excluding auth | 200 / 0.498 s | 200 / 0.455 s |
+
+The pages shared **nine Google Place IDs**: twenty observations represent **eleven unique businesses**, including the **same two accepted DC venues** and nine unique excluded businesses. The alternative added **one new raw business, zero new eligible DC venues**. Its two accepted venues were already known from the primary search; the adapter's standalone per-call `latestSearch` counts are not used as a cross-search comparison. No historical venue-ID inventory was saved, so comparison with the earlier manual session's exact IDs is unavailable.
+
+Every outside-area observation had affirmative bowling evidence under the existing relevance function. Mixed bowling/arcade facilities were therefore discovered, rather than categorically excluded for being arcades, but all such mixed-type observations were outside the requested area. Counts describe supplied provider metadata, not independently verified facilities, operating status, sessions or reservations. No relevance rejection occurred after geography, so no evidence here establishes a legitimate **in-DC** bowling venue being lost to that filter. Region counts distinguish the exclusion from merely missing geography evidence.
+
+### Conclusion and limits
+
+The demonstrated bottleneck in these two first pages is **geographic scope plus heavily overlapping provider results**, rather than the twenty-candidate cap, duplicate IDs within a page or bowling-relevance rejection. Both pages reached the ten-result request limit and advertised further pages; the test does **not** establish that DC has only two bowling businesses or that later pages cannot add venues. No additional page was fetched. The strict-type query and unfiltered refinement produced the same accepted pool in this sample. No conclusively demonstrated implementation defect requires a code change.
+
+Potential future product decision: explicitly offer an owner/user-approved DC metropolitan scope that includes suitable Maryland/Virginia facilities. Do not silently reinterpret “Washington, DC” as the metropolitan area. Existing same-area pagination could also be measured under a new bounded authorization; neither more pages nor a wider search is part of this diagnostic. Actual routing, shortlist participation, travel feasibility and ranking effects remain **unverified live here**, because Routes calls were prohibited. No dinner search or itinerary generation was performed.
+
+**Actual usage: two Text Search Pro attempts, both HTTP 200; zero Routes requests/elements, zero Details, zero retries and zero other billable methods.** Gross list-price estimate: **2 × $0.032 = $0.064 USD**, before applicable free allowances or trial credits; posted charges and credit balance were not inspected. Official global Text Search Pro pricing was checked October 26: $32/1,000 in the first paid tier, 5,000 free monthly events per SKU. [Google pricing](https://developers.google.com/maps/billing-and-pricing/pricing).
+
+Raw payloads, venue names/IDs, addresses, returned coordinates, page tokens and credentials were kept only in process memory and not saved or committed. Only aggregate counts/statuses/public query configuration were retained. The process exited with live gates removed and **mock default confirmed**; optional live features remain disabled. Existing application maxima, Cloud quotas, $25/$45/$50 alerts, Free Trial and approximately $40–$50/month target are unchanged. Task 47 has not started. This documentation-only follow-up reruns the focused offline discovery/normalization/quality/budget suites; it does not claim a new frontend/browser or live itinerary check.

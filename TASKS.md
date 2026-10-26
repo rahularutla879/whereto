@@ -184,7 +184,7 @@ This is where the app becomes genuinely useful.
 
   Approved application-limit expansion — October 26, 2026: ten searches, twenty retained candidates/activity, 300 route elements and thirty attempts/outing, with unchanged 50-attempt/1,500-element process and 150-element minute ceilings. Explicit bounded pagination, staged routing, contact headroom and original-budget continuation tested offline. Actual Cloud quotas verified unchanged via read-only administration; no billable Google calls or Task 47 work. See HANDOVER.md and current provider documentation for verification.
 
-  Bowling diagnosis — October 26, 2026: aggregate per-stage coverage, explicit evidence-backed mixed-venue refinement, primary-shortage routing expansion and rejected-duplicate accounting verified with invented responses. Historical DC provider coverage remains unknown; no live Google calls, quota/tier/limit changes or Task 47 work. See HANDOVER.md and provider findings.
+  Bowling diagnosis — October 26, 2026: aggregate per-stage coverage, explicit evidence-backed mixed-venue refinement, primary-shortage routing expansion and rejected-duplicate accounting verified with invented responses. Subsequent authorized live diagnostic: two Pro searches each returned ten results, retained the same two DC bowling venues, and excluded eight MD/VA results per page; nine IDs overlapped. No Routes/Details, quota/tier/limit changes or Task 47 work. Further-page and live ranking coverage remain unknown. See HANDOVER.md and provider findings.
 
 Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.
 
