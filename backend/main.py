@@ -86,6 +86,7 @@ def interpret_outing(request: InterpretationInput):
 @app.get("/api/planning-mode")
 def planning_mode():
     return {"mode": provider_budget.settings.mode, "enabled": provider_budget.settings.mode == "mock" or local_real_enabled(),
+            "startingLookupEnabled": local_real_enabled() and os.environ.get("WHERETO_START_LOOKUP_DEV") == "1",
             "contactDetailsEnabled": local_real_enabled() and os.environ.get("WHERETO_CONTACT_DETAILS_DEV") == "1"}
 
 
@@ -104,6 +105,7 @@ def venue_details(request: ContactRequest):
 
 
 class OptionsRequest(BaseModel):
+    expandDiscovery: bool = Field(default=False, strict=True)
     token: str = Field(min_length=1, max_length=100)
 
 
@@ -112,7 +114,7 @@ def more_options(request: OptionsRequest):
     from backend.real_planning import more_real_plans
     try:
         provider_budget.settings.require_live_provider()
-        return JSONResponse(content=more_real_plans(request.token).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
+        return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
         return JSONResponse(status_code=422, content={"message": message + " No fictional fallback was used."}, headers={"Cache-Control": "no-store"})

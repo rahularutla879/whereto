@@ -12,6 +12,8 @@ import { POST as options } from "../app/api/plans/options/route";
 import { POST as startingPlaces } from "../app/api/starting-places/route";
 import { GET as mode } from "../app/api/planning-mode/route";
 import { VenueDetailsSession, safeWebsite } from "./venue-details";
+import { StartingConfirmation } from "./starting-confirmation";
+import { StartingPlaceSession } from "./starting-places";
 import { nextOptions } from "./option-batches";
 
 test("offline real mode: AI → HTTP backend → Google fixtures → existing planner → proxies/cards/contact details", async () => {
@@ -93,6 +95,42 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(located.plans.length, 3);
     assert.equal(located.location, "Washington, DC");
     assert.equal(located.plans[0].firstLeg?.approximate, true);
+    let strictValidated: ValidatedOuting | undefined;
+    const strictResult = await generateOuting("Plan bowling and dinner in Baltimore on Saturday, November 7, 2026, for 2 people. Keep driving between venues under 5 minutes.", EMPTY_PREFERENCES, { onValidated: value => { strictValidated = value; } }, send);
+    assert.equal(strictValidated?.request.maxLegTravel, 5);
+    assert.equal(strictValidated?.request.maxLegTravelExclusive, true);
+    assert.equal(strictValidated?.request.transport, "driving");
+    assert.equal(strictResult.plans.length, 3);
+    // Submitted manual text waits for explicit selection before any AI/planning.
+    const confirmation = new StartingConfirmation();
+    const manualSession = new StartingPlaceSession();
+    const beforeStart = await (await fetch(`${base}/__test/counts`)).json();
+    const waiting = confirmation.wait().then(origin => origin ? generateOuting("Bowling then dinner in Washington, DC for 2 people on 2026-11-07", EMPTY_PREFERENCES, { locationContext: origin }, send) : null);
+    const found = await manualSession.get("union station, washington dc", send);
+    assert.equal((await (await fetch(`${base}/__test/counts`)).json()).ai, beforeStart.ai);
+    confirmation.confirm({ startingLocation: { point: { id: "authorized-start", coordinates: found[1].coordinates }, explicitly_authorized: true, precision: found[1].precision }, maxFirstLegTravel: 15 });
+    const continued = await waiting;
+    assert.equal(continued?.location, "Washington, DC");
+    assert.equal(continued?.plans.length, 3);
+    assert.equal(continued?.plans[0].firstLeg?.approximate, true);
+    for (const state of ["lookup_disabled", "lookup_failure", "lookup_empty", "single_start"]) {
+      await scenario(state);
+      const lookupResponse = await send("/api/starting-places", { method: "POST", body: JSON.stringify({ query: "Synthetic station" }) });
+      assert.equal(lookupResponse.ok, state === "lookup_empty" || state === "single_start");
+      const payload = await lookupResponse.json();
+      if (lookupResponse.ok) assert.equal(payload.matches.length, state === "single_start" ? 1 : 0);
+      else assert.match(payload.message, /disabled|quota/);
+    }
+    await scenario("sparse");
+    const sparse = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
+    assert.equal(sparse.canDiscover, true);
+    const beforeDiscovery = await (await fetch(`${base}/__test/counts`)).json();
+    const moreVenues = await send("/api/plans/options", { method: "POST", body: JSON.stringify({ token: sparse.optionsToken, expandDiscovery: true }) });
+    assert.equal(moreVenues.ok, true);
+    const expandedData = await moreVenues.json();
+    assert.deepEqual(expandedData.diagnostics.discoveredCounts, [10,10]);
+    assert.equal((await (await fetch(`${base}/__test/counts`)).json()).searches - beforeDiscovery.searches, 1);
+    assert.equal(adaptRanking(expandedData).canDiscover, false);
     for (const name of ["empty", "quota", "authentication"]) {
       await scenario(name);
       let retained: ValidatedOuting | undefined;

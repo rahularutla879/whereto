@@ -81,6 +81,13 @@ class DetailsSessions:
             self.entries[token] = (now, set(ids), outing, set())
             return token
 
+    def extend(self, token, ids):
+        # Extend only the existing outing capability; keep its age and budget.
+        with self.lock:
+            entry = self.entries.get(token)
+            if entry and monotonic() - entry[0] < 1800:
+                entry[1].update(ids)
+
     def get(self, token, place_id):
         with self.lock:
             entry = self.entries.get(token)

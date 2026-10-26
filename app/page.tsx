@@ -14,11 +14,11 @@ import { ResultsInformation } from "@/components/results-information";
 import { planWarnings, resultsSummary } from "@/lib/results-presentation";
 import { PlanningFeedback } from "@/components/planning-feedback";
 import { OutingSummary, activityEditText } from "@/components/outing-summary";
-import { LocationControls } from "@/components/location-controls";
+import { LocationControls, type StartingLocationHandle } from "@/components/location-controls";
 import { VenueDetails, GoogleCredits } from "@/components/venue-details";
 import { VenueDetailsSession } from "@/lib/venue-details";
 import type { LocationContext } from "@/lib/planning-client";
-import { nextOptions } from "@/lib/option-batches";
+import { nextOptions, expandedOptions } from "@/lib/option-batches";
 import { RealVenueFacts } from "@/components/real-venue-facts";
 import { adaptRanking } from "@/lib/planning-client";
 import { PlanCost } from "@/components/plan-cost";
@@ -72,9 +72,12 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
 
 export default function Home() {
   const [dataMode, setDataMode] = useState<"mock" | "real" | "unavailable">("unavailable");
+  const startingControls = useRef<StartingLocationHandle>(null);
+  const [lookupEnabled, setLookupEnabled] = useState(false);
+  const [planningStage, setPlanningStage] = useState("Generating itinerary");
   const [locationContext, setLocationContext] = useState<LocationContext>({});
   const detailsSession = useRef(new VenueDetailsSession());
-  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) setDataMode(value.mode); }).catch(() => {}); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -95,6 +98,7 @@ export default function Home() {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
+    startingControls.current?.cancel();
     session.current.cancel();
     detailsSession.current.clear();
     setLoading(false);
@@ -110,6 +114,7 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
   }
   function cancelClarification() {
+    startingControls.current?.cancel();
     session.current.cancel();
     setLoading(false);
     setClarification(null);
@@ -117,22 +122,23 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Follow-up canceled. Edit your request or plan again.", location: "", activities: [], notes: [] });
   }
   const [optionsNotice, setOptionsNotice] = useState("");
-  async function showDifferent() {
-    if (result.alternativeBatches?.length) { setResult(nextOptions); setOptionsNotice(""); return; }
-    if (!result.optionsToken || !result.canExpand) return;
+  async function showDifferent(expandDiscovery = false) {
+    if (!expandDiscovery && result.alternativeBatches?.length) { setResult(nextOptions); setOptionsNotice(""); return; }
+    if (!result.optionsToken || !(expandDiscovery ? result.canDiscover : result.canExpand)) return;
     const controller = session.current.begin();
     if (!controller) return;
+    setPlanningStage("Generating itinerary");
     setLoading(true); setOptionsNotice("Checking different combinations within this search…");
     try {
-      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken }), cache: "no-store", signal: controller.signal });
+      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
       if (!response.ok) throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable.");
       const next = adaptRanking(data);
       if (!session.current.current(controller)) return;
-      if (next.plans.length) { setResult(next); setOptionsNotice(""); }
-      else { setResult(previous => ({ ...previous, canExpand: false })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
+      if (next.plans.length) { setResult(previous => expandDiscovery ? expandedOptions(previous, next) : next); setOptionsNotice(""); }
+      else { setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
-      if (session.current.current(controller)) { setResult(previous => ({ ...previous, canExpand: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
+      if (session.current.current(controller)) { setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
     } finally { if (session.current.finish(controller)) setLoading(false); }
   }
   async function runPlanning(followup: boolean) {
@@ -141,15 +147,24 @@ export default function Home() {
     detailsSession.current.clear();
     setOptionsNotice("");
     setLoading(true);
+    setPlanningStage("Generating itinerary");
     setGenerated(true);
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Planning…", location: "", activities: [], notes: [] });
     let needsAnswer = false;
     const original = followup && clarification ? clarification.pending.text : request;
     try {
+      let origin = locationContext;
+      if (dataMode === "real" && origin.manualStartingPlace) {
+        const confirmed = await startingControls.current?.prepare();
+        if (!session.current.current(controller)) return;
+        if (!confirmed) { setResult(previous => ({ ...previous, message: "Your starting place needs attention. Check the message by the starting-place field." })); return; }
+        origin = confirmed; setLocationContext(confirmed);
+      }
+      setPlanningStage("Generating itinerary");
       const next = await generateOuting(original, manualPreferences(preferenceState), {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
-        signal: controller.signal, locationContext: dataMode === "real" ? locationContext : undefined,
+        signal: controller.signal, locationContext: dataMode === "real" ? origin : undefined,
         onValidated: value => { if (session.current.current(controller)) { setValidated(value); setClarification(null); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
@@ -197,8 +212,8 @@ export default function Home() {
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          {dataMode === "real" && <LocationControls onChange={value => { invalidateResults(); setLocationContext(value); }} />}
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? "Planning…" : result.requestFailed ? "Retry" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          {dataMode === "real" && <LocationControls ref={startingControls} lookupEnabled={lookupEnabled} onStage={setPlanningStage} onChange={value => { invalidateResults(); setLocationContext(value); }} />}
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? planningStage === "Generating itinerary" ? "Planning…" : planningStage : result.requestFailed ? "Retry" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
@@ -230,10 +245,10 @@ export default function Home() {
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
-        <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? "Finding possible plans…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
+        <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && !loading && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
-        {!loading && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
-        {generated && result.dataMode === "real" && result.plans.length > 0 && <div className="more-options"><button type="button" className="secondary-button" disabled={(!result.alternativeBatches?.length && !result.canExpand) || dirty || loading} onClick={showDifferent}>Show different options</button><p role="status">{optionsNotice || (result.alternativeBatches?.length ? "Uses already checked combinations. No new provider requests." : result.canExpand ? "Checks unused combinations first; may calculate more routes within the same search budget." : "No more distinct options within this search coverage. Other venues may exist outside the checked pool.")}</p></div>}
+        {!loading && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {generated && result.dataMode === "real" && (result.plans.length > 0 || result.canDiscover) && <div className="more-options"><button type="button" className="secondary-button" disabled={(!result.alternativeBatches?.length && !result.canExpand) || dirty || loading} onClick={() => { void showDifferent(); }}>Show different options</button>{result.canDiscover && <button type="button" className="secondary-button" disabled={dirty || loading} onClick={() => { void showDifferent(true); }}>Search for more venues</button>}<p role="status">{optionsNotice || (result.alternativeBatches?.length ? "Uses already checked combinations. No new provider requests." : result.canExpand ? "Checks unused combinations first; may calculate more routes within the same search budget." : "No more distinct options within this search coverage. Other venues may exist outside the checked pool.") }{result.canDiscover && " Search for more venues makes at most two additional same-area searches within this outing’s existing budget."}</p></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 

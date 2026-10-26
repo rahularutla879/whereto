@@ -481,3 +481,9 @@ Complete interpretation continuations are retained via `onValidated` for model-f
 - `real-venue-facts.tsx` and structured `constraintIssues` separate presentation from evidence: missing optional rows disappear, critical warnings remain. Google/third-party credits, original IDs, long-name titles and fictional card presentation survive.
 
 Settings, effective Cloud values, pricing, gates and verification are in [real planning](docs/real-planning.md) and [billing safeguards](docs/billing-safeguards.md). No Task 47/database work.
+
+## Task 46 manual acceptance follow-up
+
+- `travel_constraints.py` supplies bounded scope/operator source evidence to the existing interpretation validator. Additive exclusive flags travel through PlanningRequest, mock evaluation and exact Task 44 feasibility independently for leg/total/first-leg caps. It is validation/normalization, not a replacement AI or itinerary engine.
+- Active option contexts retain the original search area and whether the single explicit discovery refinement was used. `/api/plans/options` accepts only a continuation plus an additive expandDiscovery flag; refinement reuses that outing/session budget, retained candidates, seen combinations and directed route cache. Initial empty discovery can expose this capability. Per-category inventory remains ten; contacts extend original capability IDs without resetting budget/age. Discovery/quality and planning diagnostics expose aggregate stage/rejection counts.
+- `StartingConfirmation` owns the pending browser-only match-selection promise. LocationControls exposes preparation/cancellation to the existing submission flow; confirmation resumes the same request, while edits/unmount/failure cancel it. No keystroke lookup, automatic geolocation permission, browser storage or new geocoding provider.

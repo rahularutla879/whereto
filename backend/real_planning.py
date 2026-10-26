@@ -57,7 +57,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             raise
         context = {"outing": outing, "request": request, "session": session, "discovery": discovery,
                    "routes": {}, "seen": set(), "width": 6 if len(request.activities) <= 2 else 4,
-                   "expanded": False, "matrixRequests": 0, "usedPrimary": set()}
+                   "expanded": False, "discoveryExpanded": False, "area": area, "matrixRequests": 0, "usedPrimary": set()}
     else:
         discovery = context["discovery"]
     pools, facts = [], {}
@@ -77,9 +77,17 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         pools.append(pool)
     diagnostics = {"placesSearchRequests": len(set(request.activities)), "placesDetailsRequests": 0,
                    "excludedCandidates": discovery.excluded_count,
+                   "discoveryStages": discovery.stages, "discoveryReasons": discovery.diagnostics,
                    "usageCategories": ["Text Search Enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "Text Search Pro", "Compute Route Matrix Essentials"]}
     if any(not pool for pool in pools):
-        return empty(public, "Too few matching real venues for every requested activity in this area. Try a different area or activity; no fictional stops were added.", diagnostics)
+        from backend.option_sessions import option_sessions
+        if "token" not in context:
+            context["token"] = option_sessions.create(context)
+        diagnostics.update(outing.usage(), discoveredCounts=[len(p) for p in pools])
+        result = empty(public, "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.", diagnostics)
+        result.optionsToken = context["token"]
+        result.canDiscover = can_discover(context)
+        return result
     from backend.routing_shortlist import shortlist
     all_pools = pools
     pools = shortlist(all_pools, facts, context["width"], request.startingLocation)
@@ -119,7 +127,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                            status=DataStatus.estimated if leg.status in ("ok", "same_location") else DataStatus.unknown,
                            source="Google Maps route estimate; display rounded up to whole minutes")
 
-    evaluated, rejections = [], {}
+    evaluated, rejections, rejection_codes = [], {}, {}
     for candidate in candidates:
         # Task 27 schedules known durations and ranks unknown components honestly.
         # Exact Task 44 seconds enforce travel caps, never rounded display minutes.
@@ -141,6 +149,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         evidence = evaluate_feasibility(FeasibilityInput(
             candidate_id=candidate.id, stops=stops, mode=mode, routes=routed.legs,
             max_leg_minutes=request.maxLegTravel, max_total_minutes=request.travel,
+            max_leg_exclusive=request.maxLegTravelExclusive, max_total_exclusive=request.travelExclusive,
+            max_first_leg_exclusive=request.maxFirstLegTravelExclusive,
             starting_location=request.startingLocation, max_first_leg_minutes=request.maxFirstLegTravel,
             evaluated_at=datetime.now(timezone.utc)))
         labels = feasibility_labels(evidence)
@@ -174,14 +184,22 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         if plan.feasibility == "violated":
             for issue in plan.issues:
                 if issue.status == "violation":
+                    rejection_codes[issue.code] = rejection_codes.get(issue.code, 0) + 1
                     rejections[issue.message] = rejections.get(issue.message, 0) + 1
         else:
             evaluated.append(plan)
+    diagnostics.update(evaluatedCombinations=len(candidates), eligibleCombinations=len(evaluated),
+                       eligiblePrimaryCandidates=len({p.candidate.venues[0].id for p in evaluated}),
+                       routeOutcomeCounts={status: sum(leg.status == status for leg in routed.legs) for status in {leg.status for leg in routed.legs}},
+                       rejectedConstraints=rejection_codes, previouslyOfferedCombinations=len(context["seen"]),
+                       primaryCandidates=len({v.id for v in pools[0]}))
     ranked = [p for p in score_candidates(public, evaluated) if p.candidate.id not in context["seen"]]
+    diagnostics["unseenEligibleCombinations"] = len(ranked)
     # Keep genuinely useful shared stops when only one activity has alternatives.
     varying = sum(len({p.candidate.venues[i].id for p in ranked}) > 1 for i in range(len(request.activities)))
     min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
     diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
+    diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     if len(diverse) < 3 and not context["expanded"] and not context.get("stopped") and any(len(p) > len(q) for p, q in zip(all_pools, pools)):
         context["expanded"] = True
         context["width"] = {1: 10, 2: 10, 3: 8, 4: 6}[len(request.activities)]
@@ -208,13 +226,15 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     if "token" not in context:
         context["token"] = option_sessions.create(context)
     details_token = context["detailsToken"]
+    details_sessions.extend(details_token, list(facts))
     can_expand = not context.get("stopped") and (any(p.candidate.id not in context["seen"] for p in evaluated) or (
         not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
-        alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand,
+        alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
-        errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No complete real outing is available.")],
-        notes=["Real venues from Google Maps; activity categories reflect search context and need confirmation.",
+        errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
+        notes=["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
+               "Real venues from Google Maps; activity categories reflect search context and need confirmation.",
                "Real prices, group capacity, activity durations, hours, showtimes and reservations are unknown. No budget is confirmed.",
                "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
                "Inter-stop travel excludes the first trip and return home. An explicitly shared start is shown separately.",
@@ -227,7 +247,7 @@ def empty(request, message, diagnostics=None):
                          notes=["Search coverage is limited; these results do not cover every venue in the city."] if diagnostics and diagnostics.get("placesSearchRequests") else [])
 
 
-def more_real_plans(token):
+def more_real_plans(token, *, expand_discovery=False):
     from backend.option_sessions import option_sessions
     context, lock = option_sessions.get(token)
     context["session"].settings.require_live_provider()
@@ -242,6 +262,8 @@ def more_real_plans(token):
             raise DiscoveryError("date_expired", "The outing date or time window is no longer valid. Start a new search with a future date.")
         if context.get("stopped"):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
+        if expand_discovery:
+            expand_venue_discovery(context)
         result = real_plans(context["request"], context["session"], context=context)
         if not result.provisionalPlans and not context["expanded"]:
             context["expanded"] = True
@@ -255,3 +277,54 @@ def more_real_plans(token):
         raise
     finally:
         lock.release()
+
+
+def can_discover(context):
+    if context.get('discoveryExpanded') or context.get('stopped'):
+        return False
+    settings = context['session'].settings
+    usage = context['outing'].usage()
+    return (usage['placesSearchRequests'] < settings.searches_per_outing
+            and usage['providerAttempts'] < settings.requests_per_outing
+            and any(sum(a in v.activities for v in context['discovery'].venues) < settings.candidates_per_activity
+                    for a in dict.fromkeys(context['request'].activities)))
+
+
+def expand_venue_discovery(context):
+    """One explicit same-area query refinement, reusing the ORIGINAL budget.
+
+    No pagination, widened geography, automatic replenishment or candidate cap
+    increase. Keep known candidates; fill free slots with validated new IDs.
+    """
+    if not can_discover(context):
+        raise DiscoveryError('coverage_limit', 'More venue searches are unavailable within this search budget or ten-candidate limit. Other venues may exist.')
+    context['discoveryExpanded'] = True
+    request, outing = context['request'], context['outing']
+    old = context['discovery']
+    counts = {a: sum(a in v.activities for v in old.venues) for a in dict.fromkeys(request.activities)}
+    available = outing.settings.searches_per_outing - outing.usage()['placesSearchRequests']
+    # Primary activity first, then other sparse categories. At most two extra
+    # requests/action, also bounded by the original four-search outing ceiling.
+    activities = [a for a in counts if counts[a] < outing.settings.candidates_per_activity][:min(2, available)]
+    found = PlacesDiscovery(outing).discover_many([DiscoveryRequest(activity=a, destination=context['area'],
+        meal='dinner' if a == 'food' and (request.dinner or request.dinnerStops) else None,
+        search_variant='alternative') for a in activities])
+    from backend.venue_quality import assess_candidates
+    merged = assess_candidates([source for v in old.venues + found.venues for source in v.sources])
+    retained, used = [], {a: 0 for a in counts}
+    for venue in merged.venues:
+        accepted = [a for a in venue.activities if a in used and used[a] < outing.settings.candidates_per_activity]
+        if accepted:
+            retained.append(venue.model_copy(update={'activities': accepted}))
+            for a in accepted:
+                used[a] += 1
+    from backend.places import DiscoveryResult
+    context['discovery'] = DiscoveryResult(candidates=[], venues=retained,
+        excluded_count=old.excluded_count + found.excluded_count,
+        diagnostics={key: old.diagnostics.get(key, 0) + found.diagnostics.get(key, 0) for key in old.diagnostics.keys() | found.diagnostics.keys()},
+        stages={'initial': old.stages, 'expansion': found.stages,
+                'retainedCounts': {a.value: n for a, n in used.items()},
+                'newAssociations': sum(used[a] - counts[a] for a in counts),
+                'candidateCapExcludedAssociations': sum(len(v.activities) for v in merged.venues) - sum(used.values())})
+    context['expanded'] = False
+    context['width'] = 6 if len(request.activities) <= 2 else 4

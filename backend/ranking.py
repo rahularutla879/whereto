@@ -86,11 +86,11 @@ def evaluate_candidate(
     for leg in legs:
         if leg.minutes is None or leg.status == DataStatus.unknown:
             issue("unknown_travel", "travel", "Travel evidence is missing; obtain a travel estimate before confirming timing.", unknown=True)
-        if request.maxLegTravel is not None and leg.minutes is not None and leg.minutes > request.maxLegTravel:
+        if request.maxLegTravel is not None and leg.minutes is not None and (leg.minutes > request.maxLegTravel or request.maxLegTravelExclusive and leg.minutes == request.maxLegTravel):
             issue("leg_travel_exceeded", "maxLegTravel", "A leg exceeds the travel cap; increase it or choose closer stops.")
     known_travel = sum(q.minutes for q in legs if q.minutes is not None)
     travel = known_travel if all(q.minutes is not None for q in legs) else None
-    if request.travel is not None and known_travel > request.travel:
+    if request.travel is not None and (known_travel > request.travel or request.travelExclusive and known_travel == request.travel):
         issue("total_travel_exceeded", "travel", "Total inter-stop travel exceeds the cap; allow more travel or fewer/closer activities.")
 
     stops = []

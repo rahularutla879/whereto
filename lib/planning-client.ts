@@ -15,7 +15,7 @@ type Ranked = {
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; request: { location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
+type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; request: { location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -76,7 +76,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
   const identities = [...plans, ...alternativeBatches.flat()].map(p => p.venues.map(v => v.id).join("\u0000"));
   if (new Set(identities).size !== identities.length) throw new Error("Duplicate itinerary options");
-  return { dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
+  return { dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, canDiscover: data.canDiscover, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
     message: plans.length ? data.message : [...new Set([data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))])].join(" "), notes: data.notes };
 }
 
@@ -91,7 +91,7 @@ export type PendingOuting = {
 export type ValidatedOuting = {
   request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
-    groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; transport: string | null;
+    groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; travelExclusive?: boolean; maxLegTravelExclusive?: boolean; maxFirstLegTravelExclusive?: boolean; transport: string | null;
     dinnerStops: number[] | null };
   continuation: PendingOuting;
   explicitCost: boolean;
@@ -132,12 +132,12 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     const extractedPreferences = interpretedPreferences(extraction.request);
     context?.onInterpreted?.(extractedPreferences);
     if (extraction.pending) context?.onValidated?.({ request: { ...extraction.request,
-      ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravel: context.locationContext.maxFirstLegTravel } : {}) },
+      ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravel: context.locationContext.maxFirstLegTravel, maxFirstLegTravelExclusive: false } : {}) },
       continuation: { pending: extraction.pending, questions: [] },
       explicitCost: !!preferences.costExplicit || preferences.cost !== "balanced" || extraction.interpretation?.cost != null,
       explicitTime: !!extraction.interpretation?.time_expressions?.length || !!extraction.pending.answers?.time });
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...extraction.request, ...(context?.locationContext ?? {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
+      body: JSON.stringify({ ...extraction.request, ...(context?.locationContext ?? {}), ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravelExclusive: false } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();

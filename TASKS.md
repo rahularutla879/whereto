@@ -180,6 +180,8 @@ This is where the app becomes genuinely useful.
 
   Controlled verification — October 26, 2026: two rating-enabled activity searches, one landmark search, two contact Details requests and one matrix/18 elements, all HTTP 200, no retries. Mock restored. Bowling false-positive filtering corrected and verified offline; 383 backend/124 frontend tests, lint, TypeScript and build passed. Ten live candidates/category and live corrected bowling selection were not established. [Exact ledger and verification boundaries](docs/real-planning.md#october-26-controlled-live-verification). No Task 47 work.
 
+  Manual acceptance fixes — October 26, 2026: explicit same-budget sparse discovery refinement and aggregate stage diagnostics; source-backed strict between-venue travel limits; automatic manual-start lookup/confirmation and pending submission resume/cancellation. Invented ten-by-ten fixture covers 15 full alternative clicks and all 100 distinct pairs within 100 elements. No live Google calls, quota/billing changes or Task 47 work. Final checks are recorded in HANDOVER.md and [provider notes](docs/real-planning.md#task-46-manual-acceptance-fixes).
+
 Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.
 
 Google for Developers

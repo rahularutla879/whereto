@@ -18,12 +18,12 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
     ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : ACTIVITY_LABELS[a]).join(" → ")],
   ];
   if (r.budget !== null) details.push(["Budget", `$${r.budget} maximum / person`]);
-  if (r.travel !== null) details.push(["Travel", `${r.travel} min maximum total between stops`]);
+  if (r.travel !== null) details.push(["Travel", `${r.travelExclusive ? "Under " : ""}${r.travel} min ${r.travelExclusive ? "total between stops" : "maximum total between stops"}`]);
   if (value.explicitCost) details.push(["Experience", ({ budget: "Cheap", balanced: "Balanced", experience: "Best Experience" })[r.cost]]);
   if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} ${real ? "(destination local time where known; otherwise calendar reference shown in notes)" : "(Baltimore time)"}`]);
   if (r.groupBudget != null) details.push(["Group budget", `$${r.groupBudget} maximum total`]);
-  if (r.maxLegTravel != null) details.push(["Each journey", `${r.maxLegTravel} min maximum`]);
-  if (real && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravel} min maximum from your shared start`]);
+  if (r.maxLegTravel != null) details.push(["Each journey", `${r.maxLegTravelExclusive ? "Under " : ""}${r.maxLegTravel} min${r.maxLegTravelExclusive ? " between stops" : " maximum"}`]);
+  if (real && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravelExclusive ? "Under " : ""}${r.maxFirstLegTravel} min ${r.maxFirstLegTravelExclusive ? "from" : "maximum from"} your shared start`]);
   if (r.transport) details.push(["Transport", `${r.transport}${real ? " (Google Maps estimates)" : " (simulated travel is mode-independent)"}`]);
   return details;
 }

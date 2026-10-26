@@ -79,6 +79,7 @@ class QualityResult(ContractModel):
     venues: list[DistinctVenue]
     excluded_count: int
     diagnostics: dict[str, int] = Field(default_factory=dict, exclude=True, repr=False)
+    stages: dict = Field(default_factory=dict, exclude=True, repr=False)
 
 
 def relevance(venue: VenueFacts) -> Relevance:
@@ -234,4 +235,6 @@ def assess_candidates(records: list[VenueFacts]) -> QualityResult:
         diagnostics['corroborated_alias'] += len({(v.provider, v.id) for v in sources}) - 1
         venues.append(DistinctVenue(facts=facts, sources=sources, activities=activities, relevance=verdicts))
     return QualityResult(venues=venues, excluded_count=len(records)-len(venues),
+        stages={a.value: {"afterDeduplication": sum(any(source.activity == a for _, source in group) for group in groups),
+                         "afterRelevance": sum(a in v.activities for v in venues)} for a in {v.activity for v in records}},
                          diagnostics={k: v for k, v in sorted(diagnostics.items()) if v})

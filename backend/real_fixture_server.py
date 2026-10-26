@@ -28,15 +28,19 @@ def main():
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
         if kwargs:
+            if scenario['name'] == 'lookup_failure': raise DiscoveryError('quota', 'Starting-place quota reached. Stop and review usage.')
             result = search_fixture({'textQuery': 'cafes in Baltimore', 'pageSize': 3})
             for i, place in enumerate(result['places']):
                 place['types'] = [['street_address'], ['postal_code'], ['neighborhood']][i]
                 place['displayName']['text'] = ['Synthetic address', 'Synthetic ZIP area', 'Synthetic neighborhood'][i]
+            if scenario['name'] == 'single_start': result['places'] = result['places'][:1]
+            if scenario['name'] == 'lookup_empty': result['places'] = []
             return result
         result = search_fixture(body)
         if scenario['name'] == 'long_names':
             for place in result['places']:
                 place['displayName']['text'] += ' A Very Long Synthetic Venue Name For Responsive Headline Verification'
+        if scenario['name'] == 'sparse' and body['textQuery'].startswith('bowling alleys'): result['places'] = result['places'][:2]
         if scenario['name'] == 'empty': result['places'] = []
         if scenario['name'] == 'partial': result['places'] = result['places'][:1]
         return result
@@ -58,9 +62,11 @@ def main():
             pattern = r'\b(bowling|dinner|coffee|museum|movie|concert)\b'
             activities = [m[0] for m in re.finditer(pattern, text, re.I)]
             group = re.search(r'\b(\d+) people\b', text)
+            leg = re.search(r'between venues under (\d+) minutes', text, re.I)
             return Interpretation(activities=activities or ['coffee'], people=int(group[1]) if group else None,
                 budget_per_person=None, date=None, location='Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
-                preferences=[], transport='walking' if 'walking' in text else None)
+                preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
+                travel_leg_minutes=int(leg[1]) if leg else None)
 
     with patch('requests.sessions.Session.send', side_effect=AssertionError('Offline fixture server refused network')), \
          patch('backend.places_transport.text_search', side_effect=search), \
@@ -73,6 +79,7 @@ def main():
         @app.post('/__test/scenario')
         def set_scenario(value: dict):
             scenario['name'] = value.get('name', 'normal')
+            os.environ['WHERETO_START_LOOKUP_DEV'] = '0' if scenario['name'] == 'lookup_disabled' else '1'
             # Tests reset only process-local admission, never real accounting.
             from backend import main as api
             from backend.provider_budget import ProviderBudget

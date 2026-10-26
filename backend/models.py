@@ -140,6 +140,9 @@ class OutingRequest(ContractModel):
     groupBudget: Money | None = None
     maxLegTravel: TravelMinutes | None = None
     maxFirstLegTravel: TravelMinutes | None = None
+    travelExclusive: bool = Field(default=False, strict=True)
+    maxLegTravelExclusive: bool = Field(default=False, strict=True)
+    maxFirstLegTravelExclusive: bool = Field(default=False, strict=True)
     startTime: StartMinute = 600
     endTime: EndMinute = 1440
     requireAvailability: bool = Field(default=False, strict=True)
@@ -506,6 +509,7 @@ class RankingResult(ContractModel):
     detailsToken: str | None = None
     optionsToken: str | None = None
     canExpand: bool = False
+    canDiscover: bool = False
     alternativeBatches: list[Annotated[list[RankedItinerary], Field(min_length=1, max_length=3)]] = Field(default_factory=list, max_length=2)
 
     @model_validator(mode="after")

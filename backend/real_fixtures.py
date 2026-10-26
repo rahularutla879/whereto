@@ -3,7 +3,7 @@ from backend.places import QUERIES
 
 
 def search_fixture(body, **_kwargs):
-    query = body['textQuery'].removeprefix('dinner ')
+    query = body['textQuery'].removeprefix('dinner ').replace('bowling centers', 'bowling alleys').replace('restaurants serving dinner', 'restaurants').replace(' venues in ', ' in ')
     activity = next((a for a, q in QUERIES.items() if query == q or query.startswith(q + ' in ')), 'coffee')
     city = 'Washington' if 'Washington' in query else 'Baltimore'
     state = 'DC' if city == 'Washington' else 'MD'

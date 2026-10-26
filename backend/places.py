@@ -68,6 +68,7 @@ class TravelConstraints(DiscoveryModel):
 class DiscoveryRequest(DiscoveryModel):
     activity: ActivityType
     meal: Literal["dinner"] | None = None
+    search_variant: Literal["initial", "alternative"] = "initial"
     destination: SearchArea | None = None
     current_location: SearchArea | None = Field(default=None, repr=False)
     starting_location: StartingLocation | None = Field(default=None, repr=False)
@@ -108,6 +109,8 @@ QUERIES = {
 def search_body(request: DiscoveryRequest, limit: int) -> dict:
     area = request.area
     query = "dinner restaurants" if request.meal == "dinner" else QUERIES[request.activity.value]
+    if request.search_variant == "alternative":
+        query = "bowling centers" if request.activity == ActivityType.bowling else "restaurants serving dinner" if request.meal == "dinner" else query + " venues"
     body = {"textQuery": f"{query} in {area.name}" if area.name else query,
             "pageSize": limit, "languageCode": "en"}
     if request.activity == ActivityType.bowling:
@@ -156,6 +159,7 @@ class DiscoveryResult(DiscoveryModel):
     excluded_count: int = 0
     venues: list[DistinctVenue] = Field(default_factory=list, exclude=True, repr=False)
     diagnostics: dict[str, int] = Field(default_factory=dict, exclude=True, repr=False)
+    stages: dict = Field(default_factory=dict, exclude=True, repr=False)
     notice: str = ("Discovery candidates only. Hours, prices, availability and travel are unknown. "
                    "Area names are checked conservatively against provider address components; "
                    "unverifiable matches are excluded. Without a radius, coordinates are a bias only. "
@@ -186,7 +190,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
             candidates.append(candidate)
         except (KeyError, TypeError, AttributeError, ValidationError):
             raise DiscoveryError("invalid_response", "Google returned incomplete or invalid venue data.") from None
-    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics)
+    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates)})
 
 
 def require_development_discovery() -> None:
@@ -217,9 +221,10 @@ class PlacesDiscovery:
             raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
         if requests and any(r.area != requests[0].area for r in requests):
             raise DiscoveryError("mixed_areas", "Use one explicit discovery area per outing.")
-        records, diagnostics, geographic_exclusions = [], {}, 0
+        records, diagnostics, geographic_exclusions, stages = [], {}, 0, {}
         for request in requests:
             result = self._search(request)
+            stages[request.activity.value] = {**result.stages}
             geographic_exclusions += result.excluded_count
             for reason, count in result.diagnostics.items():
                 diagnostics[reason] = diagnostics.get(reason, 0) + count
@@ -227,6 +232,7 @@ class PlacesDiscovery:
             if rejected:
                 diagnostics['invalid_normalized_venue'] = diagnostics.get('invalid_normalized_venue', 0) + rejected
                 geographic_exclusions += rejected
+            stages[request.activity.value]["afterNormalization"] = len(normalized)
             if request.meal == "dinner":
                 relevant = []
                 for venue in normalized:
@@ -238,10 +244,14 @@ class PlacesDiscovery:
                     else:
                         relevant.append(venue)
                 normalized = relevant
+            stages[request.activity.value]["afterMealFilter"] = len(normalized)
             records.extend(normalized)
         quality = assess_candidates(records)
         for reason, count in quality.diagnostics.items():
             diagnostics[reason] = diagnostics.get(reason, 0) + count
+        for activity in stages:
+            stages[activity].update(quality.stages.get(activity, {}))
+            stages[activity]["afterDeduplicationAndRelevance"] = sum(activity in v.activities for v in quality.venues)
         candidates = [DiscoveryCandidate(provider_id=v.facts.id, display_name=v.facts.name,
                       address=v.facts.address, coordinates=v.facts.coordinates,
                       attributions=[{'provider': a.provider, 'providerUri': str(a.uri) if a.uri else None}
@@ -252,7 +262,7 @@ class PlacesDiscovery:
             self.outing.check_candidates(sum(activity in v.activities for v in quality.venues))
         return DiscoveryResult(candidates=candidates, venues=quality.venues,
                                excluded_count=geographic_exclusions + quality.excluded_count,
-                               diagnostics=dict(sorted(diagnostics.items())))
+                               diagnostics=dict(sorted(diagnostics.items())), stages=stages)
 
     def _search(self, request: DiscoveryRequest) -> DiscoveryResult:
         limit = self.outing.settings.candidates_per_activity

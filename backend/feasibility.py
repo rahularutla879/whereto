@@ -41,6 +41,9 @@ class FeasibilityInput(ContractModel):
     stops: Annotated[list[EvidenceStop], Field(min_length=1, max_length=4)]
     mode: Mode
     routes: list[RouteLeg] = Field(default_factory=list)
+    max_leg_exclusive: bool = Field(default=False, strict=True)
+    max_total_exclusive: bool = Field(default=False, strict=True)
+    max_first_leg_exclusive: bool = Field(default=False, strict=True)
     max_leg_minutes: Limit | None = None
     max_total_minutes: Limit | None = None  # Inter-stop only, like the existing request.
     starting_location: AuthorizedStart | None = Field(default=None, repr=False)
@@ -185,7 +188,8 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
                    else Decimal(str(leg.duration_seconds)))
         if not first:
             known_total += seconds
-        exceeded = limit is not None and seconds > limit * 60
+        exclusive = value.max_first_leg_exclusive if first else value.max_leg_exclusive
+        exceeded = limit is not None and (seconds > limit * 60 or exclusive and seconds == limit * 60)
         add("travel", "infeasible" if exceeded else "feasible",
             "first_leg_limit_exceeded" if exceeded and first else "leg_limit_exceeded" if exceeded else "route_verified", ref, index)
         if not first:
@@ -197,7 +201,7 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
                 available = Decimal(gap.days * 86400 + gap.seconds) + Decimal(gap.microseconds) / 10**6
                 if available < seconds:
                     add("travel", "infeasible", "insufficient_transfer_time", ref, index)
-    if value.max_total_minutes is not None and known_total > value.max_total_minutes * 60:
+    if value.max_total_minutes is not None and (known_total > value.max_total_minutes * 60 or value.max_total_exclusive and known_total == value.max_total_minutes * 60):
         add("travel", "infeasible", "total_travel_limit_exceeded", "max_total_minutes", 0)
     for i, stop in enumerate(value.stops):
         state, code, ref = _hours(stop, value.evaluated_at)

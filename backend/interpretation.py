@@ -10,6 +10,7 @@ from pydantic import AwareDatetime, Field, ValidationError
 
 from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
                                      complete_year_answer, resolve_datetime)
+from backend.travel_constraints import travel_evidence, exclusive_limit, resolved_travel_label, normalize_verbatim_travel, CONTEXT
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
                             PlanningRequest)
@@ -114,7 +115,6 @@ MONEY_EVIDENCE = re.compile(
     r"\s*(-?\d[\d,]*(?:\.\d+)?)\s*(?:(?:dollars?|USD)\s*)?"
     r"(per[ -]person|per head|each|a person|a head|total|for (?:the |our )?(?:whole )?group)?", re.I)
 LOCATION_ALTERNATIVES = re.compile(r"\bin\s+[a-z]+(?:\s+[a-z]+)?\s+(?:or|and in)\s+[a-z]+", re.I)
-TRAVEL_EVIDENCE = re.compile(r"(?<![\w.-])(-?\d+(?:\.\d+)?)\s*(minutes?|mins?|hours?|hrs?|miles?|kilometers?|km)\s*(of )?(total travel|travel total|total between stops|total|travel|between stops|between activities|per leg|each leg|per stop)\b", re.I)
 
 
 def has_minimum_spending(raw):
@@ -165,29 +165,28 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
         if (amounts and (any(n < 0 for n in amounts) or amount != min(amounts))) or (amount is not None and not amounts):
             issue("The budget amount or its per-person/group meaning was not captured correctly. State one maximum USD amount per person and/or one total group cap.")
 
-    travel_context = re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I)
+    travel_context = CONTEXT.search(raw)
     if travel_context and re.search(r"\d+\s*(?:seconds?|secs?|meters?|metres?|feet|yards?)\b", raw, re.I):
         issue("That travel unit is unsupported. State a maximum travel time in minutes or hours, total or between stops.")
     if travel_context and re.search(r"\b(?:minimum|at least)\s+\d+\s*(?:minutes?|hours?)", raw, re.I):
         issue("Minimum travel requirements are unsupported. State a maximum travel time instead.")
-    travel_matches = list(TRAVEL_EVIDENCE.finditer(raw))
+    travel_matches = travel_evidence(raw)
     if travel_context and not travel_matches and re.search(r"\d[^.;]{0,20}\b(?:minutes?|mins?|hours?|hrs?)\b", raw, re.I):
         issue("The travel amount or its total/between-stops meaning is unclear. Use a number of minutes or hours and name the limit's scope.")
     supported_travel = {"travel_total_minutes": [], "travel_leg_minutes": []}
     for match in travel_matches:
-        if not travel_context and match[4].lower() == "total":
+        if match['distance']:
+            issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total, between stops or from your starting point.")
+            continue
+        if match['scope'] == 'first':
+            continue
+        if not travel_context and match['scope'] == 'total':
             issue("An overall outing-duration limit cannot be treated as travel. State an overall start and end time instead.")
             continue
-        per_leg = bool(re.search(r"between|per leg|each leg|per stop", match[4], re.I)) and "total" not in match[4].lower()
-        field = "travel_leg_minutes" if per_leg else "travel_total_minutes"
+        field = "travel_leg_minutes" if match['scope'] == 'leg' else "travel_total_minutes"
         if field == "travel_total_minutes" and manual.travel.strip():
             continue
-        unit = match[2].lower()
-        amount = float(match[1]) * (60 if unit.startswith(("hour", "hr")) else 1)
-        if unit.startswith(("mile", "kilometer", "km")):
-            issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total or between stops.")
-            continue
-        supported_travel[field].append(amount)
+        supported_travel[field].append(match['amount'])
     for field, amounts in supported_travel.items():
         if field == "travel_total_minutes" and manual.travel.strip():
             continue
@@ -285,9 +284,17 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         ai.cost = CostPreference.budget
     ai.date_expressions = [phrase for phrase in ai.date_expressions if phrase.casefold() in raw.casefold()]
     ai.time_expressions = [phrase for phrase in ai.time_expressions if phrase.casefold() in raw.casefold()]
+    normalize_verbatim_travel(raw, ai)
     # Uncertainties stay blocking unless the corresponding explicit correction resolves them.
     uncertainties = []
     for issue in ai.uncertainties:
+        # A bare schema field with null is an absent optional value, not an
+        # independent user requirement. Source checks below still reject any
+        # explicit cap omitted by the model, including wrong scopes/amounts.
+        if issue.strip().casefold() in {"budget_per_person", "budget_group", "travel_total_minutes", "travel_leg_minutes"} and getattr(ai, issue.strip().casefold()) is None:
+            continue
+        if resolved_travel_label(issue, raw, ai):
+            continue
         # The concrete unsupported minimum explains recovery without competing
         # model-dependent guesses about amount or scope. It remains blocking.
         if has_minimum_spending(raw) and re.search(r"budget|currency|price|cost|spending", issue, re.I):
@@ -427,13 +434,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     location = chosen("location", answers.location or ai.location)
     if location is None and value.hasCurrentLocation and re.search(r"\bnear me\b", raw, re.I):
         location = "near me"
-    first_limits = re.findall(r"\b(?:within|under|maximum|at most)\s+(\d+)\s*(minutes?|mins?|hours?|hrs?)\s+(?:of|from)\s+(?:me|my (?:current |starting )?location)\b", raw, re.I)
-    if (re.search(r"\d+(?:\.\d+)?\s*(?:minutes?|mins?|hours?|hrs?)\s+(?:of|from)\s+(?:me|my (?:current |starting )?location)\b", raw, re.I)
-            and not first_limits):
-        issues.append("The first-stop travel limit is unclear. State within 10 minutes of me, or enter a maximum in Optional starting location. No limit was ignored.")
+    first_limits = [m['amount'] for m in travel_evidence(raw) if m['scope'] == 'first' and not m['distance']]
+    first_limit = min(first_limits, default=None)
+    if first_limit is not None and (not first_limit.is_integer() or not 0 <= first_limit <= 1440):
+        issues.append("The first-stop travel limit must be a whole number of minutes from 0 to 1440.")
+        first_limit = None
     if re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
         issues.append("Set the search radius in meters in Optional starting location and remove the distance wording from the request. No radius was silently assumed.")
-    first_limit = min((int(n) * (60 if unit.lower().startswith(("hour", "hr")) else 1) for n, unit in first_limits), default=None)
     people_answer = answers.people
     if people_answer:
         words = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
@@ -539,7 +546,9 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
-                maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=first_limit, cost=cost, transport=ai.transport,
+                maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
+                maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
+                maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)
         except (ValueError, TypeError, ValidationError):
