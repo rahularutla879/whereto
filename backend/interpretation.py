@@ -459,7 +459,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         issues.append("The first-stop travel limit must be a whole number of minutes from 0 to 1440.")
         first_limit = None
     if not first_preference and re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
-        issues.append("Set the search radius in meters in Optional starting location and remove the distance wording from the request. No radius was silently assumed.")
+        issues.append("Geographic radius wording is not supported in this form. No radius was silently assumed. If you mean road travel to the first stop, state a first-stop limit in miles instead; otherwise revise the geographic requirement.")
     people_answer = answers.people
     if people_answer:
         words = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()

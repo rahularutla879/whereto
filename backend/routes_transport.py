@@ -45,8 +45,10 @@ def compute_matrix(body: dict) -> list:
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,
                          "X-Goog-FieldMask": FIELD_MASK, "Content-Type": "application/json"})
             if response.status_code != 200:
-                code = {400: "invalid_request", 401: "authentication", 403: "permission", 429: "quota"}.get(response.status_code, "provider")
-                raise RouteError(code, "Google routing failed. The reservation counts; no automatic retry was made.")
+                from backend.provider_errors import classify
+                code,message,diagnostics=classify(response,'matrix')
+                error=RouteError(code,message);error.diagnostics=diagnostics
+                raise error
             data = response.json()
             if not isinstance(data, list):
                 raise ValueError("Invalid matrix response")

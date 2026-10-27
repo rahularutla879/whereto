@@ -30,8 +30,16 @@ def main():
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
+        if scenario['name']=='places_daily':
+            from types import SimpleNamespace
+            from backend.provider_errors import classify
+            response=SimpleNamespace(status_code=429,json=lambda:{'error':{'details':[{'reason':'RATE_LIMIT_EXCEEDED','metadata':{'quota_limit':'SearchTextRequestPerDayPerProject'}}]}})
+            code,message,diagnostics=classify(response,'search');error=DiscoveryError(code,message);error.diagnostics=diagnostics;raise error
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
+        if scenario['name'] == 'location_acceptance':
+            from backend.location_fixtures import acceptance_search_fixture
+            return acceptance_search_fixture(body,**kwargs)
         if scenario['name'] == 'location_first':
             from backend.location_fixtures import spatial_search_fixture
             return spatial_search_fixture(body, **kwargs)
@@ -59,6 +67,9 @@ def main():
         dispatch('matrix', len(body['origins'])*len(body['destinations']))
         if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
+        if scenario['name']=='location_acceptance':
+            from backend.location_fixtures import acceptance_matrix_fixture
+            return acceptance_matrix_fixture(body)
         result = matrix_fixture(body)
         if scenario['name'] == 'bowling_diagnostic':
             for element in result:

@@ -7,12 +7,13 @@ import { POST } from "./route";
 import { adaptRanking } from "../../../../lib/planning-client";
 import { EMPTY_PREFERENCES, formatTime, resolveOuting } from "../../../../lib/planner";
 
+const MOCK_START={point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true};
 const context = { today: "2026-11-01" };
 // Preserve Task 28 contract regression independently of the new AI boundary.
 const generateOuting = async (text: string, prefs: Parameters<typeof resolveOuting>[1], ctx: { today: string }, send: typeof fetch) => {
   const resolved = resolveOuting(text, prefs, ctx);
   if (resolved.error) return resolved.error;
-  const response = await send("/api/plans/generate", { method: "POST", body: JSON.stringify(resolved.payload) });
+  const response = await send("/api/plans/generate", { method: "POST", body: JSON.stringify({...resolved.payload,startingLocation:MOCK_START}) });
   if (!response.ok) return { plans: [], message: (await response.json()).message, location: "", activities: [], notes: [] };
   return adaptRanking(await response.json());
 };
@@ -53,7 +54,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
       assert.equal(p.feasibility, "provisional");
       assert.match(p.issues.join(" "), /Opening hours/);
       assert.equal(p.venues[0].dataQuality?.price, "fictional");
-      const raw = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify(resolveOuting("Bowling, drinks and a movie in Baltimore on 2026-11-07", EMPTY_PREFERENCES, context).payload) }));
+      const raw = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({...resolveOuting("Bowling, drinks and a movie in Baltimore on 2026-11-07", EMPTY_PREFERENCES, context).payload,startingLocation:MOCK_START}) }));
       assert.equal(raw.headers.get("cache-control"), "no-store");
       assert.deepEqual(adaptRanking(await raw.json()).plans, r.plans);
     }
@@ -90,7 +91,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
     {
       const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({
         activities: ["coffee", "museum", "coffee"], location: "Baltimore", people: 6,
-        budget: 100, travel: 30, cost: "experience", date: "2026-11-07",
+        budget: 100, travel: 30, cost: "experience", date: "2026-11-07", startingLocation: MOCK_START,
       }) }));
       const raw = await response.json();
       const before = structuredClone(raw);
@@ -133,7 +134,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
     }
     // unknown price, times and travel remain unknown in the card adapter
     {
-      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"],"date":"2026-11-07"}' }));
+      const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({activities:["coffee"],date:"2026-11-07",startingLocation:MOCK_START}) }));
       const raw = await response.json();
       const p = raw.provisionalPlans[0];
       p.costPerPerson = p.groupCost = p.elapsedDuration = null;

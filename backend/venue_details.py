@@ -55,9 +55,10 @@ def fetch_details(place_id):
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,
                          "X-Goog-FieldMask": DETAILS_MASK}, timeout=(5, 15), allow_redirects=False)
             if response.status_code != 200:
-                message = {429: "Contact lookup quota reached. Stop and review usage.",
-                           401: "Contact lookup authentication failed.", 403: "Contact lookup permission or billing is unavailable."}.get(response.status_code, "Contact lookup is unavailable. No automatic retry was made.")
-                raise DiscoveryError("details_unavailable", message)
+                from backend.provider_errors import classify
+                code,message,diagnostics=classify(response,'details')
+                error=DiscoveryError(code,message);error.diagnostics=diagnostics
+                raise error
             return contact_links(response.json(), place_id)
         except (requests.RequestException, ValueError):
             raise DiscoveryError("details_unavailable", "Contact lookup could not return valid details. No retry was made.") from None
@@ -100,8 +101,12 @@ class DetailsSessions:
             if not local_real_enabled() or os.environ.get("WHERETO_CONTACT_DETAILS_DEV") != "1":
                 raise DiscoveryError("disabled", "Phone and website lookup is disabled. Use the Google Maps link to contact the venue.")
             entry[3].add(place_id)
-        with entry[2].reserve("details", place_id):
-            return {**fetch_details(place_id), "diagnostics": entry[2].usage()}
+        from backend.provider_budget import ProviderLimitError
+        from backend.provider_errors import attach_accounting
+        try:
+            with entry[2].reserve("details", place_id):
+                return {**fetch_details(place_id), "diagnostics": entry[2].usage()}
+        except (ProviderLimitError,DiscoveryError) as error:raise attach_accounting(error,entry[2])
 
 
 details_sessions = DetailsSessions()

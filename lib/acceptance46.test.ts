@@ -44,7 +44,7 @@ test("starting-location stages are distinct from itinerary generation and preser
     assert.doesNotMatch(html, /old error|Retry|couldn’t complete/);
   }
   const html = renderToStaticMarkup(createElement(LocationControls, { lookupEnabled: false, onChange() {} }));
-  assert.match(html, /Optional starting location/); assert.doesNotMatch(html, /latitude|longitude/);
+  assert.match(html, /Where should your outing start/); assert.doesNotMatch(html, /latitude|longitude/);
 });
 test("summary distinguishes strict travel scopes without changing inclusive wording", () => {
   const value = { request: { activities: ["bowling", "food"], date: "2026-11-07", location: "Baltimore", people: 2, budget: null, travel: 20, maxLegTravel: 5, maxFirstLegTravel: 15, travelExclusive: true, maxLegTravelExclusive: true, transport: "driving", dinnerStops: [1] } } as ValidatedOuting;

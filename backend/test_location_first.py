@@ -9,7 +9,7 @@ from backend.provider_budget import ProviderBudget,ProviderSettings,ProviderLimi
 from backend.real_planning import real_plans,more_real_plans
 from backend.test_real_planning import ENV,outing
 from backend.location_fixtures import spatial_search_fixture,place,matrix_fixture
-from backend.location_policy import FirstTravel,first_intent,bands
+from backend.location_policy import FirstTravel,first_intent,effective_max
 from backend.starting_areas import StartingAreaQuery,suggest_starting_areas,references
 from backend.routes import AuthorizedStart,RoutePoint,parse_matrix
 from backend.feasibility import FeasibilityInput,EvidenceStop,evaluate_feasibility
@@ -41,8 +41,8 @@ class LocationFirst(unittest.TestCase):
             p,_,error=first_intent(text);self.assertIsNone(error)
             self.assertEqual((p.value,p.unit,p.mode,p.exclusive),(n,unit,mode,exclusive))
         self.assertIsNotNone(first_intent('Within 20 minutes of my hotel. Within 8 miles of Union Station.')[2])
-        self.assertEqual(bands(FirstTravel(value=20,mode='flexible')),[20,25,30])
-        self.assertEqual(bands(FirstTravel(value=20,mode='strict')),[20])
+        self.assertEqual(effective_max(FirstTravel(value=20,mode='flexible')),40)
+        self.assertEqual(effective_max(FirstTravel(value=20,mode='strict')),20)
 
     def test_actual_interpretation_pipeline_miles_strict_flexible_and_geo(self):
         from backend.interpretation import InterpretationInput,interpret_request
@@ -97,14 +97,14 @@ class LocationFirst(unittest.TestCase):
     def test_suggestions_verified_scored_confirmed_and_reused(self):
         session=ProviderBudget();query=StartingAreaQuery(destination='Washington, DC',activities=['bowling','food'])
         response=suggest_starting_areas(query,session)
-        self.assertEqual(len(response['matches']),3)
+        self.assertGreaterEqual(len(response['matches']),1)
         scores=[p['score'] for p in response['matches']];self.assertEqual(scores,sorted(scores,reverse=True))
         match=response['matches'][0]
         request=self.request(referenceToken=response['referenceToken'],startingLocation={**START,'point':{'id':'reference_'+match['placeId'],'coordinates':match['coordinates']},'source':'suggested'})
         r=real_plans(request,session)
         self.assertTrue(r.provisionalPlans,r.message)
         self.assertTrue(all(p.firstLeg['source']=='suggested' and p.firstLeg['originLabel']==match['name'] for p in r.provisionalPlans))
-        self.assertEqual(sum(c.args[0]['textQuery'].startswith('public transit') for c in self.search.call_args_list),1)
+        self.assertEqual(sum(c.args[0]['textQuery'].startswith('public transit') for c in self.search.call_args_list),3)
         self.assertEqual(r.request.location,'Washington, DC')
 
     def test_suggestion_no_trustworthy_reference_and_gate_disabled(self):
@@ -113,7 +113,7 @@ class LocationFirst(unittest.TestCase):
         with patch.dict(os.environ,{'WHERETO_START_LOOKUP_DEV':'0'}):
             with self.assertRaises(DiscoveryError):suggest_starting_areas(StartingAreaQuery(destination='Washington, DC',activities=['bowling']),ProviderBudget())
 
-    def test_flexible_widens_once_strict_does_not(self):
+    def test_flexible_entire_double_range_initially_eligible_strict_does_not_expand(self):
         def slow_first(body):
             result=matrix_fixture(body)
             for element in result:
@@ -122,12 +122,12 @@ class LocationFirst(unittest.TestCase):
         self.matrix.side_effect=slow_first
         r=real_plans(self.request(startingLocation=START,firstTravel={'value':20,'mode':'flexible'}),ProviderBudget())
         self.assertTrue(r.provisionalPlans,r.message)
-        context,_=option_sessions.get(r.optionsToken);self.assertEqual(context['band'],1)
+        context,_=option_sessions.get(r.optionsToken);self.assertNotIn('band',context)
         self.assertTrue(all(p.firstLeg['exceedsPreference'] for p in r.provisionalPlans))
         self.search.reset_mock();self.matrix.reset_mock()
         r=real_plans(self.request(startingLocation=START,firstTravel={'value':20,'mode':'strict'}),ProviderBudget())
         self.assertFalse(r.provisionalPlans)
-        context,_=option_sessions.get(r.optionsToken);self.assertEqual(context['band'],0)
+        context,_=option_sessions.get(r.optionsToken);self.assertNotIn('band',context)
         self.assertLessEqual(len([c for c in self.search.call_args_list if 'bowling' in c.args[0]['textQuery']]),1)
 
     def test_three_four_and_repeated_activities(self):
@@ -232,12 +232,9 @@ class LocationFirst(unittest.TestCase):
         self.assertEqual(response.status_code,422)
         self.assertIn('ignored constraint',response.body.decode())
 
-    def test_missing_origin_does_not_invent_or_request_location(self):
-        r=real_plans(self.request(),ProviderBudget())
-        self.assertTrue(r.provisionalPlans,r.message)
-        self.assertTrue(all(p.firstLeg is None for p in r.provisionalPlans))
-        self.assertFalse(any(c.args[0]['textQuery'].startswith('public transit') for c in self.search.call_args_list))
-        r=real_plans(self.request(firstTravel={'value':8,'unit':'miles'}),ProviderBudget())
-        self.assertFalse(r.provisionalPlans);self.assertIn('starting',r.message)
+    def test_missing_origin_requires_confirmation_without_provider_calls(self):
+        r=real_plans(self.request(startingLocation=None),ProviderBudget())
+        self.assertFalse(r.provisionalPlans);self.assertIn('confirm',r.message)
+        self.assertEqual(self.search.call_count,0);self.assertEqual(self.matrix.call_count,0)
 
 if __name__=='__main__':unittest.main()

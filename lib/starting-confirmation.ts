@@ -4,6 +4,7 @@ import type { LocationContext } from "./planning-client";
 // a later selection cannot accidentally resume the old request.
 export class StartingConfirmation {
   private resolve: ((value: LocationContext | null) => void) | null = null;
+  get waiting() { return this.resolve !== null; }
   wait() {
     this.cancel();
     return new Promise<LocationContext | null>(resolve => { this.resolve = resolve; });

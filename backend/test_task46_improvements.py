@@ -39,7 +39,7 @@ class ImprovementTests(unittest.TestCase):
         result = real_plans(outing(), self.session)
         self.assertEqual(result.diagnostics['discoveredCounts'], [10,10])
         self.assertEqual(result.diagnostics['shortlistedCounts'], [6,6])
-        self.assertEqual(result.diagnostics['matrixElements'],36)
+        self.assertEqual(result.diagnostics['matrixElements'],42)
         self.assertTrue(all(c.args[0]['pageSize']==10 for c in self.search.call_args_list))
         self.assertEqual(len({p.candidate.venues[0].id for p in result.provisionalPlans}),3)
         self.assertTrue(all(p.stops[0].venue.ratingCount is not None for p in result.provisionalPlans))
@@ -56,7 +56,7 @@ class ImprovementTests(unittest.TestCase):
         self.search.side_effect = response
         result = real_plans(outing(), self.session)
         self.assertEqual(result.diagnostics['discoveredCounts'], [9, 10])
-        self.assertEqual(result.diagnostics['matrixElements'], 36)
+        self.assertEqual(result.diagnostics['matrixElements'], 42)
         self.assertEqual(self.search.call_count, 2)
         for plan in result.provisionalPlans:
             self.assertNotEqual(plan.stops[0].venue.name, 'Example Racing Arcade')
@@ -78,9 +78,9 @@ class ImprovementTests(unittest.TestCase):
             result=more_real_plans(token)
         self.assertGreater(len(seen),9)
         self.assertIn([10,10],widths)
-        self.assertIn(100,counts)
+        self.assertIn(106,counts)
         self.assertEqual(self.search.call_count,2)
-        self.assertEqual(self.session._elements,100)
+        self.assertEqual(self.session._elements,106)
         self.assertLessEqual(self.session._requests,20)
 
     def test_three_four_stop_and_separate_start_under_150(self):
@@ -170,7 +170,7 @@ class ImprovementTests(unittest.TestCase):
         result=real_plans(outing(maxLegTravel=3),self.session)
         self.assertEqual(len(result.provisionalPlans),3)
         self.assertEqual(result.diagnostics['shortlistedCounts'],[10,10])
-        self.assertEqual(result.diagnostics['matrixElements'],100)
+        self.assertEqual(result.diagnostics['matrixElements'],106)
         self.assertTrue(all(p.totalTravel<=3 for p in result.provisionalPlans))
         self.assertEqual(self.search.call_count,2)
 

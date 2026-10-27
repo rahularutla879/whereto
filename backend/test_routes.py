@@ -47,6 +47,14 @@ class RouteTests(unittest.TestCase):
         self.outing = ProviderBudget().outing()
         self.calculator = GoogleRouteCalculator(self.outing)
 
+    def test_element_quota_failure_stops_later_unsent_batches(self):
+        self.post.side_effect=lambda body:[element(status={'code':8,'message':'RESTRICTED_PROVIDER_TEXT'})]
+        result=self.calculator.calculate(route_request([[point('a')],[point('b')],[point('c')]]))
+        self.assertEqual(self.post.call_count,1)
+        self.assertEqual([l.error_code for l in result.legs],['quota','not_requested'])
+        self.assertTrue(all(l.error_context['quotaBoundary']=='unknown' for l in result.legs))
+        self.assertNotIn('RESTRICTED_PROVIDER_TEXT',result.model_dump_json())
+
     def test_drive_and_walk_metrics_and_minimal_features(self):
         for mode in ("drive", "walk"):
             with self.subTest(mode=mode):

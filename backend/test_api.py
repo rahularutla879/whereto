@@ -38,6 +38,7 @@ class PlanningApiTests(unittest.TestCase):
         cls.listener.close()
 
     def post(self, payload, status=200):
+        payload={"startingLocation":{"point":{"id":"Mock_origin_0","coordinates":{"latitude":0,"longitude":0}},"explicitly_authorized":True,"source":"mock"},**payload}
         request = Request(self.url + "/api/plans/generate", data=json.dumps(payload).encode(),
                           headers={"Content-Type": "application/json"})
         try:
@@ -51,6 +52,15 @@ class PlanningApiTests(unittest.TestCase):
     def options(self, payload):
         data = self.post({"date": "2026-11-07", **payload})
         return data, data["plans"] + data["provisionalPlans"]
+
+    def test_mandatory_origin_and_fictional_first_leg_boundaries(self):
+        missing=self.post({'activities':['coffee'],'date':'2026-11-07','startingLocation':None},422)
+        self.assertEqual(missing['code'],'origin_required')
+        for mode,value,exclusive,accepted in [('flexible',2.5,False,True),('flexible',2.49,False,False),('strict',5,True,False),('strict',5,False,True)]:
+            result=self.post({'activities':['coffee'],'date':'2026-11-07','firstTravel':{'value':value,'unit':'minutes','mode':mode,'exclusive':exclusive}})
+            plans=result['plans']+result['provisionalPlans']
+            self.assertEqual(bool(plans),accepted)
+            if plans:self.assertTrue(plans[0]['firstLeg']['fictional'])
 
     def test_multi_activity_keeps_python_evidence_and_order(self):
         data, plans = self.options({"activities": ["bowling", "drinks", "movie"]})
@@ -96,11 +106,11 @@ class PlanningApiTests(unittest.TestCase):
         from unittest.mock import patch
         from backend.main import generate_plan
         from backend.mock_data import get_mock_venues
-        from backend.models import OutingRequest
+        from backend.real_planning import PlannerInput as OutingRequest
         records = [v.model_copy(update={"price": None, "duration": None})
                    for v in get_mock_venues("coffee")]
         with patch("backend.planner.load_mock_venues", return_value=records):
-            result = generate_plan(OutingRequest(activities=["coffee"], date="2026-11-07"))
+            result = generate_plan(OutingRequest(activities=["coffee"], date="2026-11-07",startingLocation={"point":{"id":"Mock_origin_0","coordinates":{"latitude":0,"longitude":0}},"explicitly_authorized":True,"source":"mock"}))
         self.assertFalse(result.plans)
         self.assertTrue(result.provisionalPlans)
         for plan in result.provisionalPlans:

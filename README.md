@@ -26,7 +26,7 @@ npm run dev:backend
 
 Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
 
-In real mode, **Optional starting location** offers **Use my current location** or an explicit **Find starting place** action. Enter an address, landmark, ZIP code, neighborhood or city. Selecting Plan my outing/Regenerate plans automatically finds matches when lookup is enabled; confirm the intended match and the original outing continues. Find starting place also remains available. Area matches are representative points, not your actual address. Your destination remains separate; first-stop travel is shown separately. No permission or lookup happens merely from opening the website or typing. If manual lookup is disabled, the message beside the field explains how to use current location or clear the field.
+Every outing now needs a confirmed start under **Where should your outing start?** Choose current location (permission only after your action), enter and confirm a manual place, or confirm an activity-aware suggested starting area. Only controls for the selected method appear. There is no origin-free fallback or visible meters-radius field. Mock mode offers clearly fictional references without Google calls; real device coordinates cannot establish travel to fictional venues.
 
 Phone/websites, ratings and manual lookup each retain an explicit local opt-in, off by default. For a **separately authorized future controlled live test**, stop the backend and use this combined command from the same project folder:
 
@@ -40,7 +40,7 @@ Real discovery initially requests up to **10 results per distinct activity**. **
 
 Application ceilings are **10 venue searches, 20 candidates/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard can pause exploration: wait at least a minute and explicitly choose Show different options again. No retry or new request is scheduled automatically. Coverage, hard constraints and budgets determine how many plans are possible.
 
-For smaller offline/development ceilings, set `WHERETO_SEARCHES_OUTING`, `WHERETO_CANDIDATES`, `WHERETO_MATRIX_OUTING` or `WHERETO_REQUESTS_OUTING` before starting the backend. Existing `WHERETO_MATRIX_SESSION` and `WHERETO_MATRIX_MINUTE` also only lower approved maxima. Defaults are ceilings, not targets. Cloud remains **40 searches/day, 10/minute; 2,000 route elements/day, 150/minute**. Expanded outings can cost more; see [current budgets and gross estimates](docs/billing-safeguards.md#task-46-approved-application-limit-expansion). All live gates remain off by default.
+For smaller offline/development ceilings, set `WHERETO_SEARCHES_OUTING`, `WHERETO_CANDIDATES`, `WHERETO_MATRIX_OUTING` or `WHERETO_REQUESTS_OUTING` before starting the backend. Existing `WHERETO_MATRIX_SESSION` and `WHERETO_MATRIX_MINUTE` also only lower approved maxima. Defaults are ceilings, not targets. Cloud was read back October 27: **200 searches/day, 10/minute; 2,000 route elements/day, 150/minute**. Only the Places daily override was increased after a confirmed daily-quota failure. Expanded outings can cost more; see [current budgets and gross estimates](docs/billing-safeguards.md#task-46-approved-application-limit-expansion). All live gates remain off by default.
 
 With sufficient suitable venues, the invented twenty-by-twenty fixture supports 15 successive alternative actions with three new pairs each. The existing ten-by-ten fixture still covers all 100 pairs. Real cities may have far fewer matching venues; no fixed number of options is promised. “Under 5 minutes between venues” is strict: exactly five minutes fails. [Acceptance fixes and remaining limits](docs/real-planning.md#task-46-manual-acceptance-fixes).
 
@@ -74,26 +74,28 @@ Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, co
 
 ## Location-first planning (Task 46)
 
-In real mode, open **Optional starting location** and choose one option:
+Describe the outing and select **Plan my outing**. Validated first-stop wording fills the existing amount, Minutes/Miles and Flexible/Strict controls automatically. Your exact Washington, DC example fills **20 Minutes · Flexible**, with **40 minutes maximum** explained below it. The field retains 20. Explicit edits win over extracted values, including strict wording, until you change the controls again. First-stop limits remain separate from between-stop and total travel.
 
-- **Use my current location**: select the button to request permission. Nothing is collected on page load. Reported device accuracy is retained for the first-leg explanation. Denial leaves manual/suggested choices available.
-- **Enter my starting location**: enter an address, hotel, station, landmark, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm the intended match and the pending outing continues. Area matches are representative points.
-- **Choose a starting area for me**: Plan compares up to three provider-backed public references in the destination. Review the explanation and select **Use this starting area**. This is a planning reference, never a claim about your physical position. **Change starting area** replaces it.
+Under **Where should your outing start?**, choose exactly one method:
 
-For a trip to another city, use a manual place there or a suggested reference. The app does not guess your current city or compare it with the destination from coordinates alone. Your explicit choice takes precedence. Leaving the origin unspecified still allows a destination-based outing with no invented first-leg estimate.
+- **Use my current location**: select **Share my location** to request permission. No automatic GPS or inferred city/address. Denial leaves the other choices available.
+- **Enter my starting location**: enter an address, hotel, landmark, station, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm one and the pending outing continues. Approximate areas use a labeled representative point.
+- **Choose a starting area for me**: the submitted activities guide several destination activity regions, then public references are compared using checked first-leg routes and onward connections. Up to three useful, different choices appear when supported. Confirm one; the original request continues. The reference is not your physical location. **Change starting area** explicitly replaces it.
 
-The optional first-stop control accepts **one number in minutes or miles**, with **Strict maximum** or **Flexible preference**. Actual Google route seconds/road meters decide eligibility; map proximity only guides searches. “Under 20 minutes” excludes exactly 20; “at most” includes it. Flexible ranges can widen in small labeled stages, such as 20 → 25 → 30 minutes, only when checked options are insufficient. Between-stop and total travel caps remain separate and hard.
+A Flexible first-stop preference has an inclusive maximum of **2 × the original amount**, eligible immediately: 20 minutes → 40 minutes; 5 miles → 10 road miles. Comparable options within the preferred amount rank slightly higher; extra first travel is labeled. Strict limits never double. “Under” excludes equality; “at most” includes it. Google route duration/road distance decides compliance. No staged 20→25→30 expansion remains, and no return trip is assumed.
 
-The website uses bounded provider search rectangles around several earlier-stop candidates, then ranks complete verified-route paths. Ordinary destination wording prefers the city and can include convenient nearby places; **Only within Washington, DC** enforces address-component membership, and **No Virginia** excludes it. Actual addresses remain visible. These checks are provider-address checks, not legal boundary polygons.
+Ordinary destination wording can include convenient nearby areas; **Only within Washington, DC** and **No Virginia** remain hard provider-address checks. There is no automatic origin swap during alternative or discovery actions. Internally supported hard coordinate-radius constraints remain available through validated API inputs, without a redundant user-facing meters field.
 
-Manual lookup and public-reference comparison both require the existing lookup opt-in. For a separately authorized future live session, use this command instead of the simpler exploration command above:
+Mock mode also requires a selected start. Its reference choices and fixed five-minute/about-one-mile first-leg fixture are explicitly fictional. For a real GPS/manual point in mock mode, first-leg travel is unknown and a hard first-leg limit is refused rather than falsely verified. No Google calls occur. Old origin-free API requests/sessions must choose a start before publishing new plans.
+
+For a separately authorized future local real session with suggested/manual lookup:
 
 ```sh
 cd /Users/rahularutla/Documents/whereto
 VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_DAILY_USD=10 WHERETO_START_LOOKUP_DEV=1 npm run dev:backend
 ```
 
-Ratings and contacts remain separate optional switches; this command enables neither. These instructions do not authorize live testing. Use the earlier unset command to restore mock mode. [Algorithm, bounds and limitations](docs/real-planning.md#location-first-planning); [estimated costs](docs/billing-safeguards.md#location-first-work-accounting).
+This is not permission for live testing. Ratings and contacts remain separate optional flags. Stop the backend and use the earlier unset/start command to restore mock mode. Read [the current flow](docs/real-planning.md#mandatory-origins-and-flexible-travel-acceptance) and [verified quota findings](docs/billing-safeguards.md#october-27-quota-diagnosis-and-authorized-adjustment).
 
 ## Start the application — beginner instructions
 

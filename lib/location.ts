@@ -8,9 +8,8 @@ export function requestLocation(geo: Pick<Geolocation, "getCurrentPosition"> | u
 }
 
 
-// Read editable hard limits after asynchronous permission finishes, not before.
-export async function requestStartingLocation(geo: Pick<Geolocation, "getCurrentPosition"> | undefined, secure: boolean,
-  readLimits: () => { first: string; radius: string }) {
+// Travel preferences live in their own editor and are never captured by a GPS request.
+export async function requestStartingLocation(geo: Pick<Geolocation, "getCurrentPosition"> | undefined, secure: boolean) {
   const {accuracyMeters,...coordinates} = await requestLocation(geo, secure);
-  return { coordinates, ...(accuracyMeters!==undefined?{accuracyMeters}:{}), ...readLimits() };
+  return { coordinates, ...(accuracyMeters!==undefined?{accuracyMeters}:{}) };
 }

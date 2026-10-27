@@ -14,6 +14,7 @@ ENV = {'VENUE_DATA_MODE': 'real', 'WHERETO_REAL_DEV': '1', 'WHERETO_ENV': 'devel
 
 
 def outing(**kwargs):
+    kwargs.setdefault('startingLocation',{'point':{'id':'authorized-start','place_id':'Fixture_origin_0'},'explicitly_authorized':True,'source':'manual','precision':'address_or_place'})
     return PlannerInput(activities=kwargs.pop('activities', ['bowling', 'food']), location='Baltimore', people=2,
                         date='2026-11-07', **kwargs)
 
@@ -36,10 +37,10 @@ class RealPlanningTests(unittest.TestCase):
         self.assertEqual(len(result.provisionalPlans), 3)
         self.assertFalse(result.plans)
         self.assertEqual(result.dataMode, 'real')
-        self.assertEqual(result.diagnostics['matrixElements'], 9)
+        self.assertEqual(result.diagnostics['matrixElements'], 12)
         self.assertEqual(self.search.call_count, 2)
         self.assertEqual(self.search.call_args_list[1].args[0]["textQuery"], "dinner restaurants in Baltimore")
-        self.assertEqual(self.matrix.call_count, 1)
+        self.assertEqual(self.matrix.call_count, 2)
         for p in result.provisionalPlans:
             self.assertIsNone(p.costPerPerson)
             self.assertIsNone(p.stops[0].end)
@@ -59,8 +60,8 @@ class RealPlanningTests(unittest.TestCase):
         self.assertEqual(len(all_plans), 9)
         self.assertEqual(len({tuple(v.id for v in p.candidate.venues) for p in all_plans}), 9)
         self.assertEqual(self.search.call_count, 2)
-        self.assertEqual(self.matrix.call_count, 1)
-        self.assertEqual(result.diagnostics['matrixElements'], 9)
+        self.assertEqual(self.matrix.call_count, 2)
+        self.assertEqual(result.diagnostics['matrixElements'], 12)
         self.assertTrue(all(p.totalTravel <= 10 and any(i.code == 'unverified_budget' for i in p.issues) for p in all_plans))
         serialized = result.model_dump(mode='json')
         serialized['alternativeBatches'][0][0] = serialized['provisionalPlans'][0]
@@ -106,7 +107,7 @@ class RealPlanningTests(unittest.TestCase):
     def test_repeated_order_and_deduplicated_searches(self):
         result = self.run_plan(activities=['coffee', 'museum', 'coffee'])
         self.assertEqual(self.search.call_count, 2)
-        self.assertEqual(result.diagnostics['matrixElements'], 18)
+        self.assertEqual(result.diagnostics['matrixElements'], 21)
         for p in result.provisionalPlans:
             self.assertEqual([v.activity for v in p.candidate.venues], ['coffee', 'museum', 'coffee'])
             self.assertEqual(len(set(v.id for v in p.candidate.venues)), 3)
@@ -122,7 +123,7 @@ class RealPlanningTests(unittest.TestCase):
         result = self.run_plan()
         for p in result.provisionalPlans:
             self.assertNotEqual(p.candidate.venues[0].id, p.candidate.venues[1].id)
-        self.assertEqual(result.diagnostics['matrixElements'], 6)
+        self.assertEqual(result.diagnostics['matrixElements'], 9)
 
     def test_travel_limits_exact_seconds_no_rounding_rejection(self):
         self.matrix.side_effect = lambda body: [dict(e, duration='120s') for e in matrix_fixture(body)]
@@ -155,7 +156,7 @@ class RealPlanningTests(unittest.TestCase):
         self.assertEqual(result.diagnostics['matrixElements'], 12)
         self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         self.search.reset_mock()
-        self.assertFalse(self.run_plan(maxFirstLegTravel=5).provisionalPlans)
+        self.assertFalse(self.run_plan(startingLocation=None,maxFirstLegTravel=5).provisionalPlans)
         self.search.assert_not_called()
 
     def test_explicit_destination_ignores_current_search_point(self):

@@ -28,9 +28,13 @@ def lookup_starting_places(request, session):
     # A separate explicit lookup is counted in the SAME process request/search
     # minute budget; up to ten lookups/process, three matches, no pagination.
     outing = session.outing()
-    with outing.reserve('lookup', sha256(request.query.casefold().encode()).hexdigest()):
-        from backend.places_transport import text_search
-        data = text_search({'textQuery': request.query, 'pageSize': 3, 'languageCode': 'en'}, field_mask=FIELD_MASK)
+    from backend.provider_budget import ProviderLimitError
+    from backend.provider_errors import attach_accounting
+    try:
+        with outing.reserve('lookup', sha256(request.query.casefold().encode()).hexdigest()):
+            from backend.places_transport import text_search
+            data = text_search({'textQuery': request.query, 'pageSize': 3, 'languageCode': 'en'}, field_mask=FIELD_MASK)
+    except (ProviderLimitError,DiscoveryError) as error:raise attach_accounting(error,outing)
     places = data.get('places', []) if isinstance(data, dict) else None
     if not isinstance(places, list) or len(places) > 3:
         raise DiscoveryError('invalid_response', 'Starting-place search returned invalid information.')

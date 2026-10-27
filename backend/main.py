@@ -81,6 +81,8 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             "code": "invalid_request",
             "message": "The outing date or time window is no longer valid. Choose a future date and a valid same-day time window, then retry. No plan was generated.",
         })
+    if request.startingLocation is None:
+        return JSONResponse(status_code=422,content={"code":"origin_required","message":"Choose and confirm where your outing starts: current location, a manual place, or a suggested starting area."})
     if provider_budget.settings.mode == "real":
         if not local_real_enabled():
             return JSONResponse(status_code=422, content={"code": "real_disabled", "message": "Real planning is disabled. Enable the local development switches or restart in mock mode."})
@@ -92,9 +94,12 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             return JSONResponse(status_code=422, content={"code": getattr(error, "code", "application_limit"), "message": str(error) + " No fictional fallback was used.", "diagnostics": getattr(error, "diagnostics", {})})
     if request.geography.strictDestination or request.geography.excludedRegions:
         return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Geographic boundary and regional exclusion checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored constraint."})
-    if any(value is not None for value in (request.startingLocation, request.currentArea, request.searchRadius, request.maxFirstLegTravel, request.manualStartingPlace, request.firstTravel)):
+    if any(value is not None for value in (request.searchRadius, request.manualStartingPlace)):
         return JSONResponse(status_code=422, content={"code": "unsupported_request", "message": "Starting-point travel and search-radius checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored limit."})
-    return recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel", "locationFirst"})))
+    if request.startingLocation.source!='mock' and (request.firstTravel or request.maxFirstLegTravel is not None):
+        return JSONResponse(status_code=422,content={'code':'unsupported_request','message':'Mock venues cannot verify travel from real coordinates. Choose a clearly fictional mock reference or use deliberately enabled real mode.'})
+    from backend.mock_origin import apply_mock_origin
+    return apply_mock_origin(recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel", "locationFirst"}))),request)
 
 
 @app.post("/api/interpret", response_model=InterpretationResult)
@@ -127,7 +132,7 @@ def venue_details(request: ContactRequest):
         provider_budget.settings.require_live_provider()
         return JSONResponse(content=details_sessions.get(request.token, request.placeId), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
-        return JSONResponse(status_code=422, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+        return JSONResponse(status_code=422, content={"message": str(error),"diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
 
 
 class OptionsRequest(BaseModel):
@@ -143,7 +148,7 @@ def more_options(request: OptionsRequest):
         return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
-        return JSONResponse(status_code=422, content={"message": message + " No fictional fallback was used."}, headers={"Cache-Control": "no-store"})
+        return JSONResponse(status_code=422, content={"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
 
 
 from backend.starting_places import StartingPlaceQuery, lookup_starting_places
@@ -154,7 +159,7 @@ def starting_places(request: StartingPlaceQuery):
     try:
         return JSONResponse(content=lookup_starting_places(request, provider_budget), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
-        return JSONResponse(status_code=422, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+        return JSONResponse(status_code=422, content={"message": str(error),"diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
 
 
 from backend.starting_areas import StartingAreaQuery, suggest_starting_areas
@@ -165,4 +170,4 @@ def starting_areas(request: StartingAreaQuery):
     try:
         return JSONResponse(content=suggest_starting_areas(request,provider_budget),headers={'Cache-Control':'no-store'})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
-        return JSONResponse(status_code=422,content={'message':'Starting-area information could not be verified.' if isinstance(error,ValidationError) else str(error)},headers={'Cache-Control':'no-store'})
+        return JSONResponse(status_code=422,content={'message':'Starting-area information could not be verified.' if isinstance(error,ValidationError) else str(error),'diagnostics':getattr(error,'diagnostics',{})},headers={'Cache-Control':'no-store'})

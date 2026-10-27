@@ -10,6 +10,7 @@ import { POST as plan } from "../app/api/plans/generate/route";
 import { POST as details } from "../app/api/venues/details/route";
 import { POST as options } from "../app/api/plans/options/route";
 import { POST as startingAreas } from "../app/api/starting-areas/route";
+import { FirstPreference } from "./first-preference";
 import { StartingAreaSession } from "./starting-areas";
 import { POST as startingPlaces } from "../app/api/starting-places/route";
 import { GET as mode } from "../app/api/planning-mode/route";
@@ -26,11 +27,13 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   const base = `http://127.0.0.1:${addr.port}`;
   process.env.BACKEND_URL = base;
   const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port)]);
+  let mockMode=false;
   const send: typeof fetch = async (path, init) => {
+    if(path==="/api/plans/generate" && init?.body){const body=JSON.parse(init.body as string);if(!body.startingLocation)body.startingLocation=mockMode?{point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true}:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},explicitly_authorized:true,source:"manual"};init={...init,body:JSON.stringify(body)};}
     const request = new Request(`http://localhost${path}`, init);
     return path === "/api/starting-areas" ? startingAreas(request) : path === "/api/starting-places" ? startingPlaces(request) : path === "/api/plans/options" ? options(request) : path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
   };
-  const scenario = (name: string) => fetch(`${base}/__test/scenario`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });
+  const scenario = (name: string) => {mockMode=name==="mock";return fetch(`${base}/__test/scenario`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });};
   try {
     for (let i = 0; i < 100; i++) {
       try { if ((await fetch(`${base}/health`)).ok) break; } catch { /* local startup */ }
@@ -59,7 +62,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(new Set(all.map(p => p.venues.map(v => v.id).join("/"))).size, 9);
     assert.ok(all.every(p => p.date === "2026-11-07" && p.people === 4));
     assert.deepEqual(await (await fetch(`${base}/__test/counts`)).json(), countsBefore);
-    assert.equal(countsBefore.elements, 36);
+    assert.equal(countsBefore.elements, 42);
     assert.equal(new Set(result.plans.map(p => p.venues[0].id)).size, 3);
     let expanded = result;
     const ids = new Set(all.map(p => p.id));
@@ -78,7 +81,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(manual.message.match(/Find and confirm/g)?.length, 1);
     const countsAfter = await (await fetch(`${base}/__test/counts`)).json();
     assert.equal(countsAfter.searches, countsBefore.searches);
-    assert.equal(countsAfter.elements, 100);
+    assert.equal(countsAfter.elements, 106);
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).details, 0);
     const p = result.plans[0], venue = p.venues[0];
     assert.equal(venue.id, venue.providerPlaceId);
@@ -200,7 +203,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
       prepareOrigin:async input=>{
         preparation++;
         const response=await suggestedSession.get(input,send);
-        assert.equal(response.matches.length,3);
+        assert.ok(response.matches.length>=1);
         assert.deepEqual(await suggestedSession.get(input,send),response);
         const match=response.matches[0];
         return {locationFirst:true,referenceToken:response.referenceToken,startingLocation:{point:{id:"reference_"+match.placeId,coordinates:match.coordinates},explicitly_authorized:true,precision:match.precision,source:"suggested",label:match.name}};
@@ -210,13 +213,27 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(spatial.location,"Washington, DC");
     assert.ok(spatial.plans.every(p=>p.firstLeg?.source==="suggested"&&p.firstLeg.miles!=null&&p.firstLeg.miles<=8));
     assert.ok(new Set(spatial.plans.map(p=>p.venues[0].id)).size>=2);
+    await scenario("location_acceptance");
+    const editor=new FirstPreference();const areas=new StartingAreaSession();
+    const natural=await generateOuting("Plan bowling followed by dinner in Washington, DC, on Saturday, November 14, 2026, for 3 people. I'd prefer the first stop to be within 20 minutes of my starting point.",EMPTY_PREFERENCES,{
+      prepareOrigin:async input=>{
+        editor.hydrate(input.firstTravel);assert.equal(editor.value?.value,20);assert.equal(editor.value?.mode,"flexible");
+        const choices=await areas.get(input,send);assert.equal(choices.matches.length,3);
+        assert.ok(new Set(choices.matches.map(p=>p.reason)).size>=2);
+        const p=choices.matches[0];
+        return {locationFirst:true,firstTravel:editor.value,referenceToken:choices.referenceToken,startingLocation:{point:{id:"reference_"+p.placeId,coordinates:p.coordinates},explicitly_authorized:true,source:"suggested",precision:p.precision,label:p.name}};
+      }
+    },send);
+    assert.equal(natural.plans.length,3,natural.message);assert.equal(editor.value?.value,20);
+    assert.ok(natural.plans.some(p=>!p.firstLeg?.exceedsPreference),"Reuse checked onward venues so comparable preferred first stops remain useful.");
+    assert.ok(natural.plans.every(p=>p.firstLeg?.minutes!=null&&p.firstLeg.minutes<=40));
     await scenario("partial");
     const partial = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
     assert.equal(partial.plans.length, 1);
     await scenario("missing_routes");
     const unknown = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
     assert.equal(unknown.plans[0].travel, null);
-    const raw = await (await plan(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({ activities: ["coffee"], date: "2026-11-07" }) }))).json();
+    const raw = await (await plan(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({ activities: ["coffee"], date: "2026-11-07",startingLocation:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},source:"manual",explicitly_authorized:true} }) }))).json();
     raw.dataMode = "mock";
     assert.throws(() => adaptRanking(raw), /Mixed venue data modes/);
     await scenario("mock");

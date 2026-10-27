@@ -1,3 +1,4 @@
+import { providerDiagnosticNotes } from "./provider-diagnostics";
 import type { FirstTravel, Geography, OriginPreparation } from "./starting-areas";
 import { interpretedPreferences } from "./preferences";
 import { recommendationCopy } from "./recommendation-copy";
@@ -131,12 +132,11 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     }
     context?.signal?.throwIfAborted();
     if (context?.prepareOrigin) {
-      let prepared=await context.prepareOrigin(extraction.request);
+      const prepared=await context.prepareOrigin(extraction.request);
       context.signal?.throwIfAborted();
       if (!prepared) return { ...failure("Check the starting-location controls to continue; your outing text is kept."), requestFailed:false };
-      // Explicit strict source wording stays hard even if a flexible control
-      // was left selected. Editing the text is required to remove that limit.
-      if (extraction.request.firstTravel?.mode==="strict") prepared={...prepared,firstTravel:extraction.request.firstTravel};
+      // The origin editor hydrates validated extraction once; explicit user edits win.
+      if (prepared.firstTravel!==undefined) extraction.request={...extraction.request,firstTravel:prepared.firstTravel,maxFirstLegTravel:null,maxFirstLegTravelExclusive:false};
       context={...context, locationContext:prepared};
     }
     const extractedPreferences = interpretedPreferences(extraction.request);
@@ -151,7 +151,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
-        return failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again.");
+        return {...failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again."),notes:providerDiagnosticNotes(error.diagnostics)};
       }
       return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
     }
@@ -168,7 +168,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 export type LocationContext = {
   locationFirst?: boolean; referenceToken?: string; firstTravel?: FirstTravel | null;
   manualStartingPlace?: string;
-  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested"; label?: string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
+  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested" | "mock"; label?: string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
   searchRadius?: number; maxFirstLegTravel?: number;
 };

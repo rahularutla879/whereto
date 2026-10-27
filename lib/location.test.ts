@@ -4,6 +4,7 @@ import { renderToStaticMarkup } from "react-dom/server";
 import { createElement } from "react";
 import { LocationControls } from "../components/location-controls";
 import { VenueDetails } from "../components/venue-details";
+import { FirstPreference } from "./first-preference";
 import { requestLocation, requestStartingLocation } from "./location";
 import { VenueDetailsSession } from "./venue-details";
 import type { DisplayVenue } from "./planner";
@@ -11,11 +12,9 @@ import type { DisplayVenue } from "./planner";
 test("rendering location controls and venue details never requests permission or contact data", () => {
   const html = renderToStaticMarkup(createElement(LocationControls, { onChange: () => { throw new Error("Unexpected location request"); } }));
   assert.match(html, /Use my current location/);
-  assert.match(html, /neighborhood/);
+  assert.match(html, /Enter my starting location/);
+  assert.doesNotMatch(html, /Search radius near me|Plan without a starting point|Optional starting location/);
   assert.match(html, /First-stop travel preference/);
-  assert.match(html, /Starting place, address, neighborhood or ZIP code/);
-  assert.match(html, /approximate representative point/);
-  assert.match(html, /Confirm the match before using its travel estimates/);
   assert.doesNotMatch(html, /latitude|longitude|starting coordinates/i);
   const venue = { id: "real", providerPlaceId: "real", name: "Venue", address: "Synthetic address" } as DisplayVenue;
   const session = new VenueDetailsSession(); session.get = () => { throw new Error("Prefetched contact data"); };
@@ -46,11 +45,12 @@ test("explicit location request: authorized point, denied permission, timeout an
 });
 
 
-test("permission completion retains travel and radius limits edited while waiting", async () => {
+test("permission completion does not overwrite separately edited travel preferences", async () => {
   let success: PositionCallback | undefined;
-  const limits = { first: "5", radius: "1000" };
-  const pending = requestStartingLocation({ getCurrentPosition(callback) { success = callback; } }, true, () => limits);
-  limits.first = "2"; limits.radius = "750";
+  const preference=new FirstPreference();preference.hydrate({value:5,unit:"minutes",mode:"strict"});
+  const pending = requestStartingLocation({ getCurrentPosition(callback) { success = callback; } }, true);
+  preference.edit({value:2,unit:"minutes",mode:"strict"});
   success!({ coords: { latitude: 0, longitude: 0 } } as GeolocationPosition);
-  assert.deepEqual(await pending, { coordinates: { latitude: 0, longitude: 0 }, first: "2", radius: "750" });
+  assert.deepEqual(await pending, { coordinates: { latitude: 0, longitude: 0 } });
+  assert.equal(preference.value?.value,2);
 });

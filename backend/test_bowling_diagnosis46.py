@@ -24,6 +24,7 @@ class BowlingDiagnosis(unittest.TestCase):
         self.addCleanup(patch.stopall);self.addCleanup(option_sessions.entries.clear)
 
     def request(self, **extra):
+        extra.setdefault("startingLocation",{"point":{"id":"authorized-start","place_id":"Fixture_origin_0"},"explicitly_authorized":True,"source":"manual"})
         return PlannerInput(activities=['bowling','food'],location='Washington, DC',date='2026-11-14',people=3,dinner=True,transport='driving',**extra)
 
     def test_same_area_refinement_escapes_type_filter_not_geography_or_relevance(self):

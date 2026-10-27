@@ -33,7 +33,7 @@ test("offline exploration HTTP boundaries and contacts share the persistent dail
   const address=listener.address();assert.ok(address && typeof address==="object");
   await new Promise<void>(r=>listener.close(()=>r()));
   const base=`http://127.0.0.1:${address.port}`;
-  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.26"}});
+  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29"}});
   const post=(path:string,body:unknown)=>fetch(`${base}${path}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   try {
     for(let i=0;i<100;i++){try{if((await fetch(`${base}/health`)).ok)break;}catch{ /* Wait only for the local fixture server. */ }await new Promise(r=>setTimeout(r,50));}
@@ -42,12 +42,12 @@ test("offline exploration HTTP boundaries and contacts share the persistent dail
     assert.equal((await fetch(`${base}/health`,{headers:{Origin:"https://example.com"}})).status,403);
     assert.equal((await fetch(`${base}/health`,{headers:{"X-Forwarded-For":"127.0.0.1"}})).status,403);
     assert.equal((await fetch(`${base}/health`,{headers:developmentOriginHeaders(new Request("https://public.example/test"))})).status,403);
-    const response=await post("/api/plans/generate",{activities:["bowling","food"],location:"Baltimore",people:2,date:"2026-11-07"});
+    const response=await post("/api/plans/generate",{activities:["bowling","food"],location:"Baltimore",people:2,date:"2026-11-07",startingLocation:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},source:"manual",explicitly_authorized:true}});
     assert.equal(response.status,200);
     const result=await response.json();assert.equal(result.provisionalPlans.length,3);
     assert.equal(result.diagnostics.explorationMode,true);
-    assert.equal(result.diagnostics.estimatedDayGrossUsd,.25);
-    assert.equal(result.diagnostics.dispatched.matrixElements,36);
+    assert.equal(result.diagnostics.estimatedDayGrossUsd,.28);
+    assert.equal(result.diagnostics.dispatched.matrixElements,42);
     const before=await(await fetch(`${base}/__test/counts`)).json();
     const detail=await post("/api/venues/details",{token:result.detailsToken,placeId:result.provisionalPlans[0].candidate.venues[0].id});
     assert.equal(detail.status,422);assert.match((await detail.json()).message,/daily estimated spending/);

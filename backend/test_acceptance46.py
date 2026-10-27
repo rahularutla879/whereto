@@ -100,7 +100,7 @@ class OptionsAcceptance(unittest.TestCase):
         self.assertEqual(len(seen),48);self.assertEqual(len(primaries),10)
         context,_=option_sessions.get(result.optionsToken)
         self.assertEqual(context['outing'].usage()['placesSearchRequests'],2)
-        self.assertEqual(context['outing'].usage()['reservedMatrixElements'],100)
+        self.assertEqual(context['outing'].usage()['reservedMatrixElements'],106)
         self.assertEqual(self.search.call_count,2)
         self.assertIs(context['session'],session)
         # Exhaust the entire invented 10×10 pool, including the last partial batch.
@@ -113,7 +113,7 @@ class OptionsAcceptance(unittest.TestCase):
                 self.assertNotIn(pair,seen);seen.add(pair)
         self.assertEqual(len(seen),100)
         self.assertEqual(self.search.call_count,2)
-        self.assertEqual(session._elements,100)
+        self.assertEqual(session._elements,110)
 
     def test_explicit_sparse_discovery_refills_without_widening_or_reset(self):
         def responses(body):
@@ -144,7 +144,7 @@ class OptionsAcceptance(unittest.TestCase):
         r=more_real_plans(token,expand_discovery=True)
         self.assertFalse(r.canDiscover)
         self.assertEqual(r.diagnostics['placesSearchRequests'],4)
-        self.assertEqual(r.diagnostics['matrixElements'],4)
+        self.assertEqual(r.diagnostics['matrixElements'],6)
         self.assertFalse(r.provisionalPlans)
         self.assertIn('checked',r.errors[0].message)
         with self.assertRaisesRegex(Exception,'budget|limit'):more_real_plans(token,expand_discovery=True)

@@ -3,7 +3,7 @@ from hashlib import sha256
 import json
 from backend.places import DiscoveryRequest, DiscoveryResult, PlacesDiscovery, SearchArea, search_body
 from backend.discovery_inventory import merge_inventory
-from backend.location_policy import bands, radius
+from backend.location_policy import effective_max, radius
 from backend.venue_geography import distance_m
 
 
@@ -24,7 +24,7 @@ def key(query):return sha256(json.dumps(search_body(query,10),sort_keys=True).en
 
 
 def add_job(context,position,center=None,anchor=None,first=False):
-    r=context['request'];area=search_area(r,center,first,context['bands'][context['band']])
+    r=context['request'];area=search_area(r,center,first,effective_max(r.firstTravel))
     query=DiscoveryRequest(activity=r.activities[position],destination=area,
         meal='dinner' if r.activities[position]=='food' and (r.dinner or position in (r.dinnerStops or [])) else None)
     identity=key(query)
@@ -74,7 +74,9 @@ def anchors(context,position):
     wanted=context['positionIds'][position]
     facts=[v.facts for v in context['discovery'].venues if v.facts.id in wanted and v.facts.coordinates]
     # Keep multiple strong spatial alternatives, not only the nearest business.
-    facts.sort(key=lambda v:(-(v.ratingCount or 0),-(v.rating or 0),v.id))
+    origin=context['request'].startingLocation
+    point=(origin.reference_coordinates or origin.point.coordinates) if position==0 and origin else None
+    facts.sort(key=lambda v:(distance_m(point,v.coordinates) if point else 0,-(v.ratingCount or 0),-(v.rating or 0),v.id))
     selected=[]
     while facts and len(selected)<2:
         if not selected:chosen=facts.pop(0)
@@ -84,13 +86,13 @@ def anchors(context,position):
     return selected
 
 
-def initialize(request,outing,seed=None):
+def initialize(request,outing,seed=None,seed_routes=None):
     context={'request':request,'outing':outing,'discovery':seed or DiscoveryResult(candidates=[]), 'jobs':[], 'jobKeys':set(),
-             'positionIds':[set() for _ in request.activities],'spatialEdges':set(),'bands':bands(request.firstTravel),'band':0,
-             'locationFirst':True,'flexExpandedThisAction':False,'actionDiscoveryCalls':0}
+             'positionIds':[set() for _ in request.activities],'spatialEdges':set(),
+             'locationFirst':True,'actionDiscoveryCalls':0}
     center=(request.startingLocation.reference_coordinates or request.startingLocation.point.coordinates) if request.startingLocation else (request.currentArea.coordinates if request.currentArea else None)
     if seed:
-        reach=radius(request.firstTravel,context['bands'][0],mode(request))
+        reach=radius(request.firstTravel,effective_max(request.firstTravel),mode(request))
         context['positionIds'][0].update(v.facts.id for v in seed.venues if request.activities[0] in v.activities
             and (not center or v.facts.coordinates and distance_m(center,v.facts.coordinates)<=reach))
     add_job(context,0,center,first=True)
@@ -98,7 +100,20 @@ def initialize(request,outing,seed=None):
     # Initial finite beam: at most two search anchors per transition, up to
     # seven venue requests for four stops. No route/venue Cartesian search.
     for i in range(1,len(request.activities)):
+        # Seed onward venues only with already checked directed connections.
+        # Do not discard useful preflight evidence merely because the next
+        # spatial query uses another anchor.
+        if seed and seed_routes:
+            for venue in seed.venues:
+                if request.activities[i] not in venue.activities:continue
+                for prior in context['positionIds'][i-1]:
+                    route=seed_routes.get((prior,venue.facts.id))
+                    if route and route.status in ('ok','same_location'):
+                        context['positionIds'][i].add(venue.facts.id)
+                        context['spatialEdges'].add((i-1,prior,venue.facts.id))
         for previous in anchors(context,i-1):
+            remaining_stops=len(request.activities)-i-1
+            if outing.usage()['placesSearchRequests']>=outing.settings.ceiling('searches_per_outing')-remaining_stops:break
             count=len(context['jobs']);add_job(context,i,previous.coordinates,previous.id)
             if len(context['jobs'])>count:run_job(context,context['jobs'][-1])
     return context
@@ -129,15 +144,3 @@ def expand(context):
     context.pop('actionFrontier',None)
     context['unseenEligible']=0;context['expanded']=False
     context['width']=6 if len(context['request'].activities)<=2 else 4
-
-
-def widen(context):
-    preference=context['request'].firstTravel
-    if (not preference or preference.mode!='flexible' or context.get('flexExpandedThisAction')
-            or context['band']+1>=len(context['bands']) or context.get('continuationAction') and context.get('actionDiscoveryCalls',0)>=2):return False
-    context['flexExpandedThisAction']=True;context['band']+=1
-    center=(context['request'].startingLocation.reference_coordinates or context['request'].startingLocation.point.coordinates) if context['request'].startingLocation else None
-    before=len(context['jobs']);add_job(context,0,center,first=True)
-    if len(context['jobs'])>before:run_job(context,context['jobs'][-1])
-    context.pop('actionFrontier',None);context['expanded']=False;context['routedThisAction']=False;context['unseenEligible']=0
-    return True

@@ -38,14 +38,16 @@ class SearchArea(DiscoveryModel):
     include_name: bool = False
     restrict_to_area: bool = False
     boundary_coordinates: Coordinates | None = Field(default=None, repr=False)
-    boundary_radius_m: Annotated[Number, Field(gt=0, le=50000)] | None = None
+    boundary_radius_m: Annotated[Number, Field(gt=0, le=2000000)] | None = None
     excluded_regions: list[Literal["VA", "MD", "DC"]] = Field(default_factory=list, max_length=3)
     name: Text | None = None
     coordinates: Coordinates | None = Field(default=None, repr=False)
-    radius_m: Annotated[Number, Field(gt=0, le=50000)] | None = None
+    radius_m: Annotated[Number, Field(gt=0, le=2000000)] | None = None
 
     @model_validator(mode="after")
     def valid_area(self):
+        if self.radius_m is not None and self.radius_m>50000 and not self.restrict_to_area:
+            raise ValueError("Google circle bias supports at most 50 km; larger spatial searches require a rectangle.")
         if self.restrict_to_area and (self.coordinates is None or self.radius_m is None):
             raise ValueError("A provider search restriction requires a center and radius.")
         if (self.boundary_coordinates is None) != (self.boundary_radius_m is None):
@@ -287,7 +289,7 @@ class PlacesDiscovery:
                 'searchRequests': 1, 'pagesFollowed': int(request.page_token is not None),
                 'searchStrategies': {('bowling_strict_type' if request.search_variant == 'initial' else 'bowling_text_evidence') if request.activity == 'bowling' else 'category_' + request.search_variant: 1},
                 'requestedPageSize': min(10, self.outing.settings.ceiling("candidates_per_activity")),
-                'geographyPolicy': 'verified_named_area' if request.area.name else 'authorized_radius' if request.area.radius_m else 'coordinate_bias_only',
+                'geographyPolicy': 'verified_named_area' if request.area.name and request.area.enforce_name else 'bounded_destination_preference' if request.area.name else 'authorized_radius' if request.area.radius_m else 'coordinate_bias_only',
             }
             geographic_exclusions += result.excluded_count
             for reason, count in result.diagnostics.items():

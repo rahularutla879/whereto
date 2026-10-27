@@ -78,15 +78,11 @@ def text_search(body: dict, *, field_mask: str | None = None) -> dict:
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,
                          "X-Goog-FieldMask": mask, "Content-Type": "application/json"})
-            errors = {
-                400: ("invalid_request", "Google rejected the discovery query or location."),
-                401: ("authentication", "Google rejected the OAuth token. No automatic retry was made."),
-                403: ("permission", "Google denied access. Check API permission, billing and project configuration."),
-                429: ("quota", "Google quota is exhausted. Stop testing and review usage."),
-            }
             if response.status_code != 200:
-                code, message = errors.get(response.status_code, ("provider", "Google discovery is unavailable or returned an unexpected HTTP status."))
-                raise DiscoveryError(code, message)
+                from backend.provider_errors import classify
+                code,message,diagnostics=classify(response,'lookup' if field_mask is not None else 'search')
+                error=DiscoveryError(code,message);error.diagnostics=diagnostics
+                raise error
             data = response.json()
             if not isinstance(data, dict) or "error" in data:
                 raise ValueError("Invalid success response")

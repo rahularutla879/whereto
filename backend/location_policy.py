@@ -51,7 +51,7 @@ def first_intent(raw):
                 origin=segment.strip(' ,')
             op=m['op'].lower()
             matches.append((m.start(),end,{'value':float(m['value']),'unit':'miles' if m['unit'].lower().startswith('mile') else 'minutes',
-                            'mode':'flexible' if any(w in op for w in ('prefer','around','about')) else 'strict',
+                            'mode':'flexible' if any(w in op for w in ('prefer','around','about')) or op=='within' and re.search(r"(?:i['’]d|i would|we would|we['’]d)?\s*prefer\b[^.;!?]*$",raw[:m.start()],re.I) else 'strict',
                             'exclusive':op in ('under','less than'), 'originText':origin}))
     if len({(v['unit'],v['value'],v['mode']) for _,_,v in matches})>1:
         return None,matches,'State one first-stop preference in minutes or miles, not competing limits.'
@@ -70,18 +70,13 @@ def geographic_intent(raw):
     return Geography(strictDestination=strict,excludedRegions=regions)
 
 
-def bands(preference):
-    if not preference:return [None]
-    v=preference.value
-    if preference.mode=='strict':return [v]
-    step=max(5 if preference.unit=='minutes' else 2,v*.25)
-    ceiling=max(v,min(60 if preference.unit=='minutes' else 30,v*1.5 if v else step*2))
-    return list(dict.fromkeys([v,min(ceiling,v+step),min(ceiling,v+2*step)]))
+def effective_max(preference):
+    return preference.value*(2 if preference.mode=='flexible' else 1) if preference else None
 
 
 def radius(preference,band,mode):
     if preference:
-        return max(250,min(50000,band*(1609.344 if preference.unit=='miles' else 80 if mode=='walk' else 600)))
+        return max(250,min(2000000,band*(1609.344 if preference.unit=='miles' else 80 if mode=='walk' else 600)))
     return 2000 if mode=='walk' else 8000
 
 
@@ -91,7 +86,7 @@ def first_measure(leg,preference):
             (Decimal(leg.duration_nanoseconds)/Decimal(10**9) if leg.duration_nanoseconds is not None else Decimal(str(leg.duration_seconds)))/60)
 
 
-def exceeds(leg,preference,band=None):
+def exceeds(leg,preference,maximum=None,*,original=False):
     n=first_measure(leg,preference)
-    limit=Decimal(str(preference.value if band is None else band))
-    return None if n is None else n>limit or preference.exclusive and n==limit
+    limit=Decimal(str(preference.value if original else effective_max(preference) if maximum is None else maximum))
+    return None if n is None else n>limit or preference.mode=='strict' and preference.exclusive and n==limit

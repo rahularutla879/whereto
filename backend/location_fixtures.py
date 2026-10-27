@@ -34,3 +34,44 @@ def spatial_search_fixture(body,**kwargs):
     result={'places':places}
     if page<1:result['nextPageToken']='1'
     return result
+
+
+REGION_LATITUDES=(38.86,38.91,38.96)
+
+def acceptance_search_fixture(body,**kwargs):
+    query=body['textQuery']
+    box=body.get('locationRestriction',{}).get('rectangle')
+    center=(box['low']['latitude']+box['high']['latitude'])/2 if box else None
+    region=min(range(3),key=lambda i:abs(REGION_LATITUDES[i]-center)) if center is not None else None
+    if query.startswith('public transit'):
+        return {'places':[place(f'Synthetic_reference_{region}',f'Synthetic public activity region {region+1}',REGION_LATITUDES[region],-77.02,types=['transit_station'])]}
+    if kwargs and body['pageSize']==3:
+        return {'places':[place('Synthetic_manual_station','Synthetic confirmed station',38.91,-77.02,types=['train_station'])]}
+    bowling='bowling' in query
+    kind='bowling' if bowling else 'food'
+    records=[]
+    for i in range(body['pageSize']):
+        group=i%3 if region is None or bowling else region
+        identity=f'Synthetic_{kind}_{i}' if bowling else f'Synthetic_food_{group}_{i}'
+        records.append(place(identity,f'Synthetic {kind} choice {i+1}',REGION_LATITUDES[group]+i*.00005,-77.02,types=['bowling_alley' if bowling else 'restaurant']))
+    return {'places':records}
+
+
+def acceptance_matrix_fixture(body):
+    def group(point):
+        if 'location' in point:
+            lat=point['location']['latLng']['latitude']
+            return min(range(3),key=lambda i:abs(REGION_LATITUDES[i]-lat))
+        identity=point['placeId']
+        if identity.startswith('Synthetic_reference_'):return int(identity.rsplit('_',1)[1])
+        if identity.startswith('Synthetic_bowling_'):return int(identity.rsplit('_',1)[1])%3
+        if identity.startswith('Synthetic_food_'):return int(identity.split('_')[2])
+        return 1
+    data=[]
+    for i,a in enumerate(body['origins']):
+        for j,b in enumerate(body['destinations']):
+            delta=abs(group(a['waypoint'])-group(b['waypoint']))
+            first='Synthetic_reference_' in a['waypoint'].get('placeId','') or 'location' in a['waypoint']
+            seconds=(600,2100,2700)[delta] if first else (240,1800,3600)[delta]
+            data.append({'originIndex':i,'destinationIndex':j,'status':{},'condition':'ROUTE_EXISTS','duration':f'{seconds}s','distanceMeters':(3000,30000,70000)[delta]})
+    return data

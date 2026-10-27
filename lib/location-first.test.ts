@@ -49,6 +49,6 @@ test("current location preserves reported accuracy and permission denial has a m
 test("summary keeps first-road-distance preference separate from between-stop constraints",()=>{
   const value={request:{activities:["bowling","food"],date:"2026-11-14",location:"Washington, DC",people:3,budget:null,travel:null,maxLegTravel:5,maxLegTravelExclusive:true,firstTravel:{value:8,unit:"miles",mode:"flexible"}}} as ValidatedOuting;
   const details=Object.fromEntries(outingDetails(value,true));
-  assert.equal(details["First journey"],"Prefer around 8 miles from the confirmed start; extra travel labeled separately");
+  assert.equal(details["First journey"],"Prefer around 8 miles from the confirmed start; maximum 16 miles");
   assert.equal(details["Each journey"],"Under 5 min between stops");
 });

@@ -59,7 +59,7 @@ class RoutePoint(RouteModel):
 class AuthorizedStart(RouteModel):
     point: RoutePoint = Field(repr=False)
     reference_coordinates: Coordinates | None = Field(default=None, repr=False)
-    source: Literal["device", "manual", "suggested"] = "device"
+    source: Literal["device", "manual", "suggested", "mock"] = "device"
     label: str | None = Field(default=None, max_length=200, repr=False)
     accuracy_m: float | None = Field(default=None, ge=0, le=1000000, repr=False)
     precision: Literal["device", "address_or_place", "postal_area", "neighborhood", "city", "approximate_area"] = "device"
@@ -105,6 +105,8 @@ class RouteLeg(RouteModel):
     provider: Literal["google_routes", "local_identity"] = "google_routes"
     estimate_type: Literal["traffic_unaware", "walking", "same_location"]
     error_code: str | None = None
+    error_message: str | None = None
+    error_context: dict | None = None
     provider_status_code: int | None = None
 
     @model_validator(mode="after")
@@ -236,7 +238,12 @@ def parse_matrix(data, origins, destinations, mode) -> list[RouteLeg]:
                 legs.append(_leg(a, b, mode, error_code="invalid_status"))
                 continue
             if code:
-                legs.append(_leg(a, b, mode, "error", error_code="provider_element", provider_status_code=code))
+                classification={8:'quota',7:'permission',16:'authentication'}.get(code,'provider_element')
+                message={'quota':'Routes quota or rate limit was reached. Google did not identify the exact limit. Review Cloud usage; no automatic retry was made.',
+                         'permission':'Routes access was denied. Review existing permissions and billing configuration.',
+                         'authentication':'Routes authentication failed. Check the existing local credentials.'}.get(classification)
+                legs.append(_leg(a,b,mode,'error',error_code=classification,provider_status_code=code,error_message=message,
+                    error_context={'service':'routes.googleapis.com','requestCategory':'matrix','providerStatusCode':code,'quotaBoundary':'unknown'} if message else None))
                 continue
             if item.get("condition") == "ROUTE_NOT_FOUND":
                 legs.append(_leg(a, b, mode, "unreachable", error_code="route_not_found"))
@@ -287,12 +294,16 @@ class GoogleRouteCalculator:
                     for body, (origins, destinations) in zip(bodies, matrices):
                         try:
                             if stopped:
-                                raise RouteError("not_requested", "Routing stopped after a provider failure.")
+                                error=RouteError('not_requested',str(stopped));error.diagnostics=getattr(stopped,'diagnostics',{});raise error
                             parsed = parse_matrix(compute_matrix(body), origins, destinations, request.mode)
                         except RouteError as error:
-                            stopped = error.code
-                            parsed = [_leg(a, b, request.mode, "error", error_code=error.code)
+                            if error.code!='not_requested':stopped = error
+                            parsed = [_leg(a, b, request.mode, "error", error_code=error.code,error_message=str(error),error_context=getattr(error,"diagnostics",None))
                                       for a in origins for b in destinations]
+                        if not stopped:
+                            failure=next((leg for leg in parsed if leg.error_code in ('quota','permission','authentication')),None)
+                            if failure:
+                                stopped=RouteError(failure.error_code,failure.error_message);stopped.diagnostics=failure.error_context or {}
                         for leg in parsed:
                             computed[location_key(routed_points[leg.origin_id]), location_key(routed_points[leg.destination_id])] = leg
                     for key, (a, b) in pairs.items():

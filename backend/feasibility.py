@@ -49,7 +49,6 @@ class FeasibilityInput(ContractModel):
     max_total_minutes: Limit | None = None  # Inter-stop only, like the existing request.
     starting_location: AuthorizedStart | None = Field(default=None, repr=False)
     first_preference: FirstTravel | None = None
-    first_band: float | None = Field(default=None, ge=0, le=1440)
     max_first_leg_minutes: Limit | None = None
     evaluated_at: AwareDatetime  # Explicit clock makes evaluation reproducible.
 
@@ -196,7 +195,7 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
         add("travel", "infeasible" if exceeded else "feasible",
             "first_leg_limit_exceeded" if exceeded and first else "leg_limit_exceeded" if exceeded else "route_verified", ref, index)
         if first and value.first_preference:
-            outside=exceeds(leg,value.first_preference,value.first_band)
+            outside=exceeds(leg,value.first_preference)
             add("travel", "infeasible" if outside else "feasible", "first_preference_exceeded" if outside else "first_preference_verified",ref,index)
         if not first:
             before, after = value.stops[index - 1].departure, value.stops[index].arrival

@@ -37,10 +37,12 @@ test("raw text → interpretation proxy → Python provider → validated reques
   const paths: string[] = [];
   const send: typeof fetch = async (url, init) => {
     paths.push(String(url));
+    if(url==="/api/plans/generate"&&init?.body){const body=JSON.parse(init.body as string);body.startingLocation??={point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true};init={...init,body:JSON.stringify(body)};}
     return (url === "/api/interpret" ? POST : planPOST)(new Request(`http://localhost${url}`, init));
   };
   let controls = emptyPreferenceState();
   const run = (preferences = manualPreferences(controls)) => generateOuting(requestText, preferences, {
+    locationContext:{startingLocation:{point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true}},
     onInterpreted: values => { controls = displayInterpretedPreferences(controls, values); },
   }, send);
   try {

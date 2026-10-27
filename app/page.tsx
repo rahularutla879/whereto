@@ -65,7 +65,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
         <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`} · sample group limit: {venue.capacity ?? "Unknown"}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
         {!real && <div className="details-total"><span>Sample group total</span><PlanCost amount={plan.groupCost} group /></div>}
         <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
-        {real && plan.firstLeg && <p>{plan.firstLeg.source === "suggested" ? `From suggested planning reference ${plan.firstLeg.originLabel ?? ""}` : `From ${plan.firstLeg.originLabel ?? "your starting point"}`}: {plan.firstLeg.minutes ?? "Unknown"} minutes{plan.firstLeg.miles != null ? ` / ${plan.firstLeg.miles} road miles` : ""} (Google Maps estimate{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.{plan.firstLeg.exceedsPreference && " Requires extra travel beyond your original flexible preference."}</p>}
+        {plan.firstLeg && <p>{!real&&"Fictional mock first-leg context: "}{plan.firstLeg.source === "suggested" ? `From suggested planning reference ${plan.firstLeg.originLabel ?? ""}` : `From ${plan.firstLeg.originLabel ?? "your starting point"}`}: {plan.firstLeg.minutes ?? "Unknown"} minutes{plan.firstLeg.miles != null ? ` / ${plan.firstLeg.miles} road miles` : ""} ({real?"Google Maps estimate":"fictional travel fixture"}{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.{plan.firstLeg.exceedsPreference && " Requires extra travel beyond your original flexible preference."}</p>}
       </div>
     </div>
   </article>;
@@ -134,7 +134,8 @@ export default function Home() {
     try {
       const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
-      if (!response.ok) throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable.");
+      if (!session.current.current(controller)) return;
+      if (!response.ok) { if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
       const next = adaptRanking(data);
       if (!session.current.current(controller)) return;
       if (next.plans.length) { setResult(previous => expandDiscovery ? expandedOptions(previous, next) : next); setOptionsNotice(""); }
@@ -166,13 +167,13 @@ export default function Home() {
       const next = await generateOuting(original, manualPreferences(preferenceState), {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
-        signal: controller.signal, locationContext: dataMode === "real" ? {...origin,locationFirst:true} : undefined,
-        prepareOrigin: dataMode === "real" ? async input => {
+        signal: controller.signal, locationContext: {...origin,locationFirst:true},
+        prepareOrigin: async input => {
           const confirmed=await startingControls.current?.prepare(input);
           if (!session.current.current(controller)) return null;
           if (confirmed) setLocationContext(confirmed);
           return confirmed ?? null;
-        } : undefined,
+        },
         onValidated: value => { if (session.current.current(controller)) { setValidated(value); setClarification(null); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
@@ -221,7 +222,7 @@ export default function Home() {
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
-          {dataMode === "real" && <LocationControls ref={startingControls} lookupEnabled={lookupEnabled} onStage={setPlanningStage} onChange={value => { invalidateResults(); setLocationContext(value); }} />}
+          {<LocationControls mock={dataMode!=="real"} ref={startingControls} lookupEnabled={lookupEnabled} onStage={setPlanningStage} onChange={(value,preparing) => { if(!preparing)invalidateResults(); setLocationContext(value); }} />}
           <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? planningStage === "Generating itinerary" ? "Planning…" : planningStage : result.requestFailed ? "Retry" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
