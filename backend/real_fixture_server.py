@@ -92,10 +92,12 @@ def main():
             activities = [m[0] for m in re.finditer(pattern, text, re.I)]
             group = re.search(r'\b(\d+) people\b', text)
             leg = re.search(r'between venues under (\d+) minutes', text, re.I)
+            from backend.between_policy import between_intent
+            between,_,_=between_intent(text)
             return Interpretation(activities=activities or ['coffee'], people=int(group[1]) if group else None,
                 budget_per_person=None, date=None, location='Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
                 preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
-                travel_leg_minutes=int(leg[1]) if leg else None)
+                travel_leg_minutes=int(leg[1]) if leg else int(between.value) if between and between.unit=='minutes' and between.mode=='strict' and between.value.is_integer() else None)
 
     with patch('requests.sessions.Session.send', side_effect=AssertionError('Offline fixture server refused network')), \
          patch('backend.places_transport.text_search', side_effect=search), \

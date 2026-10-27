@@ -31,3 +31,19 @@ def expansion_width(settings, stop_count):
         return {1:20, 2:20, 3:12, 4:10}[stop_count]
     return min(settings.candidates_per_activity, {1: settings.candidates_per_activity,
                2: settings.candidates_per_activity, 3: 12, 4: 10}[stop_count])
+
+
+def balanced_following(pool,previous,facts,width):
+    """Keep inexpensive paths near several earlier stops, not one ID cluster."""
+    ordered=[]
+    queues=[]
+    for p in previous:
+        origin=facts[p.id].coordinates
+        queues.append(sorted(pool,key=lambda v:(v.relevanceStrength!='strong',
+            distance_m(origin,facts[v.id].coordinates) if origin and facts[v.id].coordinates else inf,v.id)))
+    for i in range(width):
+        for queue in queues:
+            while queue and queue[0].id in {v.id for v in ordered}:queue.pop(0)
+            if queue:ordered.append(queue.pop(0))
+            if len(ordered)>=width:return ordered
+    return ordered

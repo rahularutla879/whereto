@@ -81,8 +81,9 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             "code": "invalid_request",
             "message": "The outing date or time window is no longer valid. Choose a future date and a valid same-day time window, then retry. No plan was generated.",
         })
-    if request.startingLocation is None:
-        return JSONResponse(status_code=422,content={"code":"origin_required","message":"Choose and confirm where your outing starts: current location, a manual place, or a suggested starting area."})
+    from backend.surprise import validate_beginning
+    try:validate_beginning(request)
+    except DiscoveryError as error:return JSONResponse(status_code=422,content={"code":error.code,"message":str(error)})
     if provider_budget.settings.mode == "real":
         if not local_real_enabled():
             return JSONResponse(status_code=422, content={"code": "real_disabled", "message": "Real planning is disabled. Enable the local development switches or restart in mock mode."})
@@ -96,9 +97,14 @@ def generate_plan(request: PlannerInput) -> RankingResult:
         return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Geographic boundary and regional exclusion checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored constraint."})
     if any(value is not None for value in (request.searchRadius, request.manualStartingPlace)):
         return JSONResponse(status_code=422, content={"code": "unsupported_request", "message": "Starting-point travel and search-radius checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored limit."})
-    if request.startingLocation.source!='mock' and (request.firstTravel or request.maxFirstLegTravel is not None):
+    if request.startingLocation and request.startingLocation.source!='mock' and (request.firstTravel or request.maxFirstLegTravel is not None):
         return JSONResponse(status_code=422,content={'code':'unsupported_request','message':'Mock venues cannot verify travel from real coordinates. Choose a clearly fictional mock reference or use deliberately enabled real mode.'})
     from backend.mock_origin import apply_mock_origin
+    if request.betweenTravel and request.betweenTravel.unit=='miles':
+        return JSONResponse(status_code=422,content={'code':'unsupported_request','message':'Mock travel has no road-mile evidence. Choose between-activity minutes or deliberately enabled real mode.'})
+    if request.planningMode=='surprise':
+        from backend.mock_surprise import mock_surprise
+        return mock_surprise(request)
     return apply_mock_origin(recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel", "locationFirst"}))),request)
 
 
@@ -144,6 +150,9 @@ class OptionsRequest(BaseModel):
 def more_options(request: OptionsRequest):
     from backend.real_planning import more_real_plans
     try:
+        if provider_budget.settings.mode=='mock':
+            from backend.mock_surprise import more_mock_surprise
+            return JSONResponse(content=more_mock_surprise(request.token).model_dump(mode="json"),headers={"Cache-Control":"no-store"})
         provider_budget.settings.require_live_provider()
         return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:

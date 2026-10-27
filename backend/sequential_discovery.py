@@ -12,7 +12,8 @@ def mode(request):return 'walk' if request.transport=='walking' else 'drive'
 
 def search_area(request,center=None,first=False,band=None):
     preference=request.firstTravel if first else None
-    reach=radius(preference,band,mode(request)) if first else (min(50000,max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode(request)=='walk' else 600))))
+    onward=request.betweenTravel
+    reach=radius(preference,band,mode(request)) if first else radius(onward,effective_max(onward),mode(request)) if onward else (min(50000,max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode(request)=='walk' else 600))))
     return SearchArea(name=request.location if request.location.casefold() not in ('near me','nearby','current location') else None,
         coordinates=center,radius_m=reach if center else None,enforce_name=request.geography.strictDestination,include_name=first,restrict_to_area=center is not None,
         excluded_regions=request.geography.excludedRegions,
@@ -77,6 +78,18 @@ def anchors(context,position):
     origin=context['request'].startingLocation
     point=(origin.reference_coordinates or origin.point.coordinates) if position==0 and origin else None
     facts.sort(key=lambda v:(distance_m(point,v.coordinates) if point else 0,-(v.ratingCount or 0),-(v.rating or 0),v.id))
+    if position==0 and context['request'].planningMode=='surprise':
+        from backend.surprise import venue_order,region
+        ordered=venue_order(facts,context.get('usedPrimary',set())|set(context['request'].recentSurpriseIds))
+        count=3 if context['outing'].settings.exploration else 2
+        selected=[];cells=set()
+        for venue in ordered:
+            cell=region(venue.coordinates)
+            if cell not in cells:selected.append(venue);cells.add(cell)
+            if len(selected)>=count:break
+        selected+=( [v for v in ordered if v not in selected][:count-len(selected)] )
+        context['surpriseOrder']=[v.id for v in selected]+[v.id for v in ordered if v not in selected]
+        return selected
     selected=[]
     while facts and len(selected)<2:
         if not selected:chosen=facts.pop(0)
@@ -133,6 +146,9 @@ def expand(context):
         inspected={anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
         source=[v.facts for v in context['discovery'].venues if v.facts.id in context['positionIds'][i-1] and v.facts.coordinates and v.facts.id not in inspected]
         if source:
+            if context['request'].planningMode=='surprise':
+                from backend.surprise import venue_order
+                source=venue_order(source,context.get('usedPrimary',()))
             v=source[0];add_job(context,i,v.coordinates,v.id)
     pending=[j for j in context['jobs'] if not j['done']]
     first=next((j for j in pending if j['position']==0),None)

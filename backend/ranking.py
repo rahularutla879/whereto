@@ -88,6 +88,16 @@ def evaluate_candidate(
             issue("unknown_travel", "travel", "Travel evidence is missing; obtain a travel estimate before confirming timing.", unknown=True)
         if request.maxLegTravel is not None and leg.minutes is not None and (leg.minutes > request.maxLegTravel or request.maxLegTravelExclusive and leg.minutes == request.maxLegTravel):
             issue("leg_travel_exceeded", "maxLegTravel", "A leg exceeds the travel cap; increase it or choose closer stops.")
+        if not real_data and request.betweenTravel:
+            from backend.location_policy import exceeds
+            from types import SimpleNamespace
+            if request.betweenTravel.unit=='miles' or leg.minutes is None:
+                issue("unknown_between_travel","travel","Fictional travel has no verified road distance; use minutes or real mode.",unknown=True)
+            else:
+                evidence=SimpleNamespace(status='ok',duration_seconds=leg.minutes*60,duration_nanoseconds=None)
+                if exceeds(evidence,request.betweenTravel):issue("between_preference_exceeded","travel","A fictional leg exceeds the strict or doubled between-activity maximum.")
+                elif request.betweenTravel.mode=='flexible' and exceeds(evidence,request.betweenTravel,original=True):
+                    issue("extra_between_travel","travel","A fictional journey between activities exceeds the original preference within its doubled maximum.",unknown=True)
     known_travel = sum(q.minutes for q in legs if q.minutes is not None)
     travel = known_travel if all(q.minutes is not None for q in legs) else None
     if request.travel is not None and (known_travel > request.travel or request.travelExclusive and known_travel == request.travel):

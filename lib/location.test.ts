@@ -12,7 +12,7 @@ import type { DisplayVenue } from "./planner";
 test("rendering location controls and venue details never requests permission or contact data", () => {
   const html = renderToStaticMarkup(createElement(LocationControls, { onChange: () => { throw new Error("Unexpected location request"); } }));
   assert.match(html, /Use my current location/);
-  assert.match(html, /Enter my starting location/);
+  assert.match(html, /choose where to start/);
   assert.doesNotMatch(html, /Search radius near me|Plan without a starting point|Optional starting location/);
   assert.match(html, /First-stop travel preference/);
   assert.doesNotMatch(html, /latitude|longitude|starting coordinates/i);

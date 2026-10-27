@@ -26,7 +26,7 @@ npm run dev:backend
 
 Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
 
-Every outing now needs a confirmed start under **Where should your outing start?** Choose current location (permission only after your action), enter and confirm a manual place, or confirm an activity-aware suggested starting area. Only controls for the selected method appear. There is no origin-free fallback or visible meters-radius field. Mock mode offers clearly fictional references without Google calls; real device coordinates cannot establish travel to fictional venues.
+Every outing needs a valid beginning under **Where should your outing start?** Choose current location, **I'll choose where to start**, or **I'm new to the city — Surprise me!** Current/manual modes use a confirmed origin; Surprise Me begins at its first activity venue with no landmark or first-leg journey. No location/lookup request happens on page load. Mock remains fictional and needs no Google credentials.
 
 Phone/websites, ratings and manual lookup each retain an explicit local opt-in, off by default. For a **separately authorized future controlled live test**, stop the backend and use this combined command from the same project folder:
 
@@ -72,30 +72,29 @@ npm run dev:backend
 
 Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, costs and limitations](docs/billing-safeguards.md#development-exploration-estimate-guard); [discovery and continuation](docs/real-planning.md#development-exploration-mode).
 
-## Location-first planning (Task 46)
+## Location and Surprise Me planning (Task 46)
 
-Describe the outing and select **Plan my outing**. Validated first-stop wording fills the existing amount, Minutes/Miles and Flexible/Strict controls automatically. Your exact Washington, DC example fills **20 Minutes · Flexible**, with **40 minutes maximum** explained below it. The field retains 20. Explicit edits win over extracted values, including strict wording, until you change the controls again. First-stop limits remain separate from between-stop and total travel.
-
-Under **Where should your outing start?**, choose exactly one method:
+Describe your destination, activities, date and group, then choose a beginning:
 
 - **Use my current location**: select **Share my location** to request permission. No automatic GPS or inferred city/address. Denial leaves the other choices available.
-- **Enter my starting location**: enter an address, hotel, landmark, station, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm one and the pending outing continues. Approximate areas use a labeled representative point.
-- **Choose a starting area for me**: the submitted activities guide several destination activity regions, then public references are compared using checked first-leg routes and onward connections. Up to three useful, different choices appear when supported. Confirm one; the original request continues. The reference is not your physical location. **Change starting area** explicitly replaces it.
+- **I'll choose where to start**: enter an address, hotel, landmark, station, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm one and the original submitted request continues. Approximate areas use a labeled representative point.
+- **I'm new to the city — Surprise me!**: “Discover unexpected places and let us plan your outing from the first activity.” No address, suggested landmark, GPS or origin journey is requested. Actual first-activity venues guide later activity searches around several promising paths.
 
-A Flexible first-stop preference has an inclusive maximum of **2 × the original amount**, eligible immediately: 20 minutes → 40 minutes; 5 miles → 10 road miles. Comparable options within the preferred amount rank slightly higher; extra first travel is labeled. Strict limits never double. “Under” excludes equality; “at most” includes it. Google route duration/road distance decides compliance. No staged 20→25→30 expansion remains, and no return trip is assumed.
+Current/manual modes keep the first-stop Minutes/Miles control. Validated natural wording fills it automatically; manual edits win. Flexible uses an inclusive **2× maximum immediately** (20 minutes → 40; 5 miles → 10 road miles), while keeping the original value editable. Strict under excludes equality; at-most includes it. Extra flexible travel is labeled; no return journey is assumed.
 
-Ordinary destination wording can include convenient nearby areas; **Only within Washington, DC** and **No Virginia** remain hard provider-address checks. There is no automatic origin swap during alternative or discovery actions. Internally supported hard coordinate-radius constraints remain available through validated API inputs, without a redundant user-facing meters field.
+Surprise Me hides those first-stop inputs and preserves their inactive values for switching back. Its optional **How far are you willing to travel between activities?** control accepts minutes or road miles, Strict or deliberate Flexible. Flexible doubles only that per-leg preference. Blank means no invented hard limit. Explicit source wording stays strict unless you deliberately edit it; separately stated total travel stays hard. Real Google seconds/road meters decide compliance, not display rounding or map proximity.
 
-Mock mode also requires a selected start. Its reference choices and fixed five-minute/about-one-mile first-leg fixture are explicitly fictional. For a real GPS/manual point in mock mode, first-leg travel is unknown and a hard first-leg limit is refused rather than falsely verified. No Google calls occur. Old origin-free API requests/sessions must choose a start before publishing new plans.
+If the prompt contains an origin-based first-stop constraint, Surprise Me pauses: choose a location-based mode or select **Remove the first-stop constraint for Surprise Me**. This removes only that scope for the same submitted text, preserving unrelated constraints. Changing the prompt revalidates the choice. Switching modes invalidates incompatible recommendations; confirmed origin input/preferences are retained in page memory and first-leg routes are checked again when returning.
 
-For a separately authorized future local real session with suggested/manual lookup:
+Surprise Me filters relevance, geography, duplicate identities and hard feasibility before recommending. Known ratings below 3 with at least 10 ratings are excluded from its selection; missing/low-count ratings are not invented or treated as poor quality. Weighted randomness balances legitimate quality, travel convenience, unseen first venues and different activity regions. It uses server-side system randomness, not a fixed seed. Complete itineraries do not repeat within an active outing. Different first venues are preferred when suitable checked alternatives exist; no novelty percentage is guaranteed.
 
-```sh
-cd /Users/rahularutla/Documents/whereto
-VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_DAILY_USD=10 WHERETO_START_LOOKUP_DEV=1 npm run dev:backend
-```
+Page memory remembers at most **120 first-venue Place IDs for ten minutes after display**, across new Surprise Me requests. Reload/close clears it. There is no database, cookie, localStorage, fingerprint or shared user history, and no names, contact data or coordinates in that history. Active computation sessions independently expire after ten minutes. [Method, retention and Google policy](docs/real-planning.md#surprise-me-discovery-mode).
 
-This is not permission for live testing. Ratings and contacts remain separate optional flags. Stop the backend and use the earlier unset/start command to restore mock mode. Read [the current flow](docs/real-planning.md#mandatory-origins-and-flexible-travel-acceptance) and [verified quota findings](docs/billing-safeguards.md#october-27-quota-diagnosis-and-authorized-adjustment).
+Ordinary destination wording can include convenient nearby places. **Only within Washington, DC** and **No Virginia** remain hard provider-address checks. Addresses and Google credits remain visible. Origin-based options never silently change your confirmed start. Internal validated radius constraints remain available for compatible origin-based API inputs.
+
+Mock mode supports Surprise Me with fictional venues and simulated minutes, no origin journey and no Google calls. Road-mile preferences require real routing and are refused in mock mode. For mock manual starts, the confirmed reference and fixed five-minute/about-one-mile first leg remain explicitly fictional. Real coordinates cannot verify travel to fictional businesses.
+
+For separately authorized local real development, use the existing startup commands above; Surprise Me requires no new flag, lookup API or billing tier. Manual lookup still needs its separate starting-lookup opt-in. Ratings and contacts retain their own opt-ins. **No live Google testing is authorized by these instructions.** Stop the backend and use the unset/start command above to restore mock mode.
 
 ## Start the application — beginner instructions
 
@@ -307,7 +306,7 @@ To run a production build **locally**, run `npm run build` and then `npm start`.
 
 ## Task 28 verification you can repeat
 
-With both servers running, click Try an example → Plan my outing → View plan. You should see sample results, fictional prices/times and an expandable About these estimates section. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
+With both servers running, click Try an example → Plan my outing → choose Surprise Me when asked → View plan. You should see sample results, fictional prices/times and an expandable About these estimates section. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 

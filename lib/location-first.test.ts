@@ -14,12 +14,12 @@ const match={placeId:"Synthetic_public",name:"Synthetic public station",address:
 test("three origin choices render without fetching or requesting permission",()=>{
   let changes=0;
   const html=renderToStaticMarkup(createElement(LocationControls,{onChange(){changes++;},lookupEnabled:true}));
-  for(const choice of ["Use my current location","Enter my starting location","Choose a starting area for me","Minutes","Miles","Flexible preference","Strict maximum"]) assert.ok(html.includes(choice));
+  for(const choice of ["Use my current location","choose where to start","Surprise me!","Minutes","Miles","Flexible preference","Strict maximum"]) assert.ok(html.includes(choice));
   assert.equal((html.match(/type="radio"/g)||[]).length,3);
   assert.doesNotMatch(html,/checked=""|latitude|longitude/);
   assert.equal(changes,0);
 });
-test("suggested references require explicit confirmation, reuse one request and cancellation rejects stale choice",async()=>{
+test("legacy suggested-reference API retains explicit confirmation, reuse one request and cancellation rejects stale choice",async()=>{
   let calls=0;const session=new StartingAreaSession();const choice=new StartingConfirmation();
   const send:typeof fetch=async(url,init)=>{calls++;assert.equal(url,"/api/starting-areas");const body=JSON.parse(init!.body as string);assert.equal(body.destination,"Washington, DC");assert.equal(body.firstTravel.unit,"miles");return Response.json({matches:[match],referenceToken:"reference"});};
   const query={...input,activities:[...input.activities]};
@@ -29,7 +29,7 @@ test("suggested references require explicit confirmation, reuse one request and 
   assert.equal(choice.confirm({locationFirst:true}),false);
   session.clear();await session.get(query,send);assert.equal(calls,2);
 });
-test("suggestion failure, quota and malformed provider facts fail closed without automatic retry",async()=>{
+test("legacy reference API failure, quota and malformed provider facts fail closed without automatic retry",async()=>{
   for(const response of [()=>Response.json({message:"Quota reached"},{status:422}),()=>Response.json({matches:[{...match,coordinates:{latitude:999,longitude:0}}]})]){
     const session=new StartingAreaSession();let calls=0;
     const send:typeof fetch=async()=>{calls++;return response();};

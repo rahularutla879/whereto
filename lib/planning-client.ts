@@ -8,6 +8,7 @@ import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, typ
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
 // selection, scores, schedules, prices and travel all come from Python.
 type Ranked = {
+  surpriseRepeated?:boolean;
   candidate: { id: string; venues: DisplayVenue[]; people: number; date: string };
   feasibility: "confirmed" | "provisional";
   stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
@@ -17,7 +18,7 @@ type Ranked = {
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; request: { location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
+type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -28,6 +29,8 @@ export function adaptRanking(value: unknown): PlannerResult {
     || !Array.isArray(data.notes) || !data.notes.every(n => typeof n === "string") || !Array.isArray(data.errors)
     || data.plans.length + data.provisionalPlans.length > 3) throw new Error("Invalid planning response");
   const real = data.dataMode === "real";
+  if(data.request.planningMode!==undefined&&!["origin","surprise"].includes(data.request.planningMode))throw new Error("Invalid planning mode");
+  if(data.request.planningMode==="surprise"&&[...data.plans,...data.provisionalPlans].some(p=>p.firstLeg!=null))throw new Error("Surprise Me cannot include an origin journey");
   if (data.dataMode !== undefined && !["mock", "real"].includes(data.dataMode)) throw new Error("Invalid data mode");
   if ([...data.plans, ...data.provisionalPlans].some(p => p.stops?.some(s => real
     ? !s.venue?.providerPlaceId || s.venue.id !== s.venue.providerPlaceId || s.venue.dataQuality?.identity !== "verified"
@@ -37,6 +40,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   if (data.alternativeBatches !== undefined && (!Array.isArray(data.alternativeBatches) || data.alternativeBatches.length > 2
     || (!real && data.alternativeBatches.length) || data.alternativeBatches.some(batch => !Array.isArray(batch) || batch.length < 1 || batch.length > 3))) throw new Error("Invalid additional options");
   for (const p of selected) {
+    if(p.routeEvidence!==undefined&&(!Array.isArray(p.routeEvidence)||p.routeEvidence.some(e=>!e?.route||[e.route.distance_meters,e.route.duration_seconds].some(n=>n!==undefined&&!nullableNumber(n)))))throw new Error("Invalid route evidence");
     if (!p.candidate || typeof p.candidate.id !== "string" || !Array.isArray(p.stops) || !p.stops.length
       || !Array.isArray(p.candidate.venues) || p.stops.length !== data.request.activities.length
       || !Array.isArray(p.issues) || !p.issues.every(i => typeof i.message === "string")
@@ -64,6 +68,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   const themes = ["lavender", "peach", "mint"] as const;
   const headlines = real ? realHeadlines(selected.map(p => p.stops.map(s => s.venue)), data.request.dinnerStops ?? (data.request.dinner ? data.request.activities.flatMap((a, i) => a === "food" ? [i] : []) : [])) : [];
   const plans: Plan[] = selected.map((p, i) => ({
+    planningMode:data.request.planningMode,surpriseRepeated:p.surpriseRepeated,
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
     constraintIssues: p.issues,
     hardBudget: data.request.budget != null || data.request.groupBudget != null,
@@ -94,7 +99,7 @@ export type ValidatedOuting = {
   request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
     groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; travelExclusive?: boolean; maxLegTravelExclusive?: boolean; maxFirstLegTravelExclusive?: boolean; transport: string | null;
-    firstTravel?: FirstTravel | null; geography?: Geography; dinnerStops: number[] | null };
+    planningMode?:"origin"|"surprise"; betweenTravel?:FirstTravel|null; firstTravel?: FirstTravel | null; geography?: Geography; dinnerStops: number[] | null };
   continuation: PendingOuting;
   explicitCost: boolean;
   explicitTime: boolean;
@@ -132,11 +137,13 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     }
     context?.signal?.throwIfAborted();
     if (context?.prepareOrigin) {
-      const prepared=await context.prepareOrigin(extraction.request);
+      const prepared=await context.prepareOrigin({...extraction.request,sourceKey:text});
       context.signal?.throwIfAborted();
       if (!prepared) return { ...failure("Check the starting-location controls to continue; your outing text is kept."), requestFailed:false };
       // The origin editor hydrates validated extraction once; explicit user edits win.
       if (prepared.firstTravel!==undefined) extraction.request={...extraction.request,firstTravel:prepared.firstTravel,maxFirstLegTravel:null,maxFirstLegTravelExclusive:false};
+      if (prepared.betweenTravel!==undefined) extraction.request={...extraction.request,betweenTravel:prepared.betweenTravel,maxLegTravel:null,maxLegTravelExclusive:false};
+      if (prepared.planningMode) extraction.request={...extraction.request,planningMode:prepared.planningMode};
       context={...context, locationContext:prepared};
     }
     const extractedPreferences = interpretedPreferences(extraction.request);
@@ -166,9 +173,10 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 
 
 export type LocationContext = {
+  planningMode?: "origin" | "surprise"; betweenTravel?:FirstTravel|null; recentSurpriseIds?:string[];
   locationFirst?: boolean; referenceToken?: string; firstTravel?: FirstTravel | null;
   manualStartingPlace?: string;
   startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested" | "mock"; label?: string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
-  searchRadius?: number; maxFirstLegTravel?: number;
+  searchRadius?: number; maxFirstLegTravel?: number|null;
 };

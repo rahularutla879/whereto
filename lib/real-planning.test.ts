@@ -29,7 +29,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port)]);
   let mockMode=false;
   const send: typeof fetch = async (path, init) => {
-    if(path==="/api/plans/generate" && init?.body){const body=JSON.parse(init.body as string);if(!body.startingLocation)body.startingLocation=mockMode?{point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true}:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},explicitly_authorized:true,source:"manual"};init={...init,body:JSON.stringify(body)};}
+    if(path==="/api/plans/generate" && init?.body){const body=JSON.parse(init.body as string);if(!body.startingLocation&&body.planningMode!=="surprise")body.startingLocation=mockMode?{point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true}:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},explicitly_authorized:true,source:"manual"};init={...init,body:JSON.stringify(body)};}
     const request = new Request(`http://localhost${path}`, init);
     return path === "/api/starting-areas" ? startingAreas(request) : path === "/api/starting-places" ? startingPlaces(request) : path === "/api/plans/options" ? options(request) : path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
   };

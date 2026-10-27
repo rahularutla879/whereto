@@ -11,6 +11,7 @@ from pydantic import AwareDatetime, Field, ValidationError
 from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
                                      complete_year_answer, resolve_datetime)
 from backend.location_policy import first_intent, geographic_intent
+from backend.between_policy import between_intent, mask
 from backend.travel_constraints import travel_evidence, exclusive_limit, resolved_travel_label, normalize_verbatim_travel, CONTEXT
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
@@ -168,9 +169,16 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
 
     first_preference, first_spans, first_problem = first_intent(raw)
     if first_problem: issue(first_problem)
+    between,between_spans,between_problem=between_intent(raw)
+    if between_problem:issue(between_problem)
     travel_raw = raw
     for begin,end,_ in sorted(first_spans,reverse=True):
         travel_raw=travel_raw[:begin]+" "*(end-begin)+travel_raw[end:]
+    if between and (between.unit=='miles' or between.mode=='flexible'):
+        if ai.travel_leg_minutes is not None and ai.travel_leg_minutes!=between.value:
+            issue("The extracted between-activity amount conflicts with the stated preference.")
+        else:ai.travel_leg_minutes=None
+        travel_raw=mask(travel_raw,between_spans)
     if first_preference:
         remaining = travel_evidence(travel_raw)
         for field,scope in [('travel_leg_minutes','leg'),('travel_total_minutes','total')]:
@@ -320,6 +328,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         fp, spans, problem = first_intent(raw)
         if fp and not problem and label.strip(' .') in {raw[a:b].strip(' .').casefold() for a,b,_ in spans}:
             continue
+        bp,bspans,bproblem=between_intent(raw)
+        if bp and not bproblem and label.strip(' .') in {raw[a:b].strip(' .').casefold() for a,b,_ in bspans}:continue
         if re.fullmatch(r'(?:no|exclude|excluding|not in) (?:virginia|maryland|district of columbia)',label) and label in raw.casefold():
             continue
         if label in resolved_modes and ai.cost == resolved_modes[label] and label in raw.casefold():
@@ -453,12 +463,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if location is None and value.hasCurrentLocation and re.search(r"\bnear me\b", raw, re.I):
         location = "near me"
     first_preference, first_spans, first_problem = first_intent(raw)
+    between,between_spans,between_problem=between_intent(raw)
     first_limits = [m['amount'] for m in travel_evidence(raw) if m['scope'] == 'first' and not m['distance']]
     first_limit = None if first_preference and (first_preference.unit=='miles' or first_preference.mode=='flexible') else min(first_limits, default=None)
     if first_limit is not None and (not first_limit.is_integer() or not 0 <= first_limit <= 1440):
         issues.append("The first-stop travel limit must be a whole number of minutes from 0 to 1440.")
         first_limit = None
-    if not first_preference and re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
+    if not first_preference and re.search(r"\bnear me\b|\bradius\b", mask(raw,between_spans), re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", mask(raw,between_spans), re.I):
         issues.append("Geographic radius wording is not supported in this form. No radius was silently assumed. If you mean road travel to the first stop, state a first-stop limit in miles instead; otherwise revise the geographic requirement.")
     people_answer = answers.people
     if people_answer:
@@ -565,7 +576,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
-                firstTravel=first_preference, geography=geographic_intent(raw), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
+                firstTravel=first_preference, betweenTravel=between, geography=geographic_intent(raw), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
                 maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
                 maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,

@@ -143,6 +143,8 @@ class OutingRequest(ContractModel):
     groupBudget: Money | None = None
     maxLegTravel: TravelMinutes | None = None
     firstTravel: FirstTravel | None = None
+    betweenTravel: FirstTravel | None = None
+    planningMode: Literal["origin","surprise"] = "origin"
     geography: Geography = Field(default_factory=Geography)
     maxFirstLegTravel: TravelMinutes | None = None
     travelExclusive: bool = Field(default=False, strict=True)
@@ -482,6 +484,7 @@ class RankedItinerary(ContractModel):
     explanations: list[RecommendationReason] = Field(default_factory=list)
     routeEvidence: list[dict] = Field(default_factory=list)
     firstLeg: dict | None = None
+    surpriseRepeated: bool = False
     feasibilityEvidence: dict = Field(default_factory=dict)
 
     @model_validator(mode="after")

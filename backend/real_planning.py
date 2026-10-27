@@ -19,9 +19,11 @@ from backend.provider_budget import ProviderBudget, ProviderLimitError
 from backend.routing_shortlist import expansion_width
 from backend.ranking import evaluate_candidate, score_candidates, _select
 from backend.routes import AuthorizedStart, GoogleRouteCalculator, RoutePoint, RouteRequest, RouteError
+from backend.routes import PlaceID
 
 
 class PlannerInput(PlanningRequest):
+    recentSurpriseIds: list[PlaceID] = Field(default_factory=list,max_length=120,exclude=True,repr=False)
     locationFirst: bool = Field(default=False, strict=True)
     referenceToken: str | None = Field(default=None, min_length=1, max_length=100, exclude=True, repr=False)
     manualStartingPlace: str | None = Field(default=None, max_length=200, exclude=True, repr=False)
@@ -36,9 +38,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     started = perf_counter()
     if context is None and request.startingLocation and request.startingLocation.source=='suggested' and not request.referenceToken:
         raise DiscoveryError('unverified_origin','Choose and confirm a verified starting-area suggestion before planning from it.')
-    if request.startingLocation is None:
-        return empty(PlanningRequest.model_validate(request.model_dump(exclude={'searchRadius','locationFirst'})), 'Choose and confirm where your outing starts: current location, a manual place, or a suggested starting area.')
-    if request.startingLocation.source=="mock":
+    if request.planningMode=='surprise':
+        from backend.surprise import validate_beginning
+        validate_beginning(request)
+        request=request.model_copy(update={'locationFirst':True})
+    if request.startingLocation is None and request.planningMode!='surprise':
+        return empty(PlanningRequest.model_validate(request.model_dump(exclude={'searchRadius','locationFirst'})), 'Choose and confirm where your outing starts using current/manual location, or select Surprise Me.')
+    if request.startingLocation and request.startingLocation.source=="mock":
         raise DiscoveryError("invalid_origin","A fictional starting reference cannot be used for real planning.")
     preflight = None
     if context is None and request.referenceToken:
@@ -92,6 +98,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "expanded": False, "discoveryPages": {a: 1 for a in dict.fromkeys(request.activities)}, "area": area, "matrixRequests": 0, "usedPrimary": set()}
     else:
         discovery = context["discovery"]
+    surprise=request.planningMode=='surprise'
+    if surprise:context.setdefault('recent',set(request.recentSurpriseIds))
     pools, facts = [], {}
     for position, activity in enumerate(request.activities):
         pool = []
@@ -126,6 +134,12 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         return result
     from backend.routing_shortlist import shortlist
     all_pools = pools
+    if surprise:
+        from backend.surprise import venue_order
+        if 'surpriseOrder' not in context:
+            context['surpriseOrder']=[v.id for v in venue_order(pools[0],context['usedPrimary']|context['recent'],facts)]
+        priority={identity:i for i,identity in enumerate(context['surpriseOrder'])}
+        pools[0]=sorted(pools[0],key=lambda v:priority.get(v.id,len(priority)))
     frontier = all_pools
     if outing.settings.exploration:
         # Finite computation, not a retention ceiling. Prefer venues with fewer
@@ -136,12 +150,22 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             frontiers = []
             for pool in pools:
                 previous = frontiers[-1] if frontiers else None
-                chosen = sorted(pool, key=lambda v: (
+                chosen = (pool if surprise and not frontiers else sorted(pool, key=lambda v: (
                     sum((a, v.id) in known for a in previous) if previous else sum(v.id == a for a, _ in known), v.id))[:width]
+                )
+                chosen=chosen[:width]
+                if surprise and frontiers:
+                    from backend.routing_shortlist import balanced_following
+                    previous_pool=[v for v in all_pools[len(frontiers)-1] if v.id in frontiers[-1]]
+                    chosen=balanced_following(pool,previous_pool,facts,width)
                 frontiers.append({v.id for v in chosen})
             context["actionFrontier"] = frontiers
         frontier = [[v for v in pool if v.id in ids] for pool, ids in zip(pools, context["actionFrontier"])]
     pools = shortlist(frontier, facts, context["width"], request.startingLocation)
+    if surprise:pools[0]=frontier[0][:context['width']]
+    if surprise:
+        from backend.routing_shortlist import balanced_following
+        for i in range(1,len(pools)):pools[i]=balanced_following(frontier[i],pools[i-1],facts,context['width'])
     for activity, row in diagnostics['venuePipeline'].items():
         count = len({v.id for pool in pools for v in pool if v.activity == activity})
         row.update(shortlistedForRouting=count, notInCheckedCompletePath=count)
@@ -165,7 +189,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         for (a,b),(origin,destination) in possible.items():
             if request.startingLocation and a==request.startingLocation.point.id:
                 desired.append((a,b));continue
-            threshold=max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode=='walk' else 600))
+            from backend.location_policy import effective_max,radius
+            threshold=radius(request.betweenTravel,effective_max(request.betweenTravel),mode) if request.betweenTravel else max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode=='walk' else 600))
             if (facts[a].coordinates and facts[b].coordinates and distance_m(facts[a].coordinates,facts[b].coordinates)<=threshold) or any(x==a and y==b for _,x,y in context['spatialEdges']):
                 desired.append((a,b))
         route_request=route_request.model_copy(update={'required_pairs':desired})
@@ -249,6 +274,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             max_leg_exclusive=request.maxLegTravelExclusive, max_total_exclusive=request.travelExclusive,
             max_first_leg_exclusive=request.maxFirstLegTravelExclusive,
             first_preference=request.firstTravel,
+            between_preference=request.betweenTravel,
             starting_location=request.startingLocation, max_first_leg_minutes=request.maxFirstLegTravel,
             evaluated_at=datetime.now(timezone.utc)))
         travel_checks = [c for c in evidence.checks if c.kind == 'travel']
@@ -278,6 +304,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         plan.routeEvidence = [{"route": routes[a.id, b.id].model_dump(mode="json"),
                                "labels": route_labels(routes[a.id, b.id]).model_dump(mode="json")}
                               for a, b in zip(candidate.venues, candidate.venues[1:])]
+        if request.betweenTravel and request.betweenTravel.mode=='flexible':
+            from backend.location_policy import exceeds
+            for i,(a,b) in enumerate(zip(candidate.venues,candidate.venues[1:])):
+                if exceeds(routes[a.id,b.id],request.betweenTravel,original=True):
+                    plan.issues.append(ConstraintIssue(code='extra_between_travel',field='travel',status='unknown',
+                        message=f'Journey {i+1} between activities exceeds your original preference, within the doubled flexible maximum.'))
+        plan.feasibility="violated" if any(i.status=="violation" for i in plan.issues) else "provisional"
         if request.startingLocation:
             first = routes[request.startingLocation.point.id, candidate.venues[0].id]
             plan.firstLeg = {"source":request.startingLocation.source,"originLabel":request.startingLocation.label,
@@ -307,7 +340,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                        routeOutcomeCounts={status: sum(leg.status == status for leg in routed.legs) for status in {leg.status for leg in routed.legs}},
                        rejectedConstraints=rejection_codes, previouslyOfferedCombinations=len(context["seen"]),
                        primaryCandidates=len({v.id for v in pools[0]}))
-    ranked = [p for p in score_candidates(public, evaluated) if p.candidate.id not in context["seen"]]
+    from backend.surprise import quality_qualified
+    qualified=[p for p in evaluated if not surprise or quality_qualified(p)]
+    if surprise:diagnostics['surpriseQualityExcluded']=len(evaluated)-len(qualified)
+    ranked = [p for p in score_candidates(public, qualified) if p.candidate.id not in context["seen"]]
+    if request.betweenTravel and request.betweenTravel.mode=='flexible':
+        for plan in ranked:
+            if not any(i.code=='extra_between_travel' for i in plan.issues):plan.score=min(1,plan.score+.05)
+        ranked.sort(key=lambda p:-p.score)
     # Modest preference bonus: quality can still outweigh extra first-leg travel.
     if request.firstTravel and request.firstTravel.mode=='flexible':
         for plan in ranked:
@@ -317,7 +357,10 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     # Keep genuinely useful shared stops when only one activity has alternatives.
     varying = sum(len({p.candidate.venues[i].id for p in ranked}) > 1 for i in range(len(request.activities)))
     min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
-    diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
+    if surprise:
+        from backend.surprise import select
+        diverse=select(ranked,3,context,facts)
+    else:diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     context['eligiblePrimary'] = diagnostics['eligiblePrimaryCandidates']
     primary_shortage = context['eligiblePrimary'] < min(3, len(all_pools[0]))
@@ -330,7 +373,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     batches, shown = [], {p.candidate.id for p in diverse}
     primary_used = context["usedPrimary"] | {p.candidate.venues[0].id for p in diverse}
     # At most six extra pre-evaluated combinations, no new searches/routes.
-    for _ in range(2):
+    for _ in range(0 if surprise else 2):
         previous = [p for p in ranked if p.candidate.id in shown]
         remaining = [p for p in ranked if p.candidate.id not in shown and all(
             sum(a.id != b.id for a, b in zip(p.candidate.venues, old.candidate.venues)) >= min_changed for old in previous)]
@@ -346,13 +389,18 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     from backend.option_sessions import option_sessions
     context["usedPrimary"].update(p.candidate.venues[0].id for p in ranked if p.candidate.id in shown)
     context["seen"].update(shown)
+    if surprise:
+        from backend.surprise import record
+        record(context,diverse,facts)
+        context['eligiblePrimary']=len({p.candidate.venues[0].id for p in ranked}-context['usedPrimary'])
+        diagnostics['surprise']={'eligibleFirstVenues':len({p.candidate.venues[0].id for p in ranked}),'offeredFirstVenues':len(context['usedPrimary']),'offeredCompleteItineraries':len(context['seen']),'offeredActivityRegions':len(context.get('usedRegions',()))}
     if "detailsToken" not in context:
         context["detailsToken"] = details_sessions.create(list(facts), outing)
     if "token" not in context:
         context["token"] = option_sessions.create(context)
     details_token = context["detailsToken"]
     details_sessions.extend(details_token, list(facts))
-    context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in evaluated)
+    context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in qualified)
     context["routedThisAction"] = False
     if outing.settings.exploration:
         diagnostics.update(outing.usage())
@@ -369,7 +417,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=route_notice if not diverse and route_notice else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=(["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
+        notes=(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
+                "Development Surprise coverage: "+json.dumps(diagnostics['surprise'],sort_keys=True)+f"; quality-excluded complete paths {diagnostics['surpriseQualityExcluded']}."] if surprise else []) + (["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
                    "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
             f"Development usage — Text Searches {outing._dispatched['search']} dispatched ({outing._pagination} pagination reservations), Details {outing._dispatched['details']}, Matrix requests {outing._dispatched['matrix']}, elements {outing._dispatched['matrixElements']}. "
             f"Conservative reserved work: {outing._searches} searches, {outing._details} Details, {outing._matrix_requests} matrices / {outing._elements} elements. "
@@ -391,8 +440,9 @@ def empty(request, message, diagnostics=None):
 def more_real_plans(token, *, expand_discovery=False):
     from backend.option_sessions import option_sessions
     context, lock = option_sessions.get(token)
+    if context.get('mockSurprise'):raise DiscoveryError('mode_changed','This outing uses mock data. Generate again in the current data mode.')
     context["session"].settings.require_live_provider()
-    if context["request"].startingLocation is None:
+    if context["request"].startingLocation is None and context["request"].planningMode!='surprise':
         raise DiscoveryError("origin_required","This older outing needs a confirmed starting point. Choose where your outing starts and generate again.")
     if not lock.acquire(blocking=False):
         raise DiscoveryError("busy", "Another options request is running. Wait for it to finish.")
@@ -409,6 +459,8 @@ def more_real_plans(token, *, expand_discovery=False):
         context["actionRouteStages"] = 0
         context["actionDiscoveryCalls"] = 0
         context["continuationAction"] = True
+        if context["request"].planningMode=='surprise':
+            context.pop('surpriseOrder',None);context.pop('actionFrontier',None);context['expanded']=False
         if context['outing'].settings.exploration:
             if expand_discovery or context.get('unseenEligible', 0) < 3:
                 context.pop('actionFrontier', None)
