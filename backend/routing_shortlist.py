@@ -27,5 +27,7 @@ def shortlist(pools, facts, width, start=None):
 def expansion_width(settings, stop_count):
     # Bounded computation as well as provider work: at most 20² / 12³ / 10⁴
     # ordered combinations. Routing uses only selectively admitted new pairs.
+    if settings.exploration:
+        return {1:20, 2:20, 3:12, 4:10}[stop_count]
     return min(settings.candidates_per_activity, {1: settings.candidates_per_activity,
                2: settings.candidates_per_activity, 3: 12, 4: 10}[stop_count])

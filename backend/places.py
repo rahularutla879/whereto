@@ -68,7 +68,7 @@ class TravelConstraints(DiscoveryModel):
 class DiscoveryRequest(DiscoveryModel):
     activity: ActivityType
     meal: Literal["dinner"] | None = None
-    search_variant: Literal["initial", "alternative"] = "initial"
+    search_variant: Literal["initial", "alternative", "mixed"] = "initial"
     page_token: str | None = Field(default=None, min_length=1, max_length=4096, repr=False)
     destination: SearchArea | None = None
     current_location: SearchArea | None = Field(default=None, repr=False)
@@ -110,6 +110,8 @@ QUERIES = {
 def search_body(request: DiscoveryRequest, limit: int) -> dict:
     area = request.area
     query = "dinner restaurants" if request.meal == "dinner" else QUERIES[request.activity.value]
+    if request.search_variant == "mixed":
+        query = "entertainment centers with bowling" if request.activity == ActivityType.bowling else query + " places"
     if request.search_variant == "alternative":
         query = "bowling centers" if request.activity == ActivityType.bowling else "restaurants serving dinner" if request.meal == "dinner" else query + " venues"
     body = {"textQuery": f"{query} in {area.name}" if area.name else query,
@@ -225,7 +227,7 @@ class PlacesDiscovery:
         """
         require_development_discovery()
         requests = [DiscoveryRequest.model_validate(r.model_dump()) for r in requests]
-        if len(requests) > self.outing.settings.searches_per_outing:
+        if len(requests) > (4 if self.outing.settings.exploration else self.outing.settings.searches_per_outing):
             from backend.provider_budget import ProviderLimitError
             raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
         if requests and any(r.area != requests[0].area for r in requests):
@@ -241,7 +243,7 @@ class PlacesDiscovery:
                 'geographyReasons': result.stages['geographyRejectedByReason'],
                 'searchRequests': 1, 'pagesFollowed': int(request.page_token is not None),
                 'searchStrategies': {('bowling_strict_type' if request.search_variant == 'initial' else 'bowling_text_evidence') if request.activity == 'bowling' else 'category_' + request.search_variant: 1},
-                'requestedPageSize': min(10, self.outing.settings.candidates_per_activity),
+                'requestedPageSize': min(10, self.outing.settings.ceiling("candidates_per_activity")),
                 'geographyPolicy': 'verified_named_area' if request.area.name else 'authorized_radius' if request.area.radius_m else 'coordinate_bias_only',
             }
             geographic_exclusions += result.excluded_count
@@ -271,7 +273,7 @@ class PlacesDiscovery:
         # The unfiltered bowling refinement must bring affirmative type/name
         # evidence; a generic entertainment-center match alone is insufficient.
         quality = assess_candidates(records, require_support={r.activity for r in requests
-            if r.activity == ActivityType.bowling and r.search_variant == 'alternative'})
+            if r.activity == ActivityType.bowling and r.search_variant != 'initial'})
         for reason, count in quality.diagnostics.items():
             diagnostics[reason] = diagnostics.get(reason, 0) + count
         for activity in stages:
@@ -298,12 +300,14 @@ class PlacesDiscovery:
                                diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging, audit=audit)
 
     def _search(self, request: DiscoveryRequest) -> DiscoveryResult:
-        limit = min(10, self.outing.settings.candidates_per_activity)
+        limit = min(10, self.outing.settings.ceiling("candidates_per_activity"))
         body = search_body(request, limit)
         if request.page_token:
             body["pageToken"] = request.page_token
         identity = sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
         with self.outing.reserve("search", identity):
+            if request.page_token:
+                self.outing.note_page()
             from backend.places_transport import text_search
             data = text_search(body)
         result = parse_response(data, request.area, limit)

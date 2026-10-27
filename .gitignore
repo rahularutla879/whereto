@@ -39,3 +39,6 @@ secrets.json
 .venv/
 __pycache__/
 *.py[cod]
+
+# Development cost accounting is local-only, never provider content.
+development-cost.json

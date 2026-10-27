@@ -38,6 +38,8 @@ def compute_matrix(body: dict) -> list:
         except DiscoveryError:
             raise RouteError("authentication", "Local impersonated authentication is unavailable. No Routes request was sent.") from None
         try:
+            from backend.development_cost import dispatch
+            dispatch("matrix", len(body['origins']) * len(body['destinations']))
             response = session.post(
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,

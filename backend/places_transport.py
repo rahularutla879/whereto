@@ -72,6 +72,8 @@ def text_search(body: dict, *, field_mask: str | None = None) -> dict:
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=0))
         token = access_token(session)
         try:
+            from backend.development_cost import dispatch
+            dispatch("search", 1)
             response = session.post(
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,

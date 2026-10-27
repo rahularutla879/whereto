@@ -1,3 +1,4 @@
+import { developmentOriginHeaders } from "../../../../lib/development-origin";
 import { adaptRanking } from "../../../../lib/planning-client";
 
 export const runtime = "nodejs";
@@ -10,7 +11,7 @@ export async function POST(request: Request) {
   try {
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
     const response = await fetch(`${base.replace(/\/$/, "")}/api/plans/generate`, {
-      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload),
+      method: "POST", headers: { "Content-Type": "application/json", ...developmentOriginHeaders(request) }, body: JSON.stringify(payload),
       cache: "no-store", signal: AbortSignal.timeout(115000),
     });
     const data: unknown = await response.json();

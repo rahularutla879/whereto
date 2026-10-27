@@ -20,7 +20,7 @@ Keep the existing `npm run dev` frontend running in the second Terminal and relo
 To turn real mode off, stop that backend with Control+C and run:
 
 ```sh
-unset VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_RATINGS_DEV WHERETO_START_LOOKUP_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
+unset WHERETO_EXPLORATION_DEV VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_RATINGS_DEV WHERETO_START_LOOKUP_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
 npm run dev:backend
 ```
 
@@ -47,6 +47,30 @@ With sufficient suitable venues, the invented twenty-by-twenty fixture supports 
 Ordinary real results omit unavailable price/capacity/timetable placeholders. Hard budgets remain visibly unverified; important dinner, movie/event and missing-route warnings remain. Actual venue-based headlines, Google ratings when present, source attribution and the mock design are preserved. [Deferred evidence and when warnings remain](docs/deferred-venue-features.md).
 
 [Full real-data flow, safeguards, limitations, pricing and tests](docs/real-planning.md). Historical checkpoints below describe the mock prototype unless stated otherwise.
+
+## Development exploration (Task 46 only)
+
+Normal mode keeps its existing limits. Exploration removes the six search/candidate/outing/process ceilings while retaining finite work per action and a persistent **$10 estimated gross/local-day** guard. It is off by default and cannot enable Google access by itself. Optional ratings, contacts and manual lookup still require their separate flags. No live verification is authorized by these instructions.
+
+For separately authorized local testing, stop the backend, then run from the project folder:
+
+```sh
+cd /Users/rahularutla/Documents/whereto
+VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_DAILY_USD=10 npm run dev:backend
+```
+
+The page shows **DEVELOPMENT EXPLORATION**. Open **About these estimates** for outing request/element counts, estimated outing/day cost and remaining estimated allowance. Discovery and routing remain finite; more options use existing evidence first. No background exploration starts on page load. Production/staging/hosting indicators and nonlocal HTTP callers are refused. Keep the backend bound to `127.0.0.1` using the existing command.
+
+The guard stores counters only at `~/.local/state/whereto/development-cost.json` (private permissions). All exploration outings, manual searches and contact requests using that file share it, including after backend restart. `WHERETO_DEV_COST_LEDGER` optionally chooses a private absolute path; do not switch/delete files to reset usage. Unreadable, busy or corrupt accounting refuses work. Increase `WHERETO_DEV_DAILY_USD` only by an explicit local configuration change and review spending first. A $10 daily allowance is **not** a $40–$50 monthly cap: five fully used days consume that target before allowances, and unrelated/normal-mode usage is not included.
+
+To stop exploration and return to mock mode:
+
+```sh
+unset WHERETO_EXPLORATION_DEV VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_RATINGS_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_START_LOOKUP_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
+npm run dev:backend
+```
+
+Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, costs and limitations](docs/billing-safeguards.md#development-exploration-estimate-guard); [discovery and continuation](docs/real-planning.md#development-exploration-mode).
 
 ## Start the application — beginner instructions
 

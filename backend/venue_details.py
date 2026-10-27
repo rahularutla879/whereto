@@ -49,6 +49,8 @@ def fetch_details(place_id):
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=0))
         token = access_token(session)
         try:
+            from backend.development_cost import dispatch
+            dispatch("details", 1)
             response = session.get(f"https://places.googleapis.com/v1/places/{place_id}",
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,
                          "X-Goog-FieldMask": DETAILS_MASK}, timeout=(5, 15), allow_redirects=False)

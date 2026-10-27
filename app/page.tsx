@@ -1,5 +1,6 @@
 "use client";
 
+import { ExplorationNotice, explorationStage } from "../components/exploration-notice";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
@@ -73,11 +74,12 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
 export default function Home() {
   const [dataMode, setDataMode] = useState<"mock" | "real" | "unavailable">("unavailable");
   const startingControls = useRef<StartingLocationHandle>(null);
+  const [explorationEnabled, setExplorationEnabled] = useState(false);
   const [lookupEnabled, setLookupEnabled] = useState(false);
   const [planningStage, setPlanningStage] = useState("Generating itinerary");
   const [locationContext, setLocationContext] = useState<LocationContext>({});
   const detailsSession = useRef(new VenueDetailsSession());
-  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setExplorationEnabled(value.explorationEnabled === true); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -127,8 +129,8 @@ export default function Home() {
     if (!result.optionsToken || !(expandDiscovery ? result.canDiscover : result.canExpand)) return;
     const controller = session.current.begin();
     if (!controller) return;
-    setPlanningStage("Generating itinerary");
-    setLoading(true); setOptionsNotice("Checking different combinations within this search…");
+    setPlanningStage(explorationStage(expandDiscovery));
+    setLoading(true); setOptionsNotice("");
     try {
       const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
@@ -208,6 +210,7 @@ export default function Home() {
       <section className="planner-section shell" id="planner" aria-labelledby="planner-title">
         <form className="planner" onSubmit={submit}>
           <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">{dataMode === "real" ? "REAL DATA · LOCAL DEV" : dataMode === "mock" ? "MOCK DATA" : "MODE UNAVAILABLE"}</span></div>
+          <ExplorationNotice active={explorationEnabled && dataMode === "real"} />
           {dataMode === "unavailable" && <p role="status">Checking the planner connection. If this stays unavailable, start the backend and reload this page before planning.</p>}
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
@@ -248,7 +251,7 @@ export default function Home() {
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && !loading && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {!loading && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
-        {generated && result.dataMode === "real" && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <div className="more-options"><button type="button" className="secondary-button" disabled={(!result.alternativeBatches?.length && !result.canExpand) || dirty || loading} onClick={() => { void showDifferent(); }}>Show different options</button>{result.canDiscover && <button type="button" className="secondary-button" disabled={dirty || loading} onClick={() => { void showDifferent(true); }}>Search for more venues</button>}<p role="status">{optionsNotice || (result.alternativeBatches?.length ? "Uses already checked combinations. No new provider requests." : result.canExpand ? "Checks unused combinations first; may calculate more routes within the same search budget." : "No more distinct options within this search coverage. Other venues may exist outside the checked pool.") }{result.canDiscover && " Search for more venues fetches at most two same-area result pages or refined searches per action, within this outing’s shared budget."}</p></div>}
+        {generated && result.dataMode === "real" && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <div className="more-options"><button type="button" className="secondary-button" disabled={(!result.alternativeBatches?.length && !result.canExpand) || dirty || loading} onClick={() => { void showDifferent(); }}>Show different options</button>{result.canDiscover && <button type="button" className="secondary-button" disabled={dirty || loading} onClick={() => { void showDifferent(true); }}>Search for more venues</button>}<p role="status">{optionsNotice || (result.alternativeBatches?.length ? "Uses already checked combinations. No new provider requests." : result.canExpand ? (explorationEnabled ? "Reuses checked options first; may find more places and check routes within the daily development allowance." : "Checks unused combinations first; may calculate more routes within the same search budget.") : "No more distinct options within this search coverage. Other venues may exist outside the checked pool.") }{result.canDiscover && " Search for more venues fetches at most two same-area result pages or refined searches per action, within this outing’s shared budget."}</p></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 

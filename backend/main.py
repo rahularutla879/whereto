@@ -24,6 +24,29 @@ provider_budget = ProviderBudget()
 app = FastAPI(title="Where To? backend")
 
 
+@app.middleware("http")
+async def exploration_local_only(request: Request, call_next):
+    # Capability/session tokens still apply. Reject public hosts, proxy forwarding
+    # and cross-origin callers even if a development process is misbound.
+    if provider_budget.settings.exploration:
+        from urllib.parse import urlparse
+        local = {"localhost", "127.0.0.1", "::1", "testserver"}
+        origin = request.headers.get("origin")
+        proxy_host = request.headers.get("x-whereto-client-host")
+        proxy_origin = request.headers.get("x-whereto-client-origin")
+        try:
+            proxy_local = not proxy_host or urlparse("http://" + proxy_host).hostname in local
+            proxy_origin_local = not proxy_origin or urlparse(proxy_origin).hostname in local
+        except ValueError:
+            proxy_local = proxy_origin_local = False
+        if (not proxy_local or not proxy_origin_local or request.headers.get("x-whereto-proxied") == "1"
+                or request.url.hostname not in local or not request.client or request.client.host not in local
+                or any(k in request.headers for k in ("x-forwarded-for", "forwarded", "x-forwarded-host"))
+                or (origin and urlparse(origin).hostname not in local)):
+            return JSONResponse(status_code=403, content={"message":"Development exploration accepts local requests only."})
+    return await call_next(request)
+
+
 @app.get("/health")
 async def health() -> dict[str, str]:
     return {"status": "ok"}
@@ -86,6 +109,7 @@ def interpret_outing(request: InterpretationInput):
 @app.get("/api/planning-mode")
 def planning_mode():
     return {"mode": provider_budget.settings.mode, "enabled": provider_budget.settings.mode == "mock" or local_real_enabled(),
+            "explorationEnabled": provider_budget.settings.exploration,
             "startingLookupEnabled": local_real_enabled() and os.environ.get("WHERETO_START_LOOKUP_DEV") == "1",
             "contactDetailsEnabled": local_real_enabled() and os.environ.get("WHERETO_CONTACT_DETAILS_DEV") == "1"}
 

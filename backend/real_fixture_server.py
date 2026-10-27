@@ -17,13 +17,18 @@ from backend.places import DiscoveryError
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8016)
+    parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
     args = parser.parse_args()
+    if args.exploration_ledger:
+        os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
                       WHERETO_CONTACT_DETAILS_DEV='1', WHERETO_START_LOOKUP_DEV='1', WHERETO_RATINGS_DEV='1', NODE_ENV='development')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
     scenario = {'name': 'normal'}
 
     def search(body, **kwargs):
+        from backend.development_cost import dispatch
+        dispatch('search')
         counts['searches'] += 1
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
@@ -47,6 +52,8 @@ def main():
         return result
 
     def matrix(body):
+        from backend.development_cost import dispatch
+        dispatch('matrix', len(body['origins'])*len(body['destinations']))
         if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
         result = matrix_fixture(body)
@@ -57,6 +64,8 @@ def main():
         return [] if scenario['name'] == 'missing_routes' else result
 
     def details(place_id):
+        from backend.development_cost import dispatch
+        dispatch('details')
         counts['details'] += 1
         if scenario['name'] == 'details_failure': raise DiscoveryError('quota', 'Contact lookup quota reached.')
         if scenario['name'] == 'missing_contacts': return {'placeId': place_id, 'phone': None, 'telephoneUrl': None, 'website': None, 'attributions': []}

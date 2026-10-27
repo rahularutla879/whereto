@@ -82,8 +82,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "discoveryStages": discovery.stages, "discoveryReasons": discovery.diagnostics,
                    "usageCategories": ["Text Search Enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "Text Search Pro", "Compute Route Matrix Essentials"]}
     diagnostics['venuePipeline'] = empty_coverage(discovery, {a.value: {v.id for v in p} for a, p in zip(request.activities, pools)})
-    diagnostics['configuredLimits'] = {'candidatesPerActivity': outing.settings.candidates_per_activity,
-        'searchesPerOuting': outing.settings.searches_per_outing, 'matrixElementsPerOuting': outing.settings.matrix_elements_per_outing}
+    diagnostics['configuredLimits'] = {'candidatesPerActivity': None if outing.settings.exploration else outing.settings.candidates_per_activity,
+        'searchesPerOuting': None if outing.settings.exploration else outing.settings.searches_per_outing, 'matrixElementsPerOuting': None if outing.settings.exploration else outing.settings.matrix_elements_per_outing}
     if any(not pool for pool in pools):
         from backend.option_sessions import option_sessions
         if "token" not in context:
@@ -96,7 +96,22 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         return result
     from backend.routing_shortlist import shortlist
     all_pools = pools
-    pools = shortlist(all_pools, facts, context["width"], request.startingLocation)
+    frontier = all_pools
+    if outing.settings.exploration:
+        # Finite computation, not a retention ceiling. Prefer venues with fewer
+        # checked routes; retain this action's frontier through its one recursion.
+        if not context.get("actionFrontier"):
+            width = expansion_width(outing.settings, len(pools))
+            known = context["routes"]
+            frontiers = []
+            for pool in pools:
+                previous = frontiers[-1] if frontiers else None
+                chosen = sorted(pool, key=lambda v: (
+                    sum((a, v.id) in known for a in previous) if previous else sum(v.id == a for a, _ in known), v.id))[:width]
+                frontiers.append({v.id for v in chosen})
+            context["actionFrontier"] = frontiers
+        frontier = [[v for v in pool if v.id in ids] for pool, ids in zip(pools, context["actionFrontier"])]
+    pools = shortlist(frontier, facts, context["width"], request.startingLocation)
     for activity, row in diagnostics['venuePipeline'].items():
         count = len({v.id for pool in pools for v in pool if v.activity == activity})
         row.update(shortlistedForRouting=count, notInCheckedCompletePath=count)
@@ -117,10 +132,11 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     # Reuse evaluated alternatives. A bounded stage fills a checked pool with
     # fewer than three options; initial infeasibility may expand once below.
     primary_evidence_needed = context.get('eligiblePrimary', 3) < min(3, len(all_pools[0]))
-    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped"):
+    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped") and (not outing.settings.exploration or context.get("actionRouteStages", 0) < 2):
         selected, _, _ = select_stage(route_request, context["routes"], outing, facts)
         context["routedThisAction"] = True
         if selected:
+            context["actionRouteStages"] = context.get("actionRouteStages", 0) + 1
             try:
                 additional = GoogleRouteCalculator(outing).calculate(route_request.model_copy(update={"required_pairs": selected}))
                 context["matrixRequests"] += additional.matrix_requests
@@ -255,7 +271,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         batch = _select(remaining, 3, min_changed=min_changed, prefer_primary=True, primary_used=primary_used)
         if not batch:
             break
-        if len(batch) < 3 and capacity["elements"] > 0 and capacity["attempts"] > 0 and (pending or (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools)))):
+        if len(batch) < 3 and capacity["elements"] > 0 and capacity["attempts"] > 0 and (pending or ((outing.settings.exploration or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools)))):
             break  # Retain leftovers for a full batch after the next explicit stage.
         batches.append(batch)
         primary_used.update(p.candidate.venues[0].id for p in batch)
@@ -272,22 +288,30 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     details_sessions.extend(details_token, list(facts))
     context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in evaluated)
     context["routedThisAction"] = False
+    if outing.settings.exploration:
+        diagnostics.update(outing.usage())
     diagnostics['venuePipeline'] = planning_coverage(discovery, all_pools, pools, request.activities,
         routes, travel_sets, evaluated, ranked, diverse, [p for p in ranked if p.candidate.id in shown], context)
     diagnostics['primaryCoverageExpansion'] = context.get('primaryCoverageExpanded', False)
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
-        (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
+        ((outing.settings.exploration or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
+    if outing.settings.exploration:
+        can_expand = can_expand or can_discover(context)
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=route_notice if not diverse and route_notice else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=[f"Current application ceilings: {outing.settings.candidates_per_activity} retained venues per activity; {outing.settings.searches_per_outing} searches and {outing.settings.matrix_elements_per_outing} route elements per outing."] + coverage_notes(diagnostics["venuePipeline"]) + ([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
+        notes=(["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
+            f"Development usage — Text Searches {outing._dispatched['search']} dispatched ({outing._pagination} pagination reservations), Details {outing._dispatched['details']}, Matrix requests {outing._dispatched['matrix']}, elements {outing._dispatched['matrixElements']}. "
+            f"Conservative reserved work: {outing._searches} searches, {outing._details} Details, {outing._matrix_requests} matrices / {outing._elements} elements. "
+            f"Estimated gross: outing ${outing._gross/1000000:.3f}, local day ${diagnostics['estimatedDayGrossUsd']:.3f}; remaining local allowance ${diagnostics['estimatedAllowanceRemainingUsd']:.3f}. "
+            "Estimates include failed/unsent batch reservations, exclude allowances/credits and unrelated usage; not verified Cloud billing."] if outing.settings.exploration else [f"Current application ceilings: {outing.settings.candidates_per_activity} retained venues per activity; {outing.settings.searches_per_outing} searches and {outing.settings.matrix_elements_per_outing} route elements per outing."]) + coverage_notes(diagnostics["venuePipeline"]) + ([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
                "Real venues from Google Maps; activity categories reflect search context and need confirmation.",
                "Real prices, group capacity, activity durations, hours, showtimes and reservations are unknown. No budget is confirmed.",
                "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
                "Inter-stop travel excludes the first trip and return home. An explicitly shared start is shown separately.",
-               f"Up to {session.settings.candidates_per_activity} relevant candidates per activity can be retained through explicit search expansion. These results do not cover every venue in the city."])
+               ("Exploration retains eligible candidates across finite actions; searched coverage is not city-wide exhaustion." if outing.settings.exploration else f"Up to {session.settings.candidates_per_activity} relevant candidates per activity can be retained through explicit search expansion. These results do not cover every venue in the city.")])
 
 
 def empty(request, message, diagnostics=None):
@@ -312,7 +336,14 @@ def more_real_plans(token, *, expand_discovery=False):
         if context.get("stopped"):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
         context["routedThisAction"] = False
+        context["actionRouteStages"] = 0
+        if context['outing'].settings.exploration:
+            if expand_discovery or context.get('unseenEligible', 0) < 3:
+                context.pop('actionFrontier', None)
+            context['expanded'] = False
         if expand_discovery:
+            expand_venue_discovery(context)
+        elif context['outing'].settings.exploration and (context.get('unseenEligible', 0) < 3 or context.get('eligiblePrimary', 3) < 3) and can_discover(context):
             expand_venue_discovery(context)
         result = real_plans(context["request"], context["session"], context=context)
         if not result.provisionalPlans and not context["expanded"]:
@@ -321,8 +352,9 @@ def more_real_plans(token, *, expand_discovery=False):
             context["width"] = expansion_width(context["session"].settings, len(context["request"].activities))
             result = real_plans(context["request"], context["session"], context=context)
         return result
-    except (DiscoveryError, ProviderLimitError, RouteError):
+    except (DiscoveryError, ProviderLimitError, RouteError) as error:
         context["stopped"] = True
+        context['outing'].stop_reason = str(error)
         raise
     finally:
         lock.release()
@@ -331,10 +363,11 @@ def more_real_plans(token, *, expand_discovery=False):
 def discovery_activities(context):
     settings = context['session'].settings
     return [a for a in dict.fromkeys(context['request'].activities)
-            if sum(a in v.activities for v in context['discovery'].venues) < settings.candidates_per_activity
-            and context['discoveryPages'].get(a, 0) < 6
+            if sum(a in v.activities for v in context['discovery'].venues) < settings.ceiling('candidates_per_activity')
+            and (settings.exploration or context['discoveryPages'].get(a, 0) < 6)
             and (context['discovery'].paging.get(a, {}).get('next')
-                 or context['discovery'].paging.get(a, {}).get('variant', 'initial') == 'initial')]
+                 or context['discovery'].paging.get(a, {}).get('variant', 'initial') == 'initial'
+                 or (settings.exploration and context['discovery'].paging.get(a, {}).get('variant') == 'alternative'))]
 
 
 def can_discover(context):
@@ -342,8 +375,8 @@ def can_discover(context):
         return False
     settings = context['session'].settings
     usage = context['outing'].usage()
-    return (usage['placesSearchRequests'] < settings.searches_per_outing
-            and usage['providerAttempts'] < settings.requests_per_outing -
+    return (usage['placesSearchRequests'] < settings.ceiling('searches_per_outing')
+            and usage['providerAttempts'] < settings.ceiling('requests_per_outing') -
                 (settings.details_per_outing - usage['placesDetailsRequests'])
             and bool(discovery_activities(context)))
 
@@ -361,8 +394,8 @@ def expand_venue_discovery(context):
     request, outing = context['request'], context['outing']
     old = context['discovery']
     counts = {a: sum(a in v.activities for v in old.venues) for a in dict.fromkeys(request.activities)}
-    available = min(outing.settings.searches_per_outing - outing.usage()['placesSearchRequests'],
-                    outing.settings.requests_per_outing - outing.usage()['providerAttempts'] -
+    available = min(outing.settings.ceiling('searches_per_outing') - outing.usage()['placesSearchRequests'],
+                    outing.settings.ceiling('requests_per_outing') - outing.usage()['providerAttempts'] -
                     (outing.settings.details_per_outing - outing.usage()['placesDetailsRequests']))
     activities = discovery_activities(context)[:min(2, available)]
     queries = []
@@ -370,15 +403,25 @@ def expand_venue_discovery(context):
         cursor = old.paging.get(a, {})
         queries.append(DiscoveryRequest(activity=a, destination=context['area'],
             meal='dinner' if a == 'food' and (request.dinner or request.dinnerStops) else None,
-            search_variant=cursor.get('variant', 'initial') if cursor.get('next') else 'alternative',
+            search_variant=cursor.get('variant', 'initial') if cursor.get('next') else ('mixed' if outing.settings.exploration and cursor.get('variant') == 'alternative' else 'alternative'),
             page_token=cursor.get('next')))
         context['discoveryPages'][a] = context['discoveryPages'].get(a, 0) + 1
     found = PlacesDiscovery(outing).discover_many(queries)
     from backend.venue_quality import assess_candidates
-    merged = assess_candidates([source for v in old.venues + found.venues for source in v.sources])
+    # Retain every source/credit, while keeping rejected activity associations
+    # out of the union. A new accepted observation may add an activity later.
+    observations = old.venues + found.venues
+    allowed = {(source.provider, source.id, a) for v in observations for source in v.sources for a in v.activities}
+    merged = assess_candidates([source for v in observations for source in v.sources])
+    accepted_venues = []
+    for v in merged.venues:
+        accepted = [a for a in v.activities if any((source.provider, source.id, a) in allowed for source in v.sources)]
+        if accepted:
+            accepted_venues.append(v.model_copy(update={'activities':accepted}))
+    merged = merged.model_copy(update={'venues':accepted_venues})
     retained, used = [], {a: 0 for a in counts}
     for venue in merged.venues:
-        accepted = [a for a in venue.activities if a in used and used[a] < outing.settings.candidates_per_activity]
+        accepted = [a for a in venue.activities if a in used and used[a] < outing.settings.ceiling('candidates_per_activity')]
         if accepted:
             retained.append(venue.model_copy(update={'activities': accepted}))
             for a in accepted:
@@ -387,7 +430,7 @@ def expand_venue_discovery(context):
     context['discovery'] = DiscoveryResult(candidates=[], venues=retained, audit=merge_discovery_audits(old, found, retained), paging={**old.paging, **found.paging},
         excluded_count=old.excluded_count + found.excluded_count,
         diagnostics={key: old.diagnostics.get(key, 0) + found.diagnostics.get(key, 0) for key in old.diagnostics.keys() | found.diagnostics.keys()},
-        stages={'initial': old.stages, 'expansion': found.stages,
+        stages={**({} if outing.settings.exploration else {'initial': old.stages}), 'expansion': found.stages,
                 'retainedCounts': {a.value: n for a, n in used.items()},
                 'newAssociations': sum(used[a] - counts[a] for a in counts),
                 'candidateCapExcludedAssociations': sum(len(v.activities) for v in merged.venues) - sum(used.values())})
