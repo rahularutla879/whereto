@@ -32,6 +32,9 @@ def main():
         counts['searches'] += 1
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
+        if scenario['name'] == 'location_first':
+            from backend.location_fixtures import spatial_search_fixture
+            return spatial_search_fixture(body, **kwargs)
         if kwargs:
             if scenario['name'] == 'lookup_failure': raise DiscoveryError('quota', 'Starting-place quota reached. Stop and review usage.')
             result = search_fixture({'textQuery': 'cafes in Baltimore', 'pageSize': 3})
@@ -94,6 +97,8 @@ def main():
         @app.post('/__test/scenario')
         def set_scenario(value: dict):
             scenario['name'] = value.get('name', 'normal')
+            os.environ['VENUE_DATA_MODE'] = 'mock' if scenario['name']=='mock' else 'real'
+            os.environ['WHERETO_EXPLORATION_DEV'] = '1' if args.exploration_ledger and scenario['name']!='mock' else '0'
             os.environ['WHERETO_START_LOOKUP_DEV'] = '0' if scenario['name'] == 'lookup_disabled' else '1'
             # Tests reset only process-local admission, never real accounting.
             from backend import main as api

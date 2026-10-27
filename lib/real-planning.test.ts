@@ -9,6 +9,8 @@ import { POST as interpret } from "../app/api/interpret/route";
 import { POST as plan } from "../app/api/plans/generate/route";
 import { POST as details } from "../app/api/venues/details/route";
 import { POST as options } from "../app/api/plans/options/route";
+import { POST as startingAreas } from "../app/api/starting-areas/route";
+import { StartingAreaSession } from "./starting-areas";
 import { POST as startingPlaces } from "../app/api/starting-places/route";
 import { GET as mode } from "../app/api/planning-mode/route";
 import { VenueDetailsSession, safeWebsite } from "./venue-details";
@@ -26,7 +28,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port)]);
   const send: typeof fetch = async (path, init) => {
     const request = new Request(`http://localhost${path}`, init);
-    return path === "/api/starting-places" ? startingPlaces(request) : path === "/api/plans/options" ? options(request) : path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
+    return path === "/api/starting-areas" ? startingAreas(request) : path === "/api/starting-places" ? startingPlaces(request) : path === "/api/plans/options" ? options(request) : path === "/api/interpret" ? interpret(request) : path === "/api/venues/details" ? details(request) : plan(request);
   };
   const scenario = (name: string) => fetch(`${base}/__test/scenario`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });
   try {
@@ -191,6 +193,23 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
         assert.equal((await (await fetch(`${base}/__test/counts`)).json()).ai, count.ai, "retry reuses validated interpretation rather than another AI call");
       }
     }
+    await scenario("location_first");
+    const suggestedSession=new StartingAreaSession();
+    let preparation=0;
+    const spatial = await generateOuting("Plan bowling and dinner in Washington, DC on Saturday, November 14, 2026 for 3 people. Within 8 miles of Union Station.", EMPTY_PREFERENCES, {
+      prepareOrigin:async input=>{
+        preparation++;
+        const response=await suggestedSession.get(input,send);
+        assert.equal(response.matches.length,3);
+        assert.deepEqual(await suggestedSession.get(input,send),response);
+        const match=response.matches[0];
+        return {locationFirst:true,referenceToken:response.referenceToken,startingLocation:{point:{id:"reference_"+match.placeId,coordinates:match.coordinates},explicitly_authorized:true,precision:match.precision,source:"suggested",label:match.name}};
+      }
+    }, send);
+    assert.equal(preparation,1);assert.equal(spatial.plans.length,3,spatial.message);
+    assert.equal(spatial.location,"Washington, DC");
+    assert.ok(spatial.plans.every(p=>p.firstLeg?.source==="suggested"&&p.firstLeg.miles!=null&&p.firstLeg.miles<=8));
+    assert.ok(new Set(spatial.plans.map(p=>p.venues[0].id)).size>=2);
     await scenario("partial");
     const partial = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
     assert.equal(partial.plans.length, 1);
@@ -200,6 +219,13 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     const raw = await (await plan(new Request("http://localhost/api/plans/generate", { method: "POST", body: JSON.stringify({ activities: ["coffee"], date: "2026-11-07" }) }))).json();
     raw.dataMode = "mock";
     assert.throws(() => adaptRanking(raw), /Mixed venue data modes/);
+    await scenario("mock");
+    assert.equal((await (await mode()).json()).mode,"mock");
+    const beforeMock=await (await fetch(`${base}/__test/counts`)).json();
+    const mock=await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07",EMPTY_PREFERENCES,{},send);
+    assert.equal(mock.dataMode,"mock");assert.equal(mock.plans.length,3);
+    const afterMock=await (await fetch(`${base}/__test/counts`)).json();
+    for(const key of ["searches","elements","details"])assert.equal(afterMock[key],beforeMock[key]);
   } finally {
     backend.kill(); await once(backend, "exit");
     if (previous === undefined) delete process.env.BACKEND_URL; else process.env.BACKEND_URL = previous;

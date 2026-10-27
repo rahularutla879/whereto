@@ -1,6 +1,7 @@
 """Task 46 orchestration: shared combinations/evaluator/ranking, real evidence only."""
 from datetime import datetime, timezone
 from math import ceil
+from typing import Literal
 import os
 from time import perf_counter
 
@@ -20,6 +21,8 @@ from backend.routes import AuthorizedStart, GoogleRouteCalculator, RoutePoint, R
 
 
 class PlannerInput(PlanningRequest):
+    locationFirst: bool = Field(default=False, strict=True)
+    referenceToken: str | None = Field(default=None, min_length=1, max_length=100, exclude=True, repr=False)
     manualStartingPlace: str | None = Field(default=None, max_length=200, exclude=True, repr=False)
     startingLocation: AuthorizedStart | None = Field(default=None, repr=False, exclude=True)
     currentArea: SearchArea | None = Field(default=None, repr=False, exclude=True)
@@ -30,17 +33,30 @@ class PlannerInput(PlanningRequest):
 def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) -> RankingResult:
     session.settings.require_live_provider()
     started = perf_counter()
-    outing = context["outing"] if context else session.outing()
+    if context is None and request.startingLocation and request.startingLocation.source=='suggested' and not request.referenceToken:
+        raise DiscoveryError('unverified_origin','Choose and confirm a verified starting-area suggestion before planning from it.')
+    preflight = None
+    if context is None and request.referenceToken:
+        from backend.starting_areas import references
+        identity = request.startingLocation.point.id.removeprefix('reference_') if request.startingLocation else ''
+        preflight, origin = references.confirm(request.referenceToken, identity, session)
+        q = preflight['query']
+        if (q.destination.casefold()!=request.location.casefold() or q.activities!=request.activities
+                or q.geography!=request.geography or q.firstTravel!=request.firstTravel
+                or q.transport!=('walking' if request.transport=='walking' else 'driving')):
+            raise DiscoveryError('changed_origin_request','Outing details changed since this suggestion. Choose a starting area again.')
+        request=request.model_copy(update={'startingLocation':origin})
+    outing = context["outing"] if context else preflight['outing'] if preflight else session.outing()
     # Do not echo precise authorized starting coordinates in result/request IDs.
-    public = PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius"}))
+    public = PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "locationFirst"}))
     if request.manualStartingPlace and request.manualStartingPlace.strip():
         return empty(public, "Find and confirm your manual starting place before planning, or clear it to plan without first-stop travel. Your destination was not changed.")
     if request.allowRevisits:
         return empty(public, "Real outings currently require distinct venues. Repeated activity types are supported, but returning to the same venue is not yet supported.")
     if request.transport is not None and request.transport.value not in ("driving", "walking"):
         return empty(public, "Real planning supports driving or walking. Select one of these modes.")
-    if request.maxFirstLegTravel is not None and request.startingLocation is None:
-        return empty(public, "Share your starting location or provide a starting point before using a first-stop travel limit.")
+    if (request.maxFirstLegTravel is not None or request.firstTravel is not None) and request.startingLocation is None:
+        return empty(public, "Choose current location, confirm a manual starting place, or choose a suggested starting area before checking first-stop travel.")
     near = request.location.strip().casefold() in ("near me", "current location", "nearby")
     if near and (request.currentArea is None or request.currentArea.coordinates is None):
         return empty(public, "Choose Use my current location, or enter a destination city/neighborhood in Set preferences.")
@@ -50,6 +66,11 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         if not near:
             return empty(public, "A search radius needs an explicit search point. Use near me with a shared location, or omit the radius for a named destination.")
         area = area.model_copy(update={"radius_m": request.searchRadius})
+    if context is None and request.locationFirst:
+        from backend.sequential_discovery import initialize
+        context=initialize(request,outing,preflight['inventory'] if preflight else None)
+        context.update(session=session,routes=preflight['routes'] if preflight else {},seen=set(),
+            width=6 if len(request.activities)<=2 else 4,expanded=False,area=area,matrixRequests=preflight['matrixRequests'] if preflight else 0,usedPrimary=set())
     if context is None:
         try:
             discovery = PlacesDiscovery(outing).discover_many([
@@ -63,10 +84,10 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     else:
         discovery = context["discovery"]
     pools, facts = [], {}
-    for activity in request.activities:
+    for position, activity in enumerate(request.activities):
         pool = []
         for distinct in discovery.venues:
-            if activity not in distinct.activities:
+            if activity not in distinct.activities or context.get("locationFirst") and distinct.facts.id not in context["positionIds"][position]:
                 continue
             fact = distinct.facts.model_copy(update={"activity": activity})
             labels = distinct_venue_labels(distinct).model_dump(mode="json")
@@ -119,20 +140,33 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     # venue can serve either category, but is never presented as two visits.
     # Explicit revisits are currently deliberately unsupported for real outings.
     distinct_request = public.model_copy(update={"allowRevisits": False})
-    candidates = list(_walk(distinct_request, pools))
-    if not candidates:
+    candidates = None if context.get("locationFirst") else list(_walk(distinct_request, pools))
+    if candidates == []:
         return empty(public, "No complete outing uses distinct real venues in the requested order. Multi-activity venues are not duplicated.", diagnostics)
     mode = "walk" if request.transport and request.transport.value == "walking" else "drive"
     from backend.routes import plan_matrices, RouteResult
     route_request = RouteRequest(activity_groups=[[RoutePoint(id=v.id, place_id=v.id) for v in pool] for pool in pools],
                                  mode=mode, starting_location=request.startingLocation)
+    if context.get('locationFirst'):
+        # Route only spatially promising consecutive transitions, plus every
+        # retained authorized origin leg. Distances here are search heuristics.
+        from backend.venue_geography import distance_m
+        possible,_=plan_matrices(route_request)
+        desired=[]
+        for (a,b),(origin,destination) in possible.items():
+            if request.startingLocation and a==request.startingLocation.point.id:
+                desired.append((a,b));continue
+            threshold=max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode=='walk' else 600))
+            if (facts[a].coordinates and facts[b].coordinates and distance_m(facts[a].coordinates,facts[b].coordinates)<=threshold) or any(x==a and y==b for _,x,y in context['spatialEdges']):
+                desired.append((a,b))
+        route_request=route_request.model_copy(update={'required_pairs':desired})
     from backend.routing_expansion import select_stage
     required, _ = plan_matrices(route_request)
     missing = [key for key in required if key not in context["routes"]]
     # Reuse evaluated alternatives. A bounded stage fills a checked pool with
     # fewer than three options; initial infeasibility may expand once below.
     primary_evidence_needed = context.get('eligiblePrimary', 3) < min(3, len(all_pools[0]))
-    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped") and (not outing.settings.exploration or context.get("actionRouteStages", 0) < 2):
+    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped") and (not (outing.settings.exploration or context.get("locationFirst")) or context.get("actionRouteStages", 0) < 2):
         selected, _, _ = select_stage(route_request, context["routes"], outing, facts)
         context["routedThisAction"] = True
         if selected:
@@ -166,6 +200,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                            status=DataStatus.estimated if leg.status in ("ok", "same_location") else DataStatus.unknown,
                            source="Google Maps route estimate; display rounded up to whole minutes")
 
+    if context.get('locationFirst'):
+        from backend.spatial_beam import candidates as beam_candidates
+        candidates=beam_candidates(distinct_request,pools,routes,context['seen'])
     evaluated, rejections, rejection_codes = [], {}, {}
     checked = 0
     travel_sets = {state: {} for state in ('compatible', 'violated', 'unverified')}
@@ -198,6 +235,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             max_leg_minutes=request.maxLegTravel, max_total_minutes=request.travel,
             max_leg_exclusive=request.maxLegTravelExclusive, max_total_exclusive=request.travelExclusive,
             max_first_leg_exclusive=request.maxFirstLegTravelExclusive,
+            first_preference=request.firstTravel, first_band=context.get("bands",[None])[context.get("band",0)],
             starting_location=request.startingLocation, max_first_leg_minutes=request.maxFirstLegTravel,
             evaluated_at=datetime.now(timezone.utc)))
         travel_checks = [c for c in evidence.checks if c.kind == 'travel']
@@ -229,9 +267,19 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                               for a, b in zip(candidate.venues, candidate.venues[1:])]
         if request.startingLocation:
             first = routes[request.startingLocation.point.id, candidate.venues[0].id]
-            plan.firstLeg = {"minutes": ceil(first.duration_minutes) if first.duration_minutes is not None else None,
+            plan.firstLeg = {"source":request.startingLocation.source,"originLabel":request.startingLocation.label,
+                             "miles":round(first.distance_meters/1609.344,2) if first.distance_meters is not None else None,
+                             "exceedsPreference":False,
+                             "minutes": ceil(first.duration_minutes) if first.duration_minutes is not None else None,
                              "labels": route_labels(first).model_dump(mode="json"),
-                             "approximate": request.startingLocation.precision not in ("device", "address_or_place")}
+                             "accuracyMeters":request.startingLocation.accuracy_m, "approximate": request.startingLocation.source=='suggested' or bool(request.startingLocation.accuracy_m and request.startingLocation.accuracy_m>100) or request.startingLocation.precision not in ("device", "address_or_place")}
+            if request.firstTravel:
+                from backend.location_policy import exceeds
+                extra=exceeds(first,request.firstTravel)
+                plan.firstLeg['exceedsPreference']=bool(extra)
+                plan.firstLeg['preference']=request.firstTravel.model_dump(exclude={'originText'})
+                if extra and request.firstTravel.mode=='flexible':
+                    plan.issues.append(ConstraintIssue(code='extra_first_travel',field='travel',status='unknown',message='This option requires extra travel beyond your original flexible first-stop preference. The estimate is from the selected planning reference.'))
         plan.feasibilityEvidence = labels.model_dump(mode="json")
         if plan.feasibility == "violated":
             for issue in plan.issues:
@@ -252,6 +300,10 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     varying = sum(len({p.candidate.venues[i].id for p in ranked}) > 1 for i in range(len(request.activities)))
     min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
     diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
+    if (context.get('locationFirst') and len(diverse)<3 and not context.get('stopped')
+            and context.get('actionRouteStages',0)<2):
+        from backend.sequential_discovery import widen
+        if widen(context):return real_plans(request,session,context=context)
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     context['eligiblePrimary'] = diagnostics['eligiblePrimaryCandidates']
     primary_shortage = context['eligiblePrimary'] < min(3, len(all_pools[0]))
@@ -296,13 +348,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
         ((outing.settings.exploration or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
-    if outing.settings.exploration:
+    if outing.settings.exploration or context.get("locationFirst"):
         can_expand = can_expand or can_discover(context)
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=route_notice if not diverse and route_notice else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=(["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
+        notes=([f"Location-first discovery: multiple earlier-stop anchors, bounded route-evidence beam; flexible search stage {context.get('band',0)}. Search coverage is not city-wide exhaustion.",
+                   "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
             f"Development usage — Text Searches {outing._dispatched['search']} dispatched ({outing._pagination} pagination reservations), Details {outing._dispatched['details']}, Matrix requests {outing._dispatched['matrix']}, elements {outing._dispatched['matrixElements']}. "
             f"Conservative reserved work: {outing._searches} searches, {outing._details} Details, {outing._matrix_requests} matrices / {outing._elements} elements. "
             f"Estimated gross: outing ${outing._gross/1000000:.3f}, local day ${diagnostics['estimatedDayGrossUsd']:.3f}; remaining local allowance ${diagnostics['estimatedAllowanceRemainingUsd']:.3f}. "
@@ -337,13 +390,16 @@ def more_real_plans(token, *, expand_discovery=False):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
         context["routedThisAction"] = False
         context["actionRouteStages"] = 0
+        context["actionDiscoveryCalls"] = 0
+        context["continuationAction"] = True
+        context["flexExpandedThisAction"] = False
         if context['outing'].settings.exploration:
             if expand_discovery or context.get('unseenEligible', 0) < 3:
                 context.pop('actionFrontier', None)
             context['expanded'] = False
         if expand_discovery:
             expand_venue_discovery(context)
-        elif context['outing'].settings.exploration and (context.get('unseenEligible', 0) < 3 or context.get('eligiblePrimary', 3) < 3) and can_discover(context):
+        elif (context['outing'].settings.exploration or context.get("locationFirst")) and (context.get('unseenEligible', 0) < 3 or context.get('eligiblePrimary', 3) < 3) and can_discover(context):
             expand_venue_discovery(context)
         result = real_plans(context["request"], context["session"], context=context)
         if not result.provisionalPlans and not context["expanded"]:
@@ -378,7 +434,12 @@ def can_discover(context):
     return (usage['placesSearchRequests'] < settings.ceiling('searches_per_outing')
             and usage['providerAttempts'] < settings.ceiling('requests_per_outing') -
                 (settings.details_per_outing - usage['placesDetailsRequests'])
-            and bool(discovery_activities(context)))
+            and (sequential_can_discover(context) if context.get('locationFirst') else bool(discovery_activities(context))))
+
+
+def sequential_can_discover(context):
+    from backend.sequential_discovery import can_expand
+    return can_expand(context)
 
 
 def expand_venue_discovery(context):
@@ -391,6 +452,10 @@ def expand_venue_discovery(context):
     """
     if not can_discover(context):
         raise DiscoveryError('coverage_limit', 'More venue searches are unavailable within the retained-candidate or request limits. Other venues may exist.')
+    if context.get('locationFirst'):
+        from backend.sequential_discovery import expand
+        expand(context)
+        return
     request, outing = context['request'], context['outing']
     old = context['discovery']
     counts = {a: sum(a in v.activities for v in old.venues) for a in dict.fromkeys(request.activities)}

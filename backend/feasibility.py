@@ -10,6 +10,7 @@ from zoneinfo import ZoneInfo
 
 from pydantic import AwareDatetime, Field, model_validator
 
+from backend.location_policy import FirstTravel, exceeds
 from backend.models import ContractModel, EVENT_ACTIVITIES, OutingDate
 from backend.routes import AuthorizedStart, Mode, RouteLeg
 from backend.venue_models import VenueFacts
@@ -47,6 +48,8 @@ class FeasibilityInput(ContractModel):
     max_leg_minutes: Limit | None = None
     max_total_minutes: Limit | None = None  # Inter-stop only, like the existing request.
     starting_location: AuthorizedStart | None = Field(default=None, repr=False)
+    first_preference: FirstTravel | None = None
+    first_band: float | None = Field(default=None, ge=0, le=1440)
     max_first_leg_minutes: Limit | None = None
     evaluated_at: AwareDatetime  # Explicit clock makes evaluation reproducible.
 
@@ -192,6 +195,9 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
         exceeded = limit is not None and (seconds > limit * 60 or exclusive and seconds == limit * 60)
         add("travel", "infeasible" if exceeded else "feasible",
             "first_leg_limit_exceeded" if exceeded and first else "leg_limit_exceeded" if exceeded else "route_verified", ref, index)
+        if first and value.first_preference:
+            outside=exceeds(leg,value.first_preference,value.first_band)
+            add("travel", "infeasible" if outside else "feasible", "first_preference_exceeded" if outside else "first_preference_verified",ref,index)
         if not first:
             before, after = value.stops[index - 1].departure, value.stops[index].arrival
             if before is None or after is None:

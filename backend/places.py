@@ -34,12 +34,22 @@ class DiscoveryModel(BaseModel):
 
 
 class SearchArea(DiscoveryModel):
+    enforce_name: bool = True
+    include_name: bool = False
+    restrict_to_area: bool = False
+    boundary_coordinates: Coordinates | None = Field(default=None, repr=False)
+    boundary_radius_m: Annotated[Number, Field(gt=0, le=50000)] | None = None
+    excluded_regions: list[Literal["VA", "MD", "DC"]] = Field(default_factory=list, max_length=3)
     name: Text | None = None
     coordinates: Coordinates | None = Field(default=None, repr=False)
     radius_m: Annotated[Number, Field(gt=0, le=50000)] | None = None
 
     @model_validator(mode="after")
     def valid_area(self):
+        if self.restrict_to_area and (self.coordinates is None or self.radius_m is None):
+            raise ValueError("A provider search restriction requires a center and radius.")
+        if (self.boundary_coordinates is None) != (self.boundary_radius_m is None):
+            raise ValueError("A fixed search boundary requires both center and radius.")
         if not self.name and self.coordinates is None:
             raise ValueError("Specify a destination or coordinates.")
         if self.radius_m is not None and self.coordinates is None:
@@ -114,7 +124,7 @@ def search_body(request: DiscoveryRequest, limit: int) -> dict:
         query = "entertainment centers with bowling" if request.activity == ActivityType.bowling else query + " places"
     if request.search_variant == "alternative":
         query = "bowling centers" if request.activity == ActivityType.bowling else "restaurants serving dinner" if request.meal == "dinner" else query + " venues"
-    body = {"textQuery": f"{query} in {area.name}" if area.name else query,
+    body = {"textQuery": f"{query} in {area.name}" if area.name and (area.coordinates is None or area.enforce_name or area.include_name) else query,
             "pageSize": limit, "languageCode": "en"}
     if request.activity == ActivityType.bowling and request.search_variant == "initial":
         # Text alone can return other entertainment businesses. Bowling has a
@@ -133,6 +143,19 @@ def search_body(request: DiscoveryRequest, limit: int) -> dict:
         body["locationBias"] = {"rectangle": {
             "low": {"latitude": -90.0, "longitude": -90.0},
             "high": {"latitude": 90.0, "longitude": 90.0}}}
+    if area.restrict_to_area:
+        from math import asin, cos, degrees, radians, sin
+        angle=area.radius_m/6371008.8
+        latitude=radians(area.coordinates.latitude)
+        low=max(-90,area.coordinates.latitude-degrees(angle));high=min(90,area.coordinates.latitude+degrees(angle))
+        if low==-90 or high==90:
+            west,east=-180,180
+        else:
+            delta=degrees(asin(min(1,sin(angle)/cos(latitude))))
+            west=(area.coordinates.longitude-delta+180)%360-180
+            east=(area.coordinates.longitude+delta+180)%360-180
+        body.pop('locationBias',None)
+        body['locationRestriction']={'rectangle':{'low':{'latitude':low,'longitude':west},'high':{'latitude':high,'longitude':east}}}
     return body
 
 
@@ -181,6 +204,24 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
     places = data.get("places", [])
     if len(places) > limit:
         raise DiscoveryError("invalid_response", "Google exceeded the requested candidate limit.")
+    if area.name and not area.enforce_name and area.coordinates is None:
+        for place in places:
+            try:
+                point = Coordinates.model_validate(place['location'])
+                if not geographic_reason(area.model_copy(update={'enforce_name':True, 'excluded_regions':[]}), point, place.get('addressComponents',[])):
+                    area=area.model_copy(update={'coordinates':point,'radius_m':30000})
+                    break
+            except (KeyError, ValueError, TypeError, AttributeError):
+                continue
+    city_reference=None
+    if area.name and area.include_name and not area.enforce_name:
+        for p in places:
+            try:
+                point=Coordinates.model_validate(p['location'])
+                if not geographic_reason(SearchArea(name=area.name),point,p.get('addressComponents',[])):
+                    city_reference=point;break
+            except (KeyError,ValueError,TypeError,AttributeError):continue
+        if city_reference is None:area=area.model_copy(update={'enforce_name':True})
     candidates, excluded = [], 0
     diagnostics, geography_reasons = {}, {}
     for place in places:
@@ -191,11 +232,13 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
                 attributions=place.get("attributions", []), types=place.get("types"),
                 primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
             reason = geographic_reason(area, candidate.coordinates, place.get("addressComponents", []))
+            if not reason and city_reference and distance_m(city_reference,candidate.coordinates)>30000:
+                reason='outside_destination_area'
             if reason:
                 excluded += 1
                 diagnostics[reason] = diagnostics.get(reason, 0) + 1
                 from backend.venue_geography import geographic_detail
-                detail = geographic_detail(area, candidate.coordinates, place.get("addressComponents", []))
+                detail = reason if reason=='outside_destination_area' else geographic_detail(area, candidate.coordinates, place.get("addressComponents", []))
                 geography_reasons[detail] = geography_reasons.get(detail, 0) + 1
                 continue
             candidates.append(candidate)

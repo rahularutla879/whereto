@@ -186,6 +186,8 @@ This is where the app becomes genuinely useful.
 
   Bowling diagnosis — October 26, 2026: aggregate per-stage coverage, explicit evidence-backed mixed-venue refinement, primary-shortage routing expansion and rejected-duplicate accounting verified with invented responses. Subsequent authorized live diagnostic: two Pro searches each returned ten results, retained the same two DC bowling venues, and excluded eight MD/VA results per page; nine IDs overlapped. No Routes/Details, quota/tier/limit changes or Task 47 work. Further-page and live ranking coverage remain unknown. See HANDOVER.md and provider findings.
 
+  Location-first improvement — October 27, 2026: three optional origin modes, confirmed provider-backed public references, first-stop minutes/miles constraints, sequential multi-path discovery and bounded flexible expansion. Offline fixtures only; existing exploration/cost/Cloud safeguards preserved. Task 46 remains complete; Task 47 is pending. See README, provider documentation and HANDOVER.md for checks and limitations.
+
   Development exploration — October 26, 2026: default-off local-only flag removes six application outing/process ceilings while preserving normal-mode limits. Finite paginated discovery/route frontiers share a persistent $10/local-day estimated spending guard, original constraints and transient continuations. No live Google calls, Cloud/billing changes, location-first redesign or Task 47 work. See current README, billing/provider documentation and HANDOVER.md for validation and limitations.
 
 Google Maps Platform is usage-based, and Places billing depends on the specific fields requested. We'll only request the information we need and keep API quotas conservative.

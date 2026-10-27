@@ -123,6 +123,9 @@ class DataQuality(ContractModel):
     experience: DataStatus = DataStatus.unknown
 
 
+from backend.location_policy import FirstTravel, Geography
+
+
 class OutingRequest(ContractModel):
     """Resolved mandatory constraints plus optional ranking/mode preferences.
 
@@ -139,6 +142,8 @@ class OutingRequest(ContractModel):
     travel: TravelMinutes | None = None  # Existing total inter-stop cap.
     groupBudget: Money | None = None
     maxLegTravel: TravelMinutes | None = None
+    firstTravel: FirstTravel | None = None
+    geography: Geography = Field(default_factory=Geography)
     maxFirstLegTravel: TravelMinutes | None = None
     travelExclusive: bool = Field(default=False, strict=True)
     maxLegTravelExclusive: bool = Field(default=False, strict=True)

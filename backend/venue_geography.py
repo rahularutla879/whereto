@@ -26,11 +26,20 @@ def geographic_reason(area, coordinates: Coordinates, components: list[dict]) ->
     def names(types):
         return {normalized(c[k]).replace(' ', '') for c in components if types.intersection(c.get('types', []))
                 for k in ('longText', 'shortText') if isinstance(c.get(k), str)}
-    if area.name:
+    excluded = set(getattr(area, 'excluded_regions', []))
+    regions = names({'administrative_area_level_1'})
+    aliases = {'VA':{'va','virginia'}, 'MD':{'md','maryland'}, 'DC':{'dc','districtofcolumbia'}}
+    if excluded and not regions:
+        return 'excluded_region_unverified'
+    if any(regions & aliases[code] for code in excluded):
+        return 'excluded_region'
+    if area.name and (getattr(area, 'enforce_name', True) or area.coordinates is None):
         parts = [normalized(part).replace(' ', '') for part in area.name.split(',')]
         if (not parts[0] or parts[0] not in names(local_types | region_types)
                 or not all(part and part in names(local_types | region_types) for part in parts[1:])):
             return 'area_unverified'
+    if getattr(area,'boundary_radius_m',None) is not None and distance_m(area.boundary_coordinates,coordinates)>area.boundary_radius_m:
+        return 'outside_radius'
     if area.radius_m is not None and distance_m(area.coordinates, coordinates) > area.radius_m:
         return 'outside_radius'
     return None
@@ -39,7 +48,7 @@ def geographic_reason(area, coordinates: Coordinates, components: list[dict]) ->
 def geographic_detail(area, coordinates, components):
     """Fixed aggregate categories only; no area names or coordinates returned."""
     reason = geographic_reason(area, coordinates, components)
-    if reason == 'outside_radius':
+    if reason in ('outside_radius','excluded_region','excluded_region_unverified'):
         return reason
     if reason == 'area_unverified':
         local = {'locality', 'postal_town', 'neighborhood', 'sublocality',

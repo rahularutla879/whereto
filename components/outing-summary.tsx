@@ -23,7 +23,8 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
   if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} ${real ? "(destination local time where known; otherwise calendar reference shown in notes)" : "(Baltimore time)"}`]);
   if (r.groupBudget != null) details.push(["Group budget", `$${r.groupBudget} maximum total`]);
   if (r.maxLegTravel != null) details.push(["Each journey", `${r.maxLegTravelExclusive ? "Under " : ""}${r.maxLegTravel} min${r.maxLegTravelExclusive ? " between stops" : " maximum"}`]);
-  if (real && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravelExclusive ? "Under " : ""}${r.maxFirstLegTravel} min ${r.maxFirstLegTravelExclusive ? "from" : "maximum from"} your shared start`]);
+  if (real && r.firstTravel) details.push(["First journey", `${r.firstTravel.mode === "flexible" ? "Prefer around" : r.firstTravel.exclusive ? "Under" : "At most"} ${r.firstTravel.value} ${r.firstTravel.unit} from the confirmed start${r.firstTravel.mode === "flexible" ? "; extra travel labeled separately" : ""}`]);
+  if (real && !r.firstTravel && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravelExclusive ? "Under " : ""}${r.maxFirstLegTravel} min ${r.maxFirstLegTravelExclusive ? "from" : "maximum from"} your shared start`]);
   if (r.transport) details.push(["Transport", `${r.transport}${real ? " (Google Maps estimates)" : " (simulated travel is mode-independent)"}`]);
   return details;
 }

@@ -10,7 +10,7 @@ def shortlist(pools, facts, width, start=None):
     forward = [{} for _ in pools]
     backward = [{} for _ in pools]
     for v in pools[0]:
-        point = start.point.coordinates if start else None
+        point = (start.reference_coordinates or start.point.coordinates) if start else None
         destination = facts[v.id].coordinates
         forward[0][v.id] = distance_m(point, destination) if point and destination else 0
     for i in range(1, len(pools)):

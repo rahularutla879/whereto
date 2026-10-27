@@ -90,9 +90,11 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             return JSONResponse(status_code=422, content={"code": "invalid_provider_data", "message": "Google returned incomplete or invalid venue or route information. No fictional fallback was used."})
         except (ProviderLimitError, DiscoveryError, RouteError) as error:
             return JSONResponse(status_code=422, content={"code": getattr(error, "code", "application_limit"), "message": str(error) + " No fictional fallback was used.", "diagnostics": getattr(error, "diagnostics", {})})
-    if any(value is not None for value in (request.startingLocation, request.currentArea, request.searchRadius, request.maxFirstLegTravel, request.manualStartingPlace)):
+    if request.geography.strictDestination or request.geography.excludedRegions:
+        return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Geographic boundary and regional exclusion checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored constraint."})
+    if any(value is not None for value in (request.startingLocation, request.currentArea, request.searchRadius, request.maxFirstLegTravel, request.manualStartingPlace, request.firstTravel)):
         return JSONResponse(status_code=422, content={"code": "unsupported_request", "message": "Starting-point travel and search-radius checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored limit."})
-    return recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel"})))
+    return recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel", "locationFirst"})))
 
 
 @app.post("/api/interpret", response_model=InterpretationResult)
@@ -153,3 +155,14 @@ def starting_places(request: StartingPlaceQuery):
         return JSONResponse(content=lookup_starting_places(request, provider_budget), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
         return JSONResponse(status_code=422, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+
+
+from backend.starting_areas import StartingAreaQuery, suggest_starting_areas
+
+
+@app.post('/api/starting-areas')
+def starting_areas(request: StartingAreaQuery):
+    try:
+        return JSONResponse(content=suggest_starting_areas(request,provider_budget),headers={'Cache-Control':'no-store'})
+    except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
+        return JSONResponse(status_code=422,content={'message':'Starting-area information could not be verified.' if isinstance(error,ValidationError) else str(error)},headers={'Cache-Control':'no-store'})

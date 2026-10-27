@@ -242,3 +242,7 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .starting-matches button { max-width: 100%; white-space: normal; }
 .venue-rating { color: #4f4a40; font-weight: 600; }
 .card-bottom > .plan-link { margin-left: auto; }
+.location-controls fieldset { border: 1px solid #d5cfd7; border-radius: 9px; padding: 12px; display: grid; gap: 8px; }
+.location-controls fieldset label { display: flex; align-items: center; gap: 8px; }
+.location-controls input[type="radio"] { width: auto; flex: 0 0 auto; }
+.location-controls select { width: 100%; padding: 10px; border: 1px solid #b9b0bc; border-radius: 8px; background: white; }

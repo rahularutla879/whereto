@@ -10,6 +10,7 @@ from pydantic import AwareDatetime, Field, ValidationError
 
 from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
                                      complete_year_answer, resolve_datetime)
+from backend.location_policy import first_intent, geographic_intent
 from backend.travel_constraints import travel_evidence, exclusive_limit, resolved_travel_label, normalize_verbatim_travel, CONTEXT
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
@@ -165,13 +166,23 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
         if (amounts and (any(n < 0 for n in amounts) or amount != min(amounts))) or (amount is not None and not amounts):
             issue("The budget amount or its per-person/group meaning was not captured correctly. State one maximum USD amount per person and/or one total group cap.")
 
-    travel_context = CONTEXT.search(raw)
+    first_preference, first_spans, first_problem = first_intent(raw)
+    if first_problem: issue(first_problem)
+    travel_raw = raw
+    for begin,end,_ in sorted(first_spans,reverse=True):
+        travel_raw=travel_raw[:begin]+" "*(end-begin)+travel_raw[end:]
+    if first_preference:
+        remaining = travel_evidence(travel_raw)
+        for field,scope in [('travel_leg_minutes','leg'),('travel_total_minutes','total')]:
+            if getattr(ai,field)==first_preference.value and not any(m['scope']==scope for m in remaining):
+                setattr(ai,field,None)
+    travel_context = CONTEXT.search(travel_raw)
     if travel_context and re.search(r"\d+\s*(?:seconds?|secs?|meters?|metres?|feet|yards?)\b", raw, re.I):
         issue("That travel unit is unsupported. State a maximum travel time in minutes or hours, total or between stops.")
     if travel_context and re.search(r"\b(?:minimum|at least)\s+\d+\s*(?:minutes?|hours?)", raw, re.I):
         issue("Minimum travel requirements are unsupported. State a maximum travel time instead.")
-    travel_matches = travel_evidence(raw)
-    if travel_context and not travel_matches and re.search(r"\d[^.;]{0,20}\b(?:minutes?|mins?|hours?|hrs?)\b", raw, re.I):
+    travel_matches = travel_evidence(travel_raw)
+    if travel_context and not travel_matches and re.search(r"\d[^.;]{0,20}\b(?:minutes?|mins?|hours?|hrs?)\b", travel_raw, re.I):
         issue("The travel amount or its total/between-stops meaning is unclear. Use a number of minutes or hours and name the limit's scope.")
     supported_travel = {"travel_total_minutes": [], "travel_leg_minutes": []}
     for match in travel_matches:
@@ -193,7 +204,7 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
         value = getattr(ai, field)
         if (amounts and (any(n < 0 for n in amounts) or value != min(amounts))) or (value is not None and not amounts):
             issue("The travel limit or its total/between-stops meaning could not be verified. State a maximum number of minutes total travel or between stops.")
-    if re.search(r"\b(?:travel|between stops|between activities)\b", raw, re.I) and re.search(r"\b(?:miles?|kilometers?|km)\b", raw, re.I):
+    if re.search(r"\b(?:travel|between stops|between activities)\b", travel_raw, re.I) and re.search(r"\b(?:miles?|kilometers?|km)\b", travel_raw, re.I):
         issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total or between stops.")
     if ai.transport and not re.search({"walking": r"\bwalk(?:ing)?\b|on foot", "cycling": r"\bcycl(?:e|ing)\b|\bbik(?:e|ing)\b", "driving": r"\bdriv(?:e|ing)\b|by car", "transit": r"\btransit\b|\bbus\b|\btrain\b"}[ai.transport.value], raw, re.I):
         issue("A transport preference could not be verified in your words. State the intended transport or rephrase and retry.")
@@ -306,6 +317,11 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                           "budget-friendly": CostPreference.budget,
                           "balanced": CostPreference.balanced}
         label = issue.strip().casefold()
+        fp, spans, problem = first_intent(raw)
+        if fp and not problem and label.strip(' .') in {raw[a:b].strip(' .').casefold() for a,b,_ in spans}:
+            continue
+        if re.fullmatch(r'(?:no|exclude|excluding|not in) (?:virginia|maryland|district of columbia)',label) and label in raw.casefold():
+            continue
         if label in resolved_modes and ai.cost == resolved_modes[label] and label in raw.casefold():
             continue
         # A model may describe absent optional settings as uncertainty. Absence
@@ -395,6 +411,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             activities.append(category)
     # Negative/alternative wording needs clarification; do not count it as a stop.
     exclusion_text = re.sub(r"\b(?:no|not) more than\b", "at most", activity_raw, flags=re.I)
+    # Supported geographic exclusions are validated separately, never activity negations.
+    exclusion_text = re.sub(r"\b(?:no|exclude|excluding|not in)\s+(?:Virginia|Maryland|District of Columbia)\b", " ", exclusion_text, flags=re.I)
     # Location, date and numeric alternatives belong to their own fields.
     exclusion_text = LOCATION_ALTERNATIVES.sub(" ", exclusion_text)
     exclusion_text = re.sub(rf"(?:{DATE_WORDING.pattern})\s+or\s+(?:{DATE_WORDING.pattern})", " ", exclusion_text, flags=re.I)
@@ -434,12 +452,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     location = chosen("location", answers.location or ai.location)
     if location is None and value.hasCurrentLocation and re.search(r"\bnear me\b", raw, re.I):
         location = "near me"
+    first_preference, first_spans, first_problem = first_intent(raw)
     first_limits = [m['amount'] for m in travel_evidence(raw) if m['scope'] == 'first' and not m['distance']]
-    first_limit = min(first_limits, default=None)
+    first_limit = None if first_preference and (first_preference.unit=='miles' or first_preference.mode=='flexible') else min(first_limits, default=None)
     if first_limit is not None and (not first_limit.is_integer() or not 0 <= first_limit <= 1440):
         issues.append("The first-stop travel limit must be a whole number of minutes from 0 to 1440.")
         first_limit = None
-    if re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
+    if not first_preference and re.search(r"\bnear me\b|\bradius\b", raw, re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", raw, re.I):
         issues.append("Set the search radius in meters in Optional starting location and remove the distance wording from the request. No radius was silently assumed.")
     people_answer = answers.people
     if people_answer:
@@ -546,7 +565,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
-                maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
+                firstTravel=first_preference, geography=geographic_intent(raw), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
                 maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
                 maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,

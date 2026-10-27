@@ -1,0 +1,143 @@
+"""Finite multi-path spatial discovery; existing planner verifies/ranks full paths."""
+from hashlib import sha256
+import json
+from backend.places import DiscoveryRequest, DiscoveryResult, PlacesDiscovery, SearchArea, search_body
+from backend.discovery_inventory import merge_inventory
+from backend.location_policy import bands, radius
+from backend.venue_geography import distance_m
+
+
+def mode(request):return 'walk' if request.transport=='walking' else 'drive'
+
+
+def search_area(request,center=None,first=False,band=None):
+    preference=request.firstTravel if first else None
+    reach=radius(preference,band,mode(request)) if first else (min(50000,max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode(request)=='walk' else 600))))
+    return SearchArea(name=request.location if request.location.casefold() not in ('near me','nearby','current location') else None,
+        coordinates=center,radius_m=reach if center else None,enforce_name=request.geography.strictDestination,include_name=first,restrict_to_area=center is not None,
+        excluded_regions=request.geography.excludedRegions,
+        boundary_coordinates=request.currentArea.coordinates if request.searchRadius is not None and request.currentArea else None,
+        boundary_radius_m=request.searchRadius)
+
+
+def key(query):return sha256(json.dumps(search_body(query,10),sort_keys=True).encode()).hexdigest()
+
+
+def add_job(context,position,center=None,anchor=None,first=False):
+    r=context['request'];area=search_area(r,center,first,context['bands'][context['band']])
+    query=DiscoveryRequest(activity=r.activities[position],destination=area,
+        meal='dinner' if r.activities[position]=='food' and (r.dinner or position in (r.dinnerStops or [])) else None)
+    identity=key(query)
+    if identity in context['jobKeys']:
+        job=next(j for j in context['jobs'] if j['key']==identity)
+        job['targets'].add((position,anchor))
+        retain_job_results(context,job)
+    else:
+        context['jobKeys'].add(identity)
+        context['jobs'].append({'key':identity,'targets':{(position,anchor)},'ids':set(),
+            'request':query,'position':position,'anchor':anchor,'next':None,'searched':False,'done':False})
+
+
+def retain_job_results(context,job):
+    retained={v.facts.id for v in context['discovery'].venues}
+    ids=job['ids'] & retained
+    for position,anchor in job['targets']:
+        context['positionIds'][position].update(ids)
+        if anchor:
+            context['spatialEdges'].update((position-1,anchor,identity) for identity in ids if identity!=anchor)
+
+
+def run_job(context,job):
+    context['actionDiscoveryCalls']=context.get('actionDiscoveryCalls',0)+1
+    query=job['request']
+    found=PlacesDiscovery(context['outing']).discover(query)
+    context['discovery']=merge_inventory(context['discovery'],found,context['outing'])
+    ids={v.facts.id for v in found.venues if query.activity in v.activities}
+    job['ids'].update(ids)
+    retain_job_results(context,job)
+    retained={v.facts.id for v in context['discovery'].venues}
+    for position_ids in context['positionIds']:position_ids.intersection_update(retained)
+    job['searched']=True
+    cursor=found.paging.get(query.activity,{})
+    job['next']=cursor.get('next')
+    if job['next']:
+        job['request']=query.model_copy(update={'page_token':job['next']})
+    else:
+        variants=['initial','alternative','mixed'] if context['outing'].settings.exploration else ['initial','alternative']
+        i=variants.index(query.search_variant)
+        if i+1<len(variants):job['request']=query.model_copy(update={'search_variant':variants[i+1],'page_token':None})
+        else:job['done']=True
+    return found
+
+
+def anchors(context,position):
+    wanted=context['positionIds'][position]
+    facts=[v.facts for v in context['discovery'].venues if v.facts.id in wanted and v.facts.coordinates]
+    # Keep multiple strong spatial alternatives, not only the nearest business.
+    facts.sort(key=lambda v:(-(v.ratingCount or 0),-(v.rating or 0),v.id))
+    selected=[]
+    while facts and len(selected)<2:
+        if not selected:chosen=facts.pop(0)
+        else:
+            chosen=max(facts,key=lambda v:(min(distance_m(v.coordinates,s.coordinates) for s in selected),v.id));facts.remove(chosen)
+        selected.append(chosen)
+    return selected
+
+
+def initialize(request,outing,seed=None):
+    context={'request':request,'outing':outing,'discovery':seed or DiscoveryResult(candidates=[]), 'jobs':[], 'jobKeys':set(),
+             'positionIds':[set() for _ in request.activities],'spatialEdges':set(),'bands':bands(request.firstTravel),'band':0,
+             'locationFirst':True,'flexExpandedThisAction':False,'actionDiscoveryCalls':0}
+    center=(request.startingLocation.reference_coordinates or request.startingLocation.point.coordinates) if request.startingLocation else (request.currentArea.coordinates if request.currentArea else None)
+    if seed:
+        reach=radius(request.firstTravel,context['bands'][0],mode(request))
+        context['positionIds'][0].update(v.facts.id for v in seed.venues if request.activities[0] in v.activities
+            and (not center or v.facts.coordinates and distance_m(center,v.facts.coordinates)<=reach))
+    add_job(context,0,center,first=True)
+    if len(context['positionIds'][0])<3:run_job(context,context['jobs'][-1])
+    # Initial finite beam: at most two search anchors per transition, up to
+    # seven venue requests for four stops. No route/venue Cartesian search.
+    for i in range(1,len(request.activities)):
+        for previous in anchors(context,i-1):
+            count=len(context['jobs']);add_job(context,i,previous.coordinates,previous.id)
+            if len(context['jobs'])>count:run_job(context,context['jobs'][-1])
+    return context
+
+
+def can_expand(context):
+    if any(not j['done'] for j in context['jobs']):return True
+    return any(context['positionIds'][i-1] - {anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
+               for i in range(1,len(context['request'].activities)))
+
+
+def expand(context):
+    # Plan at most two searches before executing. Prefer a new first-stop page,
+    # then a different earlier-stop anchor, then uninspected pages/refinements.
+    planned=[]
+    for i in range(1,len(context['request'].activities)):
+        inspected={anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
+        source=[v.facts for v in context['discovery'].venues if v.facts.id in context['positionIds'][i-1] and v.facts.coordinates and v.facts.id not in inspected]
+        if source:
+            v=source[0];add_job(context,i,v.coordinates,v.id)
+    pending=[j for j in context['jobs'] if not j['done']]
+    first=next((j for j in pending if j['position']==0),None)
+    if first:planned.append(first)
+    for j in sorted(pending,key=lambda j:(j['searched'],j['position'])):
+        if j not in planned:planned.append(j)
+        if len(planned)>=2:break
+    for job in planned[:2]:run_job(context,job)
+    context.pop('actionFrontier',None)
+    context['unseenEligible']=0;context['expanded']=False
+    context['width']=6 if len(context['request'].activities)<=2 else 4
+
+
+def widen(context):
+    preference=context['request'].firstTravel
+    if (not preference or preference.mode!='flexible' or context.get('flexExpandedThisAction')
+            or context['band']+1>=len(context['bands']) or context.get('continuationAction') and context.get('actionDiscoveryCalls',0)>=2):return False
+    context['flexExpandedThisAction']=True;context['band']+=1
+    center=(context['request'].startingLocation.reference_coordinates or context['request'].startingLocation.point.coordinates) if context['request'].startingLocation else None
+    before=len(context['jobs']);add_job(context,0,center,first=True)
+    if len(context['jobs'])>before:run_job(context,context['jobs'][-1])
+    context.pop('actionFrontier',None);context['expanded']=False;context['routedThisAction']=False;context['unseenEligible']=0
+    return True

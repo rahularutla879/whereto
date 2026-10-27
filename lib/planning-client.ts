@@ -1,3 +1,4 @@
+import type { FirstTravel, Geography, OriginPreparation } from "./starting-areas";
 import { interpretedPreferences } from "./preferences";
 import { recommendationCopy } from "./recommendation-copy";
 import { realHeadlines } from "./real-headlines";
@@ -92,14 +93,14 @@ export type ValidatedOuting = {
   request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
     groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; travelExclusive?: boolean; maxLegTravelExclusive?: boolean; maxFirstLegTravelExclusive?: boolean; transport: string | null;
-    dinnerStops: number[] | null };
+    firstTravel?: FirstTravel | null; geography?: Geography; dinnerStops: number[] | null };
   continuation: PendingOuting;
   explicitCost: boolean;
   explicitTime: boolean;
 };
 
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
-  context?: { locationContext?: LocationContext; onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
+  context?: { prepareOrigin?: (request: OriginPreparation) => Promise<LocationContext | null>; locationContext?: LocationContext; onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
     continuation?: PendingOuting; answers?: ClarificationAnswers;
     onClarification?: (value: PendingOuting | null) => void; onComplete?: () => void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
@@ -129,9 +130,18 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), requestFailed: false, notes: extraction.notes };
     }
     context?.signal?.throwIfAborted();
+    if (context?.prepareOrigin) {
+      let prepared=await context.prepareOrigin(extraction.request);
+      context.signal?.throwIfAborted();
+      if (!prepared) return { ...failure("Check the starting-location controls to continue; your outing text is kept."), requestFailed:false };
+      // Explicit strict source wording stays hard even if a flexible control
+      // was left selected. Editing the text is required to remove that limit.
+      if (extraction.request.firstTravel?.mode==="strict") prepared={...prepared,firstTravel:extraction.request.firstTravel};
+      context={...context, locationContext:prepared};
+    }
     const extractedPreferences = interpretedPreferences(extraction.request);
     context?.onInterpreted?.(extractedPreferences);
-    if (extraction.pending) context?.onValidated?.({ request: { ...extraction.request,
+    if (extraction.pending) context?.onValidated?.({ request: { ...extraction.request, ...(context?.locationContext?.firstTravel?{firstTravel:context.locationContext.firstTravel}:{}),
       ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravel: context.locationContext.maxFirstLegTravel, maxFirstLegTravelExclusive: false } : {}) },
       continuation: { pending: extraction.pending, questions: [] },
       explicitCost: !!preferences.costExplicit || preferences.cost !== "balanced" || extraction.interpretation?.cost != null,
@@ -156,8 +166,9 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 
 
 export type LocationContext = {
+  locationFirst?: boolean; referenceToken?: string; firstTravel?: FirstTravel | null;
   manualStartingPlace?: string;
-  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
+  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested"; label?: string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
   searchRadius?: number; maxFirstLegTravel?: number;
 };

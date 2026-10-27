@@ -208,6 +208,8 @@ CHECK_MESSAGES = {
     "closed_during_activity": "Opening hours conflict with the planned visit.",
     "unreachable_route": "No route found by Google Maps.",
     "leg_limit_exceeded": "Estimated travel exceeds the per-leg limit.",
+    "first_preference_exceeded": "First-stop route exceeds the strict limit or current flexible search band; no travel requirement was relaxed.",
+    "first_preference_verified": "First-stop preference checked using Google route duration or road distance.",
     "first_leg_limit_exceeded": "Estimated travel to the first stop exceeds its limit.",
     "total_travel_limit_exceeded": "Known estimated travel exceeds the total limit.",
     "insufficient_transfer_time": "The schedule leaves less time than the travel estimate.",

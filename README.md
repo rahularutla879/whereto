@@ -38,7 +38,7 @@ The October 26 controlled verification exercised ratings, contacts and landmark 
 
 Real discovery initially requests up to **10 results per distinct activity**. **Search for more venues** explicitly fetches at most two next pages or refined same-area searches per action, retaining up to **20 relevant venues/activity**. No typing-triggered search, automatic pagination, wider destination or budget reset is introduced. **Show different options** uses checked combinations first, then selectively checks unsent routes. Complete itineraries never repeat within the active search. Open **About these estimates** to see the actual runtime ceilings and aggregate counts showing where venues were filtered, routed or ranked. [Bowling coverage diagnosis and remaining live unknowns](docs/real-planning.md#task-46-diagnosis--repeated-bowling-venues).
 
-Application ceilings are **10 venue searches, 20 candidates/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. Initial routing normally uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard can pause exploration: wait at least a minute and explicitly choose Show different options again. No retry or new request is scheduled automatically. Coverage, hard constraints and budgets determine how many plans are possible.
+Application ceilings are **10 venue searches, 20 candidates/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard can pause exploration: wait at least a minute and explicitly choose Show different options again. No retry or new request is scheduled automatically. Coverage, hard constraints and budgets determine how many plans are possible.
 
 For smaller offline/development ceilings, set `WHERETO_SEARCHES_OUTING`, `WHERETO_CANDIDATES`, `WHERETO_MATRIX_OUTING` or `WHERETO_REQUESTS_OUTING` before starting the backend. Existing `WHERETO_MATRIX_SESSION` and `WHERETO_MATRIX_MINUTE` also only lower approved maxima. Defaults are ceilings, not targets. Cloud remains **40 searches/day, 10/minute; 2,000 route elements/day, 150/minute**. Expanded outings can cost more; see [current budgets and gross estimates](docs/billing-safeguards.md#task-46-approved-application-limit-expansion). All live gates remain off by default.
 
@@ -71,6 +71,29 @@ npm run dev:backend
 ```
 
 Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, costs and limitations](docs/billing-safeguards.md#development-exploration-estimate-guard); [discovery and continuation](docs/real-planning.md#development-exploration-mode).
+
+## Location-first planning (Task 46)
+
+In real mode, open **Optional starting location** and choose one option:
+
+- **Use my current location**: select the button to request permission. Nothing is collected on page load. Reported device accuracy is retained for the first-leg explanation. Denial leaves manual/suggested choices available.
+- **Enter my starting location**: enter an address, hotel, station, landmark, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm the intended match and the pending outing continues. Area matches are representative points.
+- **Choose a starting area for me**: Plan compares up to three provider-backed public references in the destination. Review the explanation and select **Use this starting area**. This is a planning reference, never a claim about your physical position. **Change starting area** replaces it.
+
+For a trip to another city, use a manual place there or a suggested reference. The app does not guess your current city or compare it with the destination from coordinates alone. Your explicit choice takes precedence. Leaving the origin unspecified still allows a destination-based outing with no invented first-leg estimate.
+
+The optional first-stop control accepts **one number in minutes or miles**, with **Strict maximum** or **Flexible preference**. Actual Google route seconds/road meters decide eligibility; map proximity only guides searches. “Under 20 minutes” excludes exactly 20; “at most” includes it. Flexible ranges can widen in small labeled stages, such as 20 → 25 → 30 minutes, only when checked options are insufficient. Between-stop and total travel caps remain separate and hard.
+
+The website uses bounded provider search rectangles around several earlier-stop candidates, then ranks complete verified-route paths. Ordinary destination wording prefers the city and can include convenient nearby places; **Only within Washington, DC** enforces address-component membership, and **No Virginia** excludes it. Actual addresses remain visible. These checks are provider-address checks, not legal boundary polygons.
+
+Manual lookup and public-reference comparison both require the existing lookup opt-in. For a separately authorized future live session, use this command instead of the simpler exploration command above:
+
+```sh
+cd /Users/rahularutla/Documents/whereto
+VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_DAILY_USD=10 WHERETO_START_LOOKUP_DEV=1 npm run dev:backend
+```
+
+Ratings and contacts remain separate optional switches; this command enables neither. These instructions do not authorize live testing. Use the earlier unset command to restore mock mode. [Algorithm, bounds and limitations](docs/real-planning.md#location-first-planning); [estimated costs](docs/billing-safeguards.md#location-first-work-accounting).
 
 ## Start the application — beginner instructions
 

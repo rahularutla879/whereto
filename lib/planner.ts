@@ -20,7 +20,7 @@ export type Plan = {
   dataMode?: "mock" | "real"; location?: string; detailsToken?: string;
   constraintIssues?: { code?: string; field?: string; status?: string; message: string }[];
   hardBudget?: boolean;
-  firstLeg?: { approximate?: boolean; minutes: number | null; labels?: unknown } | null;
+  firstLeg?: { approximate?: boolean; source?: "device" | "manual" | "suggested"; originLabel?: string | null; miles?: number | null; exceedsPreference?: boolean; accuracyMeters?: number | null; minutes: number | null; labels?: unknown } | null;
   routeEvidence?: { route: { mode: string }; labels: { claims: Record<string, { message: string }> } }[];
   id: string; title: string; fullTitle?: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
   venues: DisplayVenue[]; stops: Stop[]; price: number | null; groupCost: number | null;
