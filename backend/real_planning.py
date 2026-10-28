@@ -24,6 +24,7 @@ from backend.routes import PlaceID
 
 class PlannerInput(PlanningRequest):
     recentSurpriseIds: list[PlaceID] = Field(default_factory=list,max_length=120,exclude=True,repr=False)
+    useOriginAsSearchAnchor: bool = Field(default=False, strict=True, exclude=True)
     locationFirst: bool = Field(default=False, strict=True)
     referenceToken: str | None = Field(default=None, min_length=1, max_length=100, exclude=True, repr=False)
     manualStartingPlace: str | None = Field(default=None, max_length=200, exclude=True, repr=False)
@@ -98,6 +99,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "expanded": False, "discoveryPages": {a: 1 for a in dict.fromkeys(request.activities)}, "area": area, "matrixRequests": 0, "usedPrimary": set()}
     else:
         discovery = context["discovery"]
+    anchored=bool(context.get('jobs') and context['jobs'][0]['request'].area.anchor_verified)
+    if anchored:
+        from backend.location_context import DestinationContext
+        public.destinationContext=DestinationContext(originalText=request.location,
+            intent='unresolved' if request.useOriginAsSearchAnchor else 'explicit',
+            status='verification_unavailable',source='confirmed_anchor',precision='representative_point',
+            timezone=request.calendarTimezone)
     surprise=request.planningMode=='surprise'
     if surprise:context.setdefault('recent',set(request.recentSurpriseIds))
     pools, facts = [], {}
@@ -125,13 +133,37 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     diagnostics['venuePipeline'] = empty_coverage(discovery, {a.value: {v.id for v in p} for a, p in zip(request.activities, pools)})
     diagnostics['configuredLimits'] = {'candidatesPerActivity': 100 if outing.settings.exploration else outing.settings.candidates_per_activity,
         'searchesPerOuting': None if outing.settings.exploration else outing.settings.searches_per_outing, 'matrixElementsPerOuting': None if outing.settings.exploration else outing.settings.matrix_elements_per_outing}
+    from backend.location_context import timezone_for
+    diagnostics['locationContext']={'intent':'current_relative' if near else 'explicit',
+        'resolution':'authorized_reference' if near and request.currentArea else 'representative_point' if context.get('jobs') and context['jobs'][0]['request'].area.anchor_verified else 'provider_components_required',
+        'searchAnchorAvailable':bool(context.get('jobs') and context['jobs'][0]['request'].area.coordinates),
+        'calendarTimezone':request.calendarTimezone or timezone_for(request.location),
+        'resolvedDate':request.date.isoformat(),'timeExplicit':bool(request.explicitStart or request.explicitEnd)}
     diagnostics['discoveryTargets']={a.value:{'uniqueRelevant':len({v.id for p in pools for v in p if v.activity==a}),'target':100} for a in set(request.activities)}
     if any(not pool for pool in pools):
         from backend.option_sessions import option_sessions
         if "token" not in context:
             context["token"] = option_sessions.create(context)
         diagnostics.update(outing.usage(), discoveredCounts=[len(p) for p in pools])
-        result = empty(public, "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.", diagnostics)
+        if discovery.excluded_count and not discovery.venues and any(
+                reason in discovery.diagnostics for reason in ('area_unverified','outside_destination_area')):
+            error=DiscoveryError('destination_unresolved' if not request.geography.strictDestination else 'geographic_verification',
+                ("We couldn't confidently locate that area. Your confirmed starting point is kept. "
+                 "You can explicitly use it as a nearby search reference or correct the destination."
+                 if not request.geography.strictDestination and request.planningMode!='surprise' else
+                 "The requested destination boundary could not be verified. Clarify the destination; no boundary was broadened and Surprise Me will not invent an origin."))
+            error.diagnostics={**diagnostics,'failureBoundary':'geography'}
+            raise error
+        missing=[diagnostics['venuePipeline'].get(a.value,{}) for a,pool in zip(request.activities,pools) if not pool]
+        geographic_block=any(row.get('geographyRejected',0) for row in missing)
+        diagnostics['failureBoundary']='geographic_filtering' if geographic_block else 'discovery_coverage'
+        message=("No complete outing in the checked results. Geographic checks rejected candidates for a missing activity; the area is not proven exhausted. Explore farther or refine your destination."
+            if geographic_block else "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.")
+        result = empty(public,message,diagnostics)
+        if not discovery.venues and not anchored and not near and not discovery.excluded_count:
+            result.message="No venues were returned in the checked search, and the destination could not be verified. Correct the area or explicitly use your confirmed start as a nearby search reference. Search coverage may also be limited."
+            result.errors=[PlanningError(code="destination_verification_unavailable",message=result.message)]
+            result.diagnostics['failureBoundary']='destination_verification_unavailable'
         result.optionsToken = context["token"]
         result.canDiscover = can_discover(context)
         result.notes += coverage_notes(diagnostics["venuePipeline"])
@@ -299,6 +331,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             if check.state != "feasible":
                 plan.issues.append(ConstraintIssue(code=check.code, field=check.kind,
                     status="violation" if check.state == "infeasible" else "unknown", message=label.label.message))
+        if anchored:
+            plan.issues.append(ConstraintIssue(code="approximate_destination",field="location",status="unknown",
+                message="Search prioritizes the requested area near your confirmed reference. Exact neighborhood membership is not verified; check the actual venue addresses."))
         if request.dinner or request.dinnerStops:
             plan.issues.append(ConstraintIssue(code="unverified_dinner", field="availability", status="unknown",
                 message="Dinner service and hours are not verified for these restaurants. Confirm they serve dinner before choosing."))
@@ -457,7 +492,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=(route_notice or "No new combinations found among the places checked. Explore farther or adjust your preferences; other suitable places may exist.") if not diverse else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=['Development per-activity discovery targets: '+json.dumps(diagnostics['discoveryTargets'],sort_keys=True), 'Development travel classifications: '+json.dumps(diagnostics['travelClassifications'],sort_keys=True),'Development displayed activity coverage: '+json.dumps(diagnostics['displayedVenuesByActivity'],sort_keys=True),'Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
+        notes=['Development location context: '+json.dumps(diagnostics['locationContext'],sort_keys=True)]+['Development per-activity discovery targets: '+json.dumps(diagnostics['discoveryTargets'],sort_keys=True), 'Development travel classifications: '+json.dumps(diagnostics['travelClassifications'],sort_keys=True),'Development displayed activity coverage: '+json.dumps(diagnostics['displayedVenuesByActivity'],sort_keys=True),'Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
                 "Development Surprise coverage: "+json.dumps(diagnostics['surprise'],sort_keys=True)+f"; quality-excluded complete paths {diagnostics['surpriseQualityExcluded']}."] if surprise else []) + (["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
                    "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
             f"Development usage — Text Searches {outing._dispatched['search']} dispatched ({outing._pagination} pagination reservations), Details {outing._dispatched['details']}, Matrix requests {outing._dispatched['matrix']}, elements {outing._dispatched['matrixElements']}. "
@@ -487,12 +522,9 @@ def more_real_plans(token, *, expand_discovery=False):
     if not lock.acquire(blocking=False):
         raise DiscoveryError("busy", "Another options request is running. Wait for it to finish.")
     try:
-        from backend.date_resolution import resolve_datetime
-        r = context["request"]
-        start = f"{r.startTime // 60:02d}:{r.startTime % 60:02d}"
-        end = "midnight" if r.endTime == 1440 else f"{r.endTime // 60:02d}:{r.endTime % 60:02d}"
-        if resolve_datetime("", [], [f"from {start} to {end}"], r.location, manual_date=r.date.isoformat()).issues:
-            raise DiscoveryError("date_expired", "The outing date or time window is no longer valid. Start a new search with a future date.")
+        from backend.location_context import outing_problem
+        problem=outing_problem(context['request'])
+        if problem:raise DiscoveryError(problem[0],problem[1])
         if context.get("stopped"):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
         context["routedThisAction"] = False

@@ -12,7 +12,6 @@ import re
 from zoneinfo import ZoneInfo
 from typing import Literal
 
-from backend.planner import supports_location
 
 MONTHS = ('january february march april may june july august september october november december').split()
 MONTH_NUMBERS = {name: i + 1 for i, month in enumerate(MONTHS) for name in (month, month[:3])}
@@ -90,6 +89,8 @@ class DateResolution:
     start: int = 600
     end: int = 1440
     timezone: str = 'UTC'
+    explicit_start: bool = False
+    explicit_end: bool = False
     date_expressions: list[str] = field(default_factory=list)
     time_expressions: list[str] = field(default_factory=list)
     notes: list[str] = field(default_factory=list)
@@ -234,9 +235,10 @@ def _wall_issue(day: date, minute: int, zone: ZoneInfo) -> str | None:
 
 
 def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: list[str],
-                     location: str | None, *, manual_date: str = '', now: datetime | None = None) -> DateResolution:
+                     location: str | None, *, manual_date: str = '', now: datetime | None = None, calendar_timezone: str | None = None) -> DateResolution:
     result = DateResolution()
-    zone = ZoneInfo('America/New_York' if location and (supports_location(location.strip()) or re.fullmatch(r'Washington\s*,?\s*(?:DC|D\.C\.)', location.strip(), re.I)) else 'UTC')
+    from backend.location_context import timezone_for
+    zone = ZoneInfo(calendar_timezone or timezone_for(location))
     result.timezone = zone.key
     reference = now if now is not None else datetime.now(timezone.utc)
     if reference.tzinfo is None or reference.utcoffset() is None:
@@ -300,6 +302,8 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
             result.add_issue('invalid_time', 'The time is unclear or invalid. Include valid hours and AM/PM.')
     if len(exact_starts) > 1:
         result.add_issue('time_conflict', 'Multiple start times disagree. What one overall time window should we use?')
+    result.explicit_start = bool(starts)
+    result.explicit_end = bool(ends)
     # A day-part supplies a documented default only where an explicit bound is absent.
     evening = bool(re.search(r'\b(?:tonight|evening|night)\b', raw, re.I))
     if evening and not starts:
@@ -334,9 +338,9 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
                 result.add_issue('dst', 'This window crosses a daylight-saving clock change. The single-day planner uses wall-clock durations; choose a window wholly before or after the change.')
         if result.date == local_now.date():
             current_minute = local_now.hour * 60 + local_now.minute + (1 if local_now.second or local_now.microsecond else 0)
-            if starts and result.start < current_minute:
+            if result.explicit_start and result.start < current_minute:
                 result.add_issue('past_time', 'The requested start time today has passed. Choose a later time or another date; it was not moved automatically.')
-            elif not starts:
+            elif not result.explicit_start:
                 result.start = max(result.start, current_minute)
                 result.notes.append('Today’s earliest start is no earlier than the current local minute.')
             if result.end <= current_minute or result.start >= 1440:

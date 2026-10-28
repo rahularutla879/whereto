@@ -5,7 +5,6 @@ from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 from pydantic import ValidationError
 
-from backend.date_resolution import resolve_datetime
 from backend.models import PlanningRequest, RankingResult
 from backend.ranking import recommend_plans
 from backend.ai import AIError
@@ -71,15 +70,10 @@ def generate_plan(request: PlannerInput) -> RankingResult:
         request = PlannerInput.model_validate(request.model_dump())
     # Recheck the calendar at publication too: a validated browser request may
     # have waited across midnight or a selected start before being submitted.
-    start = f"{request.startTime // 60:02d}:{request.startTime % 60:02d}"
-    end = "midnight" if request.endTime == 1440 else f"{request.endTime // 60:02d}:{request.endTime % 60:02d}"
-    calendar = resolve_datetime("", [], [f"from {start} to {end}"], request.location,
-                                manual_date=request.date.isoformat())
-    if calendar.issues:
-        return JSONResponse(status_code=422, content={
-            "code": "invalid_request",
-            "message": "The outing date or time window is no longer valid. Choose a future date and a valid same-day time window, then retry. No plan was generated.",
-        })
+    from backend.location_context import outing_problem
+    problem=outing_problem(request)
+    if problem:
+        return JSONResponse(status_code=422,content={"code":problem[0],"message":problem[1]})
     from backend.surprise import validate_beginning
     try:validate_beginning(request)
     except DiscoveryError as error:return JSONResponse(status_code=422,content={"code":error.code,"message":str(error)})
@@ -157,7 +151,7 @@ def more_options(request: OptionsRequest):
         return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
-        return JSONResponse(status_code=422, content={"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
+        return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
 
 
 from backend.starting_places import StartingPlaceQuery, lookup_starting_places

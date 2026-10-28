@@ -7,7 +7,7 @@ import type { FirstTravel, OriginPreparation } from "../lib/starting-areas";
 import { FirstPreference } from "../lib/first-preference";
 import { GoogleCredits } from "./venue-details";
 import type { LocationContext } from "../lib/planning-client";
-export type StartingLocationHandle = { cancel: () => void; editTravel: () => void; prepare: (input?: OriginPreparation) => Promise<LocationContext | null> };
+export type StartingLocationHandle = { cancel: () => void; useAnchor: () => void; editTravel: () => void; prepare: (input?: OriginPreparation) => Promise<LocationContext | null> };
 type Mode = "none" | "current" | "manual" | "surprise";
 type Selection = NonNullable<LocationContext["startingLocation"]>;
 export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=false,ref }: {
@@ -17,13 +17,15 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
   const lookup=useRef(new StartingPlaceSession()),version=useRef(0);
   const preference=useRef(new FirstPreference()),between=useRef(new FirstPreference());
   const originInput=useRef<OriginPreparation|undefined>(undefined),removed=useRef("");
+  const relativeSearch=useRef<LocationContext["currentArea"]>(undefined),relativeRequested=useRef(false),gpsDenied=useRef(false),anchorConsent=useRef(false);
+  const anchorDestination=useRef<string|undefined>(undefined);
   const saved=useRef<Partial<Record<"current"|"manual",Selection>>>({});
   const [mode,setMode]=useState<Mode>("none"),[selected,setSelected]=useState<Selection|null>(null);
   const [manual,setManual]=useState(""),[notice,setNotice]=useState(""),[searching,setSearching]=useState(false);
   const [matches,setMatches]=useState<StartingMatch[]>([]),[credits,setCredits]=useState<StartingMatch["attributions"]>([]);
   const [first,setFirst]=useState(""),[unit,setUnit]=useState<FirstTravel["unit"]>("minutes"),[flexibility,setFlexibility]=useState<FirstTravel["mode"]>("strict");
   const [amount,setAmount]=useState(""),[betweenUnit,setBetweenUnit]=useState<FirstTravel["unit"]>("minutes"),[betweenMode,setBetweenMode]=useState<FirstTravel["mode"]>("strict");
-  const [conflict,setConflict]=useState(false);
+  const [conflict,setConflict]=useState(false),[nearbyFallback,setNearbyFallback]=useState(false);
   const cancel=()=>pending.current.cancel();
   useEffect(()=>()=>{version.current++;pending.current.cancel();lookup.current.clear();},[]);
   const changed=(value:LocationContext)=>onChange(value,pending.current.waiting);
@@ -32,7 +34,9 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
   function context(point:Selection|null=selected,surprise=mode==="surprise"):LocationContext {
     if(surprise)return {planningMode:"surprise",locationFirst:true,firstTravel:null,maxFirstLegTravel:null,betweenTravel:between.current.value};
     return {planningMode:"origin",locationFirst:true,firstTravel:preference.current.value,
-      ...(point?{startingLocation:point,currentArea:{coordinates:point.point.coordinates}}:{}),
+      ...(point?{startingLocation:point}:{}),
+      ...(relativeRequested.current&&relativeSearch.current?{currentArea:relativeSearch.current,calendarTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone}:{}),
+      ...(anchorConsent.current?{useOriginAsSearchAnchor:true}:{}),
       ...(originInput.current?.betweenTravel?{betweenTravel:originInput.current.betweenTravel}:{})};
   }
   function prepareSurprise(){
@@ -44,7 +48,7 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
     return context(null,true);
   }
   function chooseMode(next:Mode){
-    version.current++;setSearching(false);setMatches([]);setCredits([]);setConflict(false);
+    version.current++;anchorConsent.current=false;setSearching(false);setMatches([]);setCredits([]);setConflict(false);
     if(selected&&(mode==="current"||mode==="manual"))saved.current[mode]=selected;
     const restored=next==="current"||next==="manual"?saved.current[next]??null:null;
     setMode(next);setSelected(restored);
@@ -79,25 +83,50 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
     finally{if(current===version.current)setSearching(false);}
   }
   function confirm(match:StartingMatch){
-    version.current++;setMatches([]);
+    version.current++;anchorConsent.current=false;setMatches([]);setNearbyFallback(false);
     const point:Selection={point:{id:mock?match.placeId:"authorized-start",coordinates:match.coordinates},explicitly_authorized:true,
-      source:mock?"mock":"manual",label:match.name,precision:match.precision};
+      source:mock?"mock":"manual",label:match.name,geographicDescription:match.address,precision:match.precision};
+    if(relativeRequested.current&&!relativeSearch.current&&gpsDenied.current)relativeSearch.current={coordinates:match.coordinates};
     setSelected(point);saved.current.manual=point;setCredits(match.attributions);
     setNotice(mock?"Fictional mock starting reference confirmed. No actual location or route was verified.":"Starting point confirmed: "+match.name+". "+(match.precision==="address_or_place"?"Check the intended entrance.":"Travel estimates use this area's representative point."));
     const value=context(point,false);if(!pending.current.confirm(value))changed(value);
   }
-  async function locate(){
-    const current=++version.current;setNotice("Waiting for location permission…");
+  async function locate(searchOnly=false,preparing=false):Promise<LocationContext|null>{
+    const current=++version.current;anchorConsent.current=false;setNotice("Waiting for location permission…");onStage?.("Waiting for location permission");
     try{
       const found=await requestStartingLocation(navigator.geolocation,window.isSecureContext);
-      if(current!==version.current)return;
+      if(current!==version.current)return null;
       const point:Selection={point:{id:"authorized-start",coordinates:found.coordinates},explicitly_authorized:true,source:"device",precision:"device",label:"Your permission-authorized device location",...(found.accuracyMeters!==undefined?{accuracy_m:found.accuracyMeters}:{})};
-      setSelected(point);saved.current.current=point;
-      setNotice("Starting location shared for this page only"+(found.accuracyMeters!==undefined?"; reported accuracy about "+Math.round(found.accuracyMeters)+" meters":"")+". Your destination stays separate.");
-      if(!pending.current.confirm(context(point,false)))changed(context(point,false));
-    }catch(error){if(current===version.current)setNotice(error instanceof Error?error.message:"Location unavailable. Enter a starting place or choose Surprise Me.");}
+      gpsDenied.current=false;setNearbyFallback(false);
+      if(relativeRequested.current)relativeSearch.current={coordinates:found.coordinates};
+      if(!searchOnly){setSelected(point);saved.current.current=point;}
+      setNotice("Location shared for this page only. Nearby search geography and any manual route origin remain separate.");
+      const value=context(searchOnly?selected:point,false);
+      if(!pending.current.confirm(value)&&!preparing)changed(value);
+      return value;
+    }catch(error){if(current===version.current){gpsDenied.current=true;setNearbyFallback(relativeRequested.current);setNotice(error instanceof Error?error.message:"Location unavailable. Confirm a manual nearby search area.");}return null;}
   }
-  useImperativeHandle(ref,()=>({editTravel:()=>{if(disclosure.current){disclosure.current.open=true;disclosure.current.querySelector<HTMLInputElement>('input[type="number"]')?.focus();}},cancel:()=>{version.current++;originInput.current=undefined;setConflict(false);cancel();},prepare:async(input)=>{
+  useImperativeHandle(ref,()=>({useAnchor:()=>{anchorConsent.current=true;anchorDestination.current=originInput.current?.location;},editTravel:()=>{if(disclosure.current){disclosure.current.open=true;disclosure.current.querySelector<HTMLInputElement>('input[type="number"]')?.focus();}},cancel:()=>{version.current++;originInput.current=undefined;setConflict(false);cancel();},prepare:async(input)=>{
+    if(input?.destinationRelative){
+      relativeRequested.current=true;
+      if(disclosure.current)disclosure.current.open=true;
+      if(mode==="surprise"){setNotice("Surprise Me needs a named destination. Choose current/manual location for a nearby search, or enter a destination.");return null;}
+      if(gpsDenied.current&&mode==="manual"){
+        if(selected){if(relativeSearch.current)return context(selected,false);setNotice("Confirm using your selected starting place as the nearby search reference, or share current location.");return pending.current.wait();}
+        const answer=pending.current.wait();void find(manual);return answer;
+      }
+      const separateOrigin=mode==="manual"||!!input.manualOriginText;
+      if(input.manualOriginText&&mode!=="manual"){setManual(input.manualOriginText);setMode("manual");setSelected(null);}
+      else if(!separateOrigin)setMode("current");
+      const permissionVersion=version.current+1;
+      const located=await locate(separateOrigin,true);
+      if(version.current!==permissionVersion)return null;
+      if(located)return located;
+      onStage?.("Choose nearby search area");
+      return pending.current.wait();
+    }
+    if(input?.location!==anchorDestination.current)anchorConsent.current=false;
+    relativeRequested.current=input?.location==="near me";
     originInput.current=input;
     const incoming=preference.current.hydrate(input?.firstTravel);
     setFirst(incoming?String(incoming.value):"");setUnit(incoming?.unit??"minutes");setFlexibility(incoming?.mode??"strict");
@@ -130,21 +159,22 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
       <label><input type="radio" name="starting-mode" checked={mode==="surprise"} onChange={()=>chooseMode("surprise")}/>I&apos;m new to the city — Surprise me!</label>
     </fieldset>
     {mode==="surprise"&&<p>Discover unexpected places and let us plan your outing from the first activity.</p>}
-    {mode==="current"&&<button type="button" className="secondary-button" onClick={locate}>Share my location</button>}
+    {mode==="current"&&<button type="button" className="secondary-button" onClick={()=>void locate()}>Share my location</button>}
     <p role="status">{notice}</p>
+    {nearbyFallback&&selected&&mode==="manual"&&<button type="button" onClick={()=>{setNearbyFallback(false);relativeSearch.current={coordinates:selected.point.coordinates};const value=context(selected,false);if(!pending.current.confirm(value))changed(value);}}>Use confirmed start for nearby search</button>}
     {conflict&&mode==="surprise"&&<div role="group" aria-label="First-stop constraint choice">
       <button type="button" onClick={()=>chooseMode("manual")}>Use a starting location instead</button>
       <button type="button" onClick={()=>{removed.current=firstKey();setConflict(false);const value=prepareSurprise();if(value&&!pending.current.confirm(value))changed(value);}}>Remove the first-stop constraint for Surprise Me</button>
     </div>}
-    {selected&&mode!=="surprise"&&<><p>{selected.label}</p>{!mock&&<GoogleCredits credits={credits}/>}<button type="button" onClick={()=>{if(mode==="current"||mode==="manual")delete saved.current[mode];setSelected(null);changed(context(null,false));}}>Change starting point</button></>}
+    {selected&&mode!=="surprise"&&<><p>{selected.label}</p>{!mock&&<GoogleCredits credits={credits}/>}<button type="button" onClick={()=>{if(mode==="current"||mode==="manual")delete saved.current[mode];anchorConsent.current=false;setSelected(null);changed(context(null,false));}}>Change starting point</button></>}
     {mode==="manual"&&<>
       <label>Starting place, address, neighborhood or ZIP code<input value={manual} maxLength={200} placeholder="e.g. hotel or Union Station, Washington DC" onChange={e=>{
-        version.current++;setSearching(false);setMatches([]);setSelected(null);delete saved.current.manual;setManual(e.target.value);changed({...context(null,false),...(e.target.value.trim()?{manualStartingPlace:e.target.value.trim()}:{})});
+        version.current++;anchorConsent.current=false;if(gpsDenied.current){relativeSearch.current=undefined;setNearbyFallback(relativeRequested.current);}setSearching(false);setMatches([]);setSelected(null);delete saved.current.manual;setManual(e.target.value);changed({...context(null,false),...(e.target.value.trim()?{manualStartingPlace:e.target.value.trim()}:{})});
         setNotice("Plan your outing to find this place, or select Find starting place. You will confirm the match.");
       }}/></label>
       <p>A neighborhood, city or ZIP code is an approximate representative point. Confirm the intended match.</p>
       <button type="button" className="secondary-button" disabled={searching||manual.trim().length<3} onClick={()=>void find()}>{searching?"Finding…":"Find starting place"}</button>
-      {!!matches.length&&<ul className="starting-matches">{matches.map(match=><li key={match.placeId}><strong>{match.name}</strong><p>{match.address}</p><p>{match.precision==="address_or_place"?"Address/place; confirm the intended entrance.":"Approximate area representative point."}</p><button type="button" onClick={()=>confirm(match)}>Use this starting place</button>{!mock&&<GoogleCredits credits={match.attributions}/>}</li>)}</ul>}
+      {!!matches.length&&<ul className="starting-matches">{matches.map(match=><li key={match.placeId}><strong>{match.name}</strong><p>{match.address}</p><p>{match.precision==="address_or_place"?"Address/place; confirm the intended entrance.":"Approximate area representative point."}</p><button type="button" onClick={()=>confirm(match)}>{nearbyFallback?"Use this place as start and nearby search area":"Use this starting place"}</button>{!mock&&<GoogleCredits credits={match.attributions}/>}</li>)}</ul>}
     </>}
     {mode==="surprise"?<div className="preferences-grid">
       <label>How far are you willing to travel between activities?<input type="number" min="0" max={betweenUnit==="miles"?200:1440} step={betweenUnit==="miles"?"0.1":"1"} value={amount} onChange={e=>editBetween(e.target.value)}/><small>Optional; no hard limit when blank.</small></label>

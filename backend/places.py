@@ -34,6 +34,7 @@ class DiscoveryModel(BaseModel):
 
 
 class SearchArea(DiscoveryModel):
+    anchor_verified: bool = False
     enforce_name: bool = True
     include_name: bool = False
     restrict_to_area: bool = False
@@ -208,6 +209,17 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
     if len(places) > limit:
         raise DiscoveryError("invalid_response", "Google exceeded the requested candidate limit.")
     if area.name and not area.enforce_name and area.coordinates is None:
+        # Multiple distant matches do not establish one city/region.
+        references=[]
+        for place in places:
+            try:
+                point=Coordinates.model_validate(place['location'])
+                if not geographic_reason(area.model_copy(update={'enforce_name':True,'excluded_regions':[]}),point,place.get('addressComponents',[])):
+                    references.append(point)
+            except (KeyError,ValueError,TypeError,AttributeError):continue
+        if references and any(distance_m(references[0],point)>60000 for point in references[1:]):
+            raise DiscoveryError('destination_ambiguous',
+                'Several distant areas match that destination. Add the city/state or confirm a nearby starting place. No area was chosen automatically.')
         for place in places:
             try:
                 point = Coordinates.model_validate(place['location'])
@@ -221,7 +233,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
         # cannot be established. Do not treat a query string as location proof.
         area=area.model_copy(update={'enforce_name':True})
     city_reference=None
-    if area.name and area.include_name and not area.enforce_name:
+    if area.name and area.include_name and not area.enforce_name and not area.anchor_verified:
         for p in places:
             try:
                 point=Coordinates.model_validate(p['location'])

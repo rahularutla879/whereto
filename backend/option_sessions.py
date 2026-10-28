@@ -33,7 +33,7 @@ class OptionSessions:
             entry = self.entries.get(token)
             if not entry or monotonic()-entry[0] >= 600:
                 self.entries.pop(token, None)
-                raise DiscoveryError('expired', 'This search has expired. Start a new outing to explore again.')
+                raise DiscoveryError('expired', 'The 10-minute search session has expired; this does not mean your outing date has passed. Saved pages remain viewable. Regenerate to start a new search; previous no-repeat history will reset.')
             return entry[1], entry[2]
 
 

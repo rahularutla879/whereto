@@ -43,7 +43,7 @@ test("current location preserves reported accuracy and permission denial has a m
   assert.equal(requests,0);
   assert.deepEqual(await requestLocation(geo,true),{latitude:0,longitude:0,accuracyMeters:125});
   const denied={getCurrentPosition(_success:PositionCallback,error?:PositionErrorCallback|null){error?.({code:1} as GeolocationPositionError);}};
-  await assert.rejects(requestLocation(denied,true),/denied.*Enter a starting place/);
+  await assert.rejects(requestLocation(denied,true),/denied.*manual starting place/);
   await assert.rejects(requestLocation(undefined,false),/localhost or HTTPS/);
 });
 test("summary keeps first-road-distance preference separate from between-stop constraints",()=>{

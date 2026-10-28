@@ -2,9 +2,11 @@
 
 Requests contain resolved inputs, not the UI's blank/string form controls.
 JSON response names match lib/planner.ts and lib/mock-data.ts. All clock values
-are whole minutes after midnight in Baltimore (America/New_York).
+are whole minutes after midnight in the resolved destination calendar; the
+fictional catalog uses Baltimore (America/New_York).
 """
 
+from backend.location_context import DestinationContext
 from datetime import date as CalendarDate
 from enum import Enum
 from math import isclose
@@ -145,6 +147,10 @@ class OutingRequest(ContractModel):
     firstTravel: FirstTravel | None = None
     betweenTravel: FirstTravel | None = None
     planningMode: Literal["origin","surprise"] = "origin"
+    calendarTimezone: str | None = Field(default=None,max_length=100)
+    explicitStart: bool | None = Field(default=None,strict=True)
+    explicitEnd: bool | None = Field(default=None,strict=True)
+    destinationContext: DestinationContext | None = None
     geography: Geography = Field(default_factory=Geography)
     maxFirstLegTravel: TravelMinutes | None = None
     travelExclusive: bool = Field(default=False, strict=True)
@@ -163,6 +169,10 @@ class OutingRequest(ContractModel):
 
     @model_validator(mode="after")
     def validate_activities(self):
+        if self.calendarTimezone:
+            from zoneinfo import ZoneInfo
+            try: ZoneInfo(self.calendarTimezone)
+            except (KeyError, ValueError): raise ValueError("Use a valid IANA timezone.") from None
         if self.dinnerStops is not None and any(
                 i >= len(self.activities) or self.activities[i] != ActivityType.food for i in self.dinnerStops):
             raise ValueError("Dinner stop indexes must identify requested food stops")
@@ -313,7 +323,7 @@ class Itinerary(ContractModel):
 
 class PlanningError(ContractModel):
     code: Literal["invalid_request", "unsupported_request", "unsupported_location",
-                  "missing_date", "no_availability", "infeasible", "insufficient_data"]
+                  "missing_date", "no_availability", "infeasible", "insufficient_data", "destination_verification_unavailable"]
     message: Nonblank
     field: Nonblank | None = None
 

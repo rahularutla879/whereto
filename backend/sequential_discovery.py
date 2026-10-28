@@ -16,7 +16,11 @@ def search_area(request,center=None,first=False,band=None):
     reach=radius(preference,band,mode(request)) if first else radius(onward,effective_max(onward),mode(request)) if onward else (min(50000,max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode(request)=='walk' else 600))))
     # Preference-derived geometry is a search heuristic, never a retention filter.
     reach=max(reach,radius(None,None,mode(request)) if first else (1200 if mode(request)=="walk" else 6000))
-    return SearchArea(name=request.location if request.location.casefold() not in ('near me','nearby','current location') else None,
+    from backend.location_context import anchor_compatible
+    origin=request.startingLocation
+    anchored=bool(center and origin and (request.useOriginAsSearchAnchor or anchor_compatible(
+        request.location, origin.geographicDescription or origin.label)))
+    return SearchArea(anchor_verified=anchored,name=request.location if request.location.casefold() not in ('near me','nearby','current location') else None,
         coordinates=center,radius_m=reach if center else None,enforce_name=request.geography.strictDestination,include_name=first,restrict_to_area=center is not None,
         excluded_regions=request.geography.excludedRegions,
         boundary_coordinates=request.currentArea.coordinates if request.searchRadius is not None and request.currentArea else None,
@@ -108,7 +112,9 @@ def initialize(request,outing,seed=None,seed_routes=None):
     context={'request':request,'outing':outing,'discovery':seed or DiscoveryResult(candidates=[]), 'jobs':[], 'jobKeys':set(),
              'positionIds':[set() for _ in request.activities],'spatialEdges':set(),
              'locationFirst':True,'actionDiscoveryCalls':0}
-    center=(request.startingLocation.reference_coordinates or request.startingLocation.point.coordinates) if request.startingLocation else (request.currentArea.coordinates if request.currentArea else None)
+    near=request.location.casefold() in ('near me','nearby','current location')
+    center=request.currentArea.coordinates if near and request.currentArea else (
+        (request.startingLocation.reference_coordinates or request.startingLocation.point.coordinates) if request.startingLocation else None)
     if seed:
         reach=radius(request.firstTravel,effective_max(request.firstTravel),mode(request))
         context['positionIds'][0].update(v.facts.id for v in seed.venues if request.activities[0] in v.activities

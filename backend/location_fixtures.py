@@ -75,3 +75,24 @@ def acceptance_matrix_fixture(body):
             seconds=(600,2100,2700)[delta] if first else (240,1800,3600)[delta]
             data.append({'originIndex':i,'destinationIndex':j,'status':{},'condition':'ROUTE_EXISTS','duration':f'{seconds}s','distanceMeters':(3000,30000,70000)[delta]})
     return data
+
+
+def neighborhood_fixture(body, **kwargs):
+    food='restaurant' in body['textQuery']
+    activity='food' if food else 'drinks'
+    box=body.get('locationRestriction',{}).get('rectangle')
+    london='London' in body['textQuery'] or bool(box and box['low']['latitude']>50)
+    latitude,longitude=(51.52,-.08) if london else (40.75,-73.98)
+    city='London' if london else 'New York'
+    page=1 if body.get('pageToken') else 0
+    records=[]
+    for i in range(8):
+        records.append({'id':f'Synthetic_{activity}_{i+page*8}','displayName':{'text':f'Synthetic {activity} {i+page*8}'},
+            'formattedAddress':f'Synthetic address, {city}',
+            'location':{'latitude':latitude+i*.0002,'longitude':longitude},
+            'addressComponents':[{'longText':city,'types':['locality']}],
+            'types':['restaurant' if food else 'bar']})
+    # No neighborhood text: exact strict membership is deliberately unavailable.
+    records.append({**records[0],'id':f'Synthetic_remote_{activity}','location':{'latitude':0.,'longitude':0.}})
+    records.append(records[0])
+    return {'places':records[:body['pageSize']], **({'nextPageToken':'synthetic-page-2'} if not page else {})}

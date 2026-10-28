@@ -234,10 +234,9 @@ class ImprovementTests(unittest.TestCase):
         self.assertEqual(self.search.call_count,2)
 
     def test_options_revalidate_calendar_before_any_new_routing(self):
-        from types import SimpleNamespace
         result=real_plans(outing(),self.session)
         calls=self.matrix.call_count
-        with patch('backend.date_resolution.resolve_datetime',return_value=SimpleNamespace(issues=['expired'])):
+        with patch('backend.location_context.outing_problem',return_value=('outing_date_expired','The outing date or time has passed.')):
             with self.assertRaisesRegex(DiscoveryError,'date or time'):more_real_plans(result.optionsToken)
         self.assertEqual(self.matrix.call_count,calls)
 

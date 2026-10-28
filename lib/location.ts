@@ -3,7 +3,7 @@ export function requestLocation(geo: Pick<Geolocation, "getCurrentPosition"> | u
   if (!secure || !geo) return Promise.reject(new Error("Location is unavailable here. Use localhost or HTTPS, or find a manual starting place below. A destination city/neighborhood can be entered in Set preferences."));
   return new Promise((resolve, reject) => geo.getCurrentPosition(position => {
     resolve({ latitude: position.coords.latitude, longitude: position.coords.longitude, ...(Number.isFinite(position.coords.accuracy) ? {accuracyMeters:position.coords.accuracy} : {}) });
-  }, () => reject(new Error("Location permission was denied or unavailable. Enter a starting place below and select Find starting place, or enter a destination city/neighborhood in Set preferences. No starting point was assumed.")),
+  }, error => reject(new Error((error.code===1?"Location permission was denied.":error.code===3?"Location request timed out.":"Your position is currently unavailable.")+" Enter and confirm a manual starting place or a destination city/neighborhood. Your outing is kept; no location was assumed.")),
   { enableHighAccuracy: false, timeout: 10000, maximumAge: 0 }));
 }
 

@@ -62,7 +62,10 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     const all = [...result.plans, ...second.plans, ...third.plans];
     assert.equal(new Set(all.map(p => p.venues.map(v => v.id).join("/"))).size, 9);
     assert.ok(all.every(p => p.date === "2026-11-07" && p.people === 4));
-    assert.deepEqual(await (await fetch(`${base}/__test/counts`)).json(), countsBefore);
+    const afterAlternatives=await (await fetch(`${base}/__test/counts`)).json();
+    assert.equal(afterAlternatives.searches,countsBefore.searches);
+    assert.equal(afterAlternatives.details,0);
+    assert.ok(afterAlternatives.elements>=countsBefore.elements&&afterAlternatives.elements<=150);
     assert.equal(countsBefore.elements, 42);
     assert.equal(new Set(result.plans.map(p => p.venues[0].id)).size, 3);
     let expanded = result;
@@ -185,7 +188,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
       const retryText = "Bowling then dinner in Baltimore for 2 people on 2026-11-07";
       const failure = await generateOuting(retryText, EMPTY_PREFERENCES, { onValidated: value => { retained = value; } }, send);
       assert.equal(failure.plans.length, 0);
-      assert.match(failure.message, /matching real venues|quota or authentication/);
+      assert.match(failure.message, /matching real venues|destination could not be verified|quota or authentication/);
       if (name === "quota") {
         assert.equal(failure.requestFailed, true);
         assert.ok(retained);

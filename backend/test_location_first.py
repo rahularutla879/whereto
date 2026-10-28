@@ -224,8 +224,8 @@ class LocationFirst(unittest.TestCase):
             self.assertTrue(all(-180<=box[k]['longitude']<=180 for k in ('low','high')))
         # A remote authorized point cannot silently turn explicit DC into New York.
         self.search.side_effect=lambda body,**kw:{'places':[{**place('remote','Synthetic remote bowling',40.7,-74.0),'addressComponents':[{'longText':'New York','types':['locality']},{'shortText':'NY','types':['administrative_area_level_1']}]}]}
-        result=real_plans(self.request(startingLocation={**START,'point':{'id':'authorized-start','coordinates':{'latitude':40.7,'longitude':-74.0}}}),ProviderBudget())
-        self.assertFalse(result.provisionalPlans)
+        with self.assertRaisesRegex(DiscoveryError, "couldn't confidently locate"):
+            real_plans(self.request(startingLocation={**START,'point':{'id':'authorized-start','coordinates':{'latitude':40.7,'longitude':-74.0}}}),ProviderBudget())
         self.search.side_effect=lambda body,**kwargs:{'places':[None]}
         with self.assertRaises(DiscoveryError):real_plans(self.request(),ProviderBudget())
 

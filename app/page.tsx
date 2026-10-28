@@ -84,7 +84,7 @@ export default function Home() {
   const [lookupEnabled, setLookupEnabled] = useState(false);
   const [planningStage, setPlanningStage] = useState("Generating itinerary");
   const [locationContext, setLocationContext] = useState<LocationContext>({});
-  const detailsSession = useRef(new VenueDetailsSession());
+  const [detailsSession] = useState(()=>new VenueDetailsSession());
   useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setExplorationEnabled(value.explorationEnabled === true); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
@@ -95,7 +95,8 @@ export default function Home() {
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
   const pages = useRef(new ItineraryPages());
   const latest = useRef<PlannerResult>(demoPlans as PlannerResult);
-  const [,setPageVersion]=useState(0);
+  const [pageState,setPageState]=useState({index:0,count:0});
+  function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length});}
   const [loading, setLoading] = useState(false);
   const session = useRef(new PlanningSession());
   const surpriseHistory=useRef(new SurpriseHistory());
@@ -111,24 +112,26 @@ export default function Home() {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
-    pages.current.reset();setPageVersion(v=>v+1);
+    setRecovery(undefined);setOptionsNotice("");
+    pages.current.reset();syncPages();
     startingControls.current?.cancel();
     session.current.cancel();
-    detailsSession.current.clear();
+    detailsSession.clear();
     setLoading(false);
     setDirty(true);
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
     cancelClarification();
-    detailsSession.current.clear();
+    detailsSession.clear();
     setValidated(null);
     setDirty(false);
     setPreferenceState(previous => displayInterpretedPreferences(previous, emptyPreferenceState().values));
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
   }
   function cancelClarification() {
-    pages.current.reset();setPageVersion(v=>v+1);
+    setRecovery(undefined);setOptionsNotice("");
+    pages.current.reset();syncPages();
     startingControls.current?.cancel();
     session.current.cancel();
     setLoading(false);
@@ -137,23 +140,25 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Follow-up canceled. Edit your request or plan again.", location: "", activities: [], notes: [] });
   }
   const [optionsNotice, setOptionsNotice] = useState("");
+  const [recovery,setRecovery]=useState<string|undefined>();
   const [optionsBusy,setOptionsBusy]=useState(false);
   async function showDifferent(expandDiscovery = false) {
     const active=latest.current;
-    if (!expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));setPageVersion(v=>v+1);}setOptionsNotice("");return; }
+    if (!expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();}setOptionsNotice("");return; }
     if (!active.optionsToken || !(expandDiscovery ? active.canDiscover : active.canExpand)) return;
     const controller = session.current.begin();
     if (!controller) return;
     setPlanningStage(explorationStage(expandDiscovery));
-    setLoading(true); setOptionsBusy(true); setOptionsNotice("");
+    setLoading(true); setOptionsBusy(true); setOptionsNotice("");setRecovery(undefined);
     try {
       const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
       if (!session.current.current(controller)) return;
-      if (!response.ok) { if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(data.message);return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
+      if (!response.ok) { setRecovery(data.code);if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(data.message);return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
       const next = adaptRanking(data);
       if (!session.current.current(controller)) return;
-      if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));setPageVersion(v=>v+1);setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
+      setRecovery(next.recoveryCode);
+      if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
       else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
       if (session.current.current(controller)) { latest.current={...active,canExpand:false,canDiscover:false};setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
@@ -162,10 +167,10 @@ export default function Home() {
   async function runPlanning(followup: boolean) {
     const controller = session.current.begin();
     if (!controller) return;
-    detailsSession.current.clear();
-    pages.current.reset();setPageVersion(v=>v+1);
+    detailsSession.clear();
+    pages.current.reset();syncPages();
     setOptionsBusy(false);
-    setOptionsNotice("");
+    setOptionsNotice("");setRecovery(undefined);
     setLoading(true);
     setPlanningStage("Generating itinerary");
     setGenerated(true);
@@ -201,7 +206,8 @@ export default function Home() {
         onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); setPreferencesOpen(false); } },
       });
       if (!session.current.current(controller)) return;
-      latest.current=next;pages.current.append(next);setPageVersion(v=>v+1);
+      setRecovery(next.recoveryCode);
+      latest.current=next;pages.current.append(next);syncPages();
       setResult({ ...next, dataMode: next.dataMode ?? (dataMode === "real" ? "real" : "mock") });
       setGenerated(true);
       requestAnimationFrame(() => {
@@ -276,12 +282,14 @@ export default function Home() {
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
-        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
-        {generated && pages.current.pages.length>0 && <ItineraryPagination index={pages.current.index} count={pages.current.pages.length} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover});setPageVersion(v=>v+1);}}}/>}
+        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover});syncPages();}}}/>}
         {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}
           busy={loading} disabled={dirty} notice={optionsBusy?planningStage+"…":optionsNotice||(!result.canExpand&&!result.canDiscover?"No more options found in this search. Other suitable places may exist.":"")}
           onAction={explore=>void showDifferent(explore)} onAdjust={()=>startingControls.current?.editTravel()}/>}
+        {generated&&recovery&&["outing_date_expired","outing_time_expired"].includes(recovery)&&<div role="group" aria-label="Outing date recovery"><p>{optionsNotice||result.message} Your activities, destination and confirmed origin are kept.</p><button type="button" className="secondary-button" onClick={()=>{setPreferencesOpen(true);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('input[type="date"]')?.focus());}}>Choose another date</button><p>No date is changed until you select one and regenerate. You can keep browsing saved pages.</p></div>}
+        {generated&&["destination_unresolved","destination_ambiguous","destination_verification_unavailable"].includes(recovery??"")&&<div role="group" aria-label="Destination recovery"><p>{locationContext.planningMode==="surprise"?"Clarify the destination city or neighborhood. Surprise Me keeps its mode and does not invent a starting location.":"Your original destination is kept. A nearby reference prioritizes that area; it does not verify an exact neighborhood boundary."}</p>{locationContext.planningMode!=="surprise"&&<button type="button" className="secondary-button" onClick={()=>{startingControls.current?.useAnchor();void runPlanning(!!validated);}}>Use confirmed start as nearby search reference</button>}<button type="button" onClick={()=>setPreferencesOpen(true)}>Correct destination</button></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
       </section>
 

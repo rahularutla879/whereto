@@ -6,8 +6,9 @@ import re
 from datetime import datetime, timezone
 from typing import Annotated, Literal
 
-from pydantic import AwareDatetime, Field, ValidationError
+from pydantic import AwareDatetime, Field, ValidationError, field_validator
 
+from backend.location_context import DestinationContext
 from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
                                      complete_year_answer, resolve_datetime)
 from backend.location_policy import first_intent, geographic_intent
@@ -91,6 +92,12 @@ class ClarificationQuestion(ContractModel):
 class InterpretationInput(ContractModel):
     text: Annotated[Nonblank, Field(max_length=4000)]
     preferences: ManualPreferences = Field(default_factory=ManualPreferences)
+    calendarTimezone: str | None = Field(default=None,max_length=100)
+
+    @field_validator("calendarTimezone")
+    @classmethod
+    def valid_calendar_timezone(cls, value):
+        return DestinationContext(originalText="", timezone=value).timezone
     hasCurrentLocation: bool = Field(default=False, strict=True)
     pending: PendingClarification | None = None
     answers: ClarificationAnswers = Field(default_factory=ClarificationAnswers)
@@ -473,7 +480,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         return inferred
 
     location = chosen("location", answers.location or ai.location)
-    if location is None and value.hasCurrentLocation and re.search(r"\bnear me\b", raw, re.I):
+    from backend.location_context import relative_destination, RELATIVE
+    if not (manual.location.strip() or answers.location) and relative_destination(raw):
         location = "near me"
     first_preference, first_spans, first_problem = first_intent(raw)
     between,between_spans,between_problem=between_intent(raw)
@@ -520,12 +528,14 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         date_raw += " " + answers.time
         time_phrases = [answers.time]
     dates = resolve_datetime(date_raw, date_phrases, time_phrases, location,
-                             manual_date=manual.date.strip(), now=reference)
+                             manual_date=manual.date.strip(), now=reference, calendar_timezone=value.calendarTimezone if location=="near me" else None)
+    if location=="near me" and value.calendarTimezone:
+        dates.notes.append("Nearby calendar uses the browser-reported IANA timezone, not a timezone verified from GPS. Confirm your local calendar if travelling.")
     if saved and dates.date and not dates.issues:
         # Anchor relative dates to the original request, but recheck elapsed time
         # now so a delayed answer cannot schedule a past outing/start.
         current = resolve_datetime(date_raw, date_phrases, time_phrases, location,
-            manual_date=dates.date.isoformat(), now=now)
+            manual_date=dates.date.isoformat(), now=now, calendar_timezone=value.calendarTimezone if location=="near me" else None)
         dates.start, dates.end = current.start, current.end
         dates.issues.extend(current.issues)
         dates.problems.extend(current.problems)
@@ -587,6 +597,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         try:
             resolved = PlanningRequest(
                 activities=activities, location=location, people=int(people), date=date,
+                calendarTimezone=dates.timezone, explicitStart=dates.explicit_start, explicitEnd=dates.explicit_end,
+                destinationContext=DestinationContext(originalText=RELATIVE.search(raw).group() if location=="near me" and RELATIVE.search(raw) else location,intent="current_relative" if location=="near me" else "explicit",source="browser" if location=="near me" and value.calendarTimezone else "request",timezone=dates.timezone),
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
                 firstTravel=first_preference, betweenTravel=between, geography=geographic_intent(raw,location), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,

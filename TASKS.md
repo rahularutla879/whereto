@@ -725,3 +725,12 @@ Task 36 is complete. Task 37 may begin in a separate session; it was not started
 - [x] Preserve mock defaults, original 135-task roadmap, release tags, Cloud settings and the $10/local-day estimate guard. Zero live Google calls.
 
 Task 46 remains complete. Task 47 remains unstarted.
+
+### Task 46 acceptance — consolidated geography and outing lifecycle
+
+- [x] Fix anchored neighborhood filtering, nearby permission/intent flow, explicit geographic recovery and separate manual route origins.
+- [x] Preserve destination-local resolved dates and explicit time provenance; distinguish outing expiry from ten-minute session expiry and retain browsable saved pages.
+- [x] Verify with invented providers, full backend/frontend suites and responsive browser checks; record dependency limitations in HANDOVER.md.
+- [x] Preserve mock defaults, cost/Cloud safeguards, original roadmap and release tags. No live Google requests.
+
+Task 46 remains complete. Task 47 remains unstarted.

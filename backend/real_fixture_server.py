@@ -49,6 +49,15 @@ def main():
                 p['formattedAddress']='Synthetic address, Manhattan, New York'
                 p['addressComponents']=[{'longText':'Manhattan','types':['sublocality_level_1']},{'longText':'New York','types':['locality']}]
             return {'places':records}
+        if scenario['name'] in ('geographic','outing_expired','unknown_destination'):
+            if kwargs:
+                return {'places':[{
+                    'id':'Synthetic_manual_reference','displayName':{'text':'Synthetic public park'},
+                    'formattedAddress':'Synthetic reference, New York, NY',
+                    'location':{'latitude':40.75,'longitude':-73.98},'types':['park'],
+                    'addressComponents':[{'longText':'New York','types':['locality']}]}]}
+            from backend.location_fixtures import neighborhood_fixture
+            return neighborhood_fixture(body)
         if scenario['name'] == 'location_acceptance':
             from backend.location_fixtures import acceptance_search_fixture
             return acceptance_search_fixture(body,**kwargs)
@@ -107,11 +116,18 @@ def main():
             from backend.between_policy import between_intent
             between,_,_=between_intent(text)
             return Interpretation(activities=activities or ['coffee'], people=int(group[1]) if group else None,
-                budget_per_person=None, date=None, location='Manhattan' if 'Manhattan' in text else 'Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
+                budget_per_person=None, date=None, location='Hyderabad' if 'Hyderabad' in text else 'Mystery District' if 'Mystery District' in text else 'Manhattan' if 'Manhattan' in text else 'Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
                 preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
                 travel_leg_minutes=int(leg[1]) if leg else int(between.value) if between and between.unit=='minutes' and between.mode=='strict' and between.value.is_integer() else None)
 
-    with patch('requests.sessions.Session.send', side_effect=AssertionError('Offline fixture server refused network')), \
+    from backend.location_context import outing_problem as actual_outing_problem
+    def calendar(request,now=None):
+        if scenario['name']=='outing_expired':
+            from datetime import datetime,timedelta
+            from zoneinfo import ZoneInfo
+            now=datetime.combine(request.date+timedelta(days=1),datetime.min.time(),tzinfo=ZoneInfo(request.calendarTimezone or 'America/New_York'))
+        return actual_outing_problem(request,now)
+    with patch('backend.location_context.outing_problem',side_effect=calendar), patch('requests.sessions.Session.send', side_effect=AssertionError('Offline fixture server refused network')), \
          patch('backend.places_transport.text_search', side_effect=search), \
          patch('backend.routes_transport.compute_matrix', side_effect=matrix), \
          patch('backend.venue_details.fetch_details', side_effect=details), \

@@ -121,7 +121,8 @@ class PlanningApiTests(unittest.TestCase):
 
     def test_past_date_is_rejected_before_final_planning(self):
         data = self.post({"activities": ["coffee"], "date": "2000-01-01"}, 422)
-        self.assertIn("date or time window", data["message"])
+        self.assertEqual(data["code"], "outing_date_expired")
+        self.assertIn("has ended", data["message"])
         self.assertNotIn("Traceback", str(data))
 
     def test_invalid_and_unsupported_requests(self):

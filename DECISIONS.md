@@ -258,3 +258,7 @@ Separate 100-per-distinct-activity inventory retention from finite search/route 
 Favor all-stop coverage within a quality band, using novelty-aware randomness only in Surprise Me. Store immutable three-card page history in browser memory with separate latest capability. Arrows never generate provider work. Preserve ten-minute server no-repeat scope and disclose reload/expiry limits instead of durable Google-content storage.
 
 Retain 150-element rolling-minute protection because no evidence places it below the last verified Cloud limit. Consult shared-ledger capacity, use short cancellable pre-dispatch waits, and preserve unsent frontiers. No quota changes; mock defaults, optional gates and $10/day estimate guard remain.
+
+## October 28, 2026 — geographic recovery and outing validity
+
+Treat ordinary neighborhood wording as prioritization around a compatible, confirmed reference, with an explicit approximation warning; require actual component/boundary evidence for hard geography. Unresolved names need destination correction or deliberate anchor consent, never a manufactured origin or a quota retry. Near-current search geography is separate from a manual route origin. Keep the resolved local date and explicit-time provenance separate from the ten-minute search capability. A default earliest start is planning context, not an appointment. Preserve saved pages on expiry and require explicit date correction. Retain disclosed bounded timezone support rather than adding paid enrichment or inventing global location resolution.

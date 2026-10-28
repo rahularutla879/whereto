@@ -61,6 +61,7 @@ class AuthorizedStart(RouteModel):
     reference_coordinates: Coordinates | None = Field(default=None, repr=False)
     source: Literal["device", "manual", "suggested", "mock"] = "device"
     label: str | None = Field(default=None, max_length=200, repr=False)
+    geographicDescription: str | None = Field(default=None, max_length=500, repr=False, exclude=True)
     accuracy_m: float | None = Field(default=None, ge=0, le=1000000, repr=False)
     precision: Literal["device", "address_or_place", "postal_area", "neighborhood", "city", "approximate_area"] = "device"
     explicitly_authorized: Literal[True]

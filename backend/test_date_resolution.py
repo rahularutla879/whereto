@@ -134,7 +134,9 @@ class DateResolutionTests(unittest.TestCase):
         self.assertEqual(r.start, 902)
         self.assertEqual(r.date, REFERENCE.date())
         r = self.resolve('tonight', now=REFERENCE.replace(hour=20))
-        self.assertTrue(r.issues)  # Do not silently shift the 6 PM evening default.
+        self.assertFalse(r.issues)  # A documented default is not an explicit appointment.
+        self.assertFalse(r.explicit_start)
+        self.assertEqual(r.start,1200)
 
     def test_daylight_saving_gaps_folds_and_midnight(self):
         for text in ('2027-03-14 between midnight and noon', '2026-11-01 from midnight to 4 AM', '2027-03-14 at 2:30 AM', '2026-11-01 at 1:30 AM', '2026-11-01 before 1:31 AM'):

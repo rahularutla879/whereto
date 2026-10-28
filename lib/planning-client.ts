@@ -1,3 +1,4 @@
+import { currentRelative, explicitOrigin, recoveryCode, type DestinationContext } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
 import type { FirstTravel, Geography, OriginPreparation } from "./starting-areas";
 import { interpretedPreferences } from "./preferences";
@@ -20,7 +21,7 @@ type Ranked = {
   score?: number; components?: { quality?: number };
 };
 type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
-  plans: Ranked[]; provisionalPlans: Ranked[]; explorationPlans?: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
+  plans: Ranked[]; provisionalPlans: Ranked[]; explorationPlans?: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { code?: string; message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
   // Reject broken upstream responses instead of displaying misleading empty success.
@@ -89,7 +90,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
   const identities = [...plans, ...alternativeBatches.flat()].map(p => p.venues.map(v => v.id).join("\u0000"));
   if (new Set(identities).size !== identities.length) throw new Error("Duplicate itinerary options");
-  return { dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, canDiscover: data.canDiscover, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
+  return { recoveryCode:recoveryCode(data.errors.find(e=>recoveryCode(e.code))?.code),dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, canDiscover: data.canDiscover, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
     message: plans.length ? data.message : [...new Set([data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))])].join(" "), notes: data.notes };
 }
 
@@ -102,7 +103,7 @@ export type PendingOuting = {
 };
 
 export type ValidatedOuting = {
-  request: { location: string; date: string; people: number; activities: PlannerResult["activities"];
+  request: { calendarTimezone?:string|null; explicitStart?:boolean|null; explicitEnd?:boolean|null; destinationContext?:DestinationContext|null; location: string; date: string; people: number; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
     groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; travelExclusive?: boolean; maxLegTravelExclusive?: boolean; maxFirstLegTravelExclusive?: boolean; transport: string | null;
     planningMode?:"origin"|"surprise"; betweenTravel?:FirstTravel|null; firstTravel?: FirstTravel | null; geography?: Geography; dinnerStops: number[] | null };
@@ -120,8 +121,16 @@ export async function generateOuting(text: string, preferences: Preferences = EM
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
     activities: [], notes: [], requestFailed: true });
   try {
+    // Submission-only preflight. Never called on mount or input changes.
+    const relative=currentRelative(text) && !preferences.location?.trim() && !context?.answers?.location;
+    if(relative && context?.prepareOrigin){
+      const prepared=await context.prepareOrigin({location:"near me",activities:[],transport:null,sourceKey:text,destinationRelative:true,manualOriginText:explicitOrigin(text)});
+      context.signal?.throwIfAborted();
+      if(!prepared)return {...failure("Share your location or confirm a manual nearby search area. Your original outing is kept."),requestFailed:false};
+      context={...context,locationContext:prepared};
+    }
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, preferences, ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
+      body: JSON.stringify({ text, preferences, ...(relative&&context?.locationContext?.calendarTimezone?{calendarTimezone:context.locationContext.calendarTimezone}:{}), ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
     if (!interpreted.ok) return failure(typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated.");
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
@@ -164,7 +173,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     if (!response.ok) {
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
-        return {...failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again."),notes:providerDiagnosticNotes(error.diagnostics)};
+        return {...failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again."),recoveryCode:recoveryCode(error.code),notes:providerDiagnosticNotes(error.diagnostics)};
       }
       return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
     }
@@ -179,10 +188,11 @@ export async function generateOuting(text: string, preferences: Preferences = EM
 
 
 export type LocationContext = {
+  calendarTimezone?:string; useOriginAsSearchAnchor?:boolean;
   planningMode?: "origin" | "surprise"; betweenTravel?:FirstTravel|null; recentSurpriseIds?:string[];
   locationFirst?: boolean; referenceToken?: string; firstTravel?: FirstTravel | null;
   manualStartingPlace?: string;
-  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested" | "mock"; label?: string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
+  startingLocation?: { point: { id: string; coordinates: { latitude: number; longitude: number } }; explicitly_authorized: true; source?: "device" | "manual" | "suggested" | "mock"; label?: string; geographicDescription?:string; accuracy_m?: number; precision?: "device" | "address_or_place" | "postal_area" | "neighborhood" | "city" | "approximate_area" };
   currentArea?: { coordinates: { latitude: number; longitude: number } };
   searchRadius?: number; maxFirstLegTravel?: number|null;
 };
