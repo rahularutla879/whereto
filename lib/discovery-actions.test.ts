@@ -7,7 +7,7 @@ import {explorationStage} from "../components/exploration-notice";
 test("alternative actions have distinct simple descriptions and accessible busy status",()=>{
   const html=renderToStaticMarkup(createElement(AlternativeActions,{real:true,canCombine:true,canExplore:true,busy:false,disabled:false,notice:"",onAction(){throw Error("Unexpected request");},onAdjust(){}}));
   assert.match(html,/Show different options/);assert.match(html,/Explore farther/);
-  assert.match(html,/Try different combinations from places already found/);
+  assert.match(html,/Try new combinations from places already found/);
   assert.match(html,/Discover new places in a wider area/);
   assert.doesNotMatch(html,/provider pages|candidate pool|shared budget|Search for more venues/i);
   const busy=renderToStaticMarkup(createElement(AlternativeActions,{real:true,canCombine:true,canExplore:true,busy:true,disabled:false,notice:"Exploring areas…",onAction(){},onAdjust(){}}));

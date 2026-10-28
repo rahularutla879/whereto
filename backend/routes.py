@@ -21,7 +21,7 @@ PlaceID = Annotated[str, StringConstraints(strict=True, min_length=1, max_length
 FIELD_MASK = "originIndex,destinationIndex,status,condition,distanceMeters,duration"
 ENDPOINT = "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix"
 # Derive contract bounds from the single approved candidate setting.
-MAX_CANDIDATES = ProviderSettings.model_fields["candidates_per_activity"].default
+MAX_CANDIDATES = 20  # Technical route-frontier width, independent of retained activity pools.
 MAX_REQUIRED_PAIRS = 3 * MAX_CANDIDATES ** 2 + MAX_CANDIDATES
 
 

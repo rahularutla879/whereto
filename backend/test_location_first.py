@@ -163,7 +163,8 @@ class LocationFirst(unittest.TestCase):
     def test_unavailable_routes_and_quota_do_not_create_fake_plans_or_retry(self):
         self.matrix.return_value=[];self.matrix.side_effect=None
         result=real_plans(self.request(startingLocation=START),ProviderBudget())
-        self.assertFalse(result.provisionalPlans)
+        self.assertTrue(result.provisionalPlans)
+        self.assertTrue(all(p.travelClassification=="unverified" and p.totalTravel is None for p in result.provisionalPlans))
         calls=self.search.call_count
         self.search.side_effect=DiscoveryError('quota','Provider quota reached.')
         with self.assertRaises(DiscoveryError):real_plans(self.request(),ProviderBudget())
@@ -179,7 +180,10 @@ class LocationFirst(unittest.TestCase):
         self.assertTrue(result.provisionalPlans,result.message)
         context,_=option_sessions.get(result.optionsToken)
         self.assertTrue(context['positionIds'][2])
-        self.assertEqual(self.search.call_count,2,'Repeated identical spatial query reuses the first observation.')
+        self.assertEqual(self.search.call_count,3,'First and later search geometries differ; identical requests are still reused.')
+        import json
+        bodies=[json.dumps(c.args[0],sort_keys=True) for c in self.search.call_args_list]
+        self.assertEqual(len(bodies),len(set(bodies)))
         self.assertTrue(all(len({v.id for v in p.candidate.venues})==3 for p in result.provisionalPlans))
 
     def test_normal_mode_location_first_preserves_ceiling_and_origin_source(self):

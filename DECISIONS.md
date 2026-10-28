@@ -250,3 +250,11 @@ Use page-memory-only first Place IDs (120 entries,10 minutes) as bounded hints a
 Repair the demonstrated healthy-ledger nested-lock defect without resetting accounting. Hold locks only around durable counter transitions, bound local contention and keep invalid storage fail-closed. Distinguish no field returned from no provider admission; only an explicit unsent contact action can recover without violating no-retry semantics.
 
 Use absolute real evidence scales so tiny within-pool differences cannot crowd out competitive primaries. Preserve shared planner/beam, hard constraints and source truth. Publish/record only actual cards, separate combinations from discovery, and explore provider-backed regional tiles after pages/strategies with finite per-action work. Twenty-driving/fifteen-walking minute defaults guide search only; changing any explicit strict/2× maximum still requires the user. Do not attribute historical Manhattan/Jersey City repetition to a single cause without traces. No Cloud changes, paid requests, durable provider storage or Task 47 work.
+
+## October 28, 2026 — Task 46 discovery and browsing
+
+Separate 100-per-distinct-activity inventory retention from finite search/route work. Preserve exact original requirements while permitting clearly separated evidence-backed travel-violating alternatives for display. Hard geography, safety, prohibited activities and known required-access incompatibility stay excluded. Unknown accessibility stays unknown; no enrichment/tier change.
+
+Favor all-stop coverage within a quality band, using novelty-aware randomness only in Surprise Me. Store immutable three-card page history in browser memory with separate latest capability. Arrows never generate provider work. Preserve ten-minute server no-repeat scope and disclose reload/expiry limits instead of durable Google-content storage.
+
+Retain 150-element rolling-minute protection because no evidence places it below the last verified Cloud limit. Consult shared-ledger capacity, use short cancellable pre-dispatch waits, and preserve unsent frontiers. No quota changes; mock defaults, optional gates and $10/day estimate guard remain.

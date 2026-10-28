@@ -26,15 +26,15 @@ class ExpandedLimits(unittest.TestCase):
 
     def test_configuration_ceiling_and_downward_overrides(self):
         s = ProviderSettings()
-        self.assertEqual((s.searches_per_outing,s.candidates_per_activity,s.matrix_elements_per_outing,s.requests_per_outing,s.requests_per_session),(10,20,300,30,50))
-        for k,v in [('searches_per_outing',11),('candidates_per_activity',21),('matrix_elements_per_outing',301),('requests_per_outing',31)]:
+        self.assertEqual((s.searches_per_outing,s.candidates_per_activity,s.matrix_elements_per_outing,s.requests_per_outing,s.requests_per_session),(10,100,300,30,50))
+        for k,v in [('searches_per_outing',11),('candidates_per_activity',101),('matrix_elements_per_outing',301),('requests_per_outing',31)]:
             with self.assertRaises(ValidationError): ProviderSettings(**{k:v})
         with patch.dict(os.environ, {'WHERETO_SEARCHES_OUTING':'7','WHERETO_REQUESTS_OUTING':'25'}):
             s=ProviderSettings.from_env()
             self.assertEqual((s.searches_per_outing,s.requests_per_outing),(7,25))
 
     def expanded(self, activities=None, **kw):
-        session=ProviderBudget()
+        session=ProviderBudget(ProviderSettings(mode="real",candidates_per_activity=20))
         r=real_plans(outing(activities=activities or ['bowling','food'], **kw),session)
         self.assertTrue(all(c.args[0]['pageSize']==10 and 'pageToken' not in c.args[0] for c in self.search.call_args_list))
         while r.canDiscover:
@@ -124,7 +124,7 @@ class ExpandedLimits(unittest.TestCase):
         self.assertLessEqual(session._elements,64)
 
     def test_ten_searches_ratings_manual_lookup_and_six_contacts_fit_thirty(self):
-        session=ProviderBudget();budget=session.outing()
+        session=ProviderBudget(ProviderSettings(mode="real",candidates_per_activity=20));budget=session.outing()
         # Lookup is a separately bounded explicit pre-planning operation. It
         # shares process/search-minute accounting, never consumes a venue slot.
         from backend.starting_places import StartingPlaceQuery, lookup_starting_places
@@ -152,7 +152,7 @@ class ExpandedLimits(unittest.TestCase):
             data['nextPageToken']=body.get('pageToken','')+'x'
             return data
         self.search.side_effect=rejected
-        session=ProviderBudget();r=real_plans(outing(),session)
+        session=ProviderBudget(ProviderSettings(mode="real",candidates_per_activity=20));r=real_plans(outing(),session)
         original,_=option_sessions.get(r.optionsToken)
         for _ in range(4):r=more_real_plans(r.optionsToken,expand_discovery=True)
         self.assertEqual(self.search.call_count,10);self.assertFalse(r.canDiscover)
@@ -161,7 +161,7 @@ class ExpandedLimits(unittest.TestCase):
         self.assertEqual(self.search.call_count,10);self.matrix.assert_not_called()
 
     def test_quota_stops_new_work_without_retries_or_fake_fallback(self):
-        session=ProviderBudget();r=real_plans(outing(),session)
+        session=ProviderBudget(ProviderSettings(mode="real",candidates_per_activity=20));r=real_plans(outing(),session)
         self.search.side_effect=DiscoveryError('quota','Google quota exhausted. Stop and review usage.')
         with self.assertRaises(DiscoveryError):more_real_plans(r.optionsToken,expand_discovery=True)
         count=self.search.call_count

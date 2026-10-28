@@ -47,6 +47,13 @@ def select(ranked,count,context,facts=None,rng=None):
         batch_first={p.candidate.venues[0].id for p in chosen}
         different=[p for p in near if p.candidate.venues[0].id not in batch_first]
         pool=unseen or different or near
+        activity_usage=context.get('usedActivities',{})
+        def novelty(p):
+            return sum(v.id not in activity_usage.get(v.activity,set()) and
+                       all(v.id!=q.candidate.venues[i].id for q in chosen)
+                       for i,v in enumerate(p.candidate.venues))
+        most=max(map(novelty,pool))
+        pool=[p for p in pool if novelty(p)==most]
         vertices=list({p.candidate.venues[0].id:p.candidate.venues[0] for p in pool}.values())
         def first_weight(v):
             novelty=1

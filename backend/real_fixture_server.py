@@ -37,6 +37,18 @@ def main():
             code,message,diagnostics=classify(response,'search');error=DiscoveryError(code,message);error.diagnostics=diagnostics;raise error
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
+        if scenario['name'] == 'browsing' and not kwargs:
+            from backend.location_fixtures import place
+            is_food='restaurant' in body['textQuery']
+            box=body.get('locationRestriction',{}).get('rectangle')
+            lat=(box['low']['latitude']+box['high']['latitude'])/2 if box else 40.75
+            lon=(box['low']['longitude']+box['high']['longitude'])/2 if box else -73.98
+            offset=counts['searches']*10
+            records=[place(f'Synthetic_{"food" if is_food else "drinks"}_{n}',f'Synthetic {"restaurant" if is_food else "bar"} {n}',lat,lon,types=['restaurant' if is_food else 'bar']) for n in range(offset,offset+10)]
+            for p in records:
+                p['formattedAddress']='Synthetic address, Manhattan, New York'
+                p['addressComponents']=[{'longText':'Manhattan','types':['sublocality_level_1']},{'longText':'New York','types':['locality']}]
+            return {'places':records}
         if scenario['name'] == 'location_acceptance':
             from backend.location_fixtures import acceptance_search_fixture
             return acceptance_search_fixture(body,**kwargs)
@@ -88,14 +100,14 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
-            pattern = r'\b(bowling|dinner|coffee|museum|movie|concert)\b'
+            pattern = r'\b(bowling|dinner|drinks|coffee|museum|movie|concert)\b'
             activities = [m[0] for m in re.finditer(pattern, text, re.I)]
             group = re.search(r'\b(\d+) people\b', text)
             leg = re.search(r'between venues under (\d+) minutes', text, re.I)
             from backend.between_policy import between_intent
             between,_,_=between_intent(text)
             return Interpretation(activities=activities or ['coffee'], people=int(group[1]) if group else None,
-                budget_per_person=None, date=None, location='Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
+                budget_per_person=None, date=None, location='Manhattan' if 'Manhattan' in text else 'Washington, DC' if 'Washington, DC' in text else 'Baltimore' if 'Baltimore' in text else None,
                 preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
                 travel_leg_minutes=int(leg[1]) if leg else int(between.value) if between and between.unit=='minutes' and between.mode=='strict' and between.value.is_integer() else None)
 

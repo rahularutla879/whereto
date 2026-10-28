@@ -8,9 +8,10 @@ import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, typ
 // Pydantic JSON uses the existing camelCase names. This adapter only shapes cards;
 // selection, scores, schedules, prices and travel all come from Python.
 type Ranked = {
+  travelClassification?: Plan["travelClassification"]; travelDeviations?: string[];
   surpriseRepeated?:boolean;
   candidate: { id: string; venues: DisplayVenue[]; people: number; date: string };
-  feasibility: "confirmed" | "provisional";
+  feasibility: "confirmed" | "provisional" | "violated";
   stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
   costPerPerson: number | null; groupCost: number | null;
   totalTravel: number | null; elapsedDuration: number | null;
@@ -19,11 +20,13 @@ type Ranked = {
   score?: number; components?: { quality?: number };
 };
 type Ranking = { dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
-  plans: Ranked[]; provisionalPlans: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
+  plans: Ranked[]; provisionalPlans: Ranked[]; explorationPlans?: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
   // Reject broken upstream responses instead of displaying misleading empty success.
-  const data = value as Ranking;
+  const raw = value as Ranking;
+  if(raw?.explorationPlans!==undefined&&(!Array.isArray(raw.explorationPlans)||raw.explorationPlans.some(p=>!p||!["outside_preference","beyond_limit","unverified"].includes(p.travelClassification??"")||!Array.isArray(p.travelDeviations)||!p.travelDeviations.every(d=>typeof d==="string")||p.issues?.some(i=>i.status==="violation"&&i.field!=="travel"))))throw new Error("Invalid exploration alternatives");
+  const data = raw && { ...raw, provisionalPlans: [...(raw.provisionalPlans??[]),...(raw.explorationPlans??[])] };
   if (!data || !data.request || !Array.isArray(data.request.activities) || typeof data.request.location !== "string"
     || !Array.isArray(data.plans) || !Array.isArray(data.provisionalPlans) || typeof data.message !== "string"
     || !Array.isArray(data.notes) || !data.notes.every(n => typeof n === "string") || !Array.isArray(data.errors)
@@ -40,6 +43,8 @@ export function adaptRanking(value: unknown): PlannerResult {
   if (data.alternativeBatches !== undefined && (!Array.isArray(data.alternativeBatches) || data.alternativeBatches.length > 2
     || (!real && data.alternativeBatches.length) || data.alternativeBatches.some(batch => !Array.isArray(batch) || batch.length < 1 || batch.length > 3))) throw new Error("Invalid additional options");
   for (const p of selected) {
+    if(p.travelClassification!==undefined&&(!["matching","outside_preference","beyond_limit","unverified"].includes(p.travelClassification)||!Array.isArray(p.travelDeviations)||!p.travelDeviations.every(d=>typeof d==="string")))throw new Error("Invalid travel classification");
+    if(p.feasibility==="violated"&&(!real||p.travelClassification!=="beyond_limit"||!p.travelDeviations?.length||!p.issues.some(i=>i.status==="violation")||p.issues.some(i=>i.status==="violation"&&i.field!=="travel")))throw new Error("Invalid travel alternative");
     if(p.routeEvidence!==undefined&&(!Array.isArray(p.routeEvidence)||p.routeEvidence.some(e=>!e?.route||[e.route.distance_meters,e.route.duration_seconds].some(n=>n!==undefined&&!nullableNumber(n)))))throw new Error("Invalid route evidence");
     if (!p.candidate || typeof p.candidate.id !== "string" || !Array.isArray(p.stops) || !p.stops.length
       || !Array.isArray(p.candidate.venues) || p.stops.length !== data.request.activities.length
@@ -56,7 +61,7 @@ export function adaptRanking(value: unknown): PlannerResult {
       || !p.prices.every(q => nullableNumber(q.amount) && typeof q.status === "string")
       || !p.legs.every(q => nullableNumber(q.minutes) && typeof q.status === "string")) throw new Error("Invalid itinerary response");
   }
-  if (data.plans.some(p => p.feasibility !== "confirmed") || data.provisionalPlans.some(p => p.feasibility !== "provisional")) throw new Error("Invalid feasibility response");
+  if (data.plans.some(p => p.feasibility !== "confirmed") || data.provisionalPlans.some(p => p.feasibility !== "provisional" && !(real && p.feasibility==="violated" && p.travelClassification==="beyond_limit"))) throw new Error("Invalid feasibility response");
   const normalized = (value: unknown) => typeof value === "number" && Number.isFinite(value) && value >= 0 && value <= 1 ? value : null;
   const copy = recommendationCopy(selected.map(p => ({
     score: normalized(p.score),
@@ -68,6 +73,7 @@ export function adaptRanking(value: unknown): PlannerResult {
   const themes = ["lavender", "peach", "mint"] as const;
   const headlines = real ? realHeadlines(selected.map(p => p.stops.map(s => s.venue)), data.request.dinnerStops ?? (data.request.dinner ? data.request.activities.flatMap((a, i) => a === "food" ? [i] : []) : [])) : [];
   const plans: Plan[] = selected.map((p, i) => ({
+    travelClassification:p.travelClassification,travelDeviations:p.travelDeviations,
     planningMode:data.request.planningMode,surpriseRepeated:p.surpriseRepeated,
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
     constraintIssues: p.issues,

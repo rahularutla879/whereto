@@ -7,6 +7,10 @@ def select_stage(request, known, outing, facts):
     pairs, matrices = plan_matrices(request)
     missing = {key: pair for key, pair in pairs.items() if key not in known}
     capacity = outing.routing_capacity()
+    if missing and outing.settings.exploration and not capacity['minuteElements']:
+        from backend.provider_work import wait_for_capacity
+        wait_for_capacity(lambda:outing.routing_capacity()['minuteElements'])
+        capacity=outing.routing_capacity()
     limit = min(64, capacity['elements'], capacity['minuteElements'])
     attempts = capacity['attempts']
     if not missing or not limit or not attempts:
@@ -26,7 +30,7 @@ def select_stage(request, known, outing, facts):
     rows = []
     for origins, destinations in matrices:
         origins = sorted(origins, key=lambda p: (sum(a == p.id for a, _ in known), p.id))
-        rows.append([(a, sorted(destinations, key=lambda b: (proximity(a, b), b.id))) for a in origins])
+        rows.append([(a, sorted(destinations, key=lambda b: (sum(y==b.id for _,y in known), proximity(a, b), b.id))) for a in origins])
     chosen = []
     for i in range(max((len(r) for r in rows), default=0)):
         for group in rows:

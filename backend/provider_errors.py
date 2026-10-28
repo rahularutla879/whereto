@@ -41,7 +41,7 @@ def attach_accounting(error,outing):
     except ProviderLimitError:
         usage={'providerAttempts':outing._requests,'placesSearchRequests':outing._searches,'reservedMatrixElements':outing._elements,'accountingUnavailable':True}
     boundary='provider_or_unknown'
-    if isinstance(error,ProviderLimitError):
+    if isinstance(error,ProviderLimitError) or getattr(error,"code",None)=="application_limit":
         message=str(error).casefold()
         boundary=('local_spending_guard' if 'daily estimated spending' in message else
                   'local_accounting' if 'accounting' in message else

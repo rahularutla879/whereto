@@ -136,7 +136,8 @@ class RealPlanningTests(unittest.TestCase):
         self.matrix.side_effect = lambda body: [dict(e, duration='120.000000001s') for e in matrix_fixture(body)]
         result = self.run_plan(maxLegTravel=2)
         self.assertFalse(result.provisionalPlans)
-        self.assertIn('per-leg', str(result.errors))
+        self.assertTrue(result.explorationPlans)
+        self.assertTrue(all(p.travelDeviations for p in result.explorationPlans))
         self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         self.assertFalse(self.run_plan(travel=0).provisionalPlans)
 
@@ -151,7 +152,8 @@ class RealPlanningTests(unittest.TestCase):
         start = {'point': {'id': 'authorized-start', 'coordinates': {'latitude': 39.28, 'longitude': -76.60}}, 'explicitly_authorized': True}
         result = self.run_plan(startingLocation=start, maxFirstLegTravel=0)
         self.assertFalse(result.provisionalPlans)
-        self.assertIn('first stop', str(result.errors))
+        self.assertTrue(result.explorationPlans)
+        self.assertTrue(all(p.travelClassification=='beyond_limit' for p in result.explorationPlans))
         self.assertNotIn('"latitude":', result.model_dump_json())
         self.session = ProviderBudget(ProviderSettings(mode="real", candidates_per_activity=3, matrix_elements_per_outing=27, matrix_elements_per_session=300))
         result = self.run_plan(startingLocation=start, maxFirstLegTravel=10)

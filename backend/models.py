@@ -153,6 +153,7 @@ class OutingRequest(ContractModel):
     startTime: StartMinute = 600
     endTime: EndMinute = 1440
     requireAvailability: bool = Field(default=False, strict=True)
+    requireWheelchairAccess: bool = Field(default=False, strict=True)
     cost: CostPreference = CostPreference.balanced
     transport: TransportationMode | None = None
     dinner: bool = Field(default=False, strict=True)
@@ -215,6 +216,7 @@ class Venue(VenueIdentity):
     # A physical place never supplies an invented ScheduledEvent.
     rating: Annotated[float, Field(strict=True, ge=1, le=5, allow_inf_nan=False)] | None = None
     ratingCount: Annotated[int, Field(strict=True, ge=0)] | None = None
+    wheelchairAccessible: bool | None = Field(default=None, strict=True)
     relevanceStrength: Literal["strong", "uncertain"] | None = None
     providerPlaceId: Nonblank | None = None
     address: Nonblank | None = None
@@ -484,6 +486,8 @@ class RankedItinerary(ContractModel):
     explanations: list[RecommendationReason] = Field(default_factory=list)
     routeEvidence: list[dict] = Field(default_factory=list)
     firstLeg: dict | None = None
+    travelClassification: Literal["matching", "outside_preference", "beyond_limit", "unverified"] = "matching"
+    travelDeviations: list[str] = Field(default_factory=list)
     surpriseRepeated: bool = False
     feasibilityEvidence: dict = Field(default_factory=dict)
 
@@ -508,6 +512,7 @@ class RankingResult(ContractModel):
     request: OutingRequest
     plans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
     provisionalPlans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
+    explorationPlans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
     errors: list[PlanningError] = Field(default_factory=list)
     rejectionReasons: dict[str, int] = Field(default_factory=dict)
     message: Nonblank
@@ -522,7 +527,7 @@ class RankingResult(ContractModel):
 
     @model_validator(mode="after")
     def validate_selection(self):
-        initial = self.plans + self.provisionalPlans
+        initial = self.plans + self.provisionalPlans + self.explorationPlans
         selected = initial + [p for batch in self.alternativeBatches for p in batch]
         if len(initial) > 3:
             raise ValueError("At most three total options")
@@ -537,6 +542,8 @@ class RankingResult(ContractModel):
             raise ValueError("Recommended plans must have confirmed constraint feasibility")
         if any(p.feasibility != "provisional" for p in self.provisionalPlans):
             raise ValueError("Provisional alternatives must remain explicit")
+        if self.explorationPlans and (self.dataMode != "real" or any(p.feasibility != "violated" or p.travelClassification != "beyond_limit" or not p.travelDeviations or any(i.status == "violation" and i.field != "travel" for i in p.issues) for p in self.explorationPlans)):
+            raise ValueError("Exploration alternatives must explicitly retain only travel violations")
         for plan in selected:
             c = plan.candidate
             if ([v.activity for v in c.venues] != self.request.activities

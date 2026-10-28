@@ -35,7 +35,7 @@ class ProviderSettings(BaseModel):
 
     searches_per_outing: int = Field(default=10, ge=0, le=10)
     details_per_outing: int = Field(default=6, ge=0, le=6)
-    candidates_per_activity: int = Field(default=20, ge=1, le=20)
+    candidates_per_activity: int = Field(default=100, ge=1, le=100)
     matrix_elements_per_outing: int = Field(default=300, ge=0, le=300)
     requests_per_outing: int = Field(default=30, ge=0, le=30)
     concurrent_requests: int = Field(default=1, ge=1, le=1)
@@ -148,13 +148,18 @@ class OutingBudget:
         Other outings/manual searches share the unchanged process ceiling.
         """
         session = self._session
+        shared=150
+        if session.cost:
+            from backend.development_cost import AccountingError
+            try:shared=session.cost.minute_capacity()
+            except AccountingError as error:raise ProviderLimitError(str(error)) from None
         with session._lock:
             now = monotonic()
             used_minute = sum(n for t, n in session._matrix_window if now - t < 60)
             return {
                 "elements": max(0, min(64 if self.settings.exploration else float("inf"), self.settings.ceiling("matrix_elements_per_outing") - self._elements,
                                        self.settings.ceiling("matrix_elements_per_session") - session._elements)),
-                "minuteElements": max(0, self.settings.matrix_elements_per_minute - used_minute),
+                "minuteElements": max(0, min(shared,self.settings.matrix_elements_per_minute - used_minute)),
                 "attempts": max(0, min(64 if self.settings.exploration else float("inf"), self.settings.ceiling("requests_per_outing") - self._requests -
                                       (self.settings.details_per_outing - self._details),
                                       self.settings.ceiling("requests_per_session") - session._requests)),
@@ -207,6 +212,8 @@ class OutingBudget:
         session = self._session
         limits = session.settings
         with session._lock:
+            from backend.provider_work import check_cancelled
+            check_cancelled()
             if identities & self._seen:
                 raise ProviderLimitError("This provider request was already attempted. Reuse its result or stop; automatic retries are disabled.")
             if session._active >= limits.concurrent_requests:

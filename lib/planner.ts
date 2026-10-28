@@ -17,6 +17,7 @@ export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neig
 };
 export type Stop = { venue: DisplayVenue; start: number | null; end: number | null };
 export type Plan = {
+  travelClassification?: "matching" | "outside_preference" | "beyond_limit" | "unverified"; travelDeviations?: string[];
   planningMode?: "origin" | "surprise"; surpriseRepeated?:boolean;
   dataMode?: "mock" | "real"; location?: string; detailsToken?: string;
   constraintIssues?: { code?: string; field?: string; status?: string; message: string }[];
@@ -26,7 +27,7 @@ export type Plan = {
   id: string; title: string; fullTitle?: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
   venues: DisplayVenue[]; stops: Stop[]; price: number | null; groupCost: number | null;
   travel: number | null; duration: number | null; people: number; date: string;
-  feasibility: "confirmed" | "provisional" | "preview"; issues: string[];
+  feasibility: "confirmed" | "provisional" | "violated" | "preview"; issues: string[];
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
 export type PlannerResult = { requestFailed?: boolean; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };

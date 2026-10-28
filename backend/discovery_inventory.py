@@ -11,7 +11,7 @@ def merge_inventory(old,found,outing):
     retained=[];used={}
     for v in merged.venues:
         accepted=[a for a in v.activities if any((s.provider,s.id,a) in allowed for s in v.sources)
-                  and used.get(a,0)<outing.settings.ceiling('candidates_per_activity')]
+                  and used.get(a,0)<min(100,outing.settings.ceiling('candidates_per_activity'))]
         if accepted:
             retained.append(v.model_copy(update={'activities':accepted}))
             for a in accepted:used[a]=used.get(a,0)+1

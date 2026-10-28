@@ -226,7 +226,10 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
             issue("A spending preference could not be verified in your words. State Budget-friendly, Balanced or Best experience, or choose it in preferences.")
     if ai.transport is None and re.search(r"\b(?:driving|by car|by bus|by bike|public transit)\b", raw, re.I):
         issue("The stated transport preference was not captured. State walking, cycling, driving or transit and retry.")
-    if re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\b(?:wheelchair|accessible|vegan|halal|kosher|private room)\b", raw, re.I):
+    from backend.provider_budget import local_real_enabled
+    required_access=bool(re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair(?: accessible| access)?\b",raw,re.I))
+    essential=re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\b(?:wheelchair|accessible|vegan|halal|kosher|private room)\b", raw, re.I)
+    if essential and not (required_access and local_real_enabled() and not re.search(r"\b(?:vegan|halal|kosher|private room)\b",raw,re.I)):
         issue("The catalog cannot verify your accessibility, dietary or venue requirement. Edit the request to remove it only if it is optional; otherwise this prototype cannot safely plan it.")
     return issues
 
@@ -590,6 +593,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
                 maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,
+                requireWheelchairAccess=bool(re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair\b",raw,re.I)),
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)
         except (ValueError, TypeError, ValidationError):
             issues.append("Check group size (1–100), USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")

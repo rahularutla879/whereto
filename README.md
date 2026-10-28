@@ -38,7 +38,7 @@ The October 26 controlled verification exercised ratings, contacts and landmark 
 
 Real discovery uses finite pages and several activity anchors. **Show different options** tries new combinations from places already found; it may check missing routes but makes no new Places searches. **Explore farther** admits at most two new pages, strategies or regional searches per action, then selectively checks routes. Complete ordered venue combinations never repeat during an active outing; individual venues may recur. Existing cards stay visible during exploration and failures. **Adjust travel preference** opens the existing editor; changing a limit and regenerating is explicit, never automatic. Technical coverage and spending details remain in **About these estimates**.
 
-Application ceilings are **10 venue searches, 20 candidates/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard can pause exploration: wait at least a minute and explicitly choose Show different options again. No retry or new request is scheduled automatically. Coverage, hard constraints and budgets determine how many plans are possible.
+Application ceilings are **10 venue searches, up to 100 retained venues/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard includes other cooperating processes through the ledger. Exploration can wait up to two seconds before dispatch, then returns a resumable pause. No failed Google call is retried and no background work is queued. Coverage, hard constraints and budgets determine how many plans are possible.
 
 For smaller offline/development ceilings, set `WHERETO_SEARCHES_OUTING`, `WHERETO_CANDIDATES`, `WHERETO_MATRIX_OUTING` or `WHERETO_REQUESTS_OUTING` before starting the backend. Existing `WHERETO_MATRIX_SESSION` and `WHERETO_MATRIX_MINUTE` also only lower approved maxima. Defaults are ceilings, not targets. Cloud was read back October 27: **200 searches/day, 10/minute; 2,000 route elements/day, 150/minute**. Only the Places daily override was increased after a confirmed daily-quota failure. Expanded outings can cost more; see [current budgets and gross estimates](docs/billing-safeguards.md#task-46-approved-application-limit-expansion). All live gates remain off by default.
 
@@ -48,9 +48,20 @@ Ordinary real results omit unavailable price/capacity/timetable placeholders. Ha
 
 [Full real-data flow, safeguards, limitations, pricing and tests](docs/real-planning.md). Historical checkpoints below describe the mock prototype unless stated otherwise.
 
+
+### Browsing more places and plans
+
+Each distinct activity has its own target of **100 relevant Google venues**: dinner + drinks can retain 100 restaurants and 100 bars. Initial recommendations arrive from a small staged search; **Explore farther** advances pages, strategies and regions toward those targets, at most two new Places requests per click. Real supply or request/cost boundaries can stop earlier. No background search.
+
+**Show different options** makes no new Places searches; it can check necessary new routes. Both actions append up to three new cards to a saved page. **Previous / Next** only browse saved pages and make no provider calls. Pages stay in this tab, reset on edits/reload, and do not persist across users. The server's continuation/no-repeat capability expires after ten minutes.
+
+Checked matching travel appears first, followed by separate pages for travel outside the original Flexible preference, verified violations of its effective maximum/Strict limits, or unverified requirements. The notice and each card identify actual evidence and original limits. Viewing an alternative never changes requirements. Geography, prohibited activities and known required-access incompatibility stay excluded. Hours, reservations and prices remain provisional.
+
+See [the current discovery and browsing contract](docs/real-planning.md#100-venue-pools-and-saved-itinerary-pages) and [cost implications](docs/billing-safeguards.md#100-venue-discovery-accounting).
+
 ## Development exploration (Task 46 only)
 
-Normal mode keeps its existing limits. Exploration removes the six search/candidate/outing/process ceilings while retaining finite work per action and a persistent **$10 estimated gross/local-day** guard. It is off by default and cannot enable Google access by itself. Optional ratings, contacts and manual lookup still require their separate flags. No live verification is authorized by these instructions.
+Normal mode keeps request and route limits, with a 100-per-activity retention target (lower overrides remain supported). Exploration removes fixed outing/process request and route ceilings while retaining finite work per action and a persistent **$10 estimated gross/local-day** guard. It is off by default and cannot enable Google access by itself. Optional ratings, contacts and manual lookup still require their separate flags. No live verification is authorized by these instructions.
 
 For separately authorized local testing, stop the backend, then run from the project folder:
 

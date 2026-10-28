@@ -38,9 +38,9 @@ class ProviderBudgetTests(unittest.TestCase):
 
     def test_ten_searches_and_twenty_candidates(self):
         outing = ProviderBudget().outing()
-        outing.check_candidates(20)
+        outing.check_candidates(100)
         with self.assertRaisesRegex(ProviderLimitError, "candidates"):
-            outing.check_candidates(21)
+            outing.check_candidates(101)
         for n in range(10):
             with outing.reserve("search", str(n)):
                 pass

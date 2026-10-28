@@ -714,3 +714,14 @@ Task 36 is complete. Task 37 may begin in a separate session; it was not started
 - [x] Continue year-only answers deterministically with preserved context; send reason-specific date/year/weekend/time questions and guidance through the existing clarification fields.
 - [x] Pass 194 backend/102 frontend tests, ESLint, TypeScript and production build; verify the exact six-person dinner request, corrections, preference synchronization and manual priority in the real Qwen/FastAPI/Next.js browser.
 - [x] Review the complete diff, update relevant documentation and commit/push the tested correction while preserving release tags. No Task 37 work.
+
+
+### Task 46 acceptance — 100-venue discovery and browsable alternatives
+
+- [x] Target 100 qualified unique venues per distinct activity through staged, explicit exploration; keep finite routing and cumulative cost safeguards.
+- [x] Balance novelty at every stop, preserve full-combination history and separate matching/unverified/travel-violating pages without rewriting requirements.
+- [x] Add immutable three-card page navigation without provider calls; retain pages on empty/failing actions and reset safely on edits.
+- [x] Pass 498 backend/160 frontend tests, lint, TypeScript and production build; exercise desktop/mobile offline browser workflows. Optional WASI dependency-tree inconsistency remains disclosed in HANDOVER.md.
+- [x] Preserve mock defaults, original 135-task roadmap, release tags, Cloud settings and the $10/local-day estimate guard. Zero live Google calls.
+
+Task 46 remains complete. Task 47 remains unstarted.

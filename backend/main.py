@@ -66,7 +66,6 @@ async def invalid_request(request: Request, exc: RequestValidationError):
     })
 
 
-@app.post("/api/plans/generate", response_model=RankingResult)
 def generate_plan(request: PlannerInput) -> RankingResult:
     if not isinstance(request, PlannerInput):
         request = PlannerInput.model_validate(request.model_dump())
@@ -93,6 +92,8 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             return JSONResponse(status_code=422, content={"code": "invalid_provider_data", "message": "Google returned incomplete or invalid venue or route information. No fictional fallback was used."})
         except (ProviderLimitError, DiscoveryError, RouteError) as error:
             return JSONResponse(status_code=422, content={"code": getattr(error, "code", "application_limit"), "message": str(error) + " No fictional fallback was used.", "diagnostics": getattr(error, "diagnostics", {})})
+    if request.requireWheelchairAccess:
+        return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Mock venues cannot verify required wheelchair access. No fictional accessibility claim was made."})
     if request.geography.strictDestination or request.geography.excludedRegions:
         return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Geographic boundary and regional exclusion checks require deliberately enabled real mode. No fictional itinerary was generated with an ignored constraint."})
     if any(value is not None for value in (request.searchRadius, request.manualStartingPlace)):
@@ -146,7 +147,6 @@ class OptionsRequest(BaseModel):
     token: str = Field(min_length=1, max_length=100)
 
 
-@app.post("/api/plans/options")
 def more_options(request: OptionsRequest):
     from backend.real_planning import more_real_plans
     try:
@@ -180,3 +180,15 @@ def starting_areas(request: StartingAreaQuery):
         return JSONResponse(content=suggest_starting_areas(request,provider_budget),headers={'Cache-Control':'no-store'})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         return JSONResponse(status_code=422,content={'message':'Starting-area information could not be verified.' if isinstance(error,ValidationError) else str(error),'diagnostics':getattr(error,'diagnostics',{})},headers={'Cache-Control':'no-store'})
+
+
+@app.post("/api/plans/generate", response_model=RankingResult)
+async def generate_endpoint(request: PlannerInput, http: Request):
+    from backend.provider_work import run_work
+    return await run_work(http, lambda: generate_plan(request))
+
+
+@app.post("/api/plans/options")
+async def options_endpoint(request: OptionsRequest, http: Request):
+    from backend.provider_work import run_work
+    return await run_work(http, lambda: more_options(request))

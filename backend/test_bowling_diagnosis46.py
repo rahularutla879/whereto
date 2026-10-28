@@ -60,7 +60,7 @@ class BowlingDiagnosis(unittest.TestCase):
         self.assertTrue(any('arcades without bowling evidence' in n for n in r.notes))
         self.assertEqual(row['searchStrategies'],{'bowling_strict_type':1,'bowling_text_evidence':1})
         self.assertEqual(row['requestedPageSize'],10);self.assertEqual(row['geographyPolicy'],'verified_named_area')
-        self.assertEqual(r.diagnostics['configuredLimits'],{'candidatesPerActivity':20,'searchesPerOuting':10,'matrixElementsPerOuting':300})
+        self.assertEqual(r.diagnostics['configuredLimits'],{'candidatesPerActivity':100,'searchesPerOuting':10,'matrixElementsPerOuting':300})
         self.assertTrue(any('Latest backend coverage — bowling: 11 Google results' in n for n in r.notes))
         ids={v.facts.id for v in context['discovery'].venues if 'bowling' in v.activities}
         self.assertTrue({'Fixture_bowling_2','Fixture_bowling_3'}<=ids)

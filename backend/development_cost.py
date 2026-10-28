@@ -31,6 +31,8 @@ def daily_limit():
 
 def dispatch(operation, count=1):
     """Called at the transport boundary, after authentication, before actual I/O."""
+    from backend.provider_work import check_cancelled
+    check_cancelled()
     active = _active.get()
     if not active and os.environ.get('WHERETO_EXPLORATION_DEV') == '1':
         from backend.provider_budget import ProviderLimitError
@@ -159,3 +161,10 @@ class DevelopmentCost:
             return {'localDay':self.day(),'estimatedDayGrossUsd':gross/1000000,'dailyAllowanceUsd':self.limit/1000000,
                     'estimatedAllowanceRemainingUsd':max(0,self.limit-gross)/1000000,
                     'cloudQuotaRemaining':None,'cloudBillingVerified':False}
+
+
+    def minute_capacity(self, kind='elements', maximum=150):
+        """Read-only advisory; reserve() still atomically decides admission."""
+        with self.locked() as (_,data):
+            now=time()
+            return max(0,maximum-sum(e[2] for e in data['recent'] if e[1]==kind and now-e[0]<60))

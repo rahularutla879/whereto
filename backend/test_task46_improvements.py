@@ -27,12 +27,12 @@ class ImprovementTests(unittest.TestCase):
 
     def test_approved_defaults_and_validated_configuration(self):
         s = self.session.settings
-        self.assertEqual((s.candidates_per_activity, s.matrix_elements_per_outing, s.matrix_elements_per_session, s.matrix_elements_per_minute), (20, 300, 1500, 150))
+        self.assertEqual((s.candidates_per_activity, s.matrix_elements_per_outing, s.matrix_elements_per_session, s.matrix_elements_per_minute), (100, 300, 1500, 150))
         self.assertEqual((s.requests_per_session, s.requests_per_outing, s.details_per_outing, s.retries), (50, 30, 6, 0))
         with patch.dict(os.environ, {'WHERETO_CANDIDATES': '7', 'WHERETO_MATRIX_OUTING': '80'}):
             settings = ProviderSettings.from_env()
             self.assertEqual((settings.candidates_per_activity, settings.matrix_elements_per_outing), (7,80))
-        for field, value in [('candidates_per_activity',21), ('matrix_elements_per_outing',301), ('matrix_elements_per_session',1501), ('matrix_elements_per_minute',151)]:
+        for field, value in [('candidates_per_activity',101), ('matrix_elements_per_outing',301), ('matrix_elements_per_session',1501), ('matrix_elements_per_minute',151)]:
             with self.assertRaises(ValidationError): ProviderSettings(**{field:value})
 
     def test_ten_discovered_but_initial_routing_not_all_to_all(self):
@@ -260,7 +260,7 @@ class ImprovementTests(unittest.TestCase):
         from backend.ranking import score_candidates
         captured=[]
         def capture(request,plans):
-            ranked=score_candidates(request,plans);captured[:]=ranked
+            ranked=score_candidates(request,plans);captured.extend(ranked)
             return ranked
         with patch('backend.real_planning.score_candidates',side_effect=capture):
             result=real_plans(outing(),self.session)

@@ -104,13 +104,16 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     for position, activity in enumerate(request.activities):
         pool = []
         for distinct in discovery.venues:
-            if activity not in distinct.activities or context.get("locationFirst") and distinct.facts.id not in context["positionIds"][position]:
+            if activity not in distinct.activities:
                 continue
             fact = distinct.facts.model_copy(update={"activity": activity})
+            if request.requireWheelchairAccess and fact.wheelchairAccessible is False:
+                continue  # Known incompatible venues are never usable alternatives.
+
             labels = distinct_venue_labels(distinct).model_dump(mode="json")
             facts[fact.id] = fact
             pool.append(Venue(id=fact.id, name=fact.name, activity=activity,
-                              providerPlaceId=fact.id, address=fact.address, rating=fact.rating, ratingCount=fact.ratingCount,
+                              providerPlaceId=fact.id, address=fact.address, rating=fact.rating, ratingCount=fact.ratingCount, wheelchairAccessible=fact.wheelchairAccessible,
                               relevanceStrength=distinct.relevance[activity].status,
                               mapsUrl=str(venue_source(fact).url), evidenceLabels=labels,
                               dataQuality=DataQuality(identity=DataStatus.verified), source="Google Maps"))
@@ -120,8 +123,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "discoveryStages": discovery.stages, "discoveryReasons": discovery.diagnostics,
                    "usageCategories": ["Text Search Enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "Text Search Pro", "Compute Route Matrix Essentials"]}
     diagnostics['venuePipeline'] = empty_coverage(discovery, {a.value: {v.id for v in p} for a, p in zip(request.activities, pools)})
-    diagnostics['configuredLimits'] = {'candidatesPerActivity': None if outing.settings.exploration else outing.settings.candidates_per_activity,
+    diagnostics['configuredLimits'] = {'candidatesPerActivity': 100 if outing.settings.exploration else outing.settings.candidates_per_activity,
         'searchesPerOuting': None if outing.settings.exploration else outing.settings.searches_per_outing, 'matrixElementsPerOuting': None if outing.settings.exploration else outing.settings.matrix_elements_per_outing}
+    diagnostics['discoveryTargets']={a.value:{'uniqueRelevant':len({v.id for p in pools for v in p if v.activity==a}),'target':100} for a in set(request.activities)}
     if any(not pool for pool in pools):
         from backend.option_sessions import option_sessions
         if "token" not in context:
@@ -134,6 +138,10 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         return result
     from backend.routing_shortlist import shortlist
     all_pools = pools
+    diversity_evidence_needed = context.get('continuationAction',False) and any(
+        any(v.id not in context.get('venueDisplayCounts',{}).get(activity.value,{}) for v in pool)
+        and context.get('unseenCheckedByActivity',{}).get(activity.value,0)==0
+        for activity,pool in zip(request.activities,all_pools))
     if surprise:
         from backend.surprise import venue_order
         if 'surpriseOrder' not in context:
@@ -141,7 +149,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         priority={identity:i for i,identity in enumerate(context['surpriseOrder'])}
         pools[0]=sorted(pools[0],key=lambda v:priority.get(v.id,len(priority)))
     frontier = all_pools
-    if outing.settings.exploration:
+    if outing.settings.exploration or context.get("locationFirst"):
         # Finite computation, not a retention ceiling. Prefer venues with fewer
         # checked routes; retain this action's frontier through its one recursion.
         if not context.get("actionFrontier"):
@@ -157,15 +165,17 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                 if context.get('locationFirst') and frontiers:
                     from backend.routing_shortlist import balanced_following
                     previous_pool=[v for v in all_pools[len(frontiers)-1] if v.id in frontiers[-1]]
-                    chosen=balanced_following(pool,previous_pool,facts,width)
+                    chosen=balanced_following(pool,previous_pool,facts,width,context.get("venueDisplayCounts",{}).get(request.activities[len(frontiers)].value,{}))
                 frontiers.append({v.id for v in chosen})
             context["actionFrontier"] = frontiers
         frontier = [[v for v in pool if v.id in ids] for pool, ids in zip(pools, context["actionFrontier"])]
+    if diversity_evidence_needed:
+        context['width']=expansion_width(session.settings,len(request.activities))
     pools = shortlist(frontier, facts, context["width"], request.startingLocation)
     if surprise:pools[0]=frontier[0][:context['width']]
     if surprise or context.get('locationFirst'):
         from backend.routing_shortlist import balanced_following
-        for i in range(1,len(pools)):pools[i]=balanced_following(frontier[i],pools[i-1],facts,context['width'])
+        for i in range(1,len(pools)):pools[i]=balanced_following(frontier[i],pools[i-1],facts,context['width'],context.get('venueDisplayCounts',{}).get(request.activities[i].value,{}))
     for activity, row in diagnostics['venuePipeline'].items():
         count = len({v.id for pool in pools for v in pool if v.activity == activity})
         row.update(shortlistedForRouting=count, notInCheckedCompletePath=count)
@@ -200,7 +210,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     # Reuse evaluated alternatives. A bounded stage fills a checked pool with
     # fewer than three options; initial infeasibility may expand once below.
     primary_evidence_needed = context.get('eligiblePrimary', 3) < min(3, len(all_pools[0]))
-    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped") and (not (outing.settings.exploration or context.get("locationFirst")) or context.get("actionRouteStages", 0) < 2):
+    # Cached combinations must not indefinitely starve undisplayed venues at
+    # another stop. Admit only another finite route stage, never a search.
+    if missing and (context.get("unseenEligible", 0) < 3 or primary_evidence_needed or diversity_evidence_needed) and not context.get("routedThisAction") and not context.get("stopped") and (not (outing.settings.exploration or context.get("locationFirst")) or context.get("actionRouteStages", 0) < 2):
         selected, _, _ = select_stage(route_request, context["routes"], outing, facts)
         context["routedThisAction"] = True
         if selected:
@@ -219,7 +231,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     diagnostics.update(unroutedPairs=pending, routingCapacity=capacity)
     coverage_pending = pending or any(len(p) > len(q) for p, q in zip(all_pools, pools))
     route_notice = ("The remaining route budget limits checked coverage. Other suitable venues may exist." if coverage_pending and (not capacity['elements'] or not capacity['attempts']) else
-                    "The local route minute allowance is used. Wait at least a minute, then choose Show different options to check unsent routes. No retry is scheduled." if pending and not capacity['minuteElements'] else
+                    "The local rolling-minute routing allowance is temporarily full. Checked places and routes are saved; choose Show different options later to check more. This is not evidence of a Google quota failure. No request is queued or retried." if pending and not capacity['minuteElements'] else
                     "More routes can be checked in bounded stages within this outing's remaining budget." if pending else "")
     failures=[leg for leg in context['routes'].values() if leg.error_message]
     if failures:
@@ -241,7 +253,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     if context.get('locationFirst'):
         from backend.spatial_beam import candidates as beam_candidates
         candidates=beam_candidates(distinct_request,pools,routes,context['seen'],audit=context.setdefault('beamAudit',{}))
-    evaluated, rejections, rejection_codes = [], {}, {}
+    evaluated, alternatives, rejections, rejection_codes = [], [], {}, {}
     checked = 0
     travel_sets = {state: {} for state in ('compatible', 'violated', 'unverified')}
     for candidate in candidates:
@@ -307,7 +319,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         if request.betweenTravel and request.betweenTravel.mode=='flexible':
             from backend.location_policy import exceeds
             for i,(a,b) in enumerate(zip(candidate.venues,candidate.venues[1:])):
-                if exceeds(routes[a.id,b.id],request.betweenTravel,original=True):
+                if exceeds(routes[a.id,b.id],request.betweenTravel,original=True) and not exceeds(routes[a.id,b.id],request.betweenTravel):
                     plan.issues.append(ConstraintIssue(code='extra_between_travel',field='travel',status='unknown',
                         message=f'Journey {i+1} between activities exceeds your original preference, within the doubled flexible maximum.'))
         plan.feasibility="violated" if any(i.status=="violation" for i in plan.issues) else "provisional"
@@ -327,13 +339,17 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                 if extra and request.firstTravel.mode=='flexible':
                     plan.issues.append(ConstraintIssue(code='extra_first_travel',field='travel',status='unknown',message='This option requires extra travel beyond your original flexible first-stop preference. The estimate is from the confirmed starting point.'))
         plan.feasibilityEvidence = labels.model_dump(mode="json")
+        from backend.travel_classification import classify
+        plan.travelClassification,plan.travelDeviations=classify(request,plan,routes,request.startingLocation)
         if plan.feasibility == "violated":
+            if all(i.field=="travel" for i in plan.issues if i.status=="violation"):
+                alternatives.append(plan)
             for issue in plan.issues:
                 if issue.status == "violation":
                     rejection_codes[issue.code] = rejection_codes.get(issue.code, 0) + 1
                     rejections[issue.message] = rejections.get(issue.message, 0) + 1
         else:
-            evaluated.append(plan)
+            (evaluated if plan.travelClassification=="matching" else alternatives).append(plan)
     diagnostics.update(candidateCombinations=len(candidates), evaluatedCombinations=checked,
                        uncheckedCombinations=len(candidates) - checked, eligibleCombinations=len(evaluated),
                        eligiblePrimaryCandidates=len({p.candidate.venues[0].id for p in evaluated}),
@@ -344,6 +360,24 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     qualified=[p for p in evaluated if not surprise or quality_qualified(p)]
     if surprise:diagnostics['surpriseQualityExcluded']=len(evaluated)-len(qualified)
     ranked = [p for p in score_candidates(public, qualified) if p.candidate.id not in context["seen"]]
+    # Score alternatives using the same evidence; retain the original violation
+    # issues/state on the returned plan rather than pretending they passed.
+    scored_alternatives=[]
+    for plan in alternatives:
+        if plan.candidate.id in context['seen'] or surprise and not quality_qualified(plan):continue
+        safe=plan.model_copy(deep=True,update={'feasibility':'provisional','issues':[i for i in plan.issues if i.status!='violation']})
+        scored=score_candidates(public,[safe])[0]
+        from backend.travel_classification import deviation_penalty
+        plan.score=max(0,scored.score-deviation_penalty(request,plan,routes,request.startingLocation))
+        plan.components=scored.components
+        plan.explanations=[e for e in scored.explanations if e.code not in ("feasibility",)]
+        scored_alternatives.append(plan)
+    scored_alternatives.sort(key=lambda p:({'outside_preference':0,'unverified':1,'beyond_limit':2}[p.travelClassification],-p.score,p.candidate.id))
+    # Never mix requirements-matching and beyond-requirements cards on a page.
+    if not ranked and scored_alternatives:
+        category=scored_alternatives[0].travelClassification
+        ranked=[p for p in scored_alternatives if p.travelClassification==category]
+
     if request.betweenTravel and request.betweenTravel.mode=='flexible':
         for plan in ranked:
             if not any(i.code=='extra_between_travel' for i in plan.issues):plan.score=min(1,plan.score+.05)
@@ -354,13 +388,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             if not plan.firstLeg['exceedsPreference']:plan.score+=.05
         ranked.sort(key=lambda plan:(-plan.score,plan.candidate.id))
     diagnostics["unseenEligibleCombinations"] = len(ranked)
-    # Keep genuinely useful shared stops when only one activity has alternatives.
-    varying = sum(len({p.candidate.venues[i].id for p in ranked}) > 1 for i in range(len(request.activities)))
-    min_changed = max(1, min(varying, (len(request.activities) + 1) // 2))
+    # Retain useful shared stops when only one activity has alternatives.
     if surprise:
         from backend.surprise import select
         diverse=select(ranked,3,context,facts)
-    else:diverse = _select(ranked, 3, min_changed=min_changed, prefer_primary=True, primary_used=context["usedPrimary"])
+    else:
+        from backend.travel_classification import select_diverse
+        diverse = select_diverse(ranked,3,context)
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     context['eligiblePrimary'] = diagnostics['eligiblePrimaryCandidates']
     primary_shortage = context['eligiblePrimary'] < min(3, len(all_pools[0]))
@@ -387,6 +421,12 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     from backend.option_sessions import option_sessions
     context["usedPrimary"].update(p.candidate.venues[0].id for p in ranked if p.candidate.id in shown)
     context["seen"].update(shown)
+    for plan in diverse:
+        for venue in plan.candidate.venues:
+            counts=context.setdefault('venueDisplayCounts',{}).setdefault(venue.activity.value,{})
+            counts[venue.id]=counts.get(venue.id,0)+1
+    diagnostics['displayedVenuesByActivity']={a:len(counts) for a,counts in context.get('venueDisplayCounts',{}).items()}
+    diagnostics['travelClassifications']={category:sum(p.travelClassification==category for p in evaluated+alternatives) for category in ('matching','outside_preference','beyond_limit','unverified')}
     if surprise:
         from backend.surprise import record
         record(context,diverse,facts)
@@ -398,23 +438,26 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         context["token"] = option_sessions.create(context)
     details_token = context["detailsToken"]
     details_sessions.extend(details_token, list(facts))
-    context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in qualified)
+    context["unseenEligible"] = sum(p.candidate.id not in context["seen"] for p in qualified+scored_alternatives)
     context["routedThisAction"] = False
+    context['unseenCheckedByActivity']={a.value:len({v.id for p in qualified+scored_alternatives
+        if p.candidate.id not in context['seen'] for v in p.candidate.venues
+        if v.activity==a and v.id not in context.get('venueDisplayCounts',{}).get(a.value,{})}) for a in set(request.activities)}
     diagnostics.update(outing.usage())
     diagnostics['venuePipeline'] = planning_coverage(discovery, all_pools, pools, request.activities,
-        routes, travel_sets, evaluated, ranked, diverse, [p for p in ranked if p.candidate.id in shown], context)
+        routes, travel_sets, [p for p in evaluated+alternatives if p.feasibility!="violated"], ranked, diverse, [p for p in ranked if p.candidate.id in shown], context)
     from backend.planning_diagnostics import bottlenecks
     diagnostics['discoveryBottlenecks']=bottlenecks(context,all_pools,pools,routes,ranked,diverse,pending)
     diagnostics['primaryCoverageExpansion'] = context.get('primaryCoverageExpanded', False)
     if context.get('referenceScoring'):diagnostics['referenceScoring']=context['referenceScoring']
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
-        ((outing.settings.exploration or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
-    return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=diverse, detailsToken=details_token,
+        ((outing.settings.exploration or context.get("locationFirst") or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
+    return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=[p for p in diverse if p.feasibility=="provisional"], explorationPlans=[p for p in diverse if p.feasibility=="violated"], detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context),
         diagnostics=diagnostics, message=(route_notice or "No new combinations found among the places checked. Explore farther or adjust your preferences; other suitable places may exist.") if not diverse else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
         errors=[] if diverse else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="no_availability", message="No more eligible combinations in the checked route pool. Other venues may exist; search expansion or remaining budgets can limit coverage.")],
-        notes=['Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
+        notes=['Development per-activity discovery targets: '+json.dumps(diagnostics['discoveryTargets'],sort_keys=True), 'Development travel classifications: '+json.dumps(diagnostics['travelClassifications'],sort_keys=True),'Development displayed activity coverage: '+json.dumps(diagnostics['displayedVenuesByActivity'],sort_keys=True),'Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
                 "Development Surprise coverage: "+json.dumps(diagnostics['surprise'],sort_keys=True)+f"; quality-excluded complete paths {diagnostics['surpriseQualityExcluded']}."] if surprise else []) + (["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
                    "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent local daily estimated spending guard. Cloud quota remaining is unknown.",
             f"Development usage — Text Searches {outing._dispatched['search']} dispatched ({outing._pagination} pagination reservations), Details {outing._dispatched['details']}, Matrix requests {outing._dispatched['matrix']}, elements {outing._dispatched['matrixElements']}. "
@@ -458,21 +501,22 @@ def more_real_plans(token, *, expand_discovery=False):
         context["continuationAction"] = True
         if context["request"].planningMode=='surprise':
             context.pop('surpriseOrder',None);context.pop('actionFrontier',None);context['expanded']=False
-        if context['outing'].settings.exploration:
+        if context['outing'].settings.exploration or context.get('locationFirst'):
             if expand_discovery or context.get('unseenEligible', 0) < 3:
                 context.pop('actionFrontier', None)
             context['expanded'] = False
         if expand_discovery:
             expand_venue_discovery(context)
         result = real_plans(context["request"], context["session"], context=context)
-        if not result.provisionalPlans and not context["expanded"]:
+        if not (result.provisionalPlans or result.explorationPlans) and not context["expanded"]:
             context["expanded"] = True
             # Larger inventory is staged, never sent as an all-pairs matrix.
             context["width"] = expansion_width(context["session"].settings, len(context["request"].activities))
             result = real_plans(context["request"], context["session"], context=context)
         return result
     except (DiscoveryError, ProviderLimitError, RouteError) as error:
-        context["stopped"] = True
+        temporary= (isinstance(error,ProviderLimitError) or getattr(error,'code',None)=='application_limit') and ('minute' in str(error).lower() or 'cancelled' in str(error).lower())
+        context["stopped"] = not temporary
         context['outing'].stop_reason = str(error)
         from backend.provider_errors import attach_accounting
         raise attach_accounting(error,context['outing'])
@@ -483,7 +527,7 @@ def more_real_plans(token, *, expand_discovery=False):
 def discovery_activities(context):
     settings = context['session'].settings
     return [a for a in dict.fromkeys(context['request'].activities)
-            if sum(a in v.activities for v in context['discovery'].venues) < settings.ceiling('candidates_per_activity')
+            if sum(a in v.activities for v in context['discovery'].venues) < min(100,settings.ceiling('candidates_per_activity'))
             and (settings.exploration or context['discoveryPages'].get(a, 0) < 6)
             and (context['discovery'].paging.get(a, {}).get('next')
                  or context['discovery'].paging.get(a, {}).get('variant', 'initial') == 'initial'
@@ -550,7 +594,7 @@ def expand_venue_discovery(context):
     merged = merged.model_copy(update={'venues':accepted_venues})
     retained, used = [], {a: 0 for a in counts}
     for venue in merged.venues:
-        accepted = [a for a in venue.activities if a in used and used[a] < outing.settings.ceiling('candidates_per_activity')]
+        accepted = [a for a in venue.activities if a in used and used[a] < min(100,outing.settings.ceiling('candidates_per_activity'))]
         if accepted:
             retained.append(venue.model_copy(update={'activities': accepted}))
             for a in accepted:

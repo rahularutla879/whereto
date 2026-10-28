@@ -12,28 +12,29 @@ def candidates(request,pools,routes,seen,width=96,audit=None):
                 if any(v.id==venue.id for v in path):continue
                 if path:
                     route=routes.get((path[-1].id,venue.id))
-                    if not route or route.status not in ('ok','same_location'):continue
+                    if not route or route.status=='unreachable':continue
                 extended=path+(venue,)
                 if index==len(pools)-1 and next(_walk(request,[[v] for v in extended])).id in seen:
                     if audit is not None:audit['previouslyShownRemoved']+=1
                     continue
                 next_paths.append(extended)
         def score(path):
-            travel=sum(routes[a.id,b.id].duration_seconds for a,b in zip(path,path[1:]))
+            travel=sum((routes[a.id,b.id].duration_seconds or 0) for a,b in zip(path,path[1:]))
             quality=sum(v.rating or 0 for v in path)
             return travel-quality*15,tuple(v.id for v in path)
         next_paths.sort(key=score)
-        groups={}
-        for path in next_paths:groups.setdefault(path[0].id,[]).append(path)
+        expanded_count=len(next_paths)
         beam=[]
-        for row in range(width):
-            for group in groups.values():
-                if row<len(group):beam.append(group[row])
-                if len(beam)>=width:break
-            if len(beam)>=width:break
+        usage={}
+        while next_paths and len(beam)<width:
+            # A finite shortlist-quality band, then coverage across every depth.
+            near=next_paths[:max(width,12)]
+            chosen=min(near,key=lambda path:(sum(usage.get((i,v.id),0) for i,v in enumerate(path)),score(path)))
+            beam.append(chosen);next_paths.remove(chosen)
+            for i,v in enumerate(chosen):usage[i,v.id]=usage.get((i,v.id),0)+1
         if audit is not None:
-            audit['expandedPaths']+=len(next_paths)
-            audit['prunedPaths']+=max(0,len(next_paths)-len(beam))
+            audit['expandedPaths']+=expanded_count
+            audit['prunedPaths']+=max(0,expanded_count-len(beam))
         if not beam:break
     result=[]
     for path in beam:

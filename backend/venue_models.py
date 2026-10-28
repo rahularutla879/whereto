@@ -130,6 +130,7 @@ class VenueFacts(VenueIdentity):
     primaryType: Nonblank | None = None
     rating: Annotated[Number, Field(ge=1, le=5)] | None = None
     ratingCount: Annotated[Integer, Field(ge=0)] | None = None
+    wheelchairAccessible: bool | None = Field(default=None, strict=True)
     regularOpeningHours: OpeningHours | None = None
     currentOpeningHours: OpeningHours | None = None
     websiteUrl: WebUrl | None = None

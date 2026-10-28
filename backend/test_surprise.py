@@ -26,7 +26,7 @@ class Selection(unittest.TestCase):
             secure.assert_called_once_with()
 
     def test_novel_ids_quality_weights_and_spatial_diversity(self):
-        venues=[SimpleNamespace(id=str(i),rating=4.5,ratingCount=100,relevanceStrength='strong',coordinates=SimpleNamespace(latitude=38.9+i*.01,longitude=-77.02)) for i in range(6)]
+        venues=[SimpleNamespace(id=str(i),activity='bowling',rating=4.5,ratingCount=100,relevanceStrength='strong',coordinates=SimpleNamespace(latitude=38.9+i*.01,longitude=-77.02)) for i in range(6)]
         order=venue_order(venues,{'0','1','2'},rng=random.Random(4))
         self.assertEqual({v.id for v in order[:3]},{'3','4','5'})
         self.assertEqual(len({v.id for v in order}),6)
@@ -200,7 +200,8 @@ class Pipeline(unittest.TestCase):
     def test_missing_route_evidence_and_tiny_pool_never_add_filler(self):
         self.matrix.side_effect=lambda body:[]
         result=real_plans(self.request(),ProviderBudget())
-        self.assertFalse(result.provisionalPlans)
+        self.assertTrue(result.provisionalPlans)
+        self.assertTrue(all(p.travelClassification=="unverified" and p.totalTravel is None for p in result.provisionalPlans))
         self.matrix.side_effect=fixture.matrix_fixture
         from backend.location_fixtures import spatial_search_fixture
         def tiny(body,**kwargs):

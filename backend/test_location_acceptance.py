@@ -100,7 +100,8 @@ class Pipeline(unittest.TestCase):
         result=real_plans(self.request(startingLocation=fixture.START,firstTravel={'value':20,'mode':'flexible'}),ProviderBudget())
         self.assertTrue(result.provisionalPlans,result.message)
         self.assertTrue(all(p.firstLeg['minutes']<=40 for p in result.provisionalPlans))
-        self.assertTrue(any(p.firstLeg['exceedsPreference'] for p in result.provisionalPlans))
+        self.assertTrue(all(p.travelClassification=='matching' for p in result.provisionalPlans))
+        # Preferred-range pages now precede extra-range pages; retained pools still include both.
         context,_=option_sessions.get(result.optionsToken);origin=context['request'].startingLocation
         with patch('backend.development_cost.time',return_value=20000),patch('backend.provider_budget.monotonic',return_value=20000):
             more_real_plans(result.optionsToken)

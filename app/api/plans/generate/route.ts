@@ -12,7 +12,7 @@ export async function POST(request: Request) {
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
     const response = await fetch(`${base.replace(/\/$/, "")}/api/plans/generate`, {
       method: "POST", headers: { "Content-Type": "application/json", ...developmentOriginHeaders(request) }, body: JSON.stringify(payload),
-      cache: "no-store", signal: AbortSignal.timeout(115000),
+      cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(115000)]),
     });
     const data: unknown = await response.json();
     if (response.status === 422) {

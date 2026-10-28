@@ -1,4 +1,6 @@
 "use client";
+import { ItineraryPagination } from "@/components/itinerary-pagination";
+import { ItineraryPages, beyondPage, BEYOND_NOTICE } from "@/lib/itinerary-pages";
 
 import { ExplorationNotice, explorationStage } from "../components/exploration-notice";
 import { useEffect, useRef, useState, type FormEvent } from "react";
@@ -21,7 +23,7 @@ import { LocationControls, type StartingLocationHandle } from "@/components/loca
 import { VenueDetails, GoogleCredits } from "@/components/venue-details";
 import { VenueDetailsSession } from "@/lib/venue-details";
 import type { LocationContext } from "@/lib/planning-client";
-import { nextOptions, expandedOptions } from "@/lib/option-batches";
+import { nextOptions } from "@/lib/option-batches";
 import { RealVenueFacts } from "@/components/real-venue-facts";
 import { adaptRanking } from "@/lib/planning-client";
 import { PlanCost } from "@/components/plan-cost";
@@ -54,6 +56,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
       <h3 className={real ? "real-plan-title" : undefined} title={plan.fullTitle}>{plan.title}</h3>
       <p className="card-description">{plan.description}</p>
       {plan.planningMode==="surprise"&&<p className="details-note">Surprise Me · Begins at {plan.venues[0].name}. {plan.surpriseRepeated?"This first venue has appeared before; the complete combination is different.":"A varied first venue from the checked eligible pool."} No travel from your location is included.</p>}
+      {plan.travelClassification && plan.travelClassification!=="matching" && <div className="plan-warning" role="note"><strong>{{outside_preference:"Outside your preferred range",beyond_limit:"Beyond your travel limit",unverified:"Requirements not fully verified"}[plan.travelClassification]}</strong><ul>{plan.travelDeviations?.map(message=><li key={message}>{message}</li>)}</ul></div>}
       {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Before you choose</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
       <div className="activity-route">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
@@ -68,7 +71,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
         <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`} · sample group limit: {venue.capacity ?? "Unknown"}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).{real&&plan.routeEvidence?.[i-1]?.route.distance_meters!=null&&" / "+(plan.routeEvidence[i-1].route.distance_meters!/1609.344).toFixed(2)+" road miles"}</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
         {!real && <div className="details-total"><span>Sample group total</span><PlanCost amount={plan.groupCost} group /></div>}
         <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
-        {plan.firstLeg && <p>{!real&&"Fictional mock first-leg context: "}{plan.firstLeg.source === "suggested" ? `From suggested planning reference ${plan.firstLeg.originLabel ?? ""}` : `From ${plan.firstLeg.originLabel ?? "your starting point"}`}: {plan.firstLeg.minutes ?? "Unknown"} minutes{plan.firstLeg.miles != null ? ` / ${plan.firstLeg.miles} road miles` : ""} ({real?"Google Maps estimate":"fictional travel fixture"}{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.{plan.firstLeg.exceedsPreference && " Requires extra travel beyond your original flexible preference."}</p>}
+        {plan.firstLeg && <p>{!real&&"Fictional mock first-leg context: "}{plan.firstLeg.source === "suggested" ? `From suggested planning reference ${plan.firstLeg.originLabel ?? ""}` : `From ${plan.firstLeg.originLabel ?? "your starting point"}`}: {plan.firstLeg.minutes ?? "Unknown"} minutes{plan.firstLeg.miles != null ? ` / ${plan.firstLeg.miles} road miles` : ""} ({real?"Google Maps estimate":"fictional travel fixture"}{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.{plan.firstLeg.exceedsPreference && " Travel differs from your original preference; see the classification above."}</p>}
       </div>
     </div>
   </article>;
@@ -90,6 +93,9 @@ export default function Home() {
   const preferences = preferenceState.values;
   const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
+  const pages = useRef(new ItineraryPages());
+  const latest = useRef<PlannerResult>(demoPlans as PlannerResult);
+  const [,setPageVersion]=useState(0);
   const [loading, setLoading] = useState(false);
   const session = useRef(new PlanningSession());
   const surpriseHistory=useRef(new SurpriseHistory());
@@ -105,6 +111,7 @@ export default function Home() {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
+    pages.current.reset();setPageVersion(v=>v+1);
     startingControls.current?.cancel();
     session.current.cancel();
     detailsSession.current.clear();
@@ -121,6 +128,7 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Plan your new request to see recommendations.", location: "", activities: [], notes: [] });
   }
   function cancelClarification() {
+    pages.current.reset();setPageVersion(v=>v+1);
     startingControls.current?.cancel();
     session.current.cancel();
     setLoading(false);
@@ -131,29 +139,31 @@ export default function Home() {
   const [optionsNotice, setOptionsNotice] = useState("");
   const [optionsBusy,setOptionsBusy]=useState(false);
   async function showDifferent(expandDiscovery = false) {
-    if (!expandDiscovery && result.alternativeBatches?.length) { setResult(nextOptions); setOptionsNotice(""); return; }
-    if (!result.optionsToken || !(expandDiscovery ? result.canDiscover : result.canExpand)) return;
+    const active=latest.current;
+    if (!expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));setPageVersion(v=>v+1);}setOptionsNotice("");return; }
+    if (!active.optionsToken || !(expandDiscovery ? active.canDiscover : active.canExpand)) return;
     const controller = session.current.begin();
     if (!controller) return;
     setPlanningStage(explorationStage(expandDiscovery));
     setLoading(true); setOptionsBusy(true); setOptionsNotice("");
     try {
-      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: result.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
+      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
       if (!session.current.current(controller)) return;
-      if (!response.ok) { if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
+      if (!response.ok) { if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(data.message);return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
       const next = adaptRanking(data);
       if (!session.current.current(controller)) return;
-      if (next.plans.length) { setResult(previous => expandDiscovery ? expandedOptions(previous, next) : next); setOptionsNotice(""); }
-      else { setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
+      if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));setPageVersion(v=>v+1);setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
+      else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
-      if (session.current.current(controller)) { setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
+      if (session.current.current(controller)) { latest.current={...active,canExpand:false,canDiscover:false};setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
     } finally { if (session.current.finish(controller)) {setLoading(false);setOptionsBusy(false);} }
   }
   async function runPlanning(followup: boolean) {
     const controller = session.current.begin();
     if (!controller) return;
     detailsSession.current.clear();
+    pages.current.reset();setPageVersion(v=>v+1);
     setOptionsBusy(false);
     setOptionsNotice("");
     setLoading(true);
@@ -191,6 +201,7 @@ export default function Home() {
         onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); setPreferencesOpen(false); } },
       });
       if (!session.current.current(controller)) return;
+      latest.current=next;pages.current.append(next);setPageVersion(v=>v+1);
       setResult({ ...next, dataMode: next.dataMode ?? (dataMode === "real" ? "real" : "mock") });
       setGenerated(true);
       requestAnimationFrame(() => {
@@ -264,7 +275,9 @@ export default function Home() {
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession.current} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {generated && pages.current.pages.length>0 && <ItineraryPagination index={pages.current.index} count={pages.current.pages.length} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover});setPageVersion(v=>v+1);}}}/>}
         {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}
           busy={loading} disabled={dirty} notice={optionsBusy?planningStage+"…":optionsNotice||(!result.canExpand&&!result.canDiscover?"No more options found in this search. Other suitable places may exist.":"")}
