@@ -2,7 +2,8 @@
 from backend.planner import _walk
 
 
-def candidates(request,pools,routes,seen,width=96):
+def candidates(request,pools,routes,seen,width=96,audit=None):
+    if audit is not None:audit.update(expandedPaths=0,prunedPaths=0,previouslyShownRemoved=0)
     beam=[()]
     for index,pool in enumerate(pools):
         next_paths=[]
@@ -13,7 +14,9 @@ def candidates(request,pools,routes,seen,width=96):
                     route=routes.get((path[-1].id,venue.id))
                     if not route or route.status not in ('ok','same_location'):continue
                 extended=path+(venue,)
-                if index==len(pools)-1 and next(_walk(request,[[v] for v in extended])).id in seen:continue
+                if index==len(pools)-1 and next(_walk(request,[[v] for v in extended])).id in seen:
+                    if audit is not None:audit['previouslyShownRemoved']+=1
+                    continue
                 next_paths.append(extended)
         def score(path):
             travel=sum(routes[a.id,b.id].duration_seconds for a,b in zip(path,path[1:]))
@@ -28,6 +31,9 @@ def candidates(request,pools,routes,seen,width=96):
                 if row<len(group):beam.append(group[row])
                 if len(beam)>=width:break
             if len(beam)>=width:break
+        if audit is not None:
+            audit['expandedPaths']+=len(next_paths)
+            audit['prunedPaths']+=max(0,len(next_paths)-len(beam))
         if not beam:break
     result=[]
     for path in beam:

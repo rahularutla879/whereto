@@ -8,7 +8,7 @@ import json
 import os
 from pathlib import Path
 import stat
-from time import time
+from time import time, monotonic, sleep
 
 # USD millionths/event, global first paid tier, checked 2026-10-26.
 RATES = {'search_pro': 32000, 'search_enterprise': 35000, 'details': 20000, 'matrix_element': 5000}
@@ -60,9 +60,17 @@ class DevelopmentCost:
             except FileExistsError:
                 fd = os.open(self.path, os.O_RDWR | os.O_NOFOLLOW)
                 created = False
-            if not stat.S_ISREG(os.fstat(fd).st_mode) or os.fstat(fd).st_mode & 0o077:
-                raise ValueError()
-            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+            if not stat.S_ISREG(os.fstat(fd).st_mode) or os.fstat(fd).st_mode & 0o077 or os.fstat(fd).st_uid != os.getuid():
+                raise AccountingError('Local accounting permissions are unsafe. Owner must inspect the private ledger ownership and mode 0600; usage was not reset.')
+            deadline = monotonic() + 2
+            while True:
+                try:
+                    fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                    break
+                except BlockingIOError:
+                    if monotonic() >= deadline:
+                        raise AccountingError('Local accounting is busy. No provider request was admitted. Wait for active work to finish before a deliberate action; do not delete the ledger.')
+                    sleep(.01)  # Bounded local lock admission, never a provider retry.
             if created:
                 data = {'version': 1, 'days': {}, 'recent': []}
                 self.write(fd, data)
@@ -83,8 +91,12 @@ class DevelopmentCost:
             if any(not isinstance(e,list) or len(e)!=3 or type(e[0]) not in (int,float) or e[1] not in ('search','details','elements') or type(e[2]) is not int or e[2]<0 for e in data['recent']):
                 raise ValueError()
             yield fd, data
-        except (OSError, ValueError, TypeError, KeyError):
-            raise AccountingError('Local development cost accounting is unavailable, busy or invalid. No new provider work was admitted; inspect the ledger without deleting usage.') from None
+        except PermissionError:
+            raise AccountingError('Local accounting access was denied. Owner must inspect the configured private ledger and parent-directory permissions. No provider work was admitted; do not reset usage.') from None
+        except (ValueError, TypeError, KeyError):
+            raise AccountingError('Local accounting data is invalid. Preserve the ledger and inspect or restore a verified backup with the owner; no provider work was admitted.') from None
+        except OSError:
+            raise AccountingError('Local accounting storage is unavailable. Inspect the configured private path and disk access; no provider work was admitted and usage was not reset.') from None
         finally:
             if fd is not None:
                 os.close(fd)
@@ -107,7 +119,8 @@ class DevelopmentCost:
         if any(k not in RATES or type(n) is not int or n < 0 for k,n in units.items()):
             raise AccountingError('Invalid local usage reservation; no provider work admitted.')
         with self.locked() as (fd, data):
-            row = data['days'].setdefault(self.day(), {'grossMicrousd':0,'reserved':{},'dispatched':{}})
+            day = self.day()
+            row = data['days'].setdefault(day, {'grossMicrousd':0,'reserved':{},'dispatched':{}})
             charge = sum(RATES[k]*n for k,n in units.items())
             if row['grossMicrousd'] + charge > self.limit:
                 raise AccountingError('Local daily estimated spending allowance reached. No new provider work was admitted. Review usage and the explicit local allowance; no retry is scheduled.')
@@ -121,19 +134,24 @@ class DevelopmentCost:
             row['grossMicrousd']+=charge
             for k,n in units.items(): row['reserved'][k]=row['reserved'].get(k,0)+n
             self.write(fd,data)  # Charge BEFORE I/O; errors/unsent batch reservations stay charged.
-            sent = {}
-            def measured(operation, count):
-                key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details','matrix':'matrix_element'}[operation]
-                n=count
-                if type(n) is not int or n <= 0 or sent.get(key,0)+n > units.get(key,0):
-                    raise AccountingError('Provider dispatch exceeds its reserved usage; no request sent.')
-                sent[key] = sent.get(key,0)+n
+        # Never hold a file lock over provider I/O or a nested usage snapshot.
+        # Reservations are durable before releasing it. Dispatch updates re-read
+        # the latest row under a short lock, so other processes cannot lose usage.
+        sent = {}
+        def measured(operation, count):
+            key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details','matrix':'matrix_element'}[operation]
+            n=count
+            if type(n) is not int or n <= 0 or sent.get(key,0)+n > units.get(key,0):
+                raise AccountingError('Provider dispatch exceeds its reserved usage; no request sent.')
+            with self.locked() as (fd, data):
+                row=data['days'][day]
                 row['dispatched'][key]=row['dispatched'].get(key,0)+n
                 self.write(fd,data)
-                if on_dispatch: on_dispatch(operation, count)
-            token=_active.set(measured)
-            try: yield charge
-            finally: _active.reset(token)
+            sent[key] = sent.get(key,0)+n
+            if on_dispatch: on_dispatch(operation, count)
+        token=_active.set(measured)
+        try: yield charge
+        finally: _active.reset(token)
 
     def snapshot(self):
         with self.locked() as (_,data):

@@ -128,7 +128,7 @@ class LocationFirst(unittest.TestCase):
         r=real_plans(self.request(startingLocation=START,firstTravel={'value':20,'mode':'strict'}),ProviderBudget())
         self.assertFalse(r.provisionalPlans)
         context,_=option_sessions.get(r.optionsToken);self.assertNotIn('band',context)
-        self.assertLessEqual(len([c for c in self.search.call_args_list if 'bowling' in c.args[0]['textQuery']]),1)
+        self.assertLessEqual(len([c for c in self.search.call_args_list if 'bowling' in c.args[0]['textQuery']]),2)
 
     def test_three_four_and_repeated_activities(self):
         for iteration,activities in enumerate((['coffee','bowling','food'],['coffee','museum','bowling','food'],['bowling','food','bowling'])):
@@ -144,7 +144,7 @@ class LocationFirst(unittest.TestCase):
         session=ProviderBudget();seen=set();primaries=set();requests=[]
         for action in range(16):
             with patch('backend.development_cost.time',return_value=20000+action*100),patch('backend.provider_budget.monotonic',return_value=20000+action*100):
-                result=real_plans(self.request(startingLocation=START),session) if action==0 else more_real_plans(token)
+                result=real_plans(self.request(startingLocation=START),session) if action==0 else more_real_plans(token,expand_discovery=action==1)
             token=result.optionsToken
             plans=result.provisionalPlans+[p for batch in result.alternativeBatches for p in batch]
             self.assertTrue(plans,(action,result.message))

@@ -209,7 +209,12 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
         for i, value in enumerate(values):
             low, high = bounds[i]
             n = 0 if value is None else 1 if high == low else (value - low) / (high - low)
-            normalized.append(1 - n if value is not None and high != low and i in (0, 2) else n)
+            if candidates and all(v.providerPlaceId for v in p.candidate.venues) and i in (1,2):
+                # Real evidence already has an absolute scale. Pool min/max
+                # exaggerated tiny rating/time differences into full-weight gaps.
+                n=(value if i==1 else 30/(30+value)) if value is not None else 0
+                normalized.append(n)
+            else:normalized.append(1 - n if value is not None and high != low and i in (0, 2) else n)
         p.components = dict(zip(("affordability", "quality", "convenience"), normalized))
         p.score = sum(w * n for w, n in zip(weights, normalized))
         p.explanations = [RecommendationReason(code="score", message=f"{request.cost.value} mode score {p.score:.3f}; normalized affordability, quality and travel weights {weights}.")]
@@ -255,7 +260,8 @@ def _select(ranked: list[RankedItinerary], count: int, *, min_changed: int = 1, 
         selected.append(choice)
         identity = tuple(v.id for v in choice.candidate.venues)
         remaining = [p for p in remaining if tuple(v.id for v in p.candidate.venues) != identity
-                     and sum(a.id != b.id for a, b in zip(p.candidate.venues, choice.candidate.venues)) >= min_changed]
+                     and (sum(a.id != b.id for a, b in zip(p.candidate.venues, choice.candidate.venues)) >= min_changed
+                          or prefer_primary and p.candidate.venues[0].id != choice.candidate.venues[0].id)]
     return selected
 
 

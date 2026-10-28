@@ -15,9 +15,12 @@ def merge_discovery_audits(old, found, retained):
         kept = _ids(retained, activity)
         overlap = known & incoming
         for key in ('googleResultsReceived', 'geographyRejected', 'normalizationRejected', 'mealRejected',
-                    'duplicatesRemoved', 'relevanceRejected', 'searchRequests', 'pagesFollowed'):
+                    'duplicatesRemoved', 'relevanceRejected', 'normalizationPassed', 'relevancePassed', 'searchRequests', 'pagesFollowed'):
             row[key] = row.get(key, 0) + addition.get(key, 0)
         row['duplicatesRemoved'] += len(overlap)
+        row['uniqueGoogleVenues']=len(old.observed.get(activity,set())|found.observed.get(activity,set()))
+        row['newGoogleVenues']=len(found.observed.get(activity,set())-old.observed.get(activity,set()))
+        row['knownGoogleVenues']=len(found.observed.get(activity,set())&old.observed.get(activity,set()))
         for key in ('geographyReasons', 'relevanceRejectedByReason', 'searchStrategies'):
             counts = row.setdefault(key, {})
             for reason, count in addition.get(key, {}).items():
@@ -95,3 +98,44 @@ def coverage_notes(coverage):
             f"Exclusion reasons: {reasons(r)}. "
             "Counts describe checked coverage, including queued options, not every venue in the area."
             for a, r in coverage.items()]
+
+
+
+def bottlenecks(context,all_pools,pools,routes,ranked,selected,pending):
+    from backend.location_policy import exceeds,FirstTravel
+    request=context['request'];start=request.startingLocation
+    first=[v.id for v in all_pools[0]]
+    compliant=violated=unknown=0
+    for identity in first:
+        if not start:continue
+        leg=routes.get((start.point.id,identity))
+        if not leg or leg.status not in ('ok','same_location'):
+            unknown+=1;continue
+        limits=[p for p in (request.firstTravel,
+            FirstTravel(value=float(request.maxFirstLegTravel),exclusive=request.maxFirstLegTravelExclusive) if request.maxFirstLegTravel is not None else None) if p]
+        if any(exceeds(leg,p) for p in limits):violated+=1
+        else:compliant+=1
+    reasons=[]
+    ranked_first=len({p.candidate.venues[0].id for p in ranked})
+    displayed=len({p.candidate.venues[0].id for p in selected})
+    if len(first)<3:reasons.append('limited_discovered_primary_supply')
+    if any(r.get('geographyRejected',0) for r in context['discovery'].audit.values()):reasons.append('geographic_filtering')
+    if any(r.get('relevanceRejected',0) for r in context['discovery'].audit.values()):reasons.append('activity_filtering')
+    if violated:reasons.append('verified_first_limit_violation')
+    if unknown:reasons.append('first_route_unverified')
+    if pending or len(first)>len(pools[0]):reasons.append('routing_work_pending')
+    if ranked_first>displayed:reasons.append('ranking_or_three_card_selection')
+    if context.get('stopped'):reasons.append('provider_or_admission_failure')
+    if context.get('beamAudit',{}).get('prunedPaths',0):reasons.append('beam_computation_bound')
+    stage=('none_three_distinct_options' if displayed>=3 else
+           'selection' if ranked_first>=3 else
+           'route_or_work_coverage' if unknown or pending else
+           'verified_first_limit' if violated else 'discovered_eligible_supply')
+    return {'shortageStage':stage,'discoveredFirstVenues':len(first),'firstVenuesInRouteShortlist':len(pools[0]),
+        'firstVenuesOutsideRouteShortlist':len(first)-len(pools[0]),
+        'firstRouteCompliant':compliant,'firstRouteNoncompliant':violated,'firstRouteUnknown':unknown,
+        'originJourneyApplicable':bool(start),'rankedFirstVenues':ranked_first,'displayedFirstVenues':displayed,
+        'routePairsAwaitingEvaluation':pending,'searchedRegions':len(context.get('searchedAreas',())),
+        'pendingSearchStrategies':sum(not j['done'] for j in context.get('jobs',[])),
+        'completeSignaturesPreviouslyShown':len(context['seen']),
+        'beam':context.get('beamAudit',{}),'latestExploration':context.get('latestExploration',{}),'reasonCodes':reasons}

@@ -40,5 +40,12 @@ def attach_accounting(error,outing):
     try:usage=outing.usage()
     except ProviderLimitError:
         usage={'providerAttempts':outing._requests,'placesSearchRequests':outing._searches,'reservedMatrixElements':outing._elements,'accountingUnavailable':True}
-    error.diagnostics={**getattr(error,'diagnostics',{}),**usage}
+    boundary='provider_or_unknown'
+    if isinstance(error,ProviderLimitError):
+        message=str(error).casefold()
+        boundary=('local_spending_guard' if 'daily estimated spending' in message else
+                  'local_accounting' if 'accounting' in message else
+                  'local_minute' if 'minute' in message else
+                  'provider_concurrency' if 'another external' in message else 'application_limit')
+    error.diagnostics={**getattr(error,'diagnostics',{}),**usage,'failureBoundary':boundary}
     return error

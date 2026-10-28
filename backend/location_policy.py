@@ -63,8 +63,9 @@ def first_intent(raw):
     except ValueError:return None,matches,'First-stop preference is outside the supported range.'
 
 
-def geographic_intent(raw):
+def geographic_intent(raw,location=None):
     strict=bool(re.search(r'\b(?:only (?:within|in)|strictly within|stay within)\s+(?!\d)',raw,re.I))
+    if location and re.search(r'\bonly\s+'+re.escape(location)+r'\b',raw,re.I):strict=True
     regions=[code for name,code in [('Virginia','VA'),('Maryland','MD'),('District of Columbia','DC')]
              if re.search(r'\b(?:no|exclude|excluding|not in)\s+'+name+r'\b',raw,re.I)]
     return Geography(strictDestination=strict,excludedRegions=regions)
@@ -77,7 +78,13 @@ def effective_max(preference):
 def radius(preference,band,mode):
     if preference:
         return max(250,min(2000000,band*(1609.344 if preference.unit=='miles' else 80 if mode=='walk' else 600)))
-    return 2000 if mode=='walk' else 8000
+    import os
+    key='WHERETO_DISCOVERY_WALK_MINUTES' if mode=='walk' else 'WHERETO_DISCOVERY_DRIVE_MINUTES'
+    try:
+        minutes=float(os.environ.get(key,'15' if mode=='walk' else '20'))
+        if not 1<=minutes<=120:raise ValueError()
+    except ValueError:raise ValueError(key+' must be a number from 1 to 120.')
+    return minutes*(80 if mode=='walk' else 600)
 
 
 def first_measure(leg,preference):

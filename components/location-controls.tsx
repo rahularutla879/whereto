@@ -7,7 +7,7 @@ import type { FirstTravel, OriginPreparation } from "../lib/starting-areas";
 import { FirstPreference } from "../lib/first-preference";
 import { GoogleCredits } from "./venue-details";
 import type { LocationContext } from "../lib/planning-client";
-export type StartingLocationHandle = { cancel: () => void; prepare: (input?: OriginPreparation) => Promise<LocationContext | null> };
+export type StartingLocationHandle = { cancel: () => void; editTravel: () => void; prepare: (input?: OriginPreparation) => Promise<LocationContext | null> };
 type Mode = "none" | "current" | "manual" | "surprise";
 type Selection = NonNullable<LocationContext["startingLocation"]>;
 export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=false,ref }: {
@@ -97,7 +97,7 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
       if(!pending.current.confirm(context(point,false)))changed(context(point,false));
     }catch(error){if(current===version.current)setNotice(error instanceof Error?error.message:"Location unavailable. Enter a starting place or choose Surprise Me.");}
   }
-  useImperativeHandle(ref,()=>({cancel:()=>{version.current++;originInput.current=undefined;setConflict(false);cancel();},prepare:async(input)=>{
+  useImperativeHandle(ref,()=>({editTravel:()=>{if(disclosure.current){disclosure.current.open=true;disclosure.current.querySelector<HTMLInputElement>('input[type="number"]')?.focus();}},cancel:()=>{version.current++;originInput.current=undefined;setConflict(false);cancel();},prepare:async(input)=>{
     originInput.current=input;
     const incoming=preference.current.hydrate(input?.firstTravel);
     setFirst(incoming?String(incoming.value):"");setUnit(incoming?.unit??"minutes");setFlexibility(incoming?.mode??"strict");

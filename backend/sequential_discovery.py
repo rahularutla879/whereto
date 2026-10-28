@@ -24,8 +24,8 @@ def search_area(request,center=None,first=False,band=None):
 def key(query):return sha256(json.dumps(search_body(query,10),sort_keys=True).encode()).hexdigest()
 
 
-def add_job(context,position,center=None,anchor=None,first=False):
-    r=context['request'];area=search_area(r,center,first,effective_max(r.firstTravel))
+def add_job(context,position,center=None,anchor=None,first=False,area=None):
+    r=context['request'];area=area or search_area(r,center,first,effective_max(r.firstTravel))
     query=DiscoveryRequest(activity=r.activities[position],destination=area,
         meal='dinner' if r.activities[position]=='food' and (r.dinner or position in (r.dinnerStops or [])) else None)
     identity=key(query)
@@ -51,7 +51,10 @@ def retain_job_results(context,job):
 def run_job(context,job):
     context['actionDiscoveryCalls']=context.get('actionDiscoveryCalls',0)+1
     query=job['request']
+    geometry=search_body(query,10)
+    area_key=sha256(json.dumps({k:geometry[k] for k in ('locationRestriction','locationBias') if k in geometry} or {'name':query.area.name},sort_keys=True).encode()).hexdigest()
     found=PlacesDiscovery(context['outing']).discover(query)
+    context.setdefault('searchedAreas',set()).add(area_key)
     context['discovery']=merge_inventory(context['discovery'],found,context['outing'])
     ids={v.facts.id for v in found.venues if query.activity in v.activities}
     job['ids'].update(ids)
@@ -134,29 +137,64 @@ def initialize(request,outing,seed=None,seed_routes=None):
 
 def can_expand(context):
     if any(not j['done'] for j in context['jobs']):return True
+    if next_region(context,commit=False) is not None:return True
     return any(context['positionIds'][i-1] - {anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
                for i in range(1,len(context['request'].activities)))
 
 
+def next_region(context,*,commit):
+    """Finite provider-backed search grid, never a claimed user position.
+
+    Tiles guide discovery only. Exact first-leg routes and hard geography still
+    decide eligibility. No-limit range grows only on explicit exploration.
+    """
+    from math import sin,cos,radians
+    from backend.venue_models import Coordinates
+    r=context['request'];origin=r.startingLocation
+    first=[v.facts for v in context['discovery'].venues if v.facts.id in context['positionIds'][0] and v.facts.coordinates]
+    center=(origin.reference_coordinates or origin.point.coordinates) if origin else (first[0].coordinates if first else None)
+    if not center:return None
+    step=context.get('regionStep',0)
+    if step>=32:return None  # Finite regional strategy, not city-wide exhaustion.
+    ring=step//8+1;angle=radians((step%8)*45)
+    reach=radius(r.firstTravel,effective_max(r.firstTravel),mode(r))
+    offset=reach*(ring/8 if r.firstTravel else ring*.65)
+    tile=reach/2 if r.firstTravel else min(50000,reach*(1+ring*.25))
+    latitude=center.latitude+sin(angle)*offset/111320
+    longitude=center.longitude+cos(angle)*offset/(111320*max(.05,cos(radians(center.latitude))))
+    if abs(latitude)>90:return None
+    longitude=(longitude+180)%360-180
+    area=search_area(r,Coordinates(latitude=latitude,longitude=longitude),True,effective_max(r.firstTravel))
+    area=area.model_copy(update={'radius_m':float(min(50000,tile))})
+    if commit:context['regionStep']=step+1
+    return area
+
+
 def expand(context):
-    # Plan at most two searches before executing. Prefer a new first-stop page,
-    # then a different earlier-stop anchor, then uninspected pages/refinements.
-    planned=[]
+    # Two explicit discovery steps: advance primary coverage first; then seed
+    # a later activity near a new promising path, not another old restaurant page.
+    before=set(context['positionIds'][0]);before_regions=len(context.get('searchedAreas',()));start_calls=context.get('actionDiscoveryCalls',0)
+    first=next((j for j in context['jobs'] if j['position']==0 and not j['done']),None)
+    if first is None:
+        area=next_region(context,commit=True)
+        if area:
+            add_job(context,0,first=True,area=area)
+            first=context['jobs'][-1]
+    if first:run_job(context,first)
+    remaining=max(0,2-(context.get('actionDiscoveryCalls',0)-start_calls))
     for i in range(1,len(context['request'].activities)):
+        if not remaining:break
         inspected={anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
         source=[v.facts for v in context['discovery'].venues if v.facts.id in context['positionIds'][i-1] and v.facts.coordinates and v.facts.id not in inspected]
         if source:
-            if context['request'].planningMode=='surprise':
-                from backend.surprise import venue_order
-                source=venue_order(source,context.get('usedPrimary',()))
+            from backend.surprise import venue_order
+            source=venue_order(source,context.get('usedPrimary',()))
             v=source[0];add_job(context,i,v.coordinates,v.id)
-    pending=[j for j in context['jobs'] if not j['done']]
-    first=next((j for j in pending if j['position']==0),None)
-    if first:planned.append(first)
-    for j in sorted(pending,key=lambda j:(j['searched'],j['position'])):
-        if j not in planned:planned.append(j)
-        if len(planned)>=2:break
-    for job in planned[:2]:run_job(context,job)
+        job=next((j for j in context['jobs'] if j['position']==i and not j['done'] and not j['searched']),None)
+        if job is None:job=next((j for j in context['jobs'] if j['position']==i and not j['done']),None)
+        if job:run_job(context,job);remaining-=1
+    context['latestExploration']={'newFirstVenues':len(context['positionIds'][0]-before),
+        'newSearchRegions':len(context.get('searchedAreas',()))-before_regions,'searchRequests':context.get('actionDiscoveryCalls',0)-start_calls}
     context.pop('actionFrontier',None)
     context['unseenEligible']=0;context['expanded']=False
     context['width']=6 if len(context['request'].activities)<=2 else 4

@@ -243,3 +243,10 @@ A valid beginning is either a confirmed origin or, in explicit Surprise Me mode,
 Reuse sequential discovery, selective routing and the existing beam/evaluator/ranker. Add quality-qualified weighted sampling with SystemRandom and controlled test seeds, not AI-invented randomness or shuffled repeats. Known ratings below 3 with at least 10 ratings exclude a Surprise path; unknown/low-count quality remains unverified, not fabricated. Favor unseen primary IDs and different venue regions among suitably ranked eligible options; expose necessary repeats honestly.
 
 Use page-memory-only first Place IDs (120 entries,10 minutes) as bounded hints across new outings, consistent with Google's ID caching exception. No durable storage, fingerprint, cross-user history, raw responses, reviews, contact information or personal coordinates. Existing 10 minute active computation sessions retain per-activity IDs and full seen signatures. Preserve cost controls and unchanged quotas; zero live provider calls for this implementation. Task 47 remains pending.
+
+
+## October 28, 2026 — comprehensive discovery acceptance
+
+Repair the demonstrated healthy-ledger nested-lock defect without resetting accounting. Hold locks only around durable counter transitions, bound local contention and keep invalid storage fail-closed. Distinguish no field returned from no provider admission; only an explicit unsent contact action can recover without violating no-retry semantics.
+
+Use absolute real evidence scales so tiny within-pool differences cannot crowd out competitive primaries. Preserve shared planner/beam, hard constraints and source truth. Publish/record only actual cards, separate combinations from discovery, and explore provider-backed regional tiles after pages/strategies with finite per-action work. Twenty-driving/fifteen-walking minute defaults guide search only; changing any explicit strict/2× maximum still requires the user. Do not attribute historical Manhattan/Jersey City repetition to a single cause without traces. No Cloud changes, paid requests, durable provider storage or Task 47 work.

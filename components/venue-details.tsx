@@ -2,7 +2,7 @@
 import { VenueRating } from "./real-venue-facts";
 import { useState } from "react";
 import type { DisplayVenue } from "../lib/planner";
-import { safeWebsite, type Credit, type ContactDetails, VenueDetailsSession } from "../lib/venue-details";
+import { ContactLookupError, safeWebsite, type Credit, type ContactDetails, VenueDetailsSession } from "../lib/venue-details";
 
 export function GoogleCredits({ credits = [] }: { credits?: Credit[] }) {
   return <span className="provider-credits"><span className="google-attribution" translate="no">Google Maps</span>{credits.map((credit, i) => <span key={i}>{safeWebsite(credit.uri) ? <a href={safeWebsite(credit.uri)!} target="_blank" rel="noopener noreferrer">{credit.provider ?? "Provider credit"}</a> : credit.provider}</span>)}</span>;
@@ -12,12 +12,13 @@ export function VenueDetails({ venue, token, session }: { venue: DisplayVenue; t
   const [contact, setContact] = useState<ContactDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [unsent,setUnsent]=useState(false);
   async function toggle() {
     setOpen(!open);
     if (open || contact || loading || error || !venue.providerPlaceId || !token) return;
     setLoading(true);
     try { setContact(await session.get(token, venue.providerPlaceId)); }
-    catch (e) { setError(e instanceof Error ? e.message : "Contact details are unavailable."); }
+    catch (e) { setError(e instanceof Error ? e.message : "Contact details are unavailable.");setUnsent(e instanceof ContactLookupError&&e.notAdmitted); }
     finally { setLoading(false); }
   }
   if (!venue.providerPlaceId) return null;
@@ -27,7 +28,13 @@ export function VenueDetails({ venue, token, session }: { venue: DisplayVenue; t
       <strong>{venue.name}</strong>{venue.address && <p>{venue.address}</p>}<VenueRating venue={venue} />
       {loading && <p role="status">Loading contact information…</p>}
       {error && <p role="status">{error}</p>}
-      {!loading && <><p>{contact?.telephoneUrl ? <a href={contact.telephoneUrl}>{contact.phone}</a> : "Phone number unavailable"}</p>
+      {unsent&&token&&<button type="button" onClick={async()=>{
+        session.retryUnsent(token,venue.providerPlaceId!);setLoading(true);setError("");setUnsent(false);
+        try{setContact(await session.get(token,venue.providerPlaceId!));}
+        catch(e){setError(e instanceof Error?e.message:"Contact lookup unavailable.");setUnsent(e instanceof ContactLookupError&&e.notAdmitted);}
+        finally{setLoading(false);}
+      }}>Try unsent lookup after fixing local access</button>}
+      {!loading && !error && <><p>{contact?.telephoneUrl ? <a href={contact.telephoneUrl}>{contact.phone}</a> : "Phone number unavailable"}</p>
         <p>{contact?.website ? <a href={contact.website} target="_blank" rel="noopener noreferrer">Official venue website</a> : "Website unavailable"}</p></>}
       {safeWebsite(venue.mapsUrl) && <a href={safeWebsite(venue.mapsUrl)!} target="_blank" rel="noopener noreferrer">View location on Google Maps</a>}
       <p>Contact the venue to arrange your visit. No reservation or ticket is confirmed.</p>

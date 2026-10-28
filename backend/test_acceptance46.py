@@ -240,7 +240,7 @@ class OptionsAcceptance(unittest.TestCase):
         r=real_plans(outing(),session)
         self.assertEqual(r.diagnostics['discoveryStages']['bowling']['returned'],10)
         self.assertEqual(r.diagnostics['primaryCandidates'],6)
-        for _ in range(6):
+        for _ in range(40):
             if not r.canExpand: break
             r=more_real_plans(r.optionsToken)
         self.assertFalse(r.canExpand)

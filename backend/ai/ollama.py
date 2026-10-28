@@ -43,7 +43,10 @@ A numeric maximum budget does NOT imply cost=budget; absent quality wording mean
 "between stops", "between venues" and "between places" mean travel_leg_minutes,
 NEVER travel_total_minutes. Travel from a starting point is neither; leave these
 fields null for that clause. Missing optional budgets/travel caps are null, not uncertainties.
-location: stated city only; do not assume Baltimore.
+location: copy the stated destination city, borough, neighborhood or district
+VERBATIM, preserving qualifiers. Never broaden a neighborhood to its city,
+narrow a borough to one neighborhood, or substitute the starting place.
+Do not assume Baltimore or invent an unstated destination.
 date: always null. Python alone validates and normalizes calendar dates.
 date_expressions: copy ALL original date wording VERBATIM, including explicit ISO
 and spoken dates, tomorrow, tonight, this Saturday, next week, month/day without

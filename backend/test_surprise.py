@@ -156,7 +156,7 @@ class Pipeline(unittest.TestCase):
         session=ProviderBudget();seen=set();first=set();usage=[]
         for action in range(16):
             with patch('backend.development_cost.time',return_value=20000+action*100),patch('backend.provider_budget.monotonic',return_value=20000+action*100):
-                result=real_plans(self.request(),session) if not action else more_real_plans(token)
+                result=real_plans(self.request(),session) if not action else more_real_plans(token,expand_discovery=action==1)
             token=result.optionsToken
             self.assertEqual(len(result.provisionalPlans),3,(action,result.message))
             for plan in result.provisionalPlans:

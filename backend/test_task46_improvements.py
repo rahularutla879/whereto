@@ -66,7 +66,7 @@ class ImprovementTests(unittest.TestCase):
         result=real_plans(outing(maxLegTravel=10,budget=0),self.session)
         token=result.optionsToken
         seen=set(); widths=[]; counts=[]
-        for _ in range(8):
+        for _ in range(40):
             for p in result.provisionalPlans + [p for batch in result.alternativeBatches for p in batch]:
                 identity=tuple(v.id for v in p.candidate.venues)
                 self.assertNotIn(identity,seen);seen.add(identity)
@@ -80,7 +80,7 @@ class ImprovementTests(unittest.TestCase):
         self.assertIn([10,10],widths)
         self.assertIn(106,counts)
         self.assertEqual(self.search.call_count,2)
-        self.assertEqual(self.session._elements,106)
+        self.assertEqual(self.session._elements,110)
         self.assertLessEqual(self.session._requests,20)
 
     def test_three_four_stop_and_separate_start_under_150(self):
@@ -102,7 +102,7 @@ class ImprovementTests(unittest.TestCase):
 
     def test_failed_expansion_cannot_reset_or_retry_budget(self):
         result=real_plans(outing(),self.session)
-        for _ in range(6):
+        for _ in range(40):
             if result.diagnostics.get('shortlistedCounts')==[10,10]: break
             # Eventually require new route evidence; fail that attempt.
             self.matrix.side_effect=__import__('backend.routes',fromlist=['RouteError']).RouteError('quota','Quota unavailable')
@@ -257,8 +257,14 @@ class ImprovementTests(unittest.TestCase):
                 if not (a.endswith('_0') or b.endswith('_0')):e['condition']='ROUTE_NOT_FOUND'
             return values
         self.search.side_effect=supplied;self.matrix.side_effect=routed
-        result=real_plans(outing(),self.session)
-        ranked=sorted(result.provisionalPlans+[p for batch in result.alternativeBatches for p in batch],key=lambda p:tuple(v.id for v in p.candidate.venues))
+        from backend.ranking import score_candidates
+        captured=[]
+        def capture(request,plans):
+            ranked=score_candidates(request,plans);captured[:]=ranked
+            return ranked
+        with patch('backend.real_planning.score_candidates',side_effect=capture):
+            result=real_plans(outing(),self.session)
+        ranked=sorted(captured,key=lambda p:tuple(v.id for v in p.candidate.venues))
         previous=_select(ranked,3)
         improved=_select(ranked,3,prefer_primary=True)
         self.assertEqual(len({p.candidate.venues[0].id for p in previous}),1)

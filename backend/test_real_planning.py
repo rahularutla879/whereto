@@ -56,15 +56,19 @@ class RealPlanningTests(unittest.TestCase):
     def test_bounded_additional_options_reuse_all_evidence_and_preserve_limits(self):
         result = self.run_plan(budget=0, maxLegTravel=10, travel=10)
         all_plans = result.provisionalPlans + [p for batch in result.alternativeBatches for p in batch]
-        self.assertEqual(len(result.alternativeBatches), 2)
-        self.assertEqual(len(all_plans), 9)
-        self.assertEqual(len({tuple(v.id for v in p.candidate.venues) for p in all_plans}), 9)
+        self.assertEqual(len(result.alternativeBatches), 0)
+        from backend.real_planning import more_real_plans
+        for _ in range(2):
+            more=more_real_plans(result.optionsToken)
+            all_plans+=more.provisionalPlans
+        self.assertEqual(len(all_plans),9)
+        self.assertEqual(len({tuple(v.id for v in p.candidate.venues) for p in all_plans}),9)
         self.assertEqual(self.search.call_count, 2)
         self.assertEqual(self.matrix.call_count, 2)
         self.assertEqual(result.diagnostics['matrixElements'], 12)
         self.assertTrue(all(p.totalTravel <= 10 and any(i.code == 'unverified_budget' for i in p.issues) for p in all_plans))
         serialized = result.model_dump(mode='json')
-        serialized['alternativeBatches'][0][0] = serialized['provisionalPlans'][0]
+        serialized['alternativeBatches'] = [[serialized['provisionalPlans'][0]]]
         with self.assertRaises(ValueError):
             type(result).model_validate(serialized)
         # Same constraints reject alternatives as well as initial options.

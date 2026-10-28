@@ -12,7 +12,7 @@ test("development exploration notice is explicit and disappears when disabled", 
   assert.match(renderToStaticMarkup(React.createElement(ExplorationNotice, { active: true })), /role="status".*DEVELOPMENT EXPLORATION.*estimated spending guard/);
 });
 test("continuation distinguishes place discovery from route checking without a retry flash", () => {
-  assert.match(explorationStage(true), /Finding more places/);
+  assert.match(explorationStage(true), /finding more places/);
   assert.match(explorationStage(false), /Checking routes/);
   assert.doesNotMatch(explorationStage(true), /retry|failed/i);
 });

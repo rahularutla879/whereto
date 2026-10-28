@@ -5,5 +5,5 @@ export function ExplorationNotice({ active }: { active: boolean }) {
 }
 
 export function explorationStage(discovery: boolean) {
-  return discovery ? "Finding more places, then checking routes" : "Checking routes and generating options";
+  return discovery ? "Exploring areas, finding more places, then checking routes" : "Checking routes and generating options";
 }

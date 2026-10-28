@@ -33,10 +33,16 @@ def geographic_reason(area, coordinates: Coordinates, components: list[dict]) ->
         return 'excluded_region_unverified'
     if any(regions & aliases[code] for code in excluded):
         return 'excluded_region'
-    if area.name and (getattr(area, 'enforce_name', True) or area.coordinates is None):
-        parts = [normalized(part).replace(' ', '') for part in area.name.split(',')]
-        if (not parts[0] or parts[0] not in names(local_types | region_types)
-                or not all(part and part in names(local_types | region_types) for part in parts[1:])):
+    if area.name and getattr(area, 'enforce_name', True):
+        supported=names(local_types | region_types)
+        words=[normalized(part).split() for part in area.name.split(',')]
+        # A qualified neighborhood may span multiple address components.
+        # Every token must be supported; no city/borough alias is fabricated.
+        def supported_part(tokens):
+            text=''.join(tokens)
+            if text in supported:return True
+            return bool(tokens) and any(''.join(tokens[:i]) in supported and supported_part(tokens[i:]) for i in range(1,len(tokens)))
+        if not all(supported_part(tokens) for tokens in words):
             return 'area_unverified'
     if getattr(area,'boundary_radius_m',None) is not None and distance_m(area.boundary_coordinates,coordinates)>area.boundary_radius_m:
         return 'outside_radius'

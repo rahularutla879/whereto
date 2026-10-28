@@ -189,6 +189,7 @@ class DiscoveryResult(DiscoveryModel):
     diagnostics: dict[str, int] = Field(default_factory=dict, exclude=True, repr=False)
     stages: dict = Field(default_factory=dict, exclude=True, repr=False)
     audit: dict = Field(default_factory=dict, exclude=True, repr=False)
+    observed: dict[str,set[str]] = Field(default_factory=dict, exclude=True, repr=False)
     paging: dict = Field(default_factory=dict, exclude=True, repr=False)
     notice: str = ("Discovery candidates only. Hours, prices, availability and travel are unknown. "
                    "Area names are checked conservatively against provider address components; "
@@ -215,6 +216,10 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
                     break
             except (KeyError, ValueError, TypeError, AttributeError):
                 continue
+    if area.name and not area.enforce_name and area.coordinates is None:
+        # Without a provider-backed destination reference, nearby coverage
+        # cannot be established. Do not treat a query string as location proof.
+        area=area.model_copy(update={'enforce_name':True})
     city_reference=None
     if area.name and area.include_name and not area.enforce_name:
         for p in places:
@@ -246,7 +251,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
             candidates.append(candidate)
         except (KeyError, TypeError, AttributeError, ValidationError):
             raise DiscoveryError("invalid_response", "Google returned incomplete or invalid venue data.") from None
-    return DiscoveryResult(candidates=candidates, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates), "geographyRejectedByReason": geography_reasons}, paging={"next": token})
+    return DiscoveryResult(candidates=candidates, observed={'all':{p['id'] for p in places}}, excluded_count=excluded, diagnostics=diagnostics, stages={"returned": len(places), "afterGeography": len(candidates), "geographyRejectedByReason": geography_reasons}, paging={"next": token})
 
 
 def require_development_discovery() -> None:
@@ -277,12 +282,14 @@ class PlacesDiscovery:
             raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
         if requests and any(r.area != requests[0].area for r in requests):
             raise DiscoveryError("mixed_areas", "Use one explicit discovery area per outing.")
-        records, diagnostics, geographic_exclusions, stages, paging, audit = [], {}, 0, {}, {}, {}
+        records, diagnostics, geographic_exclusions, stages, paging, audit, observed = [], {}, 0, {}, {}, {}, {}
         for request in requests:
             result = self._search(request)
             paging[request.activity] = {"variant": request.search_variant, "next": result.paging.get("next")}
             stages[request.activity.value] = {**result.stages}
+            observed[request.activity.value]=result.observed.get('all',set())
             audit[request.activity.value] = {
+                'uniqueGoogleVenues':len(observed[request.activity.value]),
                 'googleResultsReceived': result.stages['returned'],
                 'geographyRejected': result.excluded_count,
                 'geographyReasons': result.stages['geographyRejectedByReason'],
@@ -299,6 +306,7 @@ class PlacesDiscovery:
                 diagnostics['invalid_normalized_venue'] = diagnostics.get('invalid_normalized_venue', 0) + rejected
                 geographic_exclusions += rejected
             audit[request.activity.value]["normalizationRejected"] = rejected
+            audit[request.activity.value]["normalizationPassed"] = len(normalized)
             before_meal = len(normalized)
             stages[request.activity.value]["afterNormalization"] = len(normalized)
             if request.meal == "dinner":
@@ -329,6 +337,7 @@ class PlacesDiscovery:
                        relevanceRejectedByReason={**quality.stages.get(activity, {}).get('relevanceRejectedByReason', {}),
                            **({'dinner_cafe_without_restaurant_evidence': row['mealRejected']} if row['mealRejected'] else {})},
                        eligibleRetained=stages[activity]['afterDeduplicationAndRelevance'], candidateCapExcluded=0)
+            row['relevancePassed'] = row['eligibleRetained']
             row['latestSearch'] = {'newEligibleMatches': row['eligibleRetained'], 'previouslyKnownMatches': 0,
                                    'newlyRetained': row['eligibleRetained']}
             row['relevanceRejected'] = sum(row['relevanceRejectedByReason'].values())
@@ -340,7 +349,7 @@ class PlacesDiscovery:
         # obeys the original ceiling; no ranking or refill occurs.
         for activity in {r.activity for r in requests}:
             self.outing.check_candidates(sum(activity in v.activities for v in quality.venues))
-        return DiscoveryResult(candidates=candidates, venues=quality.venues,
+        return DiscoveryResult(candidates=candidates, venues=quality.venues, observed=observed,
                                excluded_count=geographic_exclusions + quality.excluded_count,
                                diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging, audit=audit)
 

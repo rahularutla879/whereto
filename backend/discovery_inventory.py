@@ -15,7 +15,7 @@ def merge_inventory(old,found,outing):
         if accepted:
             retained.append(v.model_copy(update={'activities':accepted}))
             for a in accepted:used[a]=used.get(a,0)+1
-    return DiscoveryResult(candidates=[],venues=retained,audit=merge_discovery_audits(old,found,retained),
+    return DiscoveryResult(candidates=[],venues=retained,observed={a:old.observed.get(a,set())|found.observed.get(a,set()) for a in old.observed.keys()|found.observed.keys()},audit=merge_discovery_audits(old,found,retained),
         paging={**old.paging,**found.paging},excluded_count=old.excluded_count+found.excluded_count,
         diagnostics={k:old.diagnostics.get(k,0)+found.diagnostics.get(k,0) for k in old.diagnostics.keys()|found.diagnostics.keys()},
         stages={'latest':found.stages,'retainedCounts':{a.value:n for a,n in used.items()}})

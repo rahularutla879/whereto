@@ -103,10 +103,19 @@ class DetailsSessions:
             entry[3].add(place_id)
         from backend.provider_budget import ProviderLimitError
         from backend.provider_errors import attach_accounting
+        admitted=False
         try:
             with entry[2].reserve("details", place_id):
-                return {**fetch_details(place_id), "diagnostics": entry[2].usage()}
-        except (ProviderLimitError,DiscoveryError) as error:raise attach_accounting(error,entry[2])
+                admitted=True
+                result=fetch_details(place_id)
+            return {**result, "diagnostics": entry[2].usage()}
+        except (ProviderLimitError,DiscoveryError) as error:
+            # A pre-admission failure is not a Google attempt. Only an explicit
+            # later action may try again after accounting is repaired.
+            if not admitted:
+                with self.lock:entry[3].discard(place_id)
+            error.diagnostics={**getattr(error,'diagnostics',{}),'contactRequestAdmitted':admitted}
+            raise attach_accounting(error,entry[2])
 
 
 details_sessions = DetailsSessions()

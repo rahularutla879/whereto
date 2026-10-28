@@ -282,6 +282,16 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     # grounding is validation only; it never extracts a replacement value.
     if ai.location is not None and ai.location.casefold() not in raw.casefold():
         ai.location = None
+    if ai.location:
+        # Retain a more specific source destination when the model shortened it.
+        # This validates the same location clause, not invented neighborhood data.
+        for match in re.finditer(r"\bin\s+([^.!?]+?)(?=\s+on\b|\s+for\s+\d|,\s*(?:tomorrow|today|on\b)|[.!?]|$)", raw, re.I):
+            clause=re.split(r'\s+(?:near|today|tomorrow|this|next|on|from|at|with|Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday|January|February|March|April|May|June|July|August|September|October|November|December)\b',match[1],flags=re.I)[0].strip(' ,')
+            if (len(clause)<=80 and len(clause)>len(ai.location)
+                    and re.search(r'\b'+re.escape(ai.location)+r'\b',clause,re.I)
+                    and not re.search(r'\b(?:minutes?|miles?|people|prefer|starting|only|no|and|followed)\b|\d',clause,re.I)):
+                ai.location=clause
+                break
     if ai.people is not None:
         counts = set()
         for match in GROUP_EVIDENCE.finditer(raw):
@@ -576,7 +586,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 activities=activities, location=location, people=int(people), date=date,
                 budget=float(budget) if budget is not None else None,
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
-                firstTravel=first_preference, betweenTravel=between, geography=geographic_intent(raw), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
+                firstTravel=first_preference, betweenTravel=between, geography=geographic_intent(raw,location), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
                 maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
                 maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
                 startTime=dates.start, endTime=dates.end,

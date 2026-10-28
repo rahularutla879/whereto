@@ -54,8 +54,9 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(result.plans[0].label, "OPTION 1 · BOWLING + DINNER");
     assert.equal(result.plans[0].title, result.plans[0].venues.map(v => v.name).join(" & "));
     const countsBefore = await (await fetch(`${base}/__test/counts`)).json();
-    const second = nextOptions(result), third = nextOptions(second);
-    assert.equal(result.alternativeBatches?.length, 2);
+    const second = adaptRanking(await (await send("/api/plans/options", {method:"POST",body:JSON.stringify({token:result.optionsToken})})).json());
+    const third = adaptRanking(await (await send("/api/plans/options", {method:"POST",body:JSON.stringify({token:result.optionsToken})})).json());
+    assert.equal(result.alternativeBatches?.length, 0);
     assert.equal(third.alternativeBatches?.length, 0);
     assert.equal(nextOptions(third), third);
     const all = [...result.plans, ...second.plans, ...third.plans];
@@ -66,12 +67,12 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(new Set(result.plans.map(p => p.venues[0].id)).size, 3);
     let expanded = result;
     const ids = new Set(all.map(p => p.id));
-    for (let i = 0; i < 5; i++) {
+    for (let i = 0; i < 14; i++) {
       const response = await send("/api/plans/options", { method: "POST", body: JSON.stringify({ token: result.optionsToken }) });
       assert.ok(response.ok);
       expanded = adaptRanking(await response.json());
       for (const p of [...expanded.plans, ...(expanded.alternativeBatches ?? []).flat()]) { assert.ok(!ids.has(p.id)); ids.add(p.id); }
-      if ((await (await fetch(`${base}/__test/counts`)).json()).elements === 100) break;
+      if ((await (await fetch(`${base}/__test/counts`)).json()).elements >= 100) break;
     }
     assert.ok(ids.size > 9);
     assert.equal((await (await fetch(`${base}/__test/counts`)).json()).searches, 2);

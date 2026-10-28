@@ -55,8 +55,8 @@ class BowlingDiagnosis(unittest.TestCase):
         self.assertEqual(row['relevanceRejectedByReason'],{'arcade_without_bowling_evidence':1})
         self.assertEqual(row['latestSearch'],{'newEligibleMatches':4,'previouslyKnownMatches':2,'newlyRetained':4})
         self.assertEqual((row['shortlistedForRouting'],row['selectedForRouting'],row['excludedByCheckedRouteFeasibility'],row['routeCompatibleVenues'],row['rankedVenues']),(6,6,1,5,5))
-        self.assertEqual(row['unusedRankedVenues'],4)
-        self.assertTrue(any('5 represented in ranking; 4 in unused ranked options' in n for n in r.notes))
+        self.assertEqual(row['unusedRankedVenues'],5)
+        self.assertTrue(any('5 represented in ranking; 5 in unused ranked options' in n for n in r.notes))
         self.assertTrue(any('arcades without bowling evidence' in n for n in r.notes))
         self.assertEqual(row['searchStrategies'],{'bowling_strict_type':1,'bowling_text_evidence':1})
         self.assertEqual(row['requestedPageSize'],10);self.assertEqual(row['geographyPolicy'],'verified_named_area')
@@ -111,7 +111,7 @@ class BowlingDiagnosis(unittest.TestCase):
         self.assertEqual(row['relevanceRejectedByReason'],{'activity_evidence_required':1})
         self.assertEqual(row['latestSearch']['newEligibleMatches'],0)
 
-    def test_score_window_explains_two_favorites_without_erasing_other_eligible_venues(self):
+    def test_absolute_rating_scale_preserves_other_eligible_primary_venues(self):
         def searches(body):
             data=search_fixture(body)
             for i,p in enumerate(data['places']):
@@ -125,8 +125,8 @@ class BowlingDiagnosis(unittest.TestCase):
         r=real_plans(self.request(),ProviderBudget())
         row=r.diagnostics['venuePipeline']['bowling']
         self.assertEqual((row['eligibleRetained'],row['routeCompatibleVenues'],row['rankedVenues']),(10,6,6))
-        self.assertEqual(row['withinBestScoreWindow'],2)
-        self.assertEqual(row['selectedVenues'],2)
+        self.assertEqual(row['withinBestScoreWindow'],6)
+        self.assertEqual(row['selectedVenues'],3)
         self.assertEqual(row['excludedByCheckedRouteFeasibility'],0)
 
     def test_duplicate_rejected_arcades_are_in_dedup_counts(self):
