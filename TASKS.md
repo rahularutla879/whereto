@@ -734,3 +734,12 @@ Task 46 remains complete. Task 47 remains unstarted.
 - [x] Preserve mock defaults, cost/Cloud safeguards, original roadmap and release tags. No live Google requests.
 
 Task 46 remains complete. Task 47 remains unstarted.
+
+### Task 46 acceptance — open activities and development exploration
+
+- [x] Retain persistent estimated-cost accounting while making the local exploration threshold nonblocking; preserve verified project minute quotas, finite cancellable work and normal-mode limits.
+- [x] Support source-grounded open activity phrases alongside canonical categories; preserve relevance, independent 100-venue pools, honest session uncertainty and destination recovery.
+- [x] Remove participant requirements/UI/ranking/capacity arithmetic while retaining optional legacy extension fields; improve first-leg copy and preserve saved pages.
+- [x] Verify with complete offline suites and desktop/mobile browser workflows; document Cloud read-back, rich continuation coverage and dependency limitations in HANDOVER.md. No billable Google requests or Cloud changes.
+
+Task 46 remains complete. Task 47 remains unstarted.

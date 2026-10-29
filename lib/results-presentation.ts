@@ -9,6 +9,11 @@ export function resultsSummary(count: number) {
 }
 
 export function consumerMessage(message: string) {
+  if (/local.*Places.*minute/i.test(message)) return "We’ve reached a temporary search limit. Your saved plans are still available; try exploring again shortly.";
+  if (/local.*(?:route|routing|provider).*minute|local rolling-minute/i.test(message))
+    return "We've reached a temporary routing limit. You can still browse your saved plans and try exploring again shortly.";
+  if (/Google.*quota|(?:Places|Routes|Place Details).*(?:quota|rate limit|element limit)/i.test(message))
+    return "Google's current search or routing limit has been reached. Your saved recommendations are still available.";
   return message
     .replace(/\d+ confirmed mock recommendations; \d+ provisional alternatives\.\s*/g, "")
     .replace("No candidate satisfies all known limits. Review rejection reasons and adjust the relevant constraint.", "No plan fits all your current preferences. Try adjusting a limit or choosing different activities.")
@@ -65,6 +70,7 @@ export function planWarnings(plan: Plan): string[] {
     else if (plan.firstLeg?.approximate) warnings.push("First-stop travel uses your confirmed area’s representative point, not your exact location.");
     if (plan.hardBudget || plan.issues.some(issue => issue.includes("Your hard budget"))) warnings.push("Your hard budget cannot be verified because venue prices are unavailable. This plan has not passed the budget constraint.");
     if (plan.venues.some(v => ["movie", "concert", "theater", "musical", "ballet", "opera", "comedy", "sports", "baseball", "basketball", "football", "soccer", "hockey"].includes(v.activity))) warnings.push("Movie showtimes and event sessions are not verified. No ticket or reservation is confirmed.");
+    if (plan.venues.some(v => v.activity.startsWith("custom:"))) warnings.push("Activity sessions, class availability, tickets and reservations are not verified. Confirm the requested activity directly with the venue.");
     if (plan.issues.some(issue => issue.startsWith("Dinner service"))) warnings.push("Dinner service and hours are not verified. Confirm the restaurant serves dinner before choosing.");
     if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) warnings.push("Travel time is missing for a required leg; travel constraints are not fully verified.");
     return [...new Set(warnings)];
@@ -73,7 +79,7 @@ export function planWarnings(plan: Plan): string[] {
   // estimates section. Every other issue (including future conflicts) stays by
   // its plan, visible even while itinerary details are closed.
   const warnings = plan.issues.filter(issue => issue !== OPENING_HOURS_ISSUE).map(consumerMessage);
-  if (plan.price === null || plan.groupCost === null || plan.prices.some(q => q.amount === null)) {
+  if (plan.price === null || plan.prices.some(q => q.amount === null)) {
     warnings.push("Some prices are unknown, so the total cost and fit with your budget still need checking.");
   }
   if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) {
@@ -81,9 +87,6 @@ export function planWarnings(plan: Plan): string[] {
   }
   if (plan.duration === null || plan.stops.some(stop => stop.start === null || stop.end === null || stop.venue.duration === null)) {
     warnings.push("Some timings are unknown. Check the schedule before choosing this plan.");
-  }
-  if (plan.venues.some(venue => venue.capacity === null)) {
-    warnings.push("Check that each stop can accommodate your group; some group-size limits are unknown.");
   }
   return [...new Set(warnings)];
 }

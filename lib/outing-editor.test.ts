@@ -24,7 +24,7 @@ test("homepage starts with preferences collapsed and an accessible toggle", () =
 
 test("compact summary has effective core details and edit action without unspecified optional rows", () => {
   const html = renderToStaticMarkup(createElement(OutingSummary, { value, dirty: false, onEdit() {} }));
-  for (const text of ["Baltimore", "November 7, 2026", "4 people", "Coffee → Museum → Coffee", "Edit details", 'aria-controls="preferences"']) assert.ok(html.includes(text));
+  for (const text of ["Baltimore", "November 7, 2026", "Coffee → Museum → Coffee", "Edit details", 'aria-controls="preferences"']) assert.ok(html.includes(text));
   for (const text of ["Not specified", "Balanced", "<dt>Budget</dt>", "<dt>Travel</dt>", "<dt>Experience</dt>"]) assert.ok(!html.includes(text));
 });
 

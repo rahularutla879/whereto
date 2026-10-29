@@ -48,7 +48,7 @@ class Accounting(unittest.TestCase):
                 self.assertFalse(result['diagnostics'].get('accountingUnavailable',False))
             self.assertEqual(transport.call_count,2)
         self.assertAlmostEqual(DevelopmentCost().snapshot()['estimatedDayGrossUsd'],.072)
-        self.assertEqual(ProviderBudget().cost.snapshot(),DevelopmentCost().snapshot())
+        self.assertEqual(ProviderBudget().cost.snapshot()["estimatedDayGrossUsd"],DevelopmentCost().snapshot()["estimatedDayGrossUsd"])
 
     def test_temporary_lock_serializes_and_releases_without_history_reset(self):
         c=DevelopmentCost();c.snapshot()

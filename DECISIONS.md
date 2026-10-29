@@ -262,3 +262,9 @@ Retain 150-element rolling-minute protection because no evidence places it below
 ## October 28, 2026 — geographic recovery and outing validity
 
 Treat ordinary neighborhood wording as prioritization around a compatible, confirmed reference, with an explicit approximation warning; require actual component/boundary evidence for hard geography. Unresolved names need destination correction or deliberate anchor consent, never a manufactured origin or a quota retry. Near-current search geography is separate from a manual route origin. Keep the resolved local date and explicit-time provenance separate from the ten-minute search capability. A default earliest start is planning context, not an appointment. Preserve saved pages on expiry and require explicit date correction. Retain disclosed bounded timezone support rather than adding paid enrichment or inventing global location resolution.
+
+## October 28, 2026 — owner-authorized exploration and activity contract
+
+In explicitly local real exploration, make estimated-cost totals informational rather than admission caps while retaining durable accounting, fail-closed integrity, zero retries, finite work and verified project minute quotas. Cloud read-back confirms 150 route elements/minute; do not substitute the published 3,000 default. Remove only the exploration manual-lookup lifetime ceiling in addition to the already uncapped outing/process work totals. Keep normal behavior intact.
+
+Extend canonical activity contracts with bounded source-grounded custom intents instead of another whitelist or a second planner. Require actual relevance evidence; finding venues does not verify sessions or bookings. Remove participant counts from current interpretation, ranking/capacity decisions, identity and UI. Preserve optional legacy schema fields for future genuinely group-aware features; group-total financial limits remain unverified rather than fabricated from an invented count.

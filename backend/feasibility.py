@@ -215,7 +215,7 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
     for i, stop in enumerate(value.stops):
         state, code, ref = _hours(stop, value.evaluated_at)
         add("hours", state, code, f"stops[{i}].{ref}", i)
-        if stop.venue.activity in EVENT_ACTIVITIES or stop.venue.activity == "movie":
+        if stop.venue.activity in EVENT_ACTIVITIES or (stop.venue.activity == "movie" or str(stop.venue.activity.value).startswith("custom:")):
             add("session", "unverified", "session_not_verified", f"stops[{i}].venue.activity", i)
     return FeasibilityResult(candidate_id=value.candidate_id, state=_state(checks),
                              travel_state=_state(c for c in checks if c.kind == "travel"),

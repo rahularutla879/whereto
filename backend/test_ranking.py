@@ -39,18 +39,18 @@ class RankingTests(unittest.TestCase):
 
     def test_inclusive_per_person_and_group_budgets(self):
         v = ordinary(price=10.0)
-        for args, state in ((dict(budget=10, groupBudget=40), "confirmed"),
-                            (dict(budget=9), "violated"), (dict(groupBudget=39), "violated"),
-                            (dict(budget=10, groupBudget=0), "violated")):
+        for args, state in ((dict(budget=10, groupBudget=40), "provisional"),
+                            (dict(budget=9), "violated"), (dict(groupBudget=39), "provisional"),
+                            (dict(budget=10, groupBudget=0), "provisional")):
             with self.subTest(args=args):
                 p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"], **args), [v])
                 self.assertEqual(p.feasibility, state)
-                self.assertEqual((p.costPerPerson, p.groupCost), (10, 40))
+                self.assertEqual((p.costPerPerson, p.groupCost), (10, None))
         p = evaluate(OutingRequest(date="2026-11-07", activities=["art"], budget=0), [ordinary("art", price=0.0)])
         self.assertEqual(p.feasibility, "confirmed")
 
     def test_decimal_budget_boundary(self):
-        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"], budget=0.3, groupBudget=1.2)
+        req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"], budget=0.3)
         p = evaluate(req, [ordinary(price=0.1), ordinary("museum", price=0.2)])
         self.assertEqual(p.feasibility, "confirmed")
         self.assertEqual(p.costPerPerson, 0.3)
@@ -69,10 +69,10 @@ class RankingTests(unittest.TestCase):
         self.assertEqual(evaluate(req, venues[:1]).feasibility, "confirmed")
 
     def test_capacity_boundary_and_missing_capacity(self):
-        for capacity, state in ((4, "confirmed"), (3, "violated"), (None, "provisional")):
+        for capacity, state in ((4, "confirmed"), (3, "confirmed"), (None, "confirmed")):
             p = evaluate(OutingRequest(date="2026-11-07", activities=["coffee"]), [ordinary(capacity=capacity)])
             self.assertEqual(p.feasibility, state)
-        self.assertFalse(recommend_plans(OutingRequest(date="2026-11-07", activities=["coffee"], people=21)).plans)
+        self.assertTrue(recommend_plans(OutingRequest(date="2026-11-07", activities=["coffee"], people=21)).provisionalPlans)
 
     def test_opening_hours_waiting_closure_and_exact_finish(self):
         req = OutingRequest(date="2026-11-07", activities=["coffee"])
@@ -160,7 +160,6 @@ class RankingTests(unittest.TestCase):
         req = OutingRequest(date="2026-11-07", activities=["coffee", "museum"])
         c = candidate(req, [ordinary(), ordinary("museum")])
         for changed in (req.model_copy(update={"activities": list(reversed(req.activities))}),
-                        req.model_copy(update={"people": 5}),
                         req.model_copy(update={"allowRevisits": True})):
             self.assertIn("request_mismatch", self.codes(evaluate_candidate(changed, c)))
         self.assertEqual([s.venue.activity for s in evaluate_candidate(req, c).stops], req.activities)
@@ -245,7 +244,7 @@ class RankingTests(unittest.TestCase):
                      price_provider=lambda *args: PriceQuote(amount=2.0, status="estimated", source="test price adapter"),
                      travel_provider=lambda *args: TravelQuote(minutes=2, status="estimated", source="test travel adapter"))
         self.assertEqual(p.feasibility, "confirmed")
-        self.assertEqual((p.costPerPerson, p.groupCost, p.totalTravel), (4, 16, 2))
+        self.assertEqual((p.costPerPerson, p.groupCost, p.totalTravel), (4, None, 2))
         self.assertTrue(all(q.status == "estimated" for q in p.prices + p.legs))
 
     def test_confirmed_options_precede_better_scoring_provisional_options(self):
@@ -293,7 +292,7 @@ class RankingTests(unittest.TestCase):
                                                  "schedule": DataStatus.unknown, "price": DataStatus.unknown})
         p = evaluate(req, [v.model_copy(update={"dataQuality": quality})])
         self.assertEqual(p.feasibility, "provisional")
-        self.assertTrue({"unknown_capacity", "unknown_duration", "unknown_schedule_evidence", "unknown_price"} <= self.codes(p))
+        self.assertTrue({"unknown_duration", "unknown_schedule_evidence", "unknown_price"} <= self.codes(p))
 
     def test_new_contract_rejects_invalid_windows_and_limits(self):
         for args in (dict(groupBudget=-1), dict(maxLegTravel=-1), dict(startTime=720, endTime=600),

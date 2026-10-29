@@ -1,7 +1,7 @@
 import * as React from "react";
 
 export function ExplorationNotice({ active }: { active: boolean }) {
-  return active ? <p role="status">DEVELOPMENT EXPLORATION · local daily estimated spending guard active</p> : null;
+  return active ? <p role="status">DEVELOPMENT EXPLORATION · estimated usage recorded; warning threshold is not a spending cap</p> : null;
 }
 
 export function explorationStage(discovery: boolean) {

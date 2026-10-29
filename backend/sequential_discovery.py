@@ -162,7 +162,9 @@ def next_region(context,*,commit,position=0):
     from backend.venue_models import Coordinates
     r=context['request'];origin=r.startingLocation
     first=[v.facts for v in context['discovery'].venues if v.facts.id in context['positionIds'][0] and v.facts.coordinates]
-    center=(origin.reference_coordinates or origin.point.coordinates) if origin else (first[0].coordinates if first else None)
+    # Provider-backed venue can guide search when a legacy Place-ID origin has
+    # no coordinates. This never changes the route origin or claims user position.
+    center=((origin.reference_coordinates or origin.point.coordinates) if origin else None) or (first[0].coordinates if first else None)
     if not center:return None
     steps=context.setdefault('regionSteps',{})
     activity=r.activities[position]

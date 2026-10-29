@@ -35,7 +35,7 @@ class Acceptance(unittest.TestCase):
             self.assertIsNotNone(result.request,result.issues)
             p=result.request.firstTravel
             self.assertEqual((p.value,p.unit,p.mode,p.exclusive),(n,unit,mode,exclusive))
-            self.assertEqual(str(result.request.date),'2026-11-14');self.assertEqual(result.request.people,3)
+            self.assertEqual(str(result.request.date),'2026-11-14');self.assertIsNone(result.request.people)
             self.assertEqual(result.request.activities,['bowling','food'])
             self.assertIsNone(result.request.maxLegTravel)
             if mode=='flexible':self.assertIsNone(result.request.maxFirstLegTravel)

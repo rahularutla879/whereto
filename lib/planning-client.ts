@@ -11,7 +11,7 @@ import { EMPTY_PREFERENCES, type Preferences, type PlannerResult, type Plan, typ
 type Ranked = {
   travelClassification?: Plan["travelClassification"]; travelDeviations?: string[];
   surpriseRepeated?:boolean;
-  candidate: { id: string; venues: DisplayVenue[]; people: number; date: string };
+  candidate: { id: string; venues: DisplayVenue[]; people?: number | null; date: string };
   feasibility: "confirmed" | "provisional" | "violated";
   stops: Plan["stops"]; prices: Plan["prices"]; legs: Plan["legs"];
   costPerPerson: number | null; groupCost: number | null;
@@ -53,7 +53,6 @@ export function adaptRanking(value: unknown): PlannerResult {
       || !Array.isArray(p.prices) || p.prices.length !== p.stops.length
       || !Array.isArray(p.legs) || p.legs.length !== p.stops.length - 1
       || ![p.costPerPerson, p.groupCost, p.totalTravel, p.elapsedDuration].every(nullableNumber)
-      || !Number.isInteger(p.candidate.people) || p.candidate.people < 1
       || !(typeof p.candidate.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(p.candidate.date))
       || !p.stops.every((s, i) => s.venue && typeof s.venue.id === "string" && typeof s.venue.name === "string"
         && s.venue.activity === data.request.activities[i] && nullableNumber(s.start) && nullableNumber(s.end)
@@ -83,8 +82,8 @@ export function adaptRanking(value: unknown): PlannerResult {
     id: p.candidate.id, title: real ? headlines[i].title : copy[i].title, fullTitle: real ? headlines[i].fullTitle : undefined, theme: themes[i],
     label: real ? headlines[i].label : `${copy[i].label} · OPTION ${i + 1}`,
     description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. ${p.stops.some(s => s.venue.rating != null && (s.venue.ratingCount ?? 0) > 0) ? "Google ratings and their counts also inform ranking." : "No rating evidence was used."}` : copy[i].description,
-    venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: p.groupCost,
-    travel: p.totalTravel, duration: p.elapsedDuration, people: p.candidate.people, date: p.candidate.date,
+    venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: null,
+    travel: p.totalTravel, duration: p.elapsedDuration, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,
   }));
   const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
@@ -103,7 +102,7 @@ export type PendingOuting = {
 };
 
 export type ValidatedOuting = {
-  request: { calendarTimezone?:string|null; explicitStart?:boolean|null; explicitEnd?:boolean|null; destinationContext?:DestinationContext|null; location: string; date: string; people: number; activities: PlannerResult["activities"];
+  request: { calendarTimezone?:string|null; explicitStart?:boolean|null; explicitEnd?:boolean|null; destinationContext?:DestinationContext|null; location: string; date: string; people?: number | null; activities: PlannerResult["activities"];
     budget: number | null; travel: number | null; cost: Preferences["cost"]; startTime: number; endTime: number;
     groupBudget: number | null; maxLegTravel: number | null; maxFirstLegTravel?: number | null; travelExclusive?: boolean; maxLegTravelExclusive?: boolean; maxFirstLegTravelExclusive?: boolean; transport: string | null;
     planningMode?:"origin"|"surprise"; betweenTravel?:FirstTravel|null; firstTravel?: FirstTravel | null; geography?: Geography; dinnerStops: number[] | null };

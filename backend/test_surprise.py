@@ -193,9 +193,12 @@ class Pipeline(unittest.TestCase):
         self.assertTrue(all('Synthetic_unsupported_arcade'!=v.id for p in result.provisionalPlans for v in p.candidate.venues))
 
     def test_local_cost_guard_fails_closed_during_surprise_discovery(self):
-        with patch.dict(os.environ,{'WHERETO_DEV_DAILY_USD':'0.04'}):
-            with self.assertRaisesRegex(Exception,'daily estimated spending'):real_plans(self.request(),ProviderBudget())
-        self.assertEqual(self.search.call_count,1)
+        with patch.dict(os.environ,{'WHERETO_DEV_DAILY_USD':'0.04','WHERETO_DEV_WARN_USD':'0.04'}):
+            result=real_plans(self.request(),ProviderBudget())
+        self.assertTrue(result.provisionalPlans)
+        self.assertGreater(result.diagnostics['estimatedDayGrossUsd'],.04)
+        self.assertTrue(result.diagnostics['estimatedUsageWarning'])
+        self.assertGreater(self.search.call_count,1)
 
     def test_missing_route_evidence_and_tiny_pool_never_add_filler(self):
         self.matrix.side_effect=lambda body:[]

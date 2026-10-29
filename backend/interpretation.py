@@ -25,7 +25,8 @@ ALIASES = {
     "bowling": "bowling", "bowl": "bowling",
     "drinks": "drinks", "drink": "drinks", "cocktails": "drinks", "cocktail": "drinks",
     "beer": "drinks", "beers": "drinks", "wine": "drinks", "mocktails": "drinks", "bar": "drinks",
-    "movie": "movie", "movies": "movie", "cinema": "movie", "film": "movie",
+    "movie": "movie", "movies": "movie", "cinema": "movie", "film": "movie", "films": "movie", "show movies": "movie",
+    "watch a movie": "movie", "watch a film": "movie", "go to the movies": "movie", "see a film": "movie",
     "food": "food", "dinner": "food", "lunch": "food", "breakfast": "food", "brunch": "food",
     "pizza": "food", "restaurant": "food", "dining": "food",
     "coffee": "coffee", "coffees": "coffee", "tea": "coffee", "cafe": "coffee", "café": "coffee",
@@ -45,6 +46,35 @@ ALIASES = {
     "theater": "theater", "theatre": "theater", "play": "theater", "musical": "musical", "musical theater": "musical",
     "ballet": "ballet", "opera": "opera", "comedy": "comedy", "comedy show": "comedy", "stand-up": "comedy",
 }
+def activity_category(phrase):
+    import unicodedata
+    text = unicodedata.normalize("NFKC", phrase).casefold().strip()
+    text = re.sub(r"^(?:(?:go to|go|show|watch|see|visit|try|do|take|have|enjoy)\s+)(?:a |an |the )?", "", text)
+    text = re.sub(r"^(?:a|an|the)\s+", "", text).strip()
+    if text in ALIASES:
+        return ALIASES[text]
+    # An extractor may accidentally put two stops in one phrase. Do not let a
+    # movie keyword or a custom query swallow another explicit activity.
+    mentioned={ALIASES[m.group().casefold()] for m in OCCURRENCES.finditer(text)}
+    if len(mentioned)>1 or mentioned and re.search(r"\band\b|\bthen\b|\bfollowed by\b",text):
+        return None
+    if re.search(r"\b(?:movies?|films?|cinema)\b", text):
+        return "movie"
+    if re.search(r"\bconcert\b", text):
+        return "concert"
+    if re.search(r"\b(?:something|anything|whatever|fun|activities|competitive|indoor)\b", text):
+        return None
+    text = re.sub(r"[^a-z0-9 '-]+", " ", text)
+    text = re.sub(r"\s+", " ", text).strip()
+    # Modest grammatical normalization, not a finite list of supported outings.
+    text = re.sub(r"\bclasses$", "class", text)
+    if len(text)>4 and text.endswith('s') and not text.endswith(('ss','us')):
+        text=text[:-1]
+    if not re.fullmatch(r"[a-z][a-z0-9 '-]{1,99}", text):
+        return None
+    return "custom:" + text
+
+
 # Semantic guard only: if AI drops/reorders a clear catalog occurrence, refuse.
 # Never constructs an interpretation or sends a keyword-derived plan.
 OCCURRENCES = re.compile(r"\b(?:" + "|".join(re.escape(a) for a in sorted(ALIASES, key=len, reverse=True)) + r")\b", re.I)
@@ -115,10 +145,6 @@ class InterpretationResult(ContractModel):
 
 # These bounded source checks validate explicit evidence; they never construct
 # an extraction. Unrecognized language remains the provider's responsibility.
-NUMBER_WORDS = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
-NUMBER = r"(?:\d+(?:\.\d+)?|" + "|".join(NUMBER_WORDS) + r")"
-FOR_GROUP = rf"\bfor ({NUMBER})(?!\d|[.,]\d)(?=\s*(?:$|[,;.!?]|\b(?:in|on|at|with|under|maximum|after|before)\b))"
-GROUP_EVIDENCE = re.compile(rf"\b({NUMBER})\s+(?:people|friends|persons|colleagues|of us)\b|\b(?:group|party) of ({NUMBER})\b|\bwe(?:'re| are) ({NUMBER})\b|{FOR_GROUP}", re.I)
 MONEY_EVIDENCE = re.compile(
     r"(?:[$€£¥₹]|\b(?:USD|EUR|GBP|CAD|AUD|INR|JPY)\s*|(?=-?\d[\d,]*(?:\.\d+)?\s*(?:dollars?|USD)\b))"
     r"\s*(-?\d[\d,]*(?:\.\d+)?)\s*(?:(?:dollars?|USD)\s*)?"
@@ -138,15 +164,6 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
         if message not in issues:
             issues.append(message)
 
-    if not (manual.people.strip() or answers.people):
-        counts = set()
-        for match in GROUP_EVIDENCE.finditer(raw):
-            token = next(v for v in match.groups() if v).lower()
-            counts.add(NUMBER_WORDS.index(token) if token in NUMBER_WORDS else float(token))
-        if (len(counts) > 1 or (counts and counts != {ai.people})
-                or re.search(rf"\b{NUMBER}\s+or\s+{NUMBER}\s+(?:people|friends|persons)\b", raw, re.I)):
-            issue("The stated group size is conflicting or was not captured correctly. Confirm how many people are coming.")
-            ask("people", "How many people are coming? Enter one whole number from 1 to 100.", "ambiguous")
     if not (manual.location.strip() or answers.location) and LOCATION_ALTERNATIVES.search(raw):
         issue("More than one location was stated. Choose one city for this outing.")
         ask("location", LOCATION_QUESTION, "ambiguous")
@@ -262,8 +279,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         # This is an explicit correction of the desired stop list, never a model suggestion.
         activity_raw = answers.activities
         replacements = [phrase.strip() for phrase in re.split(r",|\bthen\b|\band\b", activity_raw, flags=re.I) if phrase.strip()]
-        unknown = [phrase for phrase in ai.activities if phrase.casefold() not in ALIASES]
-        if unknown and any(phrase.casefold() in ALIASES for phrase in ai.activities):
+        unknown = [phrase for phrase in ai.activities if activity_category(phrase) is None]
+        if unknown and any(activity_category(phrase) is not None for phrase in ai.activities):
             if len(replacements) == len(unknown):
                 choices = iter(replacements)
                 ai.activities = [next(choices) if phrase in unknown else phrase for phrase in ai.activities]
@@ -302,13 +319,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                     and not re.search(r'\b(?:minutes?|miles?|people|prefer|starting|only|no|and|followed)\b|\d',clause,re.I)):
                 ai.location=clause
                 break
-    if ai.people is not None:
-        counts = set()
-        for match in GROUP_EVIDENCE.finditer(raw):
-            token = next(v for v in match.groups() if v).lower()
-            counts.add(NUMBER_WORDS.index(token) if token in NUMBER_WORDS else float(token))
-        if ai.people not in counts and not (ai.people == 2 and re.search(r"\bcouple\b", raw, re.I)):
-            ai.people = None
+    ai.people = None  # Legacy extension only; never a planning requirement.
     other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|CHF|SEK|NOK|DKK|ZAR|BRL|KRW|RUB|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)
     if (not manual.budget.strip() or ai.budget_group is not None) and ai.currency == "USD" and other_currency:
         grounding_issues.append("The request names a non-USD currency. This catalog cannot convert currency.")
@@ -327,6 +338,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     # Uncertainties stay blocking unless the corresponding explicit correction resolves them.
     uncertainties = []
     for issue in ai.uncertainties:
+        if re.search(r"people|participants?|party|group|persons", issue, re.I) and not re.search(r"budget|currency|price|cost|spending", issue, re.I):
+            continue
         # A bare schema field with null is an absent optional value, not an
         # independent user requirement. Source checks below still reject any
         # explicit cap omitted by the model, including wrong scopes/amounts.
@@ -419,7 +432,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 if repeated_uses.get(phrase.casefold(), 0) < limit:
                     found = repetition.start()
         repeated_uses[phrase.casefold()] = repeated_uses.get(phrase.casefold(), 0) + 1
-        category = ALIASES.get(phrase.casefold())
+        category = activity_category(phrase)
         if found < 0:
             issues.append("AI could not verify an ordered activity in your request. Rephrase with explicit stops.")
         else:
@@ -427,14 +440,14 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             cursor = max(cursor, found + len(phrase))
         if category is None:
             label = f'“{phrase}”' if found >= 0 else "An activity"
-            message = f'{label} is unsupported or needs a specific activity. No partial plan was created.'
+            message = "We couldn't tell which activity you meant. Could you be a little more specific?"
             issues.append(message)
             if re.search(r"something|activity|activities|competitive|indoor|fun|anything", phrase, re.I):
-                ask("activities", f'Which activity do you mean by “{phrase}”? We’ll keep your other stops.' if found >= 0 and sum(p.casefold() not in ALIASES for p in ai.activities) == 1 else "Which activities replace the unclear stops, in order? We’ll keep your other stops.", "ambiguous")
+                ask("activities", f'Which activity do you mean by “{phrase}”? We’ll keep your other stops.' if found >= 0 and sum(activity_category(p) is None for p in ai.activities) == 1 else "Which activities replace the unclear stops, in order? We’ll keep your other stops.", "ambiguous")
             elif saved and answers.activities:
                 ask("activities", "That activity is unsupported. Choose a supported activity for the unclear stop; your original request is kept.", "ambiguous")
             else:
-                unsupported.append(message)
+                ask("activities", message, "ambiguous")
         else:
             if phrase.casefold() == "dinner":
                 dinner_stops.append(len(activities))
@@ -492,15 +505,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         first_limit = None
     if not first_preference and re.search(r"\bnear me\b|\bradius\b", mask(raw,between_spans), re.I) and re.search(r"\d+(?:\.\d+)?\s*(?:miles?|kilometers?|kilometres?|km|meters?|metres?)\b", mask(raw,between_spans), re.I):
         issues.append("Geographic radius wording is not supported in this form. No radius was silently assumed. If you mean road travel to the first stop, state a first-stop limit in miles instead; otherwise revise the geographic requirement.")
-    people_answer = answers.people
-    if people_answer:
-        words = "zero one two three four five six seven eight nine ten eleven twelve thirteen fourteen fifteen sixteen seventeen eighteen nineteen twenty".split()
-        word_match = re.fullmatch(r"(" + "|".join(words) + r")(?:\s+(?:people|persons?|friends))?", people_answer, re.I)
-        if word_match:
-            people_answer = str(words.index(word_match[1].lower()))
-        match = re.fullmatch(r"(\d+)(?:\s+(?:people|persons?|friends))?", people_answer, re.I)
-        people_answer = match[1] if match else people_answer
-    people = chosen("people", people_answer or ai.people)
     date_raw = raw
     date_phrases = ai.date_expressions
     if answers.date and not manual.date.strip():
@@ -571,9 +575,6 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if location is None:
         ask("location", LOCATION_QUESTION)
         issues.append(LOCATION_QUESTION)
-    if people is None:
-        ask("people", "How many people are coming? (1–100)")
-        issues.append("Group size is unknown. State how many people or set Number of people.")
     if (ai.budget_per_person is not None or ai.budget_group is not None) and ai.currency != "USD":
         if ai.budget_group is not None or not manual.budget.strip():
             message = "Budget currency is unknown or unsupported. This fictional catalog uses USD; no conversion was made."
@@ -581,22 +582,17 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             unsupported.append(message)
     if ai.transport:
         notes.append(f"Requested transport: {ai.transport.value}. Mock travel is mode-independent; no real route or mode-specific time is verified.")
-    for field, val in (("people", people), ("budget", budget), ("travel", travel)):
+    for field, val in (("budget", budget), ("travel", travel)):
         if isinstance(val, str):
             if not re.fullmatch(r"\d+" if field != "budget" else r"\d+(?:\.\d{1,2})?", val):
-                if field == "people":
-                    ask("people", "How many people are coming? Enter a whole number from 1 to 100.")
                 issues.append(f"Enter a valid nonnegative {'whole number' if field != 'budget' else 'amount'} for {field}.")
-    if people is not None and str(people).isdigit() and not 1 <= int(people) <= 100:
-        issues.append("Group size must be from 1 to 100.")
-        ask("people", "How many people are coming? Enter a whole number from 1 to 100.")
     if len(ai.activities) > 4:
         unsupported.append("The planner supports up to four stops; edit the request to choose fewer stops.")
     resolved = None
     if not issues:
         try:
             resolved = PlanningRequest(
-                activities=activities, location=location, people=int(people), date=date,
+                activities=activities, activityIntents={category:phrase for category,phrase in zip(activities,ai.activities)}, location=location, date=date,
                 calendarTimezone=dates.timezone, explicitStart=dates.explicit_start, explicitEnd=dates.explicit_end,
                 destinationContext=DestinationContext(originalText=RELATIVE.search(raw).group() if location=="near me" and RELATIVE.search(raw) else location,intent="current_relative" if location=="near me" else "explicit",source="browser" if location=="near me" and value.calendarTimezone else "request",timezone=dates.timezone),
                 budget=float(budget) if budget is not None else None,
@@ -608,7 +604,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 requireWheelchairAccess=bool(re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair\b",raw,re.I)),
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)
         except (ValueError, TypeError, ValidationError):
-            issues.append("Check group size (1–100), USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")
+            issues.append("Check USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")
     # Keep the original grounded extraction; follow-up corrections remain separate.
     original = saved.interpretation if saved else ai.model_copy(deep=True)
     pending = PendingClarification(text=value.text, interpretation=original, answers=answers, referenceTime=reference) if (resolved is not None or (issues and (questions or saved))) and not unsupported else None

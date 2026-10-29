@@ -95,7 +95,7 @@ class ExpandedLimits(unittest.TestCase):
             r=more_real_plans(r.optionsToken);iterations+=1
             if not r.provisionalPlans and r.canExpand:
                 self.assertEqual(session._elements,old)
-                self.assertIn('minute',r.message)
+                self.assertIn('temporary routing limit',r.message)
                 paused=True;self.clock.return_value+=61  # no sleep, retry or counter reset
         self.assertTrue(paused)
         self.assertLessEqual(session._elements,300)
@@ -117,7 +117,7 @@ class ExpandedLimits(unittest.TestCase):
         session._matrix_window.append((self.clock.return_value,150))
         r=real_plans(outing(),session)
         self.assertFalse(r.provisionalPlans);self.assertTrue(r.canExpand);self.assertFalse(r.canDiscover)
-        self.assertIn('minute',r.message);self.matrix.assert_not_called()
+        self.assertIn('temporary routing limit',r.message);self.matrix.assert_not_called()
         self.clock.return_value+=61
         r=more_real_plans(r.optionsToken)
         self.assertTrue(r.provisionalPlans);self.assertEqual(self.search.call_count,2)

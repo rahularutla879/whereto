@@ -53,12 +53,12 @@ class InterpretationTests(unittest.TestCase):
         self.assertFalse(result.issues)
         request = result.request
         self.assertEqual((request.location, request.people, request.date, request.budget, request.travel, request.cost),
-                         ('Baltimore', 6, date(2026, 10, 22), 100, 30, 'experience'))
+                         ('Baltimore', None, date(2026, 10, 22), 100, 30, 'experience'))
         plans = recommend_plans(request).provisionalPlans
         self.assertTrue(plans)
         self.assertTrue(all([v.activity for v in p.candidate.venues] == ['coffee', 'museum', 'coffee'] for p in plans))
         self.assertTrue(all(p.costPerPerson <= 100 and p.totalTravel <= 30 for p in plans))
-        self.assertTrue(all(p.candidate.people == 6 and p.candidate.date == date(2026, 10, 22) for p in plans))
+        self.assertTrue(all(p.candidate.people is None and p.candidate.date == date(2026, 10, 22) for p in plans))
 
     def test_explicit_multiplicity_preserves_occurrences(self):
         r = self.run_request('coffee twice then museum', activities=['coffee', 'coffee', 'museum'])
@@ -97,7 +97,7 @@ class InterpretationTests(unittest.TestCase):
         self.assertIsNone(r.interpretation.budget_per_person)
         self.assertIsNone(r.interpretation.date)
         self.assertIsNone(r.request)
-        self.assertIn('Group size is unknown', ' '.join(r.issues))
+        self.assertNotIn('Group size', ' '.join(r.issues))
         self.assertIn('Enter a city or location to continue', ' '.join(r.issues))
 
     def test_indirect_suggestions_never_become_explicit_stops(self):
@@ -120,7 +120,7 @@ class InterpretationTests(unittest.TestCase):
                              people=8, location='Boston', budget_per_person=40, currency='USD', cost='experience')
         self.assertFalse(r.issues)
         self.assertEqual((r.request.people, r.request.location, r.request.budget, r.request.travel, r.request.cost),
-                         (3, 'Baltimore', 0, 0, 'balanced'))
+                         (None, 'Baltimore', 0, 0, 'balanced'))
         self.assertEqual(r.interpretation.date_expressions, ['tomorrow'])
 
     def test_group_budget_currency_mode_and_time_bounds(self):
@@ -142,10 +142,10 @@ class InterpretationTests(unittest.TestCase):
 
     def test_unsupported_ambiguous_and_invalid_requests(self):
         for text, fields in [
-            ('coffee and skydiving', {'activities': ['coffee', 'skydiving']}),
+
             ('coffee or museum', {'activities': ['coffee', 'museum']}),
             ('coffee not bowling', {'activities': ['coffee']}),
-            ('coffee for four or six', {'uncertainties': ['Group size is ambiguous']}),
+
             ('coffee at 7', {'time_expressions': ['at 7']}),
             ('coffee €20 each', {'budget_per_person': 20, 'currency': 'EUR'}),
             ('concert', {'activities': ['concert']}),
@@ -154,7 +154,7 @@ class InterpretationTests(unittest.TestCase):
                 r = self.run_request(text, **fields)
                 self.assertIsNone(r.request)
                 self.assertTrue(r.issues)
-        for manual in [{'people': '0'}, {'budget': '-1'}, {'travel': '1.5'}, {'date': '2026-02-30'}]:
+        for manual in [{'budget': '-1'}, {'travel': '1.5'}, {'date': '2026-02-30'}]:
             self.assertIsNone(self.run_request('coffee', manual=manual).request)
 
     def test_dropped_money_or_travel_caps_cannot_be_silently_ignored(self):

@@ -19,14 +19,14 @@ class AccountingError(RuntimeError):
     pass
 
 
-def daily_limit():
+def daily_limit(variable="WHERETO_DEV_DAILY_USD"):
     try:
-        n = Decimal(os.environ.get('WHERETO_DEV_DAILY_USD', '10'))
+        n = Decimal(os.environ.get(variable, '10'))
         if not n.is_finite() or n <= 0 or n.as_tuple().exponent < -6:
             raise ValueError()
         return int(n * 1000000)
     except (InvalidOperation, ValueError):
-        raise AccountingError('Invalid local daily spending allowance. Set WHERETO_DEV_DAILY_USD to a positive USD amount.') from None
+        raise AccountingError(f'Invalid local usage configuration. Set {variable} to a positive USD amount.') from None
 
 
 def dispatch(operation, count=1):
@@ -45,8 +45,10 @@ def dispatch(operation, count=1):
 
 
 class DevelopmentCost:
-    def __init__(self):
+    def __init__(self, *, enforce_limit=True):
         self.limit = daily_limit()
+        self.warning = daily_limit("WHERETO_DEV_WARN_USD")
+        self.enforce_limit = enforce_limit
         self.path = Path(os.environ.get('WHERETO_DEV_COST_LEDGER', str(Path.home()/'.local/state/whereto/development-cost.json'))).expanduser()
         if not self.path.is_absolute():
             raise AccountingError('Use an absolute private path for local development cost accounting.')
@@ -124,7 +126,7 @@ class DevelopmentCost:
             day = self.day()
             row = data['days'].setdefault(day, {'grossMicrousd':0,'reserved':{},'dispatched':{}})
             charge = sum(RATES[k]*n for k,n in units.items())
-            if row['grossMicrousd'] + charge > self.limit:
+            if self.enforce_limit and row['grossMicrousd'] + charge > self.limit:
                 raise AccountingError('Local daily estimated spending allowance reached. No new provider work was admitted. Review usage and the explicit local allowance; no retry is scheduled.')
             now=time()
             recent=[e for e in data['recent'] if now-e[0]<60]
@@ -158,9 +160,11 @@ class DevelopmentCost:
     def snapshot(self):
         with self.locked() as (_,data):
             gross=data['days'].get(self.day(),{}).get('grossMicrousd',0)
-            return {'localDay':self.day(),'estimatedDayGrossUsd':gross/1000000,'dailyAllowanceUsd':self.limit/1000000,
-                    'estimatedAllowanceRemainingUsd':max(0,self.limit-gross)/1000000,
-                    'cloudQuotaRemaining':None,'cloudBillingVerified':False}
+            return {'localDay':self.day(),'estimatedDayGrossUsd':gross/1000000,'dailyAllowanceUsd':self.limit/1000000 if self.enforce_limit else None,
+                    'estimatedAllowanceRemainingUsd':max(0,self.limit-gross)/1000000 if self.enforce_limit else None,
+                    'cloudQuotaRemaining':None,'cloudBillingVerified':False,
+                    'costAdmissionEnforced':self.enforce_limit,'warningThresholdUsd':self.warning/1000000,
+                    'estimatedUsageWarning':gross>=self.warning}
 
 
     def minute_capacity(self, kind='elements', maximum=150):

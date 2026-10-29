@@ -61,7 +61,7 @@ def evaluate_candidate(
     if not real_data and not supports_location(request.location):
         issue("unsupported_location", "location", "The fictional catalog only covers Baltimore; choose Baltimore.")
     if ([v.activity for v in venues] != request.activities
-            or candidate.people != request.people or candidate.date != request.date
+            or candidate.date != request.date
             or candidate.allowRevisits != request.allowRevisits):
         issue("request_mismatch", "activities", "Candidate must preserve activities, order, date, group and revisit permission.")
     prices = [price_provider(v, request) for v in venues]
@@ -70,17 +70,15 @@ def evaluate_candidate(
     known = sum((Decimal(str(q.amount)) for q in prices if q.amount is not None), Decimal(0))
     cost = known if all(q.amount is not None for q in prices) else None
     for field, limit, total in (("budget", request.budget, known),
-                                 ("groupBudget", request.groupBudget, known * request.people)):
-        if limit is not None and total > Decimal(str(limit)):
+                                 ("groupBudget", request.groupBudget, None)):
+        if limit is not None and total is not None and total > Decimal(str(limit)):
             issue("budget_exceeded", field, f"Known activity costs exceed {field}; increase the cap or choose cheaper activities.")
+    if request.groupBudget is not None:
+        issue("unverified_group_budget", "budget", "A total group budget cannot be verified without group pricing; no booking or group cost is confirmed.", unknown=True)
     for v, quote in zip(venues, prices):
         if quote.amount is None or quote.status == DataStatus.unknown:
             issue("unknown_price", "budget", "Price is incomplete or unsourced; obtain a price before confirming costs.", v, True)
     for v in venues:
-        if v.capacity is None or v.dataQuality.capacity == DataStatus.unknown:
-            issue("unknown_capacity", "people", "Obtain group capacity before confirming this stop.", v, True)
-        if v.capacity is not None and v.capacity < request.people:
-            issue("capacity_exceeded", "people", f"{v.name} cannot fit {request.people} people; reduce the group or change activities.", v)
         if isinstance(v, ScheduledEvent) and v.eventDate != request.date:
             issue("event_date", "date", "Scheduled event date differs from the outing; choose a matching fixture date.", v)
     for leg in legs:
@@ -167,8 +165,8 @@ def evaluate_candidate(
     state = "violated" if any(i.status == "violation" for i in issues) else "provisional" if issues else "confirmed"
     return RankedItinerary(
         candidate=candidate, feasibility=state, issues=issues, stops=stops, prices=prices, legs=legs,
-        knownCostPerPerson=float(known), knownGroupCost=float(known * request.people), costPerPerson=float(cost) if cost is not None else None,
-        groupCost=float(cost * request.people) if cost is not None else None,
+        knownCostPerPerson=float(known), knownGroupCost=None, costPerPerson=float(cost) if cost is not None else None,
+        groupCost=None,
         totalTravel=travel if travel is None or travel <= 1440 else None,
         activityDuration=activity_duration if activity_duration is None or activity_duration <= 1440 else None,
         elapsedDuration=elapsed if elapsed is not None and 0 < elapsed <= 1440 else None,
@@ -219,7 +217,7 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
         p.score = sum(w * n for w, n in zip(weights, normalized))
         p.explanations = [RecommendationReason(code="score", message=f"{request.cost.value} mode score {p.score:.3f}; normalized affordability, quality and travel weights {weights}.")]
         if p.costPerPerson is not None:
-            p.explanations.append(RecommendationReason(code="cost", message=f"USD {p.costPerPerson:g}/person; USD {p.groupCost:g} for {request.people} people, activity costs only."))
+            p.explanations.append(RecommendationReason(code="cost", message=f"USD {p.costPerPerson:g}/person, activity costs only."))
         if p.totalTravel is not None:
             p.explanations.append(RecommendationReason(code="travel", message=f"{p.totalTravel} inter-stop travel minutes; data status is retained on every travel quote."))
         if values[1] is not None:

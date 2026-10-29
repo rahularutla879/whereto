@@ -24,7 +24,11 @@ activities, competitive in preferences, and suitable category IDs in
 suggested_activities. Suggestions are never explicit requested stops.
 preferences: stated qualities such as competitive, cocktails, quiet, outdoor,
 affordable; never assume typical tastes or companions. No invented preferences.
-people: numeric stated group size only (a couple=2); otherwise null.
+people: always null. Participant counts are ignored by this venue/route planner.
+Never ask about party size or put missing participant counts in uncertainties.
+Activities are open-ended venue-backed intentions, not a fixed category list.
+Copy pottery classes, go-karting and other concrete activity phrases verbatim;
+never mark a clear activity unsupported just because it is not a canonical category.
 budget_per_person / budget_group: explicit numeric caps only, zero is valid.
 Affordable/cheap implies cost=budget, not a numeric cap. Ambiguous budget scope
 or currency goes in uncertainties. Dollar sign means USD in this US prototype;
@@ -74,28 +78,28 @@ def example():
 # Examples retain unknown core facts and every explicit planning constraint.
 EXAMPLES = [
     ("Four people want bowling then dinner in Baltimore under $60 each and $200 total, at most 15 minutes total travel, driving. Budget-friendly.",
-     {**example(), "activities": ["bowling", "dinner"], "people": 4,
+     {**example(), "activities": ["bowling", "dinner"], "people": None,
       "location": "Baltimore", "budget_per_person": 60, "currency": "USD",
       "budget_group": 200, "travel_total_minutes": 15, "transport": "driving",
       "cost": "budget", "preferences": ["Budget-friendly"]}),
     ("Coffee for two people in Baltimore on November 7, 2026 after 6 PM before 10 PM, maximum $25 each and 10 minutes between stops.",
-     {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
+     {**example(), "activities": ["Coffee"], "people": None, "location": "Baltimore",
       "date_expressions": ["November 7, 2026"], "time_expressions": ["after 6 PM", "before 10 PM"],
       "budget_per_person": 25, "currency": "USD", "travel_leg_minutes": 10}),
     ("Coffee for two people in Baltimore tomorrow evening.",
-     {**example(), "activities": ["Coffee"], "people": 2, "location": "Baltimore",
+     {**example(), "activities": ["Coffee"], "people": None, "location": "Baltimore",
       "date_expressions": ["tomorrow evening"]}),
     ("Two people want art in Baltimore tomorrow under $0 each, 0 minutes total travel. Budget-friendly.",
-     {**example(), "activities": ["art"], "people": 2, "location": "Baltimore",
+     {**example(), "activities": ["art"], "people": None, "location": "Baltimore",
       "budget_per_person": 0, "budget_group": None, "currency": "USD",
       "travel_total_minutes": 0, "cost": "budget", "preferences": ["Budget-friendly"],
       "date_expressions": ["tomorrow"]}),
     ("A group wants coffee tomorrow.",
      {**example(), "activities": ["coffee"], "date_expressions": ["tomorrow"]}),
     ("Two people want coffee, museum, then coffee in Baltimore.",
-     {**example(), "activities": ["coffee", "museum", "coffee"], "people": 2, "location": "Baltimore"}),
+     {**example(), "activities": ["coffee", "museum", "coffee"], "people": None, "location": "Baltimore"}),
     ("Six friends want something competitive then cocktails.",
-     {**example(), "activities": ["something competitive", "cocktails"], "people": 6,
+     {**example(), "activities": ["something competitive", "cocktails"], "people": None,
       "preferences": ["competitive"], "suggested_activities": ["bowling", "miniGolf"]}),
 ]
 

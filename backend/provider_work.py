@@ -12,7 +12,7 @@ def check_cancelled():
     if event is not None and event.is_set():
         raise ProviderLimitError('Planning was cancelled. No further provider work was admitted.')
 
-def wait_for_capacity(capacity,seconds=2):
+def wait_for_capacity(capacity,seconds=15):
     """Wait only before dispatch, never retry a failed provider operation."""
     deadline=monotonic()+seconds
     while True:

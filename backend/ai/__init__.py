@@ -20,7 +20,7 @@ class Interpretation(BaseModel):
 
     model_config = ConfigDict(extra="forbid", allow_inf_nan=False, revalidate_instances="always")
     activities: Annotated[list[Annotated[Nonblank, Field(max_length=500)]], Field(strict=True, max_length=32)]
-    people: GroupSize | None
+    people: GroupSize | None = None
     budget_per_person: Money | None
     date: OutingDate | None
     location: Annotated[Nonblank, Field(max_length=200)] | None

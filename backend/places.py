@@ -122,7 +122,7 @@ QUERIES = {
 
 def search_body(request: DiscoveryRequest, limit: int) -> dict:
     area = request.area
-    query = "dinner restaurants" if request.meal == "dinner" else QUERIES[request.activity.value]
+    query = "dinner restaurants" if request.meal == "dinner" else QUERIES.get(request.activity.value, request.activity.value.removeprefix("custom:"))
     if request.search_variant == "mixed":
         query = "entertainment centers with bowling" if request.activity == ActivityType.bowling else query + " places"
     if request.search_variant == "alternative":

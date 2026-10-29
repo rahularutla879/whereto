@@ -78,7 +78,7 @@ class RequiredDateTests(unittest.TestCase):
         self.assertEqual({q.field for q in initial.questions}, {'location', 'date'})
         done = self.answer(initial, {'location': 'Baltimore', 'date': 'Tomorrow'})
         self.assertEqual((done.request.location, done.request.people, done.request.date),
-                         ('Baltimore', 2, date(2026, 10, 22)))
+                         ('Baltimore', None, date(2026, 10, 22)))
 
     def test_missing_date_and_unclear_time_are_collected_together(self):
         initial = self.initial('coffee, museum, then coffee in Baltimore for 2 people at 7')
@@ -93,16 +93,16 @@ class RequiredDateTests(unittest.TestCase):
                 'at most 30 minutes total travel, best experience, from 6 PM to 11 PM')
         initial = self.initial(text, people=None, budget_per_person=80, budget_group=200,
             currency='USD', travel_total_minutes=30, cost='experience', preferences=['best experience'])
-        self.assertEqual({q.field for q in initial.questions}, {'people', 'date'})
+        self.assertEqual({q.field for q in initial.questions}, {'date'})
         second = self.answer(initial, {'people': 'three'})
         self.assertEqual([q.field for q in second.questions], ['date'])
         done = self.answer(second, {'date': 'Tomorrow'})
         req = done.request
         self.assertEqual((req.people, req.budget, req.groupBudget, req.travel, req.cost,
-            req.startTime, req.endTime), (3, 80, 200, 30, 'experience', 1080, 1380))
+            req.startTime, req.endTime), (None, 80, 200, 30, 'experience', 1080, 1380))
         plans = recommend_plans(req).provisionalPlans
         self.assertTrue(plans)
-        self.assertTrue(all(p.costPerPerson <= 80 and p.groupCost <= 200 and p.totalTravel <= 30 for p in plans))
+        self.assertTrue(all(p.costPerPerson <= 80 and p.groupCost is None and p.totalTravel <= 30 for p in plans))
         self.assertTrue(all(s.start >= 1080 and s.end <= 1380 for p in plans for s in p.stops))
 
     def test_manual_date_overrides_answer_and_original_without_extra_question(self):
@@ -111,7 +111,7 @@ class RequiredDateTests(unittest.TestCase):
             {'date': '2026-11-07', 'people': '3', 'budget': '0', 'travel': '0', 'cost': 'balanced', 'costExplicit': True})
         self.assertFalse(done.issues)
         self.assertEqual((done.request.date, done.request.people, done.request.budget,
-            done.request.travel, done.request.cost), (date(2026, 11, 7), 3, 0, 0, 'balanced'))
+            done.request.travel, done.request.cost), (date(2026, 11, 7), None, 0, 0, 'balanced'))
 
     def test_watch_baseball_phrase_asks_for_date_without_substituting_activity(self):
         initial = self.initial('Four friends want to watch a baseball game in Baltimore.',

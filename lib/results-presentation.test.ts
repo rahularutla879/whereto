@@ -45,7 +45,7 @@ test("missing price, travel, timing and group capacity remain prominent even wit
   assert.match(warnings, /prices are unknown/);
   assert.match(warnings, /Travel time is unknown/);
   assert.match(warnings, /timings are unknown/);
-  assert.match(warnings, /group-size limits are unknown/);
+  assert.doesNotMatch(warnings, /group-size limits/);
 });
 
 test("failed plans retain the actionable violation without technical count or service names", () => {

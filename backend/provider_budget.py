@@ -94,7 +94,7 @@ class ProviderBudget:
         self._search_window = []
         self._lookups = 0
         from backend.development_cost import DevelopmentCost
-        self.cost = DevelopmentCost() if self.settings.exploration else None
+        self.cost = DevelopmentCost(enforce_limit=False) if self.settings.exploration else None
 
     def outing(self) -> "OutingBudget":
         return OutingBudget(self)
@@ -235,7 +235,7 @@ class OutingBudget:
             lookups = sum(op == "lookup" for op, _, _, _ in attempts)
             if len(session._search_window) + searches > 10:
                 raise ProviderLimitError("Local Places minute limit reached. Wait before a new deliberate search; no retry is scheduled.")
-            if session._lookups + lookups > limits.lookups_per_session:
+            if session._lookups + lookups > limits.ceiling("lookups_per_session"):
                 raise ProviderLimitError("Starting-place lookup session limit reached. Stop and review usage.")
             session._matrix_window = [(t, n) for t, n in session._matrix_window if now - t < 60]
             if elements + sum(n for _, n in session._matrix_window) > limits.matrix_elements_per_minute:
@@ -296,7 +296,7 @@ def local_real_enabled() -> bool:
 
 
 EXPLORATION_UNCAPPED = {"searches_per_outing", "candidates_per_activity", "matrix_elements_per_outing",
-                       "requests_per_outing", "requests_per_session", "matrix_elements_per_session"}
+                       "requests_per_outing", "requests_per_session", "matrix_elements_per_session", "lookups_per_session"}
 
 
 def exploration_environment():

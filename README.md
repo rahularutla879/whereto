@@ -4,6 +4,14 @@
 
 A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules, with fictional Baltimore venues by default and deliberate local real-data mode for Google Maps venues/routes. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
 
+## Current Task 46 acceptance changes
+
+Real discovery accepts grounded activity phrases beyond the original categories, including pottery classes and go-karting. Movie paraphrases such as “show movies” normalize to movie-going. These find relevant venues, not verified sessions, tickets or bookings. Ambiguous activities and unknown destinations are handled separately. The fictional catalog remains finite and never invents missing mock venues.
+
+Party size is no longer required, asked for, shown or used to rank/filter plans. Volunteered counts are ignored; valid legacy optional API values remain compatible. Group-aware reservations, capacity and pricing are future work. A stated total-group budget remains unverified rather than silently passed.
+
+Authorized local exploration now records estimated cost **without a hard daily estimated-cost block**. Its default $10 warning is nonblocking; accounting integrity still fails closed. Actual Google quotas and finite work remain protected. [Full limits audit and freshly verified Cloud settings](docs/exploration-limits.md).
+
 ## Task 46: real venues in local development
 
 Mock remains the safe default. The website badge says **MOCK DATA** or **REAL DATA · LOCAL DEV**. Real results contain Google Maps venues and driving/walking estimates; prices, hours, visit duration, showtimes and reservations still need confirmation. They are provisional options, not bookings or verified budget matches.
@@ -61,18 +69,18 @@ See [the current discovery and browsing contract](docs/real-planning.md#100-venu
 
 ## Development exploration (Task 46 only)
 
-Normal mode keeps request and route limits, with a 100-per-activity retention target (lower overrides remain supported). Exploration removes fixed outing/process request and route ceilings while retaining finite work per action and a persistent **$10 estimated gross/local-day** guard. It is off by default and cannot enable Google access by itself. Optional ratings, contacts and manual lookup still require their separate flags. No live verification is authorized by these instructions.
+Normal mode keeps request and route limits, with a 100-per-activity retention target (lower overrides remain supported). Exploration removes fixed outing/process request and route ceilings while retaining finite work per action and persistent estimated gross-cost accounting. The default **$10/local-day warning is nonblocking** in authorized exploration. It is off by default and cannot enable Google access by itself. Optional ratings, contacts and manual lookup still require their separate flags. No live verification is authorized by these instructions.
 
 For separately authorized local testing, stop the backend, then run from the project folder:
 
 ```sh
 cd /Users/rahularutla/Documents/whereto
-VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_DAILY_USD=10 npm run dev:backend
+VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_WARN_USD=10 npm run dev:backend
 ```
 
-The page shows **DEVELOPMENT EXPLORATION**. Open **About these estimates** for outing request/element counts, estimated outing/day cost and remaining estimated allowance. Discovery and routing remain finite; more options use existing evidence first. No background exploration starts on page load. Production/staging/hosting indicators and nonlocal HTTP callers are refused. Keep the backend bound to `127.0.0.1` using the existing command.
+The page shows **DEVELOPMENT EXPLORATION**. Open **About these estimates** for outing request/element counts, estimated outing/day cost and the nonblocking warning status. Discovery and routing remain finite; more options use existing evidence first. No background exploration starts on page load. Production/staging/hosting indicators and nonlocal HTTP callers are refused. Keep the backend bound to `127.0.0.1` using the existing command.
 
-The guard stores counters only at `~/.local/state/whereto/development-cost.json` (private permissions). All exploration outings, manual searches and contact requests using that file share it, including after backend restart. `WHERETO_DEV_COST_LEDGER` optionally chooses a private absolute path; do not switch/delete files to reset usage. Unreadable or corrupt accounting refuses work. Short local lock contention waits at most two seconds; provider I/O never holds the ledger lock. Errors distinguish busy, permission and invalid-data cases. Never delete/reset usage to recover access. Increase `WHERETO_DEV_DAILY_USD` only by an explicit local configuration change and review spending first. A $10 daily allowance is **not** a $40–$50 monthly cap: five fully used days consume that target before allowances, and unrelated/normal-mode usage is not included.
+The ledger stores counters only at `~/.local/state/whereto/development-cost.json` (private permissions). All exploration outings, manual searches and contact requests using that file share it, including after backend restart. `WHERETO_DEV_COST_LEDGER` optionally chooses a private absolute path; do not switch/delete files to reset usage. Unreadable or corrupt accounting refuses work. Short local lock contention waits at most two seconds; provider I/O never holds the ledger lock. Errors distinguish busy, permission and invalid-data cases. Never delete/reset usage to recover access. Set `WHERETO_DEV_WARN_USD` to change the informational warning threshold; it never becomes an exploration admission cap. The hard-guard utility retains `WHERETO_DEV_DAILY_USD` outside exploration. The approximately $40–$50 monthly target and Cloud alerts are not hard billing caps. Unrelated/normal-mode usage is not included in exploration accounting.
 
 To stop exploration and return to mock mode:
 
@@ -85,7 +93,7 @@ Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, co
 
 ## Location and Surprise Me planning (Task 46)
 
-Describe your destination, activities, date and group, then choose a beginning:
+Describe your destination, activities and date, then choose a beginning:
 
 - **Use my current location**: select **Share my location** to request permission. No automatic GPS or inferred city/address. Denial leaves the other choices available.
 - **I'll choose where to start**: enter an address, hotel, landmark, station, ZIP, neighborhood or city. Plan/Regenerate finds matches; confirm one and the original submitted request continues. Approximate areas use a labeled representative point.
@@ -167,7 +175,7 @@ You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are 
 
 The two commands avoid an extra process-management dependency. `npm run dev` still starts just the frontend.
 
-Planning requires both servers and the local AI service. If Python is stopped, Plan my outing shows an unavailable-service explanation and no generated plans. It never falls back to the retired browser planner. The initial three inspiration cards are a fixed illustration, not a generated response. Health checks time out after three seconds. AI has a 60-second default provider timeout, a 70-second proxy timeout and a 75-second browser timeout. After interpretation, planning keeps its ten-second proxy and fifteen-second browser timeouts. Increase the AI timeout only alongside those outer limits.
+Planning requires both servers and the local AI service. If Python is stopped, Plan my outing shows an unavailable-service explanation and no generated plans. It never falls back to the retired browser planner. The initial three inspiration cards are a fixed illustration, not a generated response. Health checks time out after three seconds. AI has a 60-second default provider timeout, a 70-second proxy timeout and a 75-second browser timeout. After interpretation, planning uses a 115-second proxy and 120-second browser timeout, including bounded routing admission waits. Increase the AI timeout only alongside those outer limits.
 
 The default backend address is `http://127.0.0.1:8000`. No configuration is required. For a different backend address, copy `.env.example` to `.env.local`, change `BACKEND_URL`, and restart Next.js. This setting is server-only. Do not add `NEXT_PUBLIC_` to it. The connection is server-to-server, so no browser CORS configuration is needed.
 
@@ -179,7 +187,7 @@ Click **Try an example**, then **Plan my outing**. Or type:
 
 > We're 4 friends in Baltimore. We want bowling, drinks, and a movie.
 
-You will get up to three distinct demo plans, introduced by a simple count such as **Found 3 possible plans.** A visible **Sample results** label and short disclosure explain that the venues, prices, travel times and event schedules are fictional. **About these estimates** expands to explain unchecked opening hours/availability, excluded costs and transport assumptions. Important plan-specific unknowns or conflicts remain visible beside the affected card. Use **View plan** to expand the itinerary and see its sample venues, durations, per-person costs and group total. Card headlines, labels and short descriptions compare the displayed options using their actual preference match, cost, travel and sample venue quality. Tied options acknowledge different venues or stop order; no position is automatically the cheapest or best.
+You will get up to three distinct demo plans, introduced by a simple count such as **Found 3 possible plans.** A visible **Sample results** label and short disclosure explain that the venues, prices, travel times and event schedules are fictional. **About these estimates** expands to explain unchecked opening hours/availability, excluded costs and transport assumptions. Important plan-specific unknowns or conflicts remain visible beside the affected card. Use **View plan** to expand the itinerary and see its sample venues, durations, per-person sample costs. Card headlines, labels and short descriptions compare the displayed options using their actual preference match, cost, travel and sample venue quality. Tied options acknowledge different venues or stop order; no position is automatically the cheapest or best.
 
 Try these requests too:
 
@@ -189,9 +197,9 @@ Try these requests too:
 
 You can plan entirely through your request without opening **Set preferences**. For example: `We're 6 friends in Baltimore. We want coffee, museum, then coffee tomorrow, under $100 per person, with at most 30 minutes total travel. Best experience.`
 
-After successful interpretation, **Set preferences** displays the resolved location, date, group size, budget/travel caps and cost mode. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified caps/date remain blank; Balanced is the existing default when no cost mode is stated.
+After successful interpretation, **Set preferences** displays the resolved location, date, budget/travel caps and cost mode. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified caps/date remain blank; Balanced is the existing default when no cost mode is stated.
 
-Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location or group size opens a short follow-up below your request. Answer there to continue automatically. Budget/travel limits and group capacity remain hard constraints, while cost mode ranks eligible plans.
+Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location opens a short follow-up below your request. Answer there to continue automatically. Budget/travel limits remain explicit constraints, while cost mode ranks eligible plans.
 
 ## Planner review and improvements
 
@@ -255,7 +263,7 @@ First click **Reset preferences** so old settings do not override your request. 
 
 **Every venue in mock mode is fictional.** Event schedules, start times, capacities, prices, neighborhood assignments, durations, and travel times are invented to demonstrate the interface. They are not verified quotes, actual routes, current availability, or opening hours.
 
-Costs are per person, in USD. The group total is the sample per-person cost multiplied by the group size. Estimates exclude transport fares, taxes, tips, booking fees, and extras. Travel is the total between stops using a simple made-up neighborhood model; it excludes getting to the first stop and returning home. The displayed itinerary duration includes activities, inter-stop travel, and any waiting for scheduled events. Shopping prices exclude purchases; the free picnic option requires bringing your own food. No real bookings or reservations are made.
+Costs are per person, in USD. Group pricing and capacity are not verified or calculated. Estimates exclude transport fares, taxes, tips, booking fees, and extras. Travel is the total between stops using a simple made-up neighborhood model; it excludes getting to the first stop and returning home. The displayed itinerary duration includes activities, inter-stop travel, and any waiting for scheduled events. Shopping prices exclude purchases; the free picnic option requires bringing your own food. No real bookings or reservations are made.
 
 There is no user-account authentication, payment integration, database or production deployment. Task 46 adds deliberately enabled backend Google APIs using the existing keyless local authentication.
 
@@ -394,7 +402,7 @@ It uses a fixed aware reference clock and checks 13 date/time requests, original
 
 ## Follow-up questions (Task 33)
 
-Type your outing normally; Set preferences remains optional. If an essential detail is missing, answer the short question below the request and click **Continue planning**. When both city and group size are missing, supply them together. For example, `Coffee` asks for a city, number of people and day; `Baltimore`, `4` and `Tomorrow` are enough to continue. You do not need to repeat “Coffee”.
+Type your outing normally; Set preferences remains optional. If an essential detail is missing, answer the short question below the request and click **Continue planning**. For example, `Coffee` asks for a city and day; `Baltimore` and `Tomorrow` are enough to continue. You do not need to repeat “Coffee”.
 
 Every outing needs a specific date before itineraries can be generated. If it is missing, answer “What day are you planning to go?” with Today, Tomorrow, This Saturday, Next Friday or a supported exact date. Weekend requests need Saturday, Sunday or an exact date. Unclear activities and clock windows may need a specific choice. Budget, travel caps, spending preferences and an exact start time remain optional; leaving them out does not trigger a question. Unsupported cities/activities, overnight outings and unavailable event dates get explanations without invented replacements.
 
@@ -404,14 +412,14 @@ Follow-up fields accept simple city names, numbers (also one–twenty), supporte
 
 ### Required dates and response speed — Task 33 follow-up
 
-A date in your original words or deliberately selected in Set preferences is used without another question. Missing city, group and date details are collected together; simple answers resume the original outing without another model call. A date does not verify the fictional venues’ hours, availability, prices or travel. There is no flexible-date comparison feature.
+A date in your original words or deliberately selected in Set preferences is used without another question. Missing city and date details are collected together; simple answers resume the original outing without another model call. A date does not verify the fictional venues’ hours, availability, prices or travel. There is no flexible-date comparison feature.
 
 The measured bottleneck was local AI processing, rather than itinerary calculations. The same model now receives the schema once and can omit absent optional JSON fields; validation restores their existing defaults and preserves stated constraints. Measured before/after timings are recorded in HANDOVER.md; latency varies with device/model state. Date/ranking computation is milliseconds, and follow-up completion remains fast because it does not call the model again. No background warming service or new model is required.
 
 
 ### Interpretation validation (Task 34)
 
-The app checks the AI's structured answer before planning. If a date, city or group size is unclear, answer the existing follow-up. For conflicting budgets, unsupported requirements or an unreliable interpretation, use the explanation to edit your request or set the relevant preference. Minimum spending and travel distance limits are unsupported; use maximum USD budgets and minutes/hours of travel. Automatic preference values come only from a validated request; settings you deliberately change still take priority.
+The app checks the AI's structured answer before planning. If a date or city is unclear, answer the existing follow-up. For conflicting budgets, unsupported requirements or an unreliable interpretation, use the explanation to edit your request or set the relevant preference. Minimum spending and travel distance limits are unsupported; use maximum USD budgets and minutes/hours of travel. Automatic preference values come only from a validated request; settings you deliberately change still take priority.
 
 An unavailable AI service or invalid AI response produces a retry message and no itinerary. There is no backup keyword interpreter. Date answers continue without another AI call. Checks cover common explicit wording, but unusual phrases may need rephrasing; fictional catalog results never verify real availability or venue requirements.
 

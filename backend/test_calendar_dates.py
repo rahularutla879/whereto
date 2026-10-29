@@ -105,10 +105,10 @@ class NamedCalendarTests(unittest.TestCase):
             self.assertFalse(result.issues)
             self.assertFalse(result.questions)
             self.assertEqual((result.request.people, result.request.date, result.request.activities),
-                (6, date(2026, 11, 11), ['food']))
+                (None, date(2026, 11, 11), ['food']))
             plans = recommend_plans(result.request).provisionalPlans
             self.assertTrue(plans)
-            self.assertTrue(all(p.candidate.date == date(2026, 11, 11) and p.candidate.people == 6 for p in plans))
+            self.assertTrue(all(p.candidate.date == date(2026, 11, 11) and p.candidate.people is None for p in plans))
 
         uncertain = self.initial('coffee for two in Baltimore on Nov 11',
             uncertainties=['Date has an unresolved condition'])
@@ -126,7 +126,7 @@ class NamedCalendarTests(unittest.TestCase):
         self.assertFalse(fixed.issues)
         self.assertEqual(fixed.pending.text, initial.pending.text)
         self.assertEqual((fixed.request.date, fixed.request.budget, fixed.request.people,
-            fixed.request.startTime, fixed.request.endTime), (date(2027, 3, 11), 60, 2, 1080, 1380))
+            fixed.request.startTime, fixed.request.endTime), (date(2027, 3, 11), 60, None, 1080, 1380))
         self.assertEqual(fixed.request.activities, ['coffee', 'museum', 'coffee'])
         edited = self.answer(fixed, {'activities': 'museum, coffee, coffee'}, preferences={'budget': '40'})
         self.assertFalse(edited.issues)

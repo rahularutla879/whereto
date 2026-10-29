@@ -46,14 +46,13 @@ export function interpretedPreferences(value: unknown): Preferences {
   const request = value as Record<string, unknown> | null;
   const nullableNumber = (n: unknown) => n === null || (typeof n === "number" && Number.isFinite(n) && n >= 0);
   if (!request || typeof request.location !== "string" || !request.location.trim()
-    || !Number.isInteger(request.people) || (request.people as number) < 1
     || !(request.date === null || (typeof request.date === "string" && /^\d{4}-\d{2}-\d{2}$/.test(request.date)))
     || !nullableNumber(request.budget) || !nullableNumber(request.travel)
     || !["budget", "balanced", "experience"].includes(request.cost as string)) {
     throw new Error("Invalid interpreted preference values");
   }
   return {
-    location: request.location, date: request.date as string | null ?? "", people: String(request.people),
+    location: request.location, date: request.date as string | null ?? "", people: "",
     budget: request.budget === null ? "" : String(request.budget),
     travel: request.travel === null ? "" : String(request.travel),
     cost: request.cost as Preferences["cost"], costExplicit: false,

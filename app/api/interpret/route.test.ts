@@ -58,12 +58,12 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(paths, ["/api/interpret", "/api/plans/generate"]);
     assert.equal(modelCalls, 1);
     assert.equal(controls.values.location, "Baltimore");
-    assert.equal(controls.values.people, "2");
+    assert.equal(controls.values.people, "");
     assert.equal(controls.values.budget, "30");
     assert.deepEqual(manualPreferences(controls), EMPTY_PREFERENCES);
     assert.deepEqual(result.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
     assert.match(result.plans[0].id, /^candidate-/);
-    assert.equal(result.plans[0].people, 2);
+    assert.equal(result.plans[0].people, undefined);
     assert.ok(result.plans.every(p => p.price! <= 30));
     // Model deliberately omits tomorrow: the source guard and deterministic
     // resolver must carry the local calendar date through real HTTP to cards.
@@ -111,20 +111,20 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(paths, ["/api/interpret"]);
     assert.ok(retained);
     assert.equal(modelCalls, startCalls + 1);
-    const invalid = await continueRun({ location: "Baltimore", people: "many" });
+    const invalid = await continueRun({ location: "", people: "many" });
     assert.equal(invalid.plans.length, 0);
-    assert.match(invalid.message, /whole number/);
+    assert.match(invalid.message, /city|location/);
     assert.equal(modelCalls, startCalls + 1);
     const plannerDown: typeof fetch = (url, init) => url === "/api/plans/generate"
       ? Promise.resolve(Response.json({ message: "Unavailable" }, { status: 503 })) : send(url, init);
-    const failedPlan = await continueRun({ people: "3" }, plannerDown);
+    const failedPlan = await continueRun({ location: "Baltimore", people: "3" }, plannerDown);
     assert.match(failedPlan.message, /planner unavailable/);
     assert.ok(retained); // Valid interpretation survives planner failure for a model-free retry.
     assert.equal(failedPlan.requestFailed, true);
     assert.equal(completed, 0);
     const resumed = await continueRun();
     assert.equal(resumed.plans.length, 3);
-    assert.equal(resumed.plans[0].people, 3);
+    assert.equal(resumed.plans[0].people, undefined);
     assert.equal(resumed.plans[0].date, tomorrow);
     assert.deepEqual(resumed.plans[0].venues.map(v => v.activity), ["coffee", "museum", "coffee"]);
     assert.equal(modelCalls, startCalls + 1);

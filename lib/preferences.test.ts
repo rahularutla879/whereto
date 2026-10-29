@@ -11,14 +11,14 @@ test("untouched controls submit no overrides; structured interpretation fills ev
   const initial = emptyPreferenceState();
   assert.deepEqual(manualPreferences(initial), EMPTY_PREFERENCES);
   const shown = displayInterpretedPreferences(initial, interpretedPreferences(request));
-  assert.deepEqual(shown.values, { location: "Baltimore", date: "2026-10-22", people: "6", budget: "100", travel: "30", cost: "experience", costExplicit: false });
+  assert.deepEqual(shown.values, { location: "Baltimore", date: "2026-10-22", people: "", budget: "100", travel: "30", cost: "experience", costExplicit: false });
   assert.deepEqual(manualPreferences(shown), EMPTY_PREFERENCES);
 });
 
 test("subsequent text replaces auto-populated values, clears unspecified caps/date, and leaves no override", () => {
   const first = displayInterpretedPreferences(emptyPreferenceState(), interpretedPreferences(request));
   const next = displayInterpretedPreferences(first, interpretedPreferences({ ...request, people: 2, date: null, budget: null, travel: null, cost: "balanced" }));
-  assert.deepEqual(next.values, { ...EMPTY_PREFERENCES, location: "Baltimore", people: "2", costExplicit: false });
+  assert.deepEqual(next.values, { ...EMPTY_PREFERENCES, location: "Baltimore", people: "", costExplicit: false });
   assert.deepEqual(manualPreferences(next), EMPTY_PREFERENCES);
 });
 
@@ -33,7 +33,7 @@ test("manual edits win independently, including zero caps and deliberately selec
   assert.equal(next.values.cost, "balanced"); assert.equal(next.values.costExplicit, true);
   state = editPreference(next, "people", "");
   assert.equal(state.values.people, ""); assert.equal(manualPreferences(state).people, "");
-  assert.equal(displayInterpretedPreferences(state, interpretedPreferences(request)).values.people, "6");
+  assert.equal(displayInterpretedPreferences(state, interpretedPreferences(request)).values.people, "");
   assert.deepEqual(manualPreferences(emptyPreferenceState()), EMPTY_PREFERENCES);
 });
 
@@ -43,7 +43,7 @@ test("an edit made while interpretation is pending survives the automatic displa
 });
 
 test("invalid structured preference fields cannot become displayed facts", () => {
-  for (const changed of [{ people: 0 }, { date: "tomorrow" }, { budget: undefined }, { travel: -1 }, { cost: "luxury" }, { location: null }]) {
+  for (const changed of [{ date: "tomorrow" }, { budget: undefined }, { travel: -1 }, { cost: "luxury" }, { location: null }]) {
     assert.throws(() => interpretedPreferences({ ...request, ...changed }));
   }
 });
@@ -60,7 +60,7 @@ test("one interpretation call displays values before planning; later text submit
       return Response.json({ interpretation: {}, request: current, issues: [], notes: [] });
     }
     assert.deepEqual(body, current);
-    assert.equal(state.values.people, String(current.people));
+    assert.equal(state.values.people, "");
     // Planning failure must stay an error, while successful interpretation can
     // still be inspected; it must never call the model or legacy engine again.
     return Response.json({ message: "Unavailable" }, { status: 503 });
@@ -72,7 +72,7 @@ test("one interpretation call displays values before planning; later text submit
   assert.equal(state.values.date, "2026-10-22");
   current = { ...request, people: 2, budget: 20, cost: "budget" };
   await run();
-  assert.equal(state.values.people, "2"); assert.equal(state.values.budget, "20");
+  assert.equal(state.values.people, ""); assert.equal(state.values.budget, "20");
   assert.deepEqual(paths, ["/api/interpret", "/api/plans/generate", "/api/interpret", "/api/plans/generate"]);
 });
 

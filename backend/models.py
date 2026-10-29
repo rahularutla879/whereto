@@ -80,6 +80,24 @@ class ActivityType(str, Enum):
     comedy = "comedy"
 
 
+    @classmethod
+    def _missing_(cls, value):
+        # Open-ended intents have a distinct, bounded namespace. Do not mutate
+        # the canonical enum or retain user strings in a process-global cache.
+        import re
+        if isinstance(value, str) and re.fullmatch(r"custom:[a-z][a-z0-9 '-]{1,99}", value):
+            member = str.__new__(cls, value)
+            member._name_ = value
+            member._value_ = value
+            return member
+        return None
+
+    @classmethod
+    def __get_pydantic_json_schema__(cls, core_schema, handler):
+        return {"type": "string", "maxLength": 107,
+                "description": "Canonical activity ID, or custom: followed by a grounded activity phrase."}
+
+
 EVENT_ACTIVITIES = frozenset({
     ActivityType.baseball, ActivityType.basketball, ActivityType.football,
     ActivityType.soccer, ActivityType.hockey, ActivityType.sports,
@@ -137,8 +155,9 @@ class OutingRequest(ContractModel):
     """
 
     activities: list[ActivityType] = Field(min_length=1, max_length=4)
+    activityIntents: dict[str, Annotated[Nonblank, Field(max_length=500)]] = Field(default_factory=dict, max_length=4)
     location: Location = "Baltimore"
-    people: GroupSize = 4
+    people: GroupSize | None = None
     date: OutingDate | None = None
     budget: Annotated[Money, Field(le=100000)] | None = None
     travel: TravelMinutes | None = None  # Existing total inter-stop cap.
@@ -290,7 +309,7 @@ class Itinerary(ContractModel):
     price: Money  # Total USD/person; excludes transport, tax, tips, fees, extras.
     travel: TravelMinutes  # Total between stops only; excludes first/last trip.
     duration: DurationMinutes  # Elapsed time including travel and waiting.
-    people: GroupSize
+    people: GroupSize | None = None
     date: OutingDate | Literal["Any day"]
     transport: TransportationMode | None = None
     dataQuality: DataQuality = Field(default_factory=DataQuality)
@@ -305,8 +324,6 @@ class Itinerary(ContractModel):
         for index, stop in enumerate(self.stops):
             if index and stop.start < self.stops[index - 1].end:
                 raise ValueError("Stops cannot overlap")
-            if stop.venue.capacity is not None and stop.venue.capacity < self.people:
-                raise ValueError("Group exceeds venue capacity")
             if isinstance(stop.venue, ScheduledEvent) and self.date != stop.venue.eventDate:
                 raise ValueError("Event date must match outing date")
         if self.duration != self.stops[-1].end - self.stops[0].start:
@@ -395,7 +412,7 @@ class CandidateItinerary(ContractModel):
     id: Nonblank
     venues: list[VenueInformation] = Field(min_length=1, max_length=4)
     stops: list[CandidateStop] = Field(min_length=1, max_length=4)
-    people: GroupSize
+    people: GroupSize | None = None
     date: OutingDate | None = None
     allowRevisits: bool = Field(default=False, strict=True)
 
@@ -426,7 +443,6 @@ class CandidateGenerationResult(ContractModel):
             raise ValueError("Candidate IDs must be distinct")
         for candidate in self.candidates:
             if ([v.activity for v in candidate.venues] != self.request.activities
-                    or candidate.people != self.request.people
                     or candidate.date != self.request.date
                     or candidate.allowRevisits != self.request.allowRevisits):
                 raise ValueError("Candidates must preserve the resolved request")
@@ -485,7 +501,7 @@ class RankedItinerary(ContractModel):
     prices: list[PriceQuote]
     legs: list[TravelQuote]
     knownCostPerPerson: Money
-    knownGroupCost: Money
+    knownGroupCost: Money | None
     costPerPerson: Money | None
     groupCost: Money | None
     totalTravel: TravelMinutes | None
@@ -506,7 +522,7 @@ class RankedItinerary(ContractModel):
         expected = ("violated" if any(i.status == "violation" for i in self.issues)
                     else "provisional" if self.issues else "confirmed")
         if self.feasibility == "confirmed" and any(value is None for value in (
-                self.costPerPerson, self.groupCost, self.totalTravel, self.activityDuration,
+                self.costPerPerson, self.totalTravel, self.activityDuration,
                 self.elapsedDuration, *(s.start for s in self.stops), *(s.end for s in self.stops))):
             raise ValueError("Confirmed evaluations require complete calculations")
         if self.feasibility != expected:
@@ -557,7 +573,7 @@ class RankingResult(ContractModel):
         for plan in selected:
             c = plan.candidate
             if ([v.activity for v in c.venues] != self.request.activities
-                    or c.people != self.request.people or c.date != self.request.date
+                    or c.date != self.request.date
                     or c.allowRevisits != self.request.allowRevisits):
                 raise ValueError("Selected plans must preserve request")
         if self.plans and self.errors:

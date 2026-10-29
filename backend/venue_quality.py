@@ -85,6 +85,21 @@ class QualityResult(ContractModel):
 def relevance(venue: VenueFacts) -> Relevance:
     activity = venue.activity.value
     types = set(venue.providerTypes or []) | ({venue.primaryType} if venue.primaryType else set())
+    if activity.startswith('custom:'):
+        # A search hit alone is not evidence of the requested activity.
+        words = re.findall(r"[a-z0-9]+", activity.removeprefix('custom:'))
+        def stem(word):
+            word=word.rstrip('s')
+            if word.endswith('ing'):
+                word=word[:-3]
+                if len(word)>2 and word[-1]==word[-2]:word=word[:-1]
+            return word
+        tokens = [stem(w) for w in words if w not in {'class','classes','workshop','workshops','venue','venues'}]
+        evidence = normalized(venue.name + ' ' + ' '.join(types).replace('_', ' '))
+        evidence_tokens = {stem(w) for w in evidence.split()}
+        if tokens and all(w in evidence_tokens for w in tokens) and not SERVICE_NAME.search(normalized(venue.name)):
+            return Relevance(status='uncertain', reason='name_support_only')
+        return Relevance(status='mismatch', reason='activity_evidence_required')
     expected, pattern = RULES[activity]
     matched_types = types & expected
     if activity == 'food':

@@ -38,7 +38,7 @@ def _pools(request: OutingRequest) -> tuple[list[list[Venue | ScheduledEvent]], 
 def _walk(request: OutingRequest, pools: list[list[Venue | ScheduledEvent]]) -> Iterator[CandidateItinerary]:
     route: list[Venue | ScheduledEvent] = []
     used: set[str] = set()
-    request_identity = request.model_dump(mode="json", exclude={"calendarTimezone","explicitStart","explicitEnd","destinationContext"})
+    request_identity = request.model_dump(mode="json", exclude={"calendarTimezone","explicitStart","explicitEnd","destinationContext","people","activityIntents"})
 
     def visit(index: int) -> Iterator[CandidateItinerary]:
         if index == len(pools):

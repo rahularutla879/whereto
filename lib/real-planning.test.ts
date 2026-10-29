@@ -44,7 +44,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     const result = await generateOuting("Plan bowling followed by dinner in Baltimore on Saturday, November 7, 2026, for 4 people.", EMPTY_PREFERENCES, { onClarification: value => { asked = !!value?.questions.length; } }, send);
     assert.equal(asked, false);
     assert.equal(result.plans[0].date, "2026-11-07");
-    assert.equal(result.plans[0].people, 4);
+    assert.equal(result.plans[0].people, undefined);
     assert.equal(result.dataMode, "real");
     assert.equal(result.plans.length, 3);
     assert.deepEqual(result.plans[0].venues.map(v => v.activity), ["bowling", "food"]);
@@ -61,7 +61,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     assert.equal(nextOptions(third), third);
     const all = [...result.plans, ...second.plans, ...third.plans];
     assert.equal(new Set(all.map(p => p.venues.map(v => v.id).join("/"))).size, 9);
-    assert.ok(all.every(p => p.date === "2026-11-07" && p.people === 4));
+    assert.ok(all.every(p => p.date === "2026-11-07" && p.people === undefined));
     const afterAlternatives=await (await fetch(`${base}/__test/counts`)).json();
     assert.equal(afterAlternatives.searches,countsBefore.searches);
     assert.equal(afterAlternatives.details,0);
@@ -181,7 +181,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
     await scenario("minute_pause");
     const paused = await generateOuting("Bowling then dinner in Baltimore for 2 people on 2026-11-07", EMPTY_PREFERENCES, {}, send);
     assert.equal(paused.plans.length, 0); assert.equal(paused.canExpand, true); assert.equal(paused.canDiscover, false);
-    assert.ok(paused.optionsToken); assert.match(paused.message, /minute/);
+    assert.ok(paused.optionsToken); assert.match(paused.message, /temporary routing limit/);
     for (const name of ["empty", "quota", "authentication"]) {
       await scenario(name);
       let retained: ValidatedOuting | undefined;

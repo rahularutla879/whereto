@@ -17,7 +17,7 @@ class SummaryEditTests(unittest.TestCase):
         self.assertFalse(edited.issues)
         self.assertEqual([a.value for a in edited.request.activities], ['museum', 'coffee', 'coffee'])
         self.assertEqual(edited.request.budget, 40)
-        self.assertEqual(edited.request.people, 4)
+        self.assertIsNone(edited.request.people)
         self.assertEqual(edited.request.travel, 30)
         self.assertEqual(str(edited.request.date), '2026-11-14')
         result = recommend_plans(edited.request)
@@ -27,21 +27,20 @@ class SummaryEditTests(unittest.TestCase):
 
     def test_invalid_edits_are_revalidated_without_ai(self):
         initial = self.initial('coffee in Baltimore for 2 people on 2026-11-07', location='Baltimore', people=2)
-        for preferences in [{'budget': '-1'}, {'people': '0'}, {'date': '2020-01-01'}, {'date': '2026-02-30'}, {'travel': '-1'}]:
+        for preferences in [{'budget': '-1'}, {'date': '2020-01-01'}, {'date': '2026-02-30'}, {'travel': '-1'}]:
             with self.subTest(preferences=preferences):
                 edited = self.answer(initial, {}, preferences)
                 self.assertIsNone(edited.request)
                 self.assertTrue(edited.issues)
-        for activities in ['skydiving', ',', 'coffee, coffee, coffee, coffee, coffee']:
+        for activities in [',', 'coffee, coffee, coffee, coffee, coffee']:
             edited = self.answer(initial, {'activities': activities})
             self.assertIsNone(edited.request)
             self.assertTrue(edited.issues)
 
     def test_acceptance_for_two_is_grounded_but_conflicting_count_is_rejected(self):
         text = 'Coffee, museum, coffee again in Baltimore on November 7, 2026 for two.'
-        result = self.initial(text, activities=['coffee', 'museum', 'coffee'], location='Baltimore', people=2)
-        self.assertFalse(result.issues)
-        self.assertEqual(result.request.people, 2)
-        conflicting = self.initial(text, activities=['coffee', 'museum', 'coffee'], location='Baltimore', people=4)
-        self.assertIsNone(conflicting.request)
-        self.assertTrue(conflicting.questions)
+        for count in (None, 2, 4):
+            result = self.initial(text, activities=['coffee','museum','coffee'], location='Baltimore', people=count)
+            self.assertFalse(result.issues)
+            self.assertIsNone(result.request.people)
+            self.assertFalse(result.questions)

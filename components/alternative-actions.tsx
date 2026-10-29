@@ -7,6 +7,6 @@ export function AlternativeActions({real,canCombine,canExplore,busy,disabled,not
     <div><button type="button" className="secondary-button" disabled={!canCombine||disabled||busy} onClick={()=>onAction(false)}>Show different options</button><p>Try new combinations from places already found.</p></div>
     {real&&<div><button type="button" className="secondary-button" disabled={!canExplore||disabled||busy} onClick={()=>onAction(true)}>Explore farther</button><p>Discover new places in a wider area.</p></div>}
     <p role="status">{notice}</p>
-    <button type="button" className="plan-link" disabled={busy} onClick={onAdjust}>Adjust travel preference</button>
+    {!/temporary .*limit|Google's current|accounting|couldn't verify enough travel/i.test(notice) && <button type="button" className="plan-link" disabled={busy} onClick={onAdjust}>Adjust travel preference</button>}
   </div>;
 }

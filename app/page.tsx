@@ -4,9 +4,9 @@ import { ItineraryPages, beyondPage, BEYOND_NOTICE } from "@/lib/itinerary-pages
 
 import { ExplorationNotice, explorationStage } from "../components/exploration-notice";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Users, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
-import { EXAMPLE_REQUEST, ACTIVITY_LABELS, MOCK_EVENT_DATES, SUPPORTED_ACTIVITIES, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
+import { EXAMPLE_REQUEST, MOCK_EVENT_DATES, activityLabel, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
 
 import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
 import { PlanningSession } from "@/lib/planning-session";
@@ -16,7 +16,7 @@ import { generateOuting, type ValidatedOuting, type PendingOuting, type Clarific
 import { ClarificationField } from "@/components/clarification-field";
 import { OutingDateField } from "@/components/outing-date-field";
 import { ResultsInformation } from "@/components/results-information";
-import { planWarnings, resultsSummary } from "@/lib/results-presentation";
+import { consumerMessage, planWarnings, resultsSummary } from "@/lib/results-presentation";
 import { PlanningFeedback } from "@/components/planning-feedback";
 import { OutingSummary, activityEditText } from "@/components/outing-summary";
 import { LocationControls, type StartingLocationHandle } from "@/components/location-controls";
@@ -27,6 +27,7 @@ import { nextOptions } from "@/lib/option-batches";
 import { RealVenueFacts } from "@/components/real-venue-facts";
 import { adaptRanking } from "@/lib/planning-client";
 import { PlanCost } from "@/components/plan-cost";
+import { FirstLegTravel } from "@/components/first-leg-travel";
 import demoPlans from "@/data/demo-plans.json";
 
 const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: CircleDot, drinks: Wine, movie: Popcorn, food: Utensils, coffee: Coffee, outdoors: Footprints, art: Palette, museum: Landmark, karaoke: Mic, arcade: Gamepad2, escape: Puzzle, shopping: ShoppingBag,
@@ -34,7 +35,6 @@ const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: Cir
   baseball: Trophy, basketball: Trophy, football: Trophy, soccer: Trophy, hockey: Trophy, sports: Trophy,
   concert: Music, theater: Theater, musical: Theater, ballet: Theater, opera: Music, comedy: Laugh,
 };
-const activityLabels = ACTIVITY_LABELS;
 const money = (amount: number | null) => amount === null ? "Unknown" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
 
 function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; detailsSession: VenueDetailsSession }) {
@@ -49,7 +49,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
       {real ? <div className="real-route-poster" aria-hidden="true">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <div key={venue.id}><Icon size={22} strokeWidth={1.5} /><span>{i + 1}. {venue.name}</span></div>;
-      })}<small>Activity illustrations · not venue photos</small></div> : classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabels[plan.venues[0].activity]}</span></div>}
+      })}<small>Activity illustrations · not venue photos</small></div> : classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabel(plan.venues[0].activity)}</span></div>}
     </div>
     <div className="card-body">
       <p className="card-label">{plan.label}</p>
@@ -60,18 +60,17 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
       {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Before you choose</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
       <div className="activity-route">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
-        return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabels[venue.activity]}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
+        return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabel(venue.activity)}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
       })}</div>
       <div className="card-facts"><span><MapPin size={14} /> {plan.location ?? "Baltimore"}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
+      {plan.firstLeg && <FirstLegTravel plan={plan} />}
       <div className="card-bottom">{!real && <div><PlanCost amount={plan.price} /><small>Sample price</small></div>}<button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
       {real && <GoogleCredits credits={plan.venues.flatMap(venue => venue.evidenceLabels?.attribution?.third_party ?? []).filter((credit, i, credits) => credits.findIndex(c => c.provider === credit.provider && c.uri === credit.uri) === i)} />}
       <div hidden={!expanded} className="plan-details" id={`details-${plan.id}`}>
         <p className="details-heading">{real ? "Your provisional itinerary" : "Your sample itinerary"}</p>
-        <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date} · {plan.people} {plan.people === 1 ? "person" : "people"}</p>
-        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`} · sample group limit: {venue.capacity ?? "Unknown"}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).{real&&plan.routeEvidence?.[i-1]?.route.distance_meters!=null&&" / "+(plan.routeEvidence[i-1].route.distance_meters!/1609.344).toFixed(2)+" road miles"}</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
-        {!real && <div className="details-total"><span>Sample group total</span><PlanCost amount={plan.groupCost} group /></div>}
+        <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date}</p>
+        <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).{real&&plan.routeEvidence?.[i-1]?.route.distance_meters!=null&&" / "+(plan.routeEvidence[i-1].route.distance_meters!/1609.344).toFixed(2)+" road miles"}</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
         <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
-        {plan.firstLeg && <p>{!real&&"Fictional mock first-leg context: "}{plan.firstLeg.source === "suggested" ? `From suggested planning reference ${plan.firstLeg.originLabel ?? ""}` : `From ${plan.firstLeg.originLabel ?? "your starting point"}`}: {plan.firstLeg.minutes ?? "Unknown"} minutes{plan.firstLeg.miles != null ? ` / ${plan.firstLeg.miles} road miles` : ""} ({real?"Google Maps estimate":"fictional travel fixture"}{plan.firstLeg.approximate ? " from the confirmed representative area point" : ""}), separate from inter-stop travel.{plan.firstLeg.exceedsPreference && " Travel differs from your original preference; see the classification above."}</p>}
       </div>
     </div>
   </article>;
@@ -142,6 +141,13 @@ export default function Home() {
   const [optionsNotice, setOptionsNotice] = useState("");
   const [recovery,setRecovery]=useState<string|undefined>();
   const [optionsBusy,setOptionsBusy]=useState(false);
+  function cancelPlanning() {
+    session.current.cancel();
+    startingControls.current?.cancel();
+    setLoading(false);setOptionsBusy(false);
+    setOptionsNotice("Planning cancelled. Your saved pages are still available; no further work is queued.");
+    setResult(previous => previous.plans.length ? previous : { ...previous, requestFailed:false, message:"Planning cancelled. Your request is kept; submit again when ready." });
+  }
   async function showDifferent(expandDiscovery = false) {
     const active=latest.current;
     if (!expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();}setOptionsNotice("");return; }
@@ -154,14 +160,14 @@ export default function Home() {
       const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
       if (!session.current.current(controller)) return;
-      if (!response.ok) { setRecovery(data.code);if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(data.message);return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
+      if (!response.ok) { setRecovery(data.code);if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(consumerMessage(data.message));return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
       const next = adaptRanking(data);
       if (!session.current.current(controller)) return;
       setRecovery(next.recoveryCode);
       if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
-      else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(next.message || "No more distinct options in the checked candidate pool."); }
+      else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(consumerMessage(next.message) || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
-      if (session.current.current(controller)) { latest.current={...active,canExpand:false,canDiscover:false};setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? error.message : "More options are unavailable. No automatic retry was made."); }
+      if (session.current.current(controller)) { latest.current={...active,canExpand:false,canDiscover:false};setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? consumerMessage(error.message) : "More options are unavailable. No automatic retry was made."); }
     } finally { if (session.current.finish(controller)) {setLoading(false);setOptionsBusy(false);} }
   }
   async function runPlanning(followup: boolean) {
@@ -223,7 +229,7 @@ export default function Home() {
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing, or use the example."); requestRef.current?.reportValidity(); return; }
     await runPlanning(!!clarification || !!validated);
   }
-  const preferencesCount = [preferences.location, preferences.date, preferences.people, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
+  const preferencesCount = [preferences.location, preferences.date, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
 
   return <>
     <a className="skip-link" href="#planner">Skip to planner</a>
@@ -248,12 +254,12 @@ export default function Home() {
           <div className="prompt-help"><span>Big ideas, loose plans, oddly specific cravings. All welcome.</span><button type="button" onClick={() => { replaceRequest(); setRequest(EXAMPLE_REQUEST); requestRef.current?.setCustomValidity(""); requestRef.current?.focus(); }}>Try an example <ArrowUpRight size={13} /></button></div>
           {<LocationControls mock={dataMode!=="real"} ref={startingControls} lookupEnabled={lookupEnabled} onStage={setPlanningStage} onChange={(value,preparing) => { if(!preparing)invalidateResults(); setLocationContext(value); }} />}
           <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button><button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? planningStage === "Generating itinerary" ? "Planning…" : planningStage : result.requestFailed ? "Retry" : clarification ? "Continue planning" : validated ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button></div>
+          {loading && <button type="button" className="secondary-button" onClick={cancelPlanning}>Cancel planning</button>}
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
             <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>{dataMode === "real" ? "Destination city/neighborhood; separate from your start" : "Fictional Baltimore venues only"}</small></label>
               <OutingDateField real={dataMode === "real"} value={preferences.date} onChange={value => updatePreference("date", value)} />
-              <label><span><Users size={14} /> Number of people</span><input type="number" inputMode="numeric" min="1" max="100" step="1" placeholder="e.g. 4" value={preferences.people} onChange={(e) => updatePreference("people", e.target.value)} /></label>
               <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>{dataMode === "real" ? "Hard limit; compliance needs actual venue prices" : "Sample activities only; excludes extras"}</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
               <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
@@ -265,7 +271,7 @@ export default function Home() {
         {!loading && !!clarification?.questions.length && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
           <p className="details-heading">A little more detail</p>
           <p>We’ve kept your original request and constraints. Edit your request above to correct it or plan a different outing.</p>
-          {generated && <p role="status">{result.message}</p>}
+          {generated && <p role="status">{consumerMessage(result.message)}</p>}
           <form onSubmit={event => { event.preventDefault(); void runPlanning(true); }}>
             <div className="preferences-grid">{clarification.questions.map(question => <ClarificationField
               key={question.field} question={question} value={answers[question.field] ?? ""}
@@ -275,14 +281,14 @@ export default function Home() {
           </form>
         </div>}
         <p className="planner-disclaimer"><CircleHelp size={13} /> {dataMode === "real" ? "Real venues and route estimates. Prices, hours and availability require confirmation. No bookings." : "A preview of what’s possible. Local sample data, no live searches or bookings."}</p>
-        <details className="catalog-help"><summary>Supported activities &amp; {dataMode === "real" ? "data limitations" : "fictional event dates"}</summary><p>{SUPPORTED_ACTIVITIES}.</p><p hidden={dataMode === "real"}>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p hidden={dataMode === "real"}>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Group capacities are mock limits (4, 8, or 20 people); prices are per person. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p>{dataMode === "real" && <p>List up to four stops, in order, including repeated activities. Every outing needs a date. Real event venues do not establish scheduled performances or movie showtimes. Prices, hours, durations, group capacity and reservations need confirmation. Driving is used unless you request walking. No budget is verified while prices are unknown.</p>}</details>
+        <details className="catalog-help"><summary>Activities and data limitations</summary><p>Where To? can search for many kinds of outings using Google Places. Specific events, tickets, schedules and availability may require separate confirmation.</p><p hidden={dataMode === "real"}>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p hidden={dataMode === "real"}>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Mock prices are per person; no capacity or booking is confirmed. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p>{dataMode === "real" && <p>List up to four stops, in order, including repeated activities. Every outing needs a date. Real event venues do not establish scheduled performances or movie showtimes. Prices, hours, durations and reservations need confirmation. Driving is used unless you request walking. No budget is verified while prices are unknown.</p>}</details>
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
         {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
-        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.people}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover});syncPages();}}}/>}
         {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}

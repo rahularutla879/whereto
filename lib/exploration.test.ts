@@ -9,7 +9,7 @@ import { ResultsInformation } from "../components/results-information";
 
 test("development exploration notice is explicit and disappears when disabled", () => {
   assert.equal(renderToStaticMarkup(React.createElement(ExplorationNotice, { active: false })), "");
-  assert.match(renderToStaticMarkup(React.createElement(ExplorationNotice, { active: true })), /role="status".*DEVELOPMENT EXPLORATION.*estimated spending guard/);
+  assert.match(renderToStaticMarkup(React.createElement(ExplorationNotice, { active: true })), /role="status".*DEVELOPMENT EXPLORATION.*estimated usage recorded/);
 });
 test("continuation distinguishes place discovery from route checking without a retry flash", () => {
   assert.match(explorationStage(true), /finding more places/);
@@ -22,7 +22,7 @@ test("developer usage remains within the collapsed estimates disclosure", () => 
   assert.doesNotMatch(html, /<details[^>]*open/);
 });
 
-test("offline exploration HTTP boundaries and contacts share the persistent daily guard", async () => {
+test("offline exploration HTTP boundaries and contacts share persistent nonblocking usage accounting", async () => {
   const { spawn } = await import("node:child_process");
   const { createServer } = await import("node:http");
   const { mkdtemp, rm } = await import("node:fs/promises");
@@ -33,7 +33,7 @@ test("offline exploration HTTP boundaries and contacts share the persistent dail
   const address=listener.address();assert.ok(address && typeof address==="object");
   await new Promise<void>(r=>listener.close(()=>r()));
   const base=`http://127.0.0.1:${address.port}`;
-  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29"}});
+  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29",WHERETO_DEV_WARN_USD:"0.29"}});
   const post=(path:string,body:unknown)=>fetch(`${base}${path}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   try {
     for(let i=0;i<100;i++){try{if((await fetch(`${base}/health`)).ok)break;}catch{ /* Wait only for the local fixture server. */ }await new Promise(r=>setTimeout(r,50));}
@@ -50,8 +50,8 @@ test("offline exploration HTTP boundaries and contacts share the persistent dail
     assert.equal(result.diagnostics.dispatched.matrixElements,42);
     const before=await(await fetch(`${base}/__test/counts`)).json();
     const detail=await post("/api/venues/details",{token:result.detailsToken,placeId:result.provisionalPlans[0].candidate.venues[0].id});
-    assert.equal(detail.status,422);assert.match((await detail.json()).message,/daily estimated spending/);
-    assert.deepEqual(await(await fetch(`${base}/__test/counts`)).json(),before);
+    assert.equal(detail.status,200);const contact=await detail.json();assert.equal(contact.diagnostics.estimatedUsageWarning,true);assert.equal(contact.diagnostics.costAdmissionEnforced,false);
+    assert.equal((await(await fetch(`${base}/__test/counts`)).json()).details,before.details+1);
     assert.ok(result.provisionalPlans.every((p:{candidate:{venues:{providerPlaceId:string}[]}})=>p.candidate.venues.every(v=>v.providerPlaceId)));
   } finally {child.kill("SIGTERM");await once(child,"exit");await rm(dir,{recursive:true,force:true});}
 });

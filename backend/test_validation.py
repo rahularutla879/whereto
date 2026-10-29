@@ -128,14 +128,9 @@ class ValidationTests(unittest.TestCase):
 
     def test_group_mismatch_and_conflict_reuse_followup(self):
         result = self.run_case(', and four friends are coming')
-        self.assertIsNone(result.request)
-        self.assertIn('people', [q.field for q in result.questions])
-        provider = Mock(); provider.interpret.side_effect = AssertionError('No second AI call')
-        fixed = interpret_request(InterpretationInput(text=result.pending.text, pending=result.pending,
-            answers={'people': '4'}), provider, now=NOW)
-        self.assertFalse(fixed.issues)
-        self.assertEqual(fixed.request.people, 4)
-        provider.interpret.assert_not_called()
+        self.assertIsNotNone(result.request)
+        self.assertIsNone(result.request.people)
+        self.assertFalse(result.questions)
 
     def test_location_conflict_reuses_location_answer(self):
         provider = Mock(); provider.interpret.return_value = Interpretation(**BASE)

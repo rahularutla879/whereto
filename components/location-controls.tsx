@@ -96,7 +96,7 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
     try{
       const found=await requestStartingLocation(navigator.geolocation,window.isSecureContext);
       if(current!==version.current)return null;
-      const point:Selection={point:{id:"authorized-start",coordinates:found.coordinates},explicitly_authorized:true,source:"device",precision:"device",label:"Your permission-authorized device location",...(found.accuracyMeters!==undefined?{accuracy_m:found.accuracyMeters}:{})};
+      const point:Selection={point:{id:"authorized-start",coordinates:found.coordinates},explicitly_authorized:true,source:"device",precision:"device",label:"Your current location",...(found.accuracyMeters!==undefined?{accuracy_m:found.accuracyMeters}:{})};
       gpsDenied.current=false;setNearbyFallback(false);
       if(relativeRequested.current)relativeSearch.current={coordinates:found.coordinates};
       if(!searchOnly){setSelected(point);saved.current.current=point;}

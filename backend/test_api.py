@@ -86,7 +86,7 @@ class PlanningApiTests(unittest.TestCase):
         _, plans = self.options({"activities": ["food", "karaoke"], "budget": 25, "travel": 5})
         self.assertTrue(plans)
         self.assertTrue(all(p["costPerPerson"] <= 25 and p["totalTravel"] <= 5 for p in plans))
-        for limits in ({"budget": 0}, {"travel": 0}, {"people": 21}):
+        for limits in ({"budget": 0}, {"travel": 0}):
             data, plans = self.options({"activities": ["food", "karaoke"], **limits})
             self.assertFalse(plans)
             self.assertTrue(data["errors"])

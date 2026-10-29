@@ -3,7 +3,8 @@
 import fixture from "../data/mock-venues.json";
 
 export const MOCK_EVENT_DATES = fixture.eventDates;
-export type Activity = keyof typeof fixture.catalog;
+export type CanonicalActivity = keyof typeof fixture.catalog;
+export type Activity = CanonicalActivity | `custom:${string}`;
 
 type Definition = {
   label: string;
@@ -44,12 +45,16 @@ const PATTERNS = {
   ballet: /\bballet\b/gi,
   opera: /\bopera\b/gi,
   comedy: /\b(?:comedy(?: shows?)?|stand[ -]up)\b/gi,
-} satisfies Record<Activity, RegExp>;
+} satisfies Record<CanonicalActivity, RegExp>;
 
 export const CATALOG = Object.fromEntries(
-  Object.entries(fixture.catalog).map(([id, item]) => [id, { ...item, pattern: PATTERNS[id as Activity] }]),
+  Object.entries(fixture.catalog).map(([id, item]) => [id, { ...item, pattern: PATTERNS[id as CanonicalActivity] }]),
 ) as Record<Activity, Definition>;
 export const ACTIVITY_LABELS = Object.fromEntries(Object.entries(CATALOG).map(([id, item]) => [id, item.label])) as Record<Activity, string>;
+
+export function activityLabel(activity: Activity): string {
+  return ACTIVITY_LABELS[activity] ?? activity.replace(/^custom:/, "");
+}
 
 type BaseVenue = {
   id: string;

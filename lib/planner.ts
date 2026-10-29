@@ -1,11 +1,11 @@
 import { ACTIVITY_LABELS, CATALOG, MOCK_EVENT_DATES, type Activity, type Venue } from "./mock-data";
 import { parseRequest, resolveDate, todayInBaltimore, validDate } from "./request";
-export { ACTIVITY_LABELS, MOCK_EVENT_DATES, VENUES } from "./mock-data";
+export { activityLabel, ACTIVITY_LABELS, MOCK_EVENT_DATES, VENUES } from "./mock-data";
 export type { Activity, Venue } from "./mock-data";
 
 export type CostPreference = "budget" | "balanced" | "experience";
 export type Preferences = { location: string; date: string; people: string; budget: string; travel: string; cost: CostPreference; costExplicit?: boolean };
-export type OutingPayload = { activities: Activity[]; location: string; people: number; date: string | null;
+export type OutingPayload = { activities: Activity[]; location: string; people?: number | null; date: string | null;
   budget: number | null; travel: number | null; cost: CostPreference; dinner: boolean };
 export type Quality = Record<string, string>;
 export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neighborhood"> & {
@@ -17,23 +17,24 @@ export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neig
 };
 export type Stop = { venue: DisplayVenue; start: number | null; end: number | null };
 export type Plan = {
+  transport?: string | null;
   travelClassification?: "matching" | "outside_preference" | "beyond_limit" | "unverified"; travelDeviations?: string[];
   planningMode?: "origin" | "surprise"; surpriseRepeated?:boolean;
   dataMode?: "mock" | "real"; location?: string; detailsToken?: string;
   constraintIssues?: { code?: string; field?: string; status?: string; message: string }[];
   hardBudget?: boolean;
-  firstLeg?: { approximate?: boolean; source?: "device" | "manual" | "suggested"; originLabel?: string | null; miles?: number | null; exceedsPreference?: boolean; accuracyMeters?: number | null; minutes: number | null; labels?: unknown } | null;
+  firstLeg?: { mode?: string; approximate?: boolean; source?: "device" | "manual" | "suggested"; originLabel?: string | null; miles?: number | null; exceedsPreference?: boolean; accuracyMeters?: number | null; minutes: number | null; labels?: unknown } | null;
   routeEvidence?: { route: { mode: string; distance_meters?:number|null; duration_seconds?:number|null }; labels: { claims: Record<string, { message: string }> } }[];
   id: string; title: string; fullTitle?: string; description: string; theme: "peach" | "lavender" | "mint"; label: string;
   venues: DisplayVenue[]; stops: Stop[]; price: number | null; groupCost: number | null;
-  travel: number | null; duration: number | null; people: number; date: string;
+  travel: number | null; duration: number | null; people?: number | null; date: string;
   feasibility: "confirmed" | "provisional" | "violated" | "preview"; issues: string[];
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
 export type PlannerResult = {
   recoveryCode?: string; requestFailed?: boolean; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };
-export const EXAMPLE_REQUEST = "We're 4 friends in Baltimore. We want bowling, drinks, and a movie.";
+export const EXAMPLE_REQUEST = "Plan bowling, drinks, and a movie in Baltimore tomorrow.";
 export const EMPTY_PREFERENCES: Preferences = { location: "", date: "", people: "", budget: "", travel: "", cost: "balanced" };
 export const SUPPORTED_ACTIVITIES = Object.values(ACTIVITY_LABELS).join(", ");
 

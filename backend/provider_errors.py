@@ -9,7 +9,8 @@ def classify(response,operation):
         'lookup':{'SearchTextRequestPerDayPerProject':'daily','SearchTextRequestPerMinutePerProject':'minute'},
         'details':{'GetPlaceRequestPerDayPerProject':'daily','GetPlaceRequestPerMinutePerProject':'minute'},
         'matrix':{'ComputeRouteMatrixElementsPerDayPerProject':'daily','ComputeRouteMatrixElementsPerMinutePerProject':'minute',
-                  'ComputeRouteMatrixPerDayPerProject':'daily','ComputeRouteMatrixPerMinutePerProject':'minute'}
+                  'ComputeRouteMatrixPerDayPerProject':'daily','ComputeRouteMatrixPerMinutePerProject':'minute',
+                  'ComputeRouteMatrixCellsPerMinutePerProject':'minute'}
     }
     try:
         data=response.json();error=data.get('error',{}) if isinstance(data,dict) else {}

@@ -35,16 +35,15 @@ class ExplorationTests(unittest.TestCase):
         self.assertFalse(any(os.getenv(k)=='1' for k in ('WHERETO_RATINGS_DEV','WHERETO_CONTACT_DETAILS_DEV','WHERETO_START_LOOKUP_DEV')))
 
     def test_exact_guard_boundary_shared_outings_and_restart(self):
-        with patch.dict(os.environ,{'WHERETO_DEV_DAILY_USD':'0.064'}):
-            for _ in range(2):
-                b=ProviderBudget();o=b.outing()
-                with o.reserve('search','different outing same query allowed'):dispatch('search')
-            b=ProviderBudget()
-            with self.assertRaisesRegex(ProviderLimitError,'daily estimated'):
-                with b.outing().reserve('search','third'):self.fail('Should not dispatch')
-            d=DevelopmentCost().snapshot()
-            self.assertEqual(d['estimatedDayGrossUsd'],.064);self.assertEqual(d['estimatedAllowanceRemainingUsd'],0)
-            self.assertEqual(json.loads(Path(self.env['WHERETO_DEV_COST_LEDGER']).read_text())['days'][DevelopmentCost.day()]['dispatched'],{'search_pro':2})
+        with patch.dict(os.environ,{'WHERETO_DEV_DAILY_USD':'0.064','WHERETO_DEV_WARN_USD':'0.064'}):
+            for _ in range(3):
+                b=ProviderBudget()
+                with b.outing().reserve('search','different outing same query allowed'):dispatch('search')
+            d=b.cost.snapshot()
+            self.assertEqual(d['estimatedDayGrossUsd'],.096)
+            self.assertTrue(d['estimatedUsageWarning'])
+            self.assertFalse(d['costAdmissionEnforced'])
+            self.assertEqual(json.loads(Path(self.env['WHERETO_DEV_COST_LEDGER']).read_text())['days'][DevelopmentCost.day()]['dispatched'],{'search_pro':3})
 
     def test_corruption_and_unavailable_state_fail_closed(self):
         c=DevelopmentCost();c.snapshot()

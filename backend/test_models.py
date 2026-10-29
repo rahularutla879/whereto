@@ -42,7 +42,7 @@ def itinerary(record=None):
 class RequestTests(unittest.TestCase):
     def test_defaults_optional_values_and_order(self):
         request = OutingRequest(activities=["museum", "coffee"])
-        self.assertEqual(request.people, 4)
+        self.assertIsNone(request.people)
         self.assertEqual(request.location, "Baltimore")
         self.assertEqual(request.cost, CostPreference.balanced)
         self.assertEqual(request.activities, [ActivityType.museum, ActivityType.coffee])
@@ -156,7 +156,7 @@ class ResultTests(unittest.TestCase):
         self.assertIsInstance(Itinerary.model_validate(itinerary(event())).stops[0].venue, ScheduledEvent)
 
     def test_inconsistent_itineraries_rejected(self):
-        cases = [{"people": 5}, {"duration": 31}, {"price": 5}, {"travel": 1},
+        cases = [ {"duration": 31}, {"price": 5}, {"travel": 1},
                  {"venues": []}, {"stops": []}, {"date": "not-a-date"}]
         for changes in cases:
             with self.subTest(changes=changes), self.assertRaises(ValidationError):

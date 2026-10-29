@@ -51,11 +51,12 @@ class ClarificationTests(unittest.TestCase):
         self.assertIn('currency', ' '.join(r.issues))
 
     def test_group_answer_cannot_clear_an_ambiguous_group_budget(self):
-        r = self.initial('coffee in Baltimore with group budget under 50 total on 2026-11-07', location='Baltimore',
-            uncertainties=['Group budget currency is unclear'])
-        done = self.answer(r, {'people': '4'})
-        self.assertIsNone(done.request)
-        self.assertIn('currency', ' '.join(done.issues))
+        for people in (None, 4):
+            r = self.initial('coffee in Baltimore with group budget under 50 total on 2026-11-07', location='Baltimore',
+                people=people, uncertainties=['Group budget currency is unclear'])
+            self.assertIsNone(r.request)
+            self.assertIn('currency', ' '.join(r.issues))
+            self.assertFalse(any(q.field == 'people' for q in r.questions))
 
     def test_activity_answer_keeps_original_stop_time_ambiguity(self):
         r = self.initial('something fun then coffee at 7 PM in Baltimore for 2 people on 2026-11-07',
@@ -76,17 +77,16 @@ class ClarificationTests(unittest.TestCase):
 
     def test_missing_group_and_invalid_answers_remain_recoverable(self):
         r = self.initial('coffee in Baltimore on 2026-11-07', location='Baltimore')
-        for invalid in ['many', '0', '101', '2.5']:
-            r = self.answer(r, {'people': invalid})
-            self.assertIsNone(r.request)
-            self.assertEqual(r.questions[0].field, 'people')
-            self.assertEqual(r.pending.text, 'coffee in Baltimore on 2026-11-07')
-        done = self.answer(r, {'people': '6 people'})
-        self.assertEqual(done.request.people, 6)
+        self.assertIsNotNone(r.request)
+        for legacy in ['many', '0', '101', '2.5', '6 people']:
+            done = self.answer(r, {'people': legacy})
+            self.assertIsNotNone(done.request)
+            self.assertIsNone(done.request.people)
+            self.assertFalse(done.questions)
 
     def test_simple_word_answer_needs_no_model(self):
         r = self.initial('coffee in Baltimore on 2026-11-07', location='Baltimore')
-        self.assertEqual(self.answer(r, {'people': 'four people'}).request.people, 4)
+        self.assertIsNone(self.answer(r, {'people': 'four people'}).request.people)
 
     def test_events_require_date_and_no_matching_date_is_feasibility(self):
         r = self.initial('concert in Baltimore for 2 people', activities=['concert'], location='Baltimore', people=2)
@@ -117,7 +117,7 @@ class ClarificationTests(unittest.TestCase):
         r = self.initial(text, activities=['coffee', 'museum', 'coffee'], budget_per_person=80,
             budget_group=200, currency='USD', travel_total_minutes=30, travel_leg_minutes=20,
             transport='driving', cost='experience', preferences=['best experience'])
-        self.assertEqual({q.field for q in r.questions}, {'location', 'people'})
+        self.assertEqual({q.field for q in r.questions}, {'location'})
         done = self.answer(r, {'location': 'Baltimore', 'people': '3'})
         req = done.request
         self.assertFalse(done.issues)
@@ -130,8 +130,9 @@ class ClarificationTests(unittest.TestCase):
     def test_group_ambiguity_does_not_ask_for_activities(self):
         r = self.initial('coffee in Baltimore for four or six people on 2026-11-07', location='Baltimore',
             uncertainties=['Group size is ambiguous'])
-        self.assertEqual([q.field for q in r.questions], ['people'])
-        self.assertEqual(self.answer(r, {'people': '4'}).request.activities, ['coffee'])
+        self.assertIsNotNone(r.request)
+        self.assertFalse(r.questions)
+        self.assertEqual(r.request.activities, ['coffee'])
 
     def test_manual_precedence_including_zero_and_balanced(self):
         r = self.initial('coffee tomorrow under $50 each, best experience', budget_per_person=50, currency='USD', cost='experience')
@@ -139,7 +140,7 @@ class ClarificationTests(unittest.TestCase):
             {'location': 'Baltimore', 'people': '3', 'date': '2026-11-07', 'budget': '0', 'travel': '0', 'cost': 'balanced', 'costExplicit': True})
         self.assertFalse(done.issues)
         self.assertEqual((done.request.location, done.request.people, done.request.date, done.request.budget, done.request.travel, done.request.cost),
-            ('Baltimore', 3, date(2026, 11, 7), 0, 0, 'balanced'))
+            ('Baltimore', None, date(2026, 11, 7), 0, 0, 'balanced'))
 
     def test_unclear_choice_keeps_previously_chosen_stop(self):
         r = self.initial('something competitive then cocktails in Baltimore for 6 people on 2026-11-07',
@@ -206,7 +207,7 @@ class ClarificationTests(unittest.TestCase):
                 self.assertEqual(done.pending.text, text)
                 self.assertEqual(done.request.location, 'Boston')
                 self.assertEqual(done.request.activities, ['coffee', 'museum', 'coffee'])
-                self.assertEqual((done.request.people, done.request.budget), (2, 80))
+                self.assertEqual((done.request.people, done.request.budget), (None, 80))
                 result = recommend_plans(done.request)
                 self.assertEqual(result.request.location, 'Boston')
                 self.assertFalse(result.plans)

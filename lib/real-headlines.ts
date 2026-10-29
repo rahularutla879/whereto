@@ -1,4 +1,4 @@
-import { ACTIVITY_LABELS, type Activity } from "./mock-data";
+import { activityLabel, type Activity } from "./mock-data";
 
 type HeadlineVenue = { name: string; activity: Activity; address?: string | null };
 const compact = (name: string) => {
@@ -17,6 +17,6 @@ export function realHeadlines(options: HeadlineVenue[][], dinnerStops: number[] 
       const distinct = venues.find((v, stop) => v.address && options.some((other, j) => j !== i && full[j] === full[i] && other[stop]?.address !== v.address));
       if (distinct) title += ` (${distinct.address})`;
     }
-    return { title, fullTitle: full[i], label: `OPTION ${i + 1} · ${venues.map((v, stop) => v.activity === "food" && dinnerStops.includes(stop) ? "DINNER" : ACTIVITY_LABELS[v.activity].toUpperCase()).join(" + ")}` };
+    return { title, fullTitle: full[i], label: `OPTION ${i + 1} · ${venues.map((v, stop) => v.activity === "food" && dinnerStops.includes(stop) ? "DINNER" : activityLabel(v.activity).toUpperCase()).join(" + ")}` };
   });
 }

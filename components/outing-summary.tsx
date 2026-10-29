@@ -1,4 +1,4 @@
-import { ACTIVITY_LABELS, formatTime } from "../lib/planner";
+import { activityLabel, formatTime } from "../lib/planner";
 import type { ValidatedOuting } from "../lib/planning-client";
 
 export function activityEditText(request: ValidatedOuting["request"]) {
@@ -14,8 +14,7 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
   const details: [string, string][] = [
     ["Location", r.location],
     ["Date", formatOutingDate(r.date)],
-    ["Group", `${r.people} ${r.people === 1 ? "person" : "people"}`],
-    ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : ACTIVITY_LABELS[a]).join(" → ")],
+    ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : activityLabel(a)).join(" → ")],
   ];
   if (r.budget !== null) details.push(["Budget", `$${r.budget} maximum / person`]);
   if (r.travel !== null) details.push(["Travel", `${r.travelExclusive ? "Under " : ""}${r.travel} min ${r.travelExclusive ? "total between stops" : "maximum total between stops"}`]);
