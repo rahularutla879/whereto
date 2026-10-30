@@ -1,4 +1,5 @@
 "use client";
+import { SavedPlans } from "@/components/saved-plans";
 import { ItineraryPagination } from "@/components/itinerary-pagination";
 import { ItineraryPages, beyondPage, BEYOND_NOTICE } from "@/lib/itinerary-pages";
 
@@ -282,6 +283,7 @@ export default function Home() {
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
         <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
+        <SavedPlans result={generated && !dirty && !loading ? result : undefined} />
         {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}

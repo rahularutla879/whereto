@@ -1,8 +1,10 @@
-# Supabase PostgreSQL setup — Tasks 47–48
+# Supabase PostgreSQL setup — Tasks 47–49
+
+Task 49 is complete: use the separate restricted runtime configuration and commands in [enable explicit saving locally](#task-49-enable-explicit-saving-locally). Historical administrator connectivity instructions below are for checks/migrations, never runtime startup.
 
 Task 47 checkpoint, October 30, 2026: **complete; actual authenticated read-only PostgreSQL verification passed**. The owner created `whereto` in organization `Where To` (Free), East US / North Virginia (`us-east-1`). Authenticated dashboard inspection independently confirmed Free, region and Healthy status. The real `backend.database_check` returned exit code 0 after DNS resolution, authenticated SELECT, a confirmed read-only transaction, verified client-to-pooler TLS and clean connection closure. At that checkpoint no schema, migrations, application records or persistence were implemented.
 
-Task 48 subsequently applied and verified the initial private schema. The Task 47 evidence below describes the earlier connectivity-only checkpoint. For current tables, migration/test commands, access protection and provider retention, read [the database schema guide](database-schema.md). Saved-plan endpoints and Tasks 49, 50 and 50A–50E remain unstarted.
+Task 48 subsequently applied and verified the initial private schema. The Task 47 evidence below describes the earlier connectivity-only checkpoint. For current tables, migration/test commands, access protection and provider retention, read [the database schema guide](database-schema.md). Task 49 now implements saved-plan endpoints through the restricted runtime described below. Task 50 and 50A–50E remain unstarted.
 
 ## Confirmed project and local setup
 
@@ -103,3 +105,61 @@ Task 48 will implement the initial schema for plans, constraints, generated itin
 - [Regions](https://supabase.com/docs/guides/platform/regions)
 - [Organization billing and Free allowance](https://supabase.com/docs/guides/platform/billing-on-supabase)
 - [Psycopg installation](https://www.psycopg.org/psycopg3/docs/basic/install.html)
+
+## Task 49: enable explicit saving locally
+
+The runtime must **not** use `backend/.env.database` (the migration administrator).
+Task 49 adds `0002_private_saved_plans.sql` and a separate, restricted login. The
+migration is already applied in the authorized development project. Data API
+remains disabled. To provision a fresh development project after applying the
+versioned migrations, source the administrator file only in a subshell and run
+`backend/.venv/bin/python -m backend.persistence_setup`. This creates a new,
+ignored `backend/.env.persistence` with mode 0600 and a random password; it never
+overwrites/rotates an existing file or prints secrets. Keep both configurations
+private. The runtime login has schema USAGE and SELECT/INSERT on the five product
+tables only, capability-scoped RLS, no membership in administrative roles, no
+ledger access, DDL, UPDATE or DELETE. The migration administrator can explicitly
+SET ROLE to that restricted identity for rollback testing. API roles retain zero
+schema/table grants. Runtime identity is checked on every connection.
+
+From `/Users/rahularutla/Documents/whereto`, start the backend in a Terminal:
+
+```sh
+(
+  set +x
+  set -a
+  source backend/.env.persistence
+  set +a
+  VENUE_DATA_MODE=mock npm run dev:backend
+)
+```
+
+In a second Terminal in the same folder run `npm run dev`. This loads database
+credentials only into Python. Keep all Google development flags unset. Ordinary
+`npm run dev:backend` still generates mock plans without database configuration;
+Save Plan then reports unavailable and leaves the generated cards intact.
+
+Describe coffee and a museum in Baltimore on a future date; choose Surprise Me;
+generate, select an option and click **Save Plan**. Refresh: the last saved plan
+opens automatically in a separate saved-plan section, preserving every saved
+option, selected option, ordered activity/stop and normalized constraint. Copy the
+private link from **Your private link** before clearing browser storage. To open
+another link, use **Reopen a saved plan**. No dashboard or account is required.
+Only one immutable save is supported per generated receipt. More-options responses
+issue fresh receipts; each saved page contains at most three options.
+
+See [saved-plan architecture and limitations](saved-plans.md). Hosted integration
+fixtures are opt-in and rollback-only:
+
+```sh
+(
+  set +x
+  set -a
+  source backend/.env.database
+  set +a
+  WHERETO_DB_SCHEMA_TESTS=1 backend/.venv/bin/python -m unittest backend.test_database_schema backend.test_saved_plans -v
+)
+```
+
+These admin-run fixtures impersonate the restricted role within a rollback-only
+transaction; they make no Google calls and leave no plans behind.

@@ -1,3 +1,5 @@
+> Current Task 49: explicit private saved plans now use a separate restricted Python/PostgreSQL connection, atomic writes and capability-scoped RLS. Browser refresh reopens the last saved plan; Google content remains transient. [Current architecture and limits](docs/saved-plans.md). Earlier sections retain historical checkpoints.
+
 > Task 46 bowling diagnosis: `backend/planning_diagnostics.py` combines per-activity discovery audits with current routing/ranking coverage, emitting only aggregate counts and fixed reason codes in diagnostics and the existing About these estimates disclosure. The explicit bowling refinement permits evidence-backed mixed venues without widening geography; primary shortage can trigger the existing bounded route expansion. [Findings, definitions and live unknowns](docs/real-planning.md#task-46-diagnosis--repeated-bowling-venues).
 
 > Current Task 46 application expansion: up to 20 retained candidates/activity, ten searches and 300 route elements under 30 attempts/outing; initial ten-result discovery and 6/4/4 shortlists remain. `backend/routing_expansion.py` selects bounded unsent directed evidence within original counters, with a recoverable preflight minute pause. Discovery response cursors live only in expiring continuations. [Current flow and boundaries](docs/real-planning.md#effective-budgets-and-local-operation). Older checkpoints below are historical.
@@ -564,3 +566,28 @@ The additive `backend/migrations/0001_initial_planning.sql` creates `whereto.pla
 `backend/database_migrate.py` reuses existing Psycopg and verified TLS in a separately invoked administrative CLI. Numbered checksummed SQL, advisory transaction locking, rollback rehearsal and atomic apply replace an unnecessary ORM. A separate read-only verification checks the actual hosted ledger, tables, ownership, ACLs and forced RLS. Private schema/table grants deny PUBLIC and Supabase API roles; no runtime identity/policies or database startup dependency is added. Data API remains disabled.
 
 Google Place IDs and app-owned provenance are retained; venue facts, route metrics, provider-derived text/snapshots, precise origins and continuation capabilities are excluded. Task 49 must implement allowlisted transactional save/retrieve behavior, completeness validation, explicit access/refresh/failure contracts and safe timestamp updates; Task 50 must complete runtime least privilege, authentication/authorization and public write protection. Five application tables are actually applied and empty in the confirmed hosted development project. [Detailed relationships, field mapping, security, provider terms, commands and extension boundaries](docs/database-schema.md). Tasks 49, 50 and 50A–50E remain unstarted.
+
+
+## Task 49 — private plan persistence
+
+Explicit Save Plan is a separate Python-controlled SQL flow; generation remains
+DB-independent. `backend/saved_plans.py` issues bounded ten-minute server receipts,
+allowlists the trusted generated selection, and atomically writes all five tables
+with Psycopg parameters. Additive migration 0002 retains selection, hashed private
+access, expiry, missing legacy preferences and fictional-only snapshots. Next's
+fixed `/api/plans/save` and `/api/plans/reopen` proxies keep SQL credentials on
+Python; `lib/saved-plans.ts` contains only browser-safe link/display contracts,
+while `lib/persistence-proxy.ts` owns upstream server calls. `SavedPlans` presents
+an independent saved document, preserving the live three-card/exploration flow.
+
+The separate non-owner runtime login has only SELECT/INSERT and capability-scoped
+forced RLS. It has no ledger, DDL, UPDATE, DELETE or administrative membership.
+Reads use a read-only transaction; writes roll back completely on any failure.
+Private links contain a 256-bit server-generated token in a fragment; PostgreSQL
+stores its SHA-256 verifier. Access expires after 30 days; browser localStorage
+remembers only the last link. API routes are restricted to local development.
+Real snapshots retain only Place IDs/app provenance; all Google content and route
+metrics remain unavailable without a future intentional refresh. There is no
+provider call on reopen. Exact origins and transient geographic evidence are not
+retained. [Full mapping, routes, limits, transactions and limitations](docs/saved-plans.md).
+UUID/ordinal relationships remain extensible for 50A–50E without implementing them.

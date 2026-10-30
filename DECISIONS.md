@@ -295,3 +295,30 @@ Use explicit SQL migrations through the existing Psycopg driver, with an atomic 
 Normalize relationships/order/common constraints; retain only the current grounded activity-intent map as JSONB. Do not restore party-size/numeric-budget requirements or store whole response/session blobs. Preserve UUID stop identities, unbounded ordinal positions, optional timing and source-kind distinctions for future additive 50A–50E migrations; defer unsupported dependency/endpoint/return/deadline logic. Cross-row completeness and updated-at mutation belong to the future transaction writer, not premature triggers.
 
 Official Google Places/Routes policies permit indefinite Place ID storage, not general permanent content caching. Choose identifier-only source records, omitting even temporarily cacheable coordinates to avoid expiration/backup lifecycle machinery. Other providers can record neutral provenance; external IDs require reviewed permissions before expanding the database allowlist. Real generated descriptions, scores, route metrics and display snapshots must not be copied into user-owned columns to bypass retention limits. Task 49 must explicitly design data refresh/attribution and unavailable-provider behavior. This intentionally sacrifices exact real-response round trips. [Mapping, official terms, commands and limitations](docs/database-schema.md). The actual hosted additive migration and read-only verification passed; no application rows remain. Tasks 49, 50 and 50A–50E are unstarted.
+
+
+## October 30, 2026 — Task 49 immutable anonymous saved plans
+
+Use server-issued ten-minute receipts rather than trusting a browser's full ranked
+response. Minimize at issuance; save at most three explicitly selected ordered
+options with one selected itinerary, in one transaction. Map normalized constraints
+to named columns and retain only allowlisted missing legacy preferences. Preserve
+fictional snapshots, but never Google details/metrics/derived ranking or geography
+claims. Reopen a separate honest saved representation without re-generation or
+provider I/O. Exact origins remain transient and are labeled unavailable.
+
+Use independent 256-bit server-generated read capabilities with SHA-256 verifiers,
+30-day access expiry and fragment links imported/cleared by the browser. Immutable
+saves need no update/delete privilege. Advisory serialization plus a unique verifier
+and document fingerprint makes same-capability retries idempotent. Create a separate
+non-owner LOGIN with only USAGE/SELECT/INSERT and forced RLS traversing to the
+transaction-local access hash. Administrative credentials are refused at runtime;
+only the migration administrator may SET ROLE to the restricted role for tests.
+Migration 0002 adds these scoped permissions/columns; Task 48 SQL stays unchanged.
+
+Limit routes to loopback/same-origin development and bound streams/connections/timeouts.
+No public list or UUID access. Explicit localStorage retention supports refresh;
+shared links, XSS/extensions, history/clipboard syncing and absent revocation/purge
+remain limitations. Do not call this authentication. Task 50 retains public security,
+accounts/ownership, revoke/rotate, cleanup/retention and distributed abuse protection;
+50A–50E retain advanced journey work. [Details](docs/saved-plans.md).

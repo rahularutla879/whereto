@@ -545,6 +545,8 @@ class RankingResult(ContractModel):
     notes: list[str] = Field(default_factory=list)
     dataMode: Literal["mock", "real"] = "mock"
     diagnostics: dict = Field(default_factory=dict)
+    saveReceipt: str | None = None
+    saveAccessToken: str | None = Field(default=None, repr=False)
     detailsToken: str | None = None
     optionsToken: str | None = None
     canExpand: bool = False

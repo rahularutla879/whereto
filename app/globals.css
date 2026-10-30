@@ -257,3 +257,13 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .alternative-row .secondary-button { flex-shrink:0; }
 .more-options .alternative-row p { margin:0; flex:1 1 180px; min-width:0; }
 .beyond-choice { margin:12px 0; text-decoration:underline; }
+
+/* Explicit plan persistence; shares existing type and button styles. */
+.saved-plans { margin: 1.5rem 0; padding: 1rem; border: 1px solid #dedbd4; border-radius: 14px; overflow-wrap: anywhere; }
+.saved-plans label { display: grid; gap: .4rem; margin: .8rem 0; }
+.saved-plans input, .saved-plans select { width: 100%; min-width: 0; padding: .7rem; border: 1px solid #b7b3aa; border-radius: 8px; background: white; color: #272624; }
+.saved-plans summary { cursor: pointer; padding: .5rem 0; font-weight: 600; }
+.saved-plans p { margin: .7rem 0; line-height: 1.6; }
+.saved-plans button { margin: .4rem .7rem .4rem 0; }
+.saved-document { margin-top: 1.5rem; }
+.saved-document li { margin: 1rem 0; }

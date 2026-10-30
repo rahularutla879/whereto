@@ -74,7 +74,10 @@ def verify_schema(connection):
     """).fetchall()
     if {r[0] for r in rows} != TABLES or any(not all(r[1:]) for r in rows):
         raise MigrationError('Unexpected tables, ownership or RLS')
-    if connection.execute("SELECT count(*) FROM pg_policies WHERE schemaname='whereto'").fetchone()[0]:
+    policies = connection.execute("SELECT tablename, policyname, roles FROM pg_policies WHERE schemaname='whereto'").fetchall()
+    expected_policies = {'plans': 'private_plan', 'plan_constraints': 'private_constraints',
+        'generated_itineraries': 'private_itineraries', 'itinerary_stops': 'private_stops', 'source_metadata': 'private_sources'}
+    if {(r[0],r[1],tuple(r[2])) for r in policies} != {(t,p,('whereto_plan_runtime',)) for t,p in expected_policies.items()}:
         raise MigrationError('Unexpected access policy')
     # Inspect explicit ACLs too: RLS cannot compensate for schema/table grants.
     grants = connection.execute("""
@@ -88,8 +91,26 @@ def verify_schema(connection):
             WHERE n.nspname='whereto' AND x.grantee <> c.relowner
         ) grants
     """).fetchone()[0]
-    if grants:
+    # Only the dedicated runtime role may have USAGE / SELECT / INSERT.
+    unexpected = connection.execute("""
+      SELECT count(*) FROM (
+        SELECT x.grantee,x.privilege_type FROM pg_namespace n,
+          LATERAL aclexplode(coalesce(n.nspacl,acldefault('n',n.nspowner))) x
+          WHERE n.nspname='whereto' AND x.grantee<>n.nspowner
+          AND (x.grantee<>'whereto_plan_runtime'::regrole OR x.privilege_type<>'USAGE' OR x.is_grantable)
+        UNION ALL
+        SELECT x.grantee,x.privilege_type FROM pg_class c JOIN pg_namespace n ON n.oid=c.relnamespace,
+          LATERAL aclexplode(coalesce(c.relacl,acldefault('r',c.relowner))) x
+          WHERE n.nspname='whereto' AND x.grantee<>c.relowner
+          AND (x.grantee<>'whereto_plan_runtime'::regrole OR x.privilege_type NOT IN ('SELECT','INSERT')
+            OR c.relname='schema_migrations' OR x.is_grantable)
+      ) unexpected
+    """).fetchone()[0]
+    if unexpected or grants != 11:
         raise MigrationError('Unexpected grants')
+    role = connection.execute("SELECT rolsuper,rolbypassrls,rolcreatedb,rolcreaterole,rolinherit FROM pg_roles WHERE rolname='whereto_plan_runtime'").fetchone()
+    if role != (False,False,False,False,False):
+        raise MigrationError('Unsafe runtime role')
     for role in ('anon', 'authenticated', 'service_role'):
         if connection.execute("SELECT has_schema_privilege(%s, 'whereto', 'USAGE')", (role,)).fetchone()[0]:
             raise MigrationError('API role has schema access')

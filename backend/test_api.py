@@ -53,6 +53,38 @@ class PlanningApiTests(unittest.TestCase):
         data = self.post({"date": "2026-11-07", **payload})
         return data, data["plans"] + data["provisionalPlans"]
 
+    def saved_post(self, path, payload, status, headers=None):
+        request = Request(self.url + path, data=json.dumps(payload).encode(),
+            headers={"Content-Type":"application/json", **(headers or {})})
+        try: response=urlopen(request,timeout=10)
+        except HTTPError as error: response=error
+        with response:
+            self.assertEqual(response.status,status)
+            return json.load(response)
+
+    def test_save_boundary_outage_does_not_break_generation(self):
+        data,plans=self.options({'activities':['coffee','museum']})
+        self.assertTrue(data['saveReceipt'])
+        payload=dict(receipt=data['saveReceipt'],accessToken=data['saveAccessToken'],
+            candidateIds=[p['candidate']['id'] for p in plans],selectedId=plans[0]['candidate']['id'])
+        error=self.saved_post('/api/plans/save',payload,503)
+        self.assertNotIn('password',json.dumps(error))
+        self.assertTrue(self.options({'activities':['coffee']})[1])
+
+    def test_save_http_invalid_payload_and_size(self):
+        self.saved_post('/api/plans/save',{'plans':[]},422)
+        self.saved_post('/api/plans/save',{'padding':'x'*4096},413)
+
+    def test_reopen_http_invalid_private_reference_and_outage(self):
+        import secrets
+        self.saved_post('/api/plans/reopen',{'accessToken':'guessed-uuid'},422)
+        self.saved_post('/api/plans/reopen',{'accessToken':secrets.token_urlsafe(32)},503)
+
+    def test_save_http_cross_origin_and_public_forwarding_denied(self):
+        self.saved_post('/api/plans/save',{},403,{'Origin':'https://evil.example'})
+        self.saved_post('/api/plans/save',{},403,{'X-WhereTo-Proxied':'1'})
+        self.saved_post('/api/plans/save',{},403,{'X-Forwarded-For':'203.0.113.1'})
+
     def test_mandatory_origin_and_fictional_first_leg_boundaries(self):
         missing=self.post({'activities':['coffee'],'date':'2026-11-07','startingLocation':None},422)
         self.assertEqual(missing['code'],'origin_required')

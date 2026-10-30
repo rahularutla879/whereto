@@ -1,4 +1,6 @@
-# Task 48 — initial PostgreSQL schema
+# PostgreSQL schema — Tasks 48–49
+
+Current Task 49 adds transactional saving, private-link access, runtime RLS and fictional-only snapshot columns through migration 0002. See the final section and [full persistence mapping](saved-plans.md). The Task 48 foundation below is retained as a historical schema checkpoint.
 
 Task scope: database foundation only. No save/retrieve endpoints, accounts, runtime database connection, public grants or complex-journey planner. Ordinary mock startup remains database-independent. See [database setup](database-setup.md) for the confirmed development project, ignored configuration and verified TLS.
 
@@ -89,3 +91,15 @@ Deliberately deferred: exact current response round trip, provider snapshots, du
 ## Actual hosted evidence
 
 On October 30, 2026, rehearsal and rollback fixtures passed on the actual PostgreSQL engine; the migration was then applied to the confirmed development project. Separate read-only verification passed, repeated apply was a safe no-op, and the hosted catalog confirmed 6 PKs, 4 FKs, 4 additional unique constraints, 51 checks and 12 indexes. All five application tables are empty; the ledger has one checksummed row. Data API was independently confirmed off in the dashboard. Final hosted schema/migration tests passed 16/16 with rollback cleanup. See the final Task 48 checkpoint in HANDOVER.md for full regression, smoke and delivery evidence. **Task 48 is complete based on actual hosted verification.** Tasks 49, 50 and 50A–50E remain unstarted.
+
+
+## Task 49 additive mapping
+
+The applied Task 48 SQL above remains checksummed and unchanged. Migration
+`0002_private_saved_plans.sql` adds capability verification/expiry/selection,
+allowlisted legacy preferences and fictional-only snapshot extension columns.
+The five-table structure stays intact. A separate restricted runtime LOGIN has
+SELECT/INSERT only, with five capability-scoped RLS policies; the migration ledger
+and all Supabase API roles remain inaccessible. Runtime never uses the migration
+administrator. [Current save/read mapping, policy reasoning and limitations](saved-plans.md)
+and [runtime setup/testing commands](database-setup.md#task-49-enable-explicit-saving-locally).

@@ -6,11 +6,30 @@ A mobile-first outing planner built with Next.js (App Router), TypeScript, React
 
 ## Development roadmap — approved Stage 1 extension
 
-[TASKS.md](TASKS.md) is the current official roadmap; the original Word document remains an unchanged historical baseline. Tasks 01–46 are complete. **Task 47 is complete**: the Supabase project exists and authenticated read-only PostgreSQL verification passed. **Task 48 is complete**: the initial private PostgreSQL schema is applied and verified; saved-plan behavior is still unimplemented.
+[TASKS.md](TASKS.md) is the current official roadmap; the original Word document remains an unchanged historical baseline. Tasks 01–46 are complete. **Task 47 is complete**: the Supabase project exists and authenticated read-only PostgreSQL verification passed. **Task 48 is complete**: the initial private PostgreSQL schema is applied and verified; Task 49 adds explicit private saving and reopening (see below).
 
 The planned Stage 1E sequence is **47 → 48 → 49 → 50 → 50A → 50B → 50C → 50D → 50E → 51 → 52 → 53 → 54 → 55**. The five additions cover complex request interpretation, fixed/flexible destination resolution, stop order and return journeys, complete journey deadlines, then integration/persistence/testing before public MVP deployment. All original task numbers are preserved.
 
-The current app provides AI-assisted leisure venue discovery and sequential recommendations. Mandatory named stops mixed with discovered errands, optional return trips, complete-journey deadline evaluation and database-backed saved plans are **planned functionality, not implemented**. The expanded Stage 1 checkpoint remains unmet. Stage 2 optimization and Stage 3 editing build on this planned foundation.
+The current app provides AI-assisted leisure venue discovery and sequential recommendations. Mandatory named stops mixed with discovered errands, optional return trips and complete-journey deadline evaluation are **planned functionality, not implemented**. Database-backed saving and reopening are implemented for trusted local development. The expanded Stage 1 checkpoint remains unmet. Stage 2 optimization and Stage 3 editing build on this planned foundation.
+
+## Save and reopen plans — Task 49
+
+Generate an outing, choose the selected itinerary, then click **Save Plan**. This
+explicitly saves the visible options and normalized requirements. Refreshing opens
+the last saved plan in a separate section; **Reopen a saved plan** accepts another
+private link. Demo cards cannot be saved. Existing three-card browsing stays intact.
+
+Saving requires Python's separate restricted database configuration. Follow the
+exact two-Terminal commands in [database setup](docs/database-setup.md#task-49-enable-explicit-saving-locally).
+Normal mock generation works without Supabase; unavailable saves preserve your cards.
+
+Anyone with a private link can read it for 30 days. The browser remembers only the
+last link; copy links you want to keep. Forget on this device removes its local
+copy, not shared copies. These links are not accounts and cannot yet be revoked.
+Avoid sensitive requests and shared browsers. Real saved plans retain activity and
+stop order plus Google Place IDs; current venue details and route estimates are
+unavailable on reopen. Nothing contacts Google automatically. Mock snapshots stay
+visibly fictional. [Architecture, security limitations and tests](docs/saved-plans.md).
 
 ## Current Task 46: travel limits and local discovery
 

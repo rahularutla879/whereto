@@ -25,7 +25,7 @@ from backend.ranking import recommend_plans
 class MigrationOfflineTests(unittest.TestCase):
     def test_inventory_is_stable_and_no_destructive_sql(self):
         files = migration_files()
-        self.assertEqual(len(files), 1)
+        self.assertEqual(len(files), 2)
         self.assertEqual(files[0][0], '0001_initial_planning.sql')
         self.assertEqual(len(files[0][1]), 64)
         sql = files[0][2].upper()
@@ -118,7 +118,7 @@ class HostedSchemaTests(unittest.TestCase):
             WHERE connamespace='whereto'::regnamespace GROUP BY contype""").fetchall()
         self.assertEqual(dict(keys)['p'], 6)
         self.assertEqual(dict(keys)['f'], 4)
-        self.assertEqual(dict(keys)['u'], 4)
+        self.assertEqual(dict(keys)['u'], 5)
         self.assertGreater(dict(keys)['c'], 35)
         indexes = {r[0] for r in self.connection.execute("SELECT indexname FROM pg_indexes WHERE schemaname='whereto'")}
         self.assertTrue({'plans_created_at_idx','source_metadata_lookup_idx',

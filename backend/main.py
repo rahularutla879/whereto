@@ -147,9 +147,9 @@ def more_options(request: OptionsRequest):
     try:
         if provider_budget.settings.mode=='mock':
             from backend.mock_surprise import more_mock_surprise
-            return JSONResponse(content=more_mock_surprise(request.token).model_dump(mode="json"),headers={"Cache-Control":"no-store"})
+            return JSONResponse(content=receipts.issue(more_mock_surprise(request.token)).model_dump(mode="json"),headers={"Cache-Control":"no-store"})
         provider_budget.settings.require_live_provider()
-        return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery, show_beyond=request.showBeyond).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
+        return JSONResponse(content=receipts.issue(more_real_plans(request.token, expand_discovery=request.expandDiscovery, show_beyond=request.showBeyond)).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
         return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
@@ -180,10 +180,63 @@ def starting_areas(request: StartingAreaQuery):
 @app.post("/api/plans/generate", response_model=RankingResult)
 async def generate_endpoint(request: PlannerInput, http: Request):
     from backend.provider_work import run_work
-    return await run_work(http, lambda: generate_plan(request))
+    return await run_work(http, lambda: receipts.issue(generate_plan(request)))
 
 
 @app.post("/api/plans/options")
 async def options_endpoint(request: OptionsRequest, http: Request):
     from backend.provider_work import run_work
     return await run_work(http, lambda: more_options(request))
+
+
+from backend.saved_plans import SaveRequest, OpenRequest, PersistenceError, receipts, save, reopen
+
+
+@app.middleware("http")
+async def private_plan_boundary(request: Request, call_next):
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+        from urllib.parse import urlparse
+        local = {"localhost", "127.0.0.1", "::1", "testserver"}
+        # Local-development MVP only; no cross-origin browser or forwarded public traffic.
+        try:
+            valid = request.url.hostname in local and request.client and request.client.host in local
+            for header in ("origin", "x-whereto-client-origin"):
+                value = request.headers.get(header)
+                valid = valid and (not value or urlparse(value).hostname in local)
+            host = request.headers.get("x-whereto-client-host")
+            valid = valid and (not host or urlparse("http://" + host).hostname in local)
+        except ValueError:
+            valid = False
+        if not valid or request.headers.get("x-whereto-proxied") == "1" or request.headers.get("sec-fetch-site") == "cross-site" or any(h in request.headers for h in ("forwarded", "x-forwarded-for", "x-forwarded-host")):
+            return JSONResponse(status_code=403, content={"message": "Private plans accept local requests only."})
+        # Stream bound applies even without Content-Length or with a dishonest header.
+        body = bytearray()
+        async for chunk in request.stream():
+            body.extend(chunk)
+            if len(body) > 4096:
+                return JSONResponse(status_code=413, content={"message": "Save request is too large."})
+        request._body = bytes(body)
+    response = await call_next(request)
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+        response.headers["Cache-Control"] = "no-store"
+        response.headers["Referrer-Policy"] = "no-referrer"
+    return response
+
+
+def persistence_response(operation, request):
+    try:
+        return JSONResponse(content=operation(request), headers={"Cache-Control": "no-store"})
+    except ValidationError:
+        return JSONResponse(status_code=409, content={"message": "Saved plan reference is incomplete. Generate again before saving."}, headers={"Cache-Control": "no-store"})
+    except PersistenceError as error:
+        return JSONResponse(status_code=error.status, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+
+
+@app.post("/api/plans/save")
+def save_endpoint(request: SaveRequest):
+    return persistence_response(save, request)
+
+
+@app.post("/api/plans/reopen")
+def reopen_endpoint(request: OpenRequest):
+    return persistence_response(reopen, request)
