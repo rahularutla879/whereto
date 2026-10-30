@@ -1,6 +1,8 @@
-# Task 47 — Supabase PostgreSQL setup
+# Supabase PostgreSQL setup — Tasks 47–48
 
-Status, October 30, 2026: **complete; actual authenticated read-only PostgreSQL verification passed**. The owner created `whereto` in organization `Where To` (Free), East US / North Virginia (`us-east-1`). Authenticated dashboard inspection independently confirmed Free, region and Healthy status. The real `backend.database_check` returned exit code 0 after DNS resolution, authenticated SELECT, a confirmed read-only transaction, verified client-to-pooler TLS and clean connection closure. No schema, migrations, application records or persistence are implemented.
+Task 47 checkpoint, October 30, 2026: **complete; actual authenticated read-only PostgreSQL verification passed**. The owner created `whereto` in organization `Where To` (Free), East US / North Virginia (`us-east-1`). Authenticated dashboard inspection independently confirmed Free, region and Healthy status. The real `backend.database_check` returned exit code 0 after DNS resolution, authenticated SELECT, a confirmed read-only transaction, verified client-to-pooler TLS and clean connection closure. At that checkpoint no schema, migrations, application records or persistence were implemented.
+
+Task 48 subsequently applied and verified the initial private schema. The Task 47 evidence below describes the earlier connectivity-only checkpoint. For current tables, migration/test commands, access protection and provider retention, read [the database schema guide](database-schema.md). Saved-plan endpoints and Tasks 49, 50 and 50A–50E remain unstarted.
 
 ## Confirmed project and local setup
 
@@ -87,7 +89,7 @@ This TLS observation verifies the client-to-pooler leg; it does not independentl
 
 Offline regression tests: `backend/.venv/bin/python -m unittest backend.test_database_check -v`. Missing-config check: `backend/.venv/bin/python -m backend.database_check` in a Terminal with no database variables exported. Neither substitutes for an actual hosted check.
 
-## Task 48 handoff — Task 47 passed
+## Historical Task 48 handoff — Task 47 passed
 
 Confirmed project, Free plan, region, session-pooler method and actual successful read-only result are recorded in HANDOVER.md. Task 47 is complete. No account/configuration blocker remains for this connectivity check. Task 48 is not started and requires its own task authorization; no secrets belong in the handoff.
 

@@ -98,7 +98,7 @@ The Next.js route disables fetch/response caching, validates the expected status
 | package.json | Dependencies and development/check commands |
 | next.config.ts, tsconfig.json, eslint.config.mjs, postcss.config.mjs | Framework, TypeScript, lint, and stylesheet tooling |
 
-React state holds requests, preferences, results, and expanded cards in memory. There is no database, browser persistence, account system, or cross-session history. Icons use lucide-react; illustrations and fonts need no external media service.
+React state holds requests, preferences, results, and expanded cards in memory. There is no runtime database persistence, browser persistence, account system, or cross-session history. Task 48 later adds an isolated hosted schema; see the current database section below. Icons use lucide-react; illustrations and fonts need no external media service.
 
 ## Backend data contract (Task 24)
 
@@ -550,8 +550,17 @@ Current Stage 1 functionality is AI-assisted leisure venue discovery and sequent
 The owner-approved [Stage 1E roadmap](TASKS.md#1e-save-plans-and-launch-our-first-mvp) plans structured mandatory/flexible stops, named destinations, precedence/reorder permissions, origin/end-point/return topology, stop-duration evidence and complete-journey deadlines. Task 48 should leave straightforward schema extension points for those concepts and provider/constraint metadata without speculative tables or advanced planning implementation. Tasks 50A–50D will extend the existing interpreter, discovery and planner; 50E will integrate persistence and basic edits. Unknown durations must remain unknown, not invented deadline compliance. Rich Stage 2 optimization and Stage 3 editing remain later work. This note changes no current API, schema, implementation, provider gates or task status; Task 47 is unstarted.
 
 
-## Task 47 — isolated PostgreSQL readiness check (complete)
+## Task 47 — isolated PostgreSQL readiness check (historical completion checkpoint)
 
 `backend/database_check.py` is a CLI-only boundary using pinned Psycopg 3 binary distribution in the existing virtual environment. It is not imported by FastAPI, the planner, Next.js or health endpoints. `backend/.env.example` defines `WHERETO_DB_HOST`, `WHERETO_DB_PORT`, `WHERETO_DB_NAME`, `WHERETO_DB_USER`, `WHERETO_DB_PASSWORD` and `WHERETO_DB_SSLROOTCERT`; only an explicitly sourced ignored backend file supplies them. Normal startup stays database-independent and mock by default.
 
 The local choice is Supabase shared session pooler on port 5432 for IPv4 compatibility, `sslmode=verify-full` with an explicit CA, read-only transaction, bounded connect/query timeouts and deterministic credential-free CLI output. No ORM, migration infrastructure, persistent pool, tables, Data API client or save endpoint exists. A successful check proves client-to-pooler TLS and authenticated PostgreSQL queries, not the pooler's internal transport properties. Project `whereto` / organization `Where To` (Free), region `us-east-1`, and Healthy dashboard status are confirmed. Ignored local configuration and the dashboard-linked public CA are installed; DNS and pre-authentication TLS 1.3 hostname/CA verification passed. Actual authenticated hosted verification passed on October 30, 2026: constant SELECT succeeded inside a read-only transaction with verified client-to-pooler TLS, rollback and clean closure. Future production direct IPv6 versus session pooler depends on FastAPI hosting; transaction mode is reserved for a possible transient/serverless architecture. [Setup, limitations and Task 48 handoff](docs/database-setup.md).
+
+
+## Task 48 — private PostgreSQL foundation (complete)
+
+The additive `backend/migrations/0001_initial_planning.sql` creates `whereto.plans`, `plan_constraints`, `generated_itineraries`, `itinerary_stops`, `source_metadata` and the administrative `schema_migrations` ledger. UUID ownership chains cascade from plans to options to ordered stops to permitted source references; constraints have a one-to-one plan key. Current requests/activities/travel/accessibility map to typed columns; stop identity and nullable user/fictional timing permit later additive journey migrations without implementing 50A–50E.
+
+`backend/database_migrate.py` reuses existing Psycopg and verified TLS in a separately invoked administrative CLI. Numbered checksummed SQL, advisory transaction locking, rollback rehearsal and atomic apply replace an unnecessary ORM. A separate read-only verification checks the actual hosted ledger, tables, ownership, ACLs and forced RLS. Private schema/table grants deny PUBLIC and Supabase API roles; no runtime identity/policies or database startup dependency is added. Data API remains disabled.
+
+Google Place IDs and app-owned provenance are retained; venue facts, route metrics, provider-derived text/snapshots, precise origins and continuation capabilities are excluded. Task 49 must implement allowlisted transactional save/retrieve behavior, completeness validation, explicit access/refresh/failure contracts and safe timestamp updates; Task 50 must complete runtime least privilege, authentication/authorization and public write protection. Five application tables are actually applied and empty in the confirmed hosted development project. [Detailed relationships, field mapping, security, provider terms, commands and extension boundaries](docs/database-schema.md). Tasks 49, 50 and 50A–50E remain unstarted.
