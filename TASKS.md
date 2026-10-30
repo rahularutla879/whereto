@@ -1,10 +1,10 @@
 # Milestones and tasks
 
-## Authoritative original roadmap
+## Official development roadmap — original numbering with approved amendments
 
-The authoritative source is [the original Word roadmap](docs/original-roadmap.docx), preserved byte for byte from the owner’s document. The checklist below transcribes its exact task wording and sequence, with the original phase/section headings, objectives, tools and completion tests. These source descriptions are plans, not permission to install tools, activate services or incur costs.
+The baseline source is [the original Word roadmap](docs/original-roadmap.docx), preserved byte for byte as a historical archive. **This checklist is the current official development roadmap**, including the owner-approved October 30, 2026 Stage 1 amendment: five pending tasks 50A–50E inserted after Task 50, a Task 48 design note, and expanded Stage 1 acceptance. All original numbered task descriptions and identifiers remain intact. There are 135 original numbered tasks plus five letter-suffixed additions (140 task entries); no original task is renumbered. These descriptions are plans, not permission to install tools, activate services or incur costs.
 
-Status as of October 24, 2026: Tasks 01–36 are completed per the owner’s current status; existing implementation notes and verification evidence are preserved in the historical tracker below and HANDOVER.md. A completed task does not claim that all technologies in its original description were adopted (for example, progress is tracked here rather than docs/ROADMAP.md). Task 37 is **complete**: its project identity and access were verified in Google Cloud Console. Task 38 is **complete**: Places API (New) and Routes API independently show enabled. Billing was unlinked at those checkpoints; the owner has since linked Free Trial billing; Task 39 is **complete**, with keyless local authentication verified and live access still disabled; Tasks 40–45 are complete as recorded below; Task 46 is complete with the stabilization checkpoints below; Tasks 47–135 are pending. Existing prototype overlap does not complete those later tasks.
+Status as of October 30, 2026: Tasks 01–36 are completed per the owner’s current status; existing implementation notes and verification evidence are preserved in the historical tracker below and HANDOVER.md. A completed task does not claim that all technologies in its original description were adopted (for example, progress is tracked here rather than docs/ROADMAP.md). Task 37 is **complete**: its project identity and access were verified in Google Cloud Console. Task 38 is **complete**: Places API (New) and Routes API independently show enabled. Billing was unlinked at those checkpoints; the owner has since linked Free Trial billing; Task 39 is **complete**, with keyless local authentication verified and live access still disabled; Tasks 40–45 are complete as recorded below; Task 46 is complete with the stabilization checkpoints below; Tasks 47–135 and the added Tasks 50A–50E are pending. Task 47 remains unstarted and is the next development task after review of this documentation update. Stage 1 is not complete. Existing prototype overlap does not complete those later tasks.
 
 The original section completion tests apply to the whole section, not to each individual task. In particular, the real-venue/route completion test for section 1D belongs to Tasks 37–46 together; Task 37 requires only the Cloud project. Original cost/provider statements below are historical roadmap text, not current pricing verification.
 
@@ -66,7 +66,7 @@ At this point, we can begin building the actual app.
 
 ### Phase 1 — Build Stage 1: The basic MVP
 
-Objective: A user describes an outing, and the app produces useful combinations of real places with actual travel-time estimates.
+Objective: A user describes an outing or errand journey, and the planned public MVP discovers real places, preserves mandatory and flexible stops, generates ordered multi-stop plans with verified travel estimates and optional return trips, evaluates complete journey deadlines with uncertainty, and saves plans for later use. The complex-journey extension is planned, not implemented.
 
 #### 1A. Build the frontend
 
@@ -204,15 +204,76 @@ Completion test: Entering a Baltimore outing request produces real venues, actua
 
 #### 1E. Save plans and launch our first MVP
 
-Tools: Supabase PostgreSQL, GitHub, Vercel or other frontend hosting, Python backend hosting.
+Tools: Supabase PostgreSQL, existing Ollama/Qwen and Pydantic interpretation, FastAPI planner, Google Places/Routes, GitHub, Vercel or other frontend hosting, Python backend hosting.
+
+Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Tasks 51–55. Complete and verify the complex-journey foundation before production deployment and initial tester launch. All tasks in this section remain pending; no Supabase or advanced-planning implementation is authorized by this roadmap update.
 
 - [ ] Task 47 — Create a Supabase project. Set up the hosted PostgreSQL database.
 
 - [ ] Task 48 — Create the initial database tables. Plans, constraints, generated itineraries, itinerary stops, and source metadata.
 
+  Architectural design note: keep the initial PostgreSQL schema extensible for mandatory versus flexible stops, explicit named destinations, stop ordering/dependencies, starting and ending locations, optional returns, estimated stop durations, total journey deadlines, travel-mode/constraint metadata and venue/provider source metadata. Use simple, immediately useful structures and extension points; avoid speculative tables. This is database design only: advanced interpretation, routing and optimization belong to 50A–50E, not Task 48.
+
 - [ ] Task 49 — Save and retrieve plans. A browser refresh should not destroy a saved itinerary.
 
 - [ ] Task 50 — Configure safe database access. Keep privileged credentials on the server, validate requests, and protect write operations.
+
+- [ ] Task 50A — Understand complex multi-stop planning requests.
+
+  Extend the existing Ollama/Qwen natural-language interpretation and Pydantic validation pipeline for:
+
+  - Explicitly named mandatory destinations and flexible activities needing venue discovery.
+  - Required stop order and reorderable errands only when the user permits reordering.
+  - Optional return to the starting location, complete journey time limits, explicit appointments/deadlines, and optional or unknown stop durations.
+
+  Example: “I have to go to SUNY College of Optometry and then a bar from there today. Plan my outing.” Interpret the college as a mandatory named stop before a flexible discovered bar; preserve the date and starting-location requirements and never silently substitute another college.
+
+  Example: “I need groceries and cash from an ATM, then I have to get back within 30 minutes.” Both errands and return to the origin are required; 30 minutes applies to the whole journey including relevant stop durations. Errand order is flexible unless the wording specifies otherwise. Pending — do not implement now.
+
+- [ ] Task 50B — Resolve fixed destinations and discover flexible stops.
+
+  Enhance the existing discovery system for multiple mandatory and flexible stops:
+
+  - Resolve named places through grounded provider lookup; require confirmation for ambiguous destinations and preserve mandatory place identity.
+  - Discover flexible venues through Google Places, preferring geographic convenience to mandatory stops.
+  - Preserve hard geographic and accessibility restrictions. Ranking must not replace required destinations.
+  - Never fabricate venue identity, availability or event information.
+
+  Example: SUNY College of Optometry → nearby bar. Depends on 50A. Pending — do not implement now.
+
+- [ ] Task 50C — Support ordered stops and return journeys.
+
+  Extend the existing itinerary engine's stop sequencing and complete journey topology:
+
+  - Preserve user-specified order and mandatory precedence; reorder independent errands only where permitted.
+  - Support journeys ending at the original origin or at an explicitly named different location.
+  - Compute directional consecutive legs, including the final return leg when requested, while preserving supported travel modes.
+  - Distinguish origin-to-first-stop, inter-stop and return/end-point travel, with actual route verification and clear uncertainty labels.
+
+  Examples: Home → Grocery store → ATM → Home; SUNY College of Optometry → Bar. Depends on 50A–50B. Pending — do not implement now.
+
+- [ ] Task 50D — Optimize itineraries against total journey constraints.
+
+  Evaluate complete journeys using the existing planning/optimization engine:
+
+  - Interpret total trip duration separately from first-stop limits and combine travel across every required leg.
+  - Include known activity durations, separating verified durations from explicit assumptions. Unknown required stop durations must prevent a definite deadline-compliance claim.
+  - Preserve mandatory ordering; optimize reorderable errands only where allowed.
+  - Use efficient candidate selection, route verification and optimization; rank feasible plans by total duration, relevance, convenience and existing quality/diversity signals.
+  - Explain infeasibility or unverifiable deadlines, preserving clearly labeled alternatives without silently violating the original constraints.
+
+  Example: “Go grocery shopping, use an ATM and return home within 30 minutes.” A journey with 22 minutes of travel and unknown shopping time is **not verified** to meet that deadline. Depends on 50A–50C. Pending — do not implement now.
+
+- [ ] Task 50E — Integrate, persist and test complex multi-stop plans.
+
+  Integrate 50A–50D with the existing frontend, FastAPI backend, Google integrations and Task 47–50 Supabase foundation:
+
+  - Save/reopen fixed versus flexible stop identity, order constraints, return journeys, deadlines and stop-duration assumptions.
+  - Support useful editing without dropping mandatory requirements; display complete journey route legs, travel estimates and total-duration calculations with uncertainty.
+  - Preserve three-card page navigation, applicable current-location/manual-origin/Surprise Me behavior, recommendation diversity and ordinary dinner/drinks or other leisure requests.
+  - Test realistic errands, appointments and leisure plans, including desktop/mobile workflows and offline regression fixtures. Controlled live verification requires separate authorization.
+
+  Depends on 50A–50D; complete before deployment. Rich map/drag-and-drop/conversational editing remains in Stage 3. Pending — do not implement now.
 
 - [ ] Task 51 — Add usage limits and basic error logging.
 
@@ -221,6 +282,8 @@ Tools: Supabase PostgreSQL, GitHub, Vercel or other frontend hosting, Python bac
 - [ ] Task 53 — Configure environment variables and HTTPS. No secret keys in public frontend code or GitHub.
 
 - [ ] Task 54 — Perform end-to-end testing. Generate, open, save, refresh, and view a plan on a phone.
+
+  Acceptance scope: cover ordinary leisure itineraries **and** complex multi-stop/errand journeys, including mandatory/flexible identity, order, returns, deadlines and unknown-duration evidence. Verify production-compatible hosting, server-only credentials, safe database access, environment configuration and HTTPS from Tasks 50–53 alongside desktop/mobile save-and-reopen behavior.
 
 - [ ] Task 55 — Invite initial testers. Collect feedback on recommendation quality, travel feasibility, and usefulness.
 
@@ -234,11 +297,15 @@ Vercel
 
 #### Checkpoint 1 — Stage 1 complete
 
-We have a real, publicly accessible outing planner that accepts natural-language requests and generates multi-stop itineraries using real venue and route data.
+Where To? is a publicly accessible AI-powered planning assistant that understands natural-language requests, discovers real venues, handles mandatory and flexible destinations, generates ordered multi-stop itineraries, calculates travel routes and optional return trips, evaluates total journey time constraints, and allows users to save and revisit their plans.
+
+This is the **planned acceptance checkpoint**, not current implementation status. Stage 1 is complete only after its pending tasks and acceptance checks pass.
 
 ### Phase 2 — Build Stage 2: Smart planning and optimization
 
 Objective: Generate plans that match individual priorities, not just places that happen to be close together.
+
+Dependency clarification: Stage 1 Tasks 50A–50E establish the initial mandatory/flexible-stop and complete-journey foundation. Tasks 56–62 expand the preference system; Tasks 71–82 extend scoring, buffers, verified fixed-time events, scheduling, ordering and optimization on that foundation. These later tasks retain their original scope/identifiers and remain pending; Stage 1 does not claim comprehensive Stage 2 trade-off intelligence.
 
 #### 2A. Build the complete preference system
 
@@ -337,6 +404,8 @@ The app understands detailed constraints, supports all three spending modes, eva
 ### Phase 3 — Build Stage 3: The interactive itinerary planner
 
 Objective: Users can modify their plans freely without starting the search again.
+
+Dependency clarification: Task 50E supplies basic requirement-preserving edits and save/reopen integration. Stage 3 retains the richer map/manual editor (89–106), natural-language editing (107–115), version history and sharing (116–124); these are extensions, not duplicated Stage 1 completion claims.
 
 #### 3A. Build the interactive map
 

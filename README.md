@@ -4,6 +4,14 @@
 
 A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules, with fictional Baltimore venues by default and deliberate local real-data mode for Google Maps venues/routes. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
 
+## Development roadmap — approved Stage 1 extension
+
+[TASKS.md](TASKS.md) is the current official roadmap; the original Word document remains an unchanged historical baseline. Tasks 01–46 are complete. **Task 47 (create the Supabase project) remains pending and unstarted**, and is next after review of this roadmap update.
+
+The planned Stage 1E sequence is **47 → 48 → 49 → 50 → 50A → 50B → 50C → 50D → 50E → 51 → 52 → 53 → 54 → 55**. The five additions cover complex request interpretation, fixed/flexible destination resolution, stop order and return journeys, complete journey deadlines, then integration/persistence/testing before public MVP deployment. All original task numbers are preserved.
+
+The current app provides AI-assisted leisure venue discovery and sequential recommendations. Mandatory named stops mixed with discovered errands, optional return trips, complete-journey deadline evaluation and database-backed saved plans are **planned functionality, not implemented**. The expanded Stage 1 checkpoint remains unmet. Stage 2 optimization and Stage 3 editing build on this planned foundation.
+
 ## Current Task 46: travel limits and local discovery
 
 Strict maxima are enforced for ordinary recommendations. Flexible retains its preferred value and inclusive 2× effective maximum. **Explore farther / Search more nearby places changes discovery coverage, never your travel limit.** When no checked plan qualifies, choose more nearby discovery or explicitly **Show options beyond my limit**. Those alternatives identify the original limit and verified excess; **Return to within-limit options** preserves the requirement. Saved page arrows never search or route.
