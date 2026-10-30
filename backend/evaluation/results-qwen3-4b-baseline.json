@@ -1,0 +1,516 @@
+{
+  "model": "qwen3:4b",
+  "installed": {
+    "name": "qwen3:4b",
+    "model": "qwen3:4b",
+    "modified_at": "2026-10-20T20:08:33.184557715-04:00",
+    "size": 2497293931,
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 2560
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "ollamaVersion": {
+    "version": "0.35.1"
+  },
+  "settings": {
+    "num_ctx": 8192,
+    "num_predict": 1024,
+    "temperature": 0,
+    "think": false,
+    "retries": 0
+  },
+  "firstCallSeconds": 14.092,
+  "warmMedianSeconds": 5.3309999999999995,
+  "baseCases": 26,
+  "successes": 23,
+  "rows": [
+    {
+      "id": "dinner",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 14.092
+    },
+    {
+      "id": "order",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.346
+    },
+    {
+      "id": "unusual",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.314
+    },
+    {
+      "id": "movies",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.201
+    },
+    {
+      "id": "workshop",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.187
+    },
+    {
+      "id": "midtown",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.479
+    },
+    {
+      "id": "borough",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.117
+    },
+    {
+      "id": "unknown",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.593
+    },
+    {
+      "id": "near",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.156
+    },
+    {
+      "id": "around",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.503
+    },
+    {
+      "id": "origin",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.86
+    },
+    {
+      "id": "separate",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "location"
+      ],
+      "accepted": false,
+      "clarificationCorrect": false,
+      "checks": {},
+      "success": false,
+      "issueCount": 1,
+      "seconds": 5.106
+    },
+    {
+      "id": "strict",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "between": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.482
+    },
+    {
+      "id": "flexible",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 6.054
+    },
+    {
+      "id": "miles",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.018
+    },
+    {
+      "id": "exclusion",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "geography": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.089
+    },
+    {
+      "id": "access",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": false,
+      "issueCount": 2,
+      "seconds": 5.703
+    },
+    {
+      "id": "date",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "date": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.475
+    },
+    {
+      "id": "missing",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "location"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "seconds": 4.181
+    },
+    {
+      "id": "kothapet",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": false,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": false,
+      "issueCount": 0,
+      "seconds": 5.908
+    },
+    {
+      "id": "multilingual",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "date"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "seconds": 5.498
+    },
+    {
+      "id": "informal",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.604
+    },
+    {
+      "id": "people",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 4.744
+    },
+    {
+      "id": "budget",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "budget": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 5.153
+    },
+    {
+      "id": "ambiguity",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "activities"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "seconds": 8.198
+    },
+    {
+      "id": "conflict",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "location"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 2,
+      "seconds": 11.83
+    },
+    {
+      "id": "dinner",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 8.498
+    },
+    {
+      "id": "order",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 8.669
+    },
+    {
+      "id": "unusual",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "seconds": 9.624
+    }
+  ],
+  "loadedModelBytes": 3800291082,
+  "loadedVramBytes": 3800291082,
+  "initialModelResident": false,
+  "validationMode": "mock (baseline before real-specific validation evaluation)"
+}

@@ -15,13 +15,16 @@ def search_area(request,center=None,first=False,band=None):
     onward=request.betweenTravel
     reach=radius(preference,band,mode(request)) if first else radius(onward,effective_max(onward),mode(request)) if onward else (min(50000,max(250,(request.maxLegTravel if request.maxLegTravel is not None else 10)*(80 if mode(request)=='walk' else 600))))
     # Preference-derived geometry is a search heuristic, never a retention filter.
-    reach=max(reach,radius(None,None,mode(request)) if first else (1200 if mode(request)=="walk" else 6000))
+    # An explicit first-leg range should not inherit a 12-km city default.
+    # Broad inventory is retained; further cells remain explicit, finite actions.
+    reach=max(reach,250 if first and preference else radius(None,None,mode(request)) if first else (1200 if mode(request)=="walk" else 6000))
+    if first and preference and preference.mode=="strict":reach=max(250,reach*.5)
     from backend.location_context import anchor_compatible
     origin=request.startingLocation
     anchored=bool(center and origin and (request.useOriginAsSearchAnchor or anchor_compatible(
         request.location, origin.geographicDescription or origin.label)))
     return SearchArea(anchor_verified=anchored,name=request.location if request.location.casefold() not in ('near me','nearby','current location') else None,
-        coordinates=center,radius_m=reach if center else None,enforce_name=request.geography.strictDestination,include_name=first,restrict_to_area=center is not None,
+        coordinates=center,radius_m=reach if center else None,enforce_name=request.geography.strictDestination,include_name=first and not anchored,restrict_to_area=center is not None,
         excluded_regions=request.geography.excludedRegions,
         boundary_coordinates=request.currentArea.coordinates if request.searchRadius is not None and request.currentArea else None,
         boundary_radius_m=request.searchRadius)
@@ -101,9 +104,15 @@ def anchors(context,position):
         return selected
     selected=[]
     while facts and len(selected)<2:
+        # Co-located businesses should share one query, not consume both paths.
+        if selected:
+            facts=[v for v in facts if all(distance_m(v.coordinates,s.coordinates)>=1 for s in selected)]
+            if not facts:break
         if not selected:chosen=facts.pop(0)
         else:
-            chosen=max(facts,key=lambda v:(min(distance_m(v.coordinates,s.coordinates) for s in selected),v.id));facts.remove(chosen)
+            chosen=(facts[0] if position==0 and point and context['request'].firstTravel else
+                    max(facts,key=lambda v:(min(distance_m(v.coordinates,s.coordinates) for s in selected),v.id)))
+            facts.remove(chosen)
         selected.append(chosen)
     return selected
 
@@ -172,8 +181,9 @@ def next_region(context,*,commit,position=0):
     if step>=32:return None  # Finite regional strategy, not city-wide exhaustion.
     ring=step//8+1;angle=radians((step%8)*45)
     reach=radius(r.firstTravel,effective_max(r.firstTravel),mode(r))
-    offset=reach*ring*.65
-    tile=min(50000,reach*(1+ring*.25))
+    local_reach=reach*.5 if r.firstTravel and r.firstTravel.mode=='strict' else reach
+    offset=local_reach*ring*.65
+    tile=min(50000,local_reach*(1+ring*.25))
     latitude=center.latitude+sin(angle)*offset/111320
     longitude=center.longitude+cos(angle)*offset/(111320*max(.05,cos(radians(center.latitude))))
     if abs(latitude)>90:return None

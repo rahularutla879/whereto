@@ -137,6 +137,7 @@ def venue_details(request: ContactRequest):
 
 
 class OptionsRequest(BaseModel):
+    showBeyond: bool = Field(default=False, strict=True)
     expandDiscovery: bool = Field(default=False, strict=True)
     token: str = Field(min_length=1, max_length=100)
 
@@ -148,7 +149,7 @@ def more_options(request: OptionsRequest):
             from backend.mock_surprise import more_mock_surprise
             return JSONResponse(content=more_mock_surprise(request.token).model_dump(mode="json"),headers={"Cache-Control":"no-store"})
         provider_budget.settings.require_live_provider()
-        return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
+        return JSONResponse(content=more_real_plans(request.token, expand_discovery=request.expandDiscovery, show_beyond=request.showBeyond).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
         return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})

@@ -743,3 +743,9 @@ Task 46 remains complete. Task 47 remains unstarted.
 - [x] Verify with complete offline suites and desktop/mobile browser workflows; document Cloud read-back, rich continuation coverage and dependency limitations in HANDOVER.md. No billable Google requests or Cloud changes.
 
 Task 46 remains complete. Task 47 remains unstarted.
+
+### Task 46 acceptance checkpoint — October 30, 2026
+
+Strict/effective Flexible maximum violations require explicit beyond-limit browsing; confirmed-origin discovery/routing prioritizes nearby evidence, with original constraints and saved-page history preserved. Budget/exploration UI cleanup, activity capability audit, alternative-provider research and installed-Qwen benchmark are documented in HANDOVER.md and the focused docs. This is acceptance work within completed Task 46; original Tasks 47–135 remain pending. No live billable calls or provider/model switch occurred.
+
+Verification: 535 backend tests, 174 frontend tests, lint, TypeScript, production build and desktop/mobile fixture workflows passed. Python/top-level npm dependency checks passed; the full npm dependency tree reports two existing optional WASM version mismatches, detailed in HANDOVER.md.

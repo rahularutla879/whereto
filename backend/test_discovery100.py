@@ -141,6 +141,9 @@ class PipelineAlternatives(unittest.TestCase):
             request=outing(maxFirstLegTravel=1)
             r=real_plans(request,ProviderBudget(ProviderSettings(mode='real',candidates_per_activity=3)))
             self.assertFalse(r.provisionalPlans)
+            self.assertFalse(r.explorationPlans)
+            self.assertTrue(r.canShowBeyond)
+            r=more_real_plans(r.optionsToken,show_beyond=True)
             self.assertEqual(len(r.explorationPlans),3)
             self.assertTrue(all(p.feasibility=='violated' and p.travelClassification=='beyond_limit' and p.travelDeviations for p in r.explorationPlans))
             self.assertEqual(r.request.maxFirstLegTravel,1)
@@ -170,7 +173,7 @@ class PipelineAlternatives(unittest.TestCase):
             self.assertTrue(all(p.travelClassification=='matching' for p in r.provisionalPlans))
             signatures={tuple(v.id for v in p.candidate.venues) for p in r.provisionalPlans}
             for _ in range(2):
-                r=more_real_plans(r.optionsToken)
+                r=more_real_plans(r.optionsToken,show_beyond=True)
                 self.assertFalse(r.provisionalPlans)
                 self.assertEqual(len(r.explorationPlans),3)
                 for p in r.explorationPlans:

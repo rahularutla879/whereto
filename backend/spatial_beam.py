@@ -21,7 +21,19 @@ def candidates(request,pools,routes,seen,width=96,audit=None):
         def score(path):
             travel=sum((routes[a.id,b.id].duration_seconds or 0) for a,b in zip(path,path[1:]))
             quality=sum(v.rating or 0 for v in path)
-            return travel-quality*15,tuple(v.id for v in path)
+            # Preserve compliant partial paths before high-rated distant ones.
+            # Unknown evidence is not compliance; retain it only behind verified paths.
+            from backend.location_policy import exceeds,FirstTravel
+            checks=[]
+            origin=getattr(request,'startingLocation',None)
+            first=request.firstTravel or (FirstTravel(value=float(request.maxFirstLegTravel),exclusive=request.maxFirstLegTravelExclusive) if request.maxFirstLegTravel is not None else None)
+            if origin and first:
+                checks.append((routes.get((origin.point.id,path[0].id)),first))
+            if request.betweenTravel:
+                checks.extend((routes.get((a.id,b.id)),request.betweenTravel) for a,b in zip(path,path[1:]))
+            violations=sum(bool(exceeds(leg,p)) for leg,p in checks if leg and leg.status in ('ok','same_location'))
+            unknown=sum(not leg or leg.status not in ('ok','same_location') for leg,_ in checks)
+            return violations,unknown,travel-quality*15,tuple(v.id for v in path)
         next_paths.sort(key=score)
         expanded_count=len(next_paths)
         beam=[]

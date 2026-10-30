@@ -19,12 +19,12 @@ test("summary displays resolved effective values and repeats without inventing o
   assert.equal(fields.Budget, undefined);
   assert.equal(fields.Experience, undefined);
   assert.equal(fields["Time window"], undefined);
-  assert.equal(fields["Group budget"], "$80 maximum total");
+  assert.equal(fields["Group budget"], undefined);
   assert.equal(activityEditText(value.request), "coffee, museum, coffee");
   assert.equal(activityEditText({ ...value.request, activities: ["miniGolf", "escape", "sports"] }), "mini golf, escape room, sports event");
   const edited = { ...value, explicitCost: true, request: { ...value.request, budget: 0, travel: 0 } };
-  assert.equal(Object.fromEntries(outingDetails(edited)).Budget, "$0 maximum / person");
-  assert.equal(Object.fromEntries(outingDetails(edited)).Experience, "Balanced");
+  assert.equal(Object.fromEntries(outingDetails(edited)).Budget, undefined);
+  assert.equal(Object.fromEntries(outingDetails(edited)).Experience, undefined);
 });
 test("dirty summary clearly withholds previous constraints until revalidation", () => {
   const html = renderToStaticMarkup(createElement(OutingSummary, { value, dirty: true, onEdit() {} }));

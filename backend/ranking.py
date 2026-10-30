@@ -201,7 +201,10 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
     measures = [(p.costPerPerson, quality(p), p.totalTravel) for p in candidates]
     bounds = [(min(v, default=0), max(v, default=0)) for v in
               ([m[i] for m in measures if m[i] is not None] for i in range(3))]
-    weights = WEIGHTS[request.cost.value]
+    real_evidence=all(v.providerPlaceId for p in candidates for v in p.candidate.venues)
+    # No real prices are supplied: a legacy spending mode cannot optimize an
+    # invented affordability score or pretend a numeric budget has passed.
+    weights = (0,.6,.4) if real_evidence else WEIGHTS[request.cost.value]
     for p, values in zip(candidates, measures):
         normalized = []
         for i, value in enumerate(values):

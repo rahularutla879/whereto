@@ -37,6 +37,9 @@ def main():
             code,message,diagnostics=classify(response,'search');error=DiscoveryError(code,message);error.diagnostics=diagnostics;raise error
         if scenario['name'] in ('quota', 'authentication'):
             raise DiscoveryError(scenario['name'], 'Google quota or authentication is unavailable. Stop and review settings.')
+        if scenario['name'] in ('strict_local','strict_far'):
+            from backend.strict_local_fixtures import local_places,local_origin
+            return {'places':[local_origin()]} if kwargs else local_places(body,distant_only=scenario['name']=='strict_far')
         if scenario['name']=='open_activity' and not kwargs:
             from backend.location_fixtures import place
             phrase='pottery class' if 'pottery' in body['textQuery'] else 'restaurant' if 'restaurant' in body['textQuery'] else 'cafe'
@@ -95,6 +98,9 @@ def main():
         dispatch('matrix', len(body['origins'])*len(body['destinations']))
         if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
+        if scenario['name'] in ('strict_local','strict_far'):
+            from backend.strict_local_fixtures import local_matrix
+            return local_matrix(body)
         if scenario['name']=='location_acceptance':
             from backend.location_fixtures import acceptance_matrix_fixture
             return acceptance_matrix_fixture(body)

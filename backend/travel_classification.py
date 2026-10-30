@@ -113,3 +113,15 @@ def deviation_penalty(request,plan,routes,origin=None):
         limit=Decimal(str(preference.value))
         deviation+=max(Decimal(0),actual-limit)/max(Decimal(1),limit)
     return .03*min(5,float(deviation))
+
+
+def limit_notice(request):
+    preference=request.firstTravel or request.betweenTravel
+    if preference:
+        value=number(Decimal(str(effective_max(preference))))
+        unit='minute' if preference.unit=='minutes' else 'road-mile'
+        label=f'{value}-{unit}'
+    else:
+        limit=request.maxFirstLegTravel if request.maxFirstLegTravel is not None else request.maxLegTravel if request.maxLegTravel is not None else request.travel
+        label=f'{limit}-minute' if limit is not None else 'stated'
+    return f"We haven't verified an outing within your {label} travel limit yet. You can search more nearby places or choose to see options farther away."

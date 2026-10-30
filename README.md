@@ -4,6 +4,14 @@
 
 A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules, with fictional Baltimore venues by default and deliberate local real-data mode for Google Maps venues/routes. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.
 
+## Current Task 46: travel limits and local discovery
+
+Strict maxima are enforced for ordinary recommendations. Flexible retains its preferred value and inclusive 2× effective maximum. **Explore farther / Search more nearby places changes discovery coverage, never your travel limit.** When no checked plan qualifies, choose more nearby discovery or explicitly **Show options beyond my limit**. Those alternatives identify the original limit and verified excess; **Return to within-limit options** preserves the requirement. Saved page arrows never search or route.
+
+Numeric budget and spending-mode controls are removed. Real prices and exact expenditure cannot be verified; cost intent in your words is retained with a warning, without a missing-budget question. Optional legacy backend fields remain for compatibility; fictional prices never establish real budget compliance.
+
+The exploration banner is removed. Real/mock badges remain, and accounting stays behind **Developer diagnostics**. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
+
 ## Current Task 46 acceptance changes
 
 Real discovery accepts grounded activity phrases beyond the original categories, including pottery classes and go-karting. Movie paraphrases such as “show movies” normalize to movie-going. These find relevant venues, not verified sessions, tickets or bookings. Ambiguous activities and unknown destinations are handled separately. The fictional catalog remains finite and never invents missing mock venues.
@@ -44,9 +52,9 @@ VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_RATINGS_
 
 The October 26 controlled verification exercised ratings, contacts and landmark lookup live: three Text Searches, two Details calls and 18 route elements. That allowance is closed; further live testing needs separate authorization. A bowling relevance correction was then verified offline only. [Results and limits](docs/real-planning.md#october-26-controlled-live-verification). Existing protected keyless credentials are reused. No new API or key is needed for manual lookup: it uses Places Text Search. Contact calls happen only when you open **View details**, under **View plan**. They use Place Details Enterprise. Ratings use optional Text Search Enterprise fields. Both tiers and costs are explained in the linked guide. Do not put the switches in production or a shell profile. Use the unset/normal-start command above to deactivate them.
 
-Real discovery uses finite pages and several activity anchors. **Show different options** tries new combinations from places already found; it may check missing routes but makes no new Places searches. **Explore farther** admits at most two new pages, strategies or regional searches per action, then selectively checks routes. Complete ordered venue combinations never repeat during an active outing; individual venues may recur. Existing cards stay visible during exploration and failures. **Adjust travel preference** opens the existing editor; changing a limit and regenerating is explicit, never automatic. Technical coverage and spending details remain in **About these estimates**.
+Real discovery uses finite pages and several activity anchors. **Show different options** tries new combinations from places already found; it may check missing routes but makes no new Places searches. **Explore farther** admits at most two new pages, strategies or regional searches per action, then selectively checks routes. Complete ordered venue combinations never repeat during an active outing; individual venues may recur. Existing cards stay visible during exploration and failures. **Adjust travel preference** opens the existing editor; changing a limit and regenerating is explicit, never automatic. Technical coverage and spending details remain in **Developer diagnostics**.
 
-Application ceilings are **10 venue searches, up to 100 retained venues/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard includes other cooperating processes through the ledger. Exploration can wait up to two seconds before dispatch, then returns a resumable pause. No failed Google call is retried and no background work is queued. Coverage, hard constraints and budgets determine how many plans are possible.
+Application ceilings are **10 venue searches, up to 100 retained venues/activity, 300 route elements and 30 total attempts per outing**, shared by all option/search actions and contacts. Unused contact allowance is reserved within the outing’s attempt budget; process ceilings stay **50 attempts and 1,500 route elements**. The older city-wide API path uses **36/32/48 elements for two/three/four stops**, plus **6/4/4** with a starting point. The website now uses the location-first path described below; its request counts depend on anchors and checked routes. Later stages use at most 64 new elements each. The unchanged **150-elements/rolling-minute** guard includes other cooperating processes through the ledger. Exploration can wait up to 15 seconds per finite routing stage before dispatch, then returns a resumable pause. No failed Google call is retried and no background work is queued. Coverage, hard constraints and budgets determine how many plans are possible.
 
 For smaller offline/development ceilings, set `WHERETO_SEARCHES_OUTING`, `WHERETO_CANDIDATES`, `WHERETO_MATRIX_OUTING` or `WHERETO_REQUESTS_OUTING` before starting the backend. Existing `WHERETO_MATRIX_SESSION` and `WHERETO_MATRIX_MINUTE` also only lower approved maxima. Defaults are ceilings, not targets. Cloud was read back October 27: **200 searches/day, 10/minute; 2,000 route elements/day, 150/minute**. Only the Places daily override was increased after a confirmed daily-quota failure. Expanded outings can cost more; see [current budgets and gross estimates](docs/billing-safeguards.md#task-46-approved-application-limit-expansion). All live gates remain off by default.
 
@@ -63,7 +71,7 @@ Each distinct activity has its own target of **100 relevant Google venues**: din
 
 **Show different options** makes no new Places searches; it can check necessary new routes. Both actions append up to three new cards to a saved page. **Previous / Next** only browse saved pages and make no provider calls. Pages stay in this tab, reset on edits/reload, and do not persist across users. The server's continuation/no-repeat capability expires after ten minutes.
 
-Checked matching travel appears first, followed by separate pages for travel outside the original Flexible preference, verified violations of its effective maximum/Strict limits, or unverified requirements. The notice and each card identify actual evidence and original limits. Viewing an alternative never changes requirements. Geography, prohibited activities and known required-access incompatibility stay excluded. Hours, reservations and prices remain provisional.
+Checked matching travel appears first. Travel inside the Flexible maximum but outside the original preference is labeled separately. Verified violations of Strict/effective Flexible maxima require your explicit beyond-limit choice. Unverified evidence is labeled separately. The notice and each card identify actual evidence and original limits. Viewing an alternative never changes requirements. Geography, prohibited activities and known required-access incompatibility stay excluded. Hours, reservations and prices remain provisional.
 
 See [the current discovery and browsing contract](docs/real-planning.md#100-venue-pools-and-saved-itinerary-pages) and [cost implications](docs/billing-safeguards.md#100-venue-discovery-accounting).
 
@@ -78,7 +86,7 @@ cd /Users/rahularutla/Documents/whereto
 VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_EXPLORATION_DEV=1 WHERETO_DEV_WARN_USD=10 npm run dev:backend
 ```
 
-The page shows **DEVELOPMENT EXPLORATION**. Open **About these estimates** for outing request/element counts, estimated outing/day cost and the nonblocking warning status. Discovery and routing remain finite; more options use existing evidence first. No background exploration starts on page load. Production/staging/hosting indicators and nonlocal HTTP callers are refused. Keep the backend bound to `127.0.0.1` using the existing command.
+No exploration banner appears in ordinary product copy. Open **Developer diagnostics** below real results for outing request/element counts, estimated outing/day cost and the nonblocking warning status. Discovery and routing remain finite; more options use existing evidence first. No background exploration starts on page load. Production/staging/hosting indicators and nonlocal HTTP callers are refused. Keep the backend bound to `127.0.0.1` using the existing command.
 
 The ledger stores counters only at `~/.local/state/whereto/development-cost.json` (private permissions). All exploration outings, manual searches and contact requests using that file share it, including after backend restart. `WHERETO_DEV_COST_LEDGER` optionally chooses a private absolute path; do not switch/delete files to reset usage. Unreadable or corrupt accounting refuses work. Short local lock contention waits at most two seconds; provider I/O never holds the ledger lock. Errors distinguish busy, permission and invalid-data cases. Never delete/reset usage to recover access. Set `WHERETO_DEV_WARN_USD` to change the informational warning threshold; it never becomes an exploration admission cap. The hard-guard utility retains `WHERETO_DEV_DAILY_USD` outside exploration. The approximately $40–$50 monthly target and Cloud alerts are not hard billing caps. Unrelated/normal-mode usage is not included in exploration accounting.
 
@@ -89,7 +97,7 @@ unset WHERETO_EXPLORATION_DEV VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_RATINGS_D
 npm run dev:backend
 ```
 
-Reload and confirm **MOCK DATA** without the exploration notice. [Accounting, costs and limitations](docs/billing-safeguards.md#development-exploration-estimate-guard); [discovery and continuation](docs/real-planning.md#development-exploration-mode).
+Reload and confirm **MOCK DATA** without developer accounting text in ordinary copy. [Accounting, costs and limitations](docs/billing-safeguards.md#development-exploration-estimate-guard); [discovery and continuation](docs/real-planning.md#development-exploration-mode).
 
 ## Location and Surprise Me planning (Task 46)
 
@@ -197,9 +205,9 @@ Try these requests too:
 
 You can plan entirely through your request without opening **Set preferences**. For example: `We're 6 friends in Baltimore. We want coffee, museum, then coffee tomorrow, under $100 per person, with at most 30 minutes total travel. Best experience.`
 
-After successful interpretation, **Set preferences** displays the resolved location, date, budget/travel caps and cost mode. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified caps/date remain blank; Balanced is the existing default when no cost mode is stated.
+After successful interpretation, **Set preferences** displays the resolved location, date and travel caps. These automatic values are for inspection; they do not override your next text request. No extra AI call is made, and typing does not trigger interpretation. Unspecified travel caps/date remain blank.
 
-Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero budget/travel limit remains a real limit; clicking Balanced deliberately also overrides conflicting text. Opening the panel or viewing automatic values creates no override. Missing location opens a short follow-up below your request. Answer there to continue automatically. Budget/travel limits remain explicit constraints, while cost mode ranks eligible plans.
+Deliberately changing a control overrides that field in later requests until you clear it or click **Reset preferences**. Clearing a field releases its override. A zero travel limit remains a real limit. Opening the panel or viewing automatic values creates no override. Missing location opens a short follow-up below your request. Answer there to continue automatically. Travel limits remain explicit constraints. Real numeric budget compliance is not verified.
 
 ## Planner review and improvements
 
@@ -236,10 +244,10 @@ All scheduled events have **invented entries only on November 7 and November 14,
 
 ### Preferences that change plans
 
-- **Budget:** a hard cap in USD **per person**, including every mock activity. Explicit text like `$25 per person` is also understood. Zero is allowed for free activities.
+- **Cost:** numeric budget controls have been removed. Real costs cannot be verified. Optional legacy mock/API budget fields remain for fictional regression compatibility.
 - **Travel:** a hard cap on **total mock travel between stops**. It excludes getting there, returning home, and waiting for an event. Zero permits a single stop but not travel between multiple stops.
-- **People:** filters mock capacity, not just the group total. Options have invented limits of 4, 8, or 20 people. For example, changing from 4 to 12 people eliminates smaller options. A group over 20 gets an explanation rather than invented capacity.
-- **Cost preference:** ranks budget, balanced, or experience options first. Experience uses a fictional venue tier, not reviews or verified quality. Budget-friendly picks use lower costs; hard limits always win. Python selects up to three distinct options under the chosen mode; tight constraints can yield fewer. Confirmed fictional-data options precede provisional alternatives.
+- **People:** participant counts are not a current planning requirement. Optional legacy fields remain compatible; venue capacity and real group suitability are not verified.
+- **Ranking:** real recommendations use supplied quality and travel evidence, plus all-stop variety. Numeric spending preferences do not establish real affordability. Legacy fictional ranking modes remain internal compatibility paths.
 
 ### Browser checks you can try
 
@@ -328,16 +336,16 @@ To run a production build **locally**, run `npm run build` and then `npm start`.
 - **Old “Relative dates are not resolved yet” message after updating the project:** the running Python process may still have old code loaded. Stop that backend in its Terminal with Control+C, then run `npm run dev:backend` from the current project folder and retry. The startup command watches backend changes.
 - **“AI interpretation unavailable”**: open the existing Ollama app, confirm `ollama list` includes `qwen3:4b`, and keep the Python backend running. No keyword fallback exists.
 - **“Python planner unavailable”**: start `npm run dev:backend`, wait for startup, then retry. No browser fallback exists.
-- **No plans appear**: check the explanation, try Baltimore, leave budget/travel blank, and click Try an example. Very low limits can exclude every sample combination.
+- **No plans appear**: check the explanation, try Baltimore, leave optional travel blank, and click Try an example. Very low limits can exclude every sample combination.
 
 
 ## Task 28 verification you can repeat
 
-With both servers running, click Try an example → Plan my outing → choose Surprise Me when asked → View plan. You should see sample results, fictional prices/times and an expandable About these estimates section. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. For no affordable plan, enter `Coffee in Baltimore for 2 people` and set Maximum budget to `0`.
+With both servers running, click Try an example → Plan my outing → choose Surprise Me when asked → View plan. You should see sample results, fictional prices/times and an expandable About these estimates section. To test confirmed fictional-data feasibility, enter `Baseball and concert in Baltimore for 4 people on 2026-11-07`. For no matching event, use `Concert in Baltimore for 4 people on 2026-11-08`. Numeric-budget UI tests are retired; legacy fictional budget contracts remain covered by automated tests.
 
 To prove Python is required, press Control+C in the backend Terminal only, then click Plan my outing again. The cards must disappear and an unavailable message must appear. Restart with `npm run dev:backend` and retry. The three cards visible before any submission are fixed inspiration examples only.
 
-Task 27 ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–33 are complete. The active website uses local AI interpretation and Python planning.
+The historical Task 27 fictional engine ranks using normalized affordability, experience and travel weights; this differs from the retired planner’s separate budget/balanced/experience picks. Balanced can therefore favor a higher-priced venue when the combined score is better. Activity order and hard limits remain mandatory. Tasks 28–33 are complete. The active website uses local AI interpretation and Python planning.
 
 
 Task 29 verification passed on October 20, 2026: real Python results, hard limits, all three spending modes, backend failure/recovery, delayed duplicate submission protection, and keyboard interactions at mobile, tablet and desktop sizes. All 75 backend tests, 56 frontend tests, lint, TypeScript and production build passed. An exact-midnight display error was fixed, and two preference hints were darkened for readability; the homepage layout is preserved. Detailed evidence and audit limits are recorded in HANDOVER.md.

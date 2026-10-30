@@ -16,11 +16,8 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
     ["Date", formatOutingDate(r.date)],
     ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : activityLabel(a)).join(" → ")],
   ];
-  if (r.budget !== null) details.push(["Budget", `$${r.budget} maximum / person`]);
   if (r.travel !== null) details.push(["Travel", `${r.travelExclusive ? "Under " : ""}${r.travel} min ${r.travelExclusive ? "total between stops" : "maximum total between stops"}`]);
-  if (value.explicitCost) details.push(["Experience", ({ budget: "Cheap", balanced: "Balanced", experience: "Best Experience" })[r.cost]]);
   if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} ${real ? "(destination local time where known; otherwise calendar reference shown in notes)" : "(Baltimore time)"}`]);
-  if (r.groupBudget != null) details.push(["Group budget", `$${r.groupBudget} maximum total`]);
   if (r.maxLegTravel != null) details.push(["Each journey", `${r.maxLegTravelExclusive ? "Under " : ""}${r.maxLegTravel} min${r.maxLegTravelExclusive ? " between stops" : " maximum"}`]);
   if(r.planningMode==="surprise")details.push(["Beginning","Surprise Me — first activity venue; no origin journey"]);
   if(r.betweenTravel)details.push(["Between activities",(r.betweenTravel.mode==="flexible"?"Prefer ":r.betweenTravel.exclusive?"Under ":"At most ")+r.betweenTravel.value+" "+r.betweenTravel.unit+(r.betweenTravel.mode==="flexible"?"; maximum "+r.betweenTravel.value*2+" "+r.betweenTravel.unit+" per leg":" per leg")]);

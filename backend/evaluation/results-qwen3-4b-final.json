@@ -1,0 +1,720 @@
+{
+  "validationMode": "real",
+  "casesSha256": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+  "model": "qwen3:4b",
+  "installed": {
+    "name": "qwen3:4b",
+    "model": "qwen3:4b",
+    "modified_at": "2026-10-20T20:08:33.184557715-04:00",
+    "size": 2497293931,
+    "digest": "359d7dd4bcdab3d86b87d73ac27966f4dbb9f5efdfcc75d34a8764a09474fae7",
+    "details": {
+      "parent_model": "",
+      "format": "gguf",
+      "family": "qwen3",
+      "families": [
+        "qwen3"
+      ],
+      "parameter_size": "4.0B",
+      "quantization_level": "Q4_K_M",
+      "context_length": 262144,
+      "embedding_length": 2560
+    },
+    "capabilities": [
+      "completion",
+      "tools",
+      "thinking"
+    ]
+  },
+  "ollamaVersion": {
+    "version": "0.35.1"
+  },
+  "settings": {
+    "num_ctx": 8192,
+    "num_predict": 1024,
+    "temperature": 0,
+    "think": false,
+    "retries": 0
+  },
+  "firstCallSeconds": 14.32,
+  "warmMedianSeconds": 6.1615,
+  "baseCases": 26,
+  "successes": 25,
+  "rows": [
+    {
+      "id": "dinner",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 14.32
+    },
+    {
+      "id": "order",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Baltimore",
+      "modelUncertainties": [],
+      "resolvedDestination": "Baltimore",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.539
+    },
+    {
+      "id": "unusual",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Manhattan",
+      "modelUncertainties": [],
+      "resolvedDestination": "Manhattan",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.562
+    },
+    {
+      "id": "movies",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.385
+    },
+    {
+      "id": "workshop",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.591
+    },
+    {
+      "id": "midtown",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Midtown Manhattan",
+      "modelUncertainties": [],
+      "resolvedDestination": "Midtown Manhattan",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.521
+    },
+    {
+      "id": "borough",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Brooklyn",
+      "modelUncertainties": [],
+      "resolvedDestination": "Brooklyn",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.335
+    },
+    {
+      "id": "unknown",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "GSIW",
+      "modelUncertainties": [
+        "3 people"
+      ],
+      "resolvedDestination": "GSIW",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.623
+    },
+    {
+      "id": "near",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "near me",
+      "modelUncertainties": [],
+      "resolvedDestination": "near me",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.223
+    },
+    {
+      "id": "around",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "around me",
+      "modelUncertainties": [],
+      "resolvedDestination": "near me",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.714
+    },
+    {
+      "id": "origin",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [
+        "within 10 minutes of my hotel in Kothapet"
+      ],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 5.508
+    },
+    {
+      "id": "separate",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Manhattan",
+      "modelUncertainties": [
+        "Start from my hotel in Jersey City"
+      ],
+      "resolvedDestination": "Manhattan",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.973
+    },
+    {
+      "id": "strict",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "between": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Baltimore",
+      "modelUncertainties": [],
+      "resolvedDestination": "Baltimore",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 4.985
+    },
+    {
+      "id": "flexible",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Washington, DC",
+      "modelUncertainties": [
+        "within 20 minutes of my starting point"
+      ],
+      "resolvedDestination": "Washington, DC",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 6.365
+    },
+    {
+      "id": "miles",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "first": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [
+        "within 5 miles of my hotel"
+      ],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 5.958
+    },
+    {
+      "id": "exclusion",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "geography": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Washington, DC",
+      "modelUncertainties": [
+        "No Virginia"
+      ],
+      "resolvedDestination": "Washington, DC",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 6.54
+    },
+    {
+      "id": "access",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "wheelchair": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Manhattan",
+      "modelUncertainties": [
+        "wheelchair access"
+      ],
+      "resolvedDestination": "Manhattan",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.769
+    },
+    {
+      "id": "date",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "date": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Baltimore",
+      "modelUncertainties": [],
+      "resolvedDestination": "Baltimore",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.804
+    },
+    {
+      "id": "missing",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "location"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "safeIssues": [
+        "Where would you like to go? Enter a city or location to continue."
+      ],
+      "extractedDestination": null,
+      "modelUncertainties": [],
+      "resolvedDestination": null,
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 5.555
+    },
+    {
+      "id": "kothapet",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": false,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": false,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Kothapet",
+      "modelUncertainties": [],
+      "resolvedDestination": "Kothapet, Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.835
+    },
+    {
+      "id": "multilingual",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "date"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "safeIssues": [
+        "What day are you planning to go?"
+      ],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": null,
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.509
+    },
+    {
+      "id": "informal",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Jersey City",
+      "modelUncertainties": [],
+      "resolvedDestination": "Jersey City",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.562
+    },
+    {
+      "id": "people",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 6.975
+    },
+    {
+      "id": "budget",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "budget": true,
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.589
+    },
+    {
+      "id": "ambiguity",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "activities"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 1,
+      "safeIssues": [
+        "We couldn't tell which activity you meant. Could you be a little more specific?"
+      ],
+      "extractedDestination": "Manhattan",
+      "modelUncertainties": [],
+      "resolvedDestination": null,
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.171
+    },
+    {
+      "id": "conflict",
+      "repeat": false,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [
+        "location"
+      ],
+      "accepted": false,
+      "clarificationCorrect": true,
+      "checks": {},
+      "success": true,
+      "issueCount": 2,
+      "safeIssues": [
+        "Part of your request is unclear or unsupported. Rephrase with explicit activities and constraints; no plan was generated.",
+        "More than one location was stated. Choose one city for this outing."
+      ],
+      "extractedDestination": "Manhattan or Brooklyn",
+      "modelUncertainties": [
+        "Manhattan or Brooklyn"
+      ],
+      "resolvedDestination": null,
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.796
+    },
+    {
+      "id": "dinner",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Hyderabad",
+      "modelUncertainties": [],
+      "resolvedDestination": "Hyderabad",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.449
+    },
+    {
+      "id": "order",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Baltimore",
+      "modelUncertainties": [],
+      "resolvedDestination": "Baltimore",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.585
+    },
+    {
+      "id": "unusual",
+      "repeat": true,
+      "structuredValid": true,
+      "activitiesCorrect": true,
+      "destinationCorrect": true,
+      "questions": [],
+      "accepted": true,
+      "clarificationCorrect": true,
+      "checks": {
+        "noInventedPeople": true
+      },
+      "success": true,
+      "issueCount": 0,
+      "safeIssues": [],
+      "extractedDestination": "Manhattan",
+      "modelUncertainties": [],
+      "resolvedDestination": "Manhattan",
+      "resolvedDestinationCorrect": true,
+      "pipelineSuccess": true,
+      "seconds": 7.908
+    }
+  ],
+  "scoringNote": "Canonical near-me destination comparison corrected after capture; no inference output or timing changed.",
+  "adapterSha256": "9eb9eec132764e45529427daf3f877c619dd566efb1b6883018aa805e40480ef",
+  "pipelineSuccesses": 26,
+  "loadedAllocationBytes": 3800291082
+}

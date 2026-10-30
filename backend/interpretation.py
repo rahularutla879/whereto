@@ -3,6 +3,7 @@
 Date/time resolution delegates to date_resolution; no itinerary arithmetic lives here.
 """
 import re
+from backend.provider_budget import local_real_enabled
 from datetime import datetime, timezone
 from typing import Annotated, Literal
 
@@ -168,28 +169,32 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
         issue("More than one location was stated. Choose one city for this outing.")
         ask("location", LOCATION_QUESTION, "ambiguous")
 
-    # A minimum is not the planner's maximum-cap contract. Never reinterpret it.
-    minimum_spending = has_minimum_spending(raw)
-    if minimum_spending:
-        issue("Minimum spending requirements are unsupported and may conflict with your maximum. Edit the request to remove the minimum and state the maximum USD budget per person or for the group. No plan was generated.")
-    money = {"budget_per_person": [], "budget_group": []}
-    for match in ([] if minimum_spending else MONEY_EVIDENCE.finditer(raw)):
-        if not re.fullmatch(r"-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?", match[1]):
-            issue("The budget amount is unclear. Use an amount such as $60 per person or $1,000 total.")
-            continue
-        amount = float(match[1].replace(",", ""))
-        scope = (match[2] or "").lower()
-        prefix = raw[max(0, match.start() - 25):match.start()].lower()
-        group = scope == "total" or "group" in scope or bool(re.search(r"(?:group (?:budget|cap)|total budget)\s*$", prefix))
-        money["budget_group" if group else "budget_per_person"].append(amount)
-        if not scope and not group and not manual.budget.strip():
-            issue("Budget scope is unclear. State USD per person or a total group budget, or set Maximum budget.")
-    for field, amounts in ([] if minimum_spending else money.items()):
-        if field == "budget_per_person" and manual.budget.strip():
-            continue
-        amount = getattr(ai, field)
-        if (amounts and (any(n < 0 for n in amounts) or amount != min(amounts))) or (amount is not None and not amounts):
-            issue("The budget amount or its per-person/group meaning was not captured correctly. State one maximum USD amount per person and/or one total group cap.")
+    # Numeric costs are retained for compatibility, never requested as missing
+    # details. Real prices/currencies cannot be verified by venue discovery.
+    from backend.provider_budget import local_real_enabled
+    if not local_real_enabled():
+        # A minimum is not the planner's maximum-cap contract. Never reinterpret it.
+        minimum_spending = has_minimum_spending(raw)
+        if minimum_spending:
+            issue("Minimum spending requirements are unsupported and may conflict with your maximum. Edit the request to remove the minimum and state the maximum USD budget per person or for the group. No plan was generated.")
+        money = {"budget_per_person": [], "budget_group": []}
+        for match in ([] if minimum_spending else MONEY_EVIDENCE.finditer(raw)):
+            if not re.fullmatch(r"-?(?:\d+|\d{1,3}(?:,\d{3})+)(?:\.\d+)?", match[1]):
+                issue("The budget amount is unclear. Use an amount such as $60 per person or $1,000 total.")
+                continue
+            amount = float(match[1].replace(",", ""))
+            scope = (match[2] or "").lower()
+            prefix = raw[max(0, match.start() - 25):match.start()].lower()
+            group = scope == "total" or "group" in scope or bool(re.search(r"(?:group (?:budget|cap)|total budget)\s*$", prefix))
+            money["budget_group" if group else "budget_per_person"].append(amount)
+            if not scope and not group and not manual.budget.strip():
+                issue("Budget scope is unclear. State USD per person or a total group budget, or set Maximum budget.")
+        for field, amounts in ([] if minimum_spending else money.items()):
+            if field == "budget_per_person" and manual.budget.strip():
+                continue
+            amount = getattr(ai, field)
+            if (amounts and (any(n < 0 for n in amounts) or amount != min(amounts))) or (amount is not None and not amounts):
+                issue("The budget amount or its per-person/group meaning was not captured correctly. State one maximum USD amount per person and/or one total group cap.")
 
     first_preference, first_spans, first_problem = first_intent(raw)
     if first_problem: issue(first_problem)
@@ -320,8 +325,19 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 ai.location=clause
                 break
     ai.people = None  # Legacy extension only; never a planning requirement.
+    # Removing unsupported cost questions does not authorize model-invented caps.
+    if local_real_enabled() and not re.search(r"[$€£¥₹]|\b(?:budget|spend|cost|price|USD|EUR|GBP|CAD|AUD|INR|JPY|dollars?|rupees?)\b",raw,re.I):
+        ai.budget_per_person=ai.budget_group=None
+        ai.currency=None
+    if local_real_enabled():
+        from decimal import Decimal
+        source_amounts={Decimal(m[1].replace(',', '')) for m in MONEY_EVIDENCE.finditer(raw)}
+        for field in ('budget_per_person','budget_group'):
+            amount=getattr(ai,field)
+            if amount is not None and Decimal(str(amount)) not in source_amounts:
+                setattr(ai,field,None)
     other_currency = re.search(r"[€£¥₹]|\b(?:EUR|GBP|CAD|AUD|NZD|HKD|SGD|MXN|INR|JPY|CNY|CHF|SEK|NOK|DKK|ZAR|BRL|KRW|RUB|Canadian|Australian|pesos?|rupees?|yen|yuan)\b", raw, re.I)
-    if (not manual.budget.strip() or ai.budget_group is not None) and ai.currency == "USD" and other_currency:
+    if (not manual.budget.strip() or ai.budget_group is not None) and ai.currency == "USD" and other_currency and not local_real_enabled():
         grounding_issues.append("The request names a non-USD currency. This catalog cannot convert currency.")
     # Existing catalog policy: an unqualified $ amount denotes USD. Restore
     # this explicit source evidence; scope/amount checks below still apply.
@@ -337,7 +353,24 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     normalize_verbatim_travel(raw, ai)
     # Uncertainties stay blocking unless the corresponding explicit correction resolves them.
     uncertainties = []
+    validation_notes = []
     for issue in ai.uncertainties:
+        # These exact, grounded clauses are representable by existing controls;
+        # they are requirements to retain, not unresolved destination facts.
+        if local_real_enabled():
+            origin_clause=re.search(r"\bstart from [^.;!?]+",raw,re.I)
+            if (origin_clause and issue.casefold()==origin_clause[0].casefold() and ai.location
+                    and re.search(r"\bin\s+"+re.escape(ai.location)+r"\b",raw[:origin_clause.start()],re.I)
+                    and not re.search(r"\d|minutes?|miles?",issue,re.I)):
+                validation_notes.append("Your stated starting place is kept for explicit lookup and confirmation; it is separate from the destination.")
+                continue
+            if (re.fullmatch(r"wheelchair (?:access|accessible)",issue,re.I)
+                    and re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair\b",raw,re.I)):
+                validation_notes.append("Required wheelchair access is retained and must be verified for each venue; unknown support is not confirmed access.")
+                continue
+        if local_real_enabled() and re.search(r"budget|currency|price|cost|spending",issue,re.I) and not re.search(r"travel|minutes|miles|location|date|wheelchair",issue,re.I):
+            validation_notes.append("Cost preferences are noted, but prices, currency conversion and budget compliance are not verified.")
+            continue
         if re.search(r"people|participants?|party|group|persons", issue, re.I) and not re.search(r"budget|currency|price|cost|spending", issue, re.I):
             continue
         # A bare schema field with null is an absent optional value, not an
@@ -411,7 +444,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",
                         "time": "What overall time window do you mean (for example, from 6 PM to 10 PM)?"}[field], "ambiguous")
     issues = [*uncertainties, *grounding_issues, *source_constraint_issues(raw, ai, manual, answers, ask)]
-    notes = ["AI interpretation; itinerary calculations use the Python planner and fictional catalog."]
+    notes = ["AI interpretation; itinerary calculations use the Python planner and fictional catalog."] + validation_notes
     if ai.preferences:
         notes.append("Stated preferences: " + ", ".join(ai.preferences) + ". Only supported categories and planning constraints are enforced; venue qualities are unverified.")
     if ai.suggested_activities:
@@ -575,7 +608,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if location is None:
         ask("location", LOCATION_QUESTION)
         issues.append(LOCATION_QUESTION)
-    if (ai.budget_per_person is not None or ai.budget_group is not None) and ai.currency != "USD":
+    if (ai.budget_per_person is not None or ai.budget_group is not None) and ai.currency != "USD" and not local_real_enabled():
         if ai.budget_group is not None or not manual.budget.strip():
             message = "Budget currency is unknown or unsupported. This fictional catalog uses USD; no conversion was made."
             issues.append(message)
@@ -606,6 +639,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         except (ValueError, TypeError, ValidationError):
             issues.append("Check USD budget (0–100,000/person), travel (0–1440 minutes), and exact date/time. Scheduled events require an exact date.")
     # Keep the original grounded extraction; follow-up corrections remain separate.
+    if local_real_enabled() and (ai.budget_per_person is not None or ai.budget_group is not None or re.search(r"budget|affordable|cheap|[$€£₹]",raw,re.I)):
+        notes.append("Your cost intent is kept. Actual venue prices and exact budget compliance are not verified; confirm costs directly.")
     original = saved.interpretation if saved else ai.model_copy(deep=True)
     pending = PendingClarification(text=value.text, interpretation=original, answers=answers, referenceTime=reference) if (resolved is not None or (issues and (questions or saved))) and not unsupported else None
     return InterpretationResult(interpretation=ai, request=resolved, notes=notes,

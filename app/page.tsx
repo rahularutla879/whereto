@@ -2,11 +2,11 @@
 import { ItineraryPagination } from "@/components/itinerary-pagination";
 import { ItineraryPages, beyondPage, BEYOND_NOTICE } from "@/lib/itinerary-pages";
 
-import { ExplorationNotice, explorationStage } from "../components/exploration-notice";
+import { explorationStage } from "../components/exploration-notice";
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { ArrowDown, ArrowRight, ArrowUpRight, Check, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Utensils, Wine, CircleDollarSign, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
+import { ArrowDown, ArrowRight, ArrowUpRight, ChevronDown, Clock3, Coffee, Footprints, MapPin, Palette, Popcorn, Settings2, Sparkles, Utensils, Wine, CircleHelp, CircleDot, X, Trophy, Music, Mic, Landmark, Theater, Laugh, Gamepad2, ShoppingBag, TreePine, Puzzle } from "lucide-react";
 import { CardArtwork, HeroArtwork } from "@/components/artwork";
-import { EXAMPLE_REQUEST, MOCK_EVENT_DATES, activityLabel, formatDuration, formatTime, type Activity, type CostPreference, type Plan, type PlannerResult } from "@/lib/planner";
+import { EXAMPLE_REQUEST, MOCK_EVENT_DATES, activityLabel, formatDuration, formatTime, type Activity, type Plan, type PlannerResult } from "@/lib/planner";
 
 import { emptyPreferenceState, editPreference, manualPreferences, displayInterpretedPreferences, type PreferenceField } from "@/lib/preferences";
 import { PlanningSession } from "@/lib/planning-session";
@@ -79,12 +79,11 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
 export default function Home() {
   const [dataMode, setDataMode] = useState<"mock" | "real" | "unavailable">("unavailable");
   const startingControls = useRef<StartingLocationHandle>(null);
-  const [explorationEnabled, setExplorationEnabled] = useState(false);
   const [lookupEnabled, setLookupEnabled] = useState(false);
   const [planningStage, setPlanningStage] = useState("Generating itinerary");
   const [locationContext, setLocationContext] = useState<LocationContext>({});
   const [detailsSession] = useState(()=>new VenueDetailsSession());
-  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setExplorationEnabled(value.explorationEnabled === true); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -94,8 +93,8 @@ export default function Home() {
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
   const pages = useRef(new ItineraryPages());
   const latest = useRef<PlannerResult>(demoPlans as PlannerResult);
-  const [pageState,setPageState]=useState({index:0,count:0});
-  function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length});}
+  const [pageState,setPageState]=useState({index:0,count:0,hasBeyond:false});
+  function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length,hasBeyond:pages.current.pages.some(page=>page.plans.some(plan=>plan.travelClassification==="beyond_limit"))});}
   const [loading, setLoading] = useState(false);
   const session = useRef(new PlanningSession());
   const surpriseHistory=useRef(new SurpriseHistory());
@@ -148,16 +147,16 @@ export default function Home() {
     setOptionsNotice("Planning cancelled. Your saved pages are still available; no further work is queued.");
     setResult(previous => previous.plans.length ? previous : { ...previous, requestFailed:false, message:"Planning cancelled. Your request is kept; submit again when ready." });
   }
-  async function showDifferent(expandDiscovery = false) {
+  async function showDifferent(expandDiscovery = false, showBeyond = false) {
     const active=latest.current;
-    if (!expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();}setOptionsNotice("");return; }
-    if (!active.optionsToken || !(expandDiscovery ? active.canDiscover : active.canExpand)) return;
+    if (!showBeyond && !expandDiscovery && active.alternativeBatches?.length) { const next=nextOptions(active);latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();}setOptionsNotice("");return; }
+    if (!active.optionsToken || !(showBeyond ? active.canShowBeyond : expandDiscovery ? active.canDiscover : active.canExpand)) return;
     const controller = session.current.begin();
     if (!controller) return;
     setPlanningStage(explorationStage(expandDiscovery));
     setLoading(true); setOptionsBusy(true); setOptionsNotice("");setRecovery(undefined);
     try {
-      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery }), cache: "no-store", signal: controller.signal });
+      const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery, showBeyond }), cache: "no-store", signal: controller.signal });
       const data = await response.json();
       if (!session.current.current(controller)) return;
       if (!response.ok) { setRecovery(data.code);if(Array.isArray(data.diagnosticNotes))setResult(previous=>({...previous,notes:[...previous.notes,...data.diagnosticNotes]}));if(data.resumable===true){setOptionsNotice(consumerMessage(data.message));return;}throw new Error(typeof data.message === "string" ? data.message : "More options are unavailable."); }
@@ -165,7 +164,7 @@ export default function Home() {
       if (!session.current.current(controller)) return;
       setRecovery(next.recoveryCode);
       if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
-      else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover })); setOptionsNotice(consumerMessage(next.message) || "No more distinct options in the checked candidate pool."); }
+      else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover,canShowBeyond:next.canShowBeyond};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover, canShowBeyond:next.canShowBeyond })); setOptionsNotice(consumerMessage(next.message) || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
       if (session.current.current(controller)) { latest.current={...active,canExpand:false,canDiscover:false};setResult(previous => ({ ...previous, canExpand: false, canDiscover: false })); setOptionsNotice(error instanceof Error ? consumerMessage(error.message) : "More options are unavailable. No automatic retry was made."); }
     } finally { if (session.current.finish(controller)) {setLoading(false);setOptionsBusy(false);} }
@@ -229,7 +228,7 @@ export default function Home() {
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing, or use the example."); requestRef.current?.reportValidity(); return; }
     await runPlanning(!!clarification || !!validated);
   }
-  const preferencesCount = [preferences.location, preferences.date, preferences.budget, preferences.travel].filter(Boolean).length + (preferences.costExplicit || preferences.cost !== "balanced" ? 1 : 0);
+  const preferencesCount = [preferences.location, preferences.date, preferences.travel].filter(Boolean).length;
 
   return <>
     <a className="skip-link" href="#planner">Skip to planner</a>
@@ -247,7 +246,6 @@ export default function Home() {
       <section className="planner-section shell" id="planner" aria-labelledby="planner-title">
         <form className="planner" onSubmit={submit}>
           <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2><span className="local-badge">{dataMode === "real" ? "REAL DATA · LOCAL DEV" : dataMode === "mock" ? "MOCK DATA" : "MODE UNAVAILABLE"}</span></div>
-          <ExplorationNotice active={explorationEnabled && dataMode === "real"} />
           {dataMode === "unavailable" && <p role="status">Checking the planner connection. If this stays unavailable, start the backend and reload this page before planning.</p>}
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
@@ -260,9 +258,7 @@ export default function Home() {
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>{dataMode === "real" ? "Destination city/neighborhood; separate from your start" : "Fictional Baltimore venues only"}</small></label>
               <OutingDateField real={dataMode === "real"} value={preferences.date} onChange={value => updatePreference("date", value)} />
-              <label><span><CircleDollarSign size={14} /> Maximum budget</span><div className="input-with-unit"><input type="number" inputMode="decimal" min="0" max="100000" step="0.01" placeholder="No limit" value={preferences.budget} onChange={(e) => updatePreference("budget", e.target.value)} /><span>$/person</span></div><small>{dataMode === "real" ? "Hard limit; compliance needs actual venue prices" : "Sample activities only; excludes extras"}</small></label>
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
-              <fieldset className="cost-field"><legend>Cost preference</legend><div className="cost-options">{([ ["budget", "Budget-friendly"], ["balanced", "Balanced"], ["experience", "Best experience"] ] as [CostPreference, string][]).map(([value, label]) => <label key={value} className={preferences.cost === value ? "selected" : ""}><input type="radio" name="cost" value={value} checked={preferences.cost === value} onClick={() => updatePreference("cost", value)} onChange={() => updatePreference("cost", value)} />{label}{preferences.cost === value && <Check size={12} />}</label>)}</div></fieldset>
               {validated && <label className="activity-editor"><span>Activities in order</span><input aria-describedby="activity-edit-help" value={answers.activities ?? activityEditText(validated.request)} maxLength={500} onChange={e => { invalidateResults(); setAnswers(previous => ({ ...previous, activities: e.target.value })); }} /><small id="activity-edit-help">Separate stops with commas, including repeats. Use “dinner” to keep dinner timing. Up to four stops.</small></label>}
             </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
@@ -289,11 +285,22 @@ export default function Home() {
         {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
-        {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover});syncPages();}}}/>}
-        {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.canExpand || result.canDiscover) && <AlternativeActions
+        {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover,canShowBeyond:latest.current.canShowBeyond});syncPages();}}}/>}
+        {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.canExpand || result.canDiscover || result.canShowBeyond) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}
           busy={loading} disabled={dirty} notice={optionsBusy?planningStage+"…":optionsNotice||(!result.canExpand&&!result.canDiscover?"No more options found in this search. Other suitable places may exist.":"")}
-          onAction={explore=>void showDifferent(explore)} onAdjust={()=>startingControls.current?.editTravel()}/>}
+          nearby={!!validated?.request.firstTravel} canShowBeyond={!!result.canShowBeyond||pageState.hasBeyond}
+          onBeyond={()=>{
+            const saved=pages.current.pages.findLastIndex(page=>page.plans.some(plan=>plan.travelClassification==="beyond_limit"));
+            if(saved>=0&&!result.plans.length){pages.current.index=saved;setResult(structuredClone(pages.current.pages[saved]));syncPages();setOptionsNotice("");}
+            else void showDifferent(false,true);
+          }} onCompliant={()=>{
+            const index=pages.current.pages.findLastIndex(page=>page.plans.every(plan=>plan.travelClassification!=="beyond_limit"));
+            if(index>=0){pages.current.index=index;setResult(structuredClone(pages.current.pages[index]));syncPages();}
+            else setResult(previous=>({...previous,plans:[],message:"Search more nearby places to verify an outing within your limit."}));
+            setOptionsNotice("Showing options within your travel maximum. Your original limits are unchanged.");
+          }} showingBeyond={result.plans.some(plan=>plan.travelClassification==="beyond_limit")}
+          onAction={explore=>void showDifferent(explore,result.plans.some(plan=>plan.travelClassification==="beyond_limit"))} onAdjust={()=>startingControls.current?.editTravel()}/>}
         {generated&&recovery&&["outing_date_expired","outing_time_expired"].includes(recovery)&&<div role="group" aria-label="Outing date recovery"><p>{optionsNotice||result.message} Your activities, destination and confirmed origin are kept.</p><button type="button" className="secondary-button" onClick={()=>{setPreferencesOpen(true);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('input[type="date"]')?.focus());}}>Choose another date</button><p>No date is changed until you select one and regenerate. You can keep browsing saved pages.</p></div>}
         {generated&&["destination_unresolved","destination_ambiguous","destination_verification_unavailable"].includes(recovery??"")&&<div role="group" aria-label="Destination recovery"><p>{locationContext.planningMode==="surprise"?"Clarify the destination city or neighborhood. Surprise Me keeps its mode and does not invent a starting location.":"Your original destination is kept. A nearby reference prioritizes that area; it does not verify an exact neighborhood boundary."}</p>{locationContext.planningMode!=="surprise"&&<button type="button" className="secondary-button" onClick={()=>{startingControls.current?.useAnchor();void runPlanning(!!validated);}}>Use confirmed start as nearby search reference</button>}<button type="button" onClick={()=>setPreferencesOpen(true)}>Correct destination</button></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}

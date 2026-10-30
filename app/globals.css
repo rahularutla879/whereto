@@ -252,3 +252,8 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .itinerary-pagination button:disabled { opacity:.45; cursor:default; }
 .itinerary-pagination button:focus-visible { outline:3px solid #7156b5; outline-offset:3px; }
 .itinerary-pagination small { flex-basis:100%; text-align:center; }
+
+.alternative-row { display:flex; align-items:center; gap:12px; flex-wrap:wrap; margin:12px 0; }
+.alternative-row .secondary-button { flex-shrink:0; }
+.more-options .alternative-row p { margin:0; flex:1 1 180px; min-width:0; }
+.beyond-choice { margin:12px 0; text-decoration:underline; }

@@ -32,7 +32,7 @@ export type Plan = {
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
 export type PlannerResult = {
-  recoveryCode?: string; requestFailed?: boolean; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };
+  recoveryCode?: string; requestFailed?: boolean; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; canShowBeyond?: boolean; dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };
 export const EXAMPLE_REQUEST = "Plan bowling, drinks, and a movie in Baltimore tomorrow.";
 export const EMPTY_PREFERENCES: Preferences = { location: "", date: "", people: "", budget: "", travel: "", cost: "balanced" };

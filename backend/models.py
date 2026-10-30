@@ -549,6 +549,7 @@ class RankingResult(ContractModel):
     optionsToken: str | None = None
     canExpand: bool = False
     canDiscover: bool = False
+    canShowBeyond: bool = False
     alternativeBatches: list[Annotated[list[RankedItinerary], Field(min_length=1, max_length=3)]] = Field(default_factory=list, max_length=2)
 
     @model_validator(mode="after")

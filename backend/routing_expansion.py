@@ -21,7 +21,7 @@ def select_stage(request, known, outing, facts):
         return list(missing), capacity, 0
 
     def proximity(a, b):
-        x = a.coordinates or (facts[a.id].coordinates if a.id in facts else None)
+        x = a.coordinates or (request.starting_location.reference_coordinates if request.starting_location and a.id==request.starting_location.point.id else None) or (facts[a.id].coordinates if a.id in facts else None)
         y = b.coordinates or (facts[b.id].coordinates if b.id in facts else None)
         return distance_m(x, y) if x and y else float('inf')
 
