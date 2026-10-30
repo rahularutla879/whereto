@@ -42,3 +42,6 @@ __pycache__/
 
 # Development cost accounting is local-only, never provider content.
 development-cost.json
+
+# Local downloaded database CA certificate (no application data).
+backend/.local/

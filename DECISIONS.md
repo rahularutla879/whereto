@@ -276,3 +276,8 @@ Require deliberate beyond-limit consent before revealing verified Strict/effecti
 ## October 30, 2026 — owner-approved pre-launch roadmap amendment
 
 Use TASKS.md as the living official roadmap, retaining docs/original-roadmap.docx as the unchanged original baseline. Insert pending Tasks 50A–50E after database/security Tasks 47–50 and before deployment Tasks 51–55, without renumbering any of the 135 original tasks. The public Stage 1 checkpoint now includes mixed mandatory/flexible journeys, ordering, optional returns, complete-journey deadlines and saved plans. Task 48 anticipates extensibility without speculative schema or planner work. Stage 2/3 retain their broader optimization/editing scopes. This is planning approval only: no Supabase project, database schema, application behavior or new task implementation is created; Task 47 remains pending and unstarted.
+
+
+## October 30, 2026 — Task 47 preparation, no runtime database dependency
+
+Choose the Supabase shared session pooler on 5432 for the isolated local FastAPI/PostgreSQL readiness check, avoiding direct IPv6 requirements or a paid IPv4 add-on. Require hostname/CA verification, read-only SQL, explicit invocation and safe fixed output. Use pinned Psycopg with bundled libpq to avoid system build/tool installation; no Supabase SDK, ORM, migrations or persistent pool is justified yet. Keep backend-only credentials in an ignored local env file, separate from Google/Ollama and frontend configuration. Production connection choice and least-privilege runtime credentials depend on future hosting/schema work. Owner project creation, Free organization/region confirmation and real connectivity are pending; Task 47 cannot be complete yet. Task 48 and 50A–50E remain unstarted.

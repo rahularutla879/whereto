@@ -139,6 +139,10 @@ Without a first-stop limit, discovery initially uses an approximate **20-minute 
 
 Contacts remain on demand and gated. A repaired ledger now supports consecutive panels without locking itself. If access is blocked before any request is admitted, the panel can offer a deliberate unsent lookup after local repair. Actual failed/attempted provider calls are not retried. Corrupt accounting stays closed; preserve the original ledger and ask its owner to inspect permissions or recover a verified backup. See [diagnosis, algorithm and limitations](docs/real-planning.md#comprehensive-discovery-acceptance) and [ledger recovery](docs/billing-safeguards.md#contact-accounting-repair).
 
+## Optional database setup — Task 47 in progress
+
+The app still runs without a database. Task 47 adds only a separate, opt-in PostgreSQL connectivity check; project creation and a real authenticated connection are **pending owner action**. Free plan and region are not yet confirmed. Follow [Supabase setup and the safe check](docs/database-setup.md) for dashboard steps, backend-only environment variables, certificate verification and exact commands. Use `backend/.env.example` for an ignored `backend/.env.database`; keep database credentials out of Next.js env files. No database startup dependency, schema, migrations or saved plans have been added. Task 48 and Tasks 50A–50E remain unstarted.
+
 ## Start the application — beginner instructions
 
 You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are already installed on this computer; Python 3.12.1 was verified without reinstalling it.
