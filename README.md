@@ -6,7 +6,7 @@ A mobile-first outing planner built with Next.js (App Router), TypeScript, React
 
 ## Development roadmap — approved Stage 1 extension
 
-[TASKS.md](TASKS.md) is the current official roadmap; the original Word document remains an unchanged historical baseline. Tasks 01–46 are complete. **Task 47 (create the Supabase project) remains pending and unstarted**, and is next after review of this roadmap update.
+[TASKS.md](TASKS.md) is the current official roadmap; the original Word document remains an unchanged historical baseline. Tasks 01–46 are complete. **Task 47 is in progress**: the Supabase project exists; authenticated PostgreSQL verification remains pending.
 
 The planned Stage 1E sequence is **47 → 48 → 49 → 50 → 50A → 50B → 50C → 50D → 50E → 51 → 52 → 53 → 54 → 55**. The five additions cover complex request interpretation, fixed/flexible destination resolution, stop order and return journeys, complete journey deadlines, then integration/persistence/testing before public MVP deployment. All original task numbers are preserved.
 
@@ -141,7 +141,7 @@ Contacts remain on demand and gated. A repaired ledger now supports consecutive 
 
 ## Optional database setup — Task 47 in progress
 
-The app still runs without a database. Task 47 adds only a separate, opt-in PostgreSQL connectivity check; project creation and a real authenticated connection are **pending owner action**. Free plan and region are not yet confirmed. Follow [Supabase setup and the safe check](docs/database-setup.md) for dashboard steps, backend-only environment variables, certificate verification and exact commands. Use `backend/.env.example` for an ignored `backend/.env.database`; keep database credentials out of Next.js env files. No database startup dependency, schema, migrations or saved plans have been added. Task 48 and Tasks 50A–50E remain unstarted.
+The app still runs without a database. Task 47 adds only a separate, opt-in PostgreSQL connectivity check; the owner-created `whereto` project is confirmed in `Where To` (Free), North Virginia (`us-east-1`). A real authenticated connection remains **pending private password entry and verification**. Follow [Supabase setup and the safe check](docs/database-setup.md) for dashboard steps, backend-only environment variables, certificate verification and exact commands. Use `backend/.env.example` for an ignored `backend/.env.database`; keep database credentials out of Next.js env files. No database startup dependency, schema, migrations or saved plans have been added. Task 48 and Tasks 50A–50E remain unstarted.
 
 ## Start the application — beginner instructions
 
