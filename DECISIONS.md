@@ -281,3 +281,8 @@ Use TASKS.md as the living official roadmap, retaining docs/original-roadmap.doc
 ## October 30, 2026 — Task 47 preparation, no runtime database dependency
 
 Choose the Supabase shared session pooler on 5432 for the isolated local FastAPI/PostgreSQL readiness check, avoiding direct IPv6 requirements or a paid IPv4 add-on. Require hostname/CA verification, read-only SQL, explicit invocation and safe fixed output. Use pinned Psycopg with bundled libpq to avoid system build/tool installation; no Supabase SDK, ORM, migrations or persistent pool is justified yet. Keep backend-only credentials in an ignored local env file, separate from Google/Ollama and frontend configuration. Production connection choice and least-privilege runtime credentials depend on future hosting/schema work. Owner project creation, Free organization/region confirmation and real connectivity are pending; Task 47 cannot be complete yet. Task 48 and 50A–50E remain unstarted.
+
+
+## October 30, 2026 — Task 47 hosted verification accepted
+
+The owner-created `whereto` project in `Where To` (Free), North Virginia (`us-east-1`), passed actual authenticated read-only PostgreSQL verification through the shared session pooler on port 5432. Keep the existing CLI-only check, explicit CA/hostname verification and database-independent mock startup. Task 47 is complete; no application schema, migrations, persistent pool or saved-plan API is introduced. Task 48 and 50A–50E remain unstarted and require separate task scope.

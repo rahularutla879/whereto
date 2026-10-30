@@ -1,6 +1,6 @@
 # Task 47 — Supabase PostgreSQL setup
 
-Status, October 30, 2026: **in progress; authenticated PostgreSQL verification pending**. The owner created `whereto` in organization `Where To` (Free), East US / North Virginia (`us-east-1`). Authenticated dashboard inspection independently confirmed Free, region and Healthy status. Repository preparation is implemented; simulated tests are not hosted verification. No schema, migrations, application records or persistence are implemented.
+Status, October 30, 2026: **complete; actual authenticated read-only PostgreSQL verification passed**. The owner created `whereto` in organization `Where To` (Free), East US / North Virginia (`us-east-1`). Authenticated dashboard inspection independently confirmed Free, region and Healthy status. The real `backend.database_check` returned exit code 0 after DNS resolution, authenticated SELECT, a confirmed read-only transaction, verified client-to-pooler TLS and clean connection closure. No schema, migrations, application records or persistence are implemented.
 
 ## Confirmed project and local setup
 
@@ -9,8 +9,8 @@ The account-creation steps below are retained for future fresh setups; the owner
 - Session pooler: `aws-0-us-east-1.pooler.supabase.com:5432`, database `postgres`.
 - Exact username was retrieved from authenticated Connect → Direct → Session pooler → Connection parameters and saved only in the ignored backend configuration.
 - `backend/.env.database` exists with mode `0600`; `backend/.local/` has mode `0700`. The existing template was used without changing Google/Ollama or frontend environment files.
-- Public CA downloaded over verified HTTPS from the dashboard-linked `https://supabase-downloads.s3-ap-southeast-1.amazonaws.com/prod/ssl/prod-ca-2021.crt`, stored as ignored `backend/.local/supabase-ca.crt` (mode `0600`). It parses as one CA and contains no private key. An unauthenticated PostgreSQL SSL negotiation verified the pooler hostname and CA chain using TLS 1.3. This pre-authentication check is not authenticated database success.
-- No approved credential integration, password-manager CLI or existing database password was available. The owner must enter the database password through the private local prompt. Any required password reset is performed by the owner in the dashboard; the agent does not change credentials. Password entry is stored using shell-safe quoting.
+- Public CA downloaded over verified HTTPS from the dashboard-linked `https://supabase-downloads.s3-ap-southeast-1.amazonaws.com/prod/ssl/prod-ca-2021.crt`, stored as ignored `backend/.local/supabase-ca.crt` (mode `0600`). It parses as one CA and contains no private key. An unauthenticated PostgreSQL SSL negotiation verified the pooler hostname and CA chain using TLS 1.3. A subsequent authenticated `backend.database_check` also passed; both results are recorded separately.
+- No approved credential integration, password-manager CLI or existing database password was available. The owner entered the database password through the private local prompt; the authenticated check then passed. Any required password reset is performed by the owner in the dashboard; the agent does not change credentials. Password entry is stored using shell-safe quoting.
 
 ## Owner dashboard steps
 
@@ -87,9 +87,9 @@ This TLS observation verifies the client-to-pooler leg; it does not independentl
 
 Offline regression tests: `backend/.venv/bin/python -m unittest backend.test_database_check -v`. Missing-config check: `backend/.venv/bin/python -m backend.database_check` in a Terminal with no database variables exported. Neither substitutes for an actual hosted check.
 
-## Task 48 handoff, after Task 47 passes
+## Task 48 handoff — Task 47 passed
 
-Record confirmed project name, Free plan, region, date, chosen endpoint method and real read-only check result in HANDOVER.md and mark Task 47 complete only then. No secrets belong in that record. Until then Task 48 is blocked on this verification, not started.
+Confirmed project, Free plan, region, session-pooler method and actual successful read-only result are recorded in HANDOVER.md. Task 47 is complete. No account/configuration blocker remains for this connectivity check. Task 48 is not started and requires its own task authorization; no secrets belong in the handoff.
 
 Task 48 will implement the initial schema for plans, constraints, generated itineraries, itinerary stops and source metadata. Preserve simple extension points for mandatory/flexible stops, named destinations, ordered visits, origins/destinations, optional returns, durations and journey deadlines. Do not pre-design advanced tables or implement interpretation/routing/optimization from Tasks 50A–50E now. Review provider content retention rules before persisting source data. Database provisioning alone does not implement saved plans or security policies.
 
