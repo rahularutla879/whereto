@@ -18,6 +18,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8016)
     parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
+    parser.add_argument('--refinements',action='store_true',help='Offline retail and saved refresh fixtures')
     parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
     args = parser.parse_args()
     if args.exploration_ledger:
@@ -25,12 +26,15 @@ def main():
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
                       WHERETO_CONTACT_DETAILS_DEV='1', WHERETO_START_LOOKUP_DEV='1', WHERETO_RATINGS_DEV='1', NODE_ENV='development')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
-    scenario = {'name': 'cinema_acceptance' if args.acceptance else 'normal'}
+    scenario = {'name': 'refinements' if args.refinements else 'cinema_acceptance' if args.acceptance else 'normal'}
 
     def search(body, **kwargs):
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
+        if scenario['name']=='refinements':
+            from backend.refinement_fixtures import search_fixture as refinement_search
+            return refinement_search(body,**kwargs)
         if scenario['name']=='cinema_acceptance':
             from backend.acceptance_fixtures import search_fixture as acceptance_search
             return acceptance_search(body,**kwargs)
@@ -126,6 +130,9 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if scenario['name']=='refinements':
+                from backend.refinement_fixtures import FixtureAI as RefinementAI
+                return RefinementAI().interpret(text)
             if scenario['name']=='cinema_acceptance':
                 from backend.acceptance_fixtures import FixtureAI as AcceptanceAI
                 return AcceptanceAI().interpret(text)
@@ -139,6 +146,15 @@ def main():
                 preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
                 travel_leg_minutes=int(leg[1]) if leg else int(between.value) if between and between.unit=='minutes' and between.mode=='strict' and between.value.is_integer() else None)
 
+    def refreshed_saved(identity):
+        counts['details']+=1
+        from backend.development_cost import dispatch
+        dispatch('details',1)
+        if scenario['name']=='refresh_partial':
+            raise DiscoveryError('invalid_response','Synthetic unavailable venue; no retry.')
+        from backend.refinement_fixtures import refreshed
+        return refreshed(identity)
+
     from backend.location_context import outing_problem as actual_outing_problem
     def calendar(request,now=None):
         if scenario['name']=='outing_expired':
@@ -150,6 +166,7 @@ def main():
          patch('backend.places_transport.text_search', side_effect=search), \
          patch('backend.routes_transport.compute_matrix', side_effect=matrix), \
          patch('backend.venue_details.fetch_details', side_effect=details), \
+         patch('backend.saved_refresh.fetch_saved_details', side_effect=refreshed_saved), \
          patch('backend.interpretation.create_provider', return_value=FixtureAI()):
         from backend.main import app
         @app.get('/__test/counts')

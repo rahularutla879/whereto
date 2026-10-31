@@ -55,7 +55,7 @@ class OpenExploration(unittest.TestCase):
 
     def test_movies_synonyms_and_unknown_acronym_are_separate(self):
         for wording in ('show movies','watch a movie','watch a film','go to the movies','see a film','cinema'):
-            result=self.extract(wording+' in GSIW today for 3 people',[wording],location='GSIW',people=3)
+            result=self.extract(wording+' in GSIW on 2026-11-14 for 3 people',[wording],location='GSIW',people=3)
             self.assertIsNotNone(result.request,result.issues)
             self.assertEqual(result.request.activities,['movie'])
             self.assertEqual(result.request.location,'GSIW')

@@ -19,6 +19,12 @@ and separate lunch and dinner. Do not collapse meals into one food entry.
 Do not include negated activities. Alternatives or contradictory requirements
 must be described in uncertainties; do not choose one without permission.
 Keep unsupported activities verbatim (skydiving stays skydiving).
+Retail: preserve brand names and format wording verbatim (Zara outlet stays
+Zara outlet, never shopping). Keep "only outlets" and "inside [mall]" in that
+activity phrase. A mall with brands is one destination phrase; separate store
+visits are separate activities, retaining "same mall" on each if required.
+Store formats are preferences unless explicitly mandatory. Never invent a tenant
+relationship, retail brand, inventory, discount or sale.
 For an indirect request like 'something competitive', put that exact phrase in
 activities, competitive in preferences, and suitable category IDs in
 suggested_activities. Suggestions are never explicit requested stops.
@@ -77,6 +83,15 @@ def example():
 
 # Examples retain unknown core facts and every explicit planning constraint.
 EXAMPLES = [
+    ("Zara outlet in Jersey City tomorrow",
+     {**example(),"activities":["Zara outlet"],"location":"Jersey City","date_expressions":["tomorrow"]}),
+    ("Find a mall with Zara tomorrow",
+     {**example(),"activities":["mall with Zara"],"date_expressions":["tomorrow"]}),
+    ("Find Nike and Adidas stores in the same mall tomorrow",
+     {**example(),"activities":["Nike and Adidas stores in the same mall"],"date_expressions":["tomorrow"]}),
+    ("Only Zara outlets in Jersey City tomorrow",
+     {**example(),"activities":["Only Zara outlets"],"location":"Jersey City","date_expressions":["tomorrow"]}),
+
     ("Four people want bowling then dinner in Baltimore under $60 each and $200 total, at most 15 minutes total travel, driving. Budget-friendly.",
      {**example(), "activities": ["bowling", "dinner"], "people": None,
       "location": "Baltimore", "budget_per_person": 60, "currency": "USD",

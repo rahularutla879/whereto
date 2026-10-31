@@ -198,7 +198,15 @@ def score_candidates(request: OutingRequest, candidates: list[RankedItinerary]) 
         values = [v.experience for v in venues]
         return sum(values) / len(values) if all(v is not None for v in values) else None
 
-    measures = [(p.costPerPerson, quality(p), p.totalTravel) for p in candidates]
+    def journey(p):
+        if not all(v.providerPlaceId for v in p.candidate.venues):return p.totalTravel
+        if p.totalTravel is None:return None
+        # First-stop estimates affect convenience even with no entered cap.
+        if p.firstLeg is not None:
+            if p.firstLeg.get('minutes') is None:return None
+            return p.totalTravel+p.firstLeg['minutes']
+        return p.totalTravel
+    measures = [(p.costPerPerson, quality(p), journey(p)) for p in candidates]
     bounds = [(min(v, default=0), max(v, default=0)) for v in
               ([m[i] for m in measures if m[i] is not None] for i in range(3))]
     real_evidence=all(v.providerPlaceId for p in candidates for v in p.candidate.venues)

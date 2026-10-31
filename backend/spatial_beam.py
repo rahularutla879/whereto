@@ -19,7 +19,11 @@ def candidates(request,pools,routes,seen,width=96,audit=None):
                     continue
                 next_paths.append(extended)
         def score(path):
-            travel=sum((routes[a.id,b.id].duration_seconds or 0) for a,b in zip(path,path[1:]))
+            legs=[routes.get((a.id,b.id)) for a,b in zip(path,path[1:])]
+            origin=getattr(request,'startingLocation',None)
+            if origin:legs.insert(0,routes.get((origin.point.id,path[0].id)))
+            route_unknown=sum(not leg or leg.status not in ('ok','same_location') or leg.duration_seconds is None for leg in legs)
+            travel=sum(leg.duration_seconds for leg in legs if leg and leg.duration_seconds is not None)
             quality=sum(v.rating or 0 for v in path)
             # Preserve compliant partial paths before high-rated distant ones.
             # Unknown evidence is not compliance; retain it only behind verified paths.
@@ -33,7 +37,7 @@ def candidates(request,pools,routes,seen,width=96,audit=None):
                 checks.extend((routes.get((a.id,b.id)),request.betweenTravel) for a,b in zip(path,path[1:]))
             violations=sum(bool(exceeds(leg,p)) for leg,p in checks if leg and leg.status in ('ok','same_location'))
             unknown=sum(not leg or leg.status not in ('ok','same_location') for leg,_ in checks)
-            return violations,unknown,travel-quality*15,tuple(v.id for v in path)
+            return violations,unknown+route_unknown,travel-quality*15,tuple(v.id for v in path)
         next_paths.sort(key=score)
         expanded_count=len(next_paths)
         beam=[]

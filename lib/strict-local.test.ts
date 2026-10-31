@@ -21,9 +21,9 @@ test("ordinary page has no numeric budget, spending modes or development banner"
  const page=readFileSync("app/page.tsx","utf8");
  for(const text of ["<ExplorationNotice","Maximum budget","cost-field","Number of people"])assert.ok(!page.includes(text),text);
  const html=renderToStaticMarkup(createElement(ResultsInformation,{real:true,needsChecking:true,notes:["Development usage — searches 3; estimated gross $0.20","Venue hours need confirmation."]}));
- assert.match(html,/<summary>Developer diagnostics<\/summary>/);
+ assert.doesNotMatch(html,/Developer diagnostics|Development usage/);
  assert.doesNotMatch(html,/<details[^>]*open/);
- assert.match(html,/Venue hours need confirmation/);
+ assert.match(html,/Check venue hours/);
 });
 
 test("explicit beyond page remains separate and earlier compliant snapshot is immutable",()=>{

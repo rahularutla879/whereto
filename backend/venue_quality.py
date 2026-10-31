@@ -85,6 +85,11 @@ class QualityResult(ContractModel):
 def relevance(venue: VenueFacts) -> Relevance:
     activity = venue.activity.value
     types = set(venue.providerTypes or []) | ({venue.primaryType} if venue.primaryType else set())
+    from backend.retail import intent as retail_intent, verdict as retail_verdict
+    retail=retail_intent(activity)
+    if retail and activity!="shopping":
+        accepted,reason=retail_verdict(venue,retail)
+        return Relevance(status='strong' if accepted else 'mismatch',reason=reason)
     if activity.startswith('custom:'):
         # A search hit alone is not evidence of the requested activity.
         words = re.findall(r"[a-z0-9]+", activity.removeprefix('custom:'))

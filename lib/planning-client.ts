@@ -82,7 +82,7 @@ export function adaptRanking(value: unknown): PlannerResult {
     firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
     id: p.candidate.id, title: real ? headlines[i].title : copy[i].title, fullTitle: real ? headlines[i].fullTitle : undefined, theme: themes[i],
     label: real ? headlines[i].label : `${copy[i].label} · OPTION ${i + 1}`,
-    description: real ? `${p.totalTravel === null ? "Travel is not fully verified" : `${p.totalTravel} estimated minutes between stops`}. Suggested for this venue combination${p.totalTravel === null ? "" : ", travel convenience"} and variety. ${p.stops.some(s => s.venue.rating != null && (s.venue.ratingCount ?? 0) > 0) ? "Google ratings and their counts also inform ranking." : "No rating evidence was used."}` : copy[i].description,
+    description: real ? `${p.stops.length===1 ? "Single-stop outing" : p.totalTravel === null ? "Travel between stops is not verified" : `About ${p.totalTravel} minutes between stops`}.` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: null,
     travel: p.totalTravel, duration: p.elapsedDuration, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,

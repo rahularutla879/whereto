@@ -53,6 +53,9 @@ def activity_category(phrase):
     text = unicodedata.normalize("NFKC", phrase).casefold().strip()
     text = re.sub(r"^(?:(?:go to|go|show|watch|see|visit|try|do|take|have|enjoy)\s+)(?:a |an |the )?", "", text)
     text = re.sub(r"^(?:a|an|the)\s+", "", text).strip()
+    from backend.retail import intent as retail_intent
+    if retail_intent(text) and text not in ALIASES:
+        return "custom:" + text if len(text)<=100 else None
     if text in ALIASES:
         return ALIASES[text]
     # An extractor may accidentally put two stops in one phrase. Do not let a
@@ -445,6 +448,16 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",
                         "time": "What overall time window do you mean (for example, from 6 PM to 10 PM)?"}[field], "ambiguous")
     issues = [*uncertainties, *grounding_issues, *source_constraint_issues(raw, ai, manual, answers, ask)]
+    from backend.retail import intent as retail_intent
+    # Validation only: never replace model activities from a keyword fallback.
+    # A brand noun alone must not lose its shared-mall/mandatory-format semantics.
+    retail_phrases=[retail_intent(p) for p in ai.activities]
+    if re.search(r'\b(?:mall with|same mall|only .{0,60}outlets?|no regular stores?)\b',raw,re.I):
+        relation=any(p and (p.same_mall or p.destination and p.brands) for p in retail_phrases)
+        hard=any(p and p.hard_format for p in retail_phrases)
+        if (re.search(r'\b(?:mall with|same mall)\b',raw,re.I) and not relation) or (re.search(r'\bonly .{0,60}outlets?\b|\bno regular stores?\b',raw,re.I) and not hard):
+            issues.append('The retail relationship or required store format was not preserved. Restate the full store or mall requirement.')
+            ask('activities','Which store or mall requirement should each stop preserve? Include the brand and any required mall or outlet format.','ambiguous')
     notes = ["AI interpretation; itinerary calculations use the Python planner and fictional catalog."] + validation_notes
     if ai.preferences:
         notes.append("Stated preferences: " + ", ".join(ai.preferences) + ". Only supported categories and planning constraints are enforced; venue qualities are unverified.")
@@ -495,6 +508,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     exclusion_text = re.sub(rf"(?:{DATE_WORDING.pattern})\s+or\s+(?:{DATE_WORDING.pattern})", " ", exclusion_text, flags=re.I)
     number_word = r"(?:\d+|one|two|three|four|five|six|seven|eight|nine|ten|eleven|twelve)"
     exclusion_text = re.sub(rf"\b{number_word}\s+or\s+{number_word}\b", " ", exclusion_text, flags=re.I)
+    if any(retail_intent(p) and retail_intent(p).hard_format for p in ai.activities):
+        exclusion_text=re.sub(r'\bno regular stores?\b','',exclusion_text,flags=re.I)
     if re.search(r"\b(?:or|instead|not|no|without|avoid|except)\b|n't\b", exclusion_text, re.I):
         issues.append("Alternatives or exclusions need a clear list of desired stops. Rephrase before planning; no substitution was made.")
     for match in OCCURRENCES.finditer(activity_raw):

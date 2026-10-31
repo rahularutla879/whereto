@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "dev:backend": "backend/.venv/bin/python -m uvicorn backend.main:app --reload --reload-dir backend --host 127.0.0.1 --port 8000",
+    "dev:backend": "backend/.venv/bin/python -m backend.dev_start",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",

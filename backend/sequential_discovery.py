@@ -72,6 +72,7 @@ def run_job(context,job):
     for position_ids in context['positionIds']:position_ids.intersection_update(retained)
     job['searched']=True
     cursor=found.paging.get(query.activity,{})
+    query=query.model_copy(update={'search_variant':cursor.get('variant',query.search_variant)})
     job['next']=cursor.get('next')
     if job['next']:
         job['request']=query.model_copy(update={'page_token':job['next']})
@@ -110,7 +111,7 @@ def anchors(context,position):
             if not facts:break
         if not selected:chosen=facts.pop(0)
         else:
-            chosen=(facts[0] if position==0 and point and context['request'].firstTravel else
+            chosen=(facts[0] if position==0 and point else
                     max(facts,key=lambda v:(min(distance_m(v.coordinates,s.coordinates) for s in selected),v.id)))
             facts.remove(chosen)
         selected.append(chosen)

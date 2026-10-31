@@ -15,6 +15,7 @@ export type SavedPlan = {
     planningMode: "origin" | "surprise"; transport: string | null; calendarTimezone: string | null;
     firstTravel: Preference | null; betweenTravel: Preference | null; maxFirstLegTravel: number | null; maxLegTravel: number | null;
     travel: number | null; geography: { strictDestination: boolean; excludedRegions: string[] };
+    budget?:number|null;groupBudget?:number|null;
     dinner: boolean; dinnerStops: number[] | null; requireAvailability: boolean; requireWheelchairAccess: boolean; allowRevisits: boolean };
   itineraries: { candidateId: string; stops: { position: number; activity: string; provider: "mock" | "google_places"; reference: string;
     timingBasis: "unknown" | "fictional"; start: number | null; end: number | null; duration: number | null;

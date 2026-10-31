@@ -1,4 +1,5 @@
 "use client";
+import { DevelopmentDiagnostics } from "@/components/development-diagnostics";
 import { SavedPlans } from "@/components/saved-plans";
 import { ItineraryPagination } from "@/components/itinerary-pagination";
 import { ItineraryPages, beyondPage, BEYOND_NOTICE } from "@/lib/itinerary-pages";
@@ -58,12 +59,12 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
       <p className="card-description">{plan.description}</p>
       {plan.planningMode==="surprise"&&<p className="details-note">Surprise Me · Begins at {plan.venues[0].name}. {plan.surpriseRepeated?"This first venue has appeared before; the complete combination is different.":"A varied first venue from the checked eligible pool."} No travel from your location is included.</p>}
       {plan.travelClassification && plan.travelClassification!=="matching" && <div className="plan-warning" role="note"><strong>{{outside_preference:"Outside your preferred range",beyond_limit:"Beyond your travel limit",unverified:"Requirements not fully verified"}[plan.travelClassification]}</strong><ul>{plan.travelDeviations?.map(message=><li key={message}>{message}</li>)}</ul></div>}
-      {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Before you choose</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
+      {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Check this option</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
       <div className="activity-route">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabel(venue.activity)}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
       })}</div>
-      <div className="card-facts"><span><MapPin size={14} /> {plan.location ?? "Baltimore"}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
+      <div className="card-facts"><span><MapPin size={14} /> {real ? plan.venues.length===1 ? plan.venues[0].address ?? "Address unavailable" : `Search area: ${plan.location ?? "Not specified"}` : plan.location ?? "Baltimore"}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
       {plan.firstLeg && <FirstLegTravel plan={plan} />}
       <div className="card-bottom">{!real && <div><PlanCost amount={plan.price} /><small>Sample price</small></div>}<button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
       {real && <GoogleCredits credits={plan.venues.flatMap(venue => venue.evidenceLabels?.attribution?.third_party ?? []).filter((credit, i, credits) => credits.findIndex(c => c.provider === credit.provider && c.uri === credit.uri) === i)} />}
@@ -71,7 +72,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
         <p className="details-heading">{real ? "Your provisional itinerary" : "Your sample itinerary"}</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date}</p>
         <ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.routeEvidence?.[i - 1]?.route.mode ?? "drive"} estimate · Google Maps` : plan.legs[i - 1]?.status ?? "unknown"}).{real&&plan.routeEvidence?.[i-1]?.route.distance_meters!=null&&" / "+(plan.routeEvidence[i-1].route.distance_meters!/1609.344).toFixed(2)+" road miles"}</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /><GoogleCredits credits={venue.evidenceLabels?.attribution?.third_party} /></>}</div></li>)}</ol>
-        <p className="details-note">~{plan.travel ?? "Unknown"} min of travel between stops. See About these estimates for what is included.</p>
+        {plan.stops.length>1&&<p className="details-note">{plan.travel===null?"Travel between stops unavailable":`~${plan.travel} min between stops`}. Return travel is not included.</p>}
       </div>
     </div>
   </article>;
@@ -104,6 +105,7 @@ export default function Home() {
   const [answers, setAnswers] = useState<ClarificationAnswers>({});
   const followupRef = useRef<HTMLDivElement>(null);
   const [generated, setGenerated] = useState(false);
+  const [savedOpen,setSavedOpen]=useState(false);
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: PreferenceField, value: string) {
@@ -111,6 +113,7 @@ export default function Home() {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
+    setSavedOpen(false);
     setRecovery(undefined);setOptionsNotice("");
     pages.current.reset();syncPages();
     startingControls.current?.cancel();
@@ -121,6 +124,7 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
+    setSavedOpen(false);
     cancelClarification();
     detailsSession.clear();
     setValidated(null);
@@ -171,6 +175,7 @@ export default function Home() {
     } finally { if (session.current.finish(controller)) {setLoading(false);setOptionsBusy(false);} }
   }
   async function runPlanning(followup: boolean) {
+    setSavedOpen(false);
     const controller = session.current.begin();
     if (!controller) return;
     detailsSession.clear();
@@ -277,14 +282,15 @@ export default function Home() {
               <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{result.requestFailed ? "Retry" : "Continue planning"}<ArrowRight size={18} /></button></div>
           </form>
         </div>}
-        <p className="planner-disclaimer"><CircleHelp size={13} /> {dataMode === "real" ? "Real venues and route estimates. Prices, hours and availability require confirmation. No bookings." : "A preview of what’s possible. Local sample data, no live searches or bookings."}</p>
+        <p className="planner-disclaimer"><CircleHelp size={13} /> {dataMode === "real" ? "Real venue discovery · Google Maps." : "A preview of what’s possible. Local sample data, no live searches or bookings."}</p>
         <details className="catalog-help"><summary>Activities and data limitations</summary><p>Where To? can search for many kinds of outings using Google Places. Specific events, tickets, schedules and availability may require separate confirmation.</p><p hidden={dataMode === "real"}>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p hidden={dataMode === "real"}>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Mock prices are per person; no capacity or booking is confirmed. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p>{dataMode === "real" && <p>List up to four stops, in order, including repeated activities. Every outing needs a date. Real event venues do not establish scheduled performances or movie showtimes. Prices, hours, durations and reservations need confirmation. Driving is used unless you request walking. No budget is verified while prices are unknown.</p>}</details>
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
-        <div className="section-heading"><div><p className="eyebrow">{generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
-        <SavedPlans result={generated && !dirty && !loading ? result : undefined} />
-        {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        <div className="section-heading"><div><p className="eyebrow">{savedOpen ? "YOUR SAVED PLAN" : generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{savedOpen ? "Your saved outing." : generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{savedOpen ? "Your original options and selection." : loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {savedOpen ? "Saved plan" : generated ? result.dataMode === "real" ? "Real venues · provisional" : "Sample results" : "Demo itineraries"}</span></div>
+        <div id="saved-results" />
+        <div hidden={savedOpen}>
+
         {generated && result.plans.length>0 && beyondPage(result) && <div className="plan-warning" role="note"><h3>Explore beyond your preferences</h3><p>{BEYOND_NOTICE}</p><p>These additional outings go beyond one or more of your travel preferences. We've included them so you can discover more places.</p></div>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult({...page,canExpand:latest.current.canExpand,canDiscover:latest.current.canDiscover,canShowBeyond:latest.current.canShowBeyond});syncPages();}}}/>}
@@ -306,6 +312,10 @@ export default function Home() {
         {generated&&recovery&&["outing_date_expired","outing_time_expired"].includes(recovery)&&<div role="group" aria-label="Outing date recovery"><p>{optionsNotice||result.message} Your activities, destination and confirmed origin are kept.</p><button type="button" className="secondary-button" onClick={()=>{setPreferencesOpen(true);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('input[type="date"]')?.focus());}}>Choose another date</button><p>No date is changed until you select one and regenerate. You can keep browsing saved pages.</p></div>}
         {generated&&["destination_unresolved","destination_ambiguous","destination_verification_unavailable"].includes(recovery??"")&&<div role="group" aria-label="Destination recovery"><p>{locationContext.planningMode==="surprise"?"Clarify the destination city or neighborhood. Surprise Me keeps its mode and does not invent a starting location.":"Your original destination is kept. A nearby reference prioritizes that area; it does not verify an exact neighborhood boundary."}</p>{locationContext.planningMode!=="surprise"&&<button type="button" className="secondary-button" onClick={()=>{startingControls.current?.useAnchor();void runPlanning(!!validated);}}>Use confirmed start as nearby search reference</button>}<button type="button" onClick={()=>setPreferencesOpen(true)}>Correct destination</button></div>}
         {!generated && <p className="sample-notice">All venues, events, schedules, capacities, prices, and travel times are fictional.</p>}
+        {generated && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        </div>
+        <SavedPlans contextKey={request+(result.saveReceipt??"")} active={savedOpen} onOpen={setSavedOpen} result={!savedOpen && generated && !dirty && !loading ? result : undefined} />
+        <DevelopmentDiagnostics />
       </section>
 
       <section className="how-section shell" id="how-it-works" aria-labelledby="how-title"><div className="how-intro"><span className="tiny-spark"><Sparkles size={21} /></span><h2 id="how-title">Less back-and-forth.<br /><em>More “see you there.”</em></h2></div><div className="how-step"><span>01</span><h3>Give us the gist.</h3><p>Your people, your place, your idea of a good time.</p></div><div className="how-step"><span>02</span><h3>Find your kind of plan.</h3><p>Explore three options that bring it all together.</p></div><div className="how-step"><span>03</span><h3>Take it to the group chat.</h3><p>Pick a favorite. Check the real-world details. Go hang out.</p></div></section>

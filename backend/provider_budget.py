@@ -92,6 +92,7 @@ class ProviderBudget:
         self._active = 0
         self._matrix_window: list[tuple[float, int]] = []
         self._search_window = []
+        self._details_window = []
         self._lookups = 0
         from backend.development_cost import DevelopmentCost
         self.cost = DevelopmentCost(enforce_limit=False) if self.settings.exploration else None
@@ -231,6 +232,9 @@ class OutingBudget:
             if session._elements + elements > limits.ceiling("matrix_elements_per_session"):
                 raise ProviderLimitError("Local testing session route matrix element limit reached. Stop and review usage.")
             now = monotonic()
+            session._details_window=[t for t in session._details_window if now-t<60]
+            if len(session._details_window)+details>10:
+                raise ProviderLimitError("Local Place Details minute limit reached. Wait before a deliberate action; no retry is scheduled.")
             session._search_window = [t for t in session._search_window if now - t < 60]
             lookups = sum(op == "lookup" for op, _, _, _ in attempts)
             if len(session._search_window) + searches > 10:
@@ -257,6 +261,7 @@ class OutingBudget:
             self._searches += searches
             self._details += details
             self._elements += elements
+            session._details_window.extend([now]*details)
             session._search_window.extend([now] * searches)
             session._lookups += lookups
             session._requests += requests

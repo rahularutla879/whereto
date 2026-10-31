@@ -1,3 +1,4 @@
+import { publicPlanningPayload } from "./public-planning-payload";
 import { classifiedFailure } from "./failure-diagnostics";
 import { recoveryCode } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
@@ -13,9 +14,9 @@ export async function providerProxy(path: "/api/starting-areas" | "/api/planning
       cache: "no-store", signal: AbortSignal.any([...(request ? [request.signal] : []), AbortSignal.timeout((path === "/api/plans/options" || path === "/api/starting-areas") ? 115000 : 30000)]),
     });
     const data = await response.json();
-    if (!response.ok && classifiedFailure(data)) return Response.json(classifiedFailure(data), { status:response.status, headers });
-    if (!response.ok) return Response.json({ code:recoveryCode(data.code), message: response.status === 422 && typeof data.message === "string" ? data.message : "Venue lookup is unavailable. Try again later.",diagnosticNotes:providerDiagnosticNotes(data.diagnostics),...(path==="/api/plans/options"?{resumable:data.diagnostics?.failureBoundary==="local_minute"}:{}),...(path==="/api/venues/details"&&typeof data.diagnostics?.contactRequestAdmitted==="boolean"?{diagnostics:{contactRequestAdmitted:data.diagnostics.contactRequestAdmitted}}:{}) }, { status: 422, headers });
-    return Response.json(data, { headers });
+    if (!response.ok && classifiedFailure(data)) return Response.json(publicPlanningPayload(classifiedFailure(data)), { status:response.status, headers });
+    if (!response.ok) return Response.json(publicPlanningPayload({ code:recoveryCode(data.code), message: response.status === 422 && typeof data.message === "string" ? data.message : "Venue lookup is unavailable. Try again later.",diagnosticNotes:providerDiagnosticNotes(data.diagnostics),...(path==="/api/plans/options"?{resumable:data.diagnostics?.failureBoundary==="local_minute"}:{}),...(path==="/api/venues/details"&&typeof data.diagnostics?.contactRequestAdmitted==="boolean"?{diagnostics:{contactRequestAdmitted:data.diagnostics.contactRequestAdmitted}}:{}) }), { status: 422, headers });
+    return Response.json(publicPlanningPayload(data), { headers });
   } catch {
     return Response.json({ message: "Venue lookup is unavailable. Check that the local backend is running." }, { status: 503, headers });
   }

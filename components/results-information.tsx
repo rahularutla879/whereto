@@ -1,21 +1,8 @@
 import * as React from "react";
-import { DEMO_DISCLOSURE, estimateNotes } from "../lib/results-presentation";
-
-export function ResultsInformation({ notes, needsChecking, real = false }: { notes: string[]; needsChecking: boolean; real?: boolean }) {
-  const debug=notes.filter(note=>/^Development /i.test(note));
-  const extraNotes = estimateNotes(notes.filter(note=>!/^Development /i.test(note)));
-  if (real) return <aside className="results-information" aria-label="About these real results"><p>Real venues from <span translate="no">Google Maps</span>. Check venue hours and suitability before going. Suggested stops are not bookings or a confirmed schedule.</p><details className="estimates-details"><summary>About these estimates</summary><ul>{extraNotes.map(note => <li key={note}>{note}</li>)}</ul></details>{debug.length>0&&<details className="estimates-details"><summary>Developer diagnostics</summary><ul>{debug.map(note=><li key={note}>{note}</li>)}</ul></details>}</aside>;
-  return <aside className="results-information" aria-label="About these sample results">
-    <p>{DEMO_DISCLOSURE}{needsChecking && " Opening hours and availability still need checking."}</p>
-    <details className="estimates-details">
-      <summary>About these estimates</summary>
-      <ul>
-        <li>Opening hours and availability have not been verified. Check directly before you go; these plans are not bookings.</li>
-        <li>Prices cover sample activities only. Transport fares, taxes, tips, booking fees and extras are excluded. Shopping purchases are extra; the free picnic option requires bringing your own food.</li>
-        <li>Travel times are made-up estimates between stops, not real routes. They exclude getting to the first stop and returning home, and do not change with your chosen transport.</li>
-        <li>Times are samples too. Total outing time includes waiting between activities.</li>
-        {extraNotes.map(note => <li key={note}>{note}</li>)}
-      </ul>
-    </details>
-  </aside>;
+import { DEMO_DISCLOSURE } from "../lib/results-presentation";
+export function ResultsInformation({real=false}:{notes:string[];needsChecking:boolean;real?:boolean}){
+ return <aside className="results-information" aria-label="Before you go"><strong>Before you go</strong>
+  <p>{real?"Travel estimates use Google Maps. Check venue hours, availability and activity schedules before visiting.":DEMO_DISCLOSURE}</p>
+  <details className="estimates-details"><summary>About these recommendations</summary><p>{real?"Recommendations cover places checked so far. Exploring can find better options. Suggested activities are not bookings, tickets or confirmed schedules. Area-based starting points are approximate; check venue addresses.":"Sample prices and times illustrate the plan. They do not confirm availability or bookings."} Return travel is not included. Missing travel estimates remain unknown.</p></details>
+ </aside>;
 }

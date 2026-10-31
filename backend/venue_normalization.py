@@ -142,6 +142,8 @@ def normalize_google_place(raw: dict, activity: ActivityType | str, *,
         if obj.get("timeZone") is not None:
             zone = _object(obj["timeZone"])
             values["timeZone"] = {k: zone[k] for k in ("id", "version") if k in zone}
+        if obj.get("containingPlaces") is not None:
+            values["containingPlaces"]=[{"id":p["id"],"displayName":p.get("displayName",{}).get("text"),"isMall":p.get("isMall",False)} for p in obj["containingPlaces"]]
         level = obj.get("priceLevel")
         if level is not None:
             values["priceLevel"] = None if level == "PRICE_LEVEL_UNSPECIFIED" else PRICE_LEVELS[level]
@@ -208,6 +210,6 @@ def normalize_discovery_candidates(result, activity: ActivityType | str, *, obse
     """
     records = [{"id": candidate.provider_id, "displayName": {"text": candidate.display_name},
                 "formattedAddress": candidate.address, "location": candidate.coordinates.model_dump(),
-                "attributions": candidate.attributions, "types": candidate.types, "primaryType": candidate.primaryType,
+                "attributions": candidate.attributions, "types": candidate.types, "containingPlaces": candidate.containingPlaces, "primaryType": candidate.primaryType,
                 "rating": candidate.rating, "userRatingCount": candidate.userRatingCount} for candidate in result.candidates]
     return normalize_google_places(records, activity, observed_at=observed_at)

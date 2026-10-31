@@ -255,7 +255,8 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
     if result.date_expressions or manual_date:
         result.notes.append(f'Calendar reference: {local_now.date().isoformat()} in {zone.key}.')
         if zone.key == 'UTC':
-            result.notes.append('Location timezone is unknown; UTC is the fallback calendar reference, not a verified local timezone. Select an exact Date if it differs locally.')
+            if location and not manual_date and any(re.search(r'\b(today|tomorrow|tonight|next|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b',p,re.I) for p in result.date_expressions):
+                result.add_issue('unsupported_date','The destination timezone is not known. Choose an exact date or add a recognizable city/region before using relative dates.')
     try:
         if manual_date:
             result.date = date.fromisoformat(manual_date)

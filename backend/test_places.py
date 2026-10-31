@@ -113,7 +113,7 @@ class DiscoveryTests(unittest.TestCase):
         candidate = result.candidates[0]
         self.assertEqual(candidate.provider_id, "original-google-id")
         self.assertEqual(candidate.provider, "google_places")
-        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions", "types", "primaryType", "rating", "userRatingCount"})
+        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions", "types", "primaryType", "rating", "userRatingCount", "containingPlaces"})
 
     def test_name_matches_do_not_override_geographic_evidence(self):
         wrong = place("Washington", "DC")
@@ -224,7 +224,7 @@ class TransportTests(unittest.TestCase):
         args, kwargs = self.session.post.call_args
         self.assertEqual(args[0], "https://places.googleapis.com/v1/places:searchText")
         self.assertEqual(kwargs["headers"]["X-Goog-User-Project"], PROJECT)
-        self.assertEqual(kwargs["headers"]["X-Goog-FieldMask"], FIELD_MASK)
+        self.assertEqual(kwargs["headers"]["X-Goog-FieldMask"], FIELD_MASK+",places.containingPlaces")
         self.assertNotIn("*", FIELD_MASK)
         self.assertEqual(set(FIELD_MASK.split(",")), {"places.id", "places.displayName", "places.formattedAddress",
                          "places.location", "places.addressComponents", "places.attributions", "places.types", "places.primaryType", "nextPageToken"})

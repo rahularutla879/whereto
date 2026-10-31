@@ -72,10 +72,10 @@ test("failed plans retain the actionable violation without technical count or se
 
 test("estimates disclosure is collapsed, accessible and includes all secondary explanations", () => {
   const html = renderToStaticMarkup(React.createElement(ResultsInformation, { notes: [], needsChecking: true }));
-  assert.match(html, /aria-label="About these sample results"/);
-  assert.match(html, /<summary>About these estimates<\/summary>/);
+  assert.match(html, /aria-label="Before you go"/);
+  assert.match(html, /<summary>About these recommendations<\/summary>/);
   assert.doesNotMatch(html, /<details[^>]*\bopen\b/);
   assert.equal(html.split(DEMO_DISCLOSURE).length - 1, 1);
-  for (const text of ["Opening hours", "availability", "taxes", "Transport fares", "first stop", "returning home", "chosen transport"]) assert.ok(html.includes(text), text);
+  for (const text of ["availability", "bookings", "Return travel", "Missing travel"]) assert.ok(html.includes(text), text);
   assert.doesNotMatch(html, /Python|shared catalog|confirmed mock/);
 });

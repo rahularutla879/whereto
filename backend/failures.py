@@ -16,6 +16,8 @@ MESSAGES = {
     'no_relevant_venues': 'No activity-relevant venues were found in the checked results. Search more places or refine the area; no substitute activity was added.',
     'insufficient_routing': 'Venues were found, but required routes could not be verified. Retry later or check the starting point; no travel estimate was invented.',
     'provider_quota_rejected': 'Google rejected this search or route request because a quota was reached. Check provider usage and retry later; no automatic retry was made.',
+    'venue_refresh_limit': 'Venue refresh is temporarily limited. Your saved plan is kept; try again later. No automatic retry was made.',
+    'venue_refresh_disabled': 'Venue refresh is disabled. Start the authorized local development profile; your saved plan is kept.',
     'provider_service_error': 'The venue or routing service could not complete this request. Check its availability and try again later.',
     'internal_application_error': 'An application error prevented this operation. Your current itinerary is kept. Use the reference ID to investigate; changing your activities is not required.',
     'local_request_required': 'This development planner accepts local requests only. Open the app on localhost or 127.0.0.1.',

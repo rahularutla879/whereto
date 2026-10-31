@@ -78,4 +78,11 @@ The fictional Baltimore catalog has the 29 canonical categories and invented sch
 
 “Where To? can search for many kinds of outings using Google Places. Specific events, tickets, schedules and availability may require separate confirmation.”
 
-Future work could add independently sourced session feeds, activity-specific evidence, multilingual/typo evaluation and richer relevance matching. Each needs dedicated correctness, licensing and cost review. None is implemented here. Read `backend/ai/ollama.py`, `interpretation.py`, `models.py`, `places.py`, `venue_quality.py`, `feasibility.py` and `lib/mock-data.ts` for the contracts. A stronger model cannot verify missing provider facts. Task 47 remains unstarted.
+Future work could add independently sourced session feeds, activity-specific evidence, multilingual/typo evaluation and richer relevance matching. Each needs dedicated correctness, licensing and cost review. None is implemented here. Read `backend/ai/ollama.py`, `interpretation.py`, `models.py`, `places.py`, `venue_quality.py`, `feasibility.py` and `lib/mock-data.ts` for the contracts. A stronger model cannot verify missing provider facts. Tasks 47–49 are complete; Task 50 and Tasks 50A–50E remain unstarted.
+
+
+## Retail stores and malls — Tasks 46/49 refinement
+
+Retail phrases preserve arbitrary brand names, flexible outlet/regular/flagship formats and explicit only-outlet requirements. Generic shopping destinations remain distinct from tenants. Name identity plus retail type is required; search hits and similarly named businesses are insufficient. A verified regular Zara location is eligible for “Zara outlet”; it is never relabeled as an outlet. Stores inside malls and multiple brands in one mall require containment IDs joined to actual mall facts. Missing evidence yields no verified match and explicit exploration, never invented tenants, sales, inventory or unrelated brand substitutions.
+
+[Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).

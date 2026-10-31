@@ -608,3 +608,10 @@ same-tab hash changes; starting-place controls have explicit grid spacing.
 Movie-theater aliases are canonicalized before conflicting-category detection;
 the existing one-stop and multi-stop engine, geography, provider retention and
 Strict/Flexible limits remain. [Evidence and limits](docs/real-planning.md#tasks-4649-acceptance-fixes--cinema-loopback-and-diagnostics).
+
+
+## Tasks 46/49 acceptance refinements
+
+Added explicit capability-authorized saved refresh and main-position saved cards; `saved_refresh` never writes provider content. `dev_start` loads owner-private allowlisted data locally. Retail parsing/evidence uses the existing custom-activity and discovery/routing pipeline, with transient containment relationships. Ranking now includes first-leg evidence and exposes sanitized late-arrival reasons. A separately gated loopback-only development snapshot replaces product diagnostics; production proxies strip internal metrics. No migrations, RLS or later-roadmap functionality.
+
+[Details](docs/acceptance-refinements.md).

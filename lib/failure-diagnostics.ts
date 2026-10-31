@@ -1,5 +1,5 @@
 // Accept only stable error categories and opaque correlation IDs from the backend.
-const CODES = new Set(["database_not_configured","database_runtime_role_required","database_connection_failed","database_authentication_failed","database_access_denied","save_validation_failed","save_reference_expired","save_transaction_failed","saved_link_unavailable","llm_interpretation_failed","no_relevant_venues","insufficient_routing","provider_quota_rejected","provider_service_error","internal_application_error","local_request_required"]);
+const CODES = new Set(["database_not_configured","database_runtime_role_required","database_connection_failed","database_authentication_failed","database_access_denied","save_validation_failed","save_reference_expired","save_transaction_failed","saved_link_unavailable","llm_interpretation_failed","no_relevant_venues","insufficient_routing","provider_quota_rejected","provider_service_error","venue_refresh_disabled","venue_refresh_limit","internal_application_error","local_request_required"]);
 export function classifiedFailure(value: unknown): {code:string;message:string;correlationId?:string;diagnostics?:Record<string,unknown>} | undefined {
   if (!value || typeof value !== "object") return;
   const data=value as Record<string,unknown>;

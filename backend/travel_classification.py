@@ -88,11 +88,14 @@ def select_diverse(ranked,count,context):
     usage=context.get('venueDisplayCounts',{})
     while remaining and len(chosen)<count:
         best=max(p.score for p in remaining)
-        near=[p for p in remaining if p.score>=best-.15]
+        near=[p for p in remaining if p.score>=best-.08]
+        if not chosen:near=[p for p in remaining if p.score>=best-1e-9]
         def key(p):
             batch=sum(any(v.id==q.candidate.venues[i].id for q in chosen) for i,v in enumerate(p.candidate.venues))
             repeats=sum(usage.get(v.activity.value,{}).get(v.id,0) for v in p.candidate.venues)
-            return batch,repeats,-p.score,tuple(v.id for v in p.candidate.venues)
+            first=p.firstLeg.get('minutes') if p.firstLeg else 0
+            journey=p.totalTravel+first if p.totalTravel is not None and first is not None else float('inf')
+            return batch,repeats,-p.score,journey,tuple(v.id for v in p.candidate.venues)
         pick=min(near,key=key);chosen.append(pick);remaining.remove(pick)
     return chosen
 

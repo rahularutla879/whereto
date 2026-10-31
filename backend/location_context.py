@@ -15,7 +15,11 @@ def relative_destination(text):
 def timezone_for(location):
     text=re.sub(r'[^a-z ]',' ',str(location or '').replace('.', '').casefold())
     if re.search(r'\bhyderabad\b',text):return 'Asia/Kolkata'
-    if re.search(r'\b(?:baltimore|washington *(?:dc|district of columbia)|manhattan|new york|nyc|brooklyn|queens|bronx|staten island)\b',text):return 'America/New_York'
+    if re.search(r'\b(?:baltimore|washington *(?:dc|district of columbia)|midtown east|midtown west|chelsea|hell s kitchen|financial district|jersey city|new jersey|hoboken|newark|journal square|newport centre|manhattan|new york|nyc|brooklyn|queens|bronx|staten island)\b',text):return 'America/New_York'
+    if re.search(r'\b(?:london|westminster|shoreditch)\b',text):return 'Europe/London'
+    if re.search(r'\b(?:san francisco|los angeles|seattle)\b',text):return 'America/Los_Angeles'
+    if re.search(r'\b(?:chicago)\b',text):return 'America/Chicago'
+    if re.search(r'\b(?:delhi|mumbai|bengaluru|bangalore|chennai|kolkata|pune)\b',text):return 'Asia/Kolkata'
     return 'UTC'
 
 class DestinationContext(BaseModel):

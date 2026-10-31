@@ -123,6 +123,9 @@ QUERIES = {
 def search_body(request: DiscoveryRequest, limit: int) -> dict:
     area = request.area
     query = "dinner restaurants" if request.meal == "dinner" else QUERIES.get(request.activity.value, request.activity.value.removeprefix("custom:"))
+    from backend.retail import query as retail_query
+    retail=retail_query(request.activity.value,request.search_variant)
+    if retail:query=retail
     if request.search_variant == "mixed":
         query = "entertainment centers with bowling" if request.activity == ActivityType.bowling else query + " places"
     if request.search_variant == "alternative":
@@ -170,6 +173,7 @@ class DiscoveryCandidate(DiscoveryModel):
     coordinates: Coordinates
     attributions: list[dict] = Field(default_factory=list)
     types: list[str] | None = None
+    containingPlaces: list[dict] | None = None
     primaryType: str | None = None
     rating: float | None = Field(default=None, ge=1, le=5, strict=True, allow_inf_nan=False)
     userRatingCount: int | None = Field(default=None, ge=0, strict=True)
@@ -249,7 +253,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
                 provider_id=place["id"], display_name=place["displayName"]["text"],
                 address=place["formattedAddress"], coordinates=place["location"],
                 attributions=place.get("attributions", []), types=place.get("types"),
-                primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
+                containingPlaces=place.get("containingPlaces"),primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
             reason = geographic_reason(area, candidate.coordinates, place.get("addressComponents", []))
             if not reason and city_reference and distance_m(city_reference,candidate.coordinates)>30000:
                 reason='outside_destination_area'
@@ -305,7 +309,7 @@ class PlacesDiscovery:
                 'googleResultsReceived': result.stages['returned'],
                 'geographyRejected': result.excluded_count,
                 'geographyReasons': result.stages['geographyRejectedByReason'],
-                'searchRequests': 1, 'pagesFollowed': int(request.page_token is not None),
+                'searchRequests': 1+result.stages.get('relationshipSearches',0), 'relationshipSearches':result.stages.get('relationshipSearches',0), 'pagesFollowed': int(request.page_token is not None),
                 'searchStrategies': {('bowling_strict_type' if request.search_variant == 'initial' else 'bowling_text_evidence') if request.activity == 'bowling' else 'category_' + request.search_variant: 1},
                 'requestedPageSize': min(10, self.outing.settings.ceiling("candidates_per_activity")),
                 'geographyPolicy': 'verified_named_area' if request.area.name and request.area.enforce_name else 'bounded_destination_preference' if request.area.name else 'authorized_radius' if request.area.radius_m else 'coordinate_bias_only',
@@ -361,6 +365,14 @@ class PlacesDiscovery:
         # obeys the original ceiling; no ranking or refill occurs.
         for activity in {r.activity for r in requests}:
             self.outing.check_candidates(sum(activity in v.activities for v in quality.venues))
+        if len(requests)==1 and not quality.venues:
+            from backend.retail import intent as retail_intent
+            r=requests[0];retail=retail_intent(r.activity.value)
+            if retail and retail.brands and not retail.destination and not retail.hard_format and r.search_variant=='initial' and not r.page_token:
+                fallback=self.discover(r.model_copy(update={'search_variant':'alternative'}))
+                from backend.discovery_inventory import merge_inventory
+                initial=DiscoveryResult(candidates=[],venues=[],observed=observed,audit=audit,paging=paging)
+                return merge_inventory(initial,fallback,self.outing)
         return DiscoveryResult(candidates=candidates, venues=quality.venues, observed=observed,
                                excluded_count=geographic_exclusions + quality.excluded_count,
                                diagnostics=dict(sorted(diagnostics.items())), stages=stages, paging=paging, audit=audit)
@@ -376,6 +388,28 @@ class PlacesDiscovery:
                 self.outing.note_page()
             from backend.places_transport import text_search
             data = text_search(body)
+        from backend.retail import intent as retail_intent
+        relationship_start=self.outing.usage()["placesSearchRequests"]
+        retail=retail_intent(request.activity.value)
+        if retail and not retail.destination and (retail.parent or retail.same_mall):
+            mall_activity=ActivityType('custom:'+retail.parent+' mall') if retail.parent else ActivityType.shopping
+            malls=self.discover(request.model_copy(update={'activity':mall_activity,'page_token':None}))
+            from backend.retail import MALL_TYPES
+            known={v.facts.id:v.facts.name for v in malls.venues if set(v.facts.providerTypes or []) & MALL_TYPES}
+            data={**data,'places':[{**p,'containingPlaces':[{**parent,**({'displayName':{'text':known[parent['id']]},'isMall':True} if parent.get('id') in known else {})} for parent in p.get('containingPlaces',[])]} for p in data.get('places',[])]}
+        if retail and retail.destination and retail.brands:
+            # A mall search cannot prove its tenants. Verify directed provider
+            # containment from separate brand-store searches, never proximity.
+            parent_sets=[]
+            if len(retail.brands)>3:
+                raise DiscoveryError('invalid_request','At most three tenant brands can be checked in one mall search.')
+            for brand in retail.brands:
+                tenant_request=request.model_copy(update={'activity':ActivityType('custom:'+brand+' store'),'page_token':None})
+                tenant_result=self.discover(tenant_request)
+                parent_sets.append({p.id for v in tenant_result.venues for p in (v.facts.containingPlaces or [])})
+            supported=set.intersection(*parent_sets) if parent_sets else set()
+            data={**data,'places':[p for p in data.get('places',[]) if p.get('id') in supported]}
         result = parse_response(data, request.area, limit)
+        result.stages["relationshipSearches"]=self.outing.usage()["placesSearchRequests"]-relationship_start
         self.outing.check_candidates(len(result.candidates))
         return result

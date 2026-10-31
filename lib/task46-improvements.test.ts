@@ -29,7 +29,7 @@ test("hard budgets, unknown travel, event sessions, dinner and future hard viola
   p.constraintIssues = [{ code: "future_hard_failure", field: "schedule", status: "violation", message: "Known closure conflicts with the requested time." }, { code: "unknown_duration", field: "duration", status: "unknown", message: "Unknown duration" }];
   const warnings = planWarnings(p).join(" ");
   assert.match(warnings, /hard budget cannot be verified/);
-  assert.match(warnings, /Known closure/); assert.match(warnings, /showtimes/); assert.match(warnings, /Dinner service/); assert.match(warnings, /Travel time is missing/);
+  assert.match(warnings, /Known closure/); assert.doesNotMatch(warnings, /showtimes|Dinner service/); assert.match(warnings, /Travel time is missing/);
   assert.doesNotMatch(warnings, /Unknown duration/);
 });
 

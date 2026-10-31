@@ -122,7 +122,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             facts[fact.id] = fact
             pool.append(Venue(id=fact.id, name=fact.name, activity=activity,
                               providerPlaceId=fact.id, address=fact.address, rating=fact.rating, ratingCount=fact.ratingCount, wheelchairAccessible=fact.wheelchairAccessible,
-                              relevanceStrength=distinct.relevance[activity].status,
+                              relevanceStrength=distinct.relevance[activity].status,retailParents=[p.model_dump() for p in (fact.containingPlaces or [])] or None,
                               mapsUrl=str(venue_source(fact).url), evidenceLabels=labels,
                               dataQuality=DataQuality(identity=DataStatus.verified), source="Google Maps"))
         pools.append(pool)
@@ -315,6 +315,10 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     checked = 0
     travel_sets = {state: {} for state in ('compatible', 'violated', 'unverified')}
     for candidate in candidates:
+        from backend.retail import intent as retail_intent
+        tenant_indices=[i for i,a in enumerate(request.activities) if (retail_intent(a.value) and retail_intent(a.value).same_mall)]
+        if len(tenant_indices)>1 and not set.intersection(*[{p.id for p in (facts[candidate.venues[i].id].containingPlaces or []) if p.isMall} for i in tenant_indices]):
+            continue # Shared-mall requirement is hard; never infer from proximity.
         needed = [(a.id, b.id) for a, b in zip(candidate.venues, candidate.venues[1:])]
         if request.startingLocation:
             needed.append((request.startingLocation.point.id, candidate.venues[0].id))
@@ -449,6 +453,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         for plan in ranked:
             if not plan.firstLeg['exceedsPreference']:plan.score+=.05
         ranked.sort(key=lambda plan:(-plan.score,plan.candidate.id))
+    from backend.retail import intent as retail_intent
+    import re
+    for plan in ranked:
+        preferred=sum(bool((retail_intent(v.activity.value) and retail_intent(v.activity.value).outlet) and re.search(r'\boutlet\b|\bfactory\b',v.name,re.I)) for v in plan.candidate.venues)
+        if preferred:
+            plan.score=min(1,plan.score+.015*preferred/len(plan.candidate.venues))
+            plan.components['retailFormatPreference']=.015*preferred/len(plan.candidate.venues)
+    ranked.sort(key=lambda plan:(-plan.score,(plan.totalTravel+((plan.firstLeg or {}).get('minutes') or 0)) if plan.totalTravel is not None and (not plan.firstLeg or plan.firstLeg.get('minutes') is not None) else float('inf'),plan.candidate.id))
     diagnostics["unseenEligibleCombinations"] = len(ranked)
     beyond_available=any(p.travelClassification=='beyond_limit' for p in scored_alternatives)
     from backend.travel_classification import limit_notice
@@ -462,6 +474,27 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     else:
         from backend.travel_classification import select_diverse
         diverse = select_diverse(ranked,3,context)
+    previous_known=context.get('rankingKnownIds',set())
+    current_known={v.id for pool in all_pools for v in pool}
+    newly_discovered=current_known-previous_known if previous_known else set()
+    previous_eligible=context.get('rankingEligibleIds',set())
+    def journey_minutes(p):
+        first=p.firstLeg.get('minutes') if p.firstLeg else 0
+        return p.totalTravel+first if p.totalTravel is not None and first is not None else None
+    diagnostics['rankingAudit']={'knownVenues':len(current_known),'newVenuesSincePreviousResponse':len(newly_discovered),
+        'eligibleVerified':len([p for p in ranked if p.travelClassification=='matching']),
+        'deferredEligible':max(0,len(ranked)-len(diverse)),
+        'lateArrivalReason':'new_discovery' if newly_discovered else 'remaining_known_combinations' if previous_known else 'initial_staged_coverage',
+        'selected':[{'score':p.score,'components':p.components,'interStopMinutes':p.totalTravel,
+            'firstStopMinutes':p.firstLeg.get('minutes') if p.firstLeg else None,
+            'newVenue':any(v.id in newly_discovered for v in p.candidate.venues),
+            'lateReason':'new_discovery' if any(v.id in newly_discovered for v in p.candidate.venues) else 'remaining_ranked_combination' if p.candidate.id in previous_eligible else 'newly_verified_known_venues' if previous_known else 'initial_staged_coverage',
+            'shorterThanPreviouslyShown':bool(journey_minutes(p) is not None and context.get('shortestShownJourney') is not None and journey_minutes(p)<context['shortestShownJourney'])} for p in diverse]}
+    context['rankingEligibleIds']=previous_eligible|{p.candidate.id for p in ranked}
+    known_journeys=[journey_minutes(p) for p in diverse if journey_minutes(p) is not None]
+    if context.get('shortestShownJourney') is not None:known_journeys.append(context['shortestShownJourney'])
+    if known_journeys:context['shortestShownJourney']=min(known_journeys)
+    context['rankingKnownIds']=current_known
     diagnostics["selectedPrimaryCandidates"] = len({p.candidate.venues[0].id for p in diverse})
     context['eligiblePrimary'] = diagnostics['eligiblePrimaryCandidates']
     primary_shortage = context['eligiblePrimary'] < min(3, len(all_pools[0]))

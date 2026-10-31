@@ -16,9 +16,10 @@ test("continuation distinguishes place discovery from route checking without a r
   assert.match(explorationStage(false), /Checking routes/);
   assert.doesNotMatch(explorationStage(true), /retry|failed/i);
 });
-test("developer usage remains within the collapsed estimates disclosure", () => {
+test("developer usage is excluded from the normal recommendation disclosure", () => {
   const html=renderToStaticMarkup(React.createElement(ResultsInformation, { real: true, needsChecking: true, notes: ["Development usage — estimated gross $0.25; Cloud billing not verified."] }));
-  assert.match(html, /<details[^>]*><summary>About these estimates<\/summary>.*Development usage/);
+  assert.match(html, /<details[^>]*><summary>About these recommendations<\/summary>/);
+  assert.doesNotMatch(html,/Development usage|estimated gross|Cloud billing/);
   assert.doesNotMatch(html, /<details[^>]*open/);
 });
 

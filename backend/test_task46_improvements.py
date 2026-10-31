@@ -181,13 +181,13 @@ class ImprovementTests(unittest.TestCase):
         with patch('backend.places_transport.access_token',return_value='synthetic'), patch('requests.Session.post',return_value=response) as post:
             transport_search({'textQuery':'synthetic'})
             mask=post.call_args.kwargs['headers']['X-Goog-FieldMask']
-            self.assertEqual(mask,FIELD_MASK+',places.rating,places.userRatingCount')
+            self.assertEqual(mask,FIELD_MASK+',places.rating,places.userRatingCount,places.containingPlaces')
             self.assertNotIn('review',mask.lower())
             transport_search({'textQuery':'synthetic'},field_mask=FIELD_MASK)
             self.assertEqual(post.call_args.kwargs['headers']['X-Goog-FieldMask'],FIELD_MASK)
             with patch.dict(os.environ,{'WHERETO_RATINGS_DEV':'0'}):
                 transport_search({'textQuery':'synthetic'})
-                self.assertEqual(post.call_args.kwargs['headers']['X-Goog-FieldMask'],FIELD_MASK)
+                self.assertEqual(post.call_args.kwargs['headers']['X-Goog-FieldMask'],FIELD_MASK+',places.containingPlaces')
                 with self.assertRaises(DiscoveryError): transport_search({},field_mask=FIELD_MASK+',places.rating,places.userRatingCount')
         with self.assertRaises(DiscoveryError):transport_search({},field_mask='*')
 

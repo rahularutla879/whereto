@@ -168,3 +168,10 @@ application error. Server evidence logs only reference/category/operation/except
 class; no SQL, exception strings, configuration, request bodies or tokens. A
 malformed successful planner response is classified as an application error rather
 than falsely calling the backend unavailable. See HANDOVER.md for exact checks.
+
+
+## Saved cards and explicit current venue details
+
+Reopened options now replace the demo/generated cards in the main results area. Save/link management follows the cards. The compact private link interface has Copy feedback, Open and collapsed Forget/help. `POST /api/plans/refresh` verifies the existing capability and original option before sequential, bounded Place Details Pro reads. Current names/addresses/status/credits stay in browser memory only; saved structure and SQL never change. No automatic provider request on reopen.
+
+[Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).

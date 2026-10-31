@@ -198,3 +198,10 @@ persistence now selects the existing private runtime file safely whenever a
 `current_user` after connecting. The source environment is not mutated. If the
 private runtime file is missing, insecure or invalid, saving fails with an
 explicit runtime-configuration category instead of silently broadening privileges.
+
+
+## One-command owner startup — current acceptance refinement
+
+The current owner workflow is `npm run dev:backend`, followed by `npm run dev` in the second Terminal. It loads the ignored owner profile and restricted persistence file automatically; the earlier manual sourcing commands remain historical alternatives. Explicit mock override: `npm run dev:backend -- --mock`. TLS, runtime identity, grants, RLS and migrations are unchanged.
+
+[Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).

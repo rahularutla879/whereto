@@ -16,7 +16,7 @@ The current app provides AI-assisted leisure venue discovery and sequential reco
 
 Generate an outing, choose the selected itinerary, then click **Save Plan**. This
 explicitly saves the visible options and normalized requirements. Refreshing opens
-the last saved plan in a separate section; **Reopen a saved plan** accepts another
+the last saved plan as the main itinerary cards; **Reopen a saved plan** accepts another
 private link. Demo cards cannot be saved. Existing three-card browsing stays intact.
 
 Saving requires Python's separate restricted database configuration. Follow the
@@ -31,8 +31,7 @@ Anyone with a private link can read it for 30 days. The browser remembers only t
 last link; copy links you want to keep. Forget on this device removes its local
 copy, not shared copies. These links are not accounts and cannot yet be revoked.
 Avoid sensitive requests and shared browsers. Real saved plans retain activity and
-stop order plus Google Place IDs; current venue details and route estimates are
-unavailable on reopen. Nothing contacts Google automatically. Mock snapshots stay
+stop order plus Google Place IDs; current venue details start unloaded and routes remain unavailable. Use **Refresh venue details** to deliberately retrieve current names and addresses; this does not regenerate the plan. Nothing contacts Google automatically. Mock snapshots stay
 visibly fictional. [Architecture, security limitations and tests](docs/saved-plans.md).
 
 ## Current Task 46: travel limits and local discovery
@@ -41,7 +40,7 @@ Strict maxima are enforced for ordinary recommendations. Flexible retains its pr
 
 Numeric budget and spending-mode controls are removed. Real prices and exact expenditure cannot be verified; cost intent in your words is retained with a warning, without a missing-budget question. Optional legacy backend fields remain for compatibility; fictional prices never establish real budget compliance.
 
-The exploration banner is removed. Real/mock badges remain, and accounting stays behind **Developer diagnostics**. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
+The exploration banner is removed. Real/mock badges remain, and accounting stays in the development-only **Local development tools** panel. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
 
 ## Current Task 46 acceptance changes
 
@@ -55,20 +54,31 @@ Authorized local exploration now records estimated cost **without a hard daily e
 
 Mock remains the safe default. The website badge says **MOCK DATA** or **REAL DATA · LOCAL DEV**. Real results contain Google Maps venues and driving/walking estimates; prices, hours, visit duration, showtimes and reservations still need confirmation. They are provisional options, not bookings or verified budget matches.
 
-From `/Users/rahularutla/Documents/whereto`, stop the backend with Control+C, then deliberately start real mode in that Terminal:
+On the owner's configured computer, Terminal 1:
 
 ```sh
-cd /Users/rahularutla/Documents/whereto
-VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development npm run dev:backend
+cd ~/Documents/whereto
+npm run dev:backend
 ```
 
-Keep the existing `npm run dev` frontend running in the second Terminal and reload the page. Existing local Ollama and protected impersonated ADC must be available. No source-code change is needed. Do not use these switches in production or hosting settings. Generating real plans makes billable Google requests within the existing application/Cloud limits; do not repeat the completed Task 46 live verification without a new allowance.
-
-To turn real mode off, stop that backend with Control+C and run:
+Terminal 2:
 
 ```sh
-unset WHERETO_EXPLORATION_DEV VENUE_DATA_MODE WHERETO_REAL_DEV WHERETO_CONTACT_DETAILS_DEV WHERETO_RATINGS_DEV WHERETO_START_LOOKUP_DEV WHERETO_PLACES_DEV WHERETO_ROUTES_DEV
-npm run dev:backend
+cd ~/Documents/whereto
+npm run dev
+```
+
+The launcher loads the existing private local profile and restricted database login.
+No manual sourcing or long environment command is needed. Fresh clones without
+that ignored profile remain mock; tests and production do not load it. Startup
+itself makes no Google request. Deliberate real planning or venue refresh can use
+Google within the existing quotas/accounting. Existing local Ollama/ADC must be
+available. Stop FastAPI with Control+C before switching modes.
+
+Explicit mock mode:
+
+```sh
+npm run dev:backend -- --mock
 ```
 
 Reload the frontend and confirm **MOCK DATA**. No Google credentials are needed for mock mode.
@@ -487,6 +497,8 @@ Describe nearby outings with “near me”, “around me”, “around here” o
 
 Neighborhood requests can use a compatible confirmed starting reference without requiring the neighborhood name in every venue address. This is approximate search prioritization, not proof of exact neighborhood boundaries. Check actual addresses. Explicit “only within” boundaries and exclusions remain enforced. If an area cannot be verified, correct the destination or explicitly approve searching around the confirmed start. Surprise Me never manufactures an origin.
 
-Dates stay fixed throughout an active outing. Hyderabad uses Asia/Kolkata; the supported New York areas and Washington, DC/Baltimore use America/New_York. Nearby requests use the browser-reported timezone with a disclosure; unknown named destinations retain the disclosed UTC fallback. A date-only default start is not a user deadline. Outing-date/time expiry and the separate ten-minute search-session expiry have different explanations. Saved pages remain browsable; **Choose another date** opens preferences without changing the date. Select a date and regenerate to confirm it while retaining other settings.
+Dates stay fixed throughout an active outing. Hyderabad uses Asia/Kolkata; the supported New York areas and Washington, DC/Baltimore use America/New_York. Nearby requests use the browser-reported timezone with a disclosure; unknown named destinations with relative dates require an exact date or recognizable city. A date-only default start is not a user deadline. Outing-date/time expiry and the separate ten-minute search-session expiry have different explanations. Saved pages remain browsable; **Choose another date** opens preferences without changing the date. Select a date and regenerate to confirm it while retaining other settings.
 
-Startup commands, mock defaults and Google opt-ins are unchanged. No live Google verification was performed for these fixes.
+The current one-command owner startup and explicit mock override are documented above. No live Google verification was performed for these fixes.
+
+See [the Tasks 46/49 acceptance refinements](docs/acceptance-refinements.md) for saved cards/refresh billing, retail brand and mall evidence, ranking, diagnostics and startup details. Tasks 50 and 50A–50E remain unstarted.

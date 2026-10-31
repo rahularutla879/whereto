@@ -340,3 +340,10 @@ minimums: the engine already supports one stop. Add exact cinema aliases before
 ambiguity checks, not an alternate interpreter. Publish private links only after
 confirmed commit; handle same-tab fragment imports and clearly identify the last
 confirmed saved link. No new migration or Task 50/50A–50E implementation.
+
+
+## Tasks 46/49 acceptance refinements
+
+Keep Google IDs as the persistent identity, and retrieve permitted current details only on explicit action. Retain user-authored intent without turning it into provider truth. Reuse the existing Details service with a lower Pro mask and conservative existing cost accounting; do not activate new services. Brand identity is hard, retail format soft unless explicitly mandatory; proximity never proves tenancy. Include full verified outbound journey in ranking, retain finite search/routing and diversity. Local profile parsing is data-only, restricted-identity and CI/production guarded. Keep raw counters out of product views; unknown destination calendars need clarification rather than a verified-UTC claim.
+
+[Details](docs/acceptance-refinements.md).

@@ -4,5 +4,5 @@ export function VenueRating({ venue }: { venue: DisplayVenue }) {
     ? <span className="venue-rating">{venue.rating.toFixed(1)} ★ · {venue.ratingCount!.toLocaleString("en-US")} Google ratings</span> : null;
 }
 export function RealVenueFacts({ venue }: { venue: DisplayVenue }) {
-  return <>{venue.address && <span>{venue.address}</span>}<VenueRating venue={venue} /></>;
+  return <>{venue.address && <span>{venue.address}</span>}{venue.retailParents?.filter(parent=>parent.displayName).map(parent=><span key={parent.id}>Inside {parent.displayName} · Google containment evidence</span>)}<VenueRating venue={venue} /></>;
 }

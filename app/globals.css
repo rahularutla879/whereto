@@ -273,3 +273,10 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .confirmed-start button { justify-self: start; max-width: 100%; white-space: normal; }
 .location-controls .manual-start-field { display: grid; gap: .5rem; margin: 1rem 0 .5rem; min-width: 0; }
 .location-controls .manual-start-field input { min-width: 0; }
+.saved-selected { outline: 2px solid var(--ink, #363b31); outline-offset: 4px; }
+.saved-stops { padding-left: 1.25rem; }
+.saved-stops p { margin: .4rem 0; overflow-wrap: anywhere; }
+.saved-results .plans-grid { margin-top: 1.5rem; }
+.saved-link input { width: 100%; min-width: 0; }
+.development-panel { margin-top: 1.5rem; }
+.development-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }

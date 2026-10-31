@@ -64,14 +64,9 @@ export function estimateNotes(notes: string[]) {
 
 export function planWarnings(plan: Plan): string[] {
   if (plan.dataMode === "real") {
-    const routine = new Set(["unknown_price", "unknown_capacity", "unknown_duration", "unknown_openingHours", "unknown_schedule_evidence", "uncertain_timing", "missing_transfer_schedule", "unverified_availability", "unverified_dinner", "unverified_budget", "session_not_verified"]);
+    const routine = new Set(["approximate_destination", "unknown_price", "unknown_capacity", "unknown_duration", "unknown_openingHours", "unknown_schedule_evidence", "uncertain_timing", "missing_transfer_schedule", "unverified_availability", "unverified_dinner", "unverified_budget", "session_not_verified"]);
     const warnings = (plan.constraintIssues ?? []).filter(issue => issue.status === "violation" || (!routine.has(issue.code ?? "") && !(issue.status === "unknown" && issue.field === "hours"))).map(issue => consumerMessage(issue.message));
-    if (plan.firstLeg?.source === "suggested") warnings.push("First-stop travel is measured from the suggested planning reference, not your actual position.");
-    else if (plan.firstLeg?.approximate) warnings.push("First-stop travel uses your confirmed area’s representative point, not your exact location.");
     if (plan.hardBudget || plan.issues.some(issue => issue.includes("Your hard budget"))) warnings.push("Your hard budget cannot be verified because venue prices are unavailable. This plan has not passed the budget constraint.");
-    if (plan.venues.some(v => ["movie", "concert", "theater", "musical", "ballet", "opera", "comedy", "sports", "baseball", "basketball", "football", "soccer", "hockey"].includes(v.activity))) warnings.push("Movie showtimes and event sessions are not verified. No ticket or reservation is confirmed.");
-    if (plan.venues.some(v => v.activity.startsWith("custom:"))) warnings.push("Activity sessions, class availability, tickets and reservations are not verified. Confirm the requested activity directly with the venue.");
-    if (plan.issues.some(issue => issue.startsWith("Dinner service"))) warnings.push("Dinner service and hours are not verified. Confirm the restaurant serves dinner before choosing.");
     if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) warnings.push("Travel time is missing for a required leg; travel constraints are not fully verified.");
     return [...new Set(warnings)];
   }

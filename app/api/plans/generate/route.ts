@@ -1,3 +1,4 @@
+import { publicPlanningPayload } from "@/lib/public-planning-payload";
 import { invalidUpstreamResponse } from "@/lib/proxy-failures";
 import { classifiedFailure } from "@/lib/failure-diagnostics";
 import { developmentOriginHeaders } from "../../../../lib/development-origin";
@@ -19,7 +20,7 @@ export async function POST(request: Request) {
     });
     received=true;
     const data: unknown = await response.json();
-    if (!response.ok && classifiedFailure(data)) return Response.json(classifiedFailure(data), { status:response.status, headers });
+    if (!response.ok && classifiedFailure(data)) return Response.json(publicPlanningPayload(classifiedFailure(data)), { status:response.status, headers });
     if (response.status === 422) {
       const error = data as { code?: string; message?: string };
       if (!error || typeof error.message !== "string") throw new Error("Invalid validation response");
@@ -27,7 +28,7 @@ export async function POST(request: Request) {
     }
     if (!response.ok) throw new Error("Backend failed");
     adaptRanking(data);
-    return Response.json(data, { headers });
+    return Response.json(publicPlanningPayload(data), { headers });
   } catch {
     if(received) return invalidUpstreamResponse();
     return Response.json({ code: "backend_unavailable", message: "Python planner unavailable. Start the backend and try again. No plan was generated." }, { status: 503, headers });

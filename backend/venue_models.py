@@ -115,6 +115,12 @@ class PriceRange(ContractModel):
         return self
 
 
+class ContainingPlace(ContractModel):
+    id: Nonblank
+    displayName: Nonblank | None = None
+    isMall: bool = False
+
+
 class VenueFacts(VenueIdentity):
     """Physical venue, including event buildings; never an event occurrence.
 
@@ -123,6 +129,7 @@ class VenueFacts(VenueIdentity):
     """
     provider: Nonblank
     evidence: Literal["provider_supplied", "fictional", "estimated", "unknown"]
+    containingPlaces: list[ContainingPlace] | None = None
     resourceName: Nonblank | None = None
     address: Nonblank | None = None
     coordinates: Coordinates | None = None

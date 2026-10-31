@@ -567,3 +567,10 @@ The only Google-shaped data was labeled Synthetic fixture data; transport guards
 rejected any real HTTP provider send. Actual Supabase persistence was tested
 separately from the mocked provider/AI boundaries. No live Google call, quota,
 billing or credential change occurred. Tasks 50 and 50A–50E remain unstarted.
+
+
+## Retail, verified journey ranking and cleaner results
+
+Brand-specific retail intent now preserves identity while treating store formats as preferences unless explicitly mandatory. Mall/tenant claims require provider containment and independently verified mall facts. Real convenience includes the origin journey even without a cap; partial unknown routes are not zero. Highest-ranked eligible choices precede novelty, with all-stop diversity retained. Detailed counters moved to a protected local development panel; normal explanations are concise. Timezone name coverage includes Jersey City/NYC neighborhoods, and unknown relative-date calendars request clarification.
+
+[Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).

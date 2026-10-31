@@ -67,7 +67,7 @@ async def invalid_request(request: Request, exc: RequestValidationError):
     issues = [{"field": ".".join(str(part) for part in e["loc"] if part != "body"),
                "message": e["msg"]} for e in exc.errors()]
     unsupported = any(e["type"] == "enum" and "activities" in e["loc"] for e in exc.errors())
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
         return failure("save_validation_failed",422,operation="persistence_validation")
     return JSONResponse(status_code=422, content={
         "code": "unsupported_request" if unsupported else "invalid_request",
@@ -189,13 +189,23 @@ def starting_areas(request: StartingAreaQuery):
 @app.post("/api/plans/generate", response_model=RankingResult)
 async def generate_endpoint(request: PlannerInput, http: Request):
     from backend.provider_work import run_work
-    return await run_work(http, lambda: receipts.issue(generate_plan(request)))
+    def generate():
+        result=generate_plan(request)
+        from backend.development_diagnostics import record
+        record(result)
+        return receipts.issue(result)
+    return await run_work(http,generate)
 
 
 @app.post("/api/plans/options")
 async def options_endpoint(request: OptionsRequest, http: Request):
     from backend.provider_work import run_work
-    return await run_work(http, lambda: more_options(request))
+    def options():
+        result=more_options(request)
+        from backend.development_diagnostics import record
+        record(result)
+        return result
+    return await run_work(http,options)
 
 
 from backend.saved_plans import SaveRequest, OpenRequest, PersistenceError, receipts, save, reopen
@@ -203,7 +213,7 @@ from backend.saved_plans import SaveRequest, OpenRequest, PersistenceError, rece
 
 @app.middleware("http")
 async def private_plan_boundary(request: Request, call_next):
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
         from urllib.parse import urlparse
         local = {"localhost", "127.0.0.1", "::1", "testserver"}
         # Local-development MVP only; no cross-origin browser or forwarded public traffic.
@@ -226,7 +236,7 @@ async def private_plan_boundary(request: Request, call_next):
                 return JSONResponse(status_code=413, content={"message": "Save request is too large."})
         request._body = bytes(body)
     response = await call_next(request)
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
         response.headers["Cache-Control"] = "no-store"
         response.headers["Referrer-Policy"] = "no-referrer"
     return response
@@ -257,3 +267,23 @@ async def safe_application_errors(request: Request, call_next):
         return await call_next(request)
     except Exception as error:
         return failure('internal_application_error',500,operation='http',error=error)
+
+
+from backend.saved_refresh import RefreshRequest, refresh_sessions
+
+@app.post('/api/plans/refresh')
+def refresh_saved_plan(request: RefreshRequest):
+    try:
+        return JSONResponse(content=refresh_sessions.refresh(request,provider_budget),headers={'Cache-Control':'no-store'})
+    except PersistenceError as error:
+        return failure(error.code,error.status,operation='saved_refresh')
+    except (DiscoveryError,ProviderLimitError) as error:
+        return failure('venue_refresh_disabled' if getattr(error,'code',None)=='disabled' else provider_code(error),422,operation='saved_refresh',error=error)
+
+
+@app.get('/api/development-diagnostics')
+def development_diagnostics():
+    if not local_real_enabled() or os.environ.get('WHERETO_DIAGNOSTICS_DEV')!='1':
+        return JSONResponse(status_code=404,content={},headers={'Cache-Control':'no-store'})
+    from backend.development_diagnostics import snapshot
+    return JSONResponse(content=snapshot(),headers={'Cache-Control':'no-store'})

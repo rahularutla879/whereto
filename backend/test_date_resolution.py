@@ -99,7 +99,8 @@ class DateResolutionTests(unittest.TestCase):
             fallback = self.resolve('tomorrow', now=now, location=location)
             self.assertEqual(fallback.date, date(2026, 11, 2))
             self.assertEqual(fallback.timezone, 'UTC')
-            self.assertIn('not a verified local timezone', ' '.join(fallback.notes))
+            if location:self.assertTrue(any('timezone is not known' in issue for issue in fallback.issues))
+            self.assertNotIn('verified local timezone', ' '.join(fallback.notes))
         with self.assertRaises(ValueError):
             self.resolve('tomorrow', now=datetime(2026, 10, 21))
 
