@@ -3,7 +3,7 @@
 export function developmentOriginHeaders(request?: Request): Record<string,string> {
   if (!request) return {};
   const host = request.headers.get("host") ?? new URL(request.url).host;
-  const loopback = new Set(["localhost", "127.0.0.1", "::1", "[::1]"]);
+  const loopback = new Set(["localhost", "127.0.0.1", "::1", "[::1]", "::ffff:127.0.0.1"]);
   const forwardedFor = request.headers.get("x-forwarded-for");
   const forwardedHost = request.headers.get("x-forwarded-host");
   let nonlocalForwarding = request.headers.has("forwarded") || !!forwardedFor?.split(",").some(ip=>!loopback.has(ip.trim()));

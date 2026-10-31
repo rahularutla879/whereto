@@ -179,7 +179,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(paths, ["/api/interpret"]);
     modelContent = "{}";
     paths.length = 0;
-    assert.match((await run()).message, /AI interpretation unavailable/);
+    assert.match((await run()).message, /local language interpreter.*Ollama.*Reference: [a-f0-9]{16}/);
     assert.deepEqual(paths, ["/api/interpret"]);
     modelStatus = 500;
     assert.equal((await run()).plans.length, 0);

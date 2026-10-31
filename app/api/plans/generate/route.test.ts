@@ -187,8 +187,10 @@ test("proxy rejects failed, malformed and stalled upstream responses", async () 
     for (const [nextStatus, nextBody] of [[500, '{}'], [200, 'not json'], [200, '{}'], [422, '{}']] as const) {
       status = nextStatus; body = nextBody;
       const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{"activities":["coffee"],"date":"2026-11-07"}' }));
-      assert.equal(response.status, 503);
-      assert.equal((await response.json()).code, "backend_unavailable");
+      assert.equal(response.status, 502);
+      const failure=await response.json();
+      assert.equal(failure.code, "internal_application_error");
+      assert.match(failure.correlationId,/^[a-f0-9]{16}$/);
     }
     stall = true;
     const response = await POST(new Request("http://localhost/api/plans/generate", { method: "POST", body: '{}' }));

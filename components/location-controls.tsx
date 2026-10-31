@@ -166,9 +166,9 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
       <button type="button" onClick={()=>chooseMode("manual")}>Use a starting location instead</button>
       <button type="button" onClick={()=>{removed.current=firstKey();setConflict(false);const value=prepareSurprise();if(value&&!pending.current.confirm(value))changed(value);}}>Remove the first-stop constraint for Surprise Me</button>
     </div>}
-    {selected&&mode!=="surprise"&&<><p>{selected.label}</p>{!mock&&<GoogleCredits credits={credits}/>}<button type="button" onClick={()=>{if(mode==="current"||mode==="manual")delete saved.current[mode];anchorConsent.current=false;setSelected(null);changed(context(null,false));}}>Change starting point</button></>}
+    {selected&&mode!=="surprise"&&<div className="confirmed-start"><p>{selected.label}</p>{!mock&&<GoogleCredits credits={credits}/>}<button type="button" onClick={()=>{if(mode==="current"||mode==="manual")delete saved.current[mode];anchorConsent.current=false;setSelected(null);changed(context(null,false));}} className="secondary-button">Change starting point</button></div>}
     {mode==="manual"&&<>
-      <label>Starting place, address, neighborhood or ZIP code<input value={manual} maxLength={200} placeholder="e.g. hotel or Union Station, Washington DC" onChange={e=>{
+      <label className="manual-start-field">Starting place, address, neighborhood or ZIP code<input value={manual} maxLength={200} placeholder="e.g. hotel or Union Station, Washington DC" onChange={e=>{
         version.current++;anchorConsent.current=false;if(gpsDenied.current){relativeSearch.current=undefined;setNearbyFallback(relativeRequested.current);}setSearching(false);setMatches([]);setSelected(null);delete saved.current.manual;setManual(e.target.value);changed({...context(null,false),...(e.target.value.trim()?{manualStartingPlace:e.target.value.trim()}:{})});
         setNotice("Plan your outing to find this place, or select Find starting place. You will confirm the match.");
       }}/></label>

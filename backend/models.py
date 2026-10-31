@@ -340,7 +340,7 @@ class Itinerary(ContractModel):
 
 class PlanningError(ContractModel):
     code: Literal["invalid_request", "unsupported_request", "unsupported_location",
-                  "missing_date", "no_availability", "infeasible", "insufficient_data", "destination_verification_unavailable"]
+                  "missing_date", "no_availability", "infeasible", "insufficient_data", "destination_verification_unavailable", "no_relevant_venues", "insufficient_routing", "provider_quota_rejected", "provider_service_error"]
     message: Nonblank
     field: Nonblank | None = None
 

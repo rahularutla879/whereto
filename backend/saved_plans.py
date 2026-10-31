@@ -15,7 +15,9 @@ from psycopg.rows import dict_row
 from psycopg.types.json import Jsonb
 from pydantic import Field, model_validator
 
-from backend.database_check import connection_settings, DatabaseCheckError
+from backend.database_check import DatabaseCheckError
+from backend.persistence_config import runtime_settings as connection_settings
+from backend.failures import MESSAGES
 from backend.models import ContractModel, OutingRequest, RankingResult
 
 Token = Annotated[str, Field(pattern=r'^[A-Za-z0-9_-]{43}$')]
@@ -90,11 +92,10 @@ class SavedDocument(ContractModel):
 
 
 class PersistenceError(Exception):
-    def __init__(self, status=503):
+    def __init__(self, status=503, code=None):
         self.status = status
-        super().__init__('Saved plan unavailable.' if status == 404 else
-                         'Saving is unavailable. Your generated plan is still here; try again later.' if status == 503 else
-                         'Save reference expired or changed. Generate plans again before saving.')
+        self.code = code or ('saved_link_unavailable' if status==404 else 'save_reference_expired' if status==409 else 'database_connection_failed')
+        super().__init__(MESSAGES[self.code])
 
 
 # These fields are normalized into named columns; no request/response blob.
@@ -199,10 +200,11 @@ def database(token, readonly=False):
     """One connection/transaction per explicit action, runtime role only."""
     if not connections.acquire(blocking=False):
         raise PersistenceError()
+    phase = "connect"
     try:
         settings = connection_settings(os.environ)
         if not settings['user'].startswith('whereto_plan_runtime.'):
-            raise PersistenceError()
+            raise PersistenceError(code="database_runtime_role_required")
         settings.update(application_name='whereto-private-plans', connect_timeout=5)
         with psycopg.connect(**settings, row_factory=dict_row) as connection:
             if not connection.pgconn.ssl_in_use:
@@ -212,11 +214,19 @@ def database(token, readonly=False):
             connection.execute("SET LOCAL lock_timeout = '2s'")
             role = connection.execute('SELECT current_user AS role').fetchone()['role']
             if role != 'whereto_plan_runtime':
-                raise PersistenceError()
+                raise PersistenceError(code='database_runtime_role_required')
             connection.execute("SELECT set_config('whereto.access_hash', %s, true)", (digest(token),))
+            phase = "transaction"
             yield connection
-    except (psycopg.Error, DatabaseCheckError, OSError, ValueError):
-        raise PersistenceError() from None
+    except DatabaseCheckError as error:
+        raise PersistenceError(code='database_runtime_role_required' if str(error)=='runtime_role_required' else 'database_not_configured') from None
+    except psycopg.Error as error:
+        code = ('database_authentication_failed' if error.sqlstate in ('28P01','28000') else
+                'database_access_denied' if error.sqlstate=='42501' else
+                'database_connection_failed' if phase=='connect' or isinstance(error,psycopg.OperationalError) else 'save_transaction_failed')
+        raise PersistenceError(code=code) from None
+    except (OSError, ValueError):
+        raise PersistenceError(code='database_connection_failed' if phase=='connect' else 'save_validation_failed') from None
     finally:
         connections.release()
 

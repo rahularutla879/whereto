@@ -591,3 +591,20 @@ metrics remain unavailable without a future intentional refresh. There is no
 provider call on reopen. Exact origins and transient geographic evidence are not
 retained. [Full mapping, routes, limits, transactions and limitations](docs/saved-plans.md).
 UUID/ordinal relationships remain extensible for 50A–50E without implementing them.
+
+
+### Tasks 46/49 acceptance corrections
+
+Runtime persistence settings now pass through `backend/persistence_config.py`:
+explicit restricted settings win; an administrator-style environment selects only
+the existing owner-private restricted file, parsed without executing shell.
+No administrator SQL connection, role/grant/schema change or startup DB dependency
+is introduced. `backend/failures.py` supplies fixed classifications and correlation
+logging without sensitive inputs. Next proxies preserve known error envelopes;
+invalid planner responses receive a distinct internal-application classification.
+The shared origin boundary recognizes IPv4-mapped loopback while rejecting public
+forwarding. `SavedPlans` publishes links only after confirmed commit and imports
+same-tab hash changes; starting-place controls have explicit grid spacing.
+Movie-theater aliases are canonicalized before conflicting-category detection;
+the existing one-stop and multi-stop engine, geography, provider retention and
+Strict/Flexible limits remain. [Evidence and limits](docs/real-planning.md#tasks-4649-acceptance-fixes--cinema-loopback-and-diagnostics).

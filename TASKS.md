@@ -220,6 +220,8 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
 - [x] Task 49 — Save and retrieve plans. A browser refresh should not destroy a saved itinerary.
 
+  Acceptance fix: administrator-loaded startup now selects only the existing restricted runtime configuration; failed saves no longer publish uncommitted links, and same-tab fragment navigation is handled. Tasks 46/49 cinema/loopback/diagnostic regression evidence is recorded in the latest HANDOVER.md checkpoint. No later task has started.
+
 - [ ] Task 50 — Configure safe database access. Keep privileged credentials on the server, validate requests, and protect write operations.
 
 - [ ] Task 50A — Understand complex multi-stop planning requests.

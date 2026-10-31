@@ -524,3 +524,46 @@ Numeric budget/spending controls and summary rows are removed. Valid legacy fiel
 The ordinary exploration banner is removed; real/mock distinction and collapsed developer diagnostics remain. Exact source-grounded manual-origin and required-wheelchair clauses reported by the model as uncertainty now retain their existing confirmation/verification contracts, rather than asking an unrelated city question or dropping essential access. Unknown access is still unknown and known incompatibility stays excluded. No prompt, model or provider switch. See [activity inventory](supported-activities.md), [provider research](venue-data-providers.md) and [model evaluation](llm-evaluation.md).
 
 No actual Kothapet venue supply, original Google geocode or current traffic was inspected: no billable provider calls are authorized. The fix proves the policy/priority behavior against invented responses, not that every real locality has venues inside ten minutes. Real coverage/latency and representative-point accuracy need a separately bounded live verification.
+
+## Tasks 46/49 acceptance fixes — cinema, loopback and diagnostics
+
+The existing real itinerary engine supports one to four activities. An invented
+Hyderabad Places response containing `movie_theater` venues already produced
+three one-stop options with confirmed-origin routes and an empty inter-stop leg
+list. No second stop, dinner, drinks or mandatory first-stop limit is necessary.
+The exact phrase `movie tomorrow in hyderabad` was also checked against the
+existing **actual local Qwen** model: activity `movie`, Hyderabad destination,
+Asia/Kolkata calendar and a destination-relative tomorrow were accepted. A separate
+actual local `movie` extraction returned `movie`. No Ollama setting/model changed.
+
+The reproducible generic failure was at the proxy boundary: Next adds
+`x-forwarded-for: ::ffff:127.0.0.1` for IPv4 loopback. The shared development-origin
+helper incorrectly marked it public; exploration's backend local-only guard
+returned 403, and Next converted it to generic backend-unavailable feedback. An
+empty invalid request reproduced this without dispatching Google (direct backend
+422, localhost proxy 422, 127 proxy 503). After accepting this exact loopback form,
+the same 127 proxy returns validation 422 and full offline-provider cinema
+planning works through HTTP/browser. Public forwarded addresses remain rejected.
+
+A separate activity normalization defect rejected `movie theater` because its
+words matched both movie and theater. Exact singular/plural American/British
+cinema aliases now normalize before ambiguity checks. No keyword fallback or
+multi-stop interpretation feature was added. Tomorrow/tonight tests straddle the
+UTC day boundary for Asia/Kolkata and America/New_York; the existing destination
+calendar, confirmed origin and Strict/Flexible guarantees remain unchanged.
+
+Discovery still uses movie-theater queries/types; showtimes, movie titles,
+screenings, tickets, prices and bookings are not invented. Missing route estimates
+remain unknown/unverified and cannot pass hard travel caps. Empty venue coverage,
+insufficient routing, provider quota/service failure, local limits and internal
+application errors are distinct. Specific temporary local routing-limit recovery
+messages remain intact. Internal errors receive safe reference IDs and are never
+misreported as venue scarcity. The production error boundary logs no request,
+coordinate, token, raw provider response, SQL or exception message.
+
+Browser acceptance used the explicit offline server:
+`backend.real_fixture_server --port 8059 --acceptance --exploration-ledger <private-temporary-test-path>`.
+The only Google-shaped data was labeled Synthetic fixture data; transport guards
+rejected any real HTTP provider send. Actual Supabase persistence was tested
+separately from the mocked provider/AI boundaries. No live Google call, quota,
+billing or credential change occurred. Tasks 50 and 50A–50E remain unstarted.

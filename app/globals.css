@@ -267,3 +267,9 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .saved-plans button { margin: .4rem .7rem .4rem 0; }
 .saved-document { margin-top: 1.5rem; }
 .saved-document li { margin: 1rem 0; }
+
+.confirmed-start { display: grid; gap: .65rem; margin: 1rem 0; min-width: 0; }
+.confirmed-start p { margin: 0; overflow-wrap: anywhere; }
+.confirmed-start button { justify-self: start; max-width: 100%; white-space: normal; }
+.location-controls .manual-start-field { display: grid; gap: .5rem; margin: 1rem 0 .5rem; min-width: 0; }
+.location-controls .manual-start-field input { min-width: 0; }

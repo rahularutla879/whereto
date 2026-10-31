@@ -1,3 +1,4 @@
+import { classifiedFailure } from "./failure-diagnostics";
 import { developmentOriginHeaders } from "./development-origin";
 
 export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reopen", request: Request) {
@@ -38,6 +39,7 @@ export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reo
       cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(45000)]),
     });
     const data = await response.json();
+    if (!response.ok && classifiedFailure(data)) return Response.json(classifiedFailure(data), { status:response.status, headers });
     if (!response.ok) return Response.json({ message: response.status === 404 ? "Saved plan unavailable. The link may be invalid, inaccessible or expired."
       : response.status === 409 ? "Save reference expired or changed. Generate plans again before saving."
       : "Saved plans are unavailable. Your current itinerary is kept; try again later." }, { status: [404,409,413,422].includes(response.status) ? response.status : 503, headers });

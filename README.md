@@ -22,6 +22,10 @@ private link. Demo cards cannot be saved. Existing three-card browsing stays int
 Saving requires Python's separate restricted database configuration. Follow the
 exact two-Terminal commands in [database setup](docs/database-setup.md#task-49-enable-explicit-saving-locally).
 Normal mock generation works without Supabase; unavailable saves preserve your cards.
+Use `backend/.env.persistence` for saving, not the migration administrator file.
+The app now reports configuration/authentication/transaction failures separately;
+a failed save never creates a success link. Same-tab and second-tab private links
+are supported. [Acceptance correction and exact real-mode startup](docs/database-setup.md#acceptance-correction-administrator-configuration-versus-runtime-configuration).
 
 Anyone with a private link can read it for 30 days. The browser remembers only the
 last link; copy links you want to keep. Forget on this device removes its local

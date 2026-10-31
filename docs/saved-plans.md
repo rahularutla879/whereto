@@ -124,3 +124,47 @@ management. These are documented limitations, not implemented security features.
 UUIDs, ordinal stops, optional timing and provider-neutral references remain
 compatible with later additive 50A–50E work; no mandatory destinations, return trips,
 new deadline semantics or complex journey interpretation were implemented.
+
+## Acceptance fixes after Task 49
+
+The owner's FastAPI process had all database settings, but sourcing
+`backend/.env.database` selected the migration administrator. Task 49 intentionally
+refused that identity; the proxy reduced the cause to a generic 503. This was not a
+Supabase outage or a rejected Google-shaped plan. Authenticated read-only TLS and
+migration/RLS verification passed. Both mock and actual planner-produced,
+sanitized provider-fixture shapes were subsequently committed/reopened through the
+restricted login without changing SQL grants, RLS, TLS or migrations.
+
+`backend/persistence_config.py` now honors an explicitly supplied restricted
+runtime environment. When the existing administrator-style `postgres.*` environment
+is present, it reads **only** the already provisioned `backend/.env.persistence`
+for application SQL. It never connects as administrator or uses SET ROLE to make
+that connection acceptable. The file must be an owner-controlled regular file,
+not a symlink, at most 4096 bytes, with no group/other permissions. A small
+allowlisted assignment parser reads it without executing shell. An ordinary
+unconfigured startup never reads it or connects automatically. Explicit restricted
+settings win, including bad credentials, so failures cannot silently fall back.
+No password or credential was changed by this fix.
+
+Save failures no longer publish a candidate link or replace the last confirmed
+link. Success requires both HTTP success and `saved: true`, emitted after commit.
+A lost response is retried with the same receipt/capability/selection; a new link
+is offered only after confirmation. A remembered link may belong to an earlier
+successful plan; a link created by the old failed-save UI may have **no database
+record** and cannot recover a never-committed itinerary. Generate/save again for a
+new confirmed link. Existing committed capabilities remain compatible.
+
+The page now handles initial fragments and `hashchange` navigation in the same
+tab. It captures the token before clearing the fragment; malformed fragments show
+an explicit error rather than silently opening a different remembered plan.
+Second-tab, refresh and backend-restart retrieval were tested for actual hosted
+records. Invalid/expired/missing references remain indistinguishable at SQL/API
+access boundaries and cannot reveal other plans.
+
+Errors now carry a fixed category and safe correlation ID through Python and
+Next: missing runtime config, wrong role, rejected login, connection failure,
+access denial, save validation, transaction failure, unavailable link and internal
+application error. Server evidence logs only reference/category/operation/exception
+class; no SQL, exception strings, configuration, request bodies or tokens. A
+malformed successful planner response is classified as an application error rather
+than falsely calling the backend unavailable. See HANDOVER.md for exact checks.

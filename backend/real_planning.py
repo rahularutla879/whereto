@@ -171,9 +171,11 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         message=("No complete outing in the checked results. Geographic checks rejected candidates for a missing activity; the area is not proven exhausted. Explore farther or refine your destination."
             if geographic_block else "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.")
         result = empty(public,message,diagnostics)
+        if not geographic_block:
+            result.errors=[PlanningError(code="no_relevant_venues",message=message)]
         if not discovery.venues and not anchored and not near and not discovery.excluded_count:
             result.message="No venues were returned in the checked search, and the destination could not be verified. Correct the area or explicitly use your confirmed start as a nearby search reference. Search coverage may also be limited."
-            result.errors=[PlanningError(code="destination_verification_unavailable",message=result.message)]
+            result.errors=[PlanningError(code="destination_verification_unavailable",message=result.message),PlanningError(code="no_relevant_venues",message=message)]
             result.diagnostics['failureBoundary']='destination_verification_unavailable'
         result.optionsToken = context["token"]
         result.canDiscover = can_discover(context)
@@ -520,10 +522,19 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
         ((outing.settings.exploration or context.get("locationFirst") or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
+    classified_error = None
+    if not diverse and route_notice:
+        from backend.failures import MESSAGES
+        codes={leg.error_code for leg in context['routes'].values()}
+        category=('provider_quota_rejected' if 'quota' in codes else
+                  'provider_service_error' if codes & {'provider','authentication','permission','timeout','invalid_response'} else 'insufficient_routing')
+        # Preserve the more specific local minute/budget recovery instructions.
+        if category!='insufficient_routing': route_notice=MESSAGES[category]
+        classified_error=PlanningError(code=category,message=route_notice)
     return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=[p for p in diverse if p.feasibility=="provisional"], explorationPlans=[p for p in diverse if p.feasibility=="violated"], detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context), canShowBeyond=beyond_available,
         diagnostics=diagnostics, message=(route_notice or compliance_notice or "We've shown the available combinations from the places checked so far. Explore farther to discover more.") if not diverse else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
-        errors=[] if diverse else [PlanningError(code="insufficient_data",message=compliance_notice)] if compliance_notice and not route_notice else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="insufficient_data" if pending else "no_availability", message=route_notice if pending else "We have shown the available combinations from the places checked so far. Explore farther to discover more.")],
+        errors=[] if diverse else [classified_error] if classified_error else [PlanningError(code="insufficient_data",message=compliance_notice)] if compliance_notice and not route_notice else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="insufficient_data" if pending else "no_availability", message=route_notice if pending else "We have shown the available combinations from the places checked so far. Explore farther to discover more.")],
         notes=['Development local discovery/routing coverage: '+json.dumps({'localCoverage':diagnostics.get('localCoverage'),'firstStopVerification':diagnostics.get('firstStopVerification')},sort_keys=True),'Development location context: '+json.dumps(diagnostics['locationContext'],sort_keys=True)]+['Development per-activity discovery targets: '+json.dumps(diagnostics['discoveryTargets'],sort_keys=True), 'Development travel classifications: '+json.dumps(diagnostics['travelClassifications'],sort_keys=True),'Development displayed activity coverage: '+json.dumps(diagnostics['displayedVenuesByActivity'],sort_keys=True),'Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
                 "Development Surprise coverage: "+json.dumps(diagnostics['surprise'],sort_keys=True)+f"; quality-excluded complete paths {diagnostics['surpriseQualityExcluded']}."] if surprise else []) + (["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
                    "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent estimated usage accounting; daily warning is nonblocking. Cloud quota remaining is unknown.",

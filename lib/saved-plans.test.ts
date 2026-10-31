@@ -58,3 +58,10 @@ test("proxy rejects public forwarding even with a local Host",async()=>{
     const response=await persistenceProxy("/api/plans/save",new Request("http://localhost/api/plans/save",{method:"POST",headers:{[name]:value},body:"{}"}));assert.equal(response.status,403);
   }
 });
+
+test("save proxy preserves actionable database errors and correlation evidence",async()=>{
+  const previous=globalThis.fetch;
+  const failure={code:"database_runtime_role_required",message:"Use the restricted saved-plan login.",correlationId:"0123456789abcdef"};
+  globalThis.fetch=(async()=>Response.json(failure,{status:503})) as typeof fetch;
+  try { const response=await persistenceProxy("/api/plans/save",new Request("http://localhost/api/plans/save",{method:"POST",body:"{}"}));assert.equal(response.status,503);assert.deepEqual(await response.json(),failure); } finally { globalThis.fetch=previous; }
+});

@@ -20,7 +20,17 @@ from pydantic import BaseModel, Field
 # One shared process budget across planning and on-demand contact requests.
 provider_budget = ProviderBudget()
 
+from backend.failures import MESSAGES, evidence, provider_code
+
 app = FastAPI(title="Where To? backend")
+
+
+def failure(code, status=503, operation='planning', *, message=None, diagnostics=None, error=None):
+    reference = evidence(code, operation, exception=error)
+    return JSONResponse(status_code=status, content={
+        'code': code, 'message': MESSAGES.get(code, message or 'This operation could not be completed.'),
+        'correlationId': reference, 'diagnostics': diagnostics or {},
+    }, headers={'Cache-Control':'no-store', 'X-Correlation-ID':reference})
 
 
 @app.middleware("http")
@@ -42,7 +52,7 @@ async def exploration_local_only(request: Request, call_next):
                 or request.url.hostname not in local or not request.client or request.client.host not in local
                 or any(k in request.headers for k in ("x-forwarded-for", "forwarded", "x-forwarded-host"))
                 or (origin and urlparse(origin).hostname not in local)):
-            return JSONResponse(status_code=403, content={"message":"Development exploration accepts local requests only."})
+            return failure("local_request_required",403,operation="development_boundary")
     return await call_next(request)
 
 
@@ -57,6 +67,8 @@ async def invalid_request(request: Request, exc: RequestValidationError):
     issues = [{"field": ".".join(str(part) for part in e["loc"] if part != "body"),
                "message": e["msg"]} for e in exc.errors()]
     unsupported = any(e["type"] == "enum" and "activities" in e["loc"] for e in exc.errors())
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen"}:
+        return failure("save_validation_failed",422,operation="persistence_validation")
     return JSONResponse(status_code=422, content={
         "code": "unsupported_request" if unsupported else "invalid_request",
         "message": ("An activity is unsupported; choose from the supported activities. No partial plan was created."
@@ -82,10 +94,10 @@ def generate_plan(request: PlannerInput) -> RankingResult:
             return JSONResponse(status_code=422, content={"code": "real_disabled", "message": "Real planning is disabled. Enable the local development switches or restart in mock mode."})
         try:
             return real_plans(request, provider_budget)
-        except ValidationError:
-            return JSONResponse(status_code=422, content={"code": "invalid_provider_data", "message": "Google returned incomplete or invalid venue or route information. No fictional fallback was used."})
+        except ValidationError as error:
+            return failure('internal_application_error',500,operation='planning_model',error=error)
         except (ProviderLimitError, DiscoveryError, RouteError) as error:
-            return JSONResponse(status_code=422, content={"code": getattr(error, "code", "application_limit"), "message": str(error) + " No fictional fallback was used.", "diagnostics": getattr(error, "diagnostics", {})})
+            return failure(provider_code(error),422,operation="venue_or_route",message=str(error),diagnostics=getattr(error,"diagnostics",{}),error=error)
     if request.requireWheelchairAccess:
         return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Mock venues cannot verify required wheelchair access. No fictional accessibility claim was made."})
     if request.geography.strictDestination or request.geography.excludedRegions:
@@ -108,10 +120,7 @@ def interpret_outing(request: InterpretationInput):
     try:
         return interpret_request(request)
     except (AIError, ValidationError, TimeoutError):
-        return JSONResponse(status_code=503, content={
-            "code": "ai_unavailable",
-            "message": "AI interpretation unavailable, timed out, or returned invalid output. Check the local AI service and settings, then retry. No plan was generated.",
-        })
+        return failure('llm_interpretation_failed',503,operation='interpretation')
 
 
 @app.get("/api/planning-mode")
@@ -227,9 +236,9 @@ def persistence_response(operation, request):
     try:
         return JSONResponse(content=operation(request), headers={"Cache-Control": "no-store"})
     except ValidationError:
-        return JSONResponse(status_code=409, content={"message": "Saved plan reference is incomplete. Generate again before saving."}, headers={"Cache-Control": "no-store"})
+        return failure('save_validation_failed',422,operation='save_validation')
     except PersistenceError as error:
-        return JSONResponse(status_code=error.status, content={"message": str(error)}, headers={"Cache-Control": "no-store"})
+        return failure(error.code,error.status,operation='save' if operation is save else 'reopen',error=error)
 
 
 @app.post("/api/plans/save")
@@ -240,3 +249,11 @@ def save_endpoint(request: SaveRequest):
 @app.post("/api/plans/reopen")
 def reopen_endpoint(request: OpenRequest):
     return persistence_response(reopen, request)
+
+
+@app.middleware('http')
+async def safe_application_errors(request: Request, call_next):
+    try:
+        return await call_next(request)
+    except Exception as error:
+        return failure('internal_application_error',500,operation='http',error=error)

@@ -26,6 +26,7 @@ ALIASES = {
     "bowling": "bowling", "bowl": "bowling",
     "drinks": "drinks", "drink": "drinks", "cocktails": "drinks", "cocktail": "drinks",
     "beer": "drinks", "beers": "drinks", "wine": "drinks", "mocktails": "drinks", "bar": "drinks",
+    "movie theater": "movie", "movie theaters": "movie", "movie theatre": "movie", "movie theatres": "movie", "cinemas": "movie",
     "movie": "movie", "movies": "movie", "cinema": "movie", "film": "movie", "films": "movie", "show movies": "movie",
     "watch a movie": "movie", "watch a film": "movie", "go to the movies": "movie", "see a film": "movie",
     "food": "food", "dinner": "food", "lunch": "food", "breakfast": "food", "brunch": "food",

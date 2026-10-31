@@ -18,18 +18,22 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8016)
     parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
+    parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
     args = parser.parse_args()
     if args.exploration_ledger:
         os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
                       WHERETO_CONTACT_DETAILS_DEV='1', WHERETO_START_LOOKUP_DEV='1', WHERETO_RATINGS_DEV='1', NODE_ENV='development')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
-    scenario = {'name': 'normal'}
+    scenario = {'name': 'cinema_acceptance' if args.acceptance else 'normal'}
 
     def search(body, **kwargs):
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
+        if scenario['name']=='cinema_acceptance':
+            from backend.acceptance_fixtures import search_fixture as acceptance_search
+            return acceptance_search(body,**kwargs)
         if scenario['name']=='places_daily':
             from types import SimpleNamespace
             from backend.provider_errors import classify
@@ -122,6 +126,9 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if scenario['name']=='cinema_acceptance':
+                from backend.acceptance_fixtures import FixtureAI as AcceptanceAI
+                return AcceptanceAI().interpret(text)
             pattern = r'\b(pottery class|go-karting|show movies|bowling|dinner|drinks|coffee|museum|movies?|concert)\b'
             activities = [m[0] for m in re.finditer(pattern, text, re.I)]
             leg = re.search(r'between venues under (\d+) minutes', text, re.I)

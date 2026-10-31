@@ -163,3 +163,38 @@ fixtures are opt-in and rollback-only:
 
 These admin-run fixtures impersonate the restricted role within a rollback-only
 transaction; they make no Google calls and leave no plans behind.
+
+## Acceptance correction: administrator configuration versus runtime configuration
+
+`backend/.env.database` is the migration/checker identity. It was the cause of the
+owner's failed save startup: its variables were present and authenticated, but the
+application correctly refused the privileged identity. A successful connection
+checker alone does not establish that saving is configured with the runtime role.
+
+Use the existing **`backend/.env.persistence`** for runtime startup. There is no
+need to recreate Supabase, change a password, rerun provisioning, or change grants.
+From `/Users/rahularutla/Documents/whereto`, stop FastAPI with Control+C, then use:
+
+```sh
+(
+  set +x
+  set -a
+  source backend/.env.persistence
+  set +a
+  VENUE_DATA_MODE=real WHERETO_REAL_DEV=1 WHERETO_ENV=development WHERETO_START_LOOKUP_DEV=1 npm run dev:backend
+)
+```
+
+This retains the existing real-mode development path and manual starting-place
+lookup. Keep any other already authorized local development switches you normally
+use; no quota, billing, credential or model change is part of this fix. Planning
+in real mode makes Google requests when **you intentionally submit**; acceptance
+tests used offline provider responses instead. For mock mode, use the earlier
+mock startup command with this same restricted configuration.
+
+For compatibility with the owner's administrator-loaded startup, application
+persistence now selects the existing private runtime file safely whenever a
+`postgres.*` environment is loaded. It still refuses administrator SQL and checks
+`current_user` after connecting. The source environment is not mutated. If the
+private runtime file is missing, insecure or invalid, saving fails with an
+explicit runtime-configuration category instead of silently broadening privileges.

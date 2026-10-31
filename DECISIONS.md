@@ -322,3 +322,21 @@ shared links, XSS/extensions, history/clipboard syncing and absent revocation/pu
 remain limitations. Do not call this authentication. Task 50 retains public security,
 accounts/ownership, revoke/rotate, cleanup/retention and distributed abuse protection;
 50A–50E retain advanced journey work. [Details](docs/saved-plans.md).
+
+
+## Tasks 46/49 acceptance corrections
+
+Keep the administrator refusal and capability-scoped RLS. Resolve the owner's
+startup mismatch by safely reading the existing restricted runtime configuration
+when administrator variables are loaded, never by using a privileged runtime
+connection or broadening SQL grants. Honor explicit restricted environments and
+fail closed on malformed/insecure private files. Preserve ordinary unconfigured
+mock startup and all real-mode flags.
+
+Accept the exact IPv4-mapped loopback address added by Next; keep public forwarding
+blocked. Distinguish safe error categories/reference IDs from raw provider/driver
+content. Preserve specific local quota-recovery messages. Do not change itinerary
+minimums: the engine already supports one stop. Add exact cinema aliases before
+ambiguity checks, not an alternate interpreter. Publish private links only after
+confirmed commit; handle same-tab fragment imports and clearly identify the last
+confirmed saved link. No new migration or Task 50/50A–50E implementation.

@@ -1,3 +1,4 @@
+import { failureText } from "./failure-diagnostics";
 import { currentRelative, explicitOrigin, recoveryCode, type DestinationContext } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
 import type { FirstTravel, Geography, OriginPreparation } from "./starting-areas";
@@ -131,7 +132,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, preferences, ...(relative&&context?.locationContext?.calendarTimezone?{calendarTimezone:context.locationContext.calendarTimezone}:{}), ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
-    if (!interpreted.ok) return failure(typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated.");
+    if (!interpreted.ok) return failure(failureText(extraction, typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated."));
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
     if (extraction.pending) {
@@ -170,6 +171,9 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ ...extraction.request, ...(context?.locationContext ?? {}), ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravelExclusive: false } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
     if (!response.ok) {
+      const errorBody=await response.clone().json().catch(()=>null);
+      const classified=failureText(errorBody, "");
+      if (classified) return {...failure(classified),notes:providerDiagnosticNotes(errorBody?.diagnostics)};
       if (response.status === 400 || response.status === 422) {
         const error = await response.json();
         return {...failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again."),recoveryCode:recoveryCode(error.code),notes:providerDiagnosticNotes(error.diagnostics)};
