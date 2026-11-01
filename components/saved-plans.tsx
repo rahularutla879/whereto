@@ -5,6 +5,7 @@ import { useEffect, useState, useCallback, useRef } from "react";
 import type { PlannerResult } from "@/lib/planner";
 import { createPortal } from "react-dom";
 import {mergeRefreshed,type RefreshedVenue} from "@/lib/saved-plan-refresh";
+import {loadSavedDetails,detailsFeedback} from "@/lib/saved-details-request";
 import { SavedCards } from "./saved-cards";
 import { fragmentToken, privateLink, SAVED_KEY, TOKEN, validateSaved, type SavedPlan } from "@/lib/saved-plans";
 
@@ -15,6 +16,8 @@ function markExplicit(accessToken:string){
 
 export function SavedPlans({ result,active,onOpen,contextKey }: { result?: PlannerResult;active:boolean;onOpen:(open:boolean)=>void;contextKey:string }) {
   const openEpoch=useRef(0);
+  const opening=useRef("");
+  const refreshing=useRef(false);
   const [container,setContainer]=useState<HTMLElement|null>(null);
   const [venues,setVenues]=useState<Record<string,RefreshedVenue>>({});
   const [refreshMessage,setRefreshMessage]=useState("");
@@ -36,6 +39,8 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
 
   const open=useCallback(async (accessToken: string) => {
     if (!TOKEN.test(accessToken)) { openEpoch.current+=1;setSaved(null);onOpen(true);setExpanded(true);setBusy(false);setMessage("Enter a valid private saved-plan link."); return; }
+    if(opening.current===accessToken)return;
+    opening.current=accessToken;
     const epoch=++openEpoch.current;
     setBusy(true); setSaved(null);setVenues({});onOpen(true);setExpanded(true);setMessage("Opening saved plan…");
     try {
@@ -47,9 +52,16 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
       markExplicit(accessToken);setExpanded(true);
       setSaved(document);setVenues({});setRefreshMessage("");onOpen(true); setToken(accessToken); setLink(privateLink(window.location.origin, accessToken));setCopyMessage("");
       try { localStorage.setItem(SAVED_KEY, accessToken); } catch { /* Private link still works without storage. */ }
-      setMessage("Saved plan reopened. No live venue or route refresh was requested.");
+      setMessage("Saved plan reopened.");
+      if(data.automaticVenueDetails===true&&document.dataMode==="real"){
+        setRefreshMessage("Loading current venue details…");
+        try{
+          const updates=await loadSavedDetails(accessToken,document.selectedId);
+          if(epoch===openEpoch.current){setVenues(updates);setRefreshMessage(detailsFeedback(updates));}
+        }catch(error){if(epoch===openEpoch.current)setRefreshMessage(error instanceof Error?error.message:"Venue details unavailable. Your saved plan is kept.");}
+      }
     } catch (error) { if(epoch===openEpoch.current)setMessage(error instanceof Error ? error.message : "Saved plan unavailable. Try again later."); }
-    finally { if(epoch===openEpoch.current)setBusy(false); }
+    finally { if(opening.current===accessToken)opening.current=""; if(epoch===openEpoch.current)setBusy(false); }
   },[onOpen]);
 
   function closeView(){
@@ -110,31 +122,28 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
   }
 
   async function refresh(candidateId:string,includeContacts=false){
+    if(refreshing.current)return;
+    refreshing.current=true;
     const epoch=openEpoch.current;
-    setBusy(true);setRefreshMessage("Refreshing venue details…");
+    setBusy(true);setRefreshMessage("Loading current venue details…");
     try{
-      const response=await fetch("/api/plans/refresh",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({accessToken:token,candidateId,includeContacts,refreshId:crypto.randomUUID()}),cache:"no-store"});
-      const data=await response.json();
-      if(!response.ok)throw new Error(failureText(data,data.message??"Venue details unavailable. Your saved plan is kept."));
-      if(data.candidateId!==candidateId || !data.venues || typeof data.venues!=="object")throw new Error("Venue response could not be verified.");
+      const updates=await loadSavedDetails(token,candidateId,includeContacts);
       if(epoch!==openEpoch.current)return;
-      setVenues(previous=>mergeRefreshed(previous,data.venues));
-      const loaded=Object.values(data.venues as Record<string,RefreshedVenue>).filter(v=>v.status==="refreshed").length;
-      setRefreshMessage(`${loaded} ${loaded===1?"stop":"stops"} loaded. ${Object.values(data.venues as Record<string,RefreshedVenue>).some(v=>v.status!=="refreshed")?"Some details are unavailable. ":""}Routes, hours and activity schedules were not refreshed.`);
+      setVenues(previous=>mergeRefreshed(previous,updates));setRefreshMessage(detailsFeedback(updates));
     }catch(error){if(epoch===openEpoch.current)setRefreshMessage(error instanceof Error?error.message:"Venue refresh unavailable. Your saved plan is kept.");}
-    finally{if(epoch===openEpoch.current)setBusy(false);}
+    finally{refreshing.current=false;if(epoch===openEpoch.current)setBusy(false);}
   }
   async function copy(){
     try{await navigator.clipboard.writeText(link);setCopyMessage("Private link copied.");}
-    catch{setCopyMessage("Copy unavailable. Select and copy the link below.");}
+    catch{setCopyMessage("Copy unavailable. Use your browser’s Copy link address action on Open saved plan.");}
   }
   return <section className="saved-plans" aria-label="Save and reopen plans">
     {active&&container&&createPortal(saved?<SavedCards saved={saved} venues={venues} refresh={(id,contacts)=>void refresh(id,contacts)} busy={busy} message={refreshMessage} onClose={closeView}/>:<section aria-label="Saved itinerary status"><p role="status">{message||"Opening saved plan…"}</p><button type="button" className="secondary-button" onClick={closeView}>Return to planning</button></section>,container)}
     {ready && <div className="saved-controls"><label>Selected itinerary<select value={choice} disabled={busy || pending?.receipt === result?.saveReceipt} onChange={event => setSelected(event.target.value)}>{result!.plans.map((plan,i) => <option key={plan.id} value={plan.id}>Option {i+1}: {plan.venues.map(v=>v.name).join(" → ")}</option>)}</select></label><button type="button" className="secondary-button" disabled={busy || savedReceipt === result?.saveReceipt} aria-busy={busy} onClick={()=>void save()}>{savedReceipt === result?.saveReceipt ? "Plan saved" : "Save Plan"}</button><p>Saves these options and your selection.</p></div>}
     <details open={expanded} onToggle={event=>setExpanded(event.currentTarget.open)}><summary>Saved plans</summary>
     {message && !active && <p role="status" aria-live="polite">{message}</p>}
-    {link && <div className="saved-link"><h3>Your saved plan</h3><p>Copy this private link to reopen your plan for 30 days. Anyone with the link can view it.</p><button type="button" className="secondary-button" onClick={()=>void copy()}>Copy link</button>{copyMessage&&<p role="status">{copyMessage}</p>}<a className="secondary-button" href={link} target="_blank" rel="noopener noreferrer">Open saved plan<span className="sr-only"> (opens in a new tab)</span></a><p className="details-note">If a new tab is blocked, copy the link and open it in another tab.</p><details><summary>Link and help</summary><label>Private link<input readOnly value={link} onFocus={event=>event.target.select()} /></label><p>This is your last confirmed saved plan. A failed save does not replace it. If a response is lost, retry the same selection. Existing copies work until expiry.</p><button type="button" className="secondary-button" onClick={()=>{try { localStorage.removeItem(SAVED_KEY); } catch { /* Storage may be disabled. */ } closeView();setToken("");setLink("");setMessage("Link forgotten on this device.");}}>Forget on this device</button></details></div>}
-    <details><summary>Reopen a saved plan</summary><label>Private saved-plan link<input type="text" value={input} onChange={event=>setInput(event.target.value)} placeholder="Paste your private link" autoComplete="off" spellCheck={false} /></label><button type="button" className="secondary-button" disabled={busy||!input} onClick={()=>{try { const url=new URL(input); void open(fragmentToken(url.hash)??""); } catch { void open(""); }}}>Open private link</button></details>
+    {link && <div className="saved-link"><h3>Your saved plan</h3><p>Copy this private link to reopen your plan for 30 days. Anyone with the link can view it.</p><button type="button" className="secondary-button" onClick={()=>void copy()}>Copy link</button>{copyMessage&&<p role="status">{copyMessage}</p>}<a className="secondary-button" href={link} target="_blank" rel="noopener noreferrer">Open saved plan<span className="sr-only"> (opens in a new tab)</span></a><button type="button" className="secondary-button" onClick={()=>{try { localStorage.removeItem(SAVED_KEY); } catch { /* Storage may be disabled. */ } closeView();setToken("");setLink("");setMessage("Link forgotten on this device.");}}>Forget on this device</button></div>}
+    <details><summary>Reopen another saved plan</summary><label>Private saved-plan link<input type="text" value={input} onChange={event=>setInput(event.target.value)} placeholder="Paste your private link" autoComplete="off" spellCheck={false} /></label><button type="button" className="secondary-button" disabled={busy||!input} onClick={()=>{try { const url=new URL(input); void open(fragmentToken(url.hash)??""); } catch { void open(""); }}}>Open private link</button></details>
     </details>
   </section>;
 }

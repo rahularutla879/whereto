@@ -5,6 +5,7 @@ must reserve before I/O, including pagination and failed attempts. Mock planning
 and the separate local AI interpreter do not consume this budget.
 """
 
+from math import ceil
 from contextlib import contextmanager, nullcontext
 import os
 from threading import Lock
@@ -15,7 +16,11 @@ from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 
 class ProviderLimitError(RuntimeError):
-    """Safe explanation for the future provider boundary to return to the user."""
+    """Safe admission category; optional reset estimate never schedules a retry."""
+    def __init__(self, message, *, reason=None, retry_after=None):
+        super().__init__(message)
+        self.reason = reason
+        self.retry_after = retry_after
 
 
 class ProviderSettings(BaseModel):
@@ -133,7 +138,7 @@ class OutingBudget:
     def cost_snapshot(self):
         from backend.development_cost import AccountingError
         try: return self._session.cost.snapshot()
-        except AccountingError as error: raise ProviderLimitError(str(error)) from None
+        except AccountingError as error: raise ProviderLimitError(str(error), reason=getattr(error,"reason",None), retry_after=getattr(error,"retry_after",None)) from None
 
     def _record_dispatch(self, operation, count):
         self._dispatched[operation] += 1
@@ -153,7 +158,7 @@ class OutingBudget:
         if session.cost:
             from backend.development_cost import AccountingError
             try:shared=session.cost.minute_capacity()
-            except AccountingError as error:raise ProviderLimitError(str(error)) from None
+            except AccountingError as error:raise ProviderLimitError(str(error), reason=getattr(error,"reason",None), retry_after=getattr(error,"retry_after",None)) from None
         with session._lock:
             now = monotonic()
             used_minute = sum(n for t, n in session._matrix_window if now - t < 60)
@@ -218,13 +223,13 @@ class OutingBudget:
             if identities & self._seen:
                 raise ProviderLimitError("This provider request was already attempted. Reuse its result or stop; automatic retries are disabled.")
             if session._active >= limits.concurrent_requests:
-                raise ProviderLimitError("Another external request is running. Wait for it to finish before continuing.")
+                raise ProviderLimitError("Another external request is running. Wait for it to finish before continuing.", reason="concurrent_request")
             if session._requests + requests > limits.ceiling("requests_per_session"):
                 raise ProviderLimitError("Local testing session request limit reached. Stop and review usage before starting a new session.")
             if self._requests + requests > limits.ceiling("requests_per_outing"):
                 raise ProviderLimitError("This outing's provider request limit was reached. Narrow the request.")
             if self._details + details > limits.details_per_outing:
-                raise ProviderLimitError("This outing’s contact-detail request limit was reached. Use the Google Maps venue link instead.")
+                raise ProviderLimitError("This outing’s contact-detail request limit was reached. Use the Google Maps venue link instead.", reason="capability_allowance")
             if self._searches + searches > limits.ceiling("searches_per_outing"):
                 raise ProviderLimitError("This outing's venue search limit was reached. Narrow the activities or search area.")
             if self._elements + elements > limits.ceiling("matrix_elements_per_outing"):
@@ -234,7 +239,7 @@ class OutingBudget:
             now = monotonic()
             session._details_window=[t for t in session._details_window if now-t<60]
             if len(session._details_window)+details>10:
-                raise ProviderLimitError("Local Place Details minute limit reached. Wait before a deliberate action; no retry is scheduled.")
+                raise ProviderLimitError("Local Place Details minute limit reached. Wait before a deliberate action; no retry is scheduled.", reason="local_minute", retry_after=max(1, ceil(60-(now-session._details_window[0]))))
             session._search_window = [t for t in session._search_window if now - t < 60]
             lookups = sum(op == "lookup" for op, _, _, _ in attempts)
             if len(session._search_window) + searches > 10:
@@ -253,7 +258,7 @@ class OutingBudget:
                 charge = reservation.__enter__()
             except AccountingError as error:
                 self.stop_reason = str(error)
-                raise ProviderLimitError(str(error)) from None
+                raise ProviderLimitError(str(error), reason=getattr(error,"reason",None), retry_after=getattr(error,"retry_after",None)) from None
             self._gross += charge
             self._matrix_requests += sum(op == "matrix" for op, _, _, _ in attempts)
             self._seen.update(identities)

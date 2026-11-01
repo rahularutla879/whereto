@@ -1,4 +1,5 @@
 """Local estimate guard. No credentials, request identities or Google content."""
+from math import ceil
 from contextlib import contextmanager
 from contextvars import ContextVar
 from datetime import datetime
@@ -16,7 +17,10 @@ _active = ContextVar('development_cost_reservation', default=None)
 
 
 class AccountingError(RuntimeError):
-    pass
+    def __init__(self, message, *, reason=None, retry_after=None):
+        super().__init__(message)
+        self.reason=reason
+        self.retry_after=retry_after
 
 
 def daily_limit(variable="WHERETO_DEV_DAILY_USD"):
@@ -133,7 +137,7 @@ class DevelopmentCost:
             additions={'search':units.get('search_pro',0)+units.get('search_enterprise',0), 'details':units.get('details',0),'elements':units.get('matrix_element',0)}
             for kind, maximum in (('search',10),('details',10),('elements',150)):
                 if additions[kind]+sum(e[2] for e in recent if e[1]==kind)>maximum:
-                    raise AccountingError('Local shared provider minute allowance reached. Wait before a deliberate action; no retry is scheduled.')
+                    raise AccountingError('Local shared provider minute allowance reached. Wait before a deliberate action; no retry is scheduled.', reason='local_shared_minute', retry_after=max(1,ceil(60-(now-min(e[0] for e in recent if e[1]==kind)))))
             data['recent']=recent+[[now,k,n] for k,n in additions.items() if n]
             row['grossMicrousd']+=charge
             for k,n in units.items(): row['reserved'][k]=row['reserved'].get(k,0)+n

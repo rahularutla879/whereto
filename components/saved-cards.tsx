@@ -12,8 +12,18 @@ export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:Sa
  useEffect(()=>{selectedCard.current?.focus();},[saved]);
  const index=saved.itineraries.findIndex(p=>p.candidateId===saved.selectedId);
  const option=saved.itineraries[index];
+ const [cooldown,setCooldown]=useState(false);
+ const blocked=Object.values(venues).some(v=>v.retryable===false);
+ useEffect(()=>{
+  const seconds=Math.max(0,...Object.values(venues).map(v=>v.retryAfterSeconds??0));
+  if(!seconds){queueMicrotask(()=>setCooldown(false));return;}
+  queueMicrotask(()=>setCooldown(true));
+  const timer=setTimeout(()=>setCooldown(false),seconds*1000);
+  return()=>clearTimeout(timer);
+ },[venues]);
  const real=saved.dataMode==="real";
  const names=option.stops.map(s=>s.fictional?.name??venues[s.reference]?.name);
+ const detailsReady=option.stops.every(s=>venues[s.reference]?.status==="refreshed");
  const credits=option.stops.flatMap(s=>venues[s.reference]?.attributions??[]);
  return <section aria-label="Saved itineraries" className="saved-results">
   <h3>Selected saved itinerary</h3>
@@ -22,10 +32,10 @@ export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:Sa
    <div className="card-body"><p className="card-label">Saved option {index+1} · Selected option</p>
    <h3 className="real-plan-title">{names.some(Boolean)?names.map((name,i)=>name??activityLabel(option.stops[i].activity as Activity)).join(" → "):"Your saved itinerary"}</h3>
    <p>{request.location} · {request.date}{!real&&" · Fictional sample"}</p>
-   {real&&<div className="saved-load"><p>Load current names, addresses, status and map links for these stops. This contacts Google Maps and uses API quota.</p>
+   {real&&<div className="saved-load"><p>{detailsReady?"Current venue information is shown below. Updating it contacts Google Maps and uses API quota.":"Load current names, addresses, status and map links. This contacts Google Maps and uses API quota."}</p>
     <label><input type="checkbox" checked={contacts} disabled={busy} onChange={e=>setContacts(e.target.checked)}/> Include phone and website (existing paid contact tier)</label>
-    <button type="button" className="secondary-button" disabled={busy} aria-busy={busy} onClick={()=>refresh(option.candidateId,contacts)}>Load current venue details</button>
-    <p className="details-note">Ratings, hours, tickets and routes are not loaded. Contact fields use the existing separate development gate.</p>
+    <button type="button" className="secondary-button" disabled={busy||blocked||cooldown} aria-busy={busy} onClick={()=>refresh(option.candidateId,contacts)}>{detailsReady?"Update current venue details":"Load current venue details"}</button>
+    <p className="details-note">Hours, tickets and routes are not loaded.</p>
    </div>}
    {message&&<p role="status" aria-live="polite">{message}</p>}
    <ol className="saved-stops">{option.stops.map(s=>{const detail=venues[s.reference];return <li key={s.position}>

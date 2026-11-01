@@ -30,7 +30,7 @@ test("normal explanations contain one shared notice and no raw JSON, cost ledger
 test("ordinary cards precede all save/reopen controls in DOM and no expanded saved document displaces demo",()=>{
  const html=renderToStaticMarkup(React.createElement(Home));
  assert.ok(html.indexOf('class="plans-grid"')<html.indexOf('aria-label="Save and reopen plans"'));
- assert.match(html,/Reopen a saved plan/);assert.doesNotMatch(html,/Before you choose/);
+ assert.match(html,/Reopen another saved plan/);assert.doesNotMatch(html,/Before you choose/);
 });
 test("production payloads omit internal diagnostics while preserving saved structures and normal notes",async()=>{
  const {publicPlanningPayload}=await import('./public-planning-payload');

@@ -474,3 +474,20 @@ Only explicit generation/exploration can request provider work. Beyond-limit opt
 No live Google verification or Cloud changes. Saved refresh reuses gated Place Details GET with `id,displayName,formattedAddress,businessStatus,attributions` (Pro), below the existing Enterprise contact tier. Conservative accounting remains $0.020/attempt, six requests per active saved-plan refresh session, one concurrent request, zero retries, shared minute/ledger guards. Retail containment uses `places.containingPlaces` at the same existing Text Search Pro tier; relationship/fallback searches are individually reserved. No Nearby Search or Time Zone API is activated. Published global initial Pro Details price checked October 31, 2026: $17/1,000, 5,000 free monthly cap; allowances are not assumed in estimates. Existing Cloud quotas and nonblocking exploration warning remain unchanged.
 
 [Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).
+
+## Saved-link retrieval and local readiness refinement
+
+`WHERETO_SAVED_AUTO_DETAILS_DEV` is **separate, default off and not enabled for the
+owner**. Manual Details approval does not approve billable calls on every explicit
+link open/reload. Proposed automatic mode reuses only selected-stop Pro fields: up
+to four unique calls, $0.017 each at first paid global tier before allowances;
+conservative local reservation remains $0.020 each. Optional Enterprise contacts
+still require their explicit checkbox/gate and are never automatic. No new
+field/service/Cloud quota/billing change. Normal home navigation makes zero calls.
+
+Six attempts per capability/30 minutes and shared ten/minute remain; new links do
+not bypass the shared ledger/Cloud quotas. Local reasons and known reset intervals
+are distinguished from Cloud errors, without automatic retries. The owner's
+ledger was inspected read-only and never reset. Local Qwen preparation uses one
+nonprivate sample and zero Google requests. See [official sources and exact
+measurements](saved-details-performance49.md).

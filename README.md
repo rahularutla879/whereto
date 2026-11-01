@@ -505,3 +505,18 @@ The current one-command owner startup and explicit mock override are documented 
 See [the Tasks 46/49 acceptance refinements](docs/acceptance-refinements.md) for saved cards/refresh billing, retail brand and mall evidence, ranking, diagnostics and startup details. Tasks 50 and 50A–50E remain unstarted.
 
 [Final Tasks 46/49 repairs](docs/final-acceptance49.md) document continuation exhaustion, selected saved views, new-tab navigation, provider fields/attribution and actual startup evidence. Stop an existing server with Control+C before restarting; backend port conflicts now explain this directly.
+
+### Saved links and first-search readiness
+
+Saved-link controls are compact: Copy link, Open saved plan (new tab), Forget on
+this device and collapsed Reopen another saved plan. Current Google details still
+use the explicit load action: automatic link-open billing is a separate default-off
+setting awaiting owner approval. No Google content is permanently retained.
+
+The owner's ignored profile now prepares the installed local Qwen prompt once in
+the background (`WHERETO_AI_WARMUP_DEV=1`). Keep the same two Terminal commands
+above; health is available while preparation runs. Waiting about 12 seconds after
+backend startup avoided the measured cold-model delay; immediate searches can
+still wait. Preparation stops after one attempt and uses no Google/SQL. Set the
+flag to `0` to disable it; mock startup never prepares AI. Details, measured limits
+and benchmark commands: [saved-details/performance acceptance](docs/saved-details-performance49.md).

@@ -197,7 +197,7 @@ export default function Home() {
         if (!confirmed) { setResult(previous => ({ ...previous, message: "Your starting place needs attention. Check the message by the starting-place field." })); return; }
         origin = confirmed; setLocationContext(confirmed);
       }
-      setPlanningStage("Generating itinerary");
+      setPlanningStage("Understanding your request");
       const next = await generateOuting(original, manualPreferences(preferenceState), {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
@@ -208,7 +208,7 @@ export default function Home() {
           if (confirmed) setLocationContext(confirmed);
           return confirmed ? {...confirmed,...(confirmed.planningMode==="surprise"?{recentSurpriseIds:surpriseHistory.current.ids()}:{})} : null;
         },
-        onValidated: value => { if (session.current.current(controller)) { setValidated(value); setClarification(null); setDirty(false); } },
+        onValidated: value => { if (session.current.current(controller)) { setPlanningStage("Checking venues and travel"); setValidated(value); setClarification(null); setDirty(false); } },
         onInterpreted: values => { if (session.current.current(controller)) setPreferenceState(previous => displayInterpretedPreferences(previous, values)); },
         onClarification: value => {
           if (!session.current.current(controller)) return;

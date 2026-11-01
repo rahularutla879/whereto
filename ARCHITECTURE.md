@@ -620,3 +620,21 @@ Added explicit capability-authorized saved refresh and main-position saved cards
 ## November 1 — final Tasks 46/49 acceptance repair
 
 Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](docs/final-acceptance49.md) and the latest HANDOVER.md evidence.
+
+## Tasks 46/49 saved-detail reliability and local AI readiness
+
+Reopen advertises a separately gated `automaticVenueDetails` policy; default false.
+The client issues at most one selected-only details action per explicit open when
+separately approved, with no contact-tier escalation/retry. Ordinary home/remembered
+links trigger no provider work. `saved-details-request.ts` centralizes bounded
+manual/optional navigation loading; all returned Google content remains in memory.
+`RefreshSessions` now guards whole-action UUID replay and exposes fixed admission
+reasons/reset estimates; shared durable accounting and existing quotas remain.
+
+`ai_readiness.py` prepares the existing local extraction prompt once in a daemon
+thread under an owner-only default-off development flag. Health does not wait.
+`performance.py` retains numeric AI timings only; the protected local diagnostic
+endpoint includes readiness and timing snapshots. Development numeric Server-Timing
+headers separate backend/proxy work; production proxies omit them. No interpreter,
+ranking, route concurrency, schema or persistence redesign. See
+[measurements and contracts](docs/saved-details-performance49.md).

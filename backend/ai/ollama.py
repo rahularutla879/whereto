@@ -2,6 +2,7 @@
 
 import json
 import socket
+from time import perf_counter
 from urllib.error import HTTPError, URLError
 from urllib.parse import urlsplit
 from urllib.request import ProxyHandler, Request, build_opener
@@ -153,11 +154,12 @@ class OllamaProvider:
             ],
             "format": schema, "stream": False, "think": False,
             "options": {"temperature": 0, "num_ctx": 8192, "num_predict": 1024},
-            "keep_alive": "5m",
+            "keep_alive": "10m",
         }
         request = Request(self.settings.base_url.rstrip("/") + "/api/chat",
                           data=json.dumps(payload).encode(),
                           headers={"Content-Type": "application/json"}, method="POST")
+        started=perf_counter()
         try:
             with self._opener.open(request, timeout=self.settings.timeout_seconds) as response:
                 result = json.load(response)
@@ -184,6 +186,10 @@ class OllamaProvider:
             content = result["message"]["content"]
             if not isinstance(content, str):
                 raise ValueError("Missing JSON content")
-            return parse_interpretation(content)
+            validation_started=perf_counter()
+            interpretation=parse_interpretation(content)
+            from backend.performance import record_ai
+            record_ai(result,(validation_started-started)*1000,(perf_counter()-validation_started)*1000)
+            return interpretation
         except (KeyError, TypeError, ValueError, ValidationError) as error:
             raise AIError("Ollama returned incomplete or invalid structured output; no interpretation was accepted.") from error

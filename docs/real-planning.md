@@ -574,3 +574,15 @@ billing or credential change occurred. Tasks 50 and 50A–50E remain unstarted.
 Brand-specific retail intent now preserves identity while treating store formats as preferences unless explicitly mandatory. Mall/tenant claims require provider containment and independently verified mall facts. Real convenience includes the origin journey even without a cap; partial unknown routes are not zero. Highest-ranked eligible choices precede novelty, with all-stop diversity retained. Detailed counters moved to a protected local development panel; normal explanations are concise. Timezone name coverage includes Jersey City/NYC neighborhoods, and unknown relative-date calendars request clarification.
 
 [Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).
+
+## First-search readiness acceptance
+
+Cold local AI, not measured live Google latency, dominated the observed local
+benchmark. A separately enabled owner-local one-shot preparation warms the existing
+Qwen model and common extraction prompt before the first outing. It never performs
+venue discovery/routing, retries or SQL; health stays available. No deterministic
+keyword replacement, ranking changes or speculative/concurrent Google calls were
+introduced. Loading copy follows actual interpretation then venue/travel stages.
+Protected diagnostics include numeric timing/readiness, and development numeric
+Server-Timing is available; normal product views do not show raw internals.
+[Cold/warm breakdown, offline fixtures and limits](saved-details-performance49.md).

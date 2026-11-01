@@ -171,3 +171,11 @@ private saved-plan links do. Original live names/routes were not retained, and
 Google coverage/current traffic/actual billable retrieval were not tested. Existing
 bounded discovery and tenant/brand/calendar coverage limitations remain. No new
 mandatory stops, return trips, journey deadlines or Task 50 security feature is added.
+
+## Subsequent saved-details/performance refinement
+
+[November 1 follow-up](saved-details-performance49.md) supersedes the link/help UI
+and generic refresh-limit behavior above. Selected-only/new-tab/security contracts
+remain. An automatic-details framework is implemented but stays disabled pending
+separate owner billing approval. Local Qwen startup preparation is enabled only
+in the ignored owner profile; health stays nonblocking. Ranking is unchanged.

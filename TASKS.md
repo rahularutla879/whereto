@@ -828,3 +828,15 @@ Task 46 remains complete. Task 47 remains unstarted.
 Strict/effective Flexible maximum violations require explicit beyond-limit browsing; confirmed-origin discovery/routing prioritizes nearby evidence, with original constraints and saved-page history preserved. Budget/exploration UI cleanup, activity capability audit, alternative-provider research and installed-Qwen benchmark are documented in HANDOVER.md and the focused docs. This is acceptance work within completed Task 46; original Tasks 47–135 remain pending. No live billable calls or provider/model switch occurred.
 
 Verification: 535 backend tests, 174 frontend tests, lint, TypeScript, production build and desktop/mobile fixture workflows passed. Python/top-level npm dependency checks passed; the full npm dependency tree reports two existing optional WASM version mismatches, detailed in HANDOVER.md.
+
+### Tasks 46/49 acceptance — saved details, link cleanup and first-search readiness
+
+- [x] Compact private-link controls and collapsed alternate-link input; preserve selected-only/new-tab behavior.
+- [x] Reproduce capability/shared-minute/replay boundaries, preserve accounting and expose specific safe recovery reasons.
+- [x] Implement separately gated automatic selected-details framework; **owner billing approval pending, automatic switch remains disabled**.
+- [x] Measure cold/warm installed Qwen and offline provider pipeline; enable one-shot local background preparation in owner-only profile.
+- [x] Preserve interpreter safeguards, ranking, routes, quotas, SQL security and original roadmap numbering.
+- Verification and delivery: see latest HANDOVER checkpoint and [acceptance record](docs/saved-details-performance49.md).
+
+Task 49 remains complete. This follow-up does not authorize automatic Google billing.
+**Task 50 and Tasks 50A–50E remain unstarted.**

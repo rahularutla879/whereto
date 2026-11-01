@@ -1,4 +1,5 @@
 """Explicit selected-option refresh. Only IDs/budgets survive the request."""
+from math import ceil
 from collections import OrderedDict
 from datetime import datetime, timezone
 from threading import Lock
@@ -7,7 +8,6 @@ import os
 import requests
 from uuid import UUID
 from pydantic import Field
-from backend.models import ContractModel
 from backend.saved_plans import OpenRequest, reopen, digest, PersistenceError
 from backend.venue_details import contact_links
 from backend.places import DiscoveryError, PROJECT
@@ -39,7 +39,10 @@ def fetch_saved_details(identity, *, include_contacts=False):
             if response.status_code!=200:
                 from backend.provider_errors import classify
                 code,message,diagnostics=classify(response,'details')
-                raise DiscoveryError(code,message)
+                if response.status_code==404:code='not_found'
+                error=DiscoveryError(code,message)
+                error.diagnostics=diagnostics
+                raise error
             data=response.json()
             contact=contact_links(data,identity)
             credits=contact['attributions']
@@ -52,7 +55,11 @@ def fetch_saved_details(identity, *, include_contacts=False):
                     'refreshedAt':datetime.now(timezone.utc).isoformat(),
                     'mapsUrl':verified_maps_url(data.get('googleMapsUri')),
                     **({k:contact[k] for k in ('phone','telephoneUrl','website')} if include_contacts else {})}
-        except (requests.RequestException,ValueError,TypeError,AttributeError):
+        except requests.Timeout:
+            raise DiscoveryError('timeout','Venue details timed out. No automatic retry.') from None
+        except requests.RequestException:
+            raise DiscoveryError('provider','Venue service could not be reached. No automatic retry.') from None
+        except (ValueError,TypeError,AttributeError):
             raise DiscoveryError('invalid_response','Current venue details could not be verified. No retry was made.') from None
 
 
@@ -79,9 +86,17 @@ class RefreshSessions:
             now=monotonic()
             self.entries=OrderedDict((k,v) for k,v in self.entries.items() if now-v[0]<1800)
             if key not in self.entries:
-                if len(self.entries)>=50:raise ProviderLimitError('Local refresh session capacity reached. No provider request was made.')
+                if len(self.entries)>=50:
+                    error=ProviderLimitError('Local refresh session capacity reached. No provider request was made.',reason='session_capacity',retry_after=max(1,ceil(1800-(now-next(iter(self.entries.values()))[0]))))
+                    return {'candidateId':request.candidateId,'venues':{option['stops'][0]['reference']:{'status':'unavailable',**refresh_issue(error)}},'diagnostics':{}}
                 self.entries[key]=(now,budget.outing(),set())
-            _,outing,attempted=self.entries[key]
+            created,outing,attempted=self.entries[key]
+        action=(str(request.refreshId),'__action__')
+        with self.lock:
+            if action in attempted:
+                return {'candidateId':request.candidateId,'venues':{s['reference']:{'status':'already_attempted','message':'This detail-loading action was already attempted. No automatic retry.'} for s in option['stops']},'diagnostics':{}}
+            attempted.add(action)
+        admitted_action=False
         results={}
         for stop in option['stops']:
             identity=stop['reference']
@@ -93,20 +108,59 @@ class RefreshSessions:
                 attempted.add(attempt)
             admitted=False
             try:
-                with outing.reserve('details',str(request.refreshId)+':'+identity):
+                with outing.reserve('details',digest(str(request.refreshId)+':'+identity)):
                     admitted=True
+                    admitted_action=True
                     details=fetch_saved_details(identity,include_contacts=True) if request.includeContacts else fetch_saved_details(identity)
                 results[identity]={'status':'refreshed',**details}
             except (DiscoveryError,ProviderLimitError) as error:
                 if not admitted:
                     with self.lock:attempted.discard(attempt)
-                from backend.failures import provider_code,MESSAGES,evidence
+                from backend.failures import provider_code,evidence
                 code='venue_refresh_limit' if isinstance(error,ProviderLimitError) else provider_code(error)
                 reference=evidence(code,'saved_refresh',exception=error)
-                results[identity]={'status':'unavailable','message':MESSAGES.get(code,'Venue details unavailable; your saved stop is kept.'),'correlationId':reference}
+                issue=refresh_issue(error, remaining=max(1,ceil(1800-(monotonic()-created))))
+                results[identity]={'status':'unavailable',**issue,'correlationId':reference}
                 # Stop on quota/service/admission failure; do not fan out after rejection.
                 if not admitted or getattr(error,'code','') in ('quota','authentication','permission','provider','timeout'):
                     break
-        return {'candidateId':request.candidateId,'venues':results,'diagnostics':outing.usage()}
+        if not admitted_action:
+            with self.lock:attempted.discard(action)
+        try:usage=outing.usage()
+        except ProviderLimitError:usage={'accountingUnavailable':True}
+        return {'candidateId':request.candidateId,'venues':results,'diagnostics':usage}
 
 refresh_sessions=RefreshSessions()
+
+
+def automatic_details_enabled():
+    """Separate owner approval; manual contact authorization never implies this."""
+    return (local_real_enabled() and os.environ.get('WHERETO_CONTACT_DETAILS_DEV')=='1'
+            and os.environ.get('WHERETO_SAVED_AUTO_DETAILS_DEV')=='1')
+
+
+def refresh_issue(error, *, remaining=1800):
+    """Only fixed public explanations; no provider payload or sensitive exception text."""
+    reason=getattr(error,'reason',None)
+    retry=getattr(error,'retry_after',None)
+    if isinstance(error,ProviderLimitError):
+        if reason=='capability_allowance':
+            message='This saved link has used its six-detail allowance for this 30-minute session.';retry=remaining
+        elif reason in ('local_minute','local_shared_minute'):
+            message='The shared local Place Details minute limit is reached. Other saved links use this same limit.'
+        elif reason=='concurrent_request':message='Another provider request is running. Wait for it to finish, then retry.'
+        elif reason=='session_capacity':message='Local saved-detail session capacity is reached. Try after an active session expires.'
+        elif 'accounting' in str(error).lower():reason='local_accounting';message='Local usage accounting is unavailable. Check the private ledger; your saved plan is kept.'
+        elif 'daily estimated spending' in str(error).lower():reason='local_daily_allowance';message='The shared application daily spending allowance is reached. Review local usage.'
+        else:reason='application_allowance';message='The shared application request allowance is reached. Review usage before continuing.'
+    else:
+        code=getattr(error,'code','provider')
+        boundary=getattr(error,'diagnostics',{}).get('quotaBoundary','unknown')
+        reason={'authentication':'provider_authentication','permission':'provider_authorization','invalid_response':'invalid_provider_response','not_found':'place_unavailable','timeout':'provider_timeout'}.get(code,'provider_service')
+        if code=='quota':
+            reason='cloud_'+boundary+'_quota'
+            message={'daily':'Google reports its shared daily Place Details quota is exhausted. Review Cloud usage.', 'minute':'Google reports a Place Details rate limit. Pause and review Cloud usage.'}.get(boundary,'Google rejected Place Details for an unspecified quota or rate limit. Review Cloud usage.')
+        else:message={'authentication':'Google authentication failed. Check the local provider credentials.','permission':'Google denied Place Details access. Check existing authorization.','not_found':'Google reports this saved place is unavailable. The original stop is kept.','timeout':'Google did not respond in time. Your saved plan is kept.','invalid_response':'The returned venue details could not be verified.'}.get(code,'The venue service is unavailable. Your saved plan is kept.')
+    result={'reason':reason,'message':message,'retryable':reason not in ('cloud_daily_quota','cloud_unknown_quota','provider_authentication','provider_authorization','local_accounting','local_daily_allowance','application_allowance')}
+    if retry is not None:result['retryAfterSeconds']=max(1,min(1800,int(retry)))
+    return result

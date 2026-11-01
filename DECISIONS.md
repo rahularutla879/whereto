@@ -352,3 +352,23 @@ Keep Google IDs as the persistent identity, and retrieve permitted current detai
 ## November 1 — final Tasks 46/49 acceptance repair
 
 Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](docs/final-acceptance49.md) and the latest HANDOVER.md evidence.
+
+## November 1, 2026 — explicit saved-open approval and measured AI preparation
+
+Keep permanent Google content out of SQL/browser storage. Existing server Details
+can legally populate current selected stops, but manual authorization does not
+authorize billing on every saved navigation. Add a separate default-off local
+automatic-open flag; do not enable it in the owner's profile without separate
+approval. Do not adopt UI Kit/Maps JavaScript/new browser credentials or paid SKUs.
+
+Keep six-attempt capability sessions and shared minute/Cloud/accounting limits.
+Expose their distinct causes; prevent replay of a partially failed UUID from
+dispatching remaining stops. Failed pre-admission remains uncharged. Do not reset
+usage to recover. Historical generic errors cannot identify a Cloud failure.
+
+Measured cold Qwen extraction was 12.9s versus 3.65s warm. One local background
+prompt preparation reduced the first post-readiness extraction to 4.10s; it moves
+11.3s preparation to startup and does not accelerate warm inference. Keep the
+existing model/schema/source safeguards rather than add a keyword interpreter.
+Keep finite ten-minute residency, existing 8,192 context and concurrency-one
+provider admission. [Evidence/limitations](docs/saved-details-performance49.md).

@@ -4,10 +4,13 @@ import { classifiedFailure } from "@/lib/failure-diagnostics";
 import { developmentOriginHeaders } from "../../../../lib/development-origin";
 import { adaptRanking } from "../../../../lib/planning-client";
 
+import {timingHeaders} from "@/lib/server-timing";
+
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
-  const headers = { "Cache-Control": "no-store" };
+  const started=performance.now();
+  const headers:Record<string,string> = { "Cache-Control": "no-store" };
   let payload: unknown;
   try { payload = await request.json(); }
   catch { return Response.json({ code: "invalid_request", message: "Invalid request: send a JSON outing request." }, { status: 400, headers }); }
@@ -20,6 +23,7 @@ export async function POST(request: Request) {
     });
     received=true;
     const data: unknown = await response.json();
+    Object.assign(headers,timingHeaders(response.headers.get("server-timing"),performance.now()-started));
     if (!response.ok && classifiedFailure(data)) return Response.json(publicPlanningPayload(classifiedFailure(data)), { status:response.status, headers });
     if (response.status === 422) {
       const error = data as { code?: string; message?: string };

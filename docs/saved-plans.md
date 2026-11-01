@@ -180,3 +180,17 @@ Reopened options now replace the demo/generated cards in the main results area. 
 ## November 1 — final Tasks 46/49 acceptance repair
 
 Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](final-acceptance49.md) and the latest HANDOVER.md evidence.
+
+## Latest acceptance: current details and simpler links
+
+The current selected-only detail UI now has compact link management and a collapsed
+Reopen another saved plan input; duplicate raw URL/help fields are removed.
+Automatic current details on explicit navigation have a **separate default-off**
+local policy, not implied by manual refresh authorization. The owner profile does
+not enable it. When approved, only selected stops use the existing Pro fields,
+with all shared quotas/ledger safeguards and no permanent Google content.
+Whole-action replay prevention and specific capability/minute/Cloud/auth/accounting
+errors replace generic enrichment-limit explanations. Known local reset estimates
+re-enable a button only; they do not schedule provider requests. See
+[exact fields, limits, costs and tests](saved-details-performance49.md). Earlier
+statements that there is no refresh describe original Task 49, not later acceptance.

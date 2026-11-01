@@ -22,7 +22,25 @@ provider_budget = ProviderBudget()
 
 from backend.failures import MESSAGES, evidence, provider_code
 
-app = FastAPI(title="Where To? backend")
+from contextlib import asynccontextmanager
+
+@asynccontextmanager
+async def lifespan(app):
+    from backend.ai_readiness import start
+    start() # Daemon preparation does not block health or require Google/SQL.
+    yield
+
+app = FastAPI(title="Where To? backend",lifespan=lifespan)
+
+
+@app.middleware('http')
+async def local_request_timing(request: Request, call_next):
+    from time import perf_counter
+    started=perf_counter()
+    response=await call_next(request)
+    if local_real_enabled() and os.environ.get('WHERETO_DIAGNOSTICS_DEV')=='1':
+        response.headers['Server-Timing']=f'backend;dur={(perf_counter()-started)*1000:.3f}'
+    return response
 
 
 def failure(code, status=503, operation='planning', *, message=None, diagnostics=None, error=None):
@@ -258,7 +276,10 @@ def save_endpoint(request: SaveRequest):
 
 @app.post("/api/plans/reopen")
 def reopen_endpoint(request: OpenRequest):
-    return persistence_response(reopen, request)
+    def with_policy(value):
+        from backend.saved_refresh import automatic_details_enabled
+        return {**reopen(value), 'automaticVenueDetails': automatic_details_enabled()}
+    return persistence_response(with_policy, request)
 
 
 @app.middleware('http')
@@ -286,4 +307,6 @@ def development_diagnostics():
     if not local_real_enabled() or os.environ.get('WHERETO_DIAGNOSTICS_DEV')!='1':
         return JSONResponse(status_code=404,content={},headers={'Cache-Control':'no-store'})
     from backend.development_diagnostics import snapshot
-    return JSONResponse(content=snapshot(),headers={'Cache-Control':'no-store'})
+    from backend.performance import snapshot as ai_timings
+    from backend.ai_readiness import snapshot as readiness
+    return JSONResponse(content={**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness()},headers={'Cache-Control':'no-store'})
