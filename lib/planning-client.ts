@@ -1,3 +1,4 @@
+import {planningMessage} from "./continuation";
 import { failureText } from "./failure-diagnostics";
 import { currentRelative, explicitOrigin, recoveryCode, type DestinationContext } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
@@ -21,7 +22,7 @@ type Ranked = {
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { saveReceipt?: string; saveAccessToken?: string; dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; canShowBeyond?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
+type Ranking = { saveReceipt?: string; saveAccessToken?: string; dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; continuationStatus?: {kind:string;message:string}; canShowBeyond?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; explorationPlans?: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { code?: string; message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -90,8 +91,8 @@ export function adaptRanking(value: unknown): PlannerResult {
   const alternativeBatches = (data.alternativeBatches ?? []).map(batch => adaptRanking({ ...data, plans: [], provisionalPlans: batch, alternativeBatches: undefined }).plans);
   const identities = [...plans, ...alternativeBatches.flat()].map(p => p.venues.map(v => v.id).join("\u0000"));
   if (new Set(identities).size !== identities.length) throw new Error("Duplicate itinerary options");
-  return { saveAccessToken:typeof data.saveAccessToken === "string" && /^[A-Za-z0-9_-]{43}$/.test(data.saveAccessToken) ? data.saveAccessToken : undefined, saveReceipt:typeof data.saveReceipt === "string" && /^[A-Za-z0-9_-]{43}$/.test(data.saveReceipt) ? data.saveReceipt : undefined, recoveryCode:recoveryCode(data.errors.find(e=>recoveryCode(e.code))?.code),dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, canDiscover: data.canDiscover, canShowBeyond:data.canShowBeyond, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
-    message: plans.length ? data.message : [...new Set([data.message, ...data.errors.map(e => e.message.replaceAll("openingHours", "Opening hours"))])].join(" "), notes: data.notes };
+  return { saveAccessToken:typeof data.saveAccessToken === "string" && /^[A-Za-z0-9_-]{43}$/.test(data.saveAccessToken) ? data.saveAccessToken : undefined, saveReceipt:typeof data.saveReceipt === "string" && /^[A-Za-z0-9_-]{43}$/.test(data.saveReceipt) ? data.saveReceipt : undefined, recoveryCode:recoveryCode(data.errors.find(e=>recoveryCode(e.code))?.code),dataMode: data.dataMode ?? "mock", optionsToken: data.optionsToken, canExpand: data.canExpand, canDiscover: data.canDiscover, continuationStatus:data.continuationStatus, canShowBeyond:data.canShowBeyond, plans, alternativeBatches, location: data.request.location, activities: data.request.activities,
+    message: plans.length ? data.message : planningMessage(data.message,data.errors), notes: data.notes };
 }
 
 export type ClarificationField = "location" | "people" | "date" | "activities" | "time";

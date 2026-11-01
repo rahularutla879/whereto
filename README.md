@@ -15,9 +15,10 @@ The current app provides AI-assisted leisure venue discovery and sequential reco
 ## Save and reopen plans — Task 49
 
 Generate an outing, choose the selected itinerary, then click **Save Plan**. This
-explicitly saves the visible options and normalized requirements. Refreshing opens
-the last saved plan as the main itinerary cards; **Reopen a saved plan** accepts another
-private link. Demo cards cannot be saved. Existing three-card browsing stays intact.
+explicitly saves the visible options and normalized requirements. **Open saved plan**
+opens the selected itinerary in a new tab. Normal app visits keep remembered links
+inside the collapsed **Saved plans** section; they never take over your outing.
+Refreshing an explicitly opened saved view preserves that selected view. Demo cards cannot be saved. Existing three-card browsing stays intact.
 
 Saving requires Python's separate restricted database configuration. Follow the
 exact two-Terminal commands in [database setup](docs/database-setup.md#task-49-enable-explicit-saving-locally).
@@ -31,7 +32,7 @@ Anyone with a private link can read it for 30 days. The browser remembers only t
 last link; copy links you want to keep. Forget on this device removes its local
 copy, not shared copies. These links are not accounts and cannot yet be revoked.
 Avoid sensitive requests and shared browsers. Real saved plans retain activity and
-stop order plus Google Place IDs; current venue details start unloaded and routes remain unavailable. Use **Refresh venue details** to deliberately retrieve current names and addresses; this does not regenerate the plan. Nothing contacts Google automatically. Mock snapshots stay
+stop order plus Google Place IDs; current venue details start unloaded and routes remain unavailable. Use **Load current venue details** to deliberately retrieve current names and addresses; this does not regenerate the plan. An optional unchecked phone/website choice uses the existing paid contact tier. Nothing contacts Google automatically. Mock snapshots stay
 visibly fictional. [Architecture, security limitations and tests](docs/saved-plans.md).
 
 ## Current Task 46: travel limits and local discovery
@@ -502,3 +503,5 @@ Dates stay fixed throughout an active outing. Hyderabad uses Asia/Kolkata; the s
 The current one-command owner startup and explicit mock override are documented above. No live Google verification was performed for these fixes.
 
 See [the Tasks 46/49 acceptance refinements](docs/acceptance-refinements.md) for saved cards/refresh billing, retail brand and mall evidence, ranking, diagnostics and startup details. Tasks 50 and 50A–50E remain unstarted.
+
+[Final Tasks 46/49 repairs](docs/final-acceptance49.md) document continuation exhaustion, selected saved views, new-tab navigation, provider fields/attribution and actual startup evidence. Stop an existing server with Control+C before restarting; backend port conflicts now explain this directly.

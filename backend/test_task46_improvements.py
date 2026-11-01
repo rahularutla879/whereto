@@ -110,7 +110,8 @@ class ImprovementTests(unittest.TestCase):
         self.assertFalse(result.canExpand)
         self.assertTrue(any(i.code == "route_provider_quota" for p in result.provisionalPlans for i in p.issues))
         count=self.matrix.call_count
-        with self.assertRaisesRegex(DiscoveryError,'stopped'):more_real_plans(result.optionsToken)
+        repeated=more_real_plans(result.optionsToken)
+        self.assertFalse(repeated.canExpand);self.assertEqual(repeated.continuationStatus.kind,'provider_limited')
         self.assertEqual(self.matrix.call_count,count)
 
     def test_starting_search_exact_and_approximate_confirmation_candidates(self):

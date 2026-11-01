@@ -4,6 +4,7 @@ import os
 from pathlib import Path
 import shlex
 import stat
+import socket
 
 PROFILE = Path(__file__).with_name('.env.development')
 RUNTIME = Path(__file__).with_name('.env.persistence')
@@ -61,16 +62,27 @@ def environment(env, *, mock=False, profile=PROFILE, runtime=RUNTIME):
     return result
 
 
+def port_available(port):
+    if not 1<=port<=65535:raise ValueError('Use a backend port between 1 and 65535.')
+    with socket.socket(socket.AF_INET,socket.SOCK_STREAM) as probe:
+        probe.setsockopt(socket.SOL_SOCKET,socket.SO_REUSEADDR,1) # Match Uvicorn; TIME_WAIT is not a running server.
+        try:probe.bind(('127.0.0.1',port))
+        except OSError:raise ValueError(f'Backend port {port} is already in use. Reuse the running backend, or stop its Terminal with Control+C before restarting. No alternate port was selected.') from None
+
+
 def main():
     parser=argparse.ArgumentParser()
     parser.add_argument('--mock',action='store_true')
     parser.add_argument('--port',type=int,default=8000)
     parser.add_argument('--no-reload',action='store_true')
     args=parser.parse_args()
-    try:settings=environment(os.environ,mock=args.mock)
+    try:
+        settings=environment(os.environ,mock=args.mock)
+        port_available(args.port)
     except (OSError,ValueError) as error:
-        # These messages are fixed configuration instructions, never values.
-        print('Backend configuration could not load. Check private profile permissions/assignments and restricted database settings. See docs/database-setup.md.')
+        # Messages below originate only in our validator; never print exception input.
+        if isinstance(error,ValueError) and str(error).startswith('Backend port '):print(str(error))
+        else:print('Backend configuration could not load. Check backend/.env.development and .env.persistence: owner-only regular files (chmod 600), plain allowlisted KEY=value assignments, restricted login and existing TLS certificate. See docs/database-setup.md.')
         raise SystemExit(1) from None
     os.environ.clear();os.environ.update(settings)
     print('Local backend starting in '+settings.get('VENUE_DATA_MODE','mock')+' mode. Provider requests require deliberate actions.')

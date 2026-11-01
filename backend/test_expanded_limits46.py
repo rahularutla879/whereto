@@ -157,7 +157,7 @@ class ExpandedLimits(unittest.TestCase):
         for _ in range(4):r=more_real_plans(r.optionsToken,expand_discovery=True)
         self.assertEqual(self.search.call_count,10);self.assertFalse(r.canDiscover)
         self.assertEqual(original['outing'].usage()['placesSearchRequests'],10)
-        with self.assertRaises(DiscoveryError):more_real_plans(r.optionsToken,expand_discovery=True)
+        self.assertFalse(more_real_plans(r.optionsToken,expand_discovery=True).canDiscover)
         self.assertEqual(self.search.call_count,10);self.matrix.assert_not_called()
 
     def test_quota_stops_new_work_without_retries_or_fake_fallback(self):

@@ -101,7 +101,7 @@ class RetailTests(unittest.TestCase):
   self.assertTrue(all(item['lateReason']=='new_discovery' for item in continued.diagnostics['rankingAudit']['selected']))
 
 class RefreshTests(unittest.TestCase):
- def document(self):return {'dataMode':'real','itineraries':[{'candidateId':'chosen','stops':[{'reference':'one'},{'reference':'two'}]}]}
+ def document(self):return {'dataMode':'real','selectedId':'chosen','itineraries':[{'candidateId':'chosen','stops':[{'reference':'one'},{'reference':'two'}]}]}
  def test_capability_checked_before_refresh_and_no_retries(self):
   from backend.saved_refresh import RefreshSessions,RefreshRequest
   session=RefreshSessions();request=RefreshRequest(refreshId='12345678-1234-4234-8234-123456789abc',accessToken='A'*43,candidateId='chosen')

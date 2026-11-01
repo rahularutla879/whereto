@@ -11,7 +11,7 @@ from pydantic import Field
 from backend.evidence import distinct_venue_labels, feasibility_labels, route_labels, venue_source
 from backend.feasibility import EvidenceStop, FeasibilityInput, evaluate_feasibility
 from backend.models import (PlanningRequest, RankingResult, PlanningError, Venue, DataQuality,
-                            ConstraintIssue, PriceQuote, TravelQuote, DataStatus)
+                            ConstraintIssue, PriceQuote, TravelQuote, DataStatus, ContinuationStatus)
 from backend.places import DiscoveryError, DiscoveryRequest, PlacesDiscovery, SearchArea
 from backend.planner import _walk
 from backend.planning_diagnostics import empty_coverage, planning_coverage, merge_discovery_audits, coverage_notes
@@ -179,6 +179,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             result.diagnostics['failureBoundary']='destination_verification_unavailable'
         result.optionsToken = context["token"]
         result.canDiscover = can_discover(context)
+        from backend.continuation_status import continuation_status
+        result.continuationStatus=ContinuationStatus(**continuation_status(discovery=result.canDiscover,constrained=geographic_block))
+        context["lastContinuation"]=result
         result.notes += coverage_notes(diagnostics["venuePipeline"])
         return result
     from backend.routing_shortlist import shortlist
@@ -552,9 +555,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     diagnostics['discoveryBottlenecks']=bottlenecks(context,all_pools,pools,routes,ranked,diverse,pending)
     diagnostics['primaryCoverageExpansion'] = context.get('primaryCoverageExpanded', False)
     if context.get('referenceScoring'):diagnostics['referenceScoring']=context['referenceScoring']
+    # Retained inventory alone is not useful work once the bounded frontier and
+    # its routes are checked. Missing directed pairs remain explicit work.
+    from backend.continuation_status import known_route_work
+    known_pending=known_route_work(context,request,all_pools,facts,routes,mode)
     can_expand = not context.get("stopped") and (context["unseenEligible"] > 0 or (
         capacity['elements'] > 0 and capacity['attempts'] > 0 and (pending > 0 or
-        ((outing.settings.exploration or context.get("locationFirst") or not context["expanded"]) and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
+        known_pending or (not context["expanded"] and any(len(p) > len(q) for p, q in zip(all_pools, pools))))))
     classified_error = None
     if not diverse and route_notice:
         from backend.failures import MESSAGES
@@ -564,10 +571,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         # Preserve the more specific local minute/budget recovery instructions.
         if category!='insufficient_routing': route_notice=MESSAGES[category]
         classified_error=PlanningError(code=category,message=route_notice)
-    return RankingResult(request=distinct_request, dataMode="real", provisionalPlans=[p for p in diverse if p.feasibility=="provisional"], explorationPlans=[p for p in diverse if p.feasibility=="violated"], detailsToken=details_token,
+    from backend.continuation_status import continuation_status
+    continuation=continuation_status(combinations=context['unseenEligible']>0,discovery=can_discover(context),
+        pending=can_expand and context['unseenEligible']==0,constrained=bool(compliance_notice or rejections) and not diverse,
+        limited=bool(context.get('stopped')) or bool(coverage_pending and (not capacity['elements'] or not capacity['attempts'] or not capacity['minuteElements'])))
+    result = RankingResult(request=distinct_request, dataMode="real", continuationStatus=continuation, provisionalPlans=[p for p in diverse if p.feasibility=="provisional"], explorationPlans=[p for p in diverse if p.feasibility=="violated"], detailsToken=details_token,
         alternativeBatches=batches, optionsToken=context["token"], canExpand=can_expand, canDiscover=can_discover(context), canShowBeyond=beyond_available,
-        diagnostics=diagnostics, message=(route_notice or compliance_notice or "We've shown the available combinations from the places checked so far. Explore farther to discover more.") if not diverse else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
-        errors=[] if diverse else [classified_error] if classified_error else [PlanningError(code="insufficient_data",message=compliance_notice)] if compliance_notice and not route_notice else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="insufficient_data" if pending else "no_availability", message=route_notice if pending else "We have shown the available combinations from the places checked so far. Explore farther to discover more.")],
+        diagnostics=diagnostics, message=(route_notice or compliance_notice or continuation["message"]) if not diverse else f"{len(diverse)} provisional real-venue options. Prices, hours and availability need confirmation.",
+        errors=[] if diverse else [classified_error] if classified_error else [PlanningError(code="insufficient_data",message=compliance_notice)] if compliance_notice and not route_notice else [PlanningError(code="infeasible", message=m) for m in rejections] or [PlanningError(code="insufficient_data" if pending else "no_availability", message=route_notice if pending else continuation["message"])],
         notes=['Development local discovery/routing coverage: '+json.dumps({'localCoverage':diagnostics.get('localCoverage'),'firstStopVerification':diagnostics.get('firstStopVerification')},sort_keys=True),'Development location context: '+json.dumps(diagnostics['locationContext'],sort_keys=True)]+['Development per-activity discovery targets: '+json.dumps(diagnostics['discoveryTargets'],sort_keys=True), 'Development travel classifications: '+json.dumps(diagnostics['travelClassifications'],sort_keys=True),'Development displayed activity coverage: '+json.dumps(diagnostics['displayedVenuesByActivity'],sort_keys=True),'Development discovery bottlenecks: '+json.dumps(diagnostics['discoveryBottlenecks'],sort_keys=True)]+(["Surprise Me begins at the first activity; no journey from your location is planned. Quality-qualified weighted sampling favors unseen first venues. Repeated first venues may be needed when the checked pool is exhausted; further suitable venues may exist.",
                 "Development Surprise coverage: "+json.dumps(diagnostics['surprise'],sort_keys=True)+f"; quality-excluded complete paths {diagnostics['surpriseQualityExcluded']}."] if surprise else []) + (["Development starting-area comparison: "+json.dumps(context['referenceScoring'],sort_keys=True)] if context.get('referenceScoring') else []) + (["Location-first discovery: multiple earlier-stop anchors and bounded route-evidence beam. Flexible first-stop maximum is twice the entered preference. Search coverage is not city-wide exhaustion.",
                    "Destination is a preference with a bounded nearby search unless Only within or explicit regional exclusions were requested."] if context.get('locationFirst') else []) + (["Development exploration active: finite discovery/route batches, persistent estimated usage accounting; daily warning is nonblocking. Cloud quota remaining is unknown.",
@@ -580,6 +591,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
                "Inter-stop travel excludes the first trip and return home. An explicitly shared start is shown separately.",
                ("Exploration retains eligible candidates across finite actions; searched coverage is not city-wide exhaustion." if outing.settings.exploration else f"Up to {session.settings.candidates_per_activity} relevant candidates per activity can be retained through explicit search expansion. These results do not cover every venue in the city.")])
+
+    context["lastContinuation"]=result
+    return result
 
 
 def empty(request, message, diagnostics=None):
@@ -601,6 +615,10 @@ def more_real_plans(token, *, expand_discovery=False, show_beyond=False):
         from backend.location_context import outing_problem
         problem=outing_problem(context['request'])
         if problem:raise DiscoveryError(problem[0],problem[1])
+        previous=context.get('lastContinuation')
+        if previous and not show_beyond and not (previous.canDiscover if expand_discovery else previous.canExpand):
+            return previous.model_copy(update={'plans':[],'provisionalPlans':[],'explorationPlans':[],'alternativeBatches':[],
+                'message':previous.continuationStatus.message if previous.continuationStatus else previous.message,'errors':[]})
         if context.get("stopped"):
             raise DiscoveryError("stopped", "Search expansion stopped after an earlier provider or budget failure. No automatic retry is available.")
         context["routedThisAction"] = False
@@ -627,6 +645,11 @@ def more_real_plans(token, *, expand_discovery=False, show_beyond=False):
         temporary= (isinstance(error,ProviderLimitError) or getattr(error,'code',None)=='application_limit') and ('minute' in str(error).lower() or 'cancelled' in str(error).lower())
         context["stopped"] = not temporary
         context['outing'].stop_reason = str(error)
+        from backend.continuation_status import continuation_status
+        previous=context.get('lastContinuation')
+        error.continuation={'canExpand':bool(previous and previous.canExpand and temporary),
+            'canDiscover':bool(previous and previous.canDiscover and temporary),
+            'status':continuation_status(limited=True)}
         from backend.provider_errors import attach_accounting
         raise attach_accounting(error,context['outing'])
     finally:

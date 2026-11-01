@@ -146,8 +146,9 @@ class OptionsAcceptance(unittest.TestCase):
         self.assertEqual(r.diagnostics['placesSearchRequests'],4)
         self.assertEqual(r.diagnostics['matrixElements'],6)
         self.assertFalse(r.provisionalPlans)
-        self.assertIn('checked',r.errors[0].message)
-        with self.assertRaisesRegex(Exception,'budget|limit'):more_real_plans(token,expand_discovery=True)
+        self.assertIn('for this outing right now',r.errors[0].message)
+        repeated=more_real_plans(token,expand_discovery=True)
+        self.assertFalse(repeated.canDiscover);self.assertEqual(repeated.continuationStatus.kind,'search_exhausted')
         self.assertEqual(self.search.call_count,4)
 
     def test_empty_initial_pool_can_explicitly_search_once(self):

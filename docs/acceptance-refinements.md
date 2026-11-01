@@ -205,3 +205,8 @@ reloading still clears those provider facts. Single-stop generated cards show th
 actual venue address so a nearby store cannot appear to be inside the search city
 merely because the original request named it. Hosted test cleanup targets only the
 known disposable capability hash; pre-existing owner plans are preserved.
+
+
+## November 1 — final Tasks 46/49 acceptance repair
+
+Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](final-acceptance49.md) and the latest HANDOVER.md evidence.

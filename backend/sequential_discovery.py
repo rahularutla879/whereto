@@ -155,11 +155,12 @@ def initialize(request,outing,seed=None,seed_routes=None):
 
 def can_expand(context):
     counts={a:sum(a in v.activities for v in context['discovery'].venues) for a in set(context['request'].activities)}
-    if all(n>=100 for n in counts.values()):return False
-    if any(not j['done'] and counts[context['request'].activities[j['position']]]<100 for j in context['jobs']):return True
-    if any(counts[a]<100 and next_region(context,commit=False,position=context['request'].activities.index(a)) is not None for a in counts):return True
+    cap=min(100,context['outing'].settings.ceiling('candidates_per_activity'))
+    if all(n>=cap for n in counts.values()):return False
+    if any(not j['done'] and counts[context['request'].activities[j['position']]]<cap for j in context['jobs']):return True
+    if any(counts[a]<cap and next_region(context,commit=False,position=context['request'].activities.index(a)) is not None for a in counts):return True
     return any(context['positionIds'][i-1] - {anchor for j in context['jobs'] for position,anchor in j['targets'] if position==i}
-               for i in range(1,len(context['request'].activities)))
+               for i in range(1,len(context['request'].activities)) if counts[context['request'].activities[i]]<cap)
 
 
 def next_region(context,*,commit,position=0):

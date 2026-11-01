@@ -4,8 +4,8 @@ import { useState } from "react";
 import type { DisplayVenue } from "../lib/planner";
 import { ContactLookupError, safeWebsite, type Credit, type ContactDetails, VenueDetailsSession } from "../lib/venue-details";
 
-export function GoogleCredits({ credits = [] }: { credits?: Credit[] }) {
-  return <span className="provider-credits"><span className="google-attribution" translate="no">Google Maps</span>{credits.map((credit, i) => <span key={i}>{safeWebsite(credit.uri) ? <a href={safeWebsite(credit.uri)!} target="_blank" rel="noopener noreferrer">{credit.provider ?? "Provider credit"}</a> : credit.provider}</span>)}</span>;
+export function GoogleCredits({ credits = [],showGoogle=true }: { credits?: Credit[];showGoogle?:boolean }) {
+  return <span className="provider-credits">{showGoogle&&<span className="google-attribution" translate="no">Google Maps</span>}{credits.filter((credit,i,all)=>all.findIndex(c=>c.provider===credit.provider&&c.uri===credit.uri)===i).map((credit, i) => <span key={i}>{safeWebsite(credit.uri) ? <a href={safeWebsite(credit.uri)!} target="_blank" rel="noopener noreferrer">{credit.provider ?? "Provider credit"}</a> : credit.provider}</span>)}</span>;
 }
 export function VenueDetails({ venue, token, session }: { venue: DisplayVenue; token?: string; session: VenueDetailsSession }) {
   const [open, setOpen] = useState(false);
@@ -38,7 +38,7 @@ export function VenueDetails({ venue, token, session }: { venue: DisplayVenue; t
         <p>{contact?.website ? <a href={contact.website} target="_blank" rel="noopener noreferrer">Official venue website</a> : "Website unavailable"}</p></>}
       {safeWebsite(venue.mapsUrl) && <a href={safeWebsite(venue.mapsUrl)!} target="_blank" rel="noopener noreferrer">View location on Google Maps</a>}
       <p>Contact the venue to arrange your visit. No reservation or ticket is confirmed.</p>
-      <GoogleCredits credits={[...(venue.evidenceLabels?.attribution?.third_party ?? []), ...(contact?.attributions ?? [])]} />
+      <GoogleCredits credits={contact?.attributions} showGoogle={false} />
     </div>
   </div>;
 }

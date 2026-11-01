@@ -535,6 +535,11 @@ class RankedItinerary(ContractModel):
         return self
 
 
+class ContinuationStatus(ContractModel):
+    kind: Literal['available','discovery_remaining','search_exhausted','provider_limited','constraints','pending_routes']
+    message: Nonblank
+
+
 class RankingResult(ContractModel):
     request: OutingRequest
     plans: list[RankedItinerary] = Field(default_factory=list, max_length=3)
@@ -552,6 +557,7 @@ class RankingResult(ContractModel):
     optionsToken: str | None = None
     canExpand: bool = False
     canDiscover: bool = False
+    continuationStatus: ContinuationStatus | None = None
     canShowBeyond: bool = False
     alternativeBatches: list[Annotated[list[RankedItinerary], Field(min_length=1, max_length=3)]] = Field(default_factory=list, max_length=2)
 

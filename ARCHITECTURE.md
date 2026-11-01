@@ -615,3 +615,8 @@ Strict/Flexible limits remain. [Evidence and limits](docs/real-planning.md#tasks
 Added explicit capability-authorized saved refresh and main-position saved cards; `saved_refresh` never writes provider content. `dev_start` loads owner-private allowlisted data locally. Retail parsing/evidence uses the existing custom-activity and discovery/routing pipeline, with transient containment relationships. Ranking now includes first-leg evidence and exposes sanitized late-arrival reasons. A separately gated loopback-only development snapshot replaces product diagnostics; production proxies strip internal metrics. No migrations, RLS or later-roadmap functionality.
 
 [Details](docs/acceptance-refinements.md).
+
+
+## November 1 — final Tasks 46/49 acceptance repair
+
+Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](docs/final-acceptance49.md) and the latest HANDOVER.md evidence.

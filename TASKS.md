@@ -220,6 +220,8 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
 - [x] Task 49 — Save and retrieve plans. A browser refresh should not destroy a saved itinerary.
 
+  Final acceptance repair (November 1): selected-only detailed saved view, secure new-tab links, collapsed normal startup, explicit current-detail load, single continuation status and truthful bounded exhaustion. Startup/default ports verified. Tasks 50 and 50A–50E remain unstarted. See docs/final-acceptance49.md.
+
   Acceptance refinements: saved cards/explicit bounded venue refresh, compact links, secondary save controls, retail evidence, verified journey ranking, local diagnostics and one-command owner startup are part of Tasks 46/49 only. See docs/acceptance-refinements.md and the latest HANDOVER.md verification.
 
   Acceptance fix: administrator-loaded startup now selects only the existing restricted runtime configuration; failed saves no longer publish uncommitted links, and same-tab fragment navigation is handled. Tasks 46/49 cinema/loopback/diagnostic regression evidence is recorded in the latest HANDOVER.md checkpoint. No later task has started.

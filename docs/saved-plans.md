@@ -175,3 +175,8 @@ than falsely calling the backend unavailable. See HANDOVER.md for exact checks.
 Reopened options now replace the demo/generated cards in the main results area. Save/link management follows the cards. The compact private link interface has Copy feedback, Open and collapsed Forget/help. `POST /api/plans/refresh` verifies the existing capability and original option before sequential, bounded Place Details Pro reads. Current names/addresses/status/credits stay in browser memory only; saved structure and SQL never change. No automatic provider request on reopen.
 
 [Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).
+
+
+## November 1 — final Tasks 46/49 acceptance repair
+
+Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](final-acceptance49.md) and the latest HANDOVER.md evidence.

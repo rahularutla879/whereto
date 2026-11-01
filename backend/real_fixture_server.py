@@ -146,14 +146,16 @@ def main():
                 preferences=[], transport='walking' if 'walking' in text else 'driving' if 'driving' in text else None,
                 travel_leg_minutes=int(leg[1]) if leg else int(between.value) if between and between.unit=='minutes' and between.mode=='strict' and between.value.is_integer() else None)
 
-    def refreshed_saved(identity):
+    def refreshed_saved(identity,**kwargs):
         counts['details']+=1
         from backend.development_cost import dispatch
         dispatch('details',1)
-        if scenario['name']=='refresh_partial':
+        if scenario['name']=='refresh_partial' and 'restaurant' in identity:
             raise DiscoveryError('invalid_response','Synthetic unavailable venue; no retry.')
         from backend.refinement_fixtures import refreshed
-        return refreshed(identity)
+        data=refreshed(identity)
+        if not kwargs.get("include_contacts"):data={k:v for k,v in data.items() if k not in ("phone","website","telephoneUrl")}
+        return data
 
     from backend.location_context import outing_problem as actual_outing_problem
     def calendar(request,now=None):
@@ -174,6 +176,17 @@ def main():
         @app.post('/__test/scenario')
         def set_scenario(value: dict):
             scenario['name'] = value.get('name', 'normal')
+            if scenario['name']=='exhausted':
+                from backend.option_sessions import option_sessions
+                from backend.models import ContinuationStatus
+                from backend.continuation_status import continuation_status
+                for _,context,_ in option_sessions.entries.values():
+                    for job in context.get('jobs',[]):job['done']=True
+                    context['regionSteps']={a:32 for a in context['request'].activities}
+                    last=context.get('lastContinuation')
+                    if last:
+                        last.canDiscover=False
+                        last.continuationStatus=ContinuationStatus(**continuation_status(combinations=last.canExpand))
             os.environ['VENUE_DATA_MODE'] = 'mock' if scenario['name']=='mock' else 'real'
             os.environ['WHERETO_EXPLORATION_DEV'] = '1' if args.exploration_ledger and scenario['name']!='mock' else '0'
             os.environ['WHERETO_START_LOOKUP_DEV'] = '0' if scenario['name'] == 'lookup_disabled' else '1'

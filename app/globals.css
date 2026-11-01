@@ -280,3 +280,17 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .saved-link input { width: 100%; min-width: 0; }
 .development-panel { margin-top: 1.5rem; }
 .development-panel pre { white-space: pre-wrap; overflow-wrap: anywhere; max-width: 100%; }
+.saved-itinerary { max-width: 900px; margin: 1.5rem 0; }
+.saved-itinerary .card-body { padding: 1.5rem; }
+.saved-itinerary .saved-stops { list-style: none; padding: 0; }
+.saved-itinerary .saved-stops li { display: flex; gap: 1rem; margin: 1.5rem 0; }
+.saved-itinerary .saved-stops li > div { min-width: 0; }
+.saved-itinerary h4 { margin: 0; font-size: 1.15rem; }
+.saved-load { display: grid; gap: .75rem; margin: 1rem 0; }
+.saved-load label { display: flex; align-items: flex-start; gap: .5rem; }
+.saved-load input { width: auto; margin-top: .25rem; }
+.saved-venue-links { display: flex; flex-wrap: wrap; gap: .75rem; }
+.saved-venue-links a { text-decoration: underline; overflow-wrap: anywhere; }
+/* Saved detail cards have no artwork column, including on narrow screens. */
+.saved-itinerary { display: block; width: 100%; min-width: 0; }
+.saved-itinerary .real-plan-title { display: block; white-space: normal; overflow: visible; overflow-wrap: anywhere; max-width: none; -webkit-line-clamp: unset; }

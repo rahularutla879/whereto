@@ -11,15 +11,15 @@ const document:SavedPlan={version:1,saved:true,dataMode:"real",selectedId:"two",
  itineraries:["one","two","three"].map(candidateId=>({candidateId,fictionalMetrics:null,stops:[{position:0,activity:"movie",provider:"google_places",reference:"Fixture49_"+candidateId,timingBasis:"unknown",start:null,end:null,duration:null,fictional:null}]}))};
 test("saved real cards preserve order/selection with clean placeholders, never raw IDs or demo plans",()=>{
  const html=renderToStaticMarkup(React.createElement(SavedCards,{saved:document,venues:{},refresh(){},busy:false,message:""}));
- assert.equal((html.match(/class="plan-card/g)??[]).length,3);
- assert.ok(html.indexOf('Saved option 1')<html.indexOf('Saved option 2'));
- assert.match(html,/Saved option 2, selected/);assert.match(html,/Movie stop/);
+ assert.equal((html.match(/class="plan-card/g)??[]).length,1);
+ assert.doesNotMatch(html,/Saved option 1|Saved option 3/);
+ assert.match(html,/Saved option 2, selected/);assert.match(html,/>Movie</);
  assert.doesNotMatch(html,/Fixture49_|DEMO PLAN|\b0 minutes|estimated minutes between stops/);
- assert.match(html,/Refresh venue details/);assert.match(html,/Strict: up to 10 minutes/);
+ assert.match(html,/Load current venue details/);assert.match(html,/Strict: up to 10 minutes/);
 });
 test("refreshed names and closure are current in-memory facts; failed stops retain placeholders",()=>{
- const html=renderToStaticMarkup(React.createElement(SavedCards,{saved:document,venues:{Fixture49_one:{status:"refreshed",name:"Synthetic current cinema",businessStatus:"CLOSED_PERMANENTLY",refreshedAt:"2026-10-31T12:00:00Z"},Fixture49_two:{status:"unavailable",message:"Current details unavailable"}},refresh(){},busy:false,message:"Partial refresh"}));
- assert.match(html,/Synthetic current cinema/);assert.match(html,/Reported permanently closed/);assert.match(html,/Current details unavailable/);assert.match(html,/Travel estimates unavailable/);assert.doesNotMatch(html,/Fixture49_/);
+ const html=renderToStaticMarkup(React.createElement(SavedCards,{saved:{...document,selectedId:"one"},venues:{Fixture49_one:{status:"refreshed",name:"Synthetic current cinema",businessStatus:"CLOSED_PERMANENTLY",refreshedAt:"2026-10-31T12:00:00Z"},Fixture49_two:{status:"unavailable",message:"Current details unavailable"}},refresh(){},busy:false,message:"Partial refresh"}));
+ assert.match(html,/Synthetic current cinema/);assert.match(html,/Reported permanently closed/);assert.doesNotMatch(html,/Current details unavailable/);assert.match(html,/Original route estimates were not retained/);assert.doesNotMatch(html,/Fixture49_/);
 });
 test("normal explanations contain one shared notice and no raw JSON, cost ledger or ranking internals",()=>{
  const html=renderToStaticMarkup(React.createElement(ResultsInformation,{real:true,needsChecking:true,notes:['Development usage {"apiSpend":123}','Beam score raw JSON','Calendar reference UTC']}));
@@ -48,4 +48,13 @@ test("later explicit refresh replaces current facts; failure keeps earlier names
  assert.equal(updated.id.name,'Current name');assert.equal(updated.id.businessStatus,'CLOSED_PERMANENTLY');
  const failed=mergeRefreshed(old,{id:{status:'unavailable',message:'Provider unavailable'}});
  assert.equal(failed.id.name,'Earlier name');assert.equal(failed.id.status,'stale');assert.equal(failed.id.message,'Provider unavailable');
+});
+
+test("selected multi-stop partial load keeps the verified title and both ordered stops",()=>{
+ const saved:SavedPlan={...document,constraints:{...document.constraints,activities:['movie','food'],activityIntents:{movie:'movie',food:'dinner'}},itineraries:document.itineraries.map(option=>({...option,stops:[option.stops[0],{...option.stops[0],position:1,activity:'food',reference:option.stops[0].reference+'_food'}]}))};
+ const html=renderToStaticMarkup(React.createElement(SavedCards,{saved,venues:{Fixture49_two:{status:'refreshed',name:'Synthetic cinema',mapsUrl:'https://maps.google.com/?cid=123'},Fixture49_two_food:{status:'unavailable',message:'Details unavailable'}},refresh(){},busy:false,message:'Partial load'}));
+ assert.match(html,/Synthetic cinema → Food/);assert.match(html,/Details unavailable/);assert.match(html,/Business status unavailable/);
+ assert.equal((html.match(/<li>/g)??[]).length,2);assert.equal((html.match(/>Load current venue details</g)??[]).length,1);
+ assert.ok(html.indexOf('Synthetic cinema</h4>')<html.indexOf('Food</h4>'));
+ assert.doesNotMatch(html,/Fixture49_|Saved option 1|Saved option 3/);
 });

@@ -16,7 +16,7 @@ test("current first-leg copy uses actual evidence, mode and no private origin la
   const html = renderToStaticMarkup(React.createElement(FirstLegTravel, { plan }));
   assert.match(html, /Travel from your current location/);
   assert.match(html, /About 8 minutes \(1.11 miles\) to the first stop/);
-  assert.match(html, /Walking estimate from Google Maps/);
+  assert.match(html, /Walking route estimate/);
   assert.doesNotMatch(html, /PRIVATE|permission-authorized|latitude|longitude/);
   for (const source of ["manual", "suggested"] as const) {
     const text = renderToStaticMarkup(React.createElement(FirstLegTravel, { plan: { ...plan, firstLeg: { ...plan.firstLeg!, source, minutes: null } } }));

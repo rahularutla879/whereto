@@ -205,3 +205,8 @@ explicit runtime-configuration category instead of silently broadening privilege
 The current owner workflow is `npm run dev:backend`, followed by `npm run dev` in the second Terminal. It loads the ignored owner profile and restricted persistence file automatically; the earlier manual sourcing commands remain historical alternatives. Explicit mock override: `npm run dev:backend -- --mock`. TLS, runtime identity, grants, RLS and migrations are unchanged.
 
 [Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).
+
+
+## November 1 — final Tasks 46/49 acceptance repair
+
+Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](final-acceptance49.md) and the latest HANDOVER.md evidence.

@@ -161,7 +161,7 @@ def more_options(request: OptionsRequest):
         return JSONResponse(content=receipts.issue(more_real_plans(request.token, expand_discovery=request.expandDiscovery, show_beyond=request.showBeyond)).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
         message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
-        return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
+        return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{}),"continuation":getattr(error,"continuation",{ "canExpand":False,"canDiscover":False } if getattr(error,"code",None) in ("expired","stopped","mode_changed") else None)}, headers={"Cache-Control": "no-store"})
 
 
 from backend.starting_places import StartingPlaceQuery, lookup_starting_places

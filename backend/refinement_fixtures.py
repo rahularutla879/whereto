@@ -43,5 +43,6 @@ class FixtureAI:
 def refreshed(identity):
     from datetime import datetime,timezone
     return {'name':'Synthetic refreshed cinema' if 'movie' in identity else 'Zara' if 'zara' in identity else 'Synthetic refreshed venue',
+        'mapsUrl':'https://www.google.com/maps/search/?api=1&query=Invented+fixture&query_place_id='+identity,'phone':'+1 202 555 0149','telephoneUrl':'tel:+12025550149','website':'https://example.com/invented-venue',
         'address':'Invented current provider address','businessStatus':'OPERATIONAL','attributions':[],
         'refreshedAt':datetime.now(timezone.utc).isoformat()}

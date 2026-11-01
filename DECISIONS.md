@@ -347,3 +347,8 @@ confirmed saved link. No new migration or Task 50/50A–50E implementation.
 Keep Google IDs as the persistent identity, and retrieve permitted current details only on explicit action. Retain user-authored intent without turning it into provider truth. Reuse the existing Details service with a lower Pro mask and conservative existing cost accounting; do not activate new services. Brand identity is hard, retail format soft unless explicitly mandatory; proximity never proves tenancy. Include full verified outbound journey in ranking, retain finite search/routing and diversity. Local profile parsing is data-only, restricted-identity and CI/production guarded. Keep raw counters out of product views; unknown destination calendars need clarification rather than a verified-UTC claim.
 
 [Details](docs/acceptance-refinements.md).
+
+
+## November 1 — final Tasks 46/49 acceptance repair
+
+Current behavior supersedes earlier automatic/all-option saved-view descriptions: normal visits keep saved links collapsed, explicit private links render only the selected detailed itinerary, and Open saved plan opens a secure new tab. One explicit selected-stop detail load uses the existing Pro mask with Maps URI; optional phone/website fields require deliberate existing Enterprise contact opt-in. Provider content stays in memory. Structured continuation states distinguish combinations, discovery, bounded exhaustion, limits, constraints and pending routes; ranking is preserved. Actual default-port startup was checked, and occupied backend ports now give actionable guidance. No migration, role/RLS/TLS/quota change or later task. See [the final repair report](docs/final-acceptance49.md) and the latest HANDOVER.md evidence.
