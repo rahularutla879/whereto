@@ -509,9 +509,10 @@ See [the Tasks 46/49 acceptance refinements](docs/acceptance-refinements.md) for
 ### Saved links and first-search readiness
 
 Saved-link controls are compact: Copy link, Open saved plan (new tab), Forget on
-this device and collapsed Reopen another saved plan. Current Google details still
-use the explicit load action: automatic link-open billing is a separate default-off
-setting awaiting owner approval. No Google content is permanently retained.
+this device and collapsed Reopen another saved plan. Current Google details
+load automatically on deliberately opened private links in the owner-approved
+local profile. Fresh clones remain default-off; normal home/remembered links make
+no provider requests. Manual retry remains bounded. No Google content is permanently retained.
 
 The owner's ignored profile now prepares the installed local Qwen prompt once in
 the background (`WHERETO_AI_WARMUP_DEV=1`). Keep the same two Terminal commands

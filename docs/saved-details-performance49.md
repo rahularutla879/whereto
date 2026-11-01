@@ -1,7 +1,11 @@
 # Tasks 46/49 — saved details and first-search acceptance
 
 November 1, 2026. Continues `9dffe78`. Tasks 50 and 50A–50E remain unstarted.
-No schema, role, RLS, TLS, ranking weights, Cloud quota or billing changes.
+No schema, role, RLS, TLS, ranking weights, Cloud quota or billing configuration changes.
+
+**Latest local status:** the owner separately approved automatic Pro retrieval on
+November 1, 2026. `WHERETO_SAVED_AUTO_DETAILS_DEV=1` is now active only in the
+Git-ignored owner profile; fresh clones, mock, CI and production remain unchanged.
 
 ## Saved details and authorization
 
@@ -32,14 +36,14 @@ remembered-link availability never open a plan or call Google. Explicit saved-vi
 reload counts as another deliberate open and would use quota. Duplicate lifecycle
 work and double-clicks are suppressed; multiple tabs still share provider limits.
 
-**Owner approval is still required before enabling this automatic billable switch.**
-It is absent from the owner's profile and remains disabled. Manual refresh approval
-is not treated as automatic-open approval. After separate approval, the exact local
-setting is `WHERETO_SAVED_AUTO_DETAILS_DEV=1` in the owner-only ignored
-`backend/.env.development`, followed by the usual backend restart. Use `0` or remove
-it to disable. Do not put this in public defaults, production or CI. No live auto-open
-request was dispatched during this acceptance work; enabled-mode browser tests
-used an explicit network-blocked fixture server only.
+**Owner approval received November 1, 2026.** The exact owner-only setting
+`WHERETO_SAVED_AUTO_DETAILS_DEV=1` was enabled in ignored `backend/.env.development`
+and loaded by the restarted local worker. Use `0` or remove it to disable. Do not
+put it in public defaults, production or CI. This authorizes bounded Pro retrieval
+on deliberate saved-link opens/reloads, not normal startup or remembered-link
+detection. Manual contact-tier authorization remains separate. Verification used
+only invented provider fixtures, an isolated ledger and blocked Google transport;
+no live automatic-open request was dispatched during verification.
 
 Automatic mode uses exactly the existing **Pro** mask:
 `id,displayName,formattedAddress,businessStatus,googleMapsUri,attributions`.
@@ -197,8 +201,8 @@ partial success, local minute reset, session expiry, persistent minute/restart,
 daily spending guard, Cloud daily/minute/unknown, authentication/authorization,
 DB rejection before provider admission, manual Pro/Enterprise masks, readiness
 once/default-off/remote/CI/mock guards, compact controls and existing regressions.
-No owner saved record is modified. Automatic retrieval remains pending separate
-owner authorization; full immediate real-details UX is therefore not activated.
+No owner saved record is modified. Automatic retrieval is now separately owner-authorized and enabled only in the
+private local profile. Real provider success/coverage was not tested live.
 
 Local HTTP fixture checks through the running Next.js proxy returned 200 and three
 options on all three iterations. Interpretation HTTP: 51.946/11.549/8.799 ms;

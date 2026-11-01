@@ -186,8 +186,8 @@ Current behavior supersedes earlier automatic/all-option saved-view descriptions
 The current selected-only detail UI now has compact link management and a collapsed
 Reopen another saved plan input; duplicate raw URL/help fields are removed.
 Automatic current details on explicit navigation have a **separate default-off**
-local policy, not implied by manual refresh authorization. The owner profile does
-not enable it. When approved, only selected stops use the existing Pro fields,
+local policy, not implied by manual refresh authorization. The owner separately
+approved and enabled it in the ignored local profile November 1, 2026. Only selected stops use the existing Pro fields,
 with all shared quotas/ledger safeguards and no permanent Google content.
 Whole-action replay prevention and specific capability/minute/Cloud/auth/accounting
 errors replace generic enrichment-limit explanations. Known local reset estimates

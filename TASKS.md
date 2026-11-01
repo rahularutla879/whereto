@@ -833,10 +833,11 @@ Verification: 535 backend tests, 174 frontend tests, lint, TypeScript, productio
 
 - [x] Compact private-link controls and collapsed alternate-link input; preserve selected-only/new-tab behavior.
 - [x] Reproduce capability/shared-minute/replay boundaries, preserve accounting and expose specific safe recovery reasons.
-- [x] Implement separately gated automatic selected-details framework; **owner billing approval pending, automatic switch remains disabled**.
+- [x] Implement separately gated automatic selected-details framework; **separate owner billing approval received; enabled only in the ignored owner profile**.
 - [x] Measure cold/warm installed Qwen and offline provider pipeline; enable one-shot local background preparation in owner-only profile.
 - [x] Preserve interpreter safeguards, ranking, routes, quotas, SQL security and original roadmap numbering.
 - Verification and delivery: see latest HANDOVER checkpoint and [acceptance record](docs/saved-details-performance49.md).
 
-Task 49 remains complete. This follow-up does not authorize automatic Google billing.
+Task 49 remains complete. Automatic Pro billing on explicit local saved opens was
+separately approved by the owner November 1, 2026; no global default or quota changed.
 **Task 50 and Tasks 50A–50E remain unstarted.**

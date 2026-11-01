@@ -477,9 +477,10 @@ No live Google verification or Cloud changes. Saved refresh reuses gated Place D
 
 ## Saved-link retrieval and local readiness refinement
 
-`WHERETO_SAVED_AUTO_DETAILS_DEV` is **separate, default off and not enabled for the
-owner**. Manual Details approval does not approve billable calls on every explicit
-link open/reload. Proposed automatic mode reuses only selected-stop Pro fields: up
+`WHERETO_SAVED_AUTO_DETAILS_DEV` is **separate and default off for fresh clones**.
+The owner separately approved and enabled it only in the private local profile on
+November 1, 2026. Manual Details approval does not approve billable calls on every explicit
+link open/reload. The approved automatic mode reuses only selected-stop Pro fields: up
 to four unique calls, $0.017 each at first paid global tier before allowances;
 conservative local reservation remains $0.020 each. Optional Enterprise contacts
 still require their explicit checkbox/gate and are never automatic. No new
