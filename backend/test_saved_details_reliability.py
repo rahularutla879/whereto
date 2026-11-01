@@ -21,17 +21,16 @@ class RefreshReliability(unittest.TestCase):
   for key in ('A','B','C','A'):
    self.assertTrue(all(v['status']=='refreshed' for v in self.action(key)['venues'].values()))
   self.assertEqual(self.send.call_count,8)
- def test_capability_allowance_and_new_link_scoping(self):
-  for _ in range(3):self.action()
-  blocked=self.action()['venues']['one']
-  self.assertEqual(blocked['reason'],'capability_allowance');self.assertGreater(blocked['retryAfterSeconds'],1700)
-  self.assertTrue(all(v['status']=='refreshed' for v in self.action('B')['venues'].values()))
+ def test_fourth_viewer_has_fresh_action_allowance(self):
+  for _ in range(4):
+   self.assertTrue(all(v['status']=='refreshed' for v in self.action()['venues'].values()))
+  self.assertEqual(self.send.call_count,8)
  def test_shared_minute_not_new_capability_failure_and_no_charge_before_admission(self):
   for key in 'ABCDE':self.action(key)
   blocked=self.action('F')['venues']['one']
   self.assertEqual(blocked['reason'],'local_minute');self.assertLessEqual(blocked['retryAfterSeconds'],60)
-  outing=self.sessions.entries[next(reversed(self.sessions.entries))][1]
-  self.assertEqual(outing._details,0)
+  self.assertEqual(self.budget._requests,10)
+  self.assertEqual(len(self.sessions.entries),5) # Rejected actions leave no replay record.
   with patch('backend.provider_budget.monotonic',return_value=10**12):
    self.assertTrue(all(v['status']=='refreshed' for v in self.action('F')['venues'].values()))
  def test_uuid_replay_multitab_and_failed_dispatch_remains_charged(self):

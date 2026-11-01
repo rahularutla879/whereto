@@ -2,7 +2,13 @@ export type Credit = { provider?: string | null; uri?: string | null };
 export type ContactDetails = { phone: string | null; telephoneUrl: string | null; website: string | null; attributions: Credit[] };
 export function safeWebsite(value: unknown): string | null {
   if (typeof value !== "string") return null;
-  try { const url = new URL(value); return url.protocol === "https:" && !url.username && !url.password ? url.href : null; } catch { return null; }
+  try { const url = new URL(value); return ["https:","http:"].includes(url.protocol) && !url.username && !url.password && value.length<=2048 && ![...value].some(c=>c.charCodeAt(0)<33||c.charCodeAt(0)===127) ? url.href : null; } catch { return null; }
+}
+export function safeMapsUrl(value: unknown): string | null {
+  const safe=safeWebsite(value);
+  if(!safe)return null;
+  const url=new URL(safe);
+  return url.protocol==='https:' && ['maps.google.com','www.google.com','maps.app.goo.gl'].includes(url.hostname) ? safe : null;
 }
 export class ContactLookupError extends Error {
   constructor(message:string,readonly notAdmitted=false){super(message);}

@@ -1,6 +1,13 @@
 import type { PlannerResult, Plan } from "./planner";
 
-export const BEYOND_NOTICE = "These additional itineraries don't meet all your original requirements. We're showing them so you can explore more options.";
+export const BEYOND_NOTICE = "These options exceed your preferred travel range. You can still explore them if you're comfortable traveling farther.";
+export function beyondNotice(result:PlannerResult):string{
+ const kinds=new Set(result.plans.map(p=>p.travelClassification??'matching'));
+ const mixed=kinds.size>1;
+ if(kinds.has('beyond_limit'))return `${mixed?'Some options':'These options'} exceed a hard travel limit and are shown only under your explicit opt-in. Review each option's verified exceptions.`;
+ if(kinds.has('unverified'))return `${mixed?'Some options have':'These options have'} unverified travel requirements. Check each option's evidence before choosing.`;
+ return mixed?"Some options exceed your preferred travel range. Check each option before choosing to travel farther.":BEYOND_NOTICE;
+}
 export function signature(plan: Plan): string {
   return JSON.stringify(plan.venues.map(v => [v.activity, v.providerPlaceId ?? v.id]));
 }

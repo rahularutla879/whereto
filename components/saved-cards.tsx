@@ -3,7 +3,7 @@ import {useEffect,useRef,useState} from "react";
 import { activityLabel,formatTime,type Activity } from "@/lib/planner";
 import { preferenceText,type SavedPlan } from "@/lib/saved-plans";
 import { GoogleCredits } from "./venue-details";
-import {safeWebsite} from "@/lib/venue-details";
+import {safeWebsite,safeMapsUrl} from "@/lib/venue-details";
 import type {RefreshedVenue} from "@/lib/saved-plan-refresh";
 export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:SavedPlan;venues:Record<string,RefreshedVenue>;refresh:(id:string,contacts?:boolean)=>void;busy:boolean;message:string;onClose?:()=>void}){
  const request=saved.constraints;
@@ -44,8 +44,8 @@ export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:Sa
      <p>{detail?.address??"Current venue details not loaded."}</p>
      {detail?.status==="refreshed"?<p>Current details · {detail.refreshedAt?new Date(detail.refreshedAt).toLocaleString():"just retrieved"}. {detail.businessStatus==="OPERATIONAL"?"Reported operational; opening hours unverified.":detail.businessStatus?.startsWith("CLOSED")?"":"Business status unavailable."}</p>:detail?.status==="stale"?<p role="note">Earlier details from {detail.refreshedAt?new Date(detail.refreshedAt).toLocaleString():"a previous lookup"}. Refresh unavailable. {detail.message}</p>:detail?.message&&<p role="note">{detail.message}</p>}
      {detail?.businessStatus?.startsWith("CLOSED")&&<p className="plan-warning" role="note">{detail.businessStatus==="CLOSED_PERMANENTLY"?"Reported permanently closed":"Reported temporarily closed"}. Your original stop is kept.</p>}
-     <div className="saved-venue-links">{safeWebsite(detail?.mapsUrl)&&<a href={safeWebsite(detail?.mapsUrl)!} target="_blank" rel="noopener noreferrer">View {detail?.name??"this stop"} on Google Maps</a>}
-      {safeWebsite(detail?.website)&&<a href={safeWebsite(detail?.website)!} target="_blank" rel="noopener noreferrer">Official venue website</a>}
+     <div className="saved-venue-links">{safeMapsUrl(detail?.mapsUrl)&&<a href={safeMapsUrl(detail?.mapsUrl)!} target="_blank" rel="noopener noreferrer">View {detail?.name??"this stop"} on Google Maps</a>}
+      {safeWebsite(detail?.website)&&<a href={safeWebsite(detail?.website)!} target="_blank" rel="noopener noreferrer">Official website</a>}
       {detail?.telephoneUrl&&/^tel:\+?[0-9]{7,15}$/.test(detail.telephoneUrl)&&<a href={detail.telephoneUrl}>{detail.phone??"Call venue"}</a>}</div>
     </>}
     </div></li>})}</ol>

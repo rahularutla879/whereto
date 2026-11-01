@@ -65,7 +65,10 @@ export function estimateNotes(notes: string[]) {
 export function planWarnings(plan: Plan): string[] {
   if (plan.dataMode === "real") {
     const routine = new Set(["approximate_destination", "unknown_price", "unknown_capacity", "unknown_duration", "unknown_openingHours", "unknown_schedule_evidence", "uncertain_timing", "missing_transfer_schedule", "unverified_availability", "unverified_dinner", "unverified_budget", "session_not_verified"]);
-    const warnings = (plan.constraintIssues ?? []).filter(issue => issue.status === "violation" || (!routine.has(issue.code ?? "") && !(issue.status === "unknown" && issue.field === "hours"))).map(issue => consumerMessage(issue.message));
+    const warnings = (plan.constraintIssues ?? []).filter(issue => {
+      if(plan.travelClassification==='outside_preference' && plan.travelDeviations?.length && ['extra_first_travel','extra_between_travel'].includes(issue.code??'') && issue.status!=='violation')return false;
+      return true;
+    }).filter(issue => issue.status === "violation" || (!routine.has(issue.code ?? "") && !(issue.status === "unknown" && issue.field === "hours"))).map(issue => consumerMessage(issue.message));
     if (plan.hardBudget || plan.issues.some(issue => issue.includes("Your hard budget"))) warnings.push("Your hard budget cannot be verified because venue prices are unavailable. This plan has not passed the budget constraint.");
     if (plan.travel === null || plan.legs.some(leg => leg.minutes === null)) warnings.push("Travel time is missing for a required leg; travel constraints are not fully verified.");
     return [...new Set(warnings)];

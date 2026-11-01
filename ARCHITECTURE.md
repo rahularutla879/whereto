@@ -638,3 +638,7 @@ endpoint includes readiness and timing snapshots. Development numeric Server-Tim
 headers separate backend/proxy work; production proxies omit them. No interpreter,
 ranking, route concurrency, schema or persistence redesign. See
 [measurements and contracts](docs/saved-details-performance49.md).
+
+## Tasks 46/49 sharing/UI refinement — November 1
+
+`RefreshSessions` now records hashed capability/action UUID replay timestamps (30 minutes, 512 entries) rather than cumulative per-capability outings. Each explicit selected-only action has max four unique references and reuses existing shared ProviderBudget/ledger admission. No provider-response cache or schema change. Official website anchors accept validated provider-returned HTTP/HTTPS independently of phone; Maps URLs keep their separate HTTPS allowlist. `/dev/diagnostics` uses SSR + proxy + existing backend local-development guards and returns 404 in production. It replaces the homepage diagnostic disclosure. `/supported-activities` renders shared catalog labels/event metadata, and activity follow-ups link there in a new tab. Pure presentation helpers deduplicate flexible/group warnings without changing planning/ranking. [Detailed boundaries/tests](docs/sharing-ux49.md).

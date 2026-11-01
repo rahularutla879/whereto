@@ -372,3 +372,7 @@ prompt preparation reduced the first post-readiness extraction to 4.10s; it move
 existing model/schema/source safeguards rather than add a keyword interpreter.
 Keep finite ten-minute residency, existing 8,192 context and concurrency-one
 provider admission. [Evidence/limitations](docs/saved-details-performance49.md).
+
+## November 1 — separate capability access from shared provider admission
+
+A sharing capability must not accumulate a permanent six-request Details bottleneck. Use bounded explicit selected-stop actions and hashed UUID replay metadata while preserving shared minute/concurrency/ledger/Cloud protection. Do not cache restricted content across viewers or promise simultaneous ten-friend enrichment under ten/minute and concurrency one. Keep automatic Pro local-only and Enterprise contacts explicit. Accept validated provider-returned HTTP/HTTPS external official-site links independently of phones; do not infer websites. Move raw development data to a server-protected local route, and derive user activity help from the shared registry. Deduplicate presentation only, preserving hard constraints and ranking. [Evidence and limitations](docs/sharing-ux49.md).

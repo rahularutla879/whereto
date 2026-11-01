@@ -841,3 +841,7 @@ Verification: 535 backend tests, 174 frontend tests, lint, TypeScript, productio
 Task 49 remains complete. Automatic Pro billing on explicit local saved opens was
 separately approved by the owner November 1, 2026; no global default or quota changed.
 **Task 50 and Tasks 50A–50E remain unstarted.**
+
+### Tasks 46/49 final sharing and UX acceptance — November 1, 2026
+
+Official website/phone independence, per-action saved-detail admission, dedicated protected diagnostics, registry-driven activity help and distinct travel/group notices are implemented and tested. No new roadmap task is started; Tasks 50 and 50A–50E remain pending. [Verification and quota limitations](docs/sharing-ux49.md).

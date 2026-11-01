@@ -1,5 +1,7 @@
 # Task 49 — explicit private saved plans
 
+> Latest November 1 refinement: [shared-link admission, official websites and UI verification](sharing-ux49.md) supersedes the six-per-capability session and homepage diagnostics descriptions below. Automatic Pro remains owner-approved local only.
+
 Task 49 implements local-development saving/reopening; Task 50 and 50A–50E are
 outside this change. Ordinary generation never depends on a database connection.
 
@@ -194,3 +196,7 @@ errors replace generic enrichment-limit explanations. Known local reset estimate
 re-enable a button only; they do not schedule provider requests. See
 [exact fields, limits, costs and tests](saved-details-performance49.md). Earlier
 statements that there is no refresh describe original Task 49, not later acceptance.
+
+## Current sharing and contact behavior
+
+A fresh explicit open/update permits at most four unique selected stops. The old six-per-link session no longer limits friends cumulatively. Hashed capability/action replay metadata expires after 30 minutes; shared ten/minute, concurrency-one, ledger and Cloud quotas still apply. Plan retrieval is independent of enrichment. Only explicit Enterprise loading requests phone/website; safe provider-returned HTTP/HTTPS official sites and phones display independently. No provider content is persisted. [Exact limits, tests and caveats](sharing-ux49.md).

@@ -228,7 +228,7 @@ class RealPlanningTests(unittest.TestCase):
         self.assertNotIn('rating', DETAILS_MASK)
         result = contact_links({'id': 'A', 'nationalPhoneNumber': '(202) 555-0100', 'websiteUri': 'https://example.com'}, 'A')
         self.assertEqual(result['telephoneUrl'], 'tel:2025550100')
-        for website in ('javascript:alert(1)', 'http://example.com', 'https://user:pass@example.com', 'https://example.com/\nsecret'):
+        for website in ('javascript:alert(1)', 'https://user:pass@example.com', 'https://example.com/\nsecret'):
             self.assertIsNone(contact_links({'id': 'A', 'websiteUri': website, 'nationalPhoneNumber': 'bad'}, 'A')['website'])
         self.assertIsNone(contact_links({'id': 'A'}, 'A')['phone'])
         with self.assertRaises(DiscoveryError): contact_links({'id': 'B'}, 'A')

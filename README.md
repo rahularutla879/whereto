@@ -32,7 +32,7 @@ Anyone with a private link can read it for 30 days. The browser remembers only t
 last link; copy links you want to keep. Forget on this device removes its local
 copy, not shared copies. These links are not accounts and cannot yet be revoked.
 Avoid sensitive requests and shared browsers. Real saved plans retain activity and
-stop order plus Google Place IDs; current venue details start unloaded and routes remain unavailable. Use **Load current venue details** to deliberately retrieve current names and addresses; this does not regenerate the plan. An optional unchecked phone/website choice uses the existing paid contact tier. Nothing contacts Google automatically. Mock snapshots stay
+stop order plus Google Place IDs; routes remain unavailable. On the owner’s separately approved local profile, deliberately opening a saved link loads bounded current Pro venue details automatically. Normal app startup makes no such calls. Optional phone/website loading remains an explicit paid Enterprise choice; available official websites and phones appear independently. Shared quota limits can temporarily prevent details without losing the plan. Mock snapshots stay
 visibly fictional. [Architecture, security limitations and tests](docs/saved-plans.md).
 
 ## Current Task 46: travel limits and local discovery
@@ -41,7 +41,7 @@ Strict maxima are enforced for ordinary recommendations. Flexible retains its pr
 
 Numeric budget and spending-mode controls are removed. Real prices and exact expenditure cannot be verified; cost intent in your words is retained with a warning, without a missing-budget question. Optional legacy backend fields remain for compatibility; fictional prices never establish real budget compliance.
 
-The exploration banner is removed. Real/mock badges remain, and accounting stays in the development-only **Local development tools** panel. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
+The exploration banner is removed. Real/mock badges remain, and accounting stays on the protected local **http://localhost:3000/dev/diagnostics** page, outside the normal planner. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
 
 ## Current Task 46 acceptance changes
 
@@ -521,3 +521,7 @@ backend startup avoided the measured cold-model delay; immediate searches can
 still wait. Preparation stops after one attempt and uses no Google/SQL. Set the
 flag to `0` to disable it; mock startup never prepares AI. Details, measured limits
 and benchmark commands: [saved-details/performance acceptance](docs/saved-details-performance49.md).
+
+## Activity help and shared saved links
+
+Activity follow-ups offer **View supported activities** in a new tab. The registry-driven reference is at [localhost:3000/supported-activities](http://localhost:3000/supported-activities). Your original request stays in place. Saved links no longer accumulate a six-request per-link Details limit; selected-stop actions still share ten requests/minute, one concurrent provider request and project quotas. Ten simultaneous viewers cannot all load immediately. See [verified behavior and remaining limits](docs/sharing-ux49.md). Tasks 50 and 50A–50E remain unstarted.

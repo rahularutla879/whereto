@@ -24,8 +24,8 @@ def contact_links(data, place_id):
     website = data.get("websiteUri")
     try:
         parsed = urlsplit(website) if isinstance(website, str) else None
-        if (not parsed or parsed.scheme != "https" or not parsed.hostname or parsed.username or parsed.password
-                or any(ord(c) < 33 for c in website) or len(website) > 2048):
+        if (not parsed or parsed.scheme not in ("http", "https") or not parsed.hostname or parsed.username or parsed.password
+                or any(ord(c) < 33 or ord(c)==127 for c in website) or len(website) > 2048 or (parsed.port is not None and not 1<=parsed.port<=65535)):
             website = None
     except ValueError:
         website = None

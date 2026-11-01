@@ -1,4 +1,4 @@
-"""Explicit selected-option refresh. Only IDs/budgets survive the request."""
+"""Bounded selected-option actions. Replay metadata only; no provider-content cache."""
 from math import ceil
 from collections import OrderedDict
 from datetime import datetime, timezone
@@ -81,31 +81,26 @@ class RefreshSessions:
         if not option or option['candidateId']!=document['selectedId'] or document['dataMode']!='real':raise PersistenceError(404)
         if not local_real_enabled() or os.environ.get('WHERETO_CONTACT_DETAILS_DEV')!='1':
             raise DiscoveryError('disabled','Venue refresh is disabled. The saved plan remains available.')
-        key=digest(request.accessToken)
+        if not 1<=len(option['stops'])<=4:raise PersistenceError(404)
+        # A capability authorizes reading; it is not a lifetime provider quota.
+        # Each explicit open/action gets a fresh bounded outing. The process and
+        # durable ledger still admit every attempt across all viewers/links.
+        action=(digest(request.accessToken),str(request.refreshId))
         with self.lock:
             now=monotonic()
-            self.entries=OrderedDict((k,v) for k,v in self.entries.items() if now-v[0]<1800)
-            if key not in self.entries:
-                if len(self.entries)>=50:
-                    error=ProviderLimitError('Local refresh session capacity reached. No provider request was made.',reason='session_capacity',retry_after=max(1,ceil(1800-(now-next(iter(self.entries.values()))[0]))))
-                    return {'candidateId':request.candidateId,'venues':{option['stops'][0]['reference']:{'status':'unavailable',**refresh_issue(error)}},'diagnostics':{}}
-                self.entries[key]=(now,budget.outing(),set())
-            created,outing,attempted=self.entries[key]
-        action=(str(request.refreshId),'__action__')
-        with self.lock:
-            if action in attempted:
+            self.entries=OrderedDict((k,v) for k,v in self.entries.items() if now-v<1800)
+            if action in self.entries:
                 return {'candidateId':request.candidateId,'venues':{s['reference']:{'status':'already_attempted','message':'This detail-loading action was already attempted. No automatic retry.'} for s in option['stops']},'diagnostics':{}}
-            attempted.add(action)
+            if len(self.entries)>=512:
+                error=ProviderLimitError('Shared replay registry capacity reached.',reason='session_capacity',retry_after=max(1,ceil(1800-(now-next(iter(self.entries.values()))))))
+                return {'candidateId':request.candidateId,'venues':{option['stops'][0]['reference']:{'status':'unavailable',**refresh_issue(error)}},'diagnostics':{}}
+            self.entries[action]=now
+        outing=budget.outing()
         admitted_action=False
         results={}
         for stop in option['stops']:
             identity=stop['reference']
             if identity in results:continue
-            attempt=(str(request.refreshId),identity)
-            with self.lock:
-                if attempt in attempted:
-                    results[identity]={'status':'already_attempted','message':'Already attempted in this session. No automatic retry.'};continue
-                attempted.add(attempt)
             admitted=False
             try:
                 with outing.reserve('details',digest(str(request.refreshId)+':'+identity)):
@@ -114,18 +109,16 @@ class RefreshSessions:
                     details=fetch_saved_details(identity,include_contacts=True) if request.includeContacts else fetch_saved_details(identity)
                 results[identity]={'status':'refreshed',**details}
             except (DiscoveryError,ProviderLimitError) as error:
-                if not admitted:
-                    with self.lock:attempted.discard(attempt)
                 from backend.failures import provider_code,evidence
                 code='venue_refresh_limit' if isinstance(error,ProviderLimitError) else provider_code(error)
                 reference=evidence(code,'saved_refresh',exception=error)
-                issue=refresh_issue(error, remaining=max(1,ceil(1800-(monotonic()-created))))
+                issue=refresh_issue(error)
                 results[identity]={'status':'unavailable',**issue,'correlationId':reference}
                 # Stop on quota/service/admission failure; do not fan out after rejection.
                 if not admitted or getattr(error,'code','') in ('quota','authentication','permission','provider','timeout'):
                     break
         if not admitted_action:
-            with self.lock:attempted.discard(action)
+            with self.lock:self.entries.pop(action,None)
         try:usage=outing.usage()
         except ProviderLimitError:usage={'accountingUnavailable':True}
         return {'candidateId':request.candidateId,'venues':results,'diagnostics':usage}
@@ -139,17 +132,17 @@ def automatic_details_enabled():
             and os.environ.get('WHERETO_SAVED_AUTO_DETAILS_DEV')=='1')
 
 
-def refresh_issue(error, *, remaining=1800):
+def refresh_issue(error):
     """Only fixed public explanations; no provider payload or sensitive exception text."""
     reason=getattr(error,'reason',None)
     retry=getattr(error,'retry_after',None)
     if isinstance(error,ProviderLimitError):
         if reason=='capability_allowance':
-            message='This saved link has used its six-detail allowance for this 30-minute session.';retry=remaining
+            reason='action_allowance';message='This detail-loading action exceeds its configured request allowance.'
         elif reason in ('local_minute','local_shared_minute'):
             message='The shared local Place Details minute limit is reached. Other saved links use this same limit.'
         elif reason=='concurrent_request':message='Another provider request is running. Wait for it to finish, then retry.'
-        elif reason=='session_capacity':message='Local saved-detail session capacity is reached. Try after an active session expires.'
+        elif reason=='session_capacity':message='Shared detail-action capacity is reached. Try after an active action record expires.'
         elif 'accounting' in str(error).lower():reason='local_accounting';message='Local usage accounting is unavailable. Check the private ledger; your saved plan is kept.'
         elif 'daily estimated spending' in str(error).lower():reason='local_daily_allowance';message='The shared application daily spending allowance is reached. Review local usage.'
         else:reason='application_allowance';message='The shared application request allowance is reached. Review usage before continuing.'

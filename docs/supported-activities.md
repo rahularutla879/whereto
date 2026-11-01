@@ -86,3 +86,7 @@ Future work could add independently sourced session feeds, activity-specific evi
 Retail phrases preserve arbitrary brand names, flexible outlet/regular/flagship formats and explicit only-outlet requirements. Generic shopping destinations remain distinct from tenants. Name identity plus retail type is required; search hits and similarly named businesses are insufficient. A verified regular Zara location is eligible for “Zara outlet”; it is never relabeled as an outlet. Stores inside malls and multiple brands in one mall require containment IDs joined to actual mall facts. Missing evidence yields no verified match and explicit exploration, never invented tenants, sales, inventory or unrelated brand substitutions.
 
 [Exact architecture, evidence rules, fields, billing, limits and verification](acceptance-refinements.md).
+
+## Registry-driven activity help — November 1
+
+The accessible `/supported-activities` reference derives its canonical labels from `data/mock-venues.json`, shared with Python; existing event metadata provides grouping. It distinguishes open-ended venue requests from the finite mock registry and event venues from verified schedules or places to play a sport. Activity-related follow-ups offer **View supported activities** using a secure new tab, preserving the original request. Address/date clarifications do not show that link. The reference performs zero provider calls. [Verification](sharing-ux49.md).

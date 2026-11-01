@@ -1,5 +1,7 @@
 # Tasks 46/49 — saved details and first-search acceptance
 
+> Latest November 1 refinement: [shared-link admission, official websites and UI verification](sharing-ux49.md) supersedes the six-per-capability session and homepage diagnostics descriptions below. Automatic Pro remains owner-approved local only.
+
 November 1, 2026. Continues `9dffe78`. Tasks 50 and 50A–50E remain unstarted.
 No schema, role, RLS, TLS, ranking weights, Cloud quota or billing configuration changes.
 

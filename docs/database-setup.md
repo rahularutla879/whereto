@@ -219,3 +219,7 @@ details are never inserted in PostgreSQL. AI readiness has no database access.
 Hosted tests use rollback fixtures; committed browser fixtures are cleaned up only
 by their separately recorded capability hashes, preserving every owner plan.
 See [latest acceptance evidence](saved-details-performance49.md).
+
+## November 1 sharing/UI verification
+
+No database configuration, role, RLS, TLS or migration change was needed. Hosted35/35 checks (18 real PostgreSQL rollback cases plus17offline) and restricted-login authenticated TLS verification passed. The browser committed one invented selected-option fixture; only its exact hashed plan was removed, with independent committed-cleanup verification. Owner plans were preserved. Ordinary `npm run dev:backend` and explicit mock startup both passed. [Current sharing limits and UI evidence](sharing-ux49.md).
