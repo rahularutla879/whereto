@@ -26,7 +26,7 @@ test('product cleanup retains honest examples and secure native information link
  for(const path of ['/how-it-works','/privacy','/terms'])assert.ok(html.includes(`href="${path}" target="_blank" rel="noopener noreferrer"`));
  assert.equal((html.match(/Where To\? is still growing/g)??[]).length,1);
  assert.match(html,/These example itineraries use fictional venues/);
- assert.match(html,/Travel mode \(optional\)/);assert.match(html,/<option value="driving" selected="">Driving/);assert.match(html,/<option value="walking">Walking/);
+ assert.match(html,/Travel mode/);assert.match(html,/<option value="driving" selected="">Driving/);assert.match(html,/<option value="walking">Walking/);
 });
 test('guide is user-facing and policies preserve storage and automatic-open accuracy',()=>{
  const guide=render(React.createElement(Guide));

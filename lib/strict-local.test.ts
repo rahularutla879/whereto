@@ -10,9 +10,9 @@ import type { PlannerResult, Plan } from "./planner";
 
 test("nearby and beyond-limit actions are explicit, distinct and keyboard-native",()=>{
  const html=renderToStaticMarkup(createElement(AlternativeActions,{real:true,canCombine:true,canExplore:true,canShowBeyond:true,nearby:true,busy:false,disabled:false,notice:"",onAction(){},onAdjust(){},onBeyond(){}}));
- assert.match(html,/alternative-row.*Show different options<\/button><p>New combinations/);
+ assert.match(html,/alternative-row.*Show different options<\/button><p>Try new combinations/);
  assert.match(html,/Search more nearby places/);assert.match(html,/Show options beyond my limit/);
- assert.match(html,/travel limits stay unchanged/);
+ assert.match(html,/keeping your current travel limits/);
  const back=renderToStaticMarkup(createElement(AlternativeActions,{real:true,canCombine:true,canExplore:true,busy:false,disabled:false,notice:"",showingBeyond:true,onAction(){},onAdjust(){},onCompliant(){}}));
  assert.match(back,/Return to within-limit options/);
 });

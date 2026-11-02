@@ -851,3 +851,7 @@ Official website/phone independence, per-action saved-detail admission, dedicate
 All ten requested product cleanups and the narrow optional Driving/Walking control are implemented. Public planning defaults to driving; verified routing, Strict/Flexible, continuation and saved preferences use the chosen mode. No migration, ranking rewrite, new paid API or roadmap renumbering. Tasks 50 and 50A–50E remain pending and unstarted.
 
 [Acceptance details and evidence](docs/ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+Tasks 46/49 regeneration and saved-preference acceptance: local admission classification, edited between-stop propagation, compact saved UX and offline hours regressions. No live hours retrieval or migration. Tasks 50 and 50A–50E remain unstarted. See [acceptance record](docs/regeneration-hours49.md).

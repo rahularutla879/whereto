@@ -243,12 +243,12 @@ class OutingBudget:
             session._search_window = [t for t in session._search_window if now - t < 60]
             lookups = sum(op == "lookup" for op, _, _, _ in attempts)
             if len(session._search_window) + searches > 10:
-                raise ProviderLimitError("Local Places minute limit reached. Wait before a new deliberate search; no retry is scheduled.")
+                raise ProviderLimitError("Local Places minute limit reached. Wait before a new deliberate search; no retry is scheduled.", reason="local_minute" if searches <= 10 else "batch_limit", retry_after=max(1, ceil(60-(now-session._search_window[0]))) if session._search_window and searches <= 10 else None)
             if session._lookups + lookups > limits.ceiling("lookups_per_session"):
                 raise ProviderLimitError("Starting-place lookup session limit reached. Stop and review usage.")
             session._matrix_window = [(t, n) for t, n in session._matrix_window if now - t < 60]
             if elements + sum(n for _, n in session._matrix_window) > limits.matrix_elements_per_minute:
-                raise ProviderLimitError("Local route matrix minute quota reached. Stop and review usage; no automatic retry is scheduled.")
+                raise ProviderLimitError("Local route matrix minute quota reached. Stop and review usage; no automatic retry is scheduled.", reason="local_minute" if elements <= limits.matrix_elements_per_minute else "batch_limit", retry_after=max(1, ceil(60-(now-session._matrix_window[0][0]))) if session._matrix_window and elements <= limits.matrix_elements_per_minute else None)
             from backend.development_cost import AccountingError
             units = {"search_enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "search_pro": searches - lookups,
                      "search_pro": lookups} if os.environ.get("WHERETO_RATINGS_DEV") == "1" else {"search_pro": searches}

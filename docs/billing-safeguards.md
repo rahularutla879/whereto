@@ -502,3 +502,7 @@ Saved enrichment now uses at most four unique selected references per explicit a
 Official Matrix documentation confirms WALK with the current origins/destinations shape. The existing basic matrix endpoint and minimal field mask are unchanged; WALK omits driving-only TRAFFIC_UNAWARE. No premium modifiers, new API, quota/billing changes or speculative second-mode routing. Accounting remains per element with all existing finite admission/ledger safeguards. The fixed three-candidate fixture reserves12 cells in either mode; real coverage may differ. One shared beta/path warning is displayed. All new verification uses invented provider fixtures; zero live Google requests.
 
 [Acceptance details and evidence](ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+Regeneration still consumes existing shared search/matrix admission. Local rate/admission, Cloud quota and service failures now have distinct consumer classifications; no quota or ledger reset. Opening hours are NOT enabled: the proposed selected-only Details Enterprise mask/cost ($0.02/stop first paid global tier) requires separate approval. Existing Pro automatic and explicit contact masks are unchanged. See [acceptance record](regeneration-hours49.md).

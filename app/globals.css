@@ -321,3 +321,12 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .site-footer .growing-message { max-width: 38rem; font-size: .85rem; line-height: 1.7; }
 
 .preferences-grid select { width: 100%; min-width: 0; min-height: 40px; padding: 9px 10px; border: 1px solid #dce0d3; border-radius: 6px; background: #fffefa; color: var(--ink); font: inherit; font-size: .85rem; }
+
+/* Compact saved-link actions and readable retained planning preferences. */
+.saved-actions { display:flex; align-items:center; flex-wrap:wrap; gap:12px; }
+.saved-actions .secondary-button { display:inline-flex; align-items:center; justify-content:center; min-height:44px; margin:0; }
+.saved-actions .saved-forget { background:transparent; box-shadow:none; }
+.saved-preferences { display:grid; grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr)); gap:1.1rem 1.5rem; margin:1rem 0; }
+.saved-preferences dt { font-weight:600; margin-bottom:.3rem; }
+.saved-preferences dd { margin:0; line-height:1.6; overflow-wrap:anywhere; }
+.saved-link h3 { font-size:1.1rem; font-weight:600; margin:0 0 .5rem; }

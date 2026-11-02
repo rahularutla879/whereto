@@ -592,3 +592,7 @@ Server-Timing is available; normal product views do not show raw internals.
 The optional preference now exposes existing driving/walking routing end to end, including origin, directed transitions, Strict/Flexible duration/distance checks and continuations. The same matrix endpoint, masks, bounded staging, admission, scoring weights and diversity remain. Mode changes regenerate with new evidence, never reuse another mode’s cached routes. Cards/details name the chosen mode, and one shared pedestrian beta warning remains. Form development labels and redundant actions are removed; internal mode is on protected diagnostics.
 
 [Acceptance details and evidence](ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+Regeneration after preference edits starts fresh evidence/session work and retains the confirmed origin. Shared local minute admission is explicitly distinguished from provider outages/Cloud quota; a browser refresh cannot reset it. Exploration descriptions explain recombination, bounded discovery and deliberate exceptions. Live hours are still unverified; existing offline dated-hours evaluation and proposed approval-gated fields are documented. See [acceptance record](regeneration-hours49.md).

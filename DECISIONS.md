@@ -382,3 +382,7 @@ A sharing capability must not accumulate a permanent six-request Details bottlen
 Reuse the existing transport field, route adapter and SQL column. Explicit mode controls do not rely on a model guess; clear source intent and manual selection must agree. Driving defaults only when no applicable mode is provided. Keep legacy internal data readable and never relabel another saved preference as driving. Mode-specific evidence, immutable session scope and request hashing preserve cache separation. Keep basic Matrix billing/masks/quotas and one required walking beta notice; no speculative second-mode calls. Replace technical product copy with a dedicated user guide, honest result labels and readable policies; preserve substantive privacy/security disclosures.
 
 [Acceptance details and evidence](docs/ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+A shared provider minute denial is not a provider outage. Preserve admission/ledger limits and repair classification rather than resetting quotas or using refresh as recovery. Keep current editor values authoritative. Present default planning windows as defaults, not promised arrival times. Prepare selected-only hours verification offline; separately authorized contact fields do not authorize hours. See [acceptance record](docs/regeneration-hours49.md).

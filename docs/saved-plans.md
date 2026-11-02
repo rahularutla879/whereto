@@ -206,3 +206,7 @@ A fresh explicit open/update permits at most four unique selected stops. The old
 New plans store driving/walking as app-owned configuration in the existing `transport` column. Old null/missing values default to driving on read; no owner row is updated. Other legacy mode labels are preserved as original preferences, not converted into driving estimates. Google route content is still excluded; current Details loading, selected-only view, links, expiry, restricted identity and forced RLS are unchanged. Hosted rollback tests and an exactly cleaned committed browser fixture verify walking persistence; no migration.
 
 [Acceptance details and evidence](ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+The confirmed-save interface has one heading and one expiry/sharing sentence; prior links remain distinguishable after another save fails. Copy/Open/Forget share an accessible wrapping action group. Collapsed Saved preferences formats the existing constraints and explicit/default time flags, preserving exclusive limits and mode. Contacts use the same opt-in mask with simpler wording. No SQL or retention change. See [acceptance record](regeneration-hours49.md).

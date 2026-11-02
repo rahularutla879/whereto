@@ -648,3 +648,7 @@ ranking, route concurrency, schema or persistence redesign. See
 The header links to `/how-it-works`; guide/privacy/terms share restrained information-page styles and use separate native tabs. Form diagnostics/demo actions are removed while result provenance remains. Existing `transport` carries manual preference → interpretation/normalization → origin and inter-stop routing → continuation/output → the existing SQL column. Public planning defaults to driving and accepts only driving/walking, leaving legacy internal models readable. Source/UI conflicts fail explicitly. Existing matrix bodies already support DRIVE/WALK. Context mode guards and client evidence checks prevent mixed-mode reuse; hashes/feasibility retain mode identity. No search/ranking/schema redesign. One shared walking beta notice covers displayed walking routes.
 
 [Acceptance details and evidence](docs/ui-travel-mode49.md).
+
+## November 2 — regeneration and hours preparation acceptance
+
+Origin context now emits its owned betweenTravel value (including null). ProviderLimitError maps to local-rate/admission categories, independently of Cloud/service errors. Saved constraints expose existing explicit-time and exclusive-limit flags to a structured definition list; SQL, masks, ranking and route-mode boundaries are unchanged. Offline dated-hours evaluation is reused without enabling live hours fields. See [acceptance record](docs/regeneration-hours49.md).

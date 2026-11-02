@@ -11,7 +11,8 @@ export function fragmentToken(hash: string): string | undefined {
 
 export type SavedPlan = {
   version: 1; saved: true; dataMode: "mock" | "real"; selectedId: string; expiresAt: string; liveDetailsAvailable: false;
-  constraints: { location: string; date: string; activities: string[]; activityIntents: Record<string,string>; startTime: number; endTime: number;
+  constraints: { location: string; date: string; activities: string[]; activityIntents: Record<string,string>; startTime: number; endTime: number; explicitStart?: boolean; explicitEnd?: boolean;
+    maxFirstLegTravelExclusive?:boolean; maxLegTravelExclusive?:boolean; travelExclusive?:boolean;
     planningMode: "origin" | "surprise"; transport: string | null; calendarTimezone: string | null;
     firstTravel: Preference | null; betweenTravel: Preference | null; maxFirstLegTravel: number | null; maxLegTravel: number | null;
     travel: number | null; geography: { strictDestination: boolean; excludedRegions: string[] };

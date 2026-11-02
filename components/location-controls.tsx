@@ -37,7 +37,7 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
       ...(point?{startingLocation:point}:{}),
       ...(relativeRequested.current&&relativeSearch.current?{currentArea:relativeSearch.current,calendarTimezone:Intl.DateTimeFormat().resolvedOptions().timeZone}:{}),
       ...(anchorConsent.current?{useOriginAsSearchAnchor:true}:{}),
-      ...(originInput.current?.betweenTravel?{betweenTravel:originInput.current.betweenTravel}:{})};
+      betweenTravel:between.current.value};
   }
   function prepareSurprise(){
     if(hasConflict()){

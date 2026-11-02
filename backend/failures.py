@@ -16,6 +16,8 @@ MESSAGES = {
     'no_relevant_venues': 'No activity-relevant venues were found in the checked results. Search more places or refine the area; no substitute activity was added.',
     'insufficient_routing': 'Venues were found, but required routes could not be verified. Retry later or check the starting point; no travel estimate was invented.',
     'provider_quota_rejected': 'Google rejected this search or route request because a quota was reached. Check provider usage and retry later; no automatic retry was made.',
+    'provider_local_rate_limit': 'The shared search or routing allowance is temporarily full. Your request and preferences are kept. Wait before selecting Retry; refreshing the page does not reset this limit.',
+    'provider_local_admission': 'Local provider safeguards blocked this request before dispatch. Your preferences are kept. Review local usage or accounting in developer diagnostics; no automatic retry was made.',
     'venue_refresh_limit': 'Venue refresh is temporarily limited. Your saved plan is kept; try again later. No automatic retry was made.',
     'venue_refresh_disabled': 'Venue refresh is disabled. Start the authorized local development profile; your saved plan is kept.',
     'provider_service_error': 'The venue or routing service could not complete this request. Check its availability and try again later.',
@@ -37,6 +39,9 @@ def evidence(code, operation, reference=None, exception=None):
 
 
 def provider_code(error):
+    from backend.provider_budget import ProviderLimitError
+    if isinstance(error, ProviderLimitError):
+        return 'provider_local_rate_limit' if error.reason in ('local_minute','local_shared_minute','concurrent_request') else 'provider_local_admission'
     code = getattr(error, 'code', '')
     if code == 'quota': return 'provider_quota_rejected'
     if code in ('provider','authentication','permission','timeout','invalid_response'): return 'provider_service_error'
