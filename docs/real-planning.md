@@ -586,3 +586,9 @@ introduced. Loading copy follows actual interpretation then venue/travel stages.
 Protected diagnostics include numeric timing/readiness, and development numeric
 Server-Timing is available; normal product views do not show raw internals.
 [Cold/warm breakdown, offline fixtures and limits](saved-details-performance49.md).
+
+## November 2 — optional Driving/Walking and product cleanup
+
+The optional preference now exposes existing driving/walking routing end to end, including origin, directed transitions, Strict/Flexible duration/distance checks and continuations. The same matrix endpoint, masks, bounded staging, admission, scoring weights and diversity remain. Mode changes regenerate with new evidence, never reuse another mode’s cached routes. Cards/details name the chosen mode, and one shared pedestrian beta warning remains. Form development labels and redundant actions are removed; internal mode is on protected diagnostics.
+
+[Acceptance details and evidence](ui-travel-mode49.md).

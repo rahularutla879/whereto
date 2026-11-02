@@ -496,3 +496,9 @@ measurements](saved-details-performance49.md).
 ## November 1 — shared saved-link admission refinement
 
 Saved enrichment now uses at most four unique selected references per explicit action instead of accumulating six requests on a capability. Replay metadata only (30 minutes/512 entries); no Google-response cache. Shared ten Details/minute, concurrency one, persistent ledger, actual project quotas and cost accounting are unchanged. Ten two-stop views require 20 Pro requests: $0.34 at first paid global tier before allowances; conservative app estimate $0.40. Simultaneous viewers can be busy/rate-limited and retain their plan. Last verified Cloud Details quota remains 40/day; current remaining allowance is unknown. No Cloud values or paid fields changed, no live Google verification calls. Automatic Pro and explicit Enterprise remain separate. [Evidence and limits](sharing-ux49.md).
+
+## November 2 — Walking uses existing Matrix operation
+
+Official Matrix documentation confirms WALK with the current origins/destinations shape. The existing basic matrix endpoint and minimal field mask are unchanged; WALK omits driving-only TRAFFIC_UNAWARE. No premium modifiers, new API, quota/billing changes or speculative second-mode routing. Accounting remains per element with all existing finite admission/ledger safeguards. The fixed three-candidate fixture reserves12 cells in either mode; real coverage may differ. One shared beta/path warning is displayed. All new verification uses invented provider fixtures; zero live Google requests.
+
+[Acceptance details and evidence](ui-travel-mode49.md).

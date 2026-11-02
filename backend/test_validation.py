@@ -155,8 +155,10 @@ class ValidationTests(unittest.TestCase):
         self.assertIsNone(self.run_case(', budget $60 each', budget_per_person=60, currency='USD', cost='budget').request)
 
     def test_explicit_modes_cannot_silently_become_defaults(self):
-        for text in [', best experience', ', affordable', ', driving']:
+        for text in [', best experience', ', affordable']:
             self.assertIsNone(self.run_case(text).request)
+        self.assertEqual(self.run_case(', driving').request.transport,'driving')
+        self.assertEqual(self.run_case(', walking between stops').request.transport,'walking')
         self.assertFalse(self.run_case(', best experience', manual={'cost': 'balanced', 'costExplicit': True}).issues)
 
     def test_only_exact_grounded_resolved_mode_uncertainty_can_clear(self):

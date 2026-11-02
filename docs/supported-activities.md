@@ -90,3 +90,9 @@ Retail phrases preserve arbitrary brand names, flexible outlet/regular/flagship 
 ## Registry-driven activity help — November 1
 
 The accessible `/supported-activities` reference derives its canonical labels from `data/mock-venues.json`, shared with Python; existing event metadata provides grouping. It distinguishes open-ended venue requests from the finite mock registry and event venues from verified schedules or places to play a sport. Activity-related follow-ups offer **View supported activities** using a secure new tab, preserving the original request. Address/date clarifications do not show that link. The reference performs zero provider calls. [Verification](sharing-ux49.md).
+
+## November 2 — user-facing activity reference cleanup
+
+The registry-driven `/supported-activities` page no longer discusses mock Baltimore or provider configuration. Categories, examples and honest open-ended/session/participation limitations remain. `/how-it-works` explains using the reference. Choosing Walking is a journey preference, not a replacement activity; walking/hiking as requested activities retain existing interpretation and discovery semantics.
+
+[Acceptance details and evidence](ui-travel-mode49.md).

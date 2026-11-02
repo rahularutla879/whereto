@@ -309,4 +309,4 @@ def development_diagnostics():
     from backend.development_diagnostics import snapshot
     from backend.performance import snapshot as ai_timings
     from backend.ai_readiness import snapshot as readiness
-    return JSONResponse(content={**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness()},headers={'Cache-Control':'no-store'})
+    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness()},headers={'Cache-Control':'no-store'})

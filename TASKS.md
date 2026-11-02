@@ -845,3 +845,9 @@ separately approved by the owner November 1, 2026; no global default or quota ch
 ### Tasks 46/49 final sharing and UX acceptance — November 1, 2026
 
 Official website/phone independence, per-action saved-detail admission, dedicated protected diagnostics, registry-driven activity help and distinct travel/group notices are implemented and tested. No new roadmap task is started; Tasks 50 and 50A–50E remain pending. [Verification and quota limitations](docs/sharing-ux49.md).
+
+## Tasks 46/49 UI and travel-mode acceptance — November 2, 2026
+
+All ten requested product cleanups and the narrow optional Driving/Walking control are implemented. Public planning defaults to driving; verified routing, Strict/Flexible, continuation and saved preferences use the chosen mode. No migration, ranking rewrite, new paid API or roadmap renumbering. Tasks 50 and 50A–50E remain pending and unstarted.
+
+[Acceptance details and evidence](docs/ui-travel-mode49.md).

@@ -14,7 +14,7 @@ from typing import Annotated, Literal
 
 from pydantic import (
     BaseModel, BeforeValidator, ConfigDict, Field, StringConstraints,
-    model_validator,
+    model_validator, field_validator,
 )
 
 
@@ -205,6 +205,16 @@ class OutingRequest(ContractModel):
 class PlanningRequest(OutingRequest):
     """Public/final planning requires a date; partial candidate analysis may not."""
     date: OutingDate = Field(...)
+    transport: Literal[TransportationMode.driving, TransportationMode.walking] = TransportationMode.driving
+
+    @field_validator("transport", mode="before")
+    @classmethod
+    def supported_route_mode(cls, value):
+        if value is None:
+            value = TransportationMode.driving
+        if value not in ("driving", "walking"):
+            raise ValueError("Choose driving or walking.")
+        return value
 
 
 class TimeWindow(ContractModel):

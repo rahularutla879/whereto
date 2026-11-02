@@ -117,6 +117,7 @@ def safe_document(result: RankingResult):
     """Only server-generated results enter this function, never client snapshots."""
     request = {k:v for k,v in result.request.model_dump(mode='json').items() if k in OutingRequest.model_fields}
     # Geographic verification and exact/device/provider origins are transient.
+    request['transport'] = request.get('transport') or 'driving'
     request['destinationContext'] = None
     if len(request['location']) > 200 or sum(len(v) for v in request['activityIntents'].values()) > 2000:
         return None
@@ -288,6 +289,7 @@ def read_document(connection, token):
     if not row:
         raise PersistenceError(404)
     req = {field: row[column] for field,column in COLUMNS.items()}
+    req['transport'] = req.get('transport') or 'driving'  # Legacy null means the original driving default.
     req.update({k: row['preferences'].get(k) for k in PREFERENCES})
     req['geography'] = dict(strictDestination=row['strict_destination'], excludedRegions=row['excluded_regions'])
     for field,prefix in (('firstTravel','first_travel'), ('betweenTravel','between_travel')):

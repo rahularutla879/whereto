@@ -22,7 +22,7 @@ type Ranked = {
   firstLeg?: Plan["firstLeg"]; routeEvidence?: Plan["routeEvidence"];
   score?: number; components?: { quality?: number };
 };
-type Ranking = { saveReceipt?: string; saveAccessToken?: string; dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; continuationStatus?: {kind:string;message:string}; canShowBeyond?: boolean; request: { planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
+type Ranking = { saveReceipt?: string; saveAccessToken?: string; dataMode?: "mock" | "real"; detailsToken?: string; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; continuationStatus?: {kind:string;message:string}; canShowBeyond?: boolean; request: { transport?: string | null; planningMode?:"origin"|"surprise"; location: string; activities: PlannerResult["activities"]; cost: string; budget?: number | null; groupBudget?: number | null; dinner?: boolean; dinnerStops?: number[] | null };
   plans: Ranked[]; provisionalPlans: Ranked[]; explorationPlans?: Ranked[]; alternativeBatches?: Ranked[][]; message: string; notes: string[]; errors: { code?: string; message: string }[] };
 
 export function adaptRanking(value: unknown): PlannerResult {
@@ -35,6 +35,9 @@ export function adaptRanking(value: unknown): PlannerResult {
     || !Array.isArray(data.notes) || !data.notes.every(n => typeof n === "string") || !Array.isArray(data.errors)
     || data.plans.length + data.provisionalPlans.length > 3) throw new Error("Invalid planning response");
   const real = data.dataMode === "real";
+  if(data.request.transport!=null&&!['driving','walking'].includes(data.request.transport))throw new Error('Invalid travel mode');
+  const routeMode=data.request.transport==='walking'?'walk':'drive';
+  if(real&&[...data.plans,...data.provisionalPlans].some(p=>p.routeEvidence?.some(e=>e.route.mode!==routeMode)||p.firstLeg?.mode&&p.firstLeg.mode!==routeMode))throw new Error('Mixed travel modes');
   if(data.request.planningMode!==undefined&&!["origin","surprise"].includes(data.request.planningMode))throw new Error("Invalid planning mode");
   if(data.request.planningMode==="surprise"&&[...data.plans,...data.provisionalPlans].some(p=>p.firstLeg!=null))throw new Error("Surprise Me cannot include an origin journey");
   if (data.dataMode !== undefined && !["mock", "real"].includes(data.dataMode)) throw new Error("Invalid data mode");
@@ -77,13 +80,14 @@ export function adaptRanking(value: unknown): PlannerResult {
   const plans: Plan[] = selected.map((p, i) => ({
     travelClassification:p.travelClassification,travelDeviations:p.travelDeviations,
     planningMode:data.request.planningMode,surpriseRepeated:p.surpriseRepeated,
+    transport:data.request.transport??"driving",
     dataMode: data.dataMode ?? "mock", location: data.request.location, detailsToken: data.detailsToken,
     constraintIssues: p.issues,
     hardBudget: data.request.budget != null || data.request.groupBudget != null,
     firstLeg: p.firstLeg, routeEvidence: p.routeEvidence,
     id: p.candidate.id, title: real ? headlines[i].title : copy[i].title, fullTitle: real ? headlines[i].fullTitle : undefined, theme: themes[i],
     label: real ? headlines[i].label : `${copy[i].label} · OPTION ${i + 1}`,
-    description: real ? `${p.stops.length===1 ? "Single-stop outing" : p.totalTravel === null ? "Travel between stops is not verified" : `About ${p.totalTravel} minutes between stops`}.` : copy[i].description,
+    description: real ? `${p.stops.length===1 ? "Single-stop outing" : p.totalTravel === null ? "Travel between stops is not verified" : `About ${p.totalTravel} minutes ${data.request.transport==="walking"?"walking":"driving"} between stops`}.` : copy[i].description,
     venues: p.stops.map(s => s.venue), stops: p.stops, price: p.costPerPerson, groupCost: null,
     travel: p.totalTravel, duration: p.elapsedDuration, date: p.candidate.date,
     feasibility: p.feasibility, issues: [...new Set(p.issues.map(i => i.message.replaceAll("openingHours", "Opening hours")))], prices: p.prices, legs: p.legs,

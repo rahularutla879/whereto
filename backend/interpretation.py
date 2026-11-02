@@ -92,6 +92,7 @@ class ManualPreferences(ContractModel):
     travel: str = ""
     cost: CostPreference = CostPreference.balanced
     costExplicit: bool = Field(default=False, strict=True)
+    transport: Literal["", "driving", "walking"] = ""
 
 
 LOCATION_QUESTION = "Where would you like to go? Enter a city or location to continue."
@@ -247,8 +248,6 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
             issue("The travel limit or its total/between-stops meaning could not be verified. State a maximum number of minutes total travel or between stops.")
     if re.search(r"\b(?:travel|between stops|between activities)\b", travel_raw, re.I) and re.search(r"\b(?:miles?|kilometers?|km)\b", travel_raw, re.I):
         issue("Travel distance limits are unsupported. State a maximum travel time in minutes, total or between stops.")
-    if ai.transport and not re.search({"walking": r"\bwalk(?:ing)?\b|on foot", "cycling": r"\bcycl(?:e|ing)\b|\bbik(?:e|ing)\b", "driving": r"\bdriv(?:e|ing)\b|by car", "transit": r"\btransit\b|\bbus\b|\btrain\b"}[ai.transport.value], raw, re.I):
-        issue("A transport preference could not be verified in your words. State the intended transport or rephrase and retry.")
     if not (manual.costExplicit or manual.cost != CostPreference.balanced):
         evidence = {"budget": r"\b(?:affordable|cheap|budget.friendly|low.cost)\b", "balanced": r"\bbalanced\b", "experience": r"\b(?:best experience|premium|upscale|luxury|high quality)\b"}
         stated = {mode for mode, pattern in evidence.items() if re.search(pattern, raw, re.I)}
@@ -257,8 +256,6 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
             issue("The spending preference is conflicting or was not captured correctly. Choose Budget-friendly, Balanced or Best experience in preferences.")
         elif ai.cost and not re.search({"budget": r"affordable|cheap|budget.friendly|low.cost|on a budget|budget (?:mode|preference|outing)", "balanced": r"balanced|balance", "experience": r"experience|quality|premium|upscale|luxury"}[ai.cost.value], raw, re.I):
             issue("A spending preference could not be verified in your words. State Budget-friendly, Balanced or Best experience, or choose it in preferences.")
-    if ai.transport is None and re.search(r"\b(?:driving|by car|by bus|by bike|public transit)\b", raw, re.I):
-        issue("The stated transport preference was not captured. State walking, cycling, driving or transit and retry.")
     from backend.provider_budget import local_real_enabled
     required_access=bool(re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair(?: accessible| access)?\b",raw,re.I))
     essential=re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\b(?:wheelchair|accessible|vegan|halal|kosher|private room)\b", raw, re.I)
@@ -395,6 +392,11 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                           "budget-friendly": CostPreference.budget,
                           "balanced": CostPreference.balanced}
         label = issue.strip().casefold()
+        # Mode is optional or explicitly selected in the UI; a bare absent-field
+        # uncertainty must not require the model to invent it. Conflicts are
+        # independently checked by resolve_mode below.
+        if re.fullmatch(r"(?:transport(?:ation)?(?: mode)?|travel mode)(?: (?:is )?(?:unspecified|unknown|not (?:specified|provided)))?",label):
+            continue
         fp, spans, problem = first_intent(raw)
         if fp and not problem and label.strip(' .') in {raw[a:b].strip(' .').casefold() for a,b,_ in spans}:
             continue
@@ -447,7 +449,9 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             ask(field, {"people": "How many people are coming?", "location": LOCATION_QUESTION,
                         "date": "Which exact date do you mean?", "activities": "Which activities would you like, in order?",
                         "time": "What overall time window do you mean (for example, from 6 PM to 10 PM)?"}[field], "ambiguous")
-    issues = [*uncertainties, *grounding_issues, *source_constraint_issues(raw, ai, manual, answers, ask)]
+    from backend.travel_mode import resolve_mode, is_walking_route_phrase
+    transport, mode_issues = resolve_mode(raw, ai.transport, manual.transport)
+    issues = [*uncertainties, *grounding_issues, *mode_issues, *source_constraint_issues(raw, ai, manual, answers, ask)]
     from backend.retail import intent as retail_intent
     # Validation only: never replace model activities from a keyword fallback.
     # A brand noun alone must not lose its shared-mall/mandatory-format semantics.
@@ -510,11 +514,12 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     exclusion_text = re.sub(rf"\b{number_word}\s+or\s+{number_word}\b", " ", exclusion_text, flags=re.I)
     if any(retail_intent(p) and retail_intent(p).hard_format for p in ai.activities):
         exclusion_text=re.sub(r'\bno regular stores?\b','',exclusion_text,flags=re.I)
+    exclusion_text=re.sub(r"\b(?:not|no|without|instead of|rather than|don't|do not)\s+(?:driving|walking)\b", "", exclusion_text, flags=re.I)
     if re.search(r"\b(?:or|instead|not|no|without|avoid|except)\b|n't\b", exclusion_text, re.I):
         issues.append("Alternatives or exclusions need a clear list of desired stops. Rephrase before planning; no substitution was made.")
     for match in OCCURRENCES.finditer(activity_raw):
         # Transport 'walking' is not necessarily a separate requested activity.
-        if match.group().casefold() == "walking" and ai.transport is not None:
+        if (match.group().casefold() == "walking" and ai.transport is not None) or is_walking_route_phrase(activity_raw,match.start(),match.end()):
             continue
         multiplicity = re.match(r"\s+(twice|two times|2 times|three times|3 times)\b", activity_raw[match.end():], re.I)
         if multiplicity:
@@ -629,8 +634,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             message = "Budget currency is unknown or unsupported. This fictional catalog uses USD; no conversion was made."
             issues.append(message)
             unsupported.append(message)
-    if ai.transport:
-        notes.append(f"Requested transport: {ai.transport.value}. Mock travel is mode-independent; no real route or mode-specific time is verified.")
+    if transport and not local_real_enabled():
+        notes.append(f"Requested transport: {transport.value}. Mock travel is mode-independent; no real route or mode-specific time is verified.")
     for field, val in (("budget", budget), ("travel", travel)):
         if isinstance(val, str):
             if not re.fullmatch(r"\d+" if field != "budget" else r"\d+(?:\.\d{1,2})?", val):
@@ -648,7 +653,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                 groupBudget=ai.budget_group, travel=int(travel) if travel is not None else None,
                 firstTravel=first_preference, betweenTravel=between, geography=geographic_intent(raw,location), maxLegTravel=ai.travel_leg_minutes, maxFirstLegTravel=int(first_limit) if first_limit is not None else None,
                 maxLegTravelExclusive=exclusive_limit(raw, "leg"), travelExclusive=not manual.travel.strip() and exclusive_limit(raw, "total"),
-                maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=ai.transport,
+                maxFirstLegTravelExclusive=exclusive_limit(raw, "first"), cost=cost, transport=transport,
                 startTime=dates.start, endTime=dates.end,
                 requireWheelchairAccess=bool(re.search(r"\b(?:must|require|need)\b[^.;]{0,50}\bwheelchair\b",raw,re.I)),
                 dinner=bool(dinner_stops), dinnerStops=dinner_stops)

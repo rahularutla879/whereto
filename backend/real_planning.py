@@ -99,6 +99,12 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                    "expanded": False, "discoveryPages": {a: 1 for a in dict.fromkeys(request.activities)}, "area": area, "matrixRequests": 0, "usedPrimary": set()}
     else:
         discovery = context["discovery"]
+    # Pair keys are scoped to one immutable mode-specific outing context.
+    # Reject injected/mutated contexts rather than reuse another mode's evidence.
+    route_mode = 'walk' if request.transport == 'walking' else 'drive'
+    if context.get('routeMode', route_mode) != route_mode or any(leg.mode != route_mode for leg in context['routes'].values()):
+        raise RouteError('invalid_request', 'Travel mode changed; regenerate the outing to verify new routes.')
+    context['routeMode'] = route_mode
     anchored=bool(context.get('jobs') and context['jobs'][0]['request'].area.anchor_verified)
     if anchored:
         from backend.location_context import DestinationContext

@@ -200,3 +200,9 @@ statements that there is no refresh describe original Task 49, not later accepta
 ## Current sharing and contact behavior
 
 A fresh explicit open/update permits at most four unique selected stops. The old six-per-link session no longer limits friends cumulatively. Hashed capability/action replay metadata expires after 30 minutes; shared ten/minute, concurrency-one, ledger and Cloud quotas still apply. Plan retrieval is independent of enrichment. Only explicit Enterprise loading requests phone/website; safe provider-returned HTTP/HTTPS official sites and phones display independently. No provider content is persisted. [Exact limits, tests and caveats](sharing-ux49.md).
+
+## November 2 — saved travel-mode preference
+
+New plans store driving/walking as app-owned configuration in the existing `transport` column. Old null/missing values default to driving on read; no owner row is updated. Other legacy mode labels are preserved as original preferences, not converted into driving estimates. Google route content is still excluded; current Details loading, selected-only view, links, expiry, restricted identity and forced RLS are unchanged. Hosted rollback tests and an exactly cleaned committed browser fixture verify walking persistence; no migration.
+
+[Acceptance details and evidence](ui-travel-mode49.md).

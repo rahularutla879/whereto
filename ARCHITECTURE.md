@@ -642,3 +642,9 @@ ranking, route concurrency, schema or persistence redesign. See
 ## Tasks 46/49 sharing/UI refinement — November 1
 
 `RefreshSessions` now records hashed capability/action UUID replay timestamps (30 minutes, 512 entries) rather than cumulative per-capability outings. Each explicit selected-only action has max four unique references and reuses existing shared ProviderBudget/ledger admission. No provider-response cache or schema change. Official website anchors accept validated provider-returned HTTP/HTTPS independently of phone; Maps URLs keep their separate HTTPS allowlist. `/dev/diagnostics` uses SSR + proxy + existing backend local-development guards and returns 404 in production. It replaces the homepage diagnostic disclosure. `/supported-activities` renders shared catalog labels/event metadata, and activity follow-ups link there in a new tab. Pure presentation helpers deduplicate flexible/group warnings without changing planning/ranking. [Detailed boundaries/tests](docs/sharing-ux49.md).
+
+## UI and selected travel mode — November 2
+
+The header links to `/how-it-works`; guide/privacy/terms share restrained information-page styles and use separate native tabs. Form diagnostics/demo actions are removed while result provenance remains. Existing `transport` carries manual preference → interpretation/normalization → origin and inter-stop routing → continuation/output → the existing SQL column. Public planning defaults to driving and accepts only driving/walking, leaving legacy internal models readable. Source/UI conflicts fail explicitly. Existing matrix bodies already support DRIVE/WALK. Context mode guards and client evidence checks prevent mixed-mode reuse; hashes/feasibility retain mode identity. No search/ranking/schema redesign. One shared walking beta notice covers displayed walking routes.
+
+[Acceptance details and evidence](docs/ui-travel-mode49.md).

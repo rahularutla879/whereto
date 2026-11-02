@@ -165,6 +165,18 @@ class HostedPersistenceTests(unittest.TestCase):
         self.assertNotIn('access_hash',json.dumps(result))
         self.assertEqual(self.connection.execute('SELECT count(*) AS n FROM whereto.plans').fetchone()['n'],1)
 
+    def test_walking_transport_column_round_trips(self):
+        self.document.constraints.transport = 'walking'
+        self.runtime()
+        write_document(self.connection,self.document,self.request.accessToken)
+        self.assertEqual(read_document(self.connection,self.request.accessToken)['constraints']['transport'],'walking')
+
+    def test_legacy_null_transport_defaults_to_driving(self):
+        self.document.constraints.transport = None
+        self.runtime()
+        write_document(self.connection,self.document,self.request.accessToken)
+        self.assertEqual(read_document(self.connection,self.request.accessToken)['constraints']['transport'],'driving')
+
     def test_duplicate_save_is_idempotent_and_mutation_denied(self):
         self.runtime()
         write_document(self.connection,self.document,self.request.accessToken)

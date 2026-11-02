@@ -24,6 +24,7 @@ export function manualPreferences(state: PreferenceState): Preferences {
   for (const field of ["location", "date", "people", "budget", "travel"] as const) {
     if (state.manual[field]) result[field] = state.values[field];
   }
+  if (state.manual.transport) result.transport=state.values.transport;
   if (state.manual.cost) {
     result.cost = state.values.cost;
     result.costExplicit = true;
@@ -36,6 +37,7 @@ export function displayInterpretedPreferences(state: PreferenceState, inferred: 
   for (const field of ["location", "date", "people", "budget", "travel"] as const) {
     if (state.manual[field]) values[field] = state.values[field];
   }
+  if (state.manual.transport) values.transport=state.values.transport;
   if (state.manual.cost) values.cost = state.values.cost;
   return { values, manual: { ...state.manual } };
 }
@@ -52,6 +54,7 @@ export function interpretedPreferences(value: unknown): Preferences {
     throw new Error("Invalid interpreted preference values");
   }
   return {
+    ...(request.transport === "walking" || request.transport === "driving" ? {transport: request.transport} : {}),
     location: request.location, date: request.date as string | null ?? "", people: "",
     budget: request.budget === null ? "" : String(request.budget),
     travel: request.travel === null ? "" : String(request.travel),

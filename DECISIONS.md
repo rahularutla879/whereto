@@ -376,3 +376,9 @@ provider admission. [Evidence/limitations](docs/saved-details-performance49.md).
 ## November 1 — separate capability access from shared provider admission
 
 A sharing capability must not accumulate a permanent six-request Details bottleneck. Use bounded explicit selected-stop actions and hashed UUID replay metadata while preserving shared minute/concurrency/ledger/Cloud protection. Do not cache restricted content across viewers or promise simultaneous ten-friend enrichment under ten/minute and concurrency one. Keep automatic Pro local-only and Enterprise contacts explicit. Accept validated provider-returned HTTP/HTTPS external official-site links independently of phones; do not infer websites. Move raw development data to a server-protected local route, and derive user activity help from the shared registry. Deduplicate presentation only, preserving hard constraints and ranking. [Evidence and limitations](docs/sharing-ux49.md).
+
+## November 2 — expose existing walking routing without redesigning planning
+
+Reuse the existing transport field, route adapter and SQL column. Explicit mode controls do not rely on a model guess; clear source intent and manual selection must agree. Driving defaults only when no applicable mode is provided. Keep legacy internal data readable and never relabel another saved preference as driving. Mode-specific evidence, immutable session scope and request hashing preserve cache separation. Keep basic Matrix billing/masks/quotas and one required walking beta notice; no speculative second-mode calls. Replace technical product copy with a dedicated user guide, honest result labels and readable policies; preserve substantive privacy/security disclosures.
+
+[Acceptance details and evidence](docs/ui-travel-mode49.md).

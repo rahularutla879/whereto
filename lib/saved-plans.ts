@@ -34,5 +34,5 @@ export function validateSaved(value: unknown): SavedPlan {
     || data.itineraries.some(p => !Array.isArray(p.stops) || p.stops.length !== data.constraints.activities.length
       || p.stops.some((s,i) => s.position !== i || s.activity !== data.constraints.activities[i] || typeof s.reference !== "string"
         || (data.dataMode === "real" && (s.provider !== "google_places" || s.fictional !== null || s.start !== null || s.end !== null || s.duration !== null || p.fictionalMetrics !== null))))) throw new Error("Saved plan is incomplete or unavailable.");
-  return data;
+  return {...data,constraints:{...data.constraints,transport:data.constraints.transport??"driving"}};
 }

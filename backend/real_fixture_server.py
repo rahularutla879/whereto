@@ -32,7 +32,7 @@ def main():
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
-        if scenario['name']=='refinements':
+        if scenario['name'] in ('refinements','travel_modes'):
             from backend.refinement_fixtures import search_fixture as refinement_search
             return refinement_search(body,**kwargs)
         if scenario['name']=='cinema_acceptance':
@@ -112,6 +112,9 @@ def main():
         if scenario['name']=='location_acceptance':
             from backend.location_fixtures import acceptance_matrix_fixture
             return acceptance_matrix_fixture(body)
+        if scenario['name']=='travel_modes':
+            from backend.travel_mode_fixtures import matrix as mode_matrix
+            return mode_matrix(body)
         result = matrix_fixture(body)
         if scenario['name'] == 'bowling_diagnostic':
             for element in result:
@@ -130,7 +133,7 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
-            if scenario['name']=='refinements':
+            if scenario['name'] in ('refinements','travel_modes'):
                 from backend.refinement_fixtures import FixtureAI as RefinementAI
                 return RefinementAI().interpret(text)
             if scenario['name']=='cinema_acceptance':

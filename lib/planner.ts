@@ -4,7 +4,7 @@ export { activityLabel, ACTIVITY_LABELS, MOCK_EVENT_DATES, VENUES } from "./mock
 export type { Activity, Venue } from "./mock-data";
 
 export type CostPreference = "budget" | "balanced" | "experience";
-export type Preferences = { location: string; date: string; people: string; budget: string; travel: string; cost: CostPreference; costExplicit?: boolean };
+export type Preferences = { location: string; date: string; people: string; budget: string; travel: string; cost: CostPreference; costExplicit?: boolean; transport?: "" | "driving" | "walking" };
 export type OutingPayload = { activities: Activity[]; location: string; people?: number | null; date: string | null;
   budget: number | null; travel: number | null; cost: CostPreference; dinner: boolean };
 export type Quality = Record<string, string>;
@@ -47,7 +47,7 @@ export function resolveOuting(request: string, preferences: Preferences = EMPTY_
   const location = preferences.location.trim() || parsed.location || "Baltimore";
   const notes: string[] = [];
   const fail = (message: string): ResolvedOuting => ({ error: { plans: [], message, location, activities, notes } });
-  if (!request.trim()) return fail("Tell us which activities you want, or click Try an example.");
+  if (!request.trim()) return fail("Tell us which activities you want.");
   if (!/^baltimore(?:\s*,?\s*(?:md|maryland))?$/i.test(location)) return fail("This mock catalog only covers Baltimore. Choose Baltimore in Set preferences to try it.");
   if (parsed.remaining) return fail(`I couldn't match “${parsed.remaining}” to this mock planner. No partial plan was created. Open Supported activities & fictional event dates above, or simplify the request. Use Set preferences for exact dates and limits.`);
   if (!activities.length) return fail("No supported activity found. Try dinner and karaoke, a museum, or another supported activity from the list above. We won't substitute an unrelated outing.");

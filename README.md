@@ -41,7 +41,7 @@ Strict maxima are enforced for ordinary recommendations. Flexible retains its pr
 
 Numeric budget and spending-mode controls are removed. Real prices and exact expenditure cannot be verified; cost intent in your words is retained with a warning, without a missing-budget question. Optional legacy backend fields remain for compatibility; fictional prices never establish real budget compliance.
 
-The exploration banner is removed. Real/mock badges remain, and accounting stays on the protected local **http://localhost:3000/dev/diagnostics** page, outside the normal planner. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
+The exploration banner and form development badge are removed. Result provenance labels remain, and accounting stays on the protected local **http://localhost:3000/dev/diagnostics** page, outside the normal planner. No monitoring, quota, ledger or safe-default flag is removed. Current research and audits: [activity capabilities](docs/supported-activities.md), [future venue providers](docs/venue-data-providers.md), [local model evaluation](docs/llm-evaluation.md). No additional provider or model is enabled.
 
 ## Current Task 46 acceptance changes
 
@@ -53,7 +53,7 @@ Authorized local exploration now records estimated cost **without a hard daily e
 
 ## Task 46: real venues in local development
 
-Mock remains the safe default. The website badge says **MOCK DATA** or **REAL DATA · LOCAL DEV**. Real results contain Google Maps venues and driving/walking estimates; prices, hours, visit duration, showtimes and reservations still need confirmation. They are provisional options, not bookings or verified budget matches.
+Mock remains the safe default. Fictional example/sample cards are clearly labeled; the form has no development-mode badge. Real results contain Google Maps venues and driving/walking estimates; prices, hours, visit duration, showtimes and reservations still need confirmation. They are provisional options, not bookings or verified budget matches.
 
 On the owner's configured computer, Terminal 1:
 
@@ -525,3 +525,9 @@ and benchmark commands: [saved-details/performance acceptance](docs/saved-detail
 ## Activity help and shared saved links
 
 Activity follow-ups offer **View supported activities** in a new tab. The registry-driven reference is at [localhost:3000/supported-activities](http://localhost:3000/supported-activities). Your original request stays in place. Saved links no longer accumulate a six-request per-link Details limit; selected-stop actions still share ten requests/minute, one concurrent provider request and project quotas. Ten simultaneous viewers cannot all load immediately. See [verified behavior and remaining limits](docs/sharing-ux49.md). Tasks 50 and 50A–50E remain unstarted.
+
+## User guide and travel mode
+
+Open **How it works** in the header for the new-tab [user guide](http://localhost:3000/how-it-works). Privacy and Terms also open separately, preserving your current outing.
+
+In **Set preferences → Travel mode (optional)**, choose **Driving** or **Walking**. Driving is the default when neither a selection nor clear request wording specifies walking. One mode applies to the first journey and all inter-stop journeys. A conflicting explicit selection/request asks you to make them match. Strict limits and Flexible’s existing doubled maximum use the selected mode’s routes and distances. Changes require regeneration; browsing and exploration retain the mode. Saved plans retain it too; old missing modes default to driving. Walking routes may omit sidewalks or pedestrian paths—check before visiting. Fictional examples remain mode-independent samples. [Verified behavior and provider safeguards](docs/ui-travel-mode49.md).
