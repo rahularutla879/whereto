@@ -132,3 +132,7 @@ selected walking browser plan was reopened, independently verified and exactly c
 Desktop1280/mobile390 layouts, Strict/Flexible/mode changes, actual shared-window recovery
 without reload, pages2/3, subsequent regeneration and copy/new-tab behavior were exercised.
 Screenshots and detailed evidence are recorded in HANDOVER.md. No live Google calls.
+
+## November 2 — Text Search hours and capacity acceptance
+
+This newer owner request supersedes the earlier pending-hours proposal: authorized Text Search hours are implemented without extra search calls, and the owner separately approved manual saved-stop Enterprise hours. Both use new local-only profile gates; automatic saved loading stays Pro. No capacity or spending thresholds were raised. See the new acceptance/capacity record for exact fields, limitations and verification. See [acceptance and capacity report](hours-capacity49.md).

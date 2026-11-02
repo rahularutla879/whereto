@@ -10,6 +10,7 @@ export function fragmentToken(hash: string): string | undefined {
 }
 
 export type SavedPlan = {
+  hoursRefreshAvailable?:boolean;
   version: 1; saved: true; dataMode: "mock" | "real"; selectedId: string; expiresAt: string; liveDetailsAvailable: false;
   constraints: { location: string; date: string; activities: string[]; activityIntents: Record<string,string>; startTime: number; endTime: number; explicitStart?: boolean; explicitEnd?: boolean;
     maxFirstLegTravelExclusive?:boolean; maxLegTravelExclusive?:boolean; travelExclusive?:boolean;

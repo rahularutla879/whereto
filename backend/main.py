@@ -277,8 +277,8 @@ def save_endpoint(request: SaveRequest):
 @app.post("/api/plans/reopen")
 def reopen_endpoint(request: OpenRequest):
     def with_policy(value):
-        from backend.saved_refresh import automatic_details_enabled
-        return {**reopen(value), 'automaticVenueDetails': automatic_details_enabled()}
+        from backend.saved_refresh import automatic_details_enabled, saved_hours_enabled
+        return {**reopen(value), 'automaticVenueDetails': automatic_details_enabled(), 'hoursRefreshAvailable': saved_hours_enabled()}
     return persistence_response(with_policy, request)
 
 

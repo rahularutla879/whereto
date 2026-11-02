@@ -115,6 +115,9 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     surprise=request.planningMode=='surprise'
     if surprise:context.setdefault('recent',set(request.recentSurpriseIds))
     pools, facts = [], {}
+    hours_closed=set()
+    from backend.planning_hours import venue_hours
+    from backend.search_fields import enterprise_search
     for position, activity in enumerate(request.activities):
         pool = []
         for distinct in discovery.venues:
@@ -124,10 +127,14 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             if request.requireWheelchairAccess and fact.wheelchairAccessible is False:
                 continue  # Known incompatible venues are never usable alternatives.
 
+            hours=venue_hours(fact,request.date,start=request.startTime if request.explicitStart else None,end=request.endTime if request.explicitEnd else None,calendar_timezone=request.calendarTimezone)
+            if hours['status']=='closed':
+                hours_closed.add((activity.value,fact.id))
+                continue
             labels = distinct_venue_labels(distinct).model_dump(mode="json")
             facts[fact.id] = fact
             pool.append(Venue(id=fact.id, name=fact.name, activity=activity,
-                              providerPlaceId=fact.id, address=fact.address, rating=fact.rating, ratingCount=fact.ratingCount, wheelchairAccessible=fact.wheelchairAccessible,
+                              hoursEvidence=hours, providerPlaceId=fact.id, address=fact.address, rating=fact.rating, ratingCount=fact.ratingCount, wheelchairAccessible=fact.wheelchairAccessible,
                               relevanceStrength=distinct.relevance[activity].status,retailParents=[p.model_dump() for p in (fact.containingPlaces or [])] or None,
                               mapsUrl=str(venue_source(fact).url), evidenceLabels=labels,
                               dataQuality=DataQuality(identity=DataStatus.verified), source="Google Maps"))
@@ -135,7 +142,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
     diagnostics = {"placesSearchRequests": len(set(request.activities)), "placesDetailsRequests": 0,
                    "excludedCandidates": discovery.excluded_count,
                    "discoveryStages": discovery.stages, "discoveryReasons": discovery.diagnostics,
-                   "usageCategories": ["Text Search Enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "Text Search Pro", "Compute Route Matrix Essentials"]}
+                   "usageCategories": ["Text Search Enterprise" if enterprise_search() else "Text Search Pro", "Compute Route Matrix Essentials"]}
+    diagnostics['hoursExcludedCandidates']=len(hours_closed)
     diagnostics['venuePipeline'] = empty_coverage(discovery, {a.value: {v.id for v in p} for a, p in zip(request.activities, pools)})
     diagnostics['configuredLimits'] = {'candidatesPerActivity': 100 if outing.settings.exploration else outing.settings.candidates_per_activity,
         'searchesPerOuting': None if outing.settings.exploration else outing.settings.searches_per_outing, 'matrixElementsPerOuting': None if outing.settings.exploration else outing.settings.matrix_elements_per_outing}
@@ -176,6 +184,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         diagnostics['failureBoundary']='geographic_filtering' if geographic_block else 'discovery_coverage'
         message=("No complete outing in the checked results. Geographic checks rejected candidates for a missing activity; the area is not proven exhausted. Explore farther or refine your destination."
             if geographic_block else "Too few matching real venues in the checked search. Search for more venues if available, or choose a different area/activity; no fictional stops were added.")
+        if any(not pool and any(a==activity.value for a,_ in hours_closed) for activity,pool in zip(request.activities,pools)):message="Matching venues were reported closed throughout the requested date or time window. Change the date/time or search more places; unknown hours were not treated as closed."
         result = empty(public,message,diagnostics)
         if not geographic_block:
             result.errors=[PlanningError(code="no_relevant_venues",message=message)]
@@ -375,7 +384,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
                 message="Search prioritizes the requested area near your confirmed reference. Exact neighborhood membership is not verified; check the actual venue addresses."))
         if request.dinner or request.dinnerStops:
             plan.issues.append(ConstraintIssue(code="unverified_dinner", field="availability", status="unknown",
-                message="Dinner service and hours are not verified for these restaurants. Confirm they serve dinner before choosing."))
+                message="Dinner service is not verified for these restaurants. Check the displayed hours and confirm dinner availability."))
         plan.issues.append(ConstraintIssue(code="unverified_availability", field="availability", status="unknown",
             message="Venue suitability, reservations and activity availability require confirmation. No booking is confirmed."))
         if request.budget is not None or request.groupBudget is not None:

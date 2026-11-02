@@ -6,6 +6,10 @@ from time import monotonic
 from backend.places import DiscoveryError
 
 
+# Bounded memory retention, not authorization to dispatch provider requests.
+MAX_ACTIVE_SESSIONS = 50
+
+
 class OptionSessions:
     def __init__(self):
         self.entries = OrderedDict()
@@ -15,7 +19,7 @@ class OptionSessions:
         with self.lock:
             now = monotonic()
             self.entries = OrderedDict((k, v) for k, v in self.entries.items() if now-v[0] < 600)
-            while len(self.entries) >= 20:
+            while len(self.entries) >= MAX_ACTIVE_SESSIONS:
                 self.entries.popitem(last=False)
             token = token_urlsafe(32)
             self.entries[token] = (now, context, Lock())

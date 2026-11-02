@@ -855,3 +855,9 @@ All ten requested product cleanups and the narrow optional Driving/Walking contr
 ## November 2 — regeneration and hours preparation acceptance
 
 Tasks 46/49 regeneration and saved-preference acceptance: local admission classification, edited between-stop propagation, compact saved UX and offline hours regressions. No live hours retrieval or migration. Tasks 50 and 50A–50E remain unstarted. See [acceptance record](docs/regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+Tasks 46/49 acceptance: saved copy cleanup, centralized display casing, hours-enabled Text Search/eligibility/detail display and separately approved manual saved hours are implemented. Current shared Cloud-mirroring admission stays intact; no quota/spending increase or schema migration. Task 50 and Tasks 50A–50E remain unstarted. See [acceptance and capacity report](docs/hours-capacity49.md).
+
+Capacity acceptance also retains50 active search continuations (previously20) without changing expiry, provider quotas, concurrency or spending safeguards. Later roadmap tasks remain unstarted.

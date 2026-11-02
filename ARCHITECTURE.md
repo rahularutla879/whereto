@@ -652,3 +652,9 @@ The header links to `/how-it-works`; guide/privacy/terms share restrained inform
 ## November 2 — regeneration and hours preparation acceptance
 
 Origin context now emits its owned betweenTravel value (including null). ProviderLimitError maps to local-rate/admission categories, independently of Cloud/service errors. Saved constraints expose existing explicit-time and exclusive-limit flags to a structured definition list; SQL, masks, ranking and route-mode boundaries are unchanged. Offline dated-hours evaluation is reused without enabling live hours fields. See [acceptance record](docs/regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+Authorized hours/timezone and original receipt timestamps now pass through the discovery DTO into canonical facts and typed transient HoursEvidence. Pool eligibility excludes only evidenced closed dates/windows; ranking weights/routes remain. Shared search_fields controls the actual Text Search mask and Enterprise accounting. Saved manual includeHours is independently gated, capability/selected-stop checked and excluded from automatic Pro calls. Central display-format and OpeningHours components preserve provider names and app-owned stored values. See [acceptance and capacity report](docs/hours-capacity49.md).
+
+Active option-session memory now retains50 isolated contexts rather than20, with unchanged ten-minute expiry, oldest eviction, provider admission and no cross-configuration content reuse. This avoids early continuation loss under repeated testing.

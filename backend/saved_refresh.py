@@ -15,6 +15,7 @@ from backend.provider_budget import local_real_enabled, ProviderLimitError
 
 # Pro, below the existing Enterprise contact-details mask; no hours/photos/ratings.
 REFRESH_MASK='id,displayName,formattedAddress,businessStatus,googleMapsUri,attributions'
+HOURS_REFRESH_FIELDS='timeZone,currentOpeningHours,regularOpeningHours'
 CONTACT_REFRESH_MASK=REFRESH_MASK+',nationalPhoneNumber,internationalPhoneNumber,websiteUri'
 
 
@@ -22,11 +23,14 @@ class RefreshRequest(OpenRequest):
     refreshId: UUID
     candidateId: str = Field(min_length=1,max_length=200)
     includeContacts: bool = Field(default=False,strict=True)
+    includeHours: bool = Field(default=False,strict=True)
 
 
-def fetch_saved_details(identity, *, include_contacts=False):
+def fetch_saved_details(identity, *, include_contacts=False, include_hours=False, outing_date=None, window_start=None, window_end=None, activity="food", calendar_timezone=None):
+    if include_hours and not saved_hours_enabled():raise DiscoveryError("disabled","Opening-hours loading is disabled in this development session.")
     if not local_real_enabled() or os.environ.get('WHERETO_CONTACT_DETAILS_DEV')!='1':
         raise DiscoveryError('disabled','Venue refresh is disabled in this development session.')
+    mask=(CONTACT_REFRESH_MASK if include_contacts else REFRESH_MASK)+(','+HOURS_REFRESH_FIELDS if include_hours else '')
     from backend.places_transport import access_token
     with requests.Session() as session:
         session.mount('https://',requests.adapters.HTTPAdapter(max_retries=0))
@@ -35,7 +39,7 @@ def fetch_saved_details(identity, *, include_contacts=False):
         dispatch('details',1)
         try:
             response=session.get('https://places.googleapis.com/v1/places/'+identity,
-                headers={'Authorization':'Bearer '+token,'X-Goog-User-Project':PROJECT,'X-Goog-FieldMask':CONTACT_REFRESH_MASK if include_contacts else REFRESH_MASK},timeout=(5,15),allow_redirects=False)
+                headers={'Authorization':'Bearer '+token,'X-Goog-User-Project':PROJECT,'X-Goog-FieldMask':mask},timeout=(5,15),allow_redirects=False)
             if response.status_code!=200:
                 from backend.provider_errors import classify
                 code,message,diagnostics=classify(response,'details')
@@ -51,7 +55,14 @@ def fetch_saved_details(identity, *, include_contacts=False):
             status=data.get('businessStatus')
             if not isinstance(name,str) or not 1<=len(name.strip())<=200 or (address is not None and (not isinstance(address,str) or len(address)>1000)) or status not in (None,'OPERATIONAL','CLOSED_TEMPORARILY','CLOSED_PERMANENTLY'):
                 raise ValueError()
-            return {'name':name.strip(),'address':address,'businessStatus':status,'attributions':credits,
+            hours={}
+            if include_hours:
+                from datetime import date
+                from backend.venue_normalization import normalize_google_place
+                from backend.planning_hours import venue_hours
+                fact=normalize_google_place(data,activity)
+                hours={'hoursEvidence':venue_hours(fact,date.fromisoformat(outing_date),start=window_start,end=window_end,calendar_timezone=calendar_timezone)}
+            return {**hours,'name':name.strip(),'address':address,'businessStatus':status,'attributions':credits,
                     'refreshedAt':datetime.now(timezone.utc).isoformat(),
                     'mapsUrl':verified_maps_url(data.get('googleMapsUri')),
                     **({k:contact[k] for k in ('phone','telephoneUrl','website')} if include_contacts else {})}
@@ -81,6 +92,7 @@ class RefreshSessions:
         if not option or option['candidateId']!=document['selectedId'] or document['dataMode']!='real':raise PersistenceError(404)
         if not local_real_enabled() or os.environ.get('WHERETO_CONTACT_DETAILS_DEV')!='1':
             raise DiscoveryError('disabled','Venue refresh is disabled. The saved plan remains available.')
+        if request.includeHours and not saved_hours_enabled():raise DiscoveryError('disabled','Opening-hours loading is disabled. Your saved plan is kept.')
         if not 1<=len(option['stops'])<=4:raise PersistenceError(404)
         # A capability authorizes reading; it is not a lifetime provider quota.
         # Each explicit open/action gets a fresh bounded outing. The process and
@@ -106,7 +118,12 @@ class RefreshSessions:
                 with outing.reserve('details',digest(str(request.refreshId)+':'+identity)):
                     admitted=True
                     admitted_action=True
-                    details=fetch_saved_details(identity,include_contacts=True) if request.includeContacts else fetch_saved_details(identity)
+                    if request.includeHours:
+                        constraints=document['constraints']
+                        details=fetch_saved_details(identity,include_contacts=request.includeContacts,include_hours=True,
+                            outing_date=constraints['date'],window_start=constraints['startTime'] if constraints.get('explicitStart') else None,
+                            window_end=constraints['endTime'] if constraints.get('explicitEnd') else None,activity=stop['activity'],calendar_timezone=constraints.get('calendarTimezone'))
+                    else:details=fetch_saved_details(identity,include_contacts=True) if request.includeContacts else fetch_saved_details(identity)
                 results[identity]={'status':'refreshed',**details}
             except (DiscoveryError,ProviderLimitError) as error:
                 from backend.failures import provider_code,evidence
@@ -157,3 +174,7 @@ def refresh_issue(error):
     result={'reason':reason,'message':message,'retryable':reason not in ('cloud_daily_quota','cloud_unknown_quota','provider_authentication','provider_authorization','local_accounting','local_daily_allowance','application_allowance')}
     if retry is not None:result['retryAfterSeconds']=max(1,min(1800,int(retry)))
     return result
+
+
+def saved_hours_enabled():
+    return local_real_enabled() and os.environ.get('WHERETO_SAVED_HOURS_DEV')=='1' and os.environ.get('WHERETO_CONTACT_DETAILS_DEV')=='1'

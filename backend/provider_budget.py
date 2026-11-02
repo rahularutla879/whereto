@@ -250,8 +250,9 @@ class OutingBudget:
             if elements + sum(n for _, n in session._matrix_window) > limits.matrix_elements_per_minute:
                 raise ProviderLimitError("Local route matrix minute quota reached. Stop and review usage; no automatic retry is scheduled.", reason="local_minute" if elements <= limits.matrix_elements_per_minute else "batch_limit", retry_after=max(1, ceil(60-(now-session._matrix_window[0][0]))) if session._matrix_window and elements <= limits.matrix_elements_per_minute else None)
             from backend.development_cost import AccountingError
-            units = {"search_enterprise" if os.environ.get("WHERETO_RATINGS_DEV") == "1" else "search_pro": searches - lookups,
-                     "search_pro": lookups} if os.environ.get("WHERETO_RATINGS_DEV") == "1" else {"search_pro": searches}
+            from backend.search_fields import enterprise_search
+            units = {"search_enterprise" if enterprise_search() else "search_pro": searches - lookups,
+                     "search_pro": lookups} if enterprise_search() else {"search_pro": searches}
             units.update(details=details, matrix_element=elements)
             reservation = session.cost.reserve(units, self._record_dispatch) if session.cost else nullcontext(0)
             try:

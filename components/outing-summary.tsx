@@ -1,4 +1,5 @@
-import { activityLabel, formatTime } from "../lib/planner";
+import {destinationLabel,transportLabel,activityDisplay} from "@/lib/display-format";
+import { formatTime } from "../lib/planner";
 import type { ValidatedOuting } from "../lib/planning-client";
 
 export function activityEditText(request: ValidatedOuting["request"]) {
@@ -12,9 +13,9 @@ export function formatOutingDate(date: string) {
 export function outingDetails(value: ValidatedOuting, real = false): [string, string][] {
   const r = value.request;
   const details: [string, string][] = [
-    ["Location", r.location],
+    ["Location", destinationLabel(r.location)],
     ["Date", formatOutingDate(r.date)],
-    ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : activityLabel(a)).join(" → ")],
+    ["Activities", r.activities.map((a, i) => r.dinnerStops?.includes(i) ? "Dinner" : activityDisplay(a)).join(" → ")],
   ];
   if (r.travel !== null) details.push(["Travel", `${r.travelExclusive ? "Under " : ""}${r.travel} min ${r.travelExclusive ? "total between stops" : "maximum total between stops"}`]);
   if (value.explicitTime) details.push(["Time window", `${formatTime(r.startTime)}–${r.endTime === 1440 ? "midnight" : formatTime(r.endTime)} ${real ? "(destination local time where known; otherwise calendar reference shown in notes)" : "(Baltimore time)"}`]);
@@ -23,7 +24,7 @@ export function outingDetails(value: ValidatedOuting, real = false): [string, st
   if(r.betweenTravel)details.push(["Between activities",(r.betweenTravel.mode==="flexible"?"Prefer ":r.betweenTravel.exclusive?"Under ":"At most ")+r.betweenTravel.value+" "+r.betweenTravel.unit+(r.betweenTravel.mode==="flexible"?"; maximum "+r.betweenTravel.value*2+" "+r.betweenTravel.unit+" per leg":" per leg")]);
   if (real && r.firstTravel) details.push(["First journey", `${r.firstTravel.mode === "flexible" ? "Prefer around" : r.firstTravel.exclusive ? "Under" : "At most"} ${r.firstTravel.value} ${r.firstTravel.unit} from the confirmed start${r.firstTravel.mode === "flexible" ? `; maximum ${r.firstTravel.value*2} ${r.firstTravel.unit}` : ""}`]);
   if (real && !r.firstTravel && r.maxFirstLegTravel != null) details.push(["First journey", `${r.maxFirstLegTravelExclusive ? "Under " : ""}${r.maxFirstLegTravel} min ${r.maxFirstLegTravelExclusive ? "from" : "maximum from"} your shared start`]);
-  if (r.transport) details.push(["Transport", `${r.transport}${real ? " (Google Maps estimates)" : " (simulated travel is mode-independent)"}`]);
+  if (r.transport) details.push(["Transport", `${transportLabel(r.transport)}${real ? " (Google Maps estimates)" : " (simulated travel is mode-independent)"}`]);
   return details;
 }
 

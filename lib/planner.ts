@@ -12,6 +12,7 @@ export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neig
   price: number | null; duration: number | null; capacity: number | null; neighborhood: string | null;
   providerPlaceId?: string | null; address?: string | null; mapsUrl?: string | null;
   retailParents?: {id:string;displayName?:string|null;isMall?:boolean}[] | null;
+  hoursEvidence?: import("./venue-hours").HoursEvidence | null;
   rating?: number | null; ratingCount?: number | null;
   evidenceLabels?: { claims?: Record<string, { message: string }>; attribution?: { third_party?: { provider?: string | null; uri?: string | null }[] } };
   eventDate?: string; dataQuality?: Quality; source?: string | null;

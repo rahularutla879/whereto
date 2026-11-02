@@ -1,5 +1,6 @@
 """Bounded Text Search discovery for isolated diagnostics and local real planning."""
 
+from datetime import datetime,timezone
 from hashlib import sha256
 import json
 import os
@@ -173,6 +174,10 @@ class DiscoveryCandidate(DiscoveryModel):
     coordinates: Coordinates
     attributions: list[dict] = Field(default_factory=list)
     types: list[str] | None = None
+    currentOpeningHours: dict | None = None
+    regularOpeningHours: dict | None = None
+    timeZone: dict | None = None
+    observed_at: datetime = Field(default_factory=lambda: datetime.now(timezone.utc))
     containingPlaces: list[dict] | None = None
     primaryType: str | None = None
     rating: float | None = Field(default=None, ge=1, le=5, strict=True, allow_inf_nan=False)
@@ -253,7 +258,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
                 provider_id=place["id"], display_name=place["displayName"]["text"],
                 address=place["formattedAddress"], coordinates=place["location"],
                 attributions=place.get("attributions", []), types=place.get("types"),
-                containingPlaces=place.get("containingPlaces"),primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
+                currentOpeningHours=place.get("currentOpeningHours"),regularOpeningHours=place.get("regularOpeningHours"),timeZone=place.get("timeZone"),containingPlaces=place.get("containingPlaces"),primaryType=place.get("primaryType"), rating=place.get("rating"), userRatingCount=place.get("userRatingCount"))
             reason = geographic_reason(area, candidate.coordinates, place.get("addressComponents", []))
             if not reason and city_reference and distance_m(city_reference,candidate.coordinates)>30000:
                 reason='outside_destination_area'

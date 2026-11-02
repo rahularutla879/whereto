@@ -535,3 +535,7 @@ In **Set preferences → Travel mode**, choose **Driving** or **Walking**. Drivi
 ## Changing an existing outing
 
 Edit your preferences and choose **Regenerate plans**; your request and confirmed starting point stay available. A temporary shared search/routing limit may require waiting before Retry; reloading does not clear it. Saved preferences distinguish planning windows from requested arrival times. Opening hours and bookings still need confirmation. [Acceptance details](docs/regeneration-hours49.md).
+
+## Opening hours and saved outings
+
+Open **View plan** to see available opening/closing hours for your outing date. Typical weekly hours can differ on special days, and missing hours remain unverified. Hours do not confirm activity sessions, tickets or reservations. In a saved itinerary, **Load opening hours** performs a separate deliberate lookup for its original date; opening the private link still loads only the existing basic venue information automatically. The owner's existing two-command startup loads the approved ignored hours settings. Fresh clones/tests/production retain safe defaults. Shared Google limits can still require waiting before Retry. [Hours and testing capacity](docs/hours-capacity49.md).

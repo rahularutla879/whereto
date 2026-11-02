@@ -386,3 +386,7 @@ Reuse the existing transport field, route adapter and SQL column. Explicit mode 
 ## November 2 — regeneration and hours preparation acceptance
 
 A shared provider minute denial is not a provider outage. Preserve admission/ledger limits and repair classification rather than resetting quotas or using refresh as recovery. Keep current editor values authoritative. Present default planning windows as defaults, not promised arrival times. Prepare selected-only hours verification offline; separately authorized contact fields do not authorize hours. See [acceptance record](docs/regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+Use the existing Text Search response for hours rather than per-candidate Details fan-out. The owner separately approved manual selected-only saved Details Enterprise hours; automatic opens remain Pro. Distinguish current dated, typical weekly and unknown hours; no invented arrival/duration or holiday certainty. Do not raise local limits that mirror Cloud capacity; owner exploration already removes cumulative prototype caps. Record tester costs before proposing any Cloud/budget increase. See [acceptance and capacity report](docs/hours-capacity49.md).

@@ -1,4 +1,5 @@
 "use client";
+import {destinationLabel} from "@/lib/display-format";
 import {restoreContinuation,continuationNotice} from "@/lib/continuation";
 import {BeyondPreferences} from "@/components/beyond-preferences";
 import { SavedPlans } from "@/components/saved-plans";
@@ -65,7 +66,7 @@ function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; 
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabel(venue.activity)}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;
       })}</div>
-      <div className="card-facts"><span><MapPin size={14} /> {real ? plan.venues.length===1 ? plan.venues[0].address ?? "Address unavailable" : `Search area: ${plan.location ?? "Not specified"}` : plan.location ?? "Baltimore"}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
+      <div className="card-facts"><span><MapPin size={14} /> {real ? plan.venues.length===1 ? plan.venues[0].address ?? "Address unavailable" : `Search area: ${destinationLabel(plan.location ?? "Not specified")}` : destinationLabel(plan.location ?? "Baltimore")}</span>{(!real || plan.duration !== null) && <span><Clock3 size={14} /> {plan.duration === null ? "Visit timing not verified" : `~${formatDuration(plan.duration)}`}</span>}</div>
       {plan.firstLeg && <FirstLegTravel plan={plan} />}
       <div className="card-bottom">{!real && <div><PlanCost amount={plan.price} /><small>Sample price</small></div>}<button className="plan-link" aria-expanded={expanded} aria-controls={`details-${plan.id}`} onClick={() => setExpanded(!expanded)}>{expanded ? "Close plan" : "View plan"}{expanded ? <X size={16} /> : <ArrowUpRight size={18} />}</button></div>
       {real && <GoogleCredits credits={plan.venues.flatMap(venue => venue.evidenceLabels?.attribution?.third_party ?? []).filter((credit, i, credits) => credits.findIndex(c => c.provider === credit.provider && c.uri === credit.uri) === i)} />}

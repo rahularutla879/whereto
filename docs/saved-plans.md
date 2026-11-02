@@ -210,3 +210,7 @@ New plans store driving/walking as app-owned configuration in the existing `tran
 ## November 2 — regeneration and hours preparation acceptance
 
 The confirmed-save interface has one heading and one expiry/sharing sentence; prior links remain distinguishable after another save fails. Copy/Open/Forget share an accessible wrapping action group. Collapsed Saved preferences formats the existing constraints and explicit/default time flags, preserving exclusive limits and mode. Contacts use the same opt-in mask with simpler wording. No SQL or retention change. See [acceptance record](regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+Saved intros no longer mention API quota. Central casing preserves brands and provider names. Separately approved WHERETO_SAVED_HOURS_DEV enables the explicit Load opening hours action for at most four selected references using Details Enterprise and the server-loaded original saved date/window. Automatic opens remain Pro-only. Hours-only updates preserve independently timestamped contacts/names in page memory. Current/typical/unknown hours display beside each stop; nothing is stored in SQL or browser persistent storage. See [acceptance and capacity report](hours-capacity49.md).

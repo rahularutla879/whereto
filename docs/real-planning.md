@@ -596,3 +596,7 @@ The optional preference now exposes existing driving/walking routing end to end,
 ## November 2 — regeneration and hours preparation acceptance
 
 Regeneration after preference edits starts fresh evidence/session work and retains the confirmed origin. Shared local minute admission is explicitly distinguished from provider outages/Cloud quota; a browser refresh cannot reset it. Exploration descriptions explain recombination, bounded discovery and deliberate exceptions. Live hours are still unverified; existing offline dated-hours evaluation and proposed approval-gated fields are documented. See [acceptance record](regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+The owner-authorized local WHERETO_HOURS_DEV gate adds currentOpeningHours, regularOpeningHours and timeZone to existing Text Search, not a second request. Hours or ratings select Enterprise accounting. Fresh dated evidence excludes demonstrably closed windows before further routing; defaults/missing times remain unverified. Expanded details show current/typical/unknown hours without event or reservation claims. Weights, modes and Strict/Flexible stay unchanged. See [acceptance and capacity report](hours-capacity49.md).

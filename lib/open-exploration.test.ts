@@ -30,7 +30,7 @@ test("legacy group counts never become controls or visible outing metadata", () 
     const request = { activities: ["custom:pottery class", "food"], location: "Manhattan", date: "2026-11-14", people, budget: null, travel: null, cost: "balanced" };
     assert.equal(interpretedPreferences(request).people, "");
     const html = renderToStaticMarkup(React.createElement(OutingSummary, { value: { request } as ValidatedOuting, dirty: false, onEdit() {} }));
-    assert.match(html, /pottery class/);
+    assert.match(html, /Pottery class/);
     assert.doesNotMatch(html, /<dt>Group|people|persons|custom:/);
   }
 });

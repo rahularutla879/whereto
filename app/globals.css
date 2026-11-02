@@ -330,3 +330,7 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .saved-preferences dt { font-weight:600; margin-bottom:.3rem; }
 .saved-preferences dd { margin:0; line-height:1.6; overflow-wrap:anywhere; }
 .saved-link h3 { font-size:1.1rem; font-weight:600; margin:0 0 .5rem; }
+
+.opening-hours { margin:.75rem 0; font-size:.85rem; line-height:1.6; }
+.opening-hours p { margin:.35rem 0; }
+.opening-hours details { margin-top:.5rem; }

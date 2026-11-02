@@ -32,9 +32,14 @@ def main():
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
-        if scenario['name'] in ('refinements','travel_modes'):
+        if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
             from backend.refinement_fixtures import search_fixture as refinement_search
-            return refinement_search(body,**kwargs)
+            data=refinement_search(body,**kwargs)
+            if scenario['name'] in ('hours','hours_closed') and not kwargs:
+                from backend.hours_fixtures49 import fixture_hours
+                for index,place in enumerate(data.get('places',[])):
+                    place.update(fixture_hours(closed=scenario['name']=='hours_closed' or index==0))
+            return data
         if scenario['name']=='cinema_acceptance':
             from backend.acceptance_fixtures import search_fixture as acceptance_search
             return acceptance_search(body,**kwargs)
@@ -133,7 +138,7 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
-            if scenario['name'] in ('refinements','travel_modes'):
+            if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
                 from backend.refinement_fixtures import FixtureAI as RefinementAI
                 return RefinementAI().interpret(text)
             if scenario['name']=='cinema_acceptance':
@@ -157,6 +162,13 @@ def main():
             raise DiscoveryError('invalid_response','Synthetic unavailable venue; no retry.')
         from backend.refinement_fixtures import refreshed
         data=refreshed(identity)
+        if kwargs.get('include_hours'):
+            from datetime import date
+            from backend.hours_fixtures49 import fixture_hours
+            from backend.venue_normalization import normalize_google_place
+            from backend.planning_hours import venue_hours
+            raw={'id':identity,'displayName':{'text':data['name']},**fixture_hours()}
+            data['hoursEvidence']=venue_hours(normalize_google_place(raw,kwargs.get('activity','food')),date.fromisoformat(kwargs['outing_date']),start=kwargs.get('window_start'),end=kwargs.get('window_end'))
         if not kwargs.get("include_contacts"):data={k:v for k,v in data.items() if k not in ("phone","website","telephoneUrl")}
         return data
 

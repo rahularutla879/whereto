@@ -59,12 +59,11 @@ def access_token(session: requests.Session) -> str:
 
 def text_search(body: dict, *, field_mask: str | None = None) -> dict:
     require_development_discovery()
-    mask = field_mask if field_mask is not None else (FIELD_MASK + ",places.rating,places.userRatingCount" if
-        os.environ.get("WHERETO_RATINGS_DEV") == "1" and local_real_enabled() else FIELD_MASK)
-    if field_mask is None:mask += ",places.containingPlaces"
-    allowed = {FIELD_MASK}
-    if local_real_enabled() and os.environ.get("WHERETO_RATINGS_DEV") == "1":
-        allowed.add(FIELD_MASK + ",places.rating,places.userRatingCount")
+    from backend.search_fields import search_mask
+    default=search_mask(FIELD_MASK)
+    mask = field_mask if field_mask is not None else default+",places.containingPlaces"
+    # Explicit minimal lookup masks stay Pro, regardless of discovery field gates.
+    allowed = {FIELD_MASK,default}
     allowed |= {value+",places.containingPlaces" for value in allowed}
     if mask not in allowed:
         raise DiscoveryError("invalid_request", "Unsupported Places field selection.")

@@ -234,6 +234,24 @@ class TimeWindow(ContractModel):
         return self
 
 
+class HoursRange(ContractModel):
+    start: int
+    end: int
+
+class HoursEvidence(ContractModel):
+    date: OutingDate
+    timezone: str | None = None
+    basis: Literal["current", "unavailable"]
+    status: Literal["open", "closed", "unverified"]
+    periods: list[HoursRange] = Field(default_factory=list)
+    weekly: list[str] = Field(default_factory=list)
+    typicalPeriods: list[HoursRange] = Field(default_factory=list)
+    typicalClosed: bool | None = None
+    message: Nonblank
+    observedAt: str | None = None
+    specialDay: bool = False
+
+
 class VenueIdentity(ContractModel):
     """Shared identity/category only; a building is not a scheduled event."""
     id: Nonblank
@@ -261,6 +279,7 @@ class Venue(VenueIdentity):
     providerPlaceId: Nonblank | None = None
     address: Nonblank | None = None
     mapsUrl: Nonblank | None = None
+    hoursEvidence: HoursEvidence | None = None  # Transient normalized hours display, never persisted.
     evidenceLabels: dict = Field(default_factory=dict)
     openingHours: Nonblank | None = None
     availability: Nonblank | None = None

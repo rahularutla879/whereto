@@ -506,3 +506,9 @@ Official Matrix documentation confirms WALK with the current origins/destination
 ## November 2 — regeneration and hours preparation acceptance
 
 Regeneration still consumes existing shared search/matrix admission. Local rate/admission, Cloud quota and service failures now have distinct consumer classifications; no quota or ledger reset. Opening hours are NOT enabled: the proposed selected-only Details Enterprise mask/cost ($0.02/stop first paid global tier) requires separate approval. Existing Pro automatic and explicit contact masks are unchanged. See [acceptance record](regeneration-hours49.md).
+
+## November 2 — Text Search hours and capacity acceptance
+
+WHERETO_HOURS_DEV is enabled only in the ignored authorized owner profile; base/production defaults remain off. Search hours are Enterprise ($0.035/request first paid global tier), already the owner ratings-enabled tier. Minimal origin lookups remain Pro. Separate owner approval enabled manual saved hours ($0.02/stop, max4), never automatic Enterprise. No new operation per discovered candidate, quotas/caps/ledger resets or Cloud changes. Current constraints and 10/25/50-tester estimates are recorded. See [acceptance and capacity report](hours-capacity49.md).
+
+The only capacity relaxation is active continuation memory20→50, with identical ten-minute expiry and no extra provider dispatch authority. Shared Search/Details/Matrix rate and cost protections remain unchanged.

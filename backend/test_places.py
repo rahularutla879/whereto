@@ -113,7 +113,11 @@ class DiscoveryTests(unittest.TestCase):
         candidate = result.candidates[0]
         self.assertEqual(candidate.provider_id, "original-google-id")
         self.assertEqual(candidate.provider, "google_places")
-        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions", "types", "primaryType", "rating", "userRatingCount", "containingPlaces"})
+        self.assertEqual(set(candidate.model_dump()), {"provider", "provider_id", "display_name", "address", "coordinates", "attributions", "types", "primaryType", "rating", "userRatingCount", "containingPlaces", "currentOpeningHours", "regularOpeningHours", "timeZone", "observed_at"})
+        self.assertIsNone(candidate.currentOpeningHours)
+        self.assertIsNone(candidate.regularOpeningHours)
+        self.assertIsNone(candidate.timeZone)
+        self.assertIsNotNone(candidate.observed_at.tzinfo)
 
     def test_name_matches_do_not_override_geographic_evidence(self):
         wrong = place("Washington", "DC")

@@ -44,9 +44,10 @@ def _hours(value):
             for endpoint in ("open", "close"):
                 if period.get(endpoint) is not None:
                     point = _object(period[endpoint])
-                    converted[endpoint] = {k: point[k] for k in ("day", "hour", "minute", "truncated") if k in point}
+                    converted[endpoint] = {**{"hour":0,"minute":0}, **{k: point[k] for k in ("day", "hour", "minute", "truncated") if k in point}}
                     if point.get("date") is not None:
                         converted[endpoint]["date"] = _date(point["date"])
+                        if "day" not in point:converted[endpoint]["day"] = (converted[endpoint]["date"].weekday()+1)%7
             periods.append(converted)
         result["periods"] = periods
     if obj.get("specialDays") is not None:
@@ -206,10 +207,15 @@ def normalize_discovery_candidates(result, activity: ActivityType | str, *, obse
     """Offline bridge from Task 40's minimal transport DTO; no new API request.
 
     Use raw Place input above for richer authorized future responses; Task 40's
-    DTO deliberately retains only its six-field discovery contract.
+    DTO retains the authorized hours evidence and original response receipt.
     """
-    records = [{"id": candidate.provider_id, "displayName": {"text": candidate.display_name},
+    venues,rejected=[],0
+    for candidate in result.candidates:
+        record={"id": candidate.provider_id, "displayName": {"text": candidate.display_name},
                 "formattedAddress": candidate.address, "location": candidate.coordinates.model_dump(),
                 "attributions": candidate.attributions, "types": candidate.types, "containingPlaces": candidate.containingPlaces, "primaryType": candidate.primaryType,
-                "rating": candidate.rating, "userRatingCount": candidate.userRatingCount} for candidate in result.candidates]
-    return normalize_google_places(records, activity, observed_at=observed_at)
+                "rating": candidate.rating, "userRatingCount": candidate.userRatingCount,
+                "currentOpeningHours":candidate.currentOpeningHours,"regularOpeningHours":candidate.regularOpeningHours,"timeZone":candidate.timeZone}
+        try:venues.append(normalize_google_place(record,activity,observed_at=observed_at or candidate.observed_at))
+        except NormalizationError:rejected+=1
+    return venues,rejected

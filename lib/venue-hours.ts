@@ -1,0 +1,1 @@
+export type HoursEvidence={date:string;timezone?:string|null;basis:'current'|'unavailable';status:'open'|'closed'|'unverified';message:string;periods:{start:number;end:number}[];weekly:string[];typicalPeriods?:{start:number;end:number}[];typicalClosed?:boolean|null;specialDay?:boolean;observedAt?:string|null};

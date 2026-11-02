@@ -125,15 +125,15 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
     finally { saving.current=false;if(epoch===openEpoch.current)setBusy(false); }
   }
 
-  async function refresh(candidateId:string,includeContacts=false){
+  async function refresh(candidateId:string,includeContacts=false,includeHours=false){
     if(refreshing.current)return;
     refreshing.current=true;
     const epoch=openEpoch.current;
-    setBusy(true);setRefreshMessage("Loading current venue details…");
+    setBusy(true);setRefreshMessage(includeHours?"Loading opening hours…":"Loading current venue details…");
     try{
-      const updates=await loadSavedDetails(token,candidateId,includeContacts);
+      const updates=await loadSavedDetails(token,candidateId,includeContacts,includeHours);
       if(epoch!==openEpoch.current)return;
-      setVenues(previous=>mergeRefreshed(previous,updates));setRefreshMessage(detailsFeedback(updates));
+      setVenues(previous=>mergeRefreshed(previous,updates,includeHours));setRefreshMessage(detailsFeedback(updates,includeHours));
     }catch(error){if(epoch===openEpoch.current)setRefreshMessage(error instanceof Error?error.message:"Venue refresh unavailable. Your saved plan is kept.");}
     finally{refreshing.current=false;if(epoch===openEpoch.current)setBusy(false);}
   }
@@ -142,7 +142,7 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
     catch{setCopyMessage("Copy unavailable. Use your browser’s Copy link address action on Open saved plan.");}
   }
   return <section className="saved-plans" aria-label="Save and reopen plans">
-    {active&&container&&createPortal(saved?<SavedCards saved={saved} venues={venues} refresh={(id,contacts)=>void refresh(id,contacts)} busy={busy} message={refreshMessage} onClose={closeView}/>:<section aria-label="Saved itinerary status"><p role="status">{message||"Opening saved plan…"}</p><button type="button" className="secondary-button" onClick={closeView}>Return to planning</button></section>,container)}
+    {active&&container&&createPortal(saved?<SavedCards saved={saved} venues={venues} refresh={(id,contacts,hours)=>void refresh(id,contacts,hours)} busy={busy} message={refreshMessage} onClose={closeView}/>:<section aria-label="Saved itinerary status"><p role="status">{message||"Opening saved plan…"}</p><button type="button" className="secondary-button" onClick={closeView}>Return to planning</button></section>,container)}
     {ready && savedReceipt !== result?.saveReceipt && <div className="saved-controls"><label>Selected itinerary<select value={choice} disabled={busy || pending?.receipt === result?.saveReceipt} onChange={event => setSelected(event.target.value)}>{result!.plans.map((plan,i) => <option key={plan.id} value={plan.id}>Option {i+1}: {plan.venues.map(v=>v.name).join(" → ")}</option>)}</select></label><button type="button" className="secondary-button" disabled={busy || savedReceipt === result?.saveReceipt} aria-busy={busy} onClick={()=>void save()}>Save Plan</button></div>}
     <details open={expanded} onToggle={event=>setExpanded(event.currentTarget.open)}><summary>Saved plans</summary>
     {message && !active && <p role="status" aria-live="polite">{message}</p>}
