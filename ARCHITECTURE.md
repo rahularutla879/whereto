@@ -673,3 +673,14 @@ nested stored-validation failures fail closed as unavailable links. Next refuses
 environment names before build/start. Hosted catalog verification now checks runtime role membership.
 No migration, connection pool, automatic retry, account system or new provider workflow was added.
 [Audit, tests, connection investigation and limitations](docs/database-security.md).
+
+## Task 50A — transient complex interpretation
+
+`backend/journey.py` adds typed source-order stop occurrences, exact/brand/activity
+references, required/optional status, order edges, endpoint, total duration,
+absolute deadline and dwell constraints to the existing AI contract. Source and
+cross-field validation precede the ordinary planner. Unsupported semantics produce
+no resolved planning request; the frontend retains editable text/preferences and
+shows one explanation. Legacy/simple planning, dates/travel, one-shot warmup,
+provider masks/quotas, ranking and saved DTOs remain. No persistence changes.
+See [contract, validation and future integration](docs/complex-interpretation.md).

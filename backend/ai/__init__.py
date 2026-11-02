@@ -8,6 +8,7 @@ from pydantic import BaseModel, ConfigDict, Field
 
 from backend.models import (ActivityType, CostPreference, EndMinute, GroupSize, Money,
                             Nonblank, OutingDate, StartMinute, TransportationMode, TravelMinutes)
+from backend.journey import Journey
 
 
 class Interpretation(BaseModel):
@@ -38,6 +39,7 @@ class Interpretation(BaseModel):
     start_time: StartMinute | None = None
     end_time: EndMinute | None = None
     uncertainties: Annotated[list[Annotated[Nonblank, Field(max_length=1000)]], Field(strict=True, max_length=32)] = Field(default_factory=list)
+    journey: Journey | None = None
 
 
 def parse_interpretation(content: str) -> Interpretation:

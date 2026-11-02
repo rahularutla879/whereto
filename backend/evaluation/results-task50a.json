@@ -1,0 +1,308 @@
+{
+  "scope": "Task 50A; authored public requests only; no venue, route, inventory or availability verification",
+  "model": "qwen3:4b",
+  "installed_id": "359d7dd4bcda",
+  "settings": {
+    "temperature": 0,
+    "think": false,
+    "num_ctx": 8192,
+    "num_predict": 1024,
+    "keep_alive": "10m"
+  },
+  "method": "Full batch before final scoped normalization fixes, followed by focused confirmation of affected cases. Latest per-case results combine those observations; no claim of a single 25/25 model run or held-out generalization.",
+  "full_batch": {
+    "passed": 22,
+    "total": 25,
+    "cases": [
+      {
+        "case": 1,
+        "errors": [],
+        "seconds": 7.032
+      },
+      {
+        "case": 2,
+        "errors": [],
+        "seconds": 19.868
+      },
+      {
+        "case": 3,
+        "errors": [],
+        "seconds": 18.139
+      },
+      {
+        "case": 4,
+        "errors": [],
+        "seconds": 24.15
+      },
+      {
+        "case": 5,
+        "errors": [],
+        "seconds": 20.375
+      },
+      {
+        "case": 6,
+        "errors": [],
+        "seconds": 21.938
+      },
+      {
+        "case": 7,
+        "errors": [],
+        "seconds": 25.838
+      },
+      {
+        "case": 8,
+        "errors": [],
+        "seconds": 22.448
+      },
+      {
+        "case": 9,
+        "errors": [],
+        "seconds": 29.432
+      },
+      {
+        "case": 10,
+        "errors": [],
+        "seconds": 40.057
+      },
+      {
+        "case": 11,
+        "errors": [],
+        "seconds": 38.743
+      },
+      {
+        "case": 12,
+        "errors": [
+          "whole duration"
+        ],
+        "seconds": 37.52
+      },
+      {
+        "case": 13,
+        "errors": [
+          "whole duration"
+        ],
+        "seconds": 13.7
+      },
+      {
+        "case": 14,
+        "errors": [],
+        "seconds": 37.708
+      },
+      {
+        "case": 15,
+        "errors": [],
+        "seconds": 27.764
+      },
+      {
+        "case": 16,
+        "errors": [],
+        "seconds": 21.896
+      },
+      {
+        "case": 17,
+        "errors": [],
+        "seconds": 25.226
+      },
+      {
+        "case": 18,
+        "errors": [],
+        "seconds": 28.022
+      },
+      {
+        "case": 19,
+        "errors": [
+          "destination kind"
+        ],
+        "seconds": 39.109
+      },
+      {
+        "case": 20,
+        "errors": [],
+        "seconds": 45.257
+      },
+      {
+        "case": 21,
+        "errors": [],
+        "seconds": 28.704
+      },
+      {
+        "case": 22,
+        "errors": [],
+        "seconds": 21.559
+      },
+      {
+        "case": 23,
+        "errors": [],
+        "seconds": 36.345
+      },
+      {
+        "case": 24,
+        "errors": [],
+        "seconds": 19.306
+      },
+      {
+        "case": 25,
+        "errors": [],
+        "seconds": 20.767
+      }
+    ]
+  },
+  "final_focused": [
+    {
+      "case": 12,
+      "run": 1,
+      "errors": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "groceries"
+          }
+        ],
+        "endpoint": {
+          "kind": "home",
+          "source": "return home"
+        },
+        "total_duration": {
+          "minutes": 45,
+          "relation": "maximum",
+          "source": "within 45 minutes"
+        }
+      },
+      "issues": [
+        "Where should the outing end? Please name home in your request or say \u2018return to my starting point\u2019 if that is what you mean."
+      ],
+      "transport": null,
+      "timing": {
+        "prompt_eval_count": 4751,
+        "eval_count": 210,
+        "load_duration": 29116875,
+        "prompt_eval_duration": 317292000,
+        "eval_duration": 9094939000
+      },
+      "seconds": 9.573
+    },
+    {
+      "case": 13,
+      "run": 1,
+      "errors": [],
+      "journey": {
+        "total_duration": {
+          "minutes": 30,
+          "relation": "under",
+          "source": "in less than 30 minutes"
+        }
+      },
+      "issues": [
+        "Which errands would you like to include? Please name the stops in your request; your timing requirement is kept."
+      ],
+      "transport": null,
+      "timing": {
+        "prompt_eval_count": 4752,
+        "eval_count": 132,
+        "load_duration": 10619917,
+        "prompt_eval_duration": 279000000,
+        "eval_duration": 5612588000
+      },
+      "seconds": 5.958
+    },
+    {
+      "case": 15,
+      "run": 1,
+      "errors": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "shopping",
+            "duration": {
+              "minutes": 20,
+              "source": "20 minutes shopping"
+            }
+          },
+          {
+            "source": "ATM",
+            "duration": {
+              "minutes": 5,
+              "source": "five minutes at an ATM"
+            }
+          }
+        ]
+      },
+      "issues": [
+        "This outing includes specific stops or timing requirements that we can't plan together yet. You can simplify the request for now."
+      ],
+      "transport": null,
+      "timing": {
+        "prompt_eval_count": 4754,
+        "eval_count": 288,
+        "load_duration": 7450750,
+        "prompt_eval_duration": 169186000,
+        "eval_duration": 12633027000
+      },
+      "seconds": 12.861
+    },
+    {
+      "case": 19,
+      "run": 1,
+      "errors": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "grocery store"
+          }
+        ],
+        "endpoint": {
+          "kind": "home",
+          "source": "return home"
+        }
+      },
+      "issues": [
+        "Where should the outing end? Please name home in your request or say \u2018return to my starting point\u2019 if that is what you mean."
+      ],
+      "transport": "walking",
+      "timing": {
+        "prompt_eval_count": 4749,
+        "eval_count": 214,
+        "load_duration": 5065833,
+        "prompt_eval_duration": 238424000,
+        "eval_duration": 8878448000
+      },
+      "seconds": 9.18
+    }
+  ],
+  "latest_per_case": {
+    "passed": 25,
+    "total": 25
+  },
+  "matched_latency": {
+    "before_first_observed_seconds": 13.154,
+    "before_warm_seconds": [
+      3.855,
+      3.911,
+      3.659,
+      4.056,
+      4.083
+    ],
+    "before_warm_median_seconds": 3.911,
+    "after_preparation_seconds": 8.977,
+    "after_warm_seconds": [
+      8.714,
+      6.825,
+      13.57,
+      9.579,
+      9.07,
+      25.545
+    ],
+    "after_warm_median_seconds": 9.3245,
+    "templates": [
+      "Coffee tomorrow in Jersey City.",
+      "Dinner and drinks in Jersey City tomorrow.",
+      "Go to SUNY College of Optometry and then get coffee."
+    ],
+    "rounds": 2,
+    "cold_model_reset": false,
+    "notes": "No model unload was forced. Early full-batch wall timings overlapped owner-server reload warmups. Matched post-change run followed completed tests/builds and fixed sources; timings still vary on the shared local Mac."
+  },
+  "observed_loaded_model": "3.8 GB, 100% GPU, context 8192; no peak-memory or comparison-model benchmark",
+  "live_google_requests": 0,
+  "database_changes": 0
+}

@@ -43,7 +43,14 @@ class AITests(unittest.TestCase):
         for field in ("start_time", "end_time"):
             expected_schema["properties"].pop(field)
         expected_schema["required"].extend(["budget_group", "currency", "travel_total_minutes",
-                                            "travel_leg_minutes", "transport", "cost"])
+                                            "travel_leg_minutes", "transport", "cost", "journey"])
+        expected_schema['properties']['journey'] = {'$ref':'#/$defs/Journey'}
+        expected_schema['$defs']['Journey']['properties'].pop('order_conflict')
+        expected_schema['$defs']['Journey']['required'] = list(expected_schema['$defs']['Journey']['properties'])
+        expected_schema['$defs']['RequestedStop']['required'] = list(expected_schema['$defs']['RequestedStop']['properties'])
+        expected_schema['$defs']['Duration']['required'] = ['minutes','relation','source']
+        expected_schema['$defs']['Deadline']['properties'].pop('minute')
+        expected_schema['$defs']['Deadline']['required'] = ['source','relation']
         self.assertEqual(payload["format"], expected_schema)
         self.assertNotIn('"$defs"', payload["messages"][0]["content"])
         self.assertEqual(result, Interpretation(**extraction()))

@@ -569,3 +569,13 @@ Task 50 audits and hardens existing private saving without changing startup comm
 Never put database credentials in frontend `.env` files or `NEXT_PUBLIC_*` variables.
 After a database error, keep the selection and retry the same save or reopen its private link;
 do not create a replacement save merely because the commit response was interrupted.
+
+## Complex outing instructions
+
+You can describe exact destinations, required/optional stops, ordering, return or
+final destinations, whole-trip limits/deadlines and time spent at stops. These
+requirements are retained during interpretation. Some cannot be planned together
+yet: the app gives one explanation and keeps your text/preferences available to
+edit. It does not produce options that silently omit them. “Home” needs clarification
+unless you explicitly mean your starting point. Ordinary requests still work.
+See [current understanding and execution limits](docs/complex-interpretation.md).

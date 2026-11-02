@@ -216,3 +216,11 @@ The confirmed-save interface has one heading and one expiry/sharing sentence; pr
 ## November 2 — Text Search hours and capacity acceptance
 
 Saved intros no longer mention API quota. Central casing preserves brands and provider names. Separately approved WHERETO_SAVED_HOURS_DEV enables the explicit Load opening hours action for at most four selected references using Details Enterprise and the server-loaded original saved date/window. Automatic opens remain Pro-only. Hours-only updates preserve independently timestamped contacts/names in page memory. Current/typical/unknown hours display beside each stop; nothing is stored in SQL or browser persistent storage. See [acceptance and capacity report](hours-capacity49.md).
+
+## Task 50A — interpretation remains transient
+
+Complex interpretation fields and `context` are not added to saved-plan DTOs or
+SQL. Unsupported advanced requests produce no resolved planner request or save
+receipt. Existing ordinary saved plans, selected options, RLS and restricted/TLS
+connections remain unchanged. Original requests, precise home references and
+coordinates are not newly persisted. Advanced persistence remains Task 50E.

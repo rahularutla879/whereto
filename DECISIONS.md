@@ -407,3 +407,14 @@ provides existing idempotency. Supavisor protocol metadata is not PostgreSQL ses
 The historical intermittent connection error remains unexplained; deterministic interruption and
 fresh connection/restart checks provide current evidence. Keep accounts, revocation, deployment
 and Tasks 50A–50E/51 outside scope. [Audit](docs/database-security.md).
+
+## Task 50A — preserve semantics before advanced execution
+
+Extend the existing interpreter with one optional typed journey object instead
+of a second parser. Source order and explicit order edges are distinct. Missing
+legacy objects retain existing simple-request semantics; the current Qwen schema
+requires the object so important requirements cannot be skipped as optional output.
+Keep original references/clauses, verify structured meanings, and block execution
+when required capabilities are absent. Home does not mean origin without explicit
+evidence. No provider lookup, routing optimization, feasibility claim, database
+migration or persistence expansion is justified here. [Contract and limits](docs/complex-interpretation.md).

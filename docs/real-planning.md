@@ -600,3 +600,12 @@ Regeneration after preference edits starts fresh evidence/session work and retai
 ## November 2 — Text Search hours and capacity acceptance
 
 The owner-authorized local WHERETO_HOURS_DEV gate adds currentOpeningHours, regularOpeningHours and timeZone to existing Text Search, not a second request. Hours or ratings select Enterprise accounting. Fresh dated evidence excludes demonstrably closed windows before further routing; defaults/missing times remain unverified. Expanded details show current/typical/unknown hours without event or reservation claims. Weights, modes and Strict/Flexible stay unchanged. See [acceptance and capacity report](hours-capacity49.md).
+
+## Task 50A — semantic requirements before discovery
+
+Complex requests now retain typed stops, optionality, order, endpoints and journey/
+stop timing in the existing interpreter. Unsupported advanced requirements stop
+before discovery/routing with an editable request and one explanation. Exact
+places are never downgraded to generic categories just to generate cards. Current
+retail brand/format handling and simple plans remain. No Google operation, quota,
+ranking, route or persistence changes. [Contract and limits](complex-interpretation.md).

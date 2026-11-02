@@ -20,6 +20,7 @@ def main():
     parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
     parser.add_argument('--refinements',action='store_true',help='Offline retail and saved refresh fixtures')
     parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
+    parser.add_argument('--journey', action='store_true', help='Offline complex-interpretation fixtures')
     args = parser.parse_args()
     if args.exploration_ledger:
         os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
@@ -138,6 +139,9 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if args.journey:
+                from backend.journey_fixtures import FixtureAI as JourneyAI
+                return JourneyAI().interpret(text)
             if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
                 from backend.refinement_fixtures import FixtureAI as RefinementAI
                 return RefinementAI().interpret(text)

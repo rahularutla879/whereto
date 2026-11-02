@@ -5,6 +5,7 @@ Date/time resolution delegates to date_resolution; no itinerary arithmetic lives
 import re
 from backend.provider_budget import local_real_enabled
 from datetime import datetime, timezone
+from datetime import date as CalendarDate
 from typing import Annotated, Literal
 
 from pydantic import AwareDatetime, Field, ValidationError, field_validator
@@ -12,12 +13,12 @@ from pydantic import AwareDatetime, Field, ValidationError, field_validator
 from backend.location_context import DestinationContext
 from backend.date_resolution import (DATE_WORDING, TIME_WORDING, CalendarReason, DATE_HELP,
                                      complete_year_answer, resolve_datetime)
-from backend.location_policy import first_intent, geographic_intent
+from backend.location_policy import FirstTravel, Geography, first_intent, geographic_intent
 from backend.between_policy import between_intent, mask
 from backend.travel_constraints import travel_evidence, exclusive_limit, resolved_travel_label, normalize_verbatim_travel, CONTEXT
 from backend.ai import AIProvider, Interpretation, create_provider
 from backend.models import (ContractModel, CostPreference, Nonblank,
-                            PlanningRequest)
+                            PlanningRequest, TransportationMode)
 
 
 # Exact phrase normalization, not a fallback text interpreter. Unknown phrases
@@ -39,6 +40,10 @@ ALIASES = {
     "karaoke": "karaoke", "arcade": "arcade", "video games": "arcade",
     "escape room": "escape", "escape rooms": "escape", "mini golf": "miniGolf", "mini-golf": "miniGolf", "miniature golf": "miniGolf", "putt-putt": "miniGolf",
     "shopping": "shopping", "thrifting": "shopping", "zoo": "zoo",
+    "groceries": "custom:supermarket", "grocery shopping": "custom:supermarket",
+    "grocery store": "custom:supermarket", "supermarket": "custom:supermarket",
+    "pharmacy": "custom:pharmacy", "atm": "custom:atm", "bank": "custom:bank",
+    "bookstore": "custom:bookstore", "book store": "custom:bookstore",
     "hiking": "hiking", "hike": "hiking", "trail": "hiking", "picnic": "picnic",
     "skating": "skating", "ice skating": "skating", "roller skating": "skating",
     "baseball": "baseball", "baseball game": "baseball", "watch a baseball game": "baseball", "basketball": "basketball", "basketball game": "basketball",
@@ -51,8 +56,14 @@ ALIASES = {
 def activity_category(phrase):
     import unicodedata
     text = unicodedata.normalize("NFKC", phrase).casefold().strip()
-    text = re.sub(r"^(?:(?:go to|go|show|watch|see|visit|try|do|take|have|enjoy)\s+)(?:a |an |the )?", "", text)
+    text = re.sub(r'\s+(?:afterward|afterwards|first|finally)$','',text)
+    text = re.sub(r"^(?:(?:go to|stop at|stop for|go|show|watch|see|visit|try|do|take|have|enjoy|get|buy|grab|pick up|play)\s+)(?:a |an |the )?", "", text)
     text = re.sub(r"^(?:a|an|the)\s+", "", text).strip()
+    if text in ('coffee shop','coffee shops'):
+        return 'coffee'
+    mentioned={ALIASES[m.group().casefold()] for m in OCCURRENCES.finditer(text)}
+    if len({a for a in mentioned if a.startswith('custom:')})>1:
+        return None
     from backend.retail import intent as retail_intent
     if retail_intent(text) and text not in ALIASES:
         return "custom:" + text if len(text)<=100 else None
@@ -67,7 +78,7 @@ def activity_category(phrase):
         return "movie"
     if re.search(r"\bconcert\b", text):
         return "concert"
-    if re.search(r"\b(?:something|anything|whatever|fun|activities|competitive|indoor)\b", text):
+    if re.search(r"\b(?:something|somewhere|anything|whatever|fun|activities|competitive|indoor)\b", text):
         return None
     text = re.sub(r"[^a-z0-9 '-]+", " ", text)
     text = re.sub(r"\s+", " ", text).strip()
@@ -139,6 +150,23 @@ class InterpretationInput(ContractModel):
     answers: ClarificationAnswers = Field(default_factory=ClarificationAnswers)
 
 
+class InterpretationContext(ContractModel):
+    """Existing resolved preferences retained when execution is unavailable.
+
+    No coordinates, provider resolution, guessed start time or persistence.
+    Original outing clock wording remains in Interpretation.time_expressions.
+    """
+    destination: str | None = None
+    date: CalendarDate | None = None
+    timezone: str | None = None
+    transport: TransportationMode | None = None
+    firstTravel: FirstTravel | None = None
+    betweenTravel: FirstTravel | None = None
+    geography: Geography | None = None
+    originText: str | None = None
+    issues: list[str] = Field(default_factory=list)
+
+
 class InterpretationResult(ContractModel):
     interpretation: Interpretation
     request: PlanningRequest | None
@@ -147,6 +175,7 @@ class InterpretationResult(ContractModel):
     questions: list[ClarificationQuestion] = Field(default_factory=list)
     pending: PendingClarification | None = None
     unsupported: list[str] = Field(default_factory=list)
+    context: InterpretationContext | None = None
 
 
 # These bounded source checks validate explicit evidence; they never construct
@@ -351,6 +380,56 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         ai.cost = CostPreference.budget
     ai.date_expressions = [phrase for phrase in ai.date_expressions if phrase.casefold() in raw.casefold()]
     ai.time_expressions = [phrase for phrase in ai.time_expressions if phrase.casefold() in raw.casefold()]
+    if ai.journey and ai.location and any(s.kind=='named_place' and s.source.casefold()==ai.location.casefold() for s in ai.journey.stops):
+        # A requested establishment does not establish the outing's city/area.
+        ai.location = None
+    from backend.journey import validate_journey, is_reference_occurrence
+    # Follow-up activity corrections must not erase original advanced constraints.
+    journey_ai = saved.interpretation.model_copy(deep=True) if saved else ai
+    journey_issue, ambiguous_journey = validate_journey(raw, journey_ai)
+    if saved:
+        ai.journey = journey_ai.journey
+    if journey_issue:
+        if saved:
+            ai.activities = journey_ai.activities
+        # Calendar context stays separate from deadlines; a deadline cannot
+        # silently become an outing start/end window or an invented start time.
+        calendar_raw = raw
+        if ai.journey and ai.journey.deadline:
+            clause=ai.journey.deadline.source
+            protected=[m.span() for m in DATE_WORDING.finditer(clause)]
+            protected += [m.span() for m in re.finditer(r'[+-]\d{2}:\d{2}',clause)]
+            masked=TIME_WORDING.sub(lambda m: m[0] if any(a<m.end() and m.start()<b for a,b in protected) else ' '*len(m[0]),clause)
+            calendar_raw = calendar_raw.replace(clause,masked)
+        calendar = resolve_datetime(calendar_raw, ai.date_expressions, [],
+            manual.location.strip() or ai.location, manual_date=manual.date.strip(),
+            now=reference, calendar_timezone=value.calendarTimezone if ai.location=='near me' else None)
+        ai.date_expressions = calendar.date_expressions
+        ai.time_expressions = calendar.time_expressions
+        destination = manual.location.strip() or ai.location
+        first, _, first_problem = first_intent(raw)
+        between, _, between_problem = between_intent(raw)
+        from backend.travel_mode import resolve_mode
+        mode, mode_problems = resolve_mode(raw, ai.transport, manual.transport)
+        # Same explicit-origin wording used by the existing client, extended to
+        # its already-supported 'start from' form. It is never an address lookup.
+        origin = re.search(r'\b(?:start|starting) from\s+([^.,;!?]+?)(?=\s+(?:today|tomorrow|for \d)|[.,;!?]|$)',raw,re.I)
+        context = InterpretationContext(destination=destination,date=calendar.date,
+            timezone=calendar.timezone,transport=mode,firstTravel=first,
+            betweenTravel=between,geography=geographic_intent(raw,destination),
+            originText=origin[1].strip() if origin else first.originText if first else None,
+            issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues] if p])
+        return InterpretationResult(interpretation=ai, request=None, notes=[],
+            context=context,
+            issues=[journey_issue], unsupported=[] if ambiguous_journey else [journey_issue])
+    if saved and answers.activities and ai.journey:
+        # Original advanced semantics were checked above and cannot be erased.
+        # A deliberate simple activity-list correction has its own source text
+        # in pending.answers; retain that provenance alongside the original.
+        from backend.journey import Journey, RequestedStop, OrderConstraint
+        ai.journey = Journey(stops=[RequestedStop(source=p) for p in ai.activities],
+            order=[OrderConstraint(before=i,after=i+1,source=answers.activities) for i in range(len(ai.activities)-1)],
+            ordering='constrained' if len(ai.activities)>1 else 'unspecified')
     normalize_verbatim_travel(raw, ai)
     # Uncertainties stay blocking unless the corresponding explicit correction resolves them.
     uncertainties = []
@@ -518,6 +597,11 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
     if re.search(r"\b(?:or|instead|not|no|without|avoid|except)\b|n't\b", exclusion_text, re.I):
         issues.append("Alternatives or exclusions need a clear list of desired stops. Rephrase before planning; no substitution was made.")
     for match in OCCURRENCES.finditer(activity_raw):
+        if is_reference_occurrence(activity_raw,ai,match):
+            continue
+        # 'Play soccer/a movie' uses play as a verb, not a theater stop.
+        if match.group().casefold() == 'play' and re.match(r'\s+(?:a\s+)?(?:movie|film|soccer|basketball|football|hockey|baseball)\b',activity_raw[match.end():],re.I):
+            continue
         # Transport 'walking' is not necessarily a separate requested activity.
         if (match.group().casefold() == "walking" and ai.transport is not None) or is_walking_route_phrase(activity_raw,match.start(),match.end()):
             continue

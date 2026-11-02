@@ -139,7 +139,9 @@ def complete_year_answer(context: str, answer: str) -> str:
 
 def _date_expression(expression: str, today: date) -> date:
     text = re.sub(r'^on\s+', '', expression.lower().strip())
-    text = re.sub(r'\s+(evening|night)$', '', text)
+    # Preserve the supplied day even when its qualitative clock window still
+    # needs clarification; 'tomorrow afternoon' is not an unknown date.
+    text = re.sub(r'\s+(morning|afternoon|evening|night)$', '', text)
     qualified = re.fullmatch(rf'({WEEKDAY})\s*,?\s+({EXPLICIT_DATE})', text, re.I)
     if qualified:
         resolved = _date_expression(qualified[2], today)

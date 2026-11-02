@@ -76,3 +76,20 @@ Other installed models were found (Llama3.2 latest 3.2B Q4_K_M, DeepSeek-R1 1.8B
 After separate approval, obtain one exact Qwen3.5 4B local quantized tag, then run this same dataset/settings three times and a held-out paraphrase set, including more Indian localities. Compare exact locality retention, unnecessary/necessary questions, malformed output, strict/flexible scopes, warm/cold latency and real peak memory under normal app load. If it does not materially improve semantics, test Qwen3 8B or another family before considering paid hosting. Do not tune prompts per candidate to manufacture a comparison advantage. Preserve old results/version/digest and review any change separately.
 
 Future deployment should retain the provider-neutral `AIProvider` boundary and deterministic date, travel, source and manual-precedence validation. A hosted model is an independently authorized privacy/cost decision, with explicit server-side credentials, request limits and no hidden fallback. Existing deterministic checks already provide the useful hybrid separation; a second speculative parser/model call is unnecessary now. The model must not resolve exact landmark coordinates, invent session availability or override confirmed origins. Task 47 remains unstarted.
+
+## Task 50A — complex semantic extension
+
+The same installed Qwen3 4B, temperature zero, 8192 context/1024 output bounds,
+thinking-off and one-shot preparation are retained. The structured projection
+now requires every journey/stop constraint field (nullable when absent); generated
+clock minutes and conflict flags remain Python-only. Initial optional nested
+fields were insufficient: schema-valid replies omitted dwell/whole-trip constraints.
+Source validation refused them rather than producing incomplete itineraries.
+Curated examples cover ordinary requests, exact places, brands, optionality,
+ordering, endpoints, budgets/deadlines, dwell times and ambiguity. Two redundant
+ordinary examples were replaced to limit prompt growth. The regression runner
+scores structured meanings and safe execution outcomes, not JSON validity alone.
+
+See [contract and reproducible commands](complex-interpretation.md). Final bounded
+accuracy, timings and evaluation limits are recorded in HANDOVER.md. No new model,
+provider, dependency, Google operation or persistence change is introduced.

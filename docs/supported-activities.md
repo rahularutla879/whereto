@@ -96,3 +96,12 @@ The accessible `/supported-activities` reference derives its canonical labels fr
 The registry-driven `/supported-activities` page no longer discusses mock Baltimore or provider configuration. Categories, examples and honest open-ended/session/participation limitations remain. `/how-it-works` explains using the reference. Choosing Walking is a journey preference, not a replacement activity; walking/hiking as requested activities retain existing interpretation and discovery semantics.
 
 [Acceptance details and evidence](ui-travel-mode49.md).
+
+## Task 50A — destination identity and stop requirements
+
+A named establishment is distinct from a discoverable activity or a brand with
+multiple suitable branches. Grocery/supermarket/ATM/pharmacy intentions remain
+open venue-backed activities, not invented availability. Exact destinations,
+optional stops, advanced ordering, return/final endpoints and journey/dwell timing
+are understood but safely blocked before execution where unsupported. The registry
+and retail format flexibility remain. [Semantic contract](complex-interpretation.md).

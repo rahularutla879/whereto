@@ -140,6 +140,11 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     if (!interpreted.ok) return failure(failureText(extraction, typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated."));
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
+    if (extraction.unsupported !== undefined && (!Array.isArray(extraction.unsupported) || !extraction.unsupported.every((s: unknown) => typeof s === "string"))) throw new Error("Invalid unsupported response");
+    if (extraction.unsupported?.length) {
+      context?.onClarification?.(null);
+      return { ...failure(extraction.unsupported.join(" ")), requestFailed: false, notes: extraction.notes };
+    }
     if (extraction.pending) {
       const fields = ["location", "people", "date", "activities", "time"];
       if (extraction.pending.text !== text || !extraction.pending.interpretation
