@@ -710,3 +710,18 @@ limitations from genuine ambiguity; the existing follow-up contract adds an endp
 answer, stored only in transient context alongside the unchanged original home clause.
 No Qwen schema expansion or extra model call is used. Manual-origin preparation
 follows interpretation. [Detailed contract and boundaries](docs/stop-resolution.md).
+
+
+## Task 50D — transient whole-journey timing
+
+`backend/advanced_timing.py` consumes an active `AdvancedRouter` through its gated,
+expiry-checked `timing_snapshot()`. Typed Decimal ranges retain route nanoseconds,
+all directional legs, source dwell semantics, exact/bounded schedules and separate
+routing/preference/duration/deadline/hours verdicts. Unknown visits/travel never
+become exact zeros. `InterpretationContext` adds explicit departure minute/clock
+source and destination/browser/unknown timezone basis, reusing deterministic clock
+parsing without Qwen schema or ordinary planner changes. UTC elapsed arithmetic
+and unique local instants handle midnight/DST; existing current-hours evaluation
+checks justified visit intervals. No public endpoint, new provider call, persistent
+provider content or schema change. Advanced cards/saving remain Task 50E.
+[Full timing policy, contract, examples and tests](docs/advanced-timing.md).

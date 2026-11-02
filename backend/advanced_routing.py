@@ -472,3 +472,13 @@ class AdvancedRouter:
             reasons=[] if chosen else ['All checked routes exceed a hard travel limit.'],
             matrix_elements=elements, matrix_requests=requests,
             considered_paths=len(paths), admitted_paths=len(selected), **metadata)
+
+    def timing_snapshot(self):
+        """Current server-owned computation only; never accept client route evidence."""
+        resolved = self.resolver.routing_snapshot()  # gate and expiry on every read
+        if self._result is None or self._arguments[0] != resolved.model_dump_json():
+            raise ValueError('No current routing computation is available.')
+        # context is intentionally excluded from serialization; validate separately.
+        result = AdvancedRoutingResult.model_validate(self._result.model_dump())
+        result.context = resolved.context
+        return result

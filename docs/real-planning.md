@@ -630,3 +630,13 @@ mode-specific directional evidence and exact Strict/Flexible policy. Ordinary
 planning/scoring/UI are unchanged; advanced requests still generate no cards or
 saved plans. Whole-trip timing remains unevaluated. [Routing audit, contracts,
 bounds and verification](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.
+
+
+## Task 50D update — backend timing evaluation
+
+The gated advanced route now has a separate local typed timing evaluation: all
+travel legs plus explicit dwell bounds, whole-duration limits, anchored deadlines,
+UTC/DST projections and fresh dated-hours compatibility. Missing evidence remains
+unverified. No additional provider/model call, ordinary ranking/UI change or SQL
+write/schema change. Advanced website cards and saving remain unavailable until
+Task 50E. [Contract, policies and verification](advanced-timing.md).

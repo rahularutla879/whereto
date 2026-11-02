@@ -186,3 +186,14 @@ outing budget, never client-provided resolved places. Missing/ambiguous required
 identities or unverified home/final endpoints cannot become compliant routes.
 Ordinary named choices and advanced execution remain backend-only. [Route contract,
 privacy, evidence and tests](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.
+
+
+## Task 50D update — timing consumes routing, never resolves again
+
+The local evaluator takes the active Task 50C router, rechecking this resolver's
+gate/expiry and unchanged context before reading its route evidence. It preserves
+selected identity, occurrences, optionality, original timing/source constraints and
+all endpoint roles. No new place choice/search, AI call, Details request or persistent
+provider cache. Destination/browser/unknown timezone basis and explicit departure
+evidence are additive transient context fields. [Timing semantics](advanced-timing.md).
+Advanced execution/saving remain Task 50E; Task 51 remains unstarted.

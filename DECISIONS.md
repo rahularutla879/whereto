@@ -461,3 +461,22 @@ canonical hours; only existing conservative current-date closure excludes venues
 No assumed start/arrival, whole-trip duration/deadline arithmetic or feasibility
 claim. Reuse existing development gates, add no public endpoint/production flag or
 persistence schema. [Detailed rationale, costs and limitations](docs/advanced-routing.md).
+
+
+## Task 50D — evidence bounds before whole-trip claims
+
+Evaluate only the current backend-owned Task 50C computation; do not accept client
+route evidence or repeat provider/model work. Keep source topology and optional
+decisions unchanged. Use exact Decimal seconds and conservative duration ranges;
+unspecified/approximate dwell cannot establish a finite completion bound. Whole-trip
+limits are independent of travel-only preferences. Proven failure takes precedence
+over missing evidence; feasibility requires every applicable hard component.
+
+Reuse the existing dated-hours/DST policy. Require explicit departure and a known
+destination-calendar timezone; default/earliest windows and browser-reported or
+fallback timezones are insufficient. Do elapsed arithmetic in UTC, preserve local
+clock projections as estimates and clarify earlier undated deadlines. Hours-envelope
+containment proves bounded visits fit; a failed envelope alone does not prove all
+possible bounded visits fail. No waiting/buffer/activity default or inferred positive
+minimum is introduced. Keep all output transient and advanced execution unavailable.
+[Exact semantics and remaining Task 50E work](docs/advanced-timing.md).

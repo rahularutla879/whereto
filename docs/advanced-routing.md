@@ -2,7 +2,7 @@
 
 Backend development/test contract only. Ordinary advanced requests still show the
 Task 50B explanation; they produce no advanced cards or saved advanced documents.
-Task 50D timing and Task 50E integration/persistence remain unstarted.
+Task 50D timing is implemented separately; Task 50E integration/persistence remains unstarted.
 
 ## Audit and minimum extensions
 
@@ -191,6 +191,18 @@ python3 scripts/security-scan.py
 Final suite counts, actual desktop/mobile checks and scope qualifications are in
 HANDOVER.md. No hosted checks are needed: persistence and its input DTOs are
 unchanged. No migration, owner-plan write, RLS/TLS/runtime identity change occurred.
-Task 50D must evaluate travel plus dwell, actual temporal anchors, whole-duration
-and deadlines. Task 50E must integrate verified advanced results, clarification,
-edits and saving. Neither task nor Task 51 has started.
+Task 50D now evaluates travel plus dwell, actual temporal anchors, whole-duration
+and deadlines (see the update below). Task 50E must integrate verified advanced
+results, clarification, edits and saving. Task 50E and Task 51 remain unstarted.
+
+
+## Task 50D update — independent temporal evaluation
+
+`AdvancedRouter.timing_snapshot()` exposes only the active server-owned computation
+after rechecking resolver authorization, expiry and unchanged resolution. No route
+request is repeated. Task 50D consumes its exact directional legs, all selected
+occurrences/omissions, scoped checks and hours facts without reranking or reordering.
+The original Task 50C snapshot retains `temporal_status=not_evaluated`; a separate
+`TimedCandidate` carries Task 50D's component/overall verdicts and projections.
+Travel verification alone remains insufficient. [Timing contract](advanced-timing.md).
+Task 50E website execution/persistence and Task 51 remain unstarted.

@@ -160,6 +160,7 @@ class InterpretationContext(ContractModel):
     destination: str | None = None
     date: CalendarDate | None = None
     timezone: str | None = None
+    timezoneBasis: Literal['destination_calendar', 'browser_reported', 'unknown'] = 'unknown'
     transport: TransportationMode | None = None
     firstTravel: FirstTravel | None = None
     betweenTravel: FirstTravel | None = None
@@ -169,6 +170,9 @@ class InterpretationContext(ContractModel):
     travelExclusive: bool = Field(default=False, strict=True)
     maxLegTravel: int | None = Field(default=None, strict=True, ge=0, le=1440)
     maxLegTravelExclusive: bool = Field(default=False, strict=True)
+    # Explicit departure evidence only; default/earliest planning bounds do not qualify.
+    departureMinute: int | None = Field(default=None, strict=True, ge=0, lt=1440)
+    departureSource: str | None = Field(default=None, max_length=100)
     originText: str | None = None
     endpointAnswer: str | None = Field(default=None, max_length=200, repr=False)
     endpointStatus: Literal["origin_confirmed", "location_needs_verification"] | None = None
@@ -460,10 +464,13 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             first = FirstTravel(value=float(first_limit), exclusive=exclusive_limit(raw, 'first'))
         context = InterpretationContext(destination=destination,date=calendar.date,
             timezone=calendar.timezone,transport=mode,firstTravel=first,
+            timezoneBasis='browser_reported' if ai.location=='near me' else 'destination_calendar' if calendar.timezone != 'UTC' else 'unknown',
             betweenTravel=between,geography=geographic_intent(raw,destination),
             originText=origin[1].strip() if origin else first.originText if first else None,
             **travel_fields,
             issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues,*travel_issues] if p])
+        from backend.advanced_timing import explicit_departure
+        context.departureMinute, context.departureSource = explicit_departure(calendar_raw)
         home_question = ai.journey and ai.journey.endpoint and ai.journey.endpoint.kind=='home' and journey_issue.startswith('Where should the outing end?')
         if home_question:
             answer = answers.endpoint.strip()

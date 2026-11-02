@@ -1,8 +1,9 @@
 # Complex outing interpretation — Task 50A
 
 This document records Task 50A semantic understanding. Task 50B now supplies gated
-backend destination resolution (see the update below); route-aware sequencing/returns,
-total-time feasibility and persistence integration remain future Tasks 50C–50E. No new Google operation, database table or migration is added.
+backend destination resolution, Task 50C supplies routing, and Task 50D supplies
+local timing evaluation (see the updates below). Website/persistence integration
+remains Task 50E. No new Google operation, database table or migration is added.
 
 ## Existing pipeline retained
 
@@ -192,3 +193,14 @@ grammar. These remain travel-only constraints. Whole-trip
 timing remains unevaluated; advanced website execution stays unavailable.
 [Routing semantics, constraints and tests](advanced-routing.md). Tasks 50D–50E
 and 51 remain unstarted.
+
+
+## Task 50D update — temporal handoff
+
+Advanced context now retains an explicit departure minute and matching clock-only
+source, separately from default/earliest planning windows, plus destination-calendar,
+browser-reported or unknown timezone basis. Deterministic existing clock parsing
+supplies this evidence; Qwen extraction/schema/call count is unchanged. Task 50D
+consumes the original Journey via the active Task 50C router and locally evaluates
+travel/dwell bounds, deadlines and hours. No advanced cards/saves are enabled.
+[Timing contract and limits](advanced-timing.md). Tasks 50E and 51 remain unstarted.

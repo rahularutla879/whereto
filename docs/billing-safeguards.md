@@ -543,3 +543,13 @@ Existing gross estimate $0.005/element gives a conservative ≤$0.135 routing ce
 per computation, before allowances; Task 50B resolution costs stay separate.
 All verification is offline with zero actual Google cost. [Scenario request/element
 counts and limitations](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.
+
+
+## Task 50D — zero incremental provider work
+
+Whole-journey timing evaluates the current trusted Task 50C route/hours evidence
+locally. Incremental Google requests **0**, incremental estimated Google cost **$0**;
+no Qwen, place resolution or Matrix repeats. Missing timing/hours evidence stays
+unverified instead of triggering retrieval. No field-mask/tier/service/quota/billing,
+credential or private-profile change. Offline fixtures reject real HTTP sends;
+persistence/schema/owner data are unchanged. [Contract and checks](advanced-timing.md).
