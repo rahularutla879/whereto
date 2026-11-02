@@ -512,3 +512,22 @@ Regeneration still consumes existing shared search/matrix admission. Local rate/
 WHERETO_HOURS_DEV is enabled only in the ignored authorized owner profile; base/production defaults remain off. Search hours are Enterprise ($0.035/request first paid global tier), already the owner ratings-enabled tier. Minimal origin lookups remain Pro. Separate owner approval enabled manual saved hours ($0.02/stop, max4), never automatic Enterprise. No new operation per discovered candidate, quotas/caps/ledger resets or Cloud changes. Current constraints and 10/25/50-tester estimates are recorded. See [acceptance and capacity report](hours-capacity49.md).
 
 The only capacity relaxation is active continuation memory20→50, with identical ten-minute expiry and no extra provider dispatch authority. Shared Search/Details/Matrix rate and cost protections remain unchanged.
+
+## Task 50B — same authorized search accounting
+
+No Google service, field tier, quota, credential or private development setting changes.
+Exact resolution uses the existing PlacesDiscovery/transport with the existing mask
+and optional already-authorized hours/ratings. Every search uses shared admission
+and conservative failure accounting. A simple exact place uses one search; a retailer
+with a named mall uses at most two; two brands sharing a mall use three fixture
+searches. Duplicate exact lookups reuse successes or failures in one active context.
+No Details, Routes, new field, pagination or retry is added by exact resolution.
+Existing flexible retail searches retain their existing bounded fallback behavior.
+
+At existing documented estimates, one/two/three Pro searches are $0.032/$0.064/$0.096
+gross; already-enabled Enterprise fields make them $0.035/$0.070/$0.105. These are
+existing list-price assumptions, not posted costs or newly checked prices. Offline
+verification and browser fixtures made zero live Google requests. Unsupported website
+messages and endpoint answers make no resolution calls. The new backend development/
+test gate is not enabled in the owner's profile or ordinary startup.
+[Full request/latency/retention details](stop-resolution.md).

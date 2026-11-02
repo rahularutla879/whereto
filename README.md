@@ -10,6 +10,8 @@ A mobile-first outing planner built with Next.js (App Router), TypeScript, React
 
 The planned Stage 1E sequence is **47 → 48 → 49 → 50 → 50A → 50B → 50C → 50D → 50E → 51 → 52 → 53 → 54 → 55**. The five additions cover complex request interpretation, fixed/flexible destination resolution, stop order and return journeys, complete journey deadlines, then integration/persistence/testing before public MVP deployment. All original task numbers are preserved.
 
+Task 50B adds a separately gated backend identity-resolution contract and structured home follow-ups; see [implementation and limits](docs/stop-resolution.md). Advanced routing remains unavailable.
+
 The current app provides AI-assisted leisure venue discovery and sequential recommendations. Mandatory named stops mixed with discovered errands, optional return trips and complete-journey deadline evaluation are **planned functionality, not implemented**. Database-backed saving and reopening are implemented for trusted local development. The expanded Stage 1 checkpoint remains unmet. Stage 2 optimization and Stage 3 editing build on this planned foundation.
 
 ## Save and reopen plans — Task 49
@@ -579,3 +581,21 @@ yet: the app gives one explanation and keeps your text/preferences available to
 edit. It does not produce options that silently omit them. “Home” needs clarification
 unless you explicitly mean your starting point. Ordinary requests still work.
 See [current understanding and execution limits](docs/complex-interpretation.md).
+
+## Task 50B — named destinations and home follow-ups
+
+Specific destinations now have a tested backend resolution contract using the existing
+Google Places search adapter. It distinguishes exact branches, flexible brands and
+discoverable activities, retaining required stops and asking for scoped choices when
+identities are ambiguous. This remains behind a separate development/test gate; the
+ordinary website does not start paid resolution searches for unsupported trips.
+
+Valid advanced requests show **Your request is understood**. Unresolved home returns
+offer an address/named-location input or **Return to my starting point**, preserving
+your original request and preferences without another AI extraction. Locations entered
+here are transient and still need verification; no home address is saved or inferred
+from current location. Advanced route planning and advanced saved itineraries remain
+unavailable. Ordinary planning/startup commands above are unchanged.
+
+[Identity rules, implemented versus deferred interactions, tests and costs](docs/stop-resolution.md).
+Tasks 50C–50E and Task 51 remain unstarted.

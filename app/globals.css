@@ -334,3 +334,6 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .opening-hours { margin:.75rem 0; font-size:.85rem; line-height:1.6; }
 .opening-hours p { margin:.35rem 0; }
 .opening-hours details { margin-top:.5rem; }
+
+.endpoint-clarification { grid-column: 1 / -1; }
+.endpoint-clarification > button { margin-top: 10px; }

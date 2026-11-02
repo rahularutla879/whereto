@@ -418,3 +418,20 @@ Keep original references/clauses, verify structured meanings, and block executio
 when required capabilities are absent. Home does not mean origin without explicit
 evidence. No provider lookup, routing optimization, feasibility claim, database
 migration or persistence expansion is justified here. [Contract and limits](docs/complex-interpretation.md).
+
+## Task 50B — identity evidence before routing
+
+Extend the existing Text Search adapter and canonical venue pipeline rather than
+adding a Google integration or asking Qwen to assert venue identity. Require literal
+normalized identity, relevant types and branch/location evidence; preserve unresolved
+states for aliases and incomplete evidence. Keep exact identity separate from generic
+activity eligibility. Require provider-directed containment joined to verified mall
+IDs. No proximity-based tenant claims, quotas/tier changes or Details fan-out.
+
+Keep resolution behind a separate backend development/test gate until the routing/
+feasibility/integration tasks can honor every constraint. Add honest advanced-status
+copy and field-only home follow-ups now: explicit origin confirmation or a location
+still needing verification, never inferred home. Preserve the source-grounded Journey
+and put answers in transient context. Named ambiguity choices are backend-only for
+now, context-bound and expiring; no new public selection route or persistent provider
+cache. [Evidence, costs and remaining limits](docs/stop-resolution.md).

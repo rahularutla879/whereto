@@ -99,7 +99,7 @@ export function adaptRanking(value: unknown): PlannerResult {
     message: plans.length ? data.message : planningMessage(data.message,data.errors), notes: data.notes };
 }
 
-export type ClarificationField = "location" | "people" | "date" | "activities" | "time";
+export type ClarificationField = "location" | "people" | "date" | "activities" | "time" | "endpoint";
 export type ClarificationAnswers = Partial<Record<ClarificationField, string>>;
 export type PendingOuting = {
   pending: { text: string; interpretation: unknown; answers: ClarificationAnswers; referenceTime: string };
@@ -141,12 +141,8 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
     if (extraction.unsupported !== undefined && (!Array.isArray(extraction.unsupported) || !extraction.unsupported.every((s: unknown) => typeof s === "string"))) throw new Error("Invalid unsupported response");
-    if (extraction.unsupported?.length) {
-      context?.onClarification?.(null);
-      return { ...failure(extraction.unsupported.join(" ")), requestFailed: false, notes: extraction.notes };
-    }
     if (extraction.pending) {
-      const fields = ["location", "people", "date", "activities", "time"];
+      const fields = ["location", "people", "date", "activities", "time", "endpoint"];
       if (extraction.pending.text !== text || !extraction.pending.interpretation
         || typeof extraction.pending.referenceTime !== "string" || !extraction.pending.answers
         || !Array.isArray(extraction.questions) || !extraction.questions.every((q: PendingOuting["questions"][number]) =>
@@ -157,6 +153,10 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       if (extraction.questions.length) context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
       else if (extraction.issues.length) context?.onClarification?.(null);
     } else if (extraction.issues.length) context?.onClarification?.(null);
+    if (extraction.unsupported?.length) {
+      context?.onClarification?.(extraction.executionStatus === "advanced_unavailable" && extraction.pending ? {pending:extraction.pending,questions:[]} : null);
+      return { ...failure(extraction.unsupported.join(" ")), advancedUnavailable: extraction.executionStatus === "advanced_unavailable", requestFailed: false, notes: extraction.notes };
+    }
     if (extraction.issues.length || !extraction.request) {
       return { ...failure(extraction.issues.join(" ") || "More information is needed before planning."), requestFailed: false, notes: extraction.notes };
     }

@@ -239,3 +239,12 @@ The real result cards expose source links, Google Maps/third-party attribution a
 ## Task 46 manual acceptance — sparse coverage
 
 Initial searches remain capped at ten/category. The planner now records privacy-safe counts after response, geography, normalization, meal filter, deduplication and relevance; exclusion/evidence codes remain aggregate. A separate explicit Search for more venues action can refine sparse categories once, at most two additional same-area Text Searches within the original four-search outing allowance. It retains accepted original identities and fills free slots, capped at ten/category after combined deduplication. It never broadens a named city or radius, automatically paginates, resets budgets or promises complete city coverage. Supported bowling/arcade types remain eligible; unsupported bowling matches do not become valid merely through repetition. See [full acceptance behavior and limits](real-planning.md#task-46-manual-acceptance-fixes). This pass used invented responses only; fresh live authorization is required to measure Washington coverage.
+
+## Task 50B — named-place identity extension
+
+`PlacesDiscovery.resolve_named` shares Text Search masks, body/bias construction,
+parsing, normalization and outing-budget admission with discovery. Exact identity
+checks and context-bound ambiguity choices live in the gated stop resolver; ordinary
+activity discovery is unchanged. Hours/timezone/receipt provenance remain transient,
+with no Details fan-out. Mall containment still requires verified parent IDs.
+[Audit, identity rules, safe contract and offline regressions](stop-resolution.md).

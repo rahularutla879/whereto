@@ -53,6 +53,15 @@ class FixtureAI:
         for original, data, _ in CASES:
             if text == original:
                 return Interpretation.model_validate(data)
+        extra = {
+            'Go to SUNY College of Optometry then get coffee today.': reply(['SUNY College of Optometry','coffee'],kinds={0:'named_place'},dates=['today'],order=[(0,1,'SUNY College of Optometry then get coffee')]),
+            'Go grocery shopping, then return home.': reply(['grocery shopping'],endpoint={'kind':'home','source':'return home'}),
+            'Get groceries and return to where I started within 45 minutes.': reply(['groceries'],endpoint={'kind':'origin','source':'return to where I started'},total={'minutes':45,'relation':'maximum','source':'within 45 minutes'}),
+            'Go to Penn Station today.': reply(['Penn Station'],kinds={0:'named_place'},dates=['today']),
+            'Go to Fictional Missing College today.': reply(['Fictional Missing College'],kinds={0:'named_place'},dates=['today']),
+            'Coffee and museum in Baltimore tomorrow.': reply(['Coffee','museum'],location='Baltimore',dates=['tomorrow']),
+        }
+        if text in extra: return Interpretation.model_validate(extra[text])
         # Deliberate browser revision example, still an explicit fixture.
         if text == 'Coffee in Baltimore tomorrow.':
             return Interpretation.model_validate(reply(['Coffee'],location='Baltimore',dates=['tomorrow']))

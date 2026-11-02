@@ -684,3 +684,22 @@ no resolved planning request; the frontend retains editable text/preferences and
 shows one explanation. Legacy/simple planning, dates/travel, one-shot warmup,
 provider masks/quotas, ranking and saved DTOs remain. No persistence changes.
 See [contract, validation and future integration](docs/complex-interpretation.md).
+
+## Task 50B — transient stop identity resolution
+
+`backend/stop_resolution.py` consumes validated Task 50A Journey and optional
+InterpretationContext/SearchArea. Its bounded ResolvedJourney/ResolvedStop/
+ResolvedCandidate contracts preserve source occurrence indexes, kind/requirement,
+canonical VenueFacts/provenance, geography, ordering, endpoint and timing context.
+`PlacesDiscovery.resolve_named` extends the existing adapter with one admitted
+Text Search, original IDs and conservative exact-name/type/qualifier checks. Generic
+activities use existing normalization/relevance/deduplication; retail/containment
+rules remain shared. Context-scoped, expiring choices reuse verified evidence.
+
+The default-off WHERETO_STOP_RESOLUTION_DEV gate has no public HTTP endpoint and
+is not connected to ordinary itinerary generation. There is no database migration
+or provider-content persistence. `executionStatus` distinguishes valid advanced
+limitations from genuine ambiguity; the existing follow-up contract adds an endpoint
+answer, stored only in transient context alongside the unchanged original home clause.
+No Qwen schema expansion or extra model call is used. Manual-origin preparation
+follows interpretation. [Detailed contract and boundaries](docs/stop-resolution.md).

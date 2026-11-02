@@ -208,7 +208,7 @@ class DiscoveryResult(DiscoveryModel):
                    "not confirmed activities or scheduled events.")
 
 
-def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
+def parse_response(data: dict, area: SearchArea, limit: int, *, identity_lookup: bool = False) -> DiscoveryResult:
     if not isinstance(data, dict) or not isinstance(data.get("places", []), list):
         raise DiscoveryError("invalid_response", "Google returned an invalid discovery response.")
     token = data.get("nextPageToken")
@@ -217,7 +217,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
     places = data.get("places", [])
     if len(places) > limit:
         raise DiscoveryError("invalid_response", "Google exceeded the requested candidate limit.")
-    if area.name and not area.enforce_name and area.coordinates is None:
+    if not identity_lookup and area.name and not area.enforce_name and area.coordinates is None:
         # Multiple distant matches do not establish one city/region.
         references=[]
         for place in places:
@@ -237,7 +237,7 @@ def parse_response(data: dict, area: SearchArea, limit: int) -> DiscoveryResult:
                     break
             except (KeyError, ValueError, TypeError, AttributeError):
                 continue
-    if area.name and not area.enforce_name and area.coordinates is None:
+    if not identity_lookup and area.name and not area.enforce_name and area.coordinates is None:
         # Without a provider-backed destination reference, nearby coverage
         # cannot be established. Do not treat a query string as location proof.
         area=area.model_copy(update={'enforce_name':True})
@@ -286,6 +286,28 @@ class PlacesDiscovery:
 
     def __init__(self, outing: OutingBudget):
         self.outing = outing
+
+    def resolve_named(self, query: str, area: SearchArea):
+        """One admitted exact-name Text Search, with ordinary bias kept soft.
+
+        Backend-only Task 50B consumer verifies identity after normalization.
+        No pagination/refinement, different service, field tier or Details call.
+        """
+        require_development_discovery()
+        if not isinstance(query, str) or not 1 <= len(query) <= 200 or any(ord(c)<32 for c in query):
+            raise DiscoveryError('invalid_request', 'That destination needs a valid place reference of up to 200 characters.')
+        area = SearchArea.model_validate(area.model_dump())
+        exact_area = area.model_copy(update={'radius_m': area.radius_m if area.restrict_to_area else None})
+        limit = min(10, self.outing.settings.ceiling('candidates_per_activity'))
+        body = search_body(DiscoveryRequest(activity=ActivityType.coffee, destination=exact_area), limit)
+        body['textQuery'] = query + (' in '+area.name if area.name and area.enforce_name else '')
+        identity = sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
+        with self.outing.reserve('search', identity):
+            from backend.places_transport import text_search
+            data = text_search(body)
+        parsed = parse_response(data, exact_area, limit, identity_lookup=True)
+        venues, _ = normalize_discovery_candidates(parsed, ActivityType('custom:named destination'))
+        return venues
 
     def discover(self, request: DiscoveryRequest) -> DiscoveryResult:
         return self.discover_many([request])

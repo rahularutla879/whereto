@@ -609,3 +609,14 @@ before discovery/routing with an editable request and one explanation. Exact
 places are never downgraded to generic categories just to generate cards. Current
 retail brand/format handling and simple plans remain. No Google operation, quota,
 ranking, route or persistence changes. [Contract and limits](complex-interpretation.md).
+
+## Task 50B — identity resolution remains separate from execution
+
+The gated backend resolver reuses PlacesDiscovery, Text Search transport/masks,
+normalization, retail/mall evidence and the shared provider budget. It returns exact
+identity candidates or unresolved/ambiguous states plus all original stop/endpoint/
+order/time/geographic requirements. Ordinary planning remains on its existing path;
+advanced requests show an honest understood-but-unavailable status and make no
+resolution calls from the website. Home follow-ups bind one transient field without
+a second Qwen extraction or provider lookup. No advanced cards/routes/saves exist.
+[Audit, contract, request counts, performance and verification](stop-resolution.md).

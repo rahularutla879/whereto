@@ -109,10 +109,11 @@ class ManualPreferences(ContractModel):
 LOCATION_QUESTION = "Where would you like to go? Enter a city or location to continue."
 
 
-ClarificationField = Literal["location", "people", "date", "activities", "time"]
+ClarificationField = Literal["location", "people", "date", "activities", "time", "endpoint"]
 
 
 class ClarificationAnswers(ContractModel):
+    endpoint: str = Field(default="", max_length=200)
     location: str = Field(default="", max_length=80)
     people: str = Field(default="", max_length=80)
     date: str = Field(default="", max_length=100)
@@ -164,6 +165,8 @@ class InterpretationContext(ContractModel):
     betweenTravel: FirstTravel | None = None
     geography: Geography | None = None
     originText: str | None = None
+    endpointAnswer: str | None = Field(default=None, max_length=200, repr=False)
+    endpointStatus: Literal["origin_confirmed", "location_needs_verification"] | None = None
     issues: list[str] = Field(default_factory=list)
 
 
@@ -176,6 +179,7 @@ class InterpretationResult(ContractModel):
     pending: PendingClarification | None = None
     unsupported: list[str] = Field(default_factory=list)
     context: InterpretationContext | None = None
+    executionStatus: Literal["advanced_unavailable", "clarification_required"] | None = None
 
 
 # These bounded source checks validate explicit evidence; they never construct
@@ -419,8 +423,28 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             betweenTravel=between,geography=geographic_intent(raw,destination),
             originText=origin[1].strip() if origin else first.originText if first else None,
             issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues] if p])
+        home_question = ai.journey and ai.journey.endpoint and ai.journey.endpoint.kind=='home' and journey_issue.startswith('Where should the outing end?')
+        if home_question:
+            answer = answers.endpoint.strip()
+            origin_answer = answer.casefold() == 'return to my starting point'
+            # Syntactic acceptance only: an address/name still needs provider
+            # identity verification. It never establishes coordinates or a route.
+            valid = origin_answer or (3 <= len(answer) <= 200 and bool(re.search(r'[a-zA-Z]',answer))
+                and not re.fullmatch(r'(?:home|my home|here|there|yes|no|unknown|current location)',answer,re.I)
+                and not any(ord(c)<32 for c in answer))
+            if not valid:
+                question = ('That answer does not identify an endpoint. ' if answer else '') + 'Where should the outing end? Enter a home address or named location, or choose Return to my starting point.'
+                return InterpretationResult(interpretation=ai,request=None,notes=[],issues=[question],context=context,
+                    executionStatus='clarification_required',
+                    questions=[ClarificationQuestion(field='endpoint',question=question,helpText='Used only for this request; not saved. A named location still needs place verification.')],
+                    pending=PendingClarification(text=value.text,interpretation=ai,answers=answers,referenceTime=reference))
+            context.endpointAnswer=answer
+            context.endpointStatus='origin_confirmed' if origin_answer else 'location_needs_verification'
+            from backend.journey import LIMITATION
+            journey_issue, ambiguous_journey = LIMITATION, False
         return InterpretationResult(interpretation=ai, request=None, notes=[],
-            context=context,
+            context=context, executionStatus='clarification_required' if ambiguous_journey else 'advanced_unavailable',
+            pending=PendingClarification(text=value.text,interpretation=ai,answers=answers,referenceTime=reference) if home_question and not ambiguous_journey else None,
             issues=[journey_issue], unsupported=[] if ambiguous_journey else [journey_issue])
     if saved and answers.activities and ai.journey:
         # Original advanced semantics were checked above and cannot be erased.

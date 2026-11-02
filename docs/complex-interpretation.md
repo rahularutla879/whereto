@@ -1,8 +1,8 @@
 # Complex outing interpretation — Task 50A
 
-This is semantic understanding only. Destination identity verification, route-aware
-sequencing/returns, total-time feasibility and persistence integration remain
-future Tasks 50B–50E. No Google operation, database table or migration is added.
+This document records Task 50A semantic understanding. Task 50B now supplies gated
+backend destination resolution (see the update below); route-aware sequencing/returns,
+total-time feasibility and persistence integration remain future Tasks 50C–50E. No new Google operation, database table or migration is added.
 
 ## Existing pipeline retained
 
@@ -159,3 +159,23 @@ was 13.154 seconds with uncontrolled load state. No forced cold-model unload or
 peak-memory comparison was performed. Larger structured output adds generation
 work; model/context/output bounds and one-call production behavior remain.
 Desktop/mobile fixture verification, cleanup and limits are recorded in HANDOVER.md.
+
+## Task 50B update — identity evidence and clarification status
+
+Task 50B now implements a separately gated backend resolution contract over this
+validated Journey, without expanding the AI schema or rerunning Qwen. Required/optional
+stops, original source indexes, order/deadline/duration and context remain intact.
+Exact identities, flexible brand branches and generic activities keep distinct
+eligibility rules. Named ambiguity choices are scoped to server-owned evidence;
+ordinary advanced execution remains unavailable and triggers no identity search.
+
+Unresolved home now produces a structured endpoint follow-up with an explicit
+return-to-start button. Invalid answers preserve the question; accepted answers
+record origin confirmation or a location needing verification in separate transient
+context. The original endpoint clause stays unchanged. All original preferences/text
+remain editable. Valid advanced requests are no longer described as needing correction.
+A proper-name guard word boundary prevents “the” from matching the start of “then”
+in the owner's SUNY-plus-coffee example.
+
+[Task 50B identity contract, implemented/deferred UI, costs and tests](stop-resolution.md).
+Tasks 50C–50E and 51 remain unstarted.

@@ -191,13 +191,7 @@ export default function Home() {
     let needsAnswer = false;
     const original = followup && clarification ? clarification.pending.text : request;
     try {
-      let origin = locationContext;
-      if (dataMode === "real" && origin.manualStartingPlace) {
-        const confirmed = await startingControls.current?.prepare();
-        if (!session.current.current(controller)) return;
-        if (!confirmed) { setResult(previous => ({ ...previous, message: "Your starting place needs attention. Check the message by the starting-place field." })); return; }
-        origin = confirmed; setLocationContext(confirmed);
-      }
+      const origin = locationContext;
       setPlanningStage("Understanding your request");
       const next = await generateOuting(original, manualPreferences(preferenceState), {
         continuation: followup ? clarification ?? validated?.continuation : undefined,
@@ -289,12 +283,12 @@ export default function Home() {
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
-        <div className="section-heading"><div><p className="eyebrow">{savedOpen ? "YOUR SAVED PLAN" : generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{savedOpen ? "Your saved outing." : generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{savedOpen ? "Your selected itinerary and original requirements." : loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : clarification?.questions.length ? "Answer the follow-up above to continue." : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {savedOpen ? "Saved plan" : generated ? result.dataMode === "real" ? "Real venues" : "Sample results" : "Demo itineraries"}</span></div>
+        <div className="section-heading"><div><p className="eyebrow">{savedOpen ? "YOUR SAVED PLAN" : generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{savedOpen ? "Your saved outing." : generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{savedOpen ? "Your selected itinerary and original requirements." : loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : clarification?.questions.length ? "Answer the follow-up above to continue." : result.advancedUnavailable ? "Your requirements are kept. Advanced route planning is still being added." : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {savedOpen ? "Saved plan" : generated ? result.dataMode === "real" ? "Real venues" : "Sample results" : "Demo itineraries"}</span></div>
         <div id="saved-results" />
         <div hidden={savedOpen}>
 
         {generated && <BeyondPreferences result={result}/>}
-        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} advancedUnavailable={result.advancedUnavailable} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult(restoreContinuation(page,latest.current));syncPages();}}}/>}
         {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.optionsToken || result.canExpand || result.canDiscover || result.canShowBeyond) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}

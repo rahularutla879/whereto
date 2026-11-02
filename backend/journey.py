@@ -92,12 +92,12 @@ class Journey(JourneyModel):
         return self
 
 
-LIMITATION = "This outing includes specific stops or timing requirements that we can't plan together yet. You can simplify the request for now."
+LIMITATION = "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added."
 REPHRASE = "Some stop or timing instructions are unclear or conflict. Please edit the request to clarify them; your original text is kept."
 
 # Bounded omission guards complement the model; they never generate stops.
 ADVANCED = re.compile(r'\b(?:return|back home|head home|go home|(?:head|get|come|go) back|where I started|finish at|end at|maybe|optionally|optional|if there.s time|if time permits|whichever|on the way back|half an hour|at least an hour|about (?:\w+|\d+) hours?|by \d)\b', re.I)
-NAMED_REFERENCE = re.compile(r'\b(?:[Gg]o to|[Vv]isit|[Ss]top at)\s+(?:the\s+)?([A-Z][\w’-]+(?:\s+(?:[A-Z][\w’-]+|of|the|on|at|\d+)){1,8})')
+NAMED_REFERENCE = re.compile(r'\b(?:[Gg]o to|[Vv]isit|[Ss]top at)\s+(?:the\s+)?([A-Z][\w’-]+(?:\s+(?:[A-Z][\w’-]+|of|the|on|at|\d+)\b){1,8})')
 NUMBERS = {'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9,'ten':10,'twenty':20,'thirty':30,'forty':40,'forty-five':45,'sixty':60,'an':1,'a':1,'half':.5}
 DURATION_WORDING = re.compile(r'(?<![\w.])(-?(?:\d+(?:\.\d+)?|'+'|'.join(NUMBERS)+r'))\s+(?:of\s+)?(?:an?\s+)?(hours?|minutes?|mins?|hrs?)\b', re.I)
 
