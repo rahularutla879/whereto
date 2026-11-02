@@ -1,3 +1,10 @@
+> Task 50C: `advanced_routing.AdvancedRouter` consumes a live server-owned Task 50B
+> resolver and its shared outing budget. A bounded precedence-aware beam constructs
+> required/optional visits and fixed endpoints, then `DirectedRouteRequest` feeds the
+> existing Matrix calculator/admission/normalizer. All legs, known/null totals and
+> scoped travel checks remain transient. No advanced public endpoint/cards/saving or
+> timing feasibility. [Contracts, bounds, privacy and audit](docs/advanced-routing.md).
+
 > Current Task 49: explicit private saved plans now use a separate restricted Python/PostgreSQL connection, atomic writes and capability-scoped RLS. Browser refresh reopens the last saved plan; Google content remains transient. [Current architecture and limits](docs/saved-plans.md). Earlier sections retain historical checkpoints.
 
 > Task 46 bowling diagnosis: `backend/planning_diagnostics.py` combines per-activity discovery audits with current routing/ranking coverage, emitting only aggregate counts and fixed reason codes in diagnostics and the existing About these estimates disclosure. The explicit bowling refinement permits evidence-backed mixed venues without widening geography; primary shortage can trigger the existing bounded route expansion. [Findings, definitions and live unknowns](docs/real-planning.md#task-46-diagnosis--repeated-bowling-venues).

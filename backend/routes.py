@@ -93,6 +93,22 @@ class RouteRequest(RouteModel):
         return self
 
 
+class DirectedRouteRequest(RouteModel):
+    """Selective advanced topology; the same transport/admission as linear routes."""
+    pairs: list[tuple[RoutePoint, RoutePoint]] = Field(max_length=27, repr=False)
+    mode: Mode
+
+    @model_validator(mode="after")
+    def consistent_identities(self):
+        seen = {}
+        for pair in self.pairs:
+            for point in pair:
+                if point.id in seen and seen[point.id] != point:
+                    raise ValueError("A stable routing identifier must identify one location.")
+                seen[point.id] = point
+        return self
+
+
 class RouteLeg(RouteModel):
     origin_id: str
     destination_id: str
@@ -189,6 +205,11 @@ def plan_matrices(request: RouteRequest):
         if not required <= pairs.keys():
             raise RouteError("invalid_request", "Requested routing pairs must follow the activity sequence.")
         pairs = {key: pair for key, pair in pairs.items() if key in required}
+    return batch_pairs(pairs)
+
+
+def batch_pairs(pairs):
+    """Batch an exact pair union without introducing extra billable cells."""
     pending = defaultdict(dict)
     points = {}
     for key, (a, b) in pairs.items():
@@ -271,8 +292,17 @@ class GoogleRouteCalculator:
         require_development_routes()  # Before even authentication imports.
         request = RouteRequest.model_validate(request.model_dump())
         pairs, matrices = plan_matrices(request)
+        return self._calculate(request, pairs, matrices)
+
+    def calculate_directed(self, request: DirectedRouteRequest) -> RouteResult:
+        require_development_routes()
+        request = DirectedRouteRequest.model_validate(request.model_dump())
+        pairs, matrices = batch_pairs({(a.id, b.id): (a, b) for a, b in request.pairs})
+        return self._calculate(request, pairs, matrices)
+
+    def _calculate(self, request, pairs, matrices):
         try:
-            for group in request.activity_groups:
+            for group in getattr(request, "activity_groups", []):
                 self.outing.check_candidates(len(group))
         except ProviderLimitError as error:
             raise RouteError("application_limit", str(error)) from None

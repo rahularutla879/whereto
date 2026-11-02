@@ -531,3 +531,15 @@ verification and browser fixtures made zero live Google requests. Unsupported we
 messages and endpoint answers make no resolution calls. The new backend development/
 test gate is not enabled in the owner's profile or ordinary startup.
 [Full request/latency/retention details](stop-resolution.md).
+
+
+## Task 50C update — backend routing contract
+
+The existing Matrix adapter now accepts a selective advanced directed-pair union:
+at most 27 pairs, one full-plan admission, no duplicate pair sends or retries.
+The same outing/process/minute/day/concurrency limits, ledger, mask and DRIVE/WALK
+policy apply. No new service, tier, quota, credential or private profile change.
+Existing gross estimate $0.005/element gives a conservative ≤$0.135 routing ceiling
+per computation, before allowances; Task 50B resolution costs stay separate.
+All verification is offline with zero actual Google cost. [Scenario request/element
+counts and limitations](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.

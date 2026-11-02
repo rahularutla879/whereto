@@ -179,3 +179,16 @@ in the owner's SUNY-plus-coffee example.
 
 [Task 50B identity contract, implemented/deferred UI, costs and tests](stop-resolution.md).
 Tasks 50C–50E and 51 remain unstarted.
+
+
+## Task 50C update — backend routing contract
+
+The validated Journey now feeds a gated backend ordering/route contract without
+another Qwen call. Source occurrences, required/optional status, precedence,
+endpoint, dwell, total-duration and deadline relations survive unchanged. The
+context now also retains existing legacy per-leg and total-between travel caps,
+exclusive boundaries and manual total-travel precedence, using the same source
+grammar. These remain travel-only constraints. Whole-trip
+timing remains unevaluated; advanced website execution stays unavailable.
+[Routing semantics, constraints and tests](advanced-routing.md). Tasks 50D–50E
+and 51 remain unstarted.

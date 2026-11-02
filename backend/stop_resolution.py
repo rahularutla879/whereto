@@ -251,6 +251,14 @@ class StopResolver:
             unresolved_constraints=constraints,diagnostics={k:self.outing.usage()[k] for k in ('placesSearchRequests','placesDetailsRequests','reservedMatrixElements','providerAttempts')})
         return self._result.model_copy(deep=True)
 
+    def routing_snapshot(self):
+        """Trusted backend consumption only; never accept a client-resolved DTO."""
+        if os.environ.get('WHERETO_STOP_RESOLUTION_DEV') != '1':
+            raise DiscoveryError('disabled', 'Advanced stop resolution is disabled.')
+        if self._result is None or monotonic() > self._expires:
+            raise ValueError('Resolution context expired.')
+        return ResolvedJourney.model_validate(self._result.model_dump())
+
     def choices(self):
         if self._result is None or monotonic()>self._expires: raise ValueError('Resolution context expired.')
         return {'context':self._token,'questions':[{'occurrence':s.occurrence,'question':s.explanation,

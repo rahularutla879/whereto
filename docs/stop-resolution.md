@@ -176,3 +176,13 @@ ESLint, production build, dependency/audit and credential scans pass. Desktop 12
 and mobile 390 fixture checks pass within the explicitly stated scope above and
 in HANDOVER.md. The final 20-iteration overhead median was 0.299ms, maximum 0.412ms.
 Hosted checks: zero; no persistence/schema path changed. No live Google or SQL.
+
+
+## Task 50C update — backend routing contract
+
+`StopResolver.routing_snapshot()` provides a revalidated active server-owned result
+under the existing gate/expiry. `AdvancedRouter` consumes that resolver and its same
+outing budget, never client-provided resolved places. Missing/ambiguous required
+identities or unverified home/final endpoints cannot become compliant routes.
+Ordinary named choices and advanced execution remain backend-only. [Route contract,
+privacy, evidence and tests](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.

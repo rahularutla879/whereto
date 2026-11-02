@@ -435,3 +435,29 @@ still needing verification, never inferred home. Preserve the source-grounded Jo
 and put answers in transient context. Named ambiguity choices are backend-only for
 now, context-bound and expiring; no new public selection route or persistent provider
 cache. [Evidence, costs and remaining limits](docs/stop-resolution.md).
+
+
+## Task 50C — bounded topology over existing route evidence
+
+Consume the server resolver, not client-supplied resolved places. Reuse its outing
+budget, authorization/expiry, canonical evidence and exact Matrix batching/transport.
+Add a selective directed-pair input to the same calculator so returns and partial
+orders do not require an independent provider integration. Keep the ordinary linear
+planner and its scoring weights unchanged.
+
+Use at most four occurrences, four shortlisted candidates/occurrence, a 24-path
+precedence-aware beam and 27 directed pairs per active computation. Geographic gaps
+prune only; verified directional seconds rank routes. Transitive precedence survives
+optional omissions. Required identity, final topology and nullable unknown totals
+are validated; optional omission and beyond-limit exceptions remain explicit.
+Extend the advanced interpretation context only enough to retain existing per-leg
+and total-between travel caps/exclusivity. Reuse the source grammar and manual
+total-travel precedence; keep these sums separate from whole-trip timing.
+
+A confirmed origin has a private routing alias and coarse confirmation metadata;
+no coordinates/address or private Place ID enter returned origin evidence. Keep
+original interpretation context internally, excluded from serialization. Retain
+canonical hours; only existing conservative current-date closure excludes venues.
+No assumed start/arrival, whole-trip duration/deadline arithmetic or feasibility
+claim. Reuse existing development gates, add no public endpoint/production flag or
+persistence schema. [Detailed rationale, costs and limitations](docs/advanced-routing.md).

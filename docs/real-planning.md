@@ -620,3 +620,13 @@ advanced requests show an honest understood-but-unavailable status and make no
 resolution calls from the website. Home follow-ups bind one transient field without
 a second Qwen extraction or provider lookup. No advanced cards/routes/saves exist.
 [Audit, contract, request counts, performance and verification](stop-resolution.md).
+
+
+## Task 50C update — backend routing contract
+
+Task 50C adds a separate backend topology-aware route constructor over the active
+Task 50B resolver. It reuses the same Matrix batching, transport, outing admission,
+mode-specific directional evidence and exact Strict/Flexible policy. Ordinary
+planning/scoring/UI are unchanged; advanced requests still generate no cards or
+saved plans. Whole-trip timing remains unevaluated. [Routing audit, contracts,
+bounds and verification](advanced-routing.md). Tasks 50D–50E and 51 remain unstarted.

@@ -164,6 +164,11 @@ class InterpretationContext(ContractModel):
     firstTravel: FirstTravel | None = None
     betweenTravel: FirstTravel | None = None
     geography: Geography | None = None
+    # Existing travel-only caps; distinct from Journey.total_duration.
+    travel: int | None = Field(default=None, strict=True, ge=0, le=1440)
+    travelExclusive: bool = Field(default=False, strict=True)
+    maxLegTravel: int | None = Field(default=None, strict=True, ge=0, le=1440)
+    maxLegTravelExclusive: bool = Field(default=False, strict=True)
     originText: str | None = None
     endpointAnswer: str | None = Field(default=None, max_length=200, repr=False)
     endpointStatus: Literal["origin_confirmed", "location_needs_verification"] | None = None
@@ -297,6 +302,35 @@ def source_constraint_issues(raw, ai, manual, answers, ask):
     return issues
 
 
+def advanced_travel_fields(raw, manual):
+    """Carry existing bounded travel-only scopes into the advanced handoff."""
+    values, issues = {}, []
+    evidence = travel_evidence(raw)
+    for scope, field in [('total', 'travel'), ('leg', 'maxLegTravel'), ('first', 'first_limit')]:
+        matches = [e for e in evidence if e['scope'] == scope]
+        if scope == 'total' and manual.travel.strip():
+            text = manual.travel.strip()
+            if not re.fullmatch(r'\d+', text) or int(text) > 1440:
+                issues.append('The total between-stop travel cap must be 0–1440 whole minutes.')
+            else:
+                values['travel'] = int(text)
+                values['travelExclusive'] = False
+            continue
+        minutes = [e['amount'] for e in matches if not e['distance']]
+        if any(not n.is_integer() or not 0 <= n <= 1440 for n in minutes):
+            issues.append('Travel-only time caps must be 0–1440 whole minutes.')
+            continue
+        if minutes:
+            values[field] = int(min(minutes))
+            if scope != 'first':
+                values[field + 'Exclusive'] = exclusive_limit(raw, scope)
+        supported_distance = (first_intent(raw)[0] if scope == 'first' else
+                              between_intent(raw)[0] if scope == 'leg' else None)
+        if any(e['distance'] for e in matches) and supported_distance is None:
+            issues.append('This travel-distance scope is unsupported; it was not silently ignored.')
+    return values, issues
+
+
 def interpret_request(value: InterpretationInput, provider: AIProvider | None = None, *,
                       now: datetime | None = None) -> InterpretationResult:
     saved = value.pending if value.pending and value.pending.text == value.text else None
@@ -418,11 +452,18 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         # Same explicit-origin wording used by the existing client, extended to
         # its already-supported 'start from' form. It is never an address lookup.
         origin = re.search(r'\b(?:start|starting) from\s+([^.,;!?]+?)(?=\s+(?:today|tomorrow|for \d)|[.,;!?]|$)',raw,re.I)
+        # Retain existing travel-only scopes even when ordinary execution is gated.
+        # Source grammar is the same as the ordinary planner; no new AI extraction.
+        travel_fields, travel_issues = advanced_travel_fields(raw, manual)
+        first_limit = travel_fields.pop('first_limit', None)
+        if first is None and first_limit is not None:
+            first = FirstTravel(value=float(first_limit), exclusive=exclusive_limit(raw, 'first'))
         context = InterpretationContext(destination=destination,date=calendar.date,
             timezone=calendar.timezone,transport=mode,firstTravel=first,
             betweenTravel=between,geography=geographic_intent(raw,destination),
             originText=origin[1].strip() if origin else first.originText if first else None,
-            issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues] if p])
+            **travel_fields,
+            issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues,*travel_issues] if p])
         home_question = ai.journey and ai.journey.endpoint and ai.journey.endpoint.kind=='home' and journey_issue.startswith('Where should the outing end?')
         if home_question:
             answer = answers.endpoint.strip()
