@@ -861,3 +861,7 @@ Tasks 46/49 regeneration and saved-preference acceptance: local admission classi
 Tasks 46/49 acceptance: saved copy cleanup, centralized display casing, hours-enabled Text Search/eligibility/detail display and separately approved manual saved hours are implemented. Current shared Cloud-mirroring admission stays intact; no quota/spending increase or schema migration. Task 50 and Tasks 50A–50E remain unstarted. See [acceptance and capacity report](docs/hours-capacity49.md).
 
 Capacity acceptance also retains50 active search continuations (previously20) without changing expiry, provider quotas, concurrency or spending safeguards. Later roadmap tasks remain unstarted.
+
+## November 2 — development lifecycle acceptance
+
+Tasks46/49 development-experience repair: bounded supervised stop/restart, fixed frontend port, authenticated exceptional stop and real PTY lifecycle regressions. No roadmap renumbering or new milestone work; Task50 and Tasks50A–50E remain unstarted. See [verified lifecycle behavior](docs/dev-lifecycle.md).

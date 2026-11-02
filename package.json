@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "dev:backend": "backend/.venv/bin/python -m backend.dev_start",
+    "dev": "node scripts/dev-server.mjs frontend",
+    "dev:backend": "node scripts/dev-server.mjs backend",
     "build": "next build --webpack",
     "start": "next start",
     "lint": "eslint .",

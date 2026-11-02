@@ -221,11 +221,11 @@ You need **Node.js 20.9 or newer**, **npm**, and **Python 3.12**. All three are 
    npm run dev
    ```
 
-7. Keep both windows open. Open **[http://localhost:3000](http://localhost:3000)** in your browser. If Next.js prints a different port because 3000 is busy, use that port instead.
+7. Keep both windows open. Open **[http://localhost:3000](http://localhost:3000)** in your browser. The frontend uses port 3000 explicitly. If it is already occupied, startup stops with an explanation instead of choosing another port.
 
 8. Verify the connection by opening **[http://localhost:3000/api/health](http://localhost:3000/api/health)**. You should see `{"status":"ok","backend":"ok"}`. This means Next.js successfully contacted Python. The direct backend check at **[http://127.0.0.1:8000/health](http://127.0.0.1:8000/health)** returns `{"status":"ok"}`.
 
-9. To stop the application, press **Control + C in each Terminal window**.
+9. To stop the application, press **Control + C in each Terminal window** and wait for the command prompt to return. The launcher waits for its workers and listening port to close before finishing. You can then run the same two commands again.
 
 The two commands avoid an extra process-management dependency. `npm run dev` still starts just the frontend.
 
@@ -539,3 +539,26 @@ Edit your preferences and choose **Regenerate plans**; your request and confirme
 ## Opening hours and saved outings
 
 Open **View plan** to see available opening/closing hours for your outing date. Typical weekly hours can differ on special days, and missing hours remain unverified. Hours do not confirm activity sessions, tickets or reservations. In a saved itinerary, **Load opening hours** performs a separate deliberate lookup for its original date; opening the private link still loads only the existing basic venue information automatically. The owner's existing two-command startup loads the approved ignored hours settings. Fresh clones/tests/production retain safe defaults. Shared Google limits can still require waiting before Retry. [Hours and testing capacity](docs/hours-capacity49.md).
+
+
+## Stopping and restarting development servers
+
+From `~/Documents/whereto`, keep using `npm run dev:backend` and `npm run dev` in
+separate Terminals. Press **Control+C** in each and wait for its prompt before
+restarting. Reload-on-edit remains enabled. A second start refuses duplicates;
+it never silently moves the frontend to 3001 or terminates another application.
+
+If the original Terminal is unavailable, these exceptional commands stop only a
+live authenticated launcher for this exact repository and wait for port release:
+
+```bash
+cd ~/Documents/whereto
+npm run dev:backend -- --stop
+npm run dev -- --stop
+```
+
+They cannot kill an unverified listener or an older unsupervised server. In that
+case, use the original Terminal's Control+C or ask for help identifying the conflict;
+do not delete Next.js lock files or run broad port-kill commands. Mock startup
+remains `npm run dev:backend -- --mock`. Your private development/database profiles
+and provider settings are unchanged. [Lifecycle verification](docs/dev-lifecycle.md).

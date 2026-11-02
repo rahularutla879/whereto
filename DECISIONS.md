@@ -390,3 +390,7 @@ A shared provider minute denial is not a provider outage. Preserve admission/led
 ## November 2 — Text Search hours and capacity acceptance
 
 Use the existing Text Search response for hours rather than per-candidate Details fan-out. The owner separately approved manual selected-only saved Details Enterprise hours; automatic opens remain Pro. Distinguish current dated, typical weekly and unknown hours; no invented arrival/duration or holiday certainty. Do not raise local limits that mirror Cloud capacity; owner exploration already removes cumulative prototype caps. Record tester costs before proposing any Cloud/budget increase. See [acceptance and capacity report](docs/hours-capacity49.md).
+
+## November 2 — development lifecycle repair
+
+Treat a live repository server as an existing instance, not an orphan merely because two processes share its socket. Supervise development runtimes through IPC lifetime ownership and bounded group cleanup; never infer kill authority from a port, process name or stale PID file. Keep3000/8000 fixed and preserve native reload. See [verification](docs/dev-lifecycle.md).
