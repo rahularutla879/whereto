@@ -662,3 +662,14 @@ Active option-session memory now retains50 isolated contexts rather than20, with
 ## Local development process ownership
 
 The two npm development scripts enter a shared Node lifetime guardian before the existing Python/Uvicorn or Next runtime. Private authenticated loopback control and owned process groups support bounded shutdown and duplicate refusal; production entry points, application ports and provider/database configuration are unchanged. See [lifecycle report](docs/dev-lifecycle.md).
+
+
+## Task 50 — existing persistence security boundary
+
+The Task 49 schema, role, forced capability RLS and transaction design are retained.
+Private POST boundaries additionally reject ambiguous/nonfinite JSON before typed validation.
+Stored provider references validate before storage/reopen and again before refresh URL construction;
+nested stored-validation failures fail closed as unavailable links. Next refuses public database
+environment names before build/start. Hosted catalog verification now checks runtime role membership.
+No migration, connection pool, automatic retry, account system or new provider workflow was added.
+[Audit, tests, connection investigation and limitations](docs/database-security.md).

@@ -245,13 +245,32 @@ async def private_plan_boundary(request: Request, call_next):
         except ValueError:
             valid = False
         if not valid or request.headers.get("x-whereto-proxied") == "1" or request.headers.get("sec-fetch-site") == "cross-site" or any(h in request.headers for h in ("forwarded", "x-forwarded-for", "x-forwarded-host")):
-            return JSONResponse(status_code=403, content={"message": "Private plans accept local requests only."})
+            return JSONResponse(status_code=403, content={"message": "Private plans accept local requests only."}, headers={"Cache-Control":"no-store", "Referrer-Policy":"no-referrer"})
         # Stream bound applies even without Content-Length or with a dishonest header.
         body = bytearray()
         async for chunk in request.stream():
             body.extend(chunk)
             if len(body) > 4096:
-                return JSONResponse(status_code=413, content={"message": "Save request is too large."})
+                return JSONResponse(status_code=413, content={"message": "Save request is too large."}, headers={"Cache-Control":"no-store", "Referrer-Policy":"no-referrer"})
+        if request.method == 'POST':
+            import json
+            def unique_object(pairs):
+                result = {}
+                for key, value in pairs:
+                    if key in result:
+                        raise ValueError('Duplicate JSON key')
+                    result[key] = value
+                return result
+            def invalid_constant(value):
+                raise ValueError('Nonfinite JSON value')
+            try:
+                payload = json.loads(bytes(body), object_pairs_hook=unique_object, parse_constant=invalid_constant)
+                if not isinstance(payload, dict):
+                    raise ValueError('Expected object')
+            except (ValueError, UnicodeError, RecursionError):
+                response = failure('save_validation_failed',422,operation='persistence_json')
+                response.headers['Referrer-Policy'] = 'no-referrer'
+                return response
         request._body = bytes(body)
     response = await call_next(request)
     if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:

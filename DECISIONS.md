@@ -394,3 +394,16 @@ Use the existing Text Search response for hours rather than per-candidate Detail
 ## November 2 — development lifecycle repair
 
 Treat a live repository server as an existing instance, not an orphan merely because two processes share its socket. Supervise development runtimes through IPC lifetime ownership and bounded group cleanup; never infer kill authority from a port, process name or stale PID file. Keep3000/8000 fixed and preserve native reload. See [verification](docs/dev-lifecycle.md).
+
+
+## Task 50 — preserve anonymous capabilities and strengthen existing boundaries
+
+Retain separate runtime credentials, parameterized atomic immutable saves, SHA-256 capability
+verification, 30-day RLS expiry and fresh verified-TLS connections. Concrete validation/error gaps
+are application changes; no migration or grant change is justified. Reject ambiguous JSON and
+malformed persisted provider references, and prevent accidental Next public database configuration.
+Do not add blind database retries: commit outcome can be uncertain; the same capability/fingerprint
+provides existing idempotency. Supavisor protocol metadata is not PostgreSQL session identity.
+The historical intermittent connection error remains unexplained; deterministic interruption and
+fresh connection/restart checks provide current evidence. Keep accounts, revocation, deployment
+and Tasks 50A–50E/51 outside scope. [Audit](docs/database-security.md).

@@ -5,6 +5,7 @@ from datetime import datetime, timezone
 from threading import Lock
 from time import monotonic
 import os
+import re
 import requests
 from uuid import UUID
 from pydantic import Field
@@ -27,6 +28,8 @@ class RefreshRequest(OpenRequest):
 
 
 def fetch_saved_details(identity, *, include_contacts=False, include_hours=False, outing_date=None, window_start=None, window_end=None, activity="food", calendar_timezone=None):
+    if not isinstance(identity, str) or not re.fullmatch(r'[A-Za-z0-9_-]{1,200}', identity):
+        raise PersistenceError(404)
     if include_hours and not saved_hours_enabled():raise DiscoveryError("disabled","Opening-hours loading is disabled in this development session.")
     if not local_real_enabled() or os.environ.get('WHERETO_CONTACT_DETAILS_DEV')!='1':
         raise DiscoveryError('disabled','Venue refresh is disabled in this development session.')

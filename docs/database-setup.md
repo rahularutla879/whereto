@@ -1,3 +1,5 @@
+> Current Task 50 security audit and acceptance: [safe database access](database-security.md). Earlier task-pending statements below are historical.
+
 # Supabase PostgreSQL setup — Tasks 47–49
 
 Task 49 is complete: use the separate restricted runtime configuration and commands in [enable explicit saving locally](#task-49-enable-explicit-saving-locally). Historical administrator connectivity instructions below are for checks/migrations, never runtime startup.

@@ -33,7 +33,12 @@ export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reo
       }
     }
     const body = Buffer.concat(chunks).toString("utf8");
-    JSON.parse(body);
+    try {
+      const payload = JSON.parse(body);
+      if (!payload || typeof payload !== "object" || Array.isArray(payload)) throw new Error();
+    } catch {
+      return Response.json({ message: "Saved-plan request is invalid." }, { status: 422, headers });
+    }
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
     const response = await fetch(`${base.replace(/\/$/, "")}${path}`, {
       method: "POST", body, headers: { "Content-Type": "application/json", ...developmentOriginHeaders(request), "X-WhereTo-Proxied":"0" },

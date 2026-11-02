@@ -1,3 +1,5 @@
+> Current Task 50 security audit and acceptance: [safe database access](database-security.md). Earlier task-pending statements below are historical.
+
 # Task 49 — explicit private saved plans
 
 > Latest November 1 refinement: [shared-link admission, official websites and UI verification](sharing-ux49.md) supersedes the six-per-capability session and homepage diagnostics descriptions below. Automatic Pro remains owner-approved local only.
@@ -28,10 +30,10 @@ delete or UUID-based retrieval API. Missing, inaccessible and expired links shar
 one 404. Malformed requests get bounded 422s; conflicts/expired receipts get 409;
 streamed payloads above 4096 bytes get 413; fixed credential-free outage messages
 use 503. Both Next and Python bound bodies, reject public/forwarded/cross-origin
-traffic, and return no-store. Next proxies only two fixed paths with a timeout;
-all SQL credentials stay in Python. Python remains bound to loopback. This is not
-a public deployment security boundary: Task 50 must review deployment/auth/write
-protection and distributed abuse controls before deployment.
+traffic, and return no-store. Next proxies only fixed save/reopen/refresh paths with a timeout;
+all SQL credentials stay in Python. Python remains bound to loopback. Public deployment requires a separately scoped
+review of networking and distributed abuse controls; Task 50 preserves this
+local-only architecture.
 
 ## Five-table mapping and transaction
 
@@ -118,10 +120,10 @@ screenshots, copied URLs and browser history/sync can leak capabilities. Fragmen
 clearing reduces exposure but cannot guarantee history erasure. No revocation or
 regeneration API exists: new generation/save creates a separate link and does not
 invalidate the old link. Expiry denies reads but does not purge stored rows/backups.
-Do not store sensitive outing content in this development MVP. Task 50 must decide
-authentication/ownership, revoke/rotate/cleanup, secure browser storage, distributed
-rate limits, deployment networking, observability redaction and operational role
-management. These are documented limitations, not implemented security features.
+Do not store sensitive outing content in this development MVP. Future deployment work must address
+account needs, revoke/rotate/cleanup, browser storage, distributed
+rate limits, deployment networking and operational role
+management. Task 50 audits current anonymous authorization and observability redaction. These are documented limitations, not implemented security features.
 
 UUIDs, ordinal stops, optional timing and provider-neutral references remain
 compatible with later additive 50A–50E work; no mandatory destinations, return trips,

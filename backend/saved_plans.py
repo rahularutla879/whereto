@@ -3,6 +3,7 @@ from collections import OrderedDict
 from contextlib import contextmanager
 from hashlib import sha256
 import os
+import re
 import secrets
 from threading import Lock, BoundedSemaphore
 from time import monotonic
@@ -20,7 +21,7 @@ from backend.persistence_config import runtime_settings as connection_settings
 from backend.failures import MESSAGES
 from backend.models import ContractModel, OutingRequest, RankingResult
 
-Token = Annotated[str, Field(pattern=r'^[A-Za-z0-9_-]{43}$')]
+Token = Annotated[str, Field(strict=True, min_length=43, max_length=43, pattern=r'^[A-Za-z0-9_-]{43}$')]
 CandidateID = Annotated[str, Field(min_length=1, max_length=200)]
 
 
@@ -53,6 +54,15 @@ class SavedStop(ContractModel):
     fictional: FictionalFacts | None = None
 
 
+    @model_validator(mode='after')
+    def valid_reference(self):
+        if self.provider == 'google_places' and not re.fullmatch(r'[A-Za-z0-9_-]{1,200}', self.reference):
+            raise ValueError('Invalid provider reference')
+        if not self.reference.strip() or any(ord(c) < 32 for c in self.reference):
+            raise ValueError('Invalid venue reference')
+        return self
+
+
 class FictionalMetrics(ContractModel):
     totalTravel: int | None = Field(ge=0, le=1440)
     legs: list[int | None] = Field(max_length=3)
@@ -75,6 +85,8 @@ class SavedDocument(ContractModel):
     @model_validator(mode='after')
     def complete_structure(self):
         ids = [option.candidateId for option in self.itineraries]
+        if len(self.constraints.location) > 200 or self.constraints.destinationContext is not None:
+            raise ValueError('Invalid retained constraints')
         if self.constraints.date is None or self.selectedId not in ids or len(set(ids)) != len(ids):
             raise ValueError('Incomplete saved selection')
         for option in self.itineraries:
@@ -332,4 +344,8 @@ def save(request):
 
 def reopen(request):
     with database(request.accessToken, readonly=True) as connection:
-        return read_document(connection, request.accessToken)
+        try:
+            return read_document(connection, request.accessToken)
+        except ValueError:
+            # Includes nested stored-record validation, also for venue refresh.
+            raise PersistenceError(404) from None

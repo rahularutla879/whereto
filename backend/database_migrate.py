@@ -111,6 +111,8 @@ def verify_schema(connection):
     role = connection.execute("SELECT rolsuper,rolbypassrls,rolcreatedb,rolcreaterole,rolinherit FROM pg_roles WHERE rolname='whereto_plan_runtime'").fetchone()
     if role != (False,False,False,False,False):
         raise MigrationError('Unsafe runtime role')
+    if connection.execute("SELECT count(*) FROM pg_auth_members WHERE member='whereto_plan_runtime'::regrole").fetchone()[0]:
+        raise MigrationError('Runtime role must not belong to other roles')
     for role in ('anon', 'authenticated', 'service_role'):
         if connection.execute("SELECT has_schema_privilege(%s, 'whereto', 'USAGE')", (role,)).fetchone()[0]:
             raise MigrationError('API role has schema access')

@@ -80,6 +80,14 @@ class PlanningApiTests(unittest.TestCase):
         self.saved_post('/api/plans/reopen',{'accessToken':'guessed-uuid'},422)
         self.saved_post('/api/plans/reopen',{'accessToken':secrets.token_urlsafe(32)},503)
 
+    def test_private_json_ambiguity_and_malformed_bodies(self):
+        for path in ('save','reopen','refresh'):
+            for body in (b'{', b'[]', b'{"accessToken":"A","accessToken":"B"}', b'{"accessToken":NaN}', b'"\\ud800"'):
+                request = Request(self.url+'/api/plans/'+path, data=body, headers={'Content-Type':'application/json'})
+                with self.assertRaises(HTTPError) as caught: urlopen(request,timeout=5)
+                self.assertEqual(caught.exception.code,422)
+                self.assertNotIn('accessToken',caught.exception.read().decode())
+
     def test_save_http_cross_origin_and_public_forwarding_denied(self):
         self.saved_post('/api/plans/save',{},403,{'Origin':'https://evil.example'})
         self.saved_post('/api/plans/save',{},403,{'X-WhereTo-Proxied':'1'})

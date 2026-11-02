@@ -65,3 +65,16 @@ test("save proxy preserves actionable database errors and correlation evidence",
   globalThis.fetch=(async()=>Response.json(failure,{status:503})) as typeof fetch;
   try { const response=await persistenceProxy("/api/plans/save",new Request("http://localhost/api/plans/save",{method:"POST",body:"{}"}));assert.equal(response.status,503);assert.deepEqual(await response.json(),failure); } finally { globalThis.fetch=previous; }
 });
+
+
+test("malformed saved JSON is a validation error before contacting Python", async()=>{
+  const previous=globalThis.fetch;
+  globalThis.fetch=(async()=>{throw new Error("Unexpected backend call");}) as typeof fetch;
+  try {
+    for(const body of ["{", "[]", "null", "123"]) {
+      const response=await persistenceProxy("/api/plans/reopen",new Request("http://localhost/api/plans/reopen",{method:"POST",body}));
+      assert.equal(response.status,422);
+      assert.equal(response.headers.get("cache-control"),"no-store");
+    }
+  } finally {globalThis.fetch=previous;}
+});

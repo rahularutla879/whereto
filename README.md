@@ -173,9 +173,9 @@ Without a first-stop limit, discovery initially uses an approximate **20-minute 
 
 Contacts remain on demand and gated. A repaired ledger now supports consecutive panels without locking itself. If access is blocked before any request is admitted, the panel can offer a deliberate unsent lookup after local repair. Actual failed/attempted provider calls are not retried. Corrupt accounting stays closed; preserve the original ledger and ask its owner to inspect permissions or recover a verified backup. See [diagnosis, algorithm and limitations](docs/real-planning.md#comprehensive-discovery-acceptance) and [ledger recovery](docs/billing-safeguards.md#contact-accounting-repair).
 
-## Optional database setup — Tasks 47–48 complete
+## Optional database setup — Tasks 47–50 complete
 
-The app still runs without a database. Task 47 adds only a separate, opt-in PostgreSQL connectivity check; the owner-created `whereto` project is confirmed in `Where To` (Free), North Virginia (`us-east-1`). The real authenticated read-only PostgreSQL check **passed**, with certificate/hostname verification and clean connection closure. Follow [Supabase setup and the safe check](docs/database-setup.md) for dashboard steps, backend-only environment variables, certificate verification and exact commands. Use `backend/.env.example` for an ignored `backend/.env.database`; keep database credentials out of Next.js env files. Task 48 adds five private application tables and a migration ledger, applied and verified in the hosted project. No database startup dependency or saved-plan feature exists. See [schema, security, provider retention and migration commands](docs/database-schema.md). Tasks 49, 50 and 50A–50E remain unstarted.
+The app still runs without a database. Task 47 adds only a separate, opt-in PostgreSQL connectivity check; the owner-created `whereto` project is confirmed in `Where To` (Free), North Virginia (`us-east-1`). The real authenticated read-only PostgreSQL check **passed**, with certificate/hostname verification and clean connection closure. Follow [Supabase setup and the safe check](docs/database-setup.md) for dashboard steps, backend-only environment variables, certificate verification and exact commands. Use `backend/.env.example` for an ignored `backend/.env.database`; keep database credentials out of Next.js env files. Task 48 adds five private application tables and a migration ledger, applied and verified in the hosted project. Ordinary planning stays database-independent; explicit private saved-plan persistence is implemented. See [schema, security, provider retention and migration commands](docs/database-schema.md). Tasks 49 and 50 are complete; Tasks 50A–50E remain unstarted.
 
 ## Start the application — beginner instructions
 
@@ -319,7 +319,7 @@ First click **Reset preferences** so old settings do not override your request. 
 
 Costs are per person, in USD. Group pricing and capacity are not verified or calculated. Estimates exclude transport fares, taxes, tips, booking fees, and extras. Travel is the total between stops using a simple made-up neighborhood model; it excludes getting to the first stop and returning home. The displayed itinerary duration includes activities, inter-stop travel, and any waiting for scheduled events. Shopping prices exclude purchases; the free picnic option requires bringing your own food. No real bookings or reservations are made.
 
-There is no user-account authentication, payment integration, runtime database persistence or production deployment. The initial hosted database schema exists independently of app startup. Task 46 adds deliberately enabled backend Google APIs using the existing keyless local authentication.
+There is no user-account authentication, payment integration or production deployment. Restricted runtime saved-plan persistence is implemented. The initial hosted database schema exists independently of app startup. Task 46 adds deliberately enabled backend Google APIs using the existing keyless local authentication.
 
 ## Project files
 
@@ -562,3 +562,10 @@ case, use the original Terminal's Control+C or ask for help identifying the conf
 do not delete Next.js lock files or run broad port-kill commands. Mock startup
 remains `npm run dev:backend -- --mock`. Your private development/database profiles
 and provider settings are unchanged. [Lifecycle verification](docs/dev-lifecycle.md).
+
+
+Task 50 audits and hardens existing private saving without changing startup commands.
+[Security controls, connection findings, tests and remaining limits](docs/database-security.md).
+Never put database credentials in frontend `.env` files or `NEXT_PUBLIC_*` variables.
+After a database error, keep the selection and retry the same save or reopen its private link;
+do not create a replacement save merely because the commit response was interrupted.
