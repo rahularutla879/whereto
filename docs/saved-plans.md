@@ -1,3 +1,5 @@
+Task 50E refinement: saved-v2 optional fields preserve original Journey, effective visit overrides, explicit departure provenance and entire-outing/travel-only scope. Legacy v2 defaults to entire-outing; v1 remains supported. Provider evidence/private origins are still excluded. Hosted tests verify committed selected-only overrides and separate-process reopening, with exact disposable cleanup. [Evidence](task50e-followup.md).
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 > Current Task 50 security audit and acceptance: [safe database access](database-security.md). Earlier task-pending statements below are historical.

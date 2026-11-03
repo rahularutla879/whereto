@@ -1,6 +1,6 @@
 """Version 2 app-owned requirements. No Google content or private locations."""
 import re
-from typing import Literal
+from typing import Annotated, Literal
 from pydantic import Field, model_validator
 from backend.models import ContractModel, OutingRequest
 from backend.journey import Journey
@@ -18,6 +18,10 @@ def redact_source(value, context):
 class AdvancedSaved(ContractModel):
     sourceText: str = Field(min_length=1,max_length=4000)
     journey: Journey
+    originalJourney: Journey | None = None
+    budgetScope: Literal['outing','travel'] = 'outing'
+    durationOverrides: list[Annotated[int, Field(strict=True,ge=0,lt=4)]] = Field(default_factory=list,max_length=4)
+    departureOverride: bool = Field(default=False,strict=True)
     occurrenceOrder: list[int] = Field(min_length=1,max_length=4)
     omittedOccurrences: list[int] = Field(max_length=4)
     ending: Literal['last_activity','origin','named_destination']
@@ -29,6 +33,15 @@ class AdvancedSaved(ContractModel):
 
     @model_validator(mode='after')
     def coverage(self):
+        if self.budgetScope=='travel' and self.journey.total_duration is None:raise ValueError('Travel-only override needs its original source budget.')
+        if any(type(n) is not int or not 0<=n<len(self.journey.stops) for n in self.durationOverrides) or len(set(self.durationOverrides))!=len(self.durationOverrides):raise ValueError('Invalid duration override occurrences.')
+        if self.originalJourney:
+            original=self.originalJourney.model_dump()
+            effective=self.journey.model_dump()
+            if len(original['stops'])!=len(effective['stops']):raise ValueError('Original stop provenance changed.')
+            for n,(before,after) in enumerate(zip(original['stops'],effective['stops'])):
+                if n in self.durationOverrides:after['duration']=before['duration']
+            if original!=effective:raise ValueError('An override changed unrelated original requirements.')
         indexes=self.occurrenceOrder+self.omittedOccurrences
         if sorted(indexes)!=list(range(len(self.journey.stops))) or self.journey.order_conflict:
             raise ValueError('Incomplete advanced requirements')
@@ -74,7 +87,7 @@ def issue_advanced(session,candidates,options):
     saved=[]
     for candidate,option in zip(candidates,options):
         route=candidate.route
-        advanced=AdvancedSaved(sourceText=source,journey=Journey.model_validate(redact(route.journey.model_dump())),occurrenceOrder=[v.occurrence for v in route.visits],
+        advanced=AdvancedSaved(sourceText=source,originalJourney=Journey.model_validate(redact(session.journey.model_dump())),budgetScope=session.budget_scope,durationOverrides=sorted(session.durations),departureOverride='departure' in session.explicit_overrides,journey=Journey.model_validate(redact(route.journey.model_dump())),occurrenceOrder=[v.occurrence for v in route.visits],
             omittedOccurrences=[o.occurrence for o in route.omitted],ending=route.ending,endpointId=route.endpoint.place_id if route.endpoint else None,
             historicalTiming=option.state,travelException=option.travelException,departureMinute=session.departure if session.departure is not None else context.departureMinute)
         saved.append(SavedOption(candidateId=option.id,advanced=advanced,stops=[SavedStop(position=i,activity=activities[v.occurrence],

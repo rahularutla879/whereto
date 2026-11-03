@@ -1,3 +1,5 @@
+Task 50E refinement: `backend/advanced_preferences.py` validates app-owned edits; Session retains original Journey plus effective overrides and projects canonical preference metadata. `lib/advanced-preferences.ts` hydrates/diffs one browser draft and merges model-free replay answers. `AdvancedPreferenceFields` lives inside the existing preferences panel. `ItineraryStop`/`EndingStep` extend the original PlanCard for both paths; VenueDetails is contact-only. Pure timing consumes a trusted effective copy with the original source budget and explicit scope. Compatible directional evidence is reused; configuration changes revalidate. Optional saved-v2 provenance fields require no schema migration. [Contracts/checks](docs/task50e-followup.md).
+
 > Task 50C: `advanced_routing.AdvancedRouter` consumes a live server-owned Task 50B
 > resolver and its shared outing budget. A bounded precedence-aware beam constructs
 > required/optional visits and fixed endpoints, then `DirectedRouteRequest` feeds the

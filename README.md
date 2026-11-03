@@ -1,3 +1,5 @@
+Task 50E: accepted shopping/other visit durations, duration meanings and departure can now be changed in **Set preferences → A few details to make it yours**. Change the value and click **Regenerate plans**; keep your original request. The 45-minute scope selector explains entire outing versus an explicit travel-only override. ATM/return requirements remain. Ordinary and advanced cards share compact contact details. [Verification and routing limits](docs/task50e-followup.md). Task 51 remains unstarted.
+
 # where to?
 
 Task 50E follow-up keeps the original cards, offers working explicit nearby-start

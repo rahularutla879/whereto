@@ -354,3 +354,13 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .plan-details a:visited { color: #655078; }
 .plan-details a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
 .plan-details li > div { min-width: 0; }
+
+.advanced-preferences { margin: 18px 0 0; padding: 14px 0 0; border: 0; border-top: 1px solid #d4d9c7; min-width: 0; }
+.advanced-preferences legend { font-size: 12px; font-weight: 600; padding: 0; }
+.advanced-visit-preference { min-width: 0; display: flex; flex-direction: column; gap: 12px; }
+.advanced-preferences select, .advanced-preferences input { max-width: 100%; min-width: 0; }
+.advanced-preferences small { display: block; line-height: 1.6; }
+.zero-visit-confirmation { display: flex; align-items: flex-start; gap: 8px; }
+.zero-visit-confirmation input { width: auto; }
+
+.advanced-budget-preference { grid-column: 1 / -1; }

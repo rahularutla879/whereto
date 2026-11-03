@@ -28,6 +28,8 @@ import { VenueDetailsSession } from "@/lib/venue-details";
 import type { LocationContext } from "@/lib/planning-client";
 import { nextOptions } from "@/lib/option-batches";
 import { adaptRanking } from "@/lib/planning-client";
+import {AdvancedPreferenceFields} from "@/components/advanced-preferences";
+import {advancedDraft,advancedEdits,rememberAdvancedEdit,durationRelation,type AdvancedDraft} from "@/lib/advanced-preferences";
 import {AdvancedClarifications} from "@/components/advanced-plan";
 import {continueAdvanced} from "@/lib/advanced-planning";
 import {PlanCard} from '@/components/plan-card';
@@ -44,6 +46,8 @@ export default function Home() {
   useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const advancedContinuation=useRef<PendingOuting|null>(null);
   const advancedAnswers=useRef<Record<string,unknown>[]>([]);
+  const [advancedPreferenceDraft,setAdvancedPreferenceDraft]=useState<AdvancedDraft|null>(null);
+  const [advancedPreferenceDirty,setAdvancedPreferenceDirty]=useState(false);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -81,6 +85,10 @@ export default function Home() {
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
+    if(result.advanced&&advancedPreferenceDirty&&advancedPreferenceDraft){
+      const edits=advancedEdits(result.advanced.data,advancedPreferenceDraft);
+      if(Object.keys(edits).length)advancedAnswers.current=rememberAdvancedEdit(advancedAnswers.current,{edits});
+    }
     setSavedOpen(false);
     setRecovery(undefined);setOptionsNotice("");
     pages.current.reset();syncPages();
@@ -92,7 +100,7 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
-    advancedContinuation.current=null;advancedAnswers.current=[];
+    advancedContinuation.current=null;advancedAnswers.current=[];setAdvancedPreferenceDraft(null);setAdvancedPreferenceDirty(false);
     setSavedOpen(false);
     cancelClarification();
     detailsSession.clear();
@@ -157,21 +165,25 @@ export default function Home() {
   }
   async function answerAdvanced(answer:Record<string,unknown>){
     if(!result.advanced||dirty)return;
+    if(advancedPreferenceDirty&&advancedPreferenceDraft&&!answer.edits){
+      const edits=advancedEdits(result.advanced.data,advancedPreferenceDraft);
+      if(Object.keys(edits).length)answer={...answer,edits};
+    }
     const controller=session.current.begin();if(!controller)return;
     beginPlanningTiming();setLoading(true);setPlanningStage("Applying your answer and checking the itinerary");setOptionsNotice("");
     try{
       const next=await continueAdvanced(result.advanced,answer,controller.signal);
       if(!session.current.current(controller))return;
-      if(answer.dwell||answer.departure||answer.choice||answer.searchNearOrigin){
-        advancedAnswers.current=advancedAnswers.current.filter(a=>!(answer.dwell&&a.dwell&&(a.dwell as {occurrence:number}).occurrence===(answer.dwell as {occurrence:number}).occurrence)&&!(answer.departure&&a.departure)&&!(answer.searchNearOrigin&&a.searchNearOrigin)&&!(answer.choice&&a.choice&&(a.choice as {occurrence:number}).occurrence===(answer.choice as {occurrence:number}).occurrence));
-        advancedAnswers.current.push(answer);
+      if(answer.dwell||answer.departure||answer.choice||answer.searchNearOrigin||answer.edits){
+        advancedAnswers.current=rememberAdvancedEdit(advancedAnswers.current,answer);
       }
       if(typeof answer.date==='string')setPreferenceState(previous=>editPreference(previous,'date',next.advanced?.data.date&&!next.advanced.data.questions.some(q=>q.field==='date')?next.advanced.data.date:answer.date as string));
       if(answer.searchNearOrigin&&next.advanced?.data.destination)setPreferenceState(previous=>displayInterpretedPreferences(previous,{...previous.values,location:next.advanced!.data.destination!}));
       if(typeof answer.destination==='string')setPreferenceState(previous=>editPreference(previous,'location',answer.destination as string));
       setResult(next);latest.current=next;
       focusFollowup(next);
-      if(!pages.current.pages.length){pages.current.append(next);syncPages();}
+      if(answer.edits){pages.current.reset();pages.current.append(next);syncPages();}
+      else if(!pages.current.pages.length){pages.current.append(next);syncPages();}
       else {pages.current.pages[pages.current.index]=structuredClone(next);syncPages();}
     }catch(error){if(session.current.current(controller)){
       setOptionsNotice(error instanceof Error?error.message:"Your answer could not be applied. Your itinerary is kept.");
@@ -182,10 +194,11 @@ export default function Home() {
   function focusFollowup(next:PlannerResult){
     if(next.advanced){
       const data=next.advanced.data;
+      setAdvancedPreferenceDraft(advancedDraft(data));setAdvancedPreferenceDirty(false);
       setPreferenceState(previous=>displayInterpretedPreferences(previous,{...previous.values,date:data.questions.some(q=>q.field==='date'||q.field==='destination')?previous.values.date:data.date??previous.values.date,location:data.destination??previous.values.location}));
     }
     const fields=next.advanced?.data.questions.map(q=>q.field)??[];
-    if(fields.some(f=>f==='date'||f==='destination'))setPreferencesOpen(true);
+    if(fields.length)setPreferencesOpen(true);
     requestAnimationFrame(()=>{
       if(fields.includes('date'))document.querySelector<HTMLInputElement>('#preferences input[name="outing-date"]')?.focus();
       else if(fields.includes('destination'))document.querySelector<HTMLInputElement>('#destination-preference')?.focus();
@@ -257,18 +270,22 @@ export default function Home() {
       if (session.current.finish(controller)) setLoading(false);
     }
   }
+  function editAdvancedPreferences(value:AdvancedDraft){
+    session.current.cancel();setLoading(false);setOptionsBusy(false);setAdvancedPreferenceDraft(value);setAdvancedPreferenceDirty(true);
+    pages.current.reset();syncPages();
+    setResult(previous=>({...previous,plans:[],saveReceipt:undefined,saveAccessToken:undefined,canExpand:false,canDiscover:false,canShowBeyond:false,message:'Preferences changed. Regenerate to check your updated itinerary.'}));
+    latest.current={...latest.current,plans:[],canExpand:false,canDiscover:false,canShowBeyond:false};
+  }
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing."); requestRef.current?.reportValidity(); return; }
-    if(result.advanced?.data.questions.length&&!dirty){
+    if(result.advanced&&!dirty&&(advancedPreferenceDirty||result.advanced.data.questions.length)){
       const fields=result.advanced.data.questions.map(q=>q.field);
-      if(fields.includes('date')||fields.includes('destination')){
-        const answer:Record<string,unknown>={};
-        if(fields.includes('date')&&preferences.date)answer.date=preferences.date;
-        if(fields.includes('destination')&&preferences.location)answer.destination=preferences.location;
-        if(Object.keys(answer).length)await answerAdvanced(answer);
-        return;
-      }
+      const answer:Record<string,unknown>={};
+      if(fields.includes('date')&&preferences.date)answer.date=preferences.date;
+      if(fields.includes('destination')&&preferences.location)answer.destination=preferences.location;
+      if(advancedPreferenceDraft){const edits=advancedEdits(result.advanced.data,advancedPreferenceDraft);if(Object.keys(edits).length)answer.edits=edits;}
+      await answerAdvanced(answer);return;
     }
     await runPlanning(!!clarification || !!validated || !!advancedContinuation.current);
   }
@@ -295,17 +312,19 @@ export default function Home() {
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <p className="prompt-help">Big ideas, loose plans, oddly specific cravings. All welcome.</p>
           {<LocationControls mock={dataMode!=="real"} ref={startingControls} lookupEnabled={lookupEnabled} onStage={setPlanningStage} onChange={(value,preparing) => { if(!preparing)invalidateResults(); setLocationContext(value); }} />}
-          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button>{((!clarification?.questions.length && (!result.advanced?.data.questions.length||result.advanced.data.questions.some(q=>['date','destination','origin'].includes(q.field)))) || loading) && <button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? planningStage === "Generating itinerary" ? "Planning…" : planningStage : result.requestFailed ? "Retry" : clarification||result.advanced?.data.questions.length ? "Continue planning" : (validated||result.advanced||generated&&dirty) ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button>}</div>
+          <div className="planner-actions"><button type="button" className="preferences-toggle" aria-expanded={preferencesOpen} aria-controls="preferences" onClick={() => setPreferencesOpen(!preferencesOpen)}><Settings2 size={16} /> Set preferences <span className="optional-label">{preferencesCount ? `${preferencesCount} set` : "optional"}</span><ChevronDown size={15} className={preferencesOpen ? "rotate" : ""} /></button>{(!clarification?.questions.length || loading) && <button type="submit" className="primary-button" disabled={loading || dataMode === "unavailable"} aria-busy={loading}>{loading ? planningStage === "Generating itinerary" ? "Planning…" : planningStage : result.requestFailed ? "Retry" : advancedPreferenceDirty ? "Regenerate plans" : clarification||result.advanced?.data.questions.length ? "Continue planning" : (validated||result.advanced||generated&&dirty) ? "Regenerate plans" : "Plan my outing"} <ArrowRight size={18} /></button>}</div>
           {loading && <button type="button" className="secondary-button" onClick={cancelPlanning}>Cancel planning</button>}
           <div id="preferences" hidden={!preferencesOpen} className="preferences-panel">
-            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); }}>Reset preferences</button></div>
+            <div className="preferences-intro"><p>A few details to make it yours.</p><button type="button" onClick={() => { invalidateResults(); setPreferenceState(emptyPreferenceState()); setValidated(null); setAnswers({}); advancedAnswers.current=[];setAdvancedPreferenceDraft(null);setAdvancedPreferenceDirty(false); }}>Reset preferences</button></div>
             <div className="preferences-grid">
               <label><span><MapPin size={14} /> Location</span><input id="destination-preference" type="text" placeholder="City or location" value={preferences.location} maxLength={80} onChange={(e) => updatePreference("location", e.target.value)} /><small>{dataMode === "real" ? "Destination city/neighborhood; separate from your start" : "Fictional Baltimore venues only"}</small></label>
               <label><span><Footprints size={14} /> Travel mode</span><select aria-label="Travel mode" value={preferences.transport||"driving"} onChange={e=>updatePreference("transport",e.target.value)}><option value="driving">Driving</option><option value="walking">Walking</option></select><small>One mode for every journey. Driving is the default.</small></label>
               <OutingDateField allowNatural={!!clarification?.questions.some(q=>q.field==="date")||!!result.advanced?.data.questions.some(q=>q.field==="date")} real={dataMode === "real"} value={preferences.date} onChange={value => updatePreference("date", value)} />
               <label><span><Clock3 size={14} /> Maximum travel time</span><div className="input-with-unit"><input type="number" inputMode="numeric" min="0" max="1440" step="1" placeholder="No limit" value={preferences.travel} onChange={(e) => updatePreference("travel", e.target.value)} /><span>minutes</span></div><small>Total between stops; excludes getting there</small></label>
               {validated && <label className="activity-editor"><span>Activities in order</span><input aria-describedby="activity-edit-help" value={answers.activities ?? activityEditText(validated.request)} maxLength={500} onChange={e => { invalidateResults(); setAnswers(previous => ({ ...previous, activities: e.target.value })); }} /><small id="activity-edit-help">Separate stops with commas, including repeats. Use “dinner” to keep dinner timing. Up to four stops.</small></label>}
-            </div><p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
+            </div>
+            {result.advanced&&advancedPreferenceDraft&&<AdvancedPreferenceFields data={result.advanced.data} draft={advancedPreferenceDraft} busy={loading} onChange={editAdvancedPreferences}/>}
+            <p className="preference-note">Values from your last request appear here. Only settings you change take priority over new text. Clear a field or reset to use your words. You can supply missing details in your request.</p>
           </div>
         {validated && <OutingSummary real={dataMode === "real"} value={validated} dirty={dirty} loading={loading} onEdit={() => { setPreferencesOpen(true); requestAnimationFrame(() => document.querySelector<HTMLInputElement>("#preferences input")?.focus()); }} />}
         {!loading && !!clarification?.questions.length && <div className="clarification-panel" ref={followupRef} aria-label="Outing follow-up">
@@ -332,6 +351,7 @@ export default function Home() {
         <div hidden={savedOpen}>
 
         {generated && <BeyondPreferences result={result}/>}
+        {result.plans.length>0&&result.advanced?.data.preferences?.budget&&<p className="details-note">Time budget: {durationRelation(result.advanced.data.preferences.budget.relation)} {result.advanced.data.preferences.budget.minutes} minutes {result.advanced.data.preferences.budgetScope==='travel'?'for travel only, excluding visits (your explicit override)':'for the entire outing, including visits and all route legs'}.</p>}
         {generated&&result.advanced&&!result.plans.length&&!result.advanced.data.questions.length&&<p role='status'>{result.message}</p>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && (!result.advanced || loading) && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} advancedUnavailable={result.advancedUnavailable} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult(restoreContinuation(page,latest.current));syncPages();}}}/>}

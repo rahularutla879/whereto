@@ -8,7 +8,7 @@ import secrets
 from threading import Lock
 from time import monotonic, perf_counter
 from typing import Literal
-from pydantic import Field, model_validator
+from pydantic import Field
 
 from backend.models import ContractModel, OutingDate
 from backend.interpretation import InterpretationContext, activity_category
@@ -35,20 +35,7 @@ class AdvancedAnswerError(ValueError):
         super().__init__(message)
 
 
-class Choice(ContractModel):
-    occurrence: int = Field(strict=True, ge=0, le=4)
-    placeId: str = Field(min_length=1, max_length=200)
-
-
-class DwellAnswer(ContractModel):
-    occurrence: int = Field(strict=True, ge=0, lt=4)
-    minutes: int = Field(strict=True, ge=0, le=10080)
-    relation: Literal['exact', 'minimum', 'maximum', 'under', 'approximate'] = 'approximate'
-
-    @model_validator(mode='after')
-    def nonempty(self):
-        if self.relation=='under' and self.minutes==0:raise ValueError('A visit cannot take strictly less than zero minutes.')
-        return self
+from backend.advanced_preferences import Choice, DwellAnswer, AdvancedEdits
 
 
 class AdvancedInput(ContractModel):
@@ -56,6 +43,7 @@ class AdvancedInput(ContractModel):
     startingLocation: AuthorizedStart | None = Field(default=None, repr=False)
     firstTravel: FirstTravel | None = None
     betweenTravel: FirstTravel | None = None
+    edits: AdvancedEdits | None = None
     choice: Choice | None = None
     dwell: DwellAnswer | None = None
     departure: str | None = Field(default=None, pattern=r'^([01]\d|2[0-3]):[0-5]\d$')
@@ -111,6 +99,7 @@ class PublicOption(ContractModel):
     elapsedLowerSeconds: float
     elapsedUpperSeconds: float | None
     upperExclusive: bool
+    budgetScope: Literal['outing','travel'] = 'outing'
     totalConstraint: Duration | None
     deadlineSource: str | None
     durationState: str
@@ -132,6 +121,8 @@ class AdvancedResult(ContractModel):
     saveReceipt: str | None = Field(default=None, repr=False)
     saveAccessToken: str | None = Field(default=None, repr=False)
     code: str | None = None
+    preferences: dict = Field(default_factory=dict)
+    detailsToken: str | None = Field(default=None,repr=False)
     bounded: Literal[True] = True
     canExpand: bool = False
     canDiscover: bool = False
@@ -163,6 +154,9 @@ class Session:
         self.origin = None
         self.configuration = None
         self.durations = {}
+        self.budget_scope = 'outing'
+        self.explicit_overrides = set()
+        self.details_token = None
         self.departure = None
         self.limitation = limitation
         self.latencies = {}
@@ -184,7 +178,70 @@ class Session:
 
     def base(self, **kwargs):
         return AdvancedResult(token=self.token, date=str(self.context.date) if self.context.date else None,
-            destination=self.context.destination, transport=self.context.transport.value if self.context.transport else 'driving', **kwargs)
+            preferences=self.preferences(), destination=self.context.destination, transport=self.context.transport.value if self.context.transport else 'driving', **kwargs)
+
+    def preferences(self):
+        stops=[]
+        choices=self.resolver.preference_choices() if self.resolver and self.resolver._result else []
+        for choice in choices:choice['label']=redact_source(choice['label'],self.context)
+        for n,stop in enumerate(self.journey.stops):
+            effective=self.durations.get(n,stop.duration)
+            stops.append({'occurrence':n,'requested':redact_source(stop.source,self.context),
+                'duration':{**effective.model_dump(mode='json'),'source':redact_source(effective.source,self.context)} if effective else None,
+                'originalDuration':{**stop.duration.model_dump(mode='json'),'source':redact_source(stop.duration.source,self.context)} if stop.duration else None,
+                'override':n in self.explicit_overrides})
+        departure=self.departure if self.departure is not None else self.context.departureMinute
+        return {'stops':stops,'budget':{**self.journey.total_duration.model_dump(mode='json'),'source':redact_source(self.journey.total_duration.source,self.context)} if self.journey.total_duration else None,
+            'budgetScope':self.budget_scope,'scopeOverride':self.budget_scope!='outing',
+            'departure':f'{departure//60:02d}:{departure%60:02d}' if departure is not None else None,
+            'departureOverride':'departure' in self.explicit_overrides,'deadlineSource':redact_source(self.journey.deadline.source,self.context) if self.journey.deadline else None,
+            'returnToOrigin':bool(self.journey.endpoint and (self.journey.endpoint.kind=='origin' or self.journey.endpoint.kind=='home' and self.context.endpointStatus=='origin_confirmed')),
+            'endpoint':redact_source(self.journey.endpoint.source,self.context) if self.journey.endpoint else None,
+            'choices':choices}
+
+    def apply_edits(self, edits):
+        scope=edits.budgetScope or self.budget_scope
+        if edits.budgetScope and self.journey.total_duration is None:
+            raise AdvancedAnswerError('advanced_answer_invalid','There is no whole-trip duration to change. Keep the original request or edit its wording.')
+        if any(n>=len(self.journey.stops) for n in edits.resetDwell):raise AdvancedAnswerError('advanced_answer_invalid','Choose an existing visit to reset.')
+        for d in edits.dwell:
+            if d.occurrence>=len(self.journey.stops):raise AdvancedAnswerError('advanced_answer_invalid','Choose an existing visit.')
+            if d.minutes==0 and not (scope=='travel' and d.zeroCountedTime and self.journey.deadline is None):
+                raise AdvancedAnswerError('advanced_answer_invalid','Zero counted visit time needs an explicit travel-only choice and confirmation. Include positive visit time for an entire-outing budget or a finish deadline.')
+        retained={n:d for n,d in self.durations.items() if n not in edits.resetDwell}
+        retained.update({d.occurrence:d for d in edits.dwell})
+        if any(d.minutes==0 for d in retained.values()) and (scope!='travel' or self.journey.deadline is not None):
+            raise AdvancedAnswerError('advanced_answer_invalid','Set a positive visit duration before including visits in the time budget or checking a finish deadline.')
+        if edits.choices:
+            if not self.resolver:raise AdvancedAnswerError('advanced_answer_invalid','Resolve the destination choices first.')
+            allowed={q['occurrence']:{c['placeId'] for c in q['choices']} for q in self.resolver.preference_choices()}
+            if any(c.placeId not in allowed.get(c.occurrence,set()) for c in edits.choices):raise AdvancedAnswerError('advanced_answer_invalid','Choose one of the verified destinations.')
+            from backend.location_context import timezone_for
+            for choice in edits.choices:
+                candidate=next(c for c in self.resolver._alternatives[choice.occurrence] if c.place_id==choice.placeId)
+                zone=candidate.facts.timeZone.id if candidate.facts.timeZone else timezone_for(candidate.facts.address)
+                if self.router and self.context.timezoneBasis=='destination_calendar' and zone!=self.context.timezone:
+                    raise AdvancedAnswerError('advanced_answer_invalid','This destination uses another local calendar. Edit Location and regenerate to revalidate the area and date.')
+        self.budget_scope=scope
+        for n in edits.resetDwell:self.durations.pop(n,None);self.explicit_overrides.discard(n)
+        if edits.resetDeparture:self.departure=None;self.explicit_overrides.discard('departure')
+        for d in edits.dwell:
+            self.durations[d.occurrence]=Duration(minutes=d.minutes,relation=d.relation,
+                source=f'Explicit user override: {d.relation} {d.minutes} counted minutes at stop {d.occurrence+1}')
+            self.explicit_overrides.add(d.occurrence)
+        if edits.departure is not None:
+            self.departure=int(edits.departure[:2])*60+int(edits.departure[3:]);self.explicit_overrides.add('departure')
+        changed=False
+        for choice in edits.choices:
+            changed|=self.resolver.change_choice(choice.occurrence,choice.placeId)
+        if changed:
+            old=self.router
+            self.router=None;self.route_attempted=False
+            self.candidates={}
+            self.reusable_routes=dict(old._evidence) if old else {}
+        # A changed verdict invalidates old pages/receipts, not compatible routes.
+        self.seen.clear();self.current_ids.clear();self.offerable={False:set(),True:set()}
+        self.receipt=self.receipt_key=None
 
     def run(self, value):
         if value.action and self.router is None:raise ValueError('Generate an initial page before continuing.')
@@ -192,6 +249,11 @@ class Session:
             raise ValueError('Confirm real starting coordinates through the existing location control.')
         if self.near_origin is not None and value.startingLocation != self.near_origin:
             raise AdvancedAnswerError('advanced_origin_changed','Your starting point changed. Regenerate to use the new origin.')
+        if value.edits and value.action:raise AdvancedAnswerError('advanced_answer_invalid','Apply preferences before exploring more options.')
+        if value.edits:
+            supplied=(value.startingLocation.model_dump_json() if value.startingLocation else None,value.firstTravel.model_dump_json() if value.firstTravel else None,value.betweenTravel.model_dump_json() if value.betweenTravel else None)
+            if self.configuration is not None and supplied!=self.configuration:raise AdvancedAnswerError('advanced_origin_changed','Routing preferences changed. Regenerate to use the new origin or travel limits.')
+            self.apply_edits(value.edits)
         if self.limitation:
             return self.base(status='unsupported', message=self.limitation)
         from backend.date_resolution import resolve_datetime
@@ -315,7 +377,7 @@ class Session:
             return self.base(status='unsupported',message='A separate home address is not verified by this flow. Choose Return to my starting point and confirm that origin, or request a named final establishment.')
         if not self.context.destination and self.search_area is None and (any(s.kind != 'named_place' for s in self.journey.stops) or self.journey.deadline):
             return self.base(status='clarification',message='Choose a search area without changing your stops.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
-        minute=self.context.departureMinute
+        minute=self.departure if self.departure is not None else self.context.departureMinute
         if minute is None:
             minute=int(value.departure[:2])*60+int(value.departure[3:]) if value.departure else self.departure
         if minute is not None and self.context.timezoneBasis=='destination_calendar':
@@ -325,8 +387,8 @@ class Session:
             invalid_clock=instant is None or instant<datetime.now(zone)
             if invalid_clock:
                 message='That departure is past or ambiguous at a clock change. Choose a future, unambiguous destination-local departure, or edit the outing date.'
-                if self.context.departureMinute is not None:
-                    return self.base(status='unsupported',message=message+' Edit the original request to replace its stated departure.')
+                if self.context.departureMinute is not None and self.departure is None:
+                    return self.base(status='unsupported',message=message+' Change Departure time in Set preferences to explicitly override the original departure.')
                 return self.base(status='clarification',message=message,questions=[{'field':'departure','question':'What time will you depart, in the destination timezone?'}])
         config = (value.startingLocation.model_dump_json() if value.startingLocation else None,
                   value.firstTravel.model_dump_json() if value.firstTravel else None,
@@ -383,6 +445,7 @@ class Session:
         if self.router is None:
             self.route_attempted = True
             self.router=AdvancedRouter(self.resolver)
+            self.router._evidence.update(getattr(self,'reusable_routes',{}))
             started=perf_counter()
             self.router.plan(origin=self.origin,allow_beyond_limit=True)
             self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
@@ -391,6 +454,7 @@ class Session:
             n=value.dwell.occurrence
             if n>=len(self.journey.stops): raise ValueError('Unknown stop occurrence.')
             if self.journey.stops[n].duration is not None: raise ValueError('Edit the request to replace an original duration.')
+            if value.dwell.minutes==0:raise AdvancedAnswerError('advanced_answer_invalid','Use the time-budget preferences to explicitly choose travel-only and confirm zero counted visit time.')
             self.durations[n]=Duration(minutes=value.dwell.minutes,relation=value.dwell.relation,
                 source=f'User clarification: {value.dwell.relation} {value.dwell.minutes} minutes at stop {n+1}')
         if value.departure:
@@ -407,8 +471,11 @@ class Session:
                 self.router.advance(origin=self.origin,allow_beyond_limit=True)
                 self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
         self.router.use_candidates(list(self.candidates.values())[:256])
+        zero=next((n for n,stop in enumerate(self.journey.stops) if (d:=self.durations.get(n,stop.duration)) is not None and d.minutes==0 and (self.budget_scope!='travel' or n not in self.explicit_overrides or self.journey.deadline is not None)),None)
+        if zero is not None:
+            return self.base(status='clarification',message='Zero is not a realistic visit duration. Supply positive visit time, or explicitly confirm zero counted time under a travel-only budget.',questions=[{'field':'dwell','occurrence':zero,'question':'How should time at this stop be counted?'}])
         started=perf_counter()
-        timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure)
+        timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure,budget_scope=self.budget_scope,allow_overrides=True)
         self.latencies['timingMs']=(perf_counter()-started)*1000
         self.timing_counts={state:sum(c.state==state for c in timing.candidates) for state in ('feasible','infeasible','unverified')}
         route_errors=[l.evidence.error_code for c in timing.candidates for l in c.route.legs if l.evidence.error_code]
@@ -462,9 +529,9 @@ class Session:
                     meters=l.evidence.distance_meters,status=l.evidence.status,mode=l.evidence.mode,mapsUrl=directions_link(l.evidence.origin_id if l.role in ('inter_activity','final_destination') else None,l.evidence.destination_id,l.evidence.mode)) for l in route.legs],
                 knownTravelSeconds=float(c.known_travel_seconds),elapsedLowerSeconds=float(c.elapsed.lower),
                 elapsedUpperSeconds=float(c.elapsed.upper) if c.elapsed.upper is not None else None,upperExclusive=c.elapsed.upper_exclusive,
-                totalConstraint=route.journey.total_duration.model_copy(update={'source':redact_source(route.journey.total_duration.source,self.context)}) if route.journey.total_duration else None,deadlineSource=redact_source(route.journey.deadline.source,self.context) if route.journey.deadline else None,durationState=c.duration_state,deadlineState=c.deadline_state,reasons=list(dict.fromkeys(r.message for r in c.reasons if r.state!='feasible')),
+                budgetScope=self.budget_scope,totalConstraint=route.journey.total_duration.model_copy(update={'source':redact_source(route.journey.total_duration.source,self.context)}) if route.journey.total_duration else None,deadlineSource=redact_source(route.journey.deadline.source,self.context) if route.journey.deadline else None,durationState=c.duration_state,deadlineState=c.deadline_state,reasons=list(dict.fromkeys(r.message for r in c.reasons if r.state!='feasible')),
                 omitted=[{'occurrence':o.occurrence,'requested':redact_source(o.requested.source,self.context),'reason':o.reason} for o in route.omitted]))
-            if route.journey.total_duration or route.journey.deadline:
+            if route.journey.total_duration and self.budget_scope=='outing' or route.journey.deadline:
                 for v in route.visits:
                     if v.requested.duration is None:
                         q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend on {redact_source(v.requested.source,self.context)}?'}
@@ -478,10 +545,11 @@ class Session:
             for c in timing.candidates:
                 if c.duration_state=='infeasible' and c.route.journey.total_duration:
                     d=c.route.journey.total_duration
-                    lower=float(c.elapsed.lower)/60
-                    upper=float(c.elapsed.upper)/60 if c.elapsed.upper is not None else None
+                    measured=c.travel if self.budget_scope=='travel' else c.elapsed
+                    lower=float(measured.lower)/60
+                    upper=float(measured.upper)/60 if measured.upper is not None else None
                     span=f'{lower:g} minutes or more' if upper is None else f'{lower:g} to {upper:g} minutes'
-                    evidence.append(f'Whole-trip requirement: {d.relation} {d.minutes} minutes. Supported journey duration: {span}.')
+                    evidence.append(f"{'Travel-only' if self.budget_scope=='travel' else 'Whole-trip'} requirement: {d.relation} {d.minutes} minutes. Supported journey duration: {span}.")
             if evidence:message='No checked option meets your requirements. '+' '.join(dict.fromkeys(evidence))+' Edit your request or preferences to try a different requirement.'
         route_error_code='provider_quota_rejected' if 'quota' in route_errors else 'provider_local_admission' if 'application_limit' in route_errors else 'provider_service_error'
         if route_errors:
@@ -489,8 +557,13 @@ class Session:
         result=self.base(status='results' if options else 'no_results',message=message,options=options,questions=questions,
             code=route_error_code if route_errors else None if options else 'insufficient_routing')
         if options:
+            from backend.venue_details import details_sessions
+            ids=[v.placeId for option in options for v in option.stops]
+            if self.details_token:details_sessions.extend(self.details_token,ids)
+            else:self.details_token=details_sessions.create(ids,self.outing)
+            result.detailsToken=self.details_token
             from backend.saved_advanced import issue_advanced
-            key=repr(([(p.id,p.state,p.model_dump()['stops']) for p in options],self.durations,self.departure))
+            key=repr(([(p.id,p.state,p.model_dump()['stops']) for p in options],self.durations,self.departure,self.budget_scope))
             if key!=self.receipt_key:
                 self.receipt=issue_advanced(self,eligible,options)
                 self.receipt_key=key

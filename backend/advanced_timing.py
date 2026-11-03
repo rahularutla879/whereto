@@ -126,6 +126,7 @@ class TimedCandidate(JourneyModel):
     visits: list[TimedVisit] = Field(min_length=1, max_length=4)
     routing_state: State
     travel_preference_state: State
+    budget_scope: Literal['outing','travel'] = 'outing'
     duration_state: State
     deadline_state: State
     hours_state: State
@@ -161,7 +162,7 @@ class TimedCandidate(JourneyModel):
                 raise ValueError('Departure disagrees with original route evidence.')
         if travel != self.travel or dwell != self.dwell or self.finish != _project(self.elapsed, self.start, zone):
             raise ValueError('Timing breakdown must agree with original evidence.')
-        if self.duration_state != _limit(self.elapsed, self.route.journey.total_duration)[0]:
+        if self.duration_state != _limit(self.travel if self.budget_scope=='travel' else self.elapsed, self.route.journey.total_duration)[0]:
             raise ValueError('Duration verdict disagrees with the source constraint.')
         expected_hours = _combine(*(v.hours_state for v in self.visits), *(['unverified'] if self.route.endpoint else []))
         expected_routing = ('infeasible' if any(l.evidence.status == 'unreachable' for l in self.route.legs)
@@ -274,7 +275,7 @@ def _visit_hours(facts, arrival, departure, evaluated_at):
     return state, code
 
 
-def _evaluate(route, index, context, evaluated_at):
+def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
     reasons = []
     def reason(state, code, message, occurrence=None):
         reasons.append(TimingReason(state=state, code=code, message=message, occurrence=occurrence))
@@ -321,8 +322,8 @@ def _evaluate(route, index, context, evaluated_at):
     # Explicit final endpoint is an arrival obligation, with no invented visit dwell.
     elapsed = _plus(travel, dwell)
     finish = _project(elapsed, anchor, zone)
-    duration_state, code = _limit(elapsed, route.journey.total_duration)
-    reason(duration_state, code, 'Whole-trip time includes every selected travel leg and explicit dwell bound; approximate durations are soft preferences.')
+    duration_state, code = _limit(travel if budget_scope=='travel' else elapsed, route.journey.total_duration)
+    reason(duration_state, code, 'Travel-only budget includes every selected travel leg and excludes visit time; independent finish deadlines still include visits.' if budget_scope=='travel' else 'Whole-trip time includes every selected travel leg and explicit dwell bound; approximate durations are soft preferences.')
     deadline = None
     deadline_state = 'feasible'
     if route.journey.deadline:
@@ -365,11 +366,11 @@ def _evaluate(route, index, context, evaluated_at):
         travel=travel, dwell=dwell, elapsed=elapsed, start=anchor,
         start_source=context.departureSource if context else None, deadline=deadline, finish=finish,
         visits=visits, routing_state=routing_state, travel_preference_state=preference,
-        duration_state=duration_state, deadline_state=deadline_state, hours_state=hours,
+        budget_scope=budget_scope,duration_state=duration_state, deadline_state=deadline_state, hours_state=hours,
         state=_combine(routing_state, preference, duration_state, deadline_state, hours), reasons=reasons)
 
 
-def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, dwell_answers=None, departure_minute=None) -> AdvancedTimingResult:
+def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, dwell_answers=None, departure_minute=None, budget_scope='outing', allow_overrides=False) -> AdvancedTimingResult:
     """Consume only an active backend router, rechecking authorization and expiry.
 
     No client evidence input. Evaluates up to three existing routes of four stops;
@@ -379,6 +380,7 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, 
         raise TypeError('A server-owned AdvancedRouter is required.')
     if not isinstance(evaluated_at, datetime) or evaluated_at.tzinfo is None or evaluated_at.utcoffset() is None:
         raise ValueError('An aware evaluation clock is required.')
+    if budget_scope not in ('outing','travel'):raise ValueError('Choose a supported budget scope.')
     result = router.timing_snapshot()
     # Only app-owned duration/departure answers amend a copy of trusted routes.
     # Identity, routing, topology and provider evidence stay in the original session.
@@ -386,7 +388,7 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, 
         for route in result.candidates:
             journey = route.journey.model_copy(deep=True)
             for occurrence, duration in dwell_answers.items():
-                if type(occurrence) is not int or not 0 <= occurrence < len(journey.stops) or journey.stops[occurrence].duration is not None:
+                if type(occurrence) is not int or not 0 <= occurrence < len(journey.stops) or journey.stops[occurrence].duration is not None and not allow_overrides:
                     raise ValueError('Only missing occurrence durations can be clarified.')
                 journey.stops[occurrence].duration = Duration.model_validate(duration.model_dump())
             route.journey = journey
@@ -396,11 +398,11 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, 
                 omission.requested = journey.stops[omission.occurrence]
             AdvancedRouteCandidate.model_validate(route.model_dump())
     if departure_minute is not None:
-        if type(departure_minute) is not int or not 0 <= departure_minute < 1440 or result.context is None or result.context.departureMinute is not None:
+        if type(departure_minute) is not int or not 0 <= departure_minute < 1440 or result.context is None or result.context.departureMinute is not None and not allow_overrides:
             raise ValueError('Only a missing explicit departure can be clarified.')
         result.context.departureMinute = departure_minute
         result.context.departureSource = f'depart at {departure_minute//60:02d}:{departure_minute%60:02d}'
-    return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at)
+    return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at,budget_scope)
         for i, route in enumerate(result.candidates)], routing_status=result.status,
         routing_reasons=result.reasons, evaluated_at=evaluated_at,
         date=result.context.date if result.context else None, timezone=result.timezone,

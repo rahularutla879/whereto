@@ -266,3 +266,188 @@ Functional follow-up acceptance is verified. **Qwen generation latency remains a
 measured limitation**; no universal sub30-second response or model speed improvement
 is claimed. Live device GPS and the owner's historical route discrepancy remain
 unverified for the specific evidence reasons above. Task51 remains unstarted.
+
+
+## November 3 — Task 50E compact details and editable itinerary preferences
+
+This acceptance refinement continues `d526d6a`; it does not start Task 51.
+
+### Shared cards and contact details
+
+Both planning paths now render the original `PlanCard`, shared `ItineraryStop`,
+artwork, numbered list, typography, actions and three-card grid. Advanced cards add
+only supplied visit bounds, useful directional legs, requested ending and one
+expandable timing/budget explanation. Ordinary scoring is unchanged. Names,
+addresses, ratings and hours remain in their primary itinerary presentation.
+Nested **View details** now adds phone/website, the contact/booking notice and any
+new required third-party credit. Repeated identity/address/rating/hours, Maps links
+already shown above, and repeated Google branding are removed. Link underlines and
+mobile wrapping are shared. Actual travel exceptions remain visible.
+
+Opening the itinerary does not request contacts or hours. A deliberate contact
+click uses the existing gated Details operation, original outing budget, duplicate
+protection and transient browser cache. Advanced contacts use that same capability;
+no new field mask, API operation, automatic request, quota or Cloud setting is added.
+
+### One effective preferences contract
+
+Accepted advanced answers now appear in **Set preferences → A few details to make
+it yours → Visit times and itinerary preferences**. All stop durations and their
+Exact/At most/At least/Under/Approximate meanings, departure, original duration
+references, source-required return/final destination and retained verified branch
+choices are shown. Existing Date, Location, Travel mode and Starting location
+controls stay canonical. Required source stops/return cannot be removed by a timing
+edit. A different starting point is edited using the existing location control;
+a different geographic calendar needs Location regeneration.
+
+The server owns `AdvancedEdits` and effective preferences. The browser has one
+editable draft, not separate clarification and preference forms. Structured edits
+amend a trusted copy for timing; original Journey/source text remain unchanged.
+Overrides are identified as explicit user changes. Clearing a duration/departure
+override restores its original source value. Draft edits applied with the nearby
+clarification preserve both answers for later model-free replay.
+
+Changing a visit clears stale cards, selection receipts and page history. Regenerate
+uses the same active token, resolver and directional route evidence. Timing is
+recomputed; no old timing verdict is reused. Mode/origin/travel-configuration changes
+use deterministic continuation and incompatible routes are not reused. Verified
+branch edits can reuse previously checked compatible pairs; only missing pairs are
+routed. Retained choices cannot inject arbitrary Place IDs. Cross-calendar branch
+changes require area/date revalidation rather than stale calendar reuse.
+
+### Entire outing versus travel-only
+
+“Return within 45 minutes” remains an inclusive **entire outing** constraint. The
+scope selector explains both meanings; selecting travel-only is a deliberate,
+visible override of that original scope. It reuses the same source amount/relation,
+not a second independent budget. Every route leg, including origin and return, is
+counted. Independent deadlines still include visits. Required shopping and ATM
+stops remain required even with unknown or excluded visit time.
+
+With grocery 20 + ATM 5, 45 minutes including visits leaves 20 for travel. Grocery 10
+leaves 30. Travel-only 45 allows 45 of route travel, with visits excluded from that
+bound; these schedules are not interchangeable. Exact/inclusive/exclusive and
+minimum/maximum/approximate semantics are retained. Approximate has no guaranteed
+completion maximum. A minimum does not invent an upper bound.
+
+Zero never drops a stop and is never advertised as realistic shopping. Zero counted
+time requires travel-only plus an explicit acknowledgement, and is refused for an
+entire-outing budget or independent finish deadline. Switching back requires a
+positive duration or clearing the override. Original zero wording also requires
+clarification before any fit claim. Travel-only cards do not present excluded/zero
+counted dwell as a verified elapsed outing duration.
+
+### Google route investigation and authorization
+
+Audited the actual Matrix request: DRIVE + `TRAFFIC_UNAWARE`, or WALK without a
+routing preference; **no departureTime**; minimal existing duration/distance/status
+mask. Exact directional Place IDs (or separately confirmed origin coordinates),
+protobuf seconds/nanoseconds, origin→first, inter-stop and return/end legs all use
+the same evidence. Display rounding is not used for hard checks. The transient
+cache is directional and mode-specific within an immutable routing configuration;
+timing edits reuse it, incompatible configuration changes require regeneration.
+No route policy/cache/cost tier was changed in this refinement.
+
+Google's [Routes billing rules](https://developers.google.com/maps/documentation/routes/usage-and-billing)
+classify traffic-aware Matrix requests as Pro. The
+[global pricing list](https://developers.google.com/maps/billing-and-pricing/pricing)
+shows first paid volume Essentials $5/1,000 elements (10,000 monthly free events)
+versus Pro $10/1,000 (5,000 free events), checked November 3. At 27 elements the gross
+estimate would change from $0.135 to $0.270 (+$0.135), before allowances/taxes/volume
+adjustments. This would need explicit approval of the higher SKU and coordinated
+request/evidence/cache/enforcement/saved-description/accounting changes. It was
+**not activated**. Request volume, approved operations and quotas stay unchanged.
+No live Google comparison was performed and no consumer Maps parity is claimed.
+Consumer UI route choice, entrances, departure assumptions and traffic may differ;
+manual consumer estimates are not provider evidence.
+
+The shared notice now says: “Travel estimates use Google Maps. Driving estimates
+exclude live traffic. Actual travel times may change, especially for future outings.”
+It is shown once, including for tomorrow's outing. Repetitive per-leg traffic copy
+is removed. Walking remains identified with its existing pedestrian-route warning.
+These are estimates retrieved under the approved policy, not current live-traffic
+or guaranteed future arrival predictions.
+
+### Persistence, measured performance and verification
+
+Saved v2 adds optional defaulted `budgetScope`, `originalJourney`, duration override
+occurrences and departure override provenance. Old v2 defaults to entire-outing;
+v1 remains compatible. Selected-only saving, capability links/30-day expiry,
+restricted role, forced RLS and verified TLS remain. No migration. Only app-owned
+requirements and permitted references are saved; no contact content, ratings,
+hours, route metrics or private origin coordinates are added to storage.
+
+Offline backend benchmark (20 alternating edits each): duration median 1.231 ms,
+max 1.642 ms; scope median 1.195 ms, max 1.369 ms. Additional searches/Matrix requests: 0.
+These measure local session/edit/timing evaluation, not Qwen, network or cold start.
+The existing Qwen latency limitation is unchanged; no model speedup is claimed.
+Browser 20→10 produced 31→21 minutes with 6 minutes of fixture travel and ATM 5 retained.
+Through 20, 10 and explicit travel-only, fixture counts stayed searches 9, elements 70,
+Details 4, AI 3: **zero incremental model/provider calls**. These are invented responses;
+actual Google sends were blocked. The AI count measures fixture interpretations,
+not fresh actual-Qwen timing. One interpretation per new text remains unchanged.
+
+Desktop 1280 and mobile 390 acceptance covers ordinary dinner/bowling, named college
+then coffee, grocery/ATM/return with 45 including visits, travel-only, accepted 20→10
+editing, compact ordinary/advanced contacts, history and selected second-option
+save/new-tab reopen. Links are underlined; no Select itinerary action or horizontal
+overflow. New saved constraints/provenance also pass committed PostgreSQL reopen
+in another process. Exact disposable hashes/selected identities were checked and
+cleaned, then committed absence verified; owner records untouched.
+
+Final frontend suite: **260/260**, 154.531s, run serially after a resource-contended
+HTTP startup attempt. TypeScript, ESLint, production build, pip dependency check,
+top-level npm dependency check and production audit (zero vulnerabilities) pass.
+Full `npm ls --all` (also with optional omitted) flags pre-existing lockfile references
+to `@emnapi/core` 1.10.0 / `@emnapi/wasi-threads` 1.2.1 under the uninstalled optional
+Tailwind WASM platform package, whose ranges request ^1.11.1 / ^1.2.2. This is an
+existing dependency-tree limitation, not reported as passed. Package manifests and
+lockfile are unchanged; the native macOS build succeeds. No unrelated upgrade was
+made. Hosted-enabled suite **58/58**, including 28 hosted cases and offline
+compatibility checks, 30.350s (final repeat). Exact second-option browser saves were verified for
+both named college/cafe and travel-only grocery/ATM, then independently cleaned.
+
+Full backend: **914 reported, 878 passed, 36 opt-in skips**, 173.001s.
+Skips are 28 hosted cases (run separately) and 8 unchanged PTY lifecycle cases;
+PTY checks were not rerun because startup/shutdown code was unchanged. Final
+focused timing/save/edit regressions: 90 reported, 79 passed, 11 hosted skips;
+final strict edit/session contracts: 27 reported, 25 passed, 2 hosted skips. The
+corrected legacy exploration fixture also passes independently. Full staged diff
+review includes all 34 changed/new files, ordinary formatting and private-source
+handling; whitespace checks pass. Credential scan: 2 configured sensitive values,
+1,335 current files/assets and 2,155 historical objects, **zero matches**. Package
+manifests/lockfile, private 0600 profiles, provider gates/quotas/billing, repository
+privacy and release tag remain unchanged.
+
+Additional final browser evidence: an unsubmitted eight-minute grocery draft survived
+changing to Walking, with ATM five minutes, return and 45 minutes retained and a fresh 30-minute all-leg
+walking route (43-minute outing). AI stayed 2; searches 6→8 and elements 48→72 were
+needed for the incompatible mode. A travel-only 45 choice with grocery 20/ATM five minutes
+kept both stops and the return, checking 30 minutes of travel rather than 55 elapsed.
+The selected second option reopened at 390px with walking, scope, original text,
+20-minute override and original ATM five minutes intact. One saved card only; scroll width 390.
+All created browser tabs were closed and viewport reset. Only temporary 3051/8050
+services were stopped; normal owner 3000/8000 services remained healthy. Owner
+configuration was untouched.
+
+Cumulative browser fixture ledger (including restarts): 14 Enterprise searches,
+3 Pro manual starting lookups, 142 Matrix elements, 6 Details actions; synthetic
+gross estimate **$1.416**. Actual Google sends/cost **0/$0**. Timing edits/scope
+changes themselves add no paid requests. The two selected browser records were
+removed only after exact hash, original source, selected IDs and new provenance
+checks; fresh connections confirmed absence. Private capability links are not
+committed or included in delivery output.
+
+The first full backend attempt encountered sandbox socket/IPC permission errors;
+it was rerun with the required local integration-test permissions. Initial focused
+fixtures assigned raw dictionaries instead of Duration models and used a partial
+single-cell response that was still complete; the fixture errors were corrected.
+The first ordinary browser attempt lacked its exact invented extraction; that
+explicit test reply was added. Neither failure is reported as passing. A draft
+entered before nearby clarification and its replay are specifically regression
+checked. No deployment, authentication/provider changes or new roadmap task.
+
+The complete backend rerun initially exposed a legacy route-exploration fixture
+using two zero-minute visits. It was updated to one explicit minute per visit,
+keeping its infeasible-cached-path and later-feasible-path assertions. The focused
+regression passes; zero wording is separately covered as clarification.

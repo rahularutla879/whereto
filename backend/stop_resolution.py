@@ -145,6 +145,7 @@ class StopResolver:
         self._paging = {}
         self._pages = {}
         self._areas = {}
+        self._alternatives = {}
         self._audits = {}
         self._observed = {}
 
@@ -204,6 +205,7 @@ class StopResolver:
                 except ValueError:
                     continue
             candidates = list(seen.values())[:10]
+            if stop.kind=='named_place' and len(candidates)>1:self._alternatives[index]=candidates.copy()
             status = ('ambiguous' if len(candidates)>1 else 'resolved') if stop.kind=='named_place' and candidates else 'candidates' if candidates else 'unresolved'
             return ResolvedStop(occurrence=index, requested=stop,status=status,candidates=candidates,
                 explanation='Which destination did you mean? Choose its name and location.' if status=='ambiguous' else '' if candidates else 'No eligible place identity could be verified. Your stop is kept.')
@@ -364,6 +366,25 @@ class StopResolver:
             'choices':[{'placeId':c.place_id,'name':c.facts.name,'address':c.facts.address,
                         'attributions':[a.model_dump(mode='json') for a in c.facts.attributions or []]} for c in s.candidates]}
             for s in self._result.stops+([self._result.endpoint] if self._result.endpoint else []) if s.status=='ambiguous']}
+
+    def preference_choices(self):
+        if self._result is None:return []
+        groups=self._result.stops+([self._result.endpoint] if self._result.endpoint else [])
+        return [{'occurrence':g.occurrence,'label':g.requested.source,
+            'selectedId':g.candidates[0].place_id if g.status=='resolved' else '',
+            'choices':[{'placeId':c.place_id,'name':c.facts.name,'address':c.facts.address,
+                'attributions':[a.model_dump(mode='json') for a in c.facts.attributions or []]} for c in self._alternatives[g.occurrence]]}
+            for g in groups if g.occurrence in self._alternatives]
+
+    def change_choice(self,occurrence,place_id):
+        self.routing_snapshot()
+        groups=self._result.stops+([self._result.endpoint] if self._result.endpoint else [])
+        group=next((g for g in groups if g.occurrence==occurrence),None)
+        candidate=next((c for c in self._alternatives.get(occurrence,[]) if c.place_id==place_id),None)
+        if group is None or candidate is None:raise ValueError('Choose a retained verified destination.')
+        changed=group.status!='resolved' or len(group.candidates)!=1 or group.candidates[0].place_id!=place_id
+        group.candidates=[candidate];group.status='resolved';group.explanation='Explicitly selected verified destination.'
+        return changed
 
     def choose(self, context, occurrence, place_id):
         if (not isinstance(context,str) or not re.fullmatch(r'[A-Za-z0-9_-]{43}',context)

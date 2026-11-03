@@ -1,3 +1,5 @@
+November 3 Task 50E audit: approved Matrix driving remains TRAFFIC_UNAWARE with no departure time, Essentials $0.005/element gross. Traffic-aware requires Pro ($0.010/element at first paid volume; different free-event allowance), explicit higher-tier approval and coordinated accounting/evidence/cache changes. It is not activated. No live Google comparison/request, billing/quota change or automatic contact request was added. [Official pricing investigation and verification](task50e-followup.md).
+
 > Current Cloud values are recorded in [October 27 quota diagnosis](#october-27-quota-diagnosis-and-authorized-adjustment); normal application ceilings remain in [approved application-limit expansion](#task-46-approved-application-limit-expansion). Older dated values below are historical.
 
 Current October 27 acceptance setting: **200 Places Text Searches/day, 10/minute; 2,000 Route Matrix elements/day, 150/minute; Details 40/day, 10/minute**. Only the justified Places daily override changed. [Verified diagnosis and adjustment](#october-27-quota-diagnosis-and-authorized-adjustment). Historical limits below describe earlier checkpoints.

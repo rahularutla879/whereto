@@ -2,12 +2,12 @@
 import {useState} from 'react';
 import {ArrowRight,ArrowUpRight,Clock3,Coffee,Footprints,MapPin,Palette,Popcorn,Sparkles,Utensils,Wine,CircleDot,X,Trophy,Music,Mic,Landmark,Theater,Laugh,Gamepad2,ShoppingBag,TreePine,Puzzle} from 'lucide-react';
 import {CardArtwork} from './artwork';
-import {activityLabel,formatDuration,formatTime,type Activity,type Plan} from '@/lib/planner';
+import {activityLabel,formatDuration,type Activity,type Plan} from '@/lib/planner';
 import {destinationLabel} from '@/lib/display-format';
 import {planWarnings} from '@/lib/results-presentation';
-import {VenueDetails,GoogleCredits} from './venue-details';
+import {GoogleCredits} from './venue-details';
 import {VenueDetailsSession} from '@/lib/venue-details';
-import {RealVenueFacts} from './real-venue-facts';
+import {ItineraryStop,EndingStep} from './itinerary-stop';
 import {PlanCost} from './plan-cost';
 import {FirstLegTravel} from './first-leg-travel';
 import {AdvancedDetails} from './advanced-plan';
@@ -16,7 +16,7 @@ const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: Cir
   baseball: Trophy, basketball: Trophy, football: Trophy, soccer: Trophy, hockey: Trophy, sports: Trophy,
   concert: Music, theater: Theater, musical: Theater, ballet: Theater, opera: Music, comedy: Laugh,
 };
-const money = (amount: number | null) => amount === null ? "Unknown" : new Intl.NumberFormat("en-US", { style: "currency", currency: "USD", maximumFractionDigits: 2 }).format(amount);
+
 
 export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; detailsSession: VenueDetailsSession }) {
   const real = plan.dataMode === "real";
@@ -51,8 +51,8 @@ export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: n
       <div hidden={!expanded} className="plan-details" id={`details-${plan.id}`}>
         <p className="details-heading">{real ? "Your itinerary" : "Your sample itinerary"}</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date}</p>
-        {plan.advanced ? <AdvancedDetails option={plan.advanced}/> : <><ol>{plan.stops.map(({ venue, start, end }, i) => <li key={venue.id}><span className="stop-number">{i + 1}</span><div><strong>{venue.name}</strong>{real ? <RealVenueFacts venue={venue} /> : <><span>{venue.kind === "event" ? `Sample event: ${venue.eventDate}` : "Fictional venue"} · {formatTime(start)}–{formatTime(end)}</span><span>{venue.neighborhood ?? "Neighborhood unknown"} · {formatDuration(venue.duration)}</span><span>{plan.prices[i]?.amount == null ? "Price not available" : `${money(plan.prices[i].amount)} per person (${plan.prices[i].status})`}</span></>}{i > 0 && <span>Travel from previous stop: {plan.legs[i - 1]?.minutes ?? "Unknown"} min ({real ? `${plan.transport??"driving"} estimate` : plan.legs[i - 1]?.status ?? "unknown"}).{real&&plan.routeEvidence?.[i-1]?.route.distance_meters!=null&&" / "+(plan.routeEvidence[i-1].route.distance_meters!/1609.344).toFixed(2)+" route miles"}</span>}{real && <><VenueDetails venue={venue} token={plan.detailsToken} session={detailsSession} /></>}</div></li>)}</ol>
-        {plan.stops.length>1&&<p className="details-note">{plan.travel===null?"Travel between stops unavailable":`~${plan.travel} min ${real ? plan.transport??"driving" : "simulated travel"} between stops`}. Return travel is not included.</p>}</>}
+        <ol>{plan.stops.map((_,i)=><ItineraryStop key={`${plan.stops[i].venue.id}-${i}`} plan={plan} index={i} detailsSession={detailsSession}/>)}{plan.advanced&&<EndingStep plan={plan}/>}</ol>
+        {plan.advanced?<AdvancedDetails option={plan.advanced}/>:plan.stops.length>1&&<p className="details-note">{plan.travel===null?"Travel between stops unavailable":`~${plan.travel} min ${real ? plan.transport??"driving" : "simulated travel"} between stops`}. Return travel is not included.</p>}
       </div>
     </div>
   </article>;

@@ -302,6 +302,8 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
   Status: **Complete in approved local development** — November 2, 2026. Normal-flow advanced orchestration, scoped place/date/area/dwell/departure clarification, ordered and return/final cards, qualified timing, selected-only version 2 saving/reopening and current approved details reuse Tasks 50A–50D. Advanced exploration uses the permitted bounded alternative: at most three computed options, with no extra-discovery/beyond-limit handler. Separate home addresses and unsupported mandatory price/accessibility/dietary/ticket conditions stay explicit limitations. Backend **865 reported: 830 passed, 35 opt-in skips**; frontend **245/245**; focused **180 reported: 179 passed, one hosted skip**. Hosted suite **57/57**, final committed advanced repeat **1/1**, PTY lifecycle **8/8**, actual Qwen fixed checks **4/4**, desktop/mobile browser checks, typecheck/lint/build/dependencies/audit/secret/diff checks pass. No migration, live Google, Cloud/billing/credential change or Task 51 work. [Contracts, performance, security and limits](docs/advanced-integration.md); final evidence in HANDOVER.md.
 
+  November3 Task50E refinement adds compact shared details, editable accepted advanced preferences and explicit entire-outing/travel-only scope; approved routing policy retained. [Acceptance record](docs/task50e-followup.md).
+
 - [ ] Task 51 — Add usage limits and basic error logging.
 
 - [ ] Task 52 — Choose production-compatible hosting. Deploy the frontend and backend to services permitted for our intended usage.

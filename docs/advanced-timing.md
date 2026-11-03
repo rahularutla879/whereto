@@ -1,3 +1,5 @@
+Task 50E refinement: an explicit travel-only scope compares the existing source duration against **all** selected travel legs. Default entire-outing compares travel plus dwell. Independent deadlines always include dwell. Structured overrides amend a trusted copy and trigger fresh local evaluation; original constraints remain available. Zero counted time requires explicit travel-only acknowledgement and cannot support an elapsed/deadline claim. [Details and exact boundary tests](task50e-followup.md).
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 # Task 50D — whole-journey timing

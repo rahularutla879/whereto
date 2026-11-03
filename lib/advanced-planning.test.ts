@@ -5,6 +5,8 @@ import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {adaptAdvanced,continueAdvanced, type AdvancedData} from './advanced-planning';
 import {generateOuting} from './planning-client';
+import {advancedDraft} from './advanced-preferences';
+import {AdvancedPreferenceFields} from '../components/advanced-preferences';
 import {AdvancedClarifications} from '../components/advanced-plan';
 import {PlanCard} from '../components/plan-card';
 import {VenueDetailsSession} from './venue-details';
@@ -33,7 +35,7 @@ test('trusted advanced projection renders complete return route and prominent un
  const html=renderToStaticMarkup(createElement(PlanCard,{plan:result.plans[0],index:0,detailsSession:new VenueDetailsSession()}));
  assert.match(html,/Return to starting point/);assert.match(html,/Total time not yet verified/);assert.match(html,/whole journey/i);assert.doesNotMatch(html,/Select itinerary/);assert.doesNotMatch(html,/Return travel is not included|10:00 AM|latitude/);
  const question=renderToStaticMarkup(createElement(AdvancedClarifications,{state:result.advanced!,busy:false,onAnswer(){}}));
- assert.match(question,/How long/);assert.match(question,/My estimate \(approximate\)/);assert.doesNotMatch(question,/<form/);assert.doesNotMatch(html,/do not guarantee actual arrival/);
+ assert.match(question,/How long/);assert.match(question,/Visit times and itinerary preferences/);assert.doesNotMatch(question,/<form/);assert.doesNotMatch(html,/do not guarantee actual arrival/);
 });
 test('normal submission routes a server-issued advanced token without ordinary dispatch',async()=>{
  const paths:string[]=[];
@@ -111,13 +113,13 @@ test('follow-up cards omit repeated unknown warnings and technical hours copy',(
  const plan=adaptAdvanced(fixture.data,{}).plans[0];
  const html=renderToStaticMarkup(createElement(PlanCard,{plan,index:0,detailsSession:new VenueDetailsSession()}));
  assert.doesNotMatch(html,/Activity illustrations|Check this option|Visit hours need checking|Visit duration not supplied|Hours checked|America\/New_York|Visit hours:/);
- assert.match(html,/without live traffic/);
+ assert.doesNotMatch(html,/without live traffic/);
  assert.equal((html.match(/aria-label="Opening hours"/g)??[]).length,plan.advanced!.stops.length);
 });
 test('duration control states minutes, integer bounds and no approximate default',()=>{
  const state=adaptAdvanced({...fixture.data,questions:[{field:'dwell',occurrence:0,question:'How many minutes grocery shopping?'}]},{}).advanced!;
- const html=renderToStaticMarkup(createElement(AdvancedClarifications,{state,busy:false,onAnswer(){}}));
- assert.match(html,/Duration \(minutes\)/);assert.match(html,/placeholder="20"/);assert.match(html,/step="1"/);assert.match(html,/max="10080"/);
+ const html=renderToStaticMarkup(createElement(AdvancedPreferenceFields,{data:state.data,draft:advancedDraft(state.data)!,busy:false,onChange(){}}));
+ assert.match(html,/duration \(minutes\)/);assert.match(html,/placeholder="20"/);assert.match(html,/step="1"/);assert.match(html,/max="10080"/);
  assert.match(html,/value="exact" selected=""/);assert.match(html,/no guaranteed maximum/);
 });
 test('readable projected clocks retain destination-local offset rather than browser timezone',()=>{

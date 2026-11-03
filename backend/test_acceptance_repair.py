@@ -194,7 +194,7 @@ class BeyondDiscoveryRepairTests(FlowRepairTests):
             p=deepcopy(self.h.records[1]);p['id']=f'Synthetic_coffee_{i}';p['displayName']['text']=f'Invented cafe {i}';p['formattedAddress']=f'{10+i} Fixture Road, New York';self.h.records.append(p)
         for identity in ['Synthetic_coffee','Synthetic_coffee_0','Synthetic_coffee_1','Synthetic_coffee_2']:
             self.h.values[('DRIVE','Synthetic_college',identity)]=600
-        s=self.h.session([{'source':'SUNY College of Optometry','kind':'named_place','duration':{'minutes':0,'source':'0 minutes'}},{'source':'coffee','duration':{'minutes':0,'source':'0 minutes'}}],total_duration={'minutes':5,'relation':'maximum','source':'within 5 minutes'})
+        s=self.h.session([{'source':'SUNY College of Optometry','kind':'named_place','duration':{'minutes':1,'relation':'exact','source':'1 minute'}},{'source':'coffee','duration':{'minutes':1,'relation':'exact','source':'1 minute'}}],total_duration={'minutes':5,'relation':'maximum','source':'within 5 minutes'})
         a=self.h.run_session(s);self.assertFalse(a.options);self.assertTrue(a.canExpand)
         count=len(self.h.searches)
         b=self.h.run_session(s,action='different');self.assertTrue(b.options)

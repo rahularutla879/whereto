@@ -1,3 +1,5 @@
+Task 50E compact-details/editable-preferences refinement: see the latest November 3 checkpoint in [follow-up evidence](docs/task50e-followup.md). Accepted grocery duration can be edited and regenerated in the existing preferences panel without restarting or another model/provider call when evidence is compatible. Scope changes are explicit; traffic-aware Pro routing remains unactivated. Task 51 remains unstarted. Final check totals are recorded in that checkpoint. Backend: 914 reported, 878 passed/36 opt-in skips; frontend 260/260; hosted-enabled suite 58/58. TypeScript/lint/build/pip/audit/secret/diff checks pass. The pre-existing optional WASM dependency-tree warning is documented; no dependency upgrade was made.
+
 # Where To? — handover
 
 Current Task 50E follow-up functional acceptance is verified against `6153e1b`: backend866 passed/35 skips, frontend252/252, hosted57/57. Qwen generation latency remains a measured limitation; no model speedup is claimed. [Changes, actual Qwen/browser timings and evidence](docs/task50e-followup.md).

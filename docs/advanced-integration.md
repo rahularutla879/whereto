@@ -1,3 +1,5 @@
+Latest Task 50E refinement: accepted structured answers are editable in the existing preferences panel; source constraints remain immutable, overrides are explicit, scope and timing reevaluate locally, and both paths use the same compact itinerary/contact primitives. [November 3 implementation and acceptance](task50e-followup.md). Earlier checkpoints below are historical.
+
 # Task 50E — local advanced outings
 
 Current November 3 acceptance repair: [causes, unified UI, incremental exploration, bounds and verification](task50e-repair.md). This supersedes the original one-page limitation below.
