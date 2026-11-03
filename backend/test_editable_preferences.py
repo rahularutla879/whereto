@@ -118,7 +118,7 @@ class EditablePreferencesTests(unittest.TestCase):
     def test_one_policy_no_departure_time_sent_and_missing_evidence_not_passed(self):
         s=self.session();self.h.run_session(s,startingLocation=start());self.run_edit(s,budgetScope='travel')
         self.assertTrue(self.h.calls)
-        self.assertTrue(all(c['travelMode']=='DRIVE' and c['routingPreference']=='TRAFFIC_UNAWARE' and 'departureTime' not in c for c in self.h.calls))
+        self.assertTrue(all(c['travelMode']=='DRIVE' and c['routingPreference']=='TRAFFIC_AWARE' and 'departureTime' not in c for c in self.h.calls))
         self.h.values['DRIVE','Synthetic_bank','origin']=None;s=self.session();r=self.h.run_session(s,startingLocation=start(),edits={'budgetScope':'travel'})
         self.assertTrue(all(p.durationState=='unverified' for p in r.options))
 
@@ -148,7 +148,7 @@ class HostedEditablePreferencesTests(unittest.TestCase):
                     a=value['itineraries'][0]['advanced'];self.assertEqual(a['budgetScope'],'travel');self.assertEqual(a['durationOverrides'],[0])
                     self.assertIsNone(a['originalJourney']['stops'][0]['duration']);self.assertEqual(a['journey']['stops'][0]['duration']['minutes'],10)
                     self.assertEqual(a['journey']['stops'][1]['duration']['minutes'],5);self.assertEqual(a['journey']['total_duration']['minutes'],45)
-                    self.assertEqual(a['ending'],'origin');self.assertNotIn('latitude',json.dumps(value))
+                    self.assertEqual(a['ending'],'origin');self.assertEqual(a['routingPolicy'],'traffic_aware_current');self.assertFalse(a['departureNow']);self.assertNotIn('latitude',json.dumps(value))
                 finally:
                     admin.execute('DELETE FROM whereto.plans WHERE access_hash=%s',(key,))
             with psycopg.connect(**connection_settings(os.environ),autocommit=True) as verify:

@@ -1,3 +1,5 @@
+Current Task 50E: verified named-place evidence can establish the outing calendar; “now” additionally needs a confirmed route origin before projecting arrival. Closed required destinations are retained as requirements and excluded, never replaced by a generic college. Unknown hours remain unknown. Existing ten-minute private session expiry stays intact; deliberate regeneration can revalidate retained interpretation and explicit answers in a fresh session without retyping or another model call. Expired venue/route evidence is refreshed under the same authorization/admission rules. [Current acceptance](task50e-consolidated.md).
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 # Task 50B — verified stop resolution

@@ -153,10 +153,10 @@ class EvidenceTests(unittest.TestCase):
             self.assertIn("12.0 minutes", labels.claims["duration_seconds"].message)
             self.assertEqual(leg.model_dump(), before)
             self.assertEqual((leg.origin_id, leg.destination_id, leg.mode), ("b", "a", mode))
-            self.assertEqual(leg.estimate_type, "traffic_unaware" if mode == "drive" else "walking")
+            self.assertEqual(leg.estimate_type, "traffic_aware" if mode == "drive" else "walking")
             self.assertTrue(labels.attribution.google_maps_required)
             self.assertIn("not guaranteed", labels.attribution.notices[0])
-            self.assertIn("live traffic" if mode == "drive" else "beta", labels.attribution.notices[0])
+            self.assertIn("Current Google traffic" if mode == "drive" else "beta", labels.attribution.notices[0])
 
     def test_unreachable_and_missing_routes_are_not_zero(self):
         for leg in (route(condition="ROUTE_NOT_FOUND"), route(status={"code": 7})):
@@ -235,4 +235,4 @@ class EvidenceTests(unittest.TestCase):
             with self.assertRaises(DiscoveryError):
                 require_development_discovery()
         self.assertEqual(FIELD_MASK, "places.id,places.displayName,places.formattedAddress,places.location,places.addressComponents,places.attributions,places.types,places.primaryType,nextPageToken")
-        self.assertEqual(ROUTE_MASK, "originIndex,destinationIndex,status,condition,distanceMeters,duration")
+        self.assertEqual(ROUTE_MASK, "originIndex,destinationIndex,status,condition,distanceMeters,duration,fallbackInfo")

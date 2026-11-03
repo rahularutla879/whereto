@@ -1,3 +1,5 @@
+Current Task 50E supersedes historical traffic-unaware notes below: every Driving leg requests `TRAFFIC_AWARE`; Walking has no routingPreference. Current request-time semantics, nanosecond limits, fallback provenance, five-minute cache compatibility and Pro accounting are shared by ordinary/advanced paths. Origin/inter-stop/return/final legs remain directional; changed modes, origins or selected identities cannot borrow incompatible evidence. Bounded discovery is unchanged; convenience/novelty order only already eligible combinations. [Current policy and verification](task50e-consolidated.md).
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 # Task 50C — advanced route construction

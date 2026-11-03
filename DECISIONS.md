@@ -509,3 +509,8 @@ Task 51 remains unstarted.
 ## November 3, 2026 — Task50E acceptance refinements
 
 Use one itinerary/card/contact design. Keep immutable source Journey plus explicit, occurrence-scoped user edits; derive one effective preferences projection. A scope override reuses the source duration amount/relation, never a separate bypass budget. Reevaluate timing over compatible cached directional evidence; invalidate stale cards/history. Save original/effective app-owned provenance through defaulted v2 fields, without Google metrics or private origins. Keep authorized traffic-unaware Essentials routing: traffic-aware invokes Pro and requires separate approval/accounting changes; do not claim consumer Maps parity. [Rationale and verification](docs/task50e-followup.md). Task51 remains unstarted.
+
+
+## November 3 — consolidated Task 50E refinement
+
+The owner's explicit current-traffic decision replaces the earlier unactivated Pro proposal. Traffic-aware routing/accounting, return/now semantics, shortest-first exploration, five dwell bounds and a measured model investigation continue Task 50E. Unsafe model changes were rejected; the latency acceptance item remains open. Existing card identity, editable answers, selected private saving, security, startup and roadmap numbers remain. Task 51 stays unstarted. [Implementation, measurements, verification and limitations](docs/task50e-consolidated.md).

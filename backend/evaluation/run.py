@@ -57,6 +57,7 @@ def main():
         except Exception as error:
             row.setdefault('structuredValid',False)
             row.update(success=False,errorType=type(error).__name__)
+        row['options']=provider.last_options
         row['seconds']=round(time.perf_counter()-start,3);rows.append(row)
         print(json.dumps(row),flush=True)
     ps_after=admin('/api/ps');base=[r for r in rows if not r['repeat']]

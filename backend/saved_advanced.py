@@ -27,6 +27,8 @@ class AdvancedSaved(ContractModel):
     ending: Literal['last_activity','origin','named_destination']
     endpointId: str | None = Field(default=None,pattern=r'^[A-Za-z0-9_-]{1,200}$')
     travelException: bool = Field(default=False,strict=True)
+    routingPolicy: Literal['traffic_aware_current','walking'] | None = None
+    departureNow: bool = Field(default=False,strict=True)
     historicalTiming: Literal['feasible','unverified']
     timingProvenance: Literal['route_estimates_and_user_constraints_not_retained'] = 'route_estimates_and_user_constraints_not_retained'
     departureMinute: int | None = Field(default=None,strict=True,ge=0,lt=1440)
@@ -89,7 +91,7 @@ def issue_advanced(session,candidates,options):
         route=candidate.route
         advanced=AdvancedSaved(sourceText=source,originalJourney=Journey.model_validate(redact(session.journey.model_dump())),budgetScope=session.budget_scope,durationOverrides=sorted(session.durations),departureOverride='departure' in session.explicit_overrides,journey=Journey.model_validate(redact(route.journey.model_dump())),occurrenceOrder=[v.occurrence for v in route.visits],
             omittedOccurrences=[o.occurrence for o in route.omitted],ending=route.ending,endpointId=route.endpoint.place_id if route.endpoint else None,
-            historicalTiming=option.state,travelException=option.travelException,departureMinute=session.departure if session.departure is not None else context.departureMinute)
+            routingPolicy='walking' if context.transport and context.transport.value=='walking' else 'traffic_aware_current',departureNow=context.departureNow and session.departure is None,historicalTiming=option.state,travelException=option.travelException,departureMinute=session.departure if session.departure is not None else context.departureMinute)
         saved.append(SavedOption(candidateId=option.id,advanced=advanced,stops=[SavedStop(position=i,activity=activities[v.occurrence],
             provider='google_places',reference=v.selected.place_id,timingBasis='unknown',start=None,end=None,duration=None) for i,v in enumerate(route.visits)]))
     token,access=secrets.token_urlsafe(32),secrets.token_urlsafe(32)

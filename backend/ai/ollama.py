@@ -215,6 +215,7 @@ for _text, _reply in EXAMPLES:
 class OllamaProvider:
     def __init__(self, settings: AISettings):
         self.settings = settings
+        self.last_options = None
         parsed = urlsplit(settings.base_url)
         if (parsed.scheme not in {"http", "https"} or not parsed.hostname
                 or parsed.username or parsed.password or parsed.query or parsed.fragment):
@@ -255,6 +256,7 @@ class OllamaProvider:
             "options": {"temperature": 0, "num_ctx": 8192, "num_predict": 1024},
             "keep_alive": "10m",
         }
+        self.last_options = dict(payload["options"])
         request = Request(self.settings.base_url.rstrip("/") + "/api/chat",
                           data=json.dumps(payload).encode(),
                           headers={"Content-Type": "application/json"}, method="POST")

@@ -61,6 +61,13 @@ class AITests(unittest.TestCase):
         self.assertEqual(payload["options"]["temperature"], 0)
         self.assertEqual(self.open.call_args.kwargs["timeout"], 60)
 
+    def test_inference_payload_preserves_verified_accuracy_baseline(self):
+        from hashlib import sha256
+        self.valid_response()
+        self.provider.interpret('Coffee in Baltimore tomorrow under $25 per person and $100 total, with under 10 minutes between stops, walking.')
+        self.assertEqual(sha256(self.open.call_args.args[0].data).hexdigest(),'b1200523ac16e0641b9d9a3ef3421d77789f78050adcdd1ca08f7a84bbf0c143')
+        self.assertEqual(self.provider.last_options,{'temperature':0,'num_ctx':8192,'num_predict':1024})
+
     def test_configuration_is_read_from_environment(self):
         with patch.dict(os.environ, {"AI_PROVIDER": "ollama", "AI_MODEL": "other-model",
                                     "AI_BASE_URL": "http://localhost:1234/",

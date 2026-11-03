@@ -1,3 +1,5 @@
+Current consolidated Task 50E: Driving uses `TRAFFIC_AWARE`/Matrix Pro with request-time departure semantics, the minimal mask plus `fallbackInfo`, and five-minute policy-aware directional cache reuse. Walking remains unchanged. Historical traffic-unaware evidence cannot establish a current route; fallback provenance and exact duration comparisons are enforced consistently. [Current contract, authorization, costs and checks](task50e-consolidated.md). Earlier traffic-unaware descriptions below are historical.
+
 > Task 46 now connects these components to the existing local planner. Mock remains default; real mode and contact lookups require deliberate switches. [Current flow, safeguards and closed live ledger](real-planning.md). Sections below preserve earlier task checkpoints.
 
 # Task 43 — backend route calculator

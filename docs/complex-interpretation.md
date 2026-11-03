@@ -1,3 +1,5 @@
+Current Task 50E refinement: coherent “be back within 3 hours” wording retains required stops/order and an inclusive 180-minute whole-outing cap. A missing/ambiguous bare-return endpoint triggers a targeted user question after other source checks, never an inferred home/origin. Existing deterministic duration normalization preserves that cap while confirmation is pending. Only an explicit user answer accepts the return endpoint. “Now” is resolved from source wording/local calendar; unsupported model-invented date phrases cannot supply a date. The original verified Qwen instructions/schema are retained after rejecting unsafe optimization candidates; one model call and strict canonical/source validation remain. [Reproduction, contracts and accuracy evidence](task50e-consolidated.md).
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 # Complex outing interpretation — Task 50A

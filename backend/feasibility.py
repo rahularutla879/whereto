@@ -181,7 +181,7 @@ def evaluate_feasibility(value: FeasibilityInput) -> FeasibilityResult:
                     and leg.estimate_type == "same_location" and origin == destination
                     and leg.duration_seconds == 0 and leg.distance_meters == 0)
         routed = (leg.status == "ok" and leg.provider == "google_routes"
-                  and leg.estimate_type == ("walking" if value.mode == "walk" else "traffic_unaware"))
+                  and leg.estimate_type in (("walking",) if value.mode == "walk" else ("traffic_aware", "traffic_unaware")))
         if not identity and not routed:
             add("travel", "unverified", "route_" + leg.status, ref, index)
             continue

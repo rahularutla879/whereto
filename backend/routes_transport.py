@@ -24,12 +24,12 @@ def _validate_basic_body(body):
         if body != matrix_body(*groups, mode):
             raise ValueError("Unsupported request options")
     except (KeyError, TypeError, ValueError, RouteError):
-        raise RouteError("invalid_request", "Only validated basic driving or walking matrix requests are permitted.") from None
+        raise RouteError("invalid_request", "Only validated traffic-aware driving or walking matrix requests are permitted.") from None
 
 
 def compute_matrix(body: dict) -> list:
     require_development_routes()
-    # Defense in depth: no direct caller can add premium/traffic options here.
+    # Defense in depth: only the selected TRAFFIC_AWARE policy is allowed; never OPTIMAL.
     _validate_basic_body(body)
     with requests.Session() as session:
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=0))
@@ -39,7 +39,8 @@ def compute_matrix(body: dict) -> list:
             raise RouteError("authentication", "Local impersonated authentication is unavailable. No Routes request was sent.") from None
         try:
             from backend.development_cost import dispatch
-            dispatch("matrix", len(body['origins']) * len(body['destinations']))
+            dispatch("matrix", len(body['origins']) * len(body['destinations']),
+                     sku='matrix_pro_element' if body['travelMode']=='DRIVE' else 'matrix_element')
             response = session.post(
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,

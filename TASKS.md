@@ -884,3 +884,8 @@ Capacity acceptance also retains50 active search continuations (previously20) wi
 ## November 2 — development lifecycle acceptance
 
 Tasks46/49 development-experience repair: bounded supervised stop/restart, fixed frontend port, authenticated exceptional stop and real PTY lifecycle regressions. No roadmap renumbering or new milestone work; Task50 and Tasks50A–50E remain unstarted. See [verified lifecycle behavior](docs/dev-lifecycle.md).
+
+
+## November 3 — consolidated Task 50E refinement
+
+The owner's explicit current-traffic decision replaces the earlier unactivated Pro proposal. Traffic-aware routing/accounting, return/now semantics, shortest-first exploration, five dwell bounds and a measured model investigation continue Task 50E. Unsafe model changes were rejected; the latency acceptance item remains open. Existing card identity, editable answers, selected private saving, security, startup and roadmap numbers remain. Task 51 stays unstarted. [Implementation, measurements, verification and limitations](docs/task50e-consolidated.md).

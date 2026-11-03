@@ -361,5 +361,129 @@
         "clarification": ""
       }
     }
+  },
+  {
+    "text": "go to suny college of optometry first and then head out for coffee and be back within 3 hours",
+    "raw": {
+      "activities": [
+        "suny college of optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "now"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "suny college of optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours"
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": {
+          "minutes": 180,
+          "relation": "maximum",
+          "source": "within 3 hours"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "go to suny college of optometry first and then head out for coffee now",
+    "raw": {
+      "activities": [
+        "suny college of optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "now"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "suny college of optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "go to suny college of optometry first and then head out for coffee now"
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
   }
 ]

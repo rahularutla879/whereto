@@ -233,7 +233,7 @@ def _leg_range(leg):
             raise ValueError('Unsupported failed-route evidence provenance.')
         return DurationRange(lower=0)
     valid = (leg.status == 'ok' and leg.provider == 'google_routes' and
-             leg.estimate_type == ('walking' if leg.mode == 'walk' else 'traffic_unaware') or
+             leg.estimate_type in (('walking',) if leg.mode == 'walk' else ('traffic_aware', 'traffic_unaware')) or
              leg.status == 'same_location' and leg.provider == 'local_identity' and
              leg.estimate_type == 'same_location' and leg.duration_seconds == leg.distance_meters == 0)
     if not valid:
@@ -258,6 +258,12 @@ def _visit_hours(facts, arrival, departure, evaluated_at):
             return core_state == 'infeasible'
         return False
 
+    # Even an unknown dwell cannot make a known-closed exact arrival open.
+    # A one-microsecond probe checks that boundary without inventing visit time.
+    if arrival.offsets.exact and arrival.earliest is not None:
+        state, code, _ = _hours(EvidenceStop(venue=facts, arrival=arrival.earliest,
+            departure=arrival.earliest+timedelta(microseconds=1), hours_request_date=request_date), evaluated_at)
+        if state == 'infeasible':return state, code
     if arrival.earliest is None or departure.latest is None:
         if mandatory_core_fails():
             return 'infeasible', 'closed_during_mandatory_visit_core'
@@ -289,6 +295,9 @@ def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
             raise ValueError('Departure must agree with explicit source clock evidence.')
         anchor = _local_instant(context.date, minute//60, minute%60, zone)
         if anchor: anchor = anchor.astimezone(zone)
+    if context and context.departureNow and context.departureInstant and zone and context.timezoneBasis == 'destination_calendar':
+        anchor=context.departureInstant.astimezone(zone)
+        if anchor.date()!=context.date:raise ValueError('Current departure must use the destination-local date.')
     if anchor is None:
         reason('unverified', 'missing_or_ambiguous_departure', 'An explicit departure, destination date and unambiguous local timezone are needed for clock projections.')
     travel = DurationRange(lower=0, upper=0)
@@ -400,6 +409,8 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, 
     if departure_minute is not None:
         if type(departure_minute) is not int or not 0 <= departure_minute < 1440 or result.context is None or result.context.departureMinute is not None and not allow_overrides:
             raise ValueError('Only a missing explicit departure can be clarified.')
+        result.context.departureNow = False
+        result.context.departureInstant = None
         result.context.departureMinute = departure_minute
         result.context.departureSource = f'depart at {departure_minute//60:02d}:{departure_minute%60:02d}'
     return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at,budget_scope)

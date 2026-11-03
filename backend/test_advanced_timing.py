@@ -339,11 +339,11 @@ class AdvancedTimingTests(unittest.TestCase):
         c=self.candidate([activity('coffee',duration=duration(15,'maximum'))],records=[self.hours_record()])
         self.assertEqual(c.hours_state,'feasible')
         c=self.candidate([activity('coffee',duration=duration(15,'maximum'))],records=[self.hours_record(closed=14)])
-        self.assertEqual(c.hours_state,'unverified')
+        self.assertEqual(c.hours_state,'infeasible')  # Exact arrival is already after closing.
         c=self.candidate([activity('coffee',duration=duration(15,'minimum'))],records=[self.hours_record(closed=14)])
         self.assertIsNone(c.elapsed.upper)
         self.assertEqual(c.hours_state,'infeasible')
-        self.assertEqual(c.visits[0].hours_code,'closed_during_mandatory_visit_core')
+        self.assertIn(c.visits[0].hours_code,('closed_during_mandatory_visit_core','closed_during_activity'))
         bank={**BANK,**fixture_hours(now=NOW)}
         for p in bank['currentOpeningHours']['periods']:
             p['close']['hour']=14

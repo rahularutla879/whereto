@@ -96,7 +96,7 @@ LIMITATION = "We understand your stops and requirements, but advanced route plan
 REPHRASE = "Some stop or timing instructions are unclear or conflict. Please edit the request to clarify them; your original text is kept."
 
 # Bounded omission guards complement the model; they never generate stops.
-ADVANCED = re.compile(r'\b(?:return|back home|head home|go home|(?:head|get|come|go) back|where I started|finish at|end at|maybe|optionally|optional|if there.s time|if time permits|whichever|on the way back|half an hour|at least an hour|about (?:\w+|\d+) hours?|by \d)\b', re.I)
+ADVANCED = re.compile(r'\b(?:return|back home|head home|go home|(?:head|get|come|go|be) back|where I started|finish at|end at|maybe|optionally|optional|if there.s time|if time permits|whichever|on the way back|half an hour|at least an hour|about (?:\w+|\d+) hours?|by \d)\b', re.I)
 NAMED_REFERENCE = re.compile(r'\b(?:[Gg]o to|[Vv]isit|[Ss]top at)\s+(?:the\s+)?([A-Z][\w’-]+(?:\s+(?:[A-Z][\w’-]+|of|the|on|at|\d+)\b){1,8})')
 NUMBERS = {'one':1,'two':2,'three':3,'four':4,'five':5,'six':6,'seven':7,'eight':8,'nine':9,'ten':10,'twenty':20,'thirty':30,'forty':40,'forty-five':45,'sixty':60,'an':1,'a':1,'half':.5}
 DURATION_WORDING = re.compile(r'(?<![\w.])(-?(?:\d+(?:\.\d+)?|'+'|'.join(NUMBERS)+r'))\s+(?:of\s+)?(?:an?\s+)?(hours?|minutes?|mins?|hrs?)\b', re.I)
@@ -144,7 +144,10 @@ def normalize_explicit_durations(raw, guarded, journey):
         endpoint=journey.endpoint
         returning=bool(endpoint and endpoint.kind in ('home','origin') and endpoint.source.casefold() in before.casefold()
                        and (operator or re.search(r'\bin\s*$',before,re.I)))
-        if whole or returning:
+        # A bare, explicit return clause has a whole-trip budget even while
+        # its endpoint is awaiting the user's confirmation. No endpoint is invented.
+        bare_back=bool(operator and re.search(r'\bbe back\s*$',before,re.I))
+        if whole or returning or bare_back:
             if journey.total_duration is None:
                 if not operator:
                     begin=max(0,start-120)+(whole.start() if whole else before.casefold().rfind(endpoint.source.casefold()))
@@ -195,7 +198,7 @@ def normalize_extracted_references(raw, ai):
     if j.stops:
         last=j.stops[-1]
         home = re.fullmatch(r'(?:go|head|return|come back|get back)\s+home',last.source,re.I)
-        origin = re.fullmatch(r'(?:head|get|come|go) back',last.source,re.I)
+        origin = re.fullmatch(r'(?:head|get|come|go|be) back',last.source,re.I)
         matching_endpoint = not j.endpoint or j.endpoint.kind in ('home','origin') and last.source.casefold() in j.endpoint.source.casefold()
         if last.requirement=='required' and (home or origin) and matching_endpoint:
             index=len(j.stops)-1
@@ -378,7 +381,7 @@ def validate_journey(raw, ai):
         home_origin = bool(re.search(r'\b(?:start|starting|leave|leaving)\s+(?:from|at)\s+(?:(?:my|our)\s+)?home\b',raw,re.I))
         if j.endpoint.kind=='home' and home_origin:
             j.endpoint.kind='origin'
-        expected = {'origin':r'\b(?:return|back)\b.*\b(?:origin|start|starting|started)\b|^(?:head|get|come|go) back$',
+        expected = {'origin':r'\b(?:return|back)\b.*\b(?:origin|start|starting|started)\b|^(?:head|get|come|go|be) back(?:\s+(?:within|in|by|before)\b.*)?$',
                     'home':r'\bhome\b',
                     'named_place':r'\b(?:finish|end|finally|head|go|return|back)\b',
                     'activity':r'\b(?:finish|end|finally|head|go)\b',
@@ -409,7 +412,7 @@ def validate_journey(raw, ai):
                 return REPHRASE, True
     # Missing semantic objects must not pass merely because JSON was valid.
     checks = [
-        (r'\b(?:return|back home|head home|go home|(?:head|get|come|go) back|where I started)\b', bool(j.endpoint)),
+        (r'\b(?:return|back home|head home|go home|(?:head|get|come|go|be) back|where I started)\b', bool(j.endpoint) or missing_return_confirmation(raw,j)),
         (r'\b(?:finish at|end at)\b', bool(j.endpoint)),
         (r'\b(?:maybe|optionally|if there.s time|if time permits)\b', any(s.requirement=='optional' for s in j.stops)),
         (r'\b(?:whichever|any order)\b', j.ordering=='flexible'),
@@ -435,7 +438,7 @@ def validate_journey(raw, ai):
             return REPHRASE, True
     if j.clarification: return REPHRASE, True
     # Home is a distinct unresolved endpoint, never inferred from device origin.
-    if j.endpoint and j.endpoint.kind=='home':
+    if missing_return_confirmation(raw,j) or j.endpoint and (j.endpoint.kind=='home' or ambiguous_return(j.endpoint)):
         return "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.", True
     from backend.retail import intent as retail_intent
     unhandled_brand = any(s.kind=='brand' and not ((retail := retail_intent(s.source)) and retail.brands) for s in j.stops)
@@ -447,3 +450,21 @@ def validate_journey(raw, ai):
     if j.order and not all((i,i+1) in edge_pairs for i in range(len(j.stops)-1)):
         advanced = True
     return (LIMITATION, False) if advanced else (None, False)
+
+
+def ambiguous_return(endpoint):
+    """'Be back' requires endpoint confirmation; never assume home/origin."""
+    return bool(endpoint and endpoint.kind == 'origin' and
+                re.fullmatch(r'be back(?:\s+(?:within|in|by|before)\b.*)?', endpoint.source, re.I))
+
+
+def missing_return_confirmation(raw, journey):
+    """An extracted stop list may still need a user-defined return endpoint.
+
+    This authorizes a question only, never an inferred endpoint or itinerary.
+    Other source/order/duration guards run before that question is accepted.
+    """
+    matches=list(re.finditer(r'\bbe back(?=\s+(?:within|in|by|before)\b|[.!?]?\s*$)', raw, re.I))
+    if journey.endpoint is not None or len(matches)!=1:return False
+    remainder=raw[:matches[0].start()]+raw[matches[0].end():]
+    return not re.search(r'\b(?:return|back home|head home|go home|(?:head|get|come|go) back|finish at|end at)\b',remainder,re.I)

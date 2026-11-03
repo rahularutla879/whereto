@@ -1,10 +1,9 @@
-Task 50E: accepted shopping/other visit durations, duration meanings and departure can now be changed in **Set preferences → A few details to make it yours**. Change the value and click **Regenerate plans**; keep your original request. The 45-minute scope selector explains entire outing versus an explicit travel-only override. ATM/return requirements remain. Ordinary and advanced cards share compact contact details. [Verification and routing limits](docs/task50e-followup.md). Task 51 remains unstarted.
+Task 50E: accepted shopping/other visit durations, duration meanings and departure can now be changed in **Set preferences → A few details to make it yours**. Change the value and click **Regenerate plans**; keep your original request. The 45-minute scope selector explains entire outing versus an explicit travel-only override. ATM/return requirements remain. Ordinary and advanced cards share compact contact details. [Current verification and routing policy](docs/task50e-consolidated.md). Task 51 remains unstarted. Current traffic/timing refinements are verified; the Qwen latency improvement remains open.
 
 # where to?
 
 Task 50E follow-up keeps the original cards, offers working explicit nearby-start
-continuation and clear minute-based visit answers, and explains driving estimates
-without live traffic. Additional options remain finite and constraint-aware.
+continuation and clear minute-based visit answers, and uses current traffic-aware driving estimates. Travel times can change, especially for future outings. Additional options remain finite and constraint-aware.
 [Current verification and limitations](docs/task50e-followup.md). Task 51 is unstarted.
 
 

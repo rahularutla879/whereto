@@ -1,3 +1,5 @@
+Current Task 50E uses the existing authorized current-hours search evidence for fresh destination-local “now” arrivals. Exact arrivals known closed are excluded; opening before arrival is allowed; closing during a required dwell fails. Missing/unknown visit bounds or hours remain qualified. No automatic Details request or new paid fields are added for this timing check. Existing overnight, 24-hour, special-day, freshness and DST rules remain. [Acceptance and boundaries](task50e-consolidated.md).
+
 # Tasks 46/49 — search hours, saved hours and development capacity
 
 November 2, 2026. Acceptance refinement; Tasks 50 and 50A–50E remain unstarted.

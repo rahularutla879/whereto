@@ -179,7 +179,7 @@ def route_labels(value: RouteLeg) -> EvidenceLabels:
     leg = RouteLeg.model_validate(value.model_dump())
     source = Source(kind="provider" if leg.provider == "google_routes" else "local", provider=leg.provider)
     routed = (leg.provider == "google_routes" and leg.status == "ok"
-              and leg.estimate_type == ("traffic_unaware" if leg.mode == "drive" else "walking"))
+              and leg.estimate_type in (("traffic_aware", "traffic_unaware") if leg.mode == "drive" else ("walking",)))
     local = (leg.provider == "local_identity" and leg.status == "same_location"
              and leg.estimate_type == "same_location" and leg.duration_seconds == 0 and leg.distance_meters == 0)
     claims = {}
@@ -196,7 +196,7 @@ def route_labels(value: RouteLeg) -> EvidenceLabels:
                              basis="supplied" if leg.provider == "google_routes" and (routed or leg.status == "unreachable") else "computed" if local else "not_checked",
                              message="No route found by Google Maps." if leg.status == "unreachable" and leg.provider == "google_routes" else "Route estimate available." if routed or local else "Route not verified.")
     attribution = google_attribution("routes") if leg.provider == "google_routes" else DisplayAttribution()
-    attribution.notices = (["Driving estimates exclude live traffic; arrival times are not guaranteed."] if leg.mode == "drive" else
+    attribution.notices = ((["Current Google traffic estimate; arrival times are not guaranteed."] if leg.estimate_type == "traffic_aware" else ["Historical driving estimate excluded live traffic; arrival times were not guaranteed."]) if leg.mode == "drive" else
                            ["Walking routes are beta and may omit sidewalks or pedestrian paths; travel times are not guaranteed."])
     # Direction, mode, estimate_type and exact metrics stay on the paired RouteLeg.
     return EvidenceLabels(claims=claims, attribution=attribution)

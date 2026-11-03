@@ -170,6 +170,7 @@ export default function Home() {
       if(Object.keys(edits).length)answer={...answer,edits};
     }
     const controller=session.current.begin();if(!controller)return;
+    let renewExpired=false;
     beginPlanningTiming();setLoading(true);setPlanningStage("Applying your answer and checking the itinerary");setOptionsNotice("");
     try{
       const next=await continueAdvanced(result.advanced,answer,controller.signal);
@@ -187,9 +188,16 @@ export default function Home() {
       else {pages.current.pages[pages.current.index]=structuredClone(next);syncPages();}
     }catch(error){if(session.current.current(controller)){
       setOptionsNotice(error instanceof Error?error.message:"Your answer could not be applied. Your itinerary is kept.");
-      if((error as {code?:string}).code==='advanced_session_expired')setResult(previous=>({...previous,canExpand:false,canDiscover:false,canShowBeyond:false,advanced:previous.advanced?{...previous.advanced,data:{...previous.advanced.data,questions:[]}}:undefined}));
+      if((error as {code?:string}).code==='advanced_session_expired'){
+        // Expiry rejects before provider work. Revalidate the retained extraction
+        // and replay explicit answers once; never rerun the model or retry Google.
+        advancedAnswers.current=rememberAdvancedEdit(advancedAnswers.current,answer);
+        renewExpired=!!advancedContinuation.current;
+        setResult(previous=>({...previous,canExpand:false,canDiscover:false,canShowBeyond:false,message:error instanceof Error?error.message:'This outing session expired. Regenerate to continue.',advanced:previous.advanced?{...previous.advanced,data:{...previous.advanced.data,questions:[]}}:undefined}));
+      }
     }}
     finally{if(session.current.finish(controller))setLoading(false);}
+    if(renewExpired)await runPlanning(true);
   }
   function focusFollowup(next:PlannerResult){
     if(next.advanced){
@@ -339,7 +347,7 @@ export default function Home() {
               <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{result.requestFailed ? "Retry" : "Continue planning"}<ArrowRight size={18} /></button></div>
         </div>}
         {generated&&result.advanced&&<AdvancedClarifications state={result.advanced} busy={loading} nearOrigin={!!locationContext.startingLocation} onAnswer={answer=>void answerAdvanced(answer)}/>}
-        {result.advanced&&optionsNotice&&result.advanced.data.questions.length>0&&<p role="alert">{optionsNotice}</p>}
+        {result.advanced&&optionsNotice&&(!result.plans.length||result.advanced.data.questions.length>0)&&<p role="alert">{optionsNotice}</p>}
         </form>
         {!loading && dataMode!=="unavailable" && !clarification?.questions.length && !result.requestFailed && (!generated||result.plans.length>0) && <p className="planner-disclaimer"><CircleHelp size={13} /> Not finding what you’re looking for? Try adjusting your preferences or searching again.</p>}
         <details className="catalog-help"><summary>Activities and data limitations</summary><p>Where To? can search for many kinds of outings using Google Places. Specific events, tickets, schedules and availability may require separate confirmation.</p><p hidden={dataMode === "real"}>Every outing needs a specific date. Mock event dates: {MOCK_EVENT_DATES.join(" and ")}. Pick a date in Set preferences or type YYYY-MM-DD, tomorrow, or a weekday. Weekend-only requests need a specific day. These are invented schedules, not real events or tickets.</p><p hidden={dataMode === "real"}>List up to four activities in the order you want. If a request is unclear, we will ask you to simplify it. Mock prices are per person; no capacity or booking is confirmed. Regular venues have no verified opening hours. Without a requested time, regular stops start at 10 AM (or later today); evening/night defaults to 6 PM. Dinner starts no earlier than 5 PM. Event start times are fixed. All mock times use Baltimore local time.</p>{dataMode === "real" && <p>List up to four stops, in order, including repeated activities. Every outing needs a date. Real event venues do not establish scheduled performances or movie showtimes. Prices, hours, durations and reservations need confirmation. Choose Driving or Walking in Set preferences; driving is the default. No budget is verified while prices are unknown.</p>}</details>

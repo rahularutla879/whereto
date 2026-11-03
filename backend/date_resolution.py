@@ -23,7 +23,7 @@ EXPLICIT_DATE = rf'(?:\d{{4}}-\d{{2}}-\d{{2}}|{MONTH}\s+{DAY}(?:(?:,\s*|\s+)\d{{
 DATE_WORDING = re.compile(
     rf'\b(?:{WEEKDAY}\s*,?\s+{EXPLICIT_DATE}|\d{{4}}-\d{{2}}-\d{{2}}|{MONTH}\s+{DAY}(?:(?:,\s*|\s+)\d{{4}})?|'
     rf'{DAY}\s+(?:of\s+)?{MONTH}(?:(?:,\s*|\s+)\d{{4}})?|'
-    rf'tomorrow(?:\s+(?:evening|night))?|today|tonight|'
+    rf'tomorrow(?:\s+(?:evening|night))?|today|tonight|now|'
     rf'(?:(?:this|next)\s+)?{WEEKDAY}(?:\s+(?:evening|night))?|'
     r'(?:this|next)\s+(?:weekend|week|month))\b', re.I)
 CLOCK = r'(?:noon|midnight|\d{1,2}(?::\d{2})?(?:\s*[ap]\.?m\.?)?)'
@@ -148,7 +148,7 @@ def _date_expression(expression: str, today: date) -> date:
         if resolved.weekday() != 'monday tuesday wednesday thursday friday saturday sunday'.split().index(qualified[1].lower()):
             raise DateExpressionError('date_conflict', 'The weekday and calendar date disagree. Which date should we use?')
         return resolved
-    if text in {'today', 'tonight'}:
+    if text in {'today', 'tonight', 'now'}:
         return today
     if text == 'tomorrow':
         return today + timedelta(days=1)
@@ -250,14 +250,14 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
     # Models may extract the two halves of a qualified calendar date. Resolve
     # that single source phrase together, not a relative weekday plus a date.
     qualified_dates = [p.casefold() for p in raw_dates if re.fullmatch(rf'{WEEKDAY}\s*,?\s+{EXPLICIT_DATE}', p, re.I)]
-    extracted = [p for p in date_expressions if p in raw_dates or not any(p.casefold() in q for q in qualified_dates)]
+    extracted = [p for p in date_expressions if p.casefold() in raw.casefold() and (p in raw_dates or not any(p.casefold() in q for q in qualified_dates))]
     result.date_expressions = list(dict.fromkeys([*extracted, *raw_dates]))
     clock_source = DATE_WORDING.sub(lambda m: ' ' * len(m.group()), raw)
     result.time_expressions = list(dict.fromkeys([*time_expressions, *[m.group() for m in TIME_WORDING.finditer(clock_source)]]))
     if result.date_expressions or manual_date:
         result.notes.append(f'Calendar reference: {local_now.date().isoformat()} in {zone.key}.')
         if zone.key == 'UTC':
-            if location and not manual_date and any(re.search(r'\b(today|tomorrow|tonight|next|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b',p,re.I) for p in result.date_expressions):
+            if location and not manual_date and any(re.search(r'\b(today|tomorrow|tonight|now|next|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b',p,re.I) for p in result.date_expressions):
                 result.add_issue('unsupported_date','The destination timezone is not known. Choose an exact date or add a recognizable city/region before using relative dates.')
     try:
         if manual_date:
@@ -313,6 +313,8 @@ def resolve_datetime(raw: str, date_expressions: list[str], time_expressions: li
         starts.append(1080)
         result.notes.append('Evening/night defaults to a 6 PM earliest start and midnight cutoff; explicit time bounds take precedence.')
     result.start = max(starts) if starts else (0 if ends and min(ends) <= 600 else 600)
+    if not starts and re.search(r'\bnow\b',raw,re.I):
+        result.start=local_now.hour*60+local_now.minute
     result.end = min(ends) if ends else 1440
     if re.search(r'\b(?:following|next)\s+(?:day|morning)\b|\bovernight\b', raw, re.I):
         result.add_issue('overnight', 'Overnight outings are not supported by the single-day planner. Choose a window ending by midnight.')

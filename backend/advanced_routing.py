@@ -3,6 +3,7 @@
 Consumes a live server-owned StopResolver. No public DTO, persistence, discovery,
 interpretation, geocoding, retry, or new production capability switch.
 """
+from datetime import datetime, timezone
 from itertools import combinations
 from decimal import Decimal
 from typing import Literal
@@ -351,6 +352,10 @@ class AdvancedRouter:
         if self._result is not None:
             if arguments != self._arguments:
                 raise RouteError('computation_used', 'Start a separate computation for changed routing inputs.')
+            from backend.routes import current_evidence
+            mode='walk' if resolved.context and resolved.context.transport and resolved.context.transport.value=='walking' else 'drive'
+            if any(not current_evidence(l.evidence,mode) for c in self._result.candidates for l in c.legs):
+                raise RouteError('expired_evidence','Travel estimates expired. Regenerate to check current routes.')
             return self._result.model_copy(deep=True)
         result = self._plan(resolved, origin, allow_beyond_limit)
         self._arguments, self._result = arguments, result
@@ -446,6 +451,8 @@ class AdvancedRouter:
                 pairs = union
         if not selected:
             return blocked('no_candidates', 'No distinct verified venue assignment satisfies the required stops and ordering.')
+        from backend.routes import current_evidence
+        self._evidence={k:v for k,v in self._evidence.items() if current_evidence(v,mode)}
         needed={k:v for k,v in pairs.items() if k not in self._evidence}
         elements = requests = 0
         local_block=False
@@ -457,7 +464,7 @@ class AdvancedRouter:
             except RouteError as error:
                 local_block=error.code=='application_limit'
                 fresh={(a.id,b.id):RouteLeg(origin_id=a.id,destination_id=b.id,mode=mode,status='unknown',
-                    estimate_type='walking' if mode=='walk' else 'traffic_unaware',error_code=error.code) for a,b in needed.values()}
+                    estimate_type='walking' if mode=='walk' else 'traffic_aware',observed_at=datetime.now(timezone.utc),error_code=error.code) for a,b in needed.values()}
             self._evidence.update({k:v for k,v in fresh.items() if v.error_code!='application_limit'})
         else:fresh={}
         evidence={**self._evidence,**fresh}

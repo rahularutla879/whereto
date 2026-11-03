@@ -1,0 +1,546 @@
+{
+  "method": "Forty sequential local session regeneration actions over invented cached directional evidence; no model or actual provider sends. Not browser end-to-end latency.",
+  "modelCalls": 0,
+  "additionalSearches": 0,
+  "additionalMatrixRequests": 0,
+  "rows": [
+    {
+      "kind": "duration",
+      "milliseconds": 1.706,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.972,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.648,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 4.013,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 2.285,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.585,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.584,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.579,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.573,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 2.32,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.478,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 3.673,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.847,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.455,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.501,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.508,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.405,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.464,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.497,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.576,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 2.507,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 2.353,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.563,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.571,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.754,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.53,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.563,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.592,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.454,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.541,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 2.847,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 2.036,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.8,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.732,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.658,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.581,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.587,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 10,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 1.567,
+      "edit": {
+        "budgetScope": "travel"
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1260.0
+    },
+    {
+      "kind": "duration",
+      "milliseconds": 1.863,
+      "edit": {
+        "dwell": [
+          {
+            "occurrence": 0,
+            "minutes": 20,
+            "relation": "exact"
+          }
+        ]
+      },
+      "scope": "travel",
+      "elapsedLowerSeconds": 1860.0
+    },
+    {
+      "kind": "scope",
+      "milliseconds": 3.012,
+      "edit": {
+        "budgetScope": "outing"
+      },
+      "scope": "outing",
+      "elapsedLowerSeconds": 1860.0
+    }
+  ],
+  "summary": {
+    "duration": {
+      "n": 20,
+      "medianMs": 1.6175,
+      "p90Ms": 2.285,
+      "maxMs": 2.847
+    },
+    "scope": {
+      "n": 20,
+      "medianMs": 1.583,
+      "p90Ms": 3.012,
+      "maxMs": 4.013
+    }
+  },
+  "browser": {
+    "method": "Time from keyboard Regenerate submission to updated rendered card visible; isolated production build and invented cached provider evidence; four dwell and four scope edits. Includes UI/proxy/backend time, excludes manual typing and real Qwen/Google latency.",
+    "samples": [
+      {
+        "action": "grocery10to20",
+        "milliseconds": 131
+      },
+      {
+        "action": "grocery20to10",
+        "milliseconds": 126
+      },
+      {
+        "action": "grocery10to20",
+        "milliseconds": 127
+      },
+      {
+        "action": "grocery20to10",
+        "milliseconds": 127
+      },
+      {
+        "action": "scope-travel",
+        "milliseconds": 524
+      },
+      {
+        "action": "scope-outing",
+        "milliseconds": 117
+      },
+      {
+        "action": "scope-travel",
+        "milliseconds": 120
+      },
+      {
+        "action": "scope-outing",
+        "milliseconds": 118
+      }
+    ],
+    "providerCountersBeforeAfter": {
+      "searches": 3,
+      "elements": 24,
+      "details": 0,
+      "ai": 1
+    },
+    "extraCalls": 0
+  }
+}

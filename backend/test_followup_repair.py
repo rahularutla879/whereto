@@ -97,7 +97,7 @@ class FollowupTests(unittest.TestCase):
         self.assertEqual(r.options[0].knownTravelSeconds,sum(l.seconds for l in r.options[0].legs))
         self.assertTrue(all(l.mode=='drive' for l in r.options[0].legs))
         for call in self.h.calls:
-            self.assertEqual(call['routingPreference'],'TRAFFIC_UNAWARE');self.assertNotIn('departureTime',call)
+            self.assertEqual(call['routingPreference'],'TRAFFIC_AWARE');self.assertNotIn('departureTime',call)
         self.assertIsNone(r.options[0].legs[0].mapsUrl);self.assertIsNone(r.options[0].legs[-1].mapsUrl)
 
     def test_representative_origin_qualification_keeps_actual_route_point(self):

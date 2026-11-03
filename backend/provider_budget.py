@@ -193,7 +193,7 @@ class OutingBudget:
             yield
 
     @contextmanager
-    def reserve_matrices(self, matrices: list[tuple[str, int, int]]) -> Iterator[None]:
+    def reserve_matrices(self, matrices: list[tuple[str, int, int]], *, traffic_aware=False) -> Iterator[None]:
         """Admit a complete routing plan atomically, before authentication/I/O.
 
         All planned attempts remain charged locally even if a failure stops the
@@ -201,11 +201,11 @@ class OutingBudget:
         """
         if not matrices:
             raise ValueError("A matrix reservation needs at least one request.")
-        with self._reserve_batch([("matrix", key, rows, cols) for key, rows, cols in matrices]):
+        with self._reserve_batch([("matrix", key, rows, cols) for key, rows, cols in matrices], traffic_aware=traffic_aware):
             yield
 
     @contextmanager
-    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]]) -> Iterator[None]:
+    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False) -> Iterator[None]:
         for operation, request_id, origins, destinations in attempts:
             self._validate_attempt(operation, request_id, origins, destinations)
         identities = {(op, key) for op, key, _, _ in attempts}
@@ -253,7 +253,8 @@ class OutingBudget:
             from backend.search_fields import enterprise_search
             units = {"search_enterprise" if enterprise_search() else "search_pro": searches - lookups,
                      "search_pro": lookups} if enterprise_search() else {"search_pro": searches}
-            units.update(details=details, matrix_element=elements)
+            units.update(details=details)
+            units["matrix_pro_element" if traffic_aware else "matrix_element"] = elements
             reservation = session.cost.reserve(units, self._record_dispatch) if session.cost else nullcontext(0)
             try:
                 charge = reservation.__enter__()

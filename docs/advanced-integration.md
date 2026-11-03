@@ -1,3 +1,5 @@
+Current consolidated Task 50E: traffic-aware Drive/unchanged Walk, Pro accounting, bounded fresh route reuse, source-grounded three-hour return clarification, shortest-first exploration and current-departure hours checks are integrated. The same preferences/card/save UI remains. An expired advanced edit recreates the server session once from retained validated input/answers; it does not rerun Qwen or retry a failed Google send. Errors remain visible even when stale cards were cleared. [Contracts, measurements and acceptance](task50e-consolidated.md). Earlier checkpoints are historical; Task 51 remains unstarted.
+
 Latest Task 50E refinement: accepted structured answers are editable in the existing preferences panel; source constraints remain immutable, overrides are explicit, scope and timing reevaluate locally, and both paths use the same compact itinerary/contact primitives. [November 3 implementation and acceptance](task50e-followup.md). Earlier checkpoints below are historical.
 
 # Task 50E — local advanced outings

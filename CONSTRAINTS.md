@@ -1,3 +1,7 @@
+## Task 50E — explicit current traffic authorization
+
+The consolidated owner request authorizes Driving Matrix `TRAFFIC_AWARE` and its Pro tier within existing controlled local development. Walking stays unchanged. Do not use `TRAFFIC_AWARE_OPTIMAL`, a second verification pass, extra Cartesian cells, hidden retries, or change Cloud quotas/billing/identities/private profiles. Driving gross first-tier accounting is $0.010/element; Walking/legacy Essentials remains $0.005/element. Preserve existing usage when adding the Pro ledger key. Current evidence expires after five minutes and never establishes a guaranteed future arrival or consumer Maps parity. Automated/browser Google sends stay blocked. [Implementation and checks](docs/task50e-consolidated.md). Task 51 remains unstarted.
+
 # Safeguards
 
 - Preserve the current visual design and working behavior unless the agreed task requires a change. Keep modifications focused; avoid unrelated edits and refactoring.

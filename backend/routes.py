@@ -7,6 +7,8 @@ from decimal import Decimal
 from hashlib import sha256
 import json
 import os
+from datetime import datetime, timezone
+from time import time
 import re
 from typing import Annotated, Literal, Protocol
 
@@ -18,7 +20,7 @@ from backend.venue_models import Coordinates, VenueFacts
 Mode = Literal["drive", "walk"]
 Identity = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=200, pattern=r"^\S+$")]
 PlaceID = Annotated[str, StringConstraints(strict=True, min_length=1, max_length=200, pattern=r"^[A-Za-z0-9_-]+$")]
-FIELD_MASK = "originIndex,destinationIndex,status,condition,distanceMeters,duration"
+FIELD_MASK = "originIndex,destinationIndex,status,condition,distanceMeters,duration,fallbackInfo"
 ENDPOINT = "https://routes.googleapis.com/distanceMatrix/v2:computeRouteMatrix"
 # Derive contract bounds from the single approved candidate setting.
 MAX_CANDIDATES = 20  # Technical route-frontier width, independent of retained activity pools.
@@ -120,7 +122,8 @@ class RouteLeg(RouteModel):
     distance_meters: Annotated[int, Field(strict=True, ge=0)] | None = None
     status: Literal["ok", "same_location", "unreachable", "error", "unknown"]
     provider: Literal["google_routes", "local_identity"] = "google_routes"
-    estimate_type: Literal["traffic_unaware", "walking", "same_location"]
+    estimate_type: Literal["traffic_unaware", "traffic_aware", "walking", "same_location"]
+    observed_at: datetime | None = None
     error_code: str | None = None
     error_message: str | None = None
     error_context: dict | None = None
@@ -144,7 +147,7 @@ class RouteResult(RouteModel):
     legs: list[RouteLeg]
     matrix_elements: int  # Conservatively reserved, not a billing receipt.
     matrix_requests: int
-    notice: str = "Routing estimates are not live traffic predictions or guaranteed travel times. Walking routes are beta and may omit sidewalks or pedestrian paths."
+    notice: str = "Driving uses current Google traffic estimates, not guaranteed arrival times. Walking routes are beta and may omit sidewalks or pedestrian paths."
 
 
 class RouteCalculator(Protocol):
@@ -173,7 +176,7 @@ def matrix_body(origins: list[RoutePoint], destinations: list[RoutePoint], mode:
             "destinations": [waypoint(p) for p in destinations],
             "travelMode": "DRIVE" if mode == "drive" else "WALK"}
     if mode == "drive":
-        body["routingPreference"] = "TRAFFIC_UNAWARE"
+        body["routingPreference"] = "TRAFFIC_AWARE"
     return body
 
 
@@ -227,8 +230,8 @@ def batch_pairs(pairs):
 
 
 def _leg(a, b, mode, status="unknown", **kwargs):
-    return RouteLeg(origin_id=a.id, destination_id=b.id, mode=mode, status=status,
-                    estimate_type="traffic_unaware" if mode == "drive" else "walking", **kwargs)
+    return RouteLeg(origin_id=a.id, destination_id=b.id, mode=mode, status=status, observed_at=datetime.now(timezone.utc),
+                    estimate_type="traffic_aware" if mode == "drive" else "walking", **kwargs)
 
 
 def parse_matrix(data, origins, destinations, mode) -> list[RouteLeg]:
@@ -276,6 +279,11 @@ def parse_matrix(data, origins, destinations, mode) -> list[RouteLeg]:
                     or type(distance) is not int or distance < 0):
                 legs.append(_leg(a, b, mode, error_code="invalid_metrics"))
                 continue
+            fallback=item.get('fallbackInfo')
+            if mode == 'drive' and fallback is not None and (not isinstance(fallback,dict) or fallback.get('routingMode') != 'FALLBACK_TRAFFIC_AWARE'):
+                legs.append(_leg(a,b,mode,error_code='traffic_policy_unavailable',
+                    error_message='Google could not supply the requested traffic-aware estimate. Travel timing remains unverified; no automatic retry was made.'))
+                continue
             seconds = float(duration[:-1])
             legs.append(_leg(a, b, mode, "ok", duration_seconds=seconds,
                              duration_nanoseconds=int(Decimal(duration[:-1]) * 10**9),
@@ -307,7 +315,7 @@ class GoogleRouteCalculator:
         except ProviderLimitError as error:
             raise RouteError("application_limit", str(error)) from None
         bodies = [matrix_body(a, b, request.mode) for a, b in matrices]
-        reservations = [(sha256(json.dumps(body, sort_keys=True).encode()).hexdigest(), len(a), len(b))
+        reservations = [(sha256((json.dumps(body, sort_keys=True)+str(int(time()//300))).encode()).hexdigest(), len(a), len(b))
                         for body, (a, b) in zip(bodies, matrices)]
         legs = {}
         for key, (a, b) in pairs.items():
@@ -317,7 +325,7 @@ class GoogleRouteCalculator:
                                      distance_meters=0, provider="local_identity", estimate_type="same_location")
         if reservations:
             try:
-                with self.outing.reserve_matrices(reservations):
+                with self.outing.reserve_matrices(reservations, traffic_aware=request.mode == "drive"):
                     from backend.routes_transport import compute_matrix
                     computed = {}
                     routed_points = {p.id: p for origins, destinations in matrices for p in origins + destinations}
@@ -346,3 +354,22 @@ class GoogleRouteCalculator:
         return RouteResult(legs=[legs[key] for key in pairs],
                            matrix_elements=sum(a * b for _, a, b in reservations),
                            matrix_requests=len(reservations))
+
+
+def current_evidence(leg, mode, *, now=None):
+    """Only the selected policy and a bounded in-memory estimate can be reused.
+
+    Legacy unaware evidence stays decodable for historical tests/descriptions;
+    live planners must request the current policy. Failed attempts stay cached
+    during the same five-minute window to prevent automatic retries.
+    """
+    if leg.mode != mode:
+        return False
+    if leg.provider == 'local_identity':
+        return leg.status == 'same_location' and leg.estimate_type == 'same_location'
+    if leg.estimate_type != ('traffic_aware' if mode == 'drive' else 'walking'):
+        return False
+    if leg.observed_at is None or leg.observed_at.tzinfo is None:
+        return False
+    age = ((now or datetime.now(timezone.utc)) - leg.observed_at).total_seconds()
+    return 0 <= age < 300

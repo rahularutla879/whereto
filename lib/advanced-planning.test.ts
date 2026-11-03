@@ -128,3 +128,11 @@ test('readable projected clocks retain destination-local offset rather than brow
  const html=renderToStaticMarkup(createElement(PlanCard,{plan,index:0,detailsSession:new VenueDetailsSession()}));
  assert.match(html,/10:00 AM/);assert.match(html,/10:20 AM/);assert.doesNotMatch(html,/15:00/);
 });
+
+test('saved zero counted time never claims a realistic zero-minute visit',()=>{
+ const saved=validateSaved(fixture.saved);const advanced=saved.itineraries[0].advanced!;
+ advanced.budgetScope='travel';advanced.journey.stops[advanced.occurrenceOrder[0]].duration={minutes:0,relation:'exact',source:'Explicit counted-time override'};
+ const html=renderToStaticMarkup(createElement(SavedCards,{saved,venues:{},refresh(){},busy:false,message:''}));
+ assert.match(html,/Zero counted visit time; actual visit duration was not established/);
+ assert.doesNotMatch(html,/exact 0 minutes/);
+});

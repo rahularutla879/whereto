@@ -67,8 +67,8 @@ class RouteTests(unittest.TestCase):
                 self.assertEqual(leg.provider, "google_routes")
                 body = self.post.call_args.args[0]
                 self.assertEqual(set(body), {"origins", "destinations", "travelMode"} | ({"routingPreference"} if mode == "drive" else set()))
-                self.assertEqual(body.get("routingPreference"), "TRAFFIC_UNAWARE" if mode == "drive" else None)
-        self.assertEqual(FIELD_MASK, "originIndex,destinationIndex,status,condition,distanceMeters,duration")
+                self.assertEqual(body.get("routingPreference"), "TRAFFIC_AWARE" if mode == "drive" else None)
+        self.assertEqual(FIELD_MASK, "originIndex,destinationIndex,status,condition,distanceMeters,duration,fallbackInfo")
 
     def test_multi_origin_destination_out_of_order_and_asymmetry(self):
         req = route_request([[point("a"), point("b")], [point("c"), point("d")], [point("a")]])
@@ -334,7 +334,7 @@ class RouteTransportTests(unittest.TestCase):
         self.session.post.assert_not_called()
 
     def test_expensive_options_rejected_before_auth(self):
-        for body in (self.body | {'routingPreference': 'TRAFFIC_AWARE'}, self.body | {'extraComputations': ['TOLLS']}, self.body | {'departureTime': 'now'}):
+        for body in (self.body | {'routingPreference': 'TRAFFIC_AWARE_OPTIMAL'}, self.body | {'extraComputations': ['TOLLS']}, self.body | {'departureTime': 'now'}):
             with self.assertRaises(RouteError):
                 compute_matrix(body)
         self.auth.assert_not_called()

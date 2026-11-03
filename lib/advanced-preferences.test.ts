@@ -56,3 +56,19 @@ test('a draft applied with nearby clarification keeps both answers for model-fre
  const changed=rememberAdvancedEdit(next,{edits:{dwell:[{occurrence:0,minutes:10}]}});
  assert.equal(changed[0].searchNearOrigin,true);assert.deepEqual((changed[1].edits as {dwell:unknown[]}).dwell,[{occurrence:0,minutes:10}]);
 });
+test('now stays an editable intent without hydrating a stale clock',()=>{
+ const nowData={...data,preferences:{...preferences,departureNow:true,departure:null}};
+ const draft=advancedDraft(nowData)!;assert.equal(draft.departure,'');assert.deepEqual(advancedEdits(nowData,draft),{});
+ const html=renderToStaticMarkup(createElement(AdvancedPreferenceFields,{data:nowData,draft,busy:false,onChange(){}}));
+ assert.match(html,/Now — refreshed when you regenerate/);
+ for(const text of ['At most gives an inclusive upper bound','strictly under excludes the entered boundary','At least gives a minimum without a maximum','Approximate is an estimate without a guaranteed maximum'])assert.ok(html.includes(text));
+ draft.departure='16:30';assert.deepEqual(advancedEdits(nowData,draft),{departure:'16:30'});
+});
+
+test('expired-session replay retains the pending override and independent accepted answers',()=>{
+ const old=[{searchNearOrigin:true},{edits:{budgetScope:'outing',dwell:[{occurrence:0,minutes:10,relation:'exact'}],departure:'17:00'}}];
+ const replay=rememberAdvancedEdit(old,{edits:{budgetScope:'travel',dwell:[{occurrence:0,minutes:0,relation:'exact',zeroCountedTime:true}]}});
+ assert.deepEqual(replay[0],{searchNearOrigin:true});
+ const edits=replay[1].edits as {budgetScope:string;dwell:unknown[];departure:string};
+ assert.equal(edits.budgetScope,'travel');assert.equal(edits.departure,'17:00');assert.deepEqual(edits.dwell,[{occurrence:0,minutes:0,relation:'exact',zeroCountedTime:true}]);
+});

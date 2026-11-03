@@ -1,3 +1,5 @@
+Current November 3 consolidated acceptance supersedes the historical traffic-unaware policy and earlier verification below. Driving now uses explicitly approved TRAFFIC_AWARE/Pro. [Current implementation, matched measurements and rendered checks](task50e-consolidated.md). Task 51 remains unstarted.
+
 # Task 50E follow-up acceptance repair
 
 Baseline: `6153e1b`. This continues Task 50E. Task 51 is unstarted. No deployment,
@@ -451,3 +453,8 @@ The complete backend rerun initially exposed a legacy route-exploration fixture
 using two zero-minute visits. It was updated to one explicit minute per visit,
 keeping its infeasible-cached-path and later-feasible-path assertions. The focused
 regression passes; zero wording is separately covered as clarification.
+
+
+## November 3 — consolidated Task 50E refinement
+
+The owner's explicit current-traffic decision replaces the earlier unactivated Pro proposal. Traffic-aware routing/accounting, return/now semantics, shortest-first exploration, five dwell bounds and a measured model investigation continue Task 50E. Unsafe model changes were rejected; the latency acceptance item remains open. Existing card identity, editable answers, selected private saving, security, startup and roadmap numbers remain. Task 51 stays unstarted. [Implementation, measurements, verification and limitations](task50e-consolidated.md).

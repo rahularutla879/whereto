@@ -461,7 +461,7 @@ class AdvancedRoutingTests(unittest.TestCase):
         self.assertLessEqual(r.matrix_elements,27)
         self.assertLessEqual(sum(len(b['origins'])*len(b['destinations']) for b in self.calls),27)
         self.assertTrue(all(len(c.visits)==4 for c in r.candidates))
-        print(f'50C dense fixture: {r.considered_paths} considered, {r.admitted_paths} admitted; {r.matrix_elements} elements, {r.matrix_requests} requests; existing gross estimate ${r.matrix_elements*.005:.3f}')
+        print(f'50C dense fixture: {r.considered_paths} considered, {r.admitted_paths} admitted; {r.matrix_elements} elements, {r.matrix_requests} requests; existing gross estimate ${r.matrix_elements*.010:.3f}')
         again=self.plan([activity('coffee'),activity('bank'),activity('grocery shopping'),activity('pharmacy')],**kwargs)
         self.assertEqual([[(v.occurrence,v.selected.place_id) for v in c.visits] for c in r.candidates],
                          [[(v.occurrence,v.selected.place_id) for v in c.visits] for c in again.candidates])
@@ -521,7 +521,7 @@ class AdvancedRoutingTests(unittest.TestCase):
             resolver=self.resolve([named('SUNY College of Optometry'),activity('coffee')],endpoint={'kind':'origin','source':'return'})
             begin=perf_counter();r=AdvancedRouter(resolver).plan(origin=start());samples.append((perf_counter()-begin)*1000)
             self.assertEqual(r.matrix_elements,3)
-        print(f'50C offline routing only: median={median(samples):.3f}ms max={max(samples):.3f}ms; 3 elements, 3 requests, $0.015 existing gross estimate; live=$0')
+        print(f'50C offline routing only: median={median(samples):.3f}ms max={max(samples):.3f}ms; 3 elements, 3 requests, $0.030 current Pro gross estimate; live=$0')
 
 
 if __name__ == '__main__':

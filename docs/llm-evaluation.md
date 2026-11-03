@@ -1,3 +1,7 @@
+## Current Task 50E evaluation
+
+The installed Qwen model, original verified prompt/schema, 8K/1,024 bounds, thinking-off, temperature-zero, one interpretation per new text and startup preparation remain. No safe inference optimization was retained: compact candidates lost destinations, a shared-prompt projection invented constraints, and an effective-contract-correct adaptive candidate worsened p90/worst latency despite a lower median. Qwen latency acceptance remains open. A golden payload test protects the retained accuracy baseline. Structured edits/exploration remain model-free. Existing tooling now records actual per-row options; `scripts/benchmark50e.py` supplies controlled matched measurements. Reload/build-contaminated runs are excluded. [Measured results, semantic matrix and explicit limitation](task50e-consolidated.md). Historical measurements below retain their original context.
+
 # Interpretation model evaluation — October 30, 2026
 
 No model was switched or downloaded. No paid inference or Google calls were used. This evaluates language extraction and deterministic validation, not venue supply or routes. Recommendations below are hypotheses where no local comparison exists.

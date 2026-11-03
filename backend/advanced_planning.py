@@ -194,7 +194,7 @@ class Session:
         return {'stops':stops,'budget':{**self.journey.total_duration.model_dump(mode='json'),'source':redact_source(self.journey.total_duration.source,self.context)} if self.journey.total_duration else None,
             'budgetScope':self.budget_scope,'scopeOverride':self.budget_scope!='outing',
             'departure':f'{departure//60:02d}:{departure%60:02d}' if departure is not None else None,
-            'departureOverride':'departure' in self.explicit_overrides,'deadlineSource':redact_source(self.journey.deadline.source,self.context) if self.journey.deadline else None,
+            'departureNow':self.context.departureNow and self.departure is None,'departureOverride':'departure' in self.explicit_overrides,'deadlineSource':redact_source(self.journey.deadline.source,self.context) if self.journey.deadline else None,
             'returnToOrigin':bool(self.journey.endpoint and (self.journey.endpoint.kind=='origin' or self.journey.endpoint.kind=='home' and self.context.endpointStatus=='origin_confirmed')),
             'endpoint':redact_source(self.journey.endpoint.source,self.context) if self.journey.endpoint else None,
             'choices':choices}
@@ -250,12 +250,23 @@ class Session:
         if self.near_origin is not None and value.startingLocation != self.near_origin:
             raise AdvancedAnswerError('advanced_origin_changed','Your starting point changed. Regenerate to use the new origin.')
         if value.edits and value.action:raise AdvancedAnswerError('advanced_answer_invalid','Apply preferences before exploring more options.')
+        if self.router:
+            from backend.routes import current_evidence
+            mode='walk' if self.context.transport and self.context.transport.value=='walking' else 'drive'
+            stale=any(not current_evidence(l.evidence,mode) for c in self.candidates.values() for l in c.legs)
+            if stale:
+                if value.action:
+                    return self.base(status='unsupported',message='These travel estimates have expired. Regenerate plans to check current routes with your saved preferences.')
+                self.router=None;self.route_attempted=False;self.candidates={};self.reusable_routes={}
+                self.seen.clear();self.current_ids.clear();self.offerable={False:set(),True:set()}
+                self.receipt=self.receipt_key=None
         if value.edits:
             supplied=(value.startingLocation.model_dump_json() if value.startingLocation else None,value.firstTravel.model_dump_json() if value.firstTravel else None,value.betweenTravel.model_dump_json() if value.betweenTravel else None)
             if self.configuration is not None and supplied!=self.configuration:raise AdvancedAnswerError('advanced_origin_changed','Routing preferences changed. Regenerate to use the new origin or travel limits.')
             self.apply_edits(value.edits)
         if self.limitation:
             return self.base(status='unsupported', message=self.limitation)
+        from zoneinfo import ZoneInfo
         from backend.date_resolution import resolve_datetime
         def calendar_for(location,zone=None,answer=None):
             calendar=resolve_datetime(answer or self.text,[],[],location,
@@ -356,6 +367,8 @@ class Session:
             return self.base(status='clarification',message='The nearby search area is kept. Choose an exact date because its timezone is not verified.',questions=[{'field':'date','question':'What exact date is this outing?'}])
         if self.requires_date_confirmation and self.context.timezoneBasis!='destination_calendar':
             return self.base(status='clarification',message='Choose the search area so tomorrow can use its local calendar.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
+        if self.context.departureNow and self.departure is None and not value.departure and not self.date_answer and self.context.timezoneBasis=='destination_calendar':
+            self.context.date=datetime.now(ZoneInfo(self.context.timezone)).date()
         if self.context.date is None:
             return self.base(status='clarification',message=' '.join(self.context.dateIssues) or 'Choose the outing date.',questions=[{'field':'date','question':'What date is this outing?'}])
         # UTC midnight cannot prove a confirmed local date has expired when the
@@ -372,11 +385,19 @@ class Session:
             return self.base(status='unsupported',message='This outing date has passed. Edit the date and regenerate.')
         if self.context.issues:
             return self.base(status='unsupported',message=' '.join(self.context.issues))
+        from backend.journey import ambiguous_return
+        if ambiguous_return(self.journey.endpoint) and self.context.endpointStatus != 'origin_confirmed':
+            return self.base(status='unsupported',message='Confirm where you mean by be back before generating this outing.')
         returning = bool(self.journey.endpoint and (self.journey.endpoint.kind == 'origin' or self.journey.endpoint.kind == 'home' and self.context.endpointStatus == 'origin_confirmed'))
         if self.journey.endpoint and self.journey.endpoint.kind == 'home' and not returning:
             return self.base(status='unsupported',message='A separate home address is not verified by this flow. Choose Return to my starting point and confirm that origin, or request a named final establishment.')
         if not self.context.destination and self.search_area is None and (any(s.kind != 'named_place' for s in self.journey.stops) or self.journey.deadline):
             return self.base(status='clarification',message='Choose a search area without changing your stops.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
+        if self.context.departureNow and self.departure is None and not value.departure:
+            instant=datetime.now(timezone.utc)
+            if self.context.date != instant.astimezone(ZoneInfo(self.context.timezone)).date():
+                return self.base(status='clarification',message='Now means today at the destination. Choose an explicit departure for this date.',questions=[{'field':'departure','question':'What time will you depart?'}])
+            self.context.departureInstant=instant
         minute=self.departure if self.departure is not None else self.context.departureMinute
         if minute is None:
             minute=int(value.departure[:2])*60+int(value.departure[3:]) if value.departure else self.departure
@@ -400,7 +421,7 @@ class Session:
             if 'betweenTravel' in value.model_fields_set:
                 self.context.betweenTravel=value.betweenTravel
                 self.context.maxLegTravel=None
-            if not value.startingLocation and (returning or self.context.firstTravel or self.context.originText):
+            if not value.startingLocation and (returning or self.context.departureNow or self.context.firstTravel or self.context.originText):
                 return self.base(status='clarification',message='Confirm your starting point using Starting location, then continue.',questions=[{'field':'origin','question':'Confirm a starting point, then continue.'}])
             if value.startingLocation and value.startingLocation.source == 'mock':
                 raise ValueError('Real journeys need a confirmed real starting point.')
@@ -417,7 +438,9 @@ class Session:
             started=perf_counter()
             self.resolver.resolve(self.journey, self.search_area or (SearchArea(name=self.context.destination) if self.context.destination else None), context=self.context)
             self.latencies['resolutionMs']=(perf_counter()-started)*1000
-        if self.near_origin is not None and self.resolver:
+        if self.resolver and self.resolver._result:
+            # Clocks are action-scoped even when venue and directional evidence
+            # remain compatible. Never reuse an earlier now verdict.
             self.resolver._result.context=self.context.model_copy(deep=True)
         if getattr(self.resolver,'_named_only',False):
             started=perf_counter()
@@ -502,6 +525,7 @@ class Session:
                 history=[self.route_id(c.route) for c in eligible]
                 return (signature not in self.current_ids,
                         sum(key in previous for key in signature for previous in history),
+                        sum(key in previous for key in signature for previous in self.seen),
                         candidate.route.known_travel_seconds)
             chosen=min(near,key=overlap)
             eligible.append(chosen);pool.remove(chosen)
@@ -531,7 +555,7 @@ class Session:
                 elapsedUpperSeconds=float(c.elapsed.upper) if c.elapsed.upper is not None else None,upperExclusive=c.elapsed.upper_exclusive,
                 budgetScope=self.budget_scope,totalConstraint=route.journey.total_duration.model_copy(update={'source':redact_source(route.journey.total_duration.source,self.context)}) if route.journey.total_duration else None,deadlineSource=redact_source(route.journey.deadline.source,self.context) if route.journey.deadline else None,durationState=c.duration_state,deadlineState=c.deadline_state,reasons=list(dict.fromkeys(r.message for r in c.reasons if r.state!='feasible')),
                 omitted=[{'occurrence':o.occurrence,'requested':redact_source(o.requested.source,self.context),'reason':o.reason} for o in route.omitted]))
-            if route.journey.total_duration and self.budget_scope=='outing' or route.journey.deadline:
+            if route.journey.total_duration and self.budget_scope=='outing' or route.journey.deadline or self.context.departureNow and c.hours_state=='unverified' and any(v.selected.facts.currentOpeningHours is not None for v in route.visits):
                 for v in route.visits:
                     if v.requested.duration is None:
                         q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend on {redact_source(v.requested.source,self.context)}?'}
@@ -592,7 +616,7 @@ class Sessions:
             return {'activeSessions':len(self.items),'lastStageMs':dict(latest.latencies) if latest else {},
                 'timingVerdicts':dict(latest.timing_counts) if latest else {},
                 'coverage':latest.resolver.coverage(latest.router,latest.seen) if latest and latest.resolver else {},
-                'routeAssumptions':{'provider':'google_routes','drivingPolicy':'TRAFFIC_UNAWARE','departureTimeSent':False,
+                'routeAssumptions':{'provider':'google_routes','drivingPolicy':'TRAFFIC_AWARE','departureTimeSent':False,
                     'originSource':latest.origin.source if latest and latest.origin else 'none',
                     'originPrecision':latest.origin.precision if latest and latest.origin else 'none',
                     'originAccuracyMeters':latest.origin.accuracy_m if latest and latest.origin else None,

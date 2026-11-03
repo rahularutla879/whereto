@@ -47,7 +47,7 @@ test("offline exploration HTTP boundaries and contacts share persistent nonblock
     assert.equal(response.status,200);
     const result=await response.json();assert.equal(result.provisionalPlans.length,3);
     assert.equal(result.diagnostics.explorationMode,true);
-    assert.equal(result.diagnostics.estimatedDayGrossUsd,.28);
+    assert.equal(result.diagnostics.estimatedDayGrossUsd,.49);
     assert.equal(result.diagnostics.dispatched.matrixElements,42);
     const before=await(await fetch(`${base}/__test/counts`)).json();
     const detail=await post("/api/venues/details",{token:result.detailsToken,placeId:result.provisionalPlans[0].candidate.venues[0].id});

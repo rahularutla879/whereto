@@ -25,6 +25,7 @@ def main():
     parser.add_argument('--local-ai',action='store_true',help='Use installed local Qwen with otherwise offline advanced provider fixtures')
     args = parser.parse_args()
     if args.local_ai and not args.advanced:parser.error('--local-ai requires --advanced')
+    if not args.local_ai:os.environ['WHERETO_AI_WARMUP_DEV']='0'  # Fully offline fixtures never prepare a real model.
     if args.exploration_ledger:
         os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
@@ -32,13 +33,28 @@ def main():
     if args.advanced:
         os.environ.update(WHERETO_ADVANCED_DEV='1',WHERETO_STOP_RESOLUTION_DEV='1',WHERETO_HOURS_DEV='1')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
+    route_policies=[]
     scenario = {'name': 'advanced' if args.advanced else 'refinements' if args.refinements else 'cinema_acceptance' if args.acceptance else 'normal'}
+
+    def hours_records(records):
+        if scenario['name'] not in ('advanced_now','advanced_now_closed','advanced_now_opens_before','advanced_now_closes_during'):return records
+        from backend.hours_fixtures49 import fixture_hours
+        from datetime import datetime,timedelta,timezone
+        from zoneinfo import ZoneInfo
+        for record in records:
+            record.update(fixture_hours(closed=scenario['name']=='advanced_now_closed' and record['id']=='Synthetic_college'))
+            if record['id']=='Synthetic_college' and scenario['name'] in ('advanced_now_opens_before','advanced_now_closes_during'):
+                instant=(datetime.now(timezone.utc)+timedelta(minutes=1 if scenario['name']=='advanced_now_opens_before' else 5)).astimezone(ZoneInfo('America/New_York'))
+                period=record['currentOpeningHours']['periods'][0]
+                boundary=period['open' if scenario['name']=='advanced_now_opens_before' else 'close']
+                boundary.update(hour=instant.hour,minute=instant.minute)
+        return records
 
     def search(body, **kwargs):
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
-        if args.advanced and scenario['name'] == 'advanced':
+        if args.advanced and scenario['name'].startswith('advanced'):
             from backend.test_advanced_routing import COLLEGE,COFFEE,GROCERY,BANK,PHARMACY,STATION
             from backend.test_stop_resolution import place
             from copy import deepcopy
@@ -53,8 +69,8 @@ def main():
                 generated=[place(f'Synthetic_{types}_{i}',f'Invented {types} {i}',f'{i+1} Fixture Road, {city}',[types],lat=40.75+i*.0001) for i in range((page-1)*10,page*10)]
                 for venue in generated:
                     venue['addressComponents']=[{'longText':city,'types':['locality']}]+([{'longText':'New Jersey','shortText':'NJ','types':['administrative_area_level_1']}] if city=='Jersey City' else [])
-                return {'places':generated[:body.get('pageSize',10)],**({'nextPageToken':f'synthetic-{page+1}'} if page<3 else {})}
-            if 'suny' in query:return {'places':[deepcopy(COLLEGE)]}
+                return {'places':hours_records(generated[:body.get('pageSize',10)]),**({'nextPageToken':f'synthetic-{page+1}'} if page<3 else {})}
+            if 'suny' in query:return {'places':hours_records([deepcopy(COLLEGE)])}
             if 'penn' in query:return {'places':[deepcopy(p) for p in records if p['displayName']['text']=='Penn Station']}
             # Ordinary Jersey City request uses the same invented evidence boundary.
             if 'jersey city' in query:
@@ -141,8 +157,18 @@ def main():
         from backend.development_cost import dispatch
         dispatch('matrix', len(body['origins'])*len(body['destinations']))
         counts['elements'] += len(body['origins']) * len(body['destinations'])
-        if args.advanced and scenario['name']=='advanced':
-            return [{'originIndex':i,'destinationIndex':j,'status':{},'condition':'ROUTE_EXISTS','duration':('120s' if body['travelMode']=='DRIVE' else '600s'),'distanceMeters':600} for i,_ in enumerate(body['origins']) for j,_ in enumerate(body['destinations'])]
+        route_policies.append({'mode':body['travelMode'],'preference':body.get('routingPreference'),'departureTimeSent':'departureTime' in body,'elements':len(body['origins'])*len(body['destinations'])})
+        if args.advanced and scenario['name'].startswith('advanced'):
+            def seconds(a,b):
+                if body['travelMode']=='WALK':return 600
+                if scenario['name']=='advanced_traffic_long':return 3600
+                if scenario['name']=='advanced_shortest':
+                    import re
+                    ids=' '.join(p['waypoint'].get('placeId','') for p in (a,b))
+                    cafe=re.search(r'Synthetic_cafe_(\d+)',ids)
+                    if cafe:return (int(cafe[1])+1)*60
+                return 120
+            return [{'originIndex':i,'destinationIndex':j,'status':{},'condition':'ROUTE_EXISTS','duration':str(seconds(a,b))+'s','distanceMeters':600} for i,a in enumerate(body['origins']) for j,b in enumerate(body['destinations'])]
         if scenario['name'] == 'slow_routes': sleep(3)
         if scenario['name'] in ('strict_local','strict_far'):
             from backend.strict_local_fixtures import local_matrix
@@ -233,6 +259,13 @@ def main():
         from backend.main import app
         @app.get('/__test/counts')
         def stats(): return counts
+        @app.post('/__test/expire-advanced')
+        def expire_advanced():
+            from backend.advanced_planning import sessions
+            for session in sessions.items.values():session.expires=0
+            return {'expired':len(sessions.items)}
+        @app.get('/__test/routes')
+        def route_stats():return route_policies
         @app.post('/__test/scenario')
         def set_scenario(value: dict):
             scenario['name'] = value.get('name', 'normal')

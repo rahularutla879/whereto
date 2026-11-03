@@ -148,7 +148,7 @@ class ImprovementTests(unittest.TestCase):
             return result
         self.search.side_effect=supplied
         result=real_plans(outing(activities=['bowling'],cost='experience'),self.session)
-        self.assertNotEqual(result.provisionalPlans[0].stops[0].venue.id,'Fixture_bowling_0')
+        self.assertEqual(result.provisionalPlans[0].stops[0].venue.id,'Fixture_bowling_0')  # Shortest known journey precedes rating confidence; rating scoring remains intact.
         self.search.side_effect=lambda body: {'places':[dict(p,rating=None,userRatingCount=None) for p in search_fixture(body)['places']]}
         result=real_plans(outing(),ProviderBudget())
         self.assertTrue(result.provisionalPlans)

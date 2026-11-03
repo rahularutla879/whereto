@@ -276,6 +276,8 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
         route_request=route_request.model_copy(update={'required_pairs':desired})
     from backend.routing_expansion import select_stage
     required, _ = plan_matrices(route_request)
+    from backend.routes import current_evidence
+    context["routes"] = {k:v for k,v in context["routes"].items() if current_evidence(v, mode)}
     missing = [key for key in required if key not in context["routes"]]
     # Reuse evaluated alternatives. A bounded stage fills a checked pool with
     # fewer than three options; initial infeasibility may expand once below.
@@ -479,6 +481,13 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             plan.score=min(1,plan.score+.015*preferred/len(plan.candidate.venues))
             plan.components['retailFormatPreference']=.015*preferred/len(plan.candidate.venues)
     ranked.sort(key=lambda plan:(-plan.score,(plan.totalTravel+((plan.firstLeg or {}).get('minutes') or 0)) if plan.totalTravel is not None and (not plan.firstLeg or plan.firstLeg.get('minutes') is not None) else float('inf'),plan.candidate.id))
+    for plan in ranked:
+        ids=[v.id for v in plan.candidate.venues]
+        pairs=list(zip(ids,ids[1:]))
+        if request.startingLocation:pairs.insert(0,(request.startingLocation.point.id,ids[0]))
+        legs=[routes.get(pair) for pair in pairs]
+        plan.components['verifiedTravelSeconds']=sum(l.duration_seconds for l in legs) if all(l and l.status in ('ok','same_location') for l in legs) else 1e12
+    ranked.sort(key=lambda p:(p.travelClassification!='matching',p.components['verifiedTravelSeconds'],-p.score,p.candidate.id))
     diagnostics["unseenEligibleCombinations"] = len(ranked)
     beyond_available=any(p.travelClassification=='beyond_limit' for p in scored_alternatives)
     from backend.travel_classification import limit_notice
@@ -603,7 +612,7 @@ def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) 
             "Estimates include failed/unsent batch reservations, exclude allowances/credits and unrelated usage; not verified Cloud billing."] if outing.settings.exploration else [f"Current application ceilings: {outing.settings.candidates_per_activity} retained venues per activity; {outing.settings.searches_per_outing} searches and {outing.settings.matrix_elements_per_outing} route elements per outing."]) + coverage_notes(diagnostics["venuePipeline"]) + ([route_notice] if route_notice else []) + ["Matching venue coverage: " + "; ".join(f"{activity.value}: {len(pool)}" for activity, pool in zip(request.activities, all_pools)) + ". This is limited search coverage, not a city-wide venue count.",
                "Real venues from Google Maps; activity categories reflect search context and need confirmation.",
                "Real prices, activity durations, hours, showtimes and reservations are unknown. No budget is confirmed.",
-               "Driving excludes live traffic. Walking routes are beta and may omit sidewalks or pedestrian paths.",
+               "Driving uses current Google traffic estimates; actual times may change. Walking routes are beta and may omit sidewalks or pedestrian paths.",
                "Inter-stop travel excludes the first trip and return home. An explicitly shared start is shown separately.",
                ("Exploration retains eligible candidates across finite actions; searched coverage is not city-wide exhaustion." if outing.settings.exploration else f"Up to {session.settings.candidates_per_activity} relevant candidates per activity can be retained through explicit search expansion. These results do not cover every venue in the city.")])
 

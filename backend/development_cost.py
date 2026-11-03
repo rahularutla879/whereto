@@ -12,8 +12,8 @@ from tempfile import mkstemp
 import stat
 from time import time, monotonic, sleep
 
-# USD millionths/event, global first paid tier, checked 2026-10-26.
-RATES = {'search_pro': 32000, 'search_enterprise': 35000, 'details': 20000, 'matrix_element': 5000}
+# USD millionths/event, global first paid tier, checked 2026-11-03. Essentials retained for historical usage and Walking; Driving uses Pro.
+RATES = {'search_pro': 32000, 'search_enterprise': 35000, 'details': 20000, 'matrix_element': 5000, 'matrix_pro_element': 10000}
 _active = ContextVar('development_cost_reservation', default=None)
 
 
@@ -34,7 +34,7 @@ def daily_limit(variable="WHERETO_DEV_DAILY_USD"):
         raise AccountingError(f'Invalid local usage configuration. Set {variable} to a positive USD amount.') from None
 
 
-def dispatch(operation, count=1):
+def dispatch(operation, count=1, *, sku=None):
     """Called at the transport boundary, after authentication, before actual I/O."""
     from backend.provider_work import check_cancelled
     check_cancelled()
@@ -43,7 +43,7 @@ def dispatch(operation, count=1):
         from backend.provider_budget import ProviderLimitError
         raise ProviderLimitError('Exploration provider work requires a reserved local cost allowance.')
     if active:
-        try: active(operation, count)
+        try: active(operation, count, sku)
         except (AccountingError, OSError):
             from backend.provider_budget import ProviderLimitError
             raise ProviderLimitError('Local cost accounting failed before provider dispatch. No request was sent.') from None
@@ -152,7 +152,7 @@ class DevelopmentCost:
                 raise AccountingError('Local daily estimated spending allowance reached. No new provider work was admitted. Review usage and the explicit local allowance; no retry is scheduled.')
             now=time()
             recent=[e for e in data['recent'] if now-e[0]<60]
-            additions={'search':units.get('search_pro',0)+units.get('search_enterprise',0), 'details':units.get('details',0),'elements':units.get('matrix_element',0)}
+            additions={'search':units.get('search_pro',0)+units.get('search_enterprise',0), 'details':units.get('details',0),'elements':units.get('matrix_element',0)+units.get('matrix_pro_element',0)}
             for kind, maximum in (('search',10),('details',10),('elements',150)):
                 if additions[kind]+sum(e[2] for e in recent if e[1]==kind)>maximum:
                     raise AccountingError('Local shared provider minute allowance reached. Wait before a deliberate action; no retry is scheduled.', reason='local_shared_minute', retry_after=max(1,ceil(60-(now-min(e[0] for e in recent if e[1]==kind)))))
@@ -164,8 +164,10 @@ class DevelopmentCost:
         # Reservations are durable before releasing it. Dispatch updates re-read
         # the latest row under a short lock, so other processes cannot lose usage.
         sent = {}
-        def measured(operation, count):
-            key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details','matrix':'matrix_element'}[operation]
+        def measured(operation, count, sku=None):
+            key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details','matrix':'matrix_pro_element' if units.get('matrix_pro_element') else 'matrix_element'}[operation]
+            if sku is not None and (operation!='matrix' or sku!=key):
+                raise AccountingError('Routing SKU does not match its reservation; no request sent.')
             n=count
             if type(n) is not int or n <= 0 or sent.get(key,0)+n > units.get(key,0):
                 raise AccountingError('Provider dispatch exceeds its reserved usage; no request sent.')
