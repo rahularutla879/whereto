@@ -230,3 +230,8 @@ audit or live provider verification is claimed. See HANDOVER.md for precise scop
 ## Task 50E — advanced application integration
 
 Task 50E displays these verdicts, filters infeasible options and accepts occurrence-specific missing-duration/explicit-departure answers. Reevaluation reads trusted route snapshots with no new Matrix/Qwen calls; approximate answers do not establish hard feasibility. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+## November 3 — Task 50E acceptance repair
+
+The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.

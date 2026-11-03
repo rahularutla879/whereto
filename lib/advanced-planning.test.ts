@@ -5,7 +5,9 @@ import {createElement} from 'react';
 import {renderToStaticMarkup} from 'react-dom/server';
 import {adaptAdvanced,continueAdvanced, type AdvancedData} from './advanced-planning';
 import {generateOuting} from './planning-client';
-import {AdvancedPlanCard,AdvancedClarifications} from '../components/advanced-plan';
+import {AdvancedClarifications} from '../components/advanced-plan';
+import {PlanCard} from '../components/plan-card';
+import {VenueDetailsSession} from './venue-details';
 import {validateSaved} from './saved-plans';
 import {SavedCards} from '../components/saved-cards';
 
@@ -28,10 +30,10 @@ finally:h.doCleanups()
 test('trusted advanced projection renders complete return route and prominent uncertainty',()=>{
  const result=adaptAdvanced(fixture.data,{});
  assert.equal(result.plans.length,1);assert.equal(result.plans[0].feasibility,'provisional');
- const html=renderToStaticMarkup(createElement(AdvancedPlanCard,{plan:result.plans[0],index:0,selected:false,onSelect(){}}));
- assert.match(html,/Return to Start/);assert.match(html,/Return to starting point/);assert.match(html,/Requirements not fully verified/);assert.match(html,/whole journey/i);assert.match(html,/Select itinerary/);assert.doesNotMatch(html,/Return travel is not included|10:00 AM|latitude/);
+ const html=renderToStaticMarkup(createElement(PlanCard,{plan:result.plans[0],index:0,detailsSession:new VenueDetailsSession()}));
+ assert.match(html,/Return to starting point/);assert.match(html,/Total time not yet verified/);assert.match(html,/whole journey/i);assert.doesNotMatch(html,/Select itinerary/);assert.doesNotMatch(html,/Return travel is not included|10:00 AM|latitude/);
  const question=renderToStaticMarkup(createElement(AdvancedClarifications,{state:result.advanced!,busy:false,onAnswer(){}}));
- assert.match(question,/How long/);assert.match(question,/My estimate \(approximate\)/);assert.match(question,/bounded search/);assert.match(question,/do not guarantee actual arrival/);assert.doesNotMatch(html,/do not guarantee actual arrival/);
+ assert.match(question,/How long/);assert.match(question,/My estimate \(approximate\)/);assert.doesNotMatch(question,/<form/);assert.doesNotMatch(html,/do not guarantee actual arrival/);
 });
 test('normal submission routes a server-issued advanced token without ordinary dispatch',async()=>{
  const paths:string[]=[];
@@ -70,4 +72,37 @@ test('advanced proxy preserves planning validation errors instead of calling the
   const response=await persistenceProxy('/api/plans/advanced',new Request('http://localhost:3000/api/plans/advanced',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:'x'.repeat(43),departure:''})}));
   assert.equal(response.status,422);assert.match((await response.json()).message,/advanced answer format/);
  }finally{globalThis.fetch=original;}
+});
+
+test('advanced cards share ordinary card primitives, readable formatting and the original save workflow',()=>{
+ const plan=adaptAdvanced(fixture.data,{}).plans[0];
+ const html=renderToStaticMarkup(createElement(PlanCard,{plan,index:0,detailsSession:new VenueDetailsSession()}));
+ for(const primitive of ['card-visual','real-route-poster','card-description','activity-route','card-facts','plan-link','stop-number'])assert.ok(html.includes(primitive));
+ assert.match(html,/November 7, 2026/);assert.match(html,/View plan/);
+ assert.doesNotMatch(html,/Select itinerary|Requested stop [0-9]|New York · 2026-/);
+});
+test('date and area questions use canonical planner fields, not duplicate forms',()=>{
+ const state=adaptAdvanced({...fixture.data,questions:[{field:'date',question:'Choose a date'},{field:'destination',question:'Choose an area'}]},{}).advanced!;
+ const html=renderToStaticMarkup(createElement(AdvancedClarifications,{state,busy:false,nearOrigin:true,onAnswer(){}}));
+ assert.match(html,/Date above/);assert.match(html,/Location above/);assert.match(html,/Search near my confirmed starting point/);
+ assert.doesNotMatch(html,/<form|<input/);
+});
+test('advanced continuation exposes real actions and history navigation makes no calls',async()=>{
+ const {ItineraryPages}=await import('./itinerary-pages');
+ const first=adaptAdvanced({...fixture.data,canExpand:true,canDiscover:true,canShowBeyond:true},{});
+ assert.equal(first.canExpand,true);assert.equal(first.canDiscover,true);assert.equal(first.canShowBeyond,true);
+ let calls=0;
+ const second=await continueAdvanced(first.advanced!,{action:'different'},undefined,async(url,init)=>{
+  calls++;assert.equal(url,'/api/plans/advanced');assert.equal(JSON.parse(String(init?.body)).action,'different');
+  return Response.json({...fixture.data,options:fixture.data.options.map(p=>({...p,id:p.id+'_next',stops:p.stops.map(s=>({...s,placeId:s.placeId+'_next'}))}))});
+ });
+ const pages=new ItineraryPages();pages.append(first);pages.append(second);
+ assert.equal(pages.pages.length,2);assert.equal(pages.navigate(-1)?.plans[0].id,first.plans[0].id);
+ assert.equal(pages.navigate(1)?.plans[0].id,second.plans[0].id);assert.equal(calls,1);
+});
+
+test('the canonical date answer keeps one native control and offers supported words',async()=>{
+ const {OutingDateField}=await import('../components/outing-date-field');
+ const html=renderToStaticMarkup(createElement(OutingDateField,{value:'',onChange(){},real:true,allowNatural:true}));
+ assert.equal((html.match(/<input/g)??[]).length,1);assert.match(html,/type="date"/);assert.match(html,/name="outing-date"/);assert.match(html,/Enter a date in words/);
 });

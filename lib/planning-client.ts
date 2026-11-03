@@ -171,7 +171,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       let result=adaptAdvanced(data,configuration);
       if(result.advanced&&extraction.pending)result.advanced.continuation={pending:extraction.pending,questions:[]};
       for(const answer of context?.advancedAnswers??[]){
-        if(!result.advanced||!["results","no_results"].includes(result.advanced.data.status))break;
+        if(!result.advanced||['provider_failure','unsupported'].includes(result.advanced.data.status))break;
         const {continueAdvanced}=await import('./advanced-planning');
         result=await continueAdvanced(result.advanced,answer,context?.signal,send);
       }

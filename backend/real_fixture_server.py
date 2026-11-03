@@ -44,8 +44,23 @@ def main():
             query=body['textQuery'].lower()
             if kwargs and not any(word in query for word in ('suny','penn')):
                 return {'places':[place('Synthetic_start','Synthetic public starting point',types=['establishment'])]}
-            types=next((t for word,t in [('cafe','cafe'),('coffee','cafe'),('grocer','supermarket'),('supermarket','supermarket'),('atm','atm'),('bank','bank'),('pharmac','pharmacy')] if word in query),None)
-            return {'places':deepcopy([p for p in records if types is None or types in p['types']])}
+            types=next((t for word,t in [('bowling','bowling_alley'),('restaurant','restaurant'),('bars','bar'),('museum','museum'),('cafe','cafe'),('coffee','cafe'),('grocer','supermarket'),('supermarket','supermarket'),('atm','atm'),('bank','bank'),('pharmac','pharmacy')] if word in query),None)
+            if types:
+                page=int(body.get('pageToken','synthetic-1').split('-')[-1])
+                city='Jersey City' if 'jersey city' in query or types in ('bowling_alley','restaurant','bar') else 'New York'
+                generated=[place(f'Synthetic_{types}_{i}',f'Invented {types} {i}',f'{i+1} Fixture Road, {city}',[types],lat=40.75+i*.0001) for i in range((page-1)*10,page*10)]
+                for venue in generated:
+                    venue['addressComponents']=[{'longText':city,'types':['locality']}]+([{'longText':'New Jersey','shortText':'NJ','types':['administrative_area_level_1']}] if city=='Jersey City' else [])
+                return {'places':generated[:body.get('pageSize',10)],**({'nextPageToken':f'synthetic-{page+1}'} if page<3 else {})}
+            if 'suny' in query:return {'places':[deepcopy(COLLEGE)]}
+            if 'penn' in query:return {'places':[deepcopy(p) for p in records if p['displayName']['text']=='Penn Station']}
+            # Ordinary Jersey City request uses the same invented evidence boundary.
+            if 'jersey city' in query:
+                kind='bowling_alley' if 'bowl' in query else 'restaurant' if 'restaurant' in query else 'bar'
+                venues=[place(f'Synthetic_{kind}_{i}',f'Invented {kind} {i}',f'{i+1} Fixture Road, Jersey City',[kind]) for i in range(body.get('pageSize',10))]
+                for venue in venues:venue['addressComponents']=[{'longText':'Jersey City','types':['locality']},{'longText':'New Jersey','shortText':'NJ','types':['administrative_area_level_1']}]
+                return {'places':venues}
+            return {'places':deepcopy([p for p in records if types is None or types in p['types']][:body.get('pageSize',10)])}
         if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
             from backend.refinement_fixtures import search_fixture as refinement_search
             data=refinement_search(body,**kwargs)
@@ -154,6 +169,12 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if args.advanced:
+                import json
+                from pathlib import Path
+                rows=json.loads(Path(__file__).with_name('repair_extractions.json').read_text())
+                match=next((r for r in rows if r['text'].casefold()==text.casefold()),None)
+                if match:return Interpretation.model_validate(match['raw'])
             if args.journey or args.advanced:
                 from backend.journey_fixtures import FixtureAI as JourneyAI
                 return JourneyAI().interpret(text)

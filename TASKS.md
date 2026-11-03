@@ -286,6 +286,8 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
 - [x] Task 50E — Integrate, persist and test complex multi-stop plans.
 
+  November 3 owner acceptance repair: ordinary dinner/bowling and grocery/ATM interpretation, unified form/date/card/save interactions and bounded advanced multi-page combinations/discovery/scoped exceptions are implemented. Verified: backend892 reported/857 passed/35 opt-in skips; frontend249/249; focused206 passed/one hosted skip; hosted57/57 plus committed exception and browser saves. Desktop1280/mobile390, six real Qwen checks, build/type/lint/dependency/audit/security checks pass. [Repair report](docs/task50e-repair.md) and HANDOVER.md contain exact evidence and limits. No Task 51 work.
+
   Integrate 50A–50D with the existing frontend, FastAPI backend, Google integrations and Task 47–50 Supabase foundation:
 
   - Save/reopen fixed versus flexible stop identity, order constraints, return journeys, deadlines and stop-duration assumptions.

@@ -1,6 +1,7 @@
 """Local-only Task 50E orchestration. Provider evidence never comes from a client."""
 from collections import OrderedDict
 from datetime import datetime, timezone
+import re
 from hashlib import sha256
 import os
 import secrets
@@ -10,7 +11,7 @@ from typing import Literal
 from pydantic import Field, model_validator
 
 from backend.models import ContractModel, OutingDate
-from backend.interpretation import InterpretationContext
+from backend.interpretation import InterpretationContext, activity_category
 from backend.journey import Duration, Journey
 from backend.location_policy import FirstTravel
 from backend.places import DiscoveryError, SearchArea
@@ -52,12 +53,16 @@ class AdvancedInput(ContractModel):
     choice: Choice | None = None
     dwell: DwellAnswer | None = None
     departure: str | None = Field(default=None, pattern=r'^([01]\d|2[0-3]):[0-5]\d$')
-    date: OutingDate | None = None
+    date: str | None = Field(default=None,min_length=1,max_length=100)
+    action: Literal['different','discover','beyond'] | None = None
+    searchNearOrigin: bool = Field(default=False,strict=True)
+    includeBeyond: bool = Field(default=False,strict=True)
     destination: str | None = Field(default=None, min_length=2, max_length=200)
 
 
 class PublicStop(ContractModel):
     occurrence: int
+    activity: str | None = None
     requested: str
     requirement: Literal['required', 'optional']
     placeId: str
@@ -87,6 +92,8 @@ class PublicLeg(ContractModel):
 
 class PublicOption(ContractModel):
     id: str
+    travelException: bool = False
+    travelDeviations: list[str] = Field(default_factory=list)
     state: Literal['feasible', 'unverified']
     routeState: str
     stops: list[PublicStop]
@@ -119,6 +126,9 @@ class AdvancedResult(ContractModel):
     saveAccessToken: str | None = Field(default=None, repr=False)
     code: str | None = None
     bounded: Literal[True] = True
+    canExpand: bool = False
+    canDiscover: bool = False
+    canShowBeyond: bool = False
 
 
 def directions_link(origin, destination, mode):
@@ -154,28 +164,104 @@ class Session:
         self.last = None
         self.resolution_attempted = False
         self.route_attempted = False
+        self.date_answer = False
+        self.search_area = None
+        self.candidates = {}
+        self.seen = set()
+        self.current_ids = set()
+        self.actions = 0
+        self.beyond = False
+        self.offerable = {False:set(),True:set()}
 
     def base(self, **kwargs):
         return AdvancedResult(token=self.token, date=str(self.context.date) if self.context.date else None,
             destination=self.context.destination, transport=self.context.transport.value if self.context.transport else 'driving', **kwargs)
 
     def run(self, value):
+        if value.action and self.router is None:raise ValueError('Generate an initial page before continuing.')
+        if value.startingLocation and (value.startingLocation.source=='mock' or value.startingLocation.point.place_id):
+            raise ValueError('Confirm real starting coordinates through the existing location control.')
         if self.limitation:
             return self.base(status='unsupported', message=self.limitation)
+        from backend.date_resolution import resolve_datetime
+        def calendar_for(location,zone=None,answer=None):
+            calendar=resolve_datetime(answer or self.text,[],[],location,
+                manual_date=answer if answer and re.fullmatch(r'\d{4}-\d{2}-\d{2}',answer) else '',
+                calendar_timezone=zone,now=datetime.now(timezone.utc))
+            return calendar
+        def apply_calendar(calendar):
+            self.context.issues=[issue for issue in self.context.issues if issue not in self.context.dateIssues]
+            self.context.dateIssues=[p.message for p in calendar.problems if p.field=='date']
+            self.context.issues+=self.context.dateIssues
+            if not self.date_answer and calendar.date:self.context.date=calendar.date
         if value.date is not None:
-            if self.resolver and value.date != self.context.date: raise ValueError('Edit the request to change the date after discovery.')
-            self.context.date = value.date
-            self.requires_date_confirmation = False
+            calendar=calendar_for(self.context.destination,self.context.timezone if self.context.timezoneBasis=='destination_calendar' else None,value.date)
+            if calendar.date is None or any(p.reason!='past_date' or self.context.timezoneBasis=='destination_calendar' for p in calendar.problems):
+                return self.base(status='clarification',message=' '.join(calendar.issues) or 'Choose a valid date.',questions=[{'field':'date','question':'What date is this outing?'}])
+            if self.resolver and not getattr(self.resolver,'_named_only',False) and calendar.date!=self.context.date:raise ValueError('Regenerate to change the date after discovery.')
+            self.context.date=calendar.date
+            self.context.issues=[issue for issue in self.context.issues if issue not in self.context.dateIssues]
+            self.context.dateIssues=[]
+            self.requires_date_confirmation=False
+            self.date_answer=True
         if value.destination is not None:
-            if self.resolver and value.destination != self.context.destination: raise ValueError('Edit the request to change the search area.')
-            # The existing calendar resolver, not a browser-supplied timezone.
-            from backend.date_resolution import resolve_datetime
-            calendar = resolve_datetime('', [], [], value.destination, manual_date=str(self.context.date or ''), now=datetime.now(timezone.utc))
-            self.context.destination = value.destination
-            self.context.timezone = calendar.timezone
-            self.context.timezoneBasis = 'destination_calendar' if calendar.timezone != 'UTC' else 'unknown'
-        if self.context.date is None or self.requires_date_confirmation:
-            return self.base(status='clarification',message='Choose the outing date.',questions=[{'field':'date','question':'What date is this outing?'}])
+            if self.resolver and not getattr(self.resolver,'_named_only',False) and value.destination!=self.context.destination:raise ValueError('Regenerate to change the search area.')
+            self.context.destination=value.destination
+            self.search_area=None
+            calendar=calendar_for(value.destination,answer=str(self.context.date) if self.date_answer and self.context.date else None)
+            self.context.timezone=calendar.timezone
+            self.context.timezoneBasis='destination_calendar' if calendar.timezone!='UTC' else 'unknown'
+            apply_calendar(calendar)
+            if calendar.timezone!='UTC':self.requires_date_confirmation=False
+        if value.searchNearOrigin:
+            if self.context.destination or self.resolver:raise ValueError('Change the destination through explicit regeneration.')
+            if not value.startingLocation or not value.startingLocation.point.coordinates:raise ValueError('Confirm starting coordinates first.')
+            # Explicit geographic consent only. Coordinates are not a timezone.
+            self.search_area=SearchArea(coordinates=value.startingLocation.point.coordinates)
+            self.context.destination="Near confirmed starting point"
+            from backend.starting_places import verified_start_calendar
+            verified=verified_start_calendar(value.startingLocation)
+            if verified:
+                city,zone=verified
+                self.context.timezone=zone;self.context.timezoneBasis='destination_calendar'
+                calendar=calendar_for(city,zone,str(self.context.date) if self.date_answer and self.context.date else None)
+                apply_calendar(calendar)
+                self.requires_date_confirmation=False
+        # A mandatory establishment can establish its calendar from verified public
+        # identity/address evidence. Resolve it once before requesting redundant dates.
+        if not self.context.destination and self.search_area is None and any(s.kind=='named_place' for s in self.journey.stops):
+            if self.resolver is None:
+                self.resolver=StopResolver(self.outing)
+                self.resolver.resolve(self.journey,None,context=self.context,named_only=True)
+            choices=self.resolver.choices()['questions']
+            if value.choice:self.resolver.choose(self.resolver.choices()['context'],value.choice.occurrence,value.choice.placeId)
+            choices=self.resolver.choices()['questions']
+            if choices:return self.base(status='clarification',message='Choose the intended destination.',questions=[dict(q,field='place') for q in choices])
+            snap=self.resolver.routing_snapshot()
+            failed=next((s for s in snap.stops if s.requested.kind=='named_place' and s.requested.requirement=='required' and not s.candidates),None)
+            if failed:
+                if failed.status=='provider_failure':
+                    code='provider_local_admission' if failed.error_code=='application_limit' else provider_code(DiscoveryError(failed.error_code or 'provider','Place discovery unavailable.'))
+                    return self.base(status='provider_failure',code=code,message=MESSAGES.get(code,'Place discovery could not finish.')+' Your requested destination is kept.')
+                return self.base(status='no_results',message='The required destination could not be verified: '+redact_source(failed.requested.source,self.context)+'. Add its city or branch to the original request and regenerate.')
+            fixed=next((s.candidates[0].facts for s in snap.stops if s.requested.kind=='named_place' and s.status=='resolved'),None)
+            if fixed:
+                from backend.location_context import timezone_for
+                zone=fixed.timeZone.id if fixed.timeZone else timezone_for(fixed.address)
+                self.search_area=SearchArea(coordinates=fixed.coordinates)
+                # Public provider address, never a remote origin/browser timezone.
+                if zone!='UTC':
+                    self.context.destination=next((p.strip() for p in fixed.address.split(',')[1:] if timezone_for(p)==zone),fixed.address)
+                    self.context.timezone=zone;self.context.timezoneBasis='destination_calendar'
+                    calendar=calendar_for(self.context.destination,zone,str(self.context.date) if self.date_answer and self.context.date else None)
+                    apply_calendar(calendar)
+                    self.requires_date_confirmation=False
+        if self.requires_date_confirmation and self.search_area is not None and self.context.timezoneBasis!='destination_calendar':
+            return self.base(status='clarification',message='The nearby search area is kept. Choose an exact date because its timezone is not verified.',questions=[{'field':'date','question':'What exact date is this outing?'}])
+        if self.requires_date_confirmation and self.context.timezoneBasis!='destination_calendar':
+            return self.base(status='clarification',message='Choose the search area so tomorrow can use its local calendar.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
+        if self.context.date is None:
+            return self.base(status='clarification',message=' '.join(self.context.dateIssues) or 'Choose the outing date.',questions=[{'field':'date','question':'What date is this outing?'}])
         # UTC midnight cannot prove a confirmed local date has expired when the
         # destination timezone is unknown. Ask for that missing evidence first.
         from zoneinfo import ZoneInfo
@@ -185,13 +271,15 @@ class Session:
             return self.base(status='clarification',message='A destination timezone is needed to check this date without treating UTC as your local calendar.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
         today = datetime.now(ZoneInfo(self.context.timezone or 'UTC')).date()
         if self.context.date < today:
+            if not self.resolver or getattr(self.resolver,'_named_only',False):
+                return self.base(status='clarification',message='This outing date has passed. Choose today or a future date.',questions=[{'field':'date','question':'What future date should we use?'}])
             return self.base(status='unsupported',message='This outing date has passed. Edit the date and regenerate.')
         if self.context.issues:
             return self.base(status='unsupported',message=' '.join(self.context.issues))
         returning = bool(self.journey.endpoint and (self.journey.endpoint.kind == 'origin' or self.journey.endpoint.kind == 'home' and self.context.endpointStatus == 'origin_confirmed'))
         if self.journey.endpoint and self.journey.endpoint.kind == 'home' and not returning:
             return self.base(status='unsupported',message='A separate home address is not verified by this flow. Choose Return to my starting point and confirm that origin, or request a named final establishment.')
-        if not self.context.destination and (any(s.kind != 'named_place' for s in self.journey.stops) or self.journey.deadline):
+        if not self.context.destination and self.search_area is None and (any(s.kind != 'named_place' for s in self.journey.stops) or self.journey.deadline):
             return self.base(status='clarification',message='Choose a search area without changing your stops.',questions=[{'field':'destination','question':'Which city or neighborhood should we search?'}])
         minute=self.context.departureMinute
         if minute is None:
@@ -231,8 +319,10 @@ class Session:
             self.resolution_attempted = True
             self.resolver = StopResolver(self.outing)
             started=perf_counter()
-            self.resolver.resolve(self.journey, SearchArea(name=self.context.destination) if self.context.destination else None, context=self.context)
+            self.resolver.resolve(self.journey, self.search_area or (SearchArea(name=self.context.destination) if self.context.destination else None), context=self.context)
             self.latencies['resolutionMs']=(perf_counter()-started)*1000
+        if getattr(self.resolver,'_named_only',False):
+            self.resolver.complete(self.search_area or SearchArea(name=self.context.destination),self.context)
         if value.choice:
             snapshot=self.resolver.routing_snapshot()
             groups=snapshot.stops+([snapshot.endpoint] if snapshot.endpoint else [])
@@ -256,7 +346,8 @@ class Session:
             self.route_attempted = True
             self.router=AdvancedRouter(self.resolver)
             started=perf_counter()
-            self.router.plan(origin=self.origin)
+            self.router.plan(origin=self.origin,allow_beyond_limit=True)
+            self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
             self.latencies['routingMs']=(perf_counter()-started)*1000
         if value.dwell:
             n=value.dwell.occurrence
@@ -267,11 +358,33 @@ class Session:
         if value.departure:
             if self.context.departureMinute is not None: raise ValueError('Edit the request to replace an original departure.')
             self.departure=int(value.departure[:2])*60+int(value.departure[3:])
+        if value.action:
+            if self.actions>=32 or len(self.router.checked)>=256:raise ValueError('This bounded session has ended. Viewed pages remain available.')
+            self.actions+=1
+            self.current_ids=set()
+            self.beyond=value.action=='beyond' or value.includeBeyond
+            if value.action=='discover':self.resolver.expand()
+            unoffered=[c for key,c in self.candidates.items() if key not in self.seen and key in self.offerable[self.beyond]]
+            if value.action=='discover' or len(unoffered)<3:
+                self.router.advance(origin=self.origin,allow_beyond_limit=True)
+                self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
+        self.router.use_candidates(list(self.candidates.values())[:256])
         started=perf_counter()
         timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure)
         self.latencies['timingMs']=(perf_counter()-started)*1000
         route_errors=[l.evidence.error_code for c in timing.candidates for l in c.route.legs if l.evidence.error_code]
-        eligible=sorted((c for c in timing.candidates if c.state!='infeasible'),key=lambda c:c.state!='feasible')
+        def permitted(c,beyond=False):
+            if any(l.evidence.error_code=='application_limit' for l in c.route.legs):return False
+            # Explicit exceptions waive only scoped travel limits. All original
+            # deadline/duration/hours/reachability checks still apply.
+            if c.route.route_status=='beyond_limit':
+                return beyond and c.routing_state=='feasible' and all(x!='infeasible' for x in (c.duration_state,c.deadline_state,c.hours_state)) and not (c.route.between_total_check and c.route.between_total_check.state=='beyond_limit')
+            return c.state!='infeasible'
+        self.offerable={b:{self.route_id(c.route) for c in timing.candidates if permitted(c,b) and (not b or c.route.route_status=='beyond_limit')} for b in (False,True)}
+        available=[c for c in timing.candidates if permitted(c,self.beyond) and (not self.beyond or c.route.route_status=='beyond_limit')]
+        eligible=sorted((c for c in available if self.route_id(c.route) in self.current_ids or self.route_id(c.route) not in self.seen),key=lambda c:(c.state!='feasible',c.route.route_status=='beyond_limit'))[:3]
+        self.current_ids={self.route_id(c.route) for c in eligible}
+        self.seen.update(self.current_ids)
         options=[]
         questions=[]
         for c in eligible:
@@ -280,14 +393,14 @@ class Session:
             for v,t in zip(route.visits,c.visits):
                 facts=v.selected.facts
                 from backend.planning_hours import venue_hours
-                stops.append(PublicStop(occurrence=v.occurrence,requested=redact_source(v.requested.source,self.context),requirement=v.requested.requirement,
+                stops.append(PublicStop(occurrence=v.occurrence,activity=activity_category(redact_source(v.requested.source,self.context)),requested=redact_source(v.requested.source,self.context),requirement=v.requested.requirement,
                     placeId=facts.id,name=facts.name,address=facts.address,mapsUrl=maps_link(facts.id),duration=v.requested.duration.model_copy(update={'source':redact_source(v.requested.duration.source,self.context)}) if v.requested.duration else None,
                     arrival=t.arrival.earliest.isoformat() if t.arrival.earliest and t.arrival.offsets.exact else None,
                     departure=t.departure.earliest.isoformat() if t.departure.earliest and t.departure.offsets.exact else None,
                     hoursState=t.hours_state,hours=venue_hours(facts,self.context.date,calendar_timezone=self.context.timezone),
                     rating=facts.rating,ratingCount=facts.ratingCount,credits=[a.model_dump(mode='json') for a in facts.attributions or []]))
             identity=sha256(repr(([(v.occurrence,v.selected.place_id) for v in route.visits],route.ending,route.endpoint.place_id if route.endpoint else None)).encode()).hexdigest()[:32]
-            options.append(PublicOption(id='advanced_'+identity,state=c.state,routeState=route.route_status,stops=stops,ending=route.ending,
+            options.append(PublicOption(id='advanced_'+identity,state='unverified' if route.route_status=='beyond_limit' else c.state,travelException=route.route_status=='beyond_limit',travelDeviations=[f"{'First stop' if route.legs[t.leg_index].role=='origin_to_first' else 'Between stops'}: {t.actual:g} {t.preference.unit}; preferred {t.preferred:g}; original maximum {t.maximum:g}." for t in route.checks if t.state in ('outside_preference','beyond_limit')],routeState=route.route_status,stops=stops,ending=route.ending,
                 endpoint={'placeId':route.endpoint.place_id,'name':route.endpoint.facts.name,'mapsUrl':maps_link(route.endpoint.place_id),
                     'credits':[a.model_dump(mode='json') for a in route.endpoint.facts.attributions or []]} if route.endpoint else None,
                 legs=[PublicLeg(role=l.role,fromOccurrence=l.from_occurrence,toOccurrence=l.to_occurrence,seconds=l.evidence.duration_seconds,
@@ -299,12 +412,12 @@ class Session:
             if route.journey.total_duration or route.journey.deadline:
                 for v in route.visits:
                     if v.requested.duration is None:
-                        q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend at stop {v.occurrence+1}: {redact_source(v.requested.source,self.context)}?'}
+                        q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend on {redact_source(v.requested.source,self.context)}?'}
                         if q not in questions: questions.append(q)
             if route.journey.deadline and c.start is None and self.context.departureMinute is None and self.departure is None:
                 q={'field':'departure','question':'What time will you depart, in the destination timezone?'}
                 if q not in questions: questions.append(q)
-        message='Compare these bounded, provider-backed options. Timing uses route estimates and your stated visit durations.' if options else ' '.join(timing.routing_reasons) or 'All checked options are infeasible: '+' '.join(dict.fromkeys(r.message for c in timing.candidates for r in c.reasons if r.state=='infeasible'))
+        message='Here are the options checked for your outing. Add any missing visit times to check the whole trip.' if options else ' '.join(timing.routing_reasons) or 'All checked options are infeasible: '+' '.join(dict.fromkeys(r.message for c in timing.candidates for r in c.reasons if r.state=='infeasible'))
         if not options and timing.candidates:
             evidence=[]
             for c in timing.candidates:
@@ -322,13 +435,24 @@ class Session:
             code=route_error_code if route_errors else None if options else 'insufficient_routing')
         if options:
             from backend.saved_advanced import issue_advanced
-            key=repr([(p.id,p.state,p.model_dump()['stops']) for p in options])
+            key=repr(([(p.id,p.state,p.model_dump()['stops']) for p in options],self.durations,self.departure))
             if key!=self.receipt_key:
                 self.receipt=issue_advanced(self,eligible,options)
                 self.receipt_key=key
             result.saveReceipt,result.saveAccessToken=self.receipt
+        result.canExpand=self.actions<32 and len(self.router.checked)<256 and (any(self.route_id(c.route) not in self.seen and permitted(c,self.beyond) and (not self.beyond or c.route.route_status=='beyond_limit') for c in timing.candidates) or self.router.pending_paths)
+        result.canDiscover=self.actions<32 and len(self.router.checked)<256 and self.resolver.can_expand()
+        result.canShowBeyond=self.actions<32 and len(self.router.checked)<256 and any(self.route_id(c.route) not in self.seen and c.route.route_status=='beyond_limit' and permitted(c,True) for c in timing.candidates)
+        if not options and result.canShowBeyond:result.message='No checked option fits your travel maximum. Search more or explicitly view options beyond that travel limit.'
+        if not options and value.action and not result.canShowBeyond and not route_errors:result.message='No further eligible options in this checked batch. Earlier pages are kept. Other venues may exist.'
+        if 'quota' in route_errors:result.canExpand=result.canDiscover=result.canShowBeyond=False
         self.last=result
         return result
+
+
+    @staticmethod
+    def route_id(route):
+        return tuple((v.occurrence,v.selected.place_id) for v in route.visits)
 
 
 class Sessions:
@@ -350,7 +474,7 @@ class Sessions:
             limitation='This advanced flow cannot verify spending, accessibility, tickets or reservations. Edit those requirements explicitly before continuing.'
         if len(ai.journey.stops)>4: limitation='Advanced routing supports up to four stops. Edit the request to choose fewer stops.'
         session=Session(text,ai.journey,result.context,budget,limitation=limitation)
-        if preferences.date.strip():session.requires_date_confirmation=False
+        if preferences.date.strip():session.requires_date_confirmation=False;session.date_answer=True
         with self.lock:
             now=monotonic()
             self.items=OrderedDict((k,s) for k,s in self.items.items() if s.expires>now)

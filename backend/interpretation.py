@@ -157,6 +157,7 @@ class InterpretationContext(ContractModel):
     No coordinates, provider resolution, guessed start time or persistence.
     Original outing clock wording remains in Interpretation.time_expressions.
     """
+    dateIssues: list[str] = Field(default_factory=list)
     destination: str | None = None
     date: CalendarDate | None = None
     timezone: str | None = None
@@ -463,7 +464,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
         first_limit = travel_fields.pop('first_limit', None)
         if first is None and first_limit is not None:
             first = FirstTravel(value=float(first_limit), exclusive=exclusive_limit(raw, 'first'))
-        context = InterpretationContext(destination=destination,date=calendar.date,
+        context = InterpretationContext(destination=destination,date=calendar.date,dateIssues=[p.message for p in calendar.problems if p.field=='date'],
             timezone=calendar.timezone,transport=mode,firstTravel=first,
             timezoneBasis='browser_reported' if ai.location=='near me' else 'destination_calendar' if calendar.timezone != 'UTC' else 'unknown',
             betweenTravel=between,geography=geographic_intent(raw,destination),

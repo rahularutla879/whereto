@@ -188,7 +188,7 @@ class HoursExclusion(JourneyModel):
 class AdvancedRoutingResult(JourneyModel):
     journey: Journey
     status: Literal['constructed', 'unresolved', 'unsupported', 'no_candidates']
-    candidates: list[AdvancedRouteCandidate] = Field(default_factory=list, max_length=3)
+    candidates: list[AdvancedRouteCandidate] = Field(default_factory=list, max_length=256)
     reasons: list[str] = Field(default_factory=list)
     hours_exclusions: list[HoursExclusion] = Field(default_factory=list)
     context: InterpretationContext | None = Field(default=None, exclude=True, repr=False)
@@ -208,7 +208,7 @@ def _signature(path):
     return tuple((i, c.place_id) for i, c in path)
 
 
-def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH):
+def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH, excluded=frozenset()):
     """Precedence-aware beam; geographic gaps only prune, never verify travel."""
     journey = resolved.journey
     ancestors = _ancestors(journey)
@@ -243,6 +243,8 @@ def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH):
                                 members = [c for n, c in extended if n in shared.stops]
                                 if members and not set.intersection(*[{p.id for p in c.facts.containingPlaces or []} for c in members]):
                                     continue
+                            if len(extended)==len(included) and _signature(extended) in excluded:
+                                continue
                             expanded.append(extended)
                 beam = sorted(expanded, key=lambda p: (_gap(p, origin, endpoint), _signature(p)))[:BEAM_WIDTH]
             paths.extend(beam)
@@ -310,10 +312,11 @@ def _total_check(legs, maximum, exclusive):
 
 
 class AdvancedRouter:
-    """One active computation, one Matrix admission, no duplicate directed pairs.
+    """One bounded batch per explicit action; no repeated directed evidence.
 
     Input authority is the server resolver, not serialized client candidate facts.
-    Uses its *same* outing budget. Repeated calls reuse the active result only.
+    Uses the same outing budget. plan() is idempotent; advance() excludes checked
+    assignments and shares the directional cache within the active session.
     """
     def __init__(self, resolver: StopResolver):
         if not isinstance(resolver, StopResolver):
@@ -321,6 +324,10 @@ class AdvancedRouter:
         self.resolver = resolver
         self._result = None
         self._arguments = None
+        self._evidence = {}
+        self.checked = set()
+        self.all_candidates = []
+        self.pending_paths = False
 
     def plan(self, *, origin: AuthorizedStart | None = None, allow_beyond_limit: bool = False):
         resolved = self.resolver.routing_snapshot()
@@ -337,7 +344,24 @@ class AdvancedRouter:
         self._arguments, self._result = arguments, result
         return result.model_copy(deep=True)
 
-    def _plan(self, resolved, origin, allow_beyond_limit):
+    def advance(self, *, origin=None, allow_beyond_limit=False):
+        """One explicit bounded beam/Matrix batch; same resolver and outing."""
+        resolved=self.resolver.routing_snapshot()
+        result=self._plan(resolved,origin,allow_beyond_limit,incremental=True)
+        self._arguments=(resolved.model_dump_json(),origin.model_dump_json() if origin else None,allow_beyond_limit)
+        self._result=result
+        return result.model_copy(deep=True)
+
+    def use_candidates(self, candidates):
+        # Only internal candidates from this router are accepted by the session.
+        resolved=self.resolver.routing_snapshot()
+        allowed={s.occurrence:{c.place_id for c in s.candidates} for s in resolved.stops}
+        if any(c.journey!=resolved.journey or any(v.selected.place_id not in allowed[v.occurrence] for v in c.visits) for c in candidates):
+            raise ValueError('Candidate identities no longer match the active resolver.')
+        self._arguments=(resolved.model_dump_json(),*self._arguments[1:])
+        self._result=self._result.model_copy(update={'candidates':candidates})
+
+    def _plan(self, resolved, origin, allow_beyond_limit, incremental=False):
         journey, context = resolved.journey, resolved.context
         exclusions = []
         metadata = dict(journey=journey, date=str(context.date) if context and context.date else None,
@@ -398,7 +422,8 @@ class AdvancedRouter:
                 group.candidates = retained
                 if not retained and group.requested.requirement == 'required':
                     return blocked('no_candidates', 'Verified current hours exclude a required stop throughout the requested date.')
-        paths = _shortlist(resolved, origin, finish, min(POOL_WIDTH, self.resolver.outing.settings.candidates_per_activity))
+        paths = _shortlist(resolved, origin, finish, min(100 if incremental else POOL_WIDTH, self.resolver.outing.settings.candidates_per_activity), self.checked if incremental else frozenset())
+        if incremental:paths=paths[:max(0,256-len(self.checked))]
         selected, pairs = [], {}
         for path in paths:
             topology = _topology(path, origin, endpoint_facts, returning)
@@ -409,18 +434,24 @@ class AdvancedRouter:
                 pairs = union
         if not selected:
             return blocked('no_candidates', 'No distinct verified venue assignment satisfies the required stops and ordering.')
-        try:
-            routed = GoogleRouteCalculator(self.resolver.outing).calculate_directed(
-                DirectedRouteRequest(pairs=list(pairs.values()), mode=mode))
-            evidence = {(l.origin_id, l.destination_id): l for l in routed.legs}
-            elements, requests = routed.matrix_elements, routed.matrix_requests
-        except RouteError as error:
-            # Admission rejection has no fabricated metrics or retry. Transport partials
-            # are already returned by the shared calculator, preserving valid cells.
-            evidence = {(a.id, b.id): RouteLeg(origin_id=a.id, destination_id=b.id, mode=mode,
-                        status='unknown', estimate_type='walking' if mode == 'walk' else 'traffic_unaware',
-                        error_code=error.code) for a, b in pairs.values()}
-            elements = requests = 0
+        needed={k:v for k,v in pairs.items() if k not in self._evidence}
+        elements = requests = 0
+        local_block=False
+        if needed:
+            try:
+                routed=GoogleRouteCalculator(self.resolver.outing).calculate_directed(DirectedRouteRequest(pairs=list(needed.values()),mode=mode))
+                fresh={(l.origin_id,l.destination_id):l for l in routed.legs}
+                elements,requests=routed.matrix_elements,routed.matrix_requests
+            except RouteError as error:
+                local_block=error.code=='application_limit'
+                fresh={(a.id,b.id):RouteLeg(origin_id=a.id,destination_id=b.id,mode=mode,status='unknown',
+                    estimate_type='walking' if mode=='walk' else 'traffic_unaware',error_code=error.code) for a,b in needed.values()}
+            self._evidence.update({k:v for k,v in fresh.items() if v.error_code!='application_limit'})
+        else:fresh={}
+        evidence={**self._evidence,**fresh}
+        local_block=local_block or any(l.error_code=='application_limit' for l in evidence.values())
+        if not local_block:self.checked.update(_signature(path) for path,_ in selected)
+        self.pending_paths=local_block or bool(_shortlist(resolved,origin,finish,min(100,self.resolver.outing.settings.candidates_per_activity),self.checked))
         options = []
         for path, topology in selected:
             legs = [AdvancedLeg(role=role, from_occurrence=i, to_occurrence=j, evidence=evidence[a.id, b.id])
@@ -459,6 +490,7 @@ class AdvancedRouter:
                     -sum(v.selected.facts.rating or 0 for v in option.visits),
                     tuple((v.occurrence, v.selected.place_id) for v in option.visits))
         options.sort(key=score)
+        self.all_candidates=options.copy()
         # Travel is primary; comparable options prefer different actual venue sets.
         chosen = []
         while options and len(chosen) < 3:

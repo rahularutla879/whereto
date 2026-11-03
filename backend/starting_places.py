@@ -3,6 +3,21 @@
 No Geocoding API enablement/key/quota change. No input or coordinate logging.
 """
 from hashlib import sha256
+from collections import OrderedDict
+from threading import Lock
+from time import monotonic
+
+_calendar_lock=Lock()
+_calendars=OrderedDict()
+
+def verified_start_calendar(start):
+    """Transient calendar evidence from an existing approved origin lookup only."""
+    if not start or start.source not in ('manual','suggested') or not start.point.coordinates:return None
+    c=start.point.coordinates
+    with _calendar_lock:
+        evidence=_calendars.get((c.latitude,c.longitude))
+        return evidence[1:] if evidence and evidence[0]>monotonic() else None
+
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 from backend.places import DiscoveryError, DiscoveryCandidate, FIELD_MASK
 
@@ -50,6 +65,13 @@ def lookup_starting_places(request, session):
                          'city' if types & {'locality', 'administrative_area_level_1', 'administrative_area_level_2'} else
                          'neighborhood' if types & {'neighborhood', 'sublocality', 'sublocality_level_1'} else
                          'address_or_place' if types & {'street_address', 'premise', 'subpremise', 'establishment'} else 'approximate_area')
+            from backend.location_context import timezone_for
+            city=next((c.get('longText') for c in raw.get('addressComponents',[]) if 'locality' in c.get('types',[])),None)
+            zone=timezone_for(city or p.address)
+            if city and zone!='UTC':
+                with _calendar_lock:
+                    _calendars[(p.coordinates.latitude,p.coordinates.longitude)]=(monotonic()+600,city,zone)
+                    while len(_calendars)>100:_calendars.popitem(last=False)
             matches.append({'placeId': p.provider_id, 'name': p.display_name, 'address': p.address,
                             'coordinates': p.coordinates.model_dump(), 'precision': precision, 'attributions': credits})
         except (KeyError, ValueError, TypeError):

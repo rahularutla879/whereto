@@ -1,0 +1,365 @@
+[
+  {
+    "text": "Go to SUNY College of Optometry, then get coffee tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry, then get coffee tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "Go grocery shopping tomorrow and return to where I started.",
+    "raw": {
+      "activities": [
+        "grocery shopping"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "grocery shopping",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow.",
+    "raw": {
+      "activities": [
+        "groceries",
+        "ATM"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "groceries",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "ATM",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 5,
+              "relation": "exact",
+              "source": "5 minutes"
+            }
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "total_duration": {
+          "minutes": 45,
+          "relation": "maximum",
+          "source": "within 45 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "dinner and bowling tomorrow in jersey city",
+    "raw": {
+      "activities": [
+        "dinner",
+        "bowling"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": "Jersey City",
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "dinner",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "bowling",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "dinner and bowling tomorrow in jersey city"
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "Dinner and drinks tomorrow in Jersey City.",
+    "raw": {
+      "activities": [
+        "Dinner",
+        "drinks"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": "Jersey City",
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "Dinner",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "drinks",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "Visit a pharmacy, then an ATM for five minutes, and return within an hour.",
+    "raw": {
+      "activities": [
+        "pharmacy",
+        "ATM"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "pharmacy",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "ATM",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 5,
+              "relation": "exact",
+              "source": "five minutes"
+            }
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Visit a pharmacy, then an ATM for five minutes, and return within an hour."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return"
+        },
+        "total_duration": {
+          "minutes": 60,
+          "relation": "maximum",
+          "source": "within an hour"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  }
+]

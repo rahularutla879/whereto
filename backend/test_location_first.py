@@ -69,7 +69,13 @@ class LocationFirst(unittest.TestCase):
                 self.assertEqual(r.travel_state,state)
 
     def test_sequential_multiple_anchors_and_actual_origin(self):
-        r=real_plans(self.request(startingLocation=START,firstTravel={'value':8,'unit':'miles'}),ProviderBudget())
+        # A real observation timestamp containing '38.9' must not be mistaken
+        # for the private latitude. Reproduce the old substring-test failure.
+        def observed(*args,**kwargs):
+            kwargs['observed_at']=datetime(2026,11,3,16,2,38,900000,tzinfo=timezone.utc)
+            return normalize_google_place(*args,**kwargs)
+        with patch('backend.venue_normalization.normalize_google_place',side_effect=observed):
+            r=real_plans(self.request(startingLocation=START,firstTravel={'value':8,'unit':'miles'}),ProviderBudget())
         self.assertEqual(len(r.provisionalPlans),3,r.message)
         bowling=[c.args[0] for c in self.search.call_args_list if 'bowling' in c.args[0]['textQuery']]
         dinners=[c.args[0] for c in self.search.call_args_list if 'restaurant' in c.args[0]['textQuery']]
@@ -80,7 +86,18 @@ class LocationFirst(unittest.TestCase):
         self.assertGreater(len({str(q['locationRestriction']) for q in dinners}),1)
         self.assertTrue(all(p.firstLeg['miles'] is not None for p in r.provisionalPlans))
         self.assertGreaterEqual(len({p.candidate.venues[0].id for p in r.provisionalPlans}),2)
-        self.assertNotIn('38.9',r.model_dump_json())
+        self.assertIn('T16:02:38.9',r.model_dump_json())
+        def no_coordinates(value):
+            if isinstance(value,dict):
+                self.assertNotIn('latitude',value)
+                self.assertNotIn('longitude',value)
+                for child in value.values():no_coordinates(child)
+            elif isinstance(value,list):
+                for child in value:no_coordinates(child)
+            elif isinstance(value,str):
+                self.assertNotRegex(value,r'"(?:latitude|longitude)"\s*:')
+        no_coordinates(r.model_dump(mode='json'))
+        self.assertNotIn('startingLocation',r.model_dump()['request'])
 
     def test_preferred_city_allows_neighbors_hard_city_and_exclusion_do_not(self):
         session=ProviderBudget();adapter=PlacesDiscovery(session.outing())

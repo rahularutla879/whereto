@@ -730,3 +730,8 @@ provider content or schema change. Advanced cards/saving remain Task 50E.
 ## Task 50E — advanced application integration
 
 Task 50E adds a server-owned expiring advanced orchestration session, minimized public DTOs and occurrence-aware version 2 saved documents over the existing five tables. Tasks 50A–50D remain the only interpretation/resolution/routing/timing implementations. No schema migration or production exposure. [Contracts, limits and verification](docs/advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+## November 3 — Task 50E acceptance repair
+
+The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](docs/task50e-repair.md). Earlier one-page limitations describe the original checkpoint.

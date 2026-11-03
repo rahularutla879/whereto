@@ -204,3 +204,8 @@ Advanced execution/saving remain Task 50E; Task 51 remains unstarted.
 ## Task 50E — advanced application integration
 
 Task 50E surfaces server-scoped named-place choices in the website and passes the same resolver/outing budget to routing. Choosing an existing candidate adds no search or model call. Separate home addresses still need verified identity and remain unsupported here. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+## November 3 — Task 50E acceptance repair
+
+The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.

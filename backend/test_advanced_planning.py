@@ -32,7 +32,7 @@ class IntegrationTests(unittest.TestCase):
         self.searches.append(body)
         q=body['textQuery'].lower()
         t=next((t for word,t in [('cafe','cafe'),('coffee','cafe'),('grocer','supermarket'),('atm','atm'),('bank','bank'),('pharmac','pharmacy')] if word in q),None)
-        return {'places':[p for p in self.records if t is None or t in p['types']]}
+        return {'places':[p for p in self.records if t is None or t in p['types']][:body.get('pageSize',10)]}
     def session(self,stops=None,**kwargs):
         return Session('Synthetic public test request',Journey(stops=stops or [{'source':'SUNY College of Optometry','kind':'named_place'},{'source':'coffee'}],**kwargs),
             InterpretationContext(destination='New York',date='2026-11-07',timezone='America/New_York',timezoneBasis='destination_calendar'),ProviderBudget(ProviderSettings()))
@@ -115,23 +115,17 @@ class IntegrationTests(unittest.TestCase):
         self.assertEqual(r.status,'no_results')
         s=self.session([{'source':'Unknown College','kind':'named_place'},{'source':'coffee'}]);r=self.run_session(s)
         self.assertEqual(r.status,'no_results');self.assertEqual(r.options,[])
-    def test_relative_date_without_destination_timezone_needs_explicit_date(self):
+    def test_relative_date_uses_verified_named_destination_calendar(self):
         session=Session('Go to Penn Station today.',Journey(stops=[{'source':'Penn Station','kind':'named_place'}]),
             InterpretationContext(date='2026-11-07',timezone='UTC',timezoneBasis='unknown'),ProviderBudget(ProviderSettings()))
         result=self.run_session(session)
-        self.assertEqual(result.status,'clarification');self.assertEqual(result.questions[0]['field'],'date')
-        self.assertFalse(self.searches)
-        result=self.run_session(session,date='2026-11-07')
-        self.assertEqual(result.status,'results')
-        # At 02:00 UTC on Nov3 it is still Nov2 in New York. Do not declare
-        # the user's confirmed Nov2 date expired using an unknown UTC basis.
+        self.assertEqual(result.status,'results');self.assertEqual(result.date,'2026-11-02')
+        self.assertEqual(session.context.timezone,'America/New_York')
         session=Session('Go to Penn Station today.',Journey(stops=[{'source':'Penn Station','kind':'named_place'}]),
             InterpretationContext(date='2026-11-02',timezone='UTC',timezoneBasis='unknown'),ProviderBudget(ProviderSettings()))
         with patch('backend.advanced_planning.datetime',wraps=datetime) as clock:
             clock.now.side_effect=lambda tz=None:datetime(2026,11,3,2,tzinfo=timezone.utc).astimezone(tz or timezone.utc)
             answer=self.run_session(session,date='2026-11-02')
-            self.assertEqual(answer.status,'clarification');self.assertEqual(answer.questions[0]['field'],'destination')
-            answer=self.run_session(session,destination='New York')
             self.assertEqual(answer.status,'results');self.assertEqual(answer.date,'2026-11-02')
             counts=(len(self.searches),len(self.calls))
             answer=self.run_session(session,departure='14:00')

@@ -561,3 +561,8 @@ Task 50E reuses the existing Places/Routes masks, shared admission, locked accou
 
 
 Task 50E verification also repaired a reproduced first-ledger publication race. A fully initialized owner-only temporary ledger is fsynced and linked into place without replacing an existing path; each writer then reads current contents under the existing lock. The original four-process regression passes 20 fresh repetitions, and deterministic scheduling proves the old rejection and the corrected two-writer accounting. Existing/corrupt ledgers are never reset, and no rates, quotas, credentials, billing or provider retry policy changed.
+
+
+## November 3 — Task 50E acceptance repair
+
+The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.

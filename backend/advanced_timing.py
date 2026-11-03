@@ -114,7 +114,7 @@ class TimedVisit(JourneyModel):
 class TimedCandidate(JourneyModel):
     # Snapshot retains exact order, legs, provenance, omissions and source constraints.
     route: 'AdvancedRouteCandidate'
-    candidate_index: int = Field(ge=0, lt=3)
+    candidate_index: int = Field(ge=0, lt=256)
     known_travel_seconds: Seconds = Field(ge=0)
     travel: DurationRange
     dwell: DurationRange
@@ -182,7 +182,7 @@ TimedCandidate.model_rebuild()
 
 
 class AdvancedTimingResult(JourneyModel):
-    candidates: list[TimedCandidate] = Field(max_length=3)
+    candidates: list[TimedCandidate] = Field(max_length=256)
     routing_status: Literal['constructed', 'unresolved', 'unsupported', 'no_candidates']
     routing_reasons: list[str]
     evaluated_at: AwareDatetime

@@ -83,3 +83,8 @@ Desktop 1280 and mobile 390 actual hosted save/reopen checks passed with invente
 ## Task 50E — advanced application integration
 
 Task 50E preserves all runtime grants, forced RLS, verified TLS and capability hashing/expiry. Version 2 requirements use existing JSON preferences and positive model_version; no migration or privileged production change. Committed restricted-role persistence/restart checks and disposable cleanup are required. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+## November 3 — Task 50E acceptance repair
+
+The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.

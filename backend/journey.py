@@ -267,6 +267,18 @@ def validate_journey(raw, ai):
         return None, False
     normalize_extracted_references(raw, ai)
     normalize_explicit_durations(raw,guarded,j)
+    # Qwen sometimes encodes a plain source-order list as forward edges. Those
+    # edges add nothing to the legacy source-order contract. Remove only this
+    # redundant representation, never reversed/cyclic or explicitly ordered intent.
+    from backend.date_resolution import DATE_WORDING, TIME_WORDING
+    order_words = TIME_WORDING.sub(' ', DATE_WORDING.sub(' ', guarded))
+    if (j.order and not j.order_conflict and j.ordering=='constrained'
+            and not re.search(r'\b(?:first|then|after|before|finally|afterward|followed|order)\b',order_words,re.I)
+            and all(e.before<e.after and e.source.casefold() in raw.casefold()
+                    and j.stops[e.before].source.casefold() in e.source.casefold()
+                    and j.stops[e.after].source.casefold() in e.source.casefold() for e in j.order)):
+        j.order=[]
+        j.ordering='unspecified'
     if any(duration_value(m[0])<0 or re.search(r'\b(?:minus|negative)\s*$',guarded[:m.start()],re.I) for m in DURATION_WORDING.finditer(guarded)):
         return REPHRASE, True
     def grounded(s): return bool(s) and s.casefold() in raw.casefold()
@@ -371,7 +383,8 @@ def validate_journey(raw, ai):
                     'named_place':r'\b(?:finish|end|finally|head|go|return|back)\b',
                     'activity':r'\b(?:finish|end|finally|head|go)\b',
                     'brand':r'\b(?:finish|end|finally|head|go)\b'}
-        if not re.search(expected[j.endpoint.kind], j.endpoint.source, re.I) and not (j.endpoint.kind=='origin' and home_origin and re.search(r'\bhome\b',j.endpoint.source,re.I)):
+        bare_return = j.endpoint.kind=='origin' and j.endpoint.source.casefold()=='return' and bool(re.search(r'\breturn(?:\s+(?:within|in|by|before)\b|[.!]?\s*$)',raw,re.I))
+        if not bare_return and not re.search(expected[j.endpoint.kind], j.endpoint.source, re.I) and not (j.endpoint.kind=='origin' and home_origin and re.search(r'\bhome\b',j.endpoint.source,re.I)):
             return REPHRASE, True
         if j.endpoint.kind=='origin' and not home_origin and re.search(r'\bhome\b',j.endpoint.source,re.I) and not re.search(r'\b(?:start|starting|started|origin)\b', j.endpoint.source,re.I):
             return REPHRASE, True

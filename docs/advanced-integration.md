@@ -1,5 +1,7 @@
 # Task 50E — local advanced outings
 
+Current November 3 acceptance repair: [causes, unified UI, incremental exploration, bounds and verification](task50e-repair.md). This supersedes the original one-page limitation below.
+
 Task 50E connects the existing interpreter, resolver, directed router and temporal
 evaluator to the website and anonymous private links. Task 51 is not started.
 This is an approved local-development integration; fresh clones/CI stay mock and
@@ -19,12 +21,12 @@ to localStorage or disk. The browser stores only the existing saved capability.
 
 `POST /api/plans/advanced` accepts the token, an explicitly authorized starting
 point, initial first/between preferences, or one bounded answer: a scoped named
-choice, occurrence-indexed dwell duration, destination, ISO date or HH:MM departure.
+choice, occurrence-indexed dwell duration, destination, ISO/natural date or HH:MM departure, or an explicit bounded continuation action.
 It rejects unknown fields. Both proxies use the existing local-origin, 4096-byte,
 no-store boundary; backend disconnect cancellation and provider admission remain.
 Changing routing inputs after dispatch requires regeneration. The website retains
 the validated extraction for preference edits, avoiding another Qwen call, and
-reapplies accepted dwell/departure answers. Edited text clears that continuation.
+reapplies accepted place/nearby/dwell/departure answers. Edited text clears that continuation.
 New routing computations do not reuse evidence across changed modes or geography.
 
 The session uses one `OutingBudget` for `StopResolver`, `AdvancedRouter` and all
@@ -36,8 +38,7 @@ Expired/replayed/fabricated contexts cannot authorize arbitrary provider identit
 
 Task 50C retains required/optional occurrences, source/fixed/partial/flexible order,
 verified endpoints and directional evidence. It admits whole paths within 27
-pairs, four stops and existing stricter shared limits. It computes at most three
-unique options. The return leg is separate from the final named-destination leg.
+pairs, four stops and existing stricter shared limits. It publishes at most three options per page from a retained bounded pool. The return leg is separate from the final named-destination leg.
 Task 50D evaluates those trusted snapshots locally. A missing-duration answer only
 amends an unspecified occurrence on a copy; an explicit original duration cannot
 be overwritten through the answer API. Approximate answers remain unbounded for
@@ -65,10 +66,12 @@ return/final leg and Maps directions only between public establishment identitie
 Private-origin legs have no public direction URL containing precise coordinates.
 
 The existing card styles, selection control and secure new-tab actions are reused.
-Advanced exploration is deliberately bounded to the computed page of at most
-three options. There is no advanced additional-discovery, ordinary continuation or
-beyond-limit handler. This is the truthful bounded alternative allowed by Task 50E;
-it is not unlimited exploration or a claim of global route optimality.
+Advanced exploration now supports explicit additional combinations, bounded same-area
+discovery and scoped travel exceptions through its own trusted session. It reuses
+the ordinary history/actions UI; it does not call ordinary server continuation handlers.
+Pages have at most three options, with 24-path/27-pair computations, at most 32
+explicit continuation actions/256 checked assignments and the original shared
+provider budgets/expiry. See the repair report for exact bounds and blockers.
 
 Return to a confirmed starting point is supported. Home still needs explicit
 return-to-start confirmation; GPS never means home. Separate home addresses,

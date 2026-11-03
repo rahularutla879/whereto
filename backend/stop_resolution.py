@@ -48,7 +48,7 @@ class ResolvedStop(JourneyModel):
     occurrence: int = Field(strict=True, ge=0, le=32)
     requested: RequestedStop
     status: Literal['resolved', 'candidates', 'ambiguous', 'unresolved', 'provider_failure']
-    candidates: list[ResolvedCandidate] = Field(default_factory=list, max_length=10)
+    candidates: list[ResolvedCandidate] = Field(default_factory=list, max_length=100)
     explanation: str = Field(default='', max_length=500)
     error_code: str | None = Field(default=None, max_length=80)
 
@@ -118,6 +118,13 @@ def _identity(source, venue, parents):
     return True
 
 
+def _discovery_activity(stop):
+    from backend.interpretation import activity_category
+    source = re.sub(r'^(?:go to|find)\s+(?:the\s+)?(?:nearest\s+)?','',stop.source,flags=re.I)
+    source = re.sub(r'^(?:the\s+)?nearest\s+','',source,flags=re.I)
+    return activity_category(source + (' store' if stop.kind=='brand' and not intent(source) else ''))
+
+
 class StopResolver:
     """One active backend-owned context. Choices expire and never authorize I/O.
 
@@ -135,6 +142,9 @@ class StopResolver:
         self._excluded_regions = []
         self._token = secrets.token_urlsafe(32)
         self._expires = monotonic()+600
+        self._paging = {}
+        self._pages = {}
+        self._areas = {}
 
     def _named(self, query, area):
         key = ('named', query, area.model_dump_json())
@@ -169,14 +179,15 @@ class StopResolver:
                 venues = [v for v in self._named(phrase, area) if _identity(stop.source,v,parents)]
                 eligibility, reason = 'identity_verified', 'Exact name, type and explicit qualifiers supported by provider evidence.'
             else:
-                from backend.interpretation import activity_category
-                source = re.sub(r'^(?:go to|find)\s+(?:the\s+)?(?:nearest\s+)?','',stop.source,flags=re.I)
-                source = re.sub(r'^(?:the\s+)?nearest\s+','',source,flags=re.I)
-                activity = activity_category(source + (' store' if stop.kind=='brand' and not intent(source) else ''))
+                activity = _discovery_activity(stop)
                 if activity is None: raise DiscoveryError('invalid_request','The activity needs clarification.')
                 key = ('activity',activity,area.model_dump_json())
                 if key not in self._cache:
-                    self._cache[key] = self.discovery.discover(DiscoveryRequest(activity=activity,destination=area)).venues
+                    found = self.discovery.discover(DiscoveryRequest(activity=activity,destination=area))
+                    self._cache[key] = found.venues
+                    self._paging[key] = found.paging.get(activity,{})
+                    self._pages[key] = 1
+                    self._areas[key] = (activity,area)
                 venues = [v.facts for v in self._cache[key]]
                 eligibility, reason = 'activity_candidate', 'Existing discovery relevance and geography checks; availability and nearest route unverified.'
             seen = {}
@@ -198,7 +209,7 @@ class StopResolver:
             attach_accounting(error,self.outing)
             return ResolvedStop(occurrence=index,requested=stop,status='provider_failure',explanation=str(error),error_code=getattr(error,'code','application_limit'))
 
-    def resolve(self, journey, area=None, *, context=None):
+    def resolve(self, journey, area=None, *, context=None, named_only=False):
         if self._started: raise ValueError('Use the active context; do not repeat resolution.')
         self._started = True
         journey = Journey.model_validate(journey.model_dump())
@@ -220,10 +231,18 @@ class StopResolver:
             if discovery_area is None and stop.kind!='named_place':
                 anchor=next((s.candidates[0].facts.coordinates for s in reversed(stops) if s.status=='resolved'),None)
                 if anchor: discovery_area=SearchArea(coordinates=anchor,excluded_regions=self._excluded_regions)
-            stops.append(self._resolve_stop(i,stop,discovery_area))
+            stops.append(ResolvedStop(occurrence=i,requested=stop,status='unresolved') if named_only and stop.kind!='named_place'
+                         else self._resolve_stop(i,stop,discovery_area))
         endpoint = None
         if journey.endpoint and journey.endpoint.kind not in ('origin','home'):
             endpoint=self._resolve_stop(len(stops),RequestedStop(source=journey.endpoint.source,kind=journey.endpoint.kind),area)
+        constraints = self._relationships(stops,journey,area,context) if not named_only else []
+        self._result = ResolvedJourney(journey=journey,area=area,context=context,stops=stops,endpoint=endpoint,
+            unresolved_constraints=constraints,diagnostics={k:self.outing.usage()[k] for k in ('placesSearchRequests','placesDetailsRequests','reservedMatrixElements','providerAttempts')})
+        self._named_only = named_only
+        return self._result.model_copy(deep=True)
+
+    def _relationships(self,stops,journey,area,context):
         constraints = []
         if journey.endpoint and journey.endpoint.kind=='home':
             if context and context.endpointStatus=='origin_confirmed':
@@ -247,9 +266,58 @@ class StopResolver:
             else:
                 for group in groups:
                     group.candidates=[c for c in group.candidates if any(p.id in shared for p in c.facts.containingPlaces or [])]
-        self._result = ResolvedJourney(journey=journey,area=area,context=context,stops=stops,endpoint=endpoint,
-            unresolved_constraints=constraints,diagnostics={k:self.outing.usage()[k] for k in ('placesSearchRequests','placesDetailsRequests','reservedMatrixElements','providerAttempts')})
-        return self._result.model_copy(deep=True)
+        return constraints
+
+    def complete(self, area, context):
+        current=self.routing_snapshot()
+        if not self._named_only:return current
+        stops=[self._resolve_stop(s.occurrence,s.requested,area) if s.requested.kind!='named_place' else s for s in current.stops]
+        self._result=current.model_copy(update={'stops':stops,'area':area,'context':context,
+            'unresolved_constraints':self._relationships(stops,current.journey,area,context)})
+        self._named_only=False
+        return self.routing_snapshot()
+
+    def can_expand(self):
+        self.routing_snapshot()
+        usage=self.outing.usage()
+        if usage['placesSearchRequests']>=self.outing.settings.ceiling('searches_per_outing') or usage['providerAttempts']>=self.outing.settings.ceiling('requests_per_outing'):return False
+        cap=min(100,self.outing.settings.ceiling('candidates_per_activity'))
+        return any(len(self._cache[k])<cap and self._pages[k]<6 and (v.get('next') or v.get('variant','initial')!='mixed')
+                   for k,v in self._paging.items())
+
+    def expand(self):
+        """At most two explicit same-area pages/variants, shared original budget.
+
+        Named identities never participate. A failed dispatched page is consumed,
+        while pre-dispatch local admission remains correctable without a retry.
+        """
+        self.routing_snapshot()
+        cap=min(100,self.outing.settings.ceiling('candidates_per_activity'))
+        keys=[k for k,v in self._paging.items() if len(self._cache[k])<cap and self._pages[k]<6
+              and (v.get('next') or v.get('variant','initial')!='mixed')][:2]
+        for key in keys:
+            activity,area=self._areas[key];cursor=self._paging[key]
+            variant=cursor.get('variant','initial') if cursor.get('next') else ('alternative' if cursor.get('variant','initial')=='initial' else 'mixed')
+            before=self.outing.usage()['providerAttempts']
+            try:
+                found=self.discovery.discover(DiscoveryRequest(activity=activity,destination=area,
+                    search_variant=variant,page_token=cursor.get('next')))
+            except (DiscoveryError,ProviderLimitError):
+                if self.outing.usage()['providerAttempts']>before:
+                    self._pages[key]+=1;self._paging[key]={'variant':'mixed'}
+                raise
+            self._pages[key]+=1;self._paging[key]=found.paging.get(activity,{})
+            known={v.facts.id for v in self._cache[key]}
+            self._cache[key]=(self._cache[key]+[v for v in found.venues if v.facts.id not in known])[:cap]
+            for group in self._result.stops:
+                if group.requested.kind!='named_place' and _discovery_activity(group.requested)==activity:
+                    group.candidates=[ResolvedCandidate(place_id=v.facts.id,eligibility='activity_candidate',
+                        reason='Existing relevance and geography checks.',facts=v.facts) for v in self._cache[key]]
+                    group.status='candidates' if group.candidates else 'unresolved'
+        # Reapply verified same-mall relationships to every newly discovered member.
+        if self._result.journey.shared_place:
+            self._result.unresolved_constraints=self._relationships(self._result.stops,self._result.journey,self._result.area,self._result.context)
+        return self.routing_snapshot()
 
     def routing_snapshot(self):
         """Trusted backend consumption only; never accept a client-resolved DTO."""

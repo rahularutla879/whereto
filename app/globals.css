@@ -337,3 +337,13 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 
 .endpoint-clarification { grid-column: 1 / -1; }
 .endpoint-clarification > button { margin-top: 10px; }
+
+/* Advanced answers share the planner controls and collapse naturally on phones. */
+.advanced-answer { display: flex; flex-direction: column; gap: 14px; min-width: 0; }
+.advanced-answer .secondary-button { align-self: flex-start; white-space: normal; }
+.clarification-panel fieldset { min-width: 0; border: 0; padding: 0; }
+.clarification-panel legend { margin-bottom: 12px; font-size: 14px; line-height: 1.5; }
+.clarification-panel fieldset .secondary-button { max-width: 100%; white-space: normal; text-align: left; }
+@media (max-width: 600px) { .clarification-panel .preferences-grid { grid-template-columns: minmax(0,1fr); } }
+
+.date-answer-mode { margin-top: 10px; font-size: 12px; text-align: left; }
