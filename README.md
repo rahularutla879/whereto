@@ -10,9 +10,9 @@ A mobile-first outing planner built with Next.js (App Router), TypeScript, React
 
 The planned Stage 1E sequence is **47 → 48 → 49 → 50 → 50A → 50B → 50C → 50D → 50E → 51 → 52 → 53 → 54 → 55**. The five additions cover complex request interpretation, fixed/flexible destination resolution, stop order and return journeys, complete journey deadlines, then integration/persistence/testing before public MVP deployment. All original task numbers are preserved.
 
-Task 50B adds a separately gated backend identity-resolution contract and structured home follow-ups; see [implementation and limits](docs/stop-resolution.md). Task 50C adds a bounded backend route/order/round-trip contract; see [routing contract and checks](docs/advanced-routing.md). Task 50D adds local whole-trip duration/deadline/hours evaluation; see [timing contract and limits](docs/advanced-timing.md). Advanced website execution remains unavailable until Task 50E.
+Task 50B adds a separately gated backend identity-resolution contract and structured home follow-ups; see [implementation and limits](docs/stop-resolution.md). Task 50C adds a bounded backend route/order/round-trip contract; see [routing contract and checks](docs/advanced-routing.md). Task 50D adds local whole-trip duration/deadline/hours evaluation; see [timing contract and limits](docs/advanced-timing.md). Task 50E connects these components to the approved local website flow and private saving; see [integration and supported limits](docs/advanced-integration.md).
 
-The current app provides AI-assisted leisure venue discovery and sequential recommendations. Named-stop resolution and bounded directional advanced route construction are implemented behind the existing backend development gate. Backend whole-journey timing is implemented behind that gate. Advanced website plans and advanced saving remain **planned functionality**. Database-backed saving and reopening are implemented for trusted local development. The expanded Stage 1 checkpoint remains unmet. Stage 2 optimization and Stage 3 editing build on this planned foundation.
+The current app provides AI-assisted leisure discovery and advanced itineraries in approved local development. Advanced plans support named-place clarification, supported ordering, confirmed returns or named endpoints, duration/deadline checks and selected-only private saving/reopening. Unknown evidence stays qualified; advanced results are bounded to three computed options. Fresh clones remain mock and advanced production access stays disabled. Task 50E is complete; Task 51 and the expanded Stage 1 deployment checkpoint remain unstarted. Stage 2 optimization and Stage 3 editing remain planned.
 
 ## Save and reopen plans — Task 49
 
@@ -599,3 +599,10 @@ unavailable. Ordinary planning/startup commands above are unchanged.
 
 [Identity rules, implemented versus deferred interactions, tests and costs](docs/stop-resolution.md).
 Tasks 50C–50E and Task 51 remain unstarted.
+
+
+## Advanced local outings (Task 50E)
+
+Advanced named destinations, errands, optional stops and return journeys now use the same request box in the approved local real mode. Confirm how the outing starts, then answer any place, date, visit-duration or departure question. Unknown timing is labeled; required stops and limits are kept. Select an option, Save Plan and use Open saved plan for a separate private-link tab.
+
+The ignored owner profile uses `WHERETO_ADVANCED_DEV=1` and `WHERETO_STOP_RESOLUTION_DEV=1` with the existing approved real-mode settings. Restart the backend after profile changes. From `/Users/rahularutla/Documents/whereto`, run `npm run dev:backend`; in a second Terminal in that folder run `npm run dev`. Fresh clones remain mock. Separate home addresses, unsupported mandatory venue requirements and additional advanced discovery remain limited; see [advanced flow and honest limits](docs/advanced-integration.md). Task 51 is not started.

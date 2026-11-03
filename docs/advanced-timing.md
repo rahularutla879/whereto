@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 # Task 50D — whole-journey timing
 
 Backend development/test evaluation only. Task 50E website integration and advanced
@@ -223,3 +225,8 @@ median 0.590 ms/max 1.772 ms; four-stop/three-candidate median 2.512 ms/max 33.9
 Desktop 1280/mobile 390 functional and responsive checks passed; ordinary saved UI
 used an in-memory repository harness, not hosted SQL. No complete accessibility
 audit or live provider verification is claimed. See HANDOVER.md for precise scope.
+
+
+## Task 50E — advanced application integration
+
+Task 50E displays these verdicts, filters infeasible options and accepts occurrence-specific missing-duration/explicit-departure answers. Reevaluation reads trusted route snapshots with no new Matrix/Qwen calls; approximate answers do not establish hard feasibility. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

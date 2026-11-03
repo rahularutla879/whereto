@@ -19,6 +19,7 @@ export type DisplayVenue = Omit<Venue, "price" | "duration" | "capacity" | "neig
 };
 export type Stop = { venue: DisplayVenue; start: number | null; end: number | null };
 export type Plan = {
+  advanced?: import("./advanced-planning").AdvancedOption;
   transport?: string | null;
   travelClassification?: "matching" | "outside_preference" | "beyond_limit" | "unverified"; travelDeviations?: string[];
   planningMode?: "origin" | "surprise"; surpriseRepeated?:boolean;
@@ -34,6 +35,7 @@ export type Plan = {
   prices: { amount: number | null; status: string }[]; legs: { minutes: number | null; status: string }[];
 };
 export type PlannerResult = {
+  advanced?: import("./advanced-planning").AdvancedState;
   advancedUnavailable?: boolean; saveReceipt?: string; saveAccessToken?: string;
   recoveryCode?: string; requestFailed?: boolean; optionsToken?: string; canExpand?: boolean; canDiscover?: boolean; continuationStatus?: {kind:string;message:string}; canShowBeyond?: boolean; dataMode?: "mock" | "real"; plans: Plan[]; alternativeBatches?: Plan[][]; message: string; location: string; activities: Activity[]; notes: string[] };
 export type ResolvedOuting = { payload: OutingPayload; notes: string[]; error?: never } | { error: PlannerResult; payload?: never; notes?: never };

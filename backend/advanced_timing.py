@@ -369,7 +369,7 @@ def _evaluate(route, index, context, evaluated_at):
         state=_combine(routing_state, preference, duration_state, deadline_state, hours), reasons=reasons)
 
 
-def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime) -> AdvancedTimingResult:
+def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, dwell_answers=None, departure_minute=None) -> AdvancedTimingResult:
     """Consume only an active backend router, rechecking authorization and expiry.
 
     No client evidence input. Evaluates up to three existing routes of four stops;
@@ -380,6 +380,26 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime) 
     if not isinstance(evaluated_at, datetime) or evaluated_at.tzinfo is None or evaluated_at.utcoffset() is None:
         raise ValueError('An aware evaluation clock is required.')
     result = router.timing_snapshot()
+    # Only app-owned duration/departure answers amend a copy of trusted routes.
+    # Identity, routing, topology and provider evidence stay in the original session.
+    if dwell_answers:
+        for route in result.candidates:
+            journey = route.journey.model_copy(deep=True)
+            for occurrence, duration in dwell_answers.items():
+                if type(occurrence) is not int or not 0 <= occurrence < len(journey.stops) or journey.stops[occurrence].duration is not None:
+                    raise ValueError('Only missing occurrence durations can be clarified.')
+                journey.stops[occurrence].duration = Duration.model_validate(duration.model_dump())
+            route.journey = journey
+            for visit in route.visits:
+                visit.requested = journey.stops[visit.occurrence]
+            for omission in route.omitted:
+                omission.requested = journey.stops[omission.occurrence]
+            AdvancedRouteCandidate.model_validate(route.model_dump())
+    if departure_minute is not None:
+        if type(departure_minute) is not int or not 0 <= departure_minute < 1440 or result.context is None or result.context.departureMinute is not None:
+            raise ValueError('Only a missing explicit departure can be clarified.')
+        result.context.departureMinute = departure_minute
+        result.context.departureSource = f'depart at {departure_minute//60:02d}:{departure_minute%60:02d}'
     return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at)
         for i, route in enumerate(result.candidates)], routing_status=result.status,
         routing_reasons=result.reasons, evaluated_at=evaluated_at,

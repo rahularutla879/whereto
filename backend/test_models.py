@@ -209,7 +209,7 @@ class ResultTests(unittest.TestCase):
         self.assertIn("PlanningResult", schema["components"]["schemas"])
         self.assertIn("ScheduledEvent", schema["components"]["schemas"])
         from backend.main import app as actual_app
-        self.assertEqual(set(actual_app.openapi()["paths"]), {"/health", "/api/plans/generate", "/api/interpret", "/api/planning-mode", "/api/venues/details", "/api/plans/options", "/api/starting-places", "/api/starting-areas", "/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"})
+        self.assertEqual(set(actual_app.openapi()["paths"]), {"/health", "/api/plans/generate", "/api/interpret", "/api/planning-mode", "/api/venues/details", "/api/plans/options", "/api/starting-places", "/api/starting-areas", "/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics", "/api/plans/advanced"})
 
     def test_current_typescript_catalog_and_planner_contract(self):
         # Execute the source of truth instead of maintaining a second Python catalog.

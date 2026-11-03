@@ -85,7 +85,9 @@ async def invalid_request(request: Request, exc: RequestValidationError):
     issues = [{"field": ".".join(str(part) for part in e["loc"] if part != "body"),
                "message": e["msg"]} for e in exc.errors()]
     unsupported = any(e["type"] == "enum" and "activities" in e["loc"] for e in exc.errors())
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
+    if request.url.path == '/api/plans/advanced':
+        return failure('invalid_request',422,operation='advanced_validation',message='Check the advanced answer format. Your request and current itinerary are kept.')
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics", "/api/plans/advanced"}:
         return failure("save_validation_failed",422,operation="persistence_validation")
     return JSONResponse(status_code=422, content={
         "code": "unsupported_request" if unsupported else "invalid_request",
@@ -136,7 +138,10 @@ def generate_plan(request: PlannerInput) -> RankingResult:
 @app.post("/api/interpret", response_model=InterpretationResult)
 def interpret_outing(request: InterpretationInput):
     try:
-        return interpret_request(request)
+        result = interpret_request(request)
+        from backend.advanced_planning import sessions
+        result.advancedToken = sessions.create(request.text, result, provider_budget, request.preferences)
+        return result
     except (AIError, ValidationError, TimeoutError):
         return failure('llm_interpretation_failed',503,operation='interpretation')
 
@@ -231,7 +236,7 @@ from backend.saved_plans import SaveRequest, OpenRequest, PersistenceError, rece
 
 @app.middleware("http")
 async def private_plan_boundary(request: Request, call_next):
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics", "/api/plans/advanced"}:
         from urllib.parse import urlparse
         local = {"localhost", "127.0.0.1", "::1", "testserver"}
         # Local-development MVP only; no cross-origin browser or forwarded public traffic.
@@ -273,7 +278,7 @@ async def private_plan_boundary(request: Request, call_next):
                 return response
         request._body = bytes(body)
     response = await call_next(request)
-    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics"}:
+    if request.url.path in {"/api/plans/save", "/api/plans/reopen", "/api/plans/refresh", "/api/development-diagnostics", "/api/plans/advanced"}:
         response.headers["Cache-Control"] = "no-store"
         response.headers["Referrer-Policy"] = "no-referrer"
     return response
@@ -328,4 +333,19 @@ def development_diagnostics():
     from backend.development_diagnostics import snapshot
     from backend.performance import snapshot as ai_timings
     from backend.ai_readiness import snapshot as readiness
-    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness()},headers={'Cache-Control':'no-store'})
+    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness(),'advanced':advanced_sessions.diagnostics()},headers={'Cache-Control':'no-store'})
+
+
+from backend.advanced_planning import AdvancedInput, sessions as advanced_sessions
+
+@app.post('/api/plans/advanced')
+async def advanced_endpoint(value: AdvancedInput, http: Request):
+    from backend.provider_work import run_work
+    def execute():
+        try:
+            return JSONResponse(content=advanced_sessions.run(value).model_dump(mode='json'), headers={'Cache-Control':'no-store'})
+        except ValueError:
+            return failure('invalid_request',422,operation='advanced',message='Advanced context or answer is invalid or expired. Your text is kept; regenerate to continue.')
+        except (DiscoveryError, ProviderLimitError, RouteError) as error:
+            return failure(provider_code(error),422,operation='advanced',error=error)
+    return await run_work(http,execute)

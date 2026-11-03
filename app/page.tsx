@@ -32,6 +32,8 @@ import { RealVenueFacts } from "@/components/real-venue-facts";
 import { adaptRanking } from "@/lib/planning-client";
 import { PlanCost } from "@/components/plan-cost";
 import { FirstLegTravel } from "@/components/first-leg-travel";
+import {AdvancedPlanCard,AdvancedClarifications} from "@/components/advanced-plan";
+import {continueAdvanced} from "@/lib/advanced-planning";
 import demoPlans from "@/data/demo-plans.json";
 
 const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: CircleDot, drinks: Wine, movie: Popcorn, food: Utensils, coffee: Coffee, outdoors: Footprints, art: Palette, museum: Landmark, karaoke: Mic, arcade: Gamepad2, escape: Puzzle, shopping: ShoppingBag,
@@ -88,6 +90,8 @@ export default function Home() {
   const [locationContext, setLocationContext] = useState<LocationContext>({});
   const [detailsSession] = useState(()=>new VenueDetailsSession());
   useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
+  const advancedContinuation=useRef<PendingOuting|null>(null);
+  const advancedAnswers=useRef<Record<string,unknown>[]>([]);
   const [validated, setValidated] = useState<ValidatedOuting | null>(null);
   const [dirty, setDirty] = useState(false);
   const [request, setRequest] = useState("");
@@ -108,6 +112,7 @@ export default function Home() {
   const followupRef = useRef<HTMLDivElement>(null);
   const [generated, setGenerated] = useState(false);
   const [savedOpen,setSavedOpen]=useState(false);
+  const [advancedSelected,setAdvancedSelected]=useState("");
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: PreferenceField, value: string) {
@@ -126,6 +131,7 @@ export default function Home() {
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Details changed. Regenerate recommendations to use your corrections.", location: "", activities: [], notes: [] });
   }
   function replaceRequest() {
+    advancedContinuation.current=null;advancedAnswers.current=[];
     setSavedOpen(false);
     cancelClarification();
     detailsSession.clear();
@@ -176,6 +182,24 @@ export default function Home() {
       if (session.current.current(controller)) { setOptionsNotice(error instanceof Error ? consumerMessage(error.message) : "More options are unavailable. No automatic retry was made."); }
     } finally { if (session.current.finish(controller)) {setLoading(false);setOptionsBusy(false);} }
   }
+  async function answerAdvanced(answer:Record<string,unknown>){
+    if(!result.advanced||dirty)return;
+    const controller=session.current.begin();if(!controller)return;
+    setLoading(true);setPlanningStage("Applying your answer and checking the itinerary");setOptionsNotice("");
+    try{
+      const next=await continueAdvanced(result.advanced,answer,controller.signal);
+      if(!session.current.current(controller))return;
+      if(answer.dwell||answer.departure){
+        advancedAnswers.current=advancedAnswers.current.filter(a=>!(answer.dwell&&a.dwell&&(a.dwell as {occurrence:number}).occurrence===(answer.dwell as {occurrence:number}).occurrence)&&!(answer.departure&&a.departure));
+        advancedAnswers.current.push(answer);
+      }
+      if(typeof answer.date==='string')setPreferenceState(previous=>editPreference(previous,'date',answer.date as string));
+      if(typeof answer.destination==='string')setPreferenceState(previous=>editPreference(previous,'location',answer.destination as string));
+      setResult(next);latest.current=next;
+      if(pages.current.index>=0)pages.current.pages[pages.current.index]=structuredClone(next);
+    }catch(error){if(session.current.current(controller))setOptionsNotice(error instanceof Error?error.message:"Your answer could not be applied. Your itinerary is kept.");}
+    finally{if(session.current.finish(controller))setLoading(false);}
+  }
   async function runPlanning(followup: boolean) {
     setSavedOpen(false);
     const controller = session.current.begin();
@@ -194,8 +218,10 @@ export default function Home() {
       const origin = locationContext;
       setPlanningStage("Understanding your request");
       const next = await generateOuting(original, manualPreferences(preferenceState), {
-        continuation: followup ? clarification ?? validated?.continuation : undefined,
+        continuation: followup ? clarification ?? validated?.continuation ?? advancedContinuation.current ?? undefined : undefined,
+        advancedAnswers: advancedAnswers.current,
         answers: followup ? { ...answers, ...(answers.activities !== undefined ? { activities: answers.activities.trim() || "," } : {}) } : undefined,
+        onStage:stage=>{if(session.current.current(controller))setPlanningStage(stage);},
         signal: controller.signal, locationContext: {...origin,locationFirst:true},
         prepareOrigin: async input => {
           const confirmed=await startingControls.current?.prepare(input);
@@ -213,6 +239,7 @@ export default function Home() {
         onComplete: () => { if (session.current.current(controller)) { setClarification(null); setAnswers({}); setPreferencesOpen(false); } },
       });
       if (!session.current.current(controller)) return;
+      if(next.advanced){setDirty(false);advancedContinuation.current=next.advanced.continuation??null;}
       setRecovery(next.recoveryCode);
       latest.current=next;pages.current.append(next);syncPages();
       setResult({ ...next, dataMode: next.dataMode ?? (dataMode === "real" ? "real" : "mock") });
@@ -228,7 +255,7 @@ export default function Home() {
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (!request.trim()) { requestRef.current?.setCustomValidity("Tell us a little about your outing."); requestRef.current?.reportValidity(); return; }
-    await runPlanning(!!clarification || !!validated);
+    await runPlanning(!!clarification || !!validated || !!advancedContinuation.current);
   }
   const preferencesCount = [preferences.location, preferences.date, preferences.travel, preferenceState.manual.transport ? preferences.transport : ""].filter(Boolean).length;
 
@@ -288,9 +315,10 @@ export default function Home() {
         <div hidden={savedOpen}>
 
         {generated && <BeyondPreferences result={result}/>}
-        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} advancedUnavailable={result.advancedUnavailable} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
+        {generated&&result.advanced&&<><AdvancedClarifications state={result.advanced} busy={loading} onAnswer={answer=>void answerAdvanced(answer)}/>{optionsNotice&&<p role="status">{optionsNotice}</p>}</>}
+        {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => plan.advanced ? <AdvancedPlanCard key={plan.id} plan={plan} index={index} selected={advancedSelected===plan.id} onSelect={()=>setAdvancedSelected(plan.id)}/> : <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && (!result.advanced || loading) && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} advancedUnavailable={result.advancedUnavailable} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult(restoreContinuation(page,latest.current));syncPages();}}}/>}
-        {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.optionsToken || result.canExpand || result.canDiscover || result.canShowBeyond) && <AlternativeActions
+        {generated && !result.advanced && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.optionsToken || result.canExpand || result.canDiscover || result.canShowBeyond) && <AlternativeActions
           real={result.dataMode==="real"} canCombine={!!result.alternativeBatches?.length||!!result.canExpand} canExplore={!!result.canDiscover}
           busy={loading} disabled={dirty} notice={optionsBusy?planningStage+"…":continuationNotice(result,optionsNotice)}
           nearby={!!validated?.request.firstTravel} canShowBeyond={!!result.canShowBeyond||pageState.hasBeyond}
@@ -308,9 +336,9 @@ export default function Home() {
         {generated&&recovery&&["outing_date_expired","outing_time_expired"].includes(recovery)&&<div role="group" aria-label="Outing date recovery"><p>Your activities, destination and confirmed origin are kept.</p><button type="button" className="secondary-button" onClick={()=>{setPreferencesOpen(true);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('input[type="date"]')?.focus());}}>Choose another date</button><p>No date is changed until you select one and regenerate. You can keep browsing saved pages.</p></div>}
         {generated&&["destination_unresolved","destination_ambiguous","destination_verification_unavailable"].includes(recovery??"")&&<div role="group" aria-label="Destination recovery"><p>{locationContext.planningMode==="surprise"?"Clarify the destination city or neighborhood. Surprise Me keeps its mode and does not invent a starting location.":"Your original destination is kept. A nearby reference prioritizes that area; it does not verify an exact neighborhood boundary."}</p>{locationContext.planningMode!=="surprise"&&<button type="button" className="secondary-button" onClick={()=>{startingControls.current?.useAnchor();void runPlanning(!!validated);}}>Use confirmed start as nearby search reference</button>}<button type="button" onClick={()=>setPreferencesOpen(true)}>Correct destination</button></div>}
         {!generated && <p className="sample-notice">These example itineraries use fictional venues, prices and travel times.</p>}
-        {generated && result.plans.length > 0 && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} walking={result.plans.some(plan=>plan.transport==="walking")} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
+        {generated && !result.advanced && result.plans.length > 0 && (!loading || optionsBusy) && <ResultsInformation real={result.dataMode === "real"} walking={result.plans.some(plan=>plan.transport==="walking")} notes={result.notes} needsChecking={result.plans.some(plan => plan.feasibility === "provisional")} />}
         </div>
-        <SavedPlans contextKey={request+(result.saveReceipt??"")} active={savedOpen} onOpen={setSavedOpen} result={!savedOpen && generated && !dirty && !loading ? result : undefined} />
+        <SavedPlans preferredSelection={advancedSelected} onSelection={setAdvancedSelected} contextKey={request+(result.saveReceipt??"")} active={savedOpen} onOpen={setSavedOpen} result={!savedOpen && generated && !dirty && !loading ? result : undefined} />
       </section>
 
       <section className="how-section shell" id="how-it-works" aria-labelledby="how-title"><div className="how-intro"><span className="tiny-spark"><Sparkles size={21} /></span><h2 id="how-title">Less back-and-forth.<br /><em>More “see you there.”</em></h2></div><div className="how-step"><span>01</span><h3>Give us the gist.</h3><p>Your people, your place, your idea of a good time.</p></div><div className="how-step"><span>02</span><h3>Find your kind of plan.</h3><p>Explore three options that bring it all together.</p></div><div className="how-step"><span>03</span><h3>Take it to the group chat.</h3><p>Pick a favorite. Check the real-world details. Go hang out.</p></div></section>

@@ -480,3 +480,11 @@ containment proves bounded visits fit; a failed envelope alone does not prove al
 possible bounded visits fail. No waiting/buffer/activity default or inferred positive
 minimum is introduced. Keep all output transient and advanced execution unavailable.
 [Exact semantics and remaining Task 50E work](docs/advanced-timing.md).
+
+
+## Task 50E — advanced application integration
+
+Task 50E uses an opaque backend session rather than accepting client evidence; initial discovery/routing shares one outing budget. Timing answers amend copies of trusted routes. Advanced options use a truthful bounded page of at most three, with no ordinary exploration handler. Version 2 app-owned requirements fit existing preferences/model-version columns; no new table or migration is justified. [Contracts, limits and verification](docs/advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+Task 50E verification also repaired a reproduced first-ledger publication race. A fully initialized owner-only temporary ledger is fsynced and linked into place without replacing an existing path; each writer then reads current contents under the existing lock. The original four-process regression passes 20 fresh repetitions, and deterministic scheduling proves the old rejection and the corrected two-writer accounting. Existing/corrupt ledgers are never reset, and no rates, quotas, credentials, billing or provider retry policy changed.

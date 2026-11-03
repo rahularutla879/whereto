@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 # Task 50B — verified stop resolution
 
 This layer resolves venue identities and discovers candidates. It does not create
@@ -197,3 +199,8 @@ all endpoint roles. No new place choice/search, AI call, Details request or pers
 provider cache. Destination/browser/unknown timezone basis and explicit departure
 evidence are additive transient context fields. [Timing semantics](advanced-timing.md).
 Advanced execution/saving remain Task 50E; Task 51 remains unstarted.
+
+
+## Task 50E — advanced application integration
+
+Task 50E surfaces server-scoped named-place choices in the website and passes the same resolver/outing budget to routing. Choosing an existing candidate adds no search or model call. Separate home addresses still need verified identity and remain unsupported here. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

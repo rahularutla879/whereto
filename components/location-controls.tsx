@@ -40,6 +40,8 @@ export function LocationControls({ onChange,onStage,lookupEnabled=false,mock=fal
       betweenTravel:between.current.value};
   }
   function prepareSurprise(){
+    if(originInput.current?.requireOrigin){setNotice("This journey must return to a confirmed starting point. Choose current location or a manual starting place.");return null;}
+
     if(hasConflict()){
       setConflict(true);setNotice("Surprise Me starts at the first activity. Travel from an unspecified origin cannot be checked. Choose a location-based mode or explicitly remove that first-stop constraint.");
       onStage?.("Resolve first-stop preference");return null;

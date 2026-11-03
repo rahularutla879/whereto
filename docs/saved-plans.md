@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 > Current Task 50 security audit and acceptance: [safe database access](database-security.md). Earlier task-pending statements below are historical.
 
 # Task 49 — explicit private saved plans
@@ -224,3 +226,8 @@ SQL. Unsupported advanced requests produce no resolved planner request or save
 receipt. Existing ordinary saved plans, selected options, RLS and restricted/TLS
 connections remain unchanged. Original requests, precise home references and
 coordinates are not newly persisted. Advanced persistence remains Task 50E.
+
+
+## Task 50E — advanced application integration
+
+Task 50E adds SavedDocument version 2 for selected advanced options using existing tables/permissions, app-owned requirements and permitted Place IDs. Current venue refresh stays independently authorized; discarded historical route evidence is never reconstructed. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

@@ -640,3 +640,8 @@ UTC/DST projections and fresh dated-hours compatibility. Missing evidence remain
 unverified. No additional provider/model call, ordinary ranking/UI change or SQL
 write/schema change. Advanced website cards and saving remain unavailable until
 Task 50E. [Contract, policies and verification](advanced-timing.md).
+
+
+## Task 50E — advanced application integration
+
+Task 50E now connects validated advanced requests to local session orchestration when WHERETO_ADVANCED_DEV and WHERETO_STOP_RESOLUTION_DEV are deliberately enabled with existing real-mode authorization. Ordinary ranking/discovery/continuation stays intact. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

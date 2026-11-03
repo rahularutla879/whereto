@@ -725,3 +725,8 @@ and unique local instants handle midnight/DST; existing current-hours evaluation
 checks justified visit intervals. No public endpoint, new provider call, persistent
 provider content or schema change. Advanced cards/saving remain Task 50E.
 [Full timing policy, contract, examples and tests](docs/advanced-timing.md).
+
+
+## Task 50E — advanced application integration
+
+Task 50E adds a server-owned expiring advanced orchestration session, minimized public DTOs and occurrence-aware version 2 saved documents over the existing five tables. Tasks 50A–50D remain the only interpretation/resolution/routing/timing implementations. No schema migration or production exposure. [Contracts, limits and verification](docs/advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

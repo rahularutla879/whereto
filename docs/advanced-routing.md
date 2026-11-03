@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 # Task 50C — advanced route construction
 
 Backend development/test contract only. Ordinary advanced requests still show the
@@ -206,3 +208,8 @@ The original Task 50C snapshot retains `temporal_status=not_evaluated`; a separa
 `TimedCandidate` carries Task 50D's component/overall verdicts and projections.
 Travel verification alone remains insufficient. [Timing contract](advanced-timing.md).
 Task 50E website execution/persistence and Task 51 remain unstarted.
+
+
+## Task 50E — advanced application integration
+
+Task 50E now invokes this router through the approved local advanced flow and displays actual ordered/return/final legs. It preserves the existing bounded work, directional evidence, required stops and Strict/Flexible checks. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

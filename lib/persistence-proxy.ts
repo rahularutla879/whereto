@@ -2,7 +2,8 @@ import { publicPlanningPayload } from "./public-planning-payload";
 import { classifiedFailure } from "./failure-diagnostics";
 import { developmentOriginHeaders } from "./development-origin";
 
-export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reopen" | "/api/plans/refresh", request: Request) {
+export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reopen" | "/api/plans/refresh" | "/api/plans/advanced", request: Request) {
+  const advanced=path==="/api/plans/advanced";
   const headers = { "Cache-Control": "no-store", "Referrer-Policy": "no-referrer" };
   const url = new URL(request.url);
   const origin = request.headers.get("origin");
@@ -45,12 +46,13 @@ export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reo
       cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(45000)]),
     });
     const data = await response.json();
+    if(advanced&&!response.ok&&typeof data?.message==='string')return Response.json(publicPlanningPayload(data),{status:response.status,headers});
     if (!response.ok && classifiedFailure(data)) return Response.json(publicPlanningPayload(classifiedFailure(data)), { status:response.status, headers });
     if (!response.ok) return Response.json({ message: response.status === 404 ? "Saved plan unavailable. The link may be invalid, inaccessible or expired."
       : response.status === 409 ? "Save reference expired or changed. Generate plans again before saving."
       : "Saved plans are unavailable. Your current itinerary is kept; try again later." }, { status: [404,409,413,422].includes(response.status) ? response.status : 503, headers });
     return Response.json(publicPlanningPayload(data), { headers });
   } catch {
-    return Response.json({ message: "Saved plans are unavailable. Your current itinerary is kept; check the backend and try again." }, { status: 503, headers });
+    return Response.json({ message: advanced?"Advanced planning is unavailable. Your current request and itinerary are kept; try again.":"Saved plans are unavailable. Your current itinerary is kept; check the backend and try again." }, { status: 503, headers });
   }
 }

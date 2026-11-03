@@ -68,14 +68,18 @@ class FictionalMetrics(ContractModel):
     legs: list[int | None] = Field(max_length=3)
 
 
+from backend.saved_advanced import AdvancedSaved
+
+
 class SavedOption(ContractModel):
+    advanced: AdvancedSaved | None = None
     candidateId: CandidateID
     stops: list[SavedStop] = Field(min_length=1, max_length=4)
     fictionalMetrics: FictionalMetrics | None = None
 
 
 class SavedDocument(ContractModel):
-    version: Literal[1] = 1
+    version: Literal[1, 2] = 1
     dataMode: Literal['mock', 'real']
     constraints: OutingRequest
     selectedId: CandidateID
@@ -90,7 +94,12 @@ class SavedDocument(ContractModel):
         if self.constraints.date is None or self.selectedId not in ids or len(set(ids)) != len(ids):
             raise ValueError('Incomplete saved selection')
         for option in self.itineraries:
-            if [s.activity for s in option.stops] != [a.value for a in self.constraints.activities]:
+            if (self.version == 2) != (option.advanced is not None) or self.version == 2 and self.dataMode != 'real':
+                raise ValueError('Advanced document version mismatch')
+            order = option.advanced.occurrenceOrder if option.advanced else list(range(len(self.constraints.activities)))
+            if option.advanced and len(option.advanced.journey.stops) != len(self.constraints.activities):
+                raise ValueError('Original occurrences changed')
+            if [s.activity for s in option.stops] != [self.constraints.activities[i].value for i in order]:
                 raise ValueError('Saved activities must match constraints')
             if [s.position for s in option.stops] != list(range(len(option.stops))):
                 raise ValueError('Saved stops must preserve order')
@@ -196,8 +205,8 @@ class Receipts:
             by_id = {p.candidateId: p for p in safe['options']}
             if any(i not in by_id for i in ids):
                 raise PersistenceError(409)
-            return SavedDocument(dataMode=safe['dataMode'], constraints=safe['constraints'],
-                selectedId=request.selectedId, itineraries=[by_id[i] for i in ids])
+            return SavedDocument(version=safe.get('version',1), dataMode=safe['dataMode'], constraints=safe['constraints'],
+                selectedId=request.selectedId, itineraries=[by_id[request.selectedId]] if safe.get('version')==2 else [by_id[i] for i in ids])
 
 
 receipts = Receipts()
@@ -265,7 +274,7 @@ def write_document(connection, document, token):
         return
     plan_id = uuid4()
     insert(connection, 'plans', dict(id=plan_id, data_mode=document.dataMode,
-        access_hash=key, save_fingerprint=fingerprint,
+        access_hash=key, save_fingerprint=fingerprint, model_version=document.version,
         selected_option=next(i for i,p in enumerate(document.itineraries) if p.candidateId == document.selectedId)))
     req = document.constraints.model_dump(mode='json')
     values = {'plan_id': plan_id, **{column: req[field] for field,column in COLUMNS.items()}}
@@ -276,13 +285,16 @@ def write_document(connection, document, token):
         for suffix in ('value','unit','mode','exclusive'):
             values[prefix+'_'+suffix] = preference[suffix] if preference else (False if suffix == 'exclusive' else None)
         extras[field+'OriginText'] = preference.get('originText') if preference else None
+    if document.version == 2:
+        extras['advancedVersion'] = 2
+        extras['advancedOptions'] = {o.candidateId:o.advanced.model_dump(mode='json') for o in document.itineraries}
     values.update(strict_destination=req['geography']['strictDestination'], excluded_regions=req['geography']['excludedRegions'], preferences=Jsonb(extras))
     insert(connection, 'plan_constraints', values)
     for i, option in enumerate(document.itineraries):
         itinerary_id = uuid4()
         insert(connection, 'generated_itineraries', dict(id=itinerary_id, plan_id=plan_id, option_position=i,
             candidate_id=option.candidateId, feasibility='provisional', travel_classification='unverified',
-            generator_version='task49-v1', fictional_metrics=Jsonb(option.fictionalMetrics.model_dump()) if option.fictionalMetrics else None))
+            generator_version='task50e-v2' if document.version==2 else 'task49-v1', fictional_metrics=Jsonb(option.fictionalMetrics.model_dump()) if option.fictionalMetrics else None))
         for stop in option.stops:
             stop_id = uuid4()
             insert(connection, 'itinerary_stops', dict(id=stop_id, itinerary_id=itinerary_id, position=stop.position,
@@ -308,27 +320,31 @@ def read_document(connection, token):
         req[field] = None if row[prefix+'_value'] is None else {
             **{suffix: float(row[prefix+'_'+suffix]) if suffix=='value' else row[prefix+'_'+suffix] for suffix in ('value','unit','mode','exclusive')},
             'originText': row['preferences'].get(field+'OriginText')}
+    advanced_version = row['preferences'].get('advancedVersion',1)
+    advanced_options = row['preferences'].get('advancedOptions',{})
     itineraries = []
     for i,option in enumerate(connection.execute('SELECT id,candidate_id,option_position,fictional_metrics FROM whereto.generated_itineraries WHERE plan_id=%s ORDER BY option_position', (plan['id'],)).fetchall()):
         if option['option_position'] != i:
             raise PersistenceError(404)
+        advanced = AdvancedSaved.model_validate(advanced_options.get(option['candidate_id'])) if advanced_version == 2 else None
+        occurrence_order = advanced.occurrenceOrder if advanced else list(range(len(req['activities'])))
         stops = []
         for j,stop in enumerate(connection.execute("""SELECT s.*,m.provider,m.external_id FROM whereto.itinerary_stops s
             JOIN whereto.source_metadata m ON m.stop_id=s.id AND m.reference_kind='venue'
             WHERE s.itinerary_id=%s ORDER BY s.position""", (option['id'],)).fetchall()):
-            if stop['position'] != j or j >= len(req['activities']) or stop['activity'] != req['activities'][j]:
+            if stop['position'] != j or j >= len(occurrence_order) or stop['activity'] != req['activities'][occurrence_order[j]]:
                 raise PersistenceError(404)
             if plan['data_mode']=='real' and (stop['provider']!='google_places' or stop['fictional_snapshot'] or stop['timing_basis']!='unknown' or option['fictional_metrics']):
                 raise PersistenceError(404)
             stops.append(SavedStop(position=j, activity=stop['activity'], provider=stop['provider'], reference=stop['external_id'],
                 timingBasis=stop['timing_basis'], start=stop['start_minute'], end=stop['end_minute'], duration=stop['duration_minutes'], fictional=stop['fictional_snapshot']))
-        if len(stops) != len(req['activities']):
+        if len(stops) != len(occurrence_order):
             raise PersistenceError(404)
-        itineraries.append(SavedOption(candidateId=option['candidate_id'], stops=stops, fictionalMetrics=option['fictional_metrics']))
+        itineraries.append(SavedOption(candidateId=option['candidate_id'], advanced=advanced, stops=stops, fictionalMetrics=option['fictional_metrics']))
     if not 0 <= plan['selected_option'] < len(itineraries):
         raise PersistenceError(404)
     try:
-        result = SavedDocument(dataMode=plan['data_mode'], constraints=req, selectedId=itineraries[plan['selected_option']].candidateId, itineraries=itineraries)
+        result = SavedDocument(version=advanced_version,dataMode=plan['data_mode'], constraints=req, selectedId=itineraries[plan['selected_option']].candidateId, itineraries=itineraries)
     except ValueError:
         raise PersistenceError(404) from None
     return {**result.model_dump(mode='json'), 'expiresAt': plan['access_expires_at'].isoformat(),

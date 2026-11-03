@@ -553,3 +553,11 @@ no Qwen, place resolution or Matrix repeats. Missing timing/hours evidence stays
 unverified instead of triggering retrieval. No field-mask/tier/service/quota/billing,
 credential or private-profile change. Offline fixtures reject real HTTP sends;
 persistence/schema/owner data are unchanged. [Contract and checks](advanced-timing.md).
+
+
+## Task 50E — advanced application integration
+
+Task 50E reuses the existing Places/Routes masks, shared admission, locked accounting, Cloud quotas, concurrency and zero-retry behavior. It adds no paid operation or quota/billing change. Advanced timings/choices reuse evidence; normal startup issues no provider request. Existing approved selected Pro/manual hours/contact gates remain separate. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.
+
+
+Task 50E verification also repaired a reproduced first-ledger publication race. A fully initialized owner-only temporary ledger is fsynced and linked into place without replacing an existing path; each writer then reads current contents under the existing lock. The original four-process regression passes 20 fresh repetitions, and deterministic scheduling proves the old rejection and the corrected two-writer accounting. Existing/corrupt ledgers are never reset, and no rates, quotas, credentials, billing or provider retry policy changed.

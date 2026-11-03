@@ -14,7 +14,7 @@ function markExplicit(accessToken:string){
     window.history.replaceState({...window.history.state,wheretoSavedView:true},"",window.location.pathname+window.location.search);
   }
 
-export function SavedPlans({ result,active,onOpen,contextKey }: { result?: PlannerResult;active:boolean;onOpen:(open:boolean)=>void;contextKey:string }) {
+export function SavedPlans({ result,active,onOpen,contextKey,preferredSelection,onSelection }: { preferredSelection?:string;onSelection?:(id:string)=>void;result?: PlannerResult;active:boolean;onOpen:(open:boolean)=>void;contextKey:string }) {
   const openEpoch=useRef(0);
   const opening=useRef("");
   const refreshing=useRef(false);
@@ -36,7 +36,8 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
   const [pending, setPending] = useState<{ receipt: string; selected: string; token: string } | null>(null);
   useEffect(()=>{openEpoch.current+=1;queueMicrotask(()=>{setBusy(false);setMessage("");setCopyMessage("");});},[contextKey]);
   const ready = !!result?.saveAccessToken && !!result?.saveReceipt && !!result.plans.length;
-  const choice = result?.plans.some(p => p.id === selected) ? selected : result?.plans[0]?.id ?? "";
+  const chosen=preferredSelection||selected;
+  const choice = result?.plans.some(p => p.id === chosen) ? chosen : result?.plans[0]?.id ?? "";
 
   const open=useCallback(async (accessToken: string) => {
     if (!TOKEN.test(accessToken)) { openEpoch.current+=1;setSaved(null);onOpen(true);setExpanded(true);setBusy(false);setMessage("Enter a valid private saved-plan link."); return; }
@@ -143,7 +144,7 @@ export function SavedPlans({ result,active,onOpen,contextKey }: { result?: Plann
   }
   return <section className="saved-plans" aria-label="Save and reopen plans">
     {active&&container&&createPortal(saved?<SavedCards saved={saved} venues={venues} refresh={(id,contacts,hours)=>void refresh(id,contacts,hours)} busy={busy} message={refreshMessage} onClose={closeView}/>:<section aria-label="Saved itinerary status"><p role="status">{message||"Opening saved plan…"}</p><button type="button" className="secondary-button" onClick={closeView}>Return to planning</button></section>,container)}
-    {ready && savedReceipt !== result?.saveReceipt && <div className="saved-controls"><label>Selected itinerary<select value={choice} disabled={busy || pending?.receipt === result?.saveReceipt} onChange={event => setSelected(event.target.value)}>{result!.plans.map((plan,i) => <option key={plan.id} value={plan.id}>Option {i+1}: {plan.venues.map(v=>v.name).join(" → ")}</option>)}</select></label><button type="button" className="secondary-button" disabled={busy || savedReceipt === result?.saveReceipt} aria-busy={busy} onClick={()=>void save()}>Save Plan</button></div>}
+    {ready && savedReceipt !== result?.saveReceipt && <div className="saved-controls"><label>Selected itinerary<select value={choice} disabled={busy || pending?.receipt === result?.saveReceipt} onChange={event => {setSelected(event.target.value);onSelection?.(event.target.value);}}>{result!.plans.map((plan,i) => <option key={plan.id} value={plan.id}>Option {i+1}: {plan.venues.map(v=>v.name).join(" → ")}</option>)}</select></label><button type="button" className="secondary-button" disabled={busy || savedReceipt === result?.saveReceipt} aria-busy={busy} onClick={()=>void save()}>Save Plan</button></div>}
     <details open={expanded} onToggle={event=>setExpanded(event.currentTarget.open)}><summary>Saved plans</summary>
     {message && !active && <p role="status" aria-live="polite">{message}</p>}
     {link && <div className="saved-link"><h3 aria-live="polite">{!active&&savedReceipt!==result?.saveReceipt?"Previously saved plan":"Your plan is saved"}</h3><p>Copy or open your private link. It expires in 30 days, and anyone with the link can view it.</p><div className="saved-actions"><button type="button" className="secondary-button" onClick={()=>void copy()}>Copy link</button><a className="secondary-button" href={link} target="_blank" rel="noopener noreferrer">Open saved plan<span className="sr-only"> (opens in a new tab)</span></a><button type="button" className="secondary-button saved-forget" onClick={()=>{try { localStorage.removeItem(SAVED_KEY); } catch { /* Storage may be disabled. */ } closeView();setToken("");setLink("");setMessage("Link forgotten on this device.");}}>Forget on this device</button></div>{copyMessage&&<p role="status">{copyMessage}</p>}</div>}

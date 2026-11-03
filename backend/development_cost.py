@@ -8,6 +8,7 @@ import fcntl
 import json
 import os
 from pathlib import Path
+from tempfile import mkstemp
 import stat
 from time import time, monotonic, sleep
 
@@ -57,17 +58,35 @@ class DevelopmentCost:
         if not self.path.is_absolute():
             raise AccountingError('Use an absolute private path for local development cost accounting.')
 
+    def _open_initialized(self):
+        try:
+            return os.open(self.path, os.O_RDWR | os.O_NOFOLLOW)
+        except FileNotFoundError:
+            # Publish a complete private ledger atomically. O_EXCL alone publishes
+            # an empty file before its creator can acquire flock; another process
+            # can otherwise win that lock and read incomplete initialization.
+            staged_fd, staged_path = mkstemp(prefix='.whereto-ledger-', dir=self.path.parent)
+            try:
+                self.write(staged_fd, {'version': 1, 'days': {}, 'recent': []})
+                try:
+                    os.link(staged_path, self.path, follow_symlinks=False)
+                except FileExistsError:
+                    os.close(staged_fd)
+                    staged_fd = None
+                    return os.open(self.path, os.O_RDWR | os.O_NOFOLLOW)
+                return staged_fd
+            except BaseException:
+                if staged_fd is not None: os.close(staged_fd)
+                raise
+            finally:
+                os.unlink(staged_path)  # Only this invocation's temporary file.
+
     @contextmanager
     def locked(self):
         fd = None
         try:
             self.path.parent.mkdir(mode=0o700, parents=True, exist_ok=True)
-            try:
-                fd = os.open(self.path, os.O_RDWR | os.O_CREAT | os.O_EXCL | os.O_NOFOLLOW, 0o600)
-                created = True
-            except FileExistsError:
-                fd = os.open(self.path, os.O_RDWR | os.O_NOFOLLOW)
-                created = False
+            fd = self._open_initialized()
             if not stat.S_ISREG(os.fstat(fd).st_mode) or os.fstat(fd).st_mode & 0o077 or os.fstat(fd).st_uid != os.getuid():
                 raise AccountingError('Local accounting permissions are unsafe. Owner must inspect the private ledger ownership and mode 0600; usage was not reset.')
             deadline = monotonic() + 2
@@ -79,11 +98,10 @@ class DevelopmentCost:
                     if monotonic() >= deadline:
                         raise AccountingError('Local accounting is busy. No provider request was admitted. Wait for active work to finish before a deliberate action; do not delete the ledger.')
                     sleep(.01)  # Bounded local lock admission, never a provider retry.
-            if created:
-                data = {'version': 1, 'days': {}, 'recent': []}
-                self.write(fd, data)
-            else:
-                data = json.loads(os.read(fd, os.fstat(fd).st_size), parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
+            # A competing writer may have reserved usage after initial publication.
+            # Always read the current locked contents; never reset existing usage.
+            os.lseek(fd, 0, 0)
+            data = json.loads(os.read(fd, os.fstat(fd).st_size), parse_constant=lambda _: (_ for _ in ()).throw(ValueError()))
             if (set(data) != {'version','days','recent'} or type(data['version']) is not int or data['version'] != 1
                     or not isinstance(data['days'], dict) or not isinstance(data['recent'], list)):
                 raise ValueError()

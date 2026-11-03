@@ -1,3 +1,4 @@
+import {adaptAdvanced} from "./advanced-planning";
 import {planningMessage} from "./continuation";
 import { failureText } from "./failure-diagnostics";
 import { currentRelative, explicitOrigin, recoveryCode, type DestinationContext } from "./destination-context";
@@ -120,7 +121,7 @@ export type ValidatedOuting = {
 export async function generateOuting(text: string, preferences: Preferences = EMPTY_PREFERENCES,
   context?: { prepareOrigin?: (request: OriginPreparation) => Promise<LocationContext | null>; locationContext?: LocationContext; onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
     continuation?: PendingOuting; answers?: ClarificationAnswers;
-    onClarification?: (value: PendingOuting | null) => void; onComplete?: () => void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
+    onClarification?: (value: PendingOuting | null) => void; advancedAnswers?:Record<string,unknown>[]; onComplete?: () => void; onStage?:(stage:string)=>void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
   // `today` remains source-compatible; only the Python resolver owns the clock.
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
@@ -153,6 +154,30 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       if (extraction.questions.length) context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
       else if (extraction.issues.length) context?.onClarification?.(null);
     } else if (extraction.issues.length) context?.onClarification?.(null);
+    if (typeof extraction.advancedToken === "string") {
+      context?.onClarification?.(null);
+      const advancedContext=extraction.context;
+      const requireOrigin=["origin","home"].includes(extraction.interpretation?.journey?.endpoint?.kind);
+      let prepared=context?.locationContext;
+      if(context?.prepareOrigin){
+        prepared=await context.prepareOrigin({requireOrigin,location:advancedContext.destination??"",activities:extraction.interpretation.activities??[],transport:advancedContext.transport,firstTravel:advancedContext.firstTravel,betweenTravel:advancedContext.betweenTravel,maxLegTravel:advancedContext.maxLegTravel,sourceKey:text})??undefined;
+        if(!prepared)return {...failure("Confirm how the outing starts. Your original request is kept."),requestFailed:false};
+      }
+      const configuration={...(prepared?.startingLocation?{startingLocation:prepared.startingLocation}:{}),firstTravel:prepared?.firstTravel!==undefined?prepared.firstTravel:advancedContext.firstTravel,betweenTravel:prepared?.betweenTravel!==undefined?prepared.betweenTravel:advancedContext.betweenTravel};
+      context?.onStage?.("Finding places, routing and checking timing");
+      const response=await send("/api/plans/advanced",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({token:extraction.advancedToken,...configuration}),cache:"no-store",signal:context?.signal});
+      const data=await response.json();
+      if(!response.ok)return failure(failureText(data,data.message??"Advanced planning could not finish. Your request is kept."));
+      let result=adaptAdvanced(data,configuration);
+      if(result.advanced&&extraction.pending)result.advanced.continuation={pending:extraction.pending,questions:[]};
+      for(const answer of context?.advancedAnswers??[]){
+        if(!result.advanced||!["results","no_results"].includes(result.advanced.data.status))break;
+        const {continueAdvanced}=await import('./advanced-planning');
+        result=await continueAdvanced(result.advanced,answer,context?.signal,send);
+      }
+      context?.onComplete?.();
+      return result;
+    }
     if (extraction.unsupported?.length) {
       context?.onClarification?.(extraction.executionStatus === "advanced_unavailable" && extraction.pending ? {pending:extraction.pending,questions:[]} : null);
       return { ...failure(extraction.unsupported.join(" ")), advancedUnavailable: extraction.executionStatus === "advanced_unavailable", requestFailed: false, notes: extraction.notes };

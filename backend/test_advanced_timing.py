@@ -470,9 +470,9 @@ class AdvancedTimingTests(unittest.TestCase):
         self.assertIsNone(result.request)
         self.assertEqual(provider.interpret.call_count,1)
 
-    def test_no_public_endpoint_saved_contract_or_frontend_execution(self):
+    def test_timing_has_no_standalone_public_evidence_endpoint(self):
         from backend.main import app
-        self.assertFalse(any('timing' in r.path or 'advanced' in r.path for r in app.routes))
+        self.assertFalse(any('timing' in r.path for r in app.routes))
         from backend.models import OutingRequest
         with self.assertRaises(ValidationError):OutingRequest(activities=['coffee'],journey={'stops':[]})
 

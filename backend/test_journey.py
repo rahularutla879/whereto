@@ -252,7 +252,7 @@ class JourneyTests(unittest.TestCase):
         r=self.run_case(text,reply(['Coffee'],endpoint={'kind':'named_place','source':'return home at 123 Synthetic Street'}))
         self.assertEqual(r.unsupported,[LIMITATION])
         self.assertEqual(r.interpretation.journey.endpoint.source,'return home at 123 Synthetic Street')
-        self.assertIsNone(r.pending)
+        self.assertEqual(r.pending.text,text)  # Model-free configuration edits retain the extraction.
 
     def test_same_final_home_reference_cannot_be_both_a_stop_and_endpoint(self):
         text='Go to the museum, then get coffee, then go home.'

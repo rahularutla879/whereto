@@ -506,10 +506,10 @@ class AdvancedRoutingTests(unittest.TestCase):
             data=c.model_dump();mutate(data)
             with self.assertRaises(ValidationError):AdvancedRouteCandidate.model_validate(data)
 
-    def test_no_new_public_endpoint_or_advanced_save_shape(self):
+    def test_advanced_endpoint_is_separate_from_ordinary_contract(self):
         from backend.main import app
         paths=[r.path for r in app.routes]
-        self.assertFalse(any('advanced' in p or 'resolve' in p for p in paths))
+        self.assertEqual([p for p in paths if 'advanced' in p or 'resolve' in p], ['/api/plans/advanced'])
         from backend.models import OutingRequest
         with self.assertRaises(ValidationError):OutingRequest(activities=['coffee'],journey={'stops':[]})
 

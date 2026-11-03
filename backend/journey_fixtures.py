@@ -54,6 +54,7 @@ class FixtureAI:
             if text == original:
                 return Interpretation.model_validate(data)
         extra = {
+            'Get coffee in New York tomorrow and finish before 3 PM.': reply(['coffee'],location='New York',dates=['tomorrow'],deadline={'source':'before 3 PM','relation':'before'}),
             'Get groceries, use an ATM and return to where I started within 45 minutes.': reply(['groceries','ATM'],
                 endpoint={'kind':'origin','source':'return to where I started'},
                 total={'minutes':45,'relation':'maximum','source':'within 45 minutes'}),

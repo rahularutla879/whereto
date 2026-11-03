@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 # Task 50 — safe database access
 
 November 2, 2026. Scope: existing anonymous local-development Supabase persistence only. Acceptance: preserve legitimate saving/reopening and selected refresh; deny cross-capability access and malformed requests; retain least privilege, verified TLS, atomic/idempotent writes and credential-free errors; pass offline, hosted and browser checks. Tasks 50A–50E and 51 are unstarted.
@@ -76,3 +78,8 @@ This is a local-development MVP. Capabilities grant access to anyone possessing 
 Full backend: 685 reported run, OK with 34 skips (26 hosted, eight opt-in lifecycle), 180.789s. Hosted suite: 56/56 (26 actual PostgreSQL + 30 offline), 27.067s. Frontend: 234/234, 116.995s. Focused security/saved/HTTP: 38 reported run, OK with 15 hosted skips. TypeScript, ESLint, production build, Python dependency consistency, exact-credential/history/Next-artifact scan and full diff review passed. The lifecycle opt-in suite was not rerun; its implementation is unchanged.
 
 Desktop 1280 and mobile 390 actual hosted save/reopen checks passed with invented provider transports and zero Google sends. Selected option 2 reopened in a new tab; selected-only refresh loaded two synthetic venues. Mobile also saved/reopened a new option 1 and had no horizontal overflow. Two committed browser records were removed by exact test verifiers and cleanup independently verified. Screenshots: `/tmp/task50-desktop.png`, `/tmp/task50-mobile.png`. Temporary test servers/tabs were closed; pre-existing owner servers were preserved. See HANDOVER.md for detailed evidence and initial corrected test assumptions.
+
+
+## Task 50E — advanced application integration
+
+Task 50E preserves all runtime grants, forced RLS, verified TLS and capability hashing/expiry. Version 2 requirements use existing JSON preferences and positive model_version; no migration or privileged production change. Committed restricted-role persistence/restart checks and disposable cleanup are required. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

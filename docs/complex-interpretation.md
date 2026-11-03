@@ -1,3 +1,5 @@
+> Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
+
 # Complex outing interpretation — Task 50A
 
 This document records Task 50A semantic understanding. Task 50B now supplies gated
@@ -204,3 +206,8 @@ supplies this evidence; Qwen extraction/schema/call count is unchanged. Task 50D
 consumes the original Journey via the active Task 50C router and locally evaluates
 travel/dwell bounds, deadlines and hours. No advanced cards/saves are enabled.
 [Timing contract and limits](advanced-timing.md). Tasks 50E and 51 remain unstarted.
+
+
+## Task 50E — advanced application integration
+
+Task 50E consumes the validated advanced interpretation once. Supported field-only answers and preference regeneration reuse it; edited text starts a new interpretation. The old limitation remains only when integration is disabled or an underlying constraint is unsupported. [Contracts, limits and verification](advanced-integration.md). Earlier task-pending statements above are historical. Task 51 remains unstarted.

@@ -189,6 +189,7 @@ class InterpretationResult(ContractModel):
     unsupported: list[str] = Field(default_factory=list)
     context: InterpretationContext | None = None
     executionStatus: Literal["advanced_unavailable", "clarification_required"] | None = None
+    advancedToken: str | None = Field(default=None, repr=False)
 
 
 # These bounded source checks validate explicit evidence; they never construct
@@ -492,7 +493,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             journey_issue, ambiguous_journey = LIMITATION, False
         return InterpretationResult(interpretation=ai, request=None, notes=[],
             context=context, executionStatus='clarification_required' if ambiguous_journey else 'advanced_unavailable',
-            pending=PendingClarification(text=value.text,interpretation=ai,answers=answers,referenceTime=reference) if home_question and not ambiguous_journey else None,
+            pending=PendingClarification(text=value.text,interpretation=ai,answers=answers,referenceTime=reference) if not ambiguous_journey else None,
             issues=[journey_issue], unsupported=[] if ambiguous_journey else [journey_issue])
     if saved and answers.activities and ai.journey:
         # Original advanced semantics were checked above and cannot be erased.

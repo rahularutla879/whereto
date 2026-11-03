@@ -1,7 +1,7 @@
 import type { StartingMatch } from "./starting-places";
 export type FirstTravel = { value: number; unit: "minutes" | "miles"; mode: "strict" | "flexible"; exclusive?: boolean; originText?: string | null };
 export type Geography = { strictDestination: boolean; excludedRegions: ("VA" | "MD" | "DC")[] };
-export type OriginPreparation = { destinationRelative?: boolean; manualOriginText?: string; sourceKey?:string; location: string; activities: string[]; transport: string | null; firstTravel?: FirstTravel | null; betweenTravel?:FirstTravel|null; maxFirstLegTravel?:number|null; geography?: Geography; maxLegTravel?:number|null; maxLegTravelExclusive?:boolean; travel?:number|null; travelExclusive?:boolean };
+export type OriginPreparation = { requireOrigin?:boolean; destinationRelative?: boolean; manualOriginText?: string; sourceKey?:string; location: string; activities: string[]; transport: string | null; firstTravel?: FirstTravel | null; betweenTravel?:FirstTravel|null; maxFirstLegTravel?:number|null; geography?: Geography; maxLegTravel?:number|null; maxLegTravelExclusive?:boolean; travel?:number|null; travelExclusive?:boolean };
 export type StartingSuggestion = StartingMatch & { reason: string; score: number };
 export class StartingAreaSession {
   private responses = new Map<string, {created:number;response:Promise<{ matches: StartingSuggestion[]; referenceToken?: string }>} >();

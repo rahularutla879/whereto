@@ -20,19 +20,32 @@ def main():
     parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
     parser.add_argument('--refinements',action='store_true',help='Offline retail and saved refresh fixtures')
     parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
+    parser.add_argument('--advanced', action='store_true', help='Offline Task50E integrated fixtures; SQL remains real when configured')
     parser.add_argument('--journey', action='store_true', help='Offline complex-interpretation fixtures')
     args = parser.parse_args()
     if args.exploration_ledger:
         os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
                       WHERETO_CONTACT_DETAILS_DEV='1', WHERETO_START_LOOKUP_DEV='1', WHERETO_RATINGS_DEV='1', NODE_ENV='development')
+    if args.advanced:
+        os.environ.update(WHERETO_ADVANCED_DEV='1',WHERETO_STOP_RESOLUTION_DEV='1',WHERETO_HOURS_DEV='1')
     counts = {'searches': 0, 'elements': 0, 'details': 0, 'ai': 0}
-    scenario = {'name': 'refinements' if args.refinements else 'cinema_acceptance' if args.acceptance else 'normal'}
+    scenario = {'name': 'advanced' if args.advanced else 'refinements' if args.refinements else 'cinema_acceptance' if args.acceptance else 'normal'}
 
     def search(body, **kwargs):
         from backend.development_cost import dispatch
         dispatch('search')
         counts['searches'] += 1
+        if args.advanced and scenario['name'] == 'advanced':
+            from backend.test_advanced_routing import COLLEGE,COFFEE,GROCERY,BANK,PHARMACY,STATION
+            from backend.test_stop_resolution import place
+            from copy import deepcopy
+            records=[COLLEGE,COFFEE,GROCERY,BANK,PHARMACY,STATION,place('Synthetic_station_two','Penn Station','2 Fixture Road, New York',['train_station'])]
+            query=body['textQuery'].lower()
+            if kwargs and not any(word in query for word in ('suny','penn')):
+                return {'places':[place('Synthetic_start','Synthetic public starting point',types=['establishment'])]}
+            types=next((t for word,t in [('cafe','cafe'),('coffee','cafe'),('grocer','supermarket'),('supermarket','supermarket'),('atm','atm'),('bank','bank'),('pharmac','pharmacy')] if word in query),None)
+            return {'places':deepcopy([p for p in records if types is None or types in p['types']])}
         if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
             from backend.refinement_fixtures import search_fixture as refinement_search
             data=refinement_search(body,**kwargs)
@@ -110,8 +123,10 @@ def main():
     def matrix(body):
         from backend.development_cost import dispatch
         dispatch('matrix', len(body['origins'])*len(body['destinations']))
-        if scenario['name'] == 'slow_routes': sleep(3)
         counts['elements'] += len(body['origins']) * len(body['destinations'])
+        if args.advanced and scenario['name']=='advanced':
+            return [{'originIndex':i,'destinationIndex':j,'status':{},'condition':'ROUTE_EXISTS','duration':('120s' if body['travelMode']=='DRIVE' else '600s'),'distanceMeters':600} for i,_ in enumerate(body['origins']) for j,_ in enumerate(body['destinations'])]
+        if scenario['name'] == 'slow_routes': sleep(3)
         if scenario['name'] in ('strict_local','strict_far'):
             from backend.strict_local_fixtures import local_matrix
             return local_matrix(body)
@@ -139,7 +154,7 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
-            if args.journey:
+            if args.journey or args.advanced:
                 from backend.journey_fixtures import FixtureAI as JourneyAI
                 return JourneyAI().interpret(text)
             if scenario['name'] in ('refinements','travel_modes','hours','hours_closed','hours_missing'):
