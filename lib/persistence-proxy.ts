@@ -1,8 +1,10 @@
+import {timingHeaders} from "./server-timing";
 import { publicPlanningPayload } from "./public-planning-payload";
 import { classifiedFailure } from "./failure-diagnostics";
 import { developmentOriginHeaders } from "./development-origin";
 
 export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reopen" | "/api/plans/refresh" | "/api/plans/advanced", request: Request) {
+  const started=performance.now();
   const advanced=path==="/api/plans/advanced";
   const headers = { "Cache-Control": "no-store", "Referrer-Policy": "no-referrer" };
   const url = new URL(request.url);
@@ -46,6 +48,7 @@ export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reo
       cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(45000)]),
     });
     const data = await response.json();
+    Object.assign(headers,timingHeaders(response.headers.get("server-timing"),performance.now()-started));
     if(advanced&&!response.ok&&typeof data?.message==='string')return Response.json(publicPlanningPayload(data),{status:response.status,headers});
     if (!response.ok && classifiedFailure(data)) return Response.json(publicPlanningPayload(classifiedFailure(data)), { status:response.status, headers });
     if (!response.ok) return Response.json({ message: response.status === 404 ? "Saved plan unavailable. The link may be invalid, inaccessible or expired."

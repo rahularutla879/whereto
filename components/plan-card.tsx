@@ -21,7 +21,7 @@ const money = (amount: number | null) => amount === null ? "Unknown" : new Intl.
 export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; detailsSession: VenueDetailsSession }) {
   const real = plan.dataMode === "real";
   const [expanded, setExpanded] = useState(false);
-  const warnings = plan.advanced ? (plan.advanced.state==='unverified'&&!plan.advanced.travelException?[plan.advanced.durationState==='unverified'||plan.advanced.deadlineState==='unverified'||plan.advanced.routeState==='unverified'?'Total time not yet verified':'Visit hours need checking']:[]) : planWarnings(plan);
+  const warnings = plan.advanced ? [] : planWarnings(plan);
   const classic = plan.venues.map((venue) => venue.activity).join(",") === "bowling,drinks,movie";
   const PosterIcon = activityIcons[plan.venues[0].activity] ?? Sparkles;
   return <article className={`plan-card ${plan.theme}`}>
@@ -30,7 +30,7 @@ export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: n
       {real ? <div className="real-route-poster" aria-hidden="true">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <div key={venue.id}><Icon size={22} strokeWidth={1.5} /><span>{i + 1}. {venue.name}</span></div>;
-      })}{plan.advanced?.ending==='origin'&&<div><MapPin size={22} strokeWidth={1.5}/><span>Return to starting point</span></div>}{plan.advanced?.endpoint&&<div><MapPin size={22} strokeWidth={1.5}/><span>{plan.advanced.endpoint.name}</span></div>}<small>Activity illustrations · not venue photos</small></div> : classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabel(plan.venues[0].activity)}</span></div>}
+      })}{plan.advanced?.ending==='origin'&&<div><MapPin size={22} strokeWidth={1.5}/><span>Return to starting point</span></div>}{plan.advanced?.endpoint&&<div><MapPin size={22} strokeWidth={1.5}/><span>{plan.advanced.endpoint.name}</span></div>}</div> : classic ? <CardArtwork theme={plan.theme} /> : <div className="activity-poster" aria-hidden="true"><PosterIcon size={62} strokeWidth={1.25} /><span>{activityLabel(plan.venues[0].activity)}</span></div>}
     </div>
     <div className="card-body">
       <p className="card-label">{plan.label}</p>
@@ -39,6 +39,7 @@ export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: n
       {plan.planningMode==="surprise"&&<p className="details-note">Surprise Me · Begins at {plan.venues[0].name}. {plan.surpriseRepeated?"This first venue has appeared before; the complete combination is different.":"A varied first venue from the checked eligible pool."} No travel from your location is included.</p>}
       {plan.travelClassification && plan.travelClassification!=="matching" && <div className="plan-warning" role="note"><strong>{{outside_preference:"Outside your preferred range",beyond_limit:"Beyond your travel limit",unverified:"Requirements not fully verified"}[plan.travelClassification]}</strong><ul>{plan.travelDeviations?.map(message=><li key={message}>{message}</li>)}</ul></div>}
       {warnings.length > 0 && <div className="plan-warning" role="note" aria-label="Important plan details"><strong>Check this option</strong><ul>{warnings.map(warning => <li key={warning}>{warning}</li>)}</ul></div>}
+      {plan.advanced&&(plan.advanced.durationState==='unverified'&&plan.advanced.totalConstraint||plan.advanced.deadlineState==='unverified'&&plan.advanced.deadlineSource)&&<p className="details-note">Total time not yet verified</p>}
       <div className="activity-route">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <span className="route-group" key={venue.id}><span className="activity"><Icon size={14} strokeWidth={1.7} />{activityLabel(venue.activity)}</span>{i < plan.venues.length - 1 && <ArrowRight size={12} className="route-arrow" />}</span>;

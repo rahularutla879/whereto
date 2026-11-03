@@ -1,5 +1,8 @@
 # Milestones and tasks
 
+Task 50E follow-up functional acceptance is verified against `6153e1b`; Qwen latency remains a documented limitation with no claimed model speedup. Original roadmap numbering is unchanged. [Detailed evidence](docs/task50e-followup.md). Task 51 unstarted.
+
+
 ## Official development roadmap — original numbering with approved amendments
 
 The baseline source is [the original Word roadmap](docs/original-roadmap.docx), preserved byte for byte as a historical archive. **This checklist is the current official development roadmap**, including the owner-approved October 30, 2026 Stage 1 amendment: five tasks 50A–50E inserted after Task 50, a Task 48 design note, and expanded Stage 1 acceptance. All original numbered task descriptions and identifiers remain intact. There are 135 original numbered tasks plus five letter-suffixed additions (140 task entries); no original task is renumbered. These descriptions are plans, not permission to install tools, activate services or incur costs.

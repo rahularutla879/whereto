@@ -566,3 +566,14 @@ Task 50E verification also repaired a reproduced first-ledger publication race. 
 ## November 3 — Task 50E acceptance repair
 
 The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.
+
+
+## Task 50E follow-up: presentation, nearby origins and coverage
+
+The follow-up repair removes repeated advanced card diagnostics, labels dwell answers
+in minutes with explicit exact/bounded/approximate meaning, distinguishes nearby
+consent from route origin and real expiry, preserves destination-local clocks,
+clarifies traffic-unaware estimates and balances bounded discovery/routing across
+all stop occurrences. Numeric development stage/coverage diagnostics remain private.
+[Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
+Task 51 remains unstarted.

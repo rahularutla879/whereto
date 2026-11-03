@@ -1,3 +1,4 @@
+import {measurePlanning} from "./planning-timing";
 import {adaptAdvanced} from "./advanced-planning";
 import {planningMessage} from "./continuation";
 import { failureText } from "./failure-diagnostics";
@@ -122,6 +123,12 @@ export async function generateOuting(text: string, preferences: Preferences = EM
   context?: { prepareOrigin?: (request: OriginPreparation) => Promise<LocationContext | null>; locationContext?: LocationContext; onValidated?: (value: ValidatedOuting) => void; today?: string; onInterpreted?: (values: Preferences) => void;
     continuation?: PendingOuting; answers?: ClarificationAnswers;
     onClarification?: (value: PendingOuting | null) => void; advancedAnswers?:Record<string,unknown>[]; onComplete?: () => void; onStage?:(stage:string)=>void; signal?: AbortSignal }, send: typeof fetch = fetch): Promise<PlannerResult> {
+  const originalSend=send;
+  send=(url,init)=>measurePlanning(url==='/api/interpret'?'interpretationHttpMs':'planningHttpMs',()=>originalSend(url,init));
+  if(context?.prepareOrigin){
+    const prepare=context.prepareOrigin;
+    context={...context,prepareOrigin:request=>measurePlanning('originPreparationMs',()=>prepare(request))};
+  }
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
   // `today` remains source-compatible; only the Python resolver owns the clock.
   const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",

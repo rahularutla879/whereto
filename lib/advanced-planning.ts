@@ -1,3 +1,4 @@
+import {measurePlanning} from "./planning-timing";
 import {outingDateLabel,transportLabel} from './display-format';
 import {realHeadlines} from './real-headlines';
 import type {Plan,PlannerResult,Activity} from './planner';
@@ -5,7 +6,7 @@ import type {LocationContext} from './planning-client';
 import type {HoursEvidence} from './venue-hours';
 export type Dwell={minutes:number;relation:'exact'|'minimum'|'maximum'|'under'|'approximate';source:string};
 export type AdvancedStop={occurrence:number;activity?:string|null;requested:string;requirement:'required'|'optional';placeId:string;name:string;address:string|null;mapsUrl:string;duration:Dwell|null;arrival:string|null;departure:string|null;hoursState:string;hours:HoursEvidence;rating:number|null;ratingCount:number|null;credits:{provider?:string|null;uri?:string|null}[]};
-export type AdvancedOption={id:string;travelException?:boolean;travelDeviations?:string[];state:'feasible'|'unverified';routeState:string;stops:AdvancedStop[];ending:'last_activity'|'origin'|'named_destination';endpoint:{placeId:string;name:string;mapsUrl:string;credits:AdvancedStop['credits']}|null;legs:{role:string;fromOccurrence:number|null;toOccurrence:number|null;seconds:number|null;meters:number|null;status:string;mode:string;mapsUrl?:string|null}[];knownTravelSeconds:number;elapsedLowerSeconds:number;elapsedUpperSeconds:number|null;upperExclusive:boolean;totalConstraint:Dwell|null;deadlineSource:string|null;durationState:string;deadlineState:string;reasons:string[];omitted:{occurrence:number;requested:string;reason:string}[]};
+export type AdvancedOption={id:string;originApproximate?:boolean;travelException?:boolean;travelDeviations?:string[];state:'feasible'|'unverified';routeState:string;stops:AdvancedStop[];ending:'last_activity'|'origin'|'named_destination';endpoint:{placeId:string;name:string;mapsUrl:string;credits:AdvancedStop['credits']}|null;legs:{role:string;fromOccurrence:number|null;toOccurrence:number|null;seconds:number|null;meters:number|null;status:string;mode:string;mapsUrl?:string|null}[];knownTravelSeconds:number;elapsedLowerSeconds:number;elapsedUpperSeconds:number|null;upperExclusive:boolean;totalConstraint:Dwell|null;deadlineSource:string|null;durationState:string;deadlineState:string;reasons:string[];omitted:{occurrence:number;requested:string;reason:string}[]};
 export type AdvancedQuestion={field:'place'|'date'|'destination'|'origin'|'dwell'|'departure';question:string;occurrence?:number;choices?:{placeId:string;name:string;address:string;attributions:AdvancedStop['credits']}[]};
 export type AdvancedData={kind:'advanced';token:string;status:string;message:string;date:string|null;destination:string|null;transport:'driving'|'walking';questions:AdvancedQuestion[];options:AdvancedOption[];saveReceipt?:string;saveAccessToken?:string;code?:string;bounded:true;canExpand?:boolean;canDiscover?:boolean;canShowBeyond?:boolean};
 export type AdvancedState={continuation?:import('./planning-client').PendingOuting;data:AdvancedData;configuration:Pick<LocationContext,'startingLocation'|'firstTravel'|'betweenTravel'>};
@@ -21,7 +22,7 @@ export function adaptAdvanced(raw:AdvancedData,configuration:AdvancedState['conf
  return {advanced:{data:raw,configuration},dataMode:'real',plans,message:raw.message,location:raw.destination??'',activities:plans[0]?.venues.map(v=>v.activity)??[],notes:[],canExpand:raw.canExpand,canDiscover:raw.canDiscover,canShowBeyond:raw.canShowBeyond,saveReceipt:raw.saveReceipt??undefined,saveAccessToken:raw.saveAccessToken??undefined};
 }
 export async function continueAdvanced(state:AdvancedState,answer:Record<string,unknown>={},signal?:AbortSignal,send:typeof fetch=fetch){
- const response=await send('/api/plans/advanced',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:state.data.token,...state.configuration,...answer}),cache:'no-store',signal});
+ const response=await measurePlanning('planningHttpMs',()=>send('/api/plans/advanced',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({token:state.data.token,...state.configuration,...answer}),cache:'no-store',signal}));
  const data=await response.json();
  if(!response.ok)throw Object.assign(Error(typeof data.message==='string'?data.message:'Advanced planning unavailable. Your request is kept.'),{code:data.code,status:response.status});
  const next=adaptAdvanced(data,state.configuration);if(next.advanced)next.advanced.continuation=state.continuation;return next;

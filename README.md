@@ -1,5 +1,11 @@
 # where to?
 
+Task 50E follow-up keeps the original cards, offers working explicit nearby-start
+continuation and clear minute-based visit answers, and explains driving estimates
+without live traffic. Additional options remain finite and constraint-aware.
+[Current verification and limitations](docs/task50e-followup.md). Task 51 is unstarted.
+
+
 **Less planning. More hanging out.**
 
 A mobile-first outing planner built with Next.js (App Router), TypeScript, React, and Tailwind CSS. The Python planner uses deterministic local rules, with fictional Baltimore venues by default and deliberate local real-data mode for Google Maps venues/routes. The website sends raw text and manual preferences through a server-side Next.js proxy to FastAPI. The local Qwen3 4B model interprets the request; Python validates it before its existing generator and ranking engine create itineraries. The AI provider can be replaced independently of the planner.

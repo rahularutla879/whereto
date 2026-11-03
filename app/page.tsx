@@ -1,4 +1,5 @@
 "use client";
+import {beginPlanningTiming,recordPlanningTiming,planningElapsed,planningTiming} from "@/lib/planning-timing";
 import {restoreContinuation,continuationNotice} from "@/lib/continuation";
 import {BeyondPreferences} from "@/components/beyond-preferences";
 import { SavedPlans } from "@/components/saved-plans";
@@ -56,6 +57,14 @@ export default function Home() {
   function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length,hasBeyond:pages.current.pages.some(page=>page.plans.some(plan=>plan.travelClassification==="beyond_limit"))});}
   const [loading, setLoading] = useState(false);
   const session = useRef(new PlanningSession());
+  useEffect(()=>{
+    if(process.env.NODE_ENV!=='development')return;
+    const frame=requestAnimationFrame(()=>{
+      recordPlanningTiming(loading?'loadingFeedbackMs':'browserTotalMs',planningElapsed());
+      document.getElementById('planner')?.setAttribute('data-planning-timing',JSON.stringify(planningTiming()));
+    });
+    return ()=>cancelAnimationFrame(frame);
+  },[loading]);
   const surpriseHistory=useRef(new SurpriseHistory());
   useEffect(()=>{surpriseHistory.current.record(result.plans);},[result.plans]);
   const [clarification, setClarification] = useState<PendingOuting | null>(null);
@@ -68,6 +77,7 @@ export default function Home() {
   function updatePreference(key: PreferenceField, value: string) {
     const answering=result.advanced?.data.questions.some(q=>q.field===(key==='location'?'destination':key));
     if(!answering)invalidateResults();
+    else {session.current.cancel();setLoading(false);}
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
@@ -118,7 +128,7 @@ export default function Home() {
     const controller = session.current.begin();
     if (!controller) return;
     setPlanningStage(explorationStage(expandDiscovery));
-    setLoading(true); setOptionsBusy(true); setOptionsNotice("");setRecovery(undefined);
+    beginPlanningTiming();setLoading(true); setOptionsBusy(true); setOptionsNotice("");setRecovery(undefined);
     try {
       if(active.advanced){
         const next=await continueAdvanced(active.advanced,{action:expandDiscovery?'discover':showBeyond?'beyond':'different',includeBeyond:showBeyond},controller.signal);
@@ -138,7 +148,7 @@ export default function Home() {
       if (next.plans.length) { latest.current=next;if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();setOptionsNotice("");}else setOptionsNotice("No new complete combinations were returned. Your saved pages are unchanged."); }
       else { latest.current={...active,canExpand:next.canExpand,canDiscover:next.canDiscover,canShowBeyond:next.canShowBeyond,continuationStatus:next.continuationStatus};setResult(previous => ({ ...previous, canExpand: next.canExpand, canDiscover: next.canDiscover, canShowBeyond:next.canShowBeyond,continuationStatus:next.continuationStatus })); setOptionsNotice(consumerMessage(next.message) || "No more distinct options in the checked candidate pool."); }
     } catch (error) {
-      if(session.current.current(controller)&&active.advanced&&['invalid_request','provider_quota_rejected'].includes((error as {code?:string}).code??'')){
+      if(session.current.current(controller)&&active.advanced&&['advanced_session_expired','invalid_request','provider_quota_rejected'].includes((error as {code?:string}).code??'')){
         latest.current={...active,canExpand:false,canDiscover:false,canShowBeyond:false};
         setResult(previous=>({...previous,canExpand:false,canDiscover:false,canShowBeyond:false}));
       }
@@ -148,7 +158,7 @@ export default function Home() {
   async function answerAdvanced(answer:Record<string,unknown>){
     if(!result.advanced||dirty)return;
     const controller=session.current.begin();if(!controller)return;
-    setLoading(true);setPlanningStage("Applying your answer and checking the itinerary");setOptionsNotice("");
+    beginPlanningTiming();setLoading(true);setPlanningStage("Applying your answer and checking the itinerary");setOptionsNotice("");
     try{
       const next=await continueAdvanced(result.advanced,answer,controller.signal);
       if(!session.current.current(controller))return;
@@ -157,12 +167,16 @@ export default function Home() {
         advancedAnswers.current.push(answer);
       }
       if(typeof answer.date==='string')setPreferenceState(previous=>editPreference(previous,'date',next.advanced?.data.date&&!next.advanced.data.questions.some(q=>q.field==='date')?next.advanced.data.date:answer.date as string));
+      if(answer.searchNearOrigin&&next.advanced?.data.destination)setPreferenceState(previous=>displayInterpretedPreferences(previous,{...previous.values,location:next.advanced!.data.destination!}));
       if(typeof answer.destination==='string')setPreferenceState(previous=>editPreference(previous,'location',answer.destination as string));
       setResult(next);latest.current=next;
       focusFollowup(next);
       if(!pages.current.pages.length){pages.current.append(next);syncPages();}
       else {pages.current.pages[pages.current.index]=structuredClone(next);syncPages();}
-    }catch(error){if(session.current.current(controller))setOptionsNotice(error instanceof Error?error.message:"Your answer could not be applied. Your itinerary is kept.");}
+    }catch(error){if(session.current.current(controller)){
+      setOptionsNotice(error instanceof Error?error.message:"Your answer could not be applied. Your itinerary is kept.");
+      if((error as {code?:string}).code==='advanced_session_expired')setResult(previous=>({...previous,canExpand:false,canDiscover:false,canShowBeyond:false,advanced:previous.advanced?{...previous.advanced,data:{...previous.advanced.data,questions:[]}}:undefined}));
+    }}
     finally{if(session.current.finish(controller))setLoading(false);}
   }
   function focusFollowup(next:PlannerResult){
@@ -186,7 +200,7 @@ export default function Home() {
     pages.current.reset();syncPages();
     setOptionsBusy(false);
     setOptionsNotice("");setRecovery(undefined);
-    setLoading(true);
+    beginPlanningTiming();setLoading(true);
     setPlanningStage("Generating itinerary");
     setGenerated(true);
     setResult({ dataMode: dataMode === "real" ? "real" : "mock", plans: [], message: "Planning…", location: "", activities: [], notes: [] });

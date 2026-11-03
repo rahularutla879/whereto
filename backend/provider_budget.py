@@ -276,7 +276,9 @@ class OutingBudget:
                 session._matrix_window.append((now, elements))
             session._active += 1
         try:
-            yield
+            from backend.performance import stage
+            category=attempts[0][0]
+            with stage(category):yield
         finally:
             with session._lock:
                 session._active -= 1

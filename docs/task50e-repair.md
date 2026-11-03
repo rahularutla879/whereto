@@ -154,3 +154,14 @@ remain usable until their normal expiry. Task 51 is not started.
 The unchanged eight opt-in PTY lifecycle cases were not rerun; existing normal
 8000/3000 servers and the homepage returned HTTP 200 after the repair. No live
 Google coverage or full assistive-technology certification is claimed.
+
+
+## Task 50E follow-up: presentation, nearby origins and coverage
+
+The follow-up repair removes repeated advanced card diagnostics, labels dwell answers
+in minutes with explicit exact/bounded/approximate meaning, distinguishes nearby
+consent from route origin and real expiry, preserves destination-local clocks,
+clarifies traffic-unaware estimates and balances bounded discovery/routing across
+all stop occurrences. Numeric development stage/coverage diagnostics remain private.
+[Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
+Task 51 remains unstarted.

@@ -134,9 +134,14 @@ class OriginCalendarRepairTests(FlowRepairTests):
         s=self.h.session([{'source':'grocery shopping'}],endpoint={'kind':'origin','source':'return'})
         s.text='Go grocery shopping tomorrow and return to where I started.'
         s.context.destination=None;s.context.timezone='UTC';s.context.timezoneBasis='unknown';s.requires_date_confirmation=True
+        from copy import deepcopy
+        self.h.records=deepcopy(self.h.records)
+        for record in self.h.records:
+            record['formattedAddress']='Unverified calendar area'
+            record.pop('timeZone',None)
         a=self.h.run_session(s,startingLocation=start(),searchNearOrigin=True)
         self.assertEqual(a.status,'clarification');self.assertEqual(a.questions[0]['field'],'date')
-        self.assertEqual(len(self.h.searches),0)
+        self.assertGreater(len(self.h.searches),0)
 
 class OrdinaryParityMatrixTests(unittest.TestCase):
     def test_pre50a_source_order_matrix_survives_redundant_qwen_edges(self):

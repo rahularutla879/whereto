@@ -248,3 +248,14 @@ checks and context-bound ambiguity choices live in the gated stop resolver; ordi
 activity discovery is unchanged. Hours/timezone/receipt provenance remain transient,
 with no Details fan-out. Mall containment still requires verified parent IDs.
 [Audit, identity rules, safe contract and offline regressions](stop-resolution.md).
+
+
+## Task 50E follow-up: presentation, nearby origins and coverage
+
+The follow-up repair removes repeated advanced card diagnostics, labels dwell answers
+in minutes with explicit exact/bounded/approximate meaning, distinguishes nearby
+consent from route origin and real expiry, preserves destination-local clocks,
+clarifies traffic-unaware estimates and balances bounded discovery/routing across
+all stop occurrences. Numeric development stage/coverage diagnostics remain private.
+[Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
+Task 51 remains unstarted.

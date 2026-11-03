@@ -347,3 +347,10 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 @media (max-width: 600px) { .clarification-panel .preferences-grid { grid-template-columns: minmax(0,1fr); } }
 
 .date-answer-mode { margin-top: 10px; font-size: 12px; text-align: left; }
+
+/* Shared venue, leg and contact links use the ordinary disclosure affordance. */
+.plan-details a { text-decoration: underline; text-underline-offset: 3px; overflow-wrap: anywhere; }
+.plan-details a:hover { text-decoration-thickness: 2px; }
+.plan-details a:visited { color: #655078; }
+.plan-details a:focus-visible { outline: 2px solid var(--orange); outline-offset: 3px; }
+.plan-details li > div { min-width: 0; }

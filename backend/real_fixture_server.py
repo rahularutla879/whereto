@@ -22,7 +22,9 @@ def main():
     parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
     parser.add_argument('--advanced', action='store_true', help='Offline Task50E integrated fixtures; SQL remains real when configured')
     parser.add_argument('--journey', action='store_true', help='Offline complex-interpretation fixtures')
+    parser.add_argument('--local-ai',action='store_true',help='Use installed local Qwen with otherwise offline advanced provider fixtures')
     args = parser.parse_args()
+    if args.local_ai and not args.advanced:parser.error('--local-ai requires --advanced')
     if args.exploration_ledger:
         os.environ.update(WHERETO_EXPLORATION_DEV='1', WHERETO_DEV_COST_LEDGER=args.exploration_ledger)
     os.environ.update(VENUE_DATA_MODE='real', WHERETO_REAL_DEV='1', WHERETO_ENV='development',
@@ -169,6 +171,7 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if args.local_ai:return local_provider.interpret(text)
             if args.advanced:
                 import json
                 from pathlib import Path
@@ -212,6 +215,8 @@ def main():
         if not kwargs.get("include_contacts"):data={k:v for k,v in data.items() if k not in ("phone","website","telephoneUrl")}
         return data
 
+    from backend.ai import create_provider
+    local_provider=create_provider() if args.local_ai else None
     from backend.location_context import outing_problem as actual_outing_problem
     def calendar(request,now=None):
         if scenario['name']=='outing_expired':

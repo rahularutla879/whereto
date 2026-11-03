@@ -331,12 +331,12 @@ def development_diagnostics():
     if not local_real_enabled() or os.environ.get('WHERETO_DIAGNOSTICS_DEV')!='1':
         return JSONResponse(status_code=404,content={},headers={'Cache-Control':'no-store'})
     from backend.development_diagnostics import snapshot
-    from backend.performance import snapshot as ai_timings
+    from backend.performance import snapshot as ai_timings, provider_snapshot
     from backend.ai_readiness import snapshot as readiness
-    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'localAiReadiness':readiness(),'advanced':advanced_sessions.diagnostics()},headers={'Cache-Control':'no-store'})
+    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'providerStageTiming':provider_snapshot(),'localAiReadiness':readiness(),'advanced':advanced_sessions.diagnostics()},headers={'Cache-Control':'no-store'})
 
 
-from backend.advanced_planning import AdvancedInput, sessions as advanced_sessions
+from backend.advanced_planning import AdvancedInput, AdvancedAnswerError, sessions as advanced_sessions
 
 @app.post('/api/plans/advanced')
 async def advanced_endpoint(value: AdvancedInput, http: Request):
@@ -344,8 +344,10 @@ async def advanced_endpoint(value: AdvancedInput, http: Request):
     def execute():
         try:
             return JSONResponse(content=advanced_sessions.run(value).model_dump(mode='json'), headers={'Cache-Control':'no-store'})
+        except AdvancedAnswerError as error:
+            return failure(error.code,422,operation='advanced',message=str(error))
         except ValueError:
-            return failure('invalid_request',422,operation='advanced',message='Advanced context or answer is invalid or expired. Your text is kept; regenerate to continue.')
+            return failure('advanced_answer_invalid',422,operation='advanced',message='This answer cannot be applied to the current outing. Check the requested field; your text and itinerary are kept.')
         except (DiscoveryError, ProviderLimitError, RouteError) as error:
             return failure(provider_code(error),422,operation='advanced',error=error)
     return await run_work(http,execute)

@@ -110,3 +110,14 @@ Post-test focused offline route/budget checks: **33/33 passed**. No repository a
 ## Task 46 — planner connection
 
 The existing route calculator now serves deliberately enabled local real planning. Its exact adjacent-group batching, direction/mode/source metadata, unknown/failure states, unchanged 27-element ceiling and full-plan admission are preserved. Optional authorized first-stop routing stays separate. Task 44 exact seconds decide hard limits; the shared minute scheduler uses floor minutes only as a conservative lower bound for time-window rejection, while result quotes round up for display. Real visit times remain unknown when durations/sessions are absent. No automatic retries or alternate fictional travel exist. [Integration and combined Task 46 live ledger](real-planning.md). The Task 43 allowance above remains exhausted and is separate from the owner's Task 46 allowance.
+
+
+## Task 50E follow-up: presentation, nearby origins and coverage
+
+The follow-up repair removes repeated advanced card diagnostics, labels dwell answers
+in minutes with explicit exact/bounded/approximate meaning, distinguishes nearby
+consent from route origin and real expiry, preserves destination-local clocks,
+clarifies traffic-unaware estimates and balances bounded discovery/routing across
+all stop occurrences. Numeric development stage/coverage diagnostics remain private.
+[Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
+Task 51 remains unstarted.

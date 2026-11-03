@@ -178,3 +178,14 @@ estimate); actual Google cost is$0. Temporary records/servers/tabs were cleaned,
 normal3000/8000 servers restored and the ignored authorized owner profile enables
 the two advanced switches. See HANDOVER.md for failures corrected before final
 passes, actual browser scope and remaining limits.
+
+
+## Task 50E follow-up: presentation, nearby origins and coverage
+
+The follow-up repair removes repeated advanced card diagnostics, labels dwell answers
+in minutes with explicit exact/bounded/approximate meaning, distinguishes nearby
+consent from route origin and real expiry, preserves destination-local clocks,
+clarifies traffic-unaware estimates and balances bounded discovery/routing across
+all stop occurrences. Numeric development stage/coverage diagnostics remain private.
+[Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
+Task 51 remains unstarted.

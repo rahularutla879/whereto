@@ -208,6 +208,26 @@ def _signature(path):
     return tuple((i, c.place_id) for i, c in path)
 
 
+def _balanced_paths(paths, limit, origin, endpoint, history=()):
+    """Represent every occurrence before repeatedly favoring one first venue.
+
+    Geographic distance orders comparable coverage; it never verifies travel.
+    History contains internal signatures only and is never serialized.
+    """
+    usage={}
+    for signature in history:
+        for key in signature:usage[key]=usage.get(key,0)+1
+    selected=[]
+    while paths and len(selected)<limit:
+        def priority(path):
+            counts=[usage.get((i,c.place_id),0) for i,c in path]
+            return (max(counts,default=0),sum(counts),_gap(path,origin,endpoint),_signature(path))
+        path=min(paths,key=priority);paths.remove(path);selected.append(path)
+        for i,c in path:
+            key=(i,c.place_id);usage[key]=usage.get(key,0)+1
+    return selected
+
+
 def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH, excluded=frozenset()):
     """Precedence-aware beam; geographic gaps only prune, never verify travel."""
     journey = resolved.journey
@@ -246,7 +266,7 @@ def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH, excluded=froze
                             if len(extended)==len(included) and _signature(extended) in excluded:
                                 continue
                             expanded.append(extended)
-                beam = sorted(expanded, key=lambda p: (_gap(p, origin, endpoint), _signature(p)))[:BEAM_WIDTH]
+                beam = _balanced_paths(expanded,BEAM_WIDTH,origin,endpoint,excluded)
             paths.extend(beam)
     # Keep a balanced finite slice across optional-inclusion patterns and first venues.
     paths.sort(key=lambda p: (_gap(p, origin, endpoint), _signature(p)))
@@ -254,15 +274,7 @@ def _shortlist(resolved, origin, endpoint, pool_width=POOL_WIDTH, excluded=froze
     for path in paths:
         unique.setdefault(tuple(c.place_id for _, c in path), path)
     paths = list(unique.values())
-    selected, usage = [], {}
-    while paths and len(selected) < BEAM_WIDTH:
-        path = min(paths, key=lambda p: (usage.get((tuple(i for i, _ in p), p[0][1].place_id), 0),
-                                         _gap(p, origin, endpoint), _signature(p)))
-        paths.remove(path)
-        selected.append(path)
-        key = (tuple(i for i, _ in path), path[0][1].place_id)
-        usage[key] = usage.get(key, 0) + 1
-    return selected
+    return _balanced_paths(paths,BEAM_WIDTH,origin,endpoint,excluded)
 
 
 def _gap(path, origin, endpoint):

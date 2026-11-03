@@ -1,5 +1,9 @@
 # Where To? — handover
 
+Current Task 50E follow-up functional acceptance is verified against `6153e1b`: backend866 passed/35 skips, frontend252/252, hosted57/57. Qwen generation latency remains a measured limitation; no model speedup is claimed. [Changes, actual Qwen/browser timings and evidence](docs/task50e-followup.md).
+Earlier completion headlines refer to their original acceptance scope. Task 51 is unstarted.
+
+
 Current November 3 Task 50E acceptance repair: all eight owner-reported flows are repaired and verified. Final backend: 892 reported, 857 passed, 35 opt-in skips; frontend: 249/249. Ordinary interpretation is restored, follow-ups and cards are shared, and advanced multi-page combinations/discovery/scoped exceptions are implemented. See the final repair checkpoint and [root causes, parity, bounds and evidence](docs/task50e-repair.md). Task 51 remains unstarted. Earlier one-page limitations describe historical checkpoints.
 
 Current Task 50E status (November 2, 2026): **complete in the approved local development flow**. Advanced clarification, ordered/return itineraries and selected private saving/reopening are implemented and verified. Backend: 865 reported, 830 passed, 35 opt-in skips; frontend: 245/245. Hosted and browser evidence, bounded exploration and remaining limits are in the final Task 50E checkpoint and [integration report](docs/advanced-integration.md). Task 51 remains unstarted. Earlier status headlines below are historical.
@@ -1241,3 +1245,32 @@ Exact-source final regression: `npm run test:backend` reports 865 tests in 171.1
 
 
 Final November 3 repair verification: full backend **892 reported, 857 passed, 35 opt-in skips**,176.931s (27 hosted and8 unchanged opt-in PTY cases); full frontend **249/249**,116.804s. Final focused advanced/owner suites **207 reported, 206 passed, one hosted skip**,1.443s; all location tests **18/18**,8.583s, with the forced timestamp privacy case. Hosted **57/57**,29.868s, plus the separate committed second-option exception proof and actual browser second-option record/independent cleanup. Actual Qwen **6/6** semantic checks. TypeScript, ESLint, production build, pip dependency consistency, npm dependency tree and production audit (zero vulnerabilities) pass. Final configured-secret scan covers2 configured sensitive values/1274 current files/assets/2067 historical objects with zero matches; full tracked/new-file diff and whitespace checks pass. No failed run is counted as passing. Private files remain ignored/0600; normal8000/3000 health and homepage return200; fixture3050/8050 have no listeners. All eight repair acceptance issues are complete; Task51 remains unstarted. Private commit/push and clean-state verification follow as delivery actions.
+
+
+## Task 50E follow-up final checkpoint
+
+[Complete root causes, design/nearby/route/coverage repair and measurements](docs/task50e-followup.md).
+Final full backend901 reported/866 passed/35 opt-in skips (214.161s); frontend252/252
+(117.729s); focused174 passed/one hosted skip; hosted57/57. Build, TypeScript, lint,
+dependency checks, zero-vulnerability production audit, complete diff and credential
+scan passed. No migration/private profile/owner data/model/Cloud/billing/tag change.
+
+Actual installed-Qwen browser A–D outcomes passed. Loading13.4–35.7ms; initial browser
+totals14.360/14.504/17.478/38.790s on the shared loaded machine. The slow ATM run
+spent35.160s generating output. Nearby continuation613.9ms and exact-dwell answer
+93.1ms required no extra extraction. Twelve total actual-model public-example
+outcomes, all warm/observed rather than a controlled speedup. The historical30s and
+22-versus31-minute route cause cannot be reconstructed. Current driving explicitly
+excludes live traffic. Remaining latency is documented, not declared solved.
+
+Desktop1280/mobile390 acceptance, exact grocery/ATM5/return45 + exact20 =>31min,
+all-stop diversity, Strict1 refusal/explicit exception/Flexible1-to2 allowance,
+Walking55 refusal/Driving31 restoration, previous/next zero calls and second-option
+save/new-tab/restart reopen passed with invented Google fixtures. Live GPS timed out
+in the in-app browser and fell back safely; device-origin pipeline is covered
+automatically with invented coordinates. No full assistive-technology/live Google
+claim. One browser test record independently verified and deleted by exact hash;
+committed absence checked. Cumulative browser synthetic accounting23 Enterprise/4Pro
+searches,236 cells/4Details, $2.193; actualGoogle0/$0. Temporary tabs/servers removed,
+viewport reset; original3000/8000 health and homepage200. Opt-in PTY8 not rerun
+(launcher unchanged). Task51 unstarted. Commit/push follow reviewed delivery.

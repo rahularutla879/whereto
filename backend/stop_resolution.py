@@ -145,6 +145,8 @@ class StopResolver:
         self._paging = {}
         self._pages = {}
         self._areas = {}
+        self._audits = {}
+        self._observed = {}
 
     def _named(self, query, area):
         key = ('named', query, area.model_dump_json())
@@ -185,6 +187,7 @@ class StopResolver:
                 if key not in self._cache:
                     found = self.discovery.discover(DiscoveryRequest(activity=activity,destination=area))
                     self._cache[key] = found.venues
+                    self._audit(key,found)
                     self._paging[key] = found.paging.get(activity,{})
                     self._pages[key] = 1
                     self._areas[key] = (activity,area)
@@ -277,6 +280,32 @@ class StopResolver:
         self._named_only=False
         return self.routing_snapshot()
 
+    def _audit(self,key,found):
+        row=self._audits.setdefault(key,{})
+        observed=self._observed.setdefault(key,set())
+        observed.update(found.observed.get(key[1],set()))
+        for name,value in found.audit.get(key[1],{}).items():
+            if type(value) is int:
+                row[name]=value if name in ('requestedPageSize','eligibleRetained') else row.get(name,0)+value
+        row['uniqueGoogleVenues']=len(observed)
+
+    def coverage(self,router=None,offered=()):
+        """Counts only; no requests, identities, coordinates or payloads."""
+        rows=[]
+        for group in self._result.stops if self._result else []:
+            ids={c.place_id for c in group.candidates}
+            checked={identity for signature in router.checked for n,identity in signature if n==group.occurrence} if router else set()
+            shown={identity for signature in offered for n,identity in signature if n==group.occurrence}
+            audit={}
+            for key in self._audits:
+                if key[1]==_discovery_activity(group.requested):
+                    for name,value in self._audits[key].items():audit[name]=audit.get(name,0)+value
+            rows.append({'occurrence':group.occurrence,'retained':len(ids),'checkedVenues':len(ids&checked),
+                'retainedNotChecked':len(ids-checked),'offeredVenues':len(ids&shown),'discovery':audit})
+        return {'stops':rows,'checkedAssignments':len(router.checked) if router else 0,
+                'offeredAssignments':len(offered),'pendingRouteFrontier':bool(router and router.pending_paths),
+                'coverage':'finite_checked_inventory'}
+
     def can_expand(self):
         self.routing_snapshot()
         usage=self.outing.usage()
@@ -294,7 +323,8 @@ class StopResolver:
         self.routing_snapshot()
         cap=min(100,self.outing.settings.ceiling('candidates_per_activity'))
         keys=[k for k,v in self._paging.items() if len(self._cache[k])<cap and self._pages[k]<6
-              and (v.get('next') or v.get('variant','initial')!='mixed')][:2]
+              and (v.get('next') or v.get('variant','initial')!='mixed')]
+        keys=sorted(keys,key=lambda k:self._pages[k])[:2]
         for key in keys:
             activity,area=self._areas[key];cursor=self._paging[key]
             variant=cursor.get('variant','initial') if cursor.get('next') else ('alternative' if cursor.get('variant','initial')=='initial' else 'mixed')
@@ -306,6 +336,7 @@ class StopResolver:
                 if self.outing.usage()['providerAttempts']>before:
                     self._pages[key]+=1;self._paging[key]={'variant':'mixed'}
                 raise
+            self._audit(key,found)
             self._pages[key]+=1;self._paging[key]=found.paging.get(activity,{})
             known={v.facts.id for v in self._cache[key]}
             self._cache[key]=(self._cache[key]+[v for v in found.venues if v.facts.id not in known])[:cap]
