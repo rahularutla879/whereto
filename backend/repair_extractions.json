@@ -485,5 +485,135 @@
         "clarification": ""
       }
     }
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then find a coffee shop nearby now.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "now"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then find a coffee shop nearby now."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
+  },
+  {
+    "text": "Tomorrow in Jersey City, buy groceries and stop at a pharmacy, and maybe grab coffee if there's time. Return to where I started within 90 minutes.",
+    "raw": {
+      "activities": [
+        "groceries",
+        "pharmacy",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": "Jersey City",
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow",
+        "Tomorrow"
+      ],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "groceries",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "pharmacy",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "optional",
+            "evidence": "maybe grab coffee if there's time",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "total_duration": {
+          "minutes": 90,
+          "relation": "maximum",
+          "source": "within 90 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    }
   }
 ]

@@ -114,7 +114,7 @@ test('follow-up cards omit repeated unknown warnings and technical hours copy',(
  const html=renderToStaticMarkup(createElement(PlanCard,{plan,index:0,detailsSession:new VenueDetailsSession()}));
  assert.doesNotMatch(html,/Activity illustrations|Check this option|Visit hours need checking|Visit duration not supplied|Hours checked|America\/New_York|Visit hours:/);
  assert.doesNotMatch(html,/without live traffic/);
- assert.equal((html.match(/aria-label="Opening hours"/g)??[]).length,plan.advanced!.stops.length);
+ assert.equal((html.match(/aria-label="Opening hours"/g)??[]).length,0);
 });
 test('duration control states minutes, integer bounds and no approximate default',()=>{
  const state=adaptAdvanced({...fixture.data,questions:[{field:'dwell',occurrence:0,question:'How many minutes grocery shopping?'}]},{}).advanced!;
@@ -135,4 +135,25 @@ test('saved zero counted time never claims a realistic zero-minute visit',()=>{
  const html=renderToStaticMarkup(createElement(SavedCards,{saved,venues:{},refresh(){},busy:false,message:''}));
  assert.match(html,/Zero counted visit time; actual visit duration was not established/);
  assert.doesNotMatch(html,/exact 0 minutes/);
+});
+
+test('shared card renders fractional duration cleanly and saved closure intent stays historical',()=>{
+ const data=structuredClone(fixture.data);data.options[0].elapsedLowerSeconds=7210;data.options[0].elapsedUpperSeconds=7210;
+ data.options[0].stops[0].closedVisitException=true;
+ const p=adaptAdvanced(data,{}).plans[0];
+ const html=renderToStaticMarkup(createElement(PlanCard,{plan:p,index:0,detailsSession:new VenueDetailsSession()}));
+ assert.match(html,/2 hr 10 sec/);assert.match(html,/Included at your request; access is not confirmed/);assert.doesNotMatch(html,/\d\.\d{5}/);
+ const saved=validateSaved(fixture.saved);saved.itineraries[0].advanced!.closedVisitOccurrences=[0];
+ const reopened=renderToStaticMarkup(createElement(SavedCards,{saved,venues:{},refresh(){},busy:false,message:''}));
+ assert.match(reopened,/closure reported for the original visit/);assert.match(reopened,/Current opening and access are not confirmed/);
+});
+test('closure recovery stays inside the existing form with explicit separate actions',()=>{
+ const data=structuredClone(fixture.data);data.questions=[];data.closureOffers=[{occurrence:0,token:'x'.repeat(43),name:'SUNY College of Optometry',message:'SUNY College of Optometry is expected to be closed.'}];
+ data.preferences!.closedVisits=[{occurrence:0,requested:'SUNY College of Optometry'}];
+ const result=adaptAdvanced(data,{});
+ const html=renderToStaticMarkup(createElement(AdvancedClarifications,{state:result.advanced!,busy:false,onAnswer(){},onChooseTime(){}}));
+ assert.match(html,/Choose another time or date/);assert.match(html,/Proceed anyway/);assert.doesNotMatch(html,/<form/);
+ const draft=advancedDraft(data)!;draft.removeClosure=[0];
+ const fields=renderToStaticMarkup(createElement(AdvancedPreferenceFields,{data,draft,busy:false,onChange(){}}));
+ assert.match(fields,/Clear to remove this permission/);assert.match(fields,/SUNY College of Optometry/);
 });

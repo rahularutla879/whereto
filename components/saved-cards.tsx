@@ -2,7 +2,7 @@
 import {destinationLabel,transportLabel,activityDisplay,outingDateLabel} from "@/lib/display-format";
 import {OpeningHours} from "./opening-hours";
 import {useEffect,useRef,useState} from "react";
-import { formatTime } from "@/lib/planner";
+import { formatTime,formatDuration } from "@/lib/planner";
 import { preferenceText,type SavedPlan } from "@/lib/saved-plans";
 import { GoogleCredits } from "./venue-details";
 import {safeWebsite,safeMapsUrl} from "@/lib/venue-details";
@@ -43,7 +43,7 @@ export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:Sa
    </div>}
    {message&&<p role="status" aria-live="polite">{message}</p>}
    <ol className="saved-stops">{option.stops.map((s,i)=>{const detail=venues[s.reference];return <li key={s.position}>
-    <span className="stop-number">{s.position+1}</span><div><h4>{s.fictional?.name??detail?.name??activityDisplay(s.activity)}</h4><p>{advanced?`${advanced.journey.stops[advanced.occurrenceOrder[i]].source} · ${advanced.journey.stops[advanced.occurrenceOrder[i]].requirement}`:activityDisplay(request.activityIntents[s.activity]??s.activity)}</p>{advanced&&<p>{(()=>{const d=advanced.journey.stops[advanced.occurrenceOrder[i]].duration;return d?`${d.minutes===0?'Zero counted visit time; actual visit duration was not established':`${d.relation} ${d.minutes} minutes`} (${advanced.durationOverrides?.includes(advanced.occurrenceOrder[i])?'explicit user override':'user supplied'})`:'Visit duration unspecified';})()}</p>}
+    <span className="stop-number">{s.position+1}</span><div><h4>{s.fictional?.name??detail?.name??activityDisplay(s.activity)}</h4><p>{advanced?`${advanced.journey.stops[advanced.occurrenceOrder[i]].source} · ${advanced.journey.stops[advanced.occurrenceOrder[i]].requirement}`:activityDisplay(request.activityIntents[s.activity]??s.activity)}</p>{advanced?.closedVisitOccurrences?.includes(advanced.occurrenceOrder[i])&&<p>Included at your request despite a closure reported for the original visit. Current opening and access are not confirmed.</p>}{advanced&&<p>{(()=>{const d=advanced.journey.stops[advanced.occurrenceOrder[i]].duration;return d?`${d.minutes===0?'Zero counted visit time; actual visit duration was not established':`${d.relation} ${d.minutes} minutes`} (${advanced.durationOverrides?.includes(advanced.occurrenceOrder[i])?'explicit user override':'user supplied'})`:'Visit duration unspecified';})()}</p>}
     {s.fictional?<p>Fictional venue · {s.fictional.neighborhood}. {s.start!==null?`${formatTime(s.start)}–${formatTime(s.end)}`:"Sample timing unavailable"}</p>:<>
      <p>{detail?.address??"Current venue details not loaded."}</p>
      {detail?.status==="refreshed"?<p>Current details · {detail.refreshedAt?new Date(detail.refreshedAt).toLocaleString():"just retrieved"}. {detail.businessStatus==="OPERATIONAL"?"Reported operational.":detail.businessStatus?.startsWith("CLOSED")?"":"Business status unavailable."}</p>:detail?.status==="stale"?<p role="note">Earlier details from {detail.refreshedAt?new Date(detail.refreshedAt).toLocaleString():"a previous lookup"}. Refresh unavailable. {detail.message}</p>:detail?.message&&<p role="note">{detail.message}</p>}
@@ -53,7 +53,7 @@ export function SavedCards({saved,venues,refresh,busy,message,onClose}:{saved:Sa
       {detail?.telephoneUrl&&/^tel:\+?[0-9]{7,15}$/.test(detail.telephoneUrl)&&<a href={detail.telephoneUrl}>{detail.phone??"Call venue"}</a>}</div>
     </>}
     </div></li>})}</ol>
-   {real?<p className="details-note">Original route estimates were not retained. Travel to, between and after these stops is unavailable; stop order is preserved.</p>:option.stops.length>1&&<p>Fictional inter-stop travel: {option.fictionalMetrics?.totalTravel??"Unknown"} minutes.</p>}
+   {real?<p className="details-note">Original route estimates were not retained. Travel to, between and after these stops is unavailable; stop order is preserved.</p>:option.stops.length>1&&<p>Fictional inter-stop travel: {formatDuration(option.fictionalMetrics?.totalTravel)}.</p>}
    {real&&<GoogleCredits credits={credits}/>}
   </div></article>
   <details className="estimates-details"><summary>Saved preferences</summary>

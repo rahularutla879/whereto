@@ -750,3 +750,8 @@ clarifies traffic-unaware estimates and balances bounded discovery/routing acros
 all stop occurrences. Numeric development stage/coverage diagnostics remain private.
 [Causes, measurements, safeguards and acceptance evidence](docs/task50e-followup.md).
 Task 51 remains unstarted.
+
+
+## November 4 — final Task 50E acceptance repair
+
+Readable duration presentation, named-venue closure recovery and explicit stop-specific outside-visit intent, fair optional coffee inclusion and model-free editable dwell are implemented. Shared cards, precise hard limits, existing provider authorization and private selected saving remain. Task 51 is unstarted. [Current acceptance record](docs/task50e-final-acceptance.md).

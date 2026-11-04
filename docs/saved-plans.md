@@ -240,3 +240,8 @@ Task 50E adds SavedDocument version 2 for selected advanced options using existi
 ## November 3 — Task 50E acceptance repair
 
 The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.
+
+
+## November 4 — final Task 50E acceptance repair
+
+Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).

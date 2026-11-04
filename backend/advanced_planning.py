@@ -21,6 +21,7 @@ from backend.stop_resolution import StopResolver
 from backend.advanced_routing import AdvancedRouter
 from backend.advanced_timing import evaluate_advanced_timing
 from backend.saved_plans import Token
+from backend.display_duration import seconds_text
 from backend.saved_advanced import redact_source
 from backend.failures import MESSAGES, provider_code
 
@@ -44,6 +45,7 @@ class AdvancedInput(ContractModel):
     firstTravel: FirstTravel | None = None
     betweenTravel: FirstTravel | None = None
     edits: AdvancedEdits | None = None
+    proceedClosed: Token | None = Field(default=None,repr=False)
     choice: Choice | None = None
     dwell: DwellAnswer | None = None
     departure: str | None = Field(default=None, pattern=r'^([01]\d|2[0-3]):[0-5]\d$')
@@ -66,6 +68,7 @@ class PublicStop(ContractModel):
     duration: Duration | None
     arrival: str | None
     departure: str | None
+    closedVisitException: bool = False
     hoursState: str
     hours: dict
     rating: float | None
@@ -116,6 +119,7 @@ class AdvancedResult(ContractModel):
     date: str | None
     destination: str | None
     transport: str
+    closureOffers: list[dict] = Field(default_factory=list,repr=False)
     questions: list[dict] = Field(default_factory=list)
     options: list[PublicOption] = Field(default_factory=list, max_length=3)
     saveReceipt: str | None = Field(default=None, repr=False)
@@ -154,6 +158,9 @@ class Session:
         self.origin = None
         self.configuration = None
         self.durations = {}
+        self.closure_offers = {}
+        self.closure_overrides = {}
+        self.selection_counts = {}
         self.budget_scope = 'outing'
         self.explicit_overrides = set()
         self.details_token = None
@@ -166,7 +173,7 @@ class Session:
         self.last = None
         self.resolution_attempted = False
         self.route_attempted = False
-        self.date_answer = False
+        self.date_answer = context.dateOverride
         self.search_area = None
         self.near_origin = None
         self.candidates = {}
@@ -191,7 +198,7 @@ class Session:
                 'originalDuration':{**stop.duration.model_dump(mode='json'),'source':redact_source(stop.duration.source,self.context)} if stop.duration else None,
                 'override':n in self.explicit_overrides})
         departure=self.departure if self.departure is not None else self.context.departureMinute
-        return {'stops':stops,'budget':{**self.journey.total_duration.model_dump(mode='json'),'source':redact_source(self.journey.total_duration.source,self.context)} if self.journey.total_duration else None,
+        return {'closedVisits':[{'occurrence':n,'requested':redact_source(self.journey.stops[n].source,self.context)} for n in self.closure_overrides], 'stops':stops,'budget':{**self.journey.total_duration.model_dump(mode='json'),'source':redact_source(self.journey.total_duration.source,self.context)} if self.journey.total_duration else None,
             'budgetScope':self.budget_scope,'scopeOverride':self.budget_scope!='outing',
             'departure':f'{departure//60:02d}:{departure%60:02d}' if departure is not None else None,
             'departureNow':self.context.departureNow and self.departure is None,'departureOverride':'departure' in self.explicit_overrides,'deadlineSource':redact_source(self.journey.deadline.source,self.context) if self.journey.deadline else None,
@@ -222,6 +229,8 @@ class Session:
                 zone=candidate.facts.timeZone.id if candidate.facts.timeZone else timezone_for(candidate.facts.address)
                 if self.router and self.context.timezoneBasis=='destination_calendar' and zone!=self.context.timezone:
                     raise AdvancedAnswerError('advanced_answer_invalid','This destination uses another local calendar. Edit Location and regenerate to revalidate the area and date.')
+        if any(n>=len(self.journey.stops) for n in edits.removeClosure):raise AdvancedAnswerError('advanced_answer_invalid','Choose an existing visit permission to remove.')
+        for n in edits.removeClosure:self.closure_overrides.pop(n,None)
         self.budget_scope=scope
         for n in edits.resetDwell:self.durations.pop(n,None);self.explicit_overrides.discard(n)
         if edits.resetDeparture:self.departure=None;self.explicit_overrides.discard('departure')
@@ -282,7 +291,13 @@ class Session:
             calendar=calendar_for(self.context.destination,self.context.timezone if self.context.timezoneBasis=='destination_calendar' else None,value.date)
             if calendar.date is None or any(p.reason!='past_date' or self.context.timezoneBasis=='destination_calendar' for p in calendar.problems):
                 return self.base(status='clarification',message=' '.join(calendar.issues) or 'Choose a valid date.',questions=[{'field':'date','question':'What date is this outing?'}])
-            if self.resolver and not getattr(self.resolver,'_named_only',False) and calendar.date!=self.context.date:raise ValueError('Regenerate to change the date after discovery.')
+            if calendar.date!=self.context.date:
+                self.closure_overrides.clear();self.closure_offers.clear()
+                self.seen.clear();self.current_ids.clear()
+                if self.resolver and self.resolver._result:self.resolver._result.context.date=calendar.date
+                if self.router:
+                    self.reusable_routes=dict(self.router._evidence)
+                    self.router=None;self.route_attempted=False;self.candidates={}
             self.context.date=calendar.date
             self.context.issues=[issue for issue in self.context.issues if issue not in self.context.dateIssues]
             self.context.dateIssues=[]
@@ -499,6 +514,36 @@ class Session:
             return self.base(status='clarification',message='Zero is not a realistic visit duration. Supply positive visit time, or explicitly confirm zero counted time under a travel-only budget.',questions=[{'field':'dwell','occurrence':zero,'question':'How should time at this stop be counted?'}])
         started=perf_counter()
         timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure,budget_scope=self.budget_scope,allow_overrides=True)
+        # Offer authority is opaque, server-owned and bound to the exact verified
+        # occurrence, identity, schedule, hours observation and routing assumptions.
+        previous_offers=self.closure_offers
+        self.closure_offers={}
+        matches=set()
+        def closure_key(c,v):
+            facts=next(x.selected.facts for x in c.route.visits if x.occurrence==v.occurrence)
+            return sha256(repr((str(self.context.date),self.context.timezone,self.departure,
+                self.context.departureMinute,self.context.departureNow,self.configuration,
+                self.context.transport,v.dwell_constraint,v.arrival.offsets,v.departure.offsets,
+                facts.currentOpeningHours,facts.observedAt.get('currentOpeningHours.periods'))).encode()).hexdigest()
+        for c in timing.candidates:
+            for v,visit in zip(c.visits,c.route.visits):
+                if v.hours_state!='infeasible' or visit.requested.kind!='named_place' or visit.requested.requirement!='required':continue
+                binding=(v.occurrence,v.place_id,closure_key(c,v))
+                if self.closure_overrides.get(v.occurrence)==binding:
+                    matches.add((c.candidate_index,v.occurrence,v.place_id))
+                else:
+                    token=next((k for k,b in previous_offers.items() if b==binding),None) or secrets.token_urlsafe(32)
+                    self.closure_offers[token]=binding
+        if value.proceedClosed:
+            binding=previous_offers.get(value.proceedClosed)
+            if binding is None or binding not in self.closure_offers.values():
+                raise AdvancedAnswerError('advanced_answer_invalid','This closed-visit choice has expired or changed. Review the current visit before proceeding.')
+            self.closure_overrides[binding[0]]=binding
+            return self.run(value.model_copy(update={'proceedClosed':None,'edits':None,'dwell':None,'departure':None,'action':None}))
+        active={n for _,n,_ in matches}
+        self.closure_overrides={n:b for n,b in self.closure_overrides.items() if n in active}
+        if matches:
+            timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure,budget_scope=self.budget_scope,allow_overrides=True,hours_exceptions=matches)
         self.latencies['timingMs']=(perf_counter()-started)*1000
         self.timing_counts={state:sum(c.state==state for c in timing.candidates) for state in ('feasible','infeasible','unverified')}
         route_errors=[l.evidence.error_code for c in timing.candidates for l in c.route.legs if l.evidence.error_code]
@@ -511,11 +556,11 @@ class Session:
             return c.state!='infeasible'
         self.offerable={b:{self.route_id(c.route) for c in timing.candidates if permitted(c,b) and (not b or c.route.route_status=='beyond_limit')} for b in (False,True)}
         available=[c for c in timing.candidates if permitted(c,self.beyond) and (not self.beyond or c.route.route_status=='beyond_limit')]
-        pool=sorted((c for c in available if self.route_id(c.route) in self.current_ids or self.route_id(c.route) not in self.seen),key=lambda c:(c.state!='feasible',c.route.route_status=='beyond_limit',sum(t.state=='outside_preference' for t in c.route.checks),c.route.known_travel_seconds))
+        pool=sorted((c for c in available if self.route_id(c.route) in self.current_ids or self.route_id(c.route) not in self.seen),key=lambda c:(c.state!='feasible',c.route.route_status=='beyond_limit',sum(t.state=='outside_preference' for t in c.route.checks),-sum(v.requested.requirement=='optional' for v in c.route.visits),c.route.known_travel_seconds))
         eligible=[]
         while pool and len(eligible)<3:
             best=pool[0]
-            def category(c):return (c.state,c.route.route_status,sum(t.state=='outside_preference' for t in c.route.checks))
+            def category(c):return (c.state,c.route.route_status,sum(t.state=='outside_preference' for t in c.route.checks),sum(v.requested.requirement=='optional' for v in c.route.visits))
             near=[c for c in pool if category(c)==category(best)
                   and c.route.known_travel_seconds<=best.route.known_travel_seconds+60]
             def overlap(candidate):
@@ -531,6 +576,16 @@ class Session:
             eligible.append(chosen);pool.remove(chosen)
         self.current_ids={self.route_id(c.route) for c in eligible}
         self.seen.update(self.current_ids)
+        def omission_explanation(omission):
+            checked=[c for c in timing.candidates if any(v.occurrence==omission.occurrence for v in c.route.visits)]
+            if any(permitted(c,self.beyond) for c in checked):
+                return 'Other checked alternatives include this optional stop; it is left out of this option.'
+            if checked and all(c.duration_state=='infeasible' for c in checked):
+                return 'Including this stop exceeds the original time budget in every checked route.'
+            if checked and all(c.deadline_state=='infeasible' for c in checked):
+                return 'Including this stop misses the finish deadline in every checked route.'
+            if omission.reason=='known_closed':return 'The checked venues are closed on the requested date.'
+            return 'No eligible route including this stop is established in the checked pool. Other venues may exist.'
         options=[]
         questions=[]
         for c in eligible:
@@ -543,10 +598,10 @@ class Session:
                     placeId=facts.id,name=facts.name,address=facts.address,mapsUrl=maps_link(facts.id),duration=v.requested.duration.model_copy(update={'source':redact_source(v.requested.duration.source,self.context)}) if v.requested.duration else None,
                     arrival=t.arrival.earliest.isoformat() if t.arrival.earliest and t.arrival.offsets.exact else None,
                     departure=t.departure.earliest.isoformat() if t.departure.earliest and t.departure.offsets.exact else None,
-                    hoursState=t.hours_state,hours=venue_hours(facts,self.context.date,calendar_timezone=self.context.timezone),
+                    closedVisitException=t.hours_exception,hoursState=t.hours_state,hours=venue_hours(facts,self.context.date,calendar_timezone=self.context.timezone),
                     rating=facts.rating,ratingCount=facts.ratingCount,credits=[a.model_dump(mode='json') for a in facts.attributions or []]))
             identity=sha256(repr(([(v.occurrence,v.selected.place_id) for v in route.visits],route.ending,route.endpoint.place_id if route.endpoint else None)).encode()).hexdigest()[:32]
-            options.append(PublicOption(id='advanced_'+identity,originApproximate=bool(self.origin and (self.origin.source=='suggested' or self.origin.accuracy_m and self.origin.accuracy_m>100 or self.origin.precision not in ('device','address_or_place'))),state='unverified' if route.route_status=='beyond_limit' else c.state,travelException=route.route_status=='beyond_limit',travelDeviations=[f"{'First stop' if route.legs[t.leg_index].role=='origin_to_first' else 'Between stops'}: {t.actual:g} {t.preference.unit}; preferred {t.preferred:g}; original maximum {t.maximum:g}." for t in route.checks if t.state in ('outside_preference','beyond_limit')],routeState=route.route_status,stops=stops,ending=route.ending,
+            options.append(PublicOption(id='advanced_'+identity,originApproximate=bool(self.origin and (self.origin.source=='suggested' or self.origin.accuracy_m and self.origin.accuracy_m>100 or self.origin.precision not in ('device','address_or_place'))),state='unverified' if route.route_status=='beyond_limit' else c.state,travelException=route.route_status=='beyond_limit',travelDeviations=[f"{'First stop' if route.legs[t.leg_index].role=='origin_to_first' else 'Between stops'}: {seconds_text(t.actual*60) if t.preference.unit=='minutes' else f'{t.actual:g} miles'}; preferred {t.preferred:g}; original maximum {t.maximum:g}." for t in route.checks if t.state in ('outside_preference','beyond_limit')],routeState=route.route_status,stops=stops,ending=route.ending,
                 endpoint={'placeId':route.endpoint.place_id,'name':route.endpoint.facts.name,'mapsUrl':maps_link(route.endpoint.place_id),
                     'credits':[a.model_dump(mode='json') for a in route.endpoint.facts.attributions or []]} if route.endpoint else None,
                 legs=[PublicLeg(role=l.role,fromOccurrence=l.from_occurrence,toOccurrence=l.to_occurrence,seconds=l.evidence.duration_seconds,
@@ -554,7 +609,7 @@ class Session:
                 knownTravelSeconds=float(c.known_travel_seconds),elapsedLowerSeconds=float(c.elapsed.lower),
                 elapsedUpperSeconds=float(c.elapsed.upper) if c.elapsed.upper is not None else None,upperExclusive=c.elapsed.upper_exclusive,
                 budgetScope=self.budget_scope,totalConstraint=route.journey.total_duration.model_copy(update={'source':redact_source(route.journey.total_duration.source,self.context)}) if route.journey.total_duration else None,deadlineSource=redact_source(route.journey.deadline.source,self.context) if route.journey.deadline else None,durationState=c.duration_state,deadlineState=c.deadline_state,reasons=list(dict.fromkeys(r.message for r in c.reasons if r.state!='feasible')),
-                omitted=[{'occurrence':o.occurrence,'requested':redact_source(o.requested.source,self.context),'reason':o.reason} for o in route.omitted]))
+                omitted=[{'occurrence':o.occurrence,'requested':redact_source(o.requested.source,self.context),'reason':o.reason,'explanation':omission_explanation(o)} for o in route.omitted]))
             if route.journey.total_duration and self.budget_scope=='outing' or route.journey.deadline or self.context.departureNow and c.hours_state=='unverified' and any(v.selected.facts.currentOpeningHours is not None for v in route.visits):
                 for v in route.visits:
                     if v.requested.duration is None:
@@ -563,6 +618,16 @@ class Session:
             if route.journey.deadline and c.start is None and self.context.departureMinute is None and self.departure is None:
                 q={'field':'departure','question':'What time will you depart, in the destination timezone?'}
                 if q not in questions: questions.append(q)
+        for c in available:
+            if (c.route.journey.total_duration and self.budget_scope=='outing') or c.route.journey.deadline:
+                for v in c.route.visits:
+                    if v.requested.requirement=='optional' and v.requested.duration is None:
+                        q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend on optional {redact_source(v.requested.source,self.context)}? This is needed to check whether it fits; it has not been assumed to take zero time.'}
+                        if q not in questions and not any(x.get('field')=='dwell' and x.get('occurrence')==v.occurrence for x in questions):questions.append(q)
+        self.selection_counts={'checked':len(timing.candidates),'eligible':len(available),
+            'optionalInclusive':sum(any(v.requested.requirement=='optional' for v in c.route.visits) for c in timing.candidates),
+            'selectedOptionalInclusive':sum(any(v.requested.requirement=='optional' for v in c.route.visits) for c in eligible),
+            'exclusions':{code:sum(any(r.code==code and r.state=='infeasible' for r in c.reasons) for c in timing.candidates) for code in {r.code for c in timing.candidates for r in c.reasons if r.state=='infeasible'}}}
         message='Here are the options checked for your outing. Add any missing visit times to check the whole trip.' if options else ' '.join(timing.routing_reasons) or 'All checked options are infeasible: '+' '.join(dict.fromkeys(r.message for c in timing.candidates for r in c.reasons if r.state=='infeasible'))
         if not options and timing.candidates:
             evidence=[]
@@ -570,16 +635,23 @@ class Session:
                 if c.duration_state=='infeasible' and c.route.journey.total_duration:
                     d=c.route.journey.total_duration
                     measured=c.travel if self.budget_scope=='travel' else c.elapsed
-                    lower=float(measured.lower)/60
-                    upper=float(measured.upper)/60 if measured.upper is not None else None
-                    span=f'{lower:g} minutes or more' if upper is None else f'{lower:g} to {upper:g} minutes'
+                    lower=seconds_text(measured.lower,'lower')
+                    upper=seconds_text(measured.upper,'upper') if measured.upper is not None else None
+                    span=f'{lower} or more' if upper is None else f'{lower} to {upper}'
                     evidence.append(f"{'Travel-only' if self.budget_scope=='travel' else 'Whole-trip'} requirement: {d.relation} {d.minutes} minutes. Supported journey duration: {span}.")
             if evidence:message='No checked option meets your requirements. '+' '.join(dict.fromkeys(evidence))+' Edit your request or preferences to try a different requirement.'
+        closure_offers=[]
+        for token,(n,place_id,_) in self.closure_offers.items():
+            visit=next(v for c in timing.candidates for v in c.route.visits if v.occurrence==n and v.selected.place_id==place_id)
+            if not any(o['occurrence']==n for o in closure_offers):
+                closure_offers.append({'token':token,'occurrence':n,'name':visit.selected.facts.name,
+                    'message':f'{visit.selected.facts.name} is expected to be closed at the planned visit time. You may keep this destination for an outside visit; access and services are not confirmed.'})
+        if not options and closure_offers:message=' '.join(o['message'] for o in closure_offers)
         route_error_code='provider_quota_rejected' if 'quota' in route_errors else 'provider_local_admission' if 'application_limit' in route_errors else 'provider_service_error'
         if route_errors:
             message=MESSAGES[route_error_code]+' Available evidence and your original constraints are kept; incomplete timing remains unverified.'
         result=self.base(status='results' if options else 'no_results',message=message,options=options,questions=questions,
-            code=route_error_code if route_errors else None if options else 'insufficient_routing')
+            closureOffers=closure_offers,code=route_error_code if route_errors else None if options else 'insufficient_routing')
         if options:
             from backend.venue_details import details_sessions
             ids=[v.placeId for option in options for v in option.stops]
@@ -615,6 +687,7 @@ class Sessions:
             latest=next(reversed(self.items.values()),None) if self.items else None
             return {'activeSessions':len(self.items),'lastStageMs':dict(latest.latencies) if latest else {},
                 'timingVerdicts':dict(latest.timing_counts) if latest else {},
+                'selection':dict(latest.selection_counts) if latest else {},
                 'coverage':latest.resolver.coverage(latest.router,latest.seen) if latest and latest.resolver else {},
                 'routeAssumptions':{'provider':'google_routes','drivingPolicy':'TRAFFIC_AWARE','departureTimeSent':False,
                     'originSource':latest.origin.source if latest and latest.origin else 'none',

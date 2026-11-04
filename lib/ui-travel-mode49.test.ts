@@ -57,7 +57,7 @@ test('walking preference reaches interpretation and generation; actual backend r
   assert.equal(result.plans.length,3);assert.equal(result.plans[0].transport,mode);
   assert.equal((sent[0].body.preferences as {transport:string}).transport,mode);
   assert.match(result.plans[0].description,new RegExp(`minutes ${mode} between stops`));
-  const first=render(React.createElement(FirstLegTravel,{plan:result.plans[0]}));assert.match(first,new RegExp(`minutes ${mode}`));
+  const first=render(React.createElement(FirstLegTravel,{plan:result.plans[0]}));assert.match(first,new RegExp(`min ${mode}`));
  }
  assert.ok(adaptRanking(walking).plans[0].travel!>adaptRanking(driving).plans[0].travel!);
 });

@@ -16,7 +16,7 @@ test("labels follow actual results rather than option positions", () => {
     assert.equal(copy[ordered.indexOf(cheap)].label, "LOWEST COST");
     assert.match(copy[ordered.indexOf(cheap)].description, /\$20\.00 per person/);
     assert.equal(copy[ordered.indexOf(quick)].label, "SHORTEST TRAVEL");
-    assert.match(copy[ordered.indexOf(quick)].description, /5 minutes between stops/);
+    assert.match(copy[ordered.indexOf(quick)].description, /5 min between stops/);
     assert.equal(copy[ordered.indexOf(best)].label, "TOP MATCH");
     assert.match(copy[ordered.indexOf(best)].description, /Best Experience.*highest sample venue quality/);
   }
@@ -78,7 +78,7 @@ test("unknown comparison data and a lone result cannot justify superlatives", ()
   const copy = recommendationCopy(options, "experience");
   assert.ok(copy.every(c => c.label === "ALTERNATIVE PLAN"));
   assert.doesNotMatch(copy.map(c => c.description).join(" "), /best|lowest|shortest|highest|same cost/i);
-  assert.match(copy[0].description, /\$40\.00 per person and 20 minutes/);
+  assert.match(copy[0].description, /\$40\.00 per person and 20 min/);
   assert.equal(recommendationCopy([partial], "budget")[0].label, "YOUR ITINERARY");
   assert.equal(recommendationCopy([{ ...partial, venues: [] }], "budget")[0].description, "An option for the activities you requested.");
 });
@@ -138,7 +138,7 @@ test("equal top scores with differing costs or travel get factual distinct headl
     plan("a", { score: 0.9, travel: 10, quality: 0.5 }),
     plan("b", { score: 0.9, travel: 20, quality: 0.8 }),
   ], "balanced");
-  assert.deepEqual(travel.map(p => p.title), ["Joint Best, 10-Min Travel", "Joint Best, 20-Min Travel"]);
+  assert.deepEqual(travel.map(p => p.title), ["Joint Best, 10 min Travel", "Joint Best, 20 min Travel"]);
   assert.ok([...cost, ...travel].every(p => p.title.length <= 30));
 });
 

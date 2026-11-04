@@ -219,11 +219,13 @@ def _balanced_paths(paths, limit, origin, endpoint, history=()):
     for signature in history:
         for key in signature:usage[key]=usage.get(key,0)+1
     selected=[]
+    patterns={}
     while paths and len(selected)<limit:
         def priority(path):
             counts=[usage.get((i,c.place_id),0) for i,c in path]
-            return (max(counts,default=0),sum(counts),_gap(path,origin,endpoint),_signature(path))
+            return (patterns.get(tuple(sorted(i for i,_ in path)),0),max(counts,default=0),sum(counts),_gap(path,origin,endpoint),_signature(path))
         path=min(paths,key=priority);paths.remove(path);selected.append(path)
+        pattern=tuple(sorted(i for i,_ in path));patterns[pattern]=patterns.get(pattern,0)+1
         for i,c in path:
             key=(i,c.place_id);usage[key]=usage.get(key,0)+1
     return selected
@@ -431,7 +433,7 @@ class AdvancedRouter:
                 retained = []
                 for candidate in group.candidates:
                     hours = venue_hours(candidate.facts, context.date, calendar_timezone=context.timezone)
-                    if hours['status'] == 'closed':
+                    if hours['status'] == 'closed' and not (group.requested.kind=='named_place' and group.requested.requirement=='required'):
                         exclusions.append(HoursExclusion(occurrence=group.occurrence, candidate=candidate,
                             date=str(context.date), timezone=context.timezone, reason=hours['message']))
                     else:

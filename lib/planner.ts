@@ -81,14 +81,10 @@ export function resolveOuting(request: string, preferences: Preferences = EMPTY_
     cost: preferences.cost, dinner: /\bdinner\b/i.test(request) }, notes };
 }
 
-export function formatDuration(minutes: number | null) {
-  if (minutes === null) return "Unknown";
-  const hours = Math.floor(minutes / 60);
-  const remainder = minutes % 60;
-  return [hours ? `${hours}h` : "", remainder ? `${remainder}m` : ""].filter(Boolean).join(" ") || "0m";
-}
+export {formatDuration} from './duration-format';
 export function formatTime(minutes: number | null) {
   if (minutes === null) return "Unknown";
+  minutes=Math.round(minutes);
   const hours = Math.floor(minutes / 60) % 24;
   return `${hours % 12 || 12}:${String(minutes % 60).padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"}`;
 }

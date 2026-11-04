@@ -72,3 +72,11 @@ test('expired-session replay retains the pending override and independent accept
  const edits=replay[1].edits as {budgetScope:string;dwell:unknown[];departure:string};
  assert.equal(edits.budgetScope,'travel');assert.equal(edits.departure,'17:00');assert.deepEqual(edits.dwell,[{occurrence:0,minutes:0,relation:'exact',zeroCountedTime:true}]);
 });
+
+test('expired closure authority is never replayed while unrelated explicit edits survive',()=>{
+ const previous=[{edits:{dwell:[{occurrence:0,minutes:20}]}}];
+ assert.deepEqual(rememberAdvancedEdit(previous,{proceedClosed:'expired-server-offer'}),previous);
+ const merged=rememberAdvancedEdit(previous,{proceedClosed:'expired-server-offer',edits:{dwell:[{occurrence:1,minutes:10}]}});
+ assert.doesNotMatch(JSON.stringify(merged),/proceedClosed|expired-server-offer/);
+ assert.equal(((merged[0].edits as {dwell:unknown[]}).dwell).length,2);
+});

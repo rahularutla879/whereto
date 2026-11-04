@@ -458,3 +458,8 @@ regression passes; zero wording is separately covered as clarification.
 ## November 3 — consolidated Task 50E refinement
 
 The owner's explicit current-traffic decision replaces the earlier unactivated Pro proposal. Traffic-aware routing/accounting, return/now semantics, shortest-first exploration, five dwell bounds and a measured model investigation continue Task 50E. Unsafe model changes were rejected; the latency acceptance item remains open. Existing card identity, editable answers, selected private saving, security, startup and roadmap numbers remain. Task 51 stays unstarted. [Implementation, measurements, verification and limitations](task50e-consolidated.md).
+
+
+## November 4 — final Task 50E acceptance repair
+
+Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).

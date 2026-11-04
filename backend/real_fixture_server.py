@@ -37,12 +37,16 @@ def main():
     scenario = {'name': 'advanced' if args.advanced else 'refinements' if args.refinements else 'cinema_acceptance' if args.acceptance else 'normal'}
 
     def hours_records(records):
-        if scenario['name'] not in ('advanced_now','advanced_now_closed','advanced_now_opens_before','advanced_now_closes_during'):return records
+        if scenario['name'] not in ('advanced_now','advanced_now_closed','advanced_now_opens_before','advanced_now_closes_during','advanced_acceptance_closed'):return records
         from backend.hours_fixtures49 import fixture_hours
         from datetime import datetime,timedelta,timezone
         from zoneinfo import ZoneInfo
         for record in records:
             record.update(fixture_hours(closed=scenario['name']=='advanced_now_closed' and record['id']=='Synthetic_college'))
+            if scenario['name']=='advanced_acceptance_closed' and record['id']=='Synthetic_college':
+                # Only today's verified college periods are removed; future dates
+                # remain distinct. Café hours stay active and unmodified.
+                record['currentOpeningHours']['periods']=record['currentOpeningHours']['periods'][1:]
             if record['id']=='Synthetic_college' and scenario['name'] in ('advanced_now_opens_before','advanced_now_closes_during'):
                 instant=(datetime.now(timezone.utc)+timedelta(minutes=1 if scenario['name']=='advanced_now_opens_before' else 5)).astimezone(ZoneInfo('America/New_York'))
                 period=record['currentOpeningHours']['periods'][0]
@@ -162,6 +166,7 @@ def main():
             def seconds(a,b):
                 if body['travelMode']=='WALK':return 600
                 if scenario['name']=='advanced_traffic_long':return 3600
+                if scenario['name']=='advanced_acceptance_fractional':return 119.316666667
                 if scenario['name']=='advanced_shortest':
                     import re
                     ids=' '.join(p['waypoint'].get('placeId','') for p in (a,b))

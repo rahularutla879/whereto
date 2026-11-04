@@ -105,6 +105,7 @@ class TimedVisit(JourneyModel):
     arrival: Projection
     departure: Projection
     hours_state: State
+    hours_exception: bool = False
     hours_code: str
     hours_observed_at: AwareDatetime | None = None
     hours_timezone: str | None = None
@@ -153,6 +154,8 @@ class TimedCandidate(JourneyModel):
             incoming = next((l for l in self.route.legs if l.to_occurrence == visit.occurrence), None)
             if incoming:
                 offset = _plus(offset, _leg_range(incoming.evidence))
+            if timed.hours_exception and (timed.hours_state!='infeasible' or visit.requested.kind!='named_place' or visit.requested.requirement!='required'):
+                raise ValueError('A closure exception must retain a failed mandatory named-visit hours check.')
             expected_dwell = _bounds(visit.requested.duration)
             if timed.dwell != expected_dwell or timed.arrival != _project(offset, self.start, zone):
                 raise ValueError('Arrival/dwell disagree with original route evidence.')
@@ -164,7 +167,7 @@ class TimedCandidate(JourneyModel):
             raise ValueError('Timing breakdown must agree with original evidence.')
         if self.duration_state != _limit(self.travel if self.budget_scope=='travel' else self.elapsed, self.route.journey.total_duration)[0]:
             raise ValueError('Duration verdict disagrees with the source constraint.')
-        expected_hours = _combine(*(v.hours_state for v in self.visits), *(['unverified'] if self.route.endpoint else []))
+        expected_hours = _combine(*('unverified' if v.hours_exception else v.hours_state for v in self.visits), *(['unverified'] if self.route.endpoint else []))
         expected_routing = ('infeasible' if any(l.evidence.status == 'unreachable' for l in self.route.legs)
                             else 'unverified' if self.route.missing_leg_indexes else 'feasible')
         expected_preference = ('infeasible' if self.route.route_status == 'beyond_limit'
@@ -281,7 +284,7 @@ def _visit_hours(facts, arrival, departure, evaluated_at):
     return state, code
 
 
-def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
+def _evaluate(route, index, context, evaluated_at, budget_scope='outing', hours_exceptions=frozenset()):
     reasons = []
     def reason(state, code, message, occurrence=None):
         reasons.append(TimingReason(state=state, code=code, message=message, occurrence=occurrence))
@@ -316,7 +319,9 @@ def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
         departure = _project(elapsed, anchor, zone)
         facts = visit.selected.facts
         state, code = _visit_hours(facts, arrival, departure, evaluated_at)
-        reason(state, code,
+        exception=(index,visit.occurrence,visit.selected.place_id) in hours_exceptions and state=='infeasible' and visit.requested.kind=='named_place' and visit.requested.requirement=='required'
+        reason('unverified' if exception else state, 'user_closed_visit' if exception else code,
+            'Closed at the planned visit time. Included at your request; access is not confirmed.' if exception else
             'Current dated hours cover the visit bounds; sessions, inventory and reservations remain unverified.' if state == 'feasible' else
             'Current dated hours prove this visit conflicts with opening periods.' if state == 'infeasible' else
             'Visit hours need applicable current periods, venue timezone and a bounded arrival/departure schedule.', visit.occurrence)
@@ -324,7 +329,7 @@ def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
             reason('unverified', 'unbounded_dwell', 'Supply an exact visit duration or a justified upper bound to establish completion time.', visit.occurrence)
         visits.append(TimedVisit(occurrence=visit.occurrence, place_id=visit.selected.place_id,
             dwell_constraint=visit.requested.duration, dwell=duration, arrival=arrival, departure=departure,
-            hours_state=state, hours_code=code, hours_observed_at=facts.observedAt.get('currentOpeningHours.periods'),
+            hours_state=state, hours_exception=exception, hours_code=code, hours_observed_at=facts.observedAt.get('currentOpeningHours.periods'),
             hours_timezone=facts.timeZone.id if facts.timeZone else None,
             special_day=bool(facts.currentOpeningHours and anchor and facts.timeZone and
                 arrival.earliest and arrival.earliest.astimezone(ZoneInfo(facts.timeZone.id)).date() in (facts.currentOpeningHours.specialDays or []))))
@@ -364,7 +369,7 @@ def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
                 'Deadline compares full journey elapsed seconds with the explicit destination-local clock, including the final leg.')
     routing_state = 'infeasible' if any(l.evidence.status == 'unreachable' for l in route.legs) else 'unverified' if route.missing_leg_indexes else 'feasible'
     preference = 'infeasible' if route.route_status == 'beyond_limit' else 'unverified' if route.route_status == 'unverified' else 'feasible'
-    hours = _combine(*(v.hours_state for v in visits))
+    hours = _combine(*('unverified' if v.hours_exception else v.hours_state for v in visits))
     if route.endpoint:
         # Endpoint arrival is preserved, but opening for an actual endpoint visit
         # cannot be established without endpoint service/visit-duration semantics.
@@ -379,7 +384,7 @@ def _evaluate(route, index, context, evaluated_at, budget_scope='outing'):
         state=_combine(routing_state, preference, duration_state, deadline_state, hours), reasons=reasons)
 
 
-def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, dwell_answers=None, departure_minute=None, budget_scope='outing', allow_overrides=False) -> AdvancedTimingResult:
+def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, dwell_answers=None, departure_minute=None, budget_scope='outing', allow_overrides=False, hours_exceptions=frozenset()) -> AdvancedTimingResult:
     """Consume only an active backend router, rechecking authorization and expiry.
 
     No client evidence input. Evaluates up to three existing routes of four stops;
@@ -413,7 +418,7 @@ def evaluate_advanced_timing(router: AdvancedRouter, *, evaluated_at: datetime, 
         result.context.departureInstant = None
         result.context.departureMinute = departure_minute
         result.context.departureSource = f'depart at {departure_minute//60:02d}:{departure_minute%60:02d}'
-    return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at,budget_scope)
+    return AdvancedTimingResult(candidates=[_evaluate(route, i, result.context, evaluated_at,budget_scope,hours_exceptions)
         for i, route in enumerate(result.candidates)], routing_status=result.status,
         routing_reasons=result.reasons, evaluated_at=evaluated_at,
         date=result.context.date if result.context else None, timezone=result.timezone,

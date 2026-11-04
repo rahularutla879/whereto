@@ -1,6 +1,6 @@
 import type {AdvancedData,Dwell} from './advanced-planning';
-export type AdvancedPreferences={stops:{occurrence:number;requested:string;duration:Dwell|null;originalDuration:Dwell|null;override:boolean}[];budget:Dwell|null;budgetScope:'outing'|'travel';scopeOverride:boolean;departure:string|null;departureOverride:boolean;departureNow?:boolean;returnToOrigin:boolean;endpoint:string|null;deadlineSource?:string|null;choices:{occurrence:number;label:string;selectedId:string;choices:{placeId:string;name:string;address:string;attributions:{provider?:string|null;uri?:string|null}[]}[]}[]};
-export type AdvancedDraft={stops:{occurrence:number;minutes:string;relation:Dwell['relation'];zeroCountedTime:boolean}[];budgetScope:'outing'|'travel';departure:string;choices:{occurrence:number;placeId:string}[]};
+export type AdvancedPreferences={closedVisits?:{occurrence:number;requested:string}[];stops:{occurrence:number;requested:string;duration:Dwell|null;originalDuration:Dwell|null;override:boolean}[];budget:Dwell|null;budgetScope:'outing'|'travel';scopeOverride:boolean;departure:string|null;departureOverride:boolean;departureNow?:boolean;returnToOrigin:boolean;endpoint:string|null;deadlineSource?:string|null;choices:{occurrence:number;label:string;selectedId:string;choices:{placeId:string;name:string;address:string;attributions:{provider?:string|null;uri?:string|null}[]}[]}[]};
+export type AdvancedDraft={removeClosure?:number[];stops:{occurrence:number;minutes:string;relation:Dwell['relation'];zeroCountedTime:boolean}[];budgetScope:'outing'|'travel';departure:string;choices:{occurrence:number;placeId:string}[]};
 export function advancedDraft(data:AdvancedData):AdvancedDraft|null{
  const p=data.preferences;if(!p?.stops)return null;
  return {stops:p.stops.map(s=>({occurrence:s.occurrence,minutes:s.duration?String(s.duration.minutes):'',relation:s.duration?.relation??'exact',zeroCountedTime:s.duration?.minutes===0&&s.override})),budgetScope:p.budgetScope,departure:p.departure??'',choices:p.choices.map(c=>({occurrence:c.occurrence,placeId:c.selectedId}))};
@@ -10,9 +10,12 @@ export function advancedEdits(data:AdvancedData,draft:AdvancedDraft):Record<stri
  const dwell=draft.stops.filter(s=>{const before=old.stops.find(o=>o.occurrence===s.occurrence);return s.minutes!==''&&(s.minutes!==before?.minutes||s.relation!==before?.relation||s.zeroCountedTime!==before?.zeroCountedTime);}).map(s=>({occurrence:s.occurrence,minutes:Number(s.minutes),relation:s.relation,zeroCountedTime:s.zeroCountedTime}));
  const resetDwell=draft.stops.filter(s=>s.minutes===''&&old.stops.find(o=>o.occurrence===s.occurrence)?.minutes!=='').map(s=>s.occurrence);
  const choices=draft.choices.filter(c=>c.placeId&&old.choices.find(o=>o.occurrence===c.occurrence)?.placeId!==c.placeId);
- return {...(dwell.length?{dwell}:{}),...(resetDwell.length?{resetDwell}:{}),...(choices.length?{choices}:{}),...(draft.budgetScope!==old.budgetScope?{budgetScope:draft.budgetScope}:{}),...(draft.departure!==old.departure?(draft.departure?{departure:draft.departure}:{resetDeparture:true}):{})};
+ return {...(draft.removeClosure?.length?{removeClosure:draft.removeClosure}:{}),...(dwell.length?{dwell}:{}),...(resetDwell.length?{resetDwell}:{}),...(choices.length?{choices}:{}),...(draft.budgetScope!==old.budgetScope?{budgetScope:draft.budgetScope}:{}),...(draft.departure!==old.departure?(draft.departure?{departure:draft.departure}:{resetDeparture:true}):{})};
 }
 export function rememberAdvancedEdit(previous:Record<string,unknown>[],answer:Record<string,unknown>){
+ // Session-bound closure authority must never be replayed into a renewed session.
+ answer={...answer};delete answer.proceedClosed;
+ if(!Object.keys(answer).length)return previous;
  if(!answer.edits)return [...previous.filter(a=>!Object.keys(answer).some(k=>k in a)),answer];
  const old=(previous.find(a=>a.edits)?.edits??{}) as Record<string,unknown>;
  const edit=answer.edits as Record<string,unknown>;
@@ -22,7 +25,7 @@ export function rememberAdvancedEdit(previous:Record<string,unknown>[],answer:Re
  const choices=new Map(((old.choices??[]) as {occurrence:number}[]).map(c=>[c.occurrence,c]));
  for(const c of (edit.choices??[]) as {occurrence:number}[])choices.set(c.occurrence,c);
  const merged:Record<string,unknown>={...old,...edit,dwell:[...dwell.values()],choices:[...choices.values()]};
- delete merged.resetDwell;
+ delete merged.resetDwell;delete merged.removeClosure;
  if(edit.resetDeparture){delete merged.departure;delete merged.resetDeparture;}
  const rest={...answer};delete rest.edits;
  const base=previous.filter(a=>!a.edits);

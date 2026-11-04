@@ -21,6 +21,7 @@ class AdvancedSaved(ContractModel):
     originalJourney: Journey | None = None
     budgetScope: Literal['outing','travel'] = 'outing'
     durationOverrides: list[Annotated[int, Field(strict=True,ge=0,lt=4)]] = Field(default_factory=list,max_length=4)
+    closedVisitOccurrences: list[Annotated[int, Field(strict=True,ge=0,lt=4)]] = Field(default_factory=list,max_length=4)
     departureOverride: bool = Field(default=False,strict=True)
     occurrenceOrder: list[int] = Field(min_length=1,max_length=4)
     omittedOccurrences: list[int] = Field(max_length=4)
@@ -44,6 +45,7 @@ class AdvancedSaved(ContractModel):
             for n,(before,after) in enumerate(zip(original['stops'],effective['stops'])):
                 if n in self.durationOverrides:after['duration']=before['duration']
             if original!=effective:raise ValueError('An override changed unrelated original requirements.')
+        if len(set(self.closedVisitOccurrences))!=len(self.closedVisitOccurrences) or any(n>=len(self.journey.stops) or n not in self.occurrenceOrder or self.journey.stops[n].kind!='named_place' or self.journey.stops[n].requirement!='required' for n in self.closedVisitOccurrences):raise ValueError('Invalid closed-visit user intent.')
         indexes=self.occurrenceOrder+self.omittedOccurrences
         if sorted(indexes)!=list(range(len(self.journey.stops))) or self.journey.order_conflict:
             raise ValueError('Incomplete advanced requirements')
@@ -89,7 +91,7 @@ def issue_advanced(session,candidates,options):
     saved=[]
     for candidate,option in zip(candidates,options):
         route=candidate.route
-        advanced=AdvancedSaved(sourceText=source,originalJourney=Journey.model_validate(redact(session.journey.model_dump())),budgetScope=session.budget_scope,durationOverrides=sorted(session.durations),departureOverride='departure' in session.explicit_overrides,journey=Journey.model_validate(redact(route.journey.model_dump())),occurrenceOrder=[v.occurrence for v in route.visits],
+        advanced=AdvancedSaved(closedVisitOccurrences=[v.occurrence for v in candidate.visits if v.hours_exception],sourceText=source,originalJourney=Journey.model_validate(redact(session.journey.model_dump())),budgetScope=session.budget_scope,durationOverrides=sorted(session.durations),departureOverride='departure' in session.explicit_overrides,journey=Journey.model_validate(redact(route.journey.model_dump())),occurrenceOrder=[v.occurrence for v in route.visits],
             omittedOccurrences=[o.occurrence for o in route.omitted],ending=route.ending,endpointId=route.endpoint.place_id if route.endpoint else None,
             routingPolicy='walking' if context.transport and context.transport.value=='walking' else 'traffic_aware_current',departureNow=context.departureNow and session.departure is None,historicalTiming=option.state,travelException=option.travelException,departureMinute=session.departure if session.departure is not None else context.departureMinute)
         saved.append(SavedOption(candidateId=option.id,advanced=advanced,stops=[SavedStop(position=i,activity=activities[v.occurrence],

@@ -109,11 +109,7 @@ export function makePlans(request: string, preferences: Preferences = EMPTY_PREF
   return { plans, location: "Baltimore", activities, notes, message: `${plans.length} sample ${plans.length === 1 ? "plan" : "plans"} for ${people} ${people === 1 ? "person" : "people"} in Baltimore` };
 }
 
-export function formatDuration(minutes: number) {
-  const hours = Math.floor(minutes / 60);
-  const remainder = minutes % 60;
-  return [hours ? `${hours}h` : "", remainder ? `${remainder}m` : ""].filter(Boolean).join(" ") || "0m";
-}
+export {formatDuration} from '../duration-format';
 export function formatTime(minutes: number) {
   const hours = Math.floor(minutes / 60);
   return `${hours % 12 || 12}:${String(minutes % 60).padStart(2, "0")} ${hours >= 12 ? "PM" : "AM"}`;

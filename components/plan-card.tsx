@@ -52,7 +52,7 @@ export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: n
         <p className="details-heading">{real ? "Your itinerary" : "Your sample itinerary"}</p>
         <p className="details-context">{plan.date.match(/^\d{4}-\d{2}-\d{2}$/) ? new Date(`${plan.date}T12:00:00`).toLocaleDateString("en-US", { month: "short", day: "numeric", year: "numeric" }) : plan.date}</p>
         <ol>{plan.stops.map((_,i)=><ItineraryStop key={`${plan.stops[i].venue.id}-${i}`} plan={plan} index={i} detailsSession={detailsSession}/>)}{plan.advanced&&<EndingStep plan={plan}/>}</ol>
-        {plan.advanced?<AdvancedDetails option={plan.advanced}/>:plan.stops.length>1&&<p className="details-note">{plan.travel===null?"Travel between stops unavailable":`~${plan.travel} min ${real ? plan.transport??"driving" : "simulated travel"} between stops`}. Return travel is not included.</p>}
+        {plan.advanced?<AdvancedDetails option={plan.advanced}/>:plan.stops.length>1&&<p className="details-note">{plan.travel===null?"Travel between stops unavailable":`~${formatDuration(plan.travel)} ${real ? plan.transport??"driving" : "simulated travel"} between stops`}. Return travel is not included.</p>}
       </div>
     </div>
   </article>;

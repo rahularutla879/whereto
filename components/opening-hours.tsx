@@ -3,6 +3,7 @@ import {formatTime} from '@/lib/planner';
 import {outingDateLabel} from '@/lib/display-format';
 function clock(value:number){return `${formatTime(((value%1440)+1440)%1440)}${value<0?' (previous day)':value>=1440?' (next day)':''}`;}
 export function OpeningHours({hours,concise=false}:{hours?:HoursEvidence|null;concise?:boolean}){
+ if(concise&&(!hours||hours.basis!=='current'&&hours.typicalClosed==null&&!hours.weekly.length))return null;
  return <section className="opening-hours" aria-label="Opening hours"><strong>Opening hours</strong>
  {!hours?<p>Hours unverified.</p>:<>
  {!concise&&<p>{outingDateLabel(hours.date)}{!concise&&hours.timezone?` · ${hours.timezone}`:''}{hours.specialDay?' · Special-day hours':''}</p>}

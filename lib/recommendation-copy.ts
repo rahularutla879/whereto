@@ -1,3 +1,4 @@
+import {formatDuration} from './duration-format';
 // Describe returned options only; never select, reorder or rescore itineraries.
 export type RecommendationFacts = {
   score: number | null;
@@ -58,13 +59,13 @@ export function recommendationCopy(plans: RecommendationFacts[], preference: str
     };
     if (quickest.includes(i)) return {
       label: quickest.length > 1 ? "JOINT SHORTEST TRAVEL" : "SHORTEST TRAVEL",
-      description: `${plan.travel} minutes between stops, ${quickest.length > 1 ? "tied for the shortest travel" : "the shortest travel"} of these plans. ${venueDetail}`.trim(),
+      description: `${formatDuration(plan.travel)} between stops, ${quickest.length > 1 ? "tied for the shortest travel" : "the shortest travel"} of these plans. ${venueDetail}`.trim(),
     };
     if (quality.includes(i)) return {
       label: quality.length > 1 ? "JOINT TOP SAMPLE VENUES" : "TOP SAMPLE VENUES",
       description: `${quality.length > 1 ? "Joint highest" : "Highest"} sample venue quality of these plans. ${venueDetail}`.trim(),
     };
-    const facts = [known(plan.cost) ? `${dollars(plan.cost)} per person` : "", known(plan.travel) ? `${plan.travel} minutes between stops` : ""].filter(Boolean).join(" and ");
+    const facts = [known(plan.cost) ? `${dollars(plan.cost)} per person` : "", known(plan.travel) ? `${formatDuration(plan.travel)} between stops` : ""].filter(Boolean).join(" and ");
     return { label: plans.length === 1 ? "YOUR ITINERARY" : "ALTERNATIVE PLAN",
       description: [venueDetail, facts ? `${facts}.` : ""].filter(Boolean).join(" ") || "An option for the activities you requested." };
   });
@@ -93,7 +94,7 @@ export function recommendationCopy(plans: RecommendationFacts[], preference: str
       if (known(plan.cost) && top.some(j => known(plans[j].cost) && !close(plans[j].cost, plan.cost))) {
         title = `Joint Best at ${dollars(plan.cost)}`;
       } else if (known(plan.travel) && top.some(j => known(plans[j].travel) && !close(plans[j].travel, plan.travel))) {
-        title = `Joint Best, ${plan.travel}-Min Travel`;
+        title = `Joint Best, ${formatDuration(plan.travel)} Travel`;
       }
     } else if (explanation.label === "ALTERNATIVE PLAN" && known(plan.cost)) {
       title = `Outing at ${dollars(plan.cost)}`;

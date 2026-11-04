@@ -143,3 +143,8 @@ Actual production-build browser timing measured from keyboard Regenerate submiss
 This pass does **not** declare all six consolidated improvements complete. Traffic-aware routing/accounting, three-hour return handling, shortest-first exploration, the five duration meanings and now/current-hours behavior are implemented and verified. Accepted grocery-duration editing remains working, including expiry recovery. The Qwen latency item remains open because candidate changes either lost source-grounded facts or worsened tail latency; the previous correct inference policy is preserved. No new model download, provider, private profile, billing/quota, deployment or roadmap task was used to work around that limitation. Consumer Google Maps parity and live Google latency/coverage remain unverified.
 
 Current source, tests, new benchmark scripts and all measurement records were reviewed; the credential scan found zero configured private-value matches in current files/assets and Git history. The existing optional WASM dependency-tree warning is the only dependency check exception. Repository privacy and the original release tag are preserved; Task 51 remains unstarted.
+
+
+## November 4 — final Task 50E acceptance repair
+
+Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).

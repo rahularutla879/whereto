@@ -79,9 +79,9 @@ export default function Home() {
   const resultsRef = useRef<HTMLHeadingElement>(null);
   const requestRef = useRef<HTMLTextAreaElement>(null);
   function updatePreference(key: PreferenceField, value: string) {
-    const answering=result.advanced?.data.questions.some(q=>q.field===(key==='location'?'destination':key));
+    const answering=(!!result.advanced&&key==='date')||result.advanced?.data.questions.some(q=>q.field===(key==='location'?'destination':key));
     if(!answering)invalidateResults();
-    else {session.current.cancel();setLoading(false);}
+    else {session.current.cancel();setLoading(false);if(key==='date'){setAdvancedPreferenceDirty(true);setSavedOpen(false);pages.current.reset();syncPages();latest.current={...latest.current,plans:[],canExpand:false,canDiscover:false,canShowBeyond:false};setResult(previous=>({...previous,plans:[],saveReceipt:undefined,saveAccessToken:undefined,canExpand:false,canDiscover:false,canShowBeyond:false,message:"Date changed. Regenerate to check the updated visit."}));}}
     setPreferenceState(previous => editPreference(previous, key, value));
   }
   function invalidateResults() {
@@ -290,7 +290,7 @@ export default function Home() {
     if(result.advanced&&!dirty&&(advancedPreferenceDirty||result.advanced.data.questions.length)){
       const fields=result.advanced.data.questions.map(q=>q.field);
       const answer:Record<string,unknown>={};
-      if(fields.includes('date')&&preferences.date)answer.date=preferences.date;
+      if(preferences.date&&(fields.includes('date')||preferences.date!==result.advanced.data.date))answer.date=preferences.date;
       if(fields.includes('destination')&&preferences.location)answer.destination=preferences.location;
       if(advancedPreferenceDraft){const edits=advancedEdits(result.advanced.data,advancedPreferenceDraft);if(Object.keys(edits).length)answer.edits=edits;}
       await answerAdvanced(answer);return;
@@ -346,7 +346,7 @@ export default function Home() {
             <div className="planner-actions"><button className="secondary-button" type="button" onClick={cancelClarification}>Cancel follow-up</button>
               <button className="primary-button" type="submit" disabled={loading} aria-busy={loading}>{result.requestFailed ? "Retry" : "Continue planning"}<ArrowRight size={18} /></button></div>
         </div>}
-        {generated&&result.advanced&&<AdvancedClarifications state={result.advanced} busy={loading} nearOrigin={!!locationContext.startingLocation} onAnswer={answer=>void answerAdvanced(answer)}/>}
+        {generated&&result.advanced&&<AdvancedClarifications state={result.advanced} busy={loading} nearOrigin={!!locationContext.startingLocation} onAnswer={answer=>void answerAdvanced(answer)} onChooseTime={()=>{setPreferencesOpen(true);requestAnimationFrame(()=>document.querySelector<HTMLInputElement>('#preferences input[name="outing-date"]')?.focus());}}/>}
         {result.advanced&&optionsNotice&&(!result.plans.length||result.advanced.data.questions.length>0)&&<p role="alert">{optionsNotice}</p>}
         </form>
         {!loading && dataMode!=="unavailable" && !clarification?.questions.length && !result.requestFailed && (!generated||result.plans.length>0) && <p className="planner-disclaimer"><CircleHelp size={13} /> Not finding what you’re looking for? Try adjusting your preferences or searching again.</p>}
@@ -360,7 +360,7 @@ export default function Home() {
 
         {generated && <BeyondPreferences result={result}/>}
         {result.plans.length>0&&result.advanced?.data.preferences?.budget&&<p className="details-note">Time budget: {durationRelation(result.advanced.data.preferences.budget.relation)} {result.advanced.data.preferences.budget.minutes} minutes {result.advanced.data.preferences.budgetScope==='travel'?'for travel only, excluding visits (your explicit override)':'for the entire outing, including visits and all route legs'}.</p>}
-        {generated&&result.advanced&&!result.plans.length&&!result.advanced.data.questions.length&&<p role='status'>{result.message}</p>}
+        {generated&&result.advanced&&!result.plans.length&&!result.advanced.data.questions.length&&!result.advanced.data.closureOffers?.length&&<p role='status'>{result.message}</p>}
         {(!loading || optionsBusy) && !clarification?.questions.length && result.plans.length ? <div className="plans-grid">{result.plans.map((plan, index) => <PlanCard key={`${generated}-${plan.id}-${plan.date}`} plan={plan} index={index} detailsSession={detailsSession} />)}</div> : !clarification?.questions.length && (!result.advanced || loading) && <PlanningFeedback stage={planningStage} loading={loading} needsClarification={!!clarification?.questions.length} advancedUnavailable={result.advancedUnavailable} failed={!!result.requestFailed} message={result.message} onRetry={() => { void runPlanning(!!clarification || !!validated); }} onEdit={() => requestRef.current?.focus()} />}
         {generated && pageState.count>0 && <ItineraryPagination index={pageState.index} count={pageState.count} busy={loading} onNavigate={direction=>{const page=pages.current.navigate(direction);if(page){setResult(restoreContinuation(page,latest.current));syncPages();}}}/>}
         {generated && (result.dataMode === "real" || result.optionsToken) && (result.plans.length > 0 || result.optionsToken || result.canExpand || result.canDiscover || result.canShowBeyond) && <AlternativeActions

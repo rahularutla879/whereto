@@ -174,6 +174,7 @@ class InterpretationContext(ContractModel):
     # Explicit departure evidence only; default/earliest planning bounds do not qualify.
     departureMinute: int | None = Field(default=None, strict=True, ge=0, lt=1440)
     departureSource: str | None = Field(default=None, max_length=100)
+    dateOverride: bool = False
     departureNow: bool = False
     departureInstant: AwareDatetime | None = None
     originText: str | None = None
@@ -475,6 +476,7 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
             issues=[p for p in [first_problem,between_problem,*mode_problems,*calendar.issues,*travel_issues] if p])
         from backend.advanced_timing import explicit_departure
         context.departureMinute, context.departureSource = explicit_departure(calendar_raw)
+        context.dateOverride = bool(manual.date.strip())
         context.departureNow = bool(re.search(r"\bnow\b", calendar_raw, re.I)) and context.departureMinute is None
         from backend.journey import ambiguous_return, missing_return_confirmation
         home_question = ai.journey and (missing_return_confirmation(raw,ai.journey) or ai.journey.endpoint and (ai.journey.endpoint.kind=='home' or ambiguous_return(ai.journey.endpoint))) and journey_issue.startswith('Where should the outing end?')

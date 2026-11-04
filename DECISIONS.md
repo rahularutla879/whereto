@@ -514,3 +514,8 @@ Use one itinerary/card/contact design. Keep immutable source Journey plus explic
 ## November 3 — consolidated Task 50E refinement
 
 The owner's explicit current-traffic decision replaces the earlier unactivated Pro proposal. Traffic-aware routing/accounting, return/now semantics, shortest-first exploration, five dwell bounds and a measured model investigation continue Task 50E. Unsafe model changes were rejected; the latency acceptance item remains open. Existing card identity, editable answers, selected private saving, security, startup and roadmap numbers remain. Task 51 stays unstarted. [Implementation, measurements, verification and limitations](docs/task50e-consolidated.md).
+
+
+## November 4 — final Task 50E acceptance repair
+
+Readable duration presentation, named-venue closure recovery and explicit stop-specific outside-visit intent, fair optional coffee inclusion and model-free editable dwell are implemented. Shared cards, precise hard limits, existing provider authorization and private selected saving remain. Task 51 is unstarted. [Current acceptance record](docs/task50e-final-acceptance.md).
