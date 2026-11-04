@@ -14,7 +14,7 @@ test("mapped loopback stays local for real development planning",()=>{
 test("classified internal/database/provider failures survive consumer presentation",()=>{
   for(const code of ["database_not_configured","database_authentication_failed","save_transaction_failed","provider_quota_rejected","internal_application_error","llm_interpretation_failed"]){
     const value={code,message:"Check the operation; your itinerary is kept.",correlationId:"0123456789abcdef"};
-    const text=failureText(value,"fallback");assert.match(text,/0123456789abcdef/);assert.equal(consumerMessage(text),text);
+    const text=failureText(value,"fallback");assert.equal(text,value.message);assert.equal(classifiedFailure(value)?.correlationId,value.correlationId);assert.equal(consumerMessage(text),text);
   }
   assert.equal(classifiedFailure({code:"unknown",message:"SQL password SECRET"}),undefined);
   assert.equal(failureText({code:"unknown",message:"SQL SECRET"},"Safe fallback"),"Safe fallback");

@@ -56,7 +56,10 @@ def parse_interpretation(content: str) -> Interpretation:
 
 
 class AIError(RuntimeError):
-    """Safe, actionable error from the AI boundary."""
+    """Private diagnostic detail and a stable public category; never log content."""
+    def __init__(self,message,code='llm_unavailable'):
+        self.code=code
+        super().__init__(message)
 
 
 class AIProvider(Protocol):

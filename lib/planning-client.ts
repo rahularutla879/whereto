@@ -1,6 +1,7 @@
 import {measurePlanning} from "./planning-timing";
 import {adaptAdvanced} from "./advanced-planning";
 import {planningMessage} from "./continuation";
+import { consumerMessage } from "./results-presentation";
 import { failureText } from "./failure-diagnostics";
 import { currentRelative, explicitOrigin, recoveryCode, type DestinationContext } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
@@ -131,7 +132,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
   }
   // Raw text goes to Python AI; the legacy keyword resolver is never called.
   // `today` remains source-compatible; only the Python resolver owns the clock.
-  const failure = (message: string): PlannerResult => ({ plans: [], message, location: "",
+  const failure = (message: string): PlannerResult => ({ plans: [], message:consumerMessage(message), location: "",
     activities: [], notes: [], requestFailed: true });
   try {
     // Submission-only preflight. Never called on mount or input changes.
@@ -145,7 +146,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ text, preferences, ...(relative&&context?.locationContext?.calendarTimezone?{calendarTimezone:context.locationContext.calendarTimezone}:{}), ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
-    if (!interpreted.ok) return failure(failureText(extraction, typeof extraction?.message === "string" ? extraction.message : "AI interpretation unavailable. No plan was generated."));
+    if (!interpreted.ok) return failure(failureText(extraction, typeof extraction?.message === "string" ? extraction.message : "We couldn't finish understanding that request. Please try again or edit the wording."));
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
     if (extraction.unsupported !== undefined && (!Array.isArray(extraction.unsupported) || !extraction.unsupported.every((s: unknown) => typeof s === "string"))) throw new Error("Invalid unsupported response");
@@ -220,14 +221,14 @@ export async function generateOuting(text: string, preferences: Preferences = EM
         const error = await response.json();
         return {...failure(typeof error.message === "string" ? error.message : "Invalid outing request. Check your preferences and try again."),recoveryCode:recoveryCode(error.code),notes:providerDiagnosticNotes(error.diagnostics)};
       }
-      return failure("Python planner unavailable. Start the backend and try again. No plan was generated.");
+      return failure("We’re having trouble creating your plans right now. Please try again.");
     }
     const result = adaptRanking(await response.json());
     result.notes = [...extraction.notes.filter((note: string) => result.dataMode !== "real" || !note.includes("Mock travel is mode-independent")), ...result.notes];
     context?.onComplete?.();
     return result;
   } catch {
-    return failure("AI interpretation or Python planner unavailable, timed out, or returned an invalid response. Check both services and retry. No plan was generated.");
+    return failure("We're having trouble planning your outing right now. Please try again.");
   }
 }
 

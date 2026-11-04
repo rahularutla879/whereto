@@ -8,5 +8,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
-  return <html lang="en"><body>{children}</body></html>;
+  // Extensions may add attributes to this static body before hydration. This
+  // one-level escape hatch does not suppress mismatches in child components.
+  return <html lang="en"><body suppressHydrationWarning>{children}</body></html>;
 }

@@ -47,7 +47,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
   }, send);
   try {
     let ready = false;
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 600; i++) {
       try { ready = (await fetch(`${process.env.BACKEND_URL}/health`)).ok; } catch { /* startup */ }
       if (ready) break;
       await new Promise(r => setTimeout(r, 50));
@@ -118,7 +118,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     const plannerDown: typeof fetch = (url, init) => url === "/api/plans/generate"
       ? Promise.resolve(Response.json({ message: "Unavailable" }, { status: 503 })) : send(url, init);
     const failedPlan = await continueRun({ location: "Baltimore", people: "3" }, plannerDown);
-    assert.match(failedPlan.message, /planner unavailable/);
+    assert.match(failedPlan.message, /trouble creating your plans.*try again/i);
     assert.ok(retained); // Valid interpretation survives planner failure for a model-free retry.
     assert.equal(failedPlan.requestFailed, true);
     assert.equal(completed, 0);
@@ -179,7 +179,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     assert.deepEqual(paths, ["/api/interpret"]);
     modelContent = "{}";
     paths.length = 0;
-    assert.match((await run()).message, /local language interpreter.*Ollama.*Reference: [a-f0-9]{16}/);
+    assert.match((await run()).message, /couldn't finish understanding.*try again or edit/i);
     assert.deepEqual(paths, ["/api/interpret"]);
     modelStatus = 500;
     assert.equal((await run()).plans.length, 0);

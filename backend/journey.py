@@ -5,6 +5,7 @@ An empty edge list means no user ordering requirement. Legacy activity lists
 default to required discoverable stops; no optionality/order is invented.
 """
 import re
+from backend.source_text import ARROW
 from typing import Annotated, Literal
 from pydantic import ConfigDict, Field, model_validator
 from backend.models import ContractModel, Nonblank
@@ -175,6 +176,15 @@ def normalize_extracted_references(raw, ai):
     source evidence. Missing/unrecognized constraints still fail validation.
     """
     j = ai.journey
+    if j:
+        from backend.source_text import verbatim
+        # Restore exact original punctuation/spacing only for equivalent supplied
+        # references; never add a missing stop, word, identity or numeric value.
+        ai.activities=[verbatim(raw,p) or p for p in ai.activities]
+        references=[*j.stops,*j.order,*([j.endpoint] if j.endpoint else []),*([j.total_duration] if j.total_duration else []),*([j.deadline] if j.deadline else []),*([j.shared_place] if j.shared_place else []),*[s.duration for s in j.stops if s.duration]]
+        for item in references:item.source=verbatim(raw,item.source) or item.source
+        for item in j.stops:
+            if item.evidence:item.evidence=verbatim(raw,item.evidence) or item.evidence
     if not j or [s.source.casefold() for s in j.stops] != [p.casefold() for p in ai.activities]:
         return
     if j.order_conflict:
@@ -288,6 +298,7 @@ def validate_journey(raw, ai):
     order_words = TIME_WORDING.sub(' ', DATE_WORDING.sub(' ', guarded))
     if (j.order and not j.order_conflict and j.ordering=='constrained'
             and not re.search(r'\b(?:first|then|after|before|finally|afterward|followed|order)\b',order_words,re.I)
+            and not ARROW.search(order_words)
             and all(e.before<e.after and e.source.casefold() in raw.casefold()
                     and j.stops[e.before].source.casefold() in e.source.casefold()
                     and j.stops[e.after].source.casefold() in e.source.casefold() for e in j.order)):
@@ -405,7 +416,9 @@ def validate_journey(raw, ai):
         if j.endpoint.kind in ('activity','brand') and re.search(r'\b(?:at|to)\s+[A-Z][\w’-]+\s+[A-Z][\w’-]+|\bon Route\s+\d+',j.endpoint.source):
             return REPHRASE, True
     for edge in j.order:
-        if not re.search(r'\b(?:first|then|after|before|finally|afterward|followed)\b',edge.source,re.I):
+        if ARROW.search(edge.source) and not re.search(r'\b(?:first|then|after|before|finally|afterward|followed)\b',edge.source,re.I):
+            if edge.before>=edge.after:return REPHRASE, True
+        if not ARROW.search(edge.source) and not re.search(r'\b(?:first|then|after|before|finally|afterward|followed)\b',edge.source,re.I):
             return REPHRASE, True
         a,b = j.stops[edge.before].source,j.stops[edge.after].source
         if a.casefold() not in edge.source.casefold() or b.casefold() not in edge.source.casefold():
@@ -436,6 +449,14 @@ def validate_journey(raw, ai):
     order_raw = TIME_WORDING.sub(' ',DATE_WORDING.sub(' ',guarded))
     if len(j.stops)>1 and re.search(r'\b(?:then|afterward|before|after|first|finally)\b',order_raw,re.I) and not (j.order or j.ordering=='flexible' or j.clarification):
         return REPHRASE, True
+    for index in range(len(activity_spans)-1):
+        if ARROW.search(raw[activity_spans[index][1]:activity_spans[index+1][0]]):
+            frontier=[index];seen=set()
+            while frontier:
+                node=frontier.pop()
+                if node in seen:continue
+                seen.add(node);frontier.extend(e.after for e in j.order if e.before==node)
+            if index+1 not in seen:return REPHRASE, True
     for pattern, present in checks:
         if re.search(pattern, raw, re.I) and not present and not j.clarification:
             # Travel-only wording remains validated by existing source checks.

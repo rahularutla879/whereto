@@ -363,10 +363,11 @@ class AdvancedRouter:
         self._arguments, self._result = arguments, result
         return result.model_copy(deep=True)
 
-    def advance(self, *, origin=None, allow_beyond_limit=False):
+    def advance(self, *, origin=None, allow_beyond_limit=False, element_allowance=MAX_ELEMENTS):
         """One explicit bounded beam/Matrix batch; same resolver and outing."""
         resolved=self.resolver.routing_snapshot()
-        result=self._plan(resolved,origin,allow_beyond_limit,incremental=True)
+        if type(element_allowance) is not int or not 0<=element_allowance<=MAX_ELEMENTS:raise ValueError('Invalid bounded routing allowance.')
+        result=self._plan(resolved,origin,allow_beyond_limit,incremental=True,element_allowance=element_allowance)
         self._arguments=(resolved.model_dump_json(),origin.model_dump_json() if origin else None,allow_beyond_limit)
         self._result=result
         return result.model_copy(deep=True)
@@ -380,7 +381,7 @@ class AdvancedRouter:
         self._arguments=(resolved.model_dump_json(),*self._arguments[1:])
         self._result=self._result.model_copy(update={'candidates':candidates})
 
-    def _plan(self, resolved, origin, allow_beyond_limit, incremental=False):
+    def _plan(self, resolved, origin, allow_beyond_limit, incremental=False, element_allowance=MAX_ELEMENTS):
         journey, context = resolved.journey, resolved.context
         exclusions = []
         metadata = dict(journey=journey, date=str(context.date) if context and context.date else None,
@@ -443,18 +444,18 @@ class AdvancedRouter:
                     return blocked('no_candidates', 'Verified current hours exclude a required stop throughout the requested date.')
         paths = _shortlist(resolved, origin, finish, min(100 if incremental else POOL_WIDTH, self.resolver.outing.settings.candidates_per_activity), self.checked if incremental else frozenset())
         if incremental:paths=paths[:max(0,256-len(self.checked))]
+        from backend.routes import current_evidence
+        self._evidence={k:v for k,v in self._evidence.items() if current_evidence(v,mode)}
         selected, pairs = [], {}
         for path in paths:
             topology = _topology(path, origin, endpoint_facts, returning)
             added = {(a.id, b.id): (a, b) for _, _, _, a, b in topology}
             union = pairs | added
-            if len(union) <= MAX_ELEMENTS:
+            if len(union) <= MAX_ELEMENTS and sum(k not in self._evidence for k in union)<=element_allowance:
                 selected.append((path, topology))
                 pairs = union
         if not selected:
             return blocked('no_candidates', 'No distinct verified venue assignment satisfies the required stops and ordering.')
-        from backend.routes import current_evidence
-        self._evidence={k:v for k,v in self._evidence.items() if current_evidence(v,mode)}
         needed={k:v for k,v in pairs.items() if k not in self._evidence}
         elements = requests = 0
         local_block=False

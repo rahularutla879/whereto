@@ -757,3 +757,7 @@ Task 51 remains unstarted.
 ## November 4 — final Task 50E acceptance repair
 
 Readable duration presentation, named-venue closure recovery and explicit stop-specific outside-visit intent, fair optional coffee inclusion and model-free editable dwell are implemented. Shared cards, precise hard limits, existing provider authorization and private selected saving remain. Task 51 is unstarted. [Current acceptance record](docs/task50e-final-acceptance.md).
+
+## Task 50E bounded coverage and source fidelity
+
+Advanced initial planning can use one selective fill stage inside the original 27-element allowance. Server continuation flags drive found-so-far copy. Narrow source-reference equivalence preserves original Unicode text and supplied ordering. Public interpretation failures expose stable safe categories; protected diagnostics keep opaque references. Only the static body uses the one-level hydration escape hatch for external attributes.

@@ -4,11 +4,14 @@ import type { Plan } from "./planner";
 export const DEMO_DISCLOSURE = "Venues, prices, travel times, and event schedules are fictional.";
 export const OPENING_HOURS_ISSUE = "Opening hours cannot be checked; obtain structured windows for the requested day.";
 
-export function resultsSummary(count: number) {
+export function resultsSummary(count: number,result?:{canExpand?:boolean;canDiscover?:boolean},found=count) {
+  if(result)return `Found ${found} ${found===1?'option':'options'} so far. ${found>count?`Showing ${count} on this page. `:''}${result.canExpand?'More combinations may be available. ':''}${result.canDiscover?'You can also look for more nearby places.':''}`.trim();
   return `Found ${count} possible ${count === 1 ? "plan" : "plans"}.`;
 }
 
 export function consumerMessage(message: string) {
+  if(/local model|local AI|local language interpreter|Check Ollama|Qwen|FastAPI|JSON schema|Start the.*backend|backend\/\.env/i.test(message))return "We're having trouble planning your outing right now. Please try again.";
+  if(/outing session expired|travel estimates have expired/i.test(message))return 'These options are still available to view. Regenerate to look for more.';
   if (/local.*Places.*minute/i.test(message)) return "We’ve reached a temporary search limit. Your saved plans are still available; try exploring again shortly.";
   if (/local.*(?:route|routing|provider).*minute|local rolling-minute/i.test(message))
     return "We've reached a temporary routing limit. You can still browse your saved plans and try exploring again shortly.";

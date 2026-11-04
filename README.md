@@ -622,3 +622,5 @@ The ignored owner profile uses `WHERETO_ADVANCED_DEV=1` and `WHERETO_STOP_RESOLU
 ## November 3 — Task 50E acceptance repair
 
 The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](docs/task50e-repair.md). Earlier one-page limitations describe the original checkpoint.
+
+Recommendations show options found so far and distinguish more combinations from searching more nearby places. Planning errors keep your request for Retry or Edit. Browser writing extensions can modify a page before it loads; the reported extension-attribute warning is handled without changing planning behavior. Startup commands are unchanged.

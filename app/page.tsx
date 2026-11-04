@@ -57,8 +57,8 @@ export default function Home() {
   const [result, setResult] = useState<PlannerResult>(demoPlans as PlannerResult);
   const pages = useRef(new ItineraryPages());
   const latest = useRef<PlannerResult>(demoPlans as PlannerResult);
-  const [pageState,setPageState]=useState({index:0,count:0,hasBeyond:false});
-  function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length,hasBeyond:pages.current.pages.some(page=>page.plans.some(plan=>plan.travelClassification==="beyond_limit"))});}
+  const [pageState,setPageState]=useState({index:0,count:0,foundCount:0,hasBeyond:false});
+  function syncPages(){setPageState({index:pages.current.index,count:pages.current.pages.length,foundCount:new Set(pages.current.pages.flatMap(page=>page.plans.map(p=>p.id))).size,hasBeyond:pages.current.pages.some(page=>page.plans.some(plan=>plan.travelClassification==="beyond_limit"))});}
   const [loading, setLoading] = useState(false);
   const session = useRef(new PlanningSession());
   useEffect(()=>{
@@ -315,7 +315,7 @@ export default function Home() {
       <section className="planner-section shell" id="planner" aria-labelledby="planner-title">
         <form className="planner" onSubmit={submit}>
           <div className="planner-topline"><h2 id="planner-title"><Sparkles size={19} /> What are we getting into?</h2></div>
-          {dataMode === "unavailable" && <p role="status">Checking the planner connection. If this stays unavailable, start the backend and reload this page before planning.</p>}
+          {dataMode === "unavailable" && <p role="status">Connecting to the planner. If this stays unavailable, please reload and try again.</p>}
           <label htmlFor="outing" className="sr-only">Describe your outing</label>
           <textarea id="outing" ref={requestRef} value={request} onChange={(event) => { replaceRequest(); setRequest(event.target.value); event.target.setCustomValidity(""); }} placeholder={EXAMPLE_REQUEST} maxLength={1200} required rows={3} />
           <p className="prompt-help">Big ideas, loose plans, oddly specific cravings. All welcome.</p>
@@ -354,7 +354,7 @@ export default function Home() {
       </section>
 
       <section id="plans" className="plans-section shell" aria-labelledby="plans-title">
-        <div className="section-heading"><div><p className="eyebrow">{savedOpen ? "YOUR SAVED PLAN" : generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{savedOpen ? "Your saved outing." : generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{savedOpen ? "Your selected itinerary and original requirements." : loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length) : (clarification?.questions.length||result.advanced?.data.questions.length) ? "Answer the follow-up above to continue." : result.advancedUnavailable ? "Your requirements are kept. Advanced route planning is still being added." : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {savedOpen ? "Saved plan" : generated ? result.dataMode === "real" ? "Real venues" : "Sample results" : "Demo itineraries"}</span></div>
+        <div className="section-heading"><div><p className="eyebrow">{savedOpen ? "YOUR SAVED PLAN" : generated ? "FROM GROUP CHAT TO GAME PLAN" : "A LITTLE INSPIRATION"}</p><h2 ref={resultsRef} tabIndex={-1} id="plans-title">{savedOpen ? "Your saved outing." : generated ? "Your next good time." : "Good plans look like this."}</h2><p role="status" aria-live="polite">{savedOpen ? "Your selected itinerary and original requirements." : loading ? planningStage + "…" : generated ? (result.plans.length ? resultsSummary(result.plans.length,result,pageState.foundCount||result.plans.length) : (clarification?.questions.length||result.advanced?.data.questions.length) ? "Answer the follow-up above to continue." : result.advancedUnavailable ? "Your requirements are kept. Advanced route planning is still being added." : "Adjust your request or preferences using the explanation below.") : "One request. Three ways to make a day of it."}</p></div><span className="sample-data-label"><span /> {savedOpen ? "Saved plan" : generated ? result.dataMode === "real" ? "Real venues" : "Sample results" : "Demo itineraries"}</span></div>
         <div id="saved-results" />
         <div hidden={savedOpen}>
 

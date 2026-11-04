@@ -17,6 +17,7 @@ from backend.location_policy import FirstTravel, Geography, first_intent, geogra
 from backend.between_policy import between_intent, mask
 from backend.travel_constraints import travel_evidence, exclusive_limit, resolved_travel_label, normalize_verbatim_travel, CONTEXT
 from backend.ai import AIProvider, Interpretation, create_provider
+from backend.source_text import valid_input
 from backend.models import (ContractModel, CostPreference, Nonblank,
                             PlanningRequest, TransportationMode)
 
@@ -40,7 +41,7 @@ ALIASES = {
     "karaoke": "karaoke", "arcade": "arcade", "video games": "arcade",
     "escape room": "escape", "escape rooms": "escape", "mini golf": "miniGolf", "mini-golf": "miniGolf", "miniature golf": "miniGolf", "putt-putt": "miniGolf",
     "shopping": "shopping", "thrifting": "shopping", "zoo": "zoo",
-    "groceries": "custom:supermarket", "grocery shopping": "custom:supermarket",
+    "grocery": "custom:supermarket", "groceries": "custom:supermarket", "grocery shopping": "custom:supermarket",
     "grocery store": "custom:supermarket", "supermarket": "custom:supermarket",
     "pharmacy": "custom:pharmacy", "atm": "custom:atm", "bank": "custom:bank",
     "bookstore": "custom:bookstore", "book store": "custom:bookstore",
@@ -122,8 +123,9 @@ class ClarificationAnswers(ContractModel):
 
 
 class PendingClarification(ContractModel):
+    _valid_text=field_validator('text')(valid_input)
     # Browser memory only. All supplied state is revalidated, never trusted as a plan.
-    text: Annotated[Nonblank, Field(max_length=4000)]
+    text: Annotated[str, Field(min_length=1,max_length=4000)]
     interpretation: Interpretation
     answers: ClarificationAnswers = Field(default_factory=ClarificationAnswers)
     referenceTime: AwareDatetime
@@ -138,7 +140,8 @@ class ClarificationQuestion(ContractModel):
 
 
 class InterpretationInput(ContractModel):
-    text: Annotated[Nonblank, Field(max_length=4000)]
+    _valid_text=field_validator('text')(valid_input)
+    text: Annotated[str, Field(min_length=1,max_length=4000)]
     preferences: ManualPreferences = Field(default_factory=ManualPreferences)
     calendarTimezone: str | None = Field(default=None,max_length=100)
 

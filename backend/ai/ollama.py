@@ -270,15 +270,15 @@ class OllamaProvider:
                               "A missing model must be downloaded separately with owner approval.") from error
             raise AIError(f"Ollama returned HTTP {error.code}; check the local service and model.") from error
         except (TimeoutError, socket.timeout) as error:
-            raise AIError("Ollama request timed out; retry or increase AI_TIMEOUT_SECONDS.") from error
+            raise AIError("Ollama request timed out; retry or increase AI_TIMEOUT_SECONDS.",code="llm_timeout") from error
         except URLError as error:
             if isinstance(error.reason, (TimeoutError, socket.timeout)):
-                raise AIError("Ollama request timed out; retry or increase AI_TIMEOUT_SECONDS.") from error
+                raise AIError("Ollama request timed out; retry or increase AI_TIMEOUT_SECONDS.",code="llm_timeout") from error
             raise AIError("Cannot reach Ollama. Open Ollama or run 'ollama serve', and check AI_BASE_URL.") from error
         except OSError as error:
             raise AIError("Ollama connection failed while reading the response; check the local service.") from error
         except (ValueError, UnicodeError) as error:
-            raise AIError("Ollama returned invalid response JSON.") from error
+            raise AIError("Ollama returned invalid response JSON.",code="llm_invalid_response") from error
         try:
             if not isinstance(result, dict) or result.get("done") is not True:
                 raise ValueError("Incomplete response")
@@ -293,4 +293,4 @@ class OllamaProvider:
             record_ai(result,(validation_started-started)*1000,(perf_counter()-validation_started)*1000)
             return interpretation
         except (KeyError, TypeError, ValueError, ValidationError) as error:
-            raise AIError("Ollama returned incomplete or invalid structured output; no interpretation was accepted.") from error
+            raise AIError("Ollama returned incomplete or invalid structured output; no interpretation was accepted.",code="llm_invalid_response") from error

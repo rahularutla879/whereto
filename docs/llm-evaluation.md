@@ -97,3 +97,7 @@ scores structured meanings and safe execution outcomes, not JSON validity alone.
 See [contract and reproducible commands](complex-interpretation.md). Final bounded
 accuracy, timings and evaluation limits are recorded in HANDOVER.md. No new model,
 provider, dependency, Google operation or persistence change is introduced.
+
+## Task 50E Unicode regression
+
+unicode_extractions.json records four unchanged installed-Qwen extractions for authored public arrow/then prompts. Replays verify supplied order, required stops, return and budgets without Google. Narrow source-reference punctuation/whitespace equivalence restores original names, never creates missing requirements. Public timeout/unavailable/invalid-response messages differ; technical categories/references remain in protected diagnostics. See task50e-final-acceptance.md for measured actual-model and browser results.

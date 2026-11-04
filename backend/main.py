@@ -142,8 +142,12 @@ def interpret_outing(request: InterpretationInput):
         from backend.advanced_planning import sessions
         result.advancedToken = sessions.create(request.text, result, provider_budget, request.preferences)
         return result
-    except (AIError, ValidationError, TimeoutError):
-        return failure('llm_interpretation_failed',503,operation='interpretation')
+    except AIError as error:
+        return failure(error.code,503,operation='interpretation',error=error)
+    except TimeoutError as error:
+        return failure('llm_timeout',503,operation='interpretation',error=error)
+    except ValidationError as error:
+        return failure('llm_invalid_response',503,operation='interpretation',error=error)
 
 
 @app.get("/api/planning-mode")

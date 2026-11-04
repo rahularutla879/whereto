@@ -7,13 +7,15 @@ export async function POST(request: Request) {
   const headers:Record<string,string> = { "Cache-Control": "no-store" };
   let payload: unknown;
   try { payload = await request.json(); }
-  catch { return Response.json({ code: "invalid_request", message: "Send a JSON outing request." }, { status: 400, headers }); }
+  catch { return Response.json({ code: "invalid_request", message: "Enter your outing and try again." }, { status: 400, headers }); }
+  let received = false;
   try {
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
     const response = await fetch(`${base.replace(/\/$/, "")}/api/interpret`, {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload),
       cache: "no-store", signal: AbortSignal.timeout(70000),
     });
+    received = true;
     const data = await response.json();
     Object.assign(headers,timingHeaders(response.headers.get("server-timing"),performance.now()-started));
     if (response.status === 422 || response.status === 503) {
@@ -26,6 +28,8 @@ export async function POST(request: Request) {
       || !(data.request === null || (typeof data.request === "object" && Array.isArray(data.request.activities)))) throw new Error("Invalid interpretation response");
     return Response.json(data, { headers });
   } catch {
-    return Response.json({ code: "ai_unavailable", message: "AI interpretation unavailable or timed out. Start the Python backend and local AI service, then retry. No plan was generated." }, { status: 503, headers });
+    return Response.json(received
+      ? { code: "llm_invalid_response", message: "We couldn't finish understanding that request. Please try again or edit the wording." }
+      : { code: "ai_unavailable", message: "We're having trouble planning your outing right now. Please try again." }, { status: 503, headers });
   }
 }

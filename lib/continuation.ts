@@ -15,5 +15,6 @@ export function restoreContinuation(page:PlannerResult,latest:PlannerResult):Pla
 export function continuationNotice(result:PlannerResult,notice=''){
  if(notice)return notice;
  if(!result.plans.length)return '';
- return result.continuationStatus?.message??(!result.canExpand&&!result.canDiscover?"We can't find any more options for this outing right now. Try a different area or change your preferences.":'');
+ if(result.continuationStatus?.kind==='checked_pool_exhausted')return 'No more matching combinations found among the places checked so far.'+(result.canDiscover?' You can look for more nearby places.':' Other venues may exist.');
+ return result.continuationStatus?.message??(!result.canExpand&&!result.canDiscover?"No more matching combinations found among the places checked so far. Other venues may exist.":'');
 }

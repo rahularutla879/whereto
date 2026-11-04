@@ -65,7 +65,7 @@ test("offline Surprise HTTP pipeline has no origin, landmark or first-leg reques
   const post=(path:string,body:unknown)=>fetch(base+path,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   const request={activities:["bowling","food"],location:"Baltimore",date:"2026-11-14",people:3,planningMode:"surprise",locationFirst:true};
   try{
-    for(let i=0;i<100;i++){try{if((await fetch(base+"/health")).ok)break;}catch{ /* Local fixture server is starting. */ }await new Promise(r=>setTimeout(r,50));}
+    for(let i=0;i<600;i++){try{if((await fetch(base+"/health")).ok)break;}catch{ /* Local fixture server is starting. */ }await new Promise(r=>setTimeout(r,50));}
     const response=await post("/api/plans/generate",request);assert.equal(response.status,200);
     const raw=await response.json(),result=adaptRanking(raw);
     assert.equal(result.plans.length,3);assert.ok(result.plans.every(p=>p.firstLeg===null&&p.planningMode==="surprise"));

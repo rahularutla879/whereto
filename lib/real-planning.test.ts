@@ -35,7 +35,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   };
   const scenario = (name: string) => {mockMode=name==="mock";return fetch(`${base}/__test/scenario`, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ name }) });};
   try {
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 600; i++) {
       try { if ((await fetch(`${base}/health`)).ok) break; } catch { /* local startup */ }
       await new Promise(r => setTimeout(r, 50));
     }
@@ -189,7 +189,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
       const retryText = "Bowling then dinner in Baltimore for 2 people on 2026-11-07";
       const failure = await generateOuting(retryText, EMPTY_PREFERENCES, { onValidated: value => { retained = value; } }, send);
       assert.equal(failure.plans.length, 0);
-      assert.match(failure.message, /matching real venues|destination could not be verified|quota.*reached|venue or routing service could not complete/);
+      assert.match(failure.message, /matching real venues|destination could not be verified|(?:quota|limit).*reached|venue or routing service could not complete/);
       if (name === "quota") {
         assert.equal(failure.requestFailed, true);
         assert.ok(retained);

@@ -56,6 +56,6 @@ export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reo
       : "Saved plans are unavailable. Your current itinerary is kept; try again later." }, { status: [404,409,413,422].includes(response.status) ? response.status : 503, headers });
     return Response.json(publicPlanningPayload(data), { headers });
   } catch {
-    return Response.json({ message: advanced?"Advanced planning is unavailable. Your current request and itinerary are kept; try again.":"Saved plans are unavailable. Your current itinerary is kept; check the backend and try again." }, { status: 503, headers });
+    return Response.json({ message: advanced?"Advanced planning is unavailable. Your current request and itinerary are kept; try again.":"Saved plans are unavailable. Your current itinerary is kept; please try again." }, { status: 503, headers });
   }
 }

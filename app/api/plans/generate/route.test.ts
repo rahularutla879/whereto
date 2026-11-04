@@ -33,7 +33,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
   const backend = spawn("backend/.venv/bin/python", ["-m", "uvicorn", "backend.main:app", "--host", "127.0.0.1", "--port", String(address.port), "--log-level", "warning"]);
   try {
     let ready = false;
-    for (let i = 0; i < 100; i++) {
+    for (let i = 0; i < 600; i++) {
       try { ready = (await fetch(`${process.env.BACKEND_URL}/health`)).ok; } catch { /* starting */ }
       if (ready) break;
       await new Promise(resolve => setTimeout(resolve, 50));
@@ -159,7 +159,7 @@ test("historical resolved request → Next.js proxy → real Python planner → 
     {
       const r = await run("Coffee on 2026-11-07");
       assert.equal(r.plans.length, 0);
-      assert.match(r.message, /Python planner unavailable/);
+      assert.match(r.message, /trouble creating your plans.*try again/i);
     }
   } finally {
     clearInterval(keepAlive);

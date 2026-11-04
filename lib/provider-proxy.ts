@@ -18,6 +18,6 @@ export async function providerProxy(path: "/api/starting-areas" | "/api/planning
     if (!response.ok) return Response.json(publicPlanningPayload({ code:recoveryCode(data.code), message: response.status === 422 && typeof data.message === "string" ? data.message : "Venue lookup is unavailable. Try again later.",diagnosticNotes:providerDiagnosticNotes(data.diagnostics),...(path==="/api/plans/options"?{resumable:data.diagnostics?.failureBoundary==="local_minute",...(typeof data.continuation?.canExpand==="boolean"&&typeof data.continuation?.canDiscover==="boolean"?{continuation:{canExpand:data.continuation.canExpand,canDiscover:data.continuation.canDiscover}}:{})}:{}),...(path==="/api/venues/details"&&typeof data.diagnostics?.contactRequestAdmitted==="boolean"?{diagnostics:{contactRequestAdmitted:data.diagnostics.contactRequestAdmitted}}:{}) }), { status: 422, headers });
     return Response.json(publicPlanningPayload(data), { headers });
   } catch {
-    return Response.json({ message: "Venue lookup is unavailable. Check that the local backend is running." }, { status: 503, headers });
+    return Response.json({ message: "Venue lookup is temporarily unavailable. Please try again." }, { status: 503, headers });
   }
 }

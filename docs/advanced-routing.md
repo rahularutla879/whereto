@@ -241,3 +241,7 @@ Shared readable duration formatting, named closed-visit recovery with explicit s
 ## Task 50E leg actions and optional continuation
 
 Every actual origin/intermediate/final/return leg now has the shared directions row. Public legs use exact selected Place IDs and mode; private origin/return URLs omit that endpoint, with visible Maps picker/input instructions. No private alias, coordinates or saved route URL. Optional opportunities are checked in bounded existing-inventory continuation before repeatedly serving omission alternatives; explicit discovery prioritizes optional activities and preserves geography, required stops and return. Traffic-aware five-minute evidence, exact limits, quotas and no retries are unchanged. [Diagnosis, counts and official URL support](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). Task 51 is unstarted.
+
+## Initial recommendation fill
+
+After local timing evaluation, one or two supported initial options can trigger one selective routing stage using only remaining room in the existing 27-element initial allowance. No new Places search, recursive fill or retry follows a failed transport. Three supported checked options need no fill. Genuine sparse inventories stay sparse. Coverage remains finite; server flags separate combinations and discovery.

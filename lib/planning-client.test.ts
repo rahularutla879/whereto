@@ -43,7 +43,7 @@ test("AI failures and invalid output produce clear errors without planning fallb
   ] as typeof fetch[]) {
     const r = await generateOuting("Coffee", EMPTY_PREFERENCES, context, send);
     assert.equal(r.plans.length, 0);
-    assert.match(r.message, /timed out|unavailable/);
+    assert.match(r.message, /trouble planning.*try again/i);
   }
 });
 

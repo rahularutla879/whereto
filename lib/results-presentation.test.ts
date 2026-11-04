@@ -60,8 +60,8 @@ test("failed plans retain the actionable violation without technical count or se
   ]) {
     const text = consumerMessage(failure);
     assert.doesNotMatch(text, /Python|backend|services|AI interpretation/);
-    assert.match(text, /could not/);
-    assert.match(text, /No plan was generated/);
+    assert.match(text, /could not|trouble planning/);
+    assert.match(text, /No plan was generated|try again/i);
   }
   const budgetFailure = failureMessage(`Known activity costs exceed budget; increase the cap. ${OPENING_HOURS_ISSUE}`);
   assert.match(budgetFailure, /exceed your per-person budget/);

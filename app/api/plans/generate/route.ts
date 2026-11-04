@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   const headers:Record<string,string> = { "Cache-Control": "no-store" };
   let payload: unknown;
   try { payload = await request.json(); }
-  catch { return Response.json({ code: "invalid_request", message: "Invalid request: send a JSON outing request." }, { status: 400, headers }); }
+  catch { return Response.json({ code: "invalid_request", message: "Enter your outing and try again." }, { status: 400, headers }); }
   let received=false;
   try {
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
@@ -35,6 +35,6 @@ export async function POST(request: Request) {
     return Response.json(publicPlanningPayload(data), { headers });
   } catch {
     if(received) return invalidUpstreamResponse();
-    return Response.json({ code: "backend_unavailable", message: "Python planner unavailable. Start the backend and try again. No plan was generated." }, { status: 503, headers });
+    return Response.json({ code: "backend_unavailable", message: "We’re having trouble creating your plans right now. Please try again." }, { status: 503, headers });
   }
 }

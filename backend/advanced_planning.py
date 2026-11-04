@@ -18,7 +18,7 @@ from backend.places import DiscoveryError, SearchArea
 from backend.provider_budget import local_real_enabled
 from backend.routes import AuthorizedStart
 from backend.stop_resolution import StopResolver
-from backend.advanced_routing import AdvancedRouter
+from backend.advanced_routing import AdvancedRouter, MAX_ELEMENTS
 from backend.advanced_timing import evaluate_advanced_timing
 from backend.saved_plans import Token
 from backend.display_duration import seconds_text
@@ -174,6 +174,8 @@ class Session:
         self.last = None
         self.resolution_attempted = False
         self.route_attempted = False
+        self.initial_fill_done = False
+        self.initial_fill_elements = 0
         self.date_answer = context.dateOverride
         self.search_area = None
         self.near_origin = None
@@ -514,6 +516,21 @@ class Session:
         zero=next((n for n,stop in enumerate(self.journey.stops) if (d:=self.durations.get(n,stop.duration)) is not None and d.minutes==0 and (self.budget_scope!='travel' or n not in self.explicit_overrides or self.journey.deadline is not None)),None)
         if zero is not None:
             return self.base(status='clarification',message='Zero is not a realistic visit duration. Supply positive visit time, or explicitly confirm zero counted time under a travel-only budget.',questions=[{'field':'dwell','occurrence':zero,'question':'How should time at this stop be counted?'}])
+        if not self.initial_fill_done:
+            self.initial_fill_done=True
+            # One local probe, at most one additional selective stage; no search,
+            # retries, extra initial element ceiling or recursive exploration.
+            initial_started=perf_counter()
+            probe=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure,budget_scope=self.budget_scope,allow_overrides=True)
+            supported=[c for c in probe.candidates if c.state!='infeasible' and c.route.route_status!='beyond_limit']
+            remaining=MAX_ELEMENTS-self.router._result.matrix_elements
+            errors=any(l.evidence.error_code for c in probe.candidates for l in c.route.legs)
+            if 0<len(supported)<3 and self.router.pending_paths and remaining>0 and not errors:
+                extra=self.router.advance(origin=self.origin,allow_beyond_limit=True,element_allowance=remaining)
+                self.initial_fill_elements=extra.matrix_elements
+                self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
+                self.router.use_candidates(list(self.candidates.values())[:256])
+            self.latencies['initialFillMs']=(perf_counter()-initial_started)*1000
         started=perf_counter()
         timing=evaluate_advanced_timing(self.router,evaluated_at=datetime.now(timezone.utc),dwell_answers=self.durations,departure_minute=self.departure,budget_scope=self.budget_scope,allow_overrides=True)
         # Offer authority is opaque, server-owned and bound to the exact verified
@@ -632,7 +649,7 @@ class Session:
                     if v.requested.requirement=='optional' and v.requested.duration is None:
                         q={'field':'dwell','occurrence':v.occurrence,'question':f'How long will you spend on optional {redact_source(v.requested.source,self.context)}? This is needed to check whether it fits; it has not been assumed to take zero time.'}
                         if q not in questions and not any(x.get('field')=='dwell' and x.get('occurrence')==v.occurrence for x in questions):questions.append(q)
-        self.selection_counts={'checked':len(timing.candidates),'eligible':len(available),
+        self.selection_counts={'initialFillElements':self.initial_fill_elements,'checked':len(timing.candidates),'eligible':len(available),
             'optionalInclusive':sum(any(v.requested.requirement=='optional' for v in c.route.visits) for c in timing.candidates),
             'selectedOptionalInclusive':sum(any(v.requested.requirement=='optional' for v in c.route.visits) for c in eligible),
             'exclusions':{code:sum(any(r.code==code and r.state=='infeasible' for r in c.reasons) for c in timing.candidates) for code in {r.code for c in timing.candidates for r in c.reasons if r.state=='infeasible'}}}

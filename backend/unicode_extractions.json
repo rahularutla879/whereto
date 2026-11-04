@@ -1,0 +1,230 @@
+[
+  {
+    "text": "Generate a grocery → pharmacy → return-to-start outing.",
+    "raw": {
+      "activities": [
+        "grocery",
+        "pharmacy"
+      ],
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "journey": {
+        "stops": [
+          {
+            "source": "grocery",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "pharmacy",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "grocery → pharmacy → return-to-start outing"
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return-to-start"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "clarification": ""
+      },
+      "date_expressions": [],
+      "time_expressions": []
+    },
+    "elapsedMs": 14574.396
+  },
+  {
+    "text": "Generate a grocery then pharmacy then return-to-start outing.",
+    "raw": {
+      "activities": [
+        "grocery",
+        "pharmacy"
+      ],
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "journey": {
+        "stops": [
+          {
+            "source": "grocery",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "pharmacy",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Generate a grocery then pharmacy then return-to-start outing."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return-to-start"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "clarification": ""
+      },
+      "date_expressions": [],
+      "time_expressions": []
+    },
+    "elapsedMs": 12169.406
+  },
+  {
+    "text": "Grocery → Pharmacy → Return within 90 minutes.",
+    "raw": {
+      "activities": [
+        "grocery",
+        "pharmacy"
+      ],
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "journey": {
+        "stops": [
+          {
+            "source": "grocery",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "pharmacy",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Grocery → Pharmacy → Return within 90 minutes."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "Return"
+        },
+        "total_duration": {
+          "minutes": 90,
+          "relation": "maximum",
+          "source": "within 90 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "clarification": ""
+      },
+      "date_expressions": [],
+      "time_expressions": []
+    },
+    "elapsedMs": 13376.635
+  },
+  {
+    "text": "College → Coffee → Return to start.",
+    "raw": {
+      "activities": [
+        "College",
+        "Coffee"
+      ],
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "journey": {
+        "stops": [
+          {
+            "source": "College",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "Coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "College → Coffee → Return to start."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "Return to start."
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "clarification": ""
+      },
+      "date_expressions": [],
+      "time_expressions": []
+    },
+    "elapsedMs": 12656.035
+  }
+]

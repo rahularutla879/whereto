@@ -203,3 +203,7 @@ Shared readable duration formatting, named closed-visit recovery with explicit s
 ## Task 50E acceptance continuation from 798a3fc
 
 The existing main form now asks where a bare return ends, preserving source, order and full three-hour maximum. Shared cards render separate directions rows for each actual leg with privacy-preserving omitted-endpoint Maps instructions. Optional opportunity continuation and prioritized café discovery expose bounded structured coverage/admission reasons; no-match preserves the latest valid page and selection. Qwen is not called for structured edits/exploration. [Actual model, browser, hosted and provider-count evidence](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). No saved schema or Task 51 change.
+
+## Found-so-far results and safe recovery
+
+The shared results heading counts distinct options in current in-tab page history and explains remaining combinations/discovery from structured server flags. Exhaustion means the checked inventory only. Pages remain available after no-match, expiry or recoverable provider failure. Original requests/preferences remain for explicit Retry/Edit. Initial fill uses at most one extra selective stage within existing admission ceilings.
