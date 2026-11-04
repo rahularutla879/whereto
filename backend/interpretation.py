@@ -495,8 +495,8 @@ def interpret_request(value: InterpretationInput, provider: AIProvider | None = 
                     questions=[ClarificationQuestion(field='endpoint',question=question,helpText='Used only for this request; not saved. A named location still needs place verification.')],
                     pending=PendingClarification(text=value.text,interpretation=ai,answers=answers,referenceTime=reference))
             if ai.journey.endpoint is None:
-                from backend.journey import Endpoint
-                ai.journey.endpoint=Endpoint(kind='origin' if origin_answer else 'home',source=re.search(r'\bbe back\b',raw,re.I).group())
+                from backend.journey import Endpoint, unresolved_return_clause
+                ai.journey.endpoint=Endpoint(kind='origin' if origin_answer else 'home',source=unresolved_return_clause(raw)[0])
             context.endpointAnswer=answer
             context.endpointStatus='origin_confirmed' if origin_answer else 'location_needs_verification'
             from backend.journey import LIMITATION

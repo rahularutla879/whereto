@@ -167,8 +167,12 @@ def main():
                 if body['travelMode']=='WALK':return 600
                 if scenario['name']=='advanced_traffic_long':return 3600
                 if scenario['name']=='advanced_acceptance_fractional':return 119.316666667
+                if scenario['name'] in ('advanced_optional_later','advanced_optional_discovery','advanced_optional_impossible'):
+                    ids=' '.join(p['waypoint'].get('placeId','') for p in (a,b))
+                    cafe=re.search(r'Synthetic_cafe_(\d+)',ids)
+                    threshold=4 if scenario['name']=='advanced_optional_later' else 10 if scenario['name']=='advanced_optional_discovery' else 1000
+                    if cafe and int(cafe[1])<threshold:return 3000
                 if scenario['name']=='advanced_shortest':
-                    import re
                     ids=' '.join(p['waypoint'].get('placeId','') for p in (a,b))
                     cafe=re.search(r'Synthetic_cafe_(\d+)',ids)
                     if cafe:return (int(cafe[1])+1)*60
@@ -206,7 +210,7 @@ def main():
             if args.advanced:
                 import json
                 from pathlib import Path
-                rows=json.loads(Path(__file__).with_name('repair_extractions.json').read_text())
+                rows=json.loads(Path(__file__).with_name('repair_extractions.json').read_text())+json.loads(Path(__file__).with_name('return_phrase_extractions.json').read_text())
                 match=next((r for r in rows if r['text'].casefold()==text.casefold()),None)
                 if match:return Interpretation.model_validate(match['raw'])
             if args.journey or args.advanced:

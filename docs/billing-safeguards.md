@@ -588,3 +588,6 @@ Task 51 remains unstarted.
 ## November 4 — final Task 50E acceptance repair
 
 Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).
+
+
+Task 50E leg-link/optional continuation repair: Maps URL anchors trigger no application provider call. A more useful Different action may dispatch the existing bounded Matrix batch earlier (controlled fixture +27 Pro elements, synthetic gross $0.27); no Places/Qwen call. Explicit nearby discovery still admits at most two supported page/variant searches and existing selective Matrix evidence. Current TRAFFIC_AWARE Pro/Walking policy, quotas, concurrency and zero retries are unchanged. Automated/browser Google sends were blocked; actual Google cost $0. [Counts and limitations](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). No Cloud/private profile change.

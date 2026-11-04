@@ -146,7 +146,7 @@ def normalize_explicit_durations(raw, guarded, journey):
                        and (operator or re.search(r'\bin\s*$',before,re.I)))
         # A bare, explicit return clause has a whole-trip budget even while
         # its endpoint is awaiting the user's confirmation. No endpoint is invented.
-        bare_back=bool(operator and re.search(r'\bbe back\s*$',before,re.I))
+        bare_back=bool(operator and unresolved_return_clause(raw) and re.search(r'\b(?:return|(?:be|get|come|go|head) back)\s*$',before,re.I))
         if whole or returning or bare_back:
             if journey.total_duration is None:
                 if not operator:
@@ -209,6 +209,17 @@ def normalize_extracted_references(raw, ai):
             j.stops.pop();ai.activities.pop()
             j.order=[e for e in j.order if e.after!=index]
             if not j.order and j.ordering=='constrained':j.ordering='unspecified'
+    bare=unresolved_return_clause(raw)
+    if bare:
+        # The source establishes a return, not its identity. Discard an AI-guessed
+        # origin only for this single unambiguous bare-return clause; ask instead.
+        if j.endpoint and j.endpoint.kind=='origin':
+            j.endpoint=Endpoint(kind='origin',source=bare[0])
+        # A relative duration is not an absolute clock deadline. Recover it below;
+        # actual by/before clocks and conflicting numeric values still fail guards.
+        if j.deadline and j.deadline.source.casefold() in raw.casefold() and re.fullmatch(
+                r'within\s+'+DURATION_WORDING.pattern+r'(?:\s+(?:today|tomorrow|tonight))?',j.deadline.source,re.I):
+            j.deadline=None
     if j.endpoint:
         # Full clauses and bare final names are equivalent only when the exact
         # final-destination clause occurs in the request.
@@ -452,19 +463,25 @@ def validate_journey(raw, ai):
     return (LIMITATION, False) if advanced else (None, False)
 
 
+BARE_RETURN = r'(?:return|(?:be|get|come|go|head) back)'
+
+
+def unresolved_return_clause(raw):
+    """One explicit return without identity: authority to ask, never to infer it."""
+    matches=list(re.finditer(r'\b'+BARE_RETURN+r'(?=\s+(?:within|in|by|before)\b|[.!?]?\s*$)',raw,re.I))
+    if len(matches)!=1:return None
+    m=matches[0]
+    tail=re.split(r'[,;.!?]|\b(?:and|then)\b',raw[m.end():],maxsplit=1,flags=re.I)[0]
+    if re.search(r'\b(?:to|at|home|where|origin|start|starting|started)\b',tail,re.I):return None
+    remainder=raw[:m.start()]+raw[m.end():]
+    if re.search(r'\b(?:return|back home|head home|go home|(?:head|get|come|go|be) back|finish at|end at)\b',remainder,re.I):return None
+    return m
+
+
 def ambiguous_return(endpoint):
-    """'Be back' requires endpoint confirmation; never assume home/origin."""
-    return bool(endpoint and endpoint.kind == 'origin' and
-                re.fullmatch(r'be back(?:\s+(?:within|in|by|before)\b.*)?', endpoint.source, re.I))
+    return bool(endpoint and endpoint.kind=='origin' and re.fullmatch(
+        BARE_RETURN+r'(?:\s+(?:within|in|by|before)\b.*)?',endpoint.source,re.I))
 
 
 def missing_return_confirmation(raw, journey):
-    """An extracted stop list may still need a user-defined return endpoint.
-
-    This authorizes a question only, never an inferred endpoint or itinerary.
-    Other source/order/duration guards run before that question is accepted.
-    """
-    matches=list(re.finditer(r'\bbe back(?=\s+(?:within|in|by|before)\b|[.!?]?\s*$)', raw, re.I))
-    if journey.endpoint is not None or len(matches)!=1:return False
-    remainder=raw[:matches[0].start()]+raw[matches[0].end():]
-    return not re.search(r'\b(?:return|back home|head home|go home|(?:head|get|come|go) back|finish at|end at)\b',remainder,re.I)
+    return journey.endpoint is None and unresolved_return_clause(raw) is not None

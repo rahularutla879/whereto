@@ -1,0 +1,458 @@
+[
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and return within 3 hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within 3 hours tomorrow"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and return within 3 hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "total_duration": null,
+        "deadline": {
+          "source": "within 3 hours tomorrow",
+          "relation": "by",
+          "minute": null
+        },
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 36763.891
+  },
+  {
+    "text": "go to suny college of optometry first and then head out for coffee and be back within 3 hours",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [],
+      "time_expressions": [],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours"
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 13434.277
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and return within three hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within three hours"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and return within three hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 14227.954
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and be back within three hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within three hours tomorrow"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and be back within three hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 16499.424
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and get back within three hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within three hours"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and get back within three hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "get back"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 14630.58
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and return to my starting point within three hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within three hours"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and return to my starting point within three hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to my starting point"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 15597.67
+  },
+  {
+    "text": "Go to SUNY College of Optometry first, then get coffee, and come back within three hours tomorrow.",
+    "raw": {
+      "activities": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "people": null,
+      "budget_per_person": null,
+      "date": null,
+      "location": null,
+      "preferences": [],
+      "suggested_activities": [],
+      "budget_group": null,
+      "currency": null,
+      "travel_total_minutes": null,
+      "travel_leg_minutes": null,
+      "transport": null,
+      "cost": null,
+      "date_expressions": [
+        "tomorrow"
+      ],
+      "time_expressions": [
+        "within three hours"
+      ],
+      "start_time": null,
+      "end_time": null,
+      "uncertainties": [],
+      "journey": {
+        "stops": [
+          {
+            "source": "SUNY College of Optometry",
+            "kind": "named_place",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [
+          {
+            "before": 0,
+            "after": 1,
+            "source": "Go to SUNY College of Optometry first, then get coffee, and come back within three hours tomorrow."
+          }
+        ],
+        "ordering": "constrained",
+        "endpoint": {
+          "kind": "origin",
+          "source": "come back"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      }
+    },
+    "elapsedMs": 15718.379
+  }
+]

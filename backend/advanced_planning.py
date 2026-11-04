@@ -128,15 +128,16 @@ class AdvancedResult(ContractModel):
     preferences: dict = Field(default_factory=dict)
     detailsToken: str | None = Field(default=None,repr=False)
     bounded: Literal[True] = True
+    exploration: dict = Field(default_factory=dict)
     canExpand: bool = False
     canDiscover: bool = False
     canShowBeyond: bool = False
 
 
 def directions_link(origin, destination, mode):
-    if not origin or not destination: return None
+    if not origin and not destination: return None
     from urllib.parse import urlencode
-    return 'https://www.google.com/maps/dir/?'+urlencode({'api':'1','origin':'Place','origin_place_id':origin,'destination':'Place','destination_place_id':destination,'travelmode':'walking' if mode=='walk' else 'driving'})
+    return 'https://www.google.com/maps/dir/?'+urlencode({'api':'1',**({'origin':'Place','origin_place_id':origin} if origin else {}),**({'destination':'Place','destination_place_id':destination} if destination else {}),'travelmode':'walking' if mode=='walk' else 'driving'})
 
 
 def maps_link(identity):
@@ -265,7 +266,7 @@ class Session:
             stale=any(not current_evidence(l.evidence,mode) for c in self.candidates.values() for l in c.legs)
             if stale:
                 if value.action:
-                    return self.base(status='unsupported',message='These travel estimates have expired. Regenerate plans to check current routes with your saved preferences.')
+                    return self.base(status='unsupported',code='advanced_evidence_expired',message='These travel estimates have expired. Regenerate plans to check current routes with your saved preferences.',exploration={'combination':'evidence_expired','discovery':'regenerate_required','message':'Travel estimates expired. Viewed pages are kept; regenerate to check current routes.'})
                 self.router=None;self.route_attempted=False;self.candidates={};self.reusable_routes={}
                 self.seen.clear();self.current_ids.clear();self.offerable={False:set(),True:set()}
                 self.receipt=self.receipt_key=None
@@ -400,9 +401,9 @@ class Session:
             return self.base(status='unsupported',message='This outing date has passed. Edit the date and regenerate.')
         if self.context.issues:
             return self.base(status='unsupported',message=' '.join(self.context.issues))
-        from backend.journey import ambiguous_return
-        if ambiguous_return(self.journey.endpoint) and self.context.endpointStatus != 'origin_confirmed':
-            return self.base(status='unsupported',message='Confirm where you mean by be back before generating this outing.')
+        from backend.journey import ambiguous_return, unresolved_return_clause
+        if unresolved_return_clause(self.text) and ambiguous_return(self.journey.endpoint) and self.context.endpointStatus != 'origin_confirmed':
+            return self.base(status='unsupported',message='Confirm where you want to return before generating this outing.')
         returning = bool(self.journey.endpoint and (self.journey.endpoint.kind == 'origin' or self.journey.endpoint.kind == 'home' and self.context.endpointStatus == 'origin_confirmed'))
         if self.journey.endpoint and self.journey.endpoint.kind == 'home' and not returning:
             return self.base(status='unsupported',message='A separate home address is not verified by this flow. Choose Return to my starting point and confirm that origin, or request a named final establishment.')
@@ -503,9 +504,10 @@ class Session:
             self.actions+=1
             self.current_ids=set()
             self.beyond=value.action=='beyond' or value.includeBeyond
-            if value.action=='discover':self.resolver.expand()
+            if value.action=='discover':self.resolver.expand(prefer_optional=any(s.requirement=='optional' for s in self.journey.stops))
             unoffered=[c for key,c in self.candidates.items() if key not in self.seen and key in self.offerable[self.beyond]]
-            if value.action=='discover' or len(unoffered)<3:
+            optional_opportunity=any(s.requirement=='optional' for s in self.journey.stops) and not any(any(v.requested.requirement=='optional' for v in c.visits) for c in unoffered)
+            if value.action=='discover' or len(unoffered)<3 or optional_opportunity:
                 self.router.advance(origin=self.origin,allow_beyond_limit=True)
                 self.candidates.update((self.route_id(c),c) for c in self.router.all_candidates)
         self.router.use_candidates(list(self.candidates.values())[:256])
@@ -581,9 +583,15 @@ class Session:
             if any(permitted(c,self.beyond) for c in checked):
                 return 'Other checked alternatives include this optional stop; it is left out of this option.'
             if checked and all(c.duration_state=='infeasible' for c in checked):
-                return 'Including this stop exceeds the original time budget in every checked route.'
+                limit=self.journey.total_duration
+                unavoidable=sum(d.minutes for n,s in enumerate(self.journey.stops)
+                    if (s.requirement=='required' or n==omission.occurrence)
+                    and (d:=self.durations.get(n,s.duration)) is not None and d.relation in ('exact','minimum'))
+                if self.budget_scope=='outing' and limit and (unavoidable>limit.minutes and limit.relation in ('maximum','under','exact') or unavoidable==limit.minutes and limit.relation=='under'):
+                    return 'The supplied visit times alone exceed the original time budget for the whole outing.'
+                return 'Including this stop exceeds the original time budget in the routes checked so far. Other combinations or nearby places may still fit.'
             if checked and all(c.deadline_state=='infeasible' for c in checked):
-                return 'Including this stop misses the finish deadline in every checked route.'
+                return 'Including this stop misses the finish deadline in the routes checked so far. Coverage is limited.'
             if omission.reason=='known_closed':return 'The checked venues are closed on the requested date.'
             return 'No eligible route including this stop is established in the checked pool. Other venues may exist.'
         options=[]
@@ -605,7 +613,7 @@ class Session:
                 endpoint={'placeId':route.endpoint.place_id,'name':route.endpoint.facts.name,'mapsUrl':maps_link(route.endpoint.place_id),
                     'credits':[a.model_dump(mode='json') for a in route.endpoint.facts.attributions or []]} if route.endpoint else None,
                 legs=[PublicLeg(role=l.role,fromOccurrence=l.from_occurrence,toOccurrence=l.to_occurrence,seconds=l.evidence.duration_seconds,
-                    meters=l.evidence.distance_meters,status=l.evidence.status,mode=l.evidence.mode,mapsUrl=directions_link(l.evidence.origin_id if l.role in ('inter_activity','final_destination') else None,l.evidence.destination_id,l.evidence.mode)) for l in route.legs],
+                    meters=l.evidence.distance_meters,status=l.evidence.status,mode=l.evidence.mode,mapsUrl=directions_link(l.evidence.origin_id if l.role!='origin_to_first' else None,l.evidence.destination_id if l.role!='return_to_origin' else None,l.evidence.mode) if l.evidence.status!='same_location' else None) for l in route.legs],
                 knownTravelSeconds=float(c.known_travel_seconds),elapsedLowerSeconds=float(c.elapsed.lower),
                 elapsedUpperSeconds=float(c.elapsed.upper) if c.elapsed.upper is not None else None,upperExclusive=c.elapsed.upper_exclusive,
                 budgetScope=self.budget_scope,totalConstraint=route.journey.total_duration.model_copy(update={'source':redact_source(route.journey.total_duration.source,self.context)}) if route.journey.total_duration else None,deadlineSource=redact_source(route.journey.deadline.source,self.context) if route.journey.deadline else None,durationState=c.duration_state,deadlineState=c.deadline_state,reasons=list(dict.fromkeys(r.message for r in c.reasons if r.state!='feasible')),
@@ -670,6 +678,27 @@ class Session:
         if not options and result.canShowBeyond:result.message='No checked option fits your travel maximum. Search more or explicitly view options beyond that travel limit.'
         if not options and value.action and not result.canShowBeyond and not route_errors:result.message='No further eligible options in this checked batch. Earlier pages are kept. Other venues may exist.'
         if 'quota' in route_errors:result.canExpand=result.canDiscover=result.canShowBeyond=False
+        optional=[]
+        for n,stop in enumerate(self.journey.stops):
+            if stop.requirement!='optional':continue
+            checked=[c for c in timing.candidates if any(v.occurrence==n for v in c.route.visits)]
+            valid=[c for c in checked if permitted(c,self.beyond)]
+            group=snapshot.stops[n]
+            closed={x.candidate.place_id for x in self.router._result.hours_exclusions if x.occurrence==n}
+            state=('known_closed' if group.candidates and {x.place_id for x in group.candidates}<=closed else 'not_discovered' if not group.candidates else 'not_routed' if not checked else
+                   'needs_duration' if valid and any(v.occurrence==n and v.requested.duration is None for c in valid for v in c.route.visits) and self.budget_scope=='outing' and self.journey.total_duration else
+                   'offered' if any(any(v.occurrence==n for v in c.route.visits) for c in eligible) else
+                   'eligible_not_shown' if valid else 'checked_infeasible' if all(c.state=='infeasible' for c in checked) else 'unverified')
+            optional.append({'occurrence':n,'state':state,'timing':'unverified' if any(c.state=='unverified' for c in valid) else 'feasible' if valid else 'infeasible' if checked and all(c.state=='infeasible' for c in checked) else 'unknown','reasons':sorted({r.code for c in checked for r in c.reasons if r.state!='feasible'})})
+        combination=('provider_quota' if 'quota' in route_errors else 'local_admission' if 'application_limit' in route_errors else
+                     'session_bound' if self.actions>=32 or len(self.router.checked)>=256 else
+                     'eligible_not_shown' if any(self.route_id(c.route) not in self.seen for c in available) else
+                     'provider_service' if route_errors else 'unchecked_combinations' if self.router.pending_paths else 'checked_pool_exhausted')
+        discovery='available' if result.canDiscover else 'provider_quota' if 'quota' in route_errors else 'session_bound' if self.actions>=32 or len(self.router.checked)>=256 else self.resolver.discovery_state()
+        note=('Only the checked routes have been evaluated. Further combinations and nearby searches keep your original limits.' if any(o['state'] in ('checked_infeasible','not_routed','not_discovered') for o in optional) and (result.canExpand or result.canDiscover) else
+              'No further eligible options in this finite session. Viewed pages remain available; other venues may exist.' if not result.canExpand and not result.canDiscover else '')
+        result.exploration={'combination':combination,'discovery':discovery,'optional':optional,'message':note}
+        self.selection_counts.update(unseenEligible=sum(self.route_id(c.route) not in self.seen for c in available),offered=len(self.seen),continuation=combination,discovery=discovery)
         self.last=result
         return result
 

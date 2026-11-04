@@ -198,3 +198,8 @@ Task 51 remains unstarted.
 ## November 4 — final Task 50E acceptance repair
 
 Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).
+
+
+## Task 50E acceptance continuation from 798a3fc
+
+The existing main form now asks where a bare return ends, preserving source, order and full three-hour maximum. Shared cards render separate directions rows for each actual leg with privacy-preserving omitted-endpoint Maps instructions. Optional opportunity continuation and prioritized café discovery expose bounded structured coverage/admission reasons; no-match preserves the latest valid page and selection. Qwen is not called for structured edits/exploration. [Actual model, browser, hosted and provider-count evidence](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). No saved schema or Task 51 change.

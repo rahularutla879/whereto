@@ -236,3 +236,8 @@ Task 51 remains unstarted.
 ## November 4 — final Task 50E acceptance repair
 
 Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).
+
+
+## Task 50E leg actions and optional continuation
+
+Every actual origin/intermediate/final/return leg now has the shared directions row. Public legs use exact selected Place IDs and mode; private origin/return URLs omit that endpoint, with visible Maps picker/input instructions. No private alias, coordinates or saved route URL. Optional opportunities are checked in bounded existing-inventory continuation before repeatedly serving omission alternatives; explicit discovery prioritizes optional activities and preserves geography, required stops and return. Traffic-aware five-minute evidence, exact limits, quotas and no retries are unchanged. [Diagnosis, counts and official URL support](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). Task 51 is unstarted.

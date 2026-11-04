@@ -364,3 +364,6 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .zero-visit-confirmation input { width: auto; }
 
 .advanced-budget-preference { grid-column: 1 / -1; }
+
+.route-directions { display: block; margin-top: 0.35rem; overflow-wrap: anywhere; }
+.route-directions a { display: inline-block; text-decoration: underline; text-underline-offset: 3px; }

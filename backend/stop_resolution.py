@@ -308,6 +308,11 @@ class StopResolver:
                 'offeredAssignments':len(offered),'pendingRouteFrontier':bool(router and router.pending_paths),
                 'coverage':'finite_checked_inventory'}
 
+    def discovery_state(self):
+        usage=self.outing.usage()
+        if usage['placesSearchRequests']>=self.outing.settings.ceiling('searches_per_outing') or usage['providerAttempts']>=self.outing.settings.ceiling('requests_per_outing'):return 'outing_admission_limit'
+        return 'available' if self.can_expand() else 'bounded_discovery_exhausted'
+
     def can_expand(self):
         self.routing_snapshot()
         usage=self.outing.usage()
@@ -316,7 +321,7 @@ class StopResolver:
         return any(len(self._cache[k])<cap and self._pages[k]<6 and (v.get('next') or v.get('variant','initial')!='mixed')
                    for k,v in self._paging.items())
 
-    def expand(self):
+    def expand(self, *, prefer_optional=False):
         """At most two explicit same-area pages/variants, shared original budget.
 
         Named identities never participate. A failed dispatched page is consumed,
@@ -326,7 +331,8 @@ class StopResolver:
         cap=min(100,self.outing.settings.ceiling('candidates_per_activity'))
         keys=[k for k,v in self._paging.items() if len(self._cache[k])<cap and self._pages[k]<6
               and (v.get('next') or v.get('variant','initial')!='mixed')]
-        keys=sorted(keys,key=lambda k:self._pages[k])[:2]
+        preferred={_discovery_activity(s.requested) for s in self._result.stops if s.requested.requirement=='optional'} if prefer_optional else set()
+        keys=sorted(keys,key=lambda k:(k[1] not in preferred,self._pages[k]))[:2]
         for key in keys:
             activity,area=self._areas[key];cursor=self._paging[key]
             variant=cursor.get('variant','initial') if cursor.get('next') else ('alternative' if cursor.get('variant','initial')=='initial' else 'mixed')

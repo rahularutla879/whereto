@@ -1,3 +1,5 @@
+Task 50E acceptance continuation from `798a3fc`: return-phrase clarification, per-leg private-safe directions, separate link rows and optional-stop exploration are repaired under the existing task. Original numbering is unchanged. [Evidence](docs/task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). Task 51 remains unstarted.
+
 # Milestones and tasks
 
 Task 50E follow-up functional acceptance is verified against `6153e1b`; Qwen latency remains a documented limitation with no claimed model speedup. Original roadmap numbering is unchanged. [Detailed evidence](docs/task50e-followup.md). Task 51 unstarted.

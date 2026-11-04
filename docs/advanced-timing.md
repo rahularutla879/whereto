@@ -244,3 +244,8 @@ The owner-reported ordinary interpretation and advanced UI regressions are repai
 ## November 4 — final Task 50E acceptance repair
 
 Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).
+
+
+## Task 50E return and optional coverage acceptance
+
+Bare “return within three hours” preserves the inclusive 180-minute entire-outing constraint while its endpoint is clarified. All actual directional legs and supplied visits consume that cap; 180 passes, 181 fails after a model-free edit. Optional coffee remains unverified without visit evidence and is only excluded as proven infeasible in the checked routes when supported bounds fail. Coverage/discovery/admission reasons never waive duration/deadline checks. [Evidence](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration).

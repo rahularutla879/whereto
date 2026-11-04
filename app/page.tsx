@@ -141,9 +141,9 @@ export default function Home() {
       if(active.advanced){
         const next=await continueAdvanced(active.advanced,{action:expandDiscovery?'discover':showBeyond?'beyond':'different',includeBeyond:showBeyond},controller.signal);
         if(!session.current.current(controller))return;
-        latest.current=next;
+        latest.current=next.plans.length?next:{...active,canExpand:next.canExpand,canDiscover:next.canDiscover,canShowBeyond:next.canShowBeyond,continuationStatus:next.continuationStatus};
         if(pages.current.append(next)){setResult(structuredClone(pages.current.pages[pages.current.index]));syncPages();}
-        else {setResult(previous=>({...previous,canExpand:next.canExpand,canDiscover:next.canDiscover,canShowBeyond:next.canShowBeyond}));setOptionsNotice(next.message);}
+        else {setResult(previous=>({...previous,canExpand:next.canExpand,canDiscover:next.canDiscover,canShowBeyond:next.canShowBeyond,continuationStatus:next.continuationStatus}));setOptionsNotice(next.message);}
         return;
       }
       const response = await fetch("/api/plans/options", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ token: active.optionsToken, expandDiscovery, showBeyond }), cache: "no-store", signal: controller.signal });

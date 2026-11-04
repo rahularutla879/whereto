@@ -218,3 +218,8 @@ Task 50E consumes the validated advanced interpretation once. Supported field-on
 ## November 3 — Task 50E acceptance repair
 
 The owner-reported ordinary interpretation and advanced UI regressions are repaired. Both paths share the original form/card/history/save controls; advanced actions now support bounded combinations, same-area discovery and explicit scoped travel exceptions. Required identities, ordering, returns, whole-trip timing, original budgets and private persistence protections remain enforced. No migration, profile/Cloud/billing/model change or Task 51 work. [Root causes, parity, bounds, evidence and remaining limits](task50e-repair.md). Earlier one-page limitations describe the original checkpoint.
+
+
+## Return-phrase acceptance continuation
+
+Actual installed Qwen reproduced the shorter “return within 3 hours tomorrow” failure: invented origin provenance, missing whole duration and a relative duration mislabeled as absolute deadline. Narrow source normalization now preserves 180 inclusive whole-outing minutes and opens the existing endpoint question for bare return/be back/get back/come back. Explicit starting-point identity remains explicit; other identities, conflicting values, cycles and real deadlines cannot be discarded. Nine actual local calls and recorded-output tests are qualified in [the acceptance record](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). No prompt/model/policy change; Task 51 is unstarted.

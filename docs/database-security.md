@@ -93,3 +93,6 @@ The owner-reported ordinary interpretation and advanced UI regressions are repai
 ## November 4 — final Task 50E acceptance repair
 
 Shared readable duration formatting, named closed-visit recovery with explicit stop-specific permission, balanced optional-stop recommendations and editable missing coffee dwell continue Task 50E. Exact enforcement, other venues’ hours, source constraints, selected private saving and approved provider accounting are preserved. No migration, Cloud/profile/model/dependency change or Task 51 work. [Diagnosis, measured counts, trust/lifecycle contracts and verification](task50e-final-acceptance.md).
+
+
+Task 50E leg-link continuation adds no stored origin, directions URL, Google route data, table, permission or migration. Authorized 59-test hosted compatibility checks retain restricted runtime identity, forced RLS, TLS, token hashing and selected-only writes. One generated browser record is cleaned only by its exact access hash and independently verified absent. [Evidence](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration).

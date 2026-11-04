@@ -663,3 +663,6 @@ clarifies traffic-unaware estimates and balances bounded discovery/routing acros
 all stop occurrences. Numeric development stage/coverage diagnostics remain private.
 [Causes, measurements, safeguards and acceptance evidence](task50e-followup.md).
 Task 51 remains unstarted.
+
+
+Current Task 50E acceptance continuation adds source-supported return clarification, shared per-leg directions rows and bounded optional-opportunity exploration. Existing ordinary planning, traffic-aware Driving/Walking, hard constraints, private origin protection and selected saving remain. [Measured diagnosis, official Maps fallback and browser verification](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). Task 51 is unstarted.

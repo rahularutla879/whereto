@@ -519,3 +519,8 @@ The owner's explicit current-traffic decision replaces the earlier unactivated P
 ## November 4 — final Task 50E acceptance repair
 
 Readable duration presentation, named-venue closure recovery and explicit stop-specific outside-visit intent, fair optional coffee inclusion and model-free editable dwell are implemented. Shared cards, precise hard limits, existing provider authorization and private selected saving remain. Task 51 is unstarted. [Current acceptance record](docs/task50e-final-acceptance.md).
+
+
+## November 4 — Task 50E return, directions and continuation acceptance
+
+Recover only source-supported bare-return duration/intent from otherwise validated extraction, then ask for the missing endpoint; never treat a model-invented origin as fact. Use official omitted-endpoint Maps URLs instead of embedding private starts or inventing current-location destinations. Put each directions action in the shared card block row. Check bounded missing optional opportunities before repeatedly serving omission-only alternatives, and prioritize optional discovery without relaxing deadlines. Keep coverage/admission reasons explicit and preserve viewed pages. [Measured evidence and privacy limitations](docs/task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration). Task 51 remains unstarted.

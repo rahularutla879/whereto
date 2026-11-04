@@ -98,7 +98,8 @@ class FollowupTests(unittest.TestCase):
         self.assertTrue(all(l.mode=='drive' for l in r.options[0].legs))
         for call in self.h.calls:
             self.assertEqual(call['routingPreference'],'TRAFFIC_AWARE');self.assertNotIn('departureTime',call)
-        self.assertIsNone(r.options[0].legs[0].mapsUrl);self.assertIsNone(r.options[0].legs[-1].mapsUrl)
+        self.assertNotIn('origin_place_id',r.options[0].legs[0].mapsUrl);self.assertNotIn('destination_place_id',r.options[0].legs[-1].mapsUrl)
+        self.assertNotIn('advanced_origin',str([l.mapsUrl for l in r.options[0].legs]))
 
     def test_representative_origin_qualification_keeps_actual_route_point(self):
         s=self.nearby();origin=start().model_copy(update={'source':'manual','precision':'postal_area','accuracy_m':500})

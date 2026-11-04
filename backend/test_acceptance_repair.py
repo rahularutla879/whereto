@@ -18,9 +18,9 @@ class InterpretationRepairTests(unittest.TestCase):
                 class Fixed:
                     def interpret(self,text):return Interpretation.model_validate(row['raw'])
                 r=interpret_request(InterpretationInput(text=row['text']),Fixed(),now=datetime(2026,11,3,15,tzinfo=timezone.utc))
-                if 'be back within 3 hours' in row['text']:
+                if 'be back within 3 hours' in row['text'] or 'and return within an hour' in row['text']:
                     self.assertEqual([q.field for q in r.questions],['endpoint'])
-                    self.assertEqual(r.interpretation.journey.total_duration.minutes,180)
+                    self.assertEqual(r.interpretation.journey.total_duration.minutes,60 if 'within an hour' in row['text'] else 180)
                     self.assertEqual(r.interpretation.journey.total_duration.relation,'maximum')
                 else:self.assertNotEqual(r.executionStatus,'clarification_required',r.issues)
                 if row['text'].startswith('dinner and bowling'):
