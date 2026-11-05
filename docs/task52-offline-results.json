@@ -1,0 +1,37 @@
+{
+  "date": "2026-11-05",
+  "baseline": "0337f4d031c2384dfcc28b0e88435aabc30ba42b",
+  "method": "Existing scripts.benchmark51; serial invented fixtures; in-memory logging; no model, Google or SQL sends. Not browser or cloud latency.",
+  "results": {
+    "admissionAndFingerprint": {
+      "samples": 1000,
+      "p50Ms": 0.0185,
+      "p95Ms": 0.022
+    },
+    "structuredEvent": {
+      "samples": 1000,
+      "p50Ms": 0.0068,
+      "p95Ms": 0.0077
+    },
+    "ordinaryCalculation": {
+      "samples": 30,
+      "p50Ms": 1.4374,
+      "p95Ms": 2.1007
+    },
+    "providerAdmission": {
+      "samples": 1000,
+      "p50Ms": 0.0359,
+      "p95Ms": 0.0438
+    },
+    "fieldClarification": {
+      "samples": 30,
+      "p50Ms": 0.1778,
+      "p95Ms": 0.2452
+    },
+    "advancedFixture": {
+      "samples": 30,
+      "p50Ms": 2.8459,
+      "p95Ms": 3.192
+    }
+  }
+}
