@@ -224,6 +224,21 @@ class OllamaProvider:
         self._opener = build_opener(ProxyHandler({}))
 
     def interpret(self, text: str) -> Interpretation:
+        from backend.admission import inference, AdmissionError
+        from backend.provider_work import check_cancelled
+        from backend.operations import stage
+        check_cancelled()
+        try:
+            lease = inference.acquire(b'inference', 'inference')
+        except AdmissionError:
+            raise AIError('Inference capacity is occupied.', code='service_busy') from None
+        try:
+            with stage('inference'):
+                return self._interpret(text)
+        finally:
+            lease.release()
+
+    def _interpret(self, text: str) -> Interpretation:
         if not isinstance(text, str) or not text.strip():
             raise ValueError("Provide a nonempty outing request.")
         schema = Interpretation.model_json_schema()
@@ -260,6 +275,8 @@ class OllamaProvider:
         request = Request(self.settings.base_url.rstrip("/") + "/api/chat",
                           data=json.dumps(payload).encode(),
                           headers={"Content-Type": "application/json"}, method="POST")
+        from backend.provider_work import check_cancelled
+        check_cancelled()
         started=perf_counter()
         try:
             with self._opener.open(request, timeout=self.settings.timeout_seconds) as response:

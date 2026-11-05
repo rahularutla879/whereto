@@ -33,7 +33,7 @@ class SharedViews(unittest.TestCase):
   for viewer in range(10):
    result=self.open();self.assertEqual([v['name'] for v in result['venues'].values()],['Invented one','Invented two'])
    self.clock[0]+=13
-  self.assertEqual(len(self.calls),20);self.assertEqual(self.budget.cost.snapshot()['estimatedDayGrossUsd'],.4)
+  self.assertEqual(len(self.calls),20);self.assertEqual(self.budget.cost.snapshot()['estimatedDayGrossUsd'],.34) # 20 Pro Details × $0.017
   self.assertTrue(all(isinstance(v,float) for v in self.sessions.entries.values())) # replay metadata only
   self.assertNotIn('Invented',str(self.sessions.entries));self.assertNotIn('A'*43,str(self.sessions.entries))
  def test_ten_immediate_opens_hit_shared_minute_not_capability(self):

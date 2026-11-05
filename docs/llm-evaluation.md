@@ -1,3 +1,5 @@
+> November 5, Task 51: [current request controls, operational privacy, error mapping and production activation dependencies](task51-operations.md). Historical Task-51-unstarted notes below retain their original dates. No hosting, Cloud configuration, schema or inference-policy change.
+
 ## Current Task 50E evaluation
 
 The installed Qwen model, original verified prompt/schema, 8K/1,024 bounds, thinking-off, temperature-zero, one interpretation per new text and startup preparation remain. No safe inference optimization was retained: compact candidates lost destinations, a shared-prompt projection invented constraints, and an effective-contract-correct adaptive candidate worsened p90/worst latency despite a lower median. Qwen latency acceptance remains open. A golden payload test protects the retained accuracy baseline. Structured edits/exploration remain model-free. Existing tooling now records actual per-row options; `scripts/benchmark50e.py` supplies controlled matched measurements. Reload/build-contaminated runs are excluded. [Measured results, semantic matrix and explicit limitation](task50e-consolidated.md). Historical measurements below retain their original context.
@@ -101,3 +103,10 @@ provider, dependency, Google operation or persistence change is introduced.
 ## Task 50E Unicode regression
 
 unicode_extractions.json records four unchanged installed-Qwen extractions for authored public arrow/then prompts. Replays verify supplied order, required stops, return and budgets without Google. Narrow source-reference punctuation/whitespace equivalence restores original names, never creates missing requirements. Public timeout/unavailable/invalid-response messages differ; technical categories/references remain in protected diagnostics. See task50e-final-acceptance.md for measured actual-model and browser results.
+
+
+## Task 51 — capacity, not an inference optimization
+
+The exact Qwen prompt/schema/model, 8192/1024 bounds, thinking-off, temperature-zero, keep-alive and 60-second default transport timeout remain. The adapter admits one active inference and rejects excess work as temporary busy with no queue or automatic retry. Startup preparation shares this gate. Structured clarifications/edits/exploration remain model-free. Interpretation HTTP now propagates browser cancellation; a dispatched synchronous call can finish under its existing timeout while retaining capacity ownership. Future cloud inference must implement the existing AIProvider/source-validation contract and reuse bounded admission/measurement.
+
+One actual installed local call for the authored ordinary dinner/bowling/Jersey City request was accepted in **28,447.593 ms** (adapter inference stage **28,363.870 ms**), preserving both activities and Jersey City. Google sends were blocked. This is one wall-time sample, without controlled cold/warm or percentile inference claims. It does not meet the five-second end-to-end launch target. Cloud selection and measured performance/accuracy work remain mandatory for Task 52 and the separate performance requirement.

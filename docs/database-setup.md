@@ -1,3 +1,5 @@
+> November 5, Task 51: [current request controls, operational privacy, error mapping and production activation dependencies](task51-operations.md). Historical Task-51-unstarted notes below retain their original dates. No hosting, Cloud configuration, schema or inference-policy change.
+
 > Current Task 50 security audit and acceptance: [safe database access](database-security.md). Earlier task-pending statements below are historical.
 
 # Supabase PostgreSQL setup — Tasks 47–49

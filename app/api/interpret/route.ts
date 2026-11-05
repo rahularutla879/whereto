@@ -1,3 +1,4 @@
+import { classifiedFailure } from "@/lib/failure-diagnostics";
 import {timingHeaders} from "@/lib/server-timing";
 
 export const runtime = "nodejs";
@@ -13,11 +14,14 @@ export async function POST(request: Request) {
     const base = process.env.BACKEND_URL ?? "http://127.0.0.1:8000";
     const response = await fetch(`${base.replace(/\/$/, "")}/api/interpret`, {
       method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload),
-      cache: "no-store", signal: AbortSignal.timeout(70000),
+      cache: "no-store", signal: AbortSignal.any([request.signal, AbortSignal.timeout(70000)]),
     });
     received = true;
     const data = await response.json();
     Object.assign(headers,timingHeaders(response.headers.get("server-timing"),performance.now()-started));
+    if (!response.ok && classifiedFailure(data)) {
+      return Response.json(classifiedFailure(data), { status: response.status, headers });
+    }
     if (response.status === 422 || response.status === 503) {
       if (typeof data?.message !== "string") throw new Error("Invalid error response");
       return Response.json(data, { status: response.status, headers });

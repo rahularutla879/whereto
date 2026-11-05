@@ -1,3 +1,5 @@
+> November 5, Task 51: [current request controls, operational privacy, error mapping and production activation dependencies](task51-operations.md). Historical Task-51-unstarted notes below retain their original dates. No hosting, Cloud configuration, schema or inference-policy change.
+
 > Current Task 50E: approved local website and version 2 saving integration is implemented. Initial milestone descriptions below are historical; see [current flow, gates and limits](advanced-integration.md).
 
 # Task 50 — safe database access
@@ -96,3 +98,8 @@ Shared readable duration formatting, named closed-visit recovery with explicit s
 
 
 Task 50E leg-link continuation adds no stored origin, directions URL, Google route data, table, permission or migration. Authorized 59-test hosted compatibility checks retain restricted runtime identity, forced RLS, TLS, token hashing and selected-only writes. One generated browser record is cleaned only by its exact access hash and independently verified absent. [Evidence](task50e-final-acceptance.md#november-4-continuation-from-798a3fc-return-wording-leg-links-and-optional-exploration).
+
+
+## Task 51 — admission around unchanged private persistence
+
+No migration, role/grant, RLS, TLS, transaction, capability or v1/v2 document change. Request admission now rejects concurrent identical HTTP work while existing advisory-lock idempotency remains authoritative for repeated saves. Private bodies/capabilities never enter new structured events or metric labels. Unsaved receipts and four-slot connection admission remain process-local; production refuses activation until the shared dependency contract is implemented. Hosted verification and exact browser-record cleanup are recorded in HANDOVER.md. Existing owner records are untouched.

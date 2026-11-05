@@ -528,3 +528,10 @@ Recover only source-supported bare-return duration/intent from otherwise validat
 ## Task 50E initial coverage, Unicode and extension hydration
 
 Use checked options first, then at most one admitted selective fill stage without new discovery or retries. Preserve original source spans and require arrow ordering rather than constructing a fallback interpretation. Separate temporary planning failure from invalid interpretation. Silence unavoidable external body-attribute differences only at the static body; child mismatches remain visible. No persistence or provider-tier change.
+
+
+## November 5, 2026 — Task 51 capacity and privacy foundation
+
+Use immediate bounded local admission and one active inference, without a daily per-user plan quota or a model queue. Detect concurrent duplicate canonical bodies with transient process-keyed HMAC fingerprints; keep worker ownership after browser cancellation. Preserve existing session work locks, provider reservations and SQL idempotency. Fix Pro saved-details accounting additively in the existing ledger; preserve all historical charges.
+
+Use fixed structured operational events, bounded in-memory measurements and a bounded asynchronous log sink. Keep content, locations, credentials and capabilities out of logs/labels. Production activation must fail at import/startup while shared sessions/admission/provider accounting and cloud inference are absent. No environment flag may claim those services exist. This deliberately keeps multi-instance activation dependent on Task 52, without choosing infrastructure early. [Policies, tradeoffs, retention, tests and activation contract](docs/task51-operations.md).

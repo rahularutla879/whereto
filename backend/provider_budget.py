@@ -182,14 +182,14 @@ class OutingBudget:
 
     @contextmanager
     def reserve(self, operation: Operation, request_id: str, *,
-                origins: int = 0, destinations: int = 0) -> Iterator[None]:
+                origins: int = 0, destinations: int = 0, details_pro: bool = False) -> Iterator[None]:
         """request_id identifies an exact request within this outing, never a key.
 
         Matrix accounting charges the full origins × destinations, not one HTTP
         request or the number of results that happen to succeed. Errors retain
         consumed counters and request identity, so retries cannot loop for free.
         """
-        with self._reserve_batch([(operation, request_id, origins, destinations)]):
+        with self._reserve_batch([(operation, request_id, origins, destinations)], details_pro=details_pro):
             yield
 
     @contextmanager
@@ -205,7 +205,9 @@ class OutingBudget:
             yield
 
     @contextmanager
-    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False) -> Iterator[None]:
+    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False, details_pro=False) -> Iterator[None]:
+        if details_pro and any(op != "details" for op, _, _, _ in attempts):
+            raise ValueError("Pro Details classification requires a Details reservation.")
         for operation, request_id, origins, destinations in attempts:
             self._validate_attempt(operation, request_id, origins, destinations)
         identities = {(op, key) for op, key, _, _ in attempts}
@@ -253,7 +255,7 @@ class OutingBudget:
             from backend.search_fields import enterprise_search
             units = {"search_enterprise" if enterprise_search() else "search_pro": searches - lookups,
                      "search_pro": lookups} if enterprise_search() else {"search_pro": searches}
-            units.update(details=details)
+            units["details_pro" if details_pro else "details"] = details
             units["matrix_pro_element" if traffic_aware else "matrix_element"] = elements
             reservation = session.cost.reserve(units, self._record_dispatch) if session.cost else nullcontext(0)
             try:
@@ -261,6 +263,8 @@ class OutingBudget:
             except AccountingError as error:
                 self.stop_reason = str(error)
                 raise ProviderLimitError(str(error), reason=getattr(error,"reason",None), retry_after=getattr(error,"retry_after",None)) from None
+            from backend.operations import event
+            event("provider_reserved", "provider_admission", units=units)
             self._gross += charge
             self._matrix_requests += sum(op == "matrix" for op, _, _, _ in attempts)
             self._seen.update(identities)
@@ -279,7 +283,14 @@ class OutingBudget:
         try:
             from backend.performance import stage
             category=attempts[0][0]
-            with stage(category):yield
+            from backend.operations import stage as measured_stage
+            with stage(category), measured_stage(category):
+                try:
+                    yield
+                except Exception as error:
+                    from backend.operations import event
+                    event('failure', category, reason=getattr(error, 'code', 'provider'))
+                    raise
         finally:
             with session._lock:
                 session._active -= 1

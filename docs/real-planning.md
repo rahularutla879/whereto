@@ -1,3 +1,5 @@
+> November 5, Task 51: [current request controls, operational privacy, error mapping and production activation dependencies](task51-operations.md). Historical Task-51-unstarted notes below retain their original dates. No hosting, Cloud configuration, schema or inference-policy change.
+
 Current consolidated Task 50E: Drive uses current `TRAFFIC_AWARE` evidence and Pro pricing; Walk remains unchanged. Among equally supported eligible results, shorter total directional travel precedes quality, with a sixty-second convenience band for useful all-stop novelty. Later explicit options reuse discovered facts and checked pairs; nearby discovery stays selective/bounded. Old/unaware or expired evidence cannot silently establish current compliance. [Policies, costs and measured verification](task50e-consolidated.md). Historical Essentials descriptions below predate the owner's explicit upgrade approval.
 
 # Task 46 — real-data outings

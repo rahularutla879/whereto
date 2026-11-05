@@ -74,7 +74,7 @@ def text_search(body: dict, *, field_mask: str | None = None) -> dict:
         token = access_token(session)
         try:
             from backend.development_cost import dispatch
-            dispatch("search", 1)
+            dispatch("search", 1, sku="search_enterprise" if any(field in mask for field in ("rating", "OpeningHours")) else "search_pro")
             response = session.post(
                 ENDPOINT, json=body, timeout=(5, 15), allow_redirects=False,
                 headers={"Authorization": f"Bearer {token}", "X-Goog-User-Project": PROJECT,

@@ -61,7 +61,7 @@ class Regeneration(unittest.TestCase):
    for action in ('regenerate','same payload after refresh'):
     with self.subTest(action=action):
      response=main.generate_plan(request);body=json.loads(response.body)
-     self.assertEqual(response.status_code,422);self.assertEqual(body['code'],'provider_local_rate_limit')
+     self.assertEqual(response.status_code,429);self.assertEqual(body['code'],'provider_local_rate_limit')
      self.assertNotIn('service could not complete',body['message']);self.assertEqual(self.budget._requests,0)
    self.clock+=61
    self.assertIsInstance(main.generate_plan(request),RankingResult)

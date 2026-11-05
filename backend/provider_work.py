@@ -29,17 +29,29 @@ def wait_for_capacity(capacity,seconds=15):
 
 async def run_work(request,operation):
     event=Event()
+    from backend.admission import active_lease
+    lease=active_lease.get()
+    if lease: lease.retain()
     def work():
         token=cancelled.set(event)
-        try:return operation()
-        finally:cancelled.reset(token)
+        try:
+            check_cancelled()
+            return operation()
+        finally:
+            cancelled.reset(token)
+            if lease: lease.release()
     task=asyncio.create_task(asyncio.to_thread(work))
     try:
         while not task.done():
             done,_=await asyncio.wait({task},timeout=.1)
             if not done and await request.is_disconnected():
                 event.set()
-        return await task
+        return await asyncio.shield(task)
     except asyncio.CancelledError:
         event.set()
+        from backend.operations import event as record_event
+        record_event("cancelled", "http", reason="cancelled")
+        # Keep ownership until the bounded synchronous transport actually ends.
+        # Retrieve an eventual exception even if the browser has gone away.
+        task.add_done_callback(lambda done: done.exception() if not done.cancelled() else None)
         raise

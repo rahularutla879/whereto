@@ -13,7 +13,7 @@ import stat
 from time import time, monotonic, sleep
 
 # USD millionths/event, global first paid tier, checked 2026-11-03. Essentials retained for historical usage and Walking; Driving uses Pro.
-RATES = {'search_pro': 32000, 'search_enterprise': 35000, 'details': 20000, 'matrix_element': 5000, 'matrix_pro_element': 10000}
+RATES = {'search_pro': 32000, 'search_enterprise': 35000, 'details': 20000, 'details_pro': 17000, 'matrix_element': 5000, 'matrix_pro_element': 10000}
 _active = ContextVar('development_cost_reservation', default=None)
 
 
@@ -47,6 +47,10 @@ def dispatch(operation, count=1, *, sku=None):
         except (AccountingError, OSError):
             from backend.provider_budget import ProviderLimitError
             raise ProviderLimitError('Local cost accounting failed before provider dispatch. No request was sent.') from None
+    if not active:
+        from backend.operations import event
+        key = {'search': 'search_pro', 'details': 'details', 'matrix': 'matrix_element'}[operation]
+        event('provider_dispatched', operation, units={sku or key: count})
 
 
 class DevelopmentCost:
@@ -152,7 +156,7 @@ class DevelopmentCost:
                 raise AccountingError('Local daily estimated spending allowance reached. No new provider work was admitted. Review usage and the explicit local allowance; no retry is scheduled.')
             now=time()
             recent=[e for e in data['recent'] if now-e[0]<60]
-            additions={'search':units.get('search_pro',0)+units.get('search_enterprise',0), 'details':units.get('details',0),'elements':units.get('matrix_element',0)+units.get('matrix_pro_element',0)}
+            additions={'search':units.get('search_pro',0)+units.get('search_enterprise',0), 'details':units.get('details',0)+units.get('details_pro',0),'elements':units.get('matrix_element',0)+units.get('matrix_pro_element',0)}
             for kind, maximum in (('search',10),('details',10),('elements',150)):
                 if additions[kind]+sum(e[2] for e in recent if e[1]==kind)>maximum:
                     raise AccountingError('Local shared provider minute allowance reached. Wait before a deliberate action; no retry is scheduled.', reason='local_shared_minute', retry_after=max(1,ceil(60-(now-min(e[0] for e in recent if e[1]==kind)))))
@@ -165,9 +169,13 @@ class DevelopmentCost:
         # the latest row under a short lock, so other processes cannot lose usage.
         sent = {}
         def measured(operation, count, sku=None):
-            key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details','matrix':'matrix_pro_element' if units.get('matrix_pro_element') else 'matrix_element'}[operation]
-            if sku is not None and (operation!='matrix' or sku!=key):
-                raise AccountingError('Routing SKU does not match its reservation; no request sent.')
+            key={'search':'search_enterprise' if units.get('search_enterprise') else 'search_pro', 'details':'details_pro' if units.get('details_pro') else 'details','matrix':'matrix_pro_element' if units.get('matrix_pro_element') else 'matrix_element'}[operation]
+            allowed = {'search': ('search_pro', 'search_enterprise'), 'details': ('details', 'details_pro'),
+                       'matrix': ('matrix_element', 'matrix_pro_element')}[operation]
+            if sku is not None:
+                if sku not in allowed or not units.get(sku):
+                    raise AccountingError('Provider SKU does not match its reservation; no request sent.')
+                key = sku
             n=count
             if type(n) is not int or n <= 0 or sent.get(key,0)+n > units.get(key,0):
                 raise AccountingError('Provider dispatch exceeds its reserved usage; no request sent.')
@@ -177,6 +185,8 @@ class DevelopmentCost:
                 self.write(fd,data)
             sent[key] = sent.get(key,0)+n
             if on_dispatch: on_dispatch(operation, count)
+            from backend.operations import event
+            event('provider_dispatched', operation, units={key: n})
         token=_active.set(measured)
         try: yield charge
         finally: _active.reset(token)

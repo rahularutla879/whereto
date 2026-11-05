@@ -95,7 +95,7 @@ class SearchHours(unittest.TestCase):
    for i in range(10):
     fixture.clock[0]+=7
     with fixture.budget.outing().reserve('search',str(i)):pass
-   self.assertEqual(fixture.budget.cost.snapshot()['estimatedDayGrossUsd'],.72)
+   self.assertEqual(fixture.budget.cost.snapshot()['estimatedDayGrossUsd'],.66) # 20 Pro Details × $0.017 + 10 Pro searches × $0.032
   finally:fixture.doCleanups()
 
  def test_saved_manual_hours_is_selected_bounded_replay_safe_and_uses_saved_window(self):

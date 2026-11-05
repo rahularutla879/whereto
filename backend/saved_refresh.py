@@ -39,7 +39,7 @@ def fetch_saved_details(identity, *, include_contacts=False, include_hours=False
         session.mount('https://',requests.adapters.HTTPAdapter(max_retries=0))
         token=access_token(session)
         from backend.development_cost import dispatch
-        dispatch('details',1)
+        dispatch('details',1,sku='details' if include_contacts or include_hours else 'details_pro')
         try:
             response=session.get('https://places.googleapis.com/v1/places/'+identity,
                 headers={'Authorization':'Bearer '+token,'X-Goog-User-Project':PROJECT,'X-Goog-FieldMask':mask},timeout=(5,15),allow_redirects=False)
@@ -118,7 +118,7 @@ class RefreshSessions:
             if identity in results:continue
             admitted=False
             try:
-                with outing.reserve('details',digest(str(request.refreshId)+':'+identity)):
+                with outing.reserve('details',digest(str(request.refreshId)+':'+identity), details_pro=not (request.includeContacts or request.includeHours)):
                     admitted=True
                     admitted_action=True
                     if request.includeHours:

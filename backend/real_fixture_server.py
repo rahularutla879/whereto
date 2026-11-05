@@ -208,6 +208,10 @@ def main():
     class FixtureAI:
         def interpret(self, text):
             counts['ai'] += 1
+            if scenario['name']=='advanced_ai_busy':
+                from backend.ai import AIError
+                raise AIError('Synthetic occupied inference capacity',code='service_busy')
+            if scenario['name']=='advanced_ai_slow':sleep(1)
             if scenario['name']=='advanced_ai_timeout':
                 from backend.ai import AIError
                 raise AIError('Invented private timeout',code='llm_timeout')

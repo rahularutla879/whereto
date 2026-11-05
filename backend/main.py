@@ -17,15 +17,20 @@ from backend.routes import RouteError, PlaceID
 from backend.venue_details import details_sessions
 from pydantic import BaseModel, Field
 
+from backend.admission import validate_environment
+validate_environment()
+
 # One shared process budget across planning and on-demand contact requests.
 provider_budget = ProviderBudget()
 
-from backend.failures import MESSAGES, evidence, provider_code
+from backend.failures import MESSAGES, evidence, provider_code, provider_status
 
 from contextlib import asynccontextmanager
 
 @asynccontextmanager
 async def lifespan(app):
+    from backend.admission import validate_environment
+    validate_environment()
     from backend.ai_readiness import start
     start() # Daemon preparation does not block health or require Google/SQL.
     yield
@@ -43,11 +48,12 @@ async def local_request_timing(request: Request, call_next):
     return response
 
 
-def failure(code, status=503, operation='planning', *, message=None, diagnostics=None, error=None):
+def failure(code, status=503, operation='planning', *, message=None, diagnostics=None, error=None, continuation=None):
     reference = evidence(code, operation, exception=error)
     return JSONResponse(status_code=status, content={
         'code': code, 'message': MESSAGES.get(code, message or 'This operation could not be completed.'),
         'correlationId': reference, 'diagnostics': diagnostics or {},
+        **({'continuation': continuation} if continuation is not None else {}),
     }, headers={'Cache-Control':'no-store', 'X-Correlation-ID':reference})
 
 
@@ -117,7 +123,7 @@ def generate_plan(request: PlannerInput) -> RankingResult:
         except ValidationError as error:
             return failure('internal_application_error',500,operation='planning_model',error=error)
         except (ProviderLimitError, DiscoveryError, RouteError) as error:
-            return failure(provider_code(error),422,operation="venue_or_route",message=str(error),diagnostics=getattr(error,"diagnostics",{}),error=error)
+            return failure(provider_code(error),provider_status(error),operation="venue_or_route",message=str(error),diagnostics=getattr(error,"diagnostics",{}),error=error)
     if request.requireWheelchairAccess:
         return JSONResponse(status_code=422,content={"code":"unsupported_request","message":"Mock venues cannot verify required wheelchair access. No fictional accessibility claim was made."})
     if request.geography.strictDestination or request.geography.excludedRegions:
@@ -135,19 +141,28 @@ def generate_plan(request: PlannerInput) -> RankingResult:
     return apply_mock_origin(recommend_plans(PlanningRequest.model_validate(request.model_dump(exclude={"searchRadius", "maxFirstLegTravel", "locationFirst"}))),request)
 
 
-@app.post("/api/interpret", response_model=InterpretationResult)
 def interpret_outing(request: InterpretationInput):
     try:
         result = interpret_request(request)
+        from backend.provider_work import check_cancelled
+        check_cancelled()
         from backend.advanced_planning import sessions
         result.advancedToken = sessions.create(request.text, result, provider_budget, request.preferences)
         return result
+    except ProviderLimitError as error:
+        return failure('request_cancelled',409,operation='interpretation',message='Planning was cancelled. Your request is kept.',error=error)
     except AIError as error:
         return failure(error.code,503,operation='interpretation',error=error)
     except TimeoutError as error:
         return failure('llm_timeout',503,operation='interpretation',error=error)
     except ValidationError as error:
         return failure('llm_invalid_response',503,operation='interpretation',error=error)
+
+
+@app.post("/api/interpret", response_model=InterpretationResult)
+async def interpret_endpoint(request: InterpretationInput, http: Request):
+    from backend.provider_work import run_work
+    return await run_work(http, lambda: interpret_outing(request))
 
 
 @app.get("/api/planning-mode")
@@ -169,7 +184,7 @@ def venue_details(request: ContactRequest):
         provider_budget.settings.require_live_provider()
         return JSONResponse(content=details_sessions.get(request.token, request.placeId), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
-        return JSONResponse(status_code=422, content={"message": str(error),"diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
+        return failure(provider_code(error),provider_status(error),operation="details" if isinstance(request,ContactRequest) else "lookup",error=error,diagnostics=getattr(error,"diagnostics",{}))
 
 
 class OptionsRequest(BaseModel):
@@ -187,8 +202,11 @@ def more_options(request: OptionsRequest):
         provider_budget.settings.require_live_provider()
         return JSONResponse(content=receipts.issue(more_real_plans(request.token, expand_discovery=request.expandDiscovery, show_beyond=request.showBeyond)).model_dump(mode="json"), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
-        message = "Provider data could not be verified." if isinstance(error, ValidationError) else str(error)
-        return JSONResponse(status_code=422, content={"code":getattr(error,"code","invalid_provider_data"),"message": message + " No fictional fallback was used.","diagnostics":getattr(error,"diagnostics",{}),"continuation":getattr(error,"continuation",{ "canExpand":False,"canDiscover":False } if getattr(error,"code",None) in ("expired","stopped","mode_changed") else None)}, headers={"Cache-Control": "no-store"})
+        code = 'provider_service_error' if isinstance(error, ValidationError) else provider_code(error)
+        return failure(code, 503 if isinstance(error, ValidationError) else provider_status(error), operation='options',
+            message=str(error) if code in ('expired','stopped','mode_changed') else None,
+            diagnostics=getattr(error,'diagnostics',{}),error=error,
+            continuation=getattr(error,'continuation',{'canExpand':False,'canDiscover':False} if code in ('expired','stopped','mode_changed') else None))
 
 
 from backend.starting_places import StartingPlaceQuery, lookup_starting_places
@@ -199,7 +217,7 @@ def starting_places(request: StartingPlaceQuery):
     try:
         return JSONResponse(content=lookup_starting_places(request, provider_budget), headers={"Cache-Control": "no-store"})
     except (ProviderLimitError, DiscoveryError) as error:
-        return JSONResponse(status_code=422, content={"message": str(error),"diagnostics":getattr(error,"diagnostics",{})}, headers={"Cache-Control": "no-store"})
+        return failure(provider_code(error),provider_status(error),operation="details" if isinstance(request,ContactRequest) else "lookup",error=error,diagnostics=getattr(error,"diagnostics",{}))
 
 
 from backend.starting_areas import StartingAreaQuery, suggest_starting_areas
@@ -210,7 +228,7 @@ def starting_areas(request: StartingAreaQuery):
     try:
         return JSONResponse(content=suggest_starting_areas(request,provider_budget),headers={'Cache-Control':'no-store'})
     except (ProviderLimitError, DiscoveryError, RouteError, ValidationError) as error:
-        return JSONResponse(status_code=422,content={'message':'Starting-area information could not be verified.' if isinstance(error,ValidationError) else str(error),'diagnostics':getattr(error,'diagnostics',{})},headers={'Cache-Control':'no-store'})
+        return failure('provider_service_error' if isinstance(error,ValidationError) else provider_code(error),503 if isinstance(error,ValidationError) else provider_status(error),operation='starting_areas',error=error,diagnostics=getattr(error,'diagnostics',{}))
 
 
 @app.post("/api/plans/generate", response_model=RankingResult)
@@ -327,7 +345,7 @@ def refresh_saved_plan(request: RefreshRequest):
     except PersistenceError as error:
         return failure(error.code,error.status,operation='saved_refresh')
     except (DiscoveryError,ProviderLimitError) as error:
-        return failure('venue_refresh_disabled' if getattr(error,'code',None)=='disabled' else provider_code(error),422,operation='saved_refresh',error=error)
+        return failure('venue_refresh_disabled' if getattr(error,'code',None)=='disabled' else provider_code(error),provider_status(error),operation='saved_refresh',error=error)
 
 
 @app.get('/api/development-diagnostics')
@@ -335,9 +353,11 @@ def development_diagnostics():
     if not local_real_enabled() or os.environ.get('WHERETO_DIAGNOSTICS_DEV')!='1':
         return JSONResponse(status_code=404,content={},headers={'Cache-Control':'no-store'})
     from backend.development_diagnostics import snapshot
+    from backend.operations import snapshot as operational_snapshot
+    from backend.admission import requests as request_admission, inference as inference_admission
     from backend.performance import snapshot as ai_timings, provider_snapshot
     from backend.ai_readiness import snapshot as readiness
-    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'providerStageTiming':provider_snapshot(),'localAiReadiness':readiness(),'advanced':advanced_sessions.diagnostics()},headers={'Cache-Control':'no-store'})
+    return JSONResponse(content={'dataMode':os.environ.get('VENUE_DATA_MODE','mock'),**snapshot(),'localAiTiming':ai_timings(),'providerStageTiming':provider_snapshot(),'localAiReadiness':readiness(),'advanced':advanced_sessions.diagnostics(), 'operations':operational_snapshot(), 'admission':request_admission.snapshot(), 'inferenceAdmission':inference_admission.snapshot()},headers={'Cache-Control':'no-store'})
 
 
 from backend.advanced_planning import AdvancedInput, AdvancedAnswerError, sessions as advanced_sessions
@@ -353,5 +373,10 @@ async def advanced_endpoint(value: AdvancedInput, http: Request):
         except ValueError:
             return failure('advanced_answer_invalid',422,operation='advanced',message='This answer cannot be applied to the current outing. Check the requested field; your text and itinerary are kept.')
         except (DiscoveryError, ProviderLimitError, RouteError) as error:
-            return failure(provider_code(error),422,operation='advanced',error=error)
+            return failure(provider_code(error),provider_status(error),operation='advanced',error=error)
     return await run_work(http,execute)
+
+
+# Outermost application middleware: admission precedes body parsing and endpoint work.
+from backend.request_middleware import RequestManagement
+app.add_middleware(RequestManagement)
