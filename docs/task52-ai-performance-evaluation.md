@@ -1,3 +1,5 @@
+> November 5, Task 52B Phase 1: the owner approved only the 594-request/$12 synthetic model experiment. [Current benchmark/readiness report](task52-cloud-model-benchmark.md): **zero paid calls/$0; GPT-4.1 mini deprecated; other candidates blocked on account/region prerequisites; no model selected**. Offline tooling exists, but full semantic review/token-bound/wire readiness and live qualification remain incomplete. Historical 52A proposals below are not live results or infrastructure authorization.
+
 # Task 52A — cloud AI and complete-result performance
 
 November 5, 2026. **No candidate cloud model was called.** No private text was uploaded, model downloaded, prompt changed or application code modified. This is an evaluation protocol, reusable corpus and fresh offline component baseline. Hosting/state/cost comparisons are in [architecture evaluation](task52-cloud-architecture-evaluation.md); execution remains approval-gated in [52B plan](task52-production-implementation-plan.md).

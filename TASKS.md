@@ -1,3 +1,5 @@
+Current November 5 Task 52B Phase 1: **controlled synthetic model experiment authorized; offline harness prepared; live qualification blocked**. Zero paid calls/$0. GPT-4.1 mini is deprecated; Google/Anthropic account, region and funding readiness unverified. Semantic review/token bounds/final wire compatibility remain open. [Benchmark and prerequisites](docs/task52-cloud-model-benchmark.md). Task 52 remains unchecked; no infrastructure provisioning or Tasks 53–55. Earlier checkpoints below are historical.
+
 Current November 5 Task 52A: **research/evaluation phase prepared; owner architecture-and-spending approval pending**. Task 52 remains in progress and unchecked; no Phase 52B implementation/provisioning. Tasks 53–55 remain unstarted. [Architecture](docs/task52-cloud-architecture-evaluation.md), [AI/performance](docs/task52-ai-performance-evaluation.md), [approval and implementation plan](docs/task52-production-implementation-plan.md). Earlier status notes are historical.
 
 Earlier November 5 checkpoint: Task 51 local protections and production activation contract are verified. No daily legitimate-user plan quota, Cloud change or deployment. Required distributed services remain explicit Task 52 dependencies; Task 52 was unstarted at that checkpoint. [Acceptance and limitations](docs/task51-operations.md). Earlier status notes below are historical.
@@ -316,7 +318,7 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
 - [ ] Task 52 — Choose production-compatible hosting. Deploy the frontend and backend to services permitted for our intended usage.
 
-  Status: **In progress — Phase 52A research prepared; owner architecture/spending decision pending.** No production infrastructure, paid inference, quota/billing change or deployment. Phase 52B requires explicit approval. [Evaluation](docs/task52-cloud-architecture-evaluation.md), [model/performance evidence](docs/task52-ai-performance-evaluation.md), [implementation blueprint](docs/task52-production-implementation-plan.md).
+  Status: **In progress — Phase 52B Phase 1 synthetic experiment approved; offline tooling prepared, live model qualification blocked.** Zero paid inference/$0; no infrastructure, quota/billing change or deployment. Only 594 synthetic attempts/$12 token spend is authorized; provider accounts/region/funding and remaining preparation gates block live work. [Current benchmark](docs/task52-cloud-model-benchmark.md). [Evaluation](docs/task52-cloud-architecture-evaluation.md), [model/performance evidence](docs/task52-ai-performance-evaluation.md), [implementation blueprint](docs/task52-production-implementation-plan.md).
 
 - [ ] Task 53 — Configure environment variables and HTTPS. No secret keys in public frontend code or GitHub.
 

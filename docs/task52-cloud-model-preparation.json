@@ -1,0 +1,81 @@
+{
+  "metadata": {
+    "experiment": "task52b-phase1",
+    "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "promptVersion": "52b-v1-unchanged-local-instructions",
+    "promptHash": "633c12057f3dae65b4caa70a8cafef998ae4ecfcfdde53f48d913b0d21a3351a",
+    "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchemaHashes": {
+      "openai": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "google": "2d5317a6b1914ff55ccb3793c7b4d779683fb475639db0cf78af81fc40b6c527",
+      "anthropic": "399d47361c1edc6cc99048f9099c24ee0af91843e05296ad0b9d64764edc1a15"
+    },
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "candidates": {
+      "openai": {
+        "model": "gpt-4.1-mini-2025-04-14",
+        "rates": [
+          400,
+          1600
+        ],
+        "blockers": [
+          "Deprecated; owner must review a replacement candidate",
+          "No evaluation credential/account readiness verified"
+        ]
+      },
+      "google": {
+        "model": "gemini-3.8-flash",
+        "rates": [
+          750,
+          3750
+        ],
+        "blockers": [
+          "No approved model-service identity, account/quota or processing-region review",
+          "Existing Maps identity must not be repurposed",
+          "Introductory global pricing expires 2026-12-31"
+        ]
+      },
+      "anthropic": {
+        "model": "claude-haiku-5-5",
+        "rates": [
+          100,
+          500
+        ],
+        "blockers": [
+          "No evaluation credential or funded account verified",
+          "Prepaid credits require separate approval if unavailable",
+          "Processing region and account retention settings unverified"
+        ]
+      }
+    },
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "attemptCap": 594,
+    "providerCap": 198,
+    "spendCapNanodollars": 12000000000,
+    "concurrency": 1,
+    "retries": 0,
+    "timezonePolicy": "Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown",
+    "temperature": 0,
+    "tools": false,
+    "inferenceRegion": "unapproved; live blocked"
+  },
+  "caseCounts": {
+    "backend/journey_fixtures.py": 25,
+    "backend/evaluation/cases.json": 26,
+    "Task52A authored synthetic extension": 15
+  },
+  "schemaBytes": 6465,
+  "maxMessageBytes": 23581,
+  "paidRequests": 0,
+  "status": "offline preparation; live blocked, not qualified",
+  "date": "2026-11-05",
+  "baseline": "285690b",
+  "expenditureUSD": "0",
+  "providerAttempts": {
+    "openai": 0,
+    "google": 0,
+    "anthropic": 0
+  },
+  "warning": "No live results. Fake test reservations do not consume paid allowance. Full semantic review, token bounds, provider readiness and wire compatibility remain open."
+}

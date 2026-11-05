@@ -1,3 +1,9 @@
+# November 5, 2026 — Task 52B Phase 1 evidence checkpoint
+
+The approved scope is only 594 synthetic single-attempt model calls and $12 aggregate token spend. Separate account deposits/subscriptions, infrastructure and later tasks remain outside approval. Official OpenAI documentation marks `gpt-4.1-mini-2025-04-14` deprecated with January 14, 2027 API removal; apply the owner’s stop rule and do not substitute a model. No production cloud model is selected because no cloud candidate was called. Google/Anthropic remain unevaluated pending account/processing readiness. The local Qwen default and existing source validators remain authoritative; evaluation code is isolated. [Sources, tooling, limitations and prerequisites](docs/task52-cloud-model-benchmark.md).
+
+---
+
 # Technical decisions
 
 This record began with source inspection on October 19, 2026, before Git was initialized; it does not reconstruct earlier project history. Reasons below are limited to code comments, documented behavior, or explicit owner requirements.
