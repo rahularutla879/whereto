@@ -1,4 +1,79 @@
-# Task 52B Phase 1 — cloud model qualification checkpoint
+# November 6, 2026 — Task 52B Phase 1 controlled evaluation
+
+Baseline clean `main` at `8e79924093fbbcb5a9d62118b14232a8af95970e`. **Qualification incomplete; no production model selection yet.** One Google inference attempt returned HTTP 400 without model output. OpenAI and Anthropic stopped at readiness. [Aggregate results/configuration](task52-cloud-model-results.json). The November 5 report below is historical; its zero-attempt/account-unavailable statements are superseded by this checkpoint.
+
+Authorization remains **66 unchanged synthetic cases × three repetitions × three providers, maximum 594 attempts/198 per provider, $12 aggregate token spend, 12,000 input/2,000 output tokens, concurrency one, no automatic retries or reallocation**. No purchase, Maps call/billing/quota change, infrastructure, production model switch, migration or Task 53 occurred in this continuation. Owner account/credit/key setup happened separately in this conversation. Those approvals cover synthetic evaluation, not production user data.
+
+## Current benchmark results
+
+No model generated a semantic response. “Unavailable” means no observation, not a passing score. Counts of structured/accepted responses use attempted inference as their denominator; semantic accuracy uses generated model outputs, of which there are zero.
+
+| Metric | OpenAI | Google | Anthropic |
+|---|---|---|---|
+| Exact model/version | `gpt-6-luna`, served revision unobserved | `gemini-3.8-flash`, served revision unobserved | `claude-haiku-5-5`, metadata ID confirmed |
+| Calls completed with model output | 0/198 planned | 0/198 planned | 0/198 planned |
+| Inference attempts consumed | 0/198 | **1/198**, HTTP 400 | 0/198 |
+| Valid structured responses | Unavailable, n=0 attempts | **0/1 attempt**, no model body | Unavailable, n=0 attempts |
+| Validated accepted responses | Unavailable, n=0 | **0/1 attempt**, n=0 model outputs | Unavailable, n=0 |
+| Fully correct semantic cases | Unavailable, 0 reviewed/66 planned | Unavailable, 0 reviewed/66 planned | Unavailable, 0 reviewed/66 planned |
+| Critical constraint failures | Unavailable, 0 outputs | Unavailable, 0 outputs | Unavailable, 0 outputs |
+| Unsupported hallucinations | Unavailable | Unavailable | Unavailable |
+| Safe clarifications | Unavailable | Unavailable | Unavailable |
+| p50 inference latency | Unavailable | Unavailable | Unavailable |
+| p90 inference latency | Unavailable | Unavailable | Unavailable |
+| p95 inference latency | Unavailable | Unavailable | Unavailable |
+| Maximum inference latency | Unavailable | Unavailable | Unavailable |
+| Billed/reported input tokens | Unavailable; 0 inference sends | Unavailable; no usage returned | Unavailable; 0 inference sends |
+| Output tokens received | 0 | 0 | 0 |
+| Provider charge / conservative estimate | $0 inference liability | **$0.0165 reservation retained**, invoice unavailable | $0 inference liability |
+| Data/privacy conditions | Standard global API; no training by default; abuse retention; `store=false` | Paid Developer API; global processing and limited abuse logging; no tools/grounding | Global commercial API; no express training permission; retention exceptions |
+| Qualification outcome | Blocked: token-count permission/bound | Stopped: request compatibility | Blocked: input exceeds cap |
+
+The complete Google **HTTP error operation** took **1,149.791750ms**. Its p50/p90/p95/max are all that value, **n=1 error response**, measured around send and complete body reading. These are not model-inference performance observations. The JSON's generic operation percentiles include this error; explicitly named inference percentiles are null. No cold/warm distinction, successful schema compilation/setup timing, inference output length, accuracy, expanded-corpus 98% gate, fastest qualified model or principal qualified alternative can be established. The error is one safe operational failure, not a semantic success or proof of a model correctness failure.
+
+**Recommendation: no production model selection yet.** Retain the three candidates pending their specific blockers. There is no successful interpretation evidence for five-second plausibility, and no Places, Routes, Cloud Run, Redis, PostgreSQL, browser rendering or higher-concurrency measurement. Full end-to-end five-second planning remains unproven.
+
+## Verified account readiness and exact blockers
+
+**OpenAI:** owner explicitly approved `gpt-6-luna` to replace deprecated GPT-4.1 mini. [Official specification](https://developers.openai.com/api/docs/models/gpt-6-luna) lists Chat Completions, structured outputs and reasoning `none`. Standard short-context input/output are $0.10/$0.50 per million; cache-write $0.125. Ledger rates conservatively use **$0.125/$0.50** to cover the higher input class, without assuming cache discounts. No Fast/Flex/Batch/regional premium. Earlier November 6 console checks: WhereTo Model Evaluation, Global Standard, $4.93 balance, auto-recharge off, model listed, 5,000 RPM/2M TPM; key expires November 13 and grants only Chat Completions Request. This is console-listed availability, not successful inference authentication.
+
+Actual non-inference `POST /v1/responses/input_tokens` returned **401, missing `api.responses.write`**. [Official token-counting guidance](https://developers.openai.com/api/docs/guides/token-counting) provides complete Responses input counts. Local tiktoken 0.12.0, inspected only in ignored evaluation storage, has no mapping for Luna; a guessed tokenizer was not admitted. **Prerequisite:** owner-reviewed counting permission/credential or an official complete-payload bound for this restricted Chat Completions configuration, including reviewed framing differences. Access was not broadened. No inference sent.
+
+**Google:** owner selected AI Studio/Developer API setup explicitly during this conversation; this is a documented service change from the original managed Cloud proposal, not reuse of Maps ADC. Default Gemini Project **`gen-lang-client-0829295259`** has its separate paid account; earlier November 6 console checks verified $5, auto-reload off, Tier 1, and `gemini-3.8-flash` limits **1,000 RPM/2M input TPM/10,000 RPD**. The provider's $250 account cap is not experiment authorization. Key is Gemini-only, Google service-account-bound and restricted to this machine's verified IPv4. Initial metadata was denied over IPv6; the local transport selects IPv4 without broadening the cloud restriction. Subsequent metadata returned **200** and confirmed `models/gemini-3.8-flash`.
+
+[Model/lifecycle](https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash) documents stable structured output; [introductory pricing](https://ai.google.dev/gemini-api/docs/latest-model) is **$0.75/$3.75 per million input/output through December 31, 2026**, reasoning included. Standard global inference only; no region guarantee. Free complete-input counting explicitly included serialized schema as extra counted text (to avoid generationConfig/schema omission): **7,023 tokens**. Conservative admission adds 2,048 framing/schema tokens plus a 252-byte replacement bound for the last corpus input: **9,323 ≤12,000**.
+
+The first inference, **`journey-01`, repetition 1**, at `POST https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent`, returned **400 `INVALID_ARGUMENT`, “Request contains an invalid argument.”** No usage, candidate, details or request ID. **Prerequisite:** review mechanical request/schema compatibility offline before any further sends; do not retry this consumed slot. Current [REST reference](https://ai.google.dev/api/generate-content) deprecates legacy `responseSchema` in favor of `responseFormat.text.schema`; the generic 400 does **not** prove that deprecation caused the error. No fix, prompt tuning or replacement call was attempted. The ledger refuses configuration drift: any reviewed wire-version transition must preserve the same journal, original consumed slot and aggregate ceilings. The stopped provider does not automatically resume.
+
+**Anthropic:** [Haiku 5.5](https://platform.claude.com/docs/en/models/haiku-5-5/overview) is active, exact ID `claude-haiku-5-5`, retirement no sooner than October 7, 2027; standard short-context input/output **$0.10/$0.50 per million**. Earlier console checks: funded WhereTo Model Evaluation workspace, $5, auto-reload off, Evaluation tier, shared **1,000 RPM/500k input TPM/80k output TPM**, US workspace storage, global inference default, key expires November 13. No separate workspace spend cap; internal ledger remains authoritative. Actual non-inference GET `/v1/models/claude-haiku-5-5` returned **200**. Actual free POST `/v1/messages/count_tokens` returned **12,408 input tokens**, already over 12,000 before conservative margin (**14,708 bound**). **Prerequisite:** explicit owner review of a higher input cap with revised reservation math, or one common new prompt/example version for all models. Neither was applied; zero inference requests.
+
+## Privacy, preserved behavior and reproducibility
+
+Reviewed [OpenAI data controls](https://developers.openai.com/api/docs/guides/your-data), [Google paid-service terms](https://ai.google.dev/gemini-api/terms#paid-services), [Anthropic API retention](https://platform.claude.com/docs/en/manage-claude/api-and-data-retention) and [commercial exceptions](https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data). OpenAI standard abuse retention can apply up to 30 days with exceptions; `store=false` is not ZDR. Google paid prompts/responses are not used to improve products; limited safety logging and international transient processing can occur. Anthropic does not train on retained API data without express permission; standard retention/legal/policy exceptions apply. No provider ZDR arrangement or account-wide optional logging setting is assumed verified. Synthetic non-personal extraction has no identified prohibited purpose; production user text remains unauthorized. No feedback sharing, Search/Maps grounding, browser history, saved itineraries/capabilities, private origins or real provider payloads were sent.
+
+Exactly **six non-inference readiness operations** occurred (OpenAI 1, Google 3, Anthropic 2), distinct from the one inference attempt. Credentials are loaded from ignored mode-600 `backend/.env.cloud-evaluation`; no auth header/key is retained in artifacts or ordinary logs. Raw synthetic response/readiness detail is protected in ignored local artifacts; committed aggregate excludes IPs, keys and billing identity. Owner credit purchases during setup are separate from experiment token usage; the agent purchased nothing.
+
+Evaluation-only [`cloud_model52_live.py`](../scripts/cloud_model52_live.py) adds explicit `prepare` and `live` commands around [`cloud_model52.py`](../scripts/cloud_model52.py). HTTPS endpoints/methods are allowlisted; TLS stays verified; redirects and SDK retries are disabled; socket timeouts are bounded; complete response is read before timing ends. One process lock spans the live run; SQLite FULL-synchronous reservations precede dispatch. Failed/unknown/completed slots stay consumed. Previous provider failures stop automatic continuation. Accepted automated semantic mismatches halt for review. No arbitrary corpus/prompt/model/endpoint/state/budget overrides, paid warmups or fallback.
+
+Prompt version **`52b-v2-unchanged-instructions-reviewed-wire-settings`** records settings changes made before the first paid attempt: Luna reasoning none/standard tier; Haiku temperature omitted/thinking disabled/low effort; Gemini low thinking. System instructions and all 19 examples remain unchanged. Mechanical schemas preserve the same canonical properties and offline bounds/source validation: OpenAI strict schema; Anthropic unsupported bounds in descriptions; existing Google inlined uppercase/nullable representation. No interpreter/parser/source-grounding module changed. Google's wire compatibility remains unresolved, not certified.
+
+Corpus unchanged SHA-256 **`5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f`**: 66 unique IDs, 25 journey expectations, 26 ordinary checks, 15 prose extensions, six matching source hashes. Reference time **2026-11-05T15:00:00Z**. No authoritative expectation changed. The three exact owner examples remain offline historical Qwen replays; no extra paid scenarios were added. Full semantic adjudication/expanded-corpus qualification remain unperformed because no model output exists.
+
+The single durable journal at ignored `backend/.local/task52-model-evaluation/journal.sqlite` must never be deleted/reset/forked. Protected provider-separated response exports and readiness remain local; committed JSON records hashes/configuration/counters. Runtime defaults remain **Qwen `qwen3:4b`/Ollama**; no runtime imports the evaluation code. Startup, ordinary/advanced planning, manual preferences, saved security, Google provider admission/quotas/billing, release tags and production refusal remain unchanged.
+
+## Cost, verification and next steps
+
+Maximum reservation per request/provider: OpenAI **$0.0025/$0.495 for 198**, Google **$0.0165/$3.267**, Anthropic **$0.0022/$0.4356**; combined **$4.1976**. Anthropic remains inadmissible on token size despite that cost calculation. Current liability **$0.0165**, remaining authorized allowance **$11.9835**. Remaining slots: OpenAI 198, Google 197, Anthropic 198, aggregate 593; no reassignment. No actual invoice/token usage was returned for the 400, so its retained reservation is not a claimed provider charge.
+
+- Fake harness and HTTP-boundary suites **29/29**, including full fake 594 slots, cost ceilings, missing/unknown/duplicate structured properties, grounding, interrupted/timeout recovery, persistent critical halt, no redirects/retries and secret redaction.
+- Existing backend interpretation/grounding/ordinary/advanced/provider regressions **236 reported /234 passed /two opt-in hosted skips**, captured repeat 2.313s. Frontend **39/39**, 925.234ms. These are test durations, not inference benchmarks.
+- No full app/browser/hosted SQL/build/load tests were run for evaluation-only edits. Existing application defaults/source preservation is tested/compared, not claimed browser verification. Final secret scan, diff review and publication evidence are in HANDOVER.
+
+Resolve the specific permission, token-cap and wire-version blockers first. Resume remaining authorized slots only with reviewed equivalent instructions and preserved accounting; no model selection until successful semantic/latency evidence exists. Only after model qualification and separate recurring-cost/processing approval: implement shared DTO/store interfaces, durable reservation/fencing authority, shared admission/sessions and offline recovery checks; prepare a reviewable private staging plan. No hosting resources or Task 53 work is authorized now. **Stop Phase 1 here for owner review.**
+
+---
+
+# Historical November 5 — cloud model preparation checkpoint
 
 November 5, 2026; baseline `285690b`. **Paid evaluation blocked; no model qualified.** This report is a preparation/readiness result, not a completed live benchmark. No inference, account setup, deposit, subscription, infrastructure or production change occurred. The owner approved only 594 synthetic single-attempt calls and $12 aggregate token spend; that allowance remains entirely unused. Infrastructure packages S/L/P and Task 53 are not approved by this experiment.
 

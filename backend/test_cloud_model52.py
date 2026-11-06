@@ -199,7 +199,7 @@ class HarnessTests(unittest.TestCase):
                 for repeat in (1, 2, 3):
                     self.assertTrue(self.ledger.reserve(provider, case['id'], repeat))
         self.assertEqual(self.ledger.db.execute('SELECT count(*) FROM attempts').fetchone()[0], 594)
-        self.assertEqual(self.ledger.db.execute('SELECT sum(charge) FROM attempts').fetchone()[0], 5286600000)
+        self.assertEqual(self.ledger.db.execute('SELECT sum(charge) FROM attempts').fetchone()[0], 4197600000)
         with patch.object(e, 'PROVIDER_CAP', 0), self.assertRaises(e.AdmissionError):
             # Exercise independent provider ceiling using a fresh ledger.
             other = e.Ledger(Path(self.tmp.name) / 'other.sqlite', {})
@@ -240,7 +240,7 @@ class HarnessTests(unittest.TestCase):
             self.assertEqual(sends.count(provider), 198)
         e.run_matrix(self.ledger, adapters, lambda provider, payload: 1000)
         self.assertEqual(len(sends), 594)
-        self.assertEqual(self.ledger.db.execute('SELECT sum(charge) FROM attempts').fetchone()[0], 5286600000)
+        self.assertEqual(self.ledger.db.execute('SELECT sum(charge) FROM attempts').fetchone()[0], 4197600000)
 
     def test_interrupt_retains_reservation_and_prevents_second_send(self):
         sends = []

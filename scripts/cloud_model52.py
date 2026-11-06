@@ -28,18 +28,18 @@ ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / 'docs/task52-evaluation-corpus.json'
 CORPUS_SHA = '5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f'
 STATE = ROOT / 'backend/.local/task52-model-evaluation'
-PROMPT_VERSION = '52b-v1-unchanged-local-instructions'
+PROMPT_VERSION = '52b-v2-unchanged-instructions-reviewed-wire-settings'
 INPUT_CAP, OUTPUT_CAP = 12000, 2000
 TOTAL_CAP, PROVIDER_CAP, SPEND_CAP = 594, 198, 12_000_000_000  # nanodollars
 # Noncached standard text rates in nanodollars/token. No tools, cache writes,
 # batch, fast mode, region premium or subscription may be enabled implicitly.
 CANDIDATES = {
-    'openai': {'model': 'gpt-4.1-mini-2025-04-14', 'rates': [400, 1600],
-               'blockers': ['Deprecated; owner must review a replacement candidate', 'No evaluation credential/account readiness verified']},
+    'openai': {'model': 'gpt-6-luna', 'rates': [125, 500],
+               'blockers': ['Live requires hash-bound readiness and token admission']},
     'google': {'model': 'gemini-3.8-flash', 'rates': [750, 3750],
-               'blockers': ['No approved model-service identity, account/quota or processing-region review', 'Existing Maps identity must not be repurposed', 'Introductory global pricing expires 2026-12-31']},
+               'blockers': ['Live requires hash-bound readiness and token admission', 'Introductory global pricing expires 2026-12-31']},
     'anthropic': {'model': 'claude-haiku-5-5', 'rates': [100, 500],
-                  'blockers': ['No evaluation credential or funded account verified', 'Prepaid credits require separate approval if unavailable', 'Processing region and account retention settings unverified']},
+                  'blockers': ['Live requires hash-bound readiness and token admission']},
 }
 
 
@@ -149,7 +149,10 @@ def metadata():
             'attemptCap': TOTAL_CAP, 'providerCap': PROVIDER_CAP,
             'spendCapNanodollars': SPEND_CAP, 'concurrency': 1, 'retries': 0,
             'timezonePolicy': 'Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown',
-            'temperature': 0, 'tools': False, 'inferenceRegion': 'unapproved; live blocked'}
+            'sampling': {'openai': 'temperature 0; reasoning none', 'google': 'temperature 0; thinking low', 'anthropic': 'temperature omitted; thinking disabled; effort low'},
+            'tools': False, 'inferenceRegion': 'standard global; synthetic non-personal evaluation only',
+            'transportVersion': '52b-single-http-v1', 'timeoutSeconds': 120,
+            'googleService': 'Gemini Developer API; separate paid Default Gemini Project'}
 
 
 class Adapter:
@@ -165,18 +168,18 @@ class Adapter:
         common = messages(text)
         model = CANDIDATES[self.provider]['model']
         if self.provider == 'openai':
-            return {'model': model, 'messages': common, 'temperature': 0,
+            return {'model': model, 'messages': common, 'temperature': 0, 'reasoning_effort': 'none', 'service_tier': 'default',
                     'max_completion_tokens': OUTPUT_CAP, 'store': False,
                     'response_format': {'type': 'json_schema', 'json_schema': {
                         'name': 'outing_interpretation', 'strict': True, 'schema': wire_schema(self.provider)}}}
         if self.provider == 'anthropic':
             return {'model': model, 'system': SYSTEM_PROMPT, 'messages': common[1:],
-                    'max_tokens': OUTPUT_CAP, 'temperature': 0,
-                    'output_config': {'format': {'type': 'json_schema', 'schema': wire_schema(self.provider)}}}
+                    'max_tokens': OUTPUT_CAP, 'thinking': {'type': 'disabled'},
+                    'output_config': {'effort': 'low', 'format': {'type': 'json_schema', 'schema': wire_schema(self.provider)}}}
         return {'systemInstruction': {'parts': [{'text': SYSTEM_PROMPT}]},
                 'contents': [{'role': 'model' if m['role'] == 'assistant' else 'user',
                               'parts': [{'text': m['content']}]} for m in common[1:]],
-                'generationConfig': {'temperature': 0, 'maxOutputTokens': OUTPUT_CAP,
+                'generationConfig': {'temperature': 0, 'maxOutputTokens': OUTPUT_CAP, 'thinkingConfig': {'thinkingLevel': 'low'},
                                      'responseMimeType': 'application/json', 'responseSchema': wire_schema(self.provider)}}
 
     def decode(self, response):
