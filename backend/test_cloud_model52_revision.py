@@ -146,6 +146,21 @@ class RevisionTests(unittest.TestCase):
                     live.live(max_new_attempts=1)
                 send.assert_not_called()
 
+    def test_completed_responses_error_null_and_failed_http_classification(self):
+        from backend.test_cloud_model52 import response, output
+        case=e.corpus()['cases'][0]
+        saved=response('openai',output(case))
+        saved.update(error=None,_http_status=200)
+        adapter=e.Adapter('openai',None)
+        text,usage,status=adapter.decode(saved)
+        self.assertEqual(status,'complete')
+        self.assertEqual(usage,(100,20))
+        self.assertTrue(e.score(case,text)['structuredValid'])
+        self.assertFalse(e.score(case,text)['automatedFailures'])
+        for error,http in (({'type':'invalid_request_error'},200),(None,400),({},400)):
+            failed=copy.deepcopy(saved);failed.update(error=error,_http_status=http)
+            self.assertEqual(adapter.decode(failed),(None,None,'provider_error'))
+
     def test_credentials_fail_closed_and_no_other_provider_key_in_headers(self):
         with tempfile.TemporaryDirectory() as directory:
             path=Path(directory)/'keys'

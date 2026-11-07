@@ -200,7 +200,9 @@ class Adapter:
 
     def decode(self, response):
         """Return content, complete billed usage, and safe stop classification."""
-        if 'error' in response:
+        # Successful Responses objects include error:null. A non-null error
+        # or a failed HTTP operation is a failure; key presence alone is not.
+        if response.get('error') is not None or response.get('_http_status', 200) != 200:
             return None, None, 'provider_error'
         if self.provider == 'openai':
             usage = response.get('usage', {})

@@ -1,0 +1,137 @@
+{
+  "baselineCommit": "559ade909cd2babfe0d35219be91df2f7a9d7a3e",
+  "slot": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "caseId": "journey-01",
+    "repetition": 1
+  },
+  "sourceText": "Dinner and drinks in Jersey City tomorrow.",
+  "httpStatus": 200,
+  "providerStatus": "completed",
+  "providerError": null,
+  "completeInferenceLatencyMs": 2764.7997090025456,
+  "providerReportedUsage": {
+    "input_tokens": 5058,
+    "input_tokens_details": {
+      "cache_write_tokens": 5055,
+      "cached_tokens": 0
+    },
+    "output_tokens": 180,
+    "output_tokens_details": {
+      "reasoning_tokens": 0
+    },
+    "total_tokens": 5238
+  },
+  "outputCharacters": 694,
+  "canonicalValidation": {
+    "structuredValid": true,
+    "missingRequiredProperties": [],
+    "unknownProperties": [],
+    "sourceGroundedAccepted": true,
+    "issues": [],
+    "questions": [],
+    "automatedChecks": {
+      "activities": true,
+      "journeySemantics": false
+    },
+    "fullyCorrect": null
+  },
+  "review": {
+    "source": "Dinner and drinks in Jersey City tomorrow.",
+    "comparisonDifferences": [
+      {
+        "path": "$.stops[0].evidence",
+        "actual": "Dinner",
+        "expected": ""
+      },
+      {
+        "path": "$.stops[1].evidence",
+        "actual": "drinks",
+        "expected": ""
+      }
+    ],
+    "agentSemanticInspection": {
+      "requiredStops": "Dinner and drinks both retained, required, source-order occurrences unchanged",
+      "location": "Jersey City matches source",
+      "namedVenueIdentity": "No named venue in source; none invented",
+      "ordering": "No explicit mandatory order asserted; unspecified and empty order edges preserved",
+      "optionalStops": "No optional stops in source; neither required stop made optional",
+      "returnAndEndpoint": "Not requested; endpoint null",
+      "timeBudgetsDeadlinesTravelLimits": "Not requested; all relevant null/empty",
+      "relativeDate": "tomorrow preserved, trusted fixed-reference resolver returns 2026-11-06 in America/New_York",
+      "otherUnknowns": "people/budget/currency/transport/cost remain null in extraction",
+      "provenance": "Dinner and drinks evidence are verbatim source spans, while sparse gold defaults evidence to empty string",
+      "observedHallucinationsOrDroppedRequirements": []
+    },
+    "reviewDisposition": "Owner review required for automated journeySemantics provenance mismatch; no corpus/scorer/source-grounding changes and no fully-correct qualification label",
+    "rawResponseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+    "originalJournalRecordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+    "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+    "providerModel": "gpt-6-luna",
+    "latencyMs": 2764.7997090025456,
+    "providerReportedUsage": {
+      "input_tokens": 5058,
+      "input_tokens_details": {
+        "cache_write_tokens": 5055,
+        "cached_tokens": 0
+      },
+      "output_tokens": 180,
+      "output_tokens_details": {
+        "reasoning_tokens": 0
+      },
+      "total_tokens": 5238
+    },
+    "usageBasedConservativeEstimatedUSD": 0.00072225,
+    "journalReservationUSD": 0.0025,
+    "originalRecordedClassification": "provider_error",
+    "correctedOfflineClassification": "complete",
+    "decoderFix": "Non-null errors/failed HTTP status are failures; error:null is normal successful Responses envelope",
+    "outputTextSha256": "4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5",
+    "additionalInferenceRequests": 0,
+    "fullyCorrect": null
+  },
+  "hashes": {
+    "configuration": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+    "requestPayload": "8bab2d72f16e623b58faa8ae56880ed494db14f6c226741cf16b71b8dbfdb78e",
+    "prompt": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+    "canonicalSchema": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchema": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "storedProviderResponseObject": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+    "rawOutputTextSha256": "4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5",
+    "originalJournalRecord": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+    "currentJournalFile": "4affc8a27b8b7d30774db0bbcabc1f0021a6a17b247adbbfa89e6ad11c68042b"
+  },
+  "hashDefinition": "Object hashes use scripts.cloud_model52.digest canonical JSON. Output-text hash uses the exact UTF-8 model JSON text. Stored response object includes sanitized transport metadata; not a claimed original HTTP-byte hash.",
+  "journalPreservation": {
+    "originalThreeRowsUnchanged": true,
+    "rootMetadataUnchanged": true,
+    "openaiRecordedStatus": "provider_error",
+    "openaiRecordedChargeNanodollars": 2500000,
+    "recordRewritten": false,
+    "explanation": "Successful Responses error:null triggered old key-presence decoder. Offline correction is separately recorded; original row/reservation retained. No retry."
+  },
+  "experiment": {
+    "attempts": {
+      "openai": 1,
+      "google": 2,
+      "anthropic": 1
+    },
+    "totalAttempts": 4,
+    "remainingAttempts": 590,
+    "providerRemaining": {
+      "openai": 197,
+      "google": 196,
+      "anthropic": 197
+    },
+    "aggregateAccountedUSD": 0.0377,
+    "remainingAuthorizedUSD": 11.9623,
+    "spendCapUSD": 12,
+    "openaiUsageBasedConservativeEstimateUSD": 0.00072225,
+    "openaiReservedUSD": 0.0025,
+    "providerReportedInvoiceChargeUSD": null
+  },
+  "readyForFurtherAutomaticDispatch": false,
+  "stopReason": "Exactly one attempt authorized; owner review of evaluator mismatch/decoder correction required. Existing journal status also fails closed before any later OpenAI dispatch.",
+  "productionQualification": "Not established; one case and an unresolved evaluator review, no full-corpus accuracy/performance evidence."
+}

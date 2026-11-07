@@ -1,5 +1,5 @@
 {
-  "baselineCommit": "8df31f2544c5a9be14ba45f5f7d8e01c54eb85ed",
+  "baselineCommit": "559ade909cd2babfe0d35219be91df2f7a9d7a3e",
   "scope": "Task52B Phase1 synthetic model evaluation only",
   "originalConfigurationHash": "c195b4bd8cfec037238e542574a8613186e26d76f1fd033236e8a8fa7b2fc8ca",
   "currentConfiguration": {
@@ -69,50 +69,56 @@
   "originalMetadataBytesUnchanged": true,
   "originalGoogleRecordUnchanged": true,
   "journalIntegrity": "ok",
-  "journalSha256": "3eef2041d51d7ffa66bfe16c18e0b5084a244f8923cc983384fb0640edaadd93",
+  "journalSha256": "4affc8a27b8b7d30774db0bbcabc1f0021a6a17b247adbbfa89e6ad11c68042b",
   "newAttemptsThisContinuation": {
-    "openai": 0,
-    "google": 1,
-    "anthropic": 1
+    "openai": 1,
+    "google": 0,
+    "anthropic": 0
   },
   "aggregate": {
-    "attemptsConsumed": 3,
-    "attemptsRemaining": 591,
+    "attemptsConsumed": 4,
+    "attemptsRemaining": 590,
     "attemptCap": 594,
-    "accountedNanodollars": 35200000,
-    "remainingAuthorizedNanodollars": 11964800000,
+    "accountedNanodollars": 37700000,
+    "remainingAuthorizedNanodollars": 11962300000,
     "actualProviderChargeUSD": null,
-    "modelOutputs": 0
+    "modelOutputs": 1
   },
   "providers": {
     "openai": {
-      "successfulInferenceLatencyDenominator": 0,
-      "operationLatencyDenominator": 0,
-      "maxOperationLatencyMs": null,
-      "p50OperationMs": null,
-      "p90OperationMs": null,
-      "p95OperationMs": null,
-      "reportedUsageRecords": 0,
-      "inputTokensWithReportedUsage": 0,
-      "outputTokensWithReportedUsage": 0,
-      "validatedAccepted": 0,
+      "successfulInferenceLatencyDenominator": 1,
+      "operationLatencyDenominator": 1,
+      "maxOperationLatencyMs": 2764.7997090025456,
+      "p50OperationMs": 2764.7997090025456,
+      "p90OperationMs": 2764.7997090025456,
+      "p95OperationMs": 2764.7997090025456,
+      "reportedUsageRecords": 1,
+      "inputTokensWithReportedUsage": 5058,
+      "outputTokensWithReportedUsage": 180,
+      "validatedAccepted": 1,
       "criticalFailures": null,
       "safeClarifications": null,
-      "attemptRecords": 0,
-      "p50Ms": null,
-      "p90Ms": null,
-      "p95Ms": null,
-      "maxMs": null,
-      "structuredValid": 0,
-      "statusCounts": {},
+      "attemptRecords": 1,
+      "p50Ms": 2764.7997090025456,
+      "p90Ms": 2764.7997090025456,
+      "p95Ms": 2764.7997090025456,
+      "maxMs": 2764.7997090025456,
+      "structuredValid": 1,
+      "statusCounts": {
+        "complete": 1
+      },
       "fullyCorrect": null,
-      "qualification": "not qualified; semantic review required",
-      "attemptsConsumed": 0,
-      "attemptsRemaining": 198,
-      "conservativelyAccountedNanodollars": 0,
+      "qualification": "Not qualified; single-case semantic review unresolved.",
+      "attemptsConsumed": 1,
+      "attemptsRemaining": 197,
+      "conservativelyAccountedNanodollars": 2500000,
       "actualProviderChargeUSD": null,
-      "attempts": [],
-      "blocker": "Owner approval/action required for project-key Responses Request (api.responses.write); inference disabled."
+      "usageBasedConservativeEstimatedUSD": 0.00072225,
+      "originalRecordedStatus": "provider_error",
+      "offlineCorrectedProviderStatus": "complete",
+      "journalRecordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+      "detailedEvidence": "task52-openai-first-attempt.json",
+      "blocker": "Owner review hold: original null-error decoder misclassification and evidence-field semantic-comparator mismatch. No further call authorized."
     },
     "google": {
       "successfulInferenceLatencyDenominator": 0,
@@ -217,10 +223,12 @@
   },
   "inputCounting": {
     "openai": {
-      "countedInputTokens": null,
-      "countMargin": null,
-      "inputUpperBound": null,
-      "nonInferenceRequests": 1
+      "countedInputTokens": 5077,
+      "countMargin": 2048,
+      "inputUpperBound": 7125,
+      "freshJourney01InputTokens": 5058,
+      "nonInferenceRequestsThisContinuation": 1,
+      "source": "Prior 66 complete case counts retained; exact journey-01 reasoning-none/schema payload recounted successfully before this single dispatch."
     },
     "google": {
       "countedInputTokens": 5786,
@@ -235,5 +243,26 @@
       "nonInferenceRequests": 67
     }
   },
-  "qualification": "No production model selected; no semantic outputs or successful inference latencies. Expanded-corpus 98% gate unestablished."
+  "qualification": "No production model selected. One complete OpenAI response passes structure/source validation; automated evidence comparison requires review. Google/Anthropic still blocked; all paid work stopped.",
+  "previousAggregateAt559ade9": {
+    "attemptsConsumed": 3,
+    "attemptsRemaining": 591,
+    "attemptCap": 594,
+    "accountedNanodollars": 35200000,
+    "remainingAuthorizedNanodollars": 11964800000,
+    "actualProviderChargeUSD": null,
+    "modelOutputs": 0
+  },
+  "singleOpenAIAttemptBaselineCommit": "559ade909cd2babfe0d35219be91df2f7a9d7a3e",
+  "newAttemptsSince559ade9": {
+    "openai": 1,
+    "google": 0,
+    "anthropic": 0
+  },
+  "originalBlockerFixBaselineCommit": "8df31f2544c5a9be14ba45f5f7d8e01c54eb85ed",
+  "attemptsAddedAt873c3c3": {
+    "openai": 0,
+    "google": 1,
+    "anthropic": 1
+  }
 }

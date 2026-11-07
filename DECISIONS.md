@@ -1,3 +1,9 @@
+# November 7, 2026 — preserve original audit row and bind offline decoder correction
+
+One authorized OpenAI response is HTTP200/completed, despite the harness initially classifying its normal error:null field as provider_error. Fix only the evaluation decoder and derive offline validation from the recorded response; retain the original journal row/full reservation and all earlier failures. Do not repeat the slot, silently rewrite the audit, weaken source grounding/gold, or begin further calls. An evidence-string-versus-empty-gold comparison discrepancy remains for owner review. One source-grounded response is insufficient for model qualification or infrastructure activation. [Exact evidence and limits](docs/task52-cloud-model-benchmark.md).
+
+---
+
 # November 6 local / November 7 UTC, 2026 — retain failures and withhold model selection
 
 Task 52B Phase 1 continues in the original paid journal across a reviewed common v3 prompt/wire revision; immutable root metadata and consumed slot records are preserved. The common reduction removes only parser-default example repetition and redundant titles, with all 19 reconstructed interpretations identical and no source/gold/runtime change. A counting cap pass is not proof of schema compilation or semantic correctness. Two Google HTTP 400 failures and one Anthropic grammar-size HTTP 400, plus missing OpenAI Responses permission, provide **no evidence for production selection**. Stop affected paid work, retain three consumed slots/$0.0352 conservative reservations, and require minimal owner permission or provider/schema compatibility review before further unused slots. Do not weaken source grounding, grant broad IAM, increase caps or begin infrastructure. [Evidence](docs/task52-cloud-model-benchmark.md), [exact revision](docs/task52-prompt-revision-v3.json).

@@ -1,3 +1,58 @@
+# November 7, 2026 — exactly one OpenAI inference; stopped for review
+
+Started clean at `559ade909cd2babfe0d35219be91df2f7a9d7a3e`. **Exactly one original OpenAI `journey-01/r1` call was sent; HTTP 200, provider status `completed`. No second inference or Google/Anthropic call was sent.** [Detailed safe evidence, hashes and review](task52-openai-first-attempt.json), [cumulative aggregate](task52-cloud-model-results.json). No production model is qualified and further paid dispatch is paused for owner review.
+
+| Metric | First OpenAI attempt |
+|---|---|
+| Model / original slot | `gpt-6-luna` / `journey-01`, repetition 1 |
+| Source | Synthetic: “Dinner and drinks in Jersey City tomorrow.” |
+| Complete inference operation | **2,764.799709ms** (full response body, not first-token timing) |
+| p50 / p90 / p95 / maximum | Each 2,764.799709ms, **n=1**; not a useful latency distribution |
+| Canonical structured validity | **1/1** complete output; zero missing/unknown properties |
+| Trusted source-grounded acceptance | **1/1**; no issues, unsupported items or clarification questions |
+| Automated semantic assertions | Activities pass; journey equality flags two evidence-string differences |
+| Fully correct semantic cases | **Not declared**; provenance-comparison review pending |
+| Input / output tokens | **5,058 /180** provider-reported; reasoning0, total5,238 |
+| Cache usage | cache-write5,055; cache-read0 (both reported by provider) |
+| Usage-based conservative estimate | **$0.00072225**, using all5,058 input tokens at$0.125/M and180 output at$0.50/M; not an invoice charge |
+| Authoritative journal reservation | **$0.0025 retained**; no release/rewrite |
+| Provider-reported invoice charge | Unavailable |
+| Cumulative attempts | **OpenAI1 /Google2 /Anthropic1 =4/594** |
+| Remaining original slots | OpenAI197 /Google196 /Anthropic197 =590; no reallocation |
+| Aggregate conservatively accounted / remaining | **$0.0377 /$11.9623** of$12 |
+
+## Predispatch gates and unchanged request
+
+Journal read-only integrity/root/row hashes matched the three-slot checkpoint before dispatch. Existing date gate2026-11-07UTC and provider/global readiness ages were still valid; no expiry was bypassed. One fresh non-inference count of the exact payload, including explicit reasoning none, returned200/**5,058**. All66 previously counted inputs/payload hashes remain valid, conservative bound7,125<12k. Existing restricted key access/Responses Write is demonstrated by successful counting and generation; no permission change. Existing credits**$4.93**, auto-reload**OFF**, rechecked in console immediately before dispatch; no purchase, reload or billing change.
+
+[Model and current prices](https://developers.openai.com/api/docs/models/gpt-6-luna), [pricing](https://developers.openai.com/api/docs/pricing) and [processing terms](https://developers.openai.com/api/docs/guides/your-data) were rechecked. Standard short-context input/output$0.10/$0.50 per million, default cache-write$0.125; unchanged global synthetic-only request, no regional premium/extended cache option. API data is not used for training by default; standard abuse retention/exceptions remain. `store=false` is not ZDR. Request unchanged: model Luna, temperature0, reasoning none, default service tier, max_output_tokens2000, strict reviewed JSON Schema, no tools or conversation linkage; only synthetic non-personal input.
+
+The existing journal committed **`reserved_uncertain`/$0.0025 for OpenAI/journey-01/r1 before HTTP dispatch**. A guard verified that committed row, unchanged prior three rows, exact payload hash and a single OpenAI transport call; the existing whole-run lock/max_new_attempts=1 enforced concurrency one. No warmup, alternative prompt, retry, fallback or modified generation request.
+
+## Successful response; decoder audit correction
+
+The provider returned `error:null` in a successful completed Responses envelope. The old evaluation decoder checked whether the error key existed, misclassifying this as `provider_error` before extracting usage/output or invoking scoring. **This was an evaluation-tool bug, not an OpenAI rejection.** The complete provider response and total transport timing were already durably recorded. A narrow evaluation-only fix now rejects non-null errors or non-200 HTTP operations; a regression covers successful null-error envelopes and real/error-null HTTP failures. No prompt, schema, corpus or application interpreter changes.
+
+**Do not rewrite the journal to hide the original classification.** The OpenAI row and full reservation remain untouched; its original hash and exact saved response hash bind the separate offline correction. Existing Google/Anthropic failure rows and root metadata are byte-for-byte unchanged. Raw journal/report-command status therefore remains `provider_error`; curated evidence explicitly distinguishes this original harness classification from the HTTP200/completed provider observation. Offline decoding/scoring used only the saved response, with no network or second inference. Provider-separated exports retain the original raw record.
+
+## Semantic result and owner review
+
+The unchanged canonical parser and trusted interpretation/source-grounding pipeline accept the output. Both **Dinner and drinks are retained as required activity occurrences**, source order preserved. Location **Jersey City** and raw **tomorrow** are grounded; deterministic fixed-reference resolution yields**2026-11-06** in America/New_York from2026-11-05T15:00:00Z (the synthetic reference date, not the real run date). No explicit ordering constraint, optionality, exact named venue, return endpoint, total/travel/visit-duration bound or deadline exists in this source; none was invented. Unknown people/budget/currency/transport/cost remain null in the model extraction. Ordinary interpreter defaults are existing trusted behavior, not model requirements. Manual inspection found no omitted/altered required stop or hallucinated requirement/identity in this one output.
+
+The unchanged automated journey comparator differs **only** at `stops[0].evidence` and `stops[1].evidence`: actual `Dinner`/`drinks`, versus sparse gold defaults `""`/`""`. Both actual values are exact source spans and pass source grounding. **Do not remove provenance validation, edit gold or quietly weaken the comparator to report a pass.** This is a candidate evaluator false positive requiring explicit review; no fully-correct label or full-corpus accuracy is assigned. Applicable semantic inspection and exact two-field diff are retained in the detailed evidence. No expectation was changed. The original recorded provider_error already fails closed for future OpenAI dispatch; owner review is required before designing an audited continuation past that classification. The remaining197 calls must not start automatically.
+
+## Hashes, verification and stop
+
+Request payload `8bab2d72f16e623b58faa8ae56880ed494db14f6c226741cf16b71b8dbfdb78e`; configuration `1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e`; stored response object `e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9`; exact output-text SHA-256 `4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5`. Detailed evidence defines hashing and includes model identifier, original record/file hashes, unchanged prompt/canonical/wire schema hashes. No key/authentication header or raw unnecessary output is committed.
+
+Preflight admission/boundary regressions **12/12 passed** (0.621s). After the narrow decoder fix, harness + original AI/interpretation/journey/timing/source-grounding suites **162/162 passed** (23.543s), including a new regression for error:null successes and non-200/error failures. Relevant frontend planning/preferences/advanced/request-management tests **33/33 passed** (820.293ms). No application runtime code changed, so full application/build/browser/hosted suites were not rerun; prior full-frontend model-call-count instability is not claimed resolved by this subset. Security scan: **375 current tracked/new files and25 private JSON evaluation artifacts**, zero configured-credential matches; keys remain in ignored regular mode600 config. Journal integrity/root/three original row hashes and frozen prompt/schema/configuration hashes reverified. Complete tracked/new-file diff, JSON and local-link checks reviewed before commit. No actual provider inference occurred during regression tests.
+
+**Not ready for automatic remaining-corpus dispatch.** Review the decoder correction and evidence-only comparator discrepancy, preserve this consumed slot/reservation, and approve any necessary audited continuation before the next unused slot. No OpenAI API/schema rejection was observed; broader accuracy, tail latency, critical gates and the expanded-corpus98% requirement remain unestablished. One2.765s interpretation is compatible with being a component of a five-second target; it does not demonstrate complete itinerary performance or justify production selection. No Places/Routes, Maps/billing/quota/credential change, Qwen/runtime/provider switch, saved database change, hosting/shared-state work, production deployment or Task53.
+
+---
+
+# Earlier readiness and benchmark checkpoints (historical where superseded)
+
 # November 7, 2026 — OpenAI non-inference readiness verified
 
 From clean `873c3c325f42e2322186aec0bab0fdd5fc32c043`, the owner reported manually setting the existing Task52B Evaluation key's Responses capability to Write. Read-only console inspection confirms the existing restricted evaluation-project key now includes `api.responses.write` (the console Write setting also includes read). No key, account permission, role or billing setting was changed by the agent.

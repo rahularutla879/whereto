@@ -1,6 +1,6 @@
 # Task 52B Phase 1 semantic review protocol
 
-The 66-case corpus is immutable. Its six source hashes and raw corpus hash are checked by `scripts.cloud_model52.corpus()`. There are 25 structured journey gold extractions, 26 ordinary assertion cases and 15 prose review cases. Structural validation and partial automated assertions do **not** complete semantic review. No generated output exists in the current three-attempt journal; none is labeled correct.
+The 66-case corpus is immutable. Its six source hashes and raw corpus hash are checked by `scripts.cloud_model52.corpus()`. There are 25 structured journey gold extractions, 26 ordinary assertion cases and 15 prose review cases. Structural validation and partial automated assertions do **not** complete semantic review. The first OpenAI slot now has one complete output; its structure/source checks pass, but an evidence-field comparison discrepancy remains for owner review and fullyCorrect is unset. The journal retains its original decoder misclassification, with a separately hash-bound offline correction; see [current evidence](task52-openai-first-attempt.json).
 
 From `/Users/rahularutla/Documents/whereto`, generate the complete private reference-review template without network access:
 
