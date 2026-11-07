@@ -1,3 +1,13 @@
+# November 7, 2026 — OpenAI readiness only; no inference dispatched
+
+Starting clean `873c3c3`, verified the owner's manual Responses Write update on the existing restricted evaluation-project key. **OpenAI readiness passed; stop before first inference.** [Exact count evidence, credits, constraints and expiry](docs/task52-cloud-model-benchmark.md).
+
+- Only OpenAI `POST /v1/responses/input_tokens` was called: 132 non-inference counts, HTTP200 throughout (66 frozen harness +66 with explicit reasoning none). Count sets agree: range5,053–5,077, first `journey-01/r1`5,058, bound7,125<12k; includes system, all19 examples, scenario, strict schema/framing. Output remains2k. No script/prompt/schema/corpus/runtime change. Existing credits$4.93/auto-reload off and model Responses/structured support/prices rechecked. Full-cap conservative reservation would be$0.0025; none was made.
+- Original paid journal/root/all rows verified unchanged by read-only hashes and integrity `ok`: OpenAI0/Google2/Anthropic1, total3/594 and$0.0352 retained. All allowance/concurrency/retry rules unchanged. Neither other provider was called. Private mode600 evidence and refreshed OpenAI readiness remain under ignored evaluation storage; credentials not exposed. Focused readiness/admission regressions **12/12 passed** (0.635s); no new tests or code changes. Credential values scanned against the documentation diff and private readiness artifacts with zero matches; ignored configuration remains mode600. Full diff reviewed. Full app/build/browser regression suites were not rerun for this read-only API check/documentation update.
+- No inference, payment, account permission change by agent, Maps/billing/quota change, hosting/shared-state work, production switch or Task53. Await owner's next instruction before first OpenAI attempt. Date gate2026-11-07UTC and readiness≤24h must still pass; refresh expired checks. Google/Anthropic stay blocked. This is input/account readiness, not a schema-compilation/semantic/latency result or production qualification.
+
+---
+
 # November 6 local / November 7 UTC, 2026 — Task 52B Phase 1 blocker continuation
 
 Started from clean `8df31f2544c5a9be14ba45f5f7d8e01c54eb85ed`. **Stop for owner/provider intervention; no production model qualified.** [Benchmark and precise next actions](docs/task52-cloud-model-benchmark.md), [aggregate evidence](docs/task52-cloud-model-results.json), [complete version audit](docs/task52-prompt-revision-v3.json).
