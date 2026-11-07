@@ -1,3 +1,9 @@
+# November 6 local / November 7 UTC, 2026 — retain failures and withhold model selection
+
+Task 52B Phase 1 continues in the original paid journal across a reviewed common v3 prompt/wire revision; immutable root metadata and consumed slot records are preserved. The common reduction removes only parser-default example repetition and redundant titles, with all 19 reconstructed interpretations identical and no source/gold/runtime change. A counting cap pass is not proof of schema compilation or semantic correctness. Two Google HTTP 400 failures and one Anthropic grammar-size HTTP 400, plus missing OpenAI Responses permission, provide **no evidence for production selection**. Stop affected paid work, retain three consumed slots/$0.0352 conservative reservations, and require minimal owner permission or provider/schema compatibility review before further unused slots. Do not weaken source grounding, grant broad IAM, increase caps or begin infrastructure. [Evidence](docs/task52-cloud-model-benchmark.md), [exact revision](docs/task52-prompt-revision-v3.json).
+
+---
+
 # November 6, 2026 — Task 52B controlled evaluation evidence
 
 The owner approved GPT-6 Luna (`gpt-6-luna`) as the OpenAI replacement and explicitly set up a separate paid Gemini Developer API project during this conversation. This changes the evaluation candidate/service record, not the application model or the proposed hosting stack. Preserve Qwen and all trusted validators. One Google inference slot is permanently consumed after HTTP 400 with $0.0165 maximum reservation retained. No automatic retry or wire/prompt/cap/permission change: OpenAI token-count permission, Anthropic over-cap input and Google compatibility require their specific next reviews. **No production selection is supported by zero model outputs.** [Results and exact prerequisites](docs/task52-cloud-model-benchmark.md).

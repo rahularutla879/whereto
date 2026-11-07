@@ -1,3 +1,96 @@
+# November 6 local / November 7 UTC, 2026 — Task 52B Phase 1 blocker continuation
+
+**Stopped on concrete provider blockers; no production model selected.** Started from clean `8df31f2544c5a9be14ba45f5f7d8e01c54eb85ed`. Two new single-attempt calls were made: Google 1 and Anthropic 1; OpenAI 0. Including the original failed Google slot, **3/594 attempts are consumed, $0.0352 conservatively retained, $11.9648 authorization remains**. No provider reported token usage or a charge for these errors; actual charges are unavailable. This is a partial reliability comparison with zero model outputs, not an accuracy or speed comparison. [Machine-readable evidence](task52-cloud-model-results.json), [complete prompt/schema revision audit](task52-prompt-revision-v3.json), [semantic review rubric](task52-semantic-review.md).
+
+## Current benchmark
+
+| Metric | OpenAI | Google | Anthropic |
+|---|---|---|---|
+| Exact model/version | `gpt-6-luna` | `gemini-3.8-flash` | `claude-haiku-5-5` |
+| Newly dispatched attempts | 0 | 1 | 1 |
+| Cumulative attempts consumed / remaining | 0 / 198 | 2 / 196 | 1 / 197 |
+| Calls completed with model output | 0 | 0/2 attempts | 0/1 attempt |
+| Valid structured responses | Unavailable (no attempts) | 0/2 attempts; no outputs to parse | 0/1 attempt; no output to parse |
+| Validated accepted responses | Unavailable | 0/2 attempts | 0/1 attempt |
+| Fully correct semantic cases | Unavailable | Unavailable | Unavailable |
+| Critical constraint failures | Unmeasured, 0 outputs reviewed | Unmeasured, 0 outputs reviewed | Unmeasured, 0 outputs reviewed |
+| Unsupported hallucinations | Unmeasured | Unmeasured | Unmeasured |
+| Safe clarifications | Unmeasured | Unmeasured | Unmeasured |
+| p50 inference latency | Unavailable | Unavailable | Unavailable |
+| p90 inference latency | Unavailable | Unavailable | Unavailable |
+| p95 inference latency | Unavailable | Unavailable | Unavailable |
+| Maximum inference latency | Unavailable | Unavailable | Unavailable |
+| Input tokens | Unavailable | Unavailable | Unavailable |
+| Output tokens / output length | Unavailable | Unavailable | Unavailable |
+| Actual provider-reported charges | Unavailable | Unavailable | Unavailable |
+| Conservatively accounted charges | $0 | $0.0330 | $0.0022 |
+| Data/privacy conditions | Global API; no training by default; abuse-retention exceptions; `store=false` planned | Separate paid Developer API; global processing, no training under paid terms, abuse exceptions | Commercial global API; storage/inference distinction, retention exceptions; no feedback/training opt-in |
+| Qualification outcome | Permission blocked | Request compatibility blocked | Schema grammar compilation blocked |
+
+The planned denominators remain **66 scenarios and 198 original slots/provider**, 594 total. Generated-output semantic/structured-validity denominators are zero, so no semantic percentage is reported. Attempt-based response availability is 0/2 Google and 0/1 Anthropic. All three consumed attempts are terminal provider errors, with no refusals/timeouts or uncertain transport reservations observed. No mandatory-stop, order, return, identity, duration or injection gate can be declared passed from these results. The expanded-corpus 98% qualification gate is unestablished.
+
+Complete **error operation** timings (body fully consumed) were Google original `journey-01/r1` 1,149.791750ms, Google revised `journey-02/r1` 1,369.127542ms, Anthropic `journey-01/r1` 396.463000ms. They are excluded from inference percentiles. Google error-operation p50/p90/p95/max: 1,149.791750/1,369.127542/1,369.127542/1,369.127542ms (n=2); Anthropic all four 396.463000ms (n=1). Cold/warm inference, successful schema setup cost and subsequent-request behavior are unavailable.
+
+## Reconciliation and immutable paid accounting
+
+Before changing tooling, read-only SQLite integrity was `ok`: exactly the original Google `journey-01/r1` failure and $0.0165, matching the prior report. Original journal file SHA-256 was `d6d2d257c21530a41dea60a00475ffbfc83fd34f2ebb17ddddb6275d9ee26df4`. The original root metadata string hash remains `c4f48d1da35fbbecd55c8b42eced5b267b06f8322cf8dce77b7b99f92a2e0b4c`; original record digest remains `7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305`. Both were rechecked after appending the two new rows. The journal was never recreated, reset, cloned or migrated. Its final hash and rows are reflected in the aggregate evidence; integrity remains `ok`.
+
+Continuation opens the **same journal with its stored original configuration**, first verifies the pinned legacy configuration/row and every unchanged authorization field, and exclusively creates a sidecar containing the reviewed v3 configuration. Every new attempt records its own configuration hash/prompt version. Only the specifically acknowledged original failure permits moving to the next unused Google slot; any other prior failure/uncertainty stops that provider. A persistent accepted-semantic/cap halt still stops the entire experiment. Reports read SQLite in read-only mode. Locks, committed-before-dispatch full-cap reservations, original slot keys, 198/provider, 594 aggregate and $12 remain enforced. No slots are reassigned.
+
+## OpenAI: permission blocker, no account change
+
+Current console details confirm an active **WhereTo Model Evaluation project-scoped restricted key**, expiry November 13, with only `api.model.chat_completions.request`; it has neither Responses write nor Admin access. Existing balance **$4.93**, auto-reload off. The revised free count again returned 401 requiring **`api.responses.write`**. [Official complete-input counting](https://developers.openai.com/api/docs/guides/token-counting) uses `POST /v1/responses/input_tokens`, counting message roles and structured formatting. There is no verified narrower complete-input counting mechanism for this exact candidate; local tiktoken has no confirmed Luna mapping. Character estimates were not used.
+
+The evaluation-only OpenAI adapter now uses **`POST /v1/responses`** and matching `input` plus `text.format` schema in the count request, removing the earlier Chat-Completions-versus-Responses counting mismatch. Planned settings remain model `gpt-6-luna`, output cap 2,000, reasoning `none`, standard tier, `store=false`, no tools. [Official model specification](https://developers.openai.com/api/docs/models/gpt-6-luna) lists Responses and structured output. No successful input count or inference is claimed. Verified standard short-context input/output remain $0.10/$0.50 per million; reservation input rate $0.125 conservatively covers the higher input class. Existing console limits are 5,000 RPM/2M TPM; no changes made.
+
+**Exact owner action:** OpenAI Platform → Settings → Organization → API keys → **Task52B Evaluation** → Edit → keep Restricted and the existing evaluation project; grant only **Model capabilities → Responses → Request** (`api.responses.write`). Chat Completions can be set to None because the revised evaluation uses Responses. Leave Models/List/Files/Assistants/Admin and other APIs at None. Do not change organization roles, create an Admin key, select All, or alter billing. This endpoint permission permits Responses generation as well as counting; the key console does not establish a count-only narrower grant. **This permission expansion was not authorized or applied.** After owner action, rerun free complete-input counts/readiness and review the exact Responses payload before any remaining OpenAI slot. Credits alone do not clear the gate.
+
+## Google: Developer API, unresolved generic 400
+
+This is the owner's separately funded **AI Studio / Gemini Developer API**, not Vertex/managed inference and not Maps ADC/billing. Endpoint `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent`, `x-goog-api-key` header. Default Gemini Project, Gemini-only service-account-bound/IP-restricted key, Tier 1, **$5.00 prepaid / auto-reload off** were rechecked. The existing approved IPv4 transport selection remains; no IP restriction or IAM change. Free authenticated model metadata/count requests succeed, ruling out a blanket key/IP denial for those operations; generation compatibility is not proved by them. Existing console limits: 1,000 RPM/2M input TPM/10,000 RPD. No API enabled or managed-platform account used.
+
+Offline review of the [official REST reference](https://ai.google.dev/api/generate-content), [v1beta discovery](https://generativelanguage.googleapis.com/$discovery/rest?version=v1beta) and [structured outputs](https://ai.google.dev/gemini-api/docs/structured-output) identified the documented enum `LOW` (original `low`) and deprecated legacy `responseSchema`. Revised JSON uses `generationConfig.responseFormat.text` with `mimeType=APPLICATION_JSON` and standard JSON Schema, preserving `$defs/$ref`, nullable `anyOf`, enums, every property/required field and numeric/array constraints. Ignored temperature is omitted. Local tests validate all 66 exact serialized payloads against the reviewed fields/schema subset. The exact revised GenerateContent representation also receives HTTP 200 from free countTokens. **The original representation also counts successfully**: counting does not prove schema compilation or that lowercase `low` caused the original error.
+
+The one resumed original slot `journey-02/r1` still returned **HTTP 400 `INVALID_ARGUMENT`**, identical generic message, no field violations/details, usage or model output. Thus the exact cause remains **unresolved**; do not attribute it confidently to casing, schema size, region, authentication or service mismatch. No third Google attempt was sent. Retain both errors in reliability and reserve $0.0165 each. Provider support/documented compatibility evidence is needed for this schema/model/Developer API combination before any further paid probe. Do not switch to Vertex, enable services, change Maps, purchase credits or retry a consumed slot. [Developer API pricing](https://ai.google.dev/gemini-api/docs/pricing) rechecked: global $0.75/$3.75 per million through December 31, 2026, then $1.50/$7.50; thinking counts as output. Date/pricing readiness remains fail closed.
+
+## Anthropic: token cap fixed; grammar-size blocker
+
+Free provider counting reproduced the original **12,408** exactly before revision. The common revision counts **10,931 maximum over every one of the 66 actual complete inputs**, including `system`, all 19 example pairs and `output_config` schema/injected-formatting overhead via `POST /v1/messages/count_tokens`. The reduction is **1,477 tokens**. Bound **11,443 = max +512** retains margin for the documented estimate variability; 557 tokens remain below the authorized cap. No truncation or cap increase. Google also counts all 66: max 5,786 plus its existing 2,048 framing allowance =7,834. Free counters are not inference attempts and are not latency measurements. Count/readiness artifacts are private and version-bound.
+
+Workspace/key/model metadata access, **$5.00 / auto-reload off**, global inference under the approved synthetic commercial conditions and standard $0.10/$0.50 per million short-context pricing were rechecked. Existing limits remain 1,000 RPM/500k input TPM/80k output TPM. No premium US-only inference setting, cache writes or tools were enabled. Endpoint `POST https://api.anthropic.com/v1/messages`, `x-api-key` and version `2023-06-01`; output 2,000, thinking disabled, effort low.
+
+The first original slot returned **HTTP 400 `invalid_request_error`**, narrowly classified as **schema grammar-size failure**, before model output/usage. [Official structured-output limits](https://platform.claude.com/docs/en/build-with-claude/structured-outputs#schema-complexity-limits) explain internal compiled-grammar limits in addition to 24 optional/16 union parameter limits. This wire schema has **15 union declarations, zero omitted-from-required properties and zero tools**; these source-level counts do not establish reference-expanded or internal grammar capacity. No schema branch, mandatory field or null semantics was removed after this failure. No further Anthropic attempt was sent.
+
+Next proposal for review: obtain provider-supported compilation guidance for the exact synthetic schema (request ID retained privately), or design an offline-proved equivalent representation preserving all properties/nulls/relations and rerun source-grounding/fairness checks. Any later paid compatibility confirmation must use an unused slot in this same journal, retain the failed slot/version, and return for review rather than running speculative probes. Increasing tokens would not resolve this observed grammar blocker and is not proposed. No additional credit purchase is needed.
+
+## Common prompt/schema revision and fairness
+
+Version **`52b-v3-equivalent-default-compaction`** applies to every candidate. The **system prompt, all 19 example user texts/order, every nested journey/activity fact and every nondefault value remain unchanged**. Only repeated top-level example fields equal to declared parser defaults are omitted: `people`, `budget_group`, `currency`, `travel_total_minutes`, `travel_leg_minutes`, `transport`, `cost`, where applicable. All 19 reconstruct identically under the unchanged `Interpretation` model. Forty-five redundant schema `title` annotations are removed from provider wire schemas; canonical trusted schema remains unchanged. No semantic instruction/example/expectation was dropped. This proves data equivalence of the example reconstructions, not model accuracy.
+
+The [revision audit](task52-prompt-revision-v3.json) lists **every removed field/value and title path**, original/revised prompt and all provider schema hashes, fixed time and input bounds. The original consumed Google slot keeps v2. New slots carry v3. Provider mechanics differ only as documented: OpenAI Responses strict JSON; Google standard responseFormat JSON Schema; Anthropic unsupported bounds retained as descriptions plus trusted offline checks. No change was made to application prompt/examples/defaults/schema/source validation or corpus.
+
+Corpus raw hash remains `5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f`; **66 cases: 25 journey extraction, 26 ordinary assertions, 15 prose semantic review; six source hashes match**. Canonical schema hash `7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965` unchanged. Prompt v3 hash `751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2`. No gold expectation was found to require a change; no reference corpus/source/fixture was edited. Source hash/shape validation is distinct from complete manual gold adjudication, which remains open.
+
+## Verification and privacy
+
+Final harness **40/40** (22.219s); readiness-expiry test also passes with a fixed clock. Full backend **1,011 reported /974 passed /37 opt-in skips** (196.064s); original interpretation/source-grounding/AI/timing subset **121/121** (0.918s), local socket/IPC rerun **17/17** (2.087s). Relevant frontend subset **33/33** (826.061ms), affected mocked integration file **2/2** in isolation (931.333ms). Complete frontend was run twice: **282/283 passed** both times; the unchanged `app/api/interpret/route.test.ts:171` model-call-count assertion failed (9 vs10, then13 vs14) under the full run. The isolated pass does not establish a clean full-suite pass; possible scheduling/duplicate-admission interaction remains unresolved, and runtime/test expectations were not changed to hide it. Initial backend sandbox run had local-socket/tsx errors and the then-outdated failure-latency assertion; targeted fixes/reruns and the final full backend run passed. No fresh browser, hosted SQL, full production build or cloud concurrency test was performed for this evaluation-only change. Runtime implementation paths/defaults/startup/config/dependencies are unchanged; source inspection is not browser verification.
+
+Security scan: all three configured credential values checked against **374 current tracked/new files** and **1,908 historical blobs**, **zero matches**. Ignored config and journal verified untracked; config mode600. Original root metadata and Google record hashes, integrity, corpus66/source hashes and 3/$0.0352 totals rechecked. Full tracked/new-file diff and local Markdown/JSON checks reviewed before publication.
+
+Credentials remain in the existing ignored mode-600 regular configuration only; no key/header is in reports, argv, frontend, Git or normal logs. Artifacts use private evaluation storage and provider-separated exports, with no real sessions/capabilities/origins. HTTPS only, redirects/proxies/retries off, exact endpoint/method allowlists and provider-isolated headers. Free count bodies contain only the synthetic prompt/schema. Synthetic commercial processing review remains limited to this experiment; no production-user-data or ZDR claim. No purchases, auto-reload, broad permissions, Maps requests/billing/quotas, Qwen changes, infrastructure, migrations, release tags, production switch or Task 53 work.
+
+## Recommendation and next authorized work
+
+**No production model selection yet.** Best correctness, fastest qualified, overall winner and principal alternative are all unavailable because no candidate produced output. None can currently be said to support five-second end-to-end planning. Even future successful model timing excludes Places, Routes, shared-state/hosting and browser rendering.
+
+Owner action is needed for the minimal OpenAI Responses Request scope. Google/Anthropic need provider-compatibility guidance or a reviewed, semantically equivalent schema proposal before further paid slots; no automatic resumption. Preserve original journal and all consumed failures. Remaining slots: OpenAI 198, Google 196, Anthropic 197, **591 total**; no reallocation, new allowance or automatic retries. Further readiness/paid resumption must use the recorded common version (or explicitly reviewed next version) with fresh pricing/account checks and original spend controls.
+
+**Shared-state/cloud next steps are review only:** after successful model qualification, present exact architecture/region/processing/recurring-cost and bounded staging authorization to the owner; only after separate approval implement shared admission/session/provider accounting, managed secrets/state, then private staging and bounded full-pipeline canaries. No shared-state or cloud resource implementation is authorized now. Task 52 stays in progress; stop this phase for owner review.
+
+---
+
+# Historical checkpoint before this continuation (superseded counts/readiness)
+
 # November 6, 2026 — Task 52B Phase 1 controlled evaluation
 
 Baseline clean `main` at `8e79924093fbbcb5a9d62118b14232a8af95970e`. **Qualification incomplete; no production model selection yet.** One Google inference attempt returned HTTP 400 without model output. OpenAI and Anthropic stopped at readiness. [Aggregate results/configuration](task52-cloud-model-results.json). The November 5 report below is historical; its zero-attempt/account-unavailable statements are superseded by this checkpoint.

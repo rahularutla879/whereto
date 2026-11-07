@@ -48,11 +48,11 @@ class LiveBoundaryTests(unittest.TestCase):
     def test_frozen_provider_settings_and_conservative_ceiling(self):
         bodies = {p: e.Adapter(p, None).payload('synthetic') for p in e.CANDIDATES}
         self.assertEqual(bodies['openai']['model'], 'gpt-6-luna')
-        self.assertEqual(bodies['openai']['reasoning_effort'], 'none')
+        self.assertEqual(bodies['openai']['reasoning']['effort'], 'none')
         self.assertFalse(bodies['openai']['store'])
         self.assertNotIn('temperature', bodies['anthropic'])
         self.assertEqual(bodies['anthropic']['thinking'], {'type':'disabled'})
-        self.assertEqual(bodies['google']['generationConfig']['thinkingConfig'], {'thinkingLevel':'low'})
+        self.assertEqual(bodies['google']['generationConfig']['thinkingConfig'], {'thinkingLevel':'LOW'})
         self.assertEqual(sum((e.INPUT_CAP*v['rates'][0]+e.OUTPUT_CAP*v['rates'][1])*198 for v in e.CANDIDATES.values()), 4197600000)
 
     def test_private_file_creation(self):
@@ -81,12 +81,13 @@ class LiveBoundaryTests(unittest.TestCase):
         class Frozen(datetime):
             @classmethod
             def now(cls, tz=None):
-                return cls(2026, 11, 6, 18, tzinfo=timezone.utc)
+                return cls(2026, 11, 7, 1, tzinfo=timezone.utc)
         with tempfile.TemporaryDirectory() as directory, \
              patch.object(e, 'STATE', Path(directory)), \
              patch.object(live, 'PREP', Path(directory)/'readiness.json'), \
              patch.object(live, 'credentials', return_value={p:'fake' for p in e.CANDIDATES}), \
-             patch.object(live, 'HTTP') as transport, patch.object(live, 'datetime', Frozen):
+             patch.object(live, 'HTTP') as transport, patch.object(live, 'datetime', Frozen), \
+             patch.object(live, 'continuation_ledger', side_effect=lambda p:e.Ledger(p,e.metadata())):
             entry = {'ready': True, 'inputUpperBound': 1000, 'payloadHashes': {}}
             live.private_json(live.PREP, {'configHash': e.digest(e.metadata()),
                 'preparedAt': live.datetime.now(live.timezone.utc).isoformat(),

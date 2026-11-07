@@ -1,16 +1,17 @@
 {
-  "date": "2026-11-06",
-  "baselineCommit": "8e79924093fbbcb5a9d62118b14232a8af95970e",
-  "metadata": {
+  "baselineCommit": "8df31f2544c5a9be14ba45f5f7d8e01c54eb85ed",
+  "scope": "Task52B Phase1 synthetic model evaluation only",
+  "originalConfigurationHash": "c195b4bd8cfec037238e542574a8613186e26d76f1fd033236e8a8fa7b2fc8ca",
+  "currentConfiguration": {
     "experiment": "task52b-phase1",
     "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
-    "promptVersion": "52b-v2-unchanged-instructions-reviewed-wire-settings",
-    "promptHash": "633c12057f3dae65b4caa70a8cafef998ae4ecfcfdde53f48d913b0d21a3351a",
+    "promptVersion": "52b-v3-equivalent-default-compaction",
+    "promptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
     "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
     "wireSchemaHashes": {
-      "openai": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
-      "google": "2d5317a6b1914ff55ccb3793c7b4d779683fb475639db0cf78af81fc40b6c527",
-      "anthropic": "399d47361c1edc6cc99048f9099c24ee0af91843e05296ad0b9d64764edc1a15"
+      "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
     },
     "referenceTime": "2026-11-05T15:00:00Z",
     "candidates": {
@@ -56,64 +57,41 @@
     "timezonePolicy": "Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown",
     "sampling": {
       "openai": "temperature 0; reasoning none",
-      "google": "temperature 0; thinking low",
+      "google": "temperature ignored/omitted; thinking LOW",
       "anthropic": "temperature omitted; thinking disabled; effort low"
     },
     "tools": false,
     "inferenceRegion": "standard global; synthetic non-personal evaluation only",
-    "transportVersion": "52b-single-http-v1",
+    "transportVersion": "52b-single-http-v2-responses",
     "timeoutSeconds": 120,
     "googleService": "Gemini Developer API; separate paid Default Gemini Project"
   },
-  "configurationHash": "c195b4bd8cfec037238e542574a8613186e26d76f1fd033236e8a8fa7b2fc8ca",
-  "inferenceAttempts": {
+  "originalMetadataBytesUnchanged": true,
+  "originalGoogleRecordUnchanged": true,
+  "journalIntegrity": "ok",
+  "journalSha256": "3eef2041d51d7ffa66bfe16c18e0b5084a244f8923cc983384fb0640edaadd93",
+  "newAttemptsThisContinuation": {
     "openai": 0,
     "google": 1,
-    "anthropic": 0
+    "anthropic": 1
   },
-  "successfulInferenceResponses": 0,
-  "nonInferenceReadinessRequests": {
-    "openai": 1,
-    "google": 3,
-    "anthropic": 2
+  "aggregate": {
+    "attemptsConsumed": 3,
+    "attemptsRemaining": 591,
+    "attemptCap": 594,
+    "accountedNanodollars": 35200000,
+    "remainingAuthorizedNanodollars": 11964800000,
+    "actualProviderChargeUSD": null,
+    "modelOutputs": 0
   },
-  "accountedNanodollars": 16500000,
-  "accounting": "Full reservation retained for HTTP 400; usage and invoice charge unavailable",
-  "providerBlockers": {
+  "providers": {
     "openai": {
-      "httpStatus": 401,
-      "missingScope": "api.responses.write",
-      "reason": "No admitted complete-payload token bound; key unchanged"
-    },
-    "google": {
-      "metadataHttpStatus": 200,
-      "tokenCount": 7023,
-      "inputUpperBound": 9323,
-      "inferenceHttpStatus": 400,
-      "errorStatus": "INVALID_ARGUMENT",
-      "caseId": "journey-01",
-      "repetition": 1,
-      "reason": "Wire compatibility unresolved; failed slot consumed; no retry"
-    },
-    "anthropic": {
-      "metadataHttpStatus": 200,
-      "tokenCount": 12408,
-      "inputUpperBound": 14708,
-      "reason": "Unchanged complete input exceeds authorized 12000-token cap"
-    }
-  },
-  "semanticOutputs": 0,
-  "reviewedSemanticCases": 0,
-  "inferenceLatencyPercentilesMs": null,
-  "httpErrorOperationLatencyMs": {
-    "p50": 1149.7917500018957,
-    "p90": 1149.7917500018957,
-    "p95": 1149.7917500018957,
-    "max": 1149.7917500018957
-  },
-  "httpErrorOperationLatencyDenominator": 1,
-  "modelResponsesByProvider": {
-    "openai": {
+      "successfulInferenceLatencyDenominator": 0,
+      "operationLatencyDenominator": 0,
+      "maxOperationLatencyMs": null,
+      "p50OperationMs": null,
+      "p90OperationMs": null,
+      "p95OperationMs": null,
       "reportedUsageRecords": 0,
       "inputTokensWithReportedUsage": 0,
       "outputTokensWithReportedUsage": 0,
@@ -128,9 +106,77 @@
       "structuredValid": 0,
       "statusCounts": {},
       "fullyCorrect": null,
-      "qualification": "not qualified; semantic review required"
+      "qualification": "not qualified; semantic review required",
+      "attemptsConsumed": 0,
+      "attemptsRemaining": 198,
+      "conservativelyAccountedNanodollars": 0,
+      "actualProviderChargeUSD": null,
+      "attempts": [],
+      "blocker": "Owner approval/action required for project-key Responses Request (api.responses.write); inference disabled."
     },
     "google": {
+      "successfulInferenceLatencyDenominator": 0,
+      "operationLatencyDenominator": 2,
+      "maxOperationLatencyMs": 1369.1275419987505,
+      "p50OperationMs": 1149.7917500018957,
+      "p90OperationMs": 1369.1275419987505,
+      "p95OperationMs": 1369.1275419987505,
+      "reportedUsageRecords": 0,
+      "inputTokensWithReportedUsage": 0,
+      "outputTokensWithReportedUsage": 0,
+      "validatedAccepted": 0,
+      "criticalFailures": null,
+      "safeClarifications": null,
+      "attemptRecords": 2,
+      "p50Ms": null,
+      "p90Ms": null,
+      "p95Ms": null,
+      "maxMs": null,
+      "structuredValid": 0,
+      "statusCounts": {
+        "provider_error": 2
+      },
+      "fullyCorrect": null,
+      "qualification": "not qualified; semantic review required",
+      "attemptsConsumed": 2,
+      "attemptsRemaining": 196,
+      "conservativelyAccountedNanodollars": 33000000,
+      "actualProviderChargeUSD": null,
+      "attempts": [
+        {
+          "caseId": "journey-01",
+          "repetition": 1,
+          "model": "gemini-3.8-flash",
+          "promptVersion": "52b-v2-unchanged-instructions-reviewed-wire-settings",
+          "configurationHash": "c195b4bd8cfec037238e542574a8613186e26d76f1fd033236e8a8fa7b2fc8ca",
+          "status": "provider_error",
+          "httpStatus": 400,
+          "latencyMs": 1149.7917500018957,
+          "accountedNanodollars": 16500000,
+          "errorCategory": "invalid_argument_without_field_details"
+        },
+        {
+          "caseId": "journey-02",
+          "repetition": 1,
+          "model": "gemini-3.8-flash",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "status": "provider_error",
+          "httpStatus": 400,
+          "latencyMs": 1369.1275419987505,
+          "accountedNanodollars": 16500000,
+          "errorCategory": "invalid_argument_without_field_details"
+        }
+      ],
+      "blocker": "Second original slot returned generic HTTP 400 despite documented wire revision. No further speculative calls."
+    },
+    "anthropic": {
+      "successfulInferenceLatencyDenominator": 0,
+      "operationLatencyDenominator": 1,
+      "maxOperationLatencyMs": 396.46300000094925,
+      "p50OperationMs": 396.46300000094925,
+      "p90OperationMs": 396.46300000094925,
+      "p95OperationMs": 396.46300000094925,
       "reportedUsageRecords": 0,
       "inputTokensWithReportedUsage": 0,
       "outputTokensWithReportedUsage": 0,
@@ -138,36 +184,56 @@
       "criticalFailures": null,
       "safeClarifications": null,
       "attemptRecords": 1,
-      "p50Ms": 1149.7917500018957,
-      "p90Ms": 1149.7917500018957,
-      "p95Ms": 1149.7917500018957,
-      "maxMs": 1149.7917500018957,
-      "structuredValid": 0,
-      "statusCounts": {
-        "provider_error": 1
-      },
-      "fullyCorrect": null,
-      "qualification": "not qualified; semantic review required"
-    },
-    "anthropic": {
-      "reportedUsageRecords": 0,
-      "inputTokensWithReportedUsage": 0,
-      "outputTokensWithReportedUsage": 0,
-      "validatedAccepted": 0,
-      "criticalFailures": null,
-      "safeClarifications": null,
-      "attemptRecords": 0,
       "p50Ms": null,
       "p90Ms": null,
       "p95Ms": null,
       "maxMs": null,
       "structuredValid": 0,
-      "statusCounts": {},
+      "statusCounts": {
+        "provider_error": 1
+      },
       "fullyCorrect": null,
-      "qualification": "not qualified; semantic review required"
+      "qualification": "not qualified; semantic review required",
+      "attemptsConsumed": 1,
+      "attemptsRemaining": 197,
+      "conservativelyAccountedNanodollars": 2200000,
+      "actualProviderChargeUSD": null,
+      "attempts": [
+        {
+          "caseId": "journey-01",
+          "repetition": 1,
+          "model": "claude-haiku-5-5",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "status": "provider_error",
+          "httpStatus": 400,
+          "latencyMs": 396.46300000094925,
+          "accountedNanodollars": 2200000,
+          "errorCategory": "schema_grammar_size"
+        }
+      ],
+      "blocker": "Input cap fixed, but first original slot returned schema grammar-size HTTP 400. No weakened contract or retry."
     }
   },
-  "recommendation": "No production model selection yet",
-  "readinessArtifactSha256": "27cbd31a43591f67d469f1c05cfd9bee9271f8bd1dec428dd65e7d1d4a87f832",
-  "journalSha256": "d6d2d257c21530a41dea60a00475ffbfc83fd34f2ebb17ddddb6275d9ee26df4"
+  "inputCounting": {
+    "openai": {
+      "countedInputTokens": null,
+      "countMargin": null,
+      "inputUpperBound": null,
+      "nonInferenceRequests": 1
+    },
+    "google": {
+      "countedInputTokens": 5786,
+      "countMargin": 2048,
+      "inputUpperBound": 7834,
+      "nonInferenceRequests": 67
+    },
+    "anthropic": {
+      "countedInputTokens": 10931,
+      "countMargin": 512,
+      "inputUpperBound": 11443,
+      "nonInferenceRequests": 67
+    }
+  },
+  "qualification": "No production model selected; no semantic outputs or successful inference latencies. Expanded-corpus 98% gate unestablished."
 }

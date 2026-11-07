@@ -1,0 +1,454 @@
+{
+  "version": "52b-v3-equivalent-default-compaction",
+  "oldConfigurationHash": "c195b4bd8cfec037238e542574a8613186e26d76f1fd033236e8a8fa7b2fc8ca",
+  "newConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+  "oldPromptHash": "633c12057f3dae65b4caa70a8cafef998ae4ecfcfdde53f48d913b0d21a3351a",
+  "newPromptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+  "canonicalSchemaHashUnchanged": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+  "oldWireSchemaHashes": {
+    "anthropic": "399d47361c1edc6cc99048f9099c24ee0af91843e05296ad0b9d64764edc1a15",
+    "google": "2d5317a6b1914ff55ccb3793c7b4d779683fb475639db0cf78af81fc40b6c527",
+    "openai": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965"
+  },
+  "newWireSchemaHashes": {
+    "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+  },
+  "systemPromptUnchanged": true,
+  "all19ExampleInputsAndOrderUnchanged": true,
+  "validatedExampleReconstructionEqual": true,
+  "removedExampleDefaults": [
+    {
+      "example": 0,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 1,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 2,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 3,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 4,
+      "removedDefaults": {
+        "people": null,
+        "travel_leg_minutes": null
+      }
+    },
+    {
+      "example": 5,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "travel_total_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 6,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "travel_leg_minutes": null,
+        "transport": null
+      }
+    },
+    {
+      "example": 7,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 8,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 9,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 10,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 11,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 12,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 13,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 14,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 15,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 16,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 17,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    },
+    {
+      "example": 18,
+      "removedDefaults": {
+        "people": null,
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null
+      }
+    }
+  ],
+  "removedSchemaTitleAnnotations": [
+    {
+      "path": "$.$defs.CostPreference.title",
+      "value": "CostPreference"
+    },
+    {
+      "path": "$.$defs.Deadline.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.Deadline.properties.relation.title",
+      "value": "Relation"
+    },
+    {
+      "path": "$.$defs.Deadline.title",
+      "value": "Deadline"
+    },
+    {
+      "path": "$.$defs.Duration.properties.minutes.title",
+      "value": "Minutes"
+    },
+    {
+      "path": "$.$defs.Duration.properties.relation.title",
+      "value": "Relation"
+    },
+    {
+      "path": "$.$defs.Duration.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.Duration.title",
+      "value": "Duration"
+    },
+    {
+      "path": "$.$defs.Endpoint.properties.kind.title",
+      "value": "Kind"
+    },
+    {
+      "path": "$.$defs.Endpoint.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.Endpoint.title",
+      "value": "Endpoint"
+    },
+    {
+      "path": "$.$defs.Journey.properties.stops.title",
+      "value": "Stops"
+    },
+    {
+      "path": "$.$defs.Journey.properties.order.title",
+      "value": "Order"
+    },
+    {
+      "path": "$.$defs.Journey.properties.ordering.title",
+      "value": "Ordering"
+    },
+    {
+      "path": "$.$defs.Journey.properties.clarification.title",
+      "value": "Clarification"
+    },
+    {
+      "path": "$.$defs.Journey.title",
+      "value": "Journey"
+    },
+    {
+      "path": "$.$defs.OrderConstraint.properties.before.title",
+      "value": "Before"
+    },
+    {
+      "path": "$.$defs.OrderConstraint.properties.after.title",
+      "value": "After"
+    },
+    {
+      "path": "$.$defs.OrderConstraint.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.OrderConstraint.title",
+      "value": "OrderConstraint"
+    },
+    {
+      "path": "$.$defs.RequestedStop.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.RequestedStop.properties.kind.title",
+      "value": "Kind"
+    },
+    {
+      "path": "$.$defs.RequestedStop.properties.requirement.title",
+      "value": "Requirement"
+    },
+    {
+      "path": "$.$defs.RequestedStop.properties.evidence.title",
+      "value": "Evidence"
+    },
+    {
+      "path": "$.$defs.RequestedStop.title",
+      "value": "RequestedStop"
+    },
+    {
+      "path": "$.$defs.SharedPlace.properties.kind.title",
+      "value": "Kind"
+    },
+    {
+      "path": "$.$defs.SharedPlace.properties.stops.title",
+      "value": "Stops"
+    },
+    {
+      "path": "$.$defs.SharedPlace.properties.source.title",
+      "value": "Source"
+    },
+    {
+      "path": "$.$defs.SharedPlace.title",
+      "value": "SharedPlace"
+    },
+    {
+      "path": "$.$defs.TransportationMode.title",
+      "value": "TransportationMode"
+    },
+    {
+      "path": "$.properties.activities.title",
+      "value": "Activities"
+    },
+    {
+      "path": "$.properties.people.title",
+      "value": "People"
+    },
+    {
+      "path": "$.properties.budget_per_person.title",
+      "value": "Budget Per Person"
+    },
+    {
+      "path": "$.properties.date.title",
+      "value": "Date"
+    },
+    {
+      "path": "$.properties.location.title",
+      "value": "Location"
+    },
+    {
+      "path": "$.properties.preferences.title",
+      "value": "Preferences"
+    },
+    {
+      "path": "$.properties.suggested_activities.title",
+      "value": "Suggested Activities"
+    },
+    {
+      "path": "$.properties.budget_group.title",
+      "value": "Budget Group"
+    },
+    {
+      "path": "$.properties.currency.title",
+      "value": "Currency"
+    },
+    {
+      "path": "$.properties.travel_total_minutes.title",
+      "value": "Travel Total Minutes"
+    },
+    {
+      "path": "$.properties.travel_leg_minutes.title",
+      "value": "Travel Leg Minutes"
+    },
+    {
+      "path": "$.properties.date_expressions.title",
+      "value": "Date Expressions"
+    },
+    {
+      "path": "$.properties.time_expressions.title",
+      "value": "Time Expressions"
+    },
+    {
+      "path": "$.properties.uncertainties.title",
+      "value": "Uncertainties"
+    },
+    {
+      "path": "$.title",
+      "value": "Interpretation"
+    }
+  ],
+  "counts": {
+    "openai": {
+      "casesCounted": 0,
+      "maxCounted": null,
+      "margin": null,
+      "upperBound": null,
+      "readyExcludingAccountOrReviewHalts": false
+    },
+    "google": {
+      "casesCounted": 66,
+      "maxCounted": 5786,
+      "margin": 2048,
+      "upperBound": 7834,
+      "readyExcludingAccountOrReviewHalts": true
+    },
+    "anthropic": {
+      "casesCounted": 66,
+      "maxCounted": 10931,
+      "margin": 512,
+      "upperBound": 11443,
+      "readyExcludingAccountOrReviewHalts": true
+    }
+  },
+  "fixedReferenceTime": "2026-11-05T15:00:00Z",
+  "originalCorpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+  "notes": [
+    "No semantic instruction, difficult example, nested requirement or nondefault value removed.",
+    "Parser equality proves reconstructed example data equality, not model correctness; all generated outputs still require trusted validation and semantic review.",
+    "Google standard JSON Schema replaces deprecated legacy dialect; LOW matches discovery enum; ignored temperature omitted.",
+    "OpenAI evaluation only uses Responses so counting matches inference input/schema; owner Responses Request permission still required."
+  ]
+}

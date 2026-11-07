@@ -11,12 +11,14 @@ from collections import Counter
 from contextlib import contextmanager
 from datetime import datetime
 import fcntl
+from functools import lru_cache
 import hashlib
 import json
 import math
 from pathlib import Path
 import sqlite3
 import time
+from types import SimpleNamespace
 from unittest.mock import patch
 
 from backend.ai import Interpretation, parse_interpretation
@@ -28,7 +30,7 @@ ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / 'docs/task52-evaluation-corpus.json'
 CORPUS_SHA = '5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f'
 STATE = ROOT / 'backend/.local/task52-model-evaluation'
-PROMPT_VERSION = '52b-v2-unchanged-instructions-reviewed-wire-settings'
+PROMPT_VERSION = '52b-v3-equivalent-default-compaction'
 INPUT_CAP, OUTPUT_CAP = 12000, 2000
 TOTAL_CAP, PROVIDER_CAP, SPEND_CAP = 594, 198, 12_000_000_000  # nanodollars
 # Noncached standard text rates in nanodollars/token. No tools, cache writes,
@@ -91,24 +93,23 @@ def schema():
 def wire_schema(provider):
     """Provider dialect only; original constraints remain enforced offline."""
     canonical = schema()
-    if provider == 'openai':
+    def untitled(value):
+        if isinstance(value, dict):
+            return {k: untitled(v) for k, v in value.items() if k != 'title'}
+        if isinstance(value, list):
+            return [untitled(v) for v in value]
+        return value
+    canonical = untitled(canonical)
+    # The Developer API responseFormat accepts standard JSON Schema, including
+    # local refs, anyOf/null and numeric bounds. No legacy Schema conversion.
+    if provider in ('openai', 'google'):
         return canonical
     def project(node):
         if not isinstance(node, dict):
             return node
-        if provider == 'google' and '$ref' in node:
-            return project(canonical['$defs'][node['$ref'].split('/')[-1]])
-        node = dict(node)
-        if provider == 'google' and 'anyOf' in node:
-            alternatives = node['anyOf']
-            nonnull = [b for b in alternatives if b.get('type') != 'null']
-            if len(nonnull) == 1 and len(alternatives) != len(nonnull):
-                return {**project(nonnull[0]), 'nullable': True}
         moved = {}
         unsupported = {'minimum', 'maximum', 'exclusiveMinimum', 'exclusiveMaximum',
-                       'multipleOf', 'minLength', 'maxLength', 'pattern', 'minItems', 'maxItems'} if provider == 'anthropic' else {
-                           'title', 'additionalProperties', 'minLength', 'maxLength',
-                           'pattern', 'exclusiveMinimum', 'exclusiveMaximum', 'multipleOf'}
+                       'multipleOf', 'minLength', 'maxLength', 'pattern', 'minItems', 'maxItems'}
         for key in unsupported:
             if key in node:
                 moved[key] = node.pop(key)
@@ -121,19 +122,33 @@ def wire_schema(provider):
             node['items'] = project(node['items'])
         if 'anyOf' in node:
             node['anyOf'] = [project(value) for value in node['anyOf']]
-        if provider == 'google':
-            node.pop('$defs', None)
-            if 'const' in node:
-                node['enum'] = [node.pop('const')]
-            if 'type' in node:
-                node['type'] = node['type'].upper()
         return node
     return project(canonical)
 
 
+@lru_cache(maxsize=1)
+def compact_examples():
+    """Remove only explicit top-level parser defaults; retain every example.
+
+    This is evaluation-only. Assert lossless reconstruction when constructing the cached examples.
+    No system instruction, example input, nondefault value or nested fact changes.
+    """
+    defaults = {k: field.default for k, field in Interpretation.model_fields.items()
+                if not field.is_required() and k not in ('journey', 'start_time', 'end_time')}
+    examples, audit = [], []
+    for index, (text, original) in enumerate(EXAMPLES):
+        removed = {k: v for k, v in original.items() if k in defaults and v == defaults[k]}
+        reduced = {k: v for k, v in original.items() if k not in removed}
+        if Interpretation.model_validate(original).model_dump(mode='json') != Interpretation.model_validate(reduced).model_dump(mode='json'):
+            raise ValueError('Example compaction changed interpretation semantics')
+        examples.append((text, reduced))
+        audit.append({'example': index, 'removedDefaults': removed})
+    return examples, audit
+
+
 def messages(text):
     return [{'role': 'system', 'content': SYSTEM_PROMPT}] + [
-        message for example, reply in EXAMPLES for message in (
+        message for example, reply in compact_examples()[0] for message in (
             {'role': 'user', 'content': example},
             {'role': 'assistant', 'content': json.dumps(reply, separators=(',', ':'))})
     ] + [{'role': 'user', 'content': text}]
@@ -149,16 +164,16 @@ def metadata():
             'attemptCap': TOTAL_CAP, 'providerCap': PROVIDER_CAP,
             'spendCapNanodollars': SPEND_CAP, 'concurrency': 1, 'retries': 0,
             'timezonePolicy': 'Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown',
-            'sampling': {'openai': 'temperature 0; reasoning none', 'google': 'temperature 0; thinking low', 'anthropic': 'temperature omitted; thinking disabled; effort low'},
+            'sampling': {'openai': 'temperature 0; reasoning none', 'google': 'temperature ignored/omitted; thinking LOW', 'anthropic': 'temperature omitted; thinking disabled; effort low'},
             'tools': False, 'inferenceRegion': 'standard global; synthetic non-personal evaluation only',
-            'transportVersion': '52b-single-http-v1', 'timeoutSeconds': 120,
+            'transportVersion': '52b-single-http-v2-responses', 'timeoutSeconds': 120,
             'googleService': 'Gemini Developer API; separate paid Default Gemini Project'}
 
 
 class Adapter:
     """Mechanical provider wire mapping; transport must make exactly one call.
 
-    Endpoint/authentication is deliberately not implemented until Stage B passes.
+    Endpoint/authentication lives only in the separately gated evaluation transport.
     An injected transport receives a body only, never credentials in artifacts.
     """
     def __init__(self, provider, transport):
@@ -168,10 +183,11 @@ class Adapter:
         common = messages(text)
         model = CANDIDATES[self.provider]['model']
         if self.provider == 'openai':
-            return {'model': model, 'messages': common, 'temperature': 0, 'reasoning_effort': 'none', 'service_tier': 'default',
-                    'max_completion_tokens': OUTPUT_CAP, 'store': False,
-                    'response_format': {'type': 'json_schema', 'json_schema': {
-                        'name': 'outing_interpretation', 'strict': True, 'schema': wire_schema(self.provider)}}}
+            return {'model': model, 'input': common, 'temperature': 0,
+                    'reasoning': {'effort': 'none'}, 'service_tier': 'default',
+                    'max_output_tokens': OUTPUT_CAP, 'store': False,
+                    'text': {'format': {'type': 'json_schema', 'name': 'outing_interpretation',
+                                        'strict': True, 'schema': wire_schema(self.provider)}}}
         if self.provider == 'anthropic':
             return {'model': model, 'system': SYSTEM_PROMPT, 'messages': common[1:],
                     'max_tokens': OUTPUT_CAP, 'thinking': {'type': 'disabled'},
@@ -179,19 +195,21 @@ class Adapter:
         return {'systemInstruction': {'parts': [{'text': SYSTEM_PROMPT}]},
                 'contents': [{'role': 'model' if m['role'] == 'assistant' else 'user',
                               'parts': [{'text': m['content']}]} for m in common[1:]],
-                'generationConfig': {'temperature': 0, 'maxOutputTokens': OUTPUT_CAP, 'thinkingConfig': {'thinkingLevel': 'low'},
-                                     'responseMimeType': 'application/json', 'responseSchema': wire_schema(self.provider)}}
+                'generationConfig': {'maxOutputTokens': OUTPUT_CAP, 'thinkingConfig': {'thinkingLevel': 'LOW'},
+                                     'responseFormat': {'text': {'mimeType': 'APPLICATION_JSON', 'schema': wire_schema(self.provider)}}}}
 
     def decode(self, response):
         """Return content, complete billed usage, and safe stop classification."""
         if 'error' in response:
             return None, None, 'provider_error'
         if self.provider == 'openai':
-            choice = response['choices'][0]
             usage = response.get('usage', {})
-            status = ('refusal' if choice['message'].get('refusal') else
-                      'complete' if choice['finish_reason'] == 'stop' else 'incomplete')
-            return choice['message'].get('content'), (usage.get('prompt_tokens'), usage.get('completion_tokens')), status
+            blocks = [block for item in response.get('output', [])
+                      for block in item.get('content', [])]
+            status = ('refusal' if any(b.get('type') == 'refusal' for b in blocks)
+                      else 'complete' if response.get('status') == 'completed' else 'incomplete')
+            content = ''.join(b.get('text', '') for b in blocks if b.get('type') == 'output_text')
+            return content, (usage.get('input_tokens'), usage.get('output_tokens')), status
         if self.provider == 'anthropic':
             usage = response.get('usage', {})
             # Sum every billed input class conservatively; no caching is requested.
@@ -418,6 +436,7 @@ def _run_one(ledger, adapter, case, repetition, input_upper_bound):
     record.update(provider=adapter.provider, model=CANDIDATES[adapter.provider]['model'],
                   caseId=case['id'], repetition=repetition,
                   inputUpperBound=input_upper_bound, payloadHash=digest(payload),
+                  configurationHash=digest(metadata()), promptVersion=PROMPT_VERSION,
                   recordedAt=datetime.now().astimezone().isoformat())
     scoring = record.get('scoring') or {}
     if scoring.get('validatedAccepted') and scoring.get('automatedFailures'):
@@ -461,9 +480,19 @@ SEMANTIC_FIELDS = (
 OUTCOMES = ('correct_extraction', 'correct_clarification', 'safe_failure', 'incorrect_extraction', 'refusal')
 
 
+def corpus_review_template():
+    """All 66 immutable sources/gold references; no invented semantic judgments."""
+    return {'corpusHash': CORPUS_SHA, 'configurationHash': digest(metadata()),
+            'cases': [{'sourceScenario': case,
+                       'fields': {field: {'applicable': None, 'correct': None} for field in SEMANTIC_FIELDS}}
+                      for case in corpus()['cases']]}
+
+
 def review_template(records):
     return {'configurationHash': digest(metadata()), 'reviews': [
         {'caseId': r['caseId'], 'repetition': r['repetition'], 'responseHash': digest(r),
+         'sourceScenario': next(c for c in corpus()['cases'] if c['id'] == r['caseId']),
+         'configurationHash': r.get('configurationHash'),
          'outcome': None, 'criticalAcceptedFailures': [],
          'fields': {field: {'applicable': None, 'correct': None} for field in SEMANTIC_FIELDS}}
         for r in records]}
@@ -530,11 +559,16 @@ def adjudicate(records, review):
 
 
 def summarize(records):
-    latencies = sorted(r['latencyMs'] for r in records)
+    latencies = sorted(r['latencyMs'] for r in records if r['status'] == 'complete')
+    operations = sorted(r['latencyMs'] for r in records)
     def percentile(p):
         return latencies[math.ceil(p * len(latencies)) - 1] if latencies else None
     measured_usage = [r['usage'] for r in records if r.get('usage') and len(r['usage']) == 2 and all(type(n) is int and n >= 0 for n in r['usage'])]
-    return {'reportedUsageRecords': len(measured_usage),
+    return {'successfulInferenceLatencyDenominator': len(latencies),
+            'operationLatencyDenominator': len(operations),
+            'maxOperationLatencyMs': max(operations) if operations else None,
+            **{f'p{p}OperationMs': operations[math.ceil(p / 100 * len(operations)) - 1] if operations else None for p in (50,90,95)},
+            'reportedUsageRecords': len(measured_usage),
             'inputTokensWithReportedUsage': sum(u[0] for u in measured_usage),
             'outputTokensWithReportedUsage': sum(u[1] for u in measured_usage),
             'validatedAccepted': sum(bool((r.get('scoring') or {}).get('validatedAccepted')) for r in records),
@@ -559,7 +593,8 @@ def main():
         if not path.exists():
             raise SystemExit('No paid journal exists; all provider metrics unavailable, calls 0, spend $0.')
         with exclusive(STATE):
-            ledger = Ledger(path, config)
+            db = sqlite3.connect(f'file:{path}?mode=ro', uri=True)
+            ledger = SimpleNamespace(db=db, close=db.close)
             try:
                 reports = {}
                 for provider in CANDIDATES:
@@ -569,7 +604,7 @@ def main():
                         destination = STATE / (provider + '-responses.json')
                         destination.touch(mode=0o600, exist_ok=True)
                         destination.chmod(0o600)
-                        destination.write_text(json.dumps({'metadata': config, 'provider': provider, 'records': records}, indent=2) + '\n')
+                        destination.write_text(json.dumps({'metadata': config, 'originalJournalMetadata': json.loads(db.execute('SELECT config FROM metadata').fetchone()[0]), 'provider': provider, 'records': records}, indent=2) + '\n')
                         template_path = STATE / (provider + '-review.json')
                         if not template_path.exists():
                             with template_path.open('x') as template_file:

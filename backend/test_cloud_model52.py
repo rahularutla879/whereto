@@ -21,7 +21,7 @@ def output(case):
 
 def response(provider, content):
     if provider == 'openai':
-        return {'choices': [{'message': {'content': content}, 'finish_reason': 'stop'}], 'usage': {'prompt_tokens': 100, 'completion_tokens': 20}}
+        return {'status':'completed', 'output':[{'content':[{'type':'output_text','text':content}]}], 'usage':{'input_tokens':100,'output_tokens':20}}
     if provider == 'anthropic':
         return {'content': [{'type': 'text', 'text': content}], 'stop_reason': 'end_turn', 'usage': {'input_tokens': 100, 'output_tokens': 20}}
     return {'candidates': [{'content': {'parts': [{'text': content}]}, 'finishReason': 'STOP'}], 'usageMetadata': {'promptTokenCount': 100, 'totalTokenCount': 120, 'candidatesTokenCount': 15, 'thoughtsTokenCount': 5}}
@@ -65,8 +65,8 @@ class HarnessTests(unittest.TestCase):
                 self.assertEqual(len(replies), 1)
                 payload = replies[0]
                 if provider == 'openai':
-                    self.assertEqual(payload['messages'], e.messages(self.case['text']))
-                    self.assertEqual(payload['response_format']['json_schema']['schema'], e.schema())
+                    self.assertEqual(payload['input'], e.messages(self.case['text']))
+                    self.assertEqual(payload['text']['format']['schema'], e.wire_schema(provider))
                 elif provider == 'anthropic':
                     self.assertEqual(payload['system'], e.SYSTEM_PROMPT)
                     self.assertEqual(payload['messages'], e.messages(self.case['text'])[1:])
@@ -74,17 +74,17 @@ class HarnessTests(unittest.TestCase):
                 else:
                     self.assertEqual(payload['systemInstruction']['parts'][0]['text'], e.SYSTEM_PROMPT)
                     self.assertEqual([m['parts'][0]['text'] for m in payload['contents']], [m['content'] for m in e.messages(self.case['text'])[1:]])
-                    self.assertEqual(payload['generationConfig']['responseSchema'], e.wire_schema(provider))
+                    self.assertEqual(payload['generationConfig']['responseFormat']['text']['schema'], e.wire_schema(provider))
 
     def test_provider_schema_projection_preserves_constraints_in_descriptions(self):
         anthropic = e.wire_schema('anthropic')
         self.assertNotIn('maxItems', anthropic['properties']['activities'])
         self.assertIn('maxItems', anthropic['properties']['activities']['description'])
         google = e.wire_schema('google')
-        self.assertNotIn('$defs', google)
-        self.assertEqual(google['type'], 'OBJECT')
-        self.assertTrue(google['properties']['budget_per_person']['nullable'])
-        self.assertIn('additionalProperties', google['description'])
+        self.assertIn('$defs', google)
+        self.assertEqual(google['type'], 'object')
+        self.assertIn({'type':'null'}, google['properties']['budget_per_person']['anyOf'])
+        self.assertFalse(google['additionalProperties'])
         self.assertEqual(google['required'], e.schema()['required'])
 
     def test_three_explicit_examples_replay_historical_qwen_only(self):
@@ -180,7 +180,7 @@ class HarnessTests(unittest.TestCase):
             self.assertNotEqual(row['status'], 'complete')
             self.assertEqual(row['accountedNanodollars'], 2200000)
         raw = response('openai', self.content)
-        raw['choices'][0]['finish_reason'] = 'length'
+        raw['status'] = 'incomplete'
         row = e.run_one(self.ledger, e.Adapter('openai', lambda body: raw), self.case, 1, 1000)
         self.assertEqual(row['status'], 'incomplete')
         self.assertIsNone(row['scoring'])
@@ -256,7 +256,7 @@ class HarnessTests(unittest.TestCase):
 
     def test_usage_cap_violation_halts_after_restart(self):
         raw = response('openai', self.content)
-        raw['usage']['prompt_tokens'] = 12001
+        raw['usage']['input_tokens'] = 12001
         with self.assertRaises(e.AdmissionError):
             e.run_one(self.ledger, e.Adapter('openai', lambda body: raw), self.case, 1, 1000)
         restarted = e.Ledger(self.path, e.metadata())
@@ -313,9 +313,10 @@ class HarnessTests(unittest.TestCase):
         self.assertEqual(record['response'], raw)
         self.assertEqual(record['status'], 'uncertain_failure')
 
-    def test_percentiles_include_failure_latency(self):
+    def test_failure_latency_is_reported_separately_from_inference(self):
         result = e.summarize([{'latencyMs': x, 'status': 'uncertain_failure'} for x in range(1, 21)])
-        self.assertEqual([result[k] for k in ('p50Ms','p90Ms','p95Ms','maxMs')], [10,18,19,20])
+        self.assertEqual([result[k] for k in ('p50OperationMs','p90OperationMs','p95OperationMs','maxOperationLatencyMs')], [10,18,19,20])
+        self.assertEqual([result[k] for k in ('p50Ms','p90Ms','p95Ms','maxMs')], [None]*4)
         self.assertIsNone(e.summarize([])['p50Ms'])
 
 
