@@ -1,3 +1,11 @@
+# Offline ordering-safety investigation — historical performance unchanged
+
+[Ordering design, replay and compatibility limits](task52-ordering-safety-investigation.md). Zero new inference/counting/provider calls. The proposed independent gate rejects v4's unsupported coffee0→museum1 while preserving museum1→coffee2, valid partial orders and the five previously correct recorded OpenAI interpretations. This is offline revalidation, not a change to any historical timing, token usage, score, financial reservation or model qualification.
+
+31 synthetic source checks,63 unsupported-edge probes and six post-freeze agent-authored cases support further offline review, not production activation. Four clear out-of-grammar source cases and six clear Qwen ordering phrases require clarification under this narrow design. No cloud inference latency was remeasured; a roughly10ms local fixture/probe diagnostic is not a production latency bound. No five-second end-to-end claim. Runtime/Qwen/prompts/provider settings and the halted paid journal remain unchanged:10/594 attempts, $0.047366625 retained/$11.952633375 remaining. Gemini and Anthropic blockers remain independent.
+
+---
+
 # November 8 — v4 three-response screen found a critical ordering error
 
 [Full v4 benchmark](task52-cloud-model-benchmark.md), [safe per-case measurements/hashes/agent rubric](task52-v4-openai-results.json), [approved continuation](task52-v4-openai-approved-continuation.json). Exactly3 new GPT-6 Luna attempts, original unused slots in approved order, no retry/warmup/tuning. journey-04/r1 **3,080.241958ms**, extension-partial/r1 **3,242.775167ms**, extension-repeated/r1 **3,131.913542ms**; complete wall-clock HTTP operation including full body, not first token. All3 HTTP200, valid structure/trusted acceptance; full agent semantics **2/3 correct**, **1/3 critical accepted unsupported order**. Independent human review0/3. The repeated case invented first-coffee→museum from list order, despite correct museum→later-coffee, return and180-minute inclusive budget. Persistent halt stopped the remaining home/optional-coffee slots.

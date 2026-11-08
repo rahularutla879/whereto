@@ -1,3 +1,9 @@
+# Task52B — keep the independent ordering proof offline
+
+A real source quote, both stop names and an ordering cue do not prove that cue's arguments or occurrence direction. Test a separate bounded proof gate with explicit unknown/clarification rather than strengthening model instructions alone or inferring dependencies from lists. Preserve current production validation and all historical paid evidence. Finite negative tests catch the accepted extra edge, but clear out-of-grammar/Qwen false clarifications prevent automatic activation. Offsets remain a schema proposal, not proof of scope. Next decision is owner review of compatibility and independent offline coverage; no new model/prompt/production/deployment selection. [Evidence and alternatives](docs/task52-ordering-safety-investigation.md).
+
+---
+
 # November 8 — separate v4 readiness, preserve all historical paid evidence
 
 Register the reviewed370-byte edge-evidence addition and source-bound scorer as a separate evaluation configuration; do not activate a production/provider/default or overwrite v3. Successful free complete-input counts support OpenAI bounded-plan owner review, not inference permission or qualification. Retain Google's new IP-denial blocker separately from its old400s, and Anthropic's grammar-size failure separately from successful counts. Schema factoring/array projections remain unactivated hypotheses requiring review/counting if adopted. All paid records/reservations remain immutable. [Readiness and proposed limits](docs/task52-v4-readiness.md).

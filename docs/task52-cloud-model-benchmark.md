@@ -1,3 +1,15 @@
+# Offline ordering-proof checkpoint — no new model requests
+
+From `4bcf3bf`, isolated version `52b-order-proof-v1-offline` now proves cue direction/scope against owned source occurrences rather than treating a real quote plus cue word as semantic proof. [Focused design, tradeoffs, compatibility and integration proposal](task52-ordering-safety-investigation.md), [source-case/probe evidence](task52-ordering-safety-checks.json), [all recorded cloud/Qwen replay](task52-ordering-safety-replay.json).
+
+The five previously correct OpenAI outputs remain ordering-compatible. V3 journey-07 remains rejected; v4 extension-repeated now receives **proposed offline clarification**, preserving its valid1→2 edge but rejecting unproven0→1. Original historical acceptance/critical failure/decoder correction, timings, usage and scores remain unchanged. All10 paid rows were inspected; three provider errors have no generated output to replay. No output was repaired, refunded or retried. This is not a new model accuracy score or production activation.
+
+31 source cases matched their declared gate outcomes;63 unsupported-edge probes had0 accepted; six post-freeze agent-authored holdouts passed. Four clear source cases deliberately clarify outside the grammar. Recorded Qwen27-row replay reveals six clear ordering phrases outside this grammar, including three new clarification outcomes relative to previously nonblocking validation. Those costs prevent automatic production integration. Production/Qwen/prompts/canonical schema/approved scorer remain unchanged; future work requires offline compatibility review, not prompt tuning or another paid batch.
+
+**Zero inference/counting/provider requests.** Journal SHA `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`, all10 rows/root and324 private files unchanged; halt remains. Counts7/2/1=10/594, retained$0.047366625, remaining$11.952633375. Backend295 passed/1 opt-in PostgreSQL skipped; frontend283 passed. No production model qualifies or five-second end-to-end evidence changes. Google400/IP and Anthropic grammar blockers remain independent/unresolved. Historical benchmark results below remain historical.
+
+---
+
 # November 8 UTC — approved v4 screen stopped after three calls
 
 Started clean at `c54928780a6a3f92d9a69bbfaf8f0d3b5d2dcb4d`. Owner approved exactly five ordered slots and at most **$0.0125** additional full reservations. **Three new OpenAI calls, all HTTP200/completed; third response contained a critical accepted unsupported ordering constraint. Stop activated. No further inference.** [Approved continuation](task52-v4-openai-approved-continuation.json), [measurements, full rubric evidence, immutable hashes and accounting](task52-v4-openai-results.json). Original proposed-plan JSON and all v3 evidence are preserved.

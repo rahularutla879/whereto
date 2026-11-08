@@ -1,3 +1,15 @@
+# Offline independent ordering proof — version 52b-order-proof-v1-offline
+
+[Design and full source rubric](task52-ordering-safety-investigation.md), [31 declared cases](task52-ordering-safety-cases.json), [probe results](task52-ordering-safety-checks.json), [versioned recorded replay](task52-ordering-safety-replay.json). No current scorer, prompt, schema, validator or historical classification changed. This is a separate opt-in ordering-only check, never a full semantic pass or paid admission signal.
+
+A graph can be structurally valid and its quotation genuine while the cue attaches to a different pair. The experiment independently binds unique source-order occurrences, recognizes anchored before/after/then/rank/arrow patterns, verifies direction, and requires every edge's supporting path and cue spans inside its own quote. It never infers a chain from commas, borrows another occurrence's evidence, drops unproven edges, or guesses when scope is unknown. Ambiguity/negation/conditional/optional scope, extra mentions, unsupported prose and binding limits request clarification. Existing canonical/source/identity/date/return/time checks remain mandatory.
+
+V4 repeated-coffee raw0→1 fails this proposed check; its1→2 remains proven. Five previously correct OpenAI outputs remain compatible; v3 journey-07 cue-only rejection remains. All historical model-score evidence remains unchanged. Qwen27 raw outputs were replayed:12 ordering-compatible,15 unknown. Six unknowns are clear order outside the narrow grammar, of which three would newly clarify formerly nonblocking interpretations; nine contain unsupported raw list edges (seven currently removed by legacy normalization, two accepted repeated-stop extra edges). These are compatibility distinctions, not15 newly proven whole-extraction errors.
+
+The31 declared gate outcomes and63 negative edge probes are finite agent-reviewed evidence, not independent blind qualification or universal soundness. Four clear source clauses outside grammar produce explicit false clarifications; no unsupported probe was accepted. Six post-freeze examples also passed, with same-agent authorship disclosed. Independent human signoff remains outstanding. Keep the experiment offline while reviewing migration/grammar coverage. Offsets would help provenance ownership but still require cue-scope proof and a separately versioned schema; no offset migration or prompt change was implemented.
+
+---
+
 # November 8 — v4 accepted ordering error; screen halted
 
 [Three-response evidence and per-field agent rubric](task52-v4-openai-results.json). Approved scorer `52b-semantic-v3-source-bound-generic-the` and production validators remain unchanged. All3 responses were valid structure and trusted accepted; only2/3 were semantically correct under complete agent review. Independent human signoff0/3; automated fullyCorrect remains null. The extension cases have prose gold, so absence of generic-scorer failures is **not** full semantic correctness.

@@ -1,3 +1,9 @@
+# Task52B offline ordering proof experiment
+
+`scripts/cloud_model52_ordering.py` contains versioned pure local relationship checks; `cloud_model52_ordering_replay.py` reads recorded cloud/Qwen evidence with network blocked and paid SQLite opened read-only. They are opt-in evaluation tools with no runtime or paid-runner import. No canonical schema/provider/prompt/planner change. Unknown cue scope requests clarification in the proposed result; production activation remains unapproved because finite grammar/Qwen compatibility gaps remain. [Design and migration/rollback proposal](docs/task52-ordering-safety-investigation.md).
+
+---
+
 > November8 v4 evaluation readiness only: `scripts/cloud_model52_v4.py` constructs a separately hashed fixed-corpus profile, read-only seven-row journal snapshot, proposed unused-slot plan and counting-only HTTPS wrapper. Inference paths/methods are denied; markers/checkpoints prevent implicit repeats and expire after24h. No live-dispatch entry point or runtime import. V3 adapter/audit, Qwen defaults and canonical validators unchanged. [Configuration, coverage and provider blockers](docs/task52-v4-readiness.md).
 
 ---

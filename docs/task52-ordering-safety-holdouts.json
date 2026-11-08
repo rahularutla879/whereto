@@ -1,0 +1,93 @@
+{
+  "version": "52b-order-proof-v1-offline",
+  "frozenModuleSHA256": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+  "provenance": "Agent-authored after grammar freeze, before first execution. Not independent blind or human-reviewed qualification. No paid requests.",
+  "cases": [
+    {
+      "id": "after-atm",
+      "text": "Walk to ATM after bakery.",
+      "stops": [
+        "ATM",
+        "bakery"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "expectedOutcome": "verified_order"
+    },
+    {
+      "id": "named-arrow",
+      "text": "Visit North Library \u2192 South Library.",
+      "stops": [
+        "North Library",
+        "South Library"
+      ],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order"
+    },
+    {
+      "id": "independent-bookstore",
+      "text": "Tea, then gallery; visit bookstore.",
+      "stops": [
+        "Tea",
+        "gallery",
+        "bookstore"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order"
+    },
+    {
+      "id": "novel-trailing-cue",
+      "text": "Tea, gallery, then bakery.",
+      "stops": [
+        "Tea",
+        "gallery",
+        "bakery"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order"
+    },
+    {
+      "id": "dont-before",
+      "text": "Don't get tea before gallery.",
+      "stops": [
+        "tea",
+        "gallery"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required"
+    },
+    {
+      "id": "retract-across-semicolon",
+      "text": "Tea before gallery; ignore that order.",
+      "stops": [
+        "Tea",
+        "gallery"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required"
+    }
+  ]
+}

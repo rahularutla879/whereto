@@ -1,0 +1,1891 @@
+{
+  "version": "52b-order-proof-v1-offline",
+  "orderingModuleSHA256": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+  "scope": "Offline ordering only; not complete semantic correctness or production activation.",
+  "cloud": [
+    {
+      "slot": [
+        "google",
+        "journey-01",
+        1
+      ],
+      "originalRowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "provider_error",
+      "originalConfigurationHash": null,
+      "originalReservationNanodollars": 16500000,
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "historicalClassificationChanged": false,
+      "replay": "no_model_output_provider_error"
+    },
+    {
+      "slot": [
+        "google",
+        "journey-02",
+        1
+      ],
+      "originalRowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "provider_error",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 16500000,
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "historicalClassificationChanged": false,
+      "replay": "no_model_output_provider_error"
+    },
+    {
+      "slot": [
+        "anthropic",
+        "journey-01",
+        1
+      ],
+      "originalRowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "provider_error",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 2200000,
+      "responseHash": "9f0152e67f23d75183a8b33407f99adf34170d20d880190fe8b664f589528162",
+      "historicalClassificationChanged": false,
+      "replay": "no_model_output_provider_error"
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "originalRowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "provider_error",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 2500000,
+      "responseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "historicalClassificationChanged": false,
+      "historicalDecoderCorrectionVerified": true,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "Dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              11,
+              17
+            ],
+            "text": "drinks"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": true
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "originalRowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 720250,
+      "responseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              5,
+              11
+            ],
+            "text": "dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              16,
+              22
+            ],
+            "text": "drinks"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "originalRowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 715375,
+      "responseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "SUNY College of Optometry"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "originalRowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalReservationNanodollars": 731000,
+      "responseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": false,
+      "unchangedScorerFailures": [
+        "journeySemantics"
+      ],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              46
+            ],
+            "cueSpan": [
+              19,
+              24
+            ],
+            "source": "the pharmacy first, then the supermarket"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              18
+            ],
+            "text": "the pharmacy"
+          },
+          {
+            "index": 1,
+            "span": [
+              31,
+              46
+            ],
+            "text": "the supermarket"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "originalRowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "originalReservationNanodollars": 2500000,
+      "responseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              51
+            ],
+            "cueSpan": [
+              36,
+              40
+            ],
+            "source": "SUNY College of Optometry and then get coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": true,
+            "quoteSpans": [
+              [
+                6,
+                51
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "SUNY College of Optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              45,
+              51
+            ],
+            "text": "coffee"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": true
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "originalRowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "originalReservationNanodollars": 2500000,
+      "responseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "before",
+            "span": [
+              8,
+              32
+            ],
+            "cueSpan": [
+              17,
+              23
+            ],
+            "source": "pharmacy before the bank"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": true,
+            "quoteSpans": [
+              [
+                8,
+                32
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              8,
+              16
+            ],
+            "text": "pharmacy"
+          },
+          {
+            "index": 1,
+            "span": [
+              28,
+              32
+            ],
+            "text": "bank"
+          },
+          {
+            "index": 2,
+            "span": [
+              38,
+              44
+            ],
+            "text": "coffee"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": true
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "originalRowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+      "originalDatabaseState": "recorded_halted",
+      "originalClassification": "complete",
+      "originalConfigurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "originalReservationNanodollars": 2500000,
+      "responseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "historicalClassificationChanged": false,
+      "decodedStatus": "complete",
+      "structuredValid": true,
+      "unchangedTrustedAccepted": true,
+      "unchangedScorerFailures": [],
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [
+          {
+            "before": 1,
+            "after": 2,
+            "rule": "then",
+            "span": [
+              8,
+              27
+            ],
+            "cueSpan": [
+              16,
+              20
+            ],
+            "source": "museum, then coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "proven": true,
+            "quoteSpans": [
+              [
+                8,
+                27
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "Coffee"
+          },
+          {
+            "index": 1,
+            "span": [
+              8,
+              14
+            ],
+            "text": "museum"
+          },
+          {
+            "index": 2,
+            "span": [
+              21,
+              27
+            ],
+            "text": "coffee"
+          }
+        ]
+      },
+      "fullyCorrect": null,
+      "independentHumanSignoff": false,
+      "proposedCombinedAcceptedExtraction": false
+    }
+  ],
+  "qwen": [
+    {
+      "cohort": "baseline",
+      "case": "E",
+      "row": 0,
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalExecutionStatus": null,
+      "sourceHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              11,
+              18
+            ],
+            "text": "bowling"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "A",
+      "row": 1,
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalExecutionStatus": "clarification_required",
+      "sourceHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6",
+      "unchangedCanonicalJourney": {
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "clarification": true
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "B",
+      "row": 2,
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "C",
+      "row": 3,
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ],
+            "source": "SUNY College of Optometry, then get coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "SUNY College of Optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              42,
+              48
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "D",
+      "row": 4,
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              4,
+              13
+            ],
+            "text": "groceries"
+          },
+          {
+            "index": 1,
+            "span": [
+              26,
+              29
+            ],
+            "text": "ATM"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "E",
+      "row": 5,
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalExecutionStatus": null,
+      "sourceHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              11,
+              18
+            ],
+            "text": "bowling"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "F",
+      "row": 6,
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              3,
+              19
+            ],
+            "text": "grocery shopping"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "repeat",
+      "row": 7,
+      "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+      "originalExecutionStatus": null,
+      "sourceHash": "1b53207dfab22e287ba0c94d34cbd8d667acb36a488b6d2a086fa99f412300bc",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [
+          {
+            "before": 1,
+            "after": 2,
+            "rule": "then",
+            "span": [
+              8,
+              27
+            ],
+            "cueSpan": [
+              16,
+              20
+            ],
+            "source": "museum, then coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "Coffee"
+          },
+          {
+            "index": 1,
+            "span": [
+              8,
+              14
+            ],
+            "text": "museum"
+          },
+          {
+            "index": 2,
+            "span": [
+              21,
+              27
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "mall",
+      "row": 8,
+      "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "38f73e3c62092fc4392062f1e79ad628eaf088b79dd962a3b6b57b03b780193f",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              10
+            ],
+            "text": "Zara"
+          },
+          {
+            "index": 1,
+            "span": [
+              15,
+              19
+            ],
+            "text": "Nike"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "flex",
+      "row": 9,
+      "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "c0dcea7bd26a90aab4506ba3e5372447fdb191b6dd0bb9ed29949a95fc81ba2a",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              10,
+              14
+            ],
+            "text": "bank"
+          },
+          {
+            "index": 1,
+            "span": [
+              19,
+              32
+            ],
+            "text": "grocery store"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "ambiguous",
+      "row": 10,
+      "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+      "originalExecutionStatus": "clarification_required",
+      "sourceHash": "1ed0c1809784861c9b77af51528dd77c66f450a78a86c05c836884c4f8efb6ab",
+      "unchangedCanonicalJourney": {
+        "explanation": "Which college or destination do you mean? Please name it in your request; your other stops are kept.",
+        "clarification": true
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              10,
+              17
+            ],
+            "text": "college"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "A",
+      "row": 11,
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalExecutionStatus": "clarification_required",
+      "sourceHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6",
+      "unchangedCanonicalJourney": {
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "clarification": true
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "B",
+      "row": 12,
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "C",
+      "row": 13,
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ],
+            "source": "SUNY College of Optometry, then get coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "SUNY College of Optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              42,
+              48
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "D",
+      "row": 14,
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              4,
+              13
+            ],
+            "text": "groceries"
+          },
+          {
+            "index": 1,
+            "span": [
+              26,
+              29
+            ],
+            "text": "ATM"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "E",
+      "row": 15,
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalExecutionStatus": null,
+      "sourceHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              11,
+              18
+            ],
+            "text": "bowling"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "F",
+      "row": 16,
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              3,
+              19
+            ],
+            "text": "grocery shopping"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "repeat",
+      "row": 17,
+      "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+      "originalExecutionStatus": null,
+      "sourceHash": "1b53207dfab22e287ba0c94d34cbd8d667acb36a488b6d2a086fa99f412300bc",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [
+          {
+            "before": 1,
+            "after": 2,
+            "rule": "then",
+            "span": [
+              8,
+              27
+            ],
+            "cueSpan": [
+              16,
+              20
+            ],
+            "source": "museum, then coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "Coffee"
+          },
+          {
+            "index": 1,
+            "span": [
+              8,
+              14
+            ],
+            "text": "museum"
+          },
+          {
+            "index": 2,
+            "span": [
+              21,
+              27
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "mall",
+      "row": 18,
+      "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "38f73e3c62092fc4392062f1e79ad628eaf088b79dd962a3b6b57b03b780193f",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              10
+            ],
+            "text": "Zara"
+          },
+          {
+            "index": 1,
+            "span": [
+              15,
+              19
+            ],
+            "text": "Nike"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "flex",
+      "row": 19,
+      "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "c0dcea7bd26a90aab4506ba3e5372447fdb191b6dd0bb9ed29949a95fc81ba2a",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              10,
+              14
+            ],
+            "text": "bank"
+          },
+          {
+            "index": 1,
+            "span": [
+              19,
+              32
+            ],
+            "text": "grocery store"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "baseline",
+      "case": "ambiguous",
+      "row": 20,
+      "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+      "originalExecutionStatus": "clarification_required",
+      "sourceHash": "1ed0c1809784861c9b77af51528dd77c66f450a78a86c05c836884c4f8efb6ab",
+      "unchangedCanonicalJourney": {
+        "explanation": "Which college or destination do you mean? Please name it in your request; your other stops are kept.",
+        "clarification": true
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              10,
+              17
+            ],
+            "text": "college"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "A",
+      "row": 0,
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalExecutionStatus": "clarification_required",
+      "sourceHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6",
+      "unchangedCanonicalJourney": {
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "clarification": true
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "B",
+      "row": 1,
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_cue_scope",
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "suny college of optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              60,
+              66
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "C",
+      "row": 2,
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ],
+            "source": "SUNY College of Optometry, then get coffee"
+          }
+        ],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ],
+            "reason": "supported_path_inside_owned_quote"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              6,
+              31
+            ],
+            "text": "SUNY College of Optometry"
+          },
+          {
+            "index": 1,
+            "span": [
+              42,
+              48
+            ],
+            "text": "coffee"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "D",
+      "row": 3,
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              4,
+              13
+            ],
+            "text": "groceries"
+          },
+          {
+            "index": 1,
+            "span": [
+              26,
+              29
+            ],
+            "text": "ATM"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "E",
+      "row": 4,
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalExecutionStatus": null,
+      "sourceHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083",
+      "unchangedCanonicalJourney": {
+        "explanation": null,
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "clarification_required",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "proofs": [],
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "proven": false,
+            "quoteSpans": [],
+            "reason": "unproven_direction_scope_or_occurrence"
+          }
+        ],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              0,
+              6
+            ],
+            "text": "dinner"
+          },
+          {
+            "index": 1,
+            "span": [
+              11,
+              18
+            ],
+            "text": "bowling"
+          }
+        ]
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "case": "F",
+      "row": 5,
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalExecutionStatus": "advanced_unavailable",
+      "sourceHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663",
+      "unchangedCanonicalJourney": {
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "clarification": false
+      },
+      "proposedOrdering": {
+        "version": "52b-order-proof-v1-offline",
+        "outcome": "verified_no_mandatory_order",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "issues": [],
+        "proofs": [],
+        "edges": [],
+        "occurrences": [
+          {
+            "index": 0,
+            "span": [
+              3,
+              19
+            ],
+            "text": "grocery shopping"
+          }
+        ]
+      }
+    }
+  ],
+  "qwenSummary": {
+    "baseline": {
+      "clarification_required": 11,
+      "verified_order": 2,
+      "verified_no_mandatory_order": 8
+    },
+    "finalRuntimeSmoke": {
+      "clarification_required": 4,
+      "verified_order": 1,
+      "verified_no_mandatory_order": 1
+    }
+  },
+  "qwenFixtureSHA256": "36c582b6bbe71ce15319635225c8f0bce79659829ca8b2dbfb944b125d70aac3",
+  "journal": {
+    "sha256Before": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "sha256After": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "allTenRowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "allIgnoredFilesUnchanged": true,
+    "ignoredFilesVerified": 324,
+    "providerCounts": {
+      "google": 2,
+      "anthropic": 1,
+      "openai": 7
+    },
+    "totalAttempts": 10,
+    "remainingAttempts": 584,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHalt": true
+  },
+  "requestsSent": {
+    "inference": 0,
+    "counting": 0,
+    "otherProvider": 0
+  },
+  "historicalClassificationsUnchanged": true,
+  "independentHumanSignoff": false
+}

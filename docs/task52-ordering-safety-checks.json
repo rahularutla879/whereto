@@ -1,0 +1,914 @@
+{
+  "version": "52b-order-proof-v1-offline",
+  "moduleSHA256": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+  "reviewBasis": "Agent-reviewed predeclared synthetic source rubric. Not independent human or blind model qualification.",
+  "sourceCaseCount": 31,
+  "expectedCaseOutcomesMatched": 31,
+  "supportedSourceCaseOutcomes": {
+    "verified_order": 18,
+    "verified_no_mandatory_order": 3,
+    "clarification_required": 10
+  },
+  "unsupportedEdgeProbes": 63,
+  "unsupportedEdgesAccepted": 0,
+  "failures": [],
+  "knownClearOutOfGrammarClarifications": 4,
+  "fixtureAndProbeLocalElapsedMs": 9.95962499291636,
+  "timingCaveat": "One local diagnostic covering construction plus checks, not production latency or a worst-case bound.",
+  "holdouts": {
+    "cases": 6,
+    "outcomesMatched": 6,
+    "moduleHashFrozenBeforeExecution": true,
+    "independentBlindReview": false
+  },
+  "cases": [
+    {
+      "caseId": "first-then",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            10,
+            46
+          ],
+          "cueSpan": [
+            19,
+            24
+          ],
+          "source": "pharmacy first, then the supermarket"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "before",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            10,
+            34
+          ],
+          "cueSpan": [
+            19,
+            25
+          ],
+          "source": "pharmacy before the bank"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "after",
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 1,
+          "after": 0,
+          "rule": "after",
+          "span": [
+            10,
+            33
+          ],
+          "cueSpan": [
+            19,
+            24
+          ],
+          "source": "pharmacy after the bank"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "partial",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            8,
+            32
+          ],
+          "cueSpan": [
+            17,
+            23
+          ],
+          "source": "pharmacy before the bank"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "trailing-then",
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "then",
+          "span": [
+            8,
+            27
+          ],
+          "cueSpan": [
+            16,
+            20
+          ],
+          "source": "museum, then coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "chain",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            0,
+            19
+          ],
+          "cueSpan": [
+            8,
+            12
+          ],
+          "source": "Coffee, then museum"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "then",
+          "span": [
+            13,
+            32
+          ],
+          "cueSpan": [
+            21,
+            25
+          ],
+          "source": "museum, then coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "simple-then",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            0,
+            19
+          ],
+          "cueSpan": [
+            8,
+            12
+          ],
+          "source": "Museum, then coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "and-list",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "verified_no_mandatory_order",
+      "proofs": [],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "comma-list",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "verified_no_mandatory_order",
+      "proofs": [],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "ranked-repeats",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "adjacent_ranks",
+          "span": [
+            6,
+            33
+          ],
+          "cueSpan": [
+            13,
+            18
+          ],
+          "source": "coffee first, museum second"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "rank_then",
+          "span": [
+            20,
+            46
+          ],
+          "cueSpan": [
+            27,
+            33
+          ],
+          "source": "museum second, then coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "indexed-repeats",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            6,
+            40
+          ],
+          "cueSpan": [
+            20,
+            26
+          ],
+          "source": "coffee stop 0 before coffee stop 1"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "independent-third",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            6,
+            26
+          ],
+          "cueSpan": [
+            15,
+            21
+          ],
+          "source": "pharmacy before bank"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "similar-names",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            6,
+            40
+          ],
+          "cueSpan": [
+            17,
+            23
+          ],
+          "source": "Art Museum before Art Museum Annex"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "named-cue-word",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            6,
+            32
+          ],
+          "cueSpan": [
+            18,
+            22
+          ],
+          "source": "First Bank, then Last Cafe"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "unrelated-clause",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": true
+    },
+    {
+      "caseId": "parenthetical",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": true
+    },
+    {
+      "caseId": "missing-cue",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "verified_no_mandatory_order",
+      "proofs": [],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "ambiguous-cue",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": true,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "ambiguous-ranks",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": true
+    },
+    {
+      "caseId": "ambiguous-mentions",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unowned_additional_stop_mentions"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "negation",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "conditional",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": true,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "event-not-stop",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "optional-edge",
+      "expectedRelationships": [],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": true,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "unicode-arrow",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "arrow",
+          "span": [
+            0,
+            15
+          ],
+          "cueSpan": [
+            7,
+            8
+          ],
+          "source": "Coffee → museum"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "arrow",
+          "span": [
+            9,
+            24
+          ],
+          "cueSpan": [
+            16,
+            17
+          ],
+          "source": "museum → coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "unicode-long-arrow",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "arrow",
+          "span": [
+            0,
+            15
+          ],
+          "cueSpan": [
+            7,
+            8
+          ],
+          "source": "Museum ⟶ coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "long-clause",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [],
+      "outcome": "clarification_required",
+      "proofs": [],
+      "issues": [
+        "unproven_cue_scope"
+      ],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": true
+    },
+    {
+      "caseId": "two-independent-pairs",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            0,
+            18
+          ],
+          "cueSpan": [
+            7,
+            11
+          ],
+          "source": "Coffee then museum"
+        },
+        {
+          "before": 2,
+          "after": 3,
+          "rule": "then",
+          "span": [
+            20,
+            39
+          ],
+          "cueSpan": [
+            27,
+            31
+          ],
+          "source": "coffee then gallery"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "suny",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "then",
+          "span": [
+            6,
+            51
+          ],
+          "cueSpan": [
+            36,
+            40
+          ],
+          "source": "SUNY College of Optometry and then get coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "v4-partial",
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "before",
+          "span": [
+            8,
+            32
+          ],
+          "cueSpan": [
+            17,
+            23
+          ],
+          "source": "pharmacy before the bank"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    },
+    {
+      "caseId": "v4-repeated",
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedSupportedGrammarRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "outcome": "verified_order",
+      "proofs": [
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "then",
+          "span": [
+            8,
+            27
+          ],
+          "cueSpan": [
+            16,
+            20
+          ],
+          "source": "museum, then coffee"
+        }
+      ],
+      "issues": [],
+      "languageAmbiguous": false,
+      "knownClearOutOfGrammar": false
+    }
+  ]
+}

@@ -1,0 +1,516 @@
+{
+  "version": "52b-order-proof-v1-offline",
+  "notAuthoritativePaidCorpus": true,
+  "expectedRubricReviewedBeforeTests": true,
+  "cases": [
+    {
+      "id": "first-then",
+      "text": "Go to the pharmacy first, then the supermarket.",
+      "stops": [
+        "pharmacy",
+        "supermarket"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "before",
+      "text": "Visit the pharmacy before the bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "after",
+      "text": "Visit the pharmacy after the bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "partial",
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "trailing-then",
+      "text": "Coffee, museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "chain",
+      "text": "Coffee, then museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "simple-then",
+      "text": "Museum, then coffee.",
+      "stops": [
+        "Museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "and-list",
+      "text": "Coffee and museum.",
+      "stops": [
+        "Coffee",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "verified_no_mandatory_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "comma-list",
+      "text": "Coffee, museum, and coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "verified_no_mandatory_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "ranked-repeats",
+      "text": "Go to coffee first, museum second, then coffee again.",
+      "stops": [
+        "coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "indexed-repeats",
+      "text": "Visit coffee stop 0 before coffee stop 1.",
+      "stops": [
+        "coffee stop 0",
+        "coffee stop 1"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "independent-third",
+      "text": "Visit pharmacy before bank; visit museum.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "museum"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "similar-names",
+      "text": "Visit Art Museum before Art Museum Annex.",
+      "stops": [
+        "Art Museum",
+        "Art Museum Annex"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "named-cue-word",
+      "text": "Visit First Bank, then Last Cafe.",
+      "stops": [
+        "First Bank",
+        "Last Cafe"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "unrelated-clause",
+      "text": "Visit pharmacy; check the weather; then visit bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageExpectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "limitation": "Clear broad temporal intent, outside bounded adjacent connector grammar; conservative clarification."
+    },
+    {
+      "id": "parenthetical",
+      "text": "Visit pharmacy, while carrying a blue bag, before bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageExpectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "limitation": "Clear intended relation but intervening prose is not deleted or guessed."
+    },
+    {
+      "id": "missing-cue",
+      "text": "Visit pharmacy and bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "verified_no_mandatory_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "ambiguous-cue",
+      "text": "Coffee before or after museum.",
+      "stops": [
+        "Coffee",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageAmbiguous": true
+    },
+    {
+      "id": "ambiguous-ranks",
+      "text": "Coffee first; museum last.",
+      "stops": [
+        "Coffee",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageExpectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "limitation": "First/last implies order, but global rank scope across semicolon is outside the supported grammar."
+    },
+    {
+      "id": "ambiguous-mentions",
+      "text": "Coffee, then museum; discuss coffee.",
+      "stops": [
+        "Coffee",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "occurrenceOwnershipAmbiguous": true
+    },
+    {
+      "id": "negation",
+      "text": "Do not visit pharmacy before bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "unsupportedPositiveOrder": true
+    },
+    {
+      "id": "conditional",
+      "text": "Visit pharmacy before bank if convenient.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageAmbiguous": true
+    },
+    {
+      "id": "event-not-stop",
+      "text": "Visit pharmacy before bank closes.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "unsupportedPositiveOrder": true
+    },
+    {
+      "id": "optional-edge",
+      "text": "Maybe coffee, then museum.",
+      "stops": [
+        "coffee",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "optional": [
+        0
+      ],
+      "languageAmbiguous": true
+    },
+    {
+      "id": "unicode-arrow",
+      "text": "Coffee \u2192 museum \u2192 coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "unicode-long-arrow",
+      "text": "Museum \u27f6 coffee.",
+      "stops": [
+        "Museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "long-clause",
+      "text": "Visit pharmacy, carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag before bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "expectedOutcome": "clarification_required",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "languageExpectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "limitation": "Evidence under500 characters; length alone does not prove scope."
+    },
+    {
+      "id": "two-independent-pairs",
+      "text": "Coffee then museum; coffee then gallery.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee",
+        "gallery"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff"
+    },
+    {
+      "id": "suny",
+      "text": "Go to SUNY College of Optometry and then get coffee.",
+      "stops": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "kinds": [
+        "named_place",
+        "activity"
+      ]
+    },
+    {
+      "id": "v4-partial",
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "location": "Jersey City"
+    },
+    {
+      "id": "v4-repeated",
+      "text": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "expectedOutcome": "verified_order",
+      "reviewer": "agent authored source rubric, not independent human signoff",
+      "location": "Jersey City"
+    }
+  ]
+}
