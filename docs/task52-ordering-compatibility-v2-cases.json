@@ -1,0 +1,682 @@
+{
+  "version": "52b-order-proof-v2-offline",
+  "review": "Agent-authored declarations before first fixture execution, not independent human qualification. Existing31 cases/gold unchanged.",
+  "cases": [
+    {
+      "id": "first-and-then",
+      "text": "First visit pharmacy, and then head out for coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "suffix-first-and-then",
+      "text": "Visit pharmacy first and then head out for coffee now.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "first-then-head",
+      "text": "First, visit pharmacy, then head to coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "after-visiting",
+      "text": "After visiting pharmacy, go to coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "before-going",
+      "text": "Before going to bank, stop at pharmacy.",
+      "stops": [
+        "bank",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "followed-by",
+      "text": "Visit pharmacy, followed by coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "start-finish",
+      "text": "Start with pharmacy, finish at bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "ordinal-suffix",
+      "text": "Visit pharmacy first, bank second, coffee third.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "ordinal-prefix",
+      "text": "First visit pharmacy, second visit bank, third get coffee.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "first-last",
+      "text": "Pharmacy first; bank last.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "partial-flexible-third",
+      "text": "Visit pharmacy before bank; get coffee whenever convenient.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "repeated-sequence",
+      "text": "Coffee, then museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "unicode-then",
+      "text": "Pharmacy\uff0c then coffee.",
+      "stops": [
+        "Pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "dash-then",
+      "text": "Pharmacy \u2014 then coffee.",
+      "stops": [
+        "Pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "arrows",
+      "text": "Pharmacy \u21d2 bank \u279c coffee.",
+      "stops": [
+        "Pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "short-break",
+      "text": "Visit pharmacy, then, after a short break, visit bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "trailing-cue-extra",
+      "text": "Coffee, museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": false,
+      "reason": "Extra edge from list order"
+    },
+    {
+      "id": "plain-list",
+      "text": "Coffee, museum, and coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Unordered list"
+    },
+    {
+      "id": "closes",
+      "text": "Visit pharmacy before bank closes.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Event timing, not a bank visit"
+    },
+    {
+      "id": "or-after",
+      "text": "Visit pharmacy before or after bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Ambiguous direction"
+    },
+    {
+      "id": "not-before",
+      "text": "Pharmacy, but not before bank.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Negated direction"
+    },
+    {
+      "id": "unless",
+      "text": "Pharmacy first, unless bank is closed.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Conditional constraint"
+    },
+    {
+      "id": "after-lunch-anchor",
+      "text": "After lunch, go to pharmacy.",
+      "stops": [
+        "lunch",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Bare temporal anchor cannot prove a mandatory lunch visit"
+    },
+    {
+      "id": "whenever",
+      "text": "Pharmacy first, bank whenever convenient.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Unresolved rank/flexible scope"
+    },
+    {
+      "id": "wrong-front-after",
+      "text": "After visiting pharmacy, go to coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": false,
+      "reason": "Reversed fronted after"
+    },
+    {
+      "id": "wrong-front-before",
+      "text": "Before going to bank, stop at pharmacy.",
+      "stops": [
+        "bank",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Reversed fronted before"
+    },
+    {
+      "id": "front-after-if",
+      "text": "After visiting pharmacy, go to coffee if convenient.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Conditional"
+    },
+    {
+      "id": "before-closes-front",
+      "text": "Before bank closes, stop at pharmacy.",
+      "stops": [
+        "bank",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": false,
+      "reason": "Event deadline"
+    },
+    {
+      "id": "followed-reversed",
+      "text": "Visit pharmacy, followed by coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": false,
+      "reason": "Wrong followed-by direction"
+    },
+    {
+      "id": "start-finish-extra",
+      "text": "Start with pharmacy, bank, finish at coffee.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Three-stop first/final scope outside binary rule; proposed graph is incomplete, not proof of a complete valid sequence."
+    },
+    {
+      "id": "first-conditional",
+      "text": "First visit pharmacy, and then coffee if bank is open.",
+      "stops": [
+        "pharmacy",
+        "coffee",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Conditional scope"
+    },
+    {
+      "id": "optional",
+      "text": "Maybe visit pharmacy, then coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "optional": [
+        0
+      ],
+      "reason": "Optional is not mandatory"
+    },
+    {
+      "id": "short-break-if",
+      "text": "Visit pharmacy, then, if convenient, visit bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "No arbitrary parenthetical deletion"
+    },
+    {
+      "id": "ordinal-swapped",
+      "text": "Visit pharmacy first, bank second, coffee third.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Swapped occurrence direction"
+    },
+    {
+      "id": "quote-many",
+      "text": "Pharmacy and museum; bank, then coffee.",
+      "stops": [
+        "Pharmacy",
+        "museum",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
+      "accept": false,
+      "reason": "Cue borrowed from another pair"
+    },
+    {
+      "id": "similar-names",
+      "text": "Visit North Museum before North Museum Annex.",
+      "stops": [
+        "North Museum",
+        "North Museum Annex"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true,
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "named-words",
+      "text": "Visit First Bank and Last Cafe.",
+      "stops": [
+        "First Bank",
+        "Last Cafe"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "kinds": [
+        "named_place",
+        "named_place"
+      ],
+      "reason": "Names do not create order"
+    },
+    {
+      "id": "long-parenthesis",
+      "text": "Visit pharmacy, carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag carrying a blue bag before bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Outside bounded grammar",
+      "clearButOutOfGrammar": true
+    },
+    {
+      "id": "ranks-no-cue",
+      "text": "Visit pharmacy second, bank first.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "reason": "Claimed direction contradicts ranks; unsupported reverse-rank grammar"
+    },
+    {
+      "id": "fronted-extra-unordered-stop",
+      "text": "Before going to bank, stop at pharmacy and museum.",
+      "stops": [
+        "bank",
+        "pharmacy",
+        "museum"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": false,
+      "reason": "Fronted clause has three stop arguments; bounded binary grammar cannot prove complete scope."
+    }
+  ]
+}

@@ -1,3 +1,103 @@
+# V2 compatibility checkpoint — offline only
+
+Baseline clean `5344aa786f3c7ac173ad8d0a9b7a10d0db86ba59`. **No inference, token counting, model/account provider API calls, credential changes or paid-state writes. V4 remains halted.** V1 source,31 cases,63 original probes, six holdouts, canonical validators, active Qwen/cloud prompts and the authoritative66-case corpus remain unchanged.
+
+[Versioned three-way comparison](task52-ordering-compatibility-v2.json), [all27 per-output Qwen source/graph reviews](task52-ordering-qwen-review-v2.json), [40 development cases](task52-ordering-compatibility-v2-cases.json), [eight separated post-freeze cases](task52-ordering-compatibility-v2-holdouts.json). New checker `scripts/cloud_model52_ordering_v2.py` is **`52b-order-proof-v2-offline`**. It reuses v1's frozen bounded occurrence/path primitives, with its own grammar. Neither checker is imported by production or the paid runner. No model output is repaired, no historical classification or score is overwritten, and neither checker grants dispatch permission.
+
+## Baseline reproduction and root causes
+
+V1's31 declared outcomes,63 original appended-edge probes and six original holdouts reproduce exactly. The known raw coffee0→museum1 edge remains historically accepted by current Journey validation, rejected by v1 and rejected by v2; both offline checkers still prove museum1→coffee2. All five previously correct OpenAI interpretations remain compatible. The v3 cue-only journey-07 response stays rejected. No failed response was rewritten or reissued.
+
+Every Qwen source and raw graph in the27-row fixture was reviewed independently of its old acceptance flag. The review file records wording, stop occurrences, original edge quotes, actual cue, source-supported relationships and the reason for each classification. The comparison separately records original execution status, current Journey-source blocking, effective graph/normalization and v1/v2 proof results. An ordering-only pass is not whole-extraction correctness or successful route planning.
+
+| Qwen graph-review category | Rows | Meaning |
+|---|---:|---|
+| Compatible correct ordering graph |10 | Already supported by v1 |
+| Correct ordering, already blocked for other omitted requirements |3 | Case A's0→1 is clear; missing return/time semantics remain blocking |
+| Correct ordering newly rejected by v1 |3 | Case B's0→1 was nonblocking; v1 caused avoidable new questions |
+| Genuine identity ambiguity outside the order graph |2 | Unresolved college; ordering-only pass cannot resolve the identity |
+| Unsupported raw list edge, safely normalized by existing runtime |7 | D/E: comma/and lists do not mandate0→1; old runtime removes that redundant representation |
+| Previously accepted unsupported mandatory edge |2 | Repeated-coffee fixture has the same extra0→1 failure |
+
+The six clear-order A/B graphs failed v1's exact connector grammar: it did not cover `first and then`, `head out for`, `now`, or the narrowly scoped trailing return-within-time clause. This is distinct from the nine unsupported raw graphs. **The six grammar false clarifications are eliminated; the nine raw safety failures remain blocked.** No assumption that historical acceptance means correctness was used.
+
+## V2 supported patterns and boundaries
+
+All proofs retain unique source-order occurrence ownership, exact source coordinates, correct direction, quoted proof containment and preservation of every independently proven dependency. Named words are masked when finding cues/conditional wording, so `First Bank` cannot supply a fake first-cue. No category equivalence, article stripping, repeated-stop merging or route-dependent decision was added.
+
+| Pattern | Exact supported boundary |
+|---|---|
+| First …, and then … / A first and then B |Anchored first/then connector; recognized visit verbs, including `head to` and `head out for` |
+| After visiting A, go to B / After going to A, visit B |Explicit visit/travel verb after fronted after; exactly two owned stop arguments in that clause; A→B. Bare `After lunch` is not a mandatory lunch visit |
+| Before going to B, stop at A |Binary fronted clause; source-order indices B0/A1, relationship1→0. Event deadline `before B closes` is not this pattern |
+| A, followed by B |Anchored connector; never reversed |
+| Start with A, finish at B |Exactly two extracted occurrences; no invented chain through unscoped middle activities |
+| First/second/third/fourth stop descriptions |Consecutive ascending adjacent ranks, prefix or suffix; explicit two-stop first/last also recognized. Descending/mixed/remote rank scopes remain unknown |
+| Partial order and repeated visits |Only proven relationships; independent third visits remain independent; occurrences never coalesce |
+| Unicode separators/arrows |Rightward→/⇒/➜/⟶/->; comma/full-width comma/en/em dash before then. No invented reversal of an arrow |
+| Short intervening clause |Only the fully quoted `then, after a short break, visit…` form. Arbitrary parentheticals/unrelated prose are not deleted |
+| Trailing now/return clause |Finite source wording such as `now` or `and be back within <number> hours/minutes` can leave the preceding order provable; canonical return/deadline checks remain mandatory and unchanged |
+
+Conditions, negations, alternatives, optionality and retraction still require unknown/clarification when an unconditional dependency cannot be proven. Correct cues borrowed from another pair, multi-activity quotes, swapped/reversed occurrence references and incomplete graphs fail. No graph edge is removed or repaired by v2. The repeated `Coffee, museum, then coffee` still proves only1→2; `Coffee, then museum, then coffee` proves0→1 and1→2; `Coffee, museum, and coffee` creates no mandatory edges.
+
+## Evidence and denominators
+
+| Measurement | Current Journey source check | V1 raw ordering gate | V2 raw ordering gate |
+|---|---:|---:|---:|
+| Unsupported Qwen mandatory graphs retained, denominator9 raw unsupported graphs |2/9; other7 normalized away |0/9 |0/9 |
+| Reviewed-correct Qwen graphs ordering-compatible, denominator18 |13 nonblocking;5 blocked for other requirements |12/18 |18/18 |
+| False clarification of a correct Qwen order graph |No new guard; other-field failures separate |6/18 |0/18 |
+| New false clarification among13 previously nonblocking correct Qwen graphs |N/A |3/13 |0/13 |
+| Ordering-only unknown across all27 Qwen rows |5 Journey blocks for other requirements, not comparable to ordering-only unknown |15/27 |9/27 |
+| Unsupported single-edge replacement probes retained, denominator92 |60/92 |0/92 |0/92 |
+| Previously correct recorded OpenAI outputs remain compatible, denominator5 |5/5 |5/5 |5/5 |
+| Known unsafe v4 extra edge retained, denominator1 |1/1 |0/1 |0/1 |
+
+The92 replacement probes consist of63 single-edge variants on original source cases plus29 on newly supported patterns. They replace the graph with an unsupported candidate edge, testing acyclic wrong direction and occurrence scope. The **original63 appended-edge probes also pass unchanged**. Do not pool these as independent samples or claim60/92 is a universal production error rate: this is the Journey source check on hand-authored inputs, not the complete interpretation/UI/routing pipeline. Some synthetic inputs intentionally omit non-ordering metadata, and normalization is reported separately.
+
+All40 development declarations matched:17 supported positive graphs accepted and23 declared unknown/blocking cases. One of those23 is a deliberately clear but out-of-grammar long clause; it is not counted as an invented edge. They include explicit safe unknowns as well as accepted patterns; matching declarations is not40-case universal semantic accuracy. Eight separately authored post-freeze examples matched with a pinned v2 module hash, four accepted/four blocked. They were authored by the same agent, not an independent blind reviewer. The initial eight cases passed, then were promoted to regression cases after a code-review correction excluded leading whitespace from fronted/start-finish proof spans; a fresh final eight were authored after the corrected module freeze. Both sets pass, and their provenance/hashes are retained in the holdout artifact. New branches each have wrong-direction, borrowed-cue, scope or conditional counterexamples, plus systematic replacement probes.
+
+V2 still conservatively clarifies three of the four original clear-but-out-of-grammar source families when given a graph asserting the intended relationship: arbitrary intervening prose, unrelated clauses and the474-character parenthetical. It can prove the explicit binary first/last relationship, but the original v1 hand fixture omitted that edge; v2 does not repair that fixture, so it remains unknown for a missing proven relationship. Broad first/final scope with three stops, descending ranks, leftward arrows and general parentheticals are not release-supported. A further explicit regression records a common remaining false clarification: `Visit pharmacy before bank, maybe get coffee.` The required0→1 relation is clear and coffee is optional, but the broad qualifier scope sees maybe before the third owned occurrence and cannot prove the first pair. The semicolon-separated independent-third version passes. This needs independently owned qualifier/clause spans, not an expanding list of ignored words. These coverage limits must not become silent edge guesses.
+
+## Local overhead
+
+Each checker was measured50 times over the same40 pre-parsed synthetic interpretations (2,000 samples/checker). Current Journey measurement includes a copy and its broader source validation; v1/v2 measurements are their standalone incremental ordering work. These are different scopes, not whole-app comparative throughput.
+
+| Checker | p50 µs | p95 µs | Maximum µs |
+|---|---:|---:|---:|
+| production | 167.312 | 262.334 | 1593.167 |
+| v1 | 21.480 | 48.375 | 126.375 |
+| v2 | 27.375 | 53.792 | 141.834 |
+
+No provider/model operation, browser render, route or hosted service was timed. These small local fixtures do not establish worst-case latency or the five-second end-to-end target. Candidate-binding work limits remain fail-closed. Historical model timings/tokens/charges are unchanged.
+
+## Integration decision and exact proposed policy
+
+**Do not activate production by default or call this generally release-ready.** The specific common Qwen ordering regression is fixed on all six recorded examples, and no tested unsupported edge was admitted. However, strict raw v2 still blocks seven ordinary D/E outputs that today's runtime safely normalizes. This is not seven newly incorrect source requests, and it is not solved merely by showing0/18 false clarifications among correct raw graphs. Broader clause coverage and independent review also remain incomplete.
+
+A further observed integration hazard is the current legacy cue vocabulary: it omits `start/finish`, so the positive binary start/finish fixture has its correct edge removed before later checks. The comparison records that normalization and a focused test proves v2 then blocks the missing relationship. Thus a simple after-the-fact insertion cannot safely advertise all new grammar as application-supported. Do not restore an edge after normalization or weaken provenance to force a pass.
+
+A narrowly scoped proposal, requiring separate owner approval:
+
+1. **Insertion:** in `backend/interpretation.py`, retain a raw deep copy and independent proof analysis immediately before the current `validate_journey(raw, journey_ai)` call. Perform the unchanged canonical/source checks, then the separately versioned proof check before any advanced handoff token/session is created in `backend/main.py` or ordinary request can reach venue/routing admission. Retain before/after canonical graphs for audit. An independently proven mandatory relationship lost during canonical normalization must block. Any future runtime integration must coordinate the no-cue predicate and old cue whitelist with server-verified v2 proofs, without blindly widening either keyword regex or re-adding model edges. That coordinated runtime change and its full regressions require separate approval. Reapply on saved pending state; never trust browser-supplied proof, graph, policy version or offsets.
+2. **Legacy no-cue normalization decision:** keep raw model quality and safe application semantics separate. Raw D/E graphs remain failed model-order outputs. Do not silently add a new stripping rule or suppress an unknown. Owner must choose between strict raw rejection (which would add seven questions in this fixture) and a deliberately reviewed compatibility path using **only the unchanged existing no-cue/forward-only/source-bound normalization predicate**, checking the resulting empty graph and disclosing that no mandatory order was stated. If approved, record original graph, normalized graph and reason server-side; raw benchmark score still fails. This exception must never apply to then/before/after/rank/arrow, reversed/cyclic or uncertain explicit order. It is a proposal, not an implementation, and cannot make a failed cloud candidate qualified.
+3. **Unknown in the main form:** return the existing safe rephrase/edit-request outcome with original text retained and no route/session token. Do not issue an extra AI call or substitute another model. Current `ClarificationField`/`ClarificationAnswers` and frontend parsing allow location/people/date/activities/time/endpoint, **not ordering**. Reusing activities to erase advanced requirements is unsafe. Structured ordering confirmation needs a separately approved backend/frontend contract and tests; it cannot be enabled by this offline module.
+4. **Explicit user answers:** a future ordering question should identify original stop-occurrence IDs (including repeats), and accept a bounded explicit relation/permutation or an explicit unordered choice. Independently validate membership, multiplicity, named identities, DAG and consistency with all retained mandatory requirements. Store confirmation text/hash/source kind alongside the immutable original text, not as a fictitious quotation from it. A contradictory answer requires an explicit edit/review. Canonical validation consumes that separate source provenance; accepted answers never silently relax endpoints, whole-trip/travel budgets, strict/flexible limits, dwell durations or opening hours. No extra inference pass is necessary for typed confirmation. Until that contract exists, request an edit through the existing UI.
+5. **Rollout/security:** default-off versioned shadow/offline profile first, pin policy and source hashes, review all ordinary/advanced/saved-plan regressions and add independently reviewed cases. Existing Qwen defaults remain untouched; no production cloud provider is selected. Proof processing is transient/backend-only, with no source text, private origins, confirmations or capabilities in normal logs; no new persistence or credentials. Any ordering change invalidates stale pending/advanced tokens before provider admission.
+6. **Rollback:** stop the new/cloud interpretation path or keep affected requests in explicit clarification. Never automatically bypass the proof check for an unsafe explicit edge, clear paid halt, retry a model, invoke a fallback provider or reuse stale sessions. Any legacy local compatibility branch needs its own explicit owner-approved boundary. Run full backend/frontend/typecheck/lint/build and application verification for actual runtime integration; none is activated here.
+
+The next qualification step is **owner review of that normalization/clarification policy plus a bounded qualifier-ownership refinement for the common optional-third case and independent offline coverage**, then a separately approved integration/shadow task. No larger paid test is recommended under this checkpoint. Existing v4 already forbids list-order inference; no new prompt revision or schema change is needed to state the rule. Future bounded model testing still needs a separately authorized unused-slot plan, readiness and audited halt adjudication that preserves every prior record; no approval is supplied by this task.
+
+## Immutable accounting and other blockers
+
+Journal SHA remains `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`; all10 rows/root/corrections and324 private files are byte-identical, and read-only recovery refuses the persistent halt. **OpenAI7/Google2/Anthropic1=10/594**, remaining191/196/197=584. Accounted **$0.047366625**, remaining **$11.952633375**. Original $12/594/198/12k/2k/concurrency1/retries0 unchanged. No paid journal clone, migration, reset, refund, new approval sidecar or override.
+
+Luna's v4 halt remains. Gemini Developer API retains two generic400 failures and the separate IP-denial; next independent work is sanitized endpoint/schema mock verification and owner-authorized egress/restriction/support review, without broadening access or substituting Vertex. Claude Haiku5.5 retains schema grammar-size rejection; next work is offline canonical-equivalence/grammar-factorization review and, only if separately approved, provider support evidence. Ordering work resolves neither issue. No live provider readiness/counting tests occurred.
+
+Final verification results are in HANDOVER.md. Production/Qwen/provider configuration, saved-plan storage, Maps/billing/quotas and infrastructure unchanged; no Task53. Earlier v1 evidence below remains historical and unchanged apart from this new section.
+
+---
+
 # Task 52B — offline ordering safety investigation
 
 Baseline: clean `4bcf3bf4bff9ffb48a93f87d466c7a0c2d53b2f6`. **No inference, token counting, account/provider API requests or paid-journal writes. The v4 evaluation remains halted.** This is an opt-in experiment, not a production safety fix or model qualification.

@@ -1,3 +1,13 @@
+# V2 offline compatibility — raw graph quality remains separate from normalization
+
+[Detailed rules, denominators and integration proposal](task52-ordering-safety-investigation.md), [versioned comparison](task52-ordering-compatibility-v2.json), [all27 individual Qwen graph reviews](task52-ordering-qwen-review-v2.json). New `52b-order-proof-v2-offline` preserves v1 and historical evidence. Forty development cases and eight separately authored post-freeze cases matched; neither set is independent human qualification. Original31/63/six baseline checks reproduce unchanged.
+
+All18 reviewed-correct Qwen ordering graphs are compatible with v2 (v1:12/18); ordering unknowns15→9 across27 rows, correct-graph false clarifications6→0, and newly blocking outcomes among13 previously nonblocking correct graphs3→0. Three case-A whole extractions and two unresolved-college cases remain canonically blocked for other reasons; ordering acceptance does not repair them. Nine unsupported raw graphs stay blocked: seven are already safely normalized in the current app, two were unsafe accepted repeated-coffee edges. Strict raw rejection would still add questions to those seven ordinary requests, so release needs an explicit normalization policy rather than relabeling their model graphs correct. The legacy cue vocabulary also omits start/finish and can erase that correct new relation; v2 detects the missing dependency. Coordinated runtime contract changes remain unapproved.
+
+Five previously correct OpenAI responses remain compatible. V3 journey-07's cue-only provenance and v4's invented coffee0→museum1 stay rejected; supported museum1→coffee2 remains proven. V2 accepted0/92 single-edge replacement probes; the original63 appended-edge tests also pass. Current Journey validation retained an unsupported edge in60/92 replacement probes, a source-guard fixture measurement rather than a whole-app error rate. Missing dependencies, reversed/borrowed cues, conditionals, optionality, event deadlines, repeated references and names remain strict. No source/graph repair, active scorer/prompt/schema/production validator change or paid dispatch. Persistent halt unchanged.
+
+---
+
 # Offline independent ordering proof — version 52b-order-proof-v1-offline
 
 [Design and full source rubric](task52-ordering-safety-investigation.md), [31 declared cases](task52-ordering-safety-cases.json), [probe results](task52-ordering-safety-checks.json), [versioned recorded replay](task52-ordering-safety-replay.json). No current scorer, prompt, schema, validator or historical classification changed. This is a separate opt-in ordering-only check, never a full semantic pass or paid admission signal.

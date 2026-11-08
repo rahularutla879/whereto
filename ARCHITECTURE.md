@@ -1,3 +1,9 @@
+# Task52B offline v2 compatibility profile
+
+`scripts/cloud_model52_ordering_v2.py` adds a separately versioned finite grammar over frozen v1 ownership/path primitives. `cloud_model52_ordering_compatibility.py` compares raw/effective production graphs, v1 and v2 against recorded synthetic evidence with network blocked and paid state read-only. Neither module is imported by runtime or paid admission; canonical schema/prompts/Qwen/defaults stay unchanged. Legacy normalization and ordering-confirmation contracts remain proposal decisions, not implemented release behavior. [Boundaries and integration plan](docs/task52-ordering-safety-investigation.md).
+
+---
+
 # Task52B offline ordering proof experiment
 
 `scripts/cloud_model52_ordering.py` contains versioned pure local relationship checks; `cloud_model52_ordering_replay.py` reads recorded cloud/Qwen evidence with network blocked and paid SQLite opened read-only. They are opt-in evaluation tools with no runtime or paid-runner import. No canonical schema/provider/prompt/planner change. Unknown cue scope requests clarification in the proposed result; production activation remains unapproved because finite grammar/Qwen compatibility gaps remain. [Design and migration/rollback proposal](docs/task52-ordering-safety-investigation.md).

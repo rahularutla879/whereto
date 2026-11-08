@@ -1,3 +1,13 @@
+# Offline v2 compatibility checkpoint — paid benchmark stays halted
+
+[Versioned three-way evidence](task52-ordering-compatibility-v2.json), [full Qwen graph review](task52-ordering-qwen-review-v2.json), [rules, release limits and proposed integration](task52-ordering-safety-investigation.md). **Zero model/counting/provider API calls.** New v2 grammar restores six clear Qwen order relationships that v1 could not prove. Raw Qwen ordering unknowns15→9/27, correct-graph false clarifications6→0/18; new questions among previously nonblocking correct graphs3→0/13. Nine unsupported raw graphs remain blocked, including two production-accepted repeated-stop extra edges. Seven other raw list graphs have existing safe legacy normalization; their release policy remains unresolved.
+
+All five previously correct OpenAI outputs remain compatible; both failed outputs remain failed under offline proof checks. Historical v3/v4 classifications/scores/timings/usage/charges unchanged.40 development and eight post-freeze same-agent cases matched;0/92 replacement probes accepted, original31/63/six baseline checks retained. No universal accuracy/production qualification, full-app latency or independent human signoff claimed. No production activation or further paid batch recommended before policy/coverage review.
+
+Journal/root/10 rows/corrections and324 private files unchanged, SHA `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`; v4 halt preserved. OpenAI7/Google2/Anthropic1=10/594; $0.047366625 retained/$11.952633375 remaining. All original ceilings unchanged. Gemini400/IP and Anthropic grammar blockers remain independent. No runtime/Qwen/prompt/schema/provider/Maps/billing/hosting/Task53 change. Earlier benchmark measurements below remain historical.
+
+---
+
 # Offline ordering-proof checkpoint — no new model requests
 
 From `4bcf3bf`, isolated version `52b-order-proof-v1-offline` now proves cue direction/scope against owned source occurrences rather than treating a real quote plus cue word as semantic proof. [Focused design, tradeoffs, compatibility and integration proposal](task52-ordering-safety-investigation.md), [source-case/probe evidence](task52-ordering-safety-checks.json), [all recorded cloud/Qwen replay](task52-ordering-safety-replay.json).

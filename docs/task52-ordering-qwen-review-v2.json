@@ -1,0 +1,898 @@
+{
+  "scope": "All27 recorded Qwen graph reviews; source-only agent inspection, not full extraction/human qualification. Original fixtures unchanged.",
+  "rows": [
+    {
+      "cohort": "baseline",
+      "row": 0,
+      "case": "E",
+      "source": "dinner and bowling tomorrow in jersey city",
+      "stops": [
+        {
+          "source": "dinner",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "bowling",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "dinner and bowling tomorrow in jersey city"
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No ordering cue: and-list",
+      "graphReview": "Unsupported raw0->1 from unordered and-list. Production safely normalizes forward edge away.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 1,
+      "case": "A",
+      "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1 graph; v1 misses first-and-then/head-out-for and return-duration suffix. Existing Journey validation rejects other omitted return/time requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 2,
+      "case": "B",
+      "source": "go to suny college of optometry first and then head out for coffee now",
+      "stops": [
+        {
+          "source": "suny college of optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee now"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1; v1 misses first-and-then/head-out-for and now suffix. Three recorded occurrences would newly clarify with v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 3,
+      "case": "C",
+      "source": "Go to SUNY College of Optometry, then get coffee tomorrow.",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Go to SUNY College of Optometry, then get coffee tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "then",
+      "graphReview": "Correct explicit0->1, already recognized by v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 4,
+      "case": "D",
+      "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow.",
+      "stops": [
+        {
+          "source": "groceries",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "ATM",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": {
+            "minutes": 5,
+            "relation": "exact",
+            "source": "5 minutes"
+          }
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No inter-stop cue: comma plus stop at; duration/return separate",
+      "graphReview": "Unsupported raw0->1 from comma-list. Production safely removes no-cue forward edge, retains ATM dwell/origin/whole-trip requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 5,
+      "case": "E",
+      "source": "dinner and bowling tomorrow in jersey city",
+      "stops": [
+        {
+          "source": "dinner",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "bowling",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "dinner and bowling tomorrow in jersey city"
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No ordering cue: and-list",
+      "graphReview": "Unsupported raw0->1 from unordered and-list. Production safely normalizes forward edge away.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 6,
+      "case": "F",
+      "source": "Go grocery shopping tomorrow and return to where I started.",
+      "stops": [
+        {
+          "source": "grocery shopping",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Return endpoint only, no inter-stop relation",
+      "graphReview": "One grocery visit; empty order correct; return is endpoint, not another indexed stop.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 7,
+      "case": "repeat",
+      "source": "Coffee, museum, then coffee in New York tomorrow.",
+      "stops": [
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "museum",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Coffee, museum, then coffee in New York tomorrow."
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "source": "Coffee, museum, then coffee in New York tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "actualCue": "then attaches museum1 to coffee2",
+      "graphReview": "Correct1->2 plus unsupported0->1 inferred from comma-list. Production accepted both; v1/v2 must block extra edge.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 8,
+      "case": "mall",
+      "source": "Visit Zara and Nike in the same mall tomorrow.",
+      "stops": [
+        {
+          "source": "Zara",
+          "kind": "brand",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "Nike",
+          "kind": "brand",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Same-mall constraint only",
+      "graphReview": "No mandatory order. Shared-mall identity constraint must remain separate.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 9,
+      "case": "flex",
+      "source": "Visit the bank and grocery store, whichever is closer first, tomorrow in New York.",
+      "stops": [
+        {
+          "source": "bank",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "grocery store",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "whichever is closer first: flexible, no mandatory edge",
+      "graphReview": "Empty mandatory graph correct for flexible nearest-first request; no fabricated first/last dependencies.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 10,
+      "case": "ambiguous",
+      "source": "Go to the college and finish at Penn Station tomorrow.",
+      "stops": [
+        {
+          "source": "college",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Unresolved college and final endpoint, no inter-stop edges",
+      "graphReview": "No inter-stop graph needed; unresolved college identity remains blocking in canonical validation. Ordering pass does not resolve that ambiguity.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 11,
+      "case": "A",
+      "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1 graph; v1 misses first-and-then/head-out-for and return-duration suffix. Existing Journey validation rejects other omitted return/time requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 12,
+      "case": "B",
+      "source": "go to suny college of optometry first and then head out for coffee now",
+      "stops": [
+        {
+          "source": "suny college of optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee now"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1; v1 misses first-and-then/head-out-for and now suffix. Three recorded occurrences would newly clarify with v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 13,
+      "case": "C",
+      "source": "Go to SUNY College of Optometry, then get coffee tomorrow.",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Go to SUNY College of Optometry, then get coffee tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "then",
+      "graphReview": "Correct explicit0->1, already recognized by v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 14,
+      "case": "D",
+      "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow.",
+      "stops": [
+        {
+          "source": "groceries",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "ATM",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": {
+            "minutes": 5,
+            "relation": "exact",
+            "source": "5 minutes"
+          }
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No inter-stop cue: comma plus stop at; duration/return separate",
+      "graphReview": "Unsupported raw0->1 from comma-list. Production safely removes no-cue forward edge, retains ATM dwell/origin/whole-trip requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 15,
+      "case": "E",
+      "source": "dinner and bowling tomorrow in jersey city",
+      "stops": [
+        {
+          "source": "dinner",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "bowling",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "dinner and bowling tomorrow in jersey city"
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No ordering cue: and-list",
+      "graphReview": "Unsupported raw0->1 from unordered and-list. Production safely normalizes forward edge away.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 16,
+      "case": "F",
+      "source": "Go grocery shopping tomorrow and return to where I started.",
+      "stops": [
+        {
+          "source": "grocery shopping",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Return endpoint only, no inter-stop relation",
+      "graphReview": "One grocery visit; empty order correct; return is endpoint, not another indexed stop.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 17,
+      "case": "repeat",
+      "source": "Coffee, museum, then coffee in New York tomorrow.",
+      "stops": [
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "museum",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Coffee, museum, then coffee in New York tomorrow."
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "source": "Coffee, museum, then coffee in New York tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "actualCue": "then attaches museum1 to coffee2",
+      "graphReview": "Correct1->2 plus unsupported0->1 inferred from comma-list. Production accepted both; v1/v2 must block extra edge.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 18,
+      "case": "mall",
+      "source": "Visit Zara and Nike in the same mall tomorrow.",
+      "stops": [
+        {
+          "source": "Zara",
+          "kind": "brand",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "Nike",
+          "kind": "brand",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Same-mall constraint only",
+      "graphReview": "No mandatory order. Shared-mall identity constraint must remain separate.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 19,
+      "case": "flex",
+      "source": "Visit the bank and grocery store, whichever is closer first, tomorrow in New York.",
+      "stops": [
+        {
+          "source": "bank",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "grocery store",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "whichever is closer first: flexible, no mandatory edge",
+      "graphReview": "Empty mandatory graph correct for flexible nearest-first request; no fabricated first/last dependencies.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "baseline",
+      "row": 20,
+      "case": "ambiguous",
+      "source": "Go to the college and finish at Penn Station tomorrow.",
+      "stops": [
+        {
+          "source": "college",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Unresolved college and final endpoint, no inter-stop edges",
+      "graphReview": "No inter-stop graph needed; unresolved college identity remains blocking in canonical validation. Ordering pass does not resolve that ambiguity.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 0,
+      "case": "A",
+      "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee and be back within 3 hours"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1 graph; v1 misses first-and-then/head-out-for and return-duration suffix. Existing Journey validation rejects other omitted return/time requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 1,
+      "case": "B",
+      "source": "go to suny college of optometry first and then head out for coffee now",
+      "stops": [
+        {
+          "source": "suny college of optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "go to suny college of optometry first and then head out for coffee now"
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "first and then",
+      "graphReview": "Correct0->1; v1 misses first-and-then/head-out-for and now suffix. Three recorded occurrences would newly clarify with v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 2,
+      "case": "C",
+      "source": "Go to SUNY College of Optometry, then get coffee tomorrow.",
+      "stops": [
+        {
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Go to SUNY College of Optometry, then get coffee tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "actualCue": "then",
+      "graphReview": "Correct explicit0->1, already recognized by v1.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 3,
+      "case": "D",
+      "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow.",
+      "stops": [
+        {
+          "source": "groceries",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "ATM",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": {
+            "minutes": 5,
+            "relation": "exact",
+            "source": "5 minutes"
+          }
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Buy groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow."
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No inter-stop cue: comma plus stop at; duration/return separate",
+      "graphReview": "Unsupported raw0->1 from comma-list. Production safely removes no-cue forward edge, retains ATM dwell/origin/whole-trip requirements.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 4,
+      "case": "E",
+      "source": "dinner and bowling tomorrow in jersey city",
+      "stops": [
+        {
+          "source": "dinner",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        },
+        {
+          "source": "bowling",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "dinner and bowling tomorrow in jersey city"
+        }
+      ],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "No ordering cue: and-list",
+      "graphReview": "Unsupported raw0->1 from unordered and-list. Production safely normalizes forward edge away.",
+      "independentHumanSignoff": false
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 5,
+      "case": "F",
+      "source": "Go grocery shopping tomorrow and return to where I started.",
+      "stops": [
+        {
+          "source": "grocery shopping",
+          "kind": "activity",
+          "requirement": "required",
+          "evidence": "",
+          "duration": null
+        }
+      ],
+      "originalGraph": [],
+      "reviewedMandatoryRelationships": [],
+      "actualCue": "Return endpoint only, no inter-stop relation",
+      "graphReview": "One grocery visit; empty order correct; return is endpoint, not another indexed stop.",
+      "independentHumanSignoff": false
+    }
+  ]
+}

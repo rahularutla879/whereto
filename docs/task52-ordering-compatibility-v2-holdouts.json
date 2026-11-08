@@ -1,0 +1,277 @@
+{
+  "version": "52b-order-proof-v2-offline",
+  "frozenModuleSHA256": "197957572a98dfed5c4b1aa7de2af8cd1bb059214926efe1895c6148e91c8925",
+  "review": "Separately authored after grammar freeze, before first execution. Same agent; not independent human/blind qualification. No tuning on these outcomes.",
+  "cases": [
+    {
+      "id": "final-first-park",
+      "text": "First, visit Lake Park, and then head out for Juice.",
+      "stops": [
+        "Lake Park",
+        "Juice"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "final-after-whitespace",
+      "text": "  After visiting East Annex, visit East Hall.",
+      "stops": [
+        "East Annex",
+        "East Hall"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "final-before",
+      "text": "Before going to South Hall, stop at North Hall.",
+      "stops": [
+        "South Hall",
+        "North Hall"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "final-start-whitespace",
+      "text": "  Start with Bakery, finish at Garden.",
+      "stops": [
+        "Bakery",
+        "Garden"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "final-negation",
+      "text": "Orchard, but not before Gallery.",
+      "stops": [
+        "Orchard",
+        "Gallery"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "final-repeat",
+      "text": "Juice, Gallery, then Juice.",
+      "stops": [
+        "Juice",
+        "Gallery",
+        "Juice"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "final-anchor",
+      "text": "After breakfast, visit Gallery.",
+      "stops": [
+        "breakfast",
+        "Gallery"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "final-conditional",
+      "text": "First visit Orchard, then Juice if Gallery is open.",
+      "stops": [
+        "Orchard",
+        "Juice",
+        "Gallery"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    }
+  ],
+  "initialFreezeModuleSHA256": "8d755987d8670a5b0e4aac85392045a377bd4294e7f671422174f03fad23ef9a",
+  "regressionCases": [
+    {
+      "id": "first-library-tea",
+      "text": "First, walk to Old Library, and then head out for Tea.",
+      "stops": [
+        "Old Library",
+        "Tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "after-annex",
+      "text": "After visiting Branch Annex, visit Branch.",
+      "stops": [
+        "Branch Annex",
+        "Branch"
+      ],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "before-halls",
+      "text": "Before going to East Hall, stop at West Hall.",
+      "stops": [
+        "East Hall",
+        "West Hall"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "rank-garden",
+      "text": "First visit Garden, second visit Gallery, third get Tea.",
+      "stops": [
+        "Garden",
+        "Gallery",
+        "Tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "temporal-anchor",
+      "text": "After lunch, visit Branch.",
+      "stops": [
+        "lunch",
+        "Branch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "borrowed-trailing",
+      "text": "Tea, Gallery, then Tea.",
+      "stops": [
+        "Tea",
+        "Gallery",
+        "Tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "unless-hall",
+      "text": "First visit Hall, and then Tea unless Garden is closed.",
+      "stops": [
+        "Hall",
+        "Tea",
+        "Garden"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "reverse-ordinal",
+      "text": "Visit Hall first, Garden second, Tea third.",
+      "stops": [
+        "Hall",
+        "Garden",
+        "Tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          2
+        ],
+        [
+          2,
+          1
+        ]
+      ],
+      "accept": false
+    }
+  ],
+  "freezeRevisionNote": "Initial eight post-freeze cases passed. A later code review found unnecessary inclusion of leading whitespace in fronted/start-finish proof spans. Initial cases are now regression cases. Eight fresh final-freeze cases below were authored after that span-only correction, before first execution. Same agent, no independent blind review."
+}
