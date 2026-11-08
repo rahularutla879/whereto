@@ -322,7 +322,7 @@ Planned dependency order: Tasks 47–50 → Tasks 50A–50E in sequence → Task
 
 - [ ] Task 52 — Choose production-compatible hosting. Deploy the frontend and backend to services permitted for our intended usage.
 
-  Status: **In progress — Phase 52B Phase 1 stopped for concrete provider blockers.** OpenAI 0/Google 2/Anthropic 1 cumulative inference attempts, zero model outputs; $0.0352 conservative reservations retained. OpenAI needs minimal Responses permission; Google generic 400 and Anthropic grammar-size 400 block compatibility. Common prompt compaction meets Anthropic input cap without changing semantics. Keep 594 attempts/$12 aggregate and the existing journal; no infrastructure, Maps quota/billing change, production switch or deployment. [Current benchmark](docs/task52-cloud-model-benchmark.md). [Evaluation](docs/task52-cloud-architecture-evaluation.md), [model/performance evidence](docs/task52-ai-performance-evaluation.md), [implementation blueprint](docs/task52-production-implementation-plan.md).
+  Status: **In progress — Phase 52B Phase 1 screen stopped for review.** OpenAI4/Google2/Anthropic1 cumulative attempts; $0.039866625 conservatively accounted. OpenAI3/4 agent-reviewed correct,1/4 safe ordering-provenance rejection; no independent human signoff or production qualification. Original journal/failed slots retained; larger batch paused. Google generic400 and Anthropic grammar-size400 remain blocked. Keep594/$12, no infrastructure, Maps changes, production switch or Task53. [Current benchmark](docs/task52-cloud-model-benchmark.md).
 
 - [ ] Task 53 — Configure environment variables and HTTPS. No secret keys in public frontend code or GitHub.
 

@@ -1,3 +1,15 @@
+# November7local /November8UTC — provenance comparator v2
+
+Empty/omitted **gold evidence** means no exact quotation was asserted. Actual nonempty evidence must occur verbatim in the original source and enclose the correct occurrence of its stop source; repeated occurrences stay distinct. Mandatory stop.source remains required; optional stops retain the existing required provenance. Explicit nonempty gold evidence remains an exact assertion. Missing actual schema properties are invalid, even where gold uses a default. No global evidence/source removal, production grounding change or corpus edit.
+
+Raw facts are compared before trusted repairs; both outputs/reference also pass the same frozen-time trusted pipeline. Exact stop/venue sources, optionality, multiplicity, endpoint, duration relation and values stay strict. Nonidentity constraint provenance can have different wording only after trusted relationship checks. Order compares graph reachability rather than edge-list serialization, with each actual edge still grounded. Scalar/default/null/date and trusted disposition checks supplement structure. Tests reject invented spans, evidence attached to another stop, dropped optionality/stops, altered venue/return/timing, invented order and unknown-city substitution.
+
+All25 structured golds self-check without edits. The26 ordinary cases have partial assertions;15 prose cases still need explicit review. This is not full66-case semantic signoff. Agent rubric inspection of original plus three new outputs found3 correct extractions and1 safe rejection; **independent human review remains outstanding**. The rubric API aggregates explicit judgments; never present agent judgments as human gold. [Current measurements](task52-openai-small-batch.json).
+
+Remaining limitation: activity-source comparison is lexically strict (e.g. `the pharmacy` vs `pharmacy`). Such flags require interpretation; they alone do not establish changed facts. The actual journey-07 result independently fails trusted edge provenance because `first, then` omits both related stops. No midbatch comparator/prompt change or retry was made; screen stopped. Original evidence-only false positive is resolved by the narrow rule above, not by treating every valid JSON output as correct.
+
+---
+
 # Task 52B Phase 1 semantic review protocol
 
 The 66-case corpus is immutable. Its six source hashes and raw corpus hash are checked by `scripts.cloud_model52.corpus()`. There are 25 structured journey gold extractions, 26 ordinary assertion cases and 15 prose review cases. Structural validation and partial automated assertions do **not** complete semantic review. The first OpenAI slot now has one complete output; its structure/source checks pass, but an evidence-field comparison discrepancy remains for owner review and fullyCorrect is unset. The journal retains its original decoder misclassification, with a separately hash-bound offline correction; see [current evidence](task52-openai-first-attempt.json).

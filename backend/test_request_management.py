@@ -166,6 +166,40 @@ class MiddlewareTests(unittest.IsolatedAsyncioTestCase):
             await self.invoke(middleware) # Intentional fresh request after completion.
             self.assertEqual(count,2)
 
+    async def test_content_length_completion_before_delayed_asgi_terminator(self):
+        # A real HTTP client completes on Content-Length bytes, before an ASGI
+        # streaming wrapper's later empty more_body=False frame is scheduled.
+        for declared,worker in ((True,False),(False,False),(True,True)):
+            with self.subTest(content_length=declared,worker=worker):
+                published,finish=asyncio.Event(),asyncio.Event()
+                calls=0;held=[]
+                async def inner(scope,receive,send):
+                    nonlocal calls
+                    calls+=1;first=calls==1
+                    if first and worker:
+                        lease=active_lease.get();lease.retain();held.append(lease)
+                    await send({'type':'http.response.start','status':200,
+                                'headers':[(b'content-length',b'2')] if declared else []})
+                    await send({'type':'http.response.body','body':b'{}','more_body':True})
+                    if first:
+                        published.set();await finish.wait()
+                    await send({'type':'http.response.body','body':b'','more_body':False})
+                store=LocalAdmission()
+                with patch('backend.request_middleware.requests',store):
+                    middleware=RequestManagement(inner)
+                    first=asyncio.create_task(self.invoke(middleware))
+                    try:
+                        await published.wait()
+                        second=await self.invoke(middleware)
+                        self.assertEqual(second[0]['status'],200 if declared and not worker else 409)
+                        if worker:
+                            held.pop().release()
+                            self.assertEqual((await self.invoke(middleware))[0]['status'],200)
+                    finally:
+                        for lease in held:lease.release()
+                        finish.set();await first
+                self.assertEqual(store.snapshot()['active'],0)
+
     async def test_cancelled_http_keeps_worker_lease_and_stops_next_dispatch(self):
         from backend.provider_work import run_work, check_cancelled
         from backend.provider_budget import ProviderLimitError

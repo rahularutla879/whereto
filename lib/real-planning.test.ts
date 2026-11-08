@@ -26,7 +26,7 @@ test("offline real mode: AI → HTTP backend → Google fixtures → existing pl
   const previous = process.env.BACKEND_URL;
   const base = `http://127.0.0.1:${addr.port}`;
   process.env.BACKEND_URL = base;
-  const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port)]);
+  const backend = spawn("backend/.venv/bin/python", ["-m", "backend.real_fixture_server", "--port", String(addr.port), "--reference-time", "2026-11-05T15:00:00+00:00"]);
   let mockMode=false;
   const send: typeof fetch = async (path, init) => {
     if(path==="/api/plans/generate" && init?.body){const body=JSON.parse(init.body as string);if(!body.startingLocation&&body.planningMode!=="surprise")body.startingLocation=mockMode?{point:{id:"Mock_origin_0",coordinates:{latitude:0,longitude:0}},source:"mock",explicitly_authorized:true}:{point:{id:"authorized-start",place_id:"Fixture_origin_0"},explicitly_authorized:true,source:"manual"};init={...init,body:JSON.stringify(body)};}

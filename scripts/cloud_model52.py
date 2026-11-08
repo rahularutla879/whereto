@@ -25,6 +25,7 @@ from backend.ai import Interpretation, parse_interpretation
 from backend.ai.ollama import EXAMPLES, SYSTEM_PROMPT
 from backend.interpretation import InterpretationInput, activity_category, interpret_request
 from backend.journey import LIMITATION
+from scripts.cloud_model52_semantics import VERSION as EVALUATOR_VERSION, compare_reference, evidence_failures
 
 ROOT = Path(__file__).resolve().parents[1]
 CORPUS = ROOT / 'docs/task52-evaluation-corpus.json'
@@ -331,7 +332,8 @@ def score(case, content):
     row = {'structuredValid': False, 'validatedAccepted': False,
            'fullyCorrect': None, 'reviewRequired': True}
     try:
-        ai, result = validate(case, content)
+        _, result = validate(case, content)
+        ai = parse_interpretation(content)  # Preserve raw facts before trusted repairs.
         missing = missing_properties(json.loads(content), schema())
         unknown = missing_properties(json.loads(content), schema(), unknown=True)
         row['missingRequiredProperties'] = missing
@@ -362,7 +364,11 @@ def score(case, content):
         if 'expectedExtraction' in case:
             target = Interpretation.model_validate(case['expectedExtraction'])
             checks['activities'] = ai.activities == target.activities
-            checks['journeySemantics'] = semantic_journey(result.interpretation.journey) == semantic_journey(target.journey)
+            row['referenceFailures'] = compare_reference(case, ai, result)
+            checks['journeySemantics'] = not row['referenceFailures']
+        row['evidenceFailures'] = evidence_failures(case['text'], ai.journey)
+        checks['sourceEvidenceAttachment'] = not row['evidenceFailures']
+        row['evaluatorVersion'] = EVALUATOR_VERSION
         row['automatedChecks'] = checks
         row['automatedFailures'] = [key for key, ok in checks.items() if not ok]
     except (ValueError, TypeError, KeyError) as error:
@@ -391,19 +397,6 @@ def missing_properties(value, node, path='$', *, unknown=False):
         for index, item in enumerate(value):
             missing += missing_properties(item, node['items'], path + '[' + str(index) + ']', unknown=unknown)
     return missing
-
-
-def semantic_journey(journey):
-    if journey is None:
-        return None
-    data = journey.model_dump(mode='json')
-    def strip(node):
-        if isinstance(node, dict):
-            return {k: strip(v) for k, v in node.items() if k not in ('source', 'minute')}
-        if isinstance(node, list):
-            return [strip(v) for v in node]
-        return node
-    return strip(data)
 
 
 def _run_one(ledger, adapter, case, repetition, input_upper_bound):
@@ -438,7 +431,7 @@ def _run_one(ledger, adapter, case, repetition, input_upper_bound):
     record.update(provider=adapter.provider, model=CANDIDATES[adapter.provider]['model'],
                   caseId=case['id'], repetition=repetition,
                   inputUpperBound=input_upper_bound, payloadHash=digest(payload),
-                  configurationHash=digest(metadata()), promptVersion=PROMPT_VERSION,
+                  configurationHash=digest(metadata()), promptVersion=PROMPT_VERSION, evaluatorVersion=EVALUATOR_VERSION,
                   recordedAt=datetime.now().astimezone().isoformat())
     scoring = record.get('scoring') or {}
     if scoring.get('validatedAccepted') and scoring.get('automatedFailures'):

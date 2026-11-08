@@ -17,6 +17,11 @@ class StrictLocal(unittest.TestCase):
         p=patch.dict(os.environ,{**ENV,'WHERETO_EXPLORATION_DEV':'1','WHERETO_DEV_COST_LEDGER':self.tmp.name+'/usage.json'},clear=True);p.start();self.addCleanup(p.stop)
         p=patch('requests.sessions.Session.send',side_effect=AssertionError('No live provider requests'));p.start();self.addCleanup(p.stop)
         self.addCleanup(option_sessions.entries.clear)
+        from datetime import datetime,timezone
+        from backend.location_context import outing_problem
+        fixed=datetime(2026,11,5,15,tzinfo=timezone.utc)
+        p=patch('backend.location_context.outing_problem',side_effect=lambda request,now=None:outing_problem(request,now or fixed))
+        p.start();self.addCleanup(p.stop)
         self.searches=[];self.first_seconds=600;self.distant_only=False
     def request(self,**changes):
         origin={'point':{'id':'Synthetic_Kothapet_origin','place_id':'Synthetic_Kothapet_origin'},'reference_coordinates':{'latitude':17.36,'longitude':78.54},'explicitly_authorized':True,'source':'manual','precision':'neighborhood','geographicDescription':'Synthetic Kothapet reference, Hyderabad','label':'Synthetic Kothapet reference'}

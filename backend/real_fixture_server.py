@@ -17,6 +17,7 @@ from backend.places import DiscoveryError
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--port', type=int, default=8016)
+    parser.add_argument('--reference-time', help='Optional fixed aware clock for offline absolute-date fixtures')
     parser.add_argument('--exploration-ledger', help='Offline-only temporary accounting path')
     parser.add_argument('--refinements',action='store_true',help='Offline retail and saved refresh fixtures')
     parser.add_argument('--acceptance', action='store_true', help='Offline Hyderabad cinema/save acceptance scenario')
@@ -24,6 +25,10 @@ def main():
     parser.add_argument('--journey', action='store_true', help='Offline complex-interpretation fixtures')
     parser.add_argument('--local-ai',action='store_true',help='Use installed local Qwen with otherwise offline advanced provider fixtures')
     args = parser.parse_args()
+    from datetime import datetime
+    reference_time=datetime.fromisoformat(args.reference_time) if args.reference_time else None
+    if reference_time is not None and reference_time.utcoffset() is None:
+        parser.error('--reference-time must include a timezone')
     if args.local_ai and not args.advanced:parser.error('--local-ai requires --advanced')
     if not args.local_ai:os.environ['WHERETO_AI_WARMUP_DEV']='0'  # Fully offline fixtures never prepare a real model.
     if args.exploration_ledger:
@@ -267,7 +272,7 @@ def main():
             from datetime import datetime,timedelta
             from zoneinfo import ZoneInfo
             now=datetime.combine(request.date+timedelta(days=1),datetime.min.time(),tzinfo=ZoneInfo(request.calendarTimezone or 'America/New_York'))
-        return actual_outing_problem(request,now)
+        return actual_outing_problem(request,now or reference_time)
     with patch('backend.location_context.outing_problem',side_effect=calendar), patch('requests.sessions.Session.send', side_effect=AssertionError('Offline fixture server refused network')), \
          patch('backend.places_transport.text_search', side_effect=search), \
          patch('backend.routes_transport.compute_matrix', side_effect=matrix), \
@@ -275,6 +280,10 @@ def main():
          patch('backend.saved_refresh.fetch_saved_details', side_effect=refreshed_saved), \
          patch('backend.interpretation.create_provider', return_value=FixtureAI()):
         from backend.main import app
+        if reference_time is not None:
+            import backend.main as fixture_main
+            from functools import partial
+            fixture_main.interpret_request=partial(fixture_main.interpret_request,now=reference_time)
         @app.get('/__test/counts')
         def stats(): return counts
         @app.post('/__test/expire-advanced')

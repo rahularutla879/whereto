@@ -32,8 +32,22 @@ test("raw text → interpretation proxy → Python provider → validated reques
   await new Promise<void>(r => reservation.close(() => r()));
   const previous = process.env.BACKEND_URL;
   process.env.BACKEND_URL = `http://127.0.0.1:${ba.port}`;
-  const python = spawn("backend/.venv/bin/python", ["-m", "uvicorn", "backend.main:app", "--port", String(ba.port), "--host", "127.0.0.1", "--log-level", "warning"],
-    { env: { ...process.env, AI_BASE_URL: `http://127.0.0.1:${ma.port}` } });
+  // Freeze both interpretation and publication checks in this test process.
+  // The fixture's absolute dates must not expire with the developer's clock.
+  const referenceTime = "2026-11-05T15:00:00+00:00";
+  const bootstrap = `
+from datetime import datetime
+from functools import partial
+import uvicorn
+import backend.main as main
+import backend.location_context as location_context
+reference = datetime.fromisoformat("${referenceTime}")
+main.interpret_request = partial(main.interpret_request, now=reference)
+location_context.outing_problem = partial(location_context.outing_problem, now=reference)
+uvicorn.run(main.app, port=${ba.port}, host="127.0.0.1", log_level="warning")
+`;
+  const python = spawn("backend/.venv/bin/python", ["-c", bootstrap],
+    { env: { ...process.env, AI_BASE_URL: `http://127.0.0.1:${ma.port}`, WHERETO_AI_WARMUP_DEV: "0" } });
   const paths: string[] = [];
   const send: typeof fetch = async (url, init) => {
     paths.push(String(url));
@@ -70,7 +84,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
     modelContent = JSON.stringify({ activities: ["coffee"], people: 2,
       location: "Baltimore", date: null, budget_per_person: null, preferences: [] });
     requestText = "coffee in Baltimore for 2 people tomorrow";
-    const localDate = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date());
+    const localDate = new Intl.DateTimeFormat("en-CA", { timeZone: "America/New_York" }).format(new Date(referenceTime));
     const tomorrow = new Date(Date.parse(`${localDate}T00:00:00Z`) + 86400000).toISOString().slice(0, 10);
     paths.length = 0;
     const relative = await run();
@@ -168,7 +182,7 @@ test("raw text → interpretation proxy → Python provider → validated reques
       const rejected = await run();
       assert.equal(rejected.plans.length, 0);
       assert.deepEqual(paths, ["/api/interpret"]);
-      assert.equal(modelCalls, callsBefore + 1);
+      assert.equal(modelCalls, callsBefore + 1, JSON.stringify({variant:changes,message:rejected.message}));
       assert.deepEqual(controls, beforeControls);
       assert.doesNotMatch(rejected.message, /ValidationError|Traceback|minimum_budget/);
     }

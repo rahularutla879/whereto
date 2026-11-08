@@ -30,6 +30,8 @@ class RequestManagement:
         start = perf_counter()
         lease = None
         http_released = False
+        response_length = None
+        response_bytes = 0
         status = 499
         event('request_started', operation)
 
@@ -41,15 +43,24 @@ class RequestManagement:
                 'Referrer-Policy': 'no-referrer'})(scope, receive, send)
 
         async def observed_send(message):
-            nonlocal status, http_released
+            nonlocal status, http_released, response_length, response_bytes
             if message['type'] == 'http.response.start':
                 status = message['status']
+                lengths = [v for k,v in message.get('headers',[]) if k.lower()==b'content-length']
+                if len(lengths)==1 and lengths[0].isdigit():
+                    response_length=int(lengths[0])
                 message = {**message, 'headers': [(k, v) for k, v in message.get('headers', [])
                     if k.lower() != b'x-correlation-id'] + [(b'x-correlation-id', reference.encode())]}
             # Release HTTP ownership before publishing the final response byte.
             # A legitimate immediate next action must not race ASGI teardown.
             # An outstanding worker retains its own independent reference.
-            if message['type'] == 'http.response.body' and not message.get('more_body') and lease and not http_released:
+            if message['type']=='http.response.body':
+                response_bytes += len(message.get('body',b''))
+            complete_body = (message['type']=='http.response.body' and
+                             (not message.get('more_body') or response_length is not None and response_bytes==response_length))
+            # Content-Length clients complete before a streaming middleware's
+            # later empty terminator. Retained workers still own their leases.
+            if complete_body and lease and not http_released:
                 lease.release()
                 http_released = True
             await send(message)

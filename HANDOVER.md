@@ -1,3 +1,74 @@
+# November 7 local / November 8 UTC — corrected scoring; three-call OpenAI screen stopped
+
+Started clean at `15b11226bf071cb86dd70f3de7055111354a0e84`. **Three new OpenAI calls were sent, all HTTP200/completed. The third failed trusted ordering-provenance validation; the remaining two selected slots were not sent. No Google/Anthropic inference. No production model selected.** [Reproducible safe measurements and hashes](docs/task52-openai-small-batch.json). Prior checkpoints below remain historical.
+
+| Original slot (all r1) | Complete latency | Input/output tokens | Structured / trusted acceptance | Reviewed result | Usage-based conservative account |
+|---|---:|---:|---|---|---:|
+| `ordinary-dinner` | 3,038.414125ms | 5,058 /176 | valid /accepted | Correct extraction | $0.000720250 |
+| `journey-03` | 2,471.989792ms | 5,059 /166 | valid /accepted advanced handoff | Correct exact SUNY identity | $0.000715375 |
+| `journey-07` | 2,196.118667ms | 5,060 /197 | valid /rejected | Safe failure: insufficient order-edge provenance | $0.000731000 |
+
+The sealed plan selected `ordinary-dinner`, `journey-03`, `journey-07`, `journey-12`, `journey-06` before dispatch, each original repetition1. Home/whole-trip45-minute and optional-coffee cases remain unused; the attempted subset does **not** demonstrate those categories. No warmups, retries, replacement prompts or replays. Each request was reserved before I/O and reviewed before any following request. Durable recovery refuses the third result before dispatching another slot. A safe rejection is a reliability/semantic failure, not a successful extraction or justified clarification.
+
+## Corrected comparator and original-attempt reconciliation
+
+Sparse reference stop `evidence=""` was treated as an asserted empty quotation. This falsely failed the original valid source spans `Dinner` and `drinks`. Evaluation-only version `52b-semantic-v2-grounded-provenance` treats an empty/omitted **reference evidence** as unspecified exact wording. Actual nonempty evidence must be a contiguous source span attached to the correct stop occurrence; optional stops still need provenance. Nonempty explicit reference evidence remains an exact assertion. Stop sources/identities, multiplicity, optionality, endpoint, order graph, timing values/relations and scalar requirements remain strict. Missing required wire properties do not inherit gold defaults. Raw substantive output is compared before trusted normalization can hide a change. Both sides also use unchanged trusted validation and the same frozen clock. Constraint-source wording can differ only when trusted validation accepts its relationship. [Detailed rubric and limitations](docs/task52-semantic-review.md).
+
+The saved `journey-01/r1` response now passes structure, trusted grounding and all three automated assertions. Offline inspection confirms Dinner/drinks, Jersey City and tomorrow with no invented ordering, identities, time or return. It is **correct under agent rubric inspection; independent human signoff has not occurred**. Its original2,764.799709ms/5,058input/180output and **$0.0025 retained reservation** remain unchanged. Decoder regression confirms successful `error:null` is not an error; real errors/non-200 are rejected.
+
+An append-only content-addressed correction `ff675b71f0e5a65461b4edbfe3d39c317701c7c69a1ac011ee1e1ec949765699` binds the original raw record `e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba`, response/configuration hashes, model/case/repetition, offline score/rubric and unchanged reservation. Recovery independently revalidates this sidecar; it cannot refund, rewrite, retry a consumed slot or clear a halt. All four pre-existing row hashes and exact root metadata remain unchanged; journal integrity is `ok`. Original raw classification remains `provider_error`; corrected offline classification is separately `complete`. No original row was rewritten.
+
+## Why the third case stopped the screen
+
+Source: “Go to the pharmacy first, then the supermarket.” The model retained both required activities and edge0→1, but used `order.source="first, then"`. This span occurs in the request but omits the edge's two stop identities. Existing `backend/journey.py` requires both stop sources in an edge's source evidence and safely rejects this result. No source rule was loosened and no response/prompt was rewritten. A new offline fixture reproduces the rejection.
+
+The comparator also flags `the pharmacy`/`the supermarket` against gold `pharmacy`/`supermarket`. Those lexical differences alone do not prove changed activities; they are disclosed as a remaining strict-comparison limitation. They do not account for the independent trusted rejection, and no fully-correct score is assigned. **Accepted critical stop/order/return/time failures:0/4 OpenAI outputs reviewed; safe rejection:1/4.** This tiny sample does not establish absence of other critical failures.
+
+## Cumulative side-by-side results
+
+| Metric | OpenAI | Google | Anthropic |
+|---|---|---|---|
+| Exact model/version | `gpt-6-luna` alias; no immutable revision returned | `gemini-3.8-flash` | `claude-haiku-5-5` |
+| Attempts consumed /198 | 4 | 2 | 1 |
+| Complete model outputs | 4/4 (one audited historical decoder correction) | 0/2 | 0/1 |
+| Valid structured responses | 4/4 outputs | Unavailable: no output | Unavailable: no output |
+| Validated accepted responses | 3/4 outputs | Unavailable | Unavailable |
+| Fully correct semantic cases | 3/4 distinct observed cases, agent rubric;0/66 with all3 repetitions | Unavailable | Unavailable |
+| Critical accepted constraint failures | 0/4 reviewed outputs | Unavailable | Unavailable |
+| Accepted unsupported hallucinations | 0/4 reviewed outputs | Unavailable | Unavailable |
+| Safe clarifications | 0/4;1 safe rejection | Unavailable | Unavailable |
+| p50 inference latency | 2,471.989792ms, n=4 | Unavailable | Unavailable |
+| p90 /p95 /maximum inference latency | 3,038.414125ms each, n=4, nearest rank | Unavailable | Unavailable |
+| Input /output tokens | 20,235 /719 reported | Unavailable | Unavailable |
+| Provider invoice charges | Unavailable | Unavailable | Unavailable |
+| Conservatively accounted token cost | $0.004666625 (includes original full reservation) | $0.033 retained | $0.0022 retained |
+| Data/privacy conditions | Approved global synthetic-only API, storefalse, standard abuse-retention exceptions; not ZDR | Separate paid Developer API synthetic-only project; not Vertex | Approved synthetic-only commercial API scope |
+| Qualification outcome | Not qualified; screen halted for owner review | Blocked: generic HTTP400 | Blocked: schema grammar-size HTTP400 |
+
+Total **7/594**, remaining **587**: OpenAI194, Google196, Anthropic197. Newly accounted **$0.002166625**; cumulative **$0.039866625**, remaining **$11.960133375** of$12. Invoice charges are unavailable; failed-provider uncertainty remains fully reserved. Rates used for conservative OpenAI accounting: all input$0.125/M, output$0.50/M; full12k/2k reservation$0.0025 before each send. No unspent provider slots were reallocated. Failed Google/Anthropic operation timings are never included in successful inference percentiles.
+
+## Fresh readiness and unchanged request
+
+November8UTC official [model](https://developers.openai.com/api/docs/models/gpt-6-luna), [pricing](https://developers.openai.com/api/docs/pricing), [processing](https://developers.openai.com/api/docs/guides/your-data) review and read-only account check: same available model, Responses/structured output supported, short input/output$0.10/$0.50 per million and default cache-write$0.125, no new premium or processing-region choice. API data is not used for training by default unless opted in; storefalse does not remove standard abuse-monitoring exceptions. Existing credits **$4.93**, auto-reload **OFF** before dispatch; no purchase/account change. This balance is not the experiment allowance or a post-run invoice.
+
+Exactly **66 fresh non-inference complete-input counts**, all200, using original instructions/examples/schema and explicit reasoningnone. Selected counts5,058/5,059/5,060/5,060/5,058; global max5,077 +2,048 conservative headroom =7,125<12,000. Output cap2,000, temperature0, reasoningnone, storefalse, no tools, standard tier, unchanged v3 prompt. The bounded runner requires current UTC-day pricing review and readiness≤24h; the older hard-coded Nov7 live entry remains expired/blocked. No date gate was bypassed. Account permission unchanged; counting and successful generation demonstrate the existing restricted Responses Write capability.
+
+Configuration hash `1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e`; prompt `751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2`; canonical schema `7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965`; corpus `5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f`. Original model settings/prompt/schema and six corpus source files unchanged. Each new payload/response/record/review hash is in the safe measurement artifact. Cache-write usage is reported, but no controlled cold/warm comparison or schema-compilation time is established.
+
+## Verification and next decision
+
+- Final security/integrity checks: **382 current tracked/new files and35 private JSON artifacts**, three configured credentials, zero credential matches. Ignored config is regular mode600; paid journal/config remain ignored. Corpus66 and all six source hashes/configuration unchanged; original four row hashes/root and sealed plan verified; JSON/local links and complete tracked/new-file diff reviewed. No raw provider envelopes or credentials committed.
+- Latest offline harness/comparator/audit/batch/admission run: **60/60**,17.939s, including reproduction of the ordering rejection. Earlier predispatch focused run71/71.
+- Full backend: **1,032 reported /995 passed /37 opt-in skips**,218.282s. Full frontend **283/283 twice**,117.256s and116.622s. TypeScript, lint and production build pass. No browser product verification claimed.
+- Frontend inconsistency had a real ASGI Content-Length completion race: a client could finish before a streaming middleware's later empty terminator released duplicate admission. Narrow runtime fix releases HTTP ownership before the declared final byte; independent outstanding workers retain their lease. Unknown-length streams still wait for the final frame. Deterministic regression failed before the fix and passes with active-worker/unknown-length controls. Separate fixed-date fixtures also expired across UTC midnight; test clocks are now fixed consistently without weakening expiry policy or model-call assertions.
+- Canonical parser/source-grounding regressions, repeated stops, wrong evidence attachment, missing fields, optionality, identity, timing relations, partial order, unknown destinations, journal recovery/refund prevention and cost/attempt/retry gates pass. Full source/gold semantic signoff remains partial:25 structured references,26 partial ordinary checks,15 prose/manual cases. No expanded98% gate or full66-case semantic coverage is claimed.
+
+**Do not resume a larger batch yet.** Owner review must decide how to address order-evidence compatibility and the disclosed lexical-comparison limitation in a separately versioned offline proposal. Do not silently tune prompts midcomparison. Preserve all consumed slots; never repeat journey-01/r1 or the three new slots. Google remains a **Gemini Developer API** key/endpoint, not Vertex/managed-service identity; two generic400 causes remain unresolved. Anthropic input fits v3 but grammar-size400 remains blocked. No substitutions or speculative calls.
+
+No model meets production qualification. These are model-interpretation times only; no Places, Routes, browser rendering or cloud staging is measured, so **five-second end-to-end planning remains unproven**. Next authorized work is owner review/offline compatibility and rubric resolution, followed only by a specifically bounded approved continuation. Shared-state/cloud-hosting implementation, staging acceptance and Task53 remain unstarted. No Maps, quotas, billing, credits/subscriptions, infrastructure, saved database, Qwen settings or production provider changes occurred.
+
+---
+
 # November 7, 2026 — first OpenAI slot only; stopped for owner review
 
 Started clean `559ade9`. Sent exactly OpenAI `journey-01/r1` via the unchanged reviewed Responses payload after fresh count5,058, valid date/age gate, credits$4.93/auto-reload off, price/processing review, original journal/root/rows verification and full-cap reservation checks. Committed$0.0025 reservation verified before HTTP; a one-call/exact-payload guard and max_new_attempts1 prevent any other slot/provider. [Benchmark](docs/task52-cloud-model-benchmark.md), [detailed response/semantic/hash evidence](docs/task52-openai-first-attempt.json), [aggregate](docs/task52-cloud-model-results.json).

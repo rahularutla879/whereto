@@ -1,3 +1,11 @@
+# November7local /November8UTC — Task52B scoring audit and stop
+
+Evaluation-only provenance comparisons distinguish unspecified gold quotation from a required source-grounded span. Explicit reference evidence, exact identities and substantive constraints remain strict. The original OpenAI decoder classification is supplemented by an append-only hash-bound offline correction; consumed rows and finances remain immutable. Agent rubric review is labeled separately from independent human signoff.
+
+The fixed five-slot screen stopped after three new OpenAI calls on a genuine trusted order-evidence rejection. No prompt/schema change, retry or production model selection. Remaining slots are not automatically authorized for a larger run. Cumulative7/594 and$0.039866625 conservatively accounted; Task52 remains in progress. [Evidence, limits and owner review](docs/task52-cloud-model-benchmark.md).
+
+---
+
 # November 7, 2026 — preserve original audit row and bind offline decoder correction
 
 One authorized OpenAI response is HTTP200/completed, despite the harness initially classifying its normal error:null field as provider_error. Fix only the evaluation decoder and derive offline validation from the recorded response; retain the original journal row/full reservation and all earlier failures. Do not repeat the slot, silently rewrite the audit, weaken source grounding/gold, or begin further calls. An evidence-string-versus-empty-gold comparison discrepancy remains for owner review. One source-grounded response is insufficient for model qualification or infrastructure activation. [Exact evidence and limits](docs/task52-cloud-model-benchmark.md).

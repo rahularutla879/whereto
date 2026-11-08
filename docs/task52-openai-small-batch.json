@@ -1,0 +1,331 @@
+{
+  "baselineCommit": "15b11226bf071cb86dd70f3de7055111354a0e84",
+  "scope": "Three new synthetic OpenAI attempts; batch stopped before fourth on trusted ordering provenance rejection",
+  "metadata": {
+    "experiment": "task52b-phase1",
+    "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "promptVersion": "52b-v3-equivalent-default-compaction",
+    "promptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+    "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchemaHashes": {
+      "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+    },
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "candidates": {
+      "openai": {
+        "model": "gpt-6-luna",
+        "rates": [
+          125,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      },
+      "google": {
+        "model": "gemini-3.8-flash",
+        "rates": [
+          750,
+          3750
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission",
+          "Introductory global pricing expires 2026-12-31"
+        ]
+      },
+      "anthropic": {
+        "model": "claude-haiku-5-5",
+        "rates": [
+          100,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      }
+    },
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "attemptCap": 594,
+    "providerCap": 198,
+    "spendCapNanodollars": 12000000000,
+    "concurrency": 1,
+    "retries": 0,
+    "timezonePolicy": "Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown",
+    "sampling": {
+      "openai": "temperature 0; reasoning none",
+      "google": "temperature ignored/omitted; thinking LOW",
+      "anthropic": "temperature omitted; thinking disabled; effort low"
+    },
+    "tools": false,
+    "inferenceRegion": "standard global; synthetic non-personal evaluation only",
+    "transportVersion": "52b-single-http-v2-responses",
+    "timeoutSeconds": 120,
+    "googleService": "Gemini Developer API; separate paid Default Gemini Project"
+  },
+  "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+  "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+  "batchPlanHash": "a72b088cb5c0040680a3aac15e8bc20456ad52c7036d5d829864a6b0ce12a482",
+  "plannedSlots": [
+    [
+      "ordinary-dinner",
+      1
+    ],
+    [
+      "journey-03",
+      1
+    ],
+    [
+      "journey-07",
+      1
+    ],
+    [
+      "journey-12",
+      1
+    ],
+    [
+      "journey-06",
+      1
+    ]
+  ],
+  "unconsumedSelectedSlots": [
+    [
+      "journey-12",
+      1
+    ],
+    [
+      "journey-06",
+      1
+    ]
+  ],
+  "baselineRowsUnchanged": true,
+  "originalJournalRootUnchanged": true,
+  "journalIntegrity": "ok",
+  "originalOpenAICorrectionHash": "ff675b71f0e5a65461b4edbfe3d39c317701c7c69a1ac011ee1e1ec949765699",
+  "originalOpenAIReservationUnchanged": 2500000,
+  "originalOpenAIReconciledOutcome": "correct_extraction under agent rubric; no independent human signoff",
+  "newAttempts": [
+    {
+      "caseId": "ordinary-dinner",
+      "repetition": 1,
+      "model": "gpt-6-luna",
+      "status": "complete",
+      "latencyMs": 3038.414125003328,
+      "usage": [
+        5058,
+        176
+      ],
+      "inputUpperBound": 7106,
+      "accountedNanodollars": 720250,
+      "payloadHash": "ae490f259f2eba32c1c6bc75c303bd9e80f2770946887c7d56e29053fdf59eaf",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+      "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae",
+      "providerResponseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "outputHash": "617219f79e8be0021cbd2f846971173944d611e96646f8fe77a4e98a4160c83d",
+      "reviewHash": "a41a4bac191f68229a929942db3f88c8a158e57d592a8e3a99d4226429c75e12",
+      "structuredValid": true,
+      "validatedAccepted": true,
+      "automatedFailures": [],
+      "referenceFailures": [],
+      "outcome": "correct_extraction"
+    },
+    {
+      "caseId": "journey-03",
+      "repetition": 1,
+      "model": "gpt-6-luna",
+      "status": "complete",
+      "latencyMs": 2471.989792000386,
+      "usage": [
+        5059,
+        166
+      ],
+      "inputUpperBound": 7107,
+      "accountedNanodollars": 715375,
+      "payloadHash": "d80254355cc28ffc486e5a17e2db65152906fcf36bc353a6c67b39b9f16f49b6",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+      "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029",
+      "providerResponseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "outputHash": "a874880dbd6ad4c86c9972bf806393b9feb8c1a431b32be1c6ec50ab829c3718",
+      "reviewHash": "6d53189c4873a7447395f52cfdc295537981e4ca691574c7ea5559e3bfbc76d1",
+      "structuredValid": true,
+      "validatedAccepted": true,
+      "automatedFailures": [],
+      "referenceFailures": [],
+      "outcome": "correct_extraction"
+    },
+    {
+      "caseId": "journey-07",
+      "repetition": 1,
+      "model": "gpt-6-luna",
+      "status": "complete",
+      "latencyMs": 2196.1186670014285,
+      "usage": [
+        5060,
+        197
+      ],
+      "inputUpperBound": 7108,
+      "accountedNanodollars": 731000,
+      "payloadHash": "6b610577b96bb5828ce4a44a7b95c8b2413141143e3f208f3efe77c03988af95",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+      "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f",
+      "providerResponseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "outputHash": "7b8e6c30356244a0ea97d41b7be38c9780cb5ed2be0a7fb020bdca54103ca202",
+      "reviewHash": "c18dca0d5503780d05c84303e6b28a54e8d8006780f1a97d8102e95fa527cb96",
+      "structuredValid": true,
+      "validatedAccepted": false,
+      "automatedFailures": [
+        "activities",
+        "journeySemantics"
+      ],
+      "referenceFailures": [
+        "$.stops[0].source",
+        "$.stops[1].source",
+        "clarification.fields",
+        "executionStatus",
+        "trustedDisposition"
+      ],
+      "outcome": "safe_failure"
+    }
+  ],
+  "newSpendNanodollars": 2166625,
+  "cumulativeCounts": {
+    "openai": 4,
+    "google": 2,
+    "anthropic": 1
+  },
+  "cumulativeAttempts": 7,
+  "remainingAttempts": 587,
+  "remainingPerProvider": {
+    "openai": 194,
+    "google": 196,
+    "anthropic": 197
+  },
+  "cumulativeAccountedNanodollars": 39866625,
+  "remainingAuthorizedNanodollars": 11960133375,
+  "providerInvoiceCharges": null,
+  "openaiCorrectedSummary": {
+    "successfulInferenceLatencyDenominator": 4,
+    "operationLatencyDenominator": 4,
+    "maxOperationLatencyMs": 3038.414125003328,
+    "p50OperationMs": 2471.989792000386,
+    "p90OperationMs": 3038.414125003328,
+    "p95OperationMs": 3038.414125003328,
+    "reportedUsageRecords": 4,
+    "inputTokensWithReportedUsage": 20235,
+    "outputTokensWithReportedUsage": 719,
+    "validatedAccepted": 3,
+    "criticalFailures": null,
+    "safeClarifications": null,
+    "attemptRecords": 4,
+    "p50Ms": 2471.989792000386,
+    "p90Ms": 3038.414125003328,
+    "p95Ms": 3038.414125003328,
+    "maxMs": 3038.414125003328,
+    "structuredValid": 4,
+    "statusCounts": {
+      "complete": 4
+    },
+    "fullyCorrect": null,
+    "qualification": "not qualified; semantic review required"
+  },
+  "agentReviewedSemantics": {
+    "reviewedAttempts": 4,
+    "recordedAttempts": 4,
+    "plannedAttemptDenominator": 198,
+    "plannedCaseDenominator": 66,
+    "fullyCorrectReviewedAttempts": 3,
+    "casesCorrectAllThreeRepetitions": 0,
+    "fieldMetrics": {
+      "required_stops": {
+        "correct": 4,
+        "applicable": 4
+      },
+      "optional_stops": {
+        "correct": 4,
+        "applicable": 4
+      },
+      "venue_identity": {
+        "correct": 1,
+        "applicable": 1
+      },
+      "ordering": {
+        "correct": 3,
+        "applicable": 4
+      },
+      "return_to_origin": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "final_destination": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "total_duration": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "travel_only_limits": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "strict_flexible": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "visit_duration": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "duration_relation": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "relative_date_time": {
+        "correct": 2,
+        "applicable": 2
+      },
+      "clarification": {
+        "correct": 3,
+        "applicable": 4
+      },
+      "unsupported": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "contradiction": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "unicode": {
+        "correct": 0,
+        "applicable": 0
+      },
+      "grounding": {
+        "correct": 3,
+        "applicable": 4
+      },
+      "injection": {
+        "correct": 0,
+        "applicable": 0
+      }
+    },
+    "outcomes": {
+      "correct_extraction": 3,
+      "safe_failure": 1
+    },
+    "criticalFailures": [],
+    "expandedCorpus98PercentGate": "not established by this 66-case screen",
+    "qualification": "not production qualified; owner review and expanded validation required"
+  },
+  "reviewerKind": "Codex agent rubric inspection; independent human signoff not performed",
+  "productionQualified": false,
+  "nextInference": "blocked pending owner review; do not rerun consumed slots",
+  "googleBlocker": "Two consumed Developer API HTTP400 INVALID_ARGUMENT responses; exact field cause unavailable",
+  "anthropicBlocker": "One consumed HTTP400 schema grammar-size rejection; input cap already met by unchanged v3 prompt",
+  "coldWarmClaim": null
+}

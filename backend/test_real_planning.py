@@ -250,9 +250,12 @@ class RealPlanningTests(unittest.TestCase):
 
 
     def test_interpretation_near_me_and_first_leg_grounding(self):
+        from functools import partial
+        from datetime import datetime, timezone
         from types import SimpleNamespace
         from backend.ai import Interpretation
-        from backend.interpretation import InterpretationInput, interpret_request
+        from backend.interpretation import InterpretationInput, interpret_request as actual_interpret
+        interpret_request=partial(actual_interpret,now=datetime(2026,11,5,15,tzinfo=timezone.utc))
         def provider(location=None):
             return SimpleNamespace(interpret=lambda text: Interpretation(activities=['Coffee'], people=2,
                 budget_per_person=None, date=None, location=location, preferences=[]))

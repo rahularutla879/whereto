@@ -11,5 +11,5 @@ export default defineConfig([
     plugins: { "react-hooks": reactHooks },
     rules: reactHooks.configs.recommended.rules,
   },
-  globalIgnores([".next/**", "out/**", "backend/.venv/**", "next-env.d.ts"]),
+  globalIgnores([".next/**", "out/**", "backend/.venv/**", "backend/.local/**", "next-env.d.ts"]),
 ]);

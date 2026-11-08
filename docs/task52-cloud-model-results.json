@@ -264,5 +264,18 @@
     "openai": 0,
     "google": 1,
     "anthropic": 1
+  },
+  "historicalCheckpointNotice": "Existing detailed metrics below are the prior single-attempt checkpoint; see latestCheckpoint for the superseding bounded screen.",
+  "latestCheckpoint": {
+    "artifact": "task52-openai-small-batch.json",
+    "attempts": {
+      "openai": 4,
+      "google": 2,
+      "anthropic": 1
+    },
+    "cumulativeAccountedNanodollars": 39866625,
+    "remainingAuthorizedNanodollars": 11960133375,
+    "productionQualified": false,
+    "status": "stopped for owner review after safe ordering-provenance rejection"
   }
 }
