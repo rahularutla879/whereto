@@ -1,3 +1,11 @@
+# November 8 — separate v4 readiness prepared; no paid inference
+
+[Full readiness, current blockers and exact future plan](task52-v4-readiness.md), [all66 OpenAI/Anthropic counts and configuration hashes](task52-v4-readiness.json), [five unused proposed slots](task52-v4-openai-test-plan.json). Configuration `52b-v4-order-edge-quotes` adds only the reviewed370-byte instruction, preserving19 examples and canonical schema; historical v3 evidence/scoring/journal remains intact. OpenAI66/66 complete-input counts5,117–5,141, bound7,189; Anthropic66/66 schema-inclusive estimates11,011–11,049, bound11,561. Both below12k, output2k. **132 free counts +two model GETs; paid inference0.**
+
+Google model GET returned403 `API_KEY_IP_ADDRESS_BLOCKED`; stopped before counting, no restriction changes. It also lacks certified structured-format counting coverage. Anthropic input fits but grammar-size failure remains unresolved; nullable-Duration factoring is an offline proposal only. OpenAI is prepared for owner approval of≤5 unused slots, not authorized/implemented for dispatch. No v4 accuracy/latency or production qualification. Original OpenAI4/Google2/Anthropic1 =7/594; $0.039866625 accounted /$11.960133375 remaining, journal byte-identical. No Maps/billing/credentials/infrastructure/production switch/Task53. Older results below remain historical.
+
+---
+
 # November 8 — offline ordering repair and review checkpoint
 
 **Zero new inference or counting calls.** [Detailed comparison, tests, risks and proposal](task52-offline-ordering-review.md), [four-output replay](task52-offline-replay.json), [unactivated common v4 proposal](task52-prompt-proposal-v4.json). Canonical validator, active v3 prompt/schema, historical scorer/audit and original journal unchanged. New opt-in offline scorer recognizes only source-bound generic `the X`/`X` activity occurrences; exact names, brands, multiplicity, optionality and constraints remain strict. journey-07 loses lexical false positives but remains a safe trusted rejection: its edge quote omits both related stops. Prior three correct agent dispositions unchanged; independent human signoff outstanding.

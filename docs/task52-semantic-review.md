@@ -1,3 +1,11 @@
+# November 8 — v4 readiness binds reviewed offline scorer
+
+Separate configuration `52b-v4-order-edge-quotes` binds `52b-semantic-v3-source-bound-generic-the`, preserving the canonical validator and old v3/v2 scored evidence. Correct order with cue-only provenance remains rejected; reversed/unsupported edges, omitted stop phrases, wrong occurrences, exact identities, nulls and hallucinated constraints retain negative tests. No generic category/name equivalence beyond the reviewed source-bound article rule. No new model output or correctness score was produced.
+
+The proposed slots are journey-04, extension-partial, extension-repeated, journey-12 and journey-06, all original unused r1. Extension prose expectations require explicit source/gold review; safe clarification is not a fabricated success. Every response requires complete rubric review before any next call; independent human signoff is separate from agent inspection. [Review plan, count evidence and stop conditions](task52-v4-readiness.md).
+
+---
+
 # November 8 — opt-in offline scorer v3, historical v2 preserved
 
 `52b-semantic-v3-source-bound-generic-the` is a separate offline rescorer, not the active paid scorer. It permits only lower-case `the X` versus `X` for a finite production-recognized generic activity, same requiredness/kind, source-order occurrence and exact overlapping original-case spans. No name/brand, plural, arbitrary alias or modifier equivalence. Original source grounding and evidence attachment remain mandatory. It projects a comparison copy only, never rewrites output or trusted validation. Missing required wire fields, changed relations/order/optionality/return/deadlines and wrong-occurrence evidence still fail. The offline audit also rejects `journey:null`: local legacy parsing permits null, but the strict evaluation wire requires an object. This stricter wire check changes none of the four recorded responses and leaves historical v2/local compatibility untouched. Empty gold evidence retains the prior unspecified-quotation rule; explicit evidence remains strict.

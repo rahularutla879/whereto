@@ -1,0 +1,437 @@
+{
+  "baselineCommit": "0d4fc6d4602a2c91192b97315f48842ea8901973",
+  "preparedAtUTC": "2026-11-08T06:23:38.600431+00:00",
+  "scope": "V4 non-inference readiness only; zero paid generation",
+  "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+  "configuration": {
+    "experiment": "task52b-phase1",
+    "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "promptVersion": "52b-v4-order-edge-quotes",
+    "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+    "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchemaHashes": {
+      "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+    },
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "candidates": {
+      "openai": {
+        "model": "gpt-6-luna",
+        "rates": [
+          125,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      },
+      "google": {
+        "model": "gemini-3.8-flash",
+        "rates": [
+          750,
+          3750
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission",
+          "Introductory global pricing expires 2026-12-31"
+        ]
+      },
+      "anthropic": {
+        "model": "claude-haiku-5-5",
+        "rates": [
+          100,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      }
+    },
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "attemptCap": 594,
+    "providerCap": 198,
+    "spendCapNanodollars": 12000000000,
+    "concurrency": 1,
+    "retries": 0,
+    "timezonePolicy": "Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown",
+    "sampling": {
+      "openai": "temperature 0; reasoning none",
+      "google": "temperature ignored/omitted; thinking LOW",
+      "anthropic": "temperature omitted; thinking disabled; effort low"
+    },
+    "tools": false,
+    "inferenceRegion": "standard global; synthetic non-personal evaluation only",
+    "transportVersion": "52b-single-http-v2-responses",
+    "timeoutSeconds": 120,
+    "googleService": "Gemini Developer API; separate paid Default Gemini Project",
+    "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the"
+  },
+  "baseV3ConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+  "promptAdditionBytes": 370,
+  "all19ExamplesUnchanged": true,
+  "canonicalSchemaUnchanged": true,
+  "paidInferenceRequests": 0,
+  "nonInferenceCountRequests": 132,
+  "modelMetadataRequests": 2,
+  "documentedCountFeesUSD": 0,
+  "journal": {
+    "sha256": "d13b585b4821be465be1c635792471072f11f38258f87e2e94126481835e9a45",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c"
+      },
+      {
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd"
+      },
+      {
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253"
+      },
+      {
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb"
+      }
+    ],
+    "counts": {
+      "openai": 4,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 39866625,
+    "integrity": "ok"
+  },
+  "remainingAttempts": 587,
+  "remainingPerProvider": {
+    "openai": 194,
+    "google": 196,
+    "anthropic": 197
+  },
+  "remainingAuthorizedNanodollars": 11960133375,
+  "providerReadiness": {
+    "openai": {
+      "casesCounted": 66,
+      "minCounted": 5117,
+      "maxCounted": 5141,
+      "margin": 2048,
+      "admissionBound": 7189,
+      "capPass": true,
+      "completeStructuredInputCount": true,
+      "countCoverage": "Complete Responses input/text.format/reasoning",
+      "outputCap": 2000,
+      "countFeeUSD": 0,
+      "counts": {
+        "journey-01": 5122,
+        "journey-02": 5122,
+        "journey-03": 5123,
+        "journey-04": 5127,
+        "journey-05": 5122,
+        "journey-06": 5122,
+        "journey-07": 5124,
+        "journey-08": 5126,
+        "journey-09": 5127,
+        "journey-10": 5125,
+        "journey-11": 5123,
+        "journey-12": 5124,
+        "journey-13": 5124,
+        "journey-14": 5122,
+        "journey-15": 5126,
+        "journey-16": 5123,
+        "journey-17": 5123,
+        "journey-18": 5121,
+        "journey-19": 5123,
+        "journey-20": 5125,
+        "journey-21": 5128,
+        "journey-22": 5122,
+        "journey-23": 5119,
+        "journey-24": 5121,
+        "journey-25": 5119,
+        "ordinary-dinner": 5122,
+        "ordinary-order": 5124,
+        "ordinary-unusual": 5125,
+        "ordinary-movies": 5124,
+        "ordinary-workshop": 5122,
+        "ordinary-midtown": 5126,
+        "ordinary-borough": 5121,
+        "ordinary-unknown": 5126,
+        "ordinary-near": 5121,
+        "ordinary-around": 5119,
+        "ordinary-origin": 5134,
+        "ordinary-separate": 5127,
+        "ordinary-strict": 5131,
+        "ordinary-flexible": 5141,
+        "ordinary-miles": 5126,
+        "ordinary-exclusion": 5128,
+        "ordinary-access": 5126,
+        "ordinary-date": 5132,
+        "ordinary-missing": 5117,
+        "ordinary-kothapet": 5126,
+        "ordinary-multilingual": 5123,
+        "ordinary-informal": 5125,
+        "ordinary-people": 5123,
+        "ordinary-budget": 5124,
+        "ordinary-ambiguity": 5122,
+        "ordinary-conflict": 5121,
+        "extension-dinner-bowling": 5122,
+        "extension-grocery-pharmacy": 5125,
+        "extension-unicode": 5133,
+        "extension-partial": 5131,
+        "extension-inclusive": 5132,
+        "extension-exclusive": 5132,
+        "extension-deadline": 5127,
+        "extension-durations": 5134,
+        "extension-injection": 5129,
+        "extension-contradictory": 5132,
+        "extension-unsupported": 5126,
+        "extension-unrecognized": 5128,
+        "extension-ambiguous-name": 5122,
+        "extension-zero": 5131,
+        "extension-repeated": 5134
+      },
+      "payloadMatrixHash": "9cd5e3a035f0adf5baf3ba0837d88067be142f084da0dde8e4becc5794d78b46",
+      "countBodyMatrixHash": "18a19d97eedfe60406d0b35b1e38cbb0f0ab5eaff9f8561b68e701420e0c052d",
+      "firstCountUTC": "2026-11-08T06:16:51.598271+00:00",
+      "lastCountUTC": "2026-11-08T06:17:19.894173+00:00",
+      "expiresNoLaterThanUTC": "2026-11-09T06:16:51.598271+00:00",
+      "countOperation": "/responses/input_tokens",
+      "freeCountEvidence": "https://help.openai.com/en/articles/4936856-understanding-and-counting-tokens",
+      "credentialAvailable": true,
+      "credentialVerifiedByNonInferenceOperation": true,
+      "paidInferenceRequests": 0,
+      "creditsUSD": 4.93,
+      "autoReload": false,
+      "readyForOwnerApproval": true,
+      "readyToDispatch": false,
+      "blocker": "No inference authorization/approved dispatch continuation; current model/project RPM/TPM not newly verified",
+      "modelMetadata": {
+        "id": "gpt-6-luna",
+        "source": "Official current model documentation and66 successful complete-input counts; no generation this checkpoint",
+        "deprecated": false
+      },
+      "sharingControls": {
+        "platformFeedback": "Disabled",
+        "evaluationAndFineTuning": "Disabled",
+        "inputsAndOutputs": "Disabled",
+        "verification": "Read-only organization Sharing console; no change"
+      },
+      "currentAccountRateLimitsVerified": false,
+      "rateLimitCheck": "No current Luna RPM/TPM exposed in rendered account limits page; verify before paid dispatch, without quota changes."
+    },
+    "anthropic": {
+      "casesCounted": 66,
+      "minCounted": 11011,
+      "maxCounted": 11049,
+      "margin": 512,
+      "admissionBound": 11561,
+      "capPass": true,
+      "completeStructuredInputCount": true,
+      "countCoverage": "Full input with output_config/schema injection",
+      "outputCap": 2000,
+      "countFeeUSD": 0,
+      "counts": {
+        "journey-01": 11021,
+        "journey-02": 11013,
+        "journey-03": 11015,
+        "journey-04": 11021,
+        "journey-05": 11016,
+        "journey-06": 11018,
+        "journey-07": 11019,
+        "journey-08": 11021,
+        "journey-09": 11018,
+        "journey-10": 11016,
+        "journey-11": 11016,
+        "journey-12": 11017,
+        "journey-13": 11017,
+        "journey-14": 11012,
+        "journey-15": 11024,
+        "journey-16": 11014,
+        "journey-17": 11017,
+        "journey-18": 11015,
+        "journey-19": 11014,
+        "journey-20": 11016,
+        "journey-21": 11027,
+        "journey-22": 11020,
+        "journey-23": 11017,
+        "journey-24": 11018,
+        "journey-25": 11013,
+        "ordinary-dinner": 11024,
+        "ordinary-order": 11025,
+        "ordinary-unusual": 11025,
+        "ordinary-movies": 11019,
+        "ordinary-workshop": 11025,
+        "ordinary-midtown": 11030,
+        "ordinary-borough": 11021,
+        "ordinary-unknown": 11017,
+        "ordinary-near": 11017,
+        "ordinary-around": 11012,
+        "ordinary-origin": 11041,
+        "ordinary-separate": 11031,
+        "ordinary-strict": 11037,
+        "ordinary-flexible": 11049,
+        "ordinary-miles": 11029,
+        "ordinary-exclusion": 11029,
+        "ordinary-access": 11029,
+        "ordinary-date": 11031,
+        "ordinary-missing": 11011,
+        "ordinary-kothapet": 11028,
+        "ordinary-multilingual": 11025,
+        "ordinary-informal": 11025,
+        "ordinary-people": 11022,
+        "ordinary-budget": 11024,
+        "ordinary-ambiguity": 11021,
+        "ordinary-conflict": 11024,
+        "extension-dinner-bowling": 11021,
+        "extension-grocery-pharmacy": 11027,
+        "extension-unicode": 11029,
+        "extension-partial": 11038,
+        "extension-inclusive": 11033,
+        "extension-exclusive": 11031,
+        "extension-deadline": 11027,
+        "extension-durations": 11040,
+        "extension-injection": 11030,
+        "extension-contradictory": 11032,
+        "extension-unsupported": 11026,
+        "extension-unrecognized": 11027,
+        "extension-ambiguous-name": 11017,
+        "extension-zero": 11035,
+        "extension-repeated": 11036
+      },
+      "payloadMatrixHash": "1146c4b82a3dfd45329110abe78ea0f3f24e71d4f8fc51b15992fcd079dbb7b0",
+      "countBodyMatrixHash": "b610116f250f35058ee455fd3ef681f9e6381b9ee49a5196e74eb12b6d24b884",
+      "firstCountUTC": "2026-11-08T06:17:50.719575+00:00",
+      "lastCountUTC": "2026-11-08T06:18:01.354708+00:00",
+      "expiresNoLaterThanUTC": "2026-11-09T06:17:50.719575+00:00",
+      "countOperation": "/messages/count_tokens",
+      "freeCountEvidence": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+      "credentialAvailable": true,
+      "credentialVerifiedByNonInferenceOperation": true,
+      "paidInferenceRequests": 0,
+      "creditsUSD": 5.0,
+      "autoReload": false,
+      "readyForOwnerApproval": false,
+      "readyToDispatch": false,
+      "blocker": "Original structured-output grammar-size rejection unresolved; counting does not compile schema",
+      "modelMetadata": {
+        "id": "claude-haiku-5-5",
+        "lifecycle": "active",
+        "deprecated_at": null,
+        "retires_at": null,
+        "max_input_tokens": 1000000,
+        "max_tokens": 128000,
+        "structuredOutputsSupported": true
+      }
+    },
+    "google": {
+      "casesCounted": 0,
+      "minCounted": null,
+      "maxCounted": null,
+      "admissionBound": null,
+      "completeStructuredInputCount": false,
+      "capPass": false,
+      "outputCap": 2000,
+      "creditsUSD": 5.0,
+      "autoReload": false,
+      "accountTier": "Paid1 /Default Gemini Project",
+      "credentialAvailable": true,
+      "credentialVerifiedByNonInferenceOperation": false,
+      "modelMetadataHttpStatus": 403,
+      "errorClassification": "PERMISSION_DENIED",
+      "allowlistedReason": "API_KEY_IP_ADDRESS_BLOCKED",
+      "service": "generativelanguage.googleapis.com",
+      "paidInferenceRequests": 0,
+      "countRequests": 0,
+      "modelMetadataRequests": 1,
+      "readyForOwnerApproval": false,
+      "readyToDispatch": false,
+      "blocker": "Existing machine-IP restriction blocks current egress; no changes/retries made. Full structured-format counting coverage also unverified.",
+      "countingScopeIfUnblocked": "Messages/system plus schema-as-text is an augmented surrogate; do not label it certified generationConfig formatting coverage",
+      "freeCountEvidence": "https://discuss.ai.google.dev/t/direct-gemini-developer-api-counttokens-free-tier-billing-and-quota-clarification/190706"
+    }
+  },
+  "priceReview": {
+    "dateUTC": "2026-11-08",
+    "openai": {
+      "shortInputUSDPerMillion": 0.1,
+      "defaultCacheWriteUSDPerMillion": 0.125,
+      "outputUSDPerMillion": 0.5,
+      "conservativeFullCapReservationUSD": 0.0025
+    },
+    "anthropic": {
+      "inputUSDPerMillion": 0.1,
+      "outputUSDPerMillion": 0.5,
+      "fullCapReservationUSD": 0.0022
+    },
+    "google": {
+      "inputUSDPerMillion": 0.75,
+      "outputUSDPerMillion": 3.75,
+      "introductoryPriceExpires": "2026-12-31",
+      "fullCapReservationUSD": 0.0165
+    },
+    "region": "Original approved standard global synthetic-only; no region/account/billing change"
+  },
+  "processingReview": {
+    "syntheticOnly": true,
+    "privateOwnerInputsSubmitted": false,
+    "openai": "Sharing controls Disabled; storefalse/no tools/conversation. Standard abuse retention exceptions apply; not a ZDR claim.",
+    "anthropic": "Commercial API default no training without permission; standard retention/exceptions apply; model active. Counting includes output_config; no schema compilation proof.",
+    "google": "Separate prepaid Developer API; Paid Services terms and optional/default project logging may retain data. No sharing/logging/account changes; no synthetic input submitted due403."
+  },
+  "providerSchemaProposals": {
+    "status": "Offline proposals only; not substituted into counted v4 payloads",
+    "googleArrayBoundProjectionHash": "c9f7edbf080add02e5d4625484c859e61258140eb6886fa151dc3a11fdd7ef1e",
+    "anthropicFactoredNullableDurationHash": "69519fc976dc7057d9dbbd877658a8e6b886cf2051039ae5ebc92727fa21d112",
+    "anthropicOriginalSyntacticUnions": 15,
+    "anthropicProposedSyntacticUnions": 14,
+    "expandedSchemaConstraintsEqual": true,
+    "compiledGrammarImprovementProven": false,
+    "requiresNewConfigurationAndCompleteCountingIfAdopted": true
+  },
+  "futurePlanArtifact": "task52-v4-openai-test-plan.json",
+  "paidTestingAuthorized": false,
+  "productionQualified": false,
+  "nextAction": "Owner review/approval of exact bounded OpenAI plan; Google owner review of IP restriction; Anthropic support/grammar compatibility review. No automatic dispatch."
+}

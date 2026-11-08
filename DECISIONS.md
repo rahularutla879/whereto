@@ -1,3 +1,9 @@
+# November 8 — separate v4 readiness, preserve all historical paid evidence
+
+Register the reviewed370-byte edge-evidence addition and source-bound scorer as a separate evaluation configuration; do not activate a production/provider/default or overwrite v3. Successful free complete-input counts support OpenAI bounded-plan owner review, not inference permission or qualification. Retain Google's new IP-denial blocker separately from its old400s, and Anthropic's grammar-size failure separately from successful counts. Schema factoring/array projections remain unactivated hypotheses requiring review/counting if adopted. All paid records/reservations remain immutable. [Readiness and proposed limits](docs/task52-v4-readiness.md).
+
+---
+
 # November 8 — retain strict edge provenance; propose prompt-only clarification
 
 Keep production validation, canonical schema and active v3 evaluation unchanged. Prefer explicitly asking future evaluated models to include both related stop phrases in each edge quote, rather than accepting cue-only evidence or introducing an occurrence-span schema migration. This is an unactivated proposal pending owner review and exact counting/readiness. A separate offline-only scorer permits narrowly source-bound generic article equivalence; historical scorer/audits/paid holds stay intact. Recorded journey-07 remains a safe failure. No new attempts or production model decision. [Alternatives, risks and evidence](docs/task52-offline-ordering-review.md).

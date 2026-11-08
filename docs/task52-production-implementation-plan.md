@@ -1,3 +1,7 @@
+> November8 separate v4 evaluation configuration/readiness prepared only. OpenAI passes token/credential/credit checks; current model/project RPM/TPM still needs confirmation. Five unused slots proposed, no inference permission or dispatch implementation. Google IP restriction and full-count coverage, Anthropic grammar compatibility remain blockers. Keep original7/594/$0.039866625 and existing journal. Owner review/approval plus fresh readiness and audited continuation precede paid evaluation; no cloud/shared-state implementation or Task53. [Exact plan and gates](task52-v4-readiness.md).
+
+---
+
 > November8: Task52B Phase1 remains an offline owner-review checkpoint. Proposed edge-evidence instructions/scoring/provider projection are unactivated; no cloud implementation permission follows. Original7/594 attempts and$0.039866625 account retained. Fresh complete-input counting/readiness and a concrete separately approved unused-slot plan must precede further inference. Shared-state/cloud staging and Task53 remain unstarted. [Review and prerequisites](task52-offline-ordering-review.md).
 
 ---

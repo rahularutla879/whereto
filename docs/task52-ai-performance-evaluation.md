@@ -1,3 +1,7 @@
+> November8 v4 readiness: zero paid inference; complete-input OpenAI counts5,117–5,141 (bound7,189), Anthropic estimates11,011–11,049 (bound11,561),66 cases each. Google metadata403/IP restriction blocked before counting; Anthropic grammar still blocked. Token fit is not compilation/semantic/latency qualification. Proposed OpenAI five-slot plan requires owner approval and audited continuation. Active Qwen/v3/schema and journal unchanged. [Readiness and source evidence](task52-v4-readiness.md).
+
+---
+
 > November8 offline checkpoint: no new cloud/local model or counting call; timings and token usage remain historical. An unactivated common prompt-only v4 proposal clarifies edge evidence, preserving all19 examples/canonical schema. New separate offline article comparison removes lexical flags but does not turn journey-07's trusted rejection into success. No production model qualified or five-second end-to-end claim. Exact new complete-input counting/readiness remains required before any future separately bounded paid batch. [Offline findings](task52-offline-ordering-review.md), [proposal](task52-prompt-proposal-v4.json).
 
 ---

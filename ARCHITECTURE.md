@@ -1,3 +1,7 @@
+> November8 v4 evaluation readiness only: `scripts/cloud_model52_v4.py` constructs a separately hashed fixed-corpus profile, read-only seven-row journal snapshot, proposed unused-slot plan and counting-only HTTPS wrapper. Inference paths/methods are denied; markers/checkpoints prevent implicit repeats and expire after24h. No live-dispatch entry point or runtime import. V3 adapter/audit, Qwen defaults and canonical validators unchanged. [Configuration, coverage and provider blockers](docs/task52-v4-readiness.md).
+
+---
+
 > November8 Task52B offline tooling only: `cloud_model52_offline.py` provides an opt-in comparison projection/rescore; `cloud_model52_proposal.py` constructs unactivated prompt/schema review artifacts. Runtime, active adapters and paid recovery import neither. Historical v2 remains frozen to preserve hash-bound audit recovery. No production source-grounding/schema/planning change. [Contract and scope](docs/task52-offline-ordering-review.md).
 
 ---

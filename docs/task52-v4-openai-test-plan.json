@@ -1,0 +1,162 @@
+{
+  "status": "PROPOSED; owner approval required; no dispatch implementation",
+  "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+  "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+  "journal": {
+    "sha256": "d13b585b4821be465be1c635792471072f11f38258f87e2e94126481835e9a45",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c"
+      },
+      {
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd"
+      },
+      {
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253"
+      },
+      {
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb"
+      }
+    ],
+    "counts": {
+      "openai": 4,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 39866625,
+    "integrity": "ok"
+  },
+  "slots": [
+    [
+      "openai",
+      "journey-04",
+      1
+    ],
+    [
+      "openai",
+      "extension-partial",
+      1
+    ],
+    [
+      "openai",
+      "extension-repeated",
+      1
+    ],
+    [
+      "openai",
+      "journey-12",
+      1
+    ],
+    [
+      "openai",
+      "journey-06",
+      1
+    ]
+  ],
+  "maxFutureAttempts": 5,
+  "authorizedInferenceRequests": 0,
+  "maxFutureReservationNanodollars": 12500000,
+  "concurrency": 1,
+  "retries": 0,
+  "stopConditions": [
+    "provider/schema/permission error",
+    "cap/spend admission failure",
+    "unsafe accepted hallucination",
+    "critical stop/order/return/time mismatch",
+    "missing or unresolved semantic review",
+    "persistent halt",
+    "readiness/pricing expiry"
+  ],
+  "review": "All fields per response; extension cases have prose gold and require explicit review. Agent review is not independent human signoff.",
+  "coverage": {
+    "journey-04": {
+      "text": "Go to SUNY College of Optometry and then get coffee.",
+      "review": "Exact required SUNY named-place identity, required coffee, source-order occurrences0/1 and supported0\u21921 edge evidence containing both. No invented city/date/time.",
+      "referenceKind": "structured gold",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "inputTokens": 5127
+    },
+    "extension-partial": {
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "review": "Required pharmacy, bank and coffee; pharmacy before bank only. Coffee is independently ordered, not optional. Preserve Jersey City/tomorrow; no fabricated full chain.",
+      "referenceKind": "prose/manual review",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "inputTokens": 5131
+    },
+    "extension-repeated": {
+      "text": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "review": "Three distinct source occurrences, museum\u2192later coffee; do not merge coffee visits. Preserve return-to-start and inclusive180-minute whole-trip budget. Additional edges require source review; source order is not blanket mandatory order.",
+      "referenceKind": "prose/manual review",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "inputTokens": 5134
+    },
+    "journey-12": {
+      "text": "Get groceries and return home within 45 minutes.",
+      "review": "Required groceries, home endpoint not assumed origin, whole-trip45-minute maximum; request necessary missing context.",
+      "referenceKind": "structured gold",
+      "payloadHash": "809dbbca9a1e69299f32105e487e70332af4dae335d6b31b92ac46dedecc77d3",
+      "inputTokens": 5124
+    },
+    "journey-06": {
+      "text": "Buy groceries and maybe stop for coffee.",
+      "review": "Required groceries, explicitly optional coffee with owned maybe evidence; no invented mandatory order/time/endpoint.",
+      "referenceKind": "structured gold",
+      "payloadHash": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+      "inputTokens": 5122
+    }
+  },
+  "maximumReservationUSD": 0.0125,
+  "reservationActuallyMade": false,
+  "prerequisites": [
+    "Owner reviews and authorizes this exact\u22645-attempt v4 configuration/unused-slot plan",
+    "Implement/review an audited continuation over the original seven-row journal; original safe failure and consumed slots stay recorded",
+    "Fresh UTC-day pricing/processing/account review; all count timestamps\u226424h and exact payload hashes still match",
+    "Review source/gold expectations before dispatch and resolve all applicable fields after every single response; stop on any unresolved judgment",
+    "Confirm current project/model RPM/TPM supports the sequential plan; this console review did not expose current values. No quota or permission increase authorized."
+  ]
+}
