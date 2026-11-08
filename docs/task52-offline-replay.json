@@ -1,0 +1,429 @@
+{
+  "baselineCommit": "61ea4284756840895d04c0608d2cdbc72277fd9d",
+  "mode": "offline only; zero API/counting/inference requests",
+  "replayScoringVersion": "52b-semantic-v3-source-bound-generic-the",
+  "historicalScoringUnchanged": "52b-semantic-v2-grounded-provenance",
+  "journalSha256Unchanged": "d13b585b4821be465be1c635792471072f11f38258f87e2e94126481835e9a45",
+  "journalRowsUnchanged": true,
+  "journalRootUnchanged": true,
+  "journalIntegrity": "ok",
+  "counts": {
+    "openai": 4,
+    "google": 2,
+    "anthropic": 1
+  },
+  "totalAttempts": 7,
+  "accountedNanodollars": 39866625,
+  "remainingNanodollars": 11960133375,
+  "remainingAttempts": 587,
+  "limits": {
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "attemptCap": 594,
+    "providerCap": 198,
+    "spendCapNanodollars": 12000000000,
+    "concurrency": 1,
+    "retries": 0
+  },
+  "replays": [
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "actualPromptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalClassification": "provider_error",
+      "verifiedProviderClassification": "complete",
+      "originalRecordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+      "providerResponseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "exactOutputSha256": "4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5",
+      "originalReservationNanodollars": 2500000,
+      "originalLatencyMs": 2764.7997090025456,
+      "originalUsage": [
+        5058,
+        180
+      ],
+      "historicalV2": {
+        "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": [],
+        "evidenceFailures": []
+      },
+      "offlineV3": {
+        "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": [],
+        "evidenceFailures": [],
+        "comparisonProjections": []
+      },
+      "agentRubricDisposition": "correct_extraction",
+      "independentHumanSignoff": false,
+      "provenanceValidity": "Valid for applicable extracted requirements",
+      "rejectionReason": null,
+      "wouldPromptProposalChangeStoredOutcome": false,
+      "note": "A new prompt cannot retroactively repair original output; no modified output counted"
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "actualPromptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalClassification": "complete",
+      "verifiedProviderClassification": "complete",
+      "originalRecordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae",
+      "providerResponseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "exactOutputSha256": "78723b5bc9c2868ad73f56419e93832c1a2298542bab2bd31256e25ebe4fa38e",
+      "originalReservationNanodollars": 720250,
+      "originalLatencyMs": 3038.414125003328,
+      "originalUsage": [
+        5058,
+        176
+      ],
+      "historicalV2": {
+        "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": null,
+        "evidenceFailures": []
+      },
+      "offlineV3": {
+        "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": null,
+        "evidenceFailures": [],
+        "comparisonProjections": []
+      },
+      "agentRubricDisposition": "correct_extraction",
+      "independentHumanSignoff": false,
+      "provenanceValidity": "Valid for applicable extracted requirements",
+      "rejectionReason": null,
+      "wouldPromptProposalChangeStoredOutcome": false,
+      "note": "A new prompt cannot retroactively repair original output; no modified output counted"
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "actualPromptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalClassification": "complete",
+      "verifiedProviderClassification": "complete",
+      "originalRecordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029",
+      "providerResponseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "exactOutputSha256": "630293bcf50a95f56eeade2d609fb301a05e7eec9c3452e0f1474cc28b08aeb1",
+      "originalReservationNanodollars": 715375,
+      "originalLatencyMs": 2471.989792000386,
+      "originalUsage": [
+        5059,
+        166
+      ],
+      "historicalV2": {
+        "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": [],
+        "evidenceFailures": []
+      },
+      "offlineV3": {
+        "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+        "structuredValid": true,
+        "validatedAccepted": true,
+        "automatedFailures": [],
+        "referenceFailures": [],
+        "evidenceFailures": [],
+        "comparisonProjections": []
+      },
+      "agentRubricDisposition": "correct_extraction",
+      "independentHumanSignoff": false,
+      "provenanceValidity": "Valid for applicable extracted requirements",
+      "rejectionReason": null,
+      "wouldPromptProposalChangeStoredOutcome": false,
+      "note": "A new prompt cannot retroactively repair original output; no modified output counted"
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "actualPromptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "originalClassification": "complete",
+      "verifiedProviderClassification": "complete",
+      "originalRecordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f",
+      "providerResponseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "exactOutputSha256": "74c1f585876c802da43f44f0481d0627f84a795595b7b86b37d96e77e1db9f5e",
+      "originalReservationNanodollars": 731000,
+      "originalLatencyMs": 2196.1186670014285,
+      "originalUsage": [
+        5060,
+        197
+      ],
+      "historicalV2": {
+        "evaluatorVersion": "52b-semantic-v2-grounded-provenance",
+        "structuredValid": true,
+        "validatedAccepted": false,
+        "automatedFailures": [
+          "activities",
+          "journeySemantics"
+        ],
+        "referenceFailures": [
+          "$.stops[0].source",
+          "$.stops[1].source",
+          "clarification.fields",
+          "executionStatus",
+          "trustedDisposition"
+        ],
+        "evidenceFailures": []
+      },
+      "offlineV3": {
+        "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+        "structuredValid": true,
+        "validatedAccepted": false,
+        "automatedFailures": [
+          "journeySemantics"
+        ],
+        "referenceFailures": [
+          "clarification.fields",
+          "executionStatus",
+          "trustedDisposition"
+        ],
+        "evidenceFailures": [],
+        "comparisonProjections": [
+          {
+            "occurrence": 0,
+            "actual": "the pharmacy",
+            "reference": "pharmacy",
+            "actualSpan": [
+              6,
+              18
+            ],
+            "referenceSpan": [
+              10,
+              18
+            ]
+          },
+          {
+            "occurrence": 1,
+            "actual": "the supermarket",
+            "reference": "supermarket",
+            "actualSpan": [
+              31,
+              46
+            ],
+            "referenceSpan": [
+              35,
+              46
+            ]
+          }
+        ]
+      },
+      "agentRubricDisposition": "safe_failure",
+      "independentHumanSignoff": false,
+      "provenanceValidity": "Stop spans grounded; edge quote lacks both related stops",
+      "rejectionReason": "Existing edge quote requires both related stop sources; first, then does not identify them",
+      "wouldPromptProposalChangeStoredOutcome": false,
+      "note": "A new prompt cannot retroactively repair original output; no modified output counted"
+    }
+  ],
+  "agentRubricCorrect": 3,
+  "safeFailures": 1,
+  "independentHumanSignoff": false,
+  "qwenHistoricalReplay": {
+    "source": "backend/evaluation/results-task50e-model-investigation.json",
+    "sourceSha256": "36c582b6bbe71ce15319635225c8f0bce79659829ca8b2dbfb944b125d70aac3",
+    "scope": "All21 original baseline raw extractions; unchanged canonical Journey validation only; no model invocation or new latency measurement",
+    "rows": [
+      {
+        "case": "E",
+        "state": "cold",
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "journeyAccepted": true,
+        "advancedHandoff": false,
+        "ambiguous": false
+      },
+      {
+        "case": "A",
+        "state": "warm",
+        "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+        "journeyAccepted": false,
+        "advancedHandoff": false,
+        "ambiguous": true
+      },
+      {
+        "case": "B",
+        "state": "warm",
+        "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "C",
+        "state": "warm",
+        "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "D",
+        "state": "warm",
+        "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "E",
+        "state": "warm",
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "journeyAccepted": true,
+        "advancedHandoff": false,
+        "ambiguous": false
+      },
+      {
+        "case": "F",
+        "state": "warm",
+        "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "repeat",
+        "state": "warm",
+        "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+        "journeyAccepted": true,
+        "advancedHandoff": false,
+        "ambiguous": false
+      },
+      {
+        "case": "mall",
+        "state": "warm",
+        "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "flex",
+        "state": "warm",
+        "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "ambiguous",
+        "state": "warm",
+        "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+        "journeyAccepted": false,
+        "advancedHandoff": false,
+        "ambiguous": true
+      },
+      {
+        "case": "A",
+        "state": "warm",
+        "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+        "journeyAccepted": false,
+        "advancedHandoff": false,
+        "ambiguous": true
+      },
+      {
+        "case": "B",
+        "state": "warm",
+        "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "C",
+        "state": "warm",
+        "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "D",
+        "state": "warm",
+        "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "E",
+        "state": "warm",
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "journeyAccepted": true,
+        "advancedHandoff": false,
+        "ambiguous": false
+      },
+      {
+        "case": "F",
+        "state": "warm",
+        "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "repeat",
+        "state": "warm",
+        "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+        "journeyAccepted": true,
+        "advancedHandoff": false,
+        "ambiguous": false
+      },
+      {
+        "case": "mall",
+        "state": "warm",
+        "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "flex",
+        "state": "warm",
+        "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+        "journeyAccepted": false,
+        "advancedHandoff": true,
+        "ambiguous": false
+      },
+      {
+        "case": "ambiguous",
+        "state": "warm",
+        "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+        "journeyAccepted": false,
+        "advancedHandoff": false,
+        "ambiguous": true
+      }
+    ]
+  },
+  "nextBatchReady": false,
+  "blockingGates": [
+    "Owner review/approval of proposed prompt and separate scoring version",
+    "Fresh exact provider-supported full-payload token counts and dated readiness/account/terms checks",
+    "New explicit bounded plan using original unused slots; existing stopped plan remains blocked"
+  ],
+  "productionQualified": false
+}

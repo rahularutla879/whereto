@@ -1,0 +1,256 @@
+{
+  "status": "PROPOSED; NOT ACTIVE; no paid or non-inference API calls in this checkpoint",
+  "version": "52b-v4-PROPOSED-order-edge-quotes",
+  "baseVersion": "52b-v3-equivalent-default-compaction",
+  "baseConfigurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+  "proposedConfigurationHash": "da1e32a319bb72be0c67aa64ac5c08de3c4103e3a7be6c741e1b50b9cdcb1725",
+  "originalPromptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+  "proposedPromptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+  "exactSystemAppend": "For each order edge, source must be one contiguous verbatim span containing BOTH referenced stop.source phrases and the explicit ordering cue. Bind the correct occurrence indexes and direction; cue words alone are insufficient. Never infer edges from list order. If the relationship is ambiguous, preserve the original conflicting clause in clarification; do not guess.\n",
+  "appendedUtf8Bytes": 370,
+  "baseSystemUnchanged": true,
+  "examples": {
+    "count": 19,
+    "allOriginalMessagesAndOrderUnchanged": true,
+    "originalCompactExampleHash": "3989590952715036c0194fc721dd332246981e251943deb512991d02d6d23ebd"
+  },
+  "canonicalSchemaHashUnchanged": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+  "wireSchemaHashesUnchanged": {
+    "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+  },
+  "providerPayloadMatrixHash": {
+    "openai": "9cd5e3a035f0adf5baf3ba0837d88067be142f084da0dde8e4becc5794d78b46",
+    "google": "fc134016b2645b56c33ca8e8ac426020c2cd70c11c529b58bc1cfaaac732e629",
+    "anthropic": "1146c4b82a3dfd45329110abe78ea0f3f24e71d4f8fc51b15992fcd079dbb7b0"
+  },
+  "offlineTokenFeasibility": {
+    "method": "Historical maximum complete provider count +370 UTF8 append bytes +32 boundary allowance +existing headroom; planning estimate only, not a certified complete new token count",
+    "providerCountsRefreshed": false,
+    "cannotAuthorizeDispatch": true,
+    "openai": {
+      "historicalV3Maximum": 5077,
+      "headroom": 2048,
+      "estimate": 7527
+    },
+    "google": {
+      "historicalV3Maximum": 5786,
+      "headroom": 2048,
+      "estimate": 8236
+    },
+    "anthropic": {
+      "historicalV3Maximum": 10931,
+      "headroom": 512,
+      "estimate": 11845
+    },
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "requirement": "Exact provider-supported complete-input counting after owner approval, including schema/injected formatting, must pass before inference"
+  },
+  "schemaStaticAudit": {
+    "google": {
+      "unionNodes": 15,
+      "optionalProperties": 0,
+      "maxArrayBounds": [
+        {
+          "path": "$.$defs.Journey.properties.stops",
+          "value": 32
+        },
+        {
+          "path": "$.$defs.Journey.properties.order",
+          "value": 64
+        },
+        {
+          "path": "$.$defs.SharedPlace.properties.stops",
+          "value": 32
+        },
+        {
+          "path": "$.properties.activities",
+          "value": 32
+        },
+        {
+          "path": "$.properties.preferences",
+          "value": 32
+        },
+        {
+          "path": "$.properties.suggested_activities",
+          "value": 32
+        },
+        {
+          "path": "$.properties.date_expressions",
+          "value": 32
+        },
+        {
+          "path": "$.properties.time_expressions",
+          "value": 32
+        },
+        {
+          "path": "$.properties.uncertainties",
+          "value": 32
+        }
+      ],
+      "refs": [
+        {
+          "path": "$.$defs.Journey.properties.stops.items",
+          "value": "#/$defs/RequestedStop"
+        },
+        {
+          "path": "$.$defs.Journey.properties.order.items",
+          "value": "#/$defs/OrderConstraint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+          "value": "#/$defs/Endpoint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+          "value": "#/$defs/Deadline"
+        },
+        {
+          "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+          "value": "#/$defs/SharedPlace"
+        },
+        {
+          "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.properties.suggested_activities.items",
+          "value": "#/$defs/ActivityType"
+        },
+        {
+          "path": "$.properties.transport.anyOf[0]",
+          "value": "#/$defs/TransportationMode"
+        },
+        {
+          "path": "$.properties.cost.anyOf[0]",
+          "value": "#/$defs/CostPreference"
+        },
+        {
+          "path": "$.properties.journey",
+          "value": "#/$defs/Journey"
+        }
+      ]
+    },
+    "anthropic": {
+      "unionNodes": 15,
+      "optionalProperties": 0,
+      "maxArrayBounds": [],
+      "refs": [
+        {
+          "path": "$.$defs.Journey.properties.stops.items",
+          "value": "#/$defs/RequestedStop"
+        },
+        {
+          "path": "$.$defs.Journey.properties.order.items",
+          "value": "#/$defs/OrderConstraint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+          "value": "#/$defs/Endpoint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+          "value": "#/$defs/Deadline"
+        },
+        {
+          "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+          "value": "#/$defs/SharedPlace"
+        },
+        {
+          "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.properties.suggested_activities.items",
+          "value": "#/$defs/ActivityType"
+        },
+        {
+          "path": "$.properties.transport.anyOf[0]",
+          "value": "#/$defs/TransportationMode"
+        },
+        {
+          "path": "$.properties.cost.anyOf[0]",
+          "value": "#/$defs/CostPreference"
+        },
+        {
+          "path": "$.properties.journey",
+          "value": "#/$defs/Journey"
+        }
+      ]
+    }
+  },
+  "googleArrayProjection": {
+    "status": "Separate UNACTIVATED candidate; not applied to v4 prompt-only proposal",
+    "hash": "c9f7edbf080add02e5d4625484c859e61258140eb6886fa151dc3a11fdd7ef1e",
+    "onlyChange": "Move minItems/maxItems to descriptions; same fields/types/required/nullability/enums/refs; original canonical limits still mandatory",
+    "staticStats": {
+      "unionNodes": 15,
+      "optionalProperties": 0,
+      "maxArrayBounds": [],
+      "refs": [
+        {
+          "path": "$.$defs.Journey.properties.stops.items",
+          "value": "#/$defs/RequestedStop"
+        },
+        {
+          "path": "$.$defs.Journey.properties.order.items",
+          "value": "#/$defs/OrderConstraint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+          "value": "#/$defs/Endpoint"
+        },
+        {
+          "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+          "value": "#/$defs/Deadline"
+        },
+        {
+          "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+          "value": "#/$defs/SharedPlace"
+        },
+        {
+          "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+          "value": "#/$defs/Duration"
+        },
+        {
+          "path": "$.properties.suggested_activities.items",
+          "value": "#/$defs/ActivityType"
+        },
+        {
+          "path": "$.properties.transport.anyOf[0]",
+          "value": "#/$defs/TransportationMode"
+        },
+        {
+          "path": "$.properties.cost.anyOf[0]",
+          "value": "#/$defs/CostPreference"
+        },
+        {
+          "path": "$.properties.journey",
+          "value": "#/$defs/Journey"
+        }
+      ]
+    },
+    "provenToFix400": false,
+    "needs": "Support/schema compilation review and new full-input counting; no trial inference"
+  },
+  "fairness": "Same appended system instruction and all19 original examples across all three providers. Report v3 outputs separately; never repeat consumed slots or mix prompt versions into a pooled accuracy score. Endpoint/schema adjustments require their own configuration identity.",
+  "heldouts": {
+    "path": "docs/task52-offline-holdouts.json",
+    "sha256": "dbf658a16a3bc5bfbacb29674d7180f6cbfd096052a8eef09cd9e79b0b0f882a",
+    "scope": "Four synthetic offline contract holdouts authored after rule/proposal freeze, not independent blind model qualification; no prompt tuning against them and no paid corpus additions"
+  }
+}

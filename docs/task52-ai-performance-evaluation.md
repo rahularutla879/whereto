@@ -1,3 +1,7 @@
+> November8 offline checkpoint: no new cloud/local model or counting call; timings and token usage remain historical. An unactivated common prompt-only v4 proposal clarifies edge evidence, preserving all19 examples/canonical schema. New separate offline article comparison removes lexical flags but does not turn journey-07's trusted rejection into success. No production model qualified or five-second end-to-end claim. Exact new complete-input counting/readiness remains required before any future separately bounded paid batch. [Offline findings](task52-offline-ordering-review.md), [proposal](task52-prompt-proposal-v4.json).
+
+---
+
 > November7local /November8UTC: scoring correction and three-new-call OpenAI screen complete; **halted at the ordering case**. Original journey-01/r1 is independently reconciled offline without rewriting its row or$0.0025 reservation. Cumulative OpenAI4/Google2/Anthropic1 =7/594, $0.039866625 conservatively accounted, $11.960133375 remaining. OpenAI structured4/4, source-accepted3/4; agent-reviewed3 correct/1 safe rejection, no independent human signoff. No production qualification or five-second end-to-end proof. Larger paid batch paused; no infrastructure/Maps/billing/Task53. [Current benchmark](task52-cloud-model-benchmark.md), [safe measurements](task52-openai-small-batch.json). Older checkpoints are historical.
 
 ---

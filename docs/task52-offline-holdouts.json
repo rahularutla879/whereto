@@ -1,0 +1,10 @@
+{
+  "status": "Synthetic offline contract holdouts, authored after proposal/rule freeze; not independent blind model evaluation or extra paid corpus slots",
+  "usedForPromptTuning": false,
+  "cases": [
+    {"text": "Visit the bank before the bookstore.", "phrases": ["bank", "bookstore"], "order": [[0, 1, "bank before the bookstore"]]},
+    {"text": "coffee before museum; bookstore can happen independently.", "phrases": ["coffee", "museum", "bookstore"], "order": [[0, 1, "coffee before museum"]]},
+    {"text": "Visit the coffee shop, then the museum, then the coffee shop.", "phrases": ["coffee shop", "museum", "coffee shop"], "order": [[0, 1, "coffee shop, then the museum"], [1, 2, "museum, then the coffee shop"]]},
+    {"text": "Visit The Coffee House before The Museum Store.", "phrases": ["The Coffee House", "The Museum Store"], "kinds": {"0": "named_place", "1": "named_place"}, "order": [[0, 1, "The Coffee House before The Museum Store"]]}
+  ]
+}

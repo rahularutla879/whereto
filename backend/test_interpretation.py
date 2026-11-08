@@ -176,7 +176,9 @@ class InterpretationTests(unittest.TestCase):
             self.assertNotIn(b'private detail', response.body)
 
     def test_endpoint_success_does_not_call_engine(self):
-        with patch('backend.interpretation.create_provider') as factory, patch('backend.main.recommend_plans') as engine:
+        from functools import partial
+        with patch('backend.interpretation.create_provider') as factory, patch('backend.main.recommend_plans') as engine, \
+             patch('backend.main.interpret_request', partial(interpret_request, now=datetime(2026,11,5,15,tzinfo=timezone.utc))):
             factory.return_value.interpret.return_value = extraction()
             r = interpret_outing(InterpretationInput(text='coffee for 2 people in Baltimore on 2026-11-07'))
         self.assertIsNotNone(r.request)

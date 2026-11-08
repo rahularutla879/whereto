@@ -1,3 +1,9 @@
+# November 8 — retain strict edge provenance; propose prompt-only clarification
+
+Keep production validation, canonical schema and active v3 evaluation unchanged. Prefer explicitly asking future evaluated models to include both related stop phrases in each edge quote, rather than accepting cue-only evidence or introducing an occurrence-span schema migration. This is an unactivated proposal pending owner review and exact counting/readiness. A separate offline-only scorer permits narrowly source-bound generic article equivalence; historical scorer/audits/paid holds stay intact. Recorded journey-07 remains a safe failure. No new attempts or production model decision. [Alternatives, risks and evidence](docs/task52-offline-ordering-review.md).
+
+---
+
 # November7local /November8UTC — Task52B scoring audit and stop
 
 Evaluation-only provenance comparisons distinguish unspecified gold quotation from a required source-grounded span. Explicit reference evidence, exact identities and substantive constraints remain strict. The original OpenAI decoder classification is supplemented by an append-only hash-bound offline correction; consumed rows and finances remain immutable. Agent rubric review is labeled separately from independent human signoff.

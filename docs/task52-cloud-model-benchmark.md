@@ -1,3 +1,11 @@
+# November 8 — offline ordering repair and review checkpoint
+
+**Zero new inference or counting calls.** [Detailed comparison, tests, risks and proposal](task52-offline-ordering-review.md), [four-output replay](task52-offline-replay.json), [unactivated common v4 proposal](task52-prompt-proposal-v4.json). Canonical validator, active v3 prompt/schema, historical scorer/audit and original journal unchanged. New opt-in offline scorer recognizes only source-bound generic `the X`/`X` activity occurrences; exact names, brands, multiplicity, optionality and constraints remain strict. journey-07 loses lexical false positives but remains a safe trusted rejection: its edge quote omits both related stops. Prior three correct agent dispositions unchanged; independent human signoff outstanding.
+
+Cumulative **OpenAI4/Google2/Anthropic1 =7/594**, **$0.039866625 accounted /$11.960133375 remaining**. Historical inference latency/usage below are unchanged, not remeasured. No production qualification or paid continuation; owner review plus fresh exact counts/readiness and an explicit bounded unused-slot plan remain required. Proposed instructions add370bytes and keep19 examples; offline count estimates are not dispatch admission proof. Google/Anthropic schema proposals are unactivated; both failures remain blocked. Older checkpoint statements below are historical where superseded.
+
+---
+
 # November 7 local / November 8 UTC — corrected scoring; three-call OpenAI screen stopped
 
 Started clean at `15b11226bf071cb86dd70f3de7055111354a0e84`. **Three new OpenAI calls were sent, all HTTP200/completed. The third failed trusted ordering-provenance validation; the remaining two selected slots were not sent. No Google/Anthropic inference. No production model selected.** [Reproducible safe measurements and hashes](task52-openai-small-batch.json). Prior checkpoints below remain historical.

@@ -1,3 +1,7 @@
+> November8 Task52B offline tooling only: `cloud_model52_offline.py` provides an opt-in comparison projection/rescore; `cloud_model52_proposal.py` constructs unactivated prompt/schema review artifacts. Runtime, active adapters and paid recovery import neither. Historical v2 remains frozen to preserve hash-bound audit recovery. No production source-grounding/schema/planning change. [Contract and scope](docs/task52-offline-ordering-review.md).
+
+---
+
 > Task52B continuation, November7local /November8UTC: isolated evaluation modules add occurrence-aware semantic comparison, content-addressed append-only correction/review sidecars and a sealed five-slot runner dispatching at most one request per invocation. The existing paid SQLite journal/root and consumed slots are preserved; runtime never imports these tools. Production prompt/schema/Qwen/source-grounding unchanged. A separately reproduced request-admission race is fixed narrowly: HTTP ownership releases when a valid single Content-Length is fully sent, or on the final frame for unknown-length responses; an active worker retains its independent reference. [Regression/evaluation evidence](docs/task52-cloud-model-benchmark.md).
 
 ---

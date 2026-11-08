@@ -30,7 +30,16 @@ test("historical resolved request → Next.js proxy → real Python planner → 
   await new Promise<void>(resolve => reservation.close(() => resolve()));
   const previous = process.env.BACKEND_URL;
   process.env.BACKEND_URL = `http://127.0.0.1:${address.port}`;
-  const backend = spawn("backend/.venv/bin/python", ["-m", "uvicorn", "backend.main:app", "--host", "127.0.0.1", "--port", String(address.port), "--log-level", "warning"]);
+  // Historical fixture dates must not expire with the developer's real clock.
+  const bootstrap = `
+from datetime import datetime
+from functools import partial
+import uvicorn
+import backend.location_context as location_context
+location_context.outing_problem = partial(location_context.outing_problem, now=datetime.fromisoformat("2026-11-05T15:00:00+00:00"))
+uvicorn.run("backend.main:app", host="127.0.0.1", port=${address.port}, log_level="warning")
+`;
+  const backend = spawn("backend/.venv/bin/python", ["-c", bootstrap], { env: { ...process.env, WHERETO_AI_WARMUP_DEV: "0" } });
   try {
     let ready = false;
     for (let i = 0; i < 600; i++) {

@@ -1,3 +1,11 @@
+# November 8 — opt-in offline scorer v3, historical v2 preserved
+
+`52b-semantic-v3-source-bound-generic-the` is a separate offline rescorer, not the active paid scorer. It permits only lower-case `the X` versus `X` for a finite production-recognized generic activity, same requiredness/kind, source-order occurrence and exact overlapping original-case spans. No name/brand, plural, arbitrary alias or modifier equivalence. Original source grounding and evidence attachment remain mandatory. It projects a comparison copy only, never rewrites output or trusted validation. Missing required wire fields, changed relations/order/optionality/return/deadlines and wrong-occurrence evidence still fail. The offline audit also rejects `journey:null`: local legacy parsing permits null, but the strict evaluation wire requires an object. This stricter wire check changes none of the four recorded responses and leaves historical v2/local compatibility untouched. Empty gold evidence retains the prior unspecified-quotation rule; explicit evidence remains strict.
+
+All25 structured references and four separate synthetic offline contract holdouts are tested. Replaying four original OpenAI responses changes only journey-07's lexical mismatch flags; its genuine edge-provenance rejection remains. Fully-correct judgments remain separate from automated assertions, and agent review is not independent human signoff. Rejected output cannot count as successful extraction. Historical v2 is intentionally frozen so its immutable correction/reviews continue to verify; no stopped paid gate is cleared. [Exact scope, negative tests and limitations](task52-offline-ordering-review.md), [versioned replay](task52-offline-replay.json).
+
+---
+
 # November7local /November8UTC — provenance comparator v2
 
 Empty/omitted **gold evidence** means no exact quotation was asserted. Actual nonempty evidence must occur verbatim in the original source and enclose the correct occurrence of its stop source; repeated occurrences stay distinct. Mandatory stop.source remains required; optional stops retain the existing required provenance. Explicit nonempty gold evidence remains an exact assertion. Missing actual schema properties are invalid, even where gold uses a default. No global evidence/source removal, production grounding change or corpus edit.

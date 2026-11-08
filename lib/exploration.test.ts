@@ -34,7 +34,7 @@ test("offline exploration HTTP boundaries and contacts share persistent nonblock
   const address=listener.address();assert.ok(address && typeof address==="object");
   await new Promise<void>(r=>listener.close(()=>r()));
   const base=`http://127.0.0.1:${address.port}`;
-  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29",WHERETO_DEV_WARN_USD:"0.29"}});
+  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--reference-time","2026-11-05T15:00:00+00:00","--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29",WHERETO_DEV_WARN_USD:"0.29"}});
   const post=(path:string,body:unknown)=>fetch(`${base}${path}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   try {
     for(let i=0;i<600;i++){try{if((await fetch(`${base}/health`)).ok)break;}catch{ /* Wait only for the local fixture server. */ }await new Promise(r=>setTimeout(r,50));}
