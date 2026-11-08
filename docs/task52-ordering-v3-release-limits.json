@@ -1,0 +1,8 @@
+{
+  "review": "Post-freeze exploratory release-limit checks, selected and observed after the final holdouts. Clear-source semantics reviewed by the same agent; NOT new passing holdouts or independent human review. No grammar tuning follows these checks.",
+  "cases": [
+    {"id":"limit-start-city","text":"Start at pharmacy and finish at bank in Jersey City tomorrow.","stops":["pharmacy","bank"],"location":"Jersey City","expectedRelationships":[[0,1]],"reviewedSemantics":"Clear binary order; geography suffix exceeds the new binary start/finish rule."},
+    {"id":"limit-three-stop-start","text":"Start with coffee, visit museum, and finish at pharmacy.","stops":["coffee","museum","pharmacy"],"expectedRelationships":[[0,1],[1,2]],"reviewedSemantics":"Clear first/last visits; three-stop start/finish scope is deliberately unsupported."},
+    {"id":"limit-do-list","text":"Do dinner and bowling tomorrow.","stops":["dinner","bowling"],"expectedRelationships":[],"reviewedSemantics":"Clear unordered list; Do is outside the finite absence-proof imperative vocabulary, creating a false clarification versus V2."}
+  ]
+}

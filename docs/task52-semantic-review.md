@@ -1,3 +1,15 @@
+# V3 source-intent and audited normalization review
+
+[Exact policy and semantic denominators](task52-ordering-policy-v3.md), [per-output comparison](task52-ordering-compatibility-v3.json). Ordering-only outcomes now distinguish correct raw graph, audited removal of invented edges from an independently proved unordered source, and unresolved real/potential order. An audited projection is **not a fully correct model extraction**. Source-bound names/status/multiplicity/date/time/return checks remain independent and unchanged. Empty-gold evidence behavior and source-bound generic-article scoring are untouched.
+
+Seven ordinary Qwen list errors can safely keep prior planning semantics without newly asking an order question; two repeated-stop invented graphs remain rejected. All18 correct raw Qwen graphs remain compatible, with five unrelated canonical blocks still unresolved. Five correct OpenAI responses remain compatible; journey-07's insufficient quote and extension-repeated's unsupported0→1 remain failures, while its1→2 stays proved. Historical scores/classifications are unchanged.
+
+Source analysis is graph-independent; required/optional classification must agree with separately owned source qualifiers. Explicit proven edges cannot be deleted, including start/finish. Unclear before/after, conditions, distant qualifiers, missing quotes, changed optionality, wrong occurrence/direction and extra chains clarify.29 declared rubrics and final8 separated post-freeze tests pass;0/147 unsupported edges retained,11 audited empty projections (not accepted invented constraints);0/19 clear-source false questions and10/10 reviewed unknowns clarified. These same-agent overlapping fixtures are not independent human review or population accuracy. Production and paid admission do not import V3. Original journal/halt/corpus remain intact.
+
+Release limit: three additional post-freeze clear sources still clarify—binary start/finish with a city suffix, three-stop start/finish, and “Do dinner and bowling.” These **3/3 exploratory false clarifications** are separate from0/19 declared cases; no tuning followed. [Exact requests/results](task52-ordering-v3-release-limits.json). Only opt-in/shadow integration is proposed; default activation remains blocked pending scope/coverage review.
+
+---
+
 # V2 offline compatibility — raw graph quality remains separate from normalization
 
 [Detailed rules, denominators and integration proposal](task52-ordering-safety-investigation.md), [versioned comparison](task52-ordering-compatibility-v2.json), [all27 individual Qwen graph reviews](task52-ordering-qwen-review-v2.json). New `52b-order-proof-v2-offline` preserves v1 and historical evidence. Forty development cases and eight separately authored post-freeze cases matched; neither set is independent human qualification. Original31/63/six baseline checks reproduce unchanged.

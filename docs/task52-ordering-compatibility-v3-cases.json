@@ -1,0 +1,438 @@
+{
+  "version": "52b-order-policy-v3-offline",
+  "review": "Predeclared before v3 implementation; same-agent source rubric, not independent human review. Unknown is conservative bounded-grammar scope, not a universal linguistic judgment.",
+  "cases": [
+    {
+      "id": "college",
+      "text": "Go to SUNY College of Optometry and then get coffee.",
+      "stops": [
+        "SUNY College of Optometry",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": [],
+      "kinds": [
+        "named_place",
+        "activity"
+      ]
+    },
+    {
+      "id": "partial",
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "repeated-partial",
+      "text": "Coffee, museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "repeated-chain",
+      "text": "Coffee, then museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "ordinary",
+      "text": "Dinner and bowling tomorrow.",
+      "stops": [
+        "Dinner",
+        "bowling"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "optional-third",
+      "text": "Pharmacy before bank, maybe coffee.",
+      "stops": [
+        "Pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "optional-verb",
+      "text": "Visit the pharmacy before the bank, maybe coffee.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "optional-and",
+      "text": "Pharmacy before bank, and maybe grab coffee.",
+      "stops": [
+        "Pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "independent-required",
+      "text": "Visit pharmacy before bank; coffee whenever convenient.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "start-finish",
+      "text": "Start with groceries and finish at the pharmacy.",
+      "stops": [
+        "groceries",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "start-at",
+      "text": "Start at the pharmacy and finish at the bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "head-out",
+      "text": "Go to the pharmacy first, then head out for coffee.",
+      "stops": [
+        "pharmacy",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "alternative",
+      "text": "Visit the pharmacy before or after the bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "closing",
+      "text": "Visit pharmacy before bank closes.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "negation",
+      "text": "Pharmacy, but not before bank.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "conditional",
+      "text": "Pharmacy first, unless bank is closed.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "global-maybe",
+      "text": "Maybe pharmacy before bank, coffee.",
+      "stops": [
+        "pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "distant-maybe",
+      "text": "Pharmacy before bank if coffee is available.",
+      "stops": [
+        "Pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "after",
+      "text": "Visit pharmacy after bank.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "arrow",
+      "text": "Pharmacy \u2192 bank \u2192 coffee.",
+      "stops": [
+        "Pharmacy",
+        "bank",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "named-cues",
+      "text": "Visit First Bank, then Last Cafe.",
+      "stops": [
+        "First Bank",
+        "Last Cafe"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": [],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "named-similar",
+      "text": "Visit Bank Annex before Bank.",
+      "stops": [
+        "Bank Annex",
+        "Bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": [],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "unordered-repeat",
+      "text": "Coffee, museum, and coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "unordered-optional",
+      "text": "Groceries, maybe coffee.",
+      "stops": [
+        "Groceries",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": [
+        1
+      ]
+    },
+    {
+      "id": "unknown-connector",
+      "text": "Pharmacy subsequently bank.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "unknown-anchor",
+      "text": "After lunch, visit pharmacy.",
+      "stops": [
+        "pharmacy"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "unscoped-flex",
+      "text": "Pharmacy first, bank whenever convenient.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "long-parenthesis",
+      "text": "Pharmacy (after considering several possibilities) before bank.",
+      "stops": [
+        "Pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "temporal-list",
+      "text": "Groceries, stop at an ATM for 5 minutes, and return to where I started within 45 minutes tomorrow.",
+      "stops": [
+        "Groceries",
+        "ATM"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    }
+  ]
+}

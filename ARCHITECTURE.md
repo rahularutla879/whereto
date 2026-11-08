@@ -1,3 +1,9 @@
+# Task52B offline source-first ordering/normalization policy
+
+`scripts/cloud_model52_ordering_v3.py` adds graph-independent bounded source intent plus an explicit raw/effective ordering decision; `project()` can deep-copy an independently proved unordered interpretation without hiding the original model error. `cloud_model52_ordering_policy_replay.py` compares production/V2/V3 using recorded fixtures, blocks network and opens the existing journal read-only. Frozen V1/V2, canonical schema, Qwen prompt/default and runtime imports stay unchanged. [Exact proposed trust-boundary integration](docs/task52-ordering-policy-v3.md); activation and typed ordering confirmation remain unimplemented.
+
+---
+
 # Task52B offline v2 compatibility profile
 
 `scripts/cloud_model52_ordering_v2.py` adds a separately versioned finite grammar over frozen v1 ownership/path primitives. `cloud_model52_ordering_compatibility.py` compares raw/effective production graphs, v1 and v2 against recorded synthetic evidence with network blocked and paid state read-only. Neither module is imported by runtime or paid admission; canonical schema/prompts/Qwen/defaults stay unchanged. Legacy normalization and ordering-confirmation contracts remain proposal decisions, not implemented release behavior. [Boundaries and integration plan](docs/task52-ordering-safety-investigation.md).

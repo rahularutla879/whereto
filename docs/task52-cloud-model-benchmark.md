@@ -1,3 +1,15 @@
+# Offline V3 ordering/normalization compatibility — no new inference
+
+[Decision policy and production proposal](task52-ordering-policy-v3.md), [versioned measurements and raw/effective graph distinctions](task52-ordering-compatibility-v3.json). Seven Qwen unordered requests no longer require unnecessary ordering clarification under the opt-in policy; true start/finish and scoped optional-third semantics are preserved. Qwen V2→V3 ordering clarifications9→2/27; OpenAI5/7 compatible with both recorded failures preserved. The seven audited list projections remain raw-model errors, not new semantic successes.
+
+New29 source rubrics matched;0/19 clear-source false clarifications;10/10 reviewed unknowns clarify;0/147 unsupported edges retained, with11 audited empty projections. Final8/8 separated post-freeze cases and28 promoted regressions pass. No independent human signoff or production qualification. No model/prompt/scorer/canonical/runtime changes and no new inference/counting/provider requests.
+
+All10 paid rows/root/corrections,324 private files and v4 halt unchanged; journal SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`. OpenAI7/Google2/Anthropic1, retained$0.047366625/remaining$11.952633375; all ceilings unchanged. Next is owner review of narrowly scoped integration, not another paid batch. Gemini400/IP and Anthropic grammar-size blockers remain. Earlier model accuracy/latency/cost measurements below stay historical.
+
+Release limit: three additional post-freeze clear sources still clarify—binary start/finish with a city suffix, three-stop start/finish, and “Do dinner and bowling.” These **3/3 exploratory false clarifications** are separate from0/19 declared cases; no tuning followed. [Exact requests/results](task52-ordering-v3-release-limits.json). Only opt-in/shadow integration is proposed; default activation remains blocked pending scope/coverage review.
+
+---
+
 # Offline v2 compatibility checkpoint — paid benchmark stays halted
 
 [Versioned three-way evidence](task52-ordering-compatibility-v2.json), [full Qwen graph review](task52-ordering-qwen-review-v2.json), [rules, release limits and proposed integration](task52-ordering-safety-investigation.md). **Zero model/counting/provider API calls.** New v2 grammar restores six clear Qwen order relationships that v1 could not prove. Raw Qwen ordering unknowns15→9/27, correct-graph false clarifications6→0/18; new questions among previously nonblocking correct graphs3→0/13. Nine unsupported raw graphs remain blocked, including two production-accepted repeated-stop extra edges. Seven other raw list graphs have existing safe legacy normalization; their release policy remains unresolved.

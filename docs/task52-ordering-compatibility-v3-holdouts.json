@@ -1,0 +1,550 @@
+{
+  "review": "Separate post-freeze same-agent tests, not independently human-reviewed; no module tuning after execution without moving these to regressions.",
+  "regressionCases": [
+    {
+      "id": "h-bakery",
+      "text": "Start at the bakery and finish at the library.",
+      "stops": [
+        "bakery",
+        "library"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "h-local",
+      "text": "Visit florist before library, and maybe grab tea.",
+      "stops": [
+        "florist",
+        "library",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "h-required",
+      "text": "Visit florist before library; tea whenever convenient.",
+      "stops": [
+        "florist",
+        "library",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "h-list",
+      "text": "Lunch and skating tonight.",
+      "stops": [
+        "Lunch",
+        "skating"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "h-repeat",
+      "text": "Tea, gallery, then tea.",
+      "stops": [
+        "Tea",
+        "gallery",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "h-list-repeat",
+      "text": "Tea, gallery, and tea.",
+      "stops": [
+        "Tea",
+        "gallery",
+        "tea"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "h-conditional",
+      "text": "Florist before library, unless tea is unavailable.",
+      "stops": [
+        "Florist",
+        "library",
+        "tea"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "h-global",
+      "text": "Maybe florist before library.",
+      "stops": [
+        "florist",
+        "library"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "h-time-event",
+      "text": "Visit florist before library closes.",
+      "stops": [
+        "florist",
+        "library"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "h-named",
+      "text": "Visit First National Bank \u2192 Last Stop Cafe.",
+      "stops": [
+        "First National Bank",
+        "Last Stop Cafe"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": [],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "h-unfamiliar",
+      "text": "Florist subsequently library.",
+      "stops": [
+        "Florist",
+        "library"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "h-and-maybe",
+      "text": "Buy groceries and maybe stop for coffee.",
+      "stops": [
+        "groceries",
+        "coffee"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": [
+        1
+      ]
+    },
+    {
+      "id": "final-local",
+      "text": "Dentist before bakery, maybe get juice.",
+      "stops": [
+        "Dentist",
+        "bakery",
+        "juice"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "final-and",
+      "text": "Buy bread and maybe have tea.",
+      "stops": [
+        "bread",
+        "tea"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": [
+        1
+      ]
+    },
+    {
+      "id": "final-required",
+      "text": "Dentist before bakery; juice whenever convenient.",
+      "stops": [
+        "Dentist",
+        "bakery",
+        "juice"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "final-sequence",
+      "text": "Tea, then park, then tea.",
+      "stops": [
+        "Tea",
+        "park",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "final-start",
+      "text": "Start with lunch and finish at the bookstore.",
+      "stops": [
+        "lunch",
+        "bookstore"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "final-ambiguous",
+      "text": "Dentist before or after bakery.",
+      "stops": [
+        "Dentist",
+        "bakery"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "final-list",
+      "text": "Lunch, bookstore, and lunch.",
+      "stops": [
+        "Lunch",
+        "bookstore",
+        "lunch"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "final-distant",
+      "text": "Dentist before bakery if juice is available.",
+      "stops": [
+        "Dentist",
+        "bakery",
+        "juice"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "locked-plan",
+      "text": "Plan breakfast and tennis tomorrow.",
+      "stops": [
+        "breakfast",
+        "tennis"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "locked-plan-unknown",
+      "text": "Plan breakfast prior to tennis.",
+      "stops": [
+        "breakfast",
+        "tennis"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "locked-local",
+      "text": "Library before florist, maybe have lunch.",
+      "stops": [
+        "Library",
+        "florist",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "locked-required",
+      "text": "Library before florist; lunch whenever convenient.",
+      "stops": [
+        "Library",
+        "florist",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "locked-start",
+      "text": "Start with breakfast and finish at the florist.",
+      "stops": [
+        "breakfast",
+        "florist"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "locked-repeat",
+      "text": "Breakfast, florist, then breakfast.",
+      "stops": [
+        "Breakfast",
+        "florist",
+        "breakfast"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "locked-conditional",
+      "text": "Library first, unless florist is closed.",
+      "stops": [
+        "Library",
+        "florist"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "locked-chain",
+      "text": "Library \u2192 florist \u2192 library.",
+      "stops": [
+        "Library",
+        "florist",
+        "library"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    }
+  ],
+  "priorFrozenModuleSHA256": "b3e841ae06cb4abd6ab240b9078d95c36e778ce925d43cdfdcbb21d91d299114",
+  "priorRun": {
+    "matched": 11,
+    "total": 12,
+    "failure": "h-and-maybe: local qualifier masking erased the independent and connector; conservative unnecessary clarification, no false acceptance."
+  },
+  "frozenModuleSHA256": "37555c4bac222888d1d5ef217457e15ca4af5aee7fa9bdc38c16ea25590bfd4e",
+  "additionalFreezeReview": {
+    "moduleSHA256": "eb15235877d1e594ead49c3daf6350f852d312f401bf3e8bbbef9700d05cabc0",
+    "outcome": "8/8 passed; subsequently promoted before adding finite Plan list imperative, to restore recorded ordinary-dinner compatibility."
+  },
+  "finalSafetyReview": {
+    "moduleSHA256": "fb764fa981a8e7783d2c7761e9893be9a3ce939d742c28b9860479c6d7e85745",
+    "priorRun": "8/8 passed; promoted before adding fail-closed source/model flexible-mode agreement. No observed false acceptance triggered the safety addition."
+  },
+  "cases": [
+    {
+      "id": "release-plan",
+      "text": "Plan lunch and swimming tonight.",
+      "stops": [
+        "lunch",
+        "swimming"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "release-local",
+      "text": "Bookstore before pool, and maybe have lunch.",
+      "stops": [
+        "Bookstore",
+        "pool",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": [
+        2
+      ]
+    },
+    {
+      "id": "release-independent",
+      "text": "Bookstore before pool; lunch whenever convenient.",
+      "stops": [
+        "Bookstore",
+        "pool",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "release-start",
+      "text": "Start at the bookstore and finish at the pool.",
+      "stops": [
+        "bookstore",
+        "pool"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "sourceCategory": "explicit",
+      "optional": []
+    },
+    {
+      "id": "release-repeat",
+      "text": "Lunch, pool, then lunch.",
+      "stops": [
+        "Lunch",
+        "pool",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "sourceCategory": "partial",
+      "optional": []
+    },
+    {
+      "id": "release-list",
+      "text": "Lunch, pool, and lunch.",
+      "stops": [
+        "Lunch",
+        "pool",
+        "lunch"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unordered",
+      "optional": []
+    },
+    {
+      "id": "release-negative",
+      "text": "Bookstore, but not before pool.",
+      "stops": [
+        "Bookstore",
+        "pool"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    },
+    {
+      "id": "release-alternative",
+      "text": "Bookstore before or after pool.",
+      "stops": [
+        "Bookstore",
+        "pool"
+      ],
+      "expectedRelationships": [],
+      "sourceCategory": "unknown",
+      "optional": []
+    }
+  ]
+}

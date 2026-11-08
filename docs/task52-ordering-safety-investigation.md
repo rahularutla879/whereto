@@ -1,3 +1,15 @@
+# V3 ordering plus normalization checkpoint — offline only
+
+[Single source-first A–F policy, safety boundaries, measurements and proposed integration](task52-ordering-policy-v3.md), [versioned replay](task52-ordering-compatibility-v3.json). `52b-order-policy-v3-offline` resolves the three V2 readiness blockers without changing production:7 legitimate Qwen list cases get an explicit audited empty graph; true binary start/finish edges are retained before old normalization; locally owned optional third activities no longer contaminate a proven pair. Unknown mandatory intent is never normalized away. Raw extraction mistakes remain scored incorrect and hash-bound; source analysis does not use proposed edges.
+
+V2 baseline reproduced unchanged (40 cases,92 replacement probes,eight holdouts; V1's31/63/six preserved). Qwen order unknowns9→2/27, all18 correct raw graphs compatible plus7 audited list normalizations; five other canonical blocks remain. OpenAI5/7 compatible,2 failures preserved. New29 source rubrics matched,0/19 clear false clarifications,10/10 unknowns clarified,0/147 unsupported edges retained (11 safely projected empty), final8/8 post-freeze tests matched. Earlier20+8 freeze cases are explicit promoted regressions, not independent fresh tests. No independent human signoff or universal-language guarantee.
+
+Production integration is justified as a separately reviewed implementation task, not activated here: replace competing legacy order authorities at the pre-normalization trust boundary, preserve raw/effective decisions and every non-order canonical check, and block session publication on unknown. Main-form ordering confirmations require a new typed/user-provenance contract; existing rephrase is safe initially. Paid state10/$0.047366625 and halt remain byte-identical. No provider calls or new prompt/scorer/runtime behavior. Earlier investigation sections below remain historical.
+
+Release limit: three additional post-freeze clear sources still clarify—binary start/finish with a city suffix, three-stop start/finish, and “Do dinner and bowling.” These **3/3 exploratory false clarifications** are separate from0/19 declared cases; no tuning followed. [Exact requests/results](task52-ordering-v3-release-limits.json). Only opt-in/shadow integration is proposed; default activation remains blocked pending scope/coverage review.
+
+---
+
 # V2 compatibility checkpoint — offline only
 
 Baseline clean `5344aa786f3c7ac173ad8d0a9b7a10d0db86ba59`. **No inference, token counting, model/account provider API calls, credential changes or paid-state writes. V4 remains halted.** V1 source,31 cases,63 original probes, six holdouts, canonical validators, active Qwen/cloud prompts and the authoritative66-case corpus remain unchanged.

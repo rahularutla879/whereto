@@ -1,3 +1,11 @@
+# Offline V3 validation overhead — not new inference evidence
+
+[Ordering/normalization policy](task52-ordering-policy-v3.md), [versioned measurements](task52-ordering-compatibility-v3.json).1,450 local ordering-only checks: p50 103.583µs,p95 155.458µs,max533.0µs, including source analysis/copy/hashes and excluding fixture construction. No HTTP, model, Google routing, browser or production staging. Existing V2 timing remains separately scoped. This does not prove worst-case or five-second end-to-end performance.
+
+Seven Qwen list errors receive audited unordered projections; correct source-supported start/finish and local optional-third constraints survive.0/147 unsupported edges retained on reviewed probes; Qwen ordering unknowns9→2/27 and OpenAI5/7 compatible. Raw model errors and independent canonical blocks remain reported separately. No runtime activation, new token counts/inference, paid-state change or production model selection. Next step is separately approved integration/clarification verification; all historical measurements below are preserved.
+
+---
+
 # Offline ordering-safety investigation — historical performance unchanged
 
 [Ordering design, replay and compatibility limits](task52-ordering-safety-investigation.md). Zero new inference/counting/provider calls. The proposed independent gate rejects v4's unsupported coffee0→museum1 while preserving museum1→coffee2, valid partial orders and the five previously correct recorded OpenAI interpretations. This is offline revalidation, not a change to any historical timing, token usage, score, financial reservation or model qualification.

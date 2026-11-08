@@ -1,3 +1,9 @@
+# Task52B — source-first ordering policy remains offline
+
+Use one independently tested source-intent authority to distinguish proven mandatory order, proved unordered lists and unknown potential requirements. Only a complete bounded no-order proof can justify an explicitly audited projection of an invented model edge; retain raw errors and immutable evidence. Never delete unproven edges on a genuinely ambiguous order source or run legacy normalization after retaining a proven start/finish edge. V3 replay resolves seven list compatibility cases and keeps both known ordering failures blocked; this supports a separate integration proposal, not production activation, paid-halt clearance or model selection. [Policy, denominators and limits](docs/task52-ordering-policy-v3.md).
+
+---
+
 # Task52B — keep the independent ordering proof offline
 
 A real source quote, both stop names and an ordering cue do not prove that cue's arguments or occurrence direction. Test a separate bounded proof gate with explicit unknown/clarification rather than strengthening model instructions alone or inferring dependencies from lists. Preserve current production validation and all historical paid evidence. Finite negative tests catch the accepted extra edge, but clear out-of-grammar/Qwen false clarifications prevent automatic activation. Offsets remain a schema proposal, not proof of scope. Next decision is owner review of compatibility and independent offline coverage; no new model/prompt/production/deployment selection. [Evidence and alternatives](docs/task52-ordering-safety-investigation.md).
