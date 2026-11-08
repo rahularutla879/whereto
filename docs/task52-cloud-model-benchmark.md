@@ -1,3 +1,47 @@
+# November 8 UTC — approved v4 screen stopped after three calls
+
+Started clean at `c54928780a6a3f92d9a69bbfaf8f0d3b5d2dcb4d`. Owner approved exactly five ordered slots and at most **$0.0125** additional full reservations. **Three new OpenAI calls, all HTTP200/completed; third response contained a critical accepted unsupported ordering constraint. Stop activated. No further inference.** [Approved continuation](task52-v4-openai-approved-continuation.json), [measurements, full rubric evidence, immutable hashes and accounting](task52-v4-openai-results.json). Original proposed-plan JSON and all v3 evidence are preserved.
+
+Configuration `52b-v4-order-edge-quotes`, hash `6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3`; scorer `52b-semantic-v3-source-bound-generic-the`. Exact reviewed370-byte addition/all19 examples/canonical schema unchanged. No mid-batch prompt tuning, retry, warmup, fallback or production validator change.
+
+| Original slot, all r1 | Complete inference latency | Input / output / reasoning | Structure / trusted acceptance | Full agent semantic review | Full retained reservation / conservative usage estimate |
+|---|---:|---:|---|---|---:|
+| journey-04 | 3,080.241958ms | 5,127 /213 /0 | valid /accepted advanced handoff | Correct exact SUNY identity, coffee, only0→1 | $0.0025 /$0.000747375 |
+| extension-partial | 3,242.775167ms | 5,131 /233 /0 | valid /accepted advanced handoff | Correct pharmacy→bank only; coffee required/unordered; Jersey City/tomorrow | $0.0025 /$0.000757875 |
+| extension-repeated | 3,131.913542ms | 5,134 /257 /0 | valid /accepted advanced handoff | **Incorrect accepted extraction: extra0→1 order from list** | $0.0025 /$0.000770250 |
+
+`journey-12/r1` and `journey-06/r1` **remain unsent**. Home clarification and optional coffee therefore have no new live evidence. First two responses passed the complete agent rubric before subsequent dispatch; third triggered `recorded_halted` and an append-only failed-review/halt artifact. Independent human signoff:0/3. Automated `fullyCorrect` stays null. No response was rewritten or retried.
+
+The repeated result retained Coffee0/museum1/coffee2, correct1→2 supported by `museum, then coffee`, origin return and inclusive180-minute whole-trip maximum. It also added0→1 supported by `Coffee, museum, then`: this trailing cue introduces the later coffee, not coffee-before-museum. The source quote is real and includes both labels, so existing bounded trusted validation accepted it. The approved prose-plan check rejected the unsupported edge; full agent review confirmed the critical failure. This is **an accepted hallucinated mandatory constraint**, not a safe rejection. No venue identity was hallucinated. [Scoring/validator distinction](task52-semantic-review.md).
+
+| Metric | OpenAI v4 screen | Google | Anthropic |
+|---|---|---|---|
+| Exact model/version | gpt-6-luna alias returned; immutable revision unavailable | gemini-3.8-flash | claude-haiku-5-5 |
+| New calls / complete responses | 3 /3 | 0 /0 | 0 /0 |
+| Valid structured / trusted accepted responses | 3/3 /3/3 | unavailable, no new output | unavailable, no new output |
+| Fully correct semantic cases | 2/3 agent-reviewed; independent human0/3 | unavailable | unavailable |
+| Critical failed responses / unsupported constraints | 1/3 /one invented mandatory edge | unavailable | unavailable |
+| Hallucinated venue identities / safe clarifications | 0/3 /0/3 | unavailable | unavailable |
+| p50 /p90 /p95 | Not used for qualification; only three samples, raw timings above | unavailable | unavailable |
+| Maximum complete inference latency | 3,242.775167ms (n=3) | unavailable | unavailable |
+| Input /output /reasoning tokens | 15,392 /703 /0 | unavailable | unavailable |
+| Retained reservation /usage upper estimate | $0.0075 /$0.002275500 | no new inference | no new inference |
+| Provider-reported invoice charge | unavailable | unavailable | unavailable |
+| Data/privacy | Standard global, synthetic only, store=false; all3 sharing options disabled; standard abuse logs up to30days with exceptions, not ZDR | historical Developer API/IP blocker | historical grammar-size blocker |
+| Qualification | **Not qualified: critical accepted order failure** | blocked | blocked |
+
+Cache-classified pricing estimate for these three calls is **$0.001717525**, using reported uncached/cache-write/cached-read/output categories at $0.10/$0.125/$0.01/$0.50 per million; not an invoice charge. The deliberately larger usage estimate above treats every input token as a cache write. All three **full** reservations remain retained in the journal; no uncertain historical charge refunded. First versus subsequent timing is descriptive only: cold/warm state and schema-compilation effects were not independently observed. These are interpretation calls, not Places/Routes/hosting/browser end-to-end measurements; no five-second application claim.
+
+Readiness refreshed November8UTC: official model remains live with Responses/strict structure/reasoning none; same Standard global pricing and processing terms. Console: **$4.93 existing credits, auto-reloadOFF, sharingDisabled×3, project/model5,000RPM/2,000,000TPM**. All66 original v4 counts revalidated (5,117–5,141, bound7,189), same UTCday/≤24h; **one fresh free count** returned200/5,127 and confirmed existing ResponsesWrite access. Output cap2,000, store=false/toolsnone/configuration hashes verified. [Official model](https://developers.openai.com/api/docs/models/gpt-6-luna), [pricing](https://developers.openai.com/api/docs/pricing?latest-pricing-expanded=true), [data terms](https://developers.openai.com/api/docs/guides/your-data), [free counting](https://help.openai.com/en/articles/4936856-understanding-and-counting-tokens).
+
+Original journal started **OpenAI4/Google2/Anthropic1 =7**, $0.039866625 accounted; now **OpenAI7/Google2/Anthropic1 =10/594**, provider remaining191/196/197, global584. Cumulative retained **$0.047366625**, remaining **$11.952633375**. SQLite integrityok; original seven exact row hashes/root, decoder correction, historical ordering rejection and305 original JSON evidence files unchanged. New operations use rowids8/9/10 and per-operation hashes. Recovery test with an assertion-only fake transport refused before HTTP (zero sends). No fresh/cloned/replaced journal. All $12/594/198/12k/2k/concurrency1/retries0 limits remain.
+
+**Recommendation: no production model selection; do not expand paid corpus testing yet.** Next step is owner review and a separately scoped offline investigation of ordering-cue attachment/occurrence relationships, preserving this failed response. Any future paid continuation needs explicit approval and refreshed gates; unused slots are not automatic permission after a halt. Gemini retains two unexplained historical Developer API400s and last free readiness403 `API_KEY_IP_ADDRESS_BLOCKED`; Developer API is not Vertex/managed-platform identity. Anthropic retains one grammar-size rejection despite fitting input; schema proposals remain unactivated. No calls to either provider this continuation.
+
+Verification: **152 existing backend/evaluation tests +21 continuation tests passed; frontend283/283 passed**. Exact consumed failure now has an offline regression demonstrating original validator acceptance but owner-plan rejection. Secret scans: configured evaluation keys0 tracked/new matches; existing scan0 current/history matches; private config/journal mode600/ignored. No runtime/shared app/dependency changes; TypeScript/lint/build/full backend/browser suites not rerun. No Maps calls/configuration, purchases, credentials/permissions/billing changes, infrastructure, database migration, Qwen/production provider change or Task53. Task52 remains in progress. Older sections below are historical snapshots.
+
+---
+
 # November 8 — separate v4 readiness prepared; no paid inference
 
 [Full readiness, current blockers and exact future plan](task52-v4-readiness.md), [all66 OpenAI/Anthropic counts and configuration hashes](task52-v4-readiness.json), [five unused proposed slots](task52-v4-openai-test-plan.json). Configuration `52b-v4-order-edge-quotes` adds only the reviewed370-byte instruction, preserving19 examples and canonical schema; historical v3 evidence/scoring/journal remains intact. OpenAI66/66 complete-input counts5,117–5,141, bound7,189; Anthropic66/66 schema-inclusive estimates11,011–11,049, bound11,561. Both below12k, output2k. **132 free counts +two model GETs; paid inference0.**

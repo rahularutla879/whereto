@@ -1,0 +1,183 @@
+{
+  "kind": "owner-approved-v4-five-slots-v1",
+  "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+  "promptVersion": "52b-v4-order-edge-quotes",
+  "scorer": "52b-semantic-v3-source-bound-generic-the",
+  "slots": [
+    [
+      "openai",
+      "journey-04",
+      1
+    ],
+    [
+      "openai",
+      "extension-partial",
+      1
+    ],
+    [
+      "openai",
+      "extension-repeated",
+      1
+    ],
+    [
+      "openai",
+      "journey-12",
+      1
+    ],
+    [
+      "openai",
+      "journey-06",
+      1
+    ]
+  ],
+  "coverage": {
+    "journey-04": {
+      "text": "Go to SUNY College of Optometry and then get coffee.",
+      "review": "Exact required SUNY named-place identity, required coffee, source-order occurrences0/1 and supported0→1 edge evidence containing both. No invented city/date/time.",
+      "referenceKind": "structured gold",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "inputTokens": 5127
+    },
+    "extension-partial": {
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "review": "Required pharmacy, bank and coffee; pharmacy before bank only. Coffee is independently ordered, not optional. Preserve Jersey City/tomorrow; no fabricated full chain.",
+      "referenceKind": "prose/manual review",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "inputTokens": 5131
+    },
+    "extension-repeated": {
+      "text": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "review": "Three distinct source occurrences, museum→later coffee; do not merge coffee visits. Preserve return-to-start and inclusive180-minute whole-trip budget. Additional edges require source review; source order is not blanket mandatory order.",
+      "referenceKind": "prose/manual review",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "inputTokens": 5134
+    },
+    "journey-12": {
+      "text": "Get groceries and return home within 45 minutes.",
+      "review": "Required groceries, home endpoint not assumed origin, whole-trip45-minute maximum; request necessary missing context.",
+      "referenceKind": "structured gold",
+      "payloadHash": "809dbbca9a1e69299f32105e487e70332af4dae335d6b31b92ac46dedecc77d3",
+      "inputTokens": 5124
+    },
+    "journey-06": {
+      "text": "Buy groceries and maybe stop for coffee.",
+      "review": "Required groceries, explicitly optional coffee with owned maybe evidence; no invented mandatory order/time/endpoint.",
+      "referenceKind": "structured gold",
+      "payloadHash": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+      "inputTokens": 5122
+    }
+  },
+  "baseline": {
+    "sha256": "d13b585b4821be465be1c635792471072f11f38258f87e2e94126481835e9a45",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c"
+      },
+      {
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd"
+      },
+      {
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253"
+      },
+      {
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb"
+      }
+    ],
+    "counts": {
+      "openai": 4,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 39866625,
+    "integrity": "ok"
+  },
+  "reviewedPlanHash": "c8dc50551014e995c4c38c290335038fd23793865d19ae76ed8c7e92e34235c1",
+  "codeHashes": {
+    "cloud_model52.py": "0e49844488e5e6b70e79c5e6b6e7d6065df13ca8c16b4ea00a6770e4c291e470",
+    "cloud_model52_offline.py": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+    "cloud_model52_v4.py": "429468bd1d6d95ca1e00f8a66f535e477623616721f8f23ae940eec73a4728ec",
+    "cloud_model52_v4_live.py": "8c6354f780bd3e2ef11cdd91eeb38f040400eab98d5d883187ef52b82e023ed5",
+    "cloud_model52_live.py": "12478fef504246f9215959e08c5198adc94521b510815f3944ebf2560d739685",
+    "cloud_model52_audit.py": "421b6f287325dbcb1bf1cd1bba125c73013533051e7c3639a0516cf1fc5ebd8d",
+    "cloud_model52_semantics.py": "e3291615e578169c3292e9177e78afba8d2a8d7cf8b154ae8e360289fc174661",
+    "cloud_model52_proposal.py": "5df77872ae3b648a65d107274426d030e1a710f083666e7499b99f30889b5c4f"
+  },
+  "maxNewAttempts": 5,
+  "maxAdditionalReservationNanodollars": 12500000,
+  "reservationPerAttemptNanodollars": 2500000,
+  "concurrency": 1,
+  "retries": 0,
+  "approval": "Owner explicitly approved exactly these five original slots in order, v4 configuration 6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3, at most five attempts and $0.0125 full reservations; stop on any provider, source, semantic or unresolved-review failure. No other inference authorized.",
+  "historicalHaltAcknowledgment": "V3 stopped screen and journey-07 source rejection remain failures; journey-01 decoder correction retained, no retry/refund/record rewrite.",
+  "approvalHash": "dab8484cbcbed0ea9233132f27514354668da5aa4031dc5dbb2b563286a7b68d",
+  "status": "APPROVED; halted after third attempt; no further dispatch",
+  "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+  "readiness": {
+    "preparedAtUTC": "2026-11-08T18:53:58.760816+00:00",
+    "reviewDateUTC": "2026-11-08",
+    "completeInputsCounted": 66,
+    "minInputTokens": 5117,
+    "maxInputTokens": 5141,
+    "conservativeInputBound": 7189,
+    "outputCap": 2000,
+    "existingCountsRevalidated": true,
+    "freshFreePermissionCount": 5127,
+    "creditsUSD": 4.93,
+    "autoReload": false,
+    "allThreeSharingOptionsDisabled": true,
+    "projectModelRPM": 5000,
+    "projectModelTPM": 2000000,
+    "processing": "Standard global; synthetic only; store=false; standard abuse-monitoring retention, not ZDR.",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "https://developers.openai.com/api/docs/pricing?latest-pricing-expanded=true",
+      "https://developers.openai.com/api/docs/guides/your-data",
+      "https://help.openai.com/en/articles/4936856-understanding-and-counting-tokens"
+    ]
+  }
+}

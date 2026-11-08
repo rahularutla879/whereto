@@ -1,3 +1,13 @@
+# November 8 — v4 three-response screen found a critical ordering error
+
+[Full v4 benchmark](task52-cloud-model-benchmark.md), [safe per-case measurements/hashes/agent rubric](task52-v4-openai-results.json), [approved continuation](task52-v4-openai-approved-continuation.json). Exactly3 new GPT-6 Luna attempts, original unused slots in approved order, no retry/warmup/tuning. journey-04/r1 **3,080.241958ms**, extension-partial/r1 **3,242.775167ms**, extension-repeated/r1 **3,131.913542ms**; complete wall-clock HTTP operation including full body, not first token. All3 HTTP200, valid structure/trusted acceptance; full agent semantics **2/3 correct**, **1/3 critical accepted unsupported order**. Independent human review0/3. The repeated case invented first-coffee→museum from list order, despite correct museum→later-coffee, return and180-minute inclusive budget. Persistent halt stopped the remaining home/optional-coffee slots.
+
+Input15,392/output703/reasoning0. Full retained reservations **$0.0075**; conservative all-input-cache-write usage upper estimate **$0.002275500**, reported-cache-category estimate **$0.001717525**; provider-reported invoice charge unavailable. These are separate estimates, not refunded reservations or dashboard charges. Cumulative10/594 (OpenAI7/Google2/Anthropic1), **$0.047366625 accounted /$11.952633375 remaining**. Original7 rows/root/corrections and historical v3 measurements preserved; v3/v4 scores are not pooled into a qualification score.
+
+No model qualified; do not select one for production or expand paid testing before offline cue/occurrence review. Only three descriptive timing samples: no production latency percentiles, cold/warm attribution or schema-compilation claims. Interpretation only: no venue search, routing, Cloud Run, state services or browser rendering measured; five-second end-to-end target remains unproven. Google/Anthropic compatibility blockers remain. No application/runtime/provider settings changed. Earlier sections below are historical.
+
+---
+
 > November8 v4 readiness: zero paid inference; complete-input OpenAI counts5,117–5,141 (bound7,189), Anthropic estimates11,011–11,049 (bound11,561),66 cases each. Google metadata403/IP restriction blocked before counting; Anthropic grammar still blocked. Token fit is not compilation/semantic/latency qualification. Proposed OpenAI five-slot plan requires owner approval and audited continuation. Active Qwen/v3/schema and journal unchanged. [Readiness and source evidence](task52-v4-readiness.md).
 
 ---

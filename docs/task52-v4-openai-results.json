@@ -1,0 +1,733 @@
+{
+  "version": "52b-v4-approved-five-screen-results-v1",
+  "recordedAtUTC": "2026-11-08T18:59:39.821438+00:00",
+  "startingGitHEAD": "c54928780a6a3f92d9a69bbfaf8f0d3b5d2dcb4d",
+  "approvalHash": "dab8484cbcbed0ea9233132f27514354668da5aa4031dc5dbb2b563286a7b68d",
+  "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+  "scorer": "52b-semantic-v3-source-bound-generic-the",
+  "historicalV3Unchanged": true,
+  "journalIntegrity": {
+    "sqlite": "ok",
+    "startingFileSHA256": "d13b585b4821be465be1c635792471072f11f38258f87e2e94126481835e9a45",
+    "endingFileSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "originalSevenRowHashesUnchanged": true,
+    "originalRootUnchanged": true,
+    "historicalJSONFilesVerified": 305,
+    "historicalJSONUnchanged": true,
+    "historicalDecoderCorrectionRevalidated": true,
+    "newFinalDatabaseState": "recorded_halted",
+    "recoveryRefusesWithoutHTTP": true
+  },
+  "readiness": {
+    "preparedAtUTC": "2026-11-08T18:53:58.760816+00:00",
+    "reviewDateUTC": "2026-11-08",
+    "completeInputsCounted": 66,
+    "minInputTokens": 5117,
+    "maxInputTokens": 5141,
+    "conservativeInputBound": 7189,
+    "outputCap": 2000,
+    "existingCountsRevalidated": true,
+    "freshFreePermissionCount": 5127,
+    "creditsUSD": 4.93,
+    "autoReload": false,
+    "allThreeSharingOptionsDisabled": true,
+    "projectModelRPM": 5000,
+    "projectModelTPM": 2000000,
+    "processing": "Standard global; synthetic only; store=false; standard abuse-monitoring retention, not ZDR.",
+    "sources": [
+      "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "https://developers.openai.com/api/docs/pricing?latest-pricing-expanded=true",
+      "https://developers.openai.com/api/docs/guides/your-data",
+      "https://help.openai.com/en/articles/4936856-understanding-and-counting-tokens"
+    ]
+  },
+  "newPaidAttempts": 3,
+  "newNonInferenceCounts": 1,
+  "newGoogleInference": 0,
+  "newAnthropicInference": 0,
+  "results": [
+    {
+      "caseId": "journey-04",
+      "repetition": 1,
+      "rowid": 8,
+      "model": "gpt-6-luna",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+      "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+      "scorerCodeHash": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+      "sourceHash": "2de13896d43aca02dca98794d21768848828c3638f3af90aa570c76504b635bb",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "operationHash": "3ad8ded80c1602c2860d3a758d9899fe88a32c62c889f7e6ae607771a585018d",
+      "responseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "outputHash": "7e42e919a475e53af1d9a326f117d02d4b0ce3b4d3c0460471d1a7225f7ba36d",
+      "responseEvidenceHash": "4529e830bc52ad2ff1cc445c09dfefef9b09a4da20bff54c341eeaece18ff63a",
+      "latencyMs": 3080.241957999533,
+      "status": "complete",
+      "usageEstimatedNanodollars": 747375,
+      "accountedNanodollars": 2500000,
+      "approvedPlanChecks": {},
+      "reviewHalt": false,
+      "stopReason": null,
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4",
+      "agentReviewHash": "d2904a8b11ce4dd1677b8f045284a75ff444fe13d2c706b93a91e4f0571c2a78",
+      "httpStatus": 200,
+      "reportedModel": "gpt-6-luna",
+      "inputTokens": 5127,
+      "outputTokens": 213,
+      "reasoningTokens": 0,
+      "cacheWriteTokens": 5124,
+      "cachedReadTokens": 0,
+      "uncachedTokens": 3,
+      "classifiedUsageEstimateNanodollars": 747300,
+      "structuredValid": true,
+      "trustedAccepted": true,
+      "scorerAutomatedFailures": [],
+      "semanticOutcome": "correct_extraction",
+      "criticalFailures": [],
+      "agentReviewedCorrect": true,
+      "independentHumanSignoff": false,
+      "automatedFullyCorrect": null,
+      "agentEvidenceNotes": {
+        "mandatory": "Two distinct required source occurrences SUNY College of Optometry (named_place) and coffee (activity), indexes0/1. Both preserved exactly; no optional stop invented.",
+        "ordering": "Only edge0->1; contiguous verbatim quote SUNY College of Optometry and then get coffee contains both stop phrases and and then cue in correct direction.",
+        "grounding": "Required stop evidence Go to SUNY College of Optometry / get coffee attaches to correct occurrences. Canonical wire valid, missing/unknown0, trusted source acceptance and full gold comparator pass.",
+        "absentRequirements": "No city, date, people, budgets, transport preference, return/endpoint, trip/travel/visit limit, deadline, shared venue or invented venue. All scalar unknowns/nulls and empty preferences checked.",
+        "handoff": "Advanced-unavailable is expected local planner boundary, preserves both mandatory stops and order; not an itinerary. No ambiguity or clarification needed for interpretation.",
+        "reviewLimit": "Complete agent rubric inspection of raw output and canonical trusted result; independent human signoff not performed."
+      },
+      "orderingEdges": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "SUNY College of Optometry and then get coffee"
+        }
+      ],
+      "requiredOccurrences": [
+        {
+          "index": 0,
+          "source": "SUNY College of Optometry",
+          "kind": "named_place",
+          "requirement": "required"
+        },
+        {
+          "index": 1,
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required"
+        }
+      ],
+      "endpoint": null,
+      "totalDuration": null,
+      "dateExpressions": [],
+      "location": null,
+      "providerReportedChargeUSD": null,
+      "agentRubricFields": {
+        "required_stops": {
+          "applicable": true,
+          "correct": true
+        },
+        "optional_stops": {
+          "applicable": false,
+          "correct": null
+        },
+        "venue_identity": {
+          "applicable": true,
+          "correct": true
+        },
+        "ordering": {
+          "applicable": true,
+          "correct": true
+        },
+        "return_to_origin": {
+          "applicable": false,
+          "correct": null
+        },
+        "final_destination": {
+          "applicable": false,
+          "correct": null
+        },
+        "total_duration": {
+          "applicable": false,
+          "correct": null
+        },
+        "travel_only_limits": {
+          "applicable": false,
+          "correct": null
+        },
+        "strict_flexible": {
+          "applicable": false,
+          "correct": null
+        },
+        "visit_duration": {
+          "applicable": false,
+          "correct": null
+        },
+        "duration_relation": {
+          "applicable": false,
+          "correct": null
+        },
+        "relative_date_time": {
+          "applicable": false,
+          "correct": null
+        },
+        "clarification": {
+          "applicable": true,
+          "correct": true
+        },
+        "unsupported": {
+          "applicable": true,
+          "correct": true
+        },
+        "contradiction": {
+          "applicable": false,
+          "correct": null
+        },
+        "unicode": {
+          "applicable": false,
+          "correct": null
+        },
+        "grounding": {
+          "applicable": true,
+          "correct": true
+        },
+        "injection": {
+          "applicable": false,
+          "correct": null
+        }
+      }
+    },
+    {
+      "caseId": "extension-partial",
+      "repetition": 1,
+      "rowid": 9,
+      "model": "gpt-6-luna",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+      "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+      "scorerCodeHash": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+      "sourceHash": "d4ee42fdc3ee7416cd4f05c58e482dd4db2442c41ccfb29704cb5e8c39aae994",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "operationHash": "9ae5d22beebcface13a0f86a53817bb2b2b1ecba39b127b3bbe38c7151f8b501",
+      "responseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "outputHash": "211c6ab0b027cf5d43db0ee5a38de1ffa242790eaa89fabd91cc33a91d239b80",
+      "responseEvidenceHash": "53cc1150b6a1b15ce09503ca806df66765a110ddbc4e83aaddb836a085d0ff43",
+      "latencyMs": 3242.775167003856,
+      "status": "complete",
+      "usageEstimatedNanodollars": 757875,
+      "accountedNanodollars": 2500000,
+      "approvedPlanChecks": {
+        "requiredDistinctOccurrences": true,
+        "occurrenceProvenance": true,
+        "partialOrderOnly": true,
+        "destinationDate": true,
+        "noInventedScalarRequirements": true,
+        "noInventedJourneyRequirements": true,
+        "endpoint": true,
+        "wholeTripBudget": true
+      },
+      "reviewHalt": false,
+      "stopReason": null,
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41",
+      "agentReviewHash": "139647723fb2f9f1ad08c9ece779964f1ffe57d9bcef0cb3c6e03c86497a1d78",
+      "httpStatus": 200,
+      "reportedModel": "gpt-6-luna",
+      "inputTokens": 5131,
+      "outputTokens": 233,
+      "reasoningTokens": 0,
+      "cacheWriteTokens": 2703,
+      "cachedReadTokens": 2425,
+      "uncachedTokens": 3,
+      "classifiedUsageEstimateNanodollars": 478925,
+      "structuredValid": true,
+      "trustedAccepted": true,
+      "scorerAutomatedFailures": [],
+      "semanticOutcome": "correct_extraction",
+      "criticalFailures": [],
+      "agentReviewedCorrect": true,
+      "independentHumanSignoff": false,
+      "automatedFullyCorrect": null,
+      "agentEvidenceNotes": {
+        "requiredOccurrences": "Required pharmacy0, bank1, coffee2, generic activity kinds, no merged or missing stop; activities align exactly with sources and occurrence spans.",
+        "partialOrder": "Exactly0->1 supported by contiguous quote pharmacy before the bank; correct identities, cue and direction. Coffee2 remains independently ordered, not optional; no full chain invented from listing.",
+        "provenance": "First two evidence quotes Visit a pharmacy before the bank are actual source clause containing the respective stop; coffee evidence get coffee whenever convenient preserves requiredness. Trusted validation/evidence attachment pass.",
+        "dateLocation": "Jersey City exact; raw date_expressions tomorrow, no invented raw absolute date; trusted frozen2026-11-05 reference resolves2026-11-06 in America/New_York.",
+        "absence": "No exact business names or brands, origin/end/return, whole-trip/travel-only cap, dwell duration, deadline, strict/flexible geography preference, group/budget/transport requirement, shared venue, opening-hours evidence or extra requirement. All null/empty raw fields inspected.",
+        "handoff": "Expected advanced-unavailable handoff for partial order; no unexplained clarification/uncertainty. No itinerary generated.",
+        "reviewLimit": "Complete prose-gold owner criteria and all18 rubric fields examined by agent; independent human signoff false."
+      },
+      "orderingEdges": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "pharmacy before the bank"
+        }
+      ],
+      "requiredOccurrences": [
+        {
+          "index": 0,
+          "source": "pharmacy",
+          "kind": "activity",
+          "requirement": "required"
+        },
+        {
+          "index": 1,
+          "source": "bank",
+          "kind": "activity",
+          "requirement": "required"
+        },
+        {
+          "index": 2,
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required"
+        }
+      ],
+      "endpoint": null,
+      "totalDuration": null,
+      "dateExpressions": [
+        "tomorrow"
+      ],
+      "location": "Jersey City",
+      "providerReportedChargeUSD": null,
+      "agentRubricFields": {
+        "required_stops": {
+          "applicable": true,
+          "correct": true
+        },
+        "optional_stops": {
+          "applicable": false,
+          "correct": null
+        },
+        "venue_identity": {
+          "applicable": false,
+          "correct": null
+        },
+        "ordering": {
+          "applicable": true,
+          "correct": true
+        },
+        "return_to_origin": {
+          "applicable": false,
+          "correct": null
+        },
+        "final_destination": {
+          "applicable": false,
+          "correct": null
+        },
+        "total_duration": {
+          "applicable": false,
+          "correct": null
+        },
+        "travel_only_limits": {
+          "applicable": false,
+          "correct": null
+        },
+        "strict_flexible": {
+          "applicable": false,
+          "correct": null
+        },
+        "visit_duration": {
+          "applicable": false,
+          "correct": null
+        },
+        "duration_relation": {
+          "applicable": false,
+          "correct": null
+        },
+        "relative_date_time": {
+          "applicable": true,
+          "correct": true
+        },
+        "clarification": {
+          "applicable": true,
+          "correct": true
+        },
+        "unsupported": {
+          "applicable": true,
+          "correct": true
+        },
+        "contradiction": {
+          "applicable": false,
+          "correct": null
+        },
+        "unicode": {
+          "applicable": false,
+          "correct": null
+        },
+        "grounding": {
+          "applicable": true,
+          "correct": true
+        },
+        "injection": {
+          "applicable": false,
+          "correct": null
+        }
+      }
+    },
+    {
+      "caseId": "extension-repeated",
+      "repetition": 1,
+      "rowid": 10,
+      "model": "gpt-6-luna",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+      "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "evaluatorVersion": "52b-semantic-v3-source-bound-generic-the",
+      "scorerCodeHash": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+      "sourceHash": "4fcfd6a028599fd26e3c297ab75c15bde0c662a10b7b77aef4c296d8009e4f8b",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "operationHash": "2933946ed4117ad650196b6f19da9fb81c14c44c4c2afe649a4fa5a37deadd8a",
+      "responseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "outputHash": "db35b8f2c50cd562cedb405d8698ef728ac76b2d3ee0417e2adcb1d0855e99c0",
+      "responseEvidenceHash": "cff15d18ff5c4efc2fa7ac203b76c0b80d76fad9b80de82494d445df7db8fe19",
+      "latencyMs": 3131.913541990798,
+      "status": "complete",
+      "usageEstimatedNanodollars": 770250,
+      "accountedNanodollars": 2500000,
+      "approvedPlanChecks": {
+        "requiredDistinctOccurrences": true,
+        "occurrenceProvenance": true,
+        "partialOrderOnly": false,
+        "destinationDate": true,
+        "noInventedScalarRequirements": true,
+        "noInventedJourneyRequirements": true,
+        "endpoint": true,
+        "wholeTripBudget": true
+      },
+      "reviewHalt": true,
+      "stopReason": "approved_prose_semantics_failure_or_unresolved",
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968",
+      "agentReviewHash": "0130193c10b8555b74a0eb57cf2c7962fa760ff3cffed2c4ff69fa388e40b6f2",
+      "httpStatus": 200,
+      "reportedModel": "gpt-6-luna",
+      "inputTokens": 5134,
+      "outputTokens": 257,
+      "reasoningTokens": 0,
+      "cacheWriteTokens": 2706,
+      "cachedReadTokens": 2425,
+      "uncachedTokens": 3,
+      "classifiedUsageEstimateNanodollars": 491300,
+      "structuredValid": true,
+      "trustedAccepted": true,
+      "scorerAutomatedFailures": [],
+      "semanticOutcome": "incorrect_extraction",
+      "criticalFailures": [
+        "ordering",
+        "grounding"
+      ],
+      "agentReviewedCorrect": false,
+      "independentHumanSignoff": false,
+      "automatedFullyCorrect": null,
+      "agentEvidenceNotes": {
+        "preserved": "Three required distinct occurrences Coffee0,museum1,coffee2; separate coffee visits, no merger. Origin return,180-minute maximum inclusive, Jersey City/tomorrow all preserved; no invented dwell duration/opening-hours evidence.",
+        "correctEdge": "museum1 -> coffee2, source museum, then coffee, correct contiguous quote/cue/direction.",
+        "criticalFailure": "Unsupported Coffee0 -> museum1 edge, source Coffee, museum, then. The trailing then introduces the subsequent coffee2; it does not establish coffee0-before-museum1. This is mandatory order inferred from list order, explicitly forbidden by approved prompt and owner rubric.",
+        "validatorLimitation": "Canonical structured contract and bounded trusted source validation accepted the extra edge: both stop phrases and a cue occur in a real quote, but cue attachment/direction within that quote is not fully established. Existing generic scorer only checked evidence attachment for prose-gold, so its empty automatedFailures is not full semantic correctness. Separate owner-plan checks and agent review caught the critical accepted unsupported constraint.",
+        "reviewLimit": "Full agent inspection, not independent human signoff. No production rule changed. No further inference authorized after this stop."
+      },
+      "orderingEdges": [
+        {
+          "before": 0,
+          "after": 1,
+          "source": "Coffee, museum, then"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "source": "museum, then coffee"
+        }
+      ],
+      "requiredOccurrences": [
+        {
+          "index": 0,
+          "source": "Coffee",
+          "kind": "activity",
+          "requirement": "required"
+        },
+        {
+          "index": 1,
+          "source": "museum",
+          "kind": "activity",
+          "requirement": "required"
+        },
+        {
+          "index": 2,
+          "source": "coffee",
+          "kind": "activity",
+          "requirement": "required"
+        }
+      ],
+      "endpoint": {
+        "kind": "origin",
+        "source": "return to the starting point"
+      },
+      "totalDuration": {
+        "minutes": 180,
+        "relation": "maximum",
+        "source": "within three hours"
+      },
+      "dateExpressions": [
+        "tomorrow"
+      ],
+      "location": "Jersey City",
+      "providerReportedChargeUSD": null,
+      "agentRubricFields": {
+        "required_stops": {
+          "applicable": true,
+          "correct": true
+        },
+        "optional_stops": {
+          "applicable": false,
+          "correct": null
+        },
+        "venue_identity": {
+          "applicable": false,
+          "correct": null
+        },
+        "ordering": {
+          "applicable": true,
+          "correct": false
+        },
+        "return_to_origin": {
+          "applicable": true,
+          "correct": true
+        },
+        "final_destination": {
+          "applicable": false,
+          "correct": null
+        },
+        "total_duration": {
+          "applicable": true,
+          "correct": true
+        },
+        "travel_only_limits": {
+          "applicable": false,
+          "correct": null
+        },
+        "strict_flexible": {
+          "applicable": false,
+          "correct": null
+        },
+        "visit_duration": {
+          "applicable": false,
+          "correct": null
+        },
+        "duration_relation": {
+          "applicable": true,
+          "correct": true
+        },
+        "relative_date_time": {
+          "applicable": true,
+          "correct": true
+        },
+        "clarification": {
+          "applicable": true,
+          "correct": true
+        },
+        "unsupported": {
+          "applicable": true,
+          "correct": true
+        },
+        "contradiction": {
+          "applicable": false,
+          "correct": null
+        },
+        "unicode": {
+          "applicable": false,
+          "correct": null
+        },
+        "grounding": {
+          "applicable": true,
+          "correct": false
+        },
+        "injection": {
+          "applicable": false,
+          "correct": null
+        }
+      }
+    }
+  ],
+  "unsentApprovedSlots": [
+    [
+      "openai",
+      "journey-12",
+      1
+    ],
+    [
+      "openai",
+      "journey-06",
+      1
+    ]
+  ],
+  "stop": "Critical accepted unsupported first-coffee -> museum mandatory edge inferred from list order. Original validator and generic scorer accepted it; approved owner-plan checks plus agent rubric rejected it. No retry/tuning/next call.",
+  "metrics": {
+    "completeResponses": 3,
+    "structuredValid": 3,
+    "trustedAccepted": 3,
+    "agentReviewedCorrect": 2,
+    "agentReviewedDenominator": 3,
+    "criticalFailedResponses": 1,
+    "unsupportedAcceptedOrderingConstraints": 1,
+    "hallucinatedVenueIdentities": 0,
+    "safeClarifications": 0,
+    "safeRejections": 0,
+    "independentHumanReviewed": 0,
+    "inputTokens": 15392,
+    "outputTokens": 703,
+    "reasoningTokens": 0,
+    "newRetainedReservationNanodollars": 7500000,
+    "approvedAdditionalReservationCapNanodollars": 12500000,
+    "newUsageConservativeUpperEstimateNanodollars": 2275500,
+    "newCacheClassifiedEstimateNanodollars": 1717525,
+    "providerReportedChargeUSD": null,
+    "latencyPercentiles": null,
+    "latencyPercentileReason": "Three descriptive samples; report individual complete inference timings, no production percentile or end-to-end claim.",
+    "rubricFieldDenominators": {
+      "required_stops": {
+        "applicable": 3,
+        "correct": 3
+      },
+      "optional_stops": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "venue_identity": {
+        "applicable": 1,
+        "correct": 1
+      },
+      "ordering": {
+        "applicable": 3,
+        "correct": 2
+      },
+      "return_to_origin": {
+        "applicable": 1,
+        "correct": 1
+      },
+      "final_destination": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "total_duration": {
+        "applicable": 1,
+        "correct": 1
+      },
+      "travel_only_limits": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "strict_flexible": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "visit_duration": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "duration_relation": {
+        "applicable": 1,
+        "correct": 1
+      },
+      "relative_date_time": {
+        "applicable": 2,
+        "correct": 2
+      },
+      "clarification": {
+        "applicable": 3,
+        "correct": 3
+      },
+      "unsupported": {
+        "applicable": 3,
+        "correct": 3
+      },
+      "contradiction": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "unicode": {
+        "applicable": 0,
+        "correct": 0
+      },
+      "grounding": {
+        "applicable": 3,
+        "correct": 2
+      },
+      "injection": {
+        "applicable": 0,
+        "correct": 0
+      }
+    }
+  },
+  "cumulative": {
+    "providerAttempts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "totalAttempts": 10,
+    "remainingAttempts": 584,
+    "remainingProviderAttempts": {
+      "openai": 191,
+      "google": 196,
+      "anthropic": 197
+    },
+    "accountedNanodollars": 47366625,
+    "remainingAllowanceNanodollars": 11952633375,
+    "openaiCompleteOutputs": 7,
+    "openaiStructuredValid": 7,
+    "openaiTrustedAccepted": 6,
+    "openaiAgentReviewedCorrect": 5,
+    "openaiSafeRejections": 1,
+    "openaiAcceptedCriticalFailureResponses": 1,
+    "independentHumanReviewed": 0
+  },
+  "verification": {
+    "existingBackendTests": 152,
+    "newContinuationTests": 21,
+    "frontendTests": 283,
+    "runtimeChanges": false,
+    "typecheckLintBuild": "Not rerun: isolated Python evaluation tooling/docs, no app runtime/shared dependencies changed.",
+    "security": "Three evaluation credentials mode600/ignored, zero tracked/new matches; existing scan zero current/history matches; final scans repeated after documentation.",
+    "notBrowserRuntimeVerification": true,
+    "existingBackendDurationSeconds": 66.921,
+    "newContinuationDurationSeconds": 8.324,
+    "frontendDurationSeconds": 117.161435833
+  },
+  "qualification": "NOT QUALIFIED; no production selection. Larger paid batch not advisable until ordering cue attachment and repeated-occurrence contract reviewed offline, with owner approval for any continuation.",
+  "remainingBlockers": {
+    "google": "Two historical Developer API HTTP400s remain unexplained; last free metadata check403 API_KEY_IP_ADDRESS_BLOCKED. No Google request in this continuation. Developer API is not managed Vertex platform.",
+    "anthropic": "One historical structured-output grammar-size rejection despite input length fitting. Offline projection proposals unactivated; no Anthropic request in this continuation."
+  },
+  "prohibitedChangesOccurred": false,
+  "recoveryLimitations": [
+    "This exact sealed continuation is persistently halted; no approval sidecar may clear it or refund/reissue a slot.",
+    "Existing readiness-only cloud_model52_v4.journal_snapshot intentionally pins the original seven-row file and now refuses the extended journal. Future readiness must validate the preserved baseline rows plus appended records; never reset or fork the journal to satisfy the old snapshot guard.",
+    "Approval is bound to current code/configuration and expiring readiness; further work needs explicit owner review and a separately audited append-only continuation.",
+    "Agent rubric review is not independent human signoff; bounded production source validation does not fully prove cue attachment."
+  ]
+}
