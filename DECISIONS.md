@@ -1,3 +1,11 @@
+# Task 52B — independent B1 preparation only
+
+Extract immutable strict capture and conservative lexical occurrence preparation at the outer adapter; leave the mutating reference/duration/travel helpers at their existing mixed validation call sites. A lexical source span or mapping is not semantic proof, and unresolved mappings never invent indices or block existing legacy behavior. Preparation records cannot issue admission authority.
+
+Use new runtime identity `52b-runtime-phase-b1` with unchanged semantic legacy policy and canonical schema. Preserve all six pins and historical manifest bytes. Historical snapshot verification remains positive; old broader working-tree equality must now fail. No paid evaluator check is weakened. [Implementation/equivalence evidence](docs/task52-phase-b-extraction-v1.md).
+
+---
+
 # Task 52B source identity / transport review
 
 Recommend exact Git snapshot retention plus immutable allowlisted role-specific manifests. Preserve old source pins and paid configurations; new runtime versions get new identities and separately labeled offline replay outcomes. The prototype has no dispatch/runtime authority and does not automatically map old paid attempts to its baseline catalog.

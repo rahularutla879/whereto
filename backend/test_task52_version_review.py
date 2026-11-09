@@ -12,11 +12,12 @@ R='52b-runtime-legacy-b04'
 
 
 class VersionReviewTests(TestCase):
-    def test_both_pinned_snapshots_and_current_sources_match(self):
+    def test_historical_snapshots_survive_new_runtime_without_false_current_equality(self):
         for name,role in [(H,'historical_evaluator'),(R,'runtime_legacy_foundation')]:
-            result=v.verify(name,role,working=True)
+            result=v.verify(name,role)
             self.assertTrue(result['snapshotVerified'])
             self.assertFalse(result['dispatchAuthorized'])
+            with self.assertRaises(v.VersionError):v.verify(name,role,working=True)
 
     def test_unknown_missing_role_and_historical_runtime_confusion_fail(self):
         for name,role in [('missing','historical_evaluator'),(None,'historical_evaluator'),
@@ -54,9 +55,11 @@ class VersionReviewTests(TestCase):
             data=real(path)
             return data+b'\n# synthetic mutation' if str(path).endswith('backend/journey.py') else data
         # Snapshot-only verification deliberately remains valid; current-tree equality must fail.
+        from scripts import task52_phase_b_identity as current
+        self.assertTrue(current.verify()['verified'])
         with patch.object(Path,'read_bytes',changed):
             self.assertTrue(v.verify(H,'historical_evaluator')['snapshotVerified'])
-            with self.assertRaises(v.VersionError):v.verify(H,'historical_evaluator',working=True)
+            with self.assertRaises(v.VersionError):current.verify()
 
     def test_replay_has_new_identity_preserves_original_and_defaults_unreviewed(self):
         original={'operationId':'synthetic-1','evaluator':'recorded-old-label',

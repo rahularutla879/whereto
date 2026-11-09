@@ -21,7 +21,7 @@ from time import monotonic
 from typing import Any
 
 from pydantic import BaseModel
-from backend.validation_phases import LEGACY_PROFILE
+from backend.validation_phases import LEGACY_PROFILE, RUNTIME_ID
 
 _required = ContextVar('foundation_admission_required', default=False)
 _active = ContextVar('foundation_admission_lease', default=None)
@@ -119,6 +119,8 @@ class AdmissionRegistry:
                 or not 0<=self._clock()-scope.created<TTL):raise AdmissionError()
 
     def validate(self, value, scope, revision, provider=None, *, now=None, execution=None):
+        from backend.interpretation import InterpretationInput
+        if not isinstance(value, InterpretationInput):raise AdmissionError()
         # Reserve bounded revision/capacity BEFORE interpretation work. Failed
         # validation never restores an older request revision or schedules a retry.
         with self._lock:
@@ -156,7 +158,7 @@ class AdmissionRegistry:
             payload={'text':d.input.text,'result':result,'preferences':d.input.preferences}
             kind='advanced_handoff'
         evidence=self._fingerprint({'input':d.input,'raw':d.raw_model,'effective':result,
-                                    'profile':LEGACY_PROFILE,'kind':kind})
+                                    'profile':LEGACY_PROFILE,'runtime':RUNTIME_ID,'kind':kind})
         binding=self._fingerprint(payload)
         with self._lock:
             self._scope(scope)

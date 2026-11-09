@@ -1,3 +1,11 @@
+# Versioned Phase B1 capture boundary
+
+`backend/source_preparation.py` owns the unchanged strict-copy helper plus immutable transient `PreparedSource`/occurrence/mapping records. The existing API legacy adapter captures these before normalizers and observes the effective interpreter result afterward; no record feeds planning decisions. Pending evidence stays effective, never raw. Inseparable journey preparation/validation remains pinned and atomic. The internal admission issuer rejects preparation inputs and fingerprints `52b-runtime-phase-b1` after full legacy validation.
+
+A separate [runtime manifest](docs/task52-runtime-phase-b1.json) and test-only `scripts/task52_phase_b_identity.py` verify current code without changing historical manifests/checks. [Scope, mappings, source limits and remaining work](docs/task52-phase-b-extraction-v1.md). No public transport or V4 enforcement.
+
+---
+
 # Task 52B source-version / authority transport design (not runtime)
 
 `scripts/task52_version_review.py` is an isolated offline checker for an exact-byte allowlisted baseline manifest, retained Git snapshots and separate evaluator/runtime roles. Runtime and paid evaluator imports are unchanged. [Extraction/version plan](docs/task52-source-compatibility-v1.md) and [proposed opaque-reference/SQL authority plus Redis evidence design](docs/task52-admission-transport-v1.md) specify future boundaries only; no shared-state implementation or public receipt exists.

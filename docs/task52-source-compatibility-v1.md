@@ -1,3 +1,9 @@
+# Phase B1 implementation checkpoint
+
+[The new runtime identity and extraction](task52-phase-b-extraction-v1.md) preserve all original six pins and this historical baseline manifest/checker. The old retained snapshot still verifies; its broader current-working-tree check now intentionally refuses the changed outer adapter/new helper. A separate exact-byte allowlisted `52b-runtime-identity-v2` manifest covers `52b-runtime-phase-b1`, canonical schema, prepared type and dependencies. No historical repinning or paid evaluator change. Remaining mutating B fragments still require a future reviewed snapshot execution boundary before pinned source edits. Historical review follows unchanged.
+
+---
+
 # Task 52B source compatibility v1 — review only
 
 Baseline `b04f85ff82aa1b1befc2d44527c8e80a22ed080e`, clean at start. Acceptance: preserve corpus/six pins, paid records, canonical schema, runtime defaults and source files; independently check identities and failure cases; specify one future ordering authority and all new-work issuers. No runtime extraction, enforcement, transport or deployment in this checkpoint.

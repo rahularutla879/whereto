@@ -1,3 +1,7 @@
+Task 52B Phase B1 capture/occurrence preparation is implemented and fully regression-tested under a new runtime identity. Mutating preparation and C/D/E remain interleaved; V4 enforcement/transport/cloud implementation stay unstarted. Task 52 remains in progress, with no new numbered task. [Evidence and next checkpoint](docs/task52-phase-b-extraction-v1.md).
+
+---
+
 Task 52B source-version and admission-transport review completed offline. New manifests distinguish historical evaluator identity from runtime identity without changing old pins, records or paid allowances. Legacy B–E extraction, all per-path issuers, shared authority and V4 remain unimplemented. Task 52 stays in progress; no new roadmap task. [Review/evidence](docs/task52-source-compatibility-v1.md).
 
 ---

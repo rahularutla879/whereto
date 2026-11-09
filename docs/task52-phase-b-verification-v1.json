@@ -1,0 +1,148 @@
+{
+  "version": "52b-phase-b-extraction-verification-v1",
+  "baselineGitHEAD": "87145d597a0be395942745deb1a3f14d5ea5cdd0",
+  "scope": "Independent strict snapshot/capture and lexical B1 records only; mutating B and C/D/E still atomic",
+  "runtime": {
+    "runtime": "52b-runtime-phase-b1",
+    "purpose": "preparation_observation",
+    "verified": true,
+    "planningAuthorized": false,
+    "historicalSourceEqualityClaimed": false
+  },
+  "manifestSHA256": "bba7caeab233f515d038a84c42842cbd20e37c13be64e8d2cd2da1b992b7d5a9",
+  "canonicalSchemaSHA256": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+  "historicalManifestAndCheckerUnchanged": true,
+  "sixPinsAndCorpusUnchanged": true,
+  "preEditCharacterization": {
+    "cases": 75,
+    "sha256": "20401f483444922c81bad3a0550fdea9e8c87f7f28e7aaffee0e34c8779c830f",
+    "exactTracesMatch": true,
+    "fullDTOOrErrorComparisons": 75,
+    "qwenRecorded": 27,
+    "openaiRecorded": 7,
+    "scope": "Behavior equivalence under fixed reference; not new model accuracy or relabeling"
+  },
+  "backend": {
+    "run": 1196,
+    "passed": 1159,
+    "skipped": 37,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 274.901,
+    "skipReasons": "29 hosted PostgreSQL / 8 opt-in local PTY; unchanged"
+  },
+  "frontend": {
+    "passed": 285,
+    "failed": 0,
+    "skipped": 0,
+    "milliseconds": 116623.947042
+  },
+  "newPhaseBTests": 14,
+  "admissionFoundationTests": 22,
+  "orderingReplay": {
+    "historicalFieldsExactlyReproduced": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "originalClassificationsUnchanged": true,
+    "independentHumanSignoff": false
+  },
+  "typecheck": "passed after build",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "browserApiSmoke": {
+    "finalSourceSet": true,
+    "syntheticOnly": true,
+    "date": "2026-11-10",
+    "interpretStatus": 200,
+    "planningStatus": 200,
+    "provisionalOptions": 3,
+    "fakeModelCalls": 1,
+    "fakeSearchCalls": 3,
+    "fakeMatrixCalls": 3,
+    "forgedClientFieldStatus": 422,
+    "forgeryExtraCalls": 0,
+    "serverStopped": true,
+    "scope": "Isolated browser fixture page through real APIs, not full main-form/live availability"
+  },
+  "existingRelativeDateLimitation": {
+    "source": "box cricket, dinner and movie in hitech city tomorrow",
+    "controlledReference": "2026-11-09T12:00:00Z",
+    "destinationTimezoneUnknown": true,
+    "oldAndNewFullDTOEqual": true,
+    "checkedCalendarTimezoneInputs": [
+      null,
+      "Asia/Kolkata"
+    ],
+    "disposition": "Existing date clarification; no request published",
+    "fixedInThisTask": false
+  },
+  "initialAttempts": {
+    "frontend": "Sandbox EPERM on Node IPC before test execution; full authorized run passed",
+    "backend": "Sandbox loopback API fixture setup error; interrupted and full authorized run passed",
+    "phaseBFocused": "One authored ambiguity test accidentally described a unique lexical binding; corrected to a genuinely ambiguous pair; final full suite passes"
+  },
+  "privateEvidence": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "readOnlyHaltRecoveryRefused": true,
+  "paidEvaluation": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1,
+    "total": 10,
+    "remainingAttempts": 584,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "newRequests": 0,
+    "limits": "$12 / 594 / 198 per provider / 12000 input / 2000 output / concurrency 1 / retries 0"
+  },
+  "security": {
+    "configuredCurrentHits": 0,
+    "configuredHistoryHits": 0,
+    "evaluationKeyCurrentHits": 0,
+    "evaluationKeyHistoryHits": 0,
+    "privateConfigAndJournalIgnoredMode600": true,
+    "completeDiffReviewed": true
+  },
+  "disabledOrUnchanged": [
+    "V4 enforcement unavailable",
+    "V4 shadow OFF",
+    "No public admission transport",
+    "No paid runner changes",
+    "No Qwen/prompt/schema change",
+    "No Maps/billing/credentials/quotas change",
+    "No shared state/infrastructure/migration/Task53"
+  ]
+}
