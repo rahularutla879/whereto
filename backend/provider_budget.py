@@ -206,6 +206,8 @@ class OutingBudget:
 
     @contextmanager
     def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False, details_pro=False) -> Iterator[None]:
+        from backend.planning_admission import guard_provider
+        guard_provider()
         if details_pro and any(op != "details" for op, _, _, _ in attempts):
             raise ValueError("Pro Details classification requires a Details reservation.")
         for operation, request_id, origins, destinations in attempts:

@@ -256,6 +256,8 @@ class Session:
         self.receipt=self.receipt_key=None
 
     def run(self, value):
+        from backend.planning_admission import guard_deferred
+        guard_deferred()
         if value.action and self.router is None:raise ValueError('Generate an initial page before continuing.')
         if value.startingLocation and (value.startingLocation.source=='mock' or value.startingLocation.point.place_id):
             raise ValueError('Confirm real starting coordinates through the existing location control.')
@@ -744,6 +746,8 @@ class Sessions:
     def create(self,text,result,budget,preferences):
         if not enabled() or result.executionStatus!='advanced_unavailable' or result.context is None or not result.interpretation.journey:
             return None
+        from backend.planning_admission import guard_handoff
+        guard_handoff(text,result,preferences)
         ai=result.interpretation
         # Unsupported independent hard requirements must not vanish at the advanced branch.
         import re

@@ -42,6 +42,8 @@ def lookup_starting_places(request, session):
         raise DiscoveryError('disabled', 'Starting-place search is disabled for this local session. Use current location or enable the documented lookup switch.')
     # A separate explicit lookup is counted in the SAME process request/search
     # minute budget; up to ten lookups/process, three matches, no pagination.
+    from backend.planning_admission import guard_deferred
+    guard_deferred()
     outing = session.outing()
     from backend.provider_budget import ProviderLimitError
     from backend.provider_errors import attach_accounting

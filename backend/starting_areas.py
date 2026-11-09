@@ -64,6 +64,8 @@ references=References()
 
 
 def suggest_starting_areas(query,session):
+    from backend.planning_admission import guard_deferred
+    guard_deferred()
     from backend.provider_budget import ProviderLimitError
     from backend.routes import RouteError
     from backend.provider_errors import attach_accounting

@@ -1,3 +1,11 @@
+# Implementation checkpoint: validation/admission foundations (no activation)
+
+The [foundation implementation](task52-validation-admission-foundations.md) extracts strict raw capture/final disposition while retaining pinned B-E validation atomically. Its internal process-local capability registry is testable for ordinary work and advanced handoff, with selected-scope deny barriers for future migrated paths. No public receipt transport, provider-ready advanced continuation, V4 profile or global registry is installed. The implementation does **not** complete the inner phase split proposed below. Default legacy/shadow behavior and every historical result remain unchanged.
+
+[Full verification](task52-validation-admission-verification.json): backend 1,135 passed / 37 unchanged opt-in skips; frontend 285; typecheck/lint/build passed. Next review must resolve the immutable source-compatibility contract and per-path provenance/authority transport before V4 enforcement. Historical design follows unchanged.
+
+---
+
 # Ordering V4 enforcement design and approval review
 
 Status: **proposal only; no enforcement prototype, runtime changes or activation**. Design version `52b-order-enforcement-design-v1`, reviewed against clean `4c3767afddc051079a83be0043b7d9740f3ffe5f`. The requested `05cfcbd` is its ancestor; the later parent-verified Hitech/HITEC spelling fix and its nine tests are preserved. Current baseline evidence is 1,106 backend passes/37 opt-in skips and 285 frontend passes, rather than the earlier 1,097/37. Task 52 remains in progress.

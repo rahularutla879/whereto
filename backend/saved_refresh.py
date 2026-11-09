@@ -97,6 +97,8 @@ class RefreshSessions:
             raise DiscoveryError('disabled','Venue refresh is disabled. The saved plan remains available.')
         if request.includeHours and not saved_hours_enabled():raise DiscoveryError('disabled','Opening-hours loading is disabled. Your saved plan is kept.')
         if not 1<=len(option['stops'])<=4:raise PersistenceError(404)
+        from backend.planning_admission import guard_deferred
+        guard_deferred()
         # A capability authorizes reading; it is not a lifetime provider quota.
         # Each explicit open/action gets a fresh bounded outing. The process and
         # durable ledger still admit every attempt across all viewers/links.

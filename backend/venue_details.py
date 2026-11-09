@@ -100,6 +100,8 @@ class DetailsSessions:
                 raise DiscoveryError("duplicate", "Contact lookup was already attempted. Reuse the open panel or generate a new outing; retries are disabled.")
             if not local_real_enabled() or os.environ.get("WHERETO_CONTACT_DETAILS_DEV") != "1":
                 raise DiscoveryError("disabled", "Phone and website lookup is disabled. Use the Google Maps link to contact the venue.")
+            from backend.planning_admission import guard_deferred
+            guard_deferred()
             entry[3].add(place_id)
         from backend.provider_budget import ProviderLimitError
         from backend.provider_errors import attach_accounting

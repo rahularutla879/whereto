@@ -142,13 +142,16 @@ def generate_plan(request: PlannerInput) -> RankingResult:
 
 
 def interpret_outing(request: InterpretationInput):
+    from backend.validation_phases import interpret_legacy_result
+    def legacy_operation(value, **kwargs):
+        return interpret_legacy_result(value, interpret_request, **kwargs)
     try:
         try:
             from backend.ordering_shadow import interpret_observed
         except Exception:
-            result = interpret_request(request)  # No model call occurred before import.
+            result = legacy_operation(request)  # No model call occurred before import.
         else:
-            result = interpret_observed(request, interpret_request)
+            result = interpret_observed(request, legacy_operation)
         from backend.provider_work import check_cancelled
         check_cancelled()
         from backend.advanced_planning import sessions

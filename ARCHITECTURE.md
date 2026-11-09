@@ -1,3 +1,11 @@
+# Task 52B internal legacy validation/admission boundary
+
+`backend/validation_phases.py` wraps strict extraction capture and final disposition around the unchanged pinned interpreter/journey source/order/calendar phase. `backend/main.py` returns the same legacy DTO through this adapter. Raw parsed snapshots are transient canonical bytes, distinct from browser effective pending snapshots. Inner B-E extraction remains deferred; no competing validator or V4 profile exists.
+
+`backend/planning_admission.py` provides an explicit server-only process-local registry with opaque object identity, keyed complete-payload fingerprints, request scope/revision, purpose, absolute expiry and atomic single use. No global registry/public wire token is installed. Guards at provider reservation and new-work roots are inert under normal legacy startup. Explicit foundation test scopes require ordinary/handoff authority and deny deferred continuation/manual/saved-refresh issuers. Existing provider budgets/capability checks remain authoritative. [Contract and entry-point matrix](docs/task52-validation-admission-foundations.md).
+
+---
+
 # Test-only clock ownership
 
 `backend.testing_clock` supplies explicit scoped UTC calendar fixtures and an opt-in route-evidence fixture clock. Its `fixture_api` wraps the real app lifespan only when `backend.test_api` selects that test factory; normal startup still uses `backend.main:app`. No production clock/configuration flag or expiry logic changed. Monotonic capabilities/quotas and billing clocks remain separate. [Testing guide](backend/TESTING.md), [regression proof](docs/task52-backend-regression-repair.md).

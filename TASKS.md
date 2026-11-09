@@ -1,3 +1,7 @@
+Task 52 remains **in progress**. Task 52B validation/admission foundations delivered a verified outer A/F extraction and internal server-only capability contract; pinned B-E extraction, public/session transport and V4 enforcement remain future separately reviewed work. No new numbered task or production enforcement was started. See [contract](docs/task52-validation-admission-foundations.md) and [verification](docs/task52-validation-admission-verification.json).
+
+---
+
 Task52B enforcement design checkpoint: single-authority/admission/session/rollback proposal prepared; no runtime change or activation. Qwen/OpenAI frozen replays reproduced; focused backend 252 pass/10 skips; date/timing 98 pass, frontend 285 pass. Future enforcement/admission/typed-confirmation gates remain unimplemented. [Review and next approval](docs/task52-ordering-enforcement-design.md). Task52 remains in progress; no Task 53 or deployment.
 
 Task52B regression checkpoint: complete backend is reproducibly green twice (1,134 tests/1,097 pass/37 unchanged opt-in skips), frontend 285/typecheck/lint/build pass. Only test clock/process fixtures changed; ordering V4 remains OFF and paid 10/594/$0.047366625/halt unchanged. Ready for separately scoped enforcement review, not activation, infrastructure or Task 53. [Evidence and remaining limits](docs/task52-backend-regression-repair.md).

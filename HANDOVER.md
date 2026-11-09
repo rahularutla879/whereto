@@ -1,3 +1,17 @@
+# Task 52B validation/admission foundations — bounded extraction, no enforcement
+
+Started clean `6a6f199`. [Contract, admission matrix and remaining work](docs/task52-validation-admission-foundations.md); [verification](docs/task52-validation-admission-verification.json). Strict parsed output is captured before legacy normalization and final disposition is explicit. **Inner source/order/calendar phases remain atomic** because the authoritative corpus pins their exact sources. No pins, gold, historical scores or paid records changed. This is the smallest verified extraction boundary, not completed V4 integration.
+
+The API uses the behavior-preserving legacy adapter. The server-only, process-local admission registry has no global instance or public receipt field. Explicit Python callers can bind ordinary validated payloads or advanced handoff purposes to version/revision/scope, immutable source/effective fingerprints, absolute 600s expiry and atomic single-use consumption. Selected-scope guards cover provider reservation and public work families; deferred continuation/manual/saved issuers fail closed in that scope. Default legacy behavior, manual DTOs, pending followups, saved viewing/refresh and provider accounting remain unchanged. No new clarification or active authority rollout. Known legacy start/finish and unsupported-edge limitations remain.
+
+Verification: full backend **1,135 passed / 37 unchanged opt-in skips** (1,172 run, 253.014s); frontend **285/285**; TypeScript, lint and production build passed. All 22 new foundation tests pass; 25 full journey results equal the direct legacy interpreter. Frozen Qwen/OpenAI/case/probe/journal replay equals prior V4 results exactly. Isolated fake-provider browser/API smoke: interpretation 200, planning 200, three provisional options; one fake model/three fake searches/three fake matrices; forged client authority 422 with no added calls. Temporary server stopped; no live availability claim.
+
+Paid journal and all 324 private files unchanged, SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`; SQLite integrity and read-only persistent-halt recovery verified. OpenAI 7 / Google 2 / Anthropic 1 = 10/594; 584 remaining; accounted $0.047366625 / remaining $11.952633375. Configured/evaluation secret scans have zero current/history hits. No inference/counting/Maps, purchases, billing/credential/quotas changes, model/prompt change, infrastructure, migration or Task 53 work.
+
+Next checkpoint: review this bounded foundation and the source-compatibility/version strategy before inner B-E extraction, authenticated pending/session/continuation transport and V4 enforcement. Process-local identity is not distributed durability. Gemini 400/IP and Anthropic grammar blockers remain independent.
+
+---
+
 # Task52B ordering enforcement design — no activation
 
 Started clean `4c3767afddc051079a83be0043b7d9740f3ffe5f` (the later reviewed Hitech/HITEC fix is preserved; requested `05cfcbd` is an ancestor). [Implementation-ready proposal and limits](docs/task52-ordering-enforcement-design.md), [fresh replay/test/hash evidence](docs/task52-ordering-enforcement-verification.json).

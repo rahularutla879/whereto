@@ -35,6 +35,8 @@ class PlannerInput(PlanningRequest):
 
 
 def real_plans(request: PlannerInput, session: ProviderBudget, *, context=None) -> RankingResult:
+    from backend.planning_admission import guard_ordinary
+    guard_ordinary(request)
     session.settings.require_live_provider()
     started = perf_counter()
     if context is None and request.startingLocation and request.startingLocation.source=='suggested' and not request.referenceToken:
@@ -629,6 +631,8 @@ def empty(request, message, diagnostics=None):
 def more_real_plans(token, *, expand_discovery=False, show_beyond=False):
     from backend.option_sessions import option_sessions
     context, lock = option_sessions.get(token)
+    from backend.planning_admission import guard_deferred
+    guard_deferred()
     if context.get('mockSurprise'):raise DiscoveryError('mode_changed','This outing uses mock data. Generate again in the current data mode.')
     context["session"].settings.require_live_provider()
     if context["request"].startingLocation is None and context["request"].planningMode!='surprise':

@@ -1,3 +1,11 @@
+# Task 52B — preserve pinned validation; internal capability foundation only
+
+Keep the six authoritative corpus source pins and historical results unchanged. Extract the outer strict-capture/final-disposition boundary now; retain mixed B-E checks atomically rather than duplicating semantic logic or claiming V4 enforcement. A separately reviewed compatibility/version strategy is required before splitting the pinned internals.
+
+Choose process-local opaque identity plus keyed request fingerprints for the internal admission prototype, with absolute expiry, monotonic revisions and atomic single consumption. Do not publish a transport token or instantiate a global registry before pending/session/new-work migration is designed. Advanced handoff authority cannot authorize provider work. This is a bounded single-process foundation, not multi-instance durability or a production enforcement decision. [Evidence and limitations](docs/task52-validation-admission-foundations.md).
+
+---
+
 # Destination spelling — exact parent-bound comparison only
 
 Accept the documented Hitech City/HITEC City spelling pair only with provider neighborhood/sublocality, Hyderabad locality and Telangana state evidence. Keep query/source/origin text unchanged and retain every other geographic check. Synthetic mismatch proof plus official-source indexed spelling evidence supports this correction without live Maps. The original failed response is unavailable, so do not claim the real incident's cause or availability was verified. [Investigation](docs/hitec-destination-investigation.md).

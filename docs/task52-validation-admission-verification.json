@@ -1,0 +1,151 @@
+{
+  "version": "52b-validation-admission-foundations-v1",
+  "baselineGitHEAD": "6a6f1994c1a1cb96810fd000b49bec6433568be0",
+  "scope": "Outer A/F extraction only; pinned B-E atomic; no V4 enforcement or public receipt transport",
+  "verification": {
+    "baselineFocused": {
+      "run": 126,
+      "passed": 116,
+      "skipped": 10
+    },
+    "newFoundationTests": 22,
+    "legacyJourneyDtoComparisons": 25,
+    "finalFocusedPassed": 50,
+    "backend": {
+      "run": 1172,
+      "passed": 1135,
+      "skipped": 37,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 253.014,
+      "skips": "29 hosted Postgres and 8 opt-in local PTY; unchanged"
+    },
+    "frontend": {
+      "passed": 285,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 117.51519625
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "browserApiSmoke": {
+      "syntheticOnly": true,
+      "fixedClock": true,
+      "interpretStatus": 200,
+      "planningStatus": 200,
+      "provisionalOptions": 3,
+      "fakeModelCalls": 1,
+      "fakeSearchCalls": 3,
+      "fakeMatrixCalls": 3,
+      "forgedClientFieldStatus": 422,
+      "forgeryAddedCalls": 0,
+      "temporaryServerStopped": true,
+      "limit": "Isolated browser fixture page and real API boundaries; not full interactive main-form or live availability"
+    },
+    "orderingReplay": {
+      "historicalResultsUnchanged": true,
+      "exactEqualFields": [
+        "summary",
+        "qwen",
+        "openai",
+        "cases",
+        "probes",
+        "journal"
+      ],
+      "summary": {
+        "qwenCorrectRawCompatible": 18,
+        "qwenAuditedNormalizations": 7,
+        "qwenClarifications": 2,
+        "openaiCompatible": 5,
+        "predeclaredCases": 20,
+        "predeclaredMatched": 20,
+        "postFreezeCases": 10,
+        "postFreezeMatched": 10,
+        "clearSources": 15,
+        "falseClarifications": 0,
+        "negativeSources": 15,
+        "negativeSourcesAccepted": 0,
+        "originalNegativeProbes": 147,
+        "newNegativeProbes": 33,
+        "retainedUnsupportedEdges": 0
+      }
+    },
+    "secretScan": {
+      "configuredCurrentAndHistoryHits": 0,
+      "evaluationKeysChecked": 3,
+      "evaluationCurrentAndHistoryHits": 0
+    }
+  },
+  "sourceHashes": {
+    "backend/validation_phases.py": "7bf42743a25d7fe10b382f5415672873b1c1ddc7f239e8a1b5c7ba63489ed161",
+    "backend/planning_admission.py": "1275fa9da285c594a5947fc7b9e4ee5957af44675a6f8215eb16b72ad3168ecf",
+    "backend/test_planning_admission.py": "3ee728885cdb80fcb70a937455243b9cd58013166860e94982f78340854bb5fa",
+    "backend/main.py": "6dca010f874a5ff15a1854b81dbe8ce1505d1bf04e0281d4fccc7aaa58a36c86",
+    "backend/advanced_planning.py": "9abc5f7cc58f9a26c6766604b9597587b85bd3915a53d8d915093e95fa0e09d8",
+    "backend/provider_budget.py": "8d67052e2d8309a087e744b20f00483cb49e1e968c893c4996af4e7df7a7f3a5",
+    "backend/real_planning.py": "5f07b291d71e8a61c93a983dece155e72c101b3e3d0d09d1f7292148b74e48fc",
+    "backend/saved_refresh.py": "fbeabf8b8844bc632c649c6ec12e685ae0569af5e99f4f404381562a2d30fd70",
+    "backend/starting_areas.py": "b8587588dd979236889662ee1b61f37b8512fc5a1519b15addd7e5ccdd2e9558",
+    "backend/starting_places.py": "f2d8714354341a08fd1b3c90280ee8f662b82471c285cbc35d5b2f0de775402c",
+    "backend/venue_details.py": "1b68fb3bd241e397ffd6f69958eddb96903983dfdadeb16c7393ec8573b68b9e"
+  },
+  "unchangedCorpusSourcePins": {
+    "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+    "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+  },
+  "privateEvidence": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "actualPaidHaltRecoveryRefusedReadOnly": true,
+  "paidEvaluation": {
+    "attempts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1,
+      "total": 10,
+      "remaining": 584
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "newRequests": 0,
+    "limits": {
+      "totalUSD": 12,
+      "totalAttempts": 594,
+      "providerAttempts": 198,
+      "inputTokens": 12000,
+      "outputTokens": 2000,
+      "concurrency": 1,
+      "retries": 0
+    }
+  },
+  "activation": {
+    "defaultLegacy": true,
+    "shadowDefaultOff": true,
+    "v4Enforcement": false,
+    "publicReceipts": false,
+    "globalRegistry": false,
+    "providerSettingsChanged": false
+  },
+  "remainingWork": [
+    "Review source-compatibility/version strategy before inner B-E extraction",
+    "Public receipt transport and per-path pending/session/continuation/manual/saved-refresh issuers",
+    "Final visit versus endpoint and ordinary absence-proof adapter",
+    "Shared atomic durability and authenticated distributed transport",
+    "Typed ordering confirmation remains design-only"
+  ]
+}
