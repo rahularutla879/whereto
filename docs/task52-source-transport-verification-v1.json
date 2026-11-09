@@ -1,0 +1,151 @@
+{
+  "version": "52b-source-transport-review-v1",
+  "baselineGitHEAD": "b04f85ff82aa1b1befc2d44527c8e80a22ed080e",
+  "scope": "Design plus isolated offline identity prototype only",
+  "manifestChecks": [
+    {
+      "identity": "52b-historical-evaluator-b04",
+      "role": "historical_evaluator",
+      "manifestSHA256": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+      "snapshotVerified": true,
+      "workingSourcesVerified": true,
+      "dispatchAuthorized": false
+    },
+    {
+      "identity": "52b-runtime-legacy-b04",
+      "role": "runtime_legacy_foundation",
+      "manifestSHA256": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+      "snapshotVerified": true,
+      "workingSourcesVerified": true,
+      "dispatchAuthorized": false
+    }
+  ],
+  "prototypeSourceSHA256": "7549495f32657959ef9397f373ade1e49f88bb3a0a94375f6c6f6b1417c8a8fd",
+  "testSourceSHA256": "5320affda3aefd31cc75921c56d7927938725815222ba5eb0832feebc9af28d9",
+  "corpusCases": 66,
+  "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+  "originalSixPinsUnchanged": true,
+  "testRuns": [
+    {
+      "suite": "task52-source-review-tests",
+      "run": 231,
+      "passed": 222,
+      "skipped": 9,
+      "seconds": 46.724,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "suite": "task52-source-boundary-tests",
+      "run": 146,
+      "passed": 145,
+      "skipped": 1,
+      "seconds": 15.106,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "suite": "task52-source-semantic-tests",
+      "run": 38,
+      "passed": 38,
+      "skipped": 0,
+      "seconds": 2.742,
+      "failures": 0,
+      "errors": 0
+    },
+    {
+      "suite": "task52-source-final-prototype",
+      "run": 10,
+      "passed": 10,
+      "skipped": 0,
+      "seconds": 11.181,
+      "failures": 0,
+      "errors": 0
+    }
+  ],
+  "testCountNote": "Runs overlap (prototype tests appear in multiple commands); do not sum as distinct coverage. Final prototype has 10 tests. Skips are existing hosted PostgreSQL opt-ins.",
+  "frozenReplay": {
+    "comparedFields": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "exactMatch": true,
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "independentHumanSignoff": false,
+    "historicalEvidenceRewritten": false
+  },
+  "privateEvidence": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "paidHaltRecoveryRefusedReadOnly": true,
+  "paidEvaluation": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1,
+    "total": 10,
+    "remainingAttempts": 584,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "limits": "$12 / 594 total / 198 per provider / 12000 input / 2000 output / concurrency 1 / retries 0",
+    "newRequests": 0
+  },
+  "security": {
+    "configuredSecretsCurrentHits": 0,
+    "configuredSecretsHistoryHits": 0,
+    "evaluationKeysCurrentHits": 0,
+    "evaluationKeysHistoryHits": 0,
+    "privateConfigIgnoredMode600": true
+  },
+  "unchanged": {
+    "productionRuntime": true,
+    "activeQwenPromptAndModel": true,
+    "hitecFix": true,
+    "canonicalSchema": true,
+    "paidEvaluator": true,
+    "historicalReports": true,
+    "shadowDefaultOff": true,
+    "enforcementDisabled": true
+  },
+  "notImplemented": [
+    "Inner B-E extraction",
+    "V4 enforced profile",
+    "Public receipt transport",
+    "Shared SQL/Redis authority",
+    "Distributed failover/crash guarantees",
+    "Per-attempt historical environment resolver"
+  ],
+  "notRerun": {
+    "fullBackendFrontendTypecheckLintBuild": "No runtime/shared application change; prior b04 1135 passes/37 skips backend, 285 frontend, typecheck/lint/build green remain historical",
+    "browser": "No UI/startup/request handling changes; no new browser claim"
+  }
+}

@@ -1,0 +1,44 @@
+{
+  "format": "52b-source-identities-v1",
+  "baselineOnly": true,
+  "identities": {
+    "52b-historical-evaluator-b04": {
+      "gitCommit": "b04f85ff82aa1b1befc2d44527c8e80a22ed080e",
+      "gitTree": "e9dae3d8029d200e3782da4c6d66dceea86b9d30",
+      "corpusPath": "docs/task52-evaluation-corpus.json",
+      "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "originalSixPins": {
+        "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+        "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+        "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+        "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+        "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+        "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+      },
+      "implementationRootSHA256": "aaf735e17cd05722e72c2fd2c15fe9352fc7f54881c4e23800925632659742f2",
+      "schemaIdentity": "backend/ai/__init__.py at pinned hash; no schema change",
+      "dependencyScope": "All tracked backend files excluding test_* basenames plus scripts/cloud_model52*.py; whole Git tree additionally pinned",
+      "role": "historical_evaluator",
+      "purpose": "Exact b04 evaluator implementation snapshot, not a replacement label for any paid attempt"
+    },
+    "52b-runtime-legacy-b04": {
+      "gitCommit": "b04f85ff82aa1b1befc2d44527c8e80a22ed080e",
+      "gitTree": "e9dae3d8029d200e3782da4c6d66dceea86b9d30",
+      "corpusPath": "docs/task52-evaluation-corpus.json",
+      "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "originalSixPins": {
+        "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+        "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+        "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+        "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+        "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+        "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+      },
+      "implementationRootSHA256": "aaf735e17cd05722e72c2fd2c15fe9352fc7f54881c4e23800925632659742f2",
+      "schemaIdentity": "backend/ai/__init__.py at pinned hash; no schema change",
+      "dependencyScope": "All tracked backend files excluding test_* basenames plus scripts/cloud_model52*.py; whole Git tree additionally pinned",
+      "role": "runtime_legacy_foundation",
+      "purpose": "Legacy runtime foundation baseline; no enforced V4 implementation registered"
+    }
+  }
+}

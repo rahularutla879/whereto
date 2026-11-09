@@ -1,3 +1,7 @@
+Task 52B source-version and admission-transport review completed offline. New manifests distinguish historical evaluator identity from runtime identity without changing old pins, records or paid allowances. Legacy B–E extraction, all per-path issuers, shared authority and V4 remain unimplemented. Task 52 stays in progress; no new roadmap task. [Review/evidence](docs/task52-source-compatibility-v1.md).
+
+---
+
 Task 52 remains **in progress**. Task 52B validation/admission foundations delivered a verified outer A/F extraction and internal server-only capability contract; pinned B-E extraction, public/session transport and V4 enforcement remain future separately reviewed work. No new numbered task or production enforcement was started. See [contract](docs/task52-validation-admission-foundations.md) and [verification](docs/task52-validation-admission-verification.json).
 
 ---

@@ -1,3 +1,9 @@
+# Task 52B source-version / authority transport design (not runtime)
+
+`scripts/task52_version_review.py` is an isolated offline checker for an exact-byte allowlisted baseline manifest, retained Git snapshots and separate evaluator/runtime roles. Runtime and paid evaluator imports are unchanged. [Extraction/version plan](docs/task52-source-compatibility-v1.md) and [proposed opaque-reference/SQL authority plus Redis evidence design](docs/task52-admission-transport-v1.md) specify future boundaries only; no shared-state implementation or public receipt exists.
+
+---
+
 # Task 52B internal legacy validation/admission boundary
 
 `backend/validation_phases.py` wraps strict extraction capture and final disposition around the unchanged pinned interpreter/journey source/order/calendar phase. `backend/main.py` returns the same legacy DTO through this adapter. Raw parsed snapshots are transient canonical bytes, distinct from browser effective pending snapshots. Inner B-E extraction remains deferred; no competing validator or V4 profile exists.

@@ -1,3 +1,11 @@
+# Task 52B source identity / transport review
+
+Recommend exact Git snapshot retention plus immutable allowlisted role-specific manifests. Preserve old source pins and paid configurations; new runtime versions get new identities and separately labeled offline replay outcomes. The prototype has no dispatch/runtime authority and does not automatically map old paid attempts to its baseline catalog.
+
+For future multi-instance admission, prefer an opaque server-held reference with durable SQL atomic revision/claim/consumption/revocation/fencing and volatile Redis evidence, following the existing hosting proposal. A signed token still needs replay state and adds no current benefit. This is a design recommendation, not provisioning/transport/enforcement approval. [Compatibility](docs/task52-source-compatibility-v1.md), [atomic-state design](docs/task52-admission-transport-v1.md).
+
+---
+
 # Task 52B — preserve pinned validation; internal capability foundation only
 
 Keep the six authoritative corpus source pins and historical results unchanged. Extract the outer strict-capture/final-disposition boundary now; retain mixed B-E checks atomically rather than duplicating semantic logic or claiming V4 enforcement. A separately reviewed compatibility/version strategy is required before splitting the pinned internals.

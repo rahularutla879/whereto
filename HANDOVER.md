@@ -1,3 +1,17 @@
+# Task 52B source compatibility and admission transport review — no activation
+
+Started clean `b04f85f`. [Version contract and function-level B–E plan](docs/task52-source-compatibility-v1.md), [transport/state/issuer matrix and endpoint semantics](docs/task52-admission-transport-v1.md), [verification](docs/task52-source-transport-verification-v1.json). Preserve old evaluator in exact Git snapshot; separately allowlist runtime/evaluator identities. A new runtime identity may differ without relabeling old outcomes or changing the paid evaluator's pin checks. The isolated offline prototype verifies exact manifest bytes, Git snapshot/source/data roots and distinct roles; separate replay descriptors stay unreviewed and cannot dispatch. No runtime imports of the prototype.
+
+Recommend future opaque server reference backed by durable SQL revision/consumption/revocation/fencing and volatile Redis evidence, consistent with the existing proposed architecture. Signed tokens alone do not supply single use. No SQL/Redis or wire transport was implemented. Pending effective snapshots cannot mint raw authority; each continuation/manual/refresh operation needs its own purpose-bound issuer and unchanged parent accounting. Source-first finish-at scope, ordinary no-Journey absence proof and literal legacy extraction remain prerequisites for test-only V4.
+
+Focused verification: 231 run / 222 passed / 9 existing hosted skips; second boundary suite 146 / 145 / 1 hosted skip; semantic/geography suite 38/38; final new offline prototype 10/10. Commands overlap; these are not distinct-case aggregate accuracy. Frozen 27 Qwen/seven OpenAI rows and all case/probe/journal fields exactly reproduce prior V4 results. No runtime/shared application file changed, so full backend/frontend/typecheck/lint/build/browser were not rerun; b04 full-suite results remain historical, not fresh measurements. Secret/history scans passed; complete diff reviewed.
+
+All six pins, corpus, historical evaluator/results, Hitech fix and all 324 private files unchanged. Journal SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`, integrity OK and actual halted continuation refuses read-only recovery. OpenAI 7 / Google 2 / Anthropic 1 = 10/594, 584 remaining; $0.047366625 accounted / $11.952633375 remaining. All original limits and halt remain. No inference/counting/Maps/provider request, billing/keys/quotas/model/prompt change, infrastructure/migration or Task 53 work.
+
+Next approval: accept the version contract, then incrementally extract legacy B–E helpers in their original call slots under a new runtime manifest with complete equivalence tests. Do not implement public transport or test-only enforcement until ordinary/terminal provenance and all issuer gates are resolved. Gemini HTTP400/IP and Anthropic grammar compilation remain separate blockers.
+
+---
+
 # Task 52B validation/admission foundations — bounded extraction, no enforcement
 
 Started clean `6a6f199`. [Contract, admission matrix and remaining work](docs/task52-validation-admission-foundations.md); [verification](docs/task52-validation-admission-verification.json). Strict parsed output is captured before legacy normalization and final disposition is explicit. **Inner source/order/calendar phases remain atomic** because the authoritative corpus pins their exact sources. No pins, gold, historical scores or paid records changed. This is the smallest verified extraction boundary, not completed V4 integration.
