@@ -1,3 +1,11 @@
+# Task 52B B2 duration preparation
+
+`backend.duration_preparation` now owns the single legacy duration-normalizer algorithm; `journey.normalize_explicit_durations` is a same-position compatibility delegate. Dynamic journey helper lookup remains intact. Other normalizers/validators and prepared-source mapping stay unchanged; runtime ID is `52b-runtime-phase-b2`.
+
+The [behavioral reconstruction](docs/task52-b2-behavioral-extraction.md) is offline evidence, not historical execution or authority. The unchanged paid evaluator refuses the new source hash. `task52_b2_test_fixture` is explicit unittest/reference-data mocking with temporary fake unit state and protected real-state/network boundaries; it is never imported by app startup. New manifest/baseline hashes are checked without repinning historical files.
+
+---
+
 # Task 52B B2 preflight only — runtime unchanged
 
 `scripts/task52_historical_preflight.py` is isolated active test tooling: read-only allowlisted Git/manifest identity plus installed distribution metadata audit, no retained-source execution, imports into the app, credentials, journal access or provider calls. CLI exit 2 and `HistoricalReplayBlocked` are deliberate until environment/confinement prerequisites are reviewed. No executor or Phase B2 runtime identity was installed. [Blocker and future boundary](docs/task52-phase-b2-historical-replay-blocker.md).

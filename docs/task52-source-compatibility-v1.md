@@ -1,3 +1,9 @@
+# B2 behavioral reconstruction implemented — historical integrity retained
+
+Owner approved a separate [current-runtime reconstruction](task52-b2-behavioral-extraction.md). Exactly one duration helper was extracted under `52b-runtime-phase-b2`; old historical manifests/pins/corpus/results are unchanged, and the original paid evaluator correctly refuses the changed journey file. Scoped fake-unit reference data is not paid readiness, a replacement evaluator or historical execution. The exact historical environment preflight remains blocked. [Full verification](task52-b2-reconstruction-verification.json).
+
+---
+
 # B2 historical execution gate — blocked before extraction
 
 [The B2 audit](task52-phase-b2-historical-replay-blocker.md) verifies retained source identity and matching declared versions, but does not establish original execution-artifact identity or verified process confinement. No historical source executed and no pinned validator changed. A version-matched reconstruction must be separately approved/labeled if original artifacts cannot be recovered; it must not masquerade as exact historical reproduction. The new offline preflight has no executor or fallback. Original manifests and B1 identities/results remain unchanged.

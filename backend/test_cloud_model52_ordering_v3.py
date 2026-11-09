@@ -147,7 +147,9 @@ class OrderingPolicyTests(unittest.TestCase):
         if not (evaluation.STATE/'journal.sqlite').is_file():
             self.skipTest('Owner-private paid evidence unavailable; pure fixture tests still run')
         from scripts.cloud_model52_ordering_policy_replay import build
-        r=build();s=r['summary']
+        from scripts.task52_b2_test_fixture import reference_scope
+        with reference_scope():r=build()
+        s=r['summary']
         self.assertEqual((s['qwenRows'],s['qwenV3Clarifications'],s['qwenAuditedUnorderedNormalizations']),(27,2,7))
         self.assertEqual((s['openaiRows'],s['openaiV3Compatible']),(7,5))
         self.assertEqual(s['qwenOtherCanonicalBlocksPreserved'],5)

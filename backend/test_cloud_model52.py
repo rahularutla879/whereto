@@ -320,5 +320,12 @@ class HarnessTests(unittest.TestCase):
         self.assertIsNone(e.summarize([])['p50Ms'])
 
 
+
+# Offline fake fixtures only; the unmodified paid source gate rejects B2.
+def load_tests(loader, tests, pattern):
+    from scripts.task52_b2_test_fixture import OfflineUnitSuite
+    return OfflineUnitSuite(tests)
+
+
 if __name__ == '__main__':
     unittest.main()

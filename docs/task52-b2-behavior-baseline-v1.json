@@ -1,0 +1,3935 @@
+{
+  "identity": "52b-behavior-reconstruction-duration-b2-v1",
+  "sourceCommit": "2fec366463a255efd5e96286e6250f7452b0cf49",
+  "evidenceKind": "current-runtime behavioral reconstruction",
+  "byteIdenticalHistoricalEnvironment": false,
+  "replacementForOriginalEvaluator": false,
+  "planningAdmissionAuthorized": false,
+  "paidInferenceAuthorized": false,
+  "referenceTime": "2026-11-08T12:00:00+00:00",
+  "frozen75Traces": [
+    {
+      "id": "journey-01",
+      "dtoSHA256": "d1a5658d554a4ebf1f64c3ac2d1f9bddd819b3f54b1d8272e8806ec2ea709303",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "662b5d5b06015cd2fce50659b64f9de0264a8e1d4ce8ed91e236e4f26c5e7b18"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "e60da6b735f805710870066570730b73bfcbe71b36fdc1d849c60408e52d2f11",
+          "after": "e60da6b735f805710870066570730b73bfcbe71b36fdc1d849c60408e52d2f11"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "415e88eea6f3df8c44eea900f207121e04e5b8a2d511c435cf66d0392fcbda88",
+          "after": "415e88eea6f3df8c44eea900f207121e04e5b8a2d511c435cf66d0392fcbda88"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "e60da6b735f805710870066570730b73bfcbe71b36fdc1d849c60408e52d2f11",
+          "after": "e60da6b735f805710870066570730b73bfcbe71b36fdc1d849c60408e52d2f11"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-02",
+      "dtoSHA256": "5d11559a61a06377eb0a13d65eb34a02e3762fd5d3d7d9ccd589b4a843ec457a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "17ec8f36d0bf131274f5060064374bd28a962ddc534e11cb4094a77797ae815d"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "56246bd9672ac019a117d0c148ef4ab97743fd581925ee7c0dea81660b806a10",
+          "after": "56246bd9672ac019a117d0c148ef4ab97743fd581925ee7c0dea81660b806a10"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "d298050de23d02ccae8fed6c316bca78c84477462d5f36c6b75acfad271e8dfb",
+          "after": "d298050de23d02ccae8fed6c316bca78c84477462d5f36c6b75acfad271e8dfb"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "56246bd9672ac019a117d0c148ef4ab97743fd581925ee7c0dea81660b806a10",
+          "after": "56246bd9672ac019a117d0c148ef4ab97743fd581925ee7c0dea81660b806a10"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-03",
+      "dtoSHA256": "ab8001ad8a5394e6fc2ded75b8f8069c8214cef1289fa1637ae2ba144094c8ee",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "11e9ccc4ba21642025e2407d5e9e0831309c7bea582b61ab891f28698388e0b0"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "f7605e3d0ecb7b38c0bd800dc48fd3a2eb43afee93b4c6710aa70a8caf2075ce",
+          "after": "f7605e3d0ecb7b38c0bd800dc48fd3a2eb43afee93b4c6710aa70a8caf2075ce"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "28df2349359cf063cfb1522ee8283ecc0a748745296118219ddae726bbacfc56",
+          "after": "28df2349359cf063cfb1522ee8283ecc0a748745296118219ddae726bbacfc56"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-04",
+      "dtoSHA256": "92917f027eb0a4088968c0f92befc4efff7cee42294a0b545e00c9f6b376112d",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "2de13896d43aca02dca98794d21768848828c3638f3af90aa570c76504b635bb"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97",
+          "after": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "9e735329c255518ab8a547ea6b9818f8b5c99894ea7c051d0d154c10a9b90843",
+          "after": "9e735329c255518ab8a547ea6b9818f8b5c99894ea7c051d0d154c10a9b90843"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-05",
+      "dtoSHA256": "b324d3c38605c8f2d2016416f92656df6dccfc66b988de9da91affd99f100ce5",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "65a2a7b44169851c36c76cedda62ce885902a53639385147a670a3ff0e7268c5"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "a9352c55c2d414858514684afc106f01c965cd6ce4f688785885c33f9cf430e4",
+          "after": "a9352c55c2d414858514684afc106f01c965cd6ce4f688785885c33f9cf430e4"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "6cebe8d3081321da63d32253c33c1e28ee7263db0a7f9ae86bd50886cdd37af4",
+          "after": "6cebe8d3081321da63d32253c33c1e28ee7263db0a7f9ae86bd50886cdd37af4"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "a9352c55c2d414858514684afc106f01c965cd6ce4f688785885c33f9cf430e4",
+          "after": "a9352c55c2d414858514684afc106f01c965cd6ce4f688785885c33f9cf430e4"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-06",
+      "dtoSHA256": "260228aaa31c81269affa24cec60d37e9b17d65888769693b2d2bcf5a7f44ca6",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e80c806f850e548ea913a1ca950b55b42153a646cbbb7fc5f95f5989f625b4a5"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "379ae4d3d850f60723627c2785c3e26607687ce82f71815f03ff074bab99d356",
+          "after": "379ae4d3d850f60723627c2785c3e26607687ce82f71815f03ff074bab99d356"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "65bc129f0ed2bb4f11c92a199e4d351dc77d7404080ae7c275f7d9929c91b785",
+          "after": "65bc129f0ed2bb4f11c92a199e4d351dc77d7404080ae7c275f7d9929c91b785"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-07",
+      "dtoSHA256": "4b74558f7e342cb20df91d982a918338d301d60fc07097e5aa63ca5bdac34f5e",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "b2a892279969bf98e71519d2ea11fe354026e5aae1ab6bc1dc4fce813a613411"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "7d0c876d3038a6c1d15ad1d357d9949f4daf8647a40add1da536039f5bb54b33",
+          "after": "7d0c876d3038a6c1d15ad1d357d9949f4daf8647a40add1da536039f5bb54b33"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "162c7e5961b5bc6afba0c230804471b62333302d2618f9b70f815e521a743498",
+          "after": "162c7e5961b5bc6afba0c230804471b62333302d2618f9b70f815e521a743498"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "7d0c876d3038a6c1d15ad1d357d9949f4daf8647a40add1da536039f5bb54b33",
+          "after": "7d0c876d3038a6c1d15ad1d357d9949f4daf8647a40add1da536039f5bb54b33"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-08",
+      "dtoSHA256": "c6c9a77726c9d3f9360ed541bb07b8f74833ed4b91fff017ba178003c13aad3a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "33f0dcefc2898ce057e7741584e3f34f1cd125e65af97d95521b9f8e2b407388"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "41fdf064911ab5920b8b3f0e4e9e5e16553817899ce5f9ffb26e80e52bdc05ef",
+          "after": "41fdf064911ab5920b8b3f0e4e9e5e16553817899ce5f9ffb26e80e52bdc05ef"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068",
+          "after": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-09",
+      "dtoSHA256": "78ec676de8ce8a7885859827ca846dcd7f4898bfa0819c00d7c138cdb75dff13",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "1e18c0a34f53133abaed72d070c777e7d854e50f23d4bd4c47ffb13ad8904931"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "e4991cb536c3d569ae897101861e5d11f10d98aeb6634068ff0183d4cc65364f",
+          "after": "e4991cb536c3d569ae897101861e5d11f10d98aeb6634068ff0183d4cc65364f"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "f8a2431befc2c437d8d311da642cc5599d79ddb2fd3baa9aaf154dfdd260c5cc",
+          "after": "f8a2431befc2c437d8d311da642cc5599d79ddb2fd3baa9aaf154dfdd260c5cc"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-10",
+      "dtoSHA256": "e59cb9abd0681defd4ccf2681e60da9c8ca16d185954d09578cc8eee9e92334a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fedd1a406208b8077c75d16320267ed75477956cf20c14b48097732f3902dedc"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "7be7a3c44b73d67589cc29c955ca757d55f2e74c27749e24cfeeb048dddc34ce",
+          "after": "7be7a3c44b73d67589cc29c955ca757d55f2e74c27749e24cfeeb048dddc34ce"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "b5b44e6234016cb20970c35cb8e261ecbf8b05c3c826552a86af0bca90d13bce",
+          "after": "b5b44e6234016cb20970c35cb8e261ecbf8b05c3c826552a86af0bca90d13bce"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-11",
+      "dtoSHA256": "ff0380fbb82ebb7bc4cb7edeab1517bb7d6c52d6ccbcac9351f7177c4bae867e",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "a5e9479ea51f32d93bfec0075d4bba3556acb244616f435fd5cbdb8d0f54e8ed"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "ead6bd4b4a3d016acf46580607fbbdb4e2f3454ed75c5fc24deca8e1e23d4581",
+          "after": "ead6bd4b4a3d016acf46580607fbbdb4e2f3454ed75c5fc24deca8e1e23d4581"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "260846c31719c5571f6695e2118f578d72be17c690dd9d1bcad539ec83cd0839",
+          "after": "260846c31719c5571f6695e2118f578d72be17c690dd9d1bcad539ec83cd0839"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-12",
+      "dtoSHA256": "cc9c8c52e74d6a60218f0ccc722a16349676b063b8d51627469836830e83e35a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "140969f9922ff77dca3d474e3de6dba594d6da094a1e69b06c91fb958870ff16"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "3c3e10d3b388f6e917276a935e049ca1722218fb7efbbbad781ba00f00ced209",
+          "after": "3c3e10d3b388f6e917276a935e049ca1722218fb7efbbbad781ba00f00ced209"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "9a3f8dc7c6130b701dc019d3b04d3010a326a08606fe696866d09fcfb40092be",
+          "after": "9a3f8dc7c6130b701dc019d3b04d3010a326a08606fe696866d09fcfb40092be"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-13",
+      "dtoSHA256": "8269e1ef33d81eebeb0fc03a9b9a558ef2e9dd00b0b16a0cb44a8e9e0c3af644",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "99dafc90a2e4ab9c2f54542a39a3b13b6e2a78b51aee02122ed84c301ff9a59f"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "619fb25136c203a43b262f4044235317c9e5fb417d20ae857a1b157a4fe4c27d",
+          "after": "619fb25136c203a43b262f4044235317c9e5fb417d20ae857a1b157a4fe4c27d"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e6059e1a8ae04b46cec9229c6363fa337e52f351b39fd288fda5ef40ac47fbae",
+          "after": "e6059e1a8ae04b46cec9229c6363fa337e52f351b39fd288fda5ef40ac47fbae"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-14",
+      "dtoSHA256": "d2d9a4554711095f89cfbf684daa98307ac9b81960474a1cb97affad1f8fcecf",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "9ceb987f18a34b5f52493af3c6cfff16009f1ec230f120a99b40d95c58806d05"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "e229669e8dfe6279e0ec760933d3589d66c7b2810b49a2041489d80236b0b9b0",
+          "after": "e229669e8dfe6279e0ec760933d3589d66c7b2810b49a2041489d80236b0b9b0"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "f0eb4b50eebc25234816fd84f4d7bbf3f7b5521606136bbe39e968b6f7c65331",
+          "after": "f0eb4b50eebc25234816fd84f4d7bbf3f7b5521606136bbe39e968b6f7c65331"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-15",
+      "dtoSHA256": "8a5e2f77d564020083e0bd2f032d1be6c026ab74f01f0aaf9ea34d92b496c068",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "f80c29fff62f7c6c59dd933bc3ae39d5f95f1df53b4371d9fa484fc5d859ac2d"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "cb2dd741ceda54d51d60628956c784a3b342cb0216563bd2b544e95d8166e4b2",
+          "after": "cb2dd741ceda54d51d60628956c784a3b342cb0216563bd2b544e95d8166e4b2"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "85497c15ab5b2c519794c1f32da9dc99d7cb82b226dd56a42564fbe9205722d4",
+          "after": "85497c15ab5b2c519794c1f32da9dc99d7cb82b226dd56a42564fbe9205722d4"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-16",
+      "dtoSHA256": "c30bf3234cc8f23cf4f3c8f27b76f50f5eb9b2efb4c8a2b6bfe7a1f77c26e3d4",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "f816407129f1fe48458063a057ae0c5c7fa96566e90671ee6bc8460a8bb352ee"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "d5cea53e989680f453ed023153b638668ed11364d0678cd08acff5dd884b0792",
+          "after": "d5cea53e989680f453ed023153b638668ed11364d0678cd08acff5dd884b0792"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "393ff86dce4c911cad176379cc85e2d4bc1dbffa8153218144068271be9c0eb9",
+          "after": "393ff86dce4c911cad176379cc85e2d4bc1dbffa8153218144068271be9c0eb9"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-17",
+      "dtoSHA256": "103ab36b987f06c51a373dcc008ee72d99199c63b25569eb60c6e26ba57d552c",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "5489f0ac792356220abfbdb4f891e6bcc05dfe98b9ac43e36d502dfc4cde0a84"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "6ba1f84c3c06a510ec42d25856b5ca71c2d3478383457ac975a93883a4273dd7",
+          "after": "6ba1f84c3c06a510ec42d25856b5ca71c2d3478383457ac975a93883a4273dd7"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5",
+          "after": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "journey-18",
+      "dtoSHA256": "1501859fd0c9f4f3f577decf103cc6474f8fe7fec8ad8d83456b93d4758fb833",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "103132259673947202fc5aa86309903bcc84d43c1593e24f0cc2991feb68188f"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "6e1ed7364beb9039a86d3121f7b4159238dbce0bf5a59c777f214ea729a84f3c",
+          "after": "6e1ed7364beb9039a86d3121f7b4159238dbce0bf5a59c777f214ea729a84f3c"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "bda5eee40de676ed2b58f03eeee815b276781f448b4cfdf7914d8d7223d6e3d7",
+          "after": "bda5eee40de676ed2b58f03eeee815b276781f448b4cfdf7914d8d7223d6e3d7"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "6e1ed7364beb9039a86d3121f7b4159238dbce0bf5a59c777f214ea729a84f3c",
+          "after": "6e1ed7364beb9039a86d3121f7b4159238dbce0bf5a59c777f214ea729a84f3c"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-19",
+      "dtoSHA256": "6f01c6e2064aa44b10778c122e9fd36c375a9a58573705db1baab41f675d0501",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "292706133f96f8941b507a16a14dd033e079f3686be6509382bbcc364064dc08"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "ad4e9b641dedb0c61763f3e8d92b6f2232f58fe0c0087d0face2915fffe02c65",
+          "after": "ad4e9b641dedb0c61763f3e8d92b6f2232f58fe0c0087d0face2915fffe02c65"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "10cfdb72a3e8a11d62ea195d2506bad9274ae21048f9a3276d3672ab950798aa",
+          "after": "10cfdb72a3e8a11d62ea195d2506bad9274ae21048f9a3276d3672ab950798aa"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-20",
+      "dtoSHA256": "80a110aad6102da41f0f5088b98779169b2050560ae9a672d9b4e90b2e1dfbd7",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "b846fdb675936970ccc5a0613a121387c15a17a186674b01aeb110d74f76d952"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "de66335fe597541894603c8a1f07de3b8e0aeb2dc860ba7b0610654514bc0bb8",
+          "after": "de66335fe597541894603c8a1f07de3b8e0aeb2dc860ba7b0610654514bc0bb8"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "771bfc43e792352877680d6128d9d9e308b4682afd5e04c0dc4bfde38108e89c",
+          "after": "771bfc43e792352877680d6128d9d9e308b4682afd5e04c0dc4bfde38108e89c"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-21",
+      "dtoSHA256": "75167dfa182f2f7460176aad7cd475cac1a6280e6238bf451481265c84602bd5",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e26995fe416e24784c9e12f8992721a844eed901b66deaad26343f11f1085f39"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4",
+          "after": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "3b8d56d4007abf73655bb74e8b13d8086fe49387ce3dc9f3a36589e7e8b972e3",
+          "after": "3b8d56d4007abf73655bb74e8b13d8086fe49387ce3dc9f3a36589e7e8b972e3"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "journey-22",
+      "dtoSHA256": "6a885e1592682bd7fa610be8b92fc07451a109a5c0c59778f1bf7b94348cf179",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "072ae0c677aca0bc011c6ef07bbcd0c124defa325aec1b19c75614fe89c3e73f"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "81fd3c90e40453db6ce30e72027af3717c4113463c430467aecbda9ea0dd1e1b",
+          "after": "81fd3c90e40453db6ce30e72027af3717c4113463c430467aecbda9ea0dd1e1b"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "14ff3c8c4a025ce492ee033affaa2e0c9ebed7c4b1367f2213f9c88f36164f91",
+          "after": "14ff3c8c4a025ce492ee033affaa2e0c9ebed7c4b1367f2213f9c88f36164f91"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "81fd3c90e40453db6ce30e72027af3717c4113463c430467aecbda9ea0dd1e1b",
+          "after": "81fd3c90e40453db6ce30e72027af3717c4113463c430467aecbda9ea0dd1e1b"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-23",
+      "dtoSHA256": "4313b32c6ac596d73d778ddfab52aa56caa546249ebb21285944d1a85fd9d45b",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fd3093d3ae2cc6d996977e195fd09105c2d6c03765bdb13deecf5b7e68a258aa"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "eabf8b6f5251161a10dc6783c115f2eeeb74b4b580540e02133a4832c32ec92d",
+          "after": "eabf8b6f5251161a10dc6783c115f2eeeb74b4b580540e02133a4832c32ec92d"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "34dc1e78992fac1a92f7c9e721ac6e5a0d39cd4bd7e2998f8a42a0b8ffa8f274",
+          "after": "34dc1e78992fac1a92f7c9e721ac6e5a0d39cd4bd7e2998f8a42a0b8ffa8f274"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "eabf8b6f5251161a10dc6783c115f2eeeb74b4b580540e02133a4832c32ec92d",
+          "after": "eabf8b6f5251161a10dc6783c115f2eeeb74b4b580540e02133a4832c32ec92d"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-24",
+      "dtoSHA256": "2b88c5d356d4ce380de9884b9ab9fde8be45ab3c177d6d7bb3afd5f08dbbe7d7",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "665238ab4b037d1cf8d8ebf9bf989bc2a165151f36da3cabbbd3f44d76f6ba97"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "48896c2877f74d0f3eba9dcbec01365dfce28e85f518e9b0e1b26745934b7106",
+          "after": "48896c2877f74d0f3eba9dcbec01365dfce28e85f518e9b0e1b26745934b7106"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "0ad8870cfad1a2868b24fbe675873866fa2dd9bc8d47b8853b166f6b94b5720d",
+          "after": "0ad8870cfad1a2868b24fbe675873866fa2dd9bc8d47b8853b166f6b94b5720d"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "48896c2877f74d0f3eba9dcbec01365dfce28e85f518e9b0e1b26745934b7106",
+          "after": "48896c2877f74d0f3eba9dcbec01365dfce28e85f518e9b0e1b26745934b7106"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "journey-25",
+      "dtoSHA256": "003c4789613a56d65e400e6f9ffa8a94438129bcc3bc06e9b34f238e03de3325",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "0546ee226e1cfa5e7a280e9f592b28ddc9976252a87c3d17cb95afc1086638ba"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "4d7a2b3140894b7e7300328bd774c369feacd97c2f8c4e1af155c463461637fd",
+          "after": "4d7a2b3140894b7e7300328bd774c369feacd97c2f8c4e1af155c463461637fd"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "27a5a931eec1733641727cacabc5c20e5718cf8ccb32cbd75f0eb5cb51c7c78d",
+          "after": "27a5a931eec1733641727cacabc5c20e5718cf8ccb32cbd75f0eb5cb51c7c78d"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "4d7a2b3140894b7e7300328bd774c369feacd97c2f8c4e1af155c463461637fd",
+          "after": "4d7a2b3140894b7e7300328bd774c369feacd97c2f8c4e1af155c463461637fd"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "ordinary",
+      "dtoSHA256": "ff1a9bd5c832d8c797bd55178d1eb014e96c63d7e1a5ab0668fb9a76252e36e4",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "662b5d5b06015cd2fce50659b64f9de0264a8e1d4ce8ed91e236e4f26c5e7b18"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58",
+          "after": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "manual",
+      "dtoSHA256": "df7b5ebdab0b99e9d5010108299e3f6421bc94d1888c0d7dadf634ba7799e389",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "662b5d5b06015cd2fce50659b64f9de0264a8e1d4ce8ed91e236e4f26c5e7b18"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58",
+          "after": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "repeated",
+      "dtoSHA256": "66053b725b63363d8a8906771bc8b849f25866b9a3194d4ce0c38228fc704bcd",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fe160b1fda3edc217172136537492f1e290f8ef190e6c6d45afc81a97599c057"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "f0a7821c25809abca3cc652cfd1c68ea69bf4bdb5b1ee2f59d9f027d8da28087",
+          "after": "f0a7821c25809abca3cc652cfd1c68ea69bf4bdb5b1ee2f59d9f027d8da28087"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "863f10b0fe445c819b317b725e30f8585da38117340fb0cf3c80cec32f7ed754",
+          "after": "863f10b0fe445c819b317b725e30f8585da38117340fb0cf3c80cec32f7ed754"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "home-stop",
+      "dtoSHA256": "ef692e009cb4ac0517f9357e3d1e3317a8a55a4e92e4fad50c68b2f556a289fa",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e93ad3f532982e3fd6018ee4adb3947f2b9c05e4497ba81fdf00d7c590b358d2"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "ed08cababa39ef4d5fd4432eb52c9e7c99fe265b3591e26ed0044fd0c5e165fe",
+          "after": "d8fa0e534c2d856a4ba1833f2064ec8274e520fb161eeb491862679d5102aa7e"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "cb4a315764b9003632241b0092eff13b1ecc11b341f9ccf50d6196a0aa8b68f5",
+          "after": "cb4a315764b9003632241b0092eff13b1ecc11b341f9ccf50d6196a0aa8b68f5"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "punctuation",
+      "dtoSHA256": "9389768db5fc784a256688b060af9fdaa92ec815be6d6642a6867a126cfcd956",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "141977c841b3713dd9069dadfb491c6e913c9f0e31c88b841a72a9474bae8043"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "f68a6176c510e1388b3fb43a00529e07633af92f42c17458328bc0226207e231",
+          "after": "f68a6176c510e1388b3fb43a00529e07633af92f42c17458328bc0226207e231"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "c6af393ecac0b9d35a86f1c715c5c89356cc597889faa28b3071a4bae8e9a683",
+          "after": "c6af393ecac0b9d35a86f1c715c5c89356cc597889faa28b3071a4bae8e9a683"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "duration",
+      "dtoSHA256": "6b822d529624076ebf870d8e1741b7686934ad5e302269839383c335b192e1cd",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "9b97d06303750559709bbba353767cee9dd1f58cfe6a7f76952d2db7498e575c"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "db1ad9ae5139b4f994690bc1596c01095f520b7776867960d9351369f1fa2193",
+          "after": "db1ad9ae5139b4f994690bc1596c01095f520b7776867960d9351369f1fa2193"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "1da03add580f3732773b2752cc17fa990bb40b1e0cad27aa0f278ba946de8b92",
+          "after": "068916b74fc1d0757d66aaede7369f8d2d2308bcc4577075bdf8c2c1e82fb947"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "repeated-count",
+      "dtoSHA256": "1c9ff7b119f188a234271a91bc958beee6a2b1fd38889c1cadf4c0059e475858",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "5e30181705dfe70c58794d031dd1f39c2696db9ae774f1ec6e19216b62d8fea0"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737",
+          "after": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5d63acd33174f9bebefc75d740613633be67931f0a03f993ff4598fa7c293fa0",
+          "after": "5d63acd33174f9bebefc75d740613633be67931f0a03f993ff4598fa7c293fa0"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737",
+          "after": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "omitted",
+      "dtoSHA256": "ba5669f93287c68013a67e6c4318e521f15dc5ce31f7082646aec59101c61d9d",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "bc9c643877e36b62704094a747176aaf43741be275414b873ccc85e2a465ab5d"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "97b23a3b7f5ef54ad9f4517b62a9bc7a8af3e119f1fc70a526a5dca365b8813d",
+          "after": "97b23a3b7f5ef54ad9f4517b62a9bc7a8af3e119f1fc70a526a5dca365b8813d"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "3c7e3eb9726515a7756f302b0289e49a3957a77c5abc9f88793d1d3524505428",
+          "after": "3c7e3eb9726515a7756f302b0289e49a3957a77c5abc9f88793d1d3524505428"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "duplicate",
+      "dtoSHA256": "ad260068ac1627e7497c359fdbd0481c274f5cee62f24312657b9b0631a41937",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c746b11615178c8472a048c2497278fbe90bc0061bd2506a123db00b1a88324a"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737",
+          "after": "1bac0dc45bbf233216ea376e422a2913263da279c3fec8069a4492701b625737"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5d63acd33174f9bebefc75d740613633be67931f0a03f993ff4598fa7c293fa0",
+          "after": "5d63acd33174f9bebefc75d740613633be67931f0a03f993ff4598fa7c293fa0"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "named",
+      "dtoSHA256": "79e710d530d8c3d13c7c4aae6f36c9499775af31ae34742a3dd50d6cf7a32c0b",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "99a95dfacf8da93f9727cc072bc21051350ccf8187620771da4a0bc53d4162b4"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "f6a110b779f8852227323fe63eff5626b231ca6f6c8f278aa57cb7e02b721e12",
+          "after": "f6a110b779f8852227323fe63eff5626b231ca6f6c8f278aa57cb7e02b721e12"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "29e6ed6889c9f29064512963863915321d7850354a1ed68f97a226bddb48d717",
+          "after": "29e6ed6889c9f29064512963863915321d7850354a1ed68f97a226bddb48d717"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "finish",
+      "dtoSHA256": "8c19d6d3b753bca48b5dca361eb05f795aa7da0a72276625b2ae46e43e62d98d",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "7c44f41c9d191622c27c758cef0bfda01400f2165c40f2ace64bbc1bd5d33f44"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "43e7795f672f64303f2568c89056def40eeaa2fa206ed4424112d50a61dd3283",
+          "after": "43e7795f672f64303f2568c89056def40eeaa2fa206ed4424112d50a61dd3283"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "1af80b398d1e805ed48bc41d4a9c744d8ec45a03754841915c3c8b2d213ff0eb",
+          "after": "1af80b398d1e805ed48bc41d4a9c744d8ec45a03754841915c3c8b2d213ff0eb"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "dst",
+      "dtoSHA256": "7f5d83b8d35b693b9d31d3e6038e897aac3c2ba5f4e6eac2ef303f91c45a0cc8",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "b17eda4dc3cb57165d6951f9b888f08f237a957dc19266cad458594e65ceedb5"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "35a8aace5e6a527a9280a4ea4cab27975800b00b8a72373de65f0cb6934570b8",
+          "after": "35a8aace5e6a527a9280a4ea4cab27975800b00b8a72373de65f0cb6934570b8"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "0e09384ba7d9b608c77919d00e16b0ff036f641747b5268a11335bb319e13c91",
+          "after": "0e09384ba7d9b608c77919d00e16b0ff036f641747b5268a11335bb319e13c91"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "35a8aace5e6a527a9280a4ea4cab27975800b00b8a72373de65f0cb6934570b8",
+          "after": "35a8aace5e6a527a9280a4ea4cab27975800b00b8a72373de65f0cb6934570b8"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "kolkata",
+      "dtoSHA256": "418b105fb70c5ba8b2f2afbbfad500e61e37443bf42bb67ee773abe68b2013fd",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "d6fe9133400bb41284238608d07471eafca0039bd7b8e486ecd00d0e03e4432e"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "0142f2ce0f62945a926f22c74c3a9d291d889b1a38403a703444b29d7b5071d2",
+          "after": "0142f2ce0f62945a926f22c74c3a9d291d889b1a38403a703444b29d7b5071d2"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "0e09384ba7d9b608c77919d00e16b0ff036f641747b5268a11335bb319e13c91",
+          "after": "0e09384ba7d9b608c77919d00e16b0ff036f641747b5268a11335bb319e13c91"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "0142f2ce0f62945a926f22c74c3a9d291d889b1a38403a703444b29d7b5071d2",
+          "after": "0142f2ce0f62945a926f22c74c3a9d291d889b1a38403a703444b29d7b5071d2"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "invalid-fields",
+      "dtoSHA256": "3be10f661f5792bd6f784161d02d24fe5bd2cc0e96a090b1c761db5e8d52f8f6",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fdcab72fd1a16bba9c4e59b37fa86bbb17f3ba7ed11f6fc8f02e457a1f06261a"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": "ValidationError"
+    },
+    {
+      "id": "qwen-0",
+      "dtoSHA256": "0dffb1cdb17c025eb996643a2719ede80534509baa6921f824f99bcd157a1260",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+          "after": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0",
+          "after": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad",
+          "after": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-1",
+      "dtoSHA256": "e02aae593711c9ccce51d592425c21f698b21544fe7f56336d0f85d9146d36c4",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+          "after": "11439bc9677dfb4924ce5720375d7ee5a2a9a2c4765ec5b5b8e88399e0a40954"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5deb2af6e600a27b3c014b9956fba9a345c0df6fb5e1270fffefbb06af527fe6",
+          "after": "7622f5ab75daaaebe93a29a46991be13d677bc23f4bb332a8396ca075d31d139"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "qwen-2",
+      "dtoSHA256": "0e6c2bb0baf8dd59189e0d6833acb8033bb5a2a0e232d1c5b08f2ea954ff11fc",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+          "after": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22",
+          "after": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-3",
+      "dtoSHA256": "53b55a95aca39a4d556ea685c97f4fa722775d583dfe69ab26d1783e95efe04a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+          "after": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101",
+          "after": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-4",
+      "dtoSHA256": "a1b247685306b64d392f6dcbf2cca47fc5485dfe0cc6575867f7ab48fee4db68",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+          "after": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af",
+          "after": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-5",
+      "dtoSHA256": "0dffb1cdb17c025eb996643a2719ede80534509baa6921f824f99bcd157a1260",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+          "after": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0",
+          "after": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad",
+          "after": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-6",
+      "dtoSHA256": "6b98269df1983d485890f0d799dd19bf7bdef9c1213c6784ed969801d65f7a00",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+          "after": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633",
+          "after": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-7",
+      "dtoSHA256": "1b75e50a7027b3bf254c7422072dcc1a6a0bae0becfc76fdd04e75e238312c34",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "1b53207dfab22e287ba0c94d34cbd8d667acb36a488b6d2a086fa99f412300bc"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+          "after": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "396f1f3be92a7e732fb428d146ef69a012e2a6bd0a3a5eec2a609381faa89c9e",
+          "after": "396f1f3be92a7e732fb428d146ef69a012e2a6bd0a3a5eec2a609381faa89c9e"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0",
+          "after": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-8",
+      "dtoSHA256": "9f1fbd059e7b48be948fd0f59690220d6270939e888254c1e8b1e3d890a7bf01",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "38f73e3c62092fc4392062f1e79ad628eaf088b79dd962a3b6b57b03b780193f"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+          "after": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5",
+          "after": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-9",
+      "dtoSHA256": "073eb4e590049f31dfccf0b2e52704c5698964c3cf5f443d0a5b30140aaced60",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c0dcea7bd26a90aab4506ba3e5372447fdb191b6dd0bb9ed29949a95fc81ba2a"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+          "after": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068",
+          "after": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-10",
+      "dtoSHA256": "64cec2d6ccc450ec8b9fde859ed84059b72ca5d137bd61db32c002531a7ae524",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "1ed0c1809784861c9b77af51528dd77c66f450a78a86c05c836884c4f8efb6ab"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+          "after": "8b92f68231ccd91afc25d5e29215cda2cf3d7f3cc0bb45ad7b6d03fbc7090e81"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "4e6e69bc1cb4344175c6429875f5472de12da7c71cdafac90d13650f673fac48",
+          "after": "4e6e69bc1cb4344175c6429875f5472de12da7c71cdafac90d13650f673fac48"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "qwen-11",
+      "dtoSHA256": "e02aae593711c9ccce51d592425c21f698b21544fe7f56336d0f85d9146d36c4",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+          "after": "11439bc9677dfb4924ce5720375d7ee5a2a9a2c4765ec5b5b8e88399e0a40954"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5deb2af6e600a27b3c014b9956fba9a345c0df6fb5e1270fffefbb06af527fe6",
+          "after": "7622f5ab75daaaebe93a29a46991be13d677bc23f4bb332a8396ca075d31d139"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "qwen-12",
+      "dtoSHA256": "0e6c2bb0baf8dd59189e0d6833acb8033bb5a2a0e232d1c5b08f2ea954ff11fc",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+          "after": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22",
+          "after": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-13",
+      "dtoSHA256": "53b55a95aca39a4d556ea685c97f4fa722775d583dfe69ab26d1783e95efe04a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+          "after": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101",
+          "after": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-14",
+      "dtoSHA256": "a1b247685306b64d392f6dcbf2cca47fc5485dfe0cc6575867f7ab48fee4db68",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+          "after": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af",
+          "after": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-15",
+      "dtoSHA256": "0dffb1cdb17c025eb996643a2719ede80534509baa6921f824f99bcd157a1260",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+          "after": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0",
+          "after": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad",
+          "after": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-16",
+      "dtoSHA256": "6b98269df1983d485890f0d799dd19bf7bdef9c1213c6784ed969801d65f7a00",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+          "after": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633",
+          "after": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-17",
+      "dtoSHA256": "1b75e50a7027b3bf254c7422072dcc1a6a0bae0becfc76fdd04e75e238312c34",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "1b53207dfab22e287ba0c94d34cbd8d667acb36a488b6d2a086fa99f412300bc"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+          "after": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "396f1f3be92a7e732fb428d146ef69a012e2a6bd0a3a5eec2a609381faa89c9e",
+          "after": "396f1f3be92a7e732fb428d146ef69a012e2a6bd0a3a5eec2a609381faa89c9e"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0",
+          "after": "5cca58e4a6796aa6fb154bd5d883c9efb4e7df4be93d732b7f05eeb6ee28f6a0"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-18",
+      "dtoSHA256": "9f1fbd059e7b48be948fd0f59690220d6270939e888254c1e8b1e3d890a7bf01",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "38f73e3c62092fc4392062f1e79ad628eaf088b79dd962a3b6b57b03b780193f"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+          "after": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5",
+          "after": "14f03a70f890f64e2f3a191eb412210af732fb780e2fb067f90c3828dbb325f5"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-19",
+      "dtoSHA256": "073eb4e590049f31dfccf0b2e52704c5698964c3cf5f443d0a5b30140aaced60",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c0dcea7bd26a90aab4506ba3e5372447fdb191b6dd0bb9ed29949a95fc81ba2a"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+          "after": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068",
+          "after": "217cb41ca82cb8a608c60a85986bf6602fd1edeb0b3d2aa9c465a6194495b068"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-20",
+      "dtoSHA256": "64cec2d6ccc450ec8b9fde859ed84059b72ca5d137bd61db32c002531a7ae524",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "1ed0c1809784861c9b77af51528dd77c66f450a78a86c05c836884c4f8efb6ab"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+          "after": "8b92f68231ccd91afc25d5e29215cda2cf3d7f3cc0bb45ad7b6d03fbc7090e81"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "4e6e69bc1cb4344175c6429875f5472de12da7c71cdafac90d13650f673fac48",
+          "after": "4e6e69bc1cb4344175c6429875f5472de12da7c71cdafac90d13650f673fac48"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "qwen-21",
+      "dtoSHA256": "e02aae593711c9ccce51d592425c21f698b21544fe7f56336d0f85d9146d36c4",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "e2f7095d006fe831da7c809cec72f67f11a83d37962c655cf7a943958f2e22a6"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+          "after": "11439bc9677dfb4924ce5720375d7ee5a2a9a2c4765ec5b5b8e88399e0a40954"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5deb2af6e600a27b3c014b9956fba9a345c0df6fb5e1270fffefbb06af527fe6",
+          "after": "7622f5ab75daaaebe93a29a46991be13d677bc23f4bb332a8396ca075d31d139"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "qwen-22",
+      "dtoSHA256": "0e6c2bb0baf8dd59189e0d6833acb8033bb5a2a0e232d1c5b08f2ea954ff11fc",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "dc6cf44444a2dd88667617f80973e9b32316111e7c30fa2fb1e5e5bb0d726a9b"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+          "after": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22",
+          "after": "e1a7f1e46cbb95a4bbf3bcb147089a6bb557a5221e9e0184b0a5eaaa6f433f22"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-23",
+      "dtoSHA256": "53b55a95aca39a4d556ea685c97f4fa722775d583dfe69ab26d1783e95efe04a",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "0179ba8e6cf6b49f75a53d12198af2b271f64b96a22cf1a5517d011114bb5ec1"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+          "after": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101",
+          "after": "e0246eb62ffbc439d6460504f737adeaa4cd064422e6fec30acec6536b4cf101"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-24",
+      "dtoSHA256": "a1b247685306b64d392f6dcbf2cca47fc5485dfe0cc6575867f7ab48fee4db68",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "fe18b07bdd94728088b77a6c59b5dc45045e5efce37c179cc1b4f0f915a64279"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+          "after": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af",
+          "after": "5e7d9bf8c701f70d3b734e868aa02e7edb851d6a7a81abcbf8a10c31eacf35af"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "qwen-25",
+      "dtoSHA256": "0dffb1cdb17c025eb996643a2719ede80534509baa6921f824f99bcd157a1260",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "c4244c9dbdcd1ee9702d58d286f83a94760a5640b8b8712f8fd020dd06597083"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+          "after": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0",
+          "after": "082f6a78ab0841f62c79afb519e12f3f80b4655c55b3657b5256deb46ea9e5d0"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad",
+          "after": "08e90e442ebbe659520be7b19a5e88ffc14fbb58c78698087cac374406cad5ad"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "qwen-26",
+      "dtoSHA256": "6b98269df1983d485890f0d799dd19bf7bdef9c1213c6784ed969801d65f7a00",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "5b7f1cdecb04bb4944664dd5dca9f2da661964432eb8fd3ef530e1e695d4a663"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+          "after": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633",
+          "after": "09948aa8abd3c406ce328601bfc7949a95970c38d142dee81fa455adefdad633"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "openai-0",
+      "dtoSHA256": "3dbb6c8e5fb268ef790e67cb238a06749f97ff09a8c9666623a6ce53b4bcf378",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "662b5d5b06015cd2fce50659b64f9de0264a8e1d4ce8ed91e236e4f26c5e7b18"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660",
+          "after": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "491d339df34f41c16d94d44414de1bbf75bb3d2ea8390d05dd082c5ef146a0ef",
+          "after": "491d339df34f41c16d94d44414de1bbf75bb3d2ea8390d05dd082c5ef146a0ef"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660",
+          "after": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "openai-1",
+      "dtoSHA256": "bdfd5076e062726744cca11c8c4d933327399b6cc7ac6df8cc05097899861b78",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "04bc1f568498d844aae15c6025704647424ef4ac482c5e89e593d2fb436c9b3c"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265",
+          "after": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "0b6ae0ad2b0ae703acddbe28a7467babc56747625e95f60ea27ca051b4c0c54f",
+          "after": "0b6ae0ad2b0ae703acddbe28a7467babc56747625e95f60ea27ca051b4c0c54f"
+        },
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265",
+          "after": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265"
+        }
+      ],
+      "providerCalls": 1,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "openai-2",
+      "dtoSHA256": "62ff08b60719bce5409ff36132e272e78f21b3089d25d21150dfab92d1aa0dcb",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "11e9ccc4ba21642025e2407d5e9e0831309c7bea582b61ab891f28698388e0b0"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "5a676fd0c762b1d341e504839068070334c96c732fe69cee0eda9df20ba53104",
+          "after": "5a676fd0c762b1d341e504839068070334c96c732fe69cee0eda9df20ba53104"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "5f817be1c831fc38d0fea43607b8d318c9cdd1f201719856d451a8be692f45cd",
+          "after": "5f817be1c831fc38d0fea43607b8d318c9cdd1f201719856d451a8be692f45cd"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "openai-3",
+      "dtoSHA256": "5799625df7464fcda243813677e7554168672c148eb323321849ede316dd7a7d",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "b2a892279969bf98e71519d2ea11fe354026e5aae1ab6bc1dc4fce813a613411"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "cf7030cdfac75c5ab30c1703e4811f6a05eba090852eec0b47fe9f146feefb47",
+          "after": "cf7030cdfac75c5ab30c1703e4811f6a05eba090852eec0b47fe9f146feefb47"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "b1e1e2cf84d12951f76ab65ee92da6ad0368e7ff12452b746b930f518551c760",
+          "after": "b1e1e2cf84d12951f76ab65ee92da6ad0368e7ff12452b746b930f518551c760"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "clarification_required",
+      "error": null
+    },
+    {
+      "id": "openai-4",
+      "dtoSHA256": "6b9f83d3ee49da1a6cb61eae443b67cffb11182b4554853a5669cf78ba919819",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "2de13896d43aca02dca98794d21768848828c3638f3af90aa570c76504b635bb"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "0f3ef71724b4da4476c070a56b5fee8319441f9da79f3fe75e7d55209684f454",
+          "after": "0f3ef71724b4da4476c070a56b5fee8319441f9da79f3fe75e7d55209684f454"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "2f89de236ddfab71dd4a75195dbbcc5beca572227040b01f10684ab2419e28cc",
+          "after": "2f89de236ddfab71dd4a75195dbbcc5beca572227040b01f10684ab2419e28cc"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "openai-5",
+      "dtoSHA256": "6d3668e7236b8cb281531f41b81d881d882cd4835b03bbcf570f80fb4ae93973",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "d4ee42fdc3ee7416cd4f05c58e482dd4db2442c41ccfb29704cb5e8c39aae994"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "04eef832cdb46d907676b0dbccca757577c7a6ab5dc371fc7efd6f96bca59da8",
+          "after": "04eef832cdb46d907676b0dbccca757577c7a6ab5dc371fc7efd6f96bca59da8"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "bac97c689d3ef7c79569db625e04b081f276e9f6e4e6f5f4414e845fdef0206e",
+          "after": "bac97c689d3ef7c79569db625e04b081f276e9f6e4e6f5f4414e845fdef0206e"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "openai-6",
+      "dtoSHA256": "50d8dbc430d1c6e809719e22f8136070ca733fa8e71ffb6be895cf6cccbdfff2",
+      "events": [
+        {
+          "helper": "provider",
+          "inputHash": "4fcfd6a028599fd26e3c297ab75c15bde0c662a10b7b77aef4c296d8009e4f8b"
+        },
+        {
+          "helper": "normalize_extracted_references",
+          "before": "886bc52a19bc303470d6cde156f593c64153040d89612c09f152d7293c36061b",
+          "after": "239e01c691db9c3941b6cf73664933cd5fd6926ec41cdfbd8ac9bc8985b7dbcf"
+        },
+        {
+          "helper": "normalize_explicit_durations",
+          "before": "78bcfb325232bb548854b7292036362a826a3c00e2432c89aee60d2f5f3e16d5",
+          "after": "78bcfb325232bb548854b7292036362a826a3c00e2432c89aee60d2f5f3e16d5"
+        }
+      ],
+      "providerCalls": 1,
+      "status": "advanced_unavailable",
+      "error": null
+    },
+    {
+      "id": "pending",
+      "dtoSHA256": "ff1a9bd5c832d8c797bd55178d1eb014e96c63d7e1a5ab0668fb9a76252e36e4",
+      "events": [
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58",
+          "after": "d38703715b376a66cc35fc291dda39ee239e9f7b3fcb69aac00abff99d173d58"
+        }
+      ],
+      "providerCalls": 0,
+      "status": null,
+      "error": null
+    },
+    {
+      "id": "pending-answer",
+      "dtoSHA256": "a8ed0b32115140cda36ed98e580fb8b1c0747040a4625ac590735b45c65b1568",
+      "events": [
+        {
+          "helper": "normalize_verbatim_travel",
+          "before": "2bfbab7dc45900d23cb7f59039fb85aaa5425502f768d6e24302899741feae18",
+          "after": "2bfbab7dc45900d23cb7f59039fb85aaa5425502f768d6e24302899741feae18"
+        }
+      ],
+      "providerCalls": 0,
+      "status": null,
+      "error": null
+    }
+  ],
+  "durationCases": [
+    {
+      "id": "exact",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "minimum",
+      "raw": "Spend at least 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "maximum",
+      "raw": "Spend at most 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "under",
+      "raw": "Spend less than 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "approximate",
+      "raw": "Spend about 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-0",
+      "raw": "I have 2 hours for coffee.",
+      "data": {
+        "activities": [
+          "coffee"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "coffee"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-1",
+      "raw": "Return within 45 minutes.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-2",
+      "raw": "Get groceries and return home within 45 minutes.",
+      "data": {
+        "activities": [
+          "groceries"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "groceries"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": {
+            "kind": "home",
+            "source": "return home"
+          },
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-3",
+      "raw": "Spend 20 minutes at coffee and 10 minutes at the museum.",
+      "data": {
+        "activities": [
+          "coffee",
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "coffee"
+            },
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-4",
+      "raw": "Spend 20 minutes at coffee and coffee.",
+      "data": {
+        "activities": [
+          "coffee",
+          "coffee"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "coffee"
+            },
+            {
+              "source": "coffee"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-5",
+      "raw": "Coffee twice for 20 minutes.",
+      "data": {
+        "activities": [
+          "coffee",
+          "coffee"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "coffee"
+            },
+            {
+              "source": "coffee"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-6",
+      "raw": "Spend 20 minutes and 10 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-7",
+      "raw": "Spend -2 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-8",
+      "raw": "Spend 10081 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-9",
+      "raw": "Spend 1.1 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-10",
+      "raw": "Spend half an hour at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "contrast-11",
+      "raw": "Spend 20 minutes driving at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "existing-dwell",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum",
+              "duration": {
+                "minutes": 10,
+                "source": "10 minutes"
+              }
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "existing-total",
+      "raw": "I have 2 hours for coffee.",
+      "data": {
+        "activities": [
+          "coffee"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "coffee"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": {
+            "minutes": 30,
+            "source": "30 minutes"
+          },
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "masked-travel",
+      "raw": "Travel within 20 minutes to the museum.",
+      "guarded": "                         to the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "long-clause",
+      "raw": "Spend 20 minutes at the museum very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very very ",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      }
+    },
+    {
+      "id": "raising-duration_value",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      },
+      "raiseDependency": "duration_value"
+    },
+    {
+      "id": "raising-duration_relation",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      },
+      "raiseDependency": "duration_relation"
+    },
+    {
+      "id": "raising-unresolved_return_clause",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      },
+      "raiseDependency": "unresolved_return_clause"
+    },
+    {
+      "id": "raising-Duration",
+      "raw": "Spend 20 minutes at the museum.",
+      "data": {
+        "activities": [
+          "museum"
+        ],
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "date_expressions": [],
+        "transport": null,
+        "journey": {
+          "stops": [
+            {
+              "source": "museum"
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "clarification": "",
+          "shared_place": null
+        }
+      },
+      "raiseDependency": "Duration"
+    }
+  ],
+  "durationExpected": [
+    {
+      "id": "exact",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "exact",
+              "source": "Spend 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "minimum",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "minimum",
+              "source": "Spend at least 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "maximum",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "maximum",
+              "source": "Spend at most 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "under",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "under",
+              "source": "Spend less than 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "approximate",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "approximate",
+              "source": "Spend about 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-0",
+      "before": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": {
+          "minutes": 120,
+          "relation": "maximum",
+          "source": "I have 2 hours"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-1",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": {
+          "minutes": 45,
+          "relation": "maximum",
+          "source": "within 45 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-2",
+      "before": {
+        "stops": [
+          {
+            "source": "groceries",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": {
+          "kind": "home",
+          "source": "return home"
+        },
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "groceries",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": {
+          "kind": "home",
+          "source": "return home"
+        },
+        "total_duration": {
+          "minutes": 45,
+          "relation": "maximum",
+          "source": "within 45 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "unresolved_return_clause",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-3",
+      "before": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "exact",
+              "source": "Spend 20 minutes at coffee"
+            }
+          },
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 10,
+              "relation": "exact",
+              "source": "10 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration",
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-4",
+      "before": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "contrast-5",
+      "before": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          },
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "contrast-6",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 10,
+              "relation": "exact",
+              "source": "10 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-7",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "contrast-8",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "contrast-9",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "contrast-10",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 30,
+              "relation": "exact",
+              "source": "Spend half an hour at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "contrast-11",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "existing-dwell",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 10,
+              "relation": "exact",
+              "source": "10 minutes"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 10,
+              "relation": "exact",
+              "source": "10 minutes"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "existing-total",
+      "before": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": {
+          "minutes": 30,
+          "relation": "exact",
+          "source": "30 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "coffee",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": {
+          "minutes": 30,
+          "relation": "exact",
+          "source": "30 minutes"
+        },
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "masked-travel",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": []
+    },
+    {
+      "id": "long-clause",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "raising-duration_value",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": {
+        "type": "ValueError",
+        "message": "Synthetic dependency failure: duration_value"
+      },
+      "dependencyCallOrder": [
+        "duration_value"
+      ]
+    },
+    {
+      "id": "raising-duration_relation",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": {
+        "type": "ValueError",
+        "message": "Synthetic dependency failure: duration_relation"
+      },
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation"
+      ]
+    },
+    {
+      "id": "raising-unresolved_return_clause",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": {
+              "minutes": 20,
+              "relation": "exact",
+              "source": "Spend 20 minutes at the museum"
+            }
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": null,
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    },
+    {
+      "id": "raising-Duration",
+      "before": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "after": {
+        "stops": [
+          {
+            "source": "museum",
+            "kind": "activity",
+            "requirement": "required",
+            "evidence": "",
+            "duration": null
+          }
+        ],
+        "order": [],
+        "ordering": "unspecified",
+        "endpoint": null,
+        "total_duration": null,
+        "deadline": null,
+        "shared_place": null,
+        "order_conflict": false,
+        "clarification": ""
+      },
+      "return": null,
+      "error": {
+        "type": "ValueError",
+        "message": "Synthetic dependency failure: Duration"
+      },
+      "dependencyCallOrder": [
+        "duration_value",
+        "duration_relation",
+        "Duration"
+      ]
+    }
+  ],
+  "baselineMetadataFixture": {
+    "experiment": "task52b-phase1",
+    "corpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "promptVersion": "52b-v3-equivalent-default-compaction",
+    "promptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+    "schemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchemaHashes": {
+      "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+    },
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "candidates": {
+      "openai": {
+        "model": "gpt-6-luna",
+        "rates": [
+          125,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      },
+      "google": {
+        "model": "gemini-3.8-flash",
+        "rates": [
+          750,
+          3750
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission",
+          "Introductory global pricing expires 2026-12-31"
+        ]
+      },
+      "anthropic": {
+        "model": "claude-haiku-5-5",
+        "rates": [
+          100,
+          500
+        ],
+        "blockers": [
+          "Live requires hash-bound readiness and token admission"
+        ]
+      }
+    },
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "attemptCap": 594,
+    "providerCap": 198,
+    "spendCapNanodollars": 12000000000,
+    "concurrency": 1,
+    "retries": 0,
+    "timezonePolicy": "Explicit America/New_York or Asia/Kolkata for named synthetic destinations; unknown remains unknown",
+    "sampling": {
+      "openai": "temperature 0; reasoning none",
+      "google": "temperature ignored/omitted; thinking LOW",
+      "anthropic": "temperature omitted; thinking disabled; effort low"
+    },
+    "tools": false,
+    "inferenceRegion": "standard global; synthetic non-personal evaluation only",
+    "transportVersion": "52b-single-http-v2-responses",
+    "timeoutSeconds": 120,
+    "googleService": "Gemini Developer API; separate paid Default Gemini Project"
+  },
+  "canonicalSchemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+  "environment": {
+    "python": "3.12.1",
+    "pydantic": "2.14.1"
+  },
+  "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f"
+}

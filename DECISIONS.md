@@ -1,3 +1,11 @@
+# Task 52B B2 — owner-approved behavioral reconstruction, one helper
+
+Use separately labeled current-runtime reconstruction `52b-behavior-reconstruction-duration-b2-v1`, not an exact historical environment claim. Preserve frozen B1 behavior data, old source pins and paid records. Extract only duration normalization, mechanically qualifying dynamic lookups, after 75 interpretation and 25 direct duration traces were frozen.
+
+The original paid evaluator must refuse B2's new journey hash. Keep it unchanged; fake unit-test reference data is explicitly scoped and guarded, with actual source refusal tested outside that scope. No baseline/fixture can authorize a real attempt or planning receipt. Passing regressions supports this refactor only; it does not select a production model, activate V4 or authorize B3. [Evidence](docs/task52-b2-behavioral-extraction.md).
+
+---
+
 # Task 52B B2 — honor the historical replay hard stop
 
 Do not treat exact version pins/source hashes as proof of original interpreter, installed dependency/native or timezone artifact bytes. Do not load current packages as alleged historical dependencies. Restricted OS probes also did not establish confinement. Leave every pinned validator and B1 runtime file unchanged; implement only a source/metadata preflight that refuses execution, not a partially functioning executor or fallback.

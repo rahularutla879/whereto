@@ -55,7 +55,7 @@ class VersionReviewTests(TestCase):
             data=real(path)
             return data+b'\n# synthetic mutation' if str(path).endswith('backend/journey.py') else data
         # Snapshot-only verification deliberately remains valid; current-tree equality must fail.
-        from scripts import task52_phase_b_identity as current
+        from scripts import task52_phase_b2_identity as current
         self.assertTrue(current.verify()['verified'])
         with patch.object(Path,'read_bytes',changed):
             self.assertTrue(v.verify(H,'historical_evaluator')['snapshotVerified'])

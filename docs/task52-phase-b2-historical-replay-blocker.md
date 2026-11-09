@@ -1,3 +1,9 @@
+# Superseding checkpoint: owner approved behavioral reconstruction
+
+The [B2 behavioral reconstruction and one-helper extraction](task52-b2-behavioral-extraction.md) proceeded under explicit owner authorization to use current-runtime evidence. This does **not** clear or rewrite the exact-historical-environment blocker below, change the preflight, execute old code, or authorize paid evaluation. Historical findings/results remain unchanged; the new evidence has its own identity.
+
+---
+
 # Task 52B B2 — historical execution prerequisite blocked
 
 Baseline clean `1f76df7c3dd2b211391995eefbb812972953d585`. **No historical validation code executed and no mutating preparation fragment extracted.** Runtime remains `52b-runtime-phase-b1`. This checkpoint implements an offline fail-closed preflight and documents the prerequisite failure; it does not deliver an executor or a Phase B2 runtime identity.

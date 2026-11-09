@@ -11,7 +11,7 @@ from typing import Literal
 from pydantic import BaseModel
 
 PREPARATION_VERSION = '52b-source-preparation-b1'
-RUNTIME_ID = '52b-runtime-phase-b1'
+RUNTIME_ID = '52b-runtime-phase-b2'
 MAX_BINDING_WORK = 256
 EvidenceKind = Literal['raw_model', 'legacy_effective_pending']
 

@@ -1,0 +1,53 @@
+{
+  "format": "52b-runtime-identity-v2",
+  "runtimeIdentity": "52b-runtime-phase-b2",
+  "historicalBaselineCommit": "2fec366463a255efd5e96286e6250f7452b0cf49",
+  "historicalManifestSHA256": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+  "semanticPolicy": "legacy-pinned-52b-v1",
+  "adapterVersion": "52b-legacy-duration-delegation-b2",
+  "preparedSourceTypeVersion": "52b-source-preparation-b1",
+  "phases": [
+    "strict_extraction",
+    "source_occurrence_capture_b1",
+    "legacy_source_order_calendar_atomic",
+    "effective_occurrence_observation_b1",
+    "final_disposition"
+  ],
+  "sourceHashes": {
+    "backend/source_preparation.py": "829d2cdcdbe3ebcd2c18c46230c87b76e3a323b4d7e2a10c778e537e8ec1e9e1",
+    "backend/validation_phases.py": "528ac1f5094dd980ed127360a247fbe7590982182adc962d9f7463f7a52dc8a0",
+    "backend/planning_admission.py": "c083f735690eac7ca47227bc597c14cce1eeef022dbb7c600c71b36e5d3dfa93",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "package-lock.json": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/journey.py": "681045405f33897d859a18394add1646236ab53c5e61b63562c1dea93b3b8d7e",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/duration_preparation.py": "05072bc30bbb97f59de7ce08a7747c8e43413657bd70ab41d49f6ef784f9c0a8"
+  },
+  "implementationRootSHA256": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+  "dependencyScope": "Same selected source/data set as historical identity, new root; no historical equality claim",
+  "canonicalSchemaSHA256": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+  "buildIdentity": {
+    "kind": "source-set-only; no deployed artifact",
+    "python": "3.12.1",
+    "pydantic": "2.14.1",
+    "fastapi": "0.150.0",
+    "lockfileHashesIncluded": true,
+    "reproducibleContainerBuild": false
+  },
+  "allowedInternalPurposes": [
+    "preparation_observation",
+    "legacy_ordinary",
+    "legacy_advanced_handoff"
+  ],
+  "preparationAuthorizesPlanning": false,
+  "v4Enforcement": false,
+  "reconstructionBaseline": {
+    "identity": "52b-behavior-reconstruction-duration-b2-v1",
+    "sha256": "657472f95826452b19901a6e57c9ffe1bbad8e8a87367cc67cc38651ffe46545",
+    "historicalEnvironmentExact": false,
+    "originalEvaluatorReplacement": false,
+    "paidInferenceAuthorized": false
+  }
+}

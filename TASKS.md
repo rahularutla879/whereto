@@ -1,3 +1,7 @@
+Task 52B B2 duration-helper extraction completed under the owner-approved behavioral reconstruction baseline; full regressions pass. Original paid source gate refuses B2, historical evidence/allowances remain intact, and evaluation remains halted. Task 52 stays in progress. Stop for review before B3; no new numbered task. [Scope/evidence](docs/task52-b2-behavioral-extraction.md).
+
+---
+
 Task 52B B2 is blocked at its explicit historical execution prerequisite. Exact sources/version pins verify, but artifact environment/confinement do not. Preflight and negative tests delivered; no mutating extraction, B2 runtime identity, activation or new numbered task. Task 52 remains in progress. [Evidence and owner checkpoint](docs/task52-phase-b2-historical-replay-blocker.md).
 
 ---

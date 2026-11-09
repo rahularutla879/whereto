@@ -14,7 +14,7 @@ from backend.source_preparation import prepare_source,observe_effective,strict_e
 from backend.validation_phases import validate_legacy
 from backend.planning_admission import AdmissionRegistry,AdmissionError
 from scripts import task52_phase_b_replay as replay
-from scripts import task52_phase_b_identity as identity
+from scripts import task52_phase_b2_identity as identity
 from scripts import task52_version_review as historical
 
 NOW=replay.NOW
@@ -31,14 +31,16 @@ class PhaseBTests(unittest.TestCase):
         return value,d
 
     def test_75_frozen_traces_and_full_dtos_errors_identical_to_direct_legacy(self):
-        baseline=json.loads((DOCS/'task52-phase-b-legacy-characterization-v1.json').read_text())
-        self.assertEqual(replay.characterize(),baseline)
-        cases=replay.scenarios()
-        self.assertEqual(sum(r['id'].startswith('qwen-') for r in cases),27)
-        self.assertEqual(sum(r['id'].startswith('openai-') for r in cases),7)
-        for row in cases:
-            with self.subTest(case=row['id']):
-                self.assertEqual(replay.run(row)[1],replay.run(row,direct=True)[1])
+        from scripts.task52_b2_test_fixture import reference_scope
+        with reference_scope():
+            baseline=json.loads((DOCS/'task52-phase-b-legacy-characterization-v1.json').read_text())
+            self.assertEqual(replay.characterize(),baseline)
+            cases=replay.scenarios()
+            self.assertEqual(sum(r['id'].startswith('qwen-') for r in cases),27)
+            self.assertEqual(sum(r['id'].startswith('openai-') for r in cases),7)
+            for row in cases:
+                with self.subTest(case=row['id']):
+                    self.assertEqual(replay.run(row)[1],replay.run(row,direct=True)[1])
 
     def test_raw_snapshot_precedes_home_removal_and_duration_normalization(self):
         text='Museum, then go home tomorrow in Jersey City.'

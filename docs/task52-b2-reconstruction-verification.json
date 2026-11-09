@@ -1,0 +1,195 @@
+{
+  "version": "52b-b2-behavioral-extraction-verification-v1",
+  "baselineGitHEAD": "2fec366463a255efd5e96286e6250f7452b0cf49",
+  "reconstructionBaselineIdentity": "52b-behavior-reconstruction-duration-b2-v1",
+  "reconstructionSHA256": "657472f95826452b19901a6e57c9ffe1bbad8e8a87367cc67cc38651ffe46545",
+  "historicalEnvironmentExact": false,
+  "historicalSourceExecuted": false,
+  "replacementEvaluator": false,
+  "planningOrPaidAuthorityFromBaseline": false,
+  "runtime": {
+    "runtime": "52b-runtime-phase-b2",
+    "verified": true,
+    "purpose": "preparation_observation",
+    "planningAuthorized": false,
+    "historicalSourceEqualityClaimed": false,
+    "behavioralReconstruction": true
+  },
+  "runtimeManifestSHA256": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+  "singleHelperExtracted": "normalize_explicit_durations",
+  "unrelatedJourneyASTNodesEqual": true,
+  "interpretationQwenCanonicalSchemaUnchanged": true,
+  "oldManifestsCorpusPaidEvaluatorAndResultsUnchanged": true,
+  "originalPaidGateRefusal": "Reference source changed; review required: backend/journey.py",
+  "equivalence": {
+    "frozen75RowsEqual": true,
+    "durationProbesCompleteDTOErrorAndDependencyTraceEqual": 25,
+    "qualifiedRelocationASTEqual": true,
+    "recordedQwen": 27,
+    "recordedOpenAI": 7,
+    "referenceClock": "2026-11-08T12:00:00+00:00",
+    "scoringScope": "current-runtime reconstruction only; no new semantic qualification"
+  },
+  "fullBackend": {
+    "run": 1208,
+    "passed": 1171,
+    "skipped": 37,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 311.147,
+    "skips": "29 existing hosted PostgreSQL / 8 existing opt-in local PTY"
+  },
+  "fullFrontend": {
+    "passed": 285,
+    "failed": 0,
+    "skipped": 0,
+    "milliseconds": 117573.479416
+  },
+  "focused": {
+    "initialExtractionGroupPassed": 86,
+    "finalIntegrityTestsPassed": 6,
+    "note": "Final integrity check separately exercised after adding baseline-byte tamper validation; production extraction unchanged since full-suite start."
+  },
+  "typecheck": "passed after production build",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "unitFixtureScope": {
+    "mechanism": "explicit unittest load_tests suite; readonly reference scope for recorded replay",
+    "realGateAssertedRefusingBeforeFixture": true,
+    "originalGateRestoredAfterFixture": true,
+    "unitState": "temporary fictional unit state, not experiment journal",
+    "credentialsReadHttpSocketsPaidWritesDeniedForTestIO": true,
+    "operatingSystemSandbox": false,
+    "productionImportsOrPublicSelectors": false,
+    "existingTestsExcluded": false
+  },
+  "reconstructionRecordedReplay": {
+    "baselineIdentity": "52b-behavior-reconstruction-duration-b2-v1",
+    "evidenceKind": "current-runtime behavioral reconstruction",
+    "historicalExact": false,
+    "traceCount": 75,
+    "equal": true,
+    "comparisonFields": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "comparisonSummary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "journal": {
+      "sha256Before": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "sha256After": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "allTenRowHashes": [
+        "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+      ],
+      "allIgnoredFilesUnchanged": true,
+      "ignoredFilesVerified": 324,
+      "providerCounts": {
+        "google": 2,
+        "anthropic": 1,
+        "openai": 7
+      },
+      "totalAttempts": 10,
+      "remainingAttempts": 584,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "persistentHalt": true
+    }
+  },
+  "browserApiSmoke": {
+    "syntheticOnly": true,
+    "realAPIBoundary": true,
+    "fullMainForm": false,
+    "interpretHTTP": 200,
+    "planningHTTP": 200,
+    "provisionalOptions": 3,
+    "date": "2026-11-10",
+    "activities": [
+      "custom:box cricket",
+      "food",
+      "movie"
+    ],
+    "durationProbe": {
+      "HTTP": 200,
+      "minutes": 20,
+      "relation": "exact",
+      "executionStatus": "advanced_unavailable",
+      "requestPublished": false
+    },
+    "forgedAuthorityHTTP": 422,
+    "forgeryExtraCalls": 0,
+    "fakeModelCalls": 2,
+    "fakeSearchCalls": 3,
+    "fakeMatrixCalls": 3,
+    "serverStopped": true,
+    "realAvailabilityVerified": false
+  },
+  "privateEvidence": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "paidEvaluation": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1,
+    "total": 10,
+    "remainingAttempts": 584,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "newPaidCalls": 0,
+    "limits": "$12 / 594 total / 198 provider / 12000 input / 2000 output / concurrency 1 / retries 0",
+    "persistentHaltUnchanged": true
+  },
+  "security": {
+    "configuredCurrentAndHistoryHits": 0,
+    "threeEvaluationKeysCurrentAndHistoryHits": 0,
+    "privateConfigAndJournalIgnoredMode600": true,
+    "completeDiffReviewed": true
+  },
+  "unchangedRestrictions": [
+    "V4 enforcement unavailable and shadow OFF",
+    "No public admission transport",
+    "No model/prompt/provider switch",
+    "No Maps/billing/credentials/quotas changes",
+    "No infrastructure/migration/Task53",
+    "Hitech City unknown-relative-date timezone limitation unchanged"
+  ],
+  "remaining": "Stop for review; no B3/C-E extraction or paid evaluation authorized."
+}
