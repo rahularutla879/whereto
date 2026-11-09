@@ -1,3 +1,9 @@
+# Destination spelling — exact parent-bound comparison only
+
+Accept the documented Hitech City/HITEC City spelling pair only with provider neighborhood/sublocality, Hyderabad locality and Telangana state evidence. Keep query/source/origin text unchanged and retain every other geographic check. Synthetic mismatch proof plus official-source indexed spelling evidence supports this correction without live Maps. The original failed response is unavailable, so do not claim the real incident's cause or availability was verified. [Investigation](docs/hitec-destination-investigation.md).
+
+---
+
 # Task52B — make scenario time explicit, preserve expiry/accounting
 
 Keep the synthetic event dates/weekday meanings and strict production expiry. Scope aware test clocks to calendar freshness and, separately, cache-reuse scenarios; leave quota/capability/billing clocks independent. Preserve exact budget assertions and test the real 300s/600s expiration boundaries. Child HTTP tests need their own process-lifespan clock; fixture cleanup must handle an exit already emitted. No suite-wide freeze, production bypass, test exclusion or ordering activation. [Verified repair](docs/task52-backend-regression-repair.md).

@@ -1,3 +1,15 @@
+# Destination spelling correction — original incident not retried
+
+From clean `05cfcbd`, the existing failed Chrome page was inspected without refresh/submission. Network history had no original response, Console retained HTTP 422 only, and the app/local snapshot does not preserve the requested geographic detail. Terminal scrollback inspection was tool-blocked; no log file was found. Original correlation/error-body fields remain unavailable; the original incident cause is not claimed proven.
+
+A separately reproduced geographic comparison defect is narrowly corrected: Hitech City/HITEC City equivalence requires a provider neighborhood/sublocality plus Hyderabad locality and Telangana state components. No city-only/landmark/fuzzy matching, destination rewrite, automatic anchor consent or extra provider call. All requested parent tokens, region exclusions, radius and strict destination checks remain enforced. Fixed-clock three-stop synthetic planning and isolated fake-provider browser/API smoke preserve all activities, November 10 and driving. Real venue/origin availability remains unverified. [Evidence, limits and verification](docs/hitec-destination-investigation.md).
+
+Paid journal/all 324 private files/halt unchanged: OpenAI 7 / Google 2 / Anthropic 1 = 10/594, retained $0.047366625, remaining $11.952633375. No inference/counting/Maps/billing/model/provider configuration, infrastructure or Task 53 action. Ordering V4 remains OFF. See the linked machine-readable verification for final suite results.
+
+Final verification: backend **1,106 passed / 37 unchanged opt-in skips** (1,143 total, 264.155s); preceding run 1,105 passed / 37 skips before the ninth test was added. Frontend **285/285**, lint, TypeScript and production build passed. All nine new regressions pass. Synthetic browser/API smoke returned 200 and three provisional options; no live availability claim. Full diff and configured-secret/history scans passed.
+
+---
+
 # Task52B — backend regression/date fixtures repaired, enforcement still OFF
 
 Baseline clean `7a4fa1ce35fee6e817c42ea3c467eb8a8318a0e9`. **Two consecutive complete documented backend runs: 1,134 tests, 1,097 passed/37 unchanged opt-in skips, 0 failures/errors each** (240.084s and 239.188s). Frontend **285/285**, TypeScript, lint and production build passed. No production expiry/security/accounting/interpretation/ordering code changed. [Root causes, exact 41 methods/traces and all run history](docs/task52-backend-regression-repair.md), [machine verification/hashes](docs/task52-backend-regression-results.json), [test clock/resource guide](backend/TESTING.md).

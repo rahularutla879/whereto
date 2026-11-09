@@ -35,6 +35,13 @@ def geographic_reason(area, coordinates: Coordinates, components: list[dict]) ->
         return 'excluded_region'
     if area.name and getattr(area, 'enforce_name', True):
         supported=names(local_types | region_types)
+        # Reviewed Hyderabad neighborhood spelling only. Parent components alone
+        # never establish it; names/businesses/addresses are not alias evidence.
+        if ('hyderabad' in names({'locality', 'postal_town'})
+                and 'telangana' in regions):
+            neighborhood_names = names(local_types - {'locality', 'postal_town'})
+            if neighborhood_names & {'hiteccity', 'hitechcity'}:
+                supported.update({'hiteccity', 'hitechcity'})
         words=[normalized(part).split() for part in area.name.split(',')]
         # A qualified neighborhood may span multiple address components.
         # Every token must be supported; no city/borough alias is fabricated.

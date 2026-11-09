@@ -1,0 +1,107 @@
+{
+  "baselineCommit": "05cfcbdbc5c36a5dfaa6478ee86b52add2260880",
+  "originalResponseRecovery": {
+    "networkHistory": "empty",
+    "console": "HTTP 422 only; original JSON unavailable",
+    "persistedLogFileFound": false,
+    "terminalScrollbackInspected": false,
+    "terminalBlock": "Computer-use application access blocked",
+    "code": null,
+    "correlationId": null,
+    "diagnostics.failureBoundary": null,
+    "discoveryReasons": null,
+    "discoveryStages": null
+  },
+  "originalFailureCauseConfirmed": false,
+  "provenOfflineDefect": "Exact neighborhood spelling mismatch; missing neighborhood evidence is a separate indistinguishable error path.",
+  "scope": "Exact Hitech City/HITEC City equivalence requires Hyderabad locality/postal town, Telangana state and neighborhood/sublocality evidence. No global normalization or query/origin rewrite.",
+  "baselinePureComparison": "area_unverified",
+  "correctedPureComparison": null,
+  "missingNeighborhoodComparison": "area_unverified",
+  "newTestMethods": 9,
+  "newTestsPassed": 9,
+  "fakeBrowserSmoke": {
+    "httpStatus": 200,
+    "provisionalOptions": 3,
+    "syntheticOnly": true,
+    "realPlanningHTTPBoundary": true,
+    "ownerTabRetried": false,
+    "fullMainFormBrowserTest": false,
+    "temporaryServerStopped": true
+  },
+  "frontend": {
+    "tests": 285,
+    "passed": 285,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 117.030145042
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "paidAttemptsAdded": 0,
+  "liveMapsCalls": 0,
+  "liveAICalls": 0,
+  "tokenCountingCalls": 0,
+  "journalVerification": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "providerAttempts": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1
+  },
+  "aggregateAttempts": 10,
+  "remainingAttempts": 584,
+  "accountedUSD": "0.047366625",
+  "remainingUSD": "11.952633375",
+  "aggregateLimitUSD": 12,
+  "orderingEnforcement": "OFF; unchanged",
+  "productionModelChanged": false,
+  "geographySourceSHA256": "53453126d4ec586126af02bed722d9312d7c3b3d4947830b39699377afc9b5e5",
+  "firstFullBackendRun": {
+    "run": 1142,
+    "passed": 1105,
+    "skipped": 37,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 269.676,
+    "note": "Includes the first eight new methods; final discovery rerun includes the ninth added ambiguity method."
+  },
+  "publicSourcesReview": "Official-source indexed excerpts; direct official page retrieval failed. No Maps API or inference used.",
+  "unchangedRuntimeBoundaries": [
+    "backend/interpretation.py",
+    "backend/journey.py",
+    "backend/ordering_shadow.py",
+    "backend/provider_budget.py",
+    "backend/development_cost.py",
+    "backend/places_transport.py",
+    "backend/routes_transport.py",
+    "backend/location_context.py",
+    "docs/task52-evaluation-corpus.json"
+  ],
+  "configuredSecretScan": {
+    "sensitiveValues": 2,
+    "currentMatches": 0,
+    "historyMatches": 0
+  },
+  "finalFullBackendRun": {
+    "run": 1143,
+    "passed": 1106,
+    "skipped": 37,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 264.155,
+    "newRegressionMethodsIncluded": 9
+  }
+}
