@@ -1,3 +1,7 @@
+Task 52B B2 is blocked at its explicit historical execution prerequisite. Exact sources/version pins verify, but artifact environment/confinement do not. Preflight and negative tests delivered; no mutating extraction, B2 runtime identity, activation or new numbered task. Task 52 remains in progress. [Evidence and owner checkpoint](docs/task52-phase-b2-historical-replay-blocker.md).
+
+---
+
 Task 52B Phase B1 capture/occurrence preparation is implemented and fully regression-tested under a new runtime identity. Mutating preparation and C/D/E remain interleaved; V4 enforcement/transport/cloud implementation stay unstarted. Task 52 remains in progress, with no new numbered task. [Evidence and next checkpoint](docs/task52-phase-b-extraction-v1.md).
 
 ---

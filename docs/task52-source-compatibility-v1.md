@@ -1,3 +1,9 @@
+# B2 historical execution gate — blocked before extraction
+
+[The B2 audit](task52-phase-b2-historical-replay-blocker.md) verifies retained source identity and matching declared versions, but does not establish original execution-artifact identity or verified process confinement. No historical source executed and no pinned validator changed. A version-matched reconstruction must be separately approved/labeled if original artifacts cannot be recovered; it must not masquerade as exact historical reproduction. The new offline preflight has no executor or fallback. Original manifests and B1 identities/results remain unchanged.
+
+---
+
 # Phase B1 implementation checkpoint
 
 [The new runtime identity and extraction](task52-phase-b-extraction-v1.md) preserve all original six pins and this historical baseline manifest/checker. The old retained snapshot still verifies; its broader current-working-tree check now intentionally refuses the changed outer adapter/new helper. A separate exact-byte allowlisted `52b-runtime-identity-v2` manifest covers `52b-runtime-phase-b1`, canonical schema, prepared type and dependencies. No historical repinning or paid evaluator change. Remaining mutating B fragments still require a future reviewed snapshot execution boundary before pinned source edits. Historical review follows unchanged.

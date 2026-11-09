@@ -1,3 +1,9 @@
+# Task 52B B2 preflight only — runtime unchanged
+
+`scripts/task52_historical_preflight.py` is isolated active test tooling: read-only allowlisted Git/manifest identity plus installed distribution metadata audit, no retained-source execution, imports into the app, credentials, journal access or provider calls. CLI exit 2 and `HistoricalReplayBlocked` are deliberate until environment/confinement prerequisites are reviewed. No executor or Phase B2 runtime identity was installed. [Blocker and future boundary](docs/task52-phase-b2-historical-replay-blocker.md).
+
+---
+
 # Versioned Phase B1 capture boundary
 
 `backend/source_preparation.py` owns the unchanged strict-copy helper plus immutable transient `PreparedSource`/occurrence/mapping records. The existing API legacy adapter captures these before normalizers and observes the effective interpreter result afterward; no record feeds planning decisions. Pending evidence stays effective, never raw. Inseparable journey preparation/validation remains pinned and atomic. The internal admission issuer rejects preparation inputs and fingerprints `52b-runtime-phase-b1` after full legacy validation.

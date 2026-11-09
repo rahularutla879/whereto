@@ -1,3 +1,11 @@
+# Task 52B B2 — honor the historical replay hard stop
+
+Do not treat exact version pins/source hashes as proof of original interpreter, installed dependency/native or timezone artifact bytes. Do not load current packages as alleged historical dependencies. Restricted OS probes also did not establish confinement. Leave every pinned validator and B1 runtime file unchanged; implement only a source/metadata preflight that refuses execution, not a partially functioning executor or fallback.
+
+`normalize_explicit_durations` is the lower-risk provisional candidate after the gate, not an approved/extracted B2 implementation. Recover historical artifact provenance, or separately review an explicitly labeled reconstructed baseline; then prove confinement and complete replay before extraction. [Findings](docs/task52-phase-b2-historical-replay-blocker.md).
+
+---
+
 # Task 52B — independent B1 preparation only
 
 Extract immutable strict capture and conservative lexical occurrence preparation at the outer adapter; leave the mutating reference/duration/travel helpers at their existing mixed validation call sites. A lexical source span or mapping is not semantic proof, and unresolved mappings never invent indices or block existing legacy behavior. Preparation records cannot issue admission authority.

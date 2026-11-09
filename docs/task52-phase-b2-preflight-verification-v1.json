@@ -1,0 +1,339 @@
+{
+  "version": "52b-phase-b2-prerequisite-checkpoint-v1",
+  "baselineGitHEAD": "1f76df7c3dd2b211391995eefbb812972953d585",
+  "status": "blocked_before_historical_execution_and_extraction",
+  "preflight": {
+    "version": "52b-historical-execution-preflight-v1",
+    "historicalIdentity": {
+      "identity": "52b-historical-evaluator-b04",
+      "role": "historical_evaluator",
+      "manifestSHA256": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+      "snapshotVerified": true,
+      "workingSourcesVerified": false,
+      "dispatchAuthorized": false
+    },
+    "comparisonBaselineRuntimeIdentity": "52b-runtime-phase-b1",
+    "historicalGitCommit": "b04f85ff82aa1b1befc2d44527c8e80a22ed080e",
+    "historicalGitTree": "e9dae3d8029d200e3782da4c6d66dceea86b9d30",
+    "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "sixPins": {
+      "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+      "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+      "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+      "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+      "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+      "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+    },
+    "b1ManifestSHA256": "bba7caeab233f515d038a84c42842cbd20e37c13be64e8d2cd2da1b992b7d5a9",
+    "schemaSHA256RecordedInB1": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+    "requirementsSHA256": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "dependencyVersions": [
+      {
+        "distribution": "annotated-doc",
+        "requiredVersion": "0.0.5",
+        "installedVersion": "0.0.5",
+        "matches": true
+      },
+      {
+        "distribution": "annotated-types",
+        "requiredVersion": "0.8.0",
+        "installedVersion": "0.8.0",
+        "matches": true
+      },
+      {
+        "distribution": "anyio",
+        "requiredVersion": "4.15.1",
+        "installedVersion": "4.15.1",
+        "matches": true
+      },
+      {
+        "distribution": "cachetools",
+        "requiredVersion": "6.2.6",
+        "installedVersion": "6.2.6",
+        "matches": true
+      },
+      {
+        "distribution": "certifi",
+        "requiredVersion": "2026.10.19",
+        "installedVersion": "2026.10.19",
+        "matches": true
+      },
+      {
+        "distribution": "charset-normalizer",
+        "requiredVersion": "3.5.2",
+        "installedVersion": "3.5.2",
+        "matches": true
+      },
+      {
+        "distribution": "click",
+        "requiredVersion": "8.5.0",
+        "installedVersion": "8.5.0",
+        "matches": true
+      },
+      {
+        "distribution": "fastapi",
+        "requiredVersion": "0.150.0",
+        "installedVersion": "0.150.0",
+        "matches": true
+      },
+      {
+        "distribution": "google-auth",
+        "requiredVersion": "2.41.1",
+        "installedVersion": "2.41.1",
+        "matches": true
+      },
+      {
+        "distribution": "h11",
+        "requiredVersion": "0.16.0",
+        "installedVersion": "0.16.0",
+        "matches": true
+      },
+      {
+        "distribution": "idna",
+        "requiredVersion": "3.20",
+        "installedVersion": "3.20",
+        "matches": true
+      },
+      {
+        "distribution": "opentelemetry-api",
+        "requiredVersion": "1.45.1",
+        "installedVersion": "1.45.1",
+        "matches": true
+      },
+      {
+        "distribution": "psycopg",
+        "requiredVersion": "3.3.3",
+        "installedVersion": "3.3.3",
+        "matches": true
+      },
+      {
+        "distribution": "pyasn1",
+        "requiredVersion": "0.6.4",
+        "installedVersion": "0.6.4",
+        "matches": true
+      },
+      {
+        "distribution": "pyasn1-modules",
+        "requiredVersion": "0.4.2",
+        "installedVersion": "0.4.2",
+        "matches": true
+      },
+      {
+        "distribution": "pydantic",
+        "requiredVersion": "2.14.1",
+        "installedVersion": "2.14.1",
+        "matches": true
+      },
+      {
+        "distribution": "pydantic-core",
+        "requiredVersion": "2.50.1",
+        "installedVersion": "2.50.1",
+        "matches": true
+      },
+      {
+        "distribution": "requests",
+        "requiredVersion": "2.34.2",
+        "installedVersion": "2.34.2",
+        "matches": true
+      },
+      {
+        "distribution": "rsa",
+        "requiredVersion": "4.9.1",
+        "installedVersion": "4.9.1",
+        "matches": true
+      },
+      {
+        "distribution": "starlette",
+        "requiredVersion": "1.9.0",
+        "installedVersion": "1.9.0",
+        "matches": true
+      },
+      {
+        "distribution": "typing-extensions",
+        "requiredVersion": "4.16.0",
+        "installedVersion": "4.16.0",
+        "matches": true
+      },
+      {
+        "distribution": "typing-inspection",
+        "requiredVersion": "0.4.4",
+        "installedVersion": "0.4.4",
+        "matches": true
+      },
+      {
+        "distribution": "urllib3",
+        "requiredVersion": "2.8.0",
+        "installedVersion": "2.8.0",
+        "matches": true
+      },
+      {
+        "distribution": "uvicorn",
+        "requiredVersion": "0.54.0",
+        "installedVersion": "0.54.0",
+        "matches": true
+      }
+    ],
+    "allPinnedVersionsMatch": true,
+    "currentPythonVersion": "3.12.1",
+    "b1PythonVersion": "3.12.1",
+    "pythonVersionMatchesB1": true,
+    "historicalArtifactEnvironmentVerified": false,
+    "approvedExecutionEnvironmentCount": 0,
+    "blockers": [
+      "missing_approved_historical_interpreter_and_dependency_artifact_lock",
+      "historical_execution_confinement_not_verified"
+    ],
+    "historicalCodeExecuted": false,
+    "runtimeExtractionPermitted": false,
+    "dependencyInstallationAttempted": false,
+    "providerRequests": 0,
+    "paidJournalAccessedByThisTool": false
+  },
+  "preflightCLIExit": 2,
+  "historicalExecutorImplemented": false,
+  "historicalEnvironmentReproducedExactly": false,
+  "osIsolationProbes": [
+    {
+      "scope": "managed",
+      "operation": "restricted isolated Python version only; no historical source",
+      "exit": 71,
+      "category": "sandbox_apply_denied",
+      "verifiedConfinement": false
+    },
+    {
+      "scope": "authorized local process",
+      "operation": "same restricted Python version-only probe",
+      "exit": -6,
+      "category": "signal_6_no_stdout_exact_cause_unproven",
+      "verifiedConfinement": false
+    }
+  ],
+  "provisionalCandidate": {
+    "name": "normalize_explicit_durations",
+    "sourcePath": "backend/journey.py",
+    "sourceLines": [
+      127,
+      169
+    ],
+    "sourceSHA256": "d807d729123f4e6bd48185c04c1c67e3d327af3d8fc1a588745457a1fbf15656",
+    "extracted": false,
+    "newMutationTraces": null,
+    "newHistoricalDTOEquivalence": null
+  },
+  "currentRuntime": {
+    "runtime": "52b-runtime-phase-b1",
+    "purpose": "preparation_observation",
+    "verified": true,
+    "planningAuthorized": false,
+    "historicalSourceEqualityClaimed": false
+  },
+  "newRuntimeIdentityCreated": false,
+  "testRuns": [
+    {
+      "suite": "focused",
+      "run": 121,
+      "passed": 121,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 31.334
+    },
+    {
+      "suite": "boundaries",
+      "run": 76,
+      "passed": 66,
+      "skipped": 10,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 3.112
+    }
+  ],
+  "newPreflightTests": 6,
+  "currentB1Replay": {
+    "historicalFieldsUnchanged": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "qwenRecords": 27,
+    "openaiRecords": 7,
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "isolatedHistoricalReplay": false,
+    "historicalOutcomesRewritten": false
+  },
+  "notRerun": {
+    "fullBackendFrontendTypecheckLintBuildBrowser": "No runtime/shared app changes; hard stop before extraction. Prior B1 results remain historical: backend 1159 pass/37 skips, frontend 285 pass, typecheck/lint/build and controlled-date fake browser smoke passed."
+  },
+  "privateEvidence": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "readOnlyPaidHaltRecoveryRefused": true,
+  "paidEvaluation": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1,
+    "total": 10,
+    "remaining": 584,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "newRequests": 0,
+    "originalLimits": "$12 / 594 / 198 per provider / 12000 input / 2000 output / concurrency 1 / retries 0"
+  },
+  "security": {
+    "configuredCurrentHits": 0,
+    "configuredHistoryHits": 0,
+    "evaluationKeyCurrentHits": 0,
+    "evaluationKeyHistoryHits": 0,
+    "historicalManifestsAndRuntimeFilesUnchanged": true,
+    "privateFilesByteIdentical": 324,
+    "noDependencyInstallOrJournalClone": true,
+    "completeDiffReviewed": true
+  },
+  "remainingPrerequisites": [
+    "Recover verifiable historical execution artifact/environment identity, or obtain explicit approval for a separately labeled reconstruction baseline",
+    "Implement and prove actual separate-process confinement without credential/journal/network access",
+    "Only then extract one duration helper under a new runtime identity and full replay/regression verification"
+  ],
+  "unrelatedBlockersUnchanged": [
+    "Hitech City relative-date destination-timezone clarification",
+    "Legacy ordering limitations and disabled V4 enforcement",
+    "Gemini Developer API HTTP400/IP restriction",
+    "Anthropic grammar compilation"
+  ],
+  "separateParentEvidenceAudit": {
+    "privateJsonFilesReviewed": 322,
+    "paidRowsReviewedReadOnly": 10,
+    "executionArtifactIdentityFieldsFound": false,
+    "nonArtifactWheelchairKeysExcluded": true,
+    "historicalExecutionToolAccessedJournal": false
+  }
+}
