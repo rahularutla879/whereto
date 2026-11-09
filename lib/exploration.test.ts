@@ -1,11 +1,38 @@
 import { test } from "node:test";
 import { developmentOriginHeaders } from "./development-origin";
 import { once } from "node:events";
+import { spawn, type ChildProcess } from "node:child_process";
 import assert from "node:assert/strict";
 import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import { ExplorationNotice, explorationStage } from "../components/exploration-notice";
 import { ResultsInformation } from "../components/results-information";
+
+async function stopFixture(child: ChildProcess): Promise<void> {
+  if (child.exitCode !== null || child.signalCode !== null) return;
+  const exited = once(child, "exit"); // Listen before sending the signal.
+  child.kill("SIGTERM");
+  await exited;
+}
+
+test("fixture cleanup handles an exit that already happened", async () => {
+  const child = spawn(process.execPath, ["-e", "process.exit(7)"]);
+  await once(child, "exit");
+  await stopFixture(child);
+  assert.equal(child.exitCode, 7);
+});
+
+test("fixture cleanup terminates and reaps a running child without sleeps", async () => {
+  const child = spawn(process.execPath, ["-e", "process.send('ready'); setInterval(() => {}, 1000)"],
+    { stdio: ["ignore", "ignore", "ignore", "ipc"] });
+  try {
+    await once(child, "message");
+    await stopFixture(child);
+    assert.equal(child.signalCode, "SIGTERM");
+  } finally {
+    await stopFixture(child);
+  }
+});
 
 test("development exploration notice is explicit and disappears when disabled", () => {
   assert.equal(renderToStaticMarkup(React.createElement(ExplorationNotice, { active: false })), "");
@@ -24,7 +51,6 @@ test("developer usage is excluded from the normal recommendation disclosure", ()
 });
 
 test("offline exploration HTTP boundaries and contacts share persistent nonblocking usage accounting", async () => {
-  const { spawn } = await import("node:child_process");
   const { createServer } = await import("node:http");
   const { mkdtemp, rm } = await import("node:fs/promises");
   const { tmpdir } = await import("node:os");
@@ -34,10 +60,14 @@ test("offline exploration HTTP boundaries and contacts share persistent nonblock
   const address=listener.address();assert.ok(address && typeof address==="object");
   await new Promise<void>(r=>listener.close(()=>r()));
   const base=`http://127.0.0.1:${address.port}`;
-  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--reference-time","2026-11-05T15:00:00+00:00","--exploration-ledger",join(dir,"usage.json")],{env:{...process.env,WHERETO_DEV_DAILY_USD:"0.29",WHERETO_DEV_WARN_USD:"0.29"}});
+  // This explicit fake-only server forbids real sends. Do not let the parent
+  // runner's CI flag select production real-provider admission in the child.
+  const fixtureEnvironment: NodeJS.ProcessEnv = { ...process.env, WHERETO_DEV_DAILY_USD: "0.29", WHERETO_DEV_WARN_USD: "0.29" };
+  delete fixtureEnvironment.CI;
+  const child=spawn("backend/.venv/bin/python",["-m","backend.real_fixture_server","--port",String(address.port),"--reference-time","2026-11-05T15:00:00+00:00","--exploration-ledger",join(dir,"usage.json")],{env:fixtureEnvironment});
   const post=(path:string,body:unknown)=>fetch(`${base}${path}`,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)});
   try {
-    for(let i=0;i<600;i++){try{if((await fetch(`${base}/health`)).ok)break;}catch{ /* Wait only for the local fixture server. */ }await new Promise(r=>setTimeout(r,50));}
+    for(let i=0;i<600;i++){if(child.exitCode!==null||child.signalCode!==null)throw new Error("Synthetic fixture server exited before readiness");try{if((await fetch(`${base}/health`)).ok)break;}catch{ /* Wait only for the local fixture server. */ }await new Promise(r=>setTimeout(r,50));}
     const mode=await (await fetch(`${base}/api/planning-mode`)).json();
     assert.equal(mode.explorationEnabled,true);
     assert.equal((await fetch(`${base}/health`,{headers:{Origin:"https://example.com"}})).status,403);
@@ -54,7 +84,7 @@ test("offline exploration HTTP boundaries and contacts share persistent nonblock
     assert.equal(detail.status,200);const contact=await detail.json();assert.equal(contact.diagnostics.estimatedUsageWarning,true);assert.equal(contact.diagnostics.costAdmissionEnforced,false);
     assert.equal((await(await fetch(`${base}/__test/counts`)).json()).details,before.details+1);
     assert.ok(result.provisionalPlans.every((p:{candidate:{venues:{providerPlaceId:string}[]}})=>p.candidate.venues.every(v=>v.providerPlaceId)));
-  } finally {child.kill("SIGTERM");await once(child,"exit");await rm(dir,{recursive:true,force:true});}
+  } finally {await stopFixture(child);await rm(dir,{recursive:true,force:true});}
 });
 
 test("proxies retain public host, origin and forwarded-request evidence for exploration admission",()=>{

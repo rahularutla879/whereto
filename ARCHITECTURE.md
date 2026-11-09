@@ -1,3 +1,9 @@
+# Test-only clock ownership
+
+`backend.testing_clock` supplies explicit scoped UTC calendar fixtures and an opt-in route-evidence fixture clock. Its `fixture_api` wraps the real app lifespan only when `backend.test_api` selects that test factory; normal startup still uses `backend.main:app`. No production clock/configuration flag or expiry logic changed. Monotonic capabilities/quotas and billing clocks remain separate. [Testing guide](backend/TESTING.md), [regression proof](docs/task52-backend-regression-repair.md).
+
+---
+
 # Default-OFF ordering shadow boundary
 
 `backend.ordering_shadow` adds a context-local test observer around `backend.main.interpret_outing`. OFF delegates unchanged; ON decorates only the lazy existing provider, observes a strictly parsed copy before the frozen interpreter/legacy normalization, and never returns a graph to admission. Pending snapshots are skipped. One bounded daemon worker/no queue, sanitized ephemeral diagnostics; no environment switch or persistence. `scripts/cloud_model52_ordering_v4.py` is the separately frozen finite policy; the release replay runner opens paid state read-only and blocks transport. [Exact boundaries, timeout/coverage limits and future enforcement switch](docs/task52-ordering-policy-v4.md). Enforcement and active Qwen remain unchanged.

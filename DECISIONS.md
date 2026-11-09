@@ -1,3 +1,9 @@
+# Task52B — make scenario time explicit, preserve expiry/accounting
+
+Keep the synthetic event dates/weekday meanings and strict production expiry. Scope aware test clocks to calendar freshness and, separately, cache-reuse scenarios; leave quota/capability/billing clocks independent. Preserve exact budget assertions and test the real 300s/600s expiration boundaries. Child HTTP tests need their own process-lifespan clock; fixture cleanup must handle an exit already emitted. No suite-wide freeze, production bypass, test exclusion or ordering activation. [Verified repair](docs/task52-backend-regression-repair.md).
+
+---
+
 # Task52B — observe ordering before legacy normalization, default OFF
 
 Close only the three demonstrated bounded-language gaps and retain raw extraction errors. Keep the corpus-pinned interpreter byte-identical: a local-test API provider decorator observes a strictly parsed deep copy before normalization, while legacy remains authoritative. Skip already-normalized pending snapshots; do not call them raw model evidence. Diagnostics cannot authorize planning and no observer failure may trigger another inference. No enforcement/default model decision follows; baseline-reproduced full-suite date-fixture failures remain a release blocker. [Versioned evidence and constraints](docs/task52-ordering-policy-v4.md).

@@ -1,4 +1,5 @@
 """Mode behavior through interpretation, actual planner and persistence mapping."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from datetime import datetime,timezone
@@ -59,6 +60,7 @@ class InterpretationModes(unittest.TestCase):
 
 class PlannerModes(unittest.TestCase):
  def setUp(self):
+  self.enterContext(calendar_clock())
   for item in (patch.dict(os.environ,ENV,clear=True),patch('requests.Session.send',side_effect=AssertionError('No live Google')),patch('backend.places_transport.text_search',side_effect=search_fixture)):
    item.start();self.addCleanup(item.stop)
   self.matrix=patch('backend.routes_transport.compute_matrix',side_effect=matrix).start();self.addCleanup(patch.stopall)

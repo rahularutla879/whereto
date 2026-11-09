@@ -1,5 +1,6 @@
 """Offline contracts/boundaries and opt-in rollback-only hosted persistence."""
 from contextlib import contextmanager
+from backend.testing_clock import calendar_clock
 import json
 import os
 import secrets
@@ -32,6 +33,7 @@ def request_for(registry, result=None):
 
 class OfflinePersistenceTests(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.registry = Receipts()
         self.request = request_for(self.registry)
 

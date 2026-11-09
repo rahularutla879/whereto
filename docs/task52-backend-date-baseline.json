@@ -1,0 +1,376 @@
+{
+  "baselineGitHEAD": "7a4fa1ce35fee6e817c42ea3c467eb8a8318a0e9",
+  "command": "npm run test:backend",
+  "testsRun": 1126,
+  "failureEntries": 15,
+  "errors": 30,
+  "skipped": 37,
+  "seconds": 145.209,
+  "distinctFailingMethods": [
+    "test_acceptance46.OptionsAcceptance.test_cumulative_limits_and_aggregate_diagnostics",
+    "test_acceptance46.OptionsAcceptance.test_empty_initial_pool_can_explicitly_search_once",
+    "test_acceptance46.OptionsAcceptance.test_expansion_provider_failure_is_charged_and_never_retried",
+    "test_acceptance46.OptionsAcceptance.test_expansion_retains_original_ids_and_caps_inventory_and_contact_budget",
+    "test_acceptance46.OptionsAcceptance.test_explicit_sparse_discovery_refills_without_widening_or_reset",
+    "test_acceptance46.OptionsAcceptance.test_fifteen_clicks_three_new_pairs_each_with_original_budget",
+    "test_acceptance46.OptionsAcceptance.test_small_pool_exhaustion_and_no_implicit_search_refill",
+    "test_acceptance_regeneration49.Regeneration.test_regeneration_after_recombination_discovery_and_exception_view",
+    "test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window",
+    "test_acceptance_regeneration49.Regeneration.test_true_provider_failure_stays_distinct_and_is_not_retried",
+    "test_api.PlanningApiTests.test_activities_and_modes_change_first_plan",
+    "test_api.PlanningApiTests.test_budget_travel_and_zero_limits",
+    "test_api.PlanningApiTests.test_endpoint_preserves_unknown_cost_and_duration",
+    "test_api.PlanningApiTests.test_mandatory_origin_and_fictional_first_leg_boundaries",
+    "test_api.PlanningApiTests.test_multi_activity_keeps_python_evidence_and_order",
+    "test_api.PlanningApiTests.test_save_boundary_outage_does_not_break_generation",
+    "test_api.PlanningApiTests.test_scheduled_matching_nonmatching_and_conflicting",
+    "test_discovery100.PipelineAlternatives.test_matching_page_then_separate_strict_alternative_pages",
+    "test_discovery100.PipelineAlternatives.test_travel_only_violations_are_explicit_and_constraints_unchanged",
+    "test_expanded_limits46.ExpandedLimits.test_explicit_discovery_exhausts_ten_shared_searches_not_fresh_budgets",
+    "test_expanded_limits46.ExpandedLimits.test_fifteen_alternative_actions_share_search_route_and_contact_budget",
+    "test_expanded_limits46.ExpandedLimits.test_initial_minute_pause_has_resumable_capability_without_new_searches",
+    "test_expanded_limits46.ExpandedLimits.test_quota_stops_new_work_without_retries_or_fake_fallback",
+    "test_expanded_limits46.ExpandedLimits.test_three_hundred_boundary_minute_pause_and_cumulative_stop",
+    "test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin",
+    "test_exploration.ExplorationTests.test_provider_quota_stops_continuation_without_retry",
+    "test_exploration.ExplorationTests.test_rich_fixture_exceeds_old_ceilings_and_fifteen_actions",
+    "test_location_acceptance.Pipeline.test_complete_initial_double_range_and_continuation_keep_origin",
+    "test_location_first.LocationFirst.test_fifteen_alternative_actions_share_inventory_and_budgets",
+    "test_location_first.LocationFirst.test_mock_mode_does_not_ignore_new_hard_geography",
+    "test_location_lifecycle.GeographyLifecycle.test_pagination_continuations_keep_context_and_no_repeats",
+    "test_open_exploration.OpenExploration.test_fifteen_actions_above_ten_dollars_reuse_pools_and_full_history",
+    "test_real_planning.RealPlanningTests.test_bounded_additional_options_reuse_all_evidence_and_preserve_limits",
+    "test_real_planning.RealPlanningTests.test_start_is_separate_enforced_and_not_echoed",
+    "test_real_planning.RealPlanningTests.test_travel_limits_exact_seconds_no_rounding_rejection",
+    "test_saved_plans.OfflinePersistenceTests.test_surprise_planner_input_is_mapped_to_retained_request_fields",
+    "test_surprise.Pipeline.test_exhausted_expired_and_quota_sessions_no_retry",
+    "test_surprise.Pipeline.test_fifteen_continuations_report_actual_primary_and_full_uniqueness",
+    "test_task46_improvements.ImprovementTests.test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget",
+    "test_task46_improvements.ImprovementTests.test_failed_expansion_cannot_reset_or_retry_budget",
+    "test_travel_mode49.PlannerModes.test_continuation_discovery_and_cache_scope_retain_mode"
+  ],
+  "methodCategories": {
+    "HTTP subprocess calendar": 6,
+    "expired fixture returning error DTO": 1,
+    "expired synthetic calendar fixture": 31,
+    "monotonic/calendar mismatch": 3
+  },
+  "failures": [
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_cumulative_limits_and_aggregate_diagnostics",
+      "header": "test_cumulative_limits_and_aggregate_diagnostics (test_acceptance46.OptionsAcceptance.test_cumulative_limits_and_aggregate_diagnostics)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 246, in test_cumulative_limits_and_aggregate_diagnostics\n    r=more_real_plans(r.optionsToken)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_empty_initial_pool_can_explicitly_search_once",
+      "header": "test_empty_initial_pool_can_explicitly_search_once (test_acceptance46.OptionsAcceptance.test_empty_initial_pool_can_explicitly_search_once)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 163, in test_empty_initial_pool_can_explicitly_search_once\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\n\n======================================================================\n{\"event\":\"provider_reserved\",\"operation\":\"provider_admission\",\"reason\":\"none\",\"units\":{\"search_pro\":1,\"details\":0,\"matrix_element\":0}}"
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_expansion_retains_original_ids_and_caps_inventory_and_contact_budget",
+      "header": "test_expansion_retains_original_ids_and_caps_inventory_and_contact_budget (test_acceptance46.OptionsAcceptance.test_expansion_retains_original_ids_and_caps_inventory_and_contact_budget)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 210, in test_expansion_retains_original_ids_and_caps_inventory_and_contact_budget\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\n\n======================================================================\n{\"event\":\"stage_finished\",\"operation\":\"search\",\"reason\":\"none\",\"durationMs\":0.018}\n{\"event\":\"provider_reserved\",\"operation\":\"provider_admission\",\"reason\":\"none\",\"units\":{\"search_pro\":1,\"details\":0,\"matrix_element\":0}}\n{\"event\":\"stage_finished\",\"operation\":\"search\",\"reason\":\"none\",\"durationMs\":0.008}"
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_explicit_sparse_discovery_refills_without_widening_or_reset",
+      "header": "test_explicit_sparse_discovery_refills_without_widening_or_reset (test_acceptance46.OptionsAcceptance.test_explicit_sparse_discovery_refills_without_widening_or_reset)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 127, in test_explicit_sparse_discovery_refills_without_widening_or_reset\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_fifteen_clicks_three_new_pairs_each_with_original_budget",
+      "header": "test_fifteen_clicks_three_new_pairs_each_with_original_budget (test_acceptance46.OptionsAcceptance.test_fifteen_clicks_three_new_pairs_each_with_original_budget)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 98, in test_fifteen_clicks_three_new_pairs_each_with_original_budget\n    result=more_real_plans(result.optionsToken);batch=result.provisionalPlans;queued=list(result.alternativeBatches)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance46.OptionsAcceptance.test_small_pool_exhaustion_and_no_implicit_search_refill",
+      "header": "test_small_pool_exhaustion_and_no_implicit_search_refill (test_acceptance46.OptionsAcceptance.test_small_pool_exhaustion_and_no_implicit_search_refill)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 142, in test_small_pool_exhaustion_and_no_implicit_search_refill\n    while r.canExpand:r=more_real_plans(token)\n                        ^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_acceptance_regeneration49.Regeneration.test_regeneration_after_recombination_discovery_and_exception_view",
+      "header": "test_regeneration_after_recombination_discovery_and_exception_view (test_acceptance_regeneration49.Regeneration.test_regeneration_after_recombination_discovery_and_exception_view)",
+      "category": "monotonic/calendar mismatch",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance_regeneration49.py\", line 54, in test_regeneration_after_recombination_discovery_and_exception_view\n    more_real_plans(initial.optionsToken,expand_discovery=explore,show_beyond=beyond)\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_api.PlanningApiTests.test_endpoint_preserves_unknown_cost_and_duration",
+      "header": "test_endpoint_preserves_unknown_cost_and_duration (test_api.PlanningApiTests.test_endpoint_preserves_unknown_cost_and_duration)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 154, in test_endpoint_preserves_unknown_cost_and_duration\n    self.assertFalse(result.plans)\n                     ^^^^^^^^^^^^\nAttributeError: 'JSONResponse' object has no attribute 'plans'"
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_discovery100.PipelineAlternatives.test_matching_page_then_separate_strict_alternative_pages",
+      "header": "test_matching_page_then_separate_strict_alternative_pages (test_discovery100.PipelineAlternatives.test_matching_page_then_separate_strict_alternative_pages)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_discovery100.py\", line 176, in test_matching_page_then_separate_strict_alternative_pages\n    r=more_real_plans(r.optionsToken,show_beyond=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_discovery100.PipelineAlternatives.test_travel_only_violations_are_explicit_and_constraints_unchanged",
+      "header": "test_travel_only_violations_are_explicit_and_constraints_unchanged (test_discovery100.PipelineAlternatives.test_travel_only_violations_are_explicit_and_constraints_unchanged)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_discovery100.py\", line 146, in test_travel_only_violations_are_explicit_and_constraints_unchanged\n    r=more_real_plans(r.optionsToken,show_beyond=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_explicit_discovery_exhausts_ten_shared_searches_not_fresh_budgets",
+      "header": "test_explicit_discovery_exhausts_ten_shared_searches_not_fresh_budgets (test_expanded_limits46.ExpandedLimits.test_explicit_discovery_exhausts_ten_shared_searches_not_fresh_budgets)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 157, in test_explicit_discovery_exhausts_ten_shared_searches_not_fresh_budgets\n    for _ in range(4):r=more_real_plans(r.optionsToken,expand_discovery=True)\n                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_fifteen_alternative_actions_share_search_route_and_contact_budget",
+      "header": "test_fifteen_alternative_actions_share_search_route_and_contact_budget (test_expanded_limits46.ExpandedLimits.test_fifteen_alternative_actions_share_search_route_and_contact_budget)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 60, in test_fifteen_alternative_actions_share_search_route_and_contact_budget\n    session,r=self.expanded()\n              ^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_expanded_limits46.py\", line 41, in expanded\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_initial_minute_pause_has_resumable_capability_without_new_searches",
+      "header": "test_initial_minute_pause_has_resumable_capability_without_new_searches (test_expanded_limits46.ExpandedLimits.test_initial_minute_pause_has_resumable_capability_without_new_searches)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 122, in test_initial_minute_pause_has_resumable_capability_without_new_searches\n    r=more_real_plans(r.optionsToken)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_three_hundred_boundary_minute_pause_and_cumulative_stop",
+      "header": "test_three_hundred_boundary_minute_pause_and_cumulative_stop (test_expanded_limits46.ExpandedLimits.test_three_hundred_boundary_minute_pause_and_cumulative_stop)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 88, in test_three_hundred_boundary_minute_pause_and_cumulative_stop\n    session,r=self.expanded()\n              ^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_expanded_limits46.py\", line 41, in expanded\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin",
+      "header": "test_twenty_inventory_two_three_four_stops_and_optional_origin (test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin) (stops=2)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 49, in test_twenty_inventory_two_three_four_stops_and_optional_origin\n    session,r=self.expanded(activities,startingLocation=start,maxFirstLegTravel=15)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_expanded_limits46.py\", line 41, in expanded\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin",
+      "header": "test_twenty_inventory_two_three_four_stops_and_optional_origin (test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin) (stops=3)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 49, in test_twenty_inventory_two_three_four_stops_and_optional_origin\n    session,r=self.expanded(activities,startingLocation=start,maxFirstLegTravel=15)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_expanded_limits46.py\", line 41, in expanded\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin",
+      "header": "test_twenty_inventory_two_three_four_stops_and_optional_origin (test_expanded_limits46.ExpandedLimits.test_twenty_inventory_two_three_four_stops_and_optional_origin) (stops=4)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 49, in test_twenty_inventory_two_three_four_stops_and_optional_origin\n    session,r=self.expanded(activities,startingLocation=start,maxFirstLegTravel=15)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_expanded_limits46.py\", line 41, in expanded\n    r=more_real_plans(r.optionsToken,expand_discovery=True)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_exploration.ExplorationTests.test_rich_fixture_exceeds_old_ceilings_and_fifteen_actions",
+      "header": "test_rich_fixture_exceeds_old_ceilings_and_fifteen_actions (test_exploration.ExplorationTests.test_rich_fixture_exceeds_old_ceilings_and_fifteen_actions)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_exploration.py\", line 135, in test_rich_fixture_exceeds_old_ceilings_and_fifteen_actions\n    r=more_real_plans(r.optionsToken,expand_discovery=True);collect(r)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_location_acceptance.Pipeline.test_complete_initial_double_range_and_continuation_keep_origin",
+      "header": "test_complete_initial_double_range_and_continuation_keep_origin (test_location_acceptance.Pipeline.test_complete_initial_double_range_and_continuation_keep_origin)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_location_acceptance.py\", line 107, in test_complete_initial_double_range_and_continuation_keep_origin\n    more_real_plans(result.optionsToken)\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_location_first.LocationFirst.test_fifteen_alternative_actions_share_inventory_and_budgets",
+      "header": "test_fifteen_alternative_actions_share_inventory_and_budgets (test_location_first.LocationFirst.test_fifteen_alternative_actions_share_inventory_and_budgets)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_location_first.py\", line 164, in test_fifteen_alternative_actions_share_inventory_and_budgets\n    result=real_plans(self.request(startingLocation=START),session) if action==0 else more_real_plans(token,expand_discovery=action==1)\n                                                                                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_location_lifecycle.GeographyLifecycle.test_pagination_continuations_keep_context_and_no_repeats",
+      "header": "test_pagination_continuations_keep_context_and_no_repeats (test_location_lifecycle.GeographyLifecycle.test_pagination_continuations_keep_context_and_no_repeats)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_location_lifecycle.py\", line 120, in test_pagination_continuations_keep_context_and_no_repeats\n    if i<15:result=more_real_plans(result.optionsToken,expand_discovery=i==0)\n                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_open_exploration.OpenExploration.test_fifteen_actions_above_ten_dollars_reuse_pools_and_full_history",
+      "header": "test_fifteen_actions_above_ten_dollars_reuse_pools_and_full_history (test_open_exploration.OpenExploration.test_fifteen_actions_above_ten_dollars_reuse_pools_and_full_history)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_open_exploration.py\", line 209, in test_fifteen_actions_above_ten_dollars_reuse_pools_and_full_history\n    r=more_real_plans(r.optionsToken,expand_discovery=False)\n      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_real_planning.RealPlanningTests.test_bounded_additional_options_reuse_all_evidence_and_preserve_limits",
+      "header": "test_bounded_additional_options_reuse_all_evidence_and_preserve_limits (test_real_planning.RealPlanningTests.test_bounded_additional_options_reuse_all_evidence_and_preserve_limits)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_real_planning.py\", line 62, in test_bounded_additional_options_reuse_all_evidence_and_preserve_limits\n    more=more_real_plans(result.optionsToken)\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_real_planning.RealPlanningTests.test_start_is_separate_enforced_and_not_echoed",
+      "header": "test_start_is_separate_enforced_and_not_echoed (test_real_planning.RealPlanningTests.test_start_is_separate_enforced_and_not_echoed)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_real_planning.py\", line 160, in test_start_is_separate_enforced_and_not_echoed\n    result=more_real_plans(result.optionsToken,show_beyond=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_real_planning.RealPlanningTests.test_travel_limits_exact_seconds_no_rounding_rejection",
+      "header": "test_travel_limits_exact_seconds_no_rounding_rejection (test_real_planning.RealPlanningTests.test_travel_limits_exact_seconds_no_rounding_rejection)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_real_planning.py\", line 141, in test_travel_limits_exact_seconds_no_rounding_rejection\n    result=more_real_plans(result.optionsToken,show_beyond=True)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_saved_plans.OfflinePersistenceTests.test_surprise_planner_input_is_mapped_to_retained_request_fields",
+      "header": "test_surprise_planner_input_is_mapped_to_retained_request_fields (test_saved_plans.OfflinePersistenceTests.test_surprise_planner_input_is_mapped_to_retained_request_fields)",
+      "category": "expired fixture returning error DTO",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_saved_plans.py\", line 56, in test_surprise_planner_input_is_mapped_to_retained_request_fields\n    save_request=request_for(self.registry,result)\n                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_saved_plans.py\", line 28, in request_for\n    candidates = result.plans + result.provisionalPlans\n                 ^^^^^^^^^^^^\nAttributeError: 'JSONResponse' object has no attribute 'plans'"
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_surprise.Pipeline.test_fifteen_continuations_report_actual_primary_and_full_uniqueness",
+      "header": "test_fifteen_continuations_report_actual_primary_and_full_uniqueness (test_surprise.Pipeline.test_fifteen_continuations_report_actual_primary_and_full_uniqueness)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_surprise.py\", line 159, in test_fifteen_continuations_report_actual_primary_and_full_uniqueness\n    result=real_plans(self.request(),session) if not action else more_real_plans(token,expand_discovery=action==1)\n                                                                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_task46_improvements.ImprovementTests.test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget",
+      "header": "test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget (test_task46_improvements.ImprovementTests.test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_task46_improvements.py\", line 78, in test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget\n    result=more_real_plans(token)\n           ^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_task46_improvements.ImprovementTests.test_failed_expansion_cannot_reset_or_retry_budget",
+      "header": "test_failed_expansion_cannot_reset_or_retry_budget (test_task46_improvements.ImprovementTests.test_failed_expansion_cannot_reset_or_retry_budget)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_task46_improvements.py\", line 109, in test_failed_expansion_cannot_reset_or_retry_budget\n    result=more_real_plans(result.optionsToken)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "ERROR",
+      "method": "test_travel_mode49.PlannerModes.test_continuation_discovery_and_cache_scope_retain_mode",
+      "header": "test_continuation_discovery_and_cache_scope_retain_mode (test_travel_mode49.PlannerModes.test_continuation_discovery_and_cache_scope_retain_mode)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_travel_mode49.py\", line 125, in test_continuation_discovery_and_cache_scope_retain_mode\n    next_result=more_real_plans(result.optionsToken,expand_discovery=discover)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/real_planning.py\", line 678, in more_real_plans\n    raise attach_accounting(error,context['outing'])\n  File \"<repo>/backend/real_planning.py\", line 641, in more_real_plans\n    if problem:raise DiscoveryError(problem[0],problem[1])\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nbackend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date."
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_acceptance46.OptionsAcceptance.test_expansion_provider_failure_is_charged_and_never_retried",
+      "header": "test_expansion_provider_failure_is_charged_and_never_retried (test_acceptance46.OptionsAcceptance.test_expansion_provider_failure_is_charged_and_never_retried)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "backend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<repo>/backend/test_acceptance46.py\", line 175, in test_expansion_provider_failure_is_charged_and_never_retried\n    with self.assertRaisesRegex(DiscoveryError,'quota'):more_real_plans(r.optionsToken,expand_discovery=True)\nAssertionError: \"quota\" does not match \"The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\""
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window",
+      "header": "test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window (test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window) (action='regenerate')",
+      "category": "monotonic/calendar mismatch",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance_regeneration49.py\", line 64, in test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window\n    self.assertEqual(response.status_code,429);self.assertEqual(body['code'],'provider_local_rate_limit')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 422 != 429"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window",
+      "header": "test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window (test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window) (action='same payload after refresh')",
+      "category": "monotonic/calendar mismatch",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance_regeneration49.py\", line 64, in test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window\n    self.assertEqual(response.status_code,429);self.assertEqual(body['code'],'provider_local_rate_limit')\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 422 != 429"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window",
+      "header": "test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window (test_acceptance_regeneration49.Regeneration.test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window)",
+      "category": "monotonic/calendar mismatch",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance_regeneration49.py\", line 67, in test_shared_limit_reproduces_identically_after_refresh_and_recovers_only_after_window\n    self.assertIsInstance(main.generate_plan(request),RankingResult)\nAssertionError: <starlette.responses.JSONResponse object at <address>> is not an instance of <class 'backend.models.RankingResult'>"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_acceptance_regeneration49.Regeneration.test_true_provider_failure_stays_distinct_and_is_not_retried",
+      "header": "test_true_provider_failure_stays_distinct_and_is_not_retried (test_acceptance_regeneration49.Regeneration.test_true_provider_failure_stays_distinct_and_is_not_retried)",
+      "category": "monotonic/calendar mismatch",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_acceptance_regeneration49.py\", line 71, in test_true_provider_failure_stays_distinct_and_is_not_retried\n    self.assertEqual(body['code'],'provider_service_error');self.assertEqual(call.call_count,1)\n    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 'outing_date_expired' != 'provider_service_error'\n- outing_date_expired\n+ provider_service_error"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_activities_and_modes_change_first_plan",
+      "header": "test_activities_and_modes_change_first_plan (test_api.PlanningApiTests.test_activities_and_modes_change_first_plan)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 119, in test_activities_and_modes_change_first_plan\n    _, plans = self.options({\"activities\": [\"coffee\"], \"cost\": mode})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 53, in options\n    data = self.post({\"date\": \"2026-11-07\", **payload})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 49, in post\n    self.assertEqual(response.status, status)\nAssertionError: 422 != 200"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_budget_travel_and_zero_limits",
+      "header": "test_budget_travel_and_zero_limits (test_api.PlanningApiTests.test_budget_travel_and_zero_limits)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 126, in test_budget_travel_and_zero_limits\n    _, plans = self.options({\"activities\": [\"food\", \"karaoke\"], \"budget\": 25, \"travel\": 5})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 53, in options\n    data = self.post({\"date\": \"2026-11-07\", **payload})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 49, in post\n    self.assertEqual(response.status, status)\nAssertionError: 422 != 200"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_mandatory_origin_and_fictional_first_leg_boundaries",
+      "header": "test_mandatory_origin_and_fictional_first_leg_boundaries (test_api.PlanningApiTests.test_mandatory_origin_and_fictional_first_leg_boundaries)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 98, in test_mandatory_origin_and_fictional_first_leg_boundaries\n    self.assertEqual(missing['code'],'origin_required')\nAssertionError: 'outing_date_expired' != 'origin_required'\n- outing_date_expired\n+ origin_required"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_multi_activity_keeps_python_evidence_and_order",
+      "header": "test_multi_activity_keeps_python_evidence_and_order (test_api.PlanningApiTests.test_multi_activity_keeps_python_evidence_and_order)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 106, in test_multi_activity_keeps_python_evidence_and_order\n    data, plans = self.options({\"activities\": [\"bowling\", \"drinks\", \"movie\"]})\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 53, in options\n    data = self.post({\"date\": \"2026-11-07\", **payload})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 49, in post\n    self.assertEqual(response.status, status)\nAssertionError: 422 != 200"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_save_boundary_outage_does_not_break_generation",
+      "header": "test_save_boundary_outage_does_not_break_generation (test_api.PlanningApiTests.test_save_boundary_outage_does_not_break_generation)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 66, in test_save_boundary_outage_does_not_break_generation\n    data,plans=self.options({'activities':['coffee','museum']})\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 53, in options\n    data = self.post({\"date\": \"2026-11-07\", **payload})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 49, in post\n    self.assertEqual(response.status, status)\nAssertionError: 422 != 200"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_api.PlanningApiTests.test_scheduled_matching_nonmatching_and_conflicting",
+      "header": "test_scheduled_matching_nonmatching_and_conflicting (test_api.PlanningApiTests.test_scheduled_matching_nonmatching_and_conflicting)",
+      "category": "HTTP subprocess calendar",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_api.py\", line 135, in test_scheduled_matching_nonmatching_and_conflicting\n    data, plans = self.options({\"activities\": [\"baseball\", \"concert\"], \"date\": \"2026-11-07\"})\n                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 53, in options\n    data = self.post({\"date\": \"2026-11-07\", **payload})\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<repo>/backend/test_api.py\", line 49, in post\n    self.assertEqual(response.status, status)\nAssertionError: 422 != 200"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_expanded_limits46.ExpandedLimits.test_quota_stops_new_work_without_retries_or_fake_fallback",
+      "header": "test_quota_stops_new_work_without_retries_or_fake_fallback (test_expanded_limits46.ExpandedLimits.test_quota_stops_new_work_without_retries_or_fake_fallback)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "backend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<repo>/backend/test_expanded_limits46.py\", line 168, in test_quota_stops_new_work_without_retries_or_fake_fallback\n    with self.assertRaisesRegex(DiscoveryError,'stopped'):more_real_plans(r.optionsToken)\nAssertionError: \"stopped\" does not match \"The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\""
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_exploration.ExplorationTests.test_provider_quota_stops_continuation_without_retry",
+      "header": "test_provider_quota_stops_continuation_without_retry (test_exploration.ExplorationTests.test_provider_quota_stops_continuation_without_retry)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_exploration.py\", line 209, in test_provider_quota_stops_continuation_without_retry\n    self.assertEqual(searches.call_count,1)\nAssertionError: 0 != 1"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_location_first.LocationFirst.test_mock_mode_does_not_ignore_new_hard_geography",
+      "header": "test_mock_mode_does_not_ignore_new_hard_geography (test_location_first.LocationFirst.test_mock_mode_does_not_ignore_new_hard_geography)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "Traceback (most recent call last):\n  File \"<repo>/backend/test_location_first.py\", line 254, in test_mock_mode_does_not_ignore_new_hard_geography\n    self.assertIn('ignored constraint',response.body.decode())\nAssertionError: 'ignored constraint' not found in '{\"code\":\"outing_date_expired\",\"message\":\"The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\"}'"
+    },
+    {
+      "kind": "FAIL",
+      "method": "test_surprise.Pipeline.test_exhausted_expired_and_quota_sessions_no_retry",
+      "header": "test_exhausted_expired_and_quota_sessions_no_retry (test_surprise.Pipeline.test_exhausted_expired_and_quota_sessions_no_retry)",
+      "category": "expired synthetic calendar fixture",
+      "stackTrace": "backend.places.DiscoveryError: The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\n\nDuring handling of the above exception, another exception occurred:\n\nTraceback (most recent call last):\n  File \"<repo>/backend/test_surprise.py\", line 181, in test_exhausted_expired_and_quota_sessions_no_retry\n    with self.assertRaisesRegex(Exception,'daily quota'):more_real_plans(token,expand_discovery=True)\nAssertionError: \"daily quota\" does not match \"The outing date 2026-11-07 has ended in America/New_York. You can still view saved pages or explicitly choose another date.\""
+    }
+  ],
+  "environment": "Local socket/Node IPC permission; temporary test-only external/model socket guard; CI=1 and warmup disabled. No opt-in hosted tests enabled. Trace paths sanitized; prior failed reports preserved."
+}

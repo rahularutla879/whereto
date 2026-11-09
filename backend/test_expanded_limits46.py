@@ -1,4 +1,5 @@
 """Approved Task 46 application ceilings. Every provider response is invented."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from unittest.mock import patch
@@ -14,6 +15,7 @@ from backend.places import DiscoveryError, DiscoveryRequest, PlacesDiscovery, Se
 
 class ExpandedLimits(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         for p in (patch.dict(os.environ, {**ENV, 'WHERETO_RATINGS_DEV':'1', 'WHERETO_CONTACT_DETAILS_DEV':'1', 'WHERETO_START_LOOKUP_DEV':'1'}, clear=True),
                   patch('requests.sessions.Session.send', side_effect=AssertionError('Live requests forbidden'))):
             p.start(); self.addCleanup(p.stop)

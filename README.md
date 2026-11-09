@@ -387,6 +387,8 @@ npm run build
 
 `npm test` checks historical regression behavior, current Python/proxy/client integration and Next.js health communication, including upstream errors, invalid responses, timeouts, and a stopped backend. `npm run test:backend` validates the shared dataset, retrieval helpers, planning models, candidate generation and filtering/ranking, compares them with actual TypeScript planner results (using the installed frontend dependencies), and starts a temporary backend on an available local port to check the HTTP response; neither test command requires the development servers to be running. `lint` checks code quality. `typecheck` checks TypeScript. `build` confirms Next.js can build the application.
 
+See [offline test clocks and opt-in resource guidance](backend/TESTING.md) for deterministic date fixtures and safe test-process cleanup.
+
 To run a production build **locally**, run `npm run build` and then `npm start`. Keep the backend running in the other Terminal for planning and `/api/health`. This still does not deploy anything.
 
 ## Troubleshooting

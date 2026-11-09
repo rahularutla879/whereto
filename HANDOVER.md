@@ -1,3 +1,21 @@
+# Task52B — backend regression/date fixtures repaired, enforcement still OFF
+
+Baseline clean `7a4fa1ce35fee6e817c42ea3c467eb8a8318a0e9`. **Two consecutive complete documented backend runs: 1,134 tests, 1,097 passed/37 unchanged opt-in skips, 0 failures/errors each** (240.084s and 239.188s). Frontend **285/285**, TypeScript, lint and production build passed. No production expiry/security/accounting/interpretation/ordering code changed. [Root causes, exact 41 methods/traces and all run history](docs/task52-backend-regression-repair.md), [machine verification/hashes](docs/task52-backend-regression-results.json), [test clock/resource guide](backend/TESTING.md).
+
+Actual baseline reproduced 1,126 tests, 15 failure entries/30 errors/37 skips, same 41 distinct failures (previous report had 1,125 before the final added shadow test). Causes: 31 stale-calendar methods, 6 child HTTP-server clocks, 3 monotonic/calendar mismatches and 1 saved-plan error-DTO consequence. Scoped aware UTC test time 2026-11-01T12:00Z preserves original Nov7 Saturday fixtures; child tests explicitly use a lifespan-scoped real-app factory. No expiry bypass, date replacement, skip or assertion weakening. All 41 original methods passed unchanged.
+
+Repeat verification exposed a separate route-cache fixture assumption: a five-minute evidence expiry can legitimately change 110 reserved elements to 150. A 301s clock probe reproduced that exact mismatch. Only the cache-reuse test now selects an explicit route-evidence clock; its 110 assertion stays. Eight clock boundary tests verify current/future/past, exact time limits, relative dates/timezones/DST, cleanup after failure, 600s capability TTL and strict 0 ≤ route age<300s. Quota/billing clocks remain independent.
+
+A separate frontend fixture cleanup race was fixed: inherited CI made the fake exploration server exit early, then teardown waited for an exit event already emitted. The fake-only child gets a copied environment without CI; parent/prod CI guards remain unchanged and a negative probe still rejects exploration under CI. Cleanup handles already-exited/running children, with 2 new event-driven tests; no sleeps/retries/timeout increases. No production bug was found in the original 41 failures.
+
+The original date-only green run and its subsequent single cache-flake red repeat remain documented, as do all historical ordering/model reports. Final runs both include every normally enabled test; 37 skips are 29 hosted PostgreSQL checks and 8 explicit POSIX PTY/process checks requiring separate resources/free development ports. Real loopback HTTP and ASGI/proxy tests preserve default-OFF/explicit local shadow ON response, invocation, session and admission equivalence. **Legacy normalization still controls the graph and can erase start/finish; that limitation is not fixed or enforced here.**
+
+Journal/root/10 rows/corrections/halt and 324 private files byte-identical, SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`; actual halted recovery refuses. OpenAI 7 / Google 2 / Anthropic 1=10/594, 584 remaining; retained $0.047366625 / remaining $11.952633375. Original $12/594/198, 12k/2k, concurrency 1, retries 0 unchanged. Secret scans current/history 0, all 3 evaluation keys 0; ignored config/journal mode 600. Full diff reviewed; no unrelated runtime changes.
+
+Ready for a **separate ordering-enforcement design/review**, not activation or paid-evaluation resumption. Pending/raw provenance and typed clarification/legacy-retirement work remain future review items. Gemini 400/IP and Anthropic grammar blockers remain. No inference/counting/Maps/billing/credits/provider/schema/model/infrastructure/migration/Task 53 change occurred; Task 52 stays in progress.
+
+---
+
 # Task52B — ordering release gaps and default-OFF shadow
 
 Started clean `d271ed1c349d21dfb7bf598a3e6eb47e724c3025`. **No inference, counting, model/provider API or Maps requests. No enforcement or paid-halt clearance.** [Versioned V4 policy and isolation/release limits](docs/task52-ordering-policy-v4.md), [comparison and hashes](docs/task52-ordering-v4-results.json), [verification](docs/task52-ordering-v4-verification.json).

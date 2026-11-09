@@ -1,5 +1,6 @@
 """100/activity, classified browsing and cancellation, entirely invented evidence."""
 import os
+from backend.testing_clock import calendar_clock
 import unittest
 from tempfile import TemporaryDirectory
 from threading import Event
@@ -134,6 +135,9 @@ class Classification(unittest.TestCase):
 del Discovery
 
 class PipelineAlternatives(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(calendar_clock())
+
     def test_travel_only_violations_are_explicit_and_constraints_unchanged(self):
         from backend.real_fixtures import search_fixture,matrix_fixture
         from backend.test_real_planning import ENV

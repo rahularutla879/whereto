@@ -1,4 +1,5 @@
 """Task 46 geographic and lifecycle regressions; all providers are invented."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from datetime import date, datetime, timedelta, timezone
@@ -31,6 +32,7 @@ from backend.location_fixtures import neighborhood_fixture
 
 class GeographyLifecycle(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.temp=TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.clock=1000
         env={**ENV,'WHERETO_EXPLORATION_DEV':'1','WHERETO_DEV_COST_LEDGER':self.temp.name+'/cost.json'}

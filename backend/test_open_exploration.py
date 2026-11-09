@@ -1,4 +1,5 @@
 """Owner-authorized exploration/intent regressions. Invented providers only."""
+from backend.testing_clock import calendar_clock
 import json
 import os
 from datetime import datetime, timezone
@@ -25,6 +26,7 @@ NOW=datetime(2026,10,28,12,tzinfo=timezone.utc)
 
 class OpenExploration(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.temp=TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.path=self.temp.name+'/usage.json'
         self.clock=1000

@@ -1,4 +1,5 @@
 """Exploration is tested entirely with invented responses and a network tripwire."""
+from backend.testing_clock import calendar_clock
 import json
 import os
 from pathlib import Path
@@ -18,6 +19,7 @@ from backend.option_sessions import option_sessions
 
 class ExplorationTests(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.temp=TemporaryDirectory(); self.addCleanup(self.temp.cleanup)
         self.env={**ENV,'WHERETO_EXPLORATION_DEV':'1','WHERETO_DEV_COST_LEDGER':self.temp.name+'/usage.json'}
         self.p=patch.dict(os.environ,self.env,clear=True);self.p.start();self.addCleanup(self.p.stop)

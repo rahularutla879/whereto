@@ -1,4 +1,5 @@
 """Consolidated improvements: invented Google fixtures, network forbidden."""
+from backend.testing_clock import calendar_clock, route_evidence_clock
 import os
 import unittest
 from unittest.mock import patch
@@ -15,6 +16,7 @@ from backend.places_transport import text_search as transport_search
 
 class ImprovementTests(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.stack = []
         for p in (patch.dict(os.environ, {**ENV, 'WHERETO_START_LOOKUP_DEV': '1', 'WHERETO_RATINGS_DEV': '1'}, clear=True),
                   patch('requests.sessions.Session.send', side_effect=AssertionError('No live requests'))):
@@ -63,6 +65,7 @@ class ImprovementTests(unittest.TestCase):
         self.assertTrue(self.search.call_args_list[0].args[0]['strictTypeFiltering'])
 
     def test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget(self):
+        self.enterContext(route_evidence_clock())
         result=real_plans(outing(maxLegTravel=10,budget=0),self.session)
         token=result.optionsToken
         seen=set(); widths=[]; counts=[]

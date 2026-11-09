@@ -1,0 +1,139 @@
+{
+  "baselineGitHEAD": "7a4fa1ce35fee6e817c42ea3c467eb8a8318a0e9",
+  "preparedAtUTC": "2026-11-09T15:49:37.407391+00:00",
+  "baseline": {
+    "testsRun": 1126,
+    "failureEntries": 15,
+    "errors": 30,
+    "skipped": 37,
+    "methodCategories": {
+      "HTTP subprocess calendar": 6,
+      "expired fixture returning error DTO": 1,
+      "expired synthetic calendar fixture": 31,
+      "monotonic/calendar mismatch": 3
+    }
+  },
+  "distinctBaselineMethods": 41,
+  "affectedMethodsPassed": 41,
+  "affectedRunSeconds": 114.521,
+  "completedIntermediateFullRuns": [
+    {
+      "command": "npm run test:backend",
+      "testsRun": 1133,
+      "seconds": 251.052,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 37
+    },
+    {
+      "command": "npm run test:backend",
+      "testsRun": 1133,
+      "seconds": 300.145,
+      "passed": false,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 37
+    }
+  ],
+  "repeatFailureDiagnosis": {
+    "method": "test_task46_improvements.ImprovementTests.test_alternatives_do_not_repeat_and_expansion_reuses_routes_and_budget",
+    "expectedElements": 110,
+    "observedElements": 150,
+    "originalAssertionUnchanged": true,
+    "forced301SecondEvidenceExpiryReproducedExactMismatch": true,
+    "hashSeeds0_1_2WithFreshEvidence": "all passed; no invalid cached evidence",
+    "fix": "Explicit per-test route_evidence_clock for cache reuse, plus expiry boundary tests; production 300s TTL unchanged."
+  },
+  "finalFullRuns": [
+    {
+      "command": "npm run test:backend",
+      "testsRun": 1134,
+      "seconds": 240.084,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 37
+    },
+    {
+      "command": "npm run test:backend",
+      "testsRun": 1134,
+      "seconds": 239.188,
+      "passed": true,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 37
+    }
+  ],
+  "normallyEnabledPassedPerFinalRun": 1097,
+  "skipReasons": {
+    "Opt-in committed advanced PostgreSQL checks": 1,
+    "Opt-in hosted rollback tests": 20,
+    "Opt-in hosted Task 50 tests": 6,
+    "Opt-in local process tests (POSIX PTY)": 8,
+    "Opt-in committed editable preference PostgreSQL check": 1,
+    "Opt-in committed closure-intent PostgreSQL check": 1
+  },
+  "calendarAndCacheBoundaryTests": 8,
+  "targetedDateBudgetShadowOrderingTests": {
+    "testsRun": 121,
+    "passed": true,
+    "note": "Before the eighth cache boundary was added; both final full runs include all eight and all ordering/shadow tests."
+  },
+  "frontend": {
+    "command": "npm test",
+    "testsRun": 285,
+    "passed": 285,
+    "failed": 0,
+    "seconds": 628.302545208,
+    "newCleanupTests": 2,
+    "initialIssue": "Inherited CI caused fake exploration child to exit; waiting for its already-emitted exit event hung cleanup. Original run explicitly stopped; fixed only test environment/cleanup."
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "APIAndShadowSmoke": "Actual loopback HTTP fixture server and existing explicit ASGI shadow ON/OFF equivalence tests passed. Production app code unchanged; no new browser UI run needed.",
+  "productionSourceSHA256": {
+    "backend/location_context.py": "aed6238f6fc9b1a67af7f9e26190e51dbac3611daa3007624302691c123bbc87",
+    "backend/routes.py": "feb1448f7fb907a738448f623e988c11482e4f3a39783eb64e719c88d21669ee",
+    "backend/provider_budget.py": "dece729d2aabe21e7cfe9234d6e48d55614fde99c1a0506e7ea40dfacdc38889",
+    "backend/development_cost.py": "2d364ca5deadd284afacbf7314ecb5e5093266237a2df6f8d78b668eaf4c7180",
+    "backend/saved_plans.py": "e52f6541e10e17761a0e7649cffd4751380e8d377e7419f81d3de96179653a9f",
+    "backend/advanced_planning.py": "1b63c8c0c02fb9dff2d077ec91816d561ebea131045bd5637ef47f92c09d2292",
+    "backend/main.py": "0999e7402b5b3a3666ccc4becac4e49b4674341eaa6530bd07a936146a2fab69",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+    "backend/ordering_shadow.py": "0c3223da48d80b8280199604cdde36d2ffa91e73a9352f4ce75a76f299bb3bf8",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f"
+  },
+  "securityAndJournal": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "paidAttemptsAdded": 0,
+  "paidBudgetUSD": 12,
+  "totalPaidAttempts": 10,
+  "remainingPaidAttempts": 584,
+  "providerCounts": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1
+  },
+  "accountedUSD": "0.047366625",
+  "remainingUSD": "11.952633375",
+  "persistentHalt": true,
+  "orderingEnforcement": "OFF; legacy remains authoritative, including known start/finish normalization limitation",
+  "sourceCorpusScoringAndPromptVersionsChanged": false,
+  "persistentHaltRecoveryRefused": true
+}

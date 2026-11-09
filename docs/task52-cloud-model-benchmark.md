@@ -1,3 +1,9 @@
+# Backend regression gate repaired — model evaluation remains halted
+
+[Deterministic clock/process repair and complete verification](task52-backend-regression-repair.md): two full backend runs each 1,134 tests/1,097 passed/37 unchanged skips; frontend 285, TypeScript, lint/build pass. No production expiry/security/model/ordering behavior change or new inference/counting/provider call. Original paid records, model scores/timings, corpus/prompt/schema versions and persistent halt remain unchanged. OpenAI 7 / Google 2 / Anthropic 1=10/594,$0.047366625 retained/$11.952633375 remaining. This closes the test-suite blocker for a separate enforcement review; it neither selects a model nor resumes paid testing. Earlier failed verification/model measurements below remain historical.
+
+---
+
 # Offline V4 ordering release checkpoint — no new inference
 
 The three V3 language release gaps close without new model evidence. Default-OFF API shadow is wired; Qwen/OpenAI recorded compatibility and both cloud ordering failures remain unchanged. No production model qualification, prompt/schema change, paid request or halt clearance. Journal10/594,$0.047366625 retained/$11.952633375 remaining stays byte-identical. Full regression suite has baseline-reproduced date-fixture failures, so enforcement is not release-ready. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.

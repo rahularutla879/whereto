@@ -1,4 +1,5 @@
 """Invented provider fixtures only, with the inherited fail-on-network guard."""
+from backend.testing_clock import calendar_clock
 import os
 import random
 import unittest
@@ -79,6 +80,7 @@ class Selection(unittest.TestCase):
 
 class Pipeline(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         fixture.LocationFirst.setUp(self)
         self.random=random.Random(121)
         self.rng=patch('backend.surprise.SystemRandom',side_effect=lambda:self.random)

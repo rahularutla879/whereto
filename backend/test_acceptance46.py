@@ -1,4 +1,5 @@
 """Manual acceptance regressions. Invented provider responses; live sends forbidden."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from datetime import datetime, timezone
@@ -77,6 +78,7 @@ class TravelAcceptance(unittest.TestCase):
 
 class OptionsAcceptance(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         for p in (patch.dict(os.environ,ENV,clear=True),patch('requests.sessions.Session.send',side_effect=AssertionError('No live sends'))):
             p.start();self.addCleanup(p.stop)
         self.search=patch('backend.places_transport.text_search',side_effect=search_fixture).start()

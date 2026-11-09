@@ -1,4 +1,5 @@
 """Offline regeneration with shared admission, new immutable contexts and no network."""
+from backend.testing_clock import calendar_clock
 import json
 import os
 import unittest
@@ -16,6 +17,7 @@ from backend.provider_budget import ProviderLimitError
 
 class Regeneration(unittest.TestCase):
  def setUp(self):
+  self.enterContext(calendar_clock())
   self.clock=1000
   for item in (patch.dict(os.environ,ENV,clear=True),patch('requests.Session.send',side_effect=AssertionError('No live Google')),patch('backend.places_transport.text_search',side_effect=search_fixture),patch('backend.routes_transport.compute_matrix',side_effect=matrix),patch('backend.provider_budget.monotonic',side_effect=lambda:self.clock)):
    item.start();self.addCleanup(item.stop)

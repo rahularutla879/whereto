@@ -1,5 +1,6 @@
 """Task 28 real HTTP boundary tests, no additional test dependencies."""
 import json
+from backend.testing_clock import calendar_clock
 from pathlib import Path
 import socket
 import subprocess
@@ -11,13 +12,16 @@ from urllib.request import Request, urlopen
 
 
 class PlanningApiTests(unittest.TestCase):
+    def setUp(self):
+        self.enterContext(calendar_clock())
+
     @classmethod
     def setUpClass(cls):
         cls.listener = socket.socket()
         cls.listener.bind(("127.0.0.1", 0))
         cls.url = f"http://127.0.0.1:{cls.listener.getsockname()[1]}"
         cls.process = subprocess.Popen(
-            [sys.executable, "-m", "uvicorn", "backend.main:app", "--fd",
+            [sys.executable, "-m", "uvicorn", "backend.testing_clock:fixture_api", "--factory", "--fd",
              str(cls.listener.fileno()), "--log-level", "warning"],
             cwd=Path(__file__).resolve().parent.parent, pass_fds=(cls.listener.fileno(),))
         cls.addClassCleanup(cls.stop)

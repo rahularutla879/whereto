@@ -1,4 +1,5 @@
 """Location-first acceptance, invented provider data and a fail-on-network guard."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from datetime import datetime,timezone
@@ -22,6 +23,7 @@ START={'point':{'id':'authorized-start','coordinates':{'latitude':38.9,'longitud
 
 class LocationFirst(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         self.temp=TemporaryDirectory();self.addCleanup(self.temp.cleanup)
         self.env={**ENV,'WHERETO_START_LOOKUP_DEV':'1','WHERETO_EXPLORATION_DEV':'1','WHERETO_DEV_COST_LEDGER':self.temp.name+'/cost.json'}
         for p in (patch.dict(os.environ,self.env,clear=True),patch('requests.sessions.Session.send',side_effect=AssertionError('Google forbidden'))):

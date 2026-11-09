@@ -1,4 +1,5 @@
 """Full provider-shaped offline orchestration; any actual send fails the test."""
+from backend.testing_clock import calendar_clock
 import os
 import unittest
 from unittest.mock import patch
@@ -21,6 +22,7 @@ def outing(**kwargs):
 
 class RealPlanningTests(unittest.TestCase):
     def setUp(self):
+        self.enterContext(calendar_clock())
         for p in [patch.dict(os.environ, ENV, clear=True),
                   patch('requests.sessions.Session.send', side_effect=AssertionError('Unintended network'))]:
             p.start(); self.addCleanup(p.stop)
