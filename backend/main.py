@@ -143,7 +143,12 @@ def generate_plan(request: PlannerInput) -> RankingResult:
 
 def interpret_outing(request: InterpretationInput):
     try:
-        result = interpret_request(request)
+        try:
+            from backend.ordering_shadow import interpret_observed
+        except Exception:
+            result = interpret_request(request)  # No model call occurred before import.
+        else:
+            result = interpret_observed(request, interpret_request)
         from backend.provider_work import check_cancelled
         check_cancelled()
         from backend.advanced_planning import sessions

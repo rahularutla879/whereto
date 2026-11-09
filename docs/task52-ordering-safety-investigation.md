@@ -1,3 +1,9 @@
+# V4 release-gap closure and observer checkpoint
+
+The three named V3 gaps now pass under a separately frozen bounded policy. Explicit global first/last scope, not list position, supports the three-stop edges. Source-owned neutral city/date suffixes and the finite Do imperative preserve all other canonical fields. The real default-OFF observer sees raw parsed copies before the unchanged legacy normalizer, through the API provider decorator; it never grants planning. Old source pins, fixtures and paid state remain intact. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.
+
+---
+
 # V3 ordering plus normalization checkpoint — offline only
 
 [Single source-first A–F policy, safety boundaries, measurements and proposed integration](task52-ordering-policy-v3.md), [versioned replay](task52-ordering-compatibility-v3.json). `52b-order-policy-v3-offline` resolves the three V2 readiness blockers without changing production:7 legitimate Qwen list cases get an explicit audited empty graph; true binary start/finish edges are retained before old normalization; locally owned optional third activities no longer contaminate a proven pair. Unknown mandatory intent is never normalized away. Raw extraction mistakes remain scored incorrect and hash-bound; source analysis does not use proposed edges.

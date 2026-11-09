@@ -1,3 +1,9 @@
+# Ordering policy V4 — raw correctness remains separate
+
+Qwen18 correct raw graphs and five correct OpenAI outputs remain compatible;7 Qwen unordered projections remain raw errors and both incorrect OpenAI outputs remain rejected. No historical score/output changed. New predeclared20 and post-freeze10 cases pass;0/15 new clear false questions,0/15 negative-source acceptances,0/180 unsupported retained edges. Saved effective snapshots are explicitly skipped, not called raw evidence. Shadow never applies a projection or changes source/required/optional/identity/time/return semantics. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.
+
+---
+
 # V3 source-intent and audited normalization review
 
 [Exact policy and semantic denominators](task52-ordering-policy-v3.md), [per-output comparison](task52-ordering-compatibility-v3.json). Ordering-only outcomes now distinguish correct raw graph, audited removal of invented edges from an independently proved unordered source, and unresolved real/potential order. An audited projection is **not a fully correct model extraction**. Source-bound names/status/multiplicity/date/time/return checks remain independent and unchanged. Empty-gold evidence behavior and source-bound generic-article scoring are untouched.

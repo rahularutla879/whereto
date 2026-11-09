@@ -1,0 +1,60 @@
+{
+  "baselineGitHEAD": "d271ed1c349d21dfb7bf598a3e6eb47e724c3025",
+  "focused": {
+    "tests": 107,
+    "passed": 107,
+    "seconds": 5.404
+  },
+  "fullBackend": {
+    "testsRun": 1125,
+    "failureEntries": 15,
+    "errors": 30,
+    "skipped": 37,
+    "seconds": 139.229,
+    "passed": false,
+    "note": "Failure entries include subtests; do not derive a passing-test count by subtracting entries. Initial sandbox run additionally hit local socket/Node IPC restrictions; final full run used local permissions and blocked external/model transport."
+  },
+  "baselineBypass": {
+    "selectedFailingMethods": 41,
+    "run": 41,
+    "failureEntries": 15,
+    "errors": 30,
+    "skipped": 0,
+    "sameFailingMethods": true,
+    "unexpectedlyPassingMethods": [],
+    "extraFailingMethods": []
+  },
+  "frontend": {
+    "tests": 283,
+    "passed": 283,
+    "seconds": 116.793440167
+  },
+  "typecheck": "passed after build completed; initial concurrent run raced generated .next/types",
+  "lint": "passed",
+  "productionBuild": "passed",
+  "browser": {
+    "scope": "Loopback synthetic fixture page using real ASGI interpretation API; fake provider, fixed reference clock. Not full planner UI/live Qwen acceptance.",
+    "offStatus": 200,
+    "onStatus": 200,
+    "responseBodiesIdentical": true,
+    "fakeProviderCallsPerRun": 1,
+    "temporaryServerStopped": true
+  },
+  "security": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "tenRowsUnchanged": true,
+    "haltRecoveryRefused": true,
+    "retainedNanodollars": 47366625,
+    "apiKeyValuesChecked": 3,
+    "currentHits": 0,
+    "historyHits": 0,
+    "privateConfigIgnoredMode600": true,
+    "corpusAndSourcePinsUnchanged": true
+  },
+  "externalInferenceRequests": 0,
+  "tokenCountingRequests": 0,
+  "mapsRequests": 0,
+  "enforcementActivated": false,
+  "shadowDefault": "OFF"
+}

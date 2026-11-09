@@ -1,3 +1,9 @@
+# Task52B — observe ordering before legacy normalization, default OFF
+
+Close only the three demonstrated bounded-language gaps and retain raw extraction errors. Keep the corpus-pinned interpreter byte-identical: a local-test API provider decorator observes a strictly parsed deep copy before normalization, while legacy remains authoritative. Skip already-normalized pending snapshots; do not call them raw model evidence. Diagnostics cannot authorize planning and no observer failure may trigger another inference. No enforcement/default model decision follows; baseline-reproduced full-suite date-fixture failures remain a release blocker. [Versioned evidence and constraints](docs/task52-ordering-policy-v4.md).
+
+---
+
 # Task52B — source-first ordering policy remains offline
 
 Use one independently tested source-intent authority to distinguish proven mandatory order, proved unordered lists and unknown potential requirements. Only a complete bounded no-order proof can justify an explicitly audited projection of an invented model edge; retain raw errors and immutable evidence. Never delete unproven edges on a genuinely ambiguous order source or run legacy normalization after retaining a proven start/finish edge. V3 replay resolves seven list compatibility cases and keeps both known ordering failures blocked; this supports a separate integration proposal, not production activation, paid-halt clearance or model selection. [Policy, denominators and limits](docs/task52-ordering-policy-v3.md).

@@ -1,3 +1,9 @@
+# Default-OFF ordering shadow boundary
+
+`backend.ordering_shadow` adds a context-local test observer around `backend.main.interpret_outing`. OFF delegates unchanged; ON decorates only the lazy existing provider, observes a strictly parsed copy before the frozen interpreter/legacy normalization, and never returns a graph to admission. Pending snapshots are skipped. One bounded daemon worker/no queue, sanitized ephemeral diagnostics; no environment switch or persistence. `scripts/cloud_model52_ordering_v4.py` is the separately frozen finite policy; the release replay runner opens paid state read-only and blocks transport. [Exact boundaries, timeout/coverage limits and future enforcement switch](docs/task52-ordering-policy-v4.md). Enforcement and active Qwen remain unchanged.
+
+---
+
 # Task52B offline source-first ordering/normalization policy
 
 `scripts/cloud_model52_ordering_v3.py` adds graph-independent bounded source intent plus an explicit raw/effective ordering decision; `project()` can deep-copy an independently proved unordered interpretation without hiding the original model error. `cloud_model52_ordering_policy_replay.py` compares production/V2/V3 using recorded fixtures, blocks network and opens the existing journal read-only. Frozen V1/V2, canonical schema, Qwen prompt/default and runtime imports stay unchanged. [Exact proposed trust-boundary integration](docs/task52-ordering-policy-v3.md); activation and typed ordering confirmation remain unimplemented.

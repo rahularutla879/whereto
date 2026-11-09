@@ -1,3 +1,9 @@
+# Offline V4 ordering release checkpoint — no new inference
+
+The three V3 language release gaps close without new model evidence. Default-OFF API shadow is wired; Qwen/OpenAI recorded compatibility and both cloud ordering failures remain unchanged. No production model qualification, prompt/schema change, paid request or halt clearance. Journal10/594,$0.047366625 retained/$11.952633375 remaining stays byte-identical. Full regression suite has baseline-reproduced date-fixture failures, so enforcement is not release-ready. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.
+
+---
+
 # Offline V3 ordering/normalization compatibility — no new inference
 
 [Decision policy and production proposal](task52-ordering-policy-v3.md), [versioned measurements and raw/effective graph distinctions](task52-ordering-compatibility-v3.json). Seven Qwen unordered requests no longer require unnecessary ordering clarification under the opt-in policy; true start/finish and scoped optional-third semantics are preserved. Qwen V2→V3 ordering clarifications9→2/27; OpenAI5/7 compatible with both recorded failures preserved. The seven audited list projections remain raw-model errors, not new semantic successes.

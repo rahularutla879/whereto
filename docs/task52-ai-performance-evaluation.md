@@ -1,3 +1,9 @@
+# Local V4 observer timing — not model latency
+
+Versioned results compare1,000 local policy checks and100/100 interpretation-boundary OFF/ON fixture calls. Snapshot/thread overhead is included; model/HTTP/routing/browser work is excluded. The25ms observation wait is not a hard real-time guarantee. No production p95 or five-second end-to-end conclusion follows. No new inference/counting/provider requests. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.
+
+---
+
 # Offline V3 validation overhead — not new inference evidence
 
 [Ordering/normalization policy](task52-ordering-policy-v3.md), [versioned measurements](task52-ordering-compatibility-v3.json).1,450 local ordering-only checks: p50 103.583µs,p95 155.458µs,max533.0µs, including source analysis/copy/hashes and excluding fixture construction. No HTTP, model, Google routing, browser or production staging. Existing V2 timing remains separately scoped. This does not prove worst-case or five-second end-to-end performance.

@@ -1,0 +1,159 @@
+{
+  "frozenModuleSHA256": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+  "review": "Separated post-freeze same-agent tests; no independent human signoff. Preserve any failures before tuning.",
+  "cases": [
+    {
+      "id": "h-city",
+      "text": "Start with library and finish at pool in Baltimore tomorrow.",
+      "stops": [
+        "library",
+        "pool"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true,
+      "location": "Baltimore"
+    },
+    {
+      "id": "h-global",
+      "text": "Start with tea, visit gallery, and finish at library.",
+      "stops": [
+        "tea",
+        "gallery",
+        "library"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "h-do",
+      "text": "Do lunch and skating tomorrow.",
+      "stops": [
+        "lunch",
+        "skating"
+      ],
+      "expectedRelationships": [],
+      "accept": true
+    },
+    {
+      "id": "h-do-before",
+      "text": "Do skating before lunch.",
+      "stops": [
+        "skating",
+        "lunch"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "h-repeat",
+      "text": "Start with tea, visit gallery, and finish at tea.",
+      "stops": [
+        "tea",
+        "gallery",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "h-names",
+      "text": "Visit Finish Cafe before Start Bank.",
+      "stops": [
+        "Finish Cafe",
+        "Start Bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true,
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "h-conditional",
+      "text": "Start with tea, visit gallery, and finish at library if open.",
+      "stops": [
+        "tea",
+        "gallery",
+        "library"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "h-unowned-city",
+      "text": "Start with library and finish at pool in Baltimore tomorrow.",
+      "stops": [
+        "library",
+        "pool"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "location": "Jersey City"
+    },
+    {
+      "id": "h-negation",
+      "text": "Do not visit gallery before library.",
+      "stops": [
+        "gallery",
+        "library"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "h-partial",
+      "text": "Tea, gallery, then tea.",
+      "stops": [
+        "Tea",
+        "gallery",
+        "tea"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    }
+  ]
+}

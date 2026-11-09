@@ -1,0 +1,308 @@
+{
+  "review": "Predeclared source/relationship expectations before V4 implementation. Same-agent review, not independent human signoff. Unsupported/ambiguous cases request clarification.",
+  "cases": [
+    {
+      "id": "city-date",
+      "text": "Start at pharmacy and finish at bank in Jersey City tomorrow.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true,
+      "location": "Jersey City"
+    },
+    {
+      "id": "three-global",
+      "text": "Start with coffee, visit museum, and finish at pharmacy.",
+      "stops": [
+        "coffee",
+        "museum",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "do-list",
+      "text": "Do dinner and bowling tomorrow.",
+      "stops": [
+        "dinner",
+        "bowling"
+      ],
+      "expectedRelationships": [],
+      "accept": true
+    },
+    {
+      "id": "do-before",
+      "text": "Do dinner before bowling.",
+      "stops": [
+        "dinner",
+        "bowling"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "do-after",
+      "text": "Do dinner after bowling.",
+      "stops": [
+        "dinner",
+        "bowling"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          0
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "global-repeat",
+      "text": "Start with coffee, visit museum, and finish at coffee.",
+      "stops": [
+        "coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "partial-remains",
+      "text": "Coffee, museum, then coffee.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "coffee"
+      ],
+      "expectedRelationships": [
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": true
+    },
+    {
+      "id": "named-words",
+      "text": "Visit Start Cafe before Finish Bank.",
+      "stops": [
+        "Start Cafe",
+        "Finish Bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": true,
+      "kinds": [
+        "named_place",
+        "named_place"
+      ]
+    },
+    {
+      "id": "city-missing",
+      "text": "Start at pharmacy and finish at bank in Jersey City tomorrow.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "city-wrong",
+      "text": "Start at pharmacy and finish at bank in Jersey City tomorrow.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false,
+      "location": "New York"
+    },
+    {
+      "id": "conditional-start",
+      "text": "Start at pharmacy unless the bank closes.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "conditional-finish",
+      "text": "Start at pharmacy and finish at bank if it is open.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "global-maybe",
+      "text": "Start with coffee, maybe visit museum, and finish at pharmacy.",
+      "stops": [
+        "coffee",
+        "museum",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": false,
+      "optional": [
+        1
+      ]
+    },
+    {
+      "id": "global-negative",
+      "text": "Start with coffee, visit museum, and do not finish at pharmacy.",
+      "stops": [
+        "coffee",
+        "museum",
+        "pharmacy"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "unknown-endpoint",
+      "text": "Start at pharmacy and finish at home.",
+      "stops": [
+        "pharmacy",
+        "home"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "global-distant",
+      "text": "Start with coffee, visit museum, and finish at pharmacy unless it rains.",
+      "stops": [
+        "coffee",
+        "museum",
+        "pharmacy"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "unrecognized-global",
+      "text": "Coffee, museum, pharmacy in exactly that order.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "pharmacy"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "date-unowned",
+      "text": "Start at pharmacy and finish at bank next whenever possible.",
+      "stops": [
+        "pharmacy",
+        "bank"
+      ],
+      "expectedRelationships": [
+        [
+          0,
+          1
+        ]
+      ],
+      "accept": false
+    },
+    {
+      "id": "do-negative",
+      "text": "Do not do dinner before bowling.",
+      "stops": [
+        "dinner",
+        "bowling"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    },
+    {
+      "id": "three-incomplete",
+      "text": "Start with coffee and finish at pharmacy, with museum somewhere.",
+      "stops": [
+        "coffee",
+        "pharmacy",
+        "museum"
+      ],
+      "expectedRelationships": [],
+      "accept": false
+    }
+  ]
+}
