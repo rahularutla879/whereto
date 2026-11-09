@@ -1,3 +1,11 @@
+# Ordering enforcement design — review only
+
+[Proposed single-authority phase split, admission/session proof, clarification, compatibility and rollback](task52-ordering-enforcement-design.md), [fresh offline verification](task52-ordering-enforcement-verification.json). Current baseline is clean `4c3767a`, preserving the later destination spelling fix. No runtime, prompt, schema, corpus, frozen policy or paid state changes. No enforcement prototype/activation.
+
+Fresh V4 replay exactly reproduces all 27 Qwen and seven OpenAI rows plus the frozen cases/probes/journal: 18 correct Qwen graphs, seven audited unordered projections, two rejected repeated-stop graphs; five OpenAI compatible, two rejected. Seven new full-interpreter characterization tests identify legacy start/finish deletion plus finish-endpoint overlap, ordinary no-journey compatibility and missing server-owned admission provenance. They do not claim the proposed enforced profile is implemented. Focused backend 252 passed/10 opt-in skips; date/timing/expiry 98 passed, frontend 285 passed. Separate owner approval is needed for phase extraction and admission-contract implementation before test-only enforcement or rollout. Paid 10/594/$0.047366625/halt unchanged; no provider/counting/Maps/infrastructure/Task 53 work.
+
+---
+
 # V4 release-gap closure and observer checkpoint
 
 The three named V3 gaps now pass under a separately frozen bounded policy. Explicit global first/last scope, not list position, supports the three-stop edges. Source-owned neutral city/date suffixes and the finite Do imperative preserve all other canonical fields. The real default-OFF observer sees raw parsed copies before the unchanged legacy normalizer, through the API provider decorator; it never grants planning. Old source pins, fixtures and paid state remain intact. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.

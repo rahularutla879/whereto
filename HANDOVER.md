@@ -1,3 +1,17 @@
+# Task52B ordering enforcement design — no activation
+
+Started clean `4c3767afddc051079a83be0043b7d9740f3ffe5f` (the later reviewed Hitech/HITEC fix is preserved; requested `05cfcbd` is an ancestor). [Implementation-ready proposal and limits](docs/task52-ordering-enforcement-design.md), [fresh replay/test/hash evidence](docs/task52-ordering-enforcement-verification.json).
+
+No runtime code or enforcement prototype was changed/activated. The proposal splits legacy order normalization from independent canonical checks, scopes global-final visits versus separate endpoints, adds server-owned semantic admission/pending/session proof, and prevents direct generation/continuation bypass. Browser pending is currently structurally revalidated data, not an authenticated expiring ordering capability. Ordinary no-journey compatibility needs a reviewed finite absence adapter. Initial unknowns use existing rephrase UI; future typed occurrence-bound confirmations are designed, not implemented. Rollback closes enforced new-work admission rather than falling back to known unsafe legacy edges. See the patch table and unimplemented acceptance matrix before approving code.
+
+Frozen V4 baseline reproduced exactly: Qwen 18 correct/7 audited projections/2 rejected across 27; OpenAI 5 correct compatible/2 rejected across 7; 20/20 declarations,10/10 holdouts,0/15 clear-source false clarifications,0/15 negative-source acceptances,0/180 retained unsupported probes. These are ordering-only same-agent fixtures, not whole-request accuracy or independent signoff. All historical rows/scores remain unchanged; five other Qwen canonical blocks remain.
+
+Verification: seven new characterization tests pass; focused backend 252 passed/10 existing opt-in DB skips (262 run), separate date/timing/expiry 98 passed, frontend 285/285 passed. Initial focused command used a nonexistent reconciliation module; corrected to the existing audit module and reran all focused tests. No production/shared-runtime changes, so full backend/typecheck/lint/build/browser were not rerun; prior clean baseline has backend 1106/37 and frontend 285/typecheck/lint/build passing. Fresh local timings are existing policy/shadow only, not enforcement overhead or production latency.
+
+Journal/root/10 rows/corrections/halt and 324 private files byte-identical, SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`. OpenAI 7 / Google 2 / Anthropic 1 = 10/594; 584 remaining; accounted $0.047366625 / remaining $11.952633375. Original $12/594/198/12k/2k/sequential-one/no-retry limits unchanged. Gemini 400/IP and Anthropic grammar blockers remain. Next approval: bounded behavior-preserving validation-phase extraction and admission-contract implementation, default legacy; no enforcement, paid evaluation, provider change, infrastructure or Task 53 work.
+
+---
+
 # Destination spelling correction — original incident not retried
 
 From clean `05cfcbd`, the existing failed Chrome page was inspected without refresh/submission. Network history had no original response, Console retained HTTP 422 only, and the app/local snapshot does not preserve the requested geographic detail. Terminal scrollback inspection was tool-blocked; no log file was found. Original correlation/error-body fields remain unavailable; the original incident cause is not claimed proven.

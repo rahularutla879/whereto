@@ -1,0 +1,625 @@
+{
+  "designVersion": "52b-order-enforcement-design-v1",
+  "preparedUTC": "2026-11-09T21:13:43.492194+00:00",
+  "baselineCommit": "4c3767afddc051079a83be0043b7d9740f3ffe5f",
+  "requestedOlderBaseline": "05cfcbd",
+  "baselineAdvance": "Preserve the subsequent committed Hitech/HITEC fix and its nine regressions.",
+  "baselineReproducedExactly": [
+    "summary",
+    "qwen",
+    "openai",
+    "cases",
+    "probes",
+    "journal"
+  ],
+  "orderingPolicy": "52b-order-policy-v4-shadow",
+  "summary": {
+    "qwenCorrectRawCompatible": 18,
+    "qwenAuditedNormalizations": 7,
+    "qwenClarifications": 2,
+    "openaiCompatible": 5,
+    "predeclaredCases": 20,
+    "predeclaredMatched": 20,
+    "postFreezeCases": 10,
+    "postFreezeMatched": 10,
+    "clearSources": 15,
+    "falseClarifications": 0,
+    "negativeSources": 15,
+    "negativeSourcesAccepted": 0,
+    "originalNegativeProbes": 147,
+    "newNegativeProbes": 33,
+    "retainedUnsupportedEdges": 0
+  },
+  "qwenReplay": [
+    {
+      "cohort": "baseline",
+      "row": 0,
+      "case": "E",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 1,
+      "case": "A",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 2,
+      "case": "B",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 3,
+      "case": "C",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 4,
+      "case": "D",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 5,
+      "case": "E",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 6,
+      "case": "F",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 7,
+      "case": "repeat",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "clarification_required",
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "decisionHash": "7d9cfa8e3c2756b439dac586566ea8dbda77bed04305c82b9945a3ed9517ccf1"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 8,
+      "case": "mall",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "613b10da854977449b07af2fcd02ddef5e7023ee0ef722559c31299340017161"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 9,
+      "case": "flex",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "baa3b79cb43d332f8046e62a100923c05e0ef000d883f624fb0e2cd54bc1dc77"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 10,
+      "case": "ambiguous",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "f01d663d812527704af4a191d47aaac2231fe85926ffc6af24bfac25258dfee7"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 11,
+      "case": "A",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 12,
+      "case": "B",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 13,
+      "case": "C",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 14,
+      "case": "D",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 15,
+      "case": "E",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 16,
+      "case": "F",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 17,
+      "case": "repeat",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "clarification_required",
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "decisionHash": "7d9cfa8e3c2756b439dac586566ea8dbda77bed04305c82b9945a3ed9517ccf1"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 18,
+      "case": "mall",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "613b10da854977449b07af2fcd02ddef5e7023ee0ef722559c31299340017161"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 19,
+      "case": "flex",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "baa3b79cb43d332f8046e62a100923c05e0ef000d883f624fb0e2cd54bc1dc77"
+      }
+    },
+    {
+      "cohort": "baseline",
+      "row": 20,
+      "case": "ambiguous",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "f01d663d812527704af4a191d47aaac2231fe85926ffc6af24bfac25258dfee7"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 0,
+      "case": "A",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 1,
+      "case": "B",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 2,
+      "case": "C",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 3,
+      "case": "D",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 4,
+      "case": "E",
+      "reviewedOrderingCorrect": false,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "issues": [],
+        "decisionHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387"
+      }
+    },
+    {
+      "cohort": "finalRuntimeSmoke",
+      "row": 5,
+      "case": "F",
+      "reviewedOrderingCorrect": true,
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce"
+      }
+    }
+  ],
+  "openaiReplay": [
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "historicalClassification": "provider_error",
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "804fd367fd8b5743250da84d4269e98139a82a71b348720c353c195a7f4d7cbc"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "19e0607bd0462472a6de8df83410b4fe5ad11e3f10059aa59ea88ffa0d3e5e8c"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "verified_no_mandatory_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "fff6f53510a0dc8778093d04e57d8710e46f2a0f218d628d60a3a708a2a59e17"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "clarification_required",
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "decisionHash": "a961a64f4d9c3a19d75b5f265038af48dbcdbd40260a5016a1ae373eea1b7fd5"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "099590df377b7e47102193600a03b95355b3caf1c9208d5eb5ad01643d880335"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "verified_order",
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "issues": [],
+        "decisionHash": "90fee224d71f448353fde6ecedb14fd67170089bb28b25139a5d47f3559d3b1a"
+      }
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "historicalClassification": "complete",
+      "v4": {
+        "outcome": "clarification_required",
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "decisionHash": "cc7de16e3c3233ec2c4392989fa53e1293deea9872ae3c35132e8698341c742f"
+      }
+    }
+  ],
+  "timing": {
+    "policy": {
+      "samples": 1000,
+      "p50Microseconds": 103.8755,
+      "p95Microseconds": 165.75,
+      "maxMicroseconds": 299.833
+    },
+    "boundary": {
+      "off": {
+        "samples": 100,
+        "p50Microseconds": 458.20849999999996,
+        "p95Microseconds": 542.75,
+        "maxMicroseconds": 764.625,
+        "observerStatuses": {}
+      },
+      "on": {
+        "samples": 100,
+        "p50Microseconds": 769.7919999999999,
+        "p95Microseconds": 910.084,
+        "maxMicroseconds": 9162.667,
+        "observerStatuses": {
+          "observed": 100
+        }
+      }
+    },
+    "scope": "Local fixtures only. Policy50x20; interpretation boundary100 off/100 on; fake AI, no HTTP/routes. Not production p95 or end-to-end latency."
+  },
+  "timingScope": "Existing frozen policy/shadow baseline only; no enforcement prototype or enforcement latency claim.",
+  "characterization": {
+    "methods": 7,
+    "passed": 7,
+    "seconds": 0.066,
+    "findings": [
+      "Legacy removes V4 global start/finish edges and separately requires a finish endpoint.",
+      "Legacy can publish an ordinary request with the unsupported repeated-stop edge; V4 rejects it.",
+      "Audited unordered projection preserves all other fields and rejects stale source/extraction decisions.",
+      "Ordering acceptance does not validate an invented endpoint.",
+      "Ordinary journey=None is a concrete missing-contract adapter gap.",
+      "Partial and repeated/global transitive closure stays occurrence-bound.",
+      "Browser pending is revalidated data, not an authenticated expiry/ordering receipt; arbitrary profile/answer fields fail."
+    ]
+  },
+  "focusedBackend": {
+    "run": 262,
+    "passed": 252,
+    "skipped": 10,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 31.535
+  },
+  "dateTimingExpiry": {
+    "run": 98,
+    "passed": 98,
+    "skipped": 0,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 0.966
+  },
+  "frontend": {
+    "run": 285,
+    "passed": 285,
+    "skipped": 0,
+    "failures": 0,
+    "seconds": 117.248934459
+  },
+  "initialCommandIssue": "A nonexistent reconciliation test module caused one loader error. Corrected to backend.test_cloud_model52_audit and reran the full focused command.",
+  "newTestDevelopmentCorrection": "The unsupported full-chain characterization takes the ordinary branch, not advanced; assertion corrected to verify the actual published ordinary request.",
+  "fullBackendThisCheckpoint": "Not rerun: no runtime source/dependency change. Prior clean 4c3767a verification was 1106 passed/37 skips.",
+  "typecheckLintBuildThisCheckpoint": "Not rerun: no application/shared-runtime/dependency change. Prior clean 4c3767a passed.",
+  "browserThisCheckpoint": "Not run; no UI/startup or runtime wiring change.",
+  "runtimeAndFrozenSourceSHA256": {
+    "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/main.py": "0999e7402b5b3a3666ccc4becac4e49b4674341eaa6530bd07a936146a2fab69",
+    "backend/ordering_shadow.py": "0c3223da48d80b8280199604cdde36d2ffa91e73a9352f4ce75a76f299bb3bf8",
+    "backend/advanced_planning.py": "1b63c8c0c02fb9dff2d077ec91816d561ebea131045bd5637ef47f92c09d2292",
+    "backend/advanced_routing.py": "980e0271064c12fc2b413823dd2120658ee2b2b8e308fab9eafaaecd77686259",
+    "backend/saved_plans.py": "e52f6541e10e17761a0e7649cffd4751380e8d377e7419f81d3de96179653a9f",
+    "backend/saved_advanced.py": "3c4c17abce8829a2ef509ee1fb51e1d09ddb3502c3369b916574456020fc3843",
+    "backend/saved_refresh.py": "b73614d03198cb18d623b5a79c2f5dcb3e9f5e3249101b05fb9494caa0c686f8",
+    "backend/option_sessions.py": "30bad7f0a2811fb89c0ee1628a5092e214a33c0e15fee6bb0bf7f78251365d51",
+    "backend/provider_budget.py": "dece729d2aabe21e7cfe9234d6e48d55614fde99c1a0506e7ea40dfacdc38889",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/venue_geography.py": "53453126d4ec586126af02bed722d9312d7c3b3d4947830b39699377afc9b5e5",
+    "lib/planning-client.ts": "37824194aac37d034c6c1f988837378ff96257ab127dc63ed44d6de0b4791990",
+    "app/page.tsx": "d558b845a92e4c28d5f45cc2ac2c727ebd37c69aac0e35eacbb11f845fa44959",
+    "scripts/cloud_model52_ordering.py": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+    "scripts/cloud_model52_ordering_v2.py": "197957572a98dfed5c4b1aa7de2af8cd1bb059214926efe1895c6148e91c8925",
+    "scripts/cloud_model52_ordering_v3.py": "37555c4bac222888d1d5ef217457e15ca4af5aee7fa9bdc38c16ea25590bfd4e",
+    "scripts/cloud_model52_ordering_v4.py": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f"
+  },
+  "journal": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "attemptCounts": {
+    "openai": 7,
+    "google": 2,
+    "anthropic": 1,
+    "aggregate": 10,
+    "remaining": 584
+  },
+  "accountedUSD": "0.047366625",
+  "remainingUSD": "11.952633375",
+  "newPaidAttempts": 0,
+  "providerOrCountingRequests": 0,
+  "enforcementActivated": false,
+  "enforcementPrototypeImplemented": false,
+  "shadowDefault": "OFF",
+  "futureAdmissionAndTypedConfirmationGates": "Proposed, not implemented or claimed passed.",
+  "independentHumanSignoff": false,
+  "historicalEvidenceChanged": false,
+  "replayDetailReference": "Unchanged docs/task52-ordering-v4-results.json holds original/proven/trusted graphs. Every fresh row matched exactly; decision hashes bind these compact results."
+}

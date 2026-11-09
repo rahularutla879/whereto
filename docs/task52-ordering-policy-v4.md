@@ -1,3 +1,11 @@
+# Ordering enforcement design — review only
+
+[Proposed single-authority phase split, admission/session proof, clarification, compatibility and rollback](task52-ordering-enforcement-design.md), [fresh offline verification](task52-ordering-enforcement-verification.json). Current baseline is clean `4c3767a`, preserving the later destination spelling fix. No runtime, prompt, schema, corpus, frozen policy or paid state changes. No enforcement prototype/activation.
+
+Fresh V4 replay exactly reproduces all 27 Qwen and seven OpenAI rows plus the frozen cases/probes/journal: 18 correct Qwen graphs, seven audited unordered projections, two rejected repeated-stop graphs; five OpenAI compatible, two rejected. Seven new full-interpreter characterization tests identify legacy start/finish deletion plus finish-endpoint overlap, ordinary no-journey compatibility and missing server-owned admission provenance. They do not claim the proposed enforced profile is implemented. Focused backend 252 passed/10 opt-in skips; date/timing/expiry 98 passed, frontend 285 passed. Separate owner approval is needed for phase extraction and admission-contract implementation before test-only enforcement or rollout. Paid 10/594/$0.047366625/halt unchanged; no provider/counting/Maps/infrastructure/Task 53 work.
+
+---
+
 # Ordering V4 release-gap closure and default-OFF shadow
 
 `52b-order-policy-v4-shadow` closes the three demonstrated V3 gaps in a separately frozen policy. A real observer is wired at the API interpretation boundary, **OFF by default and selectable only through an explicit local Python test context**. It never authorizes a plan, changes an interpretation, normalizes the active graph, asks a question or returns diagnostics in the application response. No new model, counting, provider or Maps requests were sent.

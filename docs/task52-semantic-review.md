@@ -1,3 +1,11 @@
+# Ordering enforcement design — review only
+
+[Proposed single-authority phase split, admission/session proof, clarification, compatibility and rollback](task52-ordering-enforcement-design.md), [fresh offline verification](task52-ordering-enforcement-verification.json). Current baseline is clean `4c3767a`, preserving the later destination spelling fix. No runtime, prompt, schema, corpus, frozen policy or paid state changes. No enforcement prototype/activation.
+
+Fresh V4 replay exactly reproduces all 27 Qwen and seven OpenAI rows plus the frozen cases/probes/journal: 18 correct Qwen graphs, seven audited unordered projections, two rejected repeated-stop graphs; five OpenAI compatible, two rejected. Seven new full-interpreter characterization tests identify legacy start/finish deletion plus finish-endpoint overlap, ordinary no-journey compatibility and missing server-owned admission provenance. They do not claim the proposed enforced profile is implemented. Focused backend 252 passed/10 opt-in skips; date/timing/expiry 98 passed, frontend 285 passed. Separate owner approval is needed for phase extraction and admission-contract implementation before test-only enforcement or rollout. Paid 10/594/$0.047366625/halt unchanged; no provider/counting/Maps/infrastructure/Task 53 work.
+
+---
+
 # Ordering policy V4 — raw correctness remains separate
 
 Qwen18 correct raw graphs and five correct OpenAI outputs remain compatible;7 Qwen unordered projections remain raw errors and both incorrect OpenAI outputs remain rejected. No historical score/output changed. New predeclared20 and post-freeze10 cases pass;0/15 new clear false questions,0/15 negative-source acceptances,0/180 unsupported retained edges. Saved effective snapshots are explicitly skipped, not called raw evidence. Shadow never applies a projection or changes source/required/optional/identity/time/return semantics. [Full policy, limits and tests](task52-ordering-policy-v4.md), [measurements](task52-ordering-v4-results.json). Full backend failures are reproduced with shadow bypassed; targeted107/frontend283/typecheck/lint/build pass. No enforcement or production-provider change.
