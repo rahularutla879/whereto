@@ -1,3 +1,9 @@
+# V5.1 four-example owner approval — independent review remains open
+
+[Review record and exact prompt freeze](task52-v51-prompt-freeze.md): owner product meanings10/12/15/19 and A–D are approved; Codex checked all19 examples and found no contradictory instruction. This does not certify all24 fields, all66 rubrics or any model output independently. Original six unresolved Q1 records stay frozen; the separate proposed Rule B resolution leaves five proposed field gaps, all independent gold/response reviews pending. No historical accepted repeated-coffee failure or journey-07 rejection is rewritten. [Next gates](task52-v51-next-approval-gates.md) distinguish bounded diagnostic prerequisites from broader qualification. No raw output/prompt/configuration/source or production behavior changes.
+
+---
+
 # V5.1 owner-decision proposal — no historical relabeling
 
 [V5.1 policy and complete amended rubric/prompt/replay](task52-ordering-policy-v51.md). Owner A–D confirm optional sequence and aur scope; all66 individually unapproved records are reassessed.19 mandatory/2 conditional/45 unchanged graph expectations relative to original Q1. The original six unresolved judgments remain frozen; proposed extension-inclusive ordering is resolved by Rule B only in the new version, leaving five proposed unresolved fields. Full independent correctness stays null; all case/response approvals pending. Historical V4 repeated-coffee critical acceptance/halt and journey-07 failure remain intact. No production prompt/validation or provider change.

@@ -1,0 +1,143 @@
+{
+  "identity": "52b-v5.1-four-example-owner-product-decisions-v1",
+  "recordType": "Owner product judgments from explicit current task message; not a signed grant",
+  "recordedAtUTC": "2026-11-10T19:00:18Z",
+  "ownerDecisionDateUTC": "2026-11-10",
+  "dateProvenance": "Owner instruction in this session; recorded date, not an independently timestamped signature",
+  "source": "WHERE TO? — TASK 52B: FINALIZE ORDERING V5.1 PROMPT AND OWNER APPROVAL, section1",
+  "parentPromptIdentity": "52b-cloud-v5.1-owner-list-order-PROPOSED-v1",
+  "promptHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+  "examples": [
+    {
+      "index": 10,
+      "source": "Dinner and drinks in Jersey City tomorrow.",
+      "sourceSHA256": "f5efbc1d7427fe5dcb74f93c41f4d55c876b50b44559917e949bcb29a2194619",
+      "approvedMeaning": {
+        "required": [
+          "Dinner",
+          "drinks"
+        ],
+        "optional": [],
+        "edgesIfVisited": [
+          [
+            0,
+            1
+          ]
+        ],
+        "location": "Jersey City",
+        "dateExpressions": [
+          "tomorrow"
+        ]
+      },
+      "ownerProductMeaningApproved": true,
+      "independent24FieldCertification": false
+    },
+    {
+      "index": 12,
+      "source": "Buy groceries and maybe stop for coffee, then return to where I started within 45 minutes.",
+      "sourceSHA256": "f1c4886da09b3463d8317d40b6fc31dec000f650215bea2d623f9bbd1d6ee6c6",
+      "approvedMeaning": {
+        "required": [
+          "groceries"
+        ],
+        "optional": [
+          "coffee"
+        ],
+        "edgesIfOptionalIncluded": [
+          [
+            0,
+            1
+          ]
+        ],
+        "edgesIfOptionalOmitted": [],
+        "endpoint": {
+          "kind": "origin",
+          "source": "return to where I started"
+        },
+        "wholeTrip": {
+          "minutes": 45,
+          "relation": "maximum",
+          "source": "within 45 minutes"
+        },
+        "endpointAndWholeTripSurviveOptionalOmission": true
+      },
+      "ownerProductMeaningApproved": true,
+      "independent24FieldCertification": false
+    },
+    {
+      "index": 15,
+      "source": "Visit Zara and Nike in the same mall.",
+      "sourceSHA256": "6c169c94672532bb0388b56c7d8aab86ef7e32354232f3e4a3f3c405383cd0b0",
+      "approvedMeaning": {
+        "required": [
+          "Zara",
+          "Nike"
+        ],
+        "optional": [],
+        "brandKinds": [
+          "brand",
+          "brand"
+        ],
+        "edgesIfVisited": [
+          [
+            0,
+            1
+          ]
+        ],
+        "sharedPlace": {
+          "kind": "same_mall",
+          "stops": [
+            0,
+            1
+          ],
+          "source": "same mall"
+        }
+      },
+      "ownerProductMeaningApproved": true,
+      "independent24FieldCertification": false
+    },
+    {
+      "index": 19,
+      "source": "Spend 15 minutes at the bank and ten minutes on coffee.",
+      "sourceSHA256": "09635d37cc0bc8451a44a2b7efc49425be999209231fea391db63a4cdf2eea61",
+      "approvedMeaning": {
+        "required": [
+          "bank",
+          "coffee"
+        ],
+        "optional": [],
+        "edgesIfVisited": [
+          [
+            0,
+            1
+          ]
+        ],
+        "durations": [
+          {
+            "minutes": 15,
+            "relation": "exact",
+            "source": "15 minutes at the bank"
+          },
+          {
+            "minutes": 10,
+            "relation": "exact",
+            "source": "ten minutes on coffee"
+          }
+        ]
+      },
+      "ownerProductMeaningApproved": true,
+      "independent24FieldCertification": false
+    }
+  ],
+  "generalRulesConfirmed": {
+    "A": "Complete chronological activity list defaults to visit order",
+    "B": "Optional attendance preserves position and required closure when omitted",
+    "C": "Required flexible placement and scoped partial order override defaults without implying optionality",
+    "D": "Reviewed Roman Hindi aur connects owned activities; unknown language/scope clarifies"
+  },
+  "cryptographicSignature": null,
+  "ownerFinancialApproval": null,
+  "operatorPermission": null,
+  "paidDispatchAuthorized": false,
+  "independentGoldReviewCompleted": false
+}

@@ -1,3 +1,7 @@
+# Task52B — freeze unchanged V5.1 content after four owner product approvals
+
+Record the owner's explicit example10/12/15/19 judgments and general A–D separately from Codex's19-example consistency check and independent gold/response certification. Use a new REVIEWED documentation identity without changing the existing prompt, configuration, examples or historical artifacts. No signature, paid grant, issuer or operational approval is implied. [Exact content/provenance and remaining gates](docs/task52-v51-prompt-freeze.md).
+
 # Task52B V5.1 — confirm optional sequence, flexible attendance distinction and narrow aur scope
 
 Owner confirms complete itinerary list order, conditional placement of selected optional stops, independently required flexible visits and reviewed Roman-Hindi aur as and. Version these separately from V5 and historical Q1/V4 findings; propose one ordering-field resolution and retain all non-order gaps/independent-review requirements. Prepare a full replacement cloud prompt with four audited example-order changes, without activating it. Current route shortlisting already computes closure before optional selection for an intact constrained graph; source enforcement/legacy normalization still needs separate integration approval. [Rules, evidence and limits](docs/task52-ordering-policy-v51.md).

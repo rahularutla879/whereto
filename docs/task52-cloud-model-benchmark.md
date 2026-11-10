@@ -1,3 +1,9 @@
+# Reviewed V5.1 prompt specification — zero new model measurements
+
+[Prompt freeze](task52-v51-prompt-freeze.md) records owner approval of four changed example meanings and Codex's19-example consistency review, with exact existing prompt/configuration bytes unchanged. No independent model qualification or paid authorization follows. Historical outputs/source pins/scores/cohorts/costs/halt remain unchanged; same five proposed slots stay unused. [Missing real build/operator/review/readiness/financial gates](task52-v51-next-approval-gates.md). Actual10/594,$0.047366625 retained; no provider/count/account/Maps request or production change. Older checkpoints below remain historical.
+
+---
+
 # V5.1 owner rules and full prompt proposal — no new model measurement
 
 [Separate offline policy, prompt and all66 review](task52-ordering-policy-v51.md). New full cloud prompt proposal replaces conflicting legacy ordering text and changes only ordering in four of19 examples. No model/count/account request or active prompt change. Recorded27 Qwen/seven OpenAI V5.1 ordering outcomes match V5; earlier source identities, V3/V4 cohorts/classifications/latency/usage/costs remain historical. New same-five-slot successor binds proposed hashes only; future build/approval/readiness remain unset. Original10/594,$0.047366625 and persistent halt unchanged. Gemini/Anthropic blockers remain separate.

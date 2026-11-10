@@ -1,0 +1,253 @@
+{
+  "identity": "52b-v5.1-prompt-freeze-verification-v1",
+  "baselineCommit": "f5085e9226d52ae35e61202ef54efd641331d1ae",
+  "dateUTC": "2026-11-10",
+  "reviewIdentity": "52b-cloud-v5.1-owner-list-order-REVIEWED-v1",
+  "reviewRecordSHA256": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+  "ownerProductDecisionRecordSHA256": "b2b554e2806aa64d3659ad5d09ad47e500099543731559f11dcb2b4492fba782",
+  "promptHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+  "configurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8",
+  "proposalBytesEqualBaselineGitBlob": true,
+  "ownerApprovedExampleMeanings": [
+    10,
+    12,
+    15,
+    19
+  ],
+  "other15ExampleRepliesUnchanged": true,
+  "all19NonOrderRequirementsPreserved": true,
+  "contradictionsFound": [],
+  "schemaIdentitiesUnchanged": {
+    "runtimePydantic": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+    "strictEvaluationCanonical": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "openaiWireProjection": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "note": "Different declared schema representations, all unchanged; do not conflate their hashes."
+  },
+  "policyRuntimeCorpusSourceIdentitiesVerified": true,
+  "originalPaidEvaluatorStillRefusesB2": true,
+  "tests": [
+    {
+      "scope": "New exact-byte/19-example/owner-fact/schema/Q3/unused-slot/document-only authority negatives",
+      "tests": 8,
+      "passed": 8,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 4.594
+    },
+    {
+      "scope": "Freeze checks plus frozen V1\u2013V4,V5,V5.1, Q1/Q2/Q3, corpus/source/schema, original evaluator, admission and journey/offline recorded replays; includes the8 focused tests above",
+      "tests": 265,
+      "passed": 265,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 146.105
+    }
+  ],
+  "frozenV4Replay": {
+    "unchangedFields": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "providerRequests": 0
+  },
+  "historicalRecordedReplays": {
+    "Qwen": 27,
+    "OpenAI": 7,
+    "freshReproductionCheckedBy": "backend.test_task52_ordering_v51 and backend.test_task52_ordering_v5; complete recorded B2/Q1 replay and original hashes remain unchanged",
+    "V51OrderingCompatibleQwen": 19,
+    "V51WithLegacyJourneyCompatibleQwen": 8,
+    "V51OrderingCompatibleOpenAI": 4,
+    "independentFullCorrectness": null,
+    "historicalV4RepeatedCoffeeAcceptedCriticalErrorPreserved": true,
+    "journey07ProvenanceRejectionPreserved": true
+  },
+  "Q3": {
+    "slots": [
+      [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      [
+        "openai",
+        "journey-04",
+        2
+      ],
+      [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      [
+        "openai",
+        "journey-06",
+        2
+      ],
+      [
+        "openai",
+        "journey-21",
+        1
+      ]
+    ],
+    "sourcesPayloadsRubricDigestsUnchanged": true,
+    "unusedOriginalSlots": 5,
+    "specificationCompatible": true,
+    "dispatchAuthorized": false,
+    "newAttempts": 0,
+    "newReservations": 0,
+    "realOwnerGrant": null,
+    "liveBuild": null,
+    "realSameJournalWriter": null,
+    "realEnrollment": null,
+    "freshReadiness": null
+  },
+  "historicalIntegrity": {
+    "originalJournal": {
+      "identity": "52b-q4b-readonly-journal-v1",
+      "historicalStorageSnapshotCompatible": true,
+      "continuationReady": false,
+      "executionAuthorized": false,
+      "liveDispatchAvailable": false,
+      "q4aExecutionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+      "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "rowHashes": [
+        "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+      ],
+      "schemaHash": "822c3e1130fddbabd6b64a919bc35236c16e78c7210d076ce8181013eebbf09a",
+      "schema": [
+        [
+          "table",
+          "attempts",
+          "attempts",
+          "CREATE TABLE attempts (provider TEXT, case_id TEXT, repetition INTEGER, status TEXT NOT NULL, charge INTEGER NOT NULL, record TEXT, PRIMARY KEY(provider,case_id,repetition))"
+        ],
+        [
+          "table",
+          "metadata",
+          "metadata",
+          "CREATE TABLE metadata (id INTEGER PRIMARY KEY CHECK(id=1), config TEXT NOT NULL)"
+        ],
+        [
+          "index",
+          "sqlite_autoindex_attempts_1",
+          "attempts",
+          null
+        ]
+      ],
+      "rowIDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "counts": {
+        "openai": 7,
+        "google": 2,
+        "anthropic": 1
+      },
+      "attempts": 10,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "perProviderRetainedNanodollars": {
+        "openai": 12166625,
+        "google": 33000000,
+        "anthropic": 2200000
+      },
+      "statuses": {
+        "recorded": 9,
+        "recorded_halted": 1
+      },
+      "persistentHistoricalHalt": true,
+      "journalMode": "delete",
+      "readConnectionSynchronous": 2,
+      "synchronousNote": "Connection default only; historical writer uses FULL explicitly. Not proof of every past commit or hardware durability.",
+      "rowIDsAreAutoincrement": false,
+      "blockers": [
+        "real authenticated owner/reviewer trust boundary unimplemented",
+        "real append-only writer/child scope and all-scope outcome fold unimplemented",
+        "independent reviews and separately authorized fresh readiness incomplete",
+        "no exact owner-approved live execution build or financial grant"
+      ],
+      "privateFilesUnchanged": 324,
+      "correctionsUnchanged": true,
+      "sourcePinsAndQ4ABuildVerified": true,
+      "lockMode": "0o644",
+      "directoryMode": "0o700",
+      "journalFileMode": "0o600",
+      "readMode": "mode=ro&immutable=1; query_only; SQL authorizer; existing common SH lock",
+      "reportPurpose": "compatibility evidence only, never an approval or dispatch capability"
+    },
+    "privateFilesUnchanged": 324,
+    "equalsStartingSnapshot": true,
+    "allOriginalRowsCorrectionsReservationsAndHaltPreserved": true,
+    "handbookFilesUnchanged": 30,
+    "handbookContentSetDigest": "3c127c54e2f25c516f7b34de98a82f8de809391bd2e042091cc31338f6334fe4",
+    "handbookIncludedInCommit": false
+  },
+  "security": {
+    "configuredAppSecretsChecked": 2,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "ignoredPrivateConfigurationMode600": true,
+    "journalMode600": true,
+    "newApprovalIssuerOrOperatorKey": false,
+    "newLiveTransport": false
+  },
+  "scope": {
+    "productionSourceOrDependenciesChanged": false,
+    "activeQwenOpenAIPromptChanged": false,
+    "productionEnforcement": false,
+    "V4ShadowDefault": "OFF",
+    "wholeApplicationFrontendTypecheckLintBuildBrowserRerun": false,
+    "reason": "Documentation/review JSON and offline test only; prior full application verification remains historical.",
+    "providerInferenceCountingMetadataAccountMapsRequests": 0,
+    "realTrustEnrollmentJournalWritesBillingInfrastructureTask53Changes": false
+  },
+  "reviewGaps": {
+    "productRulesAndFourExamplesApproved": true,
+    "independent24FieldCertification": false,
+    "all66GoldApprovals": 0,
+    "historical7ResponseIndependentApprovals": 0,
+    "remainingProposedQ1Fields": 5,
+    "boundedSourceGrammarUnknownOrOutOfScope": 29,
+    "futureGates": "docs/task52-v51-next-approval-gates.md"
+  }
+}
