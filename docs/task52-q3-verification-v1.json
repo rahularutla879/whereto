@@ -1,0 +1,294 @@
+{
+  "identity": "52b-q3-offline-verification-v1",
+  "baselineGitHEAD": "a6fe84304c624c154246dcdc93af207babbef0d1",
+  "proposalIdentity": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+  "proposedConfigurationHash": "850ad650bff6bab9c4465e657932874cbcae06a9a7b4e1c79eda8891a6eb942b",
+  "proposalDigest": "66a026921cfbc9f9a983b94c717e633150a74854006051d7f429b0efee15b3f7",
+  "Q3ProposalComplete": true,
+  "paidDispatchAuthorized": false,
+  "futureLiveImplementationAvailable": false,
+  "futureImplementationHash": null,
+  "independentReviewsComplete": false,
+  "authenticatedReadinessPerformed": false,
+  "maxProposedNewAttempts": 5,
+  "maxProposedNewReservationNanodollars": 12500000,
+  "actualNewRequests": 0,
+  "actualNewReservations": 0,
+  "selectedSlots": [
+    [
+      "openai",
+      "extension-repeated",
+      2
+    ],
+    [
+      "openai",
+      "journey-04",
+      2
+    ],
+    [
+      "openai",
+      "extension-partial",
+      2
+    ],
+    [
+      "openai",
+      "journey-06",
+      2
+    ],
+    [
+      "openai",
+      "journey-21",
+      1
+    ]
+  ],
+  "selectedUnresolvedQ1Fields": 0,
+  "globalUnresolvedQ1Fields": 6,
+  "allSelectedIndependentGoldReviewsPending": true,
+  "allFutureResponseReviewsPending": true,
+  "baseline": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "ordinal": 1,
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "originalState": "recorded",
+        "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+      },
+      {
+        "ordinal": 2,
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "originalState": "recorded",
+        "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+      },
+      {
+        "ordinal": 3,
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "originalState": "recorded",
+        "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+      },
+      {
+        "ordinal": 4,
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "originalState": "recorded",
+        "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+      },
+      {
+        "ordinal": 5,
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "originalState": "recorded",
+        "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+      },
+      {
+        "ordinal": 6,
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "originalState": "recorded",
+        "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+      },
+      {
+        "ordinal": 7,
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "originalState": "recorded",
+        "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+      },
+      {
+        "ordinal": 8,
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "originalState": "recorded",
+        "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+      },
+      {
+        "ordinal": 9,
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "originalState": "recorded",
+        "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+      },
+      {
+        "ordinal": 10,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+        "originalState": "recorded_halted",
+        "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+      }
+    ],
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "privateFiles": 324,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "newReservations": 0
+  },
+  "testGroups": {
+    "relevantRubricProviderVersionJournalOrderingAdmission": {
+      "run": 228,
+      "passed": 228,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 108.061
+    },
+    "finalQ1Q2Q3Integrity": {
+      "run": 28,
+      "passed": 28,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 13.761
+    }
+  },
+  "finalQ3ThreatModelMethods": [
+    "test_readonly_proposal_exactly_reproduces_frozen_plan",
+    "test_proposed_configuration_and_review_documents_bind_exact_hashes",
+    "test_all_ten_consumed_slots_refused_and_anchors_preserved",
+    "test_old_approval_duplicate_grant_wrong_order_and_unreviewed_refused",
+    "test_wrong_version_schema_source_graph_and_root_refused",
+    "test_global_provider_incremental_budget_and_token_ceiling_refused",
+    "test_crash_before_reserve_and_before_or_after_intent_never_retry",
+    "test_concurrent_runner_and_uncertain_unreviewed_response_block",
+    "test_raw_critical_or_guard_or_unresolved_failure_halts_even_safe_rejection",
+    "test_five_successful_fictional_reviews_keep_original_halt_and_all_reservations",
+    "test_lower_usage_never_refunds_and_observed_overage_is_retained_and_halts",
+    "test_actual_repeated_and_partial_source_proofs_do_not_accept_model_repairs",
+    "test_changed_origin_endpoint_is_not_silently_repaired"
+  ],
+  "refinementNote": "Final28 cover all13 Q3 methods after conservative overage accounting, explicit endpoint binding, exact rephrase/endpoint assertions and cross-document configuration-hash checks. The broad228 group passed before those isolated proposal refinements; no production/shared runtime changed.",
+  "fictionalState": {
+    "database": ":memory:",
+    "realPaidRowsOrResponsesCopied": false,
+    "onlyOpaqueBaselineHashesAndSlotIDs": true,
+    "fileBasedApprovalsCreated": false,
+    "transportOrSDK": false,
+    "financialAuthority": false,
+    "scope": "Control-flow/conservative counter model only. Not actual OS/multiprocess/SQLite-filesystem atomicity or real review-authentication proof."
+  },
+  "failureRecovery": {
+    "beforeReservation": "child stops, no spend/attempt consumed",
+    "afterReservationBeforeIntent": "consumed full reservation; no retry",
+    "afterUncertainIntent": "consumed full reservation; no retry",
+    "afterOutcomeBeforeReview": "next slot blocked until independent review",
+    "missingOrCorruptFacts": "stop, never infer successful unsent/retryable status",
+    "lowerObservedUsage": "no refund",
+    "higherObservedLiability": "retain larger exposure and halt",
+    "originalHalt": "original ten anchors unchanged, old authorization stays stopped"
+  },
+  "recordedReplay": {
+    "QwenRows": 27,
+    "OpenAIRows": 7,
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "originalEvidenceChanged": false,
+    "requestsSent": 0
+  },
+  "excludedHomeCase": {
+    "id": "journey-12",
+    "sourceSHA256": "a57292e052a8da1f30540e28415cd1c1747254199391ec6117b99589fed52850",
+    "authoredReferenceOnly": true,
+    "V4Outcome": "clarification_required",
+    "V4Issues": [
+      "absence_not_independently_proven"
+    ],
+    "reason": "Unproven source absence; do not force a clarification-only legacy result into an ordering success. No grammar change proposed."
+  },
+  "Q1Q2ArtifactsAndOriginalSourcePinsUnchanged": true,
+  "originalPaidSourceRefusalStillRequired": true,
+  "security": {
+    "configuredSecretsCurrentHistoryMatches": 0,
+    "threeEvaluationKeysCurrentHistoryMatches": 0,
+    "ignoredConfigAndJournalMode600": true,
+    "all324PrivateFilesUnchanged": true
+  },
+  "completeDiffReviewed": true,
+  "productionRuntimeChanged": false,
+  "fullAppSuitesBrowserTypecheckLintBuild": "Not rerun: new isolated proposal/test modules and docs only, no shared production/runtime/dependency changes. No new application or live-provider evidence claimed.",
+  "providerScope": {
+    "openai": "proposal only",
+    "google": "BLOCKED per Q2, excluded",
+    "anthropic": "BLOCKED per Q2, excluded"
+  },
+  "futurePrerequisites": [
+    "Owner review of parent proposal and independent batch/historical-failure review.",
+    "Separately approve bounded successor implementation/offline tests, then review concrete non-null build/execution manifest.",
+    "Separately authorize exact fresh non-inference readiness checks; no November8 reuse.",
+    "Only then explicitly approve exact five ordered slots/max$0.0125 and independent per-call reviews; no child approval exists now."
+  ],
+  "artifactHashes": {
+    "scripts/task52_q3.py": "fa7e91aa6e4ff9b5565b085af448ca72bbf45a8f2eef742ab490a879244f73f3",
+    "backend/test_task52_q3.py": "48e88315487bd600015659c7eec2bc6012290a3de00346dca63e4d66404b3892",
+    "docs/task52-q3-continuation-design.md": "cc7797c7ea452893dfc396bd6e3b6da64a718f6d05f221e281000d2684011f9f",
+    "docs/task52-q3-independent-review-v1.json": "fbee9adc1a89f9b0ea5a4481f83a5bd8eec2c4eb580fcda8809a24335aef894e",
+    "docs/task52-q3-openai-proposal-v1.json": "79f6a463c292916cecf8ad248d763fabf991d23908ad23581cdcef48a79edb27"
+  }
+}

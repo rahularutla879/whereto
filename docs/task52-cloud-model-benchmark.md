@@ -1,3 +1,9 @@
+# Q3 exact continuation proposal — no new model result
+
+[Proposed identity/slots/cost ceiling](task52-q3-openai-proposal-v1.json), [same-journal/review/readiness design](task52-q3-continuation-design.md), [offline verification](task52-q3-verification-v1.json). Five unused original slots proposed, max$0.0125 full reservations; no dispatch, count, account check, enabling approval sidecar or journal mutation. Historical seven OpenAI outputs, original prompt/scorer labels, decoder correction, source failure and accepted critical error remain unchanged. Q1/Q2/324 private files/halt stay intact at OpenAI7/Google2/Anthropic1=10/594, $0.047366625/$11.952633375 remaining. Model qualification and five-second end-to-end evidence remain unestablished. Q4 needs concrete reviewed implementation, independent reviews, fresh checks and separate approval; Google/Anthropic remain BLOCKED. No enforcement/Maps/infrastructure/Task53. Earlier measurements are historical.
+
+---
+
 # Q2 compatibility decisions — historical benchmark preserved
 
 [Finite three-provider decision](task52-q2-provider-compatibility.md), [machine matrix](task52-q2-decisions-v1.json), [fresh offline verification](task52-q2-verification-v1.json). OpenAI can proceed only to a separately reviewed Q3 proposal; original source refusal, critical error and halt remain. Google generic400/IP and Anthropic grammar compilation remain blocked. Existing unactivated schema proposals preserve canonical local validation; neither proves remote compilation. No authenticated provider/counting/metadata/inference request, account change or new score/latency measurement. Q1 artifacts and all10 paid rows/324 private files unchanged; $0.047366625 accounted/$11.952633375 remaining. No production-model selection, enforcement, infrastructure or Task53. Earlier model results below are historical.

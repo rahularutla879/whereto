@@ -1,3 +1,9 @@
+# Task52B Q3 — conditional successor proposal, not a halt override
+
+Propose one evaluation-only B2/v4 child scope bound to the original ten-row halted journal, exact unused original slots, max5/$0.0125 and independent review between calls. Start with the known repeated-stop critical case's unused r2; any raw critical failure stops even if safely blocked. Exclude journey-12 because current V4 absence proof remains unknown. Preserve the parent halt/old source refusal and every historical row; a proposed/null-build manifest cannot authorize execution. Actual live implementation/filled manifest, fresh readiness, independent reviews and exact owner approval remain prerequisites. [Design and limited review package](docs/task52-q3-continuation-design.md). No production or provider change.
+
+---
+
 # Task52B Q2 compatibility decisions — no activation
 
 OpenAI `gpt-6-luna` is technically ready only for a separately reviewed Q3 source/version and same-journal continuation **proposal**, not live dispatch or qualification. Gemini Developer API remains blocked on unresolved400/IP evidence; Anthropic remains blocked on grammar compilation. Retain one existing unactivated schema proposal per blocked provider, and seek owner-approved support evidence rather than speculative paid probes. Q1 gaps/independent review and original source refusal/halt remain. [Evidence, proposals and exact owner actions](docs/task52-q2-provider-compatibility.md). No provider/schema/prompt/runtime/account change follows.
