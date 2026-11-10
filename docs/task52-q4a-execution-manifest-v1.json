@@ -1,0 +1,325 @@
+{
+  "identity": "52b-q4a-openai-b2-v4-OFFLINE-v1",
+  "format": "52b-q4a-offline-execution-build-v1",
+  "status": "REVIEW CANDIDATE; FICTIONAL EXECUTION ONLY",
+  "parentIdentity": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+  "parentConfigurationHash": "850ad650bff6bab9c4465e657932874cbcae06a9a7b4e1c79eda8891a6eb942b",
+  "parentDigest": "66a026921cfbc9f9a983b94c717e633150a74854006051d7f429b0efee15b3f7",
+  "liveDispatchAvailable": false,
+  "paidApproval": false,
+  "planningAuthority": false,
+  "historicalEnvironmentExact": false,
+  "activationBoundary": "Not implemented. No HTTP/credential/operator-authentication path. Temporary fictional registry only.",
+  "protocolVersion": "52b-q4a-fsync-chain-sqlite-anchor-v1",
+  "scoringVersion": "52b-q4a-three-axis-offline-v1",
+  "configuration": {
+    "identity": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+    "purpose": "synthetic offline evaluation only; future paid purpose requires explicit approval",
+    "runtime": "52b-runtime-phase-b2",
+    "runtimeManifestHash": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+    "reconstruction": "52b-behavior-reconstruction-duration-b2-v1",
+    "historicalEnvironmentExact": false,
+    "canonicalPydanticSchemaHash": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+    "strictParserSchemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "originalCorpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "Q1Contract": "52b-q1-qualification-v1",
+    "Q1ManifestHash": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+    "Q1RubricHash": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+    "promptVersion": "52b-v4-order-edge-quotes",
+    "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+    "originalV4ConfigurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+    "semanticScorer": "52b-semantic-v3-source-bound-generic-the",
+    "orderingPolicy": "52b-order-policy-v4-shadow",
+    "orderingPolicyHash": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+    "originalJournalRootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "clockPolicy": "Freeze date resolver and specify destination timezone per case; unknown timezone must clarify, never assume.",
+    "rawLegacyGuardedAxes": [
+      "unmodified raw-model/full-field review",
+      "complete actual B2 legacy disposition",
+      "raw V4 proof combined conservatively with complete legacy disposition"
+    ],
+    "futureEvaluatorImplementationHash": null,
+    "futureResponseHashPolicy": "Bind complete immutable provider response and separately decoded output to operation/slot/source/payload/configuration; compute only after response, never invent future response hashes.",
+    "inferenceEndpoint": "https://api.openai.com/v1/responses",
+    "inferenceMethod": "POST",
+    "authenticationScope": "existing restricted evaluation-project key, ignored backend config only; no key or headers in artifacts",
+    "redirectsAllowed": false,
+    "countingEndpointForSeparatelyApprovedReadiness": "POST https://api.openai.com/v1/responses/input_tokens",
+    "guardIsProductionEnforcement": false,
+    "model": "gpt-6-luna",
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "reasoning": {
+      "effort": "none"
+    },
+    "temperature": 0,
+    "serviceTier": "default",
+    "store": false,
+    "tools": false,
+    "concurrency": 1,
+    "retries": 0
+  },
+  "baselineEvidence": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "ordinal": 1,
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "originalState": "recorded",
+        "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+      },
+      {
+        "ordinal": 2,
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "originalState": "recorded",
+        "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+      },
+      {
+        "ordinal": 3,
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "originalState": "recorded",
+        "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+      },
+      {
+        "ordinal": 4,
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "originalState": "recorded",
+        "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+      },
+      {
+        "ordinal": 5,
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "originalState": "recorded",
+        "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+      },
+      {
+        "ordinal": 6,
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "originalState": "recorded",
+        "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+      },
+      {
+        "ordinal": 7,
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "originalState": "recorded",
+        "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+      },
+      {
+        "ordinal": 8,
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "originalState": "recorded",
+        "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+      },
+      {
+        "ordinal": 9,
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "originalState": "recorded",
+        "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+      },
+      {
+        "ordinal": 10,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+        "originalState": "recorded_halted",
+        "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+      }
+    ],
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "privateFiles": 324,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "newReservations": 0
+  },
+  "buildIdentity": {
+    "kind": "source-set-only; no deployed artifact",
+    "python": "3.12.1",
+    "pydantic": "2.14.1",
+    "fastapi": "0.150.0",
+    "lockfileHashesIncluded": true,
+    "reproducibleContainerBuild": false
+  },
+  "slots": [
+    {
+      "ordinal": 1,
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "rubricCaseDigest": "77940447f4e618c1560b010e6cc61f2c3253543092c7f0c596c823339c703920"
+    },
+    {
+      "ordinal": 2,
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "rubricCaseDigest": "802608fa6fb46b4769d2de3f1fa99271b0c02d87bd8af96429b17871cb84b6d8"
+    },
+    {
+      "ordinal": 3,
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "rubricCaseDigest": "eebc83d5f13adc1d83bc2ac95a38125c2d8ceb228d5b2fd2a66b83013ce86db1"
+    },
+    {
+      "ordinal": 4,
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "payloadHash": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+      "rubricCaseDigest": "00d6c55346267b60015c14b90c77dcafdb62fd0a7977bdf2478da3e710ca9d22"
+    },
+    {
+      "ordinal": 5,
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "payloadHash": "0ea781ac4e38c013dbe52fd007626cdd70b910e6a9c1048cdb5ed6011fe234d4",
+      "rubricCaseDigest": "8bda336afc89bfb4fe36e89a0b36b93a3b29bc4276f8094adcc883486cc1fffd"
+    }
+  ],
+  "artifactHashes": {
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/duration_preparation.py": "05072bc30bbb97f59de7ce08a7747c8e43413657bd70ab41d49f6ef784f9c0a8",
+    "backend/evaluation/results-task50e-model-investigation.json": "36c582b6bbe71ce15319635225c8f0bce79659829ca8b2dbfb944b125d70aac3",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/journey.py": "681045405f33897d859a18394add1646236ab53c5e61b63562c1dea93b3b8d7e",
+    "backend/planning_admission.py": "c083f735690eac7ca47227bc597c14cce1eeef022dbb7c600c71b36e5d3dfa93",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "backend/source_preparation.py": "829d2cdcdbe3ebcd2c18c46230c87b76e3a323b4d7e2a10c778e537e8ec1e9e1",
+    "backend/validation_phases.py": "528ac1f5094dd980ed127360a247fbe7590982182adc962d9f7463f7a52dc8a0",
+    "docs/task52-b2-behavior-baseline-v1.json": "657472f95826452b19901a6e57c9ffe1bbad8e8a87367cc67cc38651ffe46545",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "docs/task52-openai-small-batch.json": "baa7f783b525b924b4c7453824b570dc39fc39c2b6defe5bdd837fdf409e5c1d",
+    "docs/task52-ordering-qwen-review-v2.json": "cc85c0ced54296d8d0df3b9d1d5cd3ac00daef6ad208049b3448de33cbf1e964",
+    "docs/task52-ordering-v4-results.json": "dde02ceb1058285b363eb5f3e1c8832ab1ceaa357a1a13c00daf584adcb5237b",
+    "docs/task52-prompt-proposal-v4.json": "665937dc63dd928131ba8f7d4004e9254b2a24b3352adb1695998d66aa6d1ea9",
+    "docs/task52-prompt-revision-v3.json": "b4cfb074e7595187ae01d523486f4daf334ede2a0cb20c033b211aef2798f1c7",
+    "docs/task52-q1-independent-review-v1.json": "24c58fa82092cceb3c413c80f0c53242b0ce48cc3918e284885c60baa7951ff4",
+    "docs/task52-q1-offline-manifest-v1.json": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+    "docs/task52-q1-qualification-v1.md": "46649dccf0ff0119208e7e6b6ec296a2bc1bdbad66252241a8ebd540b51b24ed",
+    "docs/task52-q1-rubric-v1.json": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+    "docs/task52-q3-continuation-design.md": "cc7797c7ea452893dfc396bd6e3b6da64a718f6d05f221e281000d2684011f9f",
+    "docs/task52-q3-independent-review-v1.json": "fbee9adc1a89f9b0ea5a4481f83a5bd8eec2c4eb580fcda8809a24335aef894e",
+    "docs/task52-q3-openai-proposal-v1.json": "79f6a463c292916cecf8ad248d763fabf991d23908ad23581cdcef48a79edb27",
+    "docs/task52-q3-verification-v1.json": "210c68d0f0e6ab83a9d6532e9b9a2d77af4d172749d5e772e0eb06d656e4a2d0",
+    "docs/task52-runtime-phase-b2.json": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+    "docs/task52-source-identities-v1.json": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+    "docs/task52-v4-openai-approved-continuation.json": "9f3848311a9d4e7a39b585b42b30a4bc4bb9fe48e2dd4e8937d284d89f2b6984",
+    "docs/task52-v4-openai-results.json": "1c521c6d5b905044a305454f358ac3e647321431ba285f49dc843bb5a4bae82f",
+    "package-lock.json": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "scripts/cloud_model52.py": "0e49844488e5e6b70e79c5e6b6e7d6065df13ca8c16b4ea00a6770e4c291e470",
+    "scripts/cloud_model52_live.py": "12478fef504246f9215959e08c5198adc94521b510815f3944ebf2560d739685",
+    "scripts/cloud_model52_offline.py": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+    "scripts/cloud_model52_ordering.py": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+    "scripts/cloud_model52_ordering_v2.py": "197957572a98dfed5c4b1aa7de2af8cd1bb059214926efe1895c6148e91c8925",
+    "scripts/cloud_model52_ordering_v3.py": "37555c4bac222888d1d5ef217457e15ca4af5aee7fa9bdc38c16ea25590bfd4e",
+    "scripts/cloud_model52_ordering_v4.py": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+    "scripts/cloud_model52_semantics.py": "e3291615e578169c3292e9177e78afba8d2a8d7cf8b154ae8e360289fc174661",
+    "scripts/cloud_model52_v4.py": "429468bd1d6d95ca1e00f8a66f535e477623616721f8f23ae940eec73a4728ec",
+    "scripts/cloud_model52_v4_live.py": "8c6354f780bd3e2ef11cdd91eeb38f040400eab98d5d883187ef52b82e023ed5",
+    "scripts/task52_phase_b2_identity.py": "9b3035aaa09568e76150ca4e71d875828d7e60133b0af810bf56c5bc0d3ac114",
+    "scripts/task52_q1.py": "bc12a388eefcd37b8dbe51e981dca4900f11c918b8d5b9541c7e18a4e5fdf650",
+    "scripts/task52_q2.py": "708e430123c69ad1a06b07e5155b6c9600b4cbb04a4ae15ddaed9b7bf9889fc3",
+    "scripts/task52_q3.py": "fa7e91aa6e4ff9b5565b085af448ca72bbf45a8f2eef742ab490a879244f73f3",
+    "scripts/task52_q4a.py": "c89a7d8ad92354dd345d1b5e6a592c582c05472dcad4047ec6bfdc17915eebe7",
+    "scripts/task52_q4a_scoring.py": "ba3e84246f975951c2ae4bf77e1126e54d525c2fe6f0e010ea41b341aa1b34ee"
+  },
+  "limits": {
+    "input": 12000,
+    "output": 2000,
+    "concurrency": 1,
+    "retries": 0,
+    "globalAttempts": 594,
+    "providerAttempts": 198,
+    "globalNanodollars": 12000000000,
+    "childAttempts": 5,
+    "childNanodollars": 12500000,
+    "perAttemptNanodollars": 2500000
+  },
+  "independentReviewComplete": false,
+  "freshReadinessComplete": false,
+  "accountFacts": "UNKNOWN; not inspected",
+  "futureLiveBuildRequired": true,
+  "parentNullImplementationSentinelIsNeverExecutable": true
+}

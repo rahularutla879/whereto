@@ -1,3 +1,7 @@
+# Task 52B Q4A offline evaluator — outside application runtime
+
+The separately versioned `scripts/task52_q4a*` tools bind the frozen Q3 proposal, B2 reconstruction, canonical parser, Q1 rubric and independent V4 ordering evidence. They have only temporary fictional state and a closed fake response transport; no app imports, live client, credentials, public receipt or planning issuer. Real journal checks remain read-only. [Protocol/build and activation gaps](docs/task52-q4a-successor-offline-v1.md). Production architecture and behavior are unchanged.
+
 # Task 52B B2 duration preparation
 
 `backend.duration_preparation` now owns the single legacy duration-normalizer algorithm; `journey.normalize_explicit_durations` is a same-position compatibility delegate. Dynamic journey helper lookup remains intact. Other normalizers/validators and prepared-source mapping stay unchanged; runtime ID is `52b-runtime-phase-b2`.

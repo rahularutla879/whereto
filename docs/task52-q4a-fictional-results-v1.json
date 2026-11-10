@@ -1,0 +1,215 @@
+{
+  "identity": "52b-q4a-fictional-five-slot-evidence-v1",
+  "executionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+  "allStateAndReviewsFictional": true,
+  "realAttempts": 0,
+  "realReservations": 0,
+  "results": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "operation": "3cb5dd2c508c638b2ed6423138d58b679d7a6d62babf3ab906b00b8fc6d818fd",
+      "responseHash": "f64c375aeb7b544f93c8c072a16f7e14fec0a1d1de260cde6fdf96bc9499814c",
+      "outcomeHash": "76cda292a851e13fa3a4d43ea4c27a35cf861caae901fd3063a7ae86f4779e1b",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "31daadd0c2d877edd4303d3ed504d3964f28f2ff8c472a7658f6af067400f63b"
+      },
+      "mappingKnown": true,
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "3b2c49114bb38a63567d05049191f783da3fd8a4729473d5c6ca5ef96c1ecc53",
+        "accepted": true
+      },
+      "guarded": {
+        "disposition": "candidate_only",
+        "provedRelationships": [
+          [
+            1,
+            2
+          ]
+        ]
+      },
+      "usage": [
+        5100,
+        500
+      ],
+      "reasoningTokens": 0,
+      "fullFictionalReservation": 2500000,
+      "fictionalUsageEstimate": 887500,
+      "latencyIsFakeControlOnly": true,
+      "independentHumanReview": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "operation": "ef6a948a6ecefd95409c5d6fae9b4bfe05427ad64ea10a36d84814ae00d138c4",
+      "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+      "outcomeHash": "aa95790ab846fe1ce940992c11ef0410ae700b70f5645a888f31f3e347758017",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+      },
+      "mappingKnown": true,
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "6fac25372fd7925ffb4119dd44c6b6ed064589e393e637f90c573c5e96e89cae",
+        "accepted": true
+      },
+      "guarded": {
+        "disposition": "candidate_only",
+        "provedRelationships": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "usage": [
+        5100,
+        500
+      ],
+      "reasoningTokens": 0,
+      "fullFictionalReservation": 2500000,
+      "fictionalUsageEstimate": 887500,
+      "latencyIsFakeControlOnly": true,
+      "independentHumanReview": null
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "operation": "310332dae804a23f5901849ceb2f9ae433d8c24454df86bd67ad64b470f47756",
+      "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+      "outcomeHash": "840030f486e8ecfb1b156e4ba488c21b79f0d6ff347b0df308a6f2bad152d5b7",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247"
+      },
+      "mappingKnown": true,
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "f89af6e48c45e76aa6b55a51fba2722168e2b8ef09a6a0c5dfdab2faf6198e4d",
+        "accepted": true
+      },
+      "guarded": {
+        "disposition": "candidate_only",
+        "provedRelationships": [
+          [
+            0,
+            1
+          ]
+        ]
+      },
+      "usage": [
+        5100,
+        500
+      ],
+      "reasoningTokens": 0,
+      "fullFictionalReservation": 2500000,
+      "fictionalUsageEstimate": 887500,
+      "latencyIsFakeControlOnly": true,
+      "independentHumanReview": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "operation": "dc19e3688da70a067d9fcabefdfeff8aa78590df01a832844831fb4c5f0ac498",
+      "responseHash": "2c3fda4eca544de994df4ae11ccf0b2bbb1d5b0ac6e7002d10f487d124f4efe3",
+      "outcomeHash": "42fb6237caf3bb3de96e3f12cbc91eefe4aceda1bd71b818b75656a1fa390ffa",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "379ae4d3d850f60723627c2785c3e26607687ce82f71815f03ff074bab99d356"
+      },
+      "mappingKnown": true,
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "0f4b3c457a27d8d0eee1b596dcd8f2de7e3c83a092f604aaa2751696242aefa6",
+        "accepted": true
+      },
+      "guarded": {
+        "disposition": "candidate_only",
+        "provedRelationships": []
+      },
+      "usage": [
+        5100,
+        500
+      ],
+      "reasoningTokens": 0,
+      "fullFictionalReservation": 2500000,
+      "fictionalUsageEstimate": 887500,
+      "latencyIsFakeControlOnly": true,
+      "independentHumanReview": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "operation": "bf33b1d4fdd1c0c276a816365c9e96ef38240371856e102471b9b703bcb4765d",
+      "responseHash": "4194d674637172a717193dd55b7d093584918d715118c6ecf217c6a8bfcc2b23",
+      "outcomeHash": "936bd067e9058a02d2a4846e11ee80a1cce6819f79df254b44e3c80b46e1c6c0",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+      },
+      "mappingKnown": true,
+      "legacy": {
+        "disposition": "blocked_or_clarify",
+        "resultHash": "75167dfa182f2f7460176aad7cd475cac1a6280e6238bf451481265c84602bd5",
+        "accepted": false
+      },
+      "guarded": {
+        "disposition": "blocked",
+        "provedRelationships": []
+      },
+      "usage": [
+        5100,
+        500
+      ],
+      "reasoningTokens": 0,
+      "fullFictionalReservation": 2500000,
+      "fictionalUsageEstimate": 887500,
+      "latencyIsFakeControlOnly": true,
+      "independentHumanReview": null
+    }
+  ],
+  "fictionalFinancialAnchorsRetained": true,
+  "fictionalExtraNanodollars": 12500000,
+  "fictionalExposureNanodollars": 59866625,
+  "originalFictionalHaltRetained": true,
+  "originalFictionalTenRowsEqual": true,
+  "factCounts": {
+    "APPROVAL": 1,
+    "OUTCOME": 5,
+    "REVIEW": 5,
+    "HALT": 0,
+    "START": 5,
+    "INTENT": 5
+  },
+  "planningAuthority": false,
+  "productionQualification": false,
+  "unmodifiedRecordedResponsesUsedForSeparateQ1Replay": true
+}

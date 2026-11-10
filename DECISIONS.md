@@ -1,3 +1,7 @@
+# Task 52B Q4A — offline build is not a live approval
+
+Implement the successor protocol only over factory-created fictional temporary state, with closed fake transport, append-only facts/reservation anchors and process-level crash/lock evidence. Keep real operator/reviewer authentication and live same-journal transport unavailable rather than approximate authorization with a flag, test fixture or Q3 proposal hash. Preserve null full-correctness judgments until independent review and stop on raw critical errors even when guarded safely. [Scope and limits](docs/task52-q4a-successor-offline-v1.md). No runtime or financial authorization decision is made.
+
 # Task52B Q3 — conditional successor proposal, not a halt override
 
 Propose one evaluation-only B2/v4 child scope bound to the original ten-row halted journal, exact unused original slots, max5/$0.0125 and independent review between calls. Start with the known repeated-stop critical case's unused r2; any raw critical failure stops even if safely blocked. Exclude journey-12 because current V4 absence proof remains unknown. Preserve the parent halt/old source refusal and every historical row; a proposed/null-build manifest cannot authorize execution. Actual live implementation/filled manifest, fresh readiness, independent reviews and exact owner approval remain prerequisites. [Design and limited review package](docs/task52-q3-continuation-design.md). No production or provider change.

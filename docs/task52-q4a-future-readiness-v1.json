@@ -1,0 +1,169 @@
+{
+  "identity": "52b-q4a-future-readiness-v1",
+  "executionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+  "authenticatedChecksPerformed": false,
+  "allCurrentAccountFacts": "UNKNOWN",
+  "newPaidApproval": false,
+  "readyForLive": false,
+  "checks": [
+    {
+      "id": "credential",
+      "requirement": "Existing project/key validity, expiration/revocation, Responses Write; no permission change.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "model",
+      "requirement": "Exact gpt-6-luna availability/lifecycle and actual returned revision/alias identity; no substitution.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "account",
+      "requirement": "Current credits cover approved maximum; auto-recharge OFF; no purchase.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "prices",
+      "requirement": "All current input/cache/output/reasoning prices and processing premiums fit full $0.0025 reservation; otherwise stop.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "terms",
+      "requirement": "Synthetic-only Standard/global processing, region, retention, abuse logs/training/sharing; no private-user approval inferred.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "counts",
+      "requirement": "Provider-supported nonbillable exact full-input counts for these five payloads including schema/format/examples/reasoning; count+2048<=12000.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "output",
+      "requirement": "max_output_tokens=2000 inclusive reasoning; reasoning none, store=false, no tools, default service tier.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "limits",
+      "requirement": "Current project/model RPM/TPM and approved cadence; conservative 5 RPM/70000 combined TPM if five in one minute. No hidden retries or quota changes.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "identity",
+      "requirement": "Exact reviewed future LIVE build/prompt/schema/payload/source/runtime/rubric/clock/decoder identities; Q4A offline build cannot dispatch.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "journal",
+      "requirement": "Original root, ten rows, corrections and persistent halt unchanged; exact separately approved child purpose, one shared lock, all-scope exposure/counters.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "review",
+      "requirement": "Independent five24-field gold/absence, two historical failures and actual future implementation review; independent response review after every call.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "approval",
+      "requirement": "Separate authenticated exact owner grant for build, five slots/order, max5/$0.0125 inside original $12/594/198/12k/2k/concurrency1/retries0.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    },
+    {
+      "id": "freshness",
+      "requirement": "All live-readiness facts same UTC day, nonfuture, age<=24h. Semantic clock stays 2026-11-05T15:00:00Z. November8 evidence is expired.",
+      "status": "NOT_PERFORMED",
+      "verifiedAt": null,
+      "evidenceHash": null,
+      "reviewer": null
+    }
+  ],
+  "slots": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "completeInputTokens": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "completeInputTokens": null
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "completeInputTokens": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "payloadHash": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+      "completeInputTokens": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "payloadHash": "0ea781ac4e38c013dbe52fd007626cdd70b910e6a9c1048cdb5ed6011fe234d4",
+      "completeInputTokens": null
+    }
+  ],
+  "noAutomaticRetries": true,
+  "maximumProposedAttempts": 5,
+  "maximumProposedNanodollars": 12500000
+}
