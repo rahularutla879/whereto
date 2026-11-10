@@ -1,0 +1,244 @@
+{
+  "identity": "52b-ordering-v5-verification-v1",
+  "baselineCommit": "a7ed1066fe3c082dd6e9b48dbfdfa58f53b610f8",
+  "policy": "52b-order-policy-v5-offline",
+  "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+  "offlineManifestCanonicalDigest": "19671baadf93c83bd323ba6215bf633c5a9045f6558b8fef24cc166cf61fcd35",
+  "offlineVerifierSHA256": "08bd238a6239aadc901fe6bd7cdb4918087a607a815a577307d18ada501ecf2d",
+  "dateUTC": "2026-11-10",
+  "evidenceType": "Current B2 behavioral reconstruction and same-agent authored fixtures; no exact historical environment or independent human review claim.",
+  "testRuns": [
+    {
+      "scope": "Q1\u2013Q4C, version/rubric/corpus, evaluator, source/ordering V1\u2013V4, admission and journey; initial12 V5 methods included",
+      "tests": 296,
+      "passed": 296,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 354.205
+    },
+    {
+      "scope": "Final V5 suite, including two additional manifest/post-freeze probe methods; overlaps first12 V5 methods above",
+      "tests": 14,
+      "passed": 14,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 18.147
+    }
+  ],
+  "newPolicyFixtures": {
+    "predeclaredSources": 38,
+    "postFreezeSameAgentSources": 8,
+    "independentHumanHoldouts": 0,
+    "clearSources": 26,
+    "falseClarifications": 0,
+    "negativeOrAmbiguousSources": 20,
+    "negativeSourcesAccepted": 0,
+    "predeclaredUnsupportedEdgeProbes": 46,
+    "postFreezeUnsupportedEdgeProbes": 12,
+    "retainedUnsupportedEdges": 0,
+    "missingRequiredRelationshipsRejected": true,
+    "transitiveRedundancyNotRequired": true,
+    "repeatMergingRejected": true,
+    "conditionalOptionalityPreserved": true
+  },
+  "originalV4Replay": {
+    "originalV4Summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "unchangedV4Fields": [
+      "summary",
+      "qwen",
+      "openai",
+      "cases",
+      "probes",
+      "journal"
+    ],
+    "localV5Microseconds": {
+      "samples": 1140,
+      "p50": 78.9375,
+      "p95": 257.375,
+      "max": 1365.375
+    },
+    "scope": "Offline same-agent fixtures only; not provider, app or production latency."
+  },
+  "newHistoricalReplayCounts": {
+    "Qwen": 27,
+    "OpenAI": 7,
+    "QwenTransitions": {
+      "compatible -> compatible": 17,
+      "compatible -> blocked": 8,
+      "blocked -> compatible": 2
+    },
+    "QwenV5WithLegacyJourneyCompatibleOnly": 8,
+    "QwenRawOrderingTransitions": {
+      "raw_error -> compatible": 6,
+      "correct -> compatible": 13,
+      "raw_error -> blocked": 3,
+      "correct -> blocked": 5
+    },
+    "OpenAITransitions": {
+      "compatible -> blocked": 2,
+      "compatible -> compatible": 3,
+      "blocked -> blocked": 1,
+      "blocked -> compatible": 1
+    },
+    "independentSignoffs": 0
+  },
+  "all66": {
+    "mandatoryGraphChanges": 18,
+    "conditionalGraphChanges": 1,
+    "conditionalCandidateAwaitingOwner": 1,
+    "languageOrderAwaitingOwner": 1,
+    "graphsUnchanged": 45,
+    "recognizedSourceContracts": 36,
+    "unknownOrOutOfGrammar": 30,
+    "originalUnresolvedJudgmentsPreserved": 6,
+    "independentCaseApprovals": 0,
+    "independentHistoricalResponseApprovals": 0
+  },
+  "historicalIntegrity": {
+    "originalSixPinsCorpusSchemaQ1Q3Q4Unchanged": true,
+    "originalEvaluatorStillRefusesB2": "Reference source changed; review required: backend/journey.py",
+    "originalJournal": {
+      "identity": "52b-q4b-readonly-journal-v1",
+      "historicalStorageSnapshotCompatible": true,
+      "continuationReady": false,
+      "executionAuthorized": false,
+      "liveDispatchAvailable": false,
+      "q4aExecutionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+      "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "rowHashes": [
+        "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+      ],
+      "schemaHash": "822c3e1130fddbabd6b64a919bc35236c16e78c7210d076ce8181013eebbf09a",
+      "schema": [
+        [
+          "table",
+          "attempts",
+          "attempts",
+          "CREATE TABLE attempts (provider TEXT, case_id TEXT, repetition INTEGER, status TEXT NOT NULL, charge INTEGER NOT NULL, record TEXT, PRIMARY KEY(provider,case_id,repetition))"
+        ],
+        [
+          "table",
+          "metadata",
+          "metadata",
+          "CREATE TABLE metadata (id INTEGER PRIMARY KEY CHECK(id=1), config TEXT NOT NULL)"
+        ],
+        [
+          "index",
+          "sqlite_autoindex_attempts_1",
+          "attempts",
+          null
+        ]
+      ],
+      "rowIDs": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10
+      ],
+      "counts": {
+        "openai": 7,
+        "google": 2,
+        "anthropic": 1
+      },
+      "attempts": 10,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "perProviderRetainedNanodollars": {
+        "openai": 12166625,
+        "google": 33000000,
+        "anthropic": 2200000
+      },
+      "statuses": {
+        "recorded": 9,
+        "recorded_halted": 1
+      },
+      "persistentHistoricalHalt": true,
+      "journalMode": "delete",
+      "readConnectionSynchronous": 2,
+      "synchronousNote": "Connection default only; historical writer uses FULL explicitly. Not proof of every past commit or hardware durability.",
+      "rowIDsAreAutoincrement": false,
+      "blockers": [
+        "real authenticated owner/reviewer trust boundary unimplemented",
+        "real append-only writer/child scope and all-scope outcome fold unimplemented",
+        "independent reviews and separately authorized fresh readiness incomplete",
+        "no exact owner-approved live execution build or financial grant"
+      ],
+      "privateFilesUnchanged": 324,
+      "correctionsUnchanged": true,
+      "sourcePinsAndQ4ABuildVerified": true,
+      "lockMode": "0o644",
+      "directoryMode": "0o700",
+      "journalFileMode": "0o600",
+      "readMode": "mode=ro&immutable=1; query_only; SQL authorizer; existing common SH lock",
+      "reportPurpose": "compatibility evidence only, never an approval or dispatch capability"
+    },
+    "privateFilesUnchanged": 324,
+    "equalsStartingPrivateSnapshot": true,
+    "newRealAttempts": 0,
+    "newRealReservations": 0,
+    "newRealApprovals": 0,
+    "haltPreserved": true
+  },
+  "security": {
+    "configuredAppSecretsChecked": 2,
+    "configuredEvaluationKeysChecked": 3,
+    "currentMatches": 0,
+    "historyMatches": 0,
+    "privateConfigIgnoredAndMode600": true,
+    "journalMode600": true,
+    "temporaryQ4CryptographicTestsAreSyntheticOnly": true,
+    "realTrustEnrolled": false,
+    "newLiveDispatchPath": false
+  },
+  "application": {
+    "runtimeOrSharedDependenciesChanged": false,
+    "fullBackendFrontendTypecheckLintBuildBrowserRerun": false,
+    "reason": "Only isolated offline scripts, test module and documentation changed; prior full application results remain historical.",
+    "productionQwenLegacyPlannerHITECFixUnchanged": true,
+    "V4ShadowDefault": "OFF",
+    "productionV4V5Enforcement": false
+  },
+  "reviewNotes": [
+    "Initial three V5 artifact assertions compared in-memory tuples to serialized JSON arrays. Canonical semantic digests corrected representation comparison; ordering tests/semantics were not weakened. Final14 and broader296 pass.",
+    "Legacy normalizer can erase V5-required order; unchanged legacy acceptance cannot override this loss.",
+    "Existing prompt forbids list inference. Future V5 prompt/configuration/payload/build remain null; old Q3 is superseded for future V5 only.",
+    "All new rubric/slot artifacts are proposals, not owner case approval, independent review or financial authority."
+  ],
+  "providerRequests": 0,
+  "tokenCountingRequests": 0,
+  "mapsRequests": 0,
+  "billingInfrastructureDatabaseTask53Changes": false,
+  "recommendedNextCheckpoint": "Review V5 semantics/impacted cases and optional projection, then separately approve a bounded prompt-amendment proposal. No live continuation."
+}

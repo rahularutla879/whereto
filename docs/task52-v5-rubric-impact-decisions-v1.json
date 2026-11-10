@@ -1,0 +1,37 @@
+{
+  "identity": "52b-v5-predeclared-rubric-impact-v1",
+  "parentContract": "52b-q1-qualification-v1",
+  "mandatoryReachabilityChanges": [
+    "journey-01",
+    "journey-05",
+    "journey-15",
+    "journey-17",
+    "ordinary-dinner",
+    "ordinary-order",
+    "ordinary-midtown",
+    "ordinary-borough",
+    "ordinary-near",
+    "ordinary-origin",
+    "ordinary-exclusion",
+    "ordinary-access",
+    "ordinary-kothapet",
+    "extension-dinner-bowling",
+    "extension-durations",
+    "extension-unrecognized",
+    "extension-zero",
+    "extension-repeated"
+  ],
+  "conditionalOrderChanges": [
+    "journey-06"
+  ],
+  "conditionalOrderAmendmentAwaitingOwner": [
+    "extension-inclusive"
+  ],
+  "additionalOrderingJudgmentAwaitingOwner": [
+    "ordinary-multilingual"
+  ],
+  "originalUnresolvedJudgmentsRemain": 6,
+  "independentCaseReviewComplete": false,
+  "conditionalProposal": "Listed optional visits retain their status; precedence is conditional on both visits occurring. Compute full closure before optional projection. Case-level owner/independent review still required.",
+  "otherCases": "All other original graph expectations remain unchanged; recognizer coverage is measured separately, not inferred from this declaration."
+}

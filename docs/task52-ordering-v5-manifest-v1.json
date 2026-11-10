@@ -1,0 +1,33 @@
+{
+  "identity": "52b-v5-offline-amendment-manifest-v1",
+  "policy": "52b-order-policy-v5-offline",
+  "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+  "runtime": "52b-runtime-phase-b2",
+  "historicalEnvironmentReproduced": false,
+  "parentContract": "52b-q1-qualification-v1",
+  "purposes": [
+    "offline_ordering_proof",
+    "proposed_rubric_amendment",
+    "labeled_recorded_replay"
+  ],
+  "dispatchAuthorized": false,
+  "planningAuthorized": false,
+  "independentApprovals": 0,
+  "sources": {
+    "scripts/task52_ordering_v5.py": "8f4122b91ffc2ec01359b44d08343524400e117e8c98b6d1219c83b9f72bc0d0",
+    "scripts/task52_ordering_v5_review.py": "3c4d75e87519857006f30f5dbb0681f465fb8e86a32dee84141c2e2be4007af8",
+    "backend/test_task52_ordering_v5.py": "098a6ac94a77c33f5c7fc36d7625902576cdad91a59a08e9cf15d6b5e239ad1a",
+    "docs/task52-ordering-policy-v5.md": "c944255ade24bd46f30d51548a81a9504215d1711d42339405b834f1acc7a90c",
+    "docs/task52-ordering-v5-cases-v1.json": "f8d1630ba00e4de46ede388b995a2657846b67df2dd637a79751b992e010c587",
+    "docs/task52-ordering-v5-holdouts-v1.json": "96755dff9adc6921db4f4c29e6bed284cae77fa92f4a99566eac5685a6263573",
+    "docs/task52-v5-rubric-impact-decisions-v1.json": "4c80a4c126a3c525cdf00c8c53215af1590711a743efd88d962f729ed6971891",
+    "docs/task52-q1-rubric-v2-owner-list-PROPOSED.json": "4ab6416ee076ec95e864275da9251f6b4a3fe291f4ff2478f9de339d1add53d6",
+    "docs/task52-ordering-v5-all66-impact-v1.json": "b00c92fe79ae6109c4c78f9f98b20f780d20f004f1ae311bf4da24bccfbd888e",
+    "docs/task52-ordering-v5-historical-replay-v1.json": "dc2488a1e67ed08b1a21a1b826e58be87e8747d34bf6dbb6b52c1644a11a0983",
+    "docs/task52-q3-openai-v5-PROPOSED-v2.json": "edacc7a76d6257acfe5af78487c03255c312b2571c508aa3d31446e5718ded4f",
+    "docs/task52-q1-offline-manifest-v1.json": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+    "docs/task52-q1-rubric-v1.json": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+    "docs/task52-q3-openai-proposal-v1.json": "79f6a463c292916cecf8ad248d763fabf991d23908ad23581cdcef48a79edb27",
+    "docs/task52-q4c-build-v1.json": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb"
+  }
+}

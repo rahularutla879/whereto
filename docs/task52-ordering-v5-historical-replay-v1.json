@@ -1,0 +1,5573 @@
+{
+  "identity": "52b-v5-historical-replay-v1",
+  "policy": "52b-order-policy-v5-offline",
+  "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+  "scope": "New policy assessment; original mixed prompt cohorts and every historical classification remain unchanged.",
+  "qwen": [
+    {
+      "ordinal": 1,
+      "cohort": "baseline",
+      "row": 0,
+      "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalV4": {
+        "resultHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                18
+              ],
+              "cue_span": [
+                7,
+                11
+              ],
+              "source": "dinner and bowling",
+              "source_sha256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+              "conditional": false,
+              "evidenceHash": "ef2ad222228a6c4bbdbc3da8b57d61aa65c5c654e52046e96e824aec9fb35673"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                11,
+                18
+              ],
+              "source": "bowling"
+            }
+          ],
+          "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                42
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 2,
+      "cohort": "baseline",
+      "row": 1,
+      "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalV4": {
+        "resultHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+              "conditional": false,
+              "evidenceHash": "ea5237f3c0bc146462cfeb1846e43bebf383708a1d644f170118e8e06958fcc7"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                93
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": true,
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 3,
+      "cohort": "baseline",
+      "row": 2,
+      "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalV4": {
+        "resultHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+              "conditional": false,
+              "evidenceHash": "00eebdcb36b28e2b39fc9b4c844f3e2c578b1bebb51117980e546ad25d725710"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                70
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 4,
+      "cohort": "baseline",
+      "row": 3,
+      "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalV4": {
+        "resultHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                48
+              ],
+              "cue_span": [
+                31,
+                38
+              ],
+              "source": "SUNY College of Optometry, then get coffee",
+              "source_sha256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+              "conditional": false,
+              "evidenceHash": "3351c590422e472a95e42ebb931244ecb6c1dd42db9966ae089d8cc635703731"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                42,
+                48
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 5,
+      "cohort": "baseline",
+      "row": 4,
+      "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalV4": {
+        "resultHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "unconsumed_context_or_terminal_scope"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                4,
+                13
+              ],
+              "source": "groceries"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                26,
+                29
+              ],
+              "source": "ATM"
+            }
+          ],
+          "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+        "issues": [
+          "unconsumed_context_or_terminal_scope",
+          "unsupported_direction_scope_or_occurrence"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": false,
+            "quoteSpans": []
+          }
+        ],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 6,
+      "cohort": "baseline",
+      "row": 5,
+      "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalV4": {
+        "resultHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                18
+              ],
+              "cue_span": [
+                7,
+                11
+              ],
+              "source": "dinner and bowling",
+              "source_sha256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+              "conditional": false,
+              "evidenceHash": "ef2ad222228a6c4bbdbc3da8b57d61aa65c5c654e52046e96e824aec9fb35673"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                11,
+                18
+              ],
+              "source": "bowling"
+            }
+          ],
+          "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                42
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 7,
+      "cohort": "baseline",
+      "row": 6,
+      "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalV4": {
+        "resultHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "not_a_bounded_itinerary_prefix"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                3,
+                19
+              ],
+              "source": "grocery shopping"
+            }
+          ],
+          "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+        "issues": [
+          "not_a_bounded_itinerary_prefix"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 8,
+      "cohort": "baseline",
+      "row": 7,
+      "sourceSHA256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+      "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+      "originalV4": {
+        "resultHash": "7d9cfa8e3c2756b439dac586566ea8dbda77bed04305c82b9945a3ed9517ccf1",
+        "outcome": "clarification_required",
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "originalGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "trustedGraph": null,
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "clarify_or_rephrase_original_source",
+        "sourceCategory": "partial",
+        "sourceRequirements": [
+          "required",
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 1,
+            "after": 2,
+            "rule": "then",
+            "span": [
+              8,
+              27
+            ],
+            "cueSpan": [
+              16,
+              20
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                14
+              ],
+              "cue_span": [
+                6,
+                8
+              ],
+              "source": "Coffee, museum",
+              "source_sha256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+              "conditional": false,
+              "evidenceHash": "76caed5160000cc79857aad4a37b65f4aa26954de13bed7428ce2b2199aa6388"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "rule": "explicit_then",
+              "span": [
+                8,
+                27
+              ],
+              "cue_span": [
+                14,
+                21
+              ],
+              "source": "museum, then coffee",
+              "source_sha256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+              "conditional": false,
+              "evidenceHash": "02eeb824c5511584c3fbb614dbd88ea60551d8b70146990f3f28429ca0fe2abf"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "Coffee"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                8,
+                14
+              ],
+              "source": "museum"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                21,
+                27
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ]
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "impliedRelationships": [
+          [
+            0,
+            2
+          ]
+        ],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 9,
+      "cohort": "baseline",
+      "row": 8,
+      "sourceSHA256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+      "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+      "originalV4": {
+        "resultHash": "613b10da854977449b07af2fcd02ddef5e7023ee0ef722559c31299340017161",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                6,
+                19
+              ],
+              "cue_span": [
+                11,
+                15
+              ],
+              "source": "Zara and Nike",
+              "source_sha256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+              "conditional": false,
+              "evidenceHash": "793770dce5a2b2b64eaad761419ea2273fba4f12cb4b1b4c7c7c7e0e5c7cf3aa"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                10
+              ],
+              "source": "Zara"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                15,
+                19
+              ],
+              "source": "Nike"
+            }
+          ],
+          "sourceSHA256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+        "issues": [
+          "missing_source_required_relationship"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 10,
+      "cohort": "baseline",
+      "row": 9,
+      "sourceSHA256": "182ba16475cc4becdf8143dca8c5a14ca238c04a5da05da54b684b9901e2bf7a",
+      "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+      "originalV4": {
+        "resultHash": "baa3b79cb43d332f8046e62a100923c05e0ef000d883f624fb0e2cd54bc1dc77",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unordered",
+          "proofs": [],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                10,
+                14
+              ],
+              "source": "bank"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                19,
+                32
+              ],
+              "source": "grocery store"
+            }
+          ],
+          "sourceSHA256": "182ba16475cc4becdf8143dca8c5a14ca238c04a5da05da54b684b9901e2bf7a",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+        "issues": [],
+        "outcome": "verified_no_mandatory_order",
+        "trustedGraph": [],
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 11,
+      "cohort": "baseline",
+      "row": 10,
+      "sourceSHA256": "0785e9dcecaf615813dfcaec63ec8ff5cacf759e13be37b9606ef8d015f692ab",
+      "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+      "originalV4": {
+        "resultHash": "f01d663d812527704af4a191d47aaac2231fe85926ffc6af24bfac25258dfee7",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unordered",
+          "proofs": [],
+          "issues": [],
+          "requirements": [
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                10,
+                17
+              ],
+              "source": "college"
+            }
+          ],
+          "sourceSHA256": "0785e9dcecaf615813dfcaec63ec8ff5cacf759e13be37b9606ef8d015f692ab",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+        "issues": [],
+        "outcome": "verified_no_mandatory_order",
+        "trustedGraph": [],
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": true,
+        "explanation": "Which college or destination do you mean? Please name it in your request; your other stops are kept.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 12,
+      "cohort": "baseline",
+      "row": 11,
+      "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalV4": {
+        "resultHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+              "conditional": false,
+              "evidenceHash": "ea5237f3c0bc146462cfeb1846e43bebf383708a1d644f170118e8e06958fcc7"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                93
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": true,
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 13,
+      "cohort": "baseline",
+      "row": 12,
+      "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalV4": {
+        "resultHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+              "conditional": false,
+              "evidenceHash": "00eebdcb36b28e2b39fc9b4c844f3e2c578b1bebb51117980e546ad25d725710"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                70
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 14,
+      "cohort": "baseline",
+      "row": 13,
+      "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalV4": {
+        "resultHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                48
+              ],
+              "cue_span": [
+                31,
+                38
+              ],
+              "source": "SUNY College of Optometry, then get coffee",
+              "source_sha256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+              "conditional": false,
+              "evidenceHash": "3351c590422e472a95e42ebb931244ecb6c1dd42db9966ae089d8cc635703731"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                42,
+                48
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 15,
+      "cohort": "baseline",
+      "row": 14,
+      "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalV4": {
+        "resultHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "unconsumed_context_or_terminal_scope"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                4,
+                13
+              ],
+              "source": "groceries"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                26,
+                29
+              ],
+              "source": "ATM"
+            }
+          ],
+          "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+        "issues": [
+          "unconsumed_context_or_terminal_scope",
+          "unsupported_direction_scope_or_occurrence"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": false,
+            "quoteSpans": []
+          }
+        ],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 16,
+      "cohort": "baseline",
+      "row": 15,
+      "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalV4": {
+        "resultHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                18
+              ],
+              "cue_span": [
+                7,
+                11
+              ],
+              "source": "dinner and bowling",
+              "source_sha256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+              "conditional": false,
+              "evidenceHash": "ef2ad222228a6c4bbdbc3da8b57d61aa65c5c654e52046e96e824aec9fb35673"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                11,
+                18
+              ],
+              "source": "bowling"
+            }
+          ],
+          "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                42
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 17,
+      "cohort": "baseline",
+      "row": 16,
+      "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalV4": {
+        "resultHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "not_a_bounded_itinerary_prefix"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                3,
+                19
+              ],
+              "source": "grocery shopping"
+            }
+          ],
+          "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+        "issues": [
+          "not_a_bounded_itinerary_prefix"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 18,
+      "cohort": "baseline",
+      "row": 17,
+      "sourceSHA256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+      "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+      "originalV4": {
+        "resultHash": "7d9cfa8e3c2756b439dac586566ea8dbda77bed04305c82b9945a3ed9517ccf1",
+        "outcome": "clarification_required",
+        "issues": [
+          "unproven_model_edge"
+        ],
+        "originalGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "trustedGraph": null,
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "clarify_or_rephrase_original_source",
+        "sourceCategory": "partial",
+        "sourceRequirements": [
+          "required",
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 1,
+            "after": 2,
+            "rule": "then",
+            "span": [
+              8,
+              27
+            ],
+            "cueSpan": [
+              16,
+              20
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                14
+              ],
+              "cue_span": [
+                6,
+                8
+              ],
+              "source": "Coffee, museum",
+              "source_sha256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+              "conditional": false,
+              "evidenceHash": "76caed5160000cc79857aad4a37b65f4aa26954de13bed7428ce2b2199aa6388"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "rule": "explicit_then",
+              "span": [
+                8,
+                27
+              ],
+              "cue_span": [
+                14,
+                21
+              ],
+              "source": "museum, then coffee",
+              "source_sha256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+              "conditional": false,
+              "evidenceHash": "02eeb824c5511584c3fbb614dbd88ea60551d8b70146990f3f28429ca0fe2abf"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "Coffee"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                8,
+                14
+              ],
+              "source": "museum"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                21,
+                27
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "345bab9f25428bb390e1109a671ccaaa33cb7f6fed72c3b6ab2da8852559e926",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "cd3af6addbefdd28f0f6f12b89db3fdc88b58bd374bc350085f1dda1a33dee59",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ]
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                49
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "impliedRelationships": [
+          [
+            0,
+            2
+          ]
+        ],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 19,
+      "cohort": "baseline",
+      "row": 18,
+      "sourceSHA256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+      "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+      "originalV4": {
+        "resultHash": "613b10da854977449b07af2fcd02ddef5e7023ee0ef722559c31299340017161",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                6,
+                19
+              ],
+              "cue_span": [
+                11,
+                15
+              ],
+              "source": "Zara and Nike",
+              "source_sha256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+              "conditional": false,
+              "evidenceHash": "793770dce5a2b2b64eaad761419ea2273fba4f12cb4b1b4c7c7c7e0e5c7cf3aa"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                10
+              ],
+              "source": "Zara"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                15,
+                19
+              ],
+              "source": "Nike"
+            }
+          ],
+          "sourceSHA256": "2e9e6714ce109b4310593e42b6b15364d927482ede71de87aba129b62145b6fa",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "38199c4cae06e6ddc0b455f9dccf8a4fe04b0a435e4d6801aed442f03fa0c0ab",
+        "issues": [
+          "missing_source_required_relationship"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 20,
+      "cohort": "baseline",
+      "row": 19,
+      "sourceSHA256": "182ba16475cc4becdf8143dca8c5a14ca238c04a5da05da54b684b9901e2bf7a",
+      "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+      "originalV4": {
+        "resultHash": "baa3b79cb43d332f8046e62a100923c05e0ef000d883f624fb0e2cd54bc1dc77",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unordered",
+          "proofs": [],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                10,
+                14
+              ],
+              "source": "bank"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                19,
+                32
+              ],
+              "source": "grocery store"
+            }
+          ],
+          "sourceSHA256": "182ba16475cc4becdf8143dca8c5a14ca238c04a5da05da54b684b9901e2bf7a",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "acad82590a935839af2021be9cef40acaa741925696cd64be789bac001a44401",
+        "issues": [],
+        "outcome": "verified_no_mandatory_order",
+        "trustedGraph": [],
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 21,
+      "cohort": "baseline",
+      "row": 20,
+      "sourceSHA256": "0785e9dcecaf615813dfcaec63ec8ff5cacf759e13be37b9606ef8d015f692ab",
+      "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+      "originalV4": {
+        "resultHash": "f01d663d812527704af4a191d47aaac2231fe85926ffc6af24bfac25258dfee7",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unordered",
+          "proofs": [],
+          "issues": [],
+          "requirements": [
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                10,
+                17
+              ],
+              "source": "college"
+            }
+          ],
+          "sourceSHA256": "0785e9dcecaf615813dfcaec63ec8ff5cacf759e13be37b9606ef8d015f692ab",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b73c72478353a5efc954e1bb5a814db7f44199dbd9823d5ca498d6fe4a532bc5",
+        "issues": [],
+        "outcome": "verified_no_mandatory_order",
+        "trustedGraph": [],
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": true,
+        "explanation": "Which college or destination do you mean? Please name it in your request; your other stops are kept.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 22,
+      "cohort": "finalRuntimeSmoke",
+      "row": 0,
+      "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+      "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+      "originalV4": {
+        "resultHash": "484c4a337c9687b08df405c59b743ff4f61d55bc5dc047f52112ce3097dbaca4",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+              "conditional": false,
+              "evidenceHash": "ea5237f3c0bc146462cfeb1846e43bebf383708a1d644f170118e8e06958fcc7"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "86d739b39de76aa9d0ba9fe76e38a61867d6a24205c8c3a61a99500ab657eb30",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "4ef0685464a197f10fec6e8c5d3b54f5ecc3bb1f34912893a82a042f7b48f1c6",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                93
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": false,
+        "originalToEffective": null,
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": true,
+        "explanation": "Where should the outing end? Please name home in your request or say ‘return to my starting point’ if that is what you mean.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 23,
+      "cohort": "finalRuntimeSmoke",
+      "row": 1,
+      "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+      "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+      "originalV4": {
+        "resultHash": "0d594f98694ae6c495b15d9273a0f26f35e5cee626120b460b8a59dc8b9af985",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              66
+            ],
+            "cueSpan": [
+              32,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                66
+              ],
+              "cue_span": [
+                32,
+                37
+              ],
+              "source": "suny college of optometry first and then head out for coffee",
+              "source_sha256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+              "conditional": false,
+              "evidenceHash": "00eebdcb36b28e2b39fc9b4c844f3e2c578b1bebb51117980e546ad25d725710"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "suny college of optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                60,
+                66
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "505561419b7de2b7f732f4f27e1f2a65affcbdc6d7e753b1bcda7d5899f34867",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "7d53e7a524f6f702b164524441f663be475352a14823bf6eac339e9074c49bc2",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                70
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 24,
+      "cohort": "finalRuntimeSmoke",
+      "row": 2,
+      "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+      "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+      "originalV4": {
+        "resultHash": "82f881bd834586fb9da2393595dc80c06596b10231d8995115b55e0a083242ea",
+        "outcome": "verified_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "explicit",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": null,
+        "sourceQualifiers": [],
+        "proofs": [
+          {
+            "before": 0,
+            "after": 1,
+            "rule": "then",
+            "span": [
+              6,
+              48
+            ],
+            "cueSpan": [
+              33,
+              37
+            ]
+          }
+        ]
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                48
+              ],
+              "cue_span": [
+                31,
+                38
+              ],
+              "source": "SUNY College of Optometry, then get coffee",
+              "source_sha256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+              "conditional": false,
+              "evidenceHash": "3351c590422e472a95e42ebb931244ecb6c1dd42db9966ae089d8cc635703731"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                42,
+                48
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "31a16a8b6ac951ab7b694da098d830caf685bfc28991e5fbcddfb4da92b12e89",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "035afcb7ee30cf8c739edc80469acf1aa6f8477604eb3e75ab7abdaf957b0cae",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                58
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": true,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 25,
+      "cohort": "finalRuntimeSmoke",
+      "row": 3,
+      "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+      "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+      "originalV4": {
+        "resultHash": "a4cd5211ac2f37bb68fd99818869d3bb94f4fce3cacfd46845d6366229968893",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "unconsumed_context_or_terminal_scope"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                4,
+                13
+              ],
+              "source": "groceries"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                26,
+                29
+              ],
+              "source": "ATM"
+            }
+          ],
+          "sourceSHA256": "0a4dfbba7aaa5562e4e67eb9e3a44d6f81e261402717f0de10b77f80e82ac00e",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "a21763ca9fbf421a238329320d9507357cba2e4c7abacf8cf97ac5597c5419b1",
+        "issues": [
+          "unconsumed_context_or_terminal_scope",
+          "unsupported_direction_scope_or_occurrence"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": false,
+            "quoteSpans": []
+          }
+        ],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 26,
+      "cohort": "finalRuntimeSmoke",
+      "row": 4,
+      "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+      "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+      "originalV4": {
+        "resultHash": "189e09fb93f13bcfb18744bdd59a9b1dec07a9bcbd4d1e3d7d98838df101a387",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": "audited_clear_source_unordered_projection",
+        "rawModelOrderingCorrect": false,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required",
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                18
+              ],
+              "cue_span": [
+                7,
+                11
+              ],
+              "source": "dinner and bowling",
+              "source_sha256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+              "conditional": false,
+              "evidenceHash": "ef2ad222228a6c4bbdbc3da8b57d61aa65c5c654e52046e96e824aec9fb35673"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                11,
+                18
+              ],
+              "source": "bowling"
+            }
+          ],
+          "sourceSHA256": "633b842d2388b4c1f242985f5acb3579bf8772e0b89752efbfe04c47eb0f68d0",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "b429dc22d475d3693890084c565d310f765914b3d5301a29d121eb403c995e89",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                42
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": null,
+        "effectiveGraph": [],
+        "legacyGraphNormalized": true
+      },
+      "originalRawGraphReviewCorrectUnderV4": false,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    },
+    {
+      "ordinal": 27,
+      "cohort": "finalRuntimeSmoke",
+      "row": 5,
+      "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+      "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+      "originalV4": {
+        "resultHash": "93b7f5ac910532457ebf630fa82683ae53bf203bb0d608d339651f3ac9511dce",
+        "outcome": "verified_no_mandatory_order",
+        "issues": [],
+        "originalGraph": [],
+        "trustedGraph": [],
+        "unsupportedModelEdges": [],
+        "normalization": null,
+        "rawModelOrderingCorrect": true,
+        "safeNextAction": "continue_remaining_canonical_validation_only",
+        "sourceCategory": "unordered",
+        "sourceRequirements": [
+          "required"
+        ],
+        "sourceAbsenceProof": "bounded_complete_unordered_list_v4",
+        "sourceQualifiers": [],
+        "proofs": []
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "unknown",
+          "proofs": [],
+          "issues": [
+            "not_a_bounded_itinerary_prefix"
+          ],
+          "requirements": [],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                3,
+                19
+              ],
+              "source": "grocery shopping"
+            }
+          ],
+          "sourceSHA256": "c6f95c54f81317e0a454d68454e56dbdc4bca0b0482b4d29ee791258872bec13",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "rawHash": "bb69e1a1f089e870757d52989f3d471551aae9ee12f31c915dca120f254d0654",
+        "issues": [
+          "not_a_bounded_itinerary_prefix"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": false,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "originalLegacyJourneyValidation": {
+        "journeyBlocking": false,
+        "explanation": "We understand your stops and requirements, but advanced route planning for this kind of trip is still being added.",
+        "effectiveGraph": [],
+        "legacyGraphNormalized": false
+      },
+      "originalRawGraphReviewCorrectUnderV4": true,
+      "V5WithLegacyJourneyCompatibleOnly": false,
+      "comparisonIsOrderingOnly": true,
+      "fullSemanticIndependentSignoff": null
+    }
+  ],
+  "openai": [
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "source": "Dinner and drinks in Jersey City tomorrow.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "provider_error",
+      "originalRecordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+      "originalResponseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "rawOutputHash": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "original": {
+          "case": "journey-01",
+          "repetition": 1,
+          "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "provider_error",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "payloadHash": "8bab2d72f16e623b58faa8ae56880ed494db14f6c226741cf16b71b8dbfdb78e",
+          "responseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+          "contentHash": "4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5",
+          "reservationNanodollars": 2500000,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "agent_review_correct_not_independently_qualified",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_absence_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_match",
+            "people": "agent_absence_match",
+            "geography": "agent_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "d75aa9f433d11779edbc86ab3ebad3940a2802d8f76734618924a2ebd2ca9401"
+        },
+        "legacy": {
+          "disposition": "accepted_ordinary",
+          "resultHash": "336cd36dbebd1d027645623fb7a211dac637845fea7e61c7e34181c5abd72196",
+          "issuesCount": 0,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+          "orderingOutcome": "verified_no_mandatory_order",
+          "issues": [],
+          "originalGraph": [],
+          "unsupportedModelEdges": [],
+          "provedRelationships": [],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 2764.7997090025456,
+          "providerUsage": [
+            5058,
+            180
+          ],
+          "retainedNanodollars": 2500000
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                17
+              ],
+              "cue_span": [
+                7,
+                11
+              ],
+              "source": "Dinner and drinks",
+              "source_sha256": "f5efbc1d7427fe5dcb74f93c41f4d55c876b50b44559917e949bcb29a2194619",
+              "conditional": false,
+              "evidenceHash": "f614b6cc5bf61490a4f785c7e60e6f33f961bdc388c6cd3addb0f948e597b185"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "Dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                11,
+                17
+              ],
+              "source": "drinks"
+            }
+          ],
+          "sourceSHA256": "f5efbc1d7427fe5dcb74f93c41f4d55c876b50b44559917e949bcb29a2194619",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "6eb2532037e36d581bdeb5bd66e47aaf940102730bddda0d2cfdc4d606e8b660",
+        "issues": [
+          "missing_source_required_relationship"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "blocked_or_clarify",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "source": "Plan dinner and drinks in Hyderabad tomorrow.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae",
+      "originalResponseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "rawOutputHash": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "original": {
+          "case": "ordinary-dinner",
+          "repetition": 1,
+          "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "payloadHash": "ae490f259f2eba32c1c6bc75c303bd9e80f2770946887c7d56e29053fdf59eaf",
+          "responseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+          "contentHash": "78723b5bc9c2868ad73f56419e93832c1a2298542bab2bd31256e25ebe4fa38e",
+          "reservationNanodollars": 720250,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "agent_review_correct_not_independently_qualified",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_absence_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_match",
+            "people": "agent_absence_match",
+            "geography": "agent_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "e2c958ef72bfadfe733f5352a283231559de08e1789c37b82a024345c2087f41"
+        },
+        "legacy": {
+          "disposition": "accepted_ordinary",
+          "resultHash": "7f605cc516d6827b4dc02ad15888e19dd2763ea3e6853dc64d140253a6d1f517",
+          "issuesCount": 0,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+          "orderingOutcome": "verified_no_mandatory_order",
+          "issues": [],
+          "originalGraph": [],
+          "unsupportedModelEdges": [],
+          "provedRelationships": [],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 3038.414125003328,
+          "providerUsage": [
+            5058,
+            176
+          ],
+          "retainedNanodollars": 720250
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                5,
+                22
+              ],
+              "cue_span": [
+                12,
+                16
+              ],
+              "source": "dinner and drinks",
+              "source_sha256": "0b5bd568c90aea0bb9f62466ed9df4e0d4144d64dd44d6eb7f7f7abb58b48fc7",
+              "conditional": false,
+              "evidenceHash": "e220454cd48b21cfa3225b083fb67baa1c055ff4f0819f1b3646b9fd5b6bb46c"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                5,
+                11
+              ],
+              "source": "dinner"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                16,
+                22
+              ],
+              "source": "drinks"
+            }
+          ],
+          "sourceSHA256": "0b5bd568c90aea0bb9f62466ed9df4e0d4144d64dd44d6eb7f7f7abb58b48fc7",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "719158dac3ddabbf6081abf90b9ec2d8079c6ecd4177d271e060b52e0d027265",
+        "issues": [
+          "missing_source_required_relationship"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": false,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "blocked_or_clarify",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "source": "Go to SUNY College of Optometry.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029",
+      "originalResponseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "rawOutputHash": "5a676fd0c762b1d341e504839068070334c96c732fe69cee0eda9df20ba53104",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "original": {
+          "case": "journey-03",
+          "repetition": 1,
+          "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "payloadHash": "d80254355cc28ffc486e5a17e2db65152906fcf36bc353a6c67b39b9f16f49b6",
+          "responseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+          "contentHash": "630293bcf50a95f56eeade2d609fb301a05e7eec9c3452e0f1474cc28b08aeb1",
+          "reservationNanodollars": 715375,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "agent_review_correct_not_independently_qualified",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_match",
+            "people": "agent_absence_match",
+            "geography": "agent_absence_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "56600dffb9e6525f7c1e0ba6f80a8d3ca125b5aca88fb5ad22f48e137c04471c"
+        },
+        "legacy": {
+          "disposition": "accepted_advanced_handoff",
+          "resultHash": "74d635f8bb53b4f1d8040a5e01834f5446d8af31967611d5f45b9302920bbfc5",
+          "issuesCount": 1,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+          "orderingOutcome": "verified_no_mandatory_order",
+          "issues": [],
+          "originalGraph": [],
+          "unsupportedModelEdges": [],
+          "provedRelationships": [],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 2471.989792000386,
+          "providerUsage": [
+            5059,
+            166
+          ],
+          "retainedNanodollars": 715375
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "single",
+          "proofs": [],
+          "issues": [],
+          "requirements": [
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            }
+          ],
+          "sourceSHA256": "3e8839b05235fcb6580aa07ae9ebb423e00a4cab9dabd6443c42c563b25c4f7a",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "5a676fd0c762b1d341e504839068070334c96c732fe69cee0eda9df20ba53104",
+        "issues": [],
+        "outcome": "verified_no_mandatory_order",
+        "trustedGraph": [],
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0
+        ],
+        "effectiveGraph": [],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "candidate_only_not_planning_authority",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "source": "Go to the pharmacy first, then the supermarket.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f",
+      "originalResponseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "rawOutputHash": "cf7030cdfac75c5ab30c1703e4811f6a05eba090852eec0b47fe9f146feefb47",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "original": {
+          "case": "journey-07",
+          "repetition": 1,
+          "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v3-equivalent-default-compaction",
+          "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+          "payloadHash": "6b610577b96bb5828ce4a44a7b95c8b2413141143e3f208f3efe77c03988af95",
+          "responseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+          "contentHash": "74c1f585876c802da43f44f0481d0627f84a795595b7b86b37d96e77e1db9f5e",
+          "reservationNanodollars": 731000,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "incorrect_provenance",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_absence_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_mismatch",
+            "people": "agent_absence_match",
+            "geography": "agent_absence_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "5fc4f5c30ae0e9bc927edb14a36c986fcd7bd071e1e8703e9f7819a0968100c3"
+        },
+        "legacy": {
+          "disposition": "blocked_or_clarify",
+          "resultHash": "5799625df7464fcda243813677e7554168672c148eb323321849ede316dd7a7d",
+          "issuesCount": 1,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "blocked_by_complete_legacy_validation",
+          "orderingOutcome": "clarification_required",
+          "issues": [
+            "unproven_model_edge"
+          ],
+          "originalGraph": [
+            [
+              0,
+              1
+            ]
+          ],
+          "unsupportedModelEdges": [
+            [
+              0,
+              1
+            ]
+          ],
+          "provedRelationships": [
+            [
+              0,
+              1
+            ]
+          ],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 2196.1186670014285,
+          "providerUsage": [
+            5060,
+            197
+          ],
+          "retainedNanodollars": 731000
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "explicit",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                46
+              ],
+              "cue_span": [
+                19,
+                24
+              ],
+              "source": "the pharmacy first, then the supermarket",
+              "source_sha256": "926dc6b3609c655bf3dd00695e1d20f16a86adb86b2be1ec14295da01ca23ea8",
+              "conditional": false,
+              "evidenceHash": "2eac0f7ba34cfce3431ede3aac025b853c828be114001599522c1a1f5ecc0db5"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                18
+              ],
+              "source": "the pharmacy"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                31,
+                46
+              ],
+              "source": "the supermarket"
+            }
+          ],
+          "sourceSHA256": "926dc6b3609c655bf3dd00695e1d20f16a86adb86b2be1ec14295da01ca23ea8",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "cf7030cdfac75c5ab30c1703e4811f6a05eba090852eec0b47fe9f146feefb47",
+        "issues": [
+          "unsupported_direction_scope_or_occurrence"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": false,
+            "quoteSpans": []
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "blocked_or_clarify",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "source": "Go to SUNY College of Optometry and then get coffee.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4",
+      "originalResponseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "rawOutputHash": "0f3ef71724b4da4476c070a56b5fee8319441f9da79f3fe75e7d55209684f454",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "original": {
+          "case": "journey-04",
+          "repetition": 1,
+          "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v4-order-edge-quotes",
+          "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+          "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+          "responseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+          "contentHash": "396402929cb233eb4fe4e5262cbf4c795729f15399278d99fbd9e5cffed8214c",
+          "reservationNanodollars": 2500000,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "agent_review_correct_not_independently_qualified",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_match",
+            "people": "agent_absence_match",
+            "geography": "agent_absence_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "802608fa6fb46b4769d2de3f1fa99271b0c02d87bd8af96429b17871cb84b6d8"
+        },
+        "legacy": {
+          "disposition": "accepted_advanced_handoff",
+          "resultHash": "e77356a9182dc79470b67cde651409b4c18e4cfa9eab12bb2059bf4239068ff7",
+          "issuesCount": 1,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+          "orderingOutcome": "verified_order",
+          "issues": [],
+          "originalGraph": [
+            [
+              0,
+              1
+            ]
+          ],
+          "unsupportedModelEdges": [],
+          "provedRelationships": [
+            [
+              0,
+              1
+            ]
+          ],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 3080.241957999533,
+          "providerUsage": [
+            5127,
+            213
+          ],
+          "retainedNanodollars": 2500000
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                51
+              ],
+              "cue_span": [
+                32,
+                41
+              ],
+              "source": "SUNY College of Optometry and then get coffee",
+              "source_sha256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+              "conditional": false,
+              "evidenceHash": "170f208eb5e89e55f11c98c26f9b7e797dbd1401f6f08208649c1b65a90739eb"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                45,
+                51
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "0f3ef71724b4da4476c070a56b5fee8319441f9da79f3fe75e7d55209684f454",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                6,
+                51
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "candidate_only_not_planning_authority",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "source": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "originalRowState": "recorded",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41",
+      "originalResponseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "rawOutputHash": "04eef832cdb46d907676b0dbccca757577c7a6ab5dc371fc7efd6f96bca59da8",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "original": {
+          "case": "extension-partial",
+          "repetition": 1,
+          "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+          "originalDatabaseState": "recorded",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v4-order-edge-quotes",
+          "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+          "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+          "responseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+          "contentHash": "da9a5e66d687eef92c747ff5890b50a9627d6143e66fed6863b2e43819dd9b24",
+          "reservationNanodollars": 2500000,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "agent_review_correct_not_independently_qualified",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_absence_match",
+            "mandatory_order": "agent_match",
+            "unordered_flexible": "agent_match",
+            "repeated_stops": "agent_absence_match",
+            "return_origin": "agent_absence_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_absence_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_absence_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_match",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_match",
+            "people": "agent_absence_match",
+            "geography": "agent_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "eebc83d5f13adc1d83bc2ac95a38125c2d8ceb228d5b2fd2a66b83013ce86db1"
+        },
+        "legacy": {
+          "disposition": "accepted_advanced_handoff",
+          "resultHash": "49cbaab5d70aeda200b07afe45054ada16b466f66a3dc315ca648534638b6956",
+          "issuesCount": 1,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+          "orderingOutcome": "verified_order",
+          "issues": [],
+          "originalGraph": [
+            [
+              0,
+              1
+            ]
+          ],
+          "unsupportedModelEdges": [],
+          "provedRelationships": [
+            [
+              0,
+              1
+            ]
+          ],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 3242.775167003856,
+          "providerUsage": [
+            5131,
+            233
+          ],
+          "retainedNanodollars": 2500000
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "partial",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_before",
+              "span": [
+                8,
+                32
+              ],
+              "cue_span": [
+                17,
+                23
+              ],
+              "source": "pharmacy before the bank",
+              "source_sha256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+              "conditional": false,
+              "evidenceHash": "b8bb33d1061d0bfcfbd8596982cd2f2e7bd1f5bc4e74ae57b352124c9a03ea4b"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                8,
+                16
+              ],
+              "source": "pharmacy"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                28,
+                32
+              ],
+              "source": "bank"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                38,
+                44
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+          "independent": [
+            2
+          ],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "04eef832cdb46d907676b0dbccca757577c7a6ab5dc371fc7efd6f96bca59da8",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                8,
+                32
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1,
+          2
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "candidate_only_not_planning_authority",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "source": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "originalRowState": "recorded_halted",
+      "originalRecordedClassification": "complete",
+      "originalRecordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968",
+      "originalResponseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "rawOutputHash": "886bc52a19bc303470d6cde156f593c64153040d89612c09f152d7293c36061b",
+      "originalQ1": {
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "original": {
+          "case": "extension-repeated",
+          "repetition": 1,
+          "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+          "originalDatabaseState": "recorded_halted",
+          "originalClassification": "complete",
+          "model": "gpt-6-luna",
+          "promptVersion": "52b-v4-order-edge-quotes",
+          "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+          "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+          "responseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+          "contentHash": "1064a0951b2ccac5eb5557b6a3680f2fc789a5a28bd03de8c5795173e98ea168",
+          "reservationNanodollars": 2500000,
+          "historicalClassificationChanged": false
+        },
+        "structuredValid": true,
+        "raw": {
+          "rubricFinding": "incorrect_unsupported_order",
+          "fullyCorrectIndependent": null,
+          "reviewerKind": "Codex same-agent reconstruction review",
+          "fieldReview": {
+            "required_activities": "agent_match",
+            "optional_activities": "agent_absence_match",
+            "exact_named_identity": "agent_absence_match",
+            "mandatory_order": "agent_mismatch",
+            "unordered_flexible": "agent_mismatch",
+            "repeated_stops": "agent_match",
+            "return_origin": "agent_match",
+            "final_destination": "agent_absence_match",
+            "final_visit": "agent_absence_match",
+            "home_ambiguity": "agent_absence_match",
+            "whole_trip_limit": "agent_match",
+            "travel_only_limit": "agent_absence_match",
+            "visit_durations": "agent_absence_match",
+            "duration_relations": "agent_match",
+            "dates_timezones": "agent_match",
+            "budget_transport": "agent_absence_match",
+            "safe_disposition": "agent_match",
+            "hallucinations": "agent_mismatch",
+            "contradiction_injection": "agent_absence_match",
+            "source_provenance": "agent_mismatch",
+            "people": "agent_absence_match",
+            "geography": "agent_match",
+            "shared_place": "agent_absence_match",
+            "deadline": "agent_absence_match"
+          },
+          "fieldReviewAutomated": false,
+          "rubricCaseDigest": "77940447f4e618c1560b010e6cc61f2c3253543092c7f0c596c823339c703920"
+        },
+        "legacy": {
+          "disposition": "accepted_advanced_handoff",
+          "resultHash": "f60027d2095d01afe63dca30c571f11e817a8020e7c4db454ff14e9975b7a5ed",
+          "issuesCount": 1,
+          "questionFields": []
+        },
+        "proposedGuarded": {
+          "disposition": "blocked_by_independent_ordering",
+          "orderingOutcome": "clarification_required",
+          "issues": [
+            "unproven_model_edge"
+          ],
+          "originalGraph": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "unsupportedModelEdges": [
+            [
+              0,
+              1
+            ]
+          ],
+          "provedRelationships": [
+            [
+              1,
+              2
+            ]
+          ],
+          "normalization": null,
+          "planningAuthorized": false
+        },
+        "historicalMeasurements": {
+          "completeLatencyMs": 3131.913541990798,
+          "providerUsage": [
+            5134,
+            257
+          ],
+          "retainedNanodollars": 2500000
+        },
+        "reviewCoverage": "seven-case same-agent full-field inspection recorded in specification; mechanical replay proves structure/legacy/order only"
+      },
+      "V5": {
+        "version": "52b-order-policy-v5-offline",
+        "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                14
+              ],
+              "cue_span": [
+                6,
+                8
+              ],
+              "source": "Coffee, museum",
+              "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "conditional": false,
+              "evidenceHash": "dd4559ec9e9d9e9852d58bd99d4280b83cb75d3681263852442eb339e4bf6498"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "rule": "explicit_then",
+              "span": [
+                8,
+                27
+              ],
+              "cue_span": [
+                14,
+                21
+              ],
+              "source": "museum, then coffee",
+              "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "conditional": false,
+              "evidenceHash": "2ce3cd63336247660547a33f3b23fbb3c28b6e922d233e3fb8c3859e5fcb4cf4"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "Coffee"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                8,
+                14
+              ],
+              "source": "museum"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                21,
+                27
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "rawHash": "886bc52a19bc303470d6cde156f593c64153040d89612c09f152d7293c36061b",
+        "issues": [],
+        "outcome": "verified_order",
+        "trustedGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "normalization": null,
+        "edges": [
+          {
+            "before": 0,
+            "after": 1,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                0,
+                20
+              ]
+            ]
+          },
+          {
+            "before": 1,
+            "after": 2,
+            "assertionKind": "model_explicit_edge",
+            "proven": true,
+            "quoteSpans": [
+              [
+                8,
+                27
+              ]
+            ]
+          }
+        ],
+        "requiredClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "impliedRelationships": [
+          [
+            0,
+            2
+          ]
+        ],
+        "mandatoryRequiredVisitClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "conditionalClosure": []
+      },
+      "mapping": {
+        "occurrenceMappingKnown": true,
+        "originalToEffective": [
+          0,
+          1,
+          2
+        ],
+        "effectiveGraph": [
+          [
+            0,
+            1
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "orderingRequirementsKnown": true,
+        "sourceRequiredOrderPreserved": true,
+        "unknownMappingNeverAuthorizesPlanning": true
+      },
+      "combinedV5WithUnchangedCompleteB2": "candidate_only_not_planning_authority",
+      "newFullIndependentCorrectness": null,
+      "reviewNote": "New owner-policy ordering comparison only. Original non-order same-agent findings and full B2 disposition preserved; source/evidence still checked. No independent requalification."
+    }
+  ],
+  "counts": {
+    "Qwen": 27,
+    "OpenAI": 7,
+    "QwenTransitions": {
+      "compatible -> compatible": 17,
+      "compatible -> blocked": 8,
+      "blocked -> compatible": 2
+    },
+    "QwenV5WithLegacyJourneyCompatibleOnly": 8,
+    "QwenRawOrderingTransitions": {
+      "raw_error -> compatible": 6,
+      "correct -> compatible": 13,
+      "raw_error -> blocked": 3,
+      "correct -> blocked": 5
+    },
+    "OpenAITransitions": {
+      "compatible -> blocked": 2,
+      "compatible -> compatible": 3,
+      "blocked -> blocked": 1,
+      "blocked -> compatible": 1
+    },
+    "independentSignoffs": 0
+  },
+  "originalJournal": {
+    "identity": "52b-q4b-readonly-journal-v1",
+    "historicalStorageSnapshotCompatible": true,
+    "continuationReady": false,
+    "executionAuthorized": false,
+    "liveDispatchAvailable": false,
+    "q4aExecutionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "schemaHash": "822c3e1130fddbabd6b64a919bc35236c16e78c7210d076ce8181013eebbf09a",
+    "schema": [
+      [
+        "table",
+        "attempts",
+        "attempts",
+        "CREATE TABLE attempts (provider TEXT, case_id TEXT, repetition INTEGER, status TEXT NOT NULL, charge INTEGER NOT NULL, record TEXT, PRIMARY KEY(provider,case_id,repetition))"
+      ],
+      [
+        "table",
+        "metadata",
+        "metadata",
+        "CREATE TABLE metadata (id INTEGER PRIMARY KEY CHECK(id=1), config TEXT NOT NULL)"
+      ],
+      [
+        "index",
+        "sqlite_autoindex_attempts_1",
+        "attempts",
+        null
+      ]
+    ],
+    "rowIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "perProviderRetainedNanodollars": {
+      "openai": 12166625,
+      "google": 33000000,
+      "anthropic": 2200000
+    },
+    "statuses": {
+      "recorded": 9,
+      "recorded_halted": 1
+    },
+    "persistentHistoricalHalt": true,
+    "journalMode": "delete",
+    "readConnectionSynchronous": 2,
+    "synchronousNote": "Connection default only; historical writer uses FULL explicitly. Not proof of every past commit or hardware durability.",
+    "rowIDsAreAutoincrement": false,
+    "blockers": [
+      "real authenticated owner/reviewer trust boundary unimplemented",
+      "real append-only writer/child scope and all-scope outcome fold unimplemented",
+      "independent reviews and separately authorized fresh readiness incomplete",
+      "no exact owner-approved live execution build or financial grant"
+    ],
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "sourcePinsAndQ4ABuildVerified": true,
+    "lockMode": "0o644",
+    "directoryMode": "0o700",
+    "journalFileMode": "0o600",
+    "readMode": "mode=ro&immutable=1; query_only; SQL authorizer; existing common SH lock",
+    "reportPurpose": "compatibility evidence only, never an approval or dispatch capability"
+  },
+  "providerRequests": 0,
+  "paidApprovalCreated": false
+}

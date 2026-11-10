@@ -1,3 +1,7 @@
+# Task 52B — owner changes default activity-list ordering
+
+Adopt the owner's new product requirement in a separately versioned **offline** V5 proposal: a complete itinerary activity list implies chronological order, while explicit partial/flexible/unordered instructions override. Preserve optionality and repeated occurrences. This does not revise historical V4 findings or activate production behavior. Keep old Q1/Q3/Q4 identities frozen; propose new rubric/build identities, and leave future payload/prompt identities unset because the current prompt explicitly forbids list inference. Case-level independent review and future enforcement/prompt approvals remain required. [Decision table, evidence and limitations](docs/task52-ordering-policy-v5.md).
+
 # Task 52B Q4C — signed facts remain purpose-bound offline evidence
 
 Use genuine local detached Ed25519 verification with exact canonical bytes, pinned explicit trust/revocation identities and separate owner/reviewer/operator keys/namespaces. Couple it to an append-only exact-schema synthetic protocol; a valid signature alone never supplies financial, semantic or planning authority. Current audience and writer are synthetic-only; do not promote test keys/fixtures to real enrollment. Preserve unknown/critical/replay/uncertain refusals and old halt. [Build, tests and real integration blockers](docs/task52-q4c-offline-protocol-v1.md). No production decision is made.

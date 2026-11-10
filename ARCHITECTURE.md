@@ -1,3 +1,7 @@
+# Task 52B V5 — independent offline source proof
+
+`scripts/task52_ordering_v5.py` is a pure, bounded owner-list ordering policy outside application startup. It records source-owned occurrence spans, explicit/default proofs, conditional optional relationships and transitive closure without modifying raw output. `task52_ordering_v5_review.py` creates proposed rubric/slot amendments and separately labeled recorded replay; it has no transport, writer or planning issuer. Legacy effective snapshots are checked separately for order loss. Production legacy authority and default-OFF V4 observer remain unchanged. [Specification/versioning](docs/task52-ordering-policy-v5.md).
+
 # Task 52B Q4C — offline signed fixture protocol
 
 `task52_q4c_auth` verifies exact canonical detached OpenSSH signatures under six synthetic role contracts; `task52_q4c_protocol` executes only new factory-owned exact-schema fictional SQLite state and closed fake transport. Build/source/binary pinning is separate from unchanged B2 and historical evaluator identities. No application imports, signer/credential loader, real writer, public transport or live activation. Real operator trust and same-journal adapter remain unimplemented. [Specification and limits](docs/task52-q4c-offline-protocol-v1.md).

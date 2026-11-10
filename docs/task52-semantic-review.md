@@ -1,3 +1,11 @@
+# Owner-policy V5 amendment checkpoint — separate from frozen Q1
+
+See [V5 policy and precise denominators](task52-ordering-policy-v5.md), [all66 proposed rubric changes](task52-ordering-v5-all66-impact-v1.json) and [27 Qwen/seven OpenAI replay](task52-ordering-v5-historical-replay-v1.json). The owner now intends list position as visit order, with explicit partial/flexible exceptions. Original V4/Q1 findings below are historical and unchanged. In particular, the accepted repeated-coffee critical failure remains a historical failure/halt, although the same graph/evidence is V5-order compatible. Journey-07's cue-only quote still fails. Two older no-order dinner/drinks responses miss new V5 order. Full independently reviewed correctness is never inferred from these changes.
+
+New Q1 amendment is proposed only:18 mandatory graph changes,one conditional change,two further pending cases,45 unchanged. All six old unresolved judgments and all independent approvals remain outstanding. V5 finite grammar recognizes36/66 source contracts;30 unknown/outside grammar are explicit coverage gaps. Legacy normalization/order loss and the current prompt's ban on list inference block V5 activation/testing; Q3/Q4 artifacts are not silently relabeled. No production/paid authority changes.
+
+---
+
 # Q1 frozen semantic review contract
 
 [Versioned contract](task52-q1-qualification-v1.md), [all66 rubric records](task52-q1-rubric-v1.json), [offline manifest](task52-q1-offline-manifest-v1.json), [replay](task52-q1-openai-replay-v1.json), [verification](task52-q1-verification-v1.json). Current-runtime reconstruction only: original scores, prompts, source pins, corpus and paid records remain unchanged. Seven structured-valid/six legacy accepted/five proposed guarded-compatible; the two historical failures remain distinct and no independent signoff is claimed. Six field-level ambiguities/seven noted cases plus all66 independent gold reviews remain open. Complete mechanical semantic comparison is not implemented; the contract explicitly requires review. No paid/source-gate readiness, provider call or model selection follows; journal10/594/$0.047366625/halt intact. Older measurements below stay historical.

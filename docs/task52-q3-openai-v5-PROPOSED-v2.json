@@ -1,0 +1,538 @@
+{
+  "identity": "52b-q3-openai-b2-v5-owner-list-PROPOSED-v2",
+  "status": "PROPOSED, blocked on prompt/case/build review; no dispatch approval",
+  "supersedesForFutureNewEvaluation": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+  "preservesParentArtifactUnchanged": true,
+  "parentProposalDigest": "66a026921cfbc9f9a983b94c717e633150a74854006051d7f429b0efee15b3f7",
+  "oldConfigurationHashHistoricalOnly": "850ad650bff6bab9c4465e657932874cbcae06a9a7b4e1c79eda8891a6eb942b",
+  "policy": "52b-order-policy-v5-offline",
+  "policySHA256": "8f4122b91ffc2ec01359b44d08343524400e117e8c98b6d1219c83b9f72bc0d0",
+  "rubric": "52b-q1-rubric-v2-owner-list-order-PROPOSED",
+  "rubricDigest": "98e8a1e724a6297d7b1f3f0e1d68de2d58b5b917f7f23749d17850ef3113d99f",
+  "scorer": "52b-semantic-v4-owner-list-order-PROPOSED",
+  "model": "gpt-6-luna",
+  "slots": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "source": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "oldPayloadHashHistoricalOnly": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "futureV5PayloadHash": null,
+      "orderingAmendment": {
+        "status": "mandatory_graph_change",
+        "parentOrdering": {
+          "requiredReachability": [
+            [
+              1,
+              2
+            ]
+          ],
+          "forbidAllOtherNontransitiveEdges": true,
+          "indexBasis": "source occurrences; list position alone is not mandatory order"
+        },
+        "proposedRequiredClosure": [
+          [
+            0,
+            1
+          ],
+          [
+            0,
+            2
+          ],
+          [
+            1,
+            2
+          ]
+        ],
+        "candidateConditionalClosure": [],
+        "sourceListEvidence": [
+          {
+            "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+            "span": [
+              0,
+              27
+            ],
+            "source": "Coffee, museum, then coffee",
+            "occurrences": [
+              0,
+              1,
+              2
+            ],
+            "basis": "Owner default-list decision; same-agent case expectation, not automatic grammar proof or independent approval.",
+            "evidenceHash": "a2c669e97907dd73b18c0053be5e5ebd1471162fca7ad489cf6bf4605ad6c8eb"
+          }
+        ],
+        "changedFields": [
+          "mandatory_order",
+          "unordered_flexible",
+          "source_provenance"
+        ],
+        "ownerGeneralRuleApproved": true,
+        "individualCaseApproved": false,
+        "requiresOwnerJudgment": false,
+        "implementationSourceAnalysis": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                0,
+                14
+              ],
+              "cue_span": [
+                6,
+                8
+              ],
+              "source": "Coffee, museum",
+              "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "conditional": false,
+              "evidenceHash": "dd4559ec9e9d9e9852d58bd99d4280b83cb75d3681263852442eb339e4bf6498"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "rule": "explicit_then",
+              "span": [
+                8,
+                27
+              ],
+              "cue_span": [
+                14,
+                21
+              ],
+              "source": "museum, then coffee",
+              "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "conditional": false,
+              "evidenceHash": "2ce3cd63336247660547a33f3b23fbb3c28b6e922d233e3fb8c3859e5fcb4cf4"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                0,
+                6
+              ],
+              "source": "Coffee"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                8,
+                14
+              ],
+              "source": "museum"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                21,
+                27
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "implementationAnalysisIsNotGold": true,
+        "originalUnresolvedFieldsPreserved": []
+      },
+      "rubricCaseDigest": "d18d1e015a4fdfb9ff8fa0e14e29decf3eb74970926e760699831071f62b7de5",
+      "independentReviewComplete": false,
+      "currentlyAdmissible": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "source": "Go to SUNY College of Optometry and then get coffee.",
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "oldPayloadHashHistoricalOnly": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "futureV5PayloadHash": null,
+      "orderingAmendment": {
+        "status": "graph_unchanged",
+        "parentOrdering": {
+          "requiredReachability": [
+            [
+              0,
+              1
+            ]
+          ],
+          "forbidAllOtherNontransitiveEdges": true,
+          "indexBasis": "source occurrences; list position alone is not mandatory order"
+        },
+        "proposedRequiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "candidateConditionalClosure": [],
+        "sourceListEvidence": [],
+        "changedFields": [],
+        "ownerGeneralRuleApproved": true,
+        "individualCaseApproved": false,
+        "requiresOwnerJudgment": false,
+        "implementationSourceAnalysis": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_then",
+              "span": [
+                6,
+                51
+              ],
+              "cue_span": [
+                32,
+                41
+              ],
+              "source": "SUNY College of Optometry and then get coffee",
+              "source_sha256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+              "conditional": false,
+              "evidenceHash": "170f208eb5e89e55f11c98c26f9b7e797dbd1401f6f08208649c1b65a90739eb"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                6,
+                31
+              ],
+              "source": "SUNY College of Optometry"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                45,
+                51
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "implementationAnalysisIsNotGold": true,
+        "originalUnresolvedFieldsPreserved": []
+      },
+      "rubricCaseDigest": "6939c3d7f5a5381858a03d9a94dbf6fa0a8fb1edeaacca1dc9b27abd1dad36c9",
+      "independentReviewComplete": false,
+      "currentlyAdmissible": false
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "source": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "oldPayloadHashHistoricalOnly": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "futureV5PayloadHash": null,
+      "orderingAmendment": {
+        "status": "graph_unchanged",
+        "parentOrdering": {
+          "requiredReachability": [
+            [
+              0,
+              1
+            ]
+          ],
+          "forbidAllOtherNontransitiveEdges": true,
+          "indexBasis": "source occurrences; list position alone is not mandatory order"
+        },
+        "proposedRequiredClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "candidateConditionalClosure": [],
+        "sourceListEvidence": [],
+        "changedFields": [],
+        "ownerGeneralRuleApproved": true,
+        "individualCaseApproved": false,
+        "requiresOwnerJudgment": false,
+        "implementationSourceAnalysis": {
+          "category": "partial",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "explicit_before",
+              "span": [
+                8,
+                32
+              ],
+              "cue_span": [
+                17,
+                23
+              ],
+              "source": "pharmacy before the bank",
+              "source_sha256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+              "conditional": false,
+              "evidenceHash": "b8bb33d1061d0bfcfbd8596982cd2f2e7bd1f5bc4e74ae57b352124c9a03ea4b"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "required",
+            "required"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                8,
+                16
+              ],
+              "source": "pharmacy"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                28,
+                32
+              ],
+              "source": "bank"
+            },
+            {
+              "index": 2,
+              "id": "s2",
+              "span": [
+                38,
+                44
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+          "independent": [
+            2
+          ],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {}
+        },
+        "implementationAnalysisIsNotGold": true,
+        "originalUnresolvedFieldsPreserved": []
+      },
+      "rubricCaseDigest": "3b567d0ca588b7874d5739669339e40af7a24e85c0e5c48d5fd0355e796ab288",
+      "independentReviewComplete": false,
+      "currentlyAdmissible": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "source": "Buy groceries and maybe stop for coffee.",
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "oldPayloadHashHistoricalOnly": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+      "futureV5PayloadHash": null,
+      "orderingAmendment": {
+        "status": "conditional_graph_change",
+        "parentOrdering": {
+          "requiredReachability": [],
+          "forbidAllOtherNontransitiveEdges": true,
+          "indexBasis": "source occurrences; list position alone is not mandatory order"
+        },
+        "proposedRequiredClosure": [],
+        "candidateConditionalClosure": [
+          [
+            0,
+            1
+          ]
+        ],
+        "sourceListEvidence": [
+          {
+            "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+            "span": [
+              4,
+              39
+            ],
+            "source": "groceries and maybe stop for coffee",
+            "occurrences": [
+              0,
+              1
+            ],
+            "basis": "Owner default-list decision; same-agent case expectation, not automatic grammar proof or independent approval.",
+            "evidenceHash": "5e654daec128e14cdb3b7871740bb27d3c4cfea6ff551938cb80d2ac78022382"
+          }
+        ],
+        "changedFields": [
+          "mandatory_order",
+          "unordered_flexible",
+          "source_provenance"
+        ],
+        "ownerGeneralRuleApproved": true,
+        "individualCaseApproved": false,
+        "requiresOwnerJudgment": true,
+        "implementationSourceAnalysis": {
+          "category": "sequence",
+          "proofs": [
+            {
+              "before": 0,
+              "after": 1,
+              "rule": "default_list",
+              "span": [
+                4,
+                39
+              ],
+              "cue_span": [
+                14,
+                18
+              ],
+              "source": "groceries and maybe stop for coffee",
+              "source_sha256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+              "conditional": true,
+              "evidenceHash": "0105c5bc46954c19559d957e03e1e0660c88a1dd5614fe0dd3d97059b233cc75"
+            }
+          ],
+          "issues": [],
+          "requirements": [
+            "required",
+            "optional"
+          ],
+          "occurrences": [
+            {
+              "index": 0,
+              "id": "s0",
+              "span": [
+                4,
+                13
+              ],
+              "source": "groceries"
+            },
+            {
+              "index": 1,
+              "id": "s1",
+              "span": [
+                33,
+                39
+              ],
+              "source": "coffee"
+            }
+          ],
+          "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "optionalMarkerSpans": {
+            "1": [
+              18,
+              24
+            ]
+          }
+        },
+        "implementationAnalysisIsNotGold": true,
+        "originalUnresolvedFieldsPreserved": []
+      },
+      "rubricCaseDigest": "e190ebc8dece72df86afc8937eb890e1218295f1503f24cefbcf5d675676c503",
+      "independentReviewComplete": false,
+      "currentlyAdmissible": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "source": "Visit the pharmacy before the bank, but the bank before the pharmacy.",
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "oldPayloadHashHistoricalOnly": "0ea781ac4e38c013dbe52fd007626cdd70b910e6a9c1048cdb5ed6011fe234d4",
+      "futureV5PayloadHash": null,
+      "orderingAmendment": {
+        "status": "graph_unchanged",
+        "parentOrdering": {
+          "requiredReachability": [],
+          "forbidAllOtherNontransitiveEdges": true,
+          "indexBasis": "source occurrences; list position alone is not mandatory order",
+          "sourceIntent": "contradictory; no graph may be admitted without clarification"
+        },
+        "proposedRequiredClosure": [],
+        "candidateConditionalClosure": [],
+        "sourceListEvidence": [],
+        "changedFields": [],
+        "ownerGeneralRuleApproved": true,
+        "individualCaseApproved": false,
+        "requiresOwnerJudgment": false,
+        "implementationSourceAnalysis": {
+          "category": "contradictory",
+          "proofs": [],
+          "issues": [
+            "contradictory_source_relations"
+          ],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [],
+          "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true
+        },
+        "implementationAnalysisIsNotGold": true,
+        "originalUnresolvedFieldsPreserved": []
+      },
+      "rubricCaseDigest": "61349a814e979173a8bb86b4c8c275940ef4a516dff4b3f4c7c177b64462ebc4",
+      "independentReviewComplete": false,
+      "currentlyAdmissible": false
+    }
+  ],
+  "futurePromptVersion": null,
+  "futureConfigurationHash": null,
+  "futureExecutionBuildHash": null,
+  "promptBlocker": "Existing unchanged v4 prompt says Never infer edges from list order. A separately reviewed prompt/examples revision and new payload hashes are required; none is implemented here.",
+  "oldQ4Contracts": "Q4A/Q4B/Q4C remain frozen V4 engineering evidence; not V5-compatible authorization or raw-error guards. A new reviewed purpose/build and owner approval are required.",
+  "maxProposedAttempts": 5,
+  "maxProposedAdditionalReservationNanodollars": 12500000,
+  "reservationPerAttemptNanodollars": 2500000,
+  "pricesFreshlyVerified": false,
+  "realApprovals": 0,
+  "newRequests": 0,
+  "newReservations": 0,
+  "realJournalRootUnchanged": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+  "historicalHaltRemainsActive": true,
+  "originalExperimentCapsUnchanged": true,
+  "noNewCasesOrRepetitions": true
+}

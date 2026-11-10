@@ -1,3 +1,11 @@
+# V5 owner-product amendment — no new model measurements
+
+[Separate V5 policy/rubric/replay and limitations](task52-ordering-policy-v5.md). Original V1–V4/Q1 scores, prompt cohorts and all provider evidence below remain unchanged. The owner changed list-order meaning; the exact repeated-coffee response now has compatible V5 ordering evidence, while its historical V4 accepted-critical-error classification and paid halt stay intact. No new inference, timing/usage charge, reservation, provider-readiness check or model qualification occurred.
+
+The old Q3 proposal is superseded only for future V5 evaluation by an [unapproved same-five-slot amendment](task52-q3-openai-v5-PROPOSED-v2.json). Current prompt explicitly forbids list inference; new prompt/payload/build fields are null. Q4A–Q4C remain frozen V4 offline artifacts. All review/readiness/execution gates stay closed. Actual historical accounting remains OpenAI7/Google2/Anthropic1=10/594,$0.047366625 retained/$11.952633375 remaining, original persistent halt active. No provider, billing, Maps, infrastructure or production changes.
+
+---
+
 > Q4A offline foundation: [separate execution build, fictional protocol tests and unimplemented live boundary](task52-q4a-successor-offline-v1.md). No new model output, timing, real reservation or approval. Historical seven OpenAI outputs, source pins and accepted critical failure stay unchanged; persistent halt remains. New fake timings are test-control measurements, not inference benchmarks. Independent reviews and fresh readiness remain pending.
 
 # Q3 exact continuation proposal — no new model result

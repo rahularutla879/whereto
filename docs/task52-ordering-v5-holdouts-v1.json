@@ -1,0 +1,135 @@
+{
+  "identity": "52b-v5-post-freeze-same-agent-v1",
+  "policySHA256": "8f4122b91ffc2ec01359b44d08343524400e117e8c98b6d1219c83b9f72bc0d0",
+  "independentHumanReviewed": false,
+  "cases": [
+    {
+      "id": "do-new-context",
+      "text": "Do lunch and museum in Boston tomorrow.",
+      "stops": [
+        "lunch",
+        "museum"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "category": "sequence",
+      "location": "Boston",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "mixed-forward",
+      "text": "Groceries, then pharmacy and dinner.",
+      "stops": [
+        "Groceries",
+        "pharmacy",
+        "dinner"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "category": "sequence",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "global-free",
+      "text": "Coffee, museum whenever convenient, dinner in any order.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unordered",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "front-after",
+      "text": "After visiting museum, go to coffee.",
+      "stops": [
+        "museum",
+        "coffee"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "category": "explicit",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "quoted-text",
+      "text": "\"Coffee and dinner\" is just an example.",
+      "stops": [
+        "Coffee",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "condition",
+      "text": "Coffee and dinner unless it rains.",
+      "stops": [
+        "Coffee",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "named-ranks",
+      "text": "Visit First Avenue Cafe and Last Stop Cafe.",
+      "stops": [
+        "First Avenue Cafe",
+        "Last Stop Cafe"
+      ],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "category": "sequence",
+      "optional": [],
+      "flexible": []
+    },
+    {
+      "id": "unscoped-clause",
+      "text": "Coffee and museum; dinner whenever convenient.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": [],
+      "flexible": []
+    }
+  ]
+}
