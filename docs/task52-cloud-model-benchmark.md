@@ -1,3 +1,9 @@
+# V5.1 owner rules and full prompt proposal — no new model measurement
+
+[Separate offline policy, prompt and all66 review](task52-ordering-policy-v51.md). New full cloud prompt proposal replaces conflicting legacy ordering text and changes only ordering in four of19 examples. No model/count/account request or active prompt change. Recorded27 Qwen/seven OpenAI V5.1 ordering outcomes match V5; earlier source identities, V3/V4 cohorts/classifications/latency/usage/costs remain historical. New same-five-slot successor binds proposed hashes only; future build/approval/readiness remain unset. Original10/594,$0.047366625 and persistent halt unchanged. Gemini/Anthropic blockers remain separate.
+
+---
+
 # V5 owner-product amendment — no new model measurements
 
 [Separate V5 policy/rubric/replay and limitations](task52-ordering-policy-v5.md). Original V1–V4/Q1 scores, prompt cohorts and all provider evidence below remain unchanged. The owner changed list-order meaning; the exact repeated-coffee response now has compatible V5 ordering evidence, while its historical V4 accepted-critical-error classification and paid halt stay intact. No new inference, timing/usage charge, reservation, provider-readiness check or model qualification occurred.

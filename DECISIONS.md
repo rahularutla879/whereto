@@ -1,3 +1,7 @@
+# Task52B V5.1 — confirm optional sequence, flexible attendance distinction and narrow aur scope
+
+Owner confirms complete itinerary list order, conditional placement of selected optional stops, independently required flexible visits and reviewed Roman-Hindi aur as and. Version these separately from V5 and historical Q1/V4 findings; propose one ordering-field resolution and retain all non-order gaps/independent-review requirements. Prepare a full replacement cloud prompt with four audited example-order changes, without activating it. Current route shortlisting already computes closure before optional selection for an intact constrained graph; source enforcement/legacy normalization still needs separate integration approval. [Rules, evidence and limits](docs/task52-ordering-policy-v51.md).
+
 # Task 52B — owner changes default activity-list ordering
 
 Adopt the owner's new product requirement in a separately versioned **offline** V5 proposal: a complete itinerary activity list implies chronological order, while explicit partial/flexible/unordered instructions override. Preserve optionality and repeated occurrences. This does not revise historical V4 findings or activate production behavior. Keep old Q1/Q3/Q4 identities frozen; propose new rubric/build identities, and leave future payload/prompt identities unset because the current prompt explicitly forbids list inference. Case-level independent review and future enforcement/prompt approvals remain required. [Decision table, evidence and limitations](docs/task52-ordering-policy-v5.md).

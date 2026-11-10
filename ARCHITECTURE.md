@@ -1,3 +1,7 @@
+# Task52B V5.1 — isolated owner-policy and prompt proposals
+
+`task52_ordering_v51` reuses frozen V5 source analysis through bounded offset-preserving connector recognition, then verifies original source quotes and new policy-bound proof hashes. Its offline selected-visit projection never publishes a plan or receipt. `task52_prompt_v51` constructs a complete proposed OpenAI request/template and audits19 examples without transport; `task52_ordering_v51_review` binds new rubric/replay/successor proposals. All application runtime, legacy authority, shadow defaults, schema, provider and paid-dispatch paths remain unchanged. [Scope/versioning](docs/task52-ordering-policy-v51.md).
+
 # Task 52B V5 — independent offline source proof
 
 `scripts/task52_ordering_v5.py` is a pure, bounded owner-list ordering policy outside application startup. It records source-owned occurrence spans, explicit/default proofs, conditional optional relationships and transitive closure without modifying raw output. `task52_ordering_v5_review.py` creates proposed rubric/slot amendments and separately labeled recorded replay; it has no transport, writer or planning issuer. Legacy effective snapshots are checked separately for order loss. Production legacy authority and default-OFF V4 observer remain unchanged. [Specification/versioning](docs/task52-ordering-policy-v5.md).

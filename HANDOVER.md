@@ -1,3 +1,15 @@
+# Task52B V5.1 — owner decisions and full cloud prompt proposal, offline only
+
+Started clean `2f2d939` (V5 plus separately committed handbook). [V5.1 policy, reviewed aur scope, actual optional-shortlist evidence and remaining limits](docs/task52-ordering-policy-v51.md), [all66 amendment](docs/task52-ordering-v51-all66-impact-v1.json), [full proposed prompt/19-example audit](docs/task52-cloud-prompt-v51-PROPOSED-v1.json), [verification](docs/task52-ordering-v51-verification-v1.json), [blank review checklist](docs/task52-v51-review-checklist.md). Identity `52b-order-policy-v5.1-owner-decisions-offline`. Owner rules A–D are confirmed; no production integration. Optional closure is computed before selected-visit projection; required flexible stops stay required. Roman Hindi aur is a whole-word owned connector, not a general multilingual parser. Existing constrained route shortlisting supports optional inclusion/omission; legacy validation/normalization remains an integration blocker.
+
+Proposed Q1 v3 has19 mandatory graph amendments,2 conditional,45 unchanged. One original optional-order ambiguity receives a separately labeled proposed Rule B resolution; original six records stay frozen, five proposed unresolved fields remain, all66 independent gold/seven response approvals blank. Source grammar37/66 recognized,29 unknown/outside scope. Recorded27 Qwen/seven OpenAI outcomes match V5; historic repeated-coffee V4 failure/halt and journey-07 provenance rejection stay intact.
+
+Proposed prompt `52b-cloud-v5.1-owner-list-order-PROPOSED-v1`, hash `1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9`; four example ordering meanings change (10/12/15/19), all non-order instructions/example facts/canonical schema retained. [New Q3 successor](docs/task52-q3-v51-PROPOSED-v3.json) keeps the same five slots, proposed payload identities and historical max5/$0.0125 only; future live build/approval/readiness unset. Q3/Q4A–C frozen identities cannot authorize this prompt. No input counts/prices/account facts refreshed. Next: independent case/prompt/example review and a separately scoped new execution-build proposal, not paid dispatch.
+
+Original journal324 private files/ten rows/corrections/halt unchanged: OpenAI7/Google2/Anthropic1,10/594,$0.047366625 accounted/$11.952633375 remaining. Handbook hashes preserved; no learning files included. Qwen/prompt/production legacy/HITEC fix unchanged, V4 shadow OFF by default, no enforcement/provider/count/account/Maps/real grant/billing/quotas/infrastructure/migration/Task53. Older checkpoints below remain historical.
+
+---
+
 # November 10, 2026 — developer learning handbook (documentation only)
 
 Added the [complete beginner developer handbook](docs/learning/README.md): 20 chapters, eight requested practical references plus a verification/evidence guide, 100 comprehension questions and 40 hands-on exercises with separate solutions. Includes five source-grounded request traces, nine Mermaid diagrams, a 460-file source/test index, all 13 current backend/Next endpoint mappings and a 180-entry glossary. Root README now links to the course; startup remains unchanged.

@@ -1,0 +1,101 @@
+{
+  "identity": "52b-v5.1-post-freeze-same-agent-v1",
+  "policySHA256": "ef2ebb7c6a74b0f0fad1309a9a313aaf50368ff13f455aa3dbe885e6ebb155eb",
+  "independentHumanReviewed": false,
+  "cases": [
+    {
+      "id": "aur-new-city",
+      "text": "Coffee AUR dinner in Mumbai tomorrow.",
+      "stops": [
+        "Coffee",
+        "dinner"
+      ],
+      "location": "Mumbai",
+      "expectedEdges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "category": "sequence",
+      "optional": []
+    },
+    {
+      "id": "aur-optional-middle",
+      "text": "Coffee aur maybe museum aur dinner.",
+      "stops": [
+        "Coffee",
+        "museum",
+        "dinner"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "category": "sequence",
+      "optional": [
+        1
+      ]
+    },
+    {
+      "id": "aur-named-cues",
+      "text": "First Avenue Cafe aur Last Stop Cafe.",
+      "stops": [
+        "First Avenue Cafe",
+        "Last Stop Cafe"
+      ],
+      "kinds": [
+        "named_place",
+        "named_place"
+      ],
+      "expectedEdges": [
+        [
+          0,
+          1
+        ]
+      ],
+      "category": "sequence",
+      "optional": []
+    },
+    {
+      "id": "aur-unscoped-semicolon",
+      "text": "Coffee aur dinner; bank whenever convenient.",
+      "stops": [
+        "Coffee",
+        "dinner",
+        "bank"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": []
+    },
+    {
+      "id": "aur-conditional",
+      "text": "Coffee aur dinner unless closed.",
+      "stops": [
+        "Coffee",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": []
+    },
+    {
+      "id": "aur-word-boundary",
+      "text": "Coffee aurora dinner.",
+      "stops": [
+        "Coffee",
+        "dinner"
+      ],
+      "expectedEdges": [],
+      "category": "unknown",
+      "optional": []
+    }
+  ]
+}

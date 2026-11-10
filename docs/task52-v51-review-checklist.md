@@ -1,0 +1,15 @@
+# V5.1 independent-review checklist — blank, no execution authority
+
+General product Rules A–D are owner-confirmed. Case-level gold review, the proposed prompt and changed example meanings remain independently unapproved. Policy `52b-order-policy-v5.1-owner-decisions-offline`; full specification and exact hashes are in [V5.1 policy](task52-ordering-policy-v51.md).
+
+- Review all66 unchanged source requests against all24 rubric dimensions, including N/A absence checks. Verify graph closure, flexible/optional scope, repeated occurrence ownership and exact source evidence. Do not substitute parser acceptance for semantic correctness.
+- Review the new proposed Rule B resolution of extension-inclusive.mandatory_order. Its original frozen unresolved record remains intact. Proposed remaining gaps: journey-25.required_activities; ordinary-multilingual.dates_timezones; ordinary-budget.budget_transport; ordinary-ambiguity.required_activities; extension-contradictory.required_activities.
+- Review the finite Roman Hindi aur connector and the exact original Kal Hyderabad mein [list] plan karo frame for ordering only. Kal's calendar meaning remains unresolved; unfamiliar language scopes clarify. This is not general translation.
+- Review the complete new system prompt and all19 examples. Example10/12/15/19 ordering changes are explicit; no non-order fact is intentionally changed. New prompt approval cannot be inferred from approval of the general product requirement.
+- Review each of the seven historical responses under its actual original policy/configuration and separately under V5.1. Keep all original hashes, critical failure, provenance rejection, costs and halt. Full independent correctness remains null.
+- Recognizer coverage37/66 is not model accuracy;29 sources remain unknown/outside grammar. Review safe clarification versus avoidable grammar limitations before any broader deployment claim.
+- Current route shortlist supports optional-closure and required-flexible placement **for the supplied intact graph with distinct fictional candidates**. It does not establish real availability, geography or route/timing feasibility. Source occurrence identity does not guarantee a repeated exact venue can be routed: current shortlist prevents duplicate place IDs. Any change to that existing behavior is separately scoped.
+- Legacy source validation/normalization can reject or erase list order. A future production authority must retire overlapping legacy logic rather than run two competing normalizers. Ordinary/no-Journey, endpoints, pending snapshots, capabilities and saved refresh still need their separately approved integration gates; none changes here.
+- The same five proposed slots retain order and source hashes, but live build, owner approval, independent review, readiness and operation permission are unset. Old Q3/Q4 signatures/builds cannot authorize V5.1. No new financial authorization exists.
+
+Independent reviewer: **unassigned**. Date: **not recorded**. Gold approvals: **0/66**. Historical response approvals: **0/7**. Prompt/example approval: **not recorded**. Financial/execution grant: **none**.

@@ -1,0 +1,29 @@
+{
+  "identity": "52b-v5.1-owner-decisions-offline-manifest-v1",
+  "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+  "dispatchAuthorized": false,
+  "planningAuthorized": false,
+  "independentReviews": 0,
+  "runtime": "52b-runtime-phase-b2",
+  "historicalEnvironmentReproduced": false,
+  "purposes": [
+    "offline_owner_policy_amendment",
+    "proposed_prompt_and_rubric",
+    "recorded_response_replay"
+  ],
+  "sources": {
+    "scripts/task52_ordering_v51.py": "ef2ebb7c6a74b0f0fad1309a9a313aaf50368ff13f455aa3dbe885e6ebb155eb",
+    "scripts/task52_ordering_v51_review.py": "dc9775d26fc982774a8d477bff4c0b411c9eacc997d9383a688515453196e45e",
+    "scripts/task52_prompt_v51.py": "c4e3196d7dc74d44dd269a9f290cc37e3926a27966722b41e6d370cb5ad1b563",
+    "backend/test_task52_ordering_v51.py": "10c2f4e0e3a6b3bfa46d132e07e6bda642c93ae4b9958a9238b054f33c1fbbb8",
+    "docs/task52-ordering-policy-v51.md": "a32d19715853cf161ac971c8ab5460d3fb2d091292355d27ab761af57f98d932",
+    "docs/task52-ordering-v51-cases-v1.json": "0e897221dab8932538ce82f471f7ced6c48a1ba064090032609e0a1996f8523a",
+    "docs/task52-ordering-v51-holdouts-v1.json": "9cdf92f32ef5013e682e892c425f2c6b9ea895823638544668f433b1fce49836",
+    "docs/task52-ordering-v51-all66-impact-v1.json": "f875291f5c71b63eeb3212f5182c5745cc00fe9b3c50ea7b42df66039784917b",
+    "docs/task52-ordering-v51-replay-v1.json": "e5db1efcfa1c72af7771814683f2aba3cf3904d3863960562362038db02b1228",
+    "docs/task52-q1-rubric-v3-v51-PROPOSED.json": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+    "docs/task52-cloud-prompt-v51-PROPOSED-v1.json": "8b9673895f77b4e890d82a900a61bc2ddc7ed31176cf2feb267c6cbf88f456cf",
+    "docs/task52-q3-v51-PROPOSED-v3.json": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc",
+    "docs/task52-ordering-v5-manifest-v1.json": "27bc9c983cc9f1ea5331ea06c555204c4395bb4ce97159ebb1ac7fc3c74c1e88"
+  }
+}

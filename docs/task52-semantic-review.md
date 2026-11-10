@@ -1,3 +1,9 @@
+# V5.1 owner-decision proposal — no historical relabeling
+
+[V5.1 policy and complete amended rubric/prompt/replay](task52-ordering-policy-v51.md). Owner A–D confirm optional sequence and aur scope; all66 individually unapproved records are reassessed.19 mandatory/2 conditional/45 unchanged graph expectations relative to original Q1. The original six unresolved judgments remain frozen; proposed extension-inclusive ordering is resolved by Rule B only in the new version, leaving five proposed unresolved fields. Full independent correctness stays null; all case/response approvals pending. Historical V4 repeated-coffee critical acceptance/halt and journey-07 failure remain intact. No production prompt/validation or provider change.
+
+---
+
 # Owner-policy V5 amendment checkpoint — separate from frozen Q1
 
 See [V5 policy and precise denominators](task52-ordering-policy-v5.md), [all66 proposed rubric changes](task52-ordering-v5-all66-impact-v1.json) and [27 Qwen/seven OpenAI replay](task52-ordering-v5-historical-replay-v1.json). The owner now intends list position as visit order, with explicit partial/flexible exceptions. Original V4/Q1 findings below are historical and unchanged. In particular, the accepted repeated-coffee critical failure remains a historical failure/halt, although the same graph/evidence is V5-order compatible. Journey-07's cue-only quote still fails. Two older no-order dinner/drinks responses miss new V5 order. Full independently reviewed correctness is never inferred from these changes.
