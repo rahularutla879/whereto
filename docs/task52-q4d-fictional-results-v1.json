@@ -1,0 +1,838 @@
+{
+  "identity": "52b-q4d-fictional-results-v1",
+  "buildSHA256": "4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4",
+  "realRequests": 0,
+  "realReservations": 0,
+  "realApprovals": 0,
+  "source": "Authored fake outputs, temporary synthetic signers and exact-DDL fictional state only",
+  "operations": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "operationHash": "61c6bfd74b52d929136b7c80661f9b1e60595589fbee2102a956d8529b948d4b",
+      "outcomeHash": "5e96633767f8aab88056c1ac9dfb72a22f09b5be443d15b68fed12792337876d",
+      "responseHash": "23a39307c48909d72fb12b0c1c0bef29ccb2dd420b824afa24ebc8ab77da9995",
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "responseHash": "23a39307c48909d72fb12b0c1c0bef29ccb2dd420b824afa24ebc8ab77da9995",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "b2f79dc389d5cc25851277ae93b00086a4f8ec99ca1914af892072ed409b3c8d",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "default_list",
+                  "span": [
+                    0,
+                    14
+                  ],
+                  "cue_span": [
+                    6,
+                    8
+                  ],
+                  "source": "Coffee, museum",
+                  "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+                  "conditional": false,
+                  "evidenceHash": "3d8af59a892e8dfd1fc8260d8098c204b407efe112a5faa932df610402bcbdb3"
+                },
+                {
+                  "before": 1,
+                  "after": 2,
+                  "rule": "explicit_then",
+                  "span": [
+                    8,
+                    27
+                  ],
+                  "cue_span": [
+                    14,
+                    21
+                  ],
+                  "source": "museum, then coffee",
+                  "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+                  "conditional": false,
+                  "evidenceHash": "18a0b770d648c02bd179d4dfa1780dc0699d6eac8a350e1991b60413bdf1a57c"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    0,
+                    6
+                  ],
+                  "source": "Coffee"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    8,
+                    14
+                  ],
+                  "source": "museum"
+                },
+                {
+                  "index": 2,
+                  "id": "s2",
+                  "span": [
+                    21,
+                    27
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    0,
+                    101
+                  ]
+                ]
+              },
+              {
+                "before": 1,
+                "after": 2,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    8,
+                    27
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "impliedRelationships": [
+              [
+                0,
+                2
+              ]
+            ],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true
+      },
+      "reservationNanodollars": 2500000,
+      "syntheticReviewRecorded": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "operationHash": "37fe0a959a152476ee3fc82cd7c8453c4c24c89b9f5713ad89dcea20ce10b690",
+      "outcomeHash": "15899815a879143a06e31fc48879e12293ca00572acc6112310d8a0bf54e8d46",
+      "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "6fac25372fd7925ffb4119dd44c6b6ed064589e393e637f90c573c5e96e89cae",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "explicit_then",
+                  "span": [
+                    6,
+                    51
+                  ],
+                  "cue_span": [
+                    32,
+                    41
+                  ],
+                  "source": "SUNY College of Optometry and then get coffee",
+                  "source_sha256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+                  "conditional": false,
+                  "evidenceHash": "734cf170f050faf93e4e66964015fe59a9437a53bb4788c2f70aab36a917392c"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    6,
+                    31
+                  ],
+                  "source": "SUNY College of Optometry"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    45,
+                    51
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    6,
+                    51
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true
+      },
+      "reservationNanodollars": 2500000,
+      "syntheticReviewRecorded": true
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "operationHash": "2ae1285e0c0f92a63dd52da04cb890a759dd9bbdc45ad3827e7a986cdecc161c",
+      "outcomeHash": "c47e18392fb082fbc1781655d5846b03b3b4515d6ea354011a76ac2bd5847d68",
+      "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "f89af6e48c45e76aa6b55a51fba2722168e2b8ef09a6a0c5dfdab2faf6198e4d",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "partial",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "explicit_before",
+                  "span": [
+                    8,
+                    32
+                  ],
+                  "cue_span": [
+                    17,
+                    23
+                  ],
+                  "source": "pharmacy before the bank",
+                  "source_sha256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+                  "conditional": false,
+                  "evidenceHash": "c8ad2514f1bc5b27398da3c9cbe3ff500a6da0b8446f5599eec58b01477616f5"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    8,
+                    16
+                  ],
+                  "source": "pharmacy"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    28,
+                    32
+                  ],
+                  "source": "bank"
+                },
+                {
+                  "index": 2,
+                  "id": "s2",
+                  "span": [
+                    38,
+                    44
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+              "independent": [
+                2
+              ],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    8,
+                    32
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true
+      },
+      "reservationNanodollars": 2500000,
+      "syntheticReviewRecorded": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "operationHash": "4bb076acd62c308d2918a3e2ee643c92f4ffbcd96c1c01b0eab017de1852c653",
+      "outcomeHash": "3764f666dc9dd87993402555de2626bfb78af341f58229231aed9211585f864b",
+      "responseHash": "a5f9f28054b4a27f64ea21c940d9131239da5414d3c1592900f79650e7324688",
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "responseHash": "a5f9f28054b4a27f64ea21c940d9131239da5414d3c1592900f79650e7324688",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "9beaee5bad1d2475a317995ae71e7880cce3654f35ba979b29c9a9038c357efb"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "0f4b3c457a27d8d0eee1b596dcd8f2de7e3c83a092f604aaa2751696242aefa6",
+          "accepted": true,
+          "effectiveOrder": [],
+          "requiredOrderPreserved": false
+        },
+        "guarded": {
+          "disposition": "blocked_by_legacy_effective_order_loss",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "default_list",
+                  "span": [
+                    4,
+                    39
+                  ],
+                  "cue_span": [
+                    14,
+                    18
+                  ],
+                  "source": "groceries and maybe stop for coffee",
+                  "source_sha256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+                  "conditional": true,
+                  "evidenceHash": "71c4b55ee7e9daa6488dea859d980321e653b12a47d1398d49f0da68b1b59804"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "optional"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    4,
+                    13
+                  ],
+                  "source": "groceries"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    33,
+                    39
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {
+                "1": [
+                  18,
+                  24
+                ]
+              },
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "9beaee5bad1d2475a317995ae71e7880cce3654f35ba979b29c9a9038c357efb",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    0,
+                    40
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [],
+            "conditionalClosure": [
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true
+      },
+      "reservationNanodollars": 2500000,
+      "syntheticReviewRecorded": false
+    }
+  ],
+  "report": {
+    "identity": "52b-q4d-v51-journal-bridge-OFFLINE-v1",
+    "syntheticOnly": true,
+    "attempts": 14,
+    "childAttempts": 4,
+    "exposureNanodollars": 20000000,
+    "childExposureNanodollars": 10000000,
+    "historicalHaltPreserved": true,
+    "childHalted": true,
+    "legacyOrderLoss": true,
+    "progressionBlocked": true,
+    "outcomeHashes": [
+      "5e96633767f8aab88056c1ac9dfb72a22f09b5be443d15b68fed12792337876d",
+      "15899815a879143a06e31fc48879e12293ca00572acc6112310d8a0bf54e8d46",
+      "c47e18392fb082fbc1781655d5846b03b3b4515d6ea354011a76ac2bd5847d68",
+      "3764f666dc9dd87993402555de2626bfb78af341f58229231aed9211585f864b"
+    ],
+    "planningAuthorized": false,
+    "executionAuthorized": false,
+    "liveDispatchAvailable": false
+  },
+  "fifthOperationRefused": true,
+  "fifthOfflineAssessment": {
+    "version": "52b-v51-three-axis-offline-v1",
+    "slot": [
+      "openai",
+      "journey-21",
+      1
+    ],
+    "responseHash": "4194d674637172a717193dd55b7d093584918d715118c6ecf217c6a8bfcc2b23",
+    "structuredValid": true,
+    "raw": {
+      "fullyCorrectIndependent": null,
+      "mechanicalFailures": [],
+      "extractionFailures": [],
+      "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+      "outputHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+    },
+    "legacy": {
+      "disposition": "blocked_or_clarify",
+      "resultHash": "75167dfa182f2f7460176aad7cd475cac1a6280e6238bf451481265c84602bd5",
+      "accepted": false,
+      "effectiveOrder": [],
+      "requiredOrderPreserved": true
+    },
+    "guarded": {
+      "disposition": "appropriate_clarification",
+      "ordering": {
+        "version": "52b-order-policy-v5.1-owner-decisions-offline",
+        "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+        "orderingOnly": true,
+        "productionActivated": false,
+        "planningAuthorized": false,
+        "source": {
+          "category": "contradictory",
+          "proofs": [],
+          "issues": [
+            "contradictory_source_relations"
+          ],
+          "requirements": [
+            "required",
+            "required"
+          ],
+          "occurrences": [],
+          "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+          "independent": [],
+          "conditionalSemantics": "order if both visited; closure before optional projection",
+          "nonOrderValidationRequired": true,
+          "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+          "reviewedConnectors": [],
+          "reviewedFrame": null,
+          "ownerOptionalSequenceRuleConfirmed": true
+        },
+        "rawHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4",
+        "issues": [
+          "contradictory_source_relations",
+          "existing_source_clarification_requires_review"
+        ],
+        "outcome": "clarification_required",
+        "trustedGraph": null,
+        "normalization": null,
+        "edges": [],
+        "requiredClosure": [],
+        "impliedRelationships": [],
+        "mandatoryRequiredVisitClosure": [],
+        "conditionalClosure": []
+      },
+      "planningAuthorized": false
+    },
+    "mappingKnown": true,
+    "requiresIndependentReview": true,
+    "planningAuthorized": false,
+    "systemFailures": [],
+    "providerStatus": "complete",
+    "usage": [
+      5100,
+      500
+    ],
+    "reasoningTokens": 0,
+    "estimatedNanodollars": 887500,
+    "comparisonProjections": [],
+    "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+    "independentReviewIsSyntheticOnly": true
+  },
+  "independentHumanReviewComplete": false,
+  "originalJournalCopied": false,
+  "financialNote": "Four full fictional reservations; no real charge or slot. Proposed cap still five/$0.0125, not approval or current prices.",
+  "temporaryStateAndKeysCleaned": true
+}

@@ -1,3 +1,7 @@
+# Task52B Q4D — keep original inspection and fictional writes separate
+
+Reuse the frozen Q4B and V5.1/Q4C components through a small exact-version bridge, rather than adapting the real journal to a fictional registry or copying another writer. A correct raw extraction with known legacy order loss receives its own terminal Q4D halt; even a missing halt after OUTCOME cannot permit progression. Future real diagnostic continuation after that loss needs a separate decision/build, and never implies plan admission. [Scope, evidence and future security review](docs/task52-q4d-v51-journal-integration.md).
+
 # Task52B — reuse frozen Q4C algorithms without relabeling V4
 
 Bind verified Q4C function code to a private fixed V5.1 plan/auth/scorer namespace instead of editing or copying its accounting/durability engine. Rebuild only the standard contextmanager wrapper; retain old source checks and add new exact build checks. Separate signed V5.1 domain/binding rejects V4 packets. Known legacy graph loss is reported without inventing a raw model error or authorizing a plan; unknown occurrence mapping and critical raw/provider/review failures stop. This is synthetic-only engineering evidence, not a real authorization system or independent qualification. [Evidence/security boundaries](docs/task52-v51-offline-evaluator-v1.md).

@@ -1,3 +1,7 @@
+# Task52B Q4D — separated real read / fictional write facade
+
+`task52_q4d.inspect_original` verifies the exact V5.1 binding over Q4B's fixed read-only inspector. `FictionalContinuation` constructs only new temporary Q4C/V5.1 state, reuses its unchanged writer/locks/facts/crypto, and adds a terminal legacy-order-loss rule including the OUTCOME-before-HALT crash gap. No database path input, application import, real writer/transport/issuer or runtime activation. [Integration and authority limits](docs/task52-q4d-v51-journal-integration.md).
+
 # Task52B — separately bound V5.1 offline evaluator
 
 `task52_v51_eval_protocol` reuses verified Q4C protocol function code in a fixed private namespace/fixture registry, with additional new-build checks; it does not patch the frozen modules. `task52_v51_eval_auth` reuses Q4C crypto/trust/role helpers with a new signed audience/purpose/binding. `task52_v51_eval_scoring` separates finite raw facts, complete B2 result and V5.1 guard/effective mapping. Only temporary synthetic SQLite and closed FakeTransport work. No application import, real writer, HTTP/credentials, issuer, public activation or planning authority. [Design and limits](docs/task52-v51-offline-evaluator-v1.md).

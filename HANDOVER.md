@@ -1,3 +1,15 @@
+# Task52B Q4D — V5.1 original-journal compatibility, live dispatch disabled
+
+Started clean `d286605`. [Narrow bridge, actual/fake matrix, strict loss policy and next gates](docs/task52-q4d-v51-journal-integration.md), [build/source manifest](docs/task52-q4d-build-v1.json), [real read-only result](docs/task52-q4d-inspection-v1.json), [fictional evidence](docs/task52-q4d-fictional-results-v1.json), [verification](docs/task52-q4d-verification-v1.json). Identity `52b-q4d-v51-journal-bridge-OFFLINE-v1`; manifest SHA256 `4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4`.
+
+Reuse fixed Q4B read-only inspection and unchanged V5.1/Q4C exact-schema synthetic writer/security/accounting/recovery. No caller-selected write path, real writer, enrollment, credential loader, live transport or enabling flag. Real state is opened only mode=ro/query-only under existing shared experiment.lock, never copied into a second experiment. Fictional writes use a separate private temporary database/EX lock; a future real writer must share the original lock inode.
+
+Q4D adds a stricter terminal rule: correct raw groceries→optional coffee still loses its edge under legacy normalization. Preserve the raw/legacy/guarded assessment, append a separate HALT and refuse review/next slot. A durable loss OUTCOME also blocks after a process exit before HALT. Therefore a correct Q4D sequence stops after four fictional reservations; fifth contradiction remains separately tested, no substitution/reordering or real slot consumption. Continuing after loss requires a separate decision/build, never planning authorization.
+
+Original ten rows/corrections/324 files/halt remain OpenAI7/Google2/Anthropic1,10/594,$0.047366625 retained/$11.952633375 remaining. Frozen Q4/V5.1 identities, old source-pin refusal, all handbook/application/Qwen/HITEC/default-OFF shadow behavior preserved. Next: review offline Q4D, complete independent five-case/two-failure review, then separately scope protected real enrollment and same-journal writer/security implementation; fresh readiness and financial/operation grants remain absent. No inference/count/account/Maps, real journal write/approval/reservation, production enforcement, infrastructure/migration or Task53. Earlier entries remain historical.
+
+---
+
 # Task52B — V5.1 signed OFFLINE evaluator integrated
 
 Started clean `1fe2e98`. [Design/reuse/limits](docs/task52-v51-offline-evaluator-v1.md), [exact build](docs/task52-v51-evaluator-build-v1.json), [five signed fake cases](docs/task52-v51-evaluator-fake-results-v1.json), [historical comparison](docs/task52-v51-evaluator-historical-comparison-v1.json), [verification](docs/task52-v51-evaluator-verification-v1.json). Identity `52b-v51-signed-offline-evaluator-v1`; build SHA256 `756976849efc43e58032f4c3ff5abeef8465f85e4b1860d3b93e5b128aefaf07`. Bind reviewed prompt1741e5…, config4239dd…, all19 examples/B2/schema/corpus66/V5.1 rubric/policy and five-case owner-product record. No historical Q3/Q4/V4 identity is relabeled.

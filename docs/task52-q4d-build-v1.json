@@ -1,0 +1,193 @@
+{
+  "identity": "52b-q4d-v51-journal-bridge-OFFLINE-v1",
+  "syntheticOnly": true,
+  "liveDispatchAvailable": false,
+  "realWritableAdapter": false,
+  "financialApproval": false,
+  "parentBuildSHA256": "756976849efc43e58032f4c3ff5abeef8465f85e4b1860d3b93e5b128aefaf07",
+  "parentBindingHash": "a29949375a74fb41aff4af6668a43af0fa77a71ee8c371b3bcadc95254ab360a",
+  "planHash": "e9395660161b91aec5ca1e5b7b9796dd31a2fe41a3affab9ee5770a011ffef33",
+  "artifactHashes": {
+    "scripts/task52_q4d.py": "cd17c8f6035bd739f8f110aa2a4cb1f1cec8317617a59709bccc3aa59cd9f452",
+    "backend/test_task52_q4d.py": "ff86d0e76a2b327de863020cb496566b2aa640366234341fb44cb6c45e34490e",
+    "scripts/task52_q4b.py": "4fa72084abd6e10058a2a0d7015fd8870bf321ba99b3a599b90d9723f27e2fe4",
+    "scripts/task52_v51_eval_identity.py": "a34bf6f58a683e1a78ef2368e8f026f9036dfc6f47e7cbf1616cad69bc5cc77c",
+    "scripts/task52_v51_eval_protocol.py": "cc3dc4b5d1abfb1a5630dab7a9d20caa721aa1514bfe317fc7c0b79c3a075219",
+    "scripts/task52_v51_eval_auth.py": "49aeaddff92d9e92f73e023e62a0639d96a7fb1865c34f8f450a353f47cb0424",
+    "scripts/task52_v51_eval_scoring.py": "f463534461ab882e7a6d0993aaf8850b5be6cfb7fc18e2c839bb5f9fe267b9cf"
+  },
+  "sourceIdentity": "52b-runtime-phase-b2; inherited verified current reconstruction, not exact historical environment",
+  "originalBaseline": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "ordinal": 1,
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "originalState": "recorded",
+        "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+      },
+      {
+        "ordinal": 2,
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "originalState": "recorded",
+        "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+      },
+      {
+        "ordinal": 3,
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "originalState": "recorded",
+        "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+      },
+      {
+        "ordinal": 4,
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "originalState": "recorded",
+        "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+      },
+      {
+        "ordinal": 5,
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "originalState": "recorded",
+        "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+      },
+      {
+        "ordinal": 6,
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "originalState": "recorded",
+        "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+      },
+      {
+        "ordinal": 7,
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "originalState": "recorded",
+        "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+      },
+      {
+        "ordinal": 8,
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "originalState": "recorded",
+        "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+      },
+      {
+        "ordinal": 9,
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "originalState": "recorded",
+        "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+      },
+      {
+        "ordinal": 10,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+        "originalState": "recorded_halted",
+        "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+      }
+    ],
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "privateFiles": 324,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "newReservations": 0
+  },
+  "fixedSlots": [
+    [
+      "openai",
+      "extension-repeated",
+      2
+    ],
+    [
+      "openai",
+      "journey-04",
+      2
+    ],
+    [
+      "openai",
+      "extension-partial",
+      2
+    ],
+    [
+      "openai",
+      "journey-06",
+      2
+    ],
+    [
+      "openai",
+      "journey-21",
+      1
+    ]
+  ],
+  "signedEnvelopeIdentity": "Unchanged synthetic V5.1 parent envelopes; no new real permission",
+  "orderingLossPolicy": "Terminal Q4D halt, no review/progression. Missing HALT after process exit still refuses from durable OUTCOME. Separate future decision/build required.",
+  "realReadProfile": "fixed Q4B mode=ro&immutable=1; query_only; authorizer; existing experiment.lock SH",
+  "fictionalWriteProfile": "factory-only new exact-DDL DB; Q4C/V5.1 append-only engine; own experiment.lock EX; full unchanged reservation limits",
+  "limits": {
+    "aggregateNanodollars": 12000000000,
+    "globalAttempts": 594,
+    "providerAttempts": 198,
+    "inputTokens": 12000,
+    "outputTokens": 2000,
+    "concurrency": 1,
+    "retries": 0,
+    "proposedOnlyChildAttempts": 5,
+    "proposedOnlyChildNanodollars": 12500000
+  }
+}
