@@ -1,3 +1,7 @@
+# Task52B — reuse frozen Q4C algorithms without relabeling V4
+
+Bind verified Q4C function code to a private fixed V5.1 plan/auth/scorer namespace instead of editing or copying its accounting/durability engine. Rebuild only the standard contextmanager wrapper; retain old source checks and add new exact build checks. Separate signed V5.1 domain/binding rejects V4 packets. Known legacy graph loss is reported without inventing a raw model error or authorizing a plan; unknown occurrence mapping and critical raw/provider/review failures stop. This is synthetic-only engineering evidence, not a real authorization system or independent qualification. [Evidence/security boundaries](docs/task52-v51-offline-evaluator-v1.md).
+
 # Task52B — freeze unchanged V5.1 content after four owner product approvals
 
 Record the owner's explicit example10/12/15/19 judgments and general A–D separately from Codex's19-example consistency check and independent gold/response certification. Use a new REVIEWED documentation identity without changing the existing prompt, configuration, examples or historical artifacts. No signature, paid grant, issuer or operational approval is implied. [Exact content/provenance and remaining gates](docs/task52-v51-prompt-freeze.md).

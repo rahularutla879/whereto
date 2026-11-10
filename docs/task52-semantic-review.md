@@ -1,3 +1,9 @@
+# V5.1 offline three-axis evaluator integration
+
+[Finite mechanical checks and signed fictional-state protocol](task52-v51-offline-evaluator-v1.md) keep raw extractionFailures separate from complete B2 legacy and V5.1 guard outcomes. Fully correct independent status remains null; synthetic signed24-field judgments are not human approvals. Known legacy graph loss never authorizes planning; unknown occurrence mapping is fatal and explicitly a system failure. Wrong raw order/optionality/named identities/repeats/return/duration or provider outcomes halt even when safely guarded. Historical V4 findings/owner records/rubrics are untouched; no real model is newly qualified. No live or production activation.
+
+---
+
 # V5.1 four-example owner approval — independent review remains open
 
 [Review record and exact prompt freeze](task52-v51-prompt-freeze.md): owner product meanings10/12/15/19 and A–D are approved; Codex checked all19 examples and found no contradictory instruction. This does not certify all24 fields, all66 rubrics or any model output independently. Original six unresolved Q1 records stay frozen; the separate proposed Rule B resolution leaves five proposed field gaps, all independent gold/response reviews pending. No historical accepted repeated-coffee failure or journey-07 rejection is rewritten. [Next gates](task52-v51-next-approval-gates.md) distinguish bounded diagnostic prerequisites from broader qualification. No raw output/prompt/configuration/source or production behavior changes.

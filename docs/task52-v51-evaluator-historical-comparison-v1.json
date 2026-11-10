@@ -1,0 +1,318 @@
+{
+  "identity": "52b-v51-offline-evaluator-historical-comparison-v1",
+  "scope": "Recorded original responses; separate current-B2/V5.1 assessment, not a new paid attempt or model qualification",
+  "QwenRecords": 27,
+  "QwenCurrentOrderingCompatible": 19,
+  "QwenWithLegacyJourneyCompatibleOnly": 8,
+  "QwenFrozenV4AndV5IdentitiesReproduced": true,
+  "OpenAIRecords": 7,
+  "openai": [
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba",
+      "originalResponseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "historicalRawRubricFinding": "agent_review_correct_not_independently_qualified",
+      "historicalLegacyDisposition": "accepted_ordinary",
+      "historicalV4GuardDisposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "V51OrderingOutcome": "clarification_required",
+      "V51Issues": [
+        "missing_source_required_relationship"
+      ],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "default_list",
+          "span": [
+            0,
+            17
+          ],
+          "cue_span": [
+            7,
+            11
+          ],
+          "source": "Dinner and drinks",
+          "source_sha256": "f5efbc1d7427fe5dcb74f93c41f4d55c876b50b44559917e949bcb29a2194619",
+          "conditional": false,
+          "evidenceHash": "aa37305315325d5d477c14929e6d9c925e63b74133f0cb879c14f76c4954bf52"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae",
+      "originalResponseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "historicalRawRubricFinding": "agent_review_correct_not_independently_qualified",
+      "historicalLegacyDisposition": "accepted_ordinary",
+      "historicalV4GuardDisposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "V51OrderingOutcome": "clarification_required",
+      "V51Issues": [
+        "missing_source_required_relationship"
+      ],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "default_list",
+          "span": [
+            5,
+            22
+          ],
+          "cue_span": [
+            12,
+            16
+          ],
+          "source": "dinner and drinks",
+          "source_sha256": "0b5bd568c90aea0bb9f62466ed9df4e0d4144d64dd44d6eb7f7f7abb58b48fc7",
+          "conditional": false,
+          "evidenceHash": "667ebb4a5607716fec1314d21d7b62e52152c514531afcbde38414a444137870"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029",
+      "originalResponseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "historicalRawRubricFinding": "agent_review_correct_not_independently_qualified",
+      "historicalLegacyDisposition": "accepted_advanced_handoff",
+      "historicalV4GuardDisposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "V51OrderingOutcome": "verified_no_mandatory_order",
+      "V51Issues": [],
+      "V51RequiredClosure": [],
+      "V51Proofs": [],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f",
+      "originalResponseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "historicalRawRubricFinding": "incorrect_provenance",
+      "historicalLegacyDisposition": "blocked_or_clarify",
+      "historicalV4GuardDisposition": "blocked_by_complete_legacy_validation",
+      "V51OrderingOutcome": "clarification_required",
+      "V51Issues": [
+        "unsupported_direction_scope_or_occurrence"
+      ],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "explicit_then",
+          "span": [
+            6,
+            46
+          ],
+          "cue_span": [
+            19,
+            24
+          ],
+          "source": "the pharmacy first, then the supermarket",
+          "source_sha256": "926dc6b3609c655bf3dd00695e1d20f16a86adb86b2be1ec14295da01ca23ea8",
+          "conditional": false,
+          "evidenceHash": "da31f91f7b841c4b417e06cc7a6039e4ca2d596501fc4ac3172b836c18a51a2d"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4",
+      "originalResponseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "historicalRawRubricFinding": "agent_review_correct_not_independently_qualified",
+      "historicalLegacyDisposition": "accepted_advanced_handoff",
+      "historicalV4GuardDisposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "V51OrderingOutcome": "verified_order",
+      "V51Issues": [],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "explicit_then",
+          "span": [
+            6,
+            51
+          ],
+          "cue_span": [
+            32,
+            41
+          ],
+          "source": "SUNY College of Optometry and then get coffee",
+          "source_sha256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+          "conditional": false,
+          "evidenceHash": "734cf170f050faf93e4e66964015fe59a9437a53bb4788c2f70aab36a917392c"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "originalJournalState": "recorded",
+      "originalRecordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41",
+      "originalResponseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "historicalRawRubricFinding": "agent_review_correct_not_independently_qualified",
+      "historicalLegacyDisposition": "accepted_advanced_handoff",
+      "historicalV4GuardDisposition": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "V51OrderingOutcome": "verified_order",
+      "V51Issues": [],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "explicit_before",
+          "span": [
+            8,
+            32
+          ],
+          "cue_span": [
+            17,
+            23
+          ],
+          "source": "pharmacy before the bank",
+          "source_sha256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+          "conditional": false,
+          "evidenceHash": "c8ad2514f1bc5b27398da3c9cbe3ff500a6da0b8446f5599eec58b01477616f5"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "originalJournalState": "recorded_halted",
+      "originalRecordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968",
+      "originalResponseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "historicalRawRubricFinding": "incorrect_unsupported_order",
+      "historicalLegacyDisposition": "accepted_advanced_handoff",
+      "historicalV4GuardDisposition": "blocked_by_independent_ordering",
+      "V51OrderingOutcome": "verified_order",
+      "V51Issues": [],
+      "V51RequiredClosure": [
+        [
+          0,
+          1
+        ],
+        [
+          0,
+          2
+        ],
+        [
+          1,
+          2
+        ]
+      ],
+      "V51Proofs": [
+        {
+          "before": 0,
+          "after": 1,
+          "rule": "default_list",
+          "span": [
+            0,
+            14
+          ],
+          "cue_span": [
+            6,
+            8
+          ],
+          "source": "Coffee, museum",
+          "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+          "conditional": false,
+          "evidenceHash": "3d8af59a892e8dfd1fc8260d8098c204b407efe112a5faa932df610402bcbdb3"
+        },
+        {
+          "before": 1,
+          "after": 2,
+          "rule": "explicit_then",
+          "span": [
+            8,
+            27
+          ],
+          "cue_span": [
+            14,
+            21
+          ],
+          "source": "museum, then coffee",
+          "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+          "conditional": false,
+          "evidenceHash": "18a0b770d648c02bd179d4dfa1780dc0699d6eac8a350e1991b60413bdf1a57c"
+        }
+      ],
+      "independentFullCorrectness": null,
+      "historicalClassificationChanged": false
+    }
+  ],
+  "originalJournalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+  "providerRequests": 0,
+  "sourceReplayImplementationSHA256": "dc9775d26fc982774a8d477bff4c0b411c9eacc997d9383a688515453196e45e",
+  "independentApprovals": 0,
+  "historicalEvidenceChanged": false
+}

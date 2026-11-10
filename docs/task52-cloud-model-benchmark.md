@@ -1,3 +1,9 @@
+# V5.1 offline evaluator integration — fictional results only
+
+[Separate implementation/build and fake/historical evidence](task52-v51-offline-evaluator-v1.md). Five authored fake responses and temporary signed synthetic reviews exercise the fixed original slot sequence. No real request, token count, inference latency, charge or model qualification is added. Known legacy groceries/coffee order loss remains a guarded planning block despite correct fake raw extraction. Original7 OpenAI/2 Google/1 Anthropic records, source pins, cohorts/costs/corrections and persistent halt remain unchanged; all324 private files preserved. Real build/operator/writer/review/readiness/financial gates remain closed. Older measurements below remain historical.
+
+---
+
 # Reviewed V5.1 prompt specification — zero new model measurements
 
 [Prompt freeze](task52-v51-prompt-freeze.md) records owner approval of four changed example meanings and Codex's19-example consistency review, with exact existing prompt/configuration bytes unchanged. No independent model qualification or paid authorization follows. Historical outputs/source pins/scores/cohorts/costs/halt remain unchanged; same five proposed slots stay unused. [Missing real build/operator/review/readiness/financial gates](task52-v51-next-approval-gates.md). Actual10/594,$0.047366625 retained; no provider/count/account/Maps request or production change. Older checkpoints below remain historical.

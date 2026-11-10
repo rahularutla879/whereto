@@ -1,0 +1,154 @@
+{
+  "identity": "52b-v51-offline-evaluator-verification-v1",
+  "implementation": "52b-v51-signed-offline-evaluator-v1",
+  "baselineCommit": "1fe2e9860fac2c22bb7f17a9b10a112caf31eeda",
+  "executionBuildSHA256": "756976849efc43e58032f4c3ff5abeef8465f85e4b1860d3b93e5b128aefaf07",
+  "identityVerifierSHA256": "a34bf6f58a683e1a78ef2368e8f026f9036dfc6f47e7cbf1616cad69bc5cc77c",
+  "dateUTC": "2026-11-10",
+  "offlineImplementationReadyForOwnerReview": true,
+  "liveDispatchAvailable": false,
+  "realWriterOrEnrollmentImplemented": false,
+  "reuse": {
+    "coreQ4CSourcesUnchanged": true,
+    "protocolFunctionCodeObjectsIdentical": true,
+    "fixedPrivateBindingsNoMonkeypatchExecOrImportHooks": true,
+    "registryIsolated": true,
+    "cryptoCanonicalTrustRoleSchemaBoundsAndBudgetRecoveryAlgorithmsReused": true,
+    "newCode": "Exact V5.1 build/purpose/binding adapter and finite three-axis scorer; no real transport/writer/issuer"
+  },
+  "tests": [
+    {
+      "scope": "Final V5.1 integration: inherited Q4C security plus new profile/source/semantic/provider/mapping tests",
+      "tests": 29,
+      "passed": 29,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 631.117
+    },
+    {
+      "scope": "Original Q4A/Q4B/Q4C plus frozen V1\u2013V5.1, prompt/source/Q1\u2013Q3, admission/journey and recorded replay regressions",
+      "tests": 319,
+      "passed": 319,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 397.007
+    }
+  ],
+  "fakeRun": {
+    "resultFileSHA256": "028c8126e815dd12ce27b585fbef8ea1f73c27baab6b685c4c588209d9bd8d1c",
+    "correctFakeCasesPassed": 5,
+    "syntheticSignedScopesAndReviewsOnly": true,
+    "fakeExtraReservationsNanodollars": 12500000,
+    "realAttempts": 0,
+    "realReservations": 0,
+    "realApprovals": 0,
+    "guardedDispositions": [
+      "candidate_only",
+      "candidate_only",
+      "candidate_only",
+      "blocked_by_legacy_effective_order_loss",
+      "appropriate_clarification"
+    ],
+    "independentFullCorrectness": null,
+    "temporaryStateAndSyntheticKeysCleaned": true,
+    "syntheticPrivateValuesScanned": 3,
+    "currentRepositoryMatches": 0
+  },
+  "failureCoverage": {
+    "semantic": "missing/extra/reversed order, merged repeats, wrong required/optional, wrong named identity, missing/wrong endpoint/return/duration/relation/source quote, invented constraints, inappropriate/insufficient clarification",
+    "provider": "wrong model, malformed/truncated/unknown-property JSON, invalid or over-cap usage, unexpected output/tool/content, HTTP error, uncertain send/response loss",
+    "authorization": "unsigned/forged/wrong role/principal/namespace/domain/build/model/prompt/schema/proposal/root/slot/source/charge, revoked/expired/future/stale/replayed/conflicting grants, incomplete/disagreed review",
+    "accounting": "exact-DDL prefix/schema/status/null/negative records, rowid deletion/reuse, original/global/provider/child financial and attempt exhaustion",
+    "recovery": "7 forked-process crash points, competing-process lock, missing intent/outcome/review, registry loss, historical and child halt refusal",
+    "rawCorrectnessNotInferredFromSafeRejection": true,
+    "unknownMappingIsSystemHalt": true,
+    "knownLegacyGraphLossNeverAuthorizesPlan": true
+  },
+  "limits": {
+    "globalAttempts": 594,
+    "perProviderAttempts": 198,
+    "spendCapNanodollars": 12000000000,
+    "inputTokens": 12000,
+    "outputTokens": 2000,
+    "concurrency": 1,
+    "automaticRetries": 0,
+    "proposedOnlyChildAttempts": 5,
+    "proposedOnlyChildCapNanodollars": 12500000
+  },
+  "originalJournal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "integrity": "ok",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "all324PrivateFilesUnchanged": true,
+    "correctionsAndHistoricalHaltUnchanged": true
+  },
+  "historicalComparison": {
+    "fileSHA256": "fe6d5cbb722829eef0cb6d197a7ccc0adf6a4632920996195917671e89fad09b",
+    "Qwen": 27,
+    "OpenAI": 7,
+    "originalV4RepeatedCoffeeAcceptedCriticalErrorPreserved": true,
+    "V51RepeatedCoffeeOrderingCompatible": true,
+    "journey07ProvenanceRejectionPreserved": true,
+    "bothDinnerDrinksMissingV51Order": true,
+    "historicalCohortsScoresChargesHashesChanged": false,
+    "originalPaidSourceGateStillRefusesB2": true,
+    "exactHistoricalEnvironmentClaim": false
+  },
+  "security": {
+    "configuredAppSecretValuesChecked": 2,
+    "evaluationKeysChecked": 3,
+    "currentMatches": 0,
+    "historyMatches": 0,
+    "privateConfigurationIgnoredAndMode600": true,
+    "originalJournalMode600": true,
+    "noPersonalSSHKeysOrRealSigningKeysUsed": true,
+    "realHumanReviewerClaims": 0
+  },
+  "scope": {
+    "productionSourceDependenciesChanged": false,
+    "fullApplicationFrontendTypecheckLintBuildBrowserRerun": false,
+    "reason": "Isolated offline scripts/tests/docs only; prior full application evidence remains historical.",
+    "productionQwenPromptLegacyPlannerHITECFixUnchanged": true,
+    "V4ShadowDefault": "OFF",
+    "productionV51Enforcement": false,
+    "handbookFilesUnchanged": 30,
+    "providerCountingMetadataAccountMapsRequests": 0,
+    "billingInfrastructureMigrationTask53Changes": false
+  },
+  "draftIssuesResolved": [
+    "Bound the contextmanager generator, retaining its standard-library wrapper globals.",
+    "Serialized diagnostic evidence tuples as JSON arrays for durable recomputation; raw responses unchanged.",
+    "Accepted complete source-bound contradictory clause with optional leading article; not cue-only evidence.",
+    "Initial28-test run had one missing public-verifier subprocess alias in the reused timeout test; fixed without bypassing checks. Final29 pass."
+  ],
+  "remainingRealGates": [
+    "Independent24-field source review for five cases/two historical failures; broader66 gold/five gaps/seven responses",
+    "Protected real roles/trust/clock/code enrollment and review",
+    "Original-journal append-only write/lock/replay/recovery adapter",
+    "Separate live build/purpose/security/transport review; decide known legacy order-loss diagnostic policy",
+    "Separately authorized fresh key/model/credits/recharge/pricing/processing/rate/input-count readiness",
+    "Final exact-source/payload/slot financial and one-operation permission",
+    "Independent real response review before another attempt"
+  ],
+  "durabilityLimit": "Fork/process-exit tests with inherited fixture registry do not prove power-loss, disk/distributed durability or restart-durable real authority."
+}

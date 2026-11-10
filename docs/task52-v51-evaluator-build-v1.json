@@ -1,0 +1,3149 @@
+{
+  "identity": "52b-v51-signed-offline-evaluator-v1",
+  "format": "52b-v51-evaluator-build-v1",
+  "syntheticOnly": true,
+  "liveDispatchAvailable": false,
+  "paidApproval": false,
+  "coreManifestSHA256": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb",
+  "binding": {
+    "parentProposalHash": "a02c80d77359404c4002807711d762f8aca772e06d33685a332e3e4b3cee4f45",
+    "parentConfigurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8",
+    "parentSpecification": {
+      "identity": "52b-q3-openai-b2-v5.1-owner-decisions-PROPOSED-v3",
+      "purpose": "synthetic V5.1 offline evaluation only",
+      "runtime": "52b-runtime-phase-b2",
+      "runtimeManifestHash": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+      "reconstruction": "52b-behavior-reconstruction-duration-b2-v1",
+      "historicalEnvironmentExact": false,
+      "canonicalPydanticSchemaHash": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+      "strictParserSchemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "originalCorpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "Q1Contract": "52b-q1-qualification-v1",
+      "Q1ManifestHash": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+      "Q1RubricHash": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+      "promptVersion": "52b-cloud-v5.1-owner-list-order-PROPOSED-v1",
+      "promptHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+      "semanticScorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+      "orderingPolicy": "52b-order-policy-v5.1-owner-decisions-offline",
+      "orderingPolicyHash": "ef2ebb7c6a74b0f0fad1309a9a313aaf50368ff13f455aa3dbe885e6ebb155eb",
+      "originalJournalRootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "referenceTime": "2026-11-05T15:00:00Z",
+      "clockPolicy": "Freeze date resolver and specify destination timezone per case; unknown timezone must clarify, never assume.",
+      "rawLegacyGuardedAxes": [
+        "unmodified raw extraction and independent full-field review",
+        "complete actual B2 legacy disposition with effective graph/mapping",
+        "raw V5.1 proof combined with legacy checks; known order loss never authorizes a plan"
+      ],
+      "futureEvaluatorImplementationHash": null,
+      "futureResponseHashPolicy": "Bind complete immutable provider response and separately decoded output to operation/slot/source/payload/configuration; compute only after response, never invent future response hashes.",
+      "inferenceEndpoint": "https://api.openai.com/v1/responses",
+      "inferenceMethod": "POST",
+      "authenticationScope": "existing restricted evaluation-project key, ignored backend config only; no key or headers in artifacts",
+      "redirectsAllowed": false,
+      "countingEndpointForSeparatelyApprovedReadiness": "POST https://api.openai.com/v1/responses/input_tokens",
+      "guardIsProductionEnforcement": false,
+      "model": "gpt-6-luna",
+      "inputCap": 12000,
+      "outputCap": 2000,
+      "reasoning": {
+        "effort": "none"
+      },
+      "temperature": 0,
+      "serviceTier": "default",
+      "store": false,
+      "tools": false,
+      "concurrency": 1,
+      "retries": 0,
+      "reviewedPromptIdentity": "52b-cloud-v5.1-owner-list-order-REVIEWED-v1",
+      "reviewedPromptRecordHash": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+      "configurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8",
+      "ownerProductRecord": "52b-v5.1-five-case-owner-product-review-v1",
+      "ownerProductRecordHash": "f70bacefcfd9bb1f703156ddaeedeaacac24141686b001aec0239f7acb8dab2b",
+      "independentHumanReviewsComplete": false
+    },
+    "originalBaseline": {
+      "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "rows": [
+        {
+          "ordinal": 1,
+          "slot": [
+            "google",
+            "journey-01",
+            1
+          ],
+          "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+          "originalState": "recorded",
+          "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+        },
+        {
+          "ordinal": 2,
+          "slot": [
+            "google",
+            "journey-02",
+            1
+          ],
+          "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+          "originalState": "recorded",
+          "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+        },
+        {
+          "ordinal": 3,
+          "slot": [
+            "anthropic",
+            "journey-01",
+            1
+          ],
+          "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+          "originalState": "recorded",
+          "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+        },
+        {
+          "ordinal": 4,
+          "slot": [
+            "openai",
+            "journey-01",
+            1
+          ],
+          "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+          "originalState": "recorded",
+          "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+        },
+        {
+          "ordinal": 5,
+          "slot": [
+            "openai",
+            "ordinary-dinner",
+            1
+          ],
+          "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+          "originalState": "recorded",
+          "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+        },
+        {
+          "ordinal": 6,
+          "slot": [
+            "openai",
+            "journey-03",
+            1
+          ],
+          "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+          "originalState": "recorded",
+          "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+        },
+        {
+          "ordinal": 7,
+          "slot": [
+            "openai",
+            "journey-07",
+            1
+          ],
+          "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+          "originalState": "recorded",
+          "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+        },
+        {
+          "ordinal": 8,
+          "slot": [
+            "openai",
+            "journey-04",
+            1
+          ],
+          "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+          "originalState": "recorded",
+          "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+        },
+        {
+          "ordinal": 9,
+          "slot": [
+            "openai",
+            "extension-partial",
+            1
+          ],
+          "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+          "originalState": "recorded",
+          "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+        },
+        {
+          "ordinal": 10,
+          "slot": [
+            "openai",
+            "extension-repeated",
+            1
+          ],
+          "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+          "originalState": "recorded_halted",
+          "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+        }
+      ],
+      "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+      "correctionFileHashes": [
+        "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+      ],
+      "privateFiles": 324,
+      "counts": {
+        "openai": 7,
+        "google": 2,
+        "anthropic": 1
+      },
+      "attempts": 10,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "persistentHistoricalHalt": true,
+      "newReservations": 0
+    },
+    "orderedSlots": [
+      {
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+        "payloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+        "rubricCaseDigest": "47805dff6e93274c6e8425dc1ab7da1deddcc9e698e1a7f8ba1ea69af27b490a"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+        "payloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+        "rubricCaseDigest": "5ddec2e32f522a6c982d17ef1a945fbefc5bd30bf26fe983cea307a4004e1273"
+      },
+      {
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+        "payloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+        "rubricCaseDigest": "f4ebb1622af9562399652af1313dcb9e4e78ad6fe940bdb26d7c769ef71b3f42"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+        "payloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+        "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-21",
+          1
+        ],
+        "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+        "payloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+        "rubricCaseDigest": "986ab85d0c05081f25f99516457ce6c290133104fdb514c8632be1c493794daa"
+      }
+    ]
+  },
+  "plan": {
+    "identity": "52b-v51-signed-offline-evaluator-v1",
+    "baseline": {
+      "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "rows": [
+        {
+          "ordinal": 1,
+          "slot": [
+            "google",
+            "journey-01",
+            1
+          ],
+          "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+          "originalState": "recorded",
+          "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+        },
+        {
+          "ordinal": 2,
+          "slot": [
+            "google",
+            "journey-02",
+            1
+          ],
+          "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+          "originalState": "recorded",
+          "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+        },
+        {
+          "ordinal": 3,
+          "slot": [
+            "anthropic",
+            "journey-01",
+            1
+          ],
+          "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+          "originalState": "recorded",
+          "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+        },
+        {
+          "ordinal": 4,
+          "slot": [
+            "openai",
+            "journey-01",
+            1
+          ],
+          "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+          "originalState": "recorded",
+          "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+        },
+        {
+          "ordinal": 5,
+          "slot": [
+            "openai",
+            "ordinary-dinner",
+            1
+          ],
+          "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+          "originalState": "recorded",
+          "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+        },
+        {
+          "ordinal": 6,
+          "slot": [
+            "openai",
+            "journey-03",
+            1
+          ],
+          "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+          "originalState": "recorded",
+          "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+        },
+        {
+          "ordinal": 7,
+          "slot": [
+            "openai",
+            "journey-07",
+            1
+          ],
+          "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+          "originalState": "recorded",
+          "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+        },
+        {
+          "ordinal": 8,
+          "slot": [
+            "openai",
+            "journey-04",
+            1
+          ],
+          "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+          "originalState": "recorded",
+          "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+        },
+        {
+          "ordinal": 9,
+          "slot": [
+            "openai",
+            "extension-partial",
+            1
+          ],
+          "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+          "originalState": "recorded",
+          "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+        },
+        {
+          "ordinal": 10,
+          "slot": [
+            "openai",
+            "extension-repeated",
+            1
+          ],
+          "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+          "originalState": "recorded_halted",
+          "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+        }
+      ],
+      "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+      "correctionFileHashes": [
+        "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+      ],
+      "privateFiles": 324,
+      "counts": {
+        "openai": 7,
+        "google": 2,
+        "anthropic": 1
+      },
+      "attempts": 10,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "persistentHistoricalHalt": true,
+      "newReservations": 0
+    },
+    "slots": [
+      {
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "source": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+        "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+        "proposedPayloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+        "rubricCaseDigest": "47805dff6e93274c6e8425dc1ab7da1deddcc9e698e1a7f8ba1ea69af27b490a",
+        "all24Expectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "Coffee",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "museum",
+                "requirement": "required"
+              },
+              {
+                "id": "s2",
+                "index": 2,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee",
+              "museum",
+              "coffee"
+            ],
+            "basis": "original partial/prose reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+              "conditionalReachability": [],
+              "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "owner_default_sequence",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": false
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "phrase": "Coffee",
+                "indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "phrase": "coffee",
+                "indices": [
+                  0,
+                  2
+                ]
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "supported",
+            "expected": {
+              "required": true,
+              "needsConfirmedOriginBeforePlanning": true,
+              "noInferredCoordinates": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "supported",
+            "expected": {
+              "minutes": 180,
+              "relation": "maximum",
+              "scope": "whole outing; include return only if independently required",
+              "inclusive": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "scope": "whole_trip",
+                "minutes": 180,
+                "relation": "maximum"
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [
+                "tomorrow"
+              ],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": "2026-11-06",
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "tomorrow"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1",
+                "s2"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "Both owned occurrences and complete source-bound list connector (reviewed whole-word aur included) or explicit scoped ordering cue.",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "supported",
+            "expected": {
+              "destinationText": "Jersey City",
+              "noOriginSubstitution": true,
+              "noSilentWidening": true
+            },
+            "sourceAnchors": [
+              "Jersey City"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        },
+        "ordering": {
+          "applicability": "supported",
+          "expected": {
+            "requiredReachability": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "forbidAllOtherNontransitiveEdges": true,
+            "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+            "conditionalReachability": [],
+            "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+          },
+          "sourceAnchors": [
+            "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+          ],
+          "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+          "independentReview": "pending"
+        },
+        "sourceProofCoverage": "sequence",
+        "unresolvedFields": [],
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "payloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+        "Q1FieldExpectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "Coffee",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "museum",
+                "requirement": "required"
+              },
+              {
+                "id": "s2",
+                "index": 2,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee",
+              "museum",
+              "coffee"
+            ],
+            "basis": "original partial/prose reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ],
+                [
+                  0,
+                  2
+                ],
+                [
+                  1,
+                  2
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+              "conditionalReachability": [],
+              "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "owner_default_sequence",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": false
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "phrase": "Coffee",
+                "indices": [
+                  0,
+                  2
+                ]
+              },
+              {
+                "phrase": "coffee",
+                "indices": [
+                  0,
+                  2
+                ]
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "supported",
+            "expected": {
+              "required": true,
+              "needsConfirmedOriginBeforePlanning": true,
+              "noInferredCoordinates": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "supported",
+            "expected": {
+              "minutes": 180,
+              "relation": "maximum",
+              "scope": "whole outing; include return only if independently required",
+              "inclusive": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "scope": "whole_trip",
+                "minutes": 180,
+                "relation": "maximum"
+              }
+            ],
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [
+                "tomorrow"
+              ],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": "2026-11-06",
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "tomorrow"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1",
+                "s2"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "Both owned occurrences and complete source-bound list connector (reviewed whole-word aur included) or explicit scoped ordering cue.",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "supported",
+            "expected": {
+              "destinationText": "Jersey City",
+              "noOriginSubstitution": true,
+              "noSilentWidening": true
+            },
+            "sourceAnchors": [
+              "Jersey City"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        }
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "source": "Go to SUNY College of Optometry and then get coffee.",
+        "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+        "proposedPayloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+        "rubricCaseDigest": "5ddec2e32f522a6c982d17ef1a945fbefc5bd30bf26fe983cea307a4004e1273",
+        "all24Expectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "SUNY College of Optometry",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "SUNY College of Optometry",
+              "coffee"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "index": 0,
+                "kind": "named_place",
+                "identity": "SUNY College of Optometry",
+                "unresolved": false
+              }
+            ],
+            "sourceAnchors": [
+              "SUNY College of Optometry"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order"
+            },
+            "sourceAnchors": [
+              "SUNY College of Optometry and then get coffee"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "constrained",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        },
+        "ordering": {
+          "applicability": "supported",
+          "expected": {
+            "requiredReachability": [
+              [
+                0,
+                1
+              ]
+            ],
+            "forbidAllOtherNontransitiveEdges": true,
+            "indexBasis": "source occurrences; list position alone is not mandatory order"
+          },
+          "sourceAnchors": [
+            "SUNY College of Optometry and then get coffee"
+          ],
+          "basis": "source-derived agent review",
+          "independentReview": "pending"
+        },
+        "sourceProofCoverage": "sequence",
+        "unresolvedFields": [],
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "payloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+        "Q1FieldExpectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "SUNY College of Optometry",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "SUNY College of Optometry",
+              "coffee"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "index": 0,
+                "kind": "named_place",
+                "identity": "SUNY College of Optometry",
+                "unresolved": false
+              }
+            ],
+            "sourceAnchors": [
+              "SUNY College of Optometry"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order"
+            },
+            "sourceAnchors": [
+              "SUNY College of Optometry and then get coffee"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "constrained",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Go to SUNY College of Optometry and then get coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        }
+      },
+      {
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "source": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+        "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+        "proposedPayloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+        "rubricCaseDigest": "f4ebb1622af9562399652af1313dcb9e4e78ad6fe940bdb26d7c769ef71b3f42",
+        "all24Expectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "pharmacy",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "bank",
+                "requirement": "required"
+              },
+              {
+                "id": "s2",
+                "index": 2,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "pharmacy",
+              "bank",
+              "coffee"
+            ],
+            "basis": "original partial/prose reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order"
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "partial",
+              "independentOccurrences": [
+                2
+              ],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [
+                "tomorrow"
+              ],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": "2026-11-06",
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "tomorrow"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1",
+                "s2"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "supported",
+            "expected": {
+              "destinationText": "Jersey City",
+              "noOriginSubstitution": true,
+              "noSilentWidening": true
+            },
+            "sourceAnchors": [
+              "Jersey City"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        },
+        "ordering": {
+          "applicability": "supported",
+          "expected": {
+            "requiredReachability": [
+              [
+                0,
+                1
+              ]
+            ],
+            "forbidAllOtherNontransitiveEdges": true,
+            "indexBasis": "source occurrences; list position alone is not mandatory order"
+          },
+          "sourceAnchors": [
+            "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+          ],
+          "basis": "source-derived agent review",
+          "independentReview": "pending"
+        },
+        "sourceProofCoverage": "partial",
+        "unresolvedFields": [],
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "payloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+        "Q1FieldExpectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "pharmacy",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "bank",
+                "requirement": "required"
+              },
+              {
+                "id": "s2",
+                "index": 2,
+                "sourcePhrase": "coffee",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "pharmacy",
+              "bank",
+              "coffee"
+            ],
+            "basis": "original partial/prose reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order"
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "partial",
+              "independentOccurrences": [
+                2
+              ],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [
+                "tomorrow"
+              ],
+              "syntheticCalendarTimezone": "America/New_York",
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": "2026-11-06",
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "tomorrow"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1",
+                "s2"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "supported",
+            "expected": {
+              "destinationText": "Jersey City",
+              "noOriginSubstitution": true,
+              "noSilentWidening": true
+            },
+            "sourceAnchors": [
+              "Jersey City"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        }
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "source": "Buy groceries and maybe stop for coffee.",
+        "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+        "proposedPayloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+        "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088",
+        "all24Expectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "groceries",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "groceries",
+              "coffee"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "coffee",
+                "requirement": "optional"
+              }
+            ],
+            "sourceAnchors": [
+              "coffee"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+              "conditionalReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "conditional_list",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": false
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": null,
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "Both owned occurrences and complete source-bound list connector (reviewed whole-word aur included) or explicit scoped ordering cue.",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        },
+        "ordering": {
+          "applicability": "supported",
+          "expected": {
+            "requiredReachability": [],
+            "forbidAllOtherNontransitiveEdges": true,
+            "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+            "conditionalReachability": [
+              [
+                0,
+                1
+              ]
+            ],
+            "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+          },
+          "sourceAnchors": [
+            "Buy groceries and maybe stop for coffee."
+          ],
+          "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+          "independentReview": "pending"
+        },
+        "sourceProofCoverage": "sequence",
+        "unresolvedFields": [],
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "payloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+        "Q1FieldExpectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "groceries",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "groceries",
+              "coffee"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "coffee",
+                "requirement": "optional"
+              }
+            ],
+            "sourceAnchors": [
+              "coffee"
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "V5.1 source occurrences; explicit scope takes priority over owner default list order",
+              "conditionalReachability": [
+                [
+                  0,
+                  1
+                ]
+              ],
+              "optionalProjection": "Owner Rule B: full closure before projection onto selected visits; optional stays optional"
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "conditional_list",
+              "independentOccurrences": [],
+              "noFullSequenceFromList": false
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": null,
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": false
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "Both owned occurrences and complete source-bound list connector (reviewed whole-word aur included) or explicit scoped ordering cue.",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Buy groceries and maybe stop for coffee."
+            ],
+            "basis": "Proposed V5.1 case expectation under owner Rules A-D; no independent case approval.",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        }
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-21",
+          1
+        ],
+        "source": "Visit the pharmacy before the bank, but the bank before the pharmacy.",
+        "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+        "proposedPayloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+        "rubricCaseDigest": "986ab85d0c05081f25f99516457ce6c290133104fdb514c8632be1c493794daa",
+        "all24Expectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "pharmacy",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "bank",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "pharmacy",
+              "bank"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order",
+              "sourceIntent": "contradictory; no graph may be admitted without clarification"
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "contradictory_not_unordered",
+              "independentOccurrences": [
+                0,
+                1
+              ],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": null,
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [
+                "contradictory order"
+              ],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "supported",
+            "expected": {
+              "action": [
+                "contradictory order"
+              ],
+              "mustNotExecuteToolsOrClaimBooking": true,
+              "mustNotChooseAndDropConflictingRequirements": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        },
+        "ordering": {
+          "applicability": "supported",
+          "expected": {
+            "requiredReachability": [],
+            "forbidAllOtherNontransitiveEdges": true,
+            "indexBasis": "source occurrences; list position alone is not mandatory order",
+            "sourceIntent": "contradictory; no graph may be admitted without clarification"
+          },
+          "sourceAnchors": [
+            "Visit the pharmacy before the bank, but the bank before the pharmacy."
+          ],
+          "basis": "source-derived agent review",
+          "independentReview": "pending"
+        },
+        "sourceProofCoverage": "contradictory",
+        "unresolvedFields": [],
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "payloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+        "Q1FieldExpectations": {
+          "required_activities": {
+            "applicability": "supported",
+            "expected": [
+              {
+                "id": "s0",
+                "index": 0,
+                "sourcePhrase": "pharmacy",
+                "requirement": "required"
+              },
+              {
+                "id": "s1",
+                "index": 1,
+                "sourcePhrase": "bank",
+                "requirement": "required"
+              }
+            ],
+            "sourceAnchors": [
+              "pharmacy",
+              "bank"
+            ],
+            "basis": "original structured reference plus source review",
+            "independentReview": "pending"
+          },
+          "optional_activities": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "exact_named_identity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "mandatory_order": {
+            "applicability": "supported",
+            "expected": {
+              "requiredReachability": [],
+              "forbidAllOtherNontransitiveEdges": true,
+              "indexBasis": "source occurrences; list position alone is not mandatory order",
+              "sourceIntent": "contradictory; no graph may be admitted without clarification"
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "unordered_flexible": {
+            "applicability": "supported",
+            "expected": {
+              "mode": "contradictory_not_unordered",
+              "independentOccurrences": [
+                0,
+                1
+              ],
+              "noFullSequenceFromList": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "repeated_stops": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "return_origin": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_destination": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "final_visit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "home_ambiguity": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "whole_trip_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "travel_only_limit": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "visit_durations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "duration_relations": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "dates_timezones": {
+            "applicability": "supported",
+            "expected": {
+              "expressions": [],
+              "syntheticCalendarTimezone": null,
+              "referenceTime": "2026-11-05T15:00:00Z",
+              "resolvedDateIfKnown": null,
+              "unknownTimezoneAction": "clarify before planning; retain expression",
+              "noInventedTimeWindow": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "budget_transport": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "safe_disposition": {
+            "applicability": "supported",
+            "expected": {
+              "extraction": "preserve all applicable fields",
+              "planning": "clarify unresolved required location/date/origin/identity; otherwise normal validated handoff, not a venue-availability promise",
+              "semanticClarification": [
+                "contradictory order"
+              ],
+              "safeRejectionAllowedOnlyForUnsupportedOrContradictoryInstructions": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "hallucinations": {
+            "applicability": "supported",
+            "expected": {
+              "forbidden": "Any mandatory activity, venue identity, edge, endpoint, date/time, duration, price, availability or capability unsupported by original source or explicit fixture context. Null/default is not permission to guess.",
+              "doNotDropUnknownActivities": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "contradiction_injection": {
+            "applicability": "supported",
+            "expected": {
+              "action": [
+                "contradictory order"
+              ],
+              "mustNotExecuteToolsOrClaimBooking": true,
+              "mustNotChooseAndDropConflictingRequirements": true
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "source_provenance": {
+            "applicability": "supported",
+            "expected": {
+              "occurrenceIDs": [
+                "s0",
+                "s1"
+              ],
+              "sourceSpanOwnership": "verbatim/bounded supported normalization and correct occurrence; borrowed or mismatched evidence fails",
+              "emptyGoldEvidence": "unspecified exact quote, never evidence optionality",
+              "explicitGoldEvidence": "retain exact asserted nonempty reference value; source grounding still required",
+              "edgeEvidence": "both referenced phrases and attached directional cue, independently proved; substring alone insufficient",
+              "requiredFields": "wire-schema required/null contract; missing property differs from explicit null"
+            },
+            "sourceAnchors": [
+              "Visit the pharmacy before the bank, but the bank before the pharmacy."
+            ],
+            "basis": "source-derived agent review",
+            "independentReview": "pending"
+          },
+          "people": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "geography": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "shared_place": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          },
+          "deadline": {
+            "applicability": "not_applicable",
+            "expected": null,
+            "sourceAnchors": [],
+            "basis": "No such requirement asserted in original source/reference; invention still forbidden.",
+            "independentReview": "pending"
+          }
+        }
+      }
+    ],
+    "successorVersionSpecification": {
+      "referenceTime": "2026-11-05T15:00:00Z"
+    }
+  },
+  "artifactHashes": {
+    "scripts/task52_v51_eval_auth.py": "49aeaddff92d9e92f73e023e62a0639d96a7fb1865c34f8f450a353f47cb0424",
+    "scripts/task52_v51_eval_protocol.py": "cc3dc4b5d1abfb1a5630dab7a9d20caa721aa1514bfe317fc7c0b79c3a075219",
+    "scripts/task52_v51_eval_scoring.py": "f463534461ab882e7a6d0993aaf8850b5be6cfb7fc18e2c839bb5f9fe267b9cf",
+    "docs/task52-cloud-prompt-v51-REVIEWED-v1.json": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+    "docs/task52-cloud-prompt-v51-PROPOSED-v1.json": "8b9673895f77b4e890d82a900a61bc2ddc7ed31176cf2feb267c6cbf88f456cf",
+    "docs/task52-q1-rubric-v3-v51-PROPOSED.json": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+    "docs/task52-q3-v51-PROPOSED-v3.json": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc",
+    "docs/task52-v51-five-case-owner-review-v1.json": "f70bacefcfd9bb1f703156ddaeedeaacac24141686b001aec0239f7acb8dab2b",
+    "docs/task52-ordering-v51-manifest-v1.json": "9791c0235b01f2bbe20e92e4020e7c11eea1fb16ca3333fbd377cb274513ee66",
+    "scripts/task52_ordering_v51.py": "ef2ebb7c6a74b0f0fad1309a9a313aaf50368ff13f455aa3dbe885e6ebb155eb",
+    "backend/test_task52_v51_evaluator.py": "0e80d096506991bf3eb3c5067b2b79c4d4cd208aba2f1e8f7aebc6991c03fbf7"
+  }
+}

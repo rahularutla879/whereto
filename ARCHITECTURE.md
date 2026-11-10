@@ -1,3 +1,7 @@
+# Task52B — separately bound V5.1 offline evaluator
+
+`task52_v51_eval_protocol` reuses verified Q4C protocol function code in a fixed private namespace/fixture registry, with additional new-build checks; it does not patch the frozen modules. `task52_v51_eval_auth` reuses Q4C crypto/trust/role helpers with a new signed audience/purpose/binding. `task52_v51_eval_scoring` separates finite raw facts, complete B2 result and V5.1 guard/effective mapping. Only temporary synthetic SQLite and closed FakeTransport work. No application import, real writer, HTTP/credentials, issuer, public activation or planning authority. [Design and limits](docs/task52-v51-offline-evaluator-v1.md).
+
 # Task52B V5.1 — isolated owner-policy and prompt proposals
 
 `task52_ordering_v51` reuses frozen V5 source analysis through bounded offset-preserving connector recognition, then verifies original source quotes and new policy-bound proof hashes. Its offline selected-visit projection never publishes a plan or receipt. `task52_prompt_v51` constructs a complete proposed OpenAI request/template and audits19 examples without transport; `task52_ordering_v51_review` binds new rubric/replay/successor proposals. All application runtime, legacy authority, shadow defaults, schema, provider and paid-dispatch paths remain unchanged. [Scope/versioning](docs/task52-ordering-policy-v51.md).
