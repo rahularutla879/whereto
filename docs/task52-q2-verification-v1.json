@@ -1,0 +1,149 @@
+{
+  "identity": "52b-q2-verification-v1",
+  "baselineGitHEAD": "1e170485f9f48840f6085afba725b2087d1452e4",
+  "q2CompleteAsCompatibilityDecision": true,
+  "productionOrLiveReadinessEstablished": false,
+  "dispositions": {
+    "openai": "READY FOR Q3 PROPOSAL",
+    "google": "BLOCKED",
+    "anthropic": "BLOCKED"
+  },
+  "tests": {
+    "providerSchemaVersionSourceOrderingAndNegative": {
+      "run": 128,
+      "passed": 128,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 77.843
+    },
+    "finalQ2Q1Integrity": {
+      "run": 15,
+      "passed": 15,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 12.793
+    }
+  },
+  "finalRefinement": "Final15 independently rerun after recording reference-expanded union metrics and the finite machine-readable dispositions. Existing runtime/provider/schema/scoring sources unchanged.",
+  "staticPayloadsOnly": {
+    "openai": 66,
+    "google": 66,
+    "anthropic": 66,
+    "authenticatedRequests": 0
+  },
+  "schemaEquivalence": {
+    "google": {
+      "baseSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "proposedSchemaHash": "c9f7edbf080add02e5d4625484c859e61258140eb6886fa151dc3a11fdd7ef1e",
+      "wireAloneEquivalent": false,
+      "composedCanonicalContractEquivalent": true,
+      "syntaxUnions": [
+        15,
+        15
+      ],
+      "expandedUnions": [
+        15,
+        15
+      ],
+      "expandedObjectProperties": 46,
+      "expandedContainerDepth": 5,
+      "remoteCompilationEstablished": false,
+      "activated": false
+    },
+    "anthropic": {
+      "baseSchemaHash": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0",
+      "proposedSchemaHash": "69519fc976dc7057d9dbbd877658a8e6b886cf2051039ae5ebc92727fa21d112",
+      "wireAloneEquivalent": true,
+      "composedCanonicalContractEquivalent": true,
+      "syntaxUnions": [
+        15,
+        14
+      ],
+      "expandedUnions": [
+        15,
+        15
+      ],
+      "expandedObjectProperties": 46,
+      "expandedContainerDepth": 5,
+      "remoteCompilationEstablished": false,
+      "activated": false
+    }
+  },
+  "historicalErrorsVerified": 3,
+  "revisedGoogleAndOriginalAnthropicPayloadHashesReproduced": true,
+  "OpenAIV4PayloadHashesReproduced": 3,
+  "firstGoogleSourceReadAsDataOnly": true,
+  "q1ArtifactsByteIdentical": true,
+  "originalEvaluatorSourceGateStillRefusesB2": true,
+  "sevenOpenAIReplay": "exact frozen Q1 reconstruction result reproduced; no independent qualification",
+  "recordedQwenOpenAIAndPolicyReplay": {
+    "qwenRows": 27,
+    "openaiRows": 7,
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "privateEvidenceUnchanged": true,
+    "requestsSent": 0
+  },
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "remaining": 584,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "persistentHalt": true
+  },
+  "publicDocumentationResearch": true,
+  "retrievalLimitations": [
+    "OpenAI full create-response reference exceeded web reader content limit; model/structured-output/settings guides retrieved instead.",
+    "Google Markdown unsupported in web reader; actual official pages fetched without authentication using curl.",
+    "No current accounts, keys, credits, permissions, IP address, pricing contract or API availability verified."
+  ],
+  "authenticatedProviderRequests": 0,
+  "inferenceRequests": 0,
+  "tokenCountingRequests": 0,
+  "modelMetadataRequests": 0,
+  "accountChanges": false,
+  "supportDraftsSent": false,
+  "productionRuntimeChanged": false,
+  "fullBackendFrontendTypecheckLintBuildBrowser": "Not rerun: isolated offline tool/tests/documentation only; no shared runtime/app dependency change. No new browser or live-provider claim.",
+  "security": {
+    "configuredSecretsCurrentAndHistoryMatches": 0,
+    "threeEvaluationKeysCurrentAndHistoryMatches": 0,
+    "privateConfigAndJournalIgnoredMode600": true
+  },
+  "completeDiffReviewed": true,
+  "artifactHashes": {
+    "scripts/task52_q2.py": "708e430123c69ad1a06b07e5155b6c9600b4cbb04a4ae15ddaed9b7bf9889fc3",
+    "backend/test_task52_q2.py": "df2c2735ef8ca3305edad04f01ecfd3958fb8bfaea45c78a4c11ff0fcd3d39e8",
+    "docs/task52-q2-anthropic-proposal-v1.json": "d9ba6cbb3f6e75f994d978b1e4b981bf27cfecfb3dbb8491de9e2402a70d5bbe",
+    "docs/task52-q2-decisions-v1.json": "2183f2b7c2b71bb50e5c5544178bb6b6e16a287ad6d0fa27f749217adc11d9b6",
+    "docs/task52-q2-evidence-v1.json": "5d8d9bfef2996721ca39e563e6332972e01b95acfd8835090913091c6c907377",
+    "docs/task52-q2-google-proposal-v1.json": "7e0c243bcb735451da393c33eed858348954b05983db68ee7f0ed6fc9b3a59a3",
+    "docs/task52-q2-provider-compatibility.md": "93615923314da28ac3a1497a15b8303183268d32718b8734a77da3ddac8a7af1"
+  },
+  "limitsUnchanged": "$12 aggregate /594 total /198 per provider /12000 input /2000 output /concurrency1 /zero retries",
+  "nextStep": "Owner review; separately scoped Q3 OpenAI proposal only. Google/Anthropic remain blocked; no automatic continuation."
+}

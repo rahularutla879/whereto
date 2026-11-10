@@ -1,3 +1,9 @@
+# Task52B Q2 compatibility decisions — no activation
+
+OpenAI `gpt-6-luna` is technically ready only for a separately reviewed Q3 source/version and same-journal continuation **proposal**, not live dispatch or qualification. Gemini Developer API remains blocked on unresolved400/IP evidence; Anthropic remains blocked on grammar compilation. Retain one existing unactivated schema proposal per blocked provider, and seek owner-approved support evidence rather than speculative paid probes. Q1 gaps/independent review and original source refusal/halt remain. [Evidence, proposals and exact owner actions](docs/task52-q2-provider-compatibility.md). No provider/schema/prompt/runtime/account change follows.
+
+---
+
 # Task 52B B2 — owner-approved behavioral reconstruction, one helper
 
 Use separately labeled current-runtime reconstruction `52b-behavior-reconstruction-duration-b2-v1`, not an exact historical environment claim. Preserve frozen B1 behavior data, old source pins and paid records. Extract only duration normalization, mechanically qualifying dynamic lookups, after 75 interpretation and 25 direct duration traces were frozen.

@@ -1,0 +1,585 @@
+{
+  "identity": "52b-q2-anthropic-nullable-duration-review-v1",
+  "provider": "anthropic",
+  "model": "claude-haiku-5-5",
+  "baseSchemaHash": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0",
+  "proposedSchemaHash": "69519fc976dc7057d9dbbd877658a8e6b886cf2051039ae5ebc92727fa21d112",
+  "schema": {
+    "$defs": {
+      "ActivityType": {
+        "description": "Canonical activity ID, or custom: followed by a grounded activity phrase. Validation constraints: {\"maxLength\": 107}",
+        "type": "string"
+      },
+      "CostPreference": {
+        "enum": [
+          "budget",
+          "balanced",
+          "experience"
+        ],
+        "type": "string"
+      },
+      "Deadline": {
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          },
+          "relation": {
+            "enum": [
+              "by",
+              "before"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "relation"
+        ],
+        "type": "object"
+      },
+      "Duration": {
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 10080, \"minimum\": 0}"
+          },
+          "relation": {
+            "enum": [
+              "exact",
+              "minimum",
+              "maximum",
+              "under",
+              "approximate"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          }
+        },
+        "required": [
+          "minutes",
+          "relation",
+          "source"
+        ],
+        "type": "object"
+      },
+      "Endpoint": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "origin",
+              "home",
+              "named_place",
+              "activity",
+              "brand"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          }
+        },
+        "required": [
+          "kind",
+          "source"
+        ],
+        "type": "object"
+      },
+      "Journey": {
+        "additionalProperties": false,
+        "properties": {
+          "stops": {
+            "items": {
+              "$ref": "#/$defs/RequestedStop"
+            },
+            "type": "array",
+            "description": "Validation constraints: {\"maxItems\": 32}"
+          },
+          "order": {
+            "items": {
+              "$ref": "#/$defs/OrderConstraint"
+            },
+            "type": "array",
+            "description": "Validation constraints: {\"maxItems\": 64}"
+          },
+          "ordering": {
+            "enum": [
+              "unspecified",
+              "constrained",
+              "flexible"
+            ],
+            "type": "string"
+          },
+          "endpoint": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Endpoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_duration": {
+            "$ref": "#/$defs/NullableDuration"
+          },
+          "deadline": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Deadline"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "shared_place": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SharedPlace"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "clarification": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500}"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stops",
+          "order",
+          "ordering",
+          "endpoint",
+          "total_duration",
+          "deadline",
+          "shared_place",
+          "clarification"
+        ]
+      },
+      "OrderConstraint": {
+        "additionalProperties": false,
+        "properties": {
+          "before": {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 31, \"minimum\": 0}"
+          },
+          "after": {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 31, \"minimum\": 0}"
+          },
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          }
+        },
+        "required": [
+          "before",
+          "after",
+          "source"
+        ],
+        "type": "object"
+      },
+      "RequestedStop": {
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          },
+          "kind": {
+            "enum": [
+              "activity",
+              "brand",
+              "named_place"
+            ],
+            "type": "string"
+          },
+          "requirement": {
+            "enum": [
+              "required",
+              "optional"
+            ],
+            "type": "string"
+          },
+          "evidence": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500}"
+          },
+          "duration": {
+            "$ref": "#/$defs/NullableDuration"
+          }
+        },
+        "required": [
+          "source",
+          "kind",
+          "requirement",
+          "evidence",
+          "duration"
+        ],
+        "type": "object"
+      },
+      "SharedPlace": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "same_mall",
+            "type": "string"
+          },
+          "stops": {
+            "items": {
+              "type": "integer",
+              "description": "Validation constraints: {\"maximum\": 31, \"minimum\": 0}"
+            },
+            "type": "array",
+            "description": "Validation constraints: {\"maxItems\": 32, \"minItems\": 2}"
+          },
+          "source": {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+          }
+        },
+        "required": [
+          "kind",
+          "stops",
+          "source"
+        ],
+        "type": "object"
+      },
+      "TransportationMode": {
+        "enum": [
+          "walking",
+          "cycling",
+          "driving",
+          "transit"
+        ],
+        "type": "string"
+      },
+      "NullableDuration": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/Duration"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      }
+    },
+    "additionalProperties": false,
+    "description": "Partial extraction, never a resolved planning request or verified facts.\n\nActivity phrases remain unnormalized. The interpretation service handles\nsupported-category mapping, ambiguity, overrides and semantic guards.\nRequired nullable fields distinguish missing information from model defaults.",
+    "properties": {
+      "activities": {
+        "items": {
+          "type": "string",
+          "description": "Validation constraints: {\"maxLength\": 500, \"minLength\": 1}"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "people": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 100, \"minimum\": 1}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "budget_per_person": {
+        "anyOf": [
+          {
+            "type": "number",
+            "description": "Validation constraints: {\"minimum\": 0}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "location": {
+        "anyOf": [
+          {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 200, \"minLength\": 1}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "preferences": {
+        "items": {
+          "type": "string",
+          "description": "Validation constraints: {\"maxLength\": 1000, \"minLength\": 1}"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "suggested_activities": {
+        "items": {
+          "$ref": "#/$defs/ActivityType"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "budget_group": {
+        "anyOf": [
+          {
+            "type": "number",
+            "description": "Validation constraints: {\"minimum\": 0}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "currency": {
+        "anyOf": [
+          {
+            "type": "string",
+            "description": "Validation constraints: {\"maxLength\": 30, \"minLength\": 1}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "travel_total_minutes": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 1440, \"minimum\": 0}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "travel_leg_minutes": {
+        "anyOf": [
+          {
+            "type": "integer",
+            "description": "Validation constraints: {\"maximum\": 1440, \"minimum\": 0}"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "transport": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/TransportationMode"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "cost": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/CostPreference"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "date_expressions": {
+        "items": {
+          "type": "string",
+          "description": "Validation constraints: {\"maxLength\": 1000, \"minLength\": 1}"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "time_expressions": {
+        "items": {
+          "type": "string",
+          "description": "Validation constraints: {\"maxLength\": 1000, \"minLength\": 1}"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "uncertainties": {
+        "items": {
+          "type": "string",
+          "description": "Validation constraints: {\"maxLength\": 1000, \"minLength\": 1}"
+        },
+        "type": "array",
+        "description": "Validation constraints: {\"maxItems\": 32}"
+      },
+      "journey": {
+        "$ref": "#/$defs/Journey"
+      }
+    },
+    "required": [
+      "activities",
+      "people",
+      "budget_per_person",
+      "date",
+      "location",
+      "preferences",
+      "suggested_activities",
+      "budget_group",
+      "currency",
+      "travel_total_minutes",
+      "travel_leg_minutes",
+      "transport",
+      "cost",
+      "date_expressions",
+      "time_expressions",
+      "uncertainties",
+      "journey"
+    ],
+    "type": "object"
+  },
+  "transformation": "Existing unactivated shared NullableDuration definition; exactly two repeated unions factored.",
+  "wireAloneEquivalent": true,
+  "composedCanonicalContractEquivalent": true,
+  "activated": false,
+  "canonicalSchemaChanged": false,
+  "promptExamplesChanged": false,
+  "remoteCompilationEstablished": false,
+  "baseStats": {
+    "expandedObjectProperties": 46,
+    "expandedObjectDepth": 4,
+    "expandedContainerDepth": 5,
+    "expandedUnionNodes": 15,
+    "expandedHash": "70b7c017763ae26bbc35f85e245f13760c00614c2d22a3374a614c6010cb306d",
+    "unionNodes": 15,
+    "optionalProperties": 0,
+    "maxArrayBounds": [],
+    "refs": [
+      {
+        "path": "$.$defs.Journey.properties.stops.items",
+        "value": "#/$defs/RequestedStop"
+      },
+      {
+        "path": "$.$defs.Journey.properties.order.items",
+        "value": "#/$defs/OrderConstraint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+        "value": "#/$defs/Endpoint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+        "value": "#/$defs/Deadline"
+      },
+      {
+        "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+        "value": "#/$defs/SharedPlace"
+      },
+      {
+        "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.properties.suggested_activities.items",
+        "value": "#/$defs/ActivityType"
+      },
+      {
+        "path": "$.properties.transport.anyOf[0]",
+        "value": "#/$defs/TransportationMode"
+      },
+      {
+        "path": "$.properties.cost.anyOf[0]",
+        "value": "#/$defs/CostPreference"
+      },
+      {
+        "path": "$.properties.journey",
+        "value": "#/$defs/Journey"
+      }
+    ]
+  },
+  "proposalStats": {
+    "expandedObjectProperties": 46,
+    "expandedObjectDepth": 4,
+    "expandedContainerDepth": 5,
+    "expandedUnionNodes": 15,
+    "expandedHash": "70b7c017763ae26bbc35f85e245f13760c00614c2d22a3374a614c6010cb306d",
+    "unionNodes": 14,
+    "optionalProperties": 0,
+    "maxArrayBounds": [],
+    "refs": [
+      {
+        "path": "$.$defs.Journey.properties.stops.items",
+        "value": "#/$defs/RequestedStop"
+      },
+      {
+        "path": "$.$defs.Journey.properties.order.items",
+        "value": "#/$defs/OrderConstraint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+        "value": "#/$defs/Endpoint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.total_duration",
+        "value": "#/$defs/NullableDuration"
+      },
+      {
+        "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+        "value": "#/$defs/Deadline"
+      },
+      {
+        "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+        "value": "#/$defs/SharedPlace"
+      },
+      {
+        "path": "$.$defs.RequestedStop.properties.duration",
+        "value": "#/$defs/NullableDuration"
+      },
+      {
+        "path": "$.$defs.NullableDuration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.properties.suggested_activities.items",
+        "value": "#/$defs/ActivityType"
+      },
+      {
+        "path": "$.properties.transport.anyOf[0]",
+        "value": "#/$defs/TransportationMode"
+      },
+      {
+        "path": "$.properties.cost.anyOf[0]",
+        "value": "#/$defs/CostPreference"
+      },
+      {
+        "path": "$.properties.journey",
+        "value": "#/$defs/Journey"
+      }
+    ]
+  }
+}

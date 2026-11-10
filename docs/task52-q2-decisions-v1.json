@@ -1,0 +1,196 @@
+{
+  "identity": "52b-q2-provider-compatibility-v1",
+  "baselineGitHEAD": "1e170485f9f48840f6085afba725b2087d1452e4",
+  "reviewDateUTC": "2026-11-10",
+  "scope": "offline compatibility decision, not account/API readiness or qualification",
+  "providers": [
+    {
+      "provider": "openai",
+      "model": "gpt-6-luna",
+      "disposition": "READY FOR Q3 PROPOSAL",
+      "technicalConfiguration": "Existing Responses strict text.format, none reasoning, temperature0, max_output_tokens2000, store=false; no tools. Seven prior completed outputs; all3 reviewed v4 payload hashes reproduced offline.",
+      "sourceVersionBlocker": "Original corpus()/metadata()/live configuration source pins intentionally reject B2 journey.py; Q1 has no future-output or paid purpose. Existing dated/three-call-halted continuation cannot grant new work.",
+      "nextAction": "Prepare one separately reviewed source/version plus append-only ten-row same-journal continuation proposal, not a new live runner in Q2.",
+      "liveReadinessEstablished": false,
+      "productionQualified": false,
+      "proposal": null,
+      "sources": [
+        "openai-model",
+        "openai-structure",
+        "openai-settings"
+      ]
+    },
+    {
+      "provider": "google",
+      "model": "gemini-3.8-flash",
+      "disposition": "BLOCKED",
+      "service": "Gemini Developer API, Default Gemini Project; not Vertex, Interactions or Maps",
+      "blockingEvidence": [
+        "Two original HTTP400 INVALID_ARGUMENT; no field detail/output, exact cause unresolved.",
+        "Revised request hash reproduced and shape documented, server schema compilation still unknown.",
+        "Later API_KEY_IP_ADDRESS_BLOCKED; current egress/restriction not inspected.",
+        "No certified complete new structured-format input counting."
+      ],
+      "nextAction": "Obtain one owner-approved provider compatibility determination using the sanitized schema/envelope support draft; keep BLOCKED if insufficient.",
+      "ownerAction": "Approve support contact and any precise evaluation-key restriction change/non-inference check separately; preserve Gemini-only access and Maps.",
+      "proposal": "52b-q2-google-array-bounds-review-v1",
+      "liveReadinessEstablished": false,
+      "productionQualified": false,
+      "sources": [
+        "google-rest",
+        "google-structure",
+        "google-model",
+        "google-tokens",
+        "google-ip"
+      ]
+    },
+    {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "disposition": "BLOCKED",
+      "blockingEvidence": [
+        "Original exact request reproduces stored hash and grammar-size HTTP400; no output/usage.",
+        "Zero optional fields/15 syntax unions do not prove internal compilation capacity.",
+        "One existing shared NullableDuration proposal reduces syntax to14, but expanded structure/branching unchanged."
+      ],
+      "nextAction": "Obtain one owner-approved provider determination on original/factored schema compilation; remain blocked if insufficient.",
+      "ownerAction": "Approve sanitized support contact; any later schema adoption/counting/paid confirmation needs separate approval and version.",
+      "proposal": "52b-q2-anthropic-nullable-duration-review-v1",
+      "liveReadinessEstablished": false,
+      "productionQualified": false,
+      "sources": [
+        "anthropic-model",
+        "anthropic-structure",
+        "anthropic-tokens"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "id": "openai-model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "retrieved": true,
+      "method": "web HTML opened; exact model/Responses/none/structure",
+      "downloadSHA256": null
+    },
+    {
+      "id": "openai-structure",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs",
+      "retrieved": true,
+      "method": "web HTML opened; required/closed objects/refs/nulls",
+      "downloadSHA256": null
+    },
+    {
+      "id": "openai-settings",
+      "url": "https://developers.openai.com/api/docs/guides/latest-model",
+      "retrieved": true,
+      "method": "web HTML opened; temperature with none reasoning",
+      "downloadSHA256": null
+    },
+    {
+      "id": "google-rest",
+      "url": "https://ai.google.dev/api/generate-content",
+      "retrieved": true,
+      "method": "unauthenticated public curl; web Markdown reader failed; redirect documentation on aistudio.google.com",
+      "downloadSHA256": "fba7832d0e5bdc47d3cce869ac078798fb2e493f7f839616e43fa31b2159a441"
+    },
+    {
+      "id": "google-structure",
+      "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "retrieved": true,
+      "method": "unauthenticated public curl; web Markdown reader failed; redirect documentation on aistudio.google.com",
+      "downloadSHA256": "dd3e233667ff2485809fa7ba2b2eca7251dfe5490c71f22e10eab260a3fb1e09"
+    },
+    {
+      "id": "google-model",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "retrieved": true,
+      "method": "unauthenticated public curl",
+      "downloadSHA256": "53a3ba46aa82c9cc7f2414959352376660b156aa5c5e114d61b9917351d4ad11"
+    },
+    {
+      "id": "google-tokens",
+      "url": "https://ai.google.dev/gemini-api/docs/tokens",
+      "retrieved": true,
+      "method": "unauthenticated public curl; guide emphasizes Interactions examples, not proof of GenerateContent hidden overhead",
+      "downloadSHA256": "c02660a6b99c47e0275e2591d4133921bba67ac3372256e932d2228927b87a84"
+    },
+    {
+      "id": "google-ip",
+      "url": "https://docs.cloud.google.com/api-keys/docs/add-restrictions-api-keys",
+      "retrieved": true,
+      "method": "web HTML opened; serverKeyRestrictions/IP and API restrictions",
+      "downloadSHA256": null
+    },
+    {
+      "id": "anthropic-model",
+      "url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "retrieved": true,
+      "method": "web HTML opened; exact model active",
+      "downloadSHA256": null
+    },
+    {
+      "id": "anthropic-structure",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "retrieved": true,
+      "method": "web HTML opened; format, schema limits, internal complexity, counting without compilation",
+      "downloadSHA256": null
+    },
+    {
+      "id": "anthropic-tokens",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/token-counting",
+      "retrieved": true,
+      "method": "web HTML opened; estimate, not compilation",
+      "downloadSHA256": null
+    }
+  ],
+  "retrievalLimitations": [
+    "OpenAI full create-response reference exceeded web reader content limit; model/structured-output/settings guides retrieved instead.",
+    "Google Markdown unsupported in web reader; actual official pages fetched without authentication using curl.",
+    "No current accounts, keys, credits, permissions, IP address, pricing contract or API availability verified."
+  ],
+  "frozenQ1": {
+    "contract": "52b-q1-qualification-v1",
+    "manifestSHA256": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+    "rubricSHA256": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+    "rubricCases": 66,
+    "dimensionsPerCase": 24,
+    "unresolvedFields": 6,
+    "independentGoldApprovals": 0,
+    "independentResponseApprovals": 0,
+    "originalSixPins": {
+      "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+      "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+      "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+      "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+      "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+      "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+    },
+    "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "historicalOpenAIReplaySHA256": "83a644cd646ef1486f2b2237bbe80ce01016ca26a123a2bf04744537c9ef4bad"
+  },
+  "proposals": {
+    "google": {
+      "path": "docs/task52-q2-google-proposal-v1.json",
+      "fileSHA256": "7e0c243bcb735451da393c33eed858348954b05983db68ee7f0ed6fc9b3a59a3",
+      "activated": false
+    },
+    "anthropic": {
+      "path": "docs/task52-q2-anthropic-proposal-v1.json",
+      "fileSHA256": "d9ba6cbb3f6e75f994d978b1e4b981bf27cfecfb3dbb8491de9e2402a70d5bbe",
+      "activated": false
+    }
+  },
+  "errorEvidenceSHA256": "5d8d9bfef2996721ca39e563e6332972e01b95acfd8835090913091c6c907377",
+  "supportContactSubmitted": false,
+  "ownerActionsPerformed": false,
+  "publicDocumentationResearch": true,
+  "authenticatedProviderRequests": 0,
+  "inferenceRequests": 0,
+  "countingRequests": 0,
+  "modelMetadataRequests": 0,
+  "paidDispatchAuthorized": false,
+  "persistentHaltCleared": false,
+  "productionChanged": false,
+  "limits": "$12 aggregate /594 total /198 per provider /12000 input /2000 output /concurrency1 /zero retries"
+}

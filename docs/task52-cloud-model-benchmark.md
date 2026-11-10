@@ -1,3 +1,9 @@
+# Q2 compatibility decisions — historical benchmark preserved
+
+[Finite three-provider decision](task52-q2-provider-compatibility.md), [machine matrix](task52-q2-decisions-v1.json), [fresh offline verification](task52-q2-verification-v1.json). OpenAI can proceed only to a separately reviewed Q3 proposal; original source refusal, critical error and halt remain. Google generic400/IP and Anthropic grammar compilation remain blocked. Existing unactivated schema proposals preserve canonical local validation; neither proves remote compilation. No authenticated provider/counting/metadata/inference request, account change or new score/latency measurement. Q1 artifacts and all10 paid rows/324 private files unchanged; $0.047366625 accounted/$11.952633375 remaining. No production-model selection, enforcement, infrastructure or Task53. Earlier model results below are historical.
+
+---
+
 # Q1 offline contract — historical benchmark unchanged
 
 [Versioned contract](task52-q1-qualification-v1.md), [all66 rubric records](task52-q1-rubric-v1.json), [offline manifest](task52-q1-offline-manifest-v1.json), [replay](task52-q1-openai-replay-v1.json), [verification](task52-q1-verification-v1.json). Current-runtime reconstruction only: original scores, prompts, source pins, corpus and paid records remain unchanged. Seven structured-valid/six legacy accepted/five proposed guarded-compatible; the two historical failures remain distinct and no independent signoff is claimed. Six field-level ambiguities/seven noted cases plus all66 independent gold reviews remain open. Complete mechanical semantic comparison is not implemented; the contract explicitly requires review. No paid/source-gate readiness, provider call or model selection follows; journal10/594/$0.047366625/halt intact. Older measurements below stay historical.

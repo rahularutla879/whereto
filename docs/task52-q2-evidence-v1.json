@@ -1,0 +1,91 @@
+{
+  "errors": [
+    {
+      "slot": [
+        "google",
+        "journey-01",
+        1
+      ],
+      "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "payloadHash": "2ae58be55d1ab5661b2c0ae7232eb32e5eca2d9c05801c6a7f4f4d5eef33a78f",
+      "configurationHash": null,
+      "HTTP": 400,
+      "cause": "unresolved_generic_INVALID_ARGUMENT",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": null,
+      "reservationNanodollars": 16500000
+    },
+    {
+      "slot": [
+        "google",
+        "journey-02",
+        1
+      ],
+      "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "payloadHash": "209f8686fb98a1b16b6893e880481396a6d40acc53410ac945fa8ec36a693936",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "HTTP": 400,
+      "cause": "unresolved_generic_INVALID_ARGUMENT",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": true,
+      "reservationNanodollars": 16500000
+    },
+    {
+      "slot": [
+        "anthropic",
+        "journey-01",
+        1
+      ],
+      "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "responseHash": "9f0152e67f23d75183a8b33407f99adf34170d20d880190fe8b664f589528162",
+      "payloadHash": "0dc7a1b2ecae537abcd40613ad1b7d19e6688190beedb8cfa85af0ece183d7f9",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "HTTP": 400,
+      "cause": "structured_output_grammar_size_rejection",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": true,
+      "reservationNanodollars": 2200000
+    }
+  ],
+  "unchangedOpenAIV4PayloadHashesVerified": 3,
+  "IPRestrictionEvidence": [
+    {
+      "fileHash": "64ea4c3cceeb096e438c89e4e09fc55143c472e64b1a9a7417ebf12bb9a1d991",
+      "category": "API_KEY_IP_ADDRESS_BLOCKED"
+    }
+  ],
+  "originalGoogleEnvelope": {
+    "retainedGitSnapshot": "8df31f2",
+    "sourceBlobSHA256": "e3e7894d7e76e2ca74e9d828b58a6ab39290ccfda18438ed02d5d24d7d88fbb4",
+    "originalWireSchemaSHA256": "2d5317a6b1914ff55ccb3793c7b4d779683fb475639db0cf78af81fc40b6c527",
+    "generationConfigKeys": [
+      "temperature",
+      "maxOutputTokens",
+      "thinkingConfig",
+      "responseMimeType",
+      "responseSchema"
+    ],
+    "thinkingLevel": "low",
+    "firstPayloadReexecuted": false,
+    "scope": "Source read as data + original payload/schema/count-diagnostic hashes; no exact historical environment claim."
+  },
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "remaining": 584,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "persistentHalt": true
+  }
+}

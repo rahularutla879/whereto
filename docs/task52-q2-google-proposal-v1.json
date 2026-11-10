@@ -1,0 +1,643 @@
+{
+  "identity": "52b-q2-google-array-bounds-review-v1",
+  "provider": "google",
+  "model": "gemini-3.8-flash",
+  "baseSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+  "proposedSchemaHash": "c9f7edbf080add02e5d4625484c859e61258140eb6886fa151dc3a11fdd7ef1e",
+  "schema": {
+    "$defs": {
+      "ActivityType": {
+        "description": "Canonical activity ID, or custom: followed by a grounded activity phrase.",
+        "maxLength": 107,
+        "type": "string"
+      },
+      "CostPreference": {
+        "enum": [
+          "budget",
+          "balanced",
+          "experience"
+        ],
+        "type": "string"
+      },
+      "Deadline": {
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "relation": {
+            "enum": [
+              "by",
+              "before"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "source",
+          "relation"
+        ],
+        "type": "object"
+      },
+      "Duration": {
+        "additionalProperties": false,
+        "properties": {
+          "minutes": {
+            "maximum": 10080,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "relation": {
+            "enum": [
+              "exact",
+              "minimum",
+              "maximum",
+              "under",
+              "approximate"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "minutes",
+          "relation",
+          "source"
+        ],
+        "type": "object"
+      },
+      "Endpoint": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "enum": [
+              "origin",
+              "home",
+              "named_place",
+              "activity",
+              "brand"
+            ],
+            "type": "string"
+          },
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "source"
+        ],
+        "type": "object"
+      },
+      "Journey": {
+        "additionalProperties": false,
+        "properties": {
+          "stops": {
+            "items": {
+              "$ref": "#/$defs/RequestedStop"
+            },
+            "type": "array",
+            "description": "Canonical array bounds: {\"maxItems\": 32}"
+          },
+          "order": {
+            "items": {
+              "$ref": "#/$defs/OrderConstraint"
+            },
+            "type": "array",
+            "description": "Canonical array bounds: {\"maxItems\": 64}"
+          },
+          "ordering": {
+            "enum": [
+              "unspecified",
+              "constrained",
+              "flexible"
+            ],
+            "type": "string"
+          },
+          "endpoint": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Endpoint"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "total_duration": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Duration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "deadline": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Deadline"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "shared_place": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/SharedPlace"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          },
+          "clarification": {
+            "maxLength": 500,
+            "type": "string"
+          }
+        },
+        "type": "object",
+        "required": [
+          "stops",
+          "order",
+          "ordering",
+          "endpoint",
+          "total_duration",
+          "deadline",
+          "shared_place",
+          "clarification"
+        ]
+      },
+      "OrderConstraint": {
+        "additionalProperties": false,
+        "properties": {
+          "before": {
+            "maximum": 31,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "after": {
+            "maximum": 31,
+            "minimum": 0,
+            "type": "integer"
+          },
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "before",
+          "after",
+          "source"
+        ],
+        "type": "object"
+      },
+      "RequestedStop": {
+        "additionalProperties": false,
+        "properties": {
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          },
+          "kind": {
+            "enum": [
+              "activity",
+              "brand",
+              "named_place"
+            ],
+            "type": "string"
+          },
+          "requirement": {
+            "enum": [
+              "required",
+              "optional"
+            ],
+            "type": "string"
+          },
+          "evidence": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "duration": {
+            "anyOf": [
+              {
+                "$ref": "#/$defs/Duration"
+              },
+              {
+                "type": "null"
+              }
+            ]
+          }
+        },
+        "required": [
+          "source",
+          "kind",
+          "requirement",
+          "evidence",
+          "duration"
+        ],
+        "type": "object"
+      },
+      "SharedPlace": {
+        "additionalProperties": false,
+        "properties": {
+          "kind": {
+            "const": "same_mall",
+            "type": "string"
+          },
+          "stops": {
+            "items": {
+              "maximum": 31,
+              "minimum": 0,
+              "type": "integer"
+            },
+            "type": "array",
+            "description": "Canonical array bounds: {\"maxItems\": 32, \"minItems\": 2}"
+          },
+          "source": {
+            "maxLength": 500,
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "required": [
+          "kind",
+          "stops",
+          "source"
+        ],
+        "type": "object"
+      },
+      "TransportationMode": {
+        "enum": [
+          "walking",
+          "cycling",
+          "driving",
+          "transit"
+        ],
+        "type": "string"
+      }
+    },
+    "additionalProperties": false,
+    "description": "Partial extraction, never a resolved planning request or verified facts.\n\nActivity phrases remain unnormalized. The interpretation service handles\nsupported-category mapping, ambiguity, overrides and semantic guards.\nRequired nullable fields distinguish missing information from model defaults.",
+    "properties": {
+      "activities": {
+        "items": {
+          "maxLength": 500,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "people": {
+        "anyOf": [
+          {
+            "maximum": 100,
+            "minimum": 1,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "budget_per_person": {
+        "anyOf": [
+          {
+            "minimum": 0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "date": {
+        "anyOf": [
+          {
+            "format": "date",
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "location": {
+        "anyOf": [
+          {
+            "maxLength": 200,
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "preferences": {
+        "items": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "suggested_activities": {
+        "items": {
+          "$ref": "#/$defs/ActivityType"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "budget_group": {
+        "anyOf": [
+          {
+            "minimum": 0,
+            "type": "number"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "currency": {
+        "anyOf": [
+          {
+            "maxLength": 30,
+            "minLength": 1,
+            "type": "string"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "travel_total_minutes": {
+        "anyOf": [
+          {
+            "maximum": 1440,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "travel_leg_minutes": {
+        "anyOf": [
+          {
+            "maximum": 1440,
+            "minimum": 0,
+            "type": "integer"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "transport": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/TransportationMode"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "cost": {
+        "anyOf": [
+          {
+            "$ref": "#/$defs/CostPreference"
+          },
+          {
+            "type": "null"
+          }
+        ]
+      },
+      "date_expressions": {
+        "items": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "time_expressions": {
+        "items": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "uncertainties": {
+        "items": {
+          "maxLength": 1000,
+          "minLength": 1,
+          "type": "string"
+        },
+        "type": "array",
+        "description": "Canonical array bounds: {\"maxItems\": 32}"
+      },
+      "journey": {
+        "$ref": "#/$defs/Journey"
+      }
+    },
+    "required": [
+      "activities",
+      "people",
+      "budget_per_person",
+      "date",
+      "location",
+      "preferences",
+      "suggested_activities",
+      "budget_group",
+      "currency",
+      "travel_total_minutes",
+      "travel_leg_minutes",
+      "transport",
+      "cost",
+      "date_expressions",
+      "time_expressions",
+      "uncertainties",
+      "journey"
+    ],
+    "type": "object"
+  },
+  "transformation": "Existing unactivated google_array_projection; minItems/maxItems moved to descriptions only.",
+  "wireAloneEquivalent": false,
+  "composedCanonicalContractEquivalent": true,
+  "activated": false,
+  "canonicalSchemaChanged": false,
+  "promptExamplesChanged": false,
+  "remoteCompilationEstablished": false,
+  "baseStats": {
+    "expandedObjectProperties": 46,
+    "expandedObjectDepth": 4,
+    "expandedContainerDepth": 5,
+    "expandedUnionNodes": 15,
+    "expandedHash": "429686c728123dbe272f33785a9ba4bf6fe55b11be26c7040ab4fbae5518e620",
+    "unionNodes": 15,
+    "optionalProperties": 0,
+    "maxArrayBounds": [
+      {
+        "path": "$.$defs.Journey.properties.stops",
+        "value": 32
+      },
+      {
+        "path": "$.$defs.Journey.properties.order",
+        "value": 64
+      },
+      {
+        "path": "$.$defs.SharedPlace.properties.stops",
+        "value": 32
+      },
+      {
+        "path": "$.properties.activities",
+        "value": 32
+      },
+      {
+        "path": "$.properties.preferences",
+        "value": 32
+      },
+      {
+        "path": "$.properties.suggested_activities",
+        "value": 32
+      },
+      {
+        "path": "$.properties.date_expressions",
+        "value": 32
+      },
+      {
+        "path": "$.properties.time_expressions",
+        "value": 32
+      },
+      {
+        "path": "$.properties.uncertainties",
+        "value": 32
+      }
+    ],
+    "refs": [
+      {
+        "path": "$.$defs.Journey.properties.stops.items",
+        "value": "#/$defs/RequestedStop"
+      },
+      {
+        "path": "$.$defs.Journey.properties.order.items",
+        "value": "#/$defs/OrderConstraint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+        "value": "#/$defs/Endpoint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+        "value": "#/$defs/Deadline"
+      },
+      {
+        "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+        "value": "#/$defs/SharedPlace"
+      },
+      {
+        "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.properties.suggested_activities.items",
+        "value": "#/$defs/ActivityType"
+      },
+      {
+        "path": "$.properties.transport.anyOf[0]",
+        "value": "#/$defs/TransportationMode"
+      },
+      {
+        "path": "$.properties.cost.anyOf[0]",
+        "value": "#/$defs/CostPreference"
+      },
+      {
+        "path": "$.properties.journey",
+        "value": "#/$defs/Journey"
+      }
+    ]
+  },
+  "proposalStats": {
+    "expandedObjectProperties": 46,
+    "expandedObjectDepth": 4,
+    "expandedContainerDepth": 5,
+    "expandedUnionNodes": 15,
+    "expandedHash": "c5268f2baa01399895ae182868314f8b589f3623deeb246b572949d30958eda8",
+    "unionNodes": 15,
+    "optionalProperties": 0,
+    "maxArrayBounds": [],
+    "refs": [
+      {
+        "path": "$.$defs.Journey.properties.stops.items",
+        "value": "#/$defs/RequestedStop"
+      },
+      {
+        "path": "$.$defs.Journey.properties.order.items",
+        "value": "#/$defs/OrderConstraint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.endpoint.anyOf[0]",
+        "value": "#/$defs/Endpoint"
+      },
+      {
+        "path": "$.$defs.Journey.properties.total_duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.$defs.Journey.properties.deadline.anyOf[0]",
+        "value": "#/$defs/Deadline"
+      },
+      {
+        "path": "$.$defs.Journey.properties.shared_place.anyOf[0]",
+        "value": "#/$defs/SharedPlace"
+      },
+      {
+        "path": "$.$defs.RequestedStop.properties.duration.anyOf[0]",
+        "value": "#/$defs/Duration"
+      },
+      {
+        "path": "$.properties.suggested_activities.items",
+        "value": "#/$defs/ActivityType"
+      },
+      {
+        "path": "$.properties.transport.anyOf[0]",
+        "value": "#/$defs/TransportationMode"
+      },
+      {
+        "path": "$.properties.cost.anyOf[0]",
+        "value": "#/$defs/CostPreference"
+      },
+      {
+        "path": "$.properties.journey",
+        "value": "#/$defs/Journey"
+      }
+    ]
+  }
+}
