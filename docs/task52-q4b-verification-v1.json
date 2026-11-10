@@ -1,0 +1,280 @@
+{
+  "identity": "52b-q4b-verification-v1",
+  "baselineCommit": "a4bd70869a3f1f779fcbdb0c5302000a4d69f9d9",
+  "Q4BOfflineCompleteForReview": true,
+  "liveDispatchAvailable": false,
+  "realWriterImplemented": false,
+  "operatorVerifierOrIssuerImplemented": false,
+  "actualNewRequests": 0,
+  "actualNewReservations": 0,
+  "actualNewApprovals": 0,
+  "currentProviderReadiness": "UNKNOWN; not performed",
+  "originalBaseline": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "ordinal": 1,
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "originalState": "recorded",
+        "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+      },
+      {
+        "ordinal": 2,
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "originalState": "recorded",
+        "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+      },
+      {
+        "ordinal": 3,
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "originalState": "recorded",
+        "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+      },
+      {
+        "ordinal": 4,
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "originalState": "recorded",
+        "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+      },
+      {
+        "ordinal": 5,
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "originalState": "recorded",
+        "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+      },
+      {
+        "ordinal": 6,
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "originalState": "recorded",
+        "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+      },
+      {
+        "ordinal": 7,
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "originalState": "recorded",
+        "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+      },
+      {
+        "ordinal": 8,
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "originalState": "recorded",
+        "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+      },
+      {
+        "ordinal": 9,
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "originalState": "recorded",
+        "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+      },
+      {
+        "ordinal": 10,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+        "originalState": "recorded_halted",
+        "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+      }
+    ],
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "privateFiles": 324,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "newReservations": 0
+  },
+  "all324FilesUnchangedFromCheckpointStart": true,
+  "Q4ASourceManifestUnchanged": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+  "originalQ1Q2Q3PinsCorpusGoldScoresResponsesUnchanged": true,
+  "originalPaidEvaluatorStillRefusesB2": true,
+  "productionRuntimeChanged": false,
+  "groups": {
+    "initialInspector": {
+      "run": 11,
+      "passed": 11,
+      "seconds": 6.951
+    },
+    "finalInspectorAndHotJournalNegative": {
+      "run": 12,
+      "passed": 12,
+      "failed": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 8.977
+    },
+    "Q1Q2Q3Q4AOrderingSourceAdmissionJourneyAndQ4B": {
+      "run": 262,
+      "passed": 262,
+      "failed": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 230.471
+    }
+  },
+  "overlappingTestGroupsNotUniqueAggregate": true,
+  "finalQ4BMethods": [
+    "test_actual_schema_root_rows_accounting_halt_and_build",
+    "test_only_fixed_ro_immutable_connection_is_opened",
+    "test_root_row_hash_status_reservation_rowid_and_missing_history_rejected",
+    "test_schema_unknown_trigger_index_and_read_profile_rejected",
+    "test_real_private_evidence_mismatch_never_opens_database",
+    "test_existing_lock_excludes_read_adapter_without_creating_files",
+    "test_sql_authorizer_denies_writes_attach_and_pragma_setters_on_fiction_only",
+    "test_exact_sql_constraints_do_not_supply_semantic_or_financial_authority",
+    "test_real_status_shaped_fictional_reservations_keep_anchors_halt_and_full_charge",
+    "test_real_status_shaped_fictional_original_and_child_ceilings",
+    "test_fake_old_or_missing_approval_cannot_authorize_a_real_run",
+    "test_hot_side_journal_is_refused_not_ignored_or_recovered"
+  ],
+  "readOnlyProof": {
+    "fixedURI": "mode=ro&immutable=1",
+    "queryOnly": true,
+    "SQLAuthorizer": true,
+    "existingSharedLockNoCreateOrChmod": true,
+    "wrongRootRowsStatusReservationSchemaIndexPrivateSetOrHotJournalRefused": true,
+    "SQLWriteAttacksTestedOnlyOnFiction": true,
+    "currentSynchronousNote": "Read-connection default FULL only; not evidence for every historical commit/power-loss guarantee."
+  },
+  "fictionalRealShape": {
+    "exactHistoricalDDL": true,
+    "actualHistoricalRowsCopied": false,
+    "amounts": "1000000 per synthetic baseline row, not historical provider charges",
+    "realStatusLabels": true,
+    "slotPKAndMetadataConstraintTested": true,
+    "nullablePKNegativeChargeUnknownStatusAndRowidReuseCharacterized": true,
+    "strictOrderedSlotsOriginalAndChildAccountingCapsTested": true,
+    "originalFictionalPrefixAndHaltPreserved": true,
+    "notAnAuthorizedRunner": true,
+    "endToEndReviewCrashAndUncertainSendTests": "Frozen Q4A20 methods included in broad262; seven forked process crashes and separate-process lock, no retries/progress for reserved uncertain operations.",
+    "crashLimit": "Local process exit/rollback/fsync ordering, not power loss, malicious OS/Python, distributed durability or implemented real child recovery."
+  },
+  "operatorDesign": {
+    "sixPurposeSeparatedFacts": true,
+    "actualTrustPrincipalsEnrolled": 0,
+    "actualIndependentSignoffs": 0,
+    "cryptoImplementationOrAuthenticSignatureTests": false,
+    "reason": "Separate protected trust enrollment/verifier requires owner decision; design only, never treat fixture/JSON/flag as authentication.",
+    "oldOrMissingOrFakeApprovalAlwaysRefusedByDefaultLiveDispatch": true
+  },
+  "recordedReplay": {
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "recordedQwen": 27,
+    "recordedOpenAI": 7,
+    "allFrozenFieldsEqual": true
+  },
+  "security": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "configuredSecretsScan": "Credential scan: 2 configured sensitive values; 1266 current files/assets; 2957 historical objects; current matches=0; historical matches=0.",
+  "fullApplicationSuites": "Not rerun: no production/shared application or dependency changes. Backend/frontend/typecheck/lint/build/browser baseline remains historical.",
+  "completeDiffReviewed": true,
+  "artifactHashes": {
+    "scripts/task52_q4b.py": "4fa72084abd6e10058a2a0d7015fd8870bf321ba99b3a599b90d9723f27e2fe4",
+    "backend/test_task52_q4b.py": "f3ef90e4af1aedd7f3b7425fe83d3e58d247b528c118e4a4ccadac00efbe63cc",
+    "docs/task52-q4b-journal-inspection-v1.json": "48ab2d38dbc67a51954483955501207ff2a36204b605613f7ca9b57a8c10a24e",
+    "docs/task52-q4b-journal-operator-review.md": "0a09deaefb909667ad5c42181084c1ae0bc466ee71843fd1b2815f57159b80d6",
+    "docs/task52-q4b-operator-design-v1.json": "b27e307eb23b81940d66b3ebcf6d18cdcec552b282f848302547359fa5669977"
+  },
+  "nextGate": "Owner review of compatibility/operator design and out-of-band role enrollment approach; separately scoped verifier and real writer implementation/offline tests, independent gold/failure/build review, then authorized fresh readiness and exact live build/scope approval. Nothing dispatched by Q4B.",
+  "otherProviderBlockers": {
+    "google": "Two Developer API HTTP400s, separate IP restriction, unchanged BLOCKED",
+    "anthropic": "Grammar compilation, unchanged BLOCKED"
+  },
+  "finalConfiguredSecretsScan": "Credential scan: 2 configured sensitive values; 1275 current files/assets; 2957 historical objects; current matches=0; historical matches=0.",
+  "finalPrivateIntegrity": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  }
+}

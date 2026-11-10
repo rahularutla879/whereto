@@ -1,0 +1,123 @@
+{
+  "identity": "52b-q4b-operator-design-v1",
+  "status": "DESIGN_ONLY_NOT_AN_APPROVAL",
+  "activationImplemented": false,
+  "liveDispatchAvailable": false,
+  "authorityGranted": false,
+  "trustAnchorsEnrolled": false,
+  "signatureVerifierImplemented": false,
+  "parentIdentity": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+  "parentConfigurationHash": "850ad650bff6bab9c4465e657932874cbcae06a9a7b4e1c79eda8891a6eb942b",
+  "parentDigest": "66a026921cfbc9f9a983b94c717e633150a74854006051d7f429b0efee15b3f7",
+  "q4aOfflineManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+  "futureLiveBuildSHA256": null,
+  "ownerPrincipal": null,
+  "reviewerPrincipal": null,
+  "operatorPrincipal": null,
+  "proposedVerification": "OpenSSH detached signature verification; exact role principal/namespace allowed-signers and revocation policy in independently protected operator context. No keys/verifier/issuer created.",
+  "canonicalEnvelopeProposal": "Strict duplicate/unknown-key rejecting sorted compact UTF-8 JSON, ensure_ascii=false, allow_nan=false; integer financial/token values; exact source byte hashes. Review before implementation.",
+  "roles": [
+    {
+      "fact": "exact_live_build_and_financial_scope",
+      "namespace": "whereto.task52b.owner-scope.v1",
+      "signerRole": "owner",
+      "approved": null,
+      "signature": null
+    },
+    {
+      "fact": "five_case_24_field_gold_and_failure_review",
+      "namespace": "whereto.task52b.rubric-review.v1",
+      "signerRole": "independent reviewer",
+      "approved": null,
+      "signature": null
+    },
+    {
+      "fact": "bounded_non_inference_permission",
+      "namespace": "whereto.task52b.readiness-permission.v1",
+      "signerRole": "owner",
+      "approved": null,
+      "signature": null
+    },
+    {
+      "fact": "fresh_completed_readiness_evidence",
+      "namespace": "whereto.task52b.readiness-evidence.v1",
+      "signerRole": "trusted operator",
+      "approved": null,
+      "signature": null
+    },
+    {
+      "fact": "one_exact_next_slot_execution",
+      "namespace": "whereto.task52b.execute-one.v1",
+      "signerRole": "operator",
+      "approved": null,
+      "signature": null
+    },
+    {
+      "fact": "each_original_response_24_field_review",
+      "namespace": "whereto.task52b.response-review.v1",
+      "signerRole": "independent reviewer",
+      "approved": null,
+      "signature": null
+    }
+  ],
+  "bindingsRequired": [
+    "live build/commit/source/runtime/schema/decoder",
+    "unchanged model/prompt/scorer/V4/corpus/Q1 rubric",
+    "original journal root/ten row hashes/private set/corrections/historical halt acknowledgment",
+    "ordered slot/source/payload hashes",
+    "parent fact hashes/role/audience/nonce/expiry/revocation",
+    "all original and proposed incremental limits",
+    "previous independent outcome review/operation/response hashes"
+  ],
+  "proposedSlots": [
+    [
+      "openai",
+      "extension-repeated",
+      2
+    ],
+    [
+      "openai",
+      "journey-04",
+      2
+    ],
+    [
+      "openai",
+      "extension-partial",
+      2
+    ],
+    [
+      "openai",
+      "journey-06",
+      2
+    ],
+    [
+      "openai",
+      "journey-21",
+      1
+    ]
+  ],
+  "originalLimits": {
+    "aggregateNanodollars": 12000000000,
+    "globalAttempts": 594,
+    "providerAttempts": 198,
+    "inputTokens": 12000,
+    "outputTokens": 2000,
+    "concurrency": 1,
+    "retries": 0
+  },
+  "proposedChildLimits": {
+    "attempts": 5,
+    "nanodollars": 12500000,
+    "perAttemptNanodollars": 2500000,
+    "financialAuthorizationCreated": false
+  },
+  "currentAccountReadiness": "UNKNOWN; no account/count/metadata/API requests performed",
+  "replayStateRequirement": "Future original lock and protected append-only nonce/START/reservation/INTENT/outcome/review facts, no refund or auto retry. Signatures alone do not prevent replay.",
+  "blockingGaps": [
+    "owner-controlled out-of-band role/key enrollment and protected verifier/trust store not established",
+    "authentic signature/role/revocation/expiry/canonicalization verifier and negative/positive tests not implemented",
+    "real same-journal append-only child writer, all-scope fold and restart handling not implemented",
+    "independent gold/failure/build/response reviews and fresh authorized readiness missing",
+    "exact owner-approved live build and operation/financial authorization missing"
+  ]
+}

@@ -1,3 +1,7 @@
+# Task 52B Q4B — storage compatibility is not execution permission
+
+Keep Q4A frozen and add only a strictly read-only historical inspector plus exact-DDL fictional SQL tests. Do not reuse the old updating/refunding finish path for future immutable child reservations. SQL rowid/PK alone cannot enforce historical integrity or financial policy. Future owner/reviewer/operator facts require out-of-band role trust and protected signature verification plus durable single-use state; no current local JSON, flag or fake reviewer is authority. Trust enrollment, real writer/verifier and live dispatch remain blocked/unimplemented. [Evidence and design](docs/task52-q4b-journal-operator-review.md).
+
 # Task 52B Q4A — offline build is not a live approval
 
 Implement the successor protocol only over factory-created fictional temporary state, with closed fake transport, append-only facts/reservation anchors and process-level crash/lock evidence. Keep real operator/reviewer authentication and live same-journal transport unavailable rather than approximate authorization with a flag, test fixture or Q3 proposal hash. Preserve null full-correctness judgments until independent review and stop on raw critical errors even when guarded safely. [Scope and limits](docs/task52-q4a-successor-offline-v1.md). No runtime or financial authorization decision is made.

@@ -1,3 +1,7 @@
+# Task 52B Q4B — read-only journal boundary
+
+`scripts/task52_q4b.py` inspects only the original fixed historical journal using ro+immutable/query-only SQL, selected read PRAGMAs, existing common SH lock and immutable evidence pins. It returns sanitized compatibility diagnostics and no execution authority. Actual SQL constraints are weaker than semantic/financial policy; a real append-only writer and protected operator/reviewer trust mechanism remain unimplemented. Q4A and application runtime are unchanged. [Matrix and future role-signature design](docs/task52-q4b-journal-operator-review.md).
+
 # Task 52B Q4A offline evaluator — outside application runtime
 
 The separately versioned `scripts/task52_q4a*` tools bind the frozen Q3 proposal, B2 reconstruction, canonical parser, Q1 rubric and independent V4 ordering evidence. They have only temporary fictional state and a closed fake response transport; no app imports, live client, credentials, public receipt or planning issuer. Real journal checks remain read-only. [Protocol/build and activation gaps](docs/task52-q4a-successor-offline-v1.md). Production architecture and behavior are unchanged.
