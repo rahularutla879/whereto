@@ -1,3 +1,15 @@
+# Task52B — proposed diagnostic progression after one known legacy loss
+
+Started clean `ea642a2`. [Bounded decision and A–E gates](docs/task52-diagnostic-progression-proposal-v1.md), [exact build/allowlist](docs/task52-diagnostic-progression-build-v1.json), [all-five fictional run](docs/task52-diagnostic-progression-fake-v1.json), [verification](docs/task52-diagnostic-progression-verification-v1.json). Proposed identity `52b-v51-known-legacy-loss-diagnostic-PROPOSED-offline-v1`; build SHA256 `2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b`.
+
+Only exact journey-06/r2 may be diagnostically eligible after mechanically intact raw extraction/V5.1 proof, known source/occurrence/status/provenance, exact order+ordering removal, direct journey witness and reproducible complete B2 result/envelope. Any additional AI/context/calendar/pending/source difference halts. New signed synthetic owner purpose explicitly names the defect; a response review must acknowledge system incompatibility and planning block plus all24 judgments. Until that review, next slot refuses; after it, only the next distinct fictional slot can proceed. Real review/certification/authorization remain absent and planning always false. No raw repair or model-success reclassification.
+
+Q4D's strict stop/source/build/result and all historical halts remain untouched. Reuse unchanged Q4C accounting/locks/state/crash algorithms in a fixed new synthetic namespace; no generic ignore/resume flag, real writer/transport/issuer/enrollment or application change. Same original five slots/caps/prompt/rubric, no actual calls/reservations or financial approval. This proposal is not permission to run a real diagnostic after legacy loss.
+
+Original ten rows/corrections/324 private files/halt remain OpenAI7/Google2/Anthropic1,10/594,$0.047366625 accounted/$11.952633375 remaining. Production/Qwen/prompt/HITEC/default-OFF shadow and handbook preserved. Next: owner review of this specific operating-policy exception, independent source/response reviews and separately scoped protected real operator/same-journal/live-build/security/readiness/financial approvals. No provider/count/metadata/account/Maps, billing/infrastructure/migration or Task53. Earlier entries remain historical.
+
+---
+
 # Task52B Q4D — V5.1 original-journal compatibility, live dispatch disabled
 
 Started clean `d286605`. [Narrow bridge, actual/fake matrix, strict loss policy and next gates](docs/task52-q4d-v51-journal-integration.md), [build/source manifest](docs/task52-q4d-build-v1.json), [real read-only result](docs/task52-q4d-inspection-v1.json), [fictional evidence](docs/task52-q4d-fictional-results-v1.json), [verification](docs/task52-q4d-verification-v1.json). Identity `52b-q4d-v51-journal-bridge-OFFLINE-v1`; manifest SHA256 `4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4`.

@@ -1,0 +1,217 @@
+{
+  "identity": "52b-v51-diagnostic-progression-verification-v1",
+  "baselineCommit": "ea642a26cfea0837438c22572e17f6650dbbf98b",
+  "status": "PROPOSED_OFFLINE_READY_FOR_OWNER_REVIEW_NOT_REAL_EXECUTION",
+  "buildIdentity": "52b-v51-known-legacy-loss-diagnostic-PROPOSED-offline-v1",
+  "buildSHA256": "2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b",
+  "policyIdentity": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+  "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+  "allowlistedDefectHash": "9223819d61e4e782e22135f2cac00d76abdfb00f947015ec92daa2f2e585f598",
+  "sourceSHA256": {
+    "scripts/task52_diag_identity.py": "ed3d44e1b2faed20d19f6978456a9c3b718d2ef626395603fb40a937caa7b0d8",
+    "scripts/task52_diag_auth.py": "3a42978f5dda2be7804b215c94361a308befffa14b77c95a108ed479e4249449",
+    "scripts/task52_diag_protocol.py": "120cdf19570c630774d7fa1d27b43937ddfd25f880e234764fae603d6b96bbf0",
+    "scripts/task52_diag_scoring.py": "d1b1f9022c039acb310eb55ee6426fe53e38fe6144af1ddcf0f358efe11c6459",
+    "backend/test_task52_diagnostic_progression.py": "8788fa5f9dd8933ef5072babca76eb06770592c7dfb9bf988e0ec527480baf57"
+  },
+  "tests": [
+    {
+      "scope": "Original Q4B read-only/actual-DDL tests",
+      "tests": 12,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 8.238,
+      "logSHA256": "24cb6f5326ac8d1886268c5504167d46a9987d8485c31dd1307da4c62d659d7f"
+    },
+    {
+      "scope": "Original Q4A/Q4C/Q4D/V5.1/source/Q1-Q3/ordering/admission/journey/recorded replays",
+      "tests": 347,
+      "passed": 347,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 1544.095,
+      "logSHA256": "a02f276460011ad45791081f16f70592c7c974b9e56c81cd304a1d2b7da616f6"
+    },
+    {
+      "scope": "Final successor isolated worker 0",
+      "tests": 12,
+      "passed": 12,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 411.867,
+      "logSHA256": "86a1227be8ad74036fa6a68d8e453925b5ef1e0171d83923c074526e6f0f973d"
+    },
+    {
+      "scope": "Final successor isolated worker 1",
+      "tests": 13,
+      "passed": 13,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 369.083,
+      "logSHA256": "a75a10a1d0ad802f35da94cbb5f4a326ca5643d93f02d0f42ef095c58d52e803"
+    },
+    {
+      "scope": "Final successor isolated worker 2",
+      "tests": 13,
+      "passed": 13,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 438.743,
+      "logSHA256": "b9b9d57666590a38f1c846fc1398e255ee1202801b3c2494274f9c3743a3b627"
+    }
+  ],
+  "finalSuccessorTests": 38,
+  "originalRegressionTests": 359,
+  "totalFinalTestExecutions": 397,
+  "countsNotIndependentSemanticSamples": true,
+  "allFinalSuccessorTestsIncludedExactlyOnceAcrossIsolatedWorkers": {
+    "testCount": 38,
+    "allIncludedExactlyOnce": true,
+    "groups": [
+      [
+        "test_wrong_named_place_partial_order_optionality_and_contradiction_halt",
+        "test_known_loss_review_disagreement_is_terminal",
+        "test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+        "test_expiry_future_time_and_scope_journal_binding",
+        "test_global_nonce_collision_rejected_before_reservation_or_send",
+        "test_malformed_envelopes_and_changed_build_fail_closed",
+        "test_mutation_and_pending_copy_comparisons_are_type_exact",
+        "test_partial_or_unresolved_signed_review_cannot_progress",
+        "test_q4d_still_has_its_strict_gate_and_frozen_purpose",
+        "test_stale_readiness_payload_and_incorrect_full_token_reservation",
+        "test_uncertain_send_provider_error_missing_outcome_and_child_halt_restart",
+        "test_verifier_timeout_and_revocation_document_tamper_never_fallback"
+      ],
+      [
+        "test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+        "test_all_five_after_explicit_synthetic_loss_review_never_planning",
+        "test_reproducible_unknown_additional_mutation_halts_signed_run",
+        "test_cross_version_signatures_and_plain_owner_document_cannot_authorize",
+        "test_five_raw_legacy_guarded_axes_and_known_legacy_order_loss",
+        "test_input_count_bounds_and_stale_response_binding_reject",
+        "test_missing_duplicate_conflicting_scope_and_wrong_slot",
+        "test_new_purpose_and_explicit_owner_exception_not_old_grants",
+        "test_positive_six_roles_openssh_signatures_and_offline_authority",
+        "test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+        "test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+        "test_unresolved_occurrence_mapping_stops_without_claiming_raw_hallucination",
+        "test_wrong_binding_model_prompt_schema_proposal_build_root_slots_and_amounts"
+      ],
+      [
+        "test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+        "test_after_outcome_process_exit_still_needs_loss_review",
+        "test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+        "test_admission_caps_and_aggregate_synthetic_exhaustion",
+        "test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+        "test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+        "test_loss_with_wrong_raw_source_optional_endpoint_never_exception",
+        "test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+        "test_only_allowlisted_delta_and_calendar_pending_context_intact",
+        "test_provider_shape_truncation_caps_and_unknown_tools_halt",
+        "test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+        "test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+        "test_unsigned_forged_signature_wrong_signer_namespace_and_role"
+      ]
+    ],
+    "estimatedWeights": [
+      350,
+      350,
+      340
+    ]
+  },
+  "shardHarnessSHA256": "24808cc58ac4399e97337112f68263f522f0c7abf07b3af2dbc35b398f5ecdce",
+  "additionalPairedMutationProbes": {
+    "consistentAlteredCalendar": "rejected",
+    "consistentAlteredPendingRevision": "rejected",
+    "fakeSource": "same source and raw extraction, modified legacy result; raw errors remain empty, system failure blocks"
+  },
+  "fakeEvidenceSHA256": "803eaba2be03e952afd72741f65b0cc73f7974ce26af275c4222da64dba77cfd",
+  "fakeResults": {
+    "correctMechanicalCases": 5,
+    "explicitSyntheticLossReviewPermittedNextDistinctSlot": true,
+    "missingReviewBlocked": true,
+    "knownLossStillSystemIncompatible": true,
+    "rawOutputsUnmodified": true,
+    "fullIndependentCorrectness": null,
+    "realIndependentReviews": 0,
+    "planningAuthorized": false,
+    "actualContinuationAuthorized": false,
+    "noSixthOrRetry": true,
+    "fictionalFullReservationsNanodollars": 12500000,
+    "realRequestsReservationsApprovals": 0
+  },
+  "originalState": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "correctionsAndPersistentHaltUnchanged": true,
+    "privateFilesUnchanged": 324,
+    "originalQ4DSourceBuildResultAndStrictGateUnchanged": true,
+    "originalSourcePinsAndPaidEvaluatorRefusalPreserved": true,
+    "historicalQwen27OpenAI7ReplayedSeparately": true
+  },
+  "recovery": {
+    "sameQ4CAccountingLockAndCrashCode": true,
+    "sevenOriginalProcessExitCheckpoints": true,
+    "knownLossDurableOutcomeStillRequiresExplicitReview": true,
+    "competingProcessTestPassed": true,
+    "missingOrUncertainStateDoesNotRetry": true,
+    "limitations": "Process-exit/forked temporary fixtures only; not power-loss, hostile same-UID, distributed or restart-durable real authority."
+  },
+  "security": {
+    "configuredAppSecretsChecked": 2,
+    "evaluationKeysChecked": 3,
+    "currentHits": 0,
+    "historyHits": 0,
+    "realKeysOrTrustEnrollment": false,
+    "noLiveHTTPOrCredentialLoader": true,
+    "allLiveDispatchAliasesRefuse": true,
+    "noCallerSelectedWritePathOrGenericIgnoreResumeFlag": true,
+    "fullDiffReviewed": true
+  },
+  "scope": {
+    "applicationRuntimeOrDependenciesChanged": false,
+    "fullBackendFrontendTypecheckLintBuildBrowserRerun": false,
+    "reason": "Only isolated offline scripts/tests/docs changed; previous full application evidence remains historical.",
+    "productionQwenPromptLegacyHITECShadowUnchanged": true,
+    "realJournalWrites": 0,
+    "providerInferenceCountingMetadataAccountMapsRequests": 0,
+    "billingInfrastructureMigrationTask53Changes": false
+  },
+  "draftReviewCorrections": [
+    "Inherited globals test compared historical plan against the deliberately new diagnostic binding; overridden to assert old globals unchanged AND new fixed binding correct. Initial draft run stopped; final complete successor set passes.",
+    "Review found Python False==0 comparison could hide a type-changing effective mutation; use canonical JSON hashes for leaf/list/witness/pending comparisons and add strict-type regression. No production or frozen code changed.",
+    "An initially broad mutation probe also changed prior outcomes; the existing reproducibility guard correctly refused that evidence. Scope the injected defect only to journey-06; corrected targeted test passes and final complete set rerun.",
+    "One final serial test run was stopped early solely to run the same complete38-test set across isolated workers; exact coverage union checked, none omitted."
+  ],
+  "warnings": "Deliberate corrupt internal boolean fixture emits a Pydantic serialization warning. Existing process-fork tests may emit multi-threaded-fork deprecation warnings; all completed, not a production process safety claim.",
+  "remainingActualGates": [
+    "Explicit owner decision permitting this exact diagnostic-only exception in a future real purpose/build/financial scope",
+    "Independent24-field selected-source/two-historical-failure reviews; genuine independent response review before each next real operation",
+    "Protected real owner/reviewer/operator enrollment/trust/revocation/clock/code/audit controls",
+    "Security-reviewed same-original-journal append-only writer, all-scope exposure/replay/common-lock/crash controls and exact new live build",
+    "Separately authorized fresh account/key/model/credits/recharge/pricing/processing/rate/token-count readiness",
+    "Exact unused source/payload/slot/build/full-reservation financial authorization and one-operation permission"
+  ],
+  "broaderQualificationOpen": "All66 independent gold, five proposed unresolved fields, historical response signoffs, held-out/expanded qualification; Gemini HTTP400/IP and Anthropic grammar compilation remain blocked."
+}

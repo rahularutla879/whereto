@@ -1,3 +1,7 @@
+# Task52B — separate diagnostic-only exception profile
+
+`task52_diag_scoring` adds a full raw/effective mutation/witness/envelope check over unchanged V5.1 A/B/C, plus conditional diagnostic eligibility and always-false planning authority. `task52_diag_auth` binds a new signed synthetic domain and explicit owner/reviewer exception acknowledgment. `task52_diag_protocol` reuses Q4C code in a fixed private fixture registry with a stricter review binding; `task52_diag_identity` pins exact sources/parents/allowlist. No production import, real writer or live activation; Q4D remains strict. [Policy and limits](docs/task52-diagnostic-progression-proposal-v1.md).
+
 # Task52B Q4D — separated real read / fictional write facade
 
 `task52_q4d.inspect_original` verifies the exact V5.1 binding over Q4B's fixed read-only inspector. `FictionalContinuation` constructs only new temporary Q4C/V5.1 state, reuses its unchanged writer/locks/facts/crypto, and adds a terminal legacy-order-loss rule including the OUTCOME-before-HALT crash gap. No database path input, application import, real writer/transport/issuer or runtime activation. [Integration and authority limits](docs/task52-q4d-v51-journal-integration.md).

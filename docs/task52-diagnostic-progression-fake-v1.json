@@ -1,0 +1,936 @@
+{
+  "identity": "52b-v51-diagnostic-progression-fake-v1",
+  "buildSHA256": "2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b",
+  "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+  "allowlistedDefectHash": "9223819d61e4e782e22135f2cac00d76abdfb00f947015ec92daa2f2e585f598",
+  "originalQ4DUnchanged": true,
+  "missingReviewRefusedBeforeSlot5": true,
+  "operations": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "payloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+      "operationHash": "42c51ae452bee2ed3ecd9e9ae4e54abc67e09e98aced686f110256bc631a6063",
+      "outcomeHash": "85284552ec4243463b3fa74b73c51b5cfacaabb1e162376e0870281817291040",
+      "responseHash": "23a39307c48909d72fb12b0c1c0bef29ccb2dd420b824afa24ebc8ab77da9995",
+      "reservationNanodollars": 2500000,
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "responseHash": "23a39307c48909d72fb12b0c1c0bef29ccb2dd420b824afa24ebc8ab77da9995",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "b2f79dc389d5cc25851277ae93b00086a4f8ec99ca1914af892072ed409b3c8d",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ],
+            [
+              1,
+              2
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "default_list",
+                  "span": [
+                    0,
+                    14
+                  ],
+                  "cue_span": [
+                    6,
+                    8
+                  ],
+                  "source": "Coffee, museum",
+                  "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+                  "conditional": false,
+                  "evidenceHash": "3d8af59a892e8dfd1fc8260d8098c204b407efe112a5faa932df610402bcbdb3"
+                },
+                {
+                  "before": 1,
+                  "after": 2,
+                  "rule": "explicit_then",
+                  "span": [
+                    8,
+                    27
+                  ],
+                  "cue_span": [
+                    14,
+                    21
+                  ],
+                  "source": "museum, then coffee",
+                  "source_sha256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+                  "conditional": false,
+                  "evidenceHash": "18a0b770d648c02bd179d4dfa1780dc0699d6eac8a350e1991b60413bdf1a57c"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    0,
+                    6
+                  ],
+                  "source": "Coffee"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    8,
+                    14
+                  ],
+                  "source": "museum"
+                },
+                {
+                  "index": 2,
+                  "id": "s2",
+                  "span": [
+                    21,
+                    27
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    0,
+                    101
+                  ]
+                ]
+              },
+              {
+                "before": 1,
+                "after": 2,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    8,
+                    27
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "impliedRelationships": [
+              [
+                0,
+                2
+              ]
+            ],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ],
+              [
+                0,
+                2
+              ],
+              [
+                1,
+                2
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true,
+        "diagnostic": {
+          "policy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+          "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+          "mechanicallyEligibleAfterReview": true,
+          "allowlistedDefect": null,
+          "systemIncompatible": false,
+          "reviewRequired": true,
+          "disposition": "standard_review_required",
+          "independentCertification": null,
+          "actualContinuationAuthorized": false,
+          "planningAuthorized": false,
+          "mutationPaths": [],
+          "rawInterpretationHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f",
+          "effectiveInterpretationHash": "6da41c49c9374fdf8fb6d8134883a6ddc9a8dcb8f7cf642c08d8e8ba787a273f"
+        }
+      },
+      "syntheticSignedReviewHash": "3930c66136d25a9cafd70bec899c33058cf54cde33f9a216f76c56e107dec17e",
+      "syntheticReviewOnly": true,
+      "realIndependentCertification": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "payloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+      "operationHash": "beb49aa47cb51859191fbbf31fdb742b0988f4af2ff69455b02994af89d6a6ef",
+      "outcomeHash": "6e9388f819947392db6db68fdb4e91b0823385870fef827a611a66586f49a7d4",
+      "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+      "reservationNanodollars": 2500000,
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "6fac25372fd7925ffb4119dd44c6b6ed064589e393e637f90c573c5e96e89cae",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "explicit_then",
+                  "span": [
+                    6,
+                    51
+                  ],
+                  "cue_span": [
+                    32,
+                    41
+                  ],
+                  "source": "SUNY College of Optometry and then get coffee",
+                  "source_sha256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+                  "conditional": false,
+                  "evidenceHash": "734cf170f050faf93e4e66964015fe59a9437a53bb4788c2f70aab36a917392c"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    6,
+                    31
+                  ],
+                  "source": "SUNY College of Optometry"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    45,
+                    51
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    6,
+                    51
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true,
+        "diagnostic": {
+          "policy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+          "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+          "mechanicallyEligibleAfterReview": true,
+          "allowlistedDefect": null,
+          "systemIncompatible": false,
+          "reviewRequired": true,
+          "disposition": "standard_review_required",
+          "independentCertification": null,
+          "actualContinuationAuthorized": false,
+          "planningAuthorized": false,
+          "mutationPaths": [],
+          "rawInterpretationHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97",
+          "effectiveInterpretationHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+        }
+      },
+      "syntheticSignedReviewHash": "def1714edf6864594cc46e5f819a72f9e2e932fe6dab01030b403f72a697f103",
+      "syntheticReviewOnly": true,
+      "realIndependentCertification": null
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "payloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+      "operationHash": "c3dbe358acc2092a9c3cb586fab596cffe810969af9ab66352078b9f73d4d5a2",
+      "outcomeHash": "8e7ccb35f1708a9ccc2f7b356cf38e8fc7d55c5030e4f1709bd21911170a21a8",
+      "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+      "reservationNanodollars": 2500000,
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "f89af6e48c45e76aa6b55a51fba2722168e2b8ef09a6a0c5dfdab2faf6198e4d",
+          "accepted": true,
+          "effectiveOrder": [
+            [
+              0,
+              1
+            ]
+          ],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "candidate_only",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "partial",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "explicit_before",
+                  "span": [
+                    8,
+                    32
+                  ],
+                  "cue_span": [
+                    17,
+                    23
+                  ],
+                  "source": "pharmacy before the bank",
+                  "source_sha256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+                  "conditional": false,
+                  "evidenceHash": "c8ad2514f1bc5b27398da3c9cbe3ff500a6da0b8446f5599eec58b01477616f5"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "required",
+                "required"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    8,
+                    16
+                  ],
+                  "source": "pharmacy"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    28,
+                    32
+                  ],
+                  "source": "bank"
+                },
+                {
+                  "index": 2,
+                  "id": "s2",
+                  "span": [
+                    38,
+                    44
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+              "independent": [
+                2
+              ],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {},
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    8,
+                    32
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true,
+        "diagnostic": {
+          "policy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+          "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+          "mechanicallyEligibleAfterReview": true,
+          "allowlistedDefect": null,
+          "systemIncompatible": false,
+          "reviewRequired": true,
+          "disposition": "standard_review_required",
+          "independentCertification": null,
+          "actualContinuationAuthorized": false,
+          "planningAuthorized": false,
+          "mutationPaths": [],
+          "rawInterpretationHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247",
+          "effectiveInterpretationHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247"
+        }
+      },
+      "syntheticSignedReviewHash": "e164d97190ef86adca289801c901354f29ac81b7ebd97ba756a403603195eb05",
+      "syntheticReviewOnly": true,
+      "realIndependentCertification": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "payloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+      "operationHash": "8140fd3f24ae051fc4d8201d8d594a0e1aa30b496deccf63d1cd32de6d0c5323",
+      "outcomeHash": "2d8afacc65e487c972a67ca07eae5b65b46d94bf0ed60e038d1b4f9a40a01006",
+      "responseHash": "a5f9f28054b4a27f64ea21c940d9131239da5414d3c1592900f79650e7324688",
+      "reservationNanodollars": 2500000,
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "responseHash": "a5f9f28054b4a27f64ea21c940d9131239da5414d3c1592900f79650e7324688",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "9beaee5bad1d2475a317995ae71e7880cce3654f35ba979b29c9a9038c357efb"
+        },
+        "legacy": {
+          "disposition": "advanced_handoff",
+          "resultHash": "0f4b3c457a27d8d0eee1b596dcd8f2de7e3c83a092f604aaa2751696242aefa6",
+          "accepted": true,
+          "effectiveOrder": [],
+          "requiredOrderPreserved": false
+        },
+        "guarded": {
+          "disposition": "blocked_by_legacy_effective_order_loss",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "sequence",
+              "proofs": [
+                {
+                  "before": 0,
+                  "after": 1,
+                  "rule": "default_list",
+                  "span": [
+                    4,
+                    39
+                  ],
+                  "cue_span": [
+                    14,
+                    18
+                  ],
+                  "source": "groceries and maybe stop for coffee",
+                  "source_sha256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+                  "conditional": true,
+                  "evidenceHash": "71c4b55ee7e9daa6488dea859d980321e653b12a47d1398d49f0da68b1b59804"
+                }
+              ],
+              "issues": [],
+              "requirements": [
+                "required",
+                "optional"
+              ],
+              "occurrences": [
+                {
+                  "index": 0,
+                  "id": "s0",
+                  "span": [
+                    4,
+                    13
+                  ],
+                  "source": "groceries"
+                },
+                {
+                  "index": 1,
+                  "id": "s1",
+                  "span": [
+                    33,
+                    39
+                  ],
+                  "source": "coffee"
+                }
+              ],
+              "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "optionalMarkerSpans": {
+                "1": [
+                  18,
+                  24
+                ]
+              },
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "9beaee5bad1d2475a317995ae71e7880cce3654f35ba979b29c9a9038c357efb",
+            "issues": [],
+            "outcome": "verified_order",
+            "trustedGraph": [
+              [
+                0,
+                1
+              ]
+            ],
+            "normalization": null,
+            "edges": [
+              {
+                "before": 0,
+                "after": 1,
+                "assertionKind": "model_explicit_edge",
+                "proven": true,
+                "quoteSpans": [
+                  [
+                    0,
+                    40
+                  ]
+                ]
+              }
+            ],
+            "requiredClosure": [
+              [
+                0,
+                1
+              ]
+            ],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [],
+            "conditionalClosure": [
+              [
+                0,
+                1
+              ]
+            ]
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true,
+        "diagnostic": {
+          "policy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+          "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+          "mechanicallyEligibleAfterReview": true,
+          "allowlistedDefect": "9223819d61e4e782e22135f2cac00d76abdfb00f947015ec92daa2f2e585f598",
+          "systemIncompatible": true,
+          "reviewRequired": true,
+          "disposition": "known_legacy_loss_review_required",
+          "independentCertification": null,
+          "actualContinuationAuthorized": false,
+          "planningAuthorized": false,
+          "mutationPaths": [
+            "/journey/order",
+            "/journey/ordering"
+          ],
+          "rawInterpretationHash": "9beaee5bad1d2475a317995ae71e7880cce3654f35ba979b29c9a9038c357efb",
+          "effectiveInterpretationHash": "379ae4d3d850f60723627c2785c3e26607687ce82f71815f03ff074bab99d356"
+        }
+      },
+      "syntheticSignedReviewHash": "a7192e1ffa29da9b3bbacd61871b34ae3ec595719b2a238a58a99580f3853809",
+      "syntheticReviewOnly": true,
+      "realIndependentCertification": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "payloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+      "operationHash": "e16096883ed1d8116b580dc11ac9713c2c535e448cf66c52c6ecd80f345fb8af",
+      "outcomeHash": "32fc8b69f8228c27e131de80cc2f5d8b53b6da32f08e60f70d58b15ea7ff0e97",
+      "responseHash": "4194d674637172a717193dd55b7d093584918d715118c6ecf217c6a8bfcc2b23",
+      "reservationNanodollars": 2500000,
+      "assessment": {
+        "version": "52b-v51-three-axis-offline-v1",
+        "slot": [
+          "openai",
+          "journey-21",
+          1
+        ],
+        "responseHash": "4194d674637172a717193dd55b7d093584918d715118c6ecf217c6a8bfcc2b23",
+        "structuredValid": true,
+        "raw": {
+          "fullyCorrectIndependent": null,
+          "mechanicalFailures": [],
+          "extractionFailures": [],
+          "mechanicalGateScope": "Q4C-compatible stop vector; extractionFailures separately reports raw errors; no independent correctness claim",
+          "outputHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+        },
+        "legacy": {
+          "disposition": "blocked_or_clarify",
+          "resultHash": "75167dfa182f2f7460176aad7cd475cac1a6280e6238bf451481265c84602bd5",
+          "accepted": false,
+          "effectiveOrder": [],
+          "requiredOrderPreserved": true
+        },
+        "guarded": {
+          "disposition": "appropriate_clarification",
+          "ordering": {
+            "version": "52b-order-policy-v5.1-owner-decisions-offline",
+            "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+            "orderingOnly": true,
+            "productionActivated": false,
+            "planningAuthorized": false,
+            "source": {
+              "category": "contradictory",
+              "proofs": [],
+              "issues": [
+                "contradictory_source_relations"
+              ],
+              "requirements": [
+                "required",
+                "required"
+              ],
+              "occurrences": [],
+              "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+              "independent": [],
+              "conditionalSemantics": "order if both visited; closure before optional projection",
+              "nonOrderValidationRequired": true,
+              "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+              "reviewedConnectors": [],
+              "reviewedFrame": null,
+              "ownerOptionalSequenceRuleConfirmed": true
+            },
+            "rawHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4",
+            "issues": [
+              "contradictory_source_relations",
+              "existing_source_clarification_requires_review"
+            ],
+            "outcome": "clarification_required",
+            "trustedGraph": null,
+            "normalization": null,
+            "edges": [],
+            "requiredClosure": [],
+            "impliedRelationships": [],
+            "mandatoryRequiredVisitClosure": [],
+            "conditionalClosure": []
+          },
+          "planningAuthorized": false
+        },
+        "mappingKnown": true,
+        "requiresIndependentReview": true,
+        "planningAuthorized": false,
+        "systemFailures": [],
+        "providerStatus": "complete",
+        "usage": [
+          5100,
+          500
+        ],
+        "reasoningTokens": 0,
+        "estimatedNanodollars": 887500,
+        "comparisonProjections": [],
+        "usageEstimateBasis": "Fictional historical125/500 nanodollar rates, not verified current prices",
+        "independentReviewIsSyntheticOnly": true,
+        "diagnostic": {
+          "policy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+          "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+          "mechanicallyEligibleAfterReview": true,
+          "allowlistedDefect": null,
+          "systemIncompatible": false,
+          "reviewRequired": true,
+          "disposition": "standard_review_required",
+          "independentCertification": null,
+          "actualContinuationAuthorized": false,
+          "planningAuthorized": false,
+          "mutationPaths": [],
+          "rawInterpretationHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4",
+          "effectiveInterpretationHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+        }
+      },
+      "syntheticSignedReviewHash": "70fb04e103f854bd50bfe220f9331058e2ca73b992bd98f36b19b2a51cf3355c",
+      "syntheticReviewOnly": true,
+      "realIndependentCertification": null
+    }
+  ],
+  "sixthOrRetryRefused": true,
+  "fakeSends": 5,
+  "fictionalAttempts": 15,
+  "fictionalChildExposureNanodollars": 12500000,
+  "fictionalHistoricalHaltPreserved": true,
+  "childHalt": false,
+  "realRequests": 0,
+  "realReservations": 0,
+  "realApprovals": 0,
+  "realIndependentReviews": 0,
+  "planningAuthorized": false,
+  "actualContinuationAuthorized": false,
+  "financialNote": "Five full fictional anchors only; historical proposed max5/$0.0125 is not current pricing or new paid authority.",
+  "temporaryStateAndTestKeysCleaned": true
+}

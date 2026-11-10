@@ -1,0 +1,94 @@
+{
+  "identity": "52b-v51-known-legacy-loss-diagnostic-PROPOSED-offline-v1",
+  "purpose": "synthetic_diagnostic_known_legacy_loss_only_v1",
+  "syntheticOnly": true,
+  "liveDispatchAvailable": false,
+  "financialApproval": false,
+  "parentQ4DBuildHash": "4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4",
+  "parentV51BuildHash": "756976849efc43e58032f4c3ff5abeef8465f85e4b1860d3b93e5b128aefaf07",
+  "artifactHashes": {
+    "scripts/task52_diag_scoring.py": "d1b1f9022c039acb310eb55ee6426fe53e38fe6144af1ddcf0f358efe11c6459",
+    "scripts/task52_diag_auth.py": "3a42978f5dda2be7804b215c94361a308befffa14b77c95a108ed479e4249449",
+    "scripts/task52_diag_protocol.py": "120cdf19570c630774d7fa1d27b43937ddfd25f880e234764fae603d6b96bbf0",
+    "backend/test_task52_diagnostic_progression.py": "8788fa5f9dd8933ef5072babca76eb06770592c7dfb9bf988e0ec527480baf57",
+    "scripts/task52_q4d_identity.py": "c0fe3d21b4d78daf1d2561944e8a3d7d59fca58477e3bc812c9ae61210879821",
+    "scripts/task52_v51_eval_identity.py": "a34bf6f58a683e1a78ef2368e8f026f9036dfc6f47e7cbf1616cad69bc5cc77c"
+  },
+  "allowlistedDefect": {
+    "identity": "52b-b2-groceries-optional-coffee-forward-edge-removal-v1",
+    "slot": [
+      "openai",
+      "journey-06",
+      2
+    ],
+    "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+    "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088",
+    "runtime": "52b-runtime-phase-b2",
+    "mutationPaths": [
+      "/journey/order",
+      "/journey/ordering"
+    ],
+    "rawEdges": [
+      [
+        0,
+        1
+      ]
+    ],
+    "rawOrdering": "constrained",
+    "effectiveEdges": [],
+    "effectiveOrdering": "unspecified",
+    "legacyEnvelopeHash": "f7c7fc4404939a0d6e001369a9ed51375aaade2189e395e6d14c04ce35828b3c",
+    "requiredConditions": [
+      "complete structure, all mechanical semantic checks pass",
+      "source occurrence/provenance/optionalities preserved, V5.1 graph proven",
+      "no other AI mutation, actual full B2 result reproducible",
+      "independent journey validator reproduces exact same delta/LIMITATION",
+      "full disposition/pending/calendar/context envelope unchanged",
+      "planning blocked and system incompatible",
+      "new exact synthetic owner purpose and explicit independent-role response review before next fictional slot"
+    ]
+  },
+  "fiveSlots": [
+    [
+      "openai",
+      "extension-repeated",
+      2
+    ],
+    [
+      "openai",
+      "journey-04",
+      2
+    ],
+    [
+      "openai",
+      "extension-partial",
+      2
+    ],
+    [
+      "openai",
+      "journey-06",
+      2
+    ],
+    [
+      "openai",
+      "journey-21",
+      1
+    ]
+  ],
+  "originalJournalRoot": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+  "historicalHaltRetained": true,
+  "realOwnerApproval": null,
+  "independentRealReview": null,
+  "futureLiveBuild": null,
+  "caps": {
+    "globalAttempts": 594,
+    "perProviderAttempts": 198,
+    "spendNanodollars": 12000000000,
+    "inputTokens": 12000,
+    "outputTokens": 2000,
+    "concurrency": 1,
+    "retries": 0,
+    "proposedOnlyAttempts": 5,
+    "proposedOnlyIncrementalNanodollars": 12500000
+  }
+}

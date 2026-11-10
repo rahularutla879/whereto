@@ -1,0 +1,55 @@
+# Task52B — diagnostic progression after one known legacy ordering loss
+
+Policy **`52b-v51-known-legacy-loss-diagnostic-policy-v1`**; proposed offline build **`52b-v51-known-legacy-loss-diagnostic-PROPOSED-offline-v1`**, starting clean `ea642a26cfea0837438c22572e17f6650dbbf98b`. [Exact build/allowlisted defect](task52-diagnostic-progression-build-v1.json), [five-operation fictional evidence](task52-diagnostic-progression-fake-v1.json), [verification](task52-diagnostic-progression-verification-v1.json). This task authorizes offline engineering/review, **not real diagnostic progression, financial execution, independent certification or planning**.
+
+## Decision proposal: one exception, five separate outcomes
+
+| Axis | Definition / gate |
+| --- | --- |
+|A Raw model correctness|Keep original complete response/output hashes, strict structure, all finite mechanical semantic findings and raw extractionFailures. Empty mechanical findings do not certify all24 fields; fullyCorrectIndependent remains null. Critical raw errors always halt, even if safely guarded.|
+|B Legacy application compatibility|Run complete unchanged B2 interpretation on a copy at the fixed reference clock. Keep its exact result hash, effective graph, context and disposition. An advanced handoff is not planning authorization.|
+|C V5.1 ordering compatibility|Independent source-first proof on raw occurrences/evidence. All required reachability, optional positioning, repeated identities, partial/flexible scope and absence of extra edges must hold. Contradiction requires the reviewed clarification, not a fabricated graph.|
+|D Model-diagnostic continuation|An error-free standard result may await review. A legacy-incompatible result may await review **only** for the exact allowlisted defect below. Another operation additionally requires the exact new purpose, current signed scope/readiness/operation and a separate response review. All actualContinuationAuthorized fields remain false here.|
+|E Planning authorization|Always false. Never restore an edge, mutate a response, publish a plan/session or mint admission from any diagnostic result.|
+
+The inherited raw.mechanicalFailures key remains a protocol stop vector. Added system/policy failures are separately reported in systemFailures; raw extractionFailures and independent correctness are not rewritten to blame the model.
+
+Q4D remains a separate frozen strict profile: it halts after case4, even with a synthetic passing review. Its source, manifest, result and halt evidence are not edited. This proposal is a new fixed-purpose adapter, not a flag or override on Q4D. Previous Q3/Q4A–C and V5.1 source, prompt/rubric and historical paid classifications stay unchanged.
+
+## Exact allowlist and reproducibility
+
+Only **journey-06/r2**, original source `Buy groceries and maybe stop for coffee.`, under pinned B2/V5.1/Q1/schema/clock identities can use the exception. Raw groceries and optional coffee must remain distinct/source-owned, with one proven0→1 edge, constrained ordering, intact optionality/provenance and no invented constraints. All unchanged parent mechanical/non-order checks must pass; mapping must be known.
+
+The full effective AI may differ from raw AI **only** at `/journey/order` (one0→1 edge becomes empty) and `/journey/ordering` (constrained becomes unspecified). An independent direct call to the unchanged journey validator must reproduce that exact effective AI and its known LIMITATION/false disposition. A second fake-provider complete B2 replay must reproduce the parent's complete result hash. No model/provider call is added: these are repeated local executions against copied authored/recorded data only.
+
+The surrounding complete legacy DTO is also pinned to `legacyEnvelopeHash` in the manifest: disposition, notes, issues, questions, request, context/calendar, pending request/version/answers/reference time and advanced token are checked. Only the two **identical** effective-AI copies (top-level and pending) are replaced by a sentinel in a diagnostic hashing copy, after equality is verified; full original DTO hashes remain recorded. Full raw/effective AI comparison and the journey witness still check every AI field. This does not hide or repair model errors and does not change evidence used by any validation/planner. Date, endpoint, source/identity/status, duration, pending or extra graph mutations fail closed. Comparisons use canonical JSON hashes so boolean/integer/float substitutions cannot exploit Python equality (False is not accepted as0).
+
+This allowlist is a current-runtime reconstruction/fake-fixture proposal, not independently approved gold or exact historical Python execution. It is deliberately narrow; a semantically valid variation that changes the pinned surrounding result is unrecognized and halts. Unknown, unreproducible or additional differences require a new reviewed policy, never an expanded fallback.
+
+## Signed purpose and explicit response review
+
+The new envelope version/audience and purpose `synthetic_diagnostic_known_legacy_loss_only_v1` bind the exact new build, parent versions, source/payload/rubric identities, original journal/halt and allowlisted-defect hash. Owner-role data must explicitly include diagnosticPurpose and allowlistedDefectHash in addition to every original ceiling and failure acknowledgment. Old V4/V5.1/Q4D identities cannot supply this authority.
+
+Each response reviewer must sign the exact operation/outcome/response hashes and all24 judgments, plus a diagnostic record naming this purpose, the exact defect hash (or null for ordinary results), systemIncompatible=true for the loss, and planningAuthorized=false. Missing review, generic agreement without this acknowledgment, wrong signer, changed purpose, disagreement/unresolved fields, stale/replayed grants or wrong previous-review hash block progression. A known loss is **not** recorded as independent AI success or application acceptance. Missing/uncertain operations and critical raw failures remain terminal; they cannot be reviewed away.
+
+Current trust/keys/review facts are disposable synthetic fixtures. Three different test keys demonstrate role separation, not three real humans. No real owner, reviewer or operator enrollment/signature/grant exists, no real independence is certified, and all real review packages remain unapproved. Genuine independent response review is a future real-build prerequisite; a synthetic signature cannot satisfy it or authorize a real operation.
+
+## Minimal implementation and safety reuse
+
+`task52_diag_scoring` adds the exact mutation/witness/envelope gate and D/E reporting over unchanged parent A/B/C scoring. `task52_diag_auth` reuses canonical parsing, Trust/revocation, role validators and OpenSSH verification with a separate fixed signed domain and narrowly extended owner/review fields. `task52_diag_protocol` binds unchanged Q4C state/reservation/locking/crash code to fixed new dependencies and an explicit diagnostic review-binding check. No caller-selected profile, source rewriting, monkeypatch of frozen modules or duplicate accounting engine is introduced. `task52_diag_identity` pins the new manifest, new sources and exact Q4D/V5.1 parents; its own source hash is separately reported, avoiding circular self-hashing.
+
+Only new factory-owned temporary exact-DDL databases can be written. Original paid journal inspection remains through the existing fixed read-only verifier; no paid database is copied, reset, migrated or opened writable. Preserve full reservations, immutable START/INTENT/OUTCOME/REVIEW/HALT facts, max(anchor, liability), source/version checks, nonce/slot uniqueness, common-lock discipline, original$12/594/198/12k/2k/concurrency1/retries0 and proposed child≤5/$0.0125. These figures are historical proposed caps, not current prices or new financial permission.
+
+## Fictional acceptance and failure evidence
+
+The fixed sequence stays extension-repeated/r2 → journey-04/r2 → extension-partial/r2 → journey-06/r2 → journey-21/r1. All five correct fakes can be evaluated. At case4, A remains mechanically intact/independently uncertified, B/C still report legacy order loss/planning block, and D is review-pending for the named defect. Slot5 refuses until the explicit synthetic response review is accepted; then the correct contradictory-order clarification is evaluated with no plan. There is no sixth operation or retry. Five full fictional anchors retain$0.0125, never actual spend.
+
+Tests cover the all-five sequence, missing/incorrect-purpose/false-compatible/wrong-signer reviews, known-loss review disagreement, changed raw optionality/evidence/endpoint/order, unknown graph/preferences/calendar/pending mutation, and process exit after the durable loss outcome. After that exit, only a complete explicit review can permit the next distinct slot; the consumed operation is never resent. Inherited tests retain raw critical, provider/uncertainty, source/build/signature, budget, replay, seven process-crash and competing-operator protections. Missing facts or a fresh process with no fixture registry refuse. These establish local synthetic/process-exit behavior, not power-loss, distributed durability or hostile same-UID isolation.
+
+The complete successor set can be rerun from the repository root with `CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52_diagnostic_progression`. Final evidence records the same38 tests divided exactly once across isolated temporary test workers; each fictional five-slot execution remains sequential. Source/response/rubric approval and real dispatch are not enabled by this command.
+
+## Limits and next real gates
+
+No actual diagnostic is authorized. Real owner approval must explicitly permit this exact exception/purpose/build and financial scope, in addition to independent selected-source/two-failure review, protected owner/reviewer/operator enrollment, a security-reviewed original-journal append-only writer/live build, fresh authorized account/model/key/credits/recharge/prices/processing/rate/input-count evidence and one-operation permission. A genuine independent response review must precede each next real call. None is implemented or obtained here; live_dispatch remains an unconditional refusal, with no HTTP client, provider credential loader, public receipt, real signer or runtime activation.
+
+All66 independent gold approvals, five proposed unresolved fields, historical response reviews and broader held-out qualification gates remain open. This policy does not repair legacy normalization, activate V5.1, qualify a model, resolve unknown grammar or change production Qwen/planning/HITEC/shadow behavior. Original10/594 (OpenAI7/Google2/Anthropic1),$0.047366625 accounted/$11.952633375 remaining, all324 private files and the persistent halt remain intact. Gemini HTTP400/IP and Anthropic grammar compilation remain separate blockers. No provider/count/metadata/account/Maps, billing, infrastructure/migration or Task53 work. Stop at this proposed offline policy/build review.

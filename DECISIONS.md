@@ -1,3 +1,7 @@
+# Task52B — propose a diagnostic exception without claiming planning compatibility
+
+Keep Q4D's historical strict halt unchanged. A separately versioned synthetic purpose may distinguish correct raw/V5.1 evidence from one proven B2 normalizer-only defect, while retaining the lost effective graph and planning block. Only an explicitly bound owner purpose plus separate response-review acknowledgment may permit the next distinct fictional diagnostic; raw errors, unknown/additional mutations and uncertainty still halt. Real human certification/approval is neither inferred nor implemented. [Exact proposed gate](docs/task52-diagnostic-progression-proposal-v1.md).
+
 # Task52B Q4D — keep original inspection and fictional writes separate
 
 Reuse the frozen Q4B and V5.1/Q4C components through a small exact-version bridge, rather than adapting the real journal to a fictional registry or copying another writer. A correct raw extraction with known legacy order loss receives its own terminal Q4D halt; even a missing halt after OUTCOME cannot permit progression. Future real diagnostic continuation after that loss needs a separate decision/build, and never implies plan admission. [Scope, evidence and future security review](docs/task52-q4d-v51-journal-integration.md).
