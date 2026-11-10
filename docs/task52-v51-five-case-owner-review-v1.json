@@ -1,0 +1,303 @@
+{
+  "identity": "52b-v5.1-five-case-owner-product-review-v1",
+  "recordType": "Documentary product-owner agreement with five complete plain-English intended interpretations",
+  "ownerApprovalDateUTC": "2026-11-10",
+  "recordedAtUTC": "2026-11-10T19:34:26Z",
+  "provenance": {
+    "medium": "ChatGPT conversation",
+    "source": "Current owner task: WHERE TO? — TASK 52B: RECORD FIVE OWNER-APPROVED V5.1 DIAGNOSTIC CASES, section1",
+    "approvalDateBasis": "Current owner instruction/session date; not an independently timestamped signature",
+    "recordedBy": "Codex agent; not an independent reviewer"
+  },
+  "references": {
+    "frozenPromptReview": {
+      "identity": "52b-cloud-v5.1-owner-list-order-REVIEWED-v1",
+      "path": "docs/task52-cloud-prompt-v51-REVIEWED-v1.json",
+      "fileSHA256": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+      "promptHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+      "configurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8"
+    },
+    "proposedRubric": {
+      "identity": "52b-q1-rubric-v3-owner-decisions-v5.1-PROPOSED",
+      "path": "docs/task52-q1-rubric-v3-v51-PROPOSED.json",
+      "fileSHA256": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+      "originalQ1Parent": "52b-q1-qualification-v1"
+    },
+    "Q3Proposal": {
+      "identity": "52b-q3-openai-b2-v5.1-owner-decisions-PROPOSED-v3",
+      "path": "docs/task52-q3-v51-PROPOSED-v3.json",
+      "fileSHA256": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc"
+    },
+    "originalCorpus": {
+      "path": "docs/task52-evaluation-corpus.json",
+      "fileSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f"
+    },
+    "referenceClock": {
+      "referenceTime": "2026-11-05T15:00:00Z",
+      "timezonePolicy": "Freeze date resolver and specify destination timezone per case; unknown timezone must clarify, never assume.",
+      "timezoneFunction": "scripts.cloud_model52.timezone_for (source pinned as data/function; corpus() still refuses B2)",
+      "rawProvenance": "immutable decoded provider output; no legacy effective snapshot promoted to raw"
+    }
+  },
+  "cases": [
+    {
+      "ordinal": 1,
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "originalSource": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "rubricCaseDigest": "47805dff6e93274c6e8425dc1ab7da1deddcc9e698e1a7f8ba1ea69af27b490a",
+      "proposedPayloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+      "approvedPlainEnglishInterpretation": "Three required visits: Coffee0 → Museum1 → Coffee2, in Jersey City tomorrow relative to the frozen reference. Return to the confirmed origin within an inclusive 180-minute whole-trip limit. Do not invent other constraints.",
+      "completePlainEnglishIntendedInterpretationOwnerApproved": true,
+      "comparison": {
+        "materialDiscrepancies": [],
+        "representationNote": "0→2 is implied by0→1→2, not an extra invented constraint. The three source occurrences remain distinct. Whole-trip maximum180 is inclusive and return is explicit; fixture tomorrow is2026-11-06 at frozen2026-11-05T15:00:00Z in America/New_York, not relative to today.",
+        "rubricDimensionsConsulted": [
+          "required_activities",
+          "optional_activities",
+          "exact_named_identity",
+          "mandatory_order",
+          "unordered_flexible",
+          "repeated_stops",
+          "return_origin",
+          "final_destination",
+          "final_visit",
+          "home_ambiguity",
+          "whole_trip_limit",
+          "travel_only_limit",
+          "visit_durations",
+          "duration_relations",
+          "dates_timezones",
+          "budget_transport",
+          "safe_disposition",
+          "hallucinations",
+          "contradiction_injection",
+          "source_provenance",
+          "people",
+          "geography",
+          "shared_place",
+          "deadline"
+        ],
+        "checkedBy": "Codex offline consistency review; not independent certification"
+      },
+      "independentlyApprovedDimensions": [],
+      "independent24FieldReviewComplete": false
+    },
+    {
+      "ordinal": 2,
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "originalSource": "Go to SUNY College of Optometry and then get coffee.",
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "rubricCaseDigest": "5ddec2e32f522a6c982d17ef1a945fbefc5bd30bf26fe983cea307a4004e1273",
+      "proposedPayloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+      "approvedPlainEnglishInterpretation": "Visit the exact SUNY College of Optometry before getting coffee. Both activities required. Do not invent date, budget, transportation, duration or return requirements.",
+      "completePlainEnglishIntendedInterpretationOwnerApproved": true,
+      "comparison": {
+        "materialDiscrepancies": [],
+        "representationNote": "Exact named identity is mandatory; fixture timezone is context, not an invented date, destination city or transport requirement. No unsupported optionality, duration or endpoint is added.",
+        "rubricDimensionsConsulted": [
+          "required_activities",
+          "optional_activities",
+          "exact_named_identity",
+          "mandatory_order",
+          "unordered_flexible",
+          "repeated_stops",
+          "return_origin",
+          "final_destination",
+          "final_visit",
+          "home_ambiguity",
+          "whole_trip_limit",
+          "travel_only_limit",
+          "visit_durations",
+          "duration_relations",
+          "dates_timezones",
+          "budget_transport",
+          "safe_disposition",
+          "hallucinations",
+          "contradiction_injection",
+          "source_provenance",
+          "people",
+          "geography",
+          "shared_place",
+          "deadline"
+        ],
+        "checkedBy": "Codex offline consistency review; not independent certification"
+      },
+      "independentlyApprovedDimensions": [],
+      "independent24FieldReviewComplete": false
+    },
+    {
+      "ordinal": 3,
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "originalSource": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "rubricCaseDigest": "f4ebb1622af9562399652af1313dcb9e4e78ad6fe940bdb26d7c769ef71b3f42",
+      "proposedPayloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+      "approvedPlainEnglishInterpretation": "Pharmacy, bank and coffee are required. Pharmacy precedes bank; coffee may occur before, between or after them. Preserve Jersey City and reference-relative tomorrow. No invented additional constraints.",
+      "completePlainEnglishIntendedInterpretationOwnerApproved": true,
+      "comparison": {
+        "materialDiscrepancies": [],
+        "representationNote": "Only0→1 is mandatory; coffee occurrence2 stays required and independently placeable. Jersey City/reference-relative tomorrow remain unchanged.",
+        "rubricDimensionsConsulted": [
+          "required_activities",
+          "optional_activities",
+          "exact_named_identity",
+          "mandatory_order",
+          "unordered_flexible",
+          "repeated_stops",
+          "return_origin",
+          "final_destination",
+          "final_visit",
+          "home_ambiguity",
+          "whole_trip_limit",
+          "travel_only_limit",
+          "visit_durations",
+          "duration_relations",
+          "dates_timezones",
+          "budget_transport",
+          "safe_disposition",
+          "hallucinations",
+          "contradiction_injection",
+          "source_provenance",
+          "people",
+          "geography",
+          "shared_place",
+          "deadline"
+        ],
+        "checkedBy": "Codex offline consistency review; not independent certification"
+      },
+      "independentlyApprovedDimensions": [],
+      "independent24FieldReviewComplete": false
+    },
+    {
+      "ordinal": 4,
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "originalSource": "Buy groceries and maybe stop for coffee.",
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088",
+      "proposedPayloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+      "approvedPlainEnglishInterpretation": "Groceries required; coffee optional. If included, coffee follows groceries. If omitted, groceries remain required. No invented context.",
+      "completePlainEnglishIntendedInterpretationOwnerApproved": true,
+      "comparison": {
+        "materialDiscrepancies": [],
+        "representationNote": "One required visit means required-only reachability is empty; conditional0→1 enforces coffee after groceries if selected. It does not force optional attendance or add a return/time/location/date.",
+        "rubricDimensionsConsulted": [
+          "required_activities",
+          "optional_activities",
+          "exact_named_identity",
+          "mandatory_order",
+          "unordered_flexible",
+          "repeated_stops",
+          "return_origin",
+          "final_destination",
+          "final_visit",
+          "home_ambiguity",
+          "whole_trip_limit",
+          "travel_only_limit",
+          "visit_durations",
+          "duration_relations",
+          "dates_timezones",
+          "budget_transport",
+          "safe_disposition",
+          "hallucinations",
+          "contradiction_injection",
+          "source_provenance",
+          "people",
+          "geography",
+          "shared_place",
+          "deadline"
+        ],
+        "checkedBy": "Codex offline consistency review; not independent certification"
+      },
+      "independentlyApprovedDimensions": [],
+      "independent24FieldReviewComplete": false
+    },
+    {
+      "ordinal": 5,
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "originalSource": "Visit the pharmacy before the bank, but the bank before the pharmacy.",
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "rubricCaseDigest": "986ab85d0c05081f25f99516457ce6c290133104fdb514c8632be1c493794daa",
+      "proposedPayloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+      "approvedPlainEnglishInterpretation": "Preserve both pharmacy and bank. Detect the contradictory ordering instructions. Ask for clarification and do not publish a plan until resolved.",
+      "completePlainEnglishIntendedInterpretationOwnerApproved": true,
+      "comparison": {
+        "materialDiscrepancies": [],
+        "representationNote": "The rubric marks contradictory_not_unordered and requires semantic clarification. Its listed occurrence indexes do not authorize an unordered graph or plan. Both conflicting requirements/stops must be retained.",
+        "rubricDimensionsConsulted": [
+          "required_activities",
+          "optional_activities",
+          "exact_named_identity",
+          "mandatory_order",
+          "unordered_flexible",
+          "repeated_stops",
+          "return_origin",
+          "final_destination",
+          "final_visit",
+          "home_ambiguity",
+          "whole_trip_limit",
+          "travel_only_limit",
+          "visit_durations",
+          "duration_relations",
+          "dates_timezones",
+          "budget_transport",
+          "safe_disposition",
+          "hallucinations",
+          "contradiction_injection",
+          "source_provenance",
+          "people",
+          "geography",
+          "shared_place",
+          "deadline"
+        ],
+        "checkedBy": "Codex offline consistency review; not independent certification"
+      },
+      "independentlyApprovedDimensions": [],
+      "independent24FieldReviewComplete": false
+    }
+  ],
+  "summary": {
+    "ownerPlainEnglishApprovals": 5,
+    "materialDiscrepancies": 0,
+    "originalSlotOrderPreserved": true,
+    "historicalRubricOrReviewModified": false,
+    "independentCaseCertifications": 0,
+    "all24DimensionsAutomaticallyApproved": false
+  },
+  "remainingIndependentReview": "All24 fields of the selected five sources and both historical failure mechanisms before any separately approved bounded diagnostic; broader66-case gold, five proposed unresolved fields, seven historical response reviews and original qualification gates remain outstanding.",
+  "authority": {
+    "purpose": "owner_product_documentation_only",
+    "cryptographicSignature": null,
+    "reviewerCredentials": null,
+    "realApprovalIssuer": false,
+    "operatorEnrollment": null,
+    "ownerFinancialApproval": null,
+    "paidExecutionAuthorization": null,
+    "planningAuthorized": false,
+    "activeEvaluator": false,
+    "liveDispatchAvailable": false,
+    "newAttempts": 0,
+    "newReservations": 0,
+    "persistentHaltPreserved": true
+  }
+}

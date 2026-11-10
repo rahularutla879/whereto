@@ -1,0 +1,104 @@
+{
+  "identity": "52b-v5.1-five-case-owner-verification-v1",
+  "baselineCommit": "e0ebf31d04b7be9d05361d3298964c0c8d3482a3",
+  "dateUTC": "2026-11-10",
+  "reviewRecord": {
+    "identity": "52b-v5.1-five-case-owner-product-review-v1",
+    "path": "docs/task52-v51-five-case-owner-review-v1.json",
+    "fileSHA256": "f70bacefcfd9bb1f703156ddaeedeaacac24141686b001aec0239f7acb8dab2b",
+    "ownerPlainEnglishApprovals": 5,
+    "independent24FieldCertifications": 0,
+    "cryptographicGrant": null,
+    "paidAuthorization": null
+  },
+  "compatibility": {
+    "sourcesAndSourceHashesMatchCorpusAndQ3": true,
+    "fiveSlotOrderUnchanged": true,
+    "rubricCaseDigestsAndProposedPayloadHashesUnchanged": true,
+    "materialDiscrepancies": [],
+    "checkedFacts": [
+      "Three required repeated occurrences, full sequence/transitive closure, inclusive180 and origin return",
+      "Jersey City/tomorrow relative to original frozen reference",
+      "Exact named SUNY identity, mandatory coffee, absent invented context",
+      "Pharmacy before bank and independently required coffee",
+      "Groceries required, optional coffee conditionally later, no forced attendance",
+      "Both contradictory stops retained; clarification and no admitted graph/plan"
+    ],
+    "originalQ1_V4_Q4A_Q4CRecordsAndSourcePinsUnchanged": true,
+    "oldPaidEvaluatorGatePreserved": true,
+    "frozenPromptRubricQ3EqualBaselineGitBytes": true
+  },
+  "tests": {
+    "command": "CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52_prompt_freeze backend.test_task52_q1 backend.test_task52_q3 backend.test_task52_version_review",
+    "run": 38,
+    "passed": 38,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 24.883,
+    "customOwnerRecordChecks": "All five exact source/hash/order/payload/rubric references and owner-approved requirements asserted offline; no material discrepancy"
+  },
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "integrity": "ok",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "totalAttempts": 10,
+    "remainingAttempts": 584,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHaltActive": true,
+    "allCorrectionsAndReservationsUnchanged": true,
+    "privateFilesUnchanged": 324,
+    "matchesStartingSnapshot": true,
+    "newAttempts": 0,
+    "newReservations": 0
+  },
+  "limitsUnchanged": {
+    "spendCapNanodollars": 12000000000,
+    "globalAttempts": 594,
+    "perProviderAttempts": 198,
+    "inputTokens": 12000,
+    "outputTokens": 2000,
+    "concurrency": 1,
+    "automaticRetries": 0
+  },
+  "security": {
+    "configuredAppValuesChecked": 2,
+    "configuredEvaluationKeysChecked": 3,
+    "currentHits": 0,
+    "historyHits": 0,
+    "ignoredPrivateConfigurationMode600": true,
+    "journalMode600": true,
+    "noRealCredentialsOrSignaturesCreated": true
+  },
+  "scope": {
+    "documentationOnlyCommit": true,
+    "productionRuntimeOrDependenciesChanged": false,
+    "QwenPromptValidationPlanningUnchanged": true,
+    "V51Offline": true,
+    "historicalHaltCleared": false,
+    "newOperatorOrLiveDispatchPath": false,
+    "providerCountingMetadataAccountMapsRequests": 0,
+    "billingInfrastructureTask53Changes": false,
+    "handbookFilesPreserved": 30,
+    "fullApplicationFrontendBuildBrowserRerun": false,
+    "reason": "Documentation-only owner review; no application/shared runtime change."
+  },
+  "remaining": "Independent24-field reviews of five selected sources/two historical failure mechanisms; broader66 gold/five proposed field gaps/seven historical response reviews; real enrollment, same-journal integration, new execution build, fresh readiness and final exact financial/operation authorization."
+}

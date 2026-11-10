@@ -1,3 +1,13 @@
+# Task52B — five diagnostic cases owner-approved at product level
+
+Started clean `e0ebf31`. [Concise review](docs/task52-v51-five-case-owner-review.md), [versioned owner record](docs/task52-v51-five-case-owner-review-v1.json), [verification](docs/task52-v51-five-case-owner-verification-v1.json), [remaining gates](docs/task52-v51-next-approval-gates.md). Identity `52b-v5.1-five-case-owner-product-review-v1`. Owner agreement with all five complete plain-English interpretations is recorded from the ChatGPT conversation; exact sources/order/payload/rubric/prompt hashes are bound. No material discrepancy found; no rubric, model output, prompt or Q3/Q4 historical record changed. Independent24-field approval remains missing; do not ask for the same product interpretations again or treat this as a cryptographic/financial grant.
+
+Same unused slots: extension-repeated/r2 → journey-04/r2 → extension-partial/r2 → journey-06/r2 → journey-21/r1. Next remains independent five-case/two-failure-mechanism review and separately scoped real build/operator/same-journal integration; no automatic readiness or send. All66 broader gold/seven historical reviews/five proposed field gaps remain pending. No general extraction added.
+
+Original journal/corrections/324 private files/halt unchanged: OpenAI7/Google2/Anthropic1,10/594,$0.047366625 accounted/$11.952633375 remaining. All30 handbook files and existing runtime/prompt/production validation/planning preserved, V5.1 offline/shadow OFF by default. No provider/count/account/Maps call, real grant/enrollment/journal write, billing/infrastructure/migration or Task53. Earlier checkpoints below remain historical.
+
+---
+
 # Task52B — reviewed V5.1 prompt freeze; no execution grant
 
 Started clean `f5085e9`. [Reviewed freeze/hash semantics and all19 examples](docs/task52-v51-prompt-freeze.md), [complete machine record](docs/task52-cloud-prompt-v51-REVIEWED-v1.json), [four owner product decisions](docs/task52-v51-owner-example-decisions-v1.json), [eight remaining approval gates](docs/task52-v51-next-approval-gates.md), [verification](docs/task52-v51-prompt-freeze-verification-v1.json). New review identity `52b-cloud-v5.1-owner-list-order-REVIEWED-v1`; original proposal/prompt/configuration bytes unchanged. Prompt hash `1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9`; config `4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8`. The embedded PROPOSED content identity stays unchanged rather than silently relabeling its payload.
