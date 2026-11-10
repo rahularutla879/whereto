@@ -1,3 +1,5 @@
+> Learn how the application works: [Where To? developer handbook](docs/learning/README.md) — 20 progressive chapters, request walkthroughs, references and safe exercises.
+
 > Task 52A production-hosting research is prepared for owner review: [architecture and cost proposal](docs/task52-cloud-architecture-evaluation.md). Nothing is deployed or provisioned; local startup commands below are unchanged. Task 52 remains in progress.
 
 Task 51 implements local request admission, inference backpressure, privacy-safe operational events and a fail-closed cloud activation contract. No daily plan allowance or infrastructure change was introduced. At the Task 51 checkpoint, Task 52 was unstarted. [Operations, audit, production dependencies and checks](docs/task51-operations.md). Earlier task-status notes below are historical.

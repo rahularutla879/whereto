@@ -1,0 +1,82 @@
+# 15 — Testing Mocks Debugging and Error Handling
+
+[Course contents](README.md) · [Glossary](GLOSSARY.md)
+
+## A test is a controlled claim
+
+A **test** runs code under declared conditions and compares actual behavior with expected behavior. A **unit test** targets a small piece; an **integration test** exercises connected pieces; an **end-to-end test** follows a larger user journey. A **mock** replaces a dependency; a **fixture** supplies known data. Developers use them to reproduce failures without relying on changing external services. Where To? particularly needs invented venue/routes/model responses so verification does not spend money or expose owner data.
+
+A green test with fake Google data establishes behavior for that fixture, not accuracy of real Google data. A test file that starts the actual FastAPI app with fake providers can establish HTTP integration, but is not automatically a browser check. Full hosted database and POSIX PTY lifecycle tests are opt-in. PTY means **pseudoterminal**, a simulated terminal used to test process ownership and shutdown.
+
+## Read an existing deterministic-clock example
+
+From [backend/TESTING.md](../../backend/TESTING.md):
+
+```python
+request = OutingRequest(activities=["coffee"], location="New York", date="2026-11-07")
+problem = outing_problem(request, now=datetime(2030, 1, 1, tzinfo=timezone.utc))
+self.assertEqual(problem[0], 'outing_date_expired')
+```
+
+Line 1 constructs a request with a declared historical date. Line 2 supplies a later aware instant explicitly; an **aware datetime** carries timezone information. Line 3 asserts that the calendar rejects it as expired. Inputs are a request and clock, output is a calendar problem, and a wrong result fails the test. No AI, Maps or SQL is needed. The surrounding example uses `calendar_clock` for scenario defaults; explicit `now` still takes precedence.
+
+**Assertions** express expected facts. A failing assertion is evidence to investigate, not permission to loosen the rule. Calendar, route-evidence, monotonic session and accounting clocks have different meanings. Historical November 7 fixtures failed after real dates advanced; the repair introduced isolated scenario clocks rather than weakening production expiry. `route_evidence_clock` controls freshness separately, and `fixture_api --factory` explicitly controls child-server test calendars.
+
+## Find the right test family
+
+| Change or question | Existing starting point |
+|---|---|
+| Candidate identity/product | `backend/test_planner.py` |
+| Scheduling/scoring | `backend/test_ranking.py`, `test_feasibility.py` |
+| Source/calendar validation | `test_interpretation.py`, `test_journey.py`, `test_date_resolution.py` |
+| Partial order/return/timing | `test_advanced_routing.py`, `test_advanced_timing.py` |
+| Geographic incident | `test_hitec_geography.py` |
+| Worker/rate/privacy | `test_request_management.py`, `test_planning_admission.py` |
+| Saving/security | `test_saved_plans.py`, `test_database_security.py` |
+| Browser-facing adapters | `lib/planning-client.test.ts`, `lib/request-management.test.ts` |
+| HTTP proxies | `app/api/interpret/route.test.ts`, `app/api/plans/generate/route.test.ts` |
+| Frozen cloud research | `backend/test_task52_q1.py` through `test_task52_q4c.py` and ordering suites |
+
+These are repository-relative paths; [the file map](PROJECT_FILE_MAP.md) links every indexed source/test. Normally enabled tests use fixtures; do not enable hosted resource or lifecycle flags as a study shortcut.
+
+## Debug by locating the first wrong boundary
+
+**Debugging** is finding why observed behavior differs from intended behavior. Start with the visible message, HTTP status and safe code/correlation ID. In browser Developer Tools, the Network panel can distinguish `/api/interpret` failure from `/api/plans/generate` or `/api/plans/advanced`. Do not export raw requests, tokens or origin payloads into shared reports.
+
+A failed frontend fetch could mean a dead proxy/backend, a validation refusal, malformed upstream JSON or a provider failure. [failure-diagnostics.ts](../../lib/failure-diagnostics.ts), [proxy-failures.ts](../../lib/proxy-failures.ts) and [backend/failures.py](../../backend/failures.py) preserve categories. A **stack trace** shows function calls around an exception; a sanitized production message deliberately hides sensitive internals. Review private local traces carefully rather than logging whole bodies.
+
+The launcher inherits terminal output; there is no guaranteed application log file containing every prior request. Operational counters and sanitized events cannot recover all original response fields. The Hitech incident's missing original response demonstrates why uncertainty should be reported instead of filled with a plausible cause.
+
+## Commands and honest reporting
+
+`npm test` runs the declared TypeScript tests. `npm run test:backend` runs unittest discovery through the existing virtual environment. `npm run lint` checks code style/errors; `npm run build` compiles a production frontend bundle; `npm run typecheck` checks types. Build replaces generated `.next/types`, so run typecheck after the build completes. Compilation is not behavior verification, and a successful build does not mean backend production activation is allowed.
+
+For this documentation-only delivery, link/organization/source checks are appropriate. Running paid services or all opt-in tests would not validate prose and would exceed scope. See [VERIFICATION.md](VERIFICATION.md) for exactly what was checked now. See [DEBUGGING_PLAYBOOK.md](DEBUGGING_PLAYBOOK.md) for symptoms and bounded read-only investigation.
+
+## Five key takeaways
+
+1. Tests establish behavior under specific conditions.
+2. Mocks prevent external cost but do not verify real availability.
+3. Separate clocks make time-dependent tests meaningful.
+4. Compile, test, browser and live evidence are distinct.
+5. Investigate the first failed boundary rather than guessing a provider cause.
+
+## Check your understanding
+
+15.Q1. What is a fixture?
+15.Q2. What does an assertion do?
+15.Q3. Why not move every expired fixture date forward?
+15.Q4. Does a build prove planning behavior?
+15.Q5. Can sanitized aggregate logs recover every original response?
+
+## Code-reading exercise — 15.R
+
+Read one test in test_hitec_geography.py and identify invented inputs, replaced dependencies and the assertion.
+
+## Practical exercise — 15.P
+
+After inspecting backend/TESTING.md, run only backend/.venv/bin/python -m unittest backend.test_planner -v in a disposable learning checkout if desired. Record actual output, not expected totals.
+
+See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-15).
+
+[Previous chapter](14-security-rate-limits-accounting-and-reliability.md) · [Contents](README.md) · [Next chapter](16-git-github-and-the-development-workflow.md)

@@ -1,0 +1,96 @@
+# 18 — Cloud Hosting Deployment and Scalability
+
+[Course contents](README.md) · [Glossary](GLOSSARY.md)
+
+## Deployment means running beyond the owner's computer
+
+**Hosting** provides machines/services that run the application. **Deployment** installs a reviewed version there. **Scalability** is handling more work while preserving correctness and cost controls. Where To? cannot safely scale by launching independent copies of local sessions and budgets: two processes might each believe the same allowance is unused, or a continuation might land on a server without its session.
+
+The repository contains a [Task 52A proposal](../../docs/task52-cloud-architecture-evaluation.md) and [implementation sequence](../../docs/task52-production-implementation-plan.md), not a provisioned cloud stack. This chapter teaches that checked-in proposal; its historical quotes/prices/model candidates are not freshly verified current purchasing advice.
+
+## The implemented startup refusal
+
+From [admission.validate_environment](../../backend/admission.py):
+
+```python
+if environment == 'production' or os.environ.get('NODE_ENV') == 'production' or hosted:
+    raise RuntimeError('Production requires verified shared admission, provider accounting, ephemeral sessions and cloud inference. Activation is deferred to Task 52.')
+```
+
+Line 1 checks declared production and known host indicators. Line 2 refuses startup with missing architectural requirements. Inputs are process environment and hosted indicators; output is refusal rather than an unsafe active service. This runs at import and lifespan validation. Setting an invented “ready” flag cannot create shared services. A successful Next frontend production build does not bypass this backend boundary.
+
+## Local and proposed cloud paths
+
+```mermaid
+flowchart TB
+  subgraph Local[Implemented local development]
+    B1[Browser localhost] --> N1[Next.js process]
+    N1 --> F1[FastAPI process]
+    F1 --> Q1[Ollama on loopback]
+    F1 --> L1[Process sessions plus protected local cost ledger]
+    F1 --> G1[Google APIs if locally authorized]
+    F1 --> S1[(Existing Supabase private saves)]
+  end
+  subgraph Cloud[Proposed only - not deployed]
+    B2[Public browser] --> E[Managed HTTPS ingress and Cloud Armor]
+    E --> N2[Cloud Run Next.js]
+    N2 --> F2[Private Cloud Run FastAPI]
+    F2 --> A[Qualified cloud extraction - pending]
+    F2 --> R[Volatile Memorystore Redis]
+    F2 --> SQL[(Regional HA Cloud SQL operational authority)]
+    F2 --> S2[(Existing Supabase saves retained)]
+    F2 --> G2[Google under shared reservations]
+  end
+```
+
+**Cloud Run** is a managed service for containerized processes. A **container** packages an application and runtime dependencies. An **image** is the packaged template; an **instance/replica** is a running copy. A **region** is a geographic service area. Colocation can reduce round-trip latency but does not prove the proposed performance target.
+
+A **load balancer** directs requests across service instances. **Ingress** is incoming traffic; **egress** is outgoing traffic to providers. A **CDN**, Content Delivery Network, distributes cacheable static content. Private planning responses still need no-store and controlled access. **Cloud Armor** supplies proposed edge protection; it does not replace application ownership/validation.
+
+## Why Redis and SQL have different proposed jobs
+
+**Redis** is fast key-value storage proposed for expiring source/venue/origin/session evidence. The proposal is volatile: no durable archive/backups of raw private/provider evidence. **HA**, High Availability, adds redundancy, but failover may still lose recent cache writes. Therefore Redis-only locks/counters must not restore already-spent capacity after failover.
+
+Cloud SQL PostgreSQL is proposed for durable operational authority: reservations, intent/outcome classification, current revisions and fences. This is separate from the existing Supabase saved-plan schema. “Same database technology” does not mean the same data purpose or approved migration. Opaque hashes/metadata still need privacy and retention controls.
+
+A **distributed transaction** attempts consistency across components. SQL and external HTTP cannot simply roll back together: once Google receives a request, undoing a local SQL transaction cannot unsend it. The design reserves durably before dispatch and treats uncertain sends conservatively. **Exactly once** should not be claimed merely because one database write is atomic. A stale worker must be fenced before publication or further provider work.
+
+## Capacity, connections and latency
+
+Each replica's database connections multiply across the fleet. The proposal suggests bounded pools and maximum replicas after measuring capacity; those design values are not current runtime cloud settings. A **connection pool** reuses a finite set of database connections; a **session pooler** mediates database sessions. Current saved operations open bounded restricted connections locally and use transaction-local access settings.
+
+**p95 latency** means 95 percent of observations in a named sample completed at or below that duration. It is not the slowest run and cannot be inferred from a handful of mixed successful/failed calls. End-to-end latency includes admission, model, validation, searches, routes, SQL where applicable, proxy and rendering. The proposed five-second p95 remains unproven.
+
+Scaling can increase provider concurrency/cost as well as throughput. Shared minute/day/account budgets, bounded work, retries zero, privacy-safe metrics and outage refusal must work across replicas before public activation. **Observability** means enough logs/metrics to understand operations; it should not become a raw request archive.
+
+## What remains
+
+A qualified cloud extraction adapter, shared state/authority implementations, privacy/provider-term approval, exact financial and infrastructure approval, deployment definitions, security/HTTPS setup and hosted end-to-end/phone acceptance remain future work. Task 52's original hosting objective is broader than its current model-evaluation phase; Tasks 53–55 have their separate roadmap responsibilities. No resources were provisioned and no Task 53 work was started for this handbook.
+
+## Five key takeaways
+
+1. Deployment is beyond local startup.
+2. Independent local budgets cannot become a shared fleet.
+3. Redis evidence and durable SQL authority have different roles.
+4. External HTTP cannot be rolled back by SQL.
+5. The cloud diagram is proposed, not deployed.
+
+## Check your understanding
+
+18.Q1. What is a replica?
+18.Q2. Why is Redis alone insufficient for spending authority?
+18.Q3. What does HA stand for?
+18.Q4. Does a frontend build activate the backend?
+18.Q5. What does p95 describe?
+
+## Code-reading exercise — 18.R
+
+Read validate_environment and the proposal shared-session contract. Find one state currently tied to monotonic process time that needs a shared representation.
+
+## Practical exercise — 18.P
+
+On paper route a continuation to a second replica. List the state it would need and which proposed store owns each item.
+
+See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-18).
+
+[Previous chapter](17-task-52b-cloud-ai-evaluation-and-ordering-research.md) · [Contents](README.md) · [Next chapter](19-how-to-read-debug-and-modify-this-codebase-yourself.md)
