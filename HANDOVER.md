@@ -1,3 +1,7 @@
+# Task 52B independent semantic review package
+
+The five V5.1 diagnostic cases are ready to share for independent semantic review. The packet pairs each original request with 24 proposed judgments and includes sanitized evidence for the journey-07/r1 provenance rejection and the historical extension-repeated/r1 accepted ordering error. Share both files together and ask the reviewer to return the completed form. All 120 judgments and both historical assessments still await independent review. [Review package](docs/task52-independent-review/PACKAGE.md) · [Blank review form](docs/task52-independent-review/REVIEW_FORM.md)
+
 # Task 52B original-journal integration preparation
 
 Started clean at `3c5f83f`. The owner approved the exact journey-06/r2 diagnostic-only continuation policy subject to genuine independent review and existing security checks. The approval is documentary and grants zero paid attempts. The integration rehearses append-only SQL on fresh exact-schema fixtures using Q4C's existing protocol and Q4D's pinned read-only inspection. The real writer, protected enrollment, independent reviews, readiness and financial/operation permissions remain pending. [Decision](docs/task52-owner-diagnostic-continuation-v1.json) · [Integration and checklists](docs/task52-real-integration-preparation-v1.md) · [Verification](docs/task52-real-integration-verification-v1.json)
