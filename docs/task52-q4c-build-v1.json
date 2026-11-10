@@ -1,0 +1,381 @@
+{
+  "sshKeygenSHA256": "9628431e9d84a2c4d2ece71443d98ebce653390f23449df18551e740f6683bb8",
+  "identity": "52b-q4c-signed-real-schema-OFFLINE-v1",
+  "format": "52b-q4c-build-v1",
+  "liveDispatchAvailable": false,
+  "syntheticOnly": true,
+  "binding": {
+    "parentProposalHash": "66a026921cfbc9f9a983b94c717e633150a74854006051d7f429b0efee15b3f7",
+    "parentConfigurationHash": "850ad650bff6bab9c4465e657932874cbcae06a9a7b4e1c79eda8891a6eb942b",
+    "parentSpecification": {
+      "identity": "52b-q3-openai-b2-v4-guarded-PROPOSED-v1",
+      "purpose": "synthetic offline evaluation only; future paid purpose requires explicit approval",
+      "runtime": "52b-runtime-phase-b2",
+      "runtimeManifestHash": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+      "reconstruction": "52b-behavior-reconstruction-duration-b2-v1",
+      "historicalEnvironmentExact": false,
+      "canonicalPydanticSchemaHash": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+      "strictParserSchemaHash": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+      "wireSchemaHash": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "originalCorpusHash": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "Q1Contract": "52b-q1-qualification-v1",
+      "Q1ManifestHash": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+      "Q1RubricHash": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+      "originalV4ConfigurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "semanticScorer": "52b-semantic-v3-source-bound-generic-the",
+      "orderingPolicy": "52b-order-policy-v4-shadow",
+      "orderingPolicyHash": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+      "originalJournalRootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "referenceTime": "2026-11-05T15:00:00Z",
+      "clockPolicy": "Freeze date resolver and specify destination timezone per case; unknown timezone must clarify, never assume.",
+      "rawLegacyGuardedAxes": [
+        "unmodified raw-model/full-field review",
+        "complete actual B2 legacy disposition",
+        "raw V4 proof combined conservatively with complete legacy disposition"
+      ],
+      "futureEvaluatorImplementationHash": null,
+      "futureResponseHashPolicy": "Bind complete immutable provider response and separately decoded output to operation/slot/source/payload/configuration; compute only after response, never invent future response hashes.",
+      "inferenceEndpoint": "https://api.openai.com/v1/responses",
+      "inferenceMethod": "POST",
+      "authenticationScope": "existing restricted evaluation-project key, ignored backend config only; no key or headers in artifacts",
+      "redirectsAllowed": false,
+      "countingEndpointForSeparatelyApprovedReadiness": "POST https://api.openai.com/v1/responses/input_tokens",
+      "guardIsProductionEnforcement": false,
+      "model": "gpt-6-luna",
+      "inputCap": 12000,
+      "outputCap": 2000,
+      "reasoning": {
+        "effort": "none"
+      },
+      "temperature": 0,
+      "serviceTier": "default",
+      "store": false,
+      "tools": false,
+      "concurrency": 1,
+      "retries": 0
+    },
+    "originalBaseline": {
+      "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+      "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+      "rows": [
+        {
+          "ordinal": 1,
+          "slot": [
+            "google",
+            "journey-01",
+            1
+          ],
+          "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+          "originalState": "recorded",
+          "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+        },
+        {
+          "ordinal": 2,
+          "slot": [
+            "google",
+            "journey-02",
+            1
+          ],
+          "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+          "originalState": "recorded",
+          "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+        },
+        {
+          "ordinal": 3,
+          "slot": [
+            "anthropic",
+            "journey-01",
+            1
+          ],
+          "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+          "originalState": "recorded",
+          "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+        },
+        {
+          "ordinal": 4,
+          "slot": [
+            "openai",
+            "journey-01",
+            1
+          ],
+          "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+          "originalState": "recorded",
+          "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+        },
+        {
+          "ordinal": 5,
+          "slot": [
+            "openai",
+            "ordinary-dinner",
+            1
+          ],
+          "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+          "originalState": "recorded",
+          "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+        },
+        {
+          "ordinal": 6,
+          "slot": [
+            "openai",
+            "journey-03",
+            1
+          ],
+          "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+          "originalState": "recorded",
+          "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+        },
+        {
+          "ordinal": 7,
+          "slot": [
+            "openai",
+            "journey-07",
+            1
+          ],
+          "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+          "originalState": "recorded",
+          "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+        },
+        {
+          "ordinal": 8,
+          "slot": [
+            "openai",
+            "journey-04",
+            1
+          ],
+          "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+          "originalState": "recorded",
+          "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+        },
+        {
+          "ordinal": 9,
+          "slot": [
+            "openai",
+            "extension-partial",
+            1
+          ],
+          "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+          "originalState": "recorded",
+          "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+        },
+        {
+          "ordinal": 10,
+          "slot": [
+            "openai",
+            "extension-repeated",
+            1
+          ],
+          "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+          "originalState": "recorded_halted",
+          "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+        }
+      ],
+      "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+      "correctionFileHashes": [
+        "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+      ],
+      "privateFiles": 324,
+      "counts": {
+        "openai": 7,
+        "google": 2,
+        "anthropic": 1
+      },
+      "attempts": 10,
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "persistentHistoricalHalt": true,
+      "newReservations": 0
+    },
+    "orderedSlots": [
+      {
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+        "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+        "rubricCaseDigest": "77940447f4e618c1560b010e6cc61f2c3253543092c7f0c596c823339c703920"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+        "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+        "rubricCaseDigest": "802608fa6fb46b4769d2de3f1fa99271b0c02d87bd8af96429b17871cb84b6d8"
+      },
+      {
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+        "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+        "rubricCaseDigest": "eebc83d5f13adc1d83bc2ac95a38125c2d8ceb228d5b2fd2a66b83013ce86db1"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+        "payloadHash": "4318ff66ef0a8fc92d64565b75d10c996c4f0665badcf9db4274868f47699f52",
+        "rubricCaseDigest": "00d6c55346267b60015c14b90c77dcafdb62fd0a7977bdf2478da3e710ca9d22"
+      },
+      {
+        "slot": [
+          "openai",
+          "journey-21",
+          1
+        ],
+        "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+        "payloadHash": "0ea781ac4e38c013dbe52fd007626cdd70b910e6a9c1048cdb5ed6011fe234d4",
+        "rubricCaseDigest": "8bda336afc89bfb4fe36e89a0b36b93a3b29bc4276f8094adcc883486cc1fffd"
+      }
+    ]
+  },
+  "artifactHashes": {
+    "backend/.env.example": "90df61e521a6dec8ec2e4093516df72d4f4b6f42106dcdadbf9492103faa20c7",
+    "backend/TESTING.md": "01d642d48c891ecf76a57ef6b94810f51c341c941fb6ddf11306da9cf2f1903f",
+    "backend/acceptance_fixtures.py": "ab524cc79fb09081d7403cb94c917bee890d4180240030dd8f065143cd915f2b",
+    "backend/admission.py": "fb211c1f323c98ab3cb1b14b7fd4bc8c457e4ddf17836f26505b10c7b5cf9ce9",
+    "backend/advanced_planning.py": "9abc5f7cc58f9a26c6766604b9597587b85bd3915a53d8d915093e95fa0e09d8",
+    "backend/advanced_preferences.py": "c69c341124053889cbb9e7f846d8c9177654bf26cc1498bd2ccad88f6689619a",
+    "backend/advanced_routing.py": "980e0271064c12fc2b413823dd2120658ee2b2b8e308fab9eafaaecd77686259",
+    "backend/advanced_timing.py": "7ea840a477240d54ba895ce4bd16468d46c5abf1712368ef576af71011445e8a",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/ai/smoke.py": "8b3150a9aa088f7fa82357f64f9d623d1a216c6e1d421c6e051ffb5e73f25578",
+    "backend/ai/smoke_dates.py": "93583606221133b2a4b21b1099a815e741b4fc9b0001bb7e178893d7f3eb6fbe",
+    "backend/ai/smoke_interpretation.py": "77739cbf25cc43221c7607e97a1a2447e6b09fbe46b1f5608d0851a3543e504c",
+    "backend/ai/smoke_journey.py": "2ffc583cc304a8f0517bdd2298b89d9b57753df790a1397fafe7e3fe0bdc076d",
+    "backend/ai/smoke_reliability.py": "359916e01696c627249930b5a4803d6d4a391715d5173c8be8a1d42f9965c1f0",
+    "backend/ai/smoke_validation.py": "c1a615413af8b7e95931547f0335f13046dd4c6bdb1bb8d873cc4c9eec51bc4f",
+    "backend/ai_readiness.py": "b1f8a60a26a2655cb83fe4f527086fe6a03fb20b2c1dcecade6cf3049291e3c5",
+    "backend/benchmark_acceptance49.py": "d88c2d87adcd33ef1571f76288ac0991ea5b0debdf60ee6a3e7a29f1679b8699",
+    "backend/between_policy.py": "640c280777e87bfd3efb4a4715a3bb77630dbf0c8b17ef7fe2df9a53d0d9fd2b",
+    "backend/continuation_status.py": "5b3ed567103d6174d4185eda217baabb8c9c3678acf1ddfeebe531e9bcc9da4f",
+    "backend/database_check.py": "e744402e55e4eb076145887bf8316485d02852261eb7437719ffc476a035abfb",
+    "backend/database_migrate.py": "56b65fa38e327bc2eaf1f3379efa4b5b2301f2fdea4160fc0f9adc61f4522361",
+    "backend/date_resolution.py": "bd1a8be6ac2789f87565608d9ba86e62a1e9b024638fca3f9c3086604a0bbf84",
+    "backend/dev_start.py": "672c9f4f4f5deedc0ed4b97989cdeda3e3d5768f65d09f6405f63edcc7449b27",
+    "backend/development_cost.py": "2d364ca5deadd284afacbf7314ecb5e5093266237a2df6f8d78b668eaf4c7180",
+    "backend/development_diagnostics.py": "92176a684e48a9949070395e993999cb7d7ee5068c7ac06682ef405172d365f2",
+    "backend/discover_places.py": "7bf6b559d87f332a126c2fdc34cfd0f61072604175f5887a9f1eefbec0a83772",
+    "backend/discovery_inventory.py": "b1f6dd30d8624611c4e32616413609de10a9a10adb7e907956919d63e7291ef7",
+    "backend/display_duration.py": "ed2f9636b77d26b9d84a52a900bfba1385b85c55a5fa9b85aec9d9dda9fde899",
+    "backend/duration_preparation.py": "05072bc30bbb97f59de7ce08a7747c8e43413657bd70ab41d49f6ef784f9c0a8",
+    "backend/evaluation/__init__.py": "88a80bd6f5e9d73327ac801d2780633df9186fafab3870b08c2c3161ebbf1fe2",
+    "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+    "backend/evaluation/results-qwen3-4b-baseline.json": "f9491034f300ce7b2c60dbe16ea82c55cb0aafcacfa864c8059b7bc04f8edcc8",
+    "backend/evaluation/results-qwen3-4b-final.json": "2b96f078481ead594260bca517956e33073329cb22f94babb0ba5878c192f76c",
+    "backend/evaluation/results-task50a.json": "1279a142d9e53d0216527186ff3b6a310973377c10addebb05b675a5450a5459",
+    "backend/evaluation/results-task50e-edits.json": "8678b92d30de37a5cc491fbb530488db33b90af577146e09c8d0386831d89072",
+    "backend/evaluation/results-task50e-model-investigation.json": "36c582b6bbe71ce15319635225c8f0bce79659829ca8b2dbfb944b125d70aac3",
+    "backend/evaluation/run.py": "8ade22bb3b5efe2e10cb3d42db48237608654c77be02f469fae184d1af351663",
+    "backend/evidence.py": "e99c9fd4ae212302bad39a5190057cb4777ed6e8ff983b057355959579d2606b",
+    "backend/failures.py": "678bd1f62a46c3f52b006852ee92eaba498251d832430eb5d2ebcdc9e71b6bc3",
+    "backend/feasibility.py": "9a721739fd2efd0a82f67824a4ee2180590fae7eda07a65825d1dba605db976e",
+    "backend/hours_fixtures49.py": "b51c26474a13efb2d2566d29591b739a595fa0dd9738156f3295301f0b968082",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/journey.py": "681045405f33897d859a18394add1646236ab53c5e61b63562c1dea93b3b8d7e",
+    "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+    "backend/location_context.py": "aed6238f6fc9b1a67af7f9e26190e51dbac3611daa3007624302691c123bbc87",
+    "backend/location_fixtures.py": "4549d656bd2f641a0dea15948dd3cfa5d023c3d82c2eab75de9d4e88a55ecb73",
+    "backend/location_policy.py": "7700968f9eba172153f090742cd9a6cd166a4182f2fe27adbf9792cef22ee5ec",
+    "backend/main.py": "6dca010f874a5ff15a1854b81dbe8ce1505d1bf04e0281d4fccc7aaa58a36c86",
+    "backend/migrations/0001_initial_planning.sql": "216804e812b475ddf4614a9e8632150a5d5b901ef3c55309f62d76c3c577410e",
+    "backend/migrations/0002_private_saved_plans.sql": "07bbc4289493ac122afdad288f73a0e61019915ae287cacfe7fe7db66a08028f",
+    "backend/mock_data.py": "13e1dd00c696d2b38d2dd4e69a2f31f684bb1de240d0f6d4c8e8b3df8c600b2f",
+    "backend/mock_origin.py": "0fb724807451c44ce9dbe9bf84578e6770dc67eff95bef82cf3ae3de5ae4a1c0",
+    "backend/mock_surprise.py": "069afa86f0012daba375427020de156ccf4da6ce09e55024e9aca29177b575b0",
+    "backend/models.py": "f5e1d60b14254f11aacf96e3eda7b4bbe0cf1ed1688ae016e09ec0bd2ae1d0e9",
+    "backend/operations.py": "d82f2c999241cc9cbd999597f24b6b99165dabd320b52995fdbd0281ae154eca",
+    "backend/option_sessions.py": "30bad7f0a2811fb89c0ee1628a5092e214a33c0e15fee6bb0bf7f78251365d51",
+    "backend/ordering_shadow.py": "0c3223da48d80b8280199604cdde36d2ffa91e73a9352f4ce75a76f299bb3bf8",
+    "backend/performance.py": "c5dfa879e25f3183a12d7c2ba51a395ac0cb47d0c5baed2815621b87233d1062",
+    "backend/persistence_config.py": "a108bd39d91879ec3994a4b8905f57fcadcf548d299a7c01dcb6c66b442d5ba0",
+    "backend/persistence_setup.py": "30b3d7f4dac5cb25ce9d62caf90298bcf0689895c63b4003d908ec533da1b4b7",
+    "backend/places.py": "364e57c8cb8dc9c086e783613adc7cc6dd97396a0d72d05fa49792384bf4809e",
+    "backend/places_transport.py": "aa9ee8a10cfb5cc5a2e61c96cf3bc0804bd55a0ce178e4d4e5beabe67f8f0392",
+    "backend/planner.py": "e6ca20fad145cdb54aa276b60e78757540ef7af50b4591f6ea59dd0d467cba62",
+    "backend/planning_admission.py": "c083f735690eac7ca47227bc597c14cce1eeef022dbb7c600c71b36e5d3dfa93",
+    "backend/planning_diagnostics.py": "ac14a421dca27cb50b0f2fa74074f54e26b89637c4aa80c2c4b0925bd8e724c0",
+    "backend/planning_hours.py": "db76ec8ce6df7ece28015c83ac56776f6c1f272bd5bfe8c618ec167e3059836b",
+    "backend/provider_budget.py": "8d67052e2d8309a087e744b20f00483cb49e1e968c893c4996af4e7df7a7f3a5",
+    "backend/provider_errors.py": "0cd8ff0b8e35d41f486866fef31e12a8ab225efcb16f4bbd732520996eb9e927",
+    "backend/provider_work.py": "f39f0ef172e8d070bb7d2f4e1c8b8a00d1ee24265ba3680ec2a58887ae0232e7",
+    "backend/ranking.py": "4ae3e2f66a2c6f073f3a92b83a874d8fbdc55165d84cebd194edc75c45c10e72",
+    "backend/real_fixture_server.py": "d592e9499656e6dea4e101ed439ddc142dfc0a01cb5b5635934fb4ff98cb8469",
+    "backend/real_fixtures.py": "a44b763d0e7e0a2551158d6e4e2fe0bfb2d8a0be94622879239e4e15763ce091",
+    "backend/real_planning.py": "5f07b291d71e8a61c93a983dece155e72c101b3e3d0d09d1f7292148b74e48fc",
+    "backend/refinement_fixtures.py": "8f7e950eea079e021ade3c7cd5ea9c6ec7926b3e9f4791ec96e79e1371baad61",
+    "backend/repair_extractions.json": "539b523472fc7c4d78a06e72335f19dba8e255a32294e82c9ab3854891840a2e",
+    "backend/request_middleware.py": "5505e9752664aee87939eb0067774c47e27f2c5251fcc6c0f157c6889ae52c24",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "backend/retail.py": "cced6409a7f5fbf9667fbdc6467423661c25f7f856d6f034fc4e10ede85ff3cc",
+    "backend/return_phrase_extractions.json": "5d7ec7efdcdeb9110277ded3ec7b2ce2ab69e92ea177269ae1b6a7faabdc4111",
+    "backend/routes.py": "feb1448f7fb907a738448f623e988c11482e4f3a39783eb64e719c88d21669ee",
+    "backend/routes_transport.py": "7ba9c60161e3028c29da52d973f5da3834267cc1d2a1b94a5444a59663a9b27d",
+    "backend/routing_expansion.py": "17447a6e01d849ba6f2b6fc38ea428212fae402fbcc1da5b6c1aed27fdc21353",
+    "backend/routing_shortlist.py": "2ef9792418d4b61bbdcdc8b4fd0c3f8b6301bf614ee298f535466ea74d05d589",
+    "backend/saved_advanced.py": "3c4c17abce8829a2ef509ee1fb51e1d09ddb3502c3369b916574456020fc3843",
+    "backend/saved_plans.py": "e52f6541e10e17761a0e7649cffd4751380e8d377e7419f81d3de96179653a9f",
+    "backend/saved_refresh.py": "fbeabf8b8844bc632c649c6ec12e685ae0569af5e99f4f404381562a2d30fd70",
+    "backend/search_fields.py": "a983d390a67f831bd728d250b19934d9bd8b3f0a18b7dee2d4119c86946bd624",
+    "backend/sequential_discovery.py": "fdcc9fae1c50fa771613a2246ee9ec5469e42109caf10c459bb57c7de58f8192",
+    "backend/source_preparation.py": "829d2cdcdbe3ebcd2c18c46230c87b76e3a323b4d7e2a10c778e537e8ec1e9e1",
+    "backend/source_text.py": "75212d25e59a5dd47d1d03cc85bb9887d1096251e84dd501076c531cb510ede2",
+    "backend/spatial_beam.py": "14a29bb9a7b78d834bdc159fcda8731e9aec8ad7af75641b8ee17d1484ce2353",
+    "backend/starting_areas.py": "b8587588dd979236889662ee1b61f37b8512fc5a1519b15addd7e5ccdd2e9558",
+    "backend/starting_places.py": "f2d8714354341a08fd1b3c90280ee8f662b82471c285cbc35d5b2f0de775402c",
+    "backend/starting_scoring.py": "8feec5f3e9c6d2115ddf2318bbcaee85b956d1dc4fe52c6d7c75539373aa3442",
+    "backend/stop_resolution.py": "689c1e7aaeb2bde44289d243de276a9abd153bf99346b40b177958b670dee694",
+    "backend/strict_local_fixtures.py": "7938693e97af5fc2f87746a9a7e4125a5d4b66a6f5b68aca4ddfbc16434c7bf3",
+    "backend/surprise.py": "67fb654c90e7e44fb2530e7e5bd9e31d405280afb7da91b6b9507c219ba34c1e",
+    "backend/testing_clock.py": "3618549185b38a0c4f16dc7c02acfdda22968adec48724a3827354095cbf330b",
+    "backend/travel_classification.py": "addfd12062e825744ea16d3baa2d3d827eebe94c0f519a0697d8d78303e15927",
+    "backend/travel_constraints.py": "1d0c2a2786525b19acfddb581b28c662392840a5914f7101c270e72a58e11b00",
+    "backend/travel_mode.py": "d4a81f0b551bf6c3b89391e66d9545f5214252e9d519d38d9936d9072830843f",
+    "backend/travel_mode_fixtures.py": "1ecff74e82dacee919a420585731efd33baa09b2d7f1c9aad38354816557137c",
+    "backend/unicode_extractions.json": "39e82c5f433eecbaef7022ecb02f5d66e64e78dc3e74d2595ccf6dec8949b9c0",
+    "backend/validation_phases.py": "528ac1f5094dd980ed127360a247fbe7590982182adc962d9f7463f7a52dc8a0",
+    "backend/venue_details.py": "1b68fb3bd241e397ffd6f69958eddb96903983dfdadeb16c7393ec8573b68b9e",
+    "backend/venue_geography.py": "53453126d4ec586126af02bed722d9312d7c3b3d4947830b39699377afc9b5e5",
+    "backend/venue_models.py": "1aedc367f1f4c705589425721777931529993d600f82680d8887adaad1f60b99",
+    "backend/venue_normalization.py": "5fc37bfccb0e5f4e4a669ecf9d25201314fec46ef0f4f9a231d917c929664ccf",
+    "backend/venue_quality.py": "3ecb48a467f2c26cb4482a37c314cdd241090e21d320dfed902577b9fdbad9e6",
+    "docs/task52-q4a-execution-manifest-v1.json": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+    "docs/task52-q4b-operator-design-v1.json": "b27e307eb23b81940d66b3ebcf6d18cdcec552b282f848302547359fa5669977",
+    "scripts/cloud_model52.py": "0e49844488e5e6b70e79c5e6b6e7d6065df13ca8c16b4ea00a6770e4c291e470",
+    "scripts/cloud_model52_audit.py": "421b6f287325dbcb1bf1cd1bba125c73013533051e7c3639a0516cf1fc5ebd8d",
+    "scripts/cloud_model52_batch.py": "8d3a55f3faa0de8382d43402dcaa0b652c0269fb3c6b30095333025a3b3875a2",
+    "scripts/cloud_model52_live.py": "12478fef504246f9215959e08c5198adc94521b510815f3944ebf2560d739685",
+    "scripts/cloud_model52_offline.py": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+    "scripts/cloud_model52_ordering.py": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+    "scripts/cloud_model52_ordering_compatibility.py": "5f9b4383f2d56f28a0b26c97b10c4c47f69885d101066489a089682168003ac0",
+    "scripts/cloud_model52_ordering_policy_replay.py": "88463a9bdcfa483df69057110af00802929c388d423bbe8df985b3d5d4e9f8fa",
+    "scripts/cloud_model52_ordering_release_replay.py": "ec3472a539947fd436cb3af9fb6e5e39a3702cc657215789f3fb3df24f40e31e",
+    "scripts/cloud_model52_ordering_replay.py": "dfad060c22a32f8759fa1303bcc415fb73fac91b2bdacafd2dae22e5375e0e23",
+    "scripts/cloud_model52_ordering_v2.py": "197957572a98dfed5c4b1aa7de2af8cd1bb059214926efe1895c6148e91c8925",
+    "scripts/cloud_model52_ordering_v3.py": "37555c4bac222888d1d5ef217457e15ca4af5aee7fa9bdc38c16ea25590bfd4e",
+    "scripts/cloud_model52_ordering_v4.py": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+    "scripts/cloud_model52_proposal.py": "5df77872ae3b648a65d107274426d030e1a710f083666e7499b99f30889b5c4f",
+    "scripts/cloud_model52_semantics.py": "e3291615e578169c3292e9177e78afba8d2a8d7cf8b154ae8e360289fc174661",
+    "scripts/cloud_model52_v4.py": "429468bd1d6d95ca1e00f8a66f535e477623616721f8f23ae940eec73a4728ec",
+    "scripts/cloud_model52_v4_live.py": "8c6354f780bd3e2ef11cdd91eeb38f040400eab98d5d883187ef52b82e023ed5",
+    "scripts/task52_q4b.py": "4fa72084abd6e10058a2a0d7015fd8870bf321ba99b3a599b90d9723f27e2fe4",
+    "scripts/task52_q4c_auth.py": "0cf6c592aab56d170f24821213026128e4e3d24ac235440aa0320a9f0948cc1b",
+    "scripts/task52_q4c_protocol.py": "4b05049f2c57314aecc64f8158319da6a32a9f5c7e24fab88450470b8a995f28"
+  },
+  "realTrustEnrolled": false,
+  "realWriterImplemented": false,
+  "roleProtocol": "52b-q4c-envelope-v1",
+  "realIndependentSignoff": false
+}

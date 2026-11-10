@@ -1,3 +1,7 @@
+# Task 52B Q4C — offline signed fixture protocol
+
+`task52_q4c_auth` verifies exact canonical detached OpenSSH signatures under six synthetic role contracts; `task52_q4c_protocol` executes only new factory-owned exact-schema fictional SQLite state and closed fake transport. Build/source/binary pinning is separate from unchanged B2 and historical evaluator identities. No application imports, signer/credential loader, real writer, public transport or live activation. Real operator trust and same-journal adapter remain unimplemented. [Specification and limits](docs/task52-q4c-offline-protocol-v1.md).
+
 # Task 52B Q4B — read-only journal boundary
 
 `scripts/task52_q4b.py` inspects only the original fixed historical journal using ro+immutable/query-only SQL, selected read PRAGMAs, existing common SH lock and immutable evidence pins. It returns sanitized compatibility diagnostics and no execution authority. Actual SQL constraints are weaker than semantic/financial policy; a real append-only writer and protected operator/reviewer trust mechanism remain unimplemented. Q4A and application runtime are unchanged. [Matrix and future role-signature design](docs/task52-q4b-journal-operator-review.md).

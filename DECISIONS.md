@@ -1,3 +1,7 @@
+# Task 52B Q4C — signed facts remain purpose-bound offline evidence
+
+Use genuine local detached Ed25519 verification with exact canonical bytes, pinned explicit trust/revocation identities and separate owner/reviewer/operator keys/namespaces. Couple it to an append-only exact-schema synthetic protocol; a valid signature alone never supplies financial, semantic or planning authority. Current audience and writer are synthetic-only; do not promote test keys/fixtures to real enrollment. Preserve unknown/critical/replay/uncertain refusals and old halt. [Build, tests and real integration blockers](docs/task52-q4c-offline-protocol-v1.md). No production decision is made.
+
 # Task 52B Q4B — storage compatibility is not execution permission
 
 Keep Q4A frozen and add only a strictly read-only historical inspector plus exact-DDL fictional SQL tests. Do not reuse the old updating/refunding finish path for future immutable child reservations. SQL rowid/PK alone cannot enforce historical integrity or financial policy. Future owner/reviewer/operator facts require out-of-band role trust and protected signature verification plus durable single-use state; no current local JSON, flag or fake reviewer is authority. Trust enrollment, real writer/verifier and live dispatch remain blocked/unimplemented. [Evidence and design](docs/task52-q4b-journal-operator-review.md).

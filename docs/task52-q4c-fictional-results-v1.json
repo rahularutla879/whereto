@@ -1,0 +1,197 @@
+{
+  "identity": "52b-q4c-signed-fictional-results-v1",
+  "executionBuildSHA256": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb",
+  "syntheticOnly": true,
+  "realRequests": 0,
+  "realReservations": 0,
+  "realApprovals": 0,
+  "realIndependentSignoffs": 0,
+  "syntheticTrustHash": "78c2557513ead864c40c4f4b0f64dc65c94e9574e53cde39c15eac243297f4ac",
+  "syntheticRevocationHash": "79bcf20e6b85d29be47693fef02988c6d8f3bc28965439802279ef1d6e546dde",
+  "syntheticPublicKeyHashes": {
+    "owner": "cf6143d00542633eb0c18f2265e6e936cf0b1a084b3eebcdf7d2722af2f9b2f4",
+    "reviewer": "fea1a773e4323b926f326276437d3f0a3258032b3f19b4c7de6a7ba2736c0ed9",
+    "operator": "df09bb825c0e1d1ccce1f753e086b181fffdd5bccdcc34358b426043bc1235cb"
+  },
+  "syntheticPrivateKeyCurrentRepositoryMatches": 0,
+  "signatureRoles": [
+    "owner",
+    "rubric",
+    "readiness_permission",
+    "readiness",
+    "execute",
+    "review"
+  ],
+  "originalSyntheticPrefixAndHaltUnchanged": true,
+  "fictionalExtraNanodollars": 12500000,
+  "fictionalTotalNanodollars": 22500000,
+  "results": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "operationID": "f973d14656137cf3369ffaf7c70f1ad48b5aaf75be2a5d1f2b49a1f660cf5439",
+      "permissionHash": "88b39cb05ace8683ad67c31238beaa26d05dd51e5f671a9504bcc64644beb3bd",
+      "outcomeHash": "760bb25c19512d0ac01a4d5214dbd3c4cfe980a4dfc64f1244edecc8a6c83212",
+      "responseHash": "f64c375aeb7b544f93c8c072a16f7e14fec0a1d1de260cde6fdf96bc9499814c",
+      "signedReviewFactHash": "c83860b373f1ec960537e6808634f06ec9fdc3d3075435b71b09ba00693e8f97",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "31daadd0c2d877edd4303d3ed504d3964f28f2ff8c472a7658f6af067400f63b"
+      },
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "3b2c49114bb38a63567d05049191f783da3fd8a4729473d5c6ca5ef96c1ecc53",
+        "accepted": true
+      },
+      "guardedDisposition": "candidate_only",
+      "mappingKnown": true,
+      "usage": [
+        5100,
+        500
+      ],
+      "fullFictionalReservationNanodollars": 2500000,
+      "fictionalUsageEstimateNanodollars": 887500,
+      "humanIndependentSignoff": null,
+      "latencyIsFakeControlOnly": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "operationID": "72631de2c68eefb5ca5cc7dabea8dcb4afb2d6086f51487c62108b58d15047d4",
+      "permissionHash": "1d80b64cd13d977eddfee128429a91522df9ab12426a8530a5ff119a64f6e701",
+      "outcomeHash": "168f4f95c0b1fc5a8b08b291b8088a9168ba851de114288cee127b4945ddd057",
+      "responseHash": "b374fd0a13fff8716081d8c9e88929223c36fb979fbc5677a22c36945fa8d595",
+      "signedReviewFactHash": "acb9a10c954033133b7f0b5b02fe8a1323ba4be1b7a77c5b139934502443a19e",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "05aac3787ccd3e624a3c03732a7b8cb1fe67f591c1303450f376f772bac78a97"
+      },
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "6fac25372fd7925ffb4119dd44c6b6ed064589e393e637f90c573c5e96e89cae",
+        "accepted": true
+      },
+      "guardedDisposition": "candidate_only",
+      "mappingKnown": true,
+      "usage": [
+        5100,
+        500
+      ],
+      "fullFictionalReservationNanodollars": 2500000,
+      "fictionalUsageEstimateNanodollars": 887500,
+      "humanIndependentSignoff": null,
+      "latencyIsFakeControlOnly": true
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "operationID": "3afcf3fa9cec4d04305e239701eb0bdb46b4ad1d42e9dea61f7064d7c991f183",
+      "permissionHash": "a38b1a155bce5d3c31e6ac98a7bd9961ecad6df23125b9b29f19e1712a39ab7d",
+      "outcomeHash": "dae6ce235b5f7238731a781e73c7a2d03bf15eed7ccd660c14d1bf0532b872c8",
+      "responseHash": "3eaf10db6c42d4196efc62ddd5c7a2ff56d4ad7a7c911e0e08798537c859c9a5",
+      "signedReviewFactHash": "3fc01fc7c4fd4bfb00253688242a877c6037ce4b123103b2fc0507ad94ddfd7e",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "7f52007f15f98adcf6bf34c86cb63e03c85f682fc75b894ec9551926b407d247"
+      },
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "f89af6e48c45e76aa6b55a51fba2722168e2b8ef09a6a0c5dfdab2faf6198e4d",
+        "accepted": true
+      },
+      "guardedDisposition": "candidate_only",
+      "mappingKnown": true,
+      "usage": [
+        5100,
+        500
+      ],
+      "fullFictionalReservationNanodollars": 2500000,
+      "fictionalUsageEstimateNanodollars": 887500,
+      "humanIndependentSignoff": null,
+      "latencyIsFakeControlOnly": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "operationID": "b8b4273697ee1bbb7ba94198c50b2f19ae42e9865eb409b2f11d5fdfeafdd1d2",
+      "permissionHash": "97668b5756149de2a0b34148dfbecc929489fb4dd93d02e927c728e7ba60b0b6",
+      "outcomeHash": "844f4f2e7a37e6195a5fd725fa086a66ce84be15fa83d681f6f50d15b3663cd7",
+      "responseHash": "2c3fda4eca544de994df4ae11ccf0b2bbb1d5b0ac6e7002d10f487d124f4efe3",
+      "signedReviewFactHash": "fda50188cbc50f3377c73432321f3b0eb3a5d47b7e373f0a5e9d736043c8ae44",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "379ae4d3d850f60723627c2785c3e26607687ce82f71815f03ff074bab99d356"
+      },
+      "legacy": {
+        "disposition": "advanced_handoff",
+        "resultHash": "0f4b3c457a27d8d0eee1b596dcd8f2de7e3c83a092f604aaa2751696242aefa6",
+        "accepted": true
+      },
+      "guardedDisposition": "candidate_only",
+      "mappingKnown": true,
+      "usage": [
+        5100,
+        500
+      ],
+      "fullFictionalReservationNanodollars": 2500000,
+      "fictionalUsageEstimateNanodollars": 887500,
+      "humanIndependentSignoff": null,
+      "latencyIsFakeControlOnly": true
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "operationID": "272c792971dcd520f66232779d16cbe9714f681e4f12a7006c6cc1f2c2eee23d",
+      "permissionHash": "4cd7d6f5b5a214f13d58677a61223bc3339b66bda513b1d389e83cc8bdc9c246",
+      "outcomeHash": "66d06ca4e09c288a817ea2d36a855f4897608099a4ee3a308a1dba9cba427c42",
+      "responseHash": "4194d674637172a717193dd55b7d093584918d715118c6ecf217c6a8bfcc2b23",
+      "signedReviewFactHash": "501c53534c6372bd8922274fdd7e8cf24563d29f1b20c16cebb219857c4a84e5",
+      "structuredValid": true,
+      "raw": {
+        "fullyCorrectIndependent": null,
+        "mechanicalFailures": [],
+        "outputHash": "04fac00850695d9bc4ea24659be9c44a5b35357b9b809131282d0b178430cbd4"
+      },
+      "legacy": {
+        "disposition": "blocked_or_clarify",
+        "resultHash": "75167dfa182f2f7460176aad7cd475cac1a6280e6238bf451481265c84602bd5",
+        "accepted": false
+      },
+      "guardedDisposition": "blocked",
+      "mappingKnown": true,
+      "usage": [
+        5100,
+        500
+      ],
+      "fullFictionalReservationNanodollars": 2500000,
+      "fictionalUsageEstimateNanodollars": 887500,
+      "humanIndependentSignoff": null,
+      "latencyIsFakeControlOnly": true
+    }
+  ],
+  "signaturesAndPrivateKeysNotStoredInThisReport": true,
+  "originalPaidJournalNotCopiedOrModified": true
+}

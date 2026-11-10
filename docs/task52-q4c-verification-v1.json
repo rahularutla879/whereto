@@ -1,0 +1,385 @@
+{
+  "identity": "52b-q4c-verification-v1",
+  "implementationIdentity": "52b-q4c-signed-real-schema-OFFLINE-v1",
+  "executionBuildSHA256": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb",
+  "baselineCommit": "b72dfa515ef5fba644fe0715c62ccad45bce1b67",
+  "Q4COfflineCompleteForReview": true,
+  "liveDispatchAvailable": false,
+  "realTrustEnrolled": false,
+  "realJournalWriterImplemented": false,
+  "realTransportImplemented": false,
+  "actualNewRequests": 0,
+  "actualNewReservations": 0,
+  "actualNewApprovals": 0,
+  "actualIndependentSignoffs": 0,
+  "originalJournal": {
+    "identity": "52b-q4b-readonly-journal-v1",
+    "historicalStorageSnapshotCompatible": true,
+    "continuationReady": false,
+    "executionAuthorized": false,
+    "liveDispatchAvailable": false,
+    "q4aExecutionManifestSHA256": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "schemaHash": "822c3e1130fddbabd6b64a919bc35236c16e78c7210d076ce8181013eebbf09a",
+    "schema": [
+      [
+        "table",
+        "attempts",
+        "attempts",
+        "CREATE TABLE attempts (provider TEXT, case_id TEXT, repetition INTEGER, status TEXT NOT NULL, charge INTEGER NOT NULL, record TEXT, PRIMARY KEY(provider,case_id,repetition))"
+      ],
+      [
+        "table",
+        "metadata",
+        "metadata",
+        "CREATE TABLE metadata (id INTEGER PRIMARY KEY CHECK(id=1), config TEXT NOT NULL)"
+      ],
+      [
+        "index",
+        "sqlite_autoindex_attempts_1",
+        "attempts",
+        null
+      ]
+    ],
+    "rowIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "perProviderRetainedNanodollars": {
+      "openai": 12166625,
+      "google": 33000000,
+      "anthropic": 2200000
+    },
+    "statuses": {
+      "recorded": 9,
+      "recorded_halted": 1
+    },
+    "persistentHistoricalHalt": true,
+    "journalMode": "delete",
+    "readConnectionSynchronous": 2,
+    "synchronousNote": "Connection default only; historical writer uses FULL explicitly. Not proof of every past commit or hardware durability.",
+    "rowIDsAreAutoincrement": false,
+    "blockers": [
+      "real authenticated owner/reviewer trust boundary unimplemented",
+      "real append-only writer/child scope and all-scope outcome fold unimplemented",
+      "independent reviews and separately authorized fresh readiness incomplete",
+      "no exact owner-approved live execution build or financial grant"
+    ],
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "sourcePinsAndQ4ABuildVerified": true,
+    "lockMode": "0o644",
+    "directoryMode": "0o700",
+    "journalFileMode": "0o600",
+    "readMode": "mode=ro&immutable=1; query_only; SQL authorizer; existing common SH lock",
+    "reportPurpose": "compatibility evidence only, never an approval or dispatch capability"
+  },
+  "originalBaselineAndCorrections": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rows": [
+      {
+        "ordinal": 1,
+        "slot": [
+          "google",
+          "journey-01",
+          1
+        ],
+        "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+        "originalState": "recorded",
+        "recordHash": "7a0545f019b16337faa5d02f3efd73f32b3052698eb16384ef98b2b182577305"
+      },
+      {
+        "ordinal": 2,
+        "slot": [
+          "google",
+          "journey-02",
+          1
+        ],
+        "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+        "originalState": "recorded",
+        "recordHash": "182a3ccc6a79d2a84642beef31cd7ea6e6953adc4df7396253d0f109eaa86d7e"
+      },
+      {
+        "ordinal": 3,
+        "slot": [
+          "anthropic",
+          "journey-01",
+          1
+        ],
+        "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+        "originalState": "recorded",
+        "recordHash": "4a0020d60bae38c0008825e5c6c0cb5377eed1c86f415f118ae048806f4fdf97"
+      },
+      {
+        "ordinal": 4,
+        "slot": [
+          "openai",
+          "journey-01",
+          1
+        ],
+        "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+        "originalState": "recorded",
+        "recordHash": "e1750bfe6fff68fd3fe6f4cead6884ba5d495681f617a9bad5f1af6b9a80cbba"
+      },
+      {
+        "ordinal": 5,
+        "slot": [
+          "openai",
+          "ordinary-dinner",
+          1
+        ],
+        "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+        "originalState": "recorded",
+        "recordHash": "0c24f5cda8c6f1da9670e1d2d9b262350e032485273cb68202e2fb4b42e1faae"
+      },
+      {
+        "ordinal": 6,
+        "slot": [
+          "openai",
+          "journey-03",
+          1
+        ],
+        "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+        "originalState": "recorded",
+        "recordHash": "34569525be551df498f722769dbd6836b6650330525a73b30d10080bbc436029"
+      },
+      {
+        "ordinal": 7,
+        "slot": [
+          "openai",
+          "journey-07",
+          1
+        ],
+        "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+        "originalState": "recorded",
+        "recordHash": "e0886db286eccbc145f1abb3acb20224cf00554c574b1326194a107336476e8f"
+      },
+      {
+        "ordinal": 8,
+        "slot": [
+          "openai",
+          "journey-04",
+          1
+        ],
+        "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+        "originalState": "recorded",
+        "recordHash": "98d9edb8503a3d6b8b7aa22953a61f8088f08d9e7ad21579201c728cb5afaad4"
+      },
+      {
+        "ordinal": 9,
+        "slot": [
+          "openai",
+          "extension-partial",
+          1
+        ],
+        "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+        "originalState": "recorded",
+        "recordHash": "6e9ad7d0d959eff5a12000ebb61ef1ec1f03fca62451dedaa15472165fb9ff41"
+      },
+      {
+        "ordinal": 10,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          1
+        ],
+        "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+        "originalState": "recorded_halted",
+        "recordHash": "93a27c251bf796cecf8375597061ac33c0953fb73936653d77be80af6f182968"
+      }
+    ],
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "privateFiles": 324,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "newReservations": 0
+  },
+  "all324FilesUnchangedFromCheckpointStart": true,
+  "originalSourcePinsCorpusRubricPaidRecordsQ3Q4AQ4BBuildsUnchanged": true,
+  "oldPaidEvaluatorStillRefusesB2": true,
+  "finalRegression": {
+    "run": 284,
+    "passed": 284,
+    "failed": 0,
+    "errors": 0,
+    "skips": 0,
+    "seconds": 316.39,
+    "modules": "Q4C/Q4B/Q4A/Q1/Q2/Q3, harness/audit/batch/provider adapters, ordering V1-V4, semantic/source/version/admission/journey"
+  },
+  "Q4CNewMethodsIncluded": 22,
+  "Q4CMethodNames": [
+    "test_positive_six_roles_openssh_signatures_and_offline_authority",
+    "test_unsigned_forged_signature_wrong_signer_namespace_and_role",
+    "test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+    "test_wrong_binding_model_prompt_schema_proposal_build_root_slots_and_amounts",
+    "test_expiry_future_time_and_scope_journal_binding",
+    "test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+    "test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+    "test_missing_duplicate_conflicting_scope_and_wrong_slot",
+    "test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+    "test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+    "test_admission_caps_and_aggregate_synthetic_exhaustion",
+    "test_stale_readiness_payload_and_incorrect_full_token_reservation",
+    "test_uncertain_send_provider_error_missing_outcome_and_child_halt_restart",
+    "test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+    "test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+    "test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+    "test_global_nonce_collision_rejected_before_reservation_or_send",
+    "test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+    "test_partial_or_unresolved_signed_review_cannot_progress",
+    "test_malformed_envelopes_and_changed_build_fail_closed",
+    "test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+    "test_input_count_bounds_and_stale_response_binding_reject"
+  ],
+  "crypto": {
+    "implementation": "Pinned /usr/bin/ssh-keygen -Y verify, detached Ed25519, exact allowed principal/namespace and explicit revocations",
+    "signingOnlyInTestHelper": true,
+    "testKeys": "Three new disposable synthetic identities per trust fixture; no personal .ssh reads or real enrollment.",
+    "roleSeparation": "owner/reviewer/operator keys and principals distinct; paired purposes cannot interchange namespaces",
+    "canonicalEnvelope": "Strict exact UTF-8 bytes, duplicates/floats/unknown fields rejected, closed bounded types; not RFC8785",
+    "actualSSHSignatureTests": true,
+    "realHumanIndependenceProven": false,
+    "noRealVerifiedFactGrantsExecution": true
+  },
+  "failureRecovery": {
+    "processCrashPoints": [
+      "after_intent",
+      "after_outcome",
+      "after_reserve",
+      "after_send",
+      "before_commit",
+      "before_reserve",
+      "before_start"
+    ],
+    "allSevenPassed": true,
+    "twoProcessOperatorExclusionPassed": true,
+    "nonceReplayAndCrossRoleCollisionRejectedBeforeReserve": true,
+    "rowDeletionReuseOrPrefixEditsRefused": true,
+    "criticalRawErrorHaltsEvenGuardedSafely": true,
+    "signedDisagreementOrUnresolvedReviewCannotProgress": true,
+    "uncertainSendMissingOutcomeReviewRemainConsumedOrBlocked": true,
+    "financialExposure": "All original and child rows, max(anchor, observed larger liability); no refunds/retries.",
+    "limits": "Local process-exit/rollback/fsync ordering only; no power-loss/distributed/hostile same-UID/coherent all-state rollback guarantee. Real protected operator state remains future."
+  },
+  "fictionalRun": {
+    "resultsArtifact": "docs/task52-q4c-fictional-results-v1.json",
+    "fiveSignedOperations": true,
+    "signedReviewsRequired": true,
+    "fullChildReservationsRetainedNanodollars": 12500000,
+    "baselineFinance": "New synthetic10x1000000; not copied paid finances.",
+    "realModelQualification": false,
+    "allRealReviewPackagesBlank": true
+  },
+  "recordedReplay": {
+    "summary": {
+      "qwenCorrectRawCompatible": 18,
+      "qwenAuditedNormalizations": 7,
+      "qwenClarifications": 2,
+      "openaiCompatible": 5,
+      "predeclaredCases": 20,
+      "predeclaredMatched": 20,
+      "postFreezeCases": 10,
+      "postFreezeMatched": 10,
+      "clearSources": 15,
+      "falseClarifications": 0,
+      "negativeSources": 15,
+      "negativeSourcesAccepted": 0,
+      "originalNegativeProbes": 147,
+      "newNegativeProbes": 33,
+      "retainedUnsupportedEdges": 0
+    },
+    "recordedQwen": 27,
+    "recordedOpenAI": 7,
+    "allFrozenFieldsEqual": true
+  },
+  "security": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  },
+  "configuredSecretsScan": "Credential scan: 2 configured sensitive values; 1281 current files/assets; 2972 historical objects; current matches=0; historical matches=0.",
+  "developmentCorrections": [
+    "Initial wrapper-hashing incorrectly applied semantic-string length limit to already-validated envelope text. Fixed wrapper hashing; exact signed-body canonicalization/bounds remain strict.",
+    "An initial changed-build negative constructed its packet inside the intentionally invalid build patch. Fixture now constructs valid packet first; final284 pass without excluded tests."
+  ],
+  "productionRuntimeOrDependenciesChanged": false,
+  "fullApplicationChecks": "Not rerun: no shared application/runtime/dependency changes. Full backend/frontend/typecheck/lint/build/browser results remain historical.",
+  "completeDiffReviewed": true,
+  "artifactHashes": {
+    "scripts/task52_q4c_auth.py": "0cf6c592aab56d170f24821213026128e4e3d24ac235440aa0320a9f0948cc1b",
+    "scripts/task52_q4c_protocol.py": "4b05049f2c57314aecc64f8158319da6a32a9f5c7e24fab88450470b8a995f28",
+    "scripts/task52_q4c_identity.py": "83a21e436dca68d05493dfa1ed84d8f27592766287da3ffec480b4d31718eee8",
+    "backend/test_task52_q4c.py": "251cf8045fe2018035275838ba764842478c54a53997ee57d93abdbeea03cc2f",
+    "docs/task52-q4c-build-v1.json": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb",
+    "docs/task52-q4c-offline-protocol-v1.md": "024a2f9eb9ea264f324cbfe51ae384f8e7e28d43d98e00578e4f421eff246eb3",
+    "docs/task52-q4c-fictional-results-v1.json": "24945e7e148450e5935c6024a23770d7cbf41cc652d7947a6e7d4e51d3010b6d"
+  },
+  "nextApprovalCheckpoint": "Review exact Q4C build/canonicalization/role trust/recovery limits and independent5x24 gold plus historical failures. Separately approve protected real enrollment and offline same-original-journal adapter integration; fresh provider readiness and exact paid scope remain separate later approvals.",
+  "otherProviderBlockers": {
+    "google": "Unresolved Developer API HTTP400/IP issue",
+    "anthropic": "Structured-output grammar compilation"
+  },
+  "currentProviderAccountReadiness": "UNKNOWN; no provider calls/counts/metadata/account requests performed.",
+  "finalConfiguredSecretsScan": "Credential scan: 2 configured sensitive values; 1283 current files/assets; 2972 historical objects; current matches=0; historical matches=0.",
+  "finalPrivateIntegrity": {
+    "privateFilesUnchanged": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "integrity": "ok",
+    "attempts": 10,
+    "retainedNanodollars": 47366625,
+    "halt": true,
+    "evaluationKeysChecked": 3,
+    "currentSecretHits": 0,
+    "historySecretHits": 0,
+    "configIgnoredAndMode600": true,
+    "journalMode600": true
+  }
+}
