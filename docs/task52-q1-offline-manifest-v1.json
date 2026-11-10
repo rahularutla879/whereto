@@ -1,0 +1,224 @@
+{
+  "identity": "52b-q1-offline-reconstruction-v1",
+  "contract": "52b-q1-qualification-v1",
+  "rubric": "52b-q1-rubric-v1",
+  "scorerScope": "specified 24-field independent review + mechanical structure/legacy/order replay; no general automatic semantic pass",
+  "semanticComparator": "52b-semantic-v3-source-bound-generic-the",
+  "runtime": "52b-runtime-phase-b2",
+  "reconstruction": "52b-behavior-reconstruction-duration-b2-v1",
+  "historicalEnvironmentExact": false,
+  "paidDispatchAuthorized": false,
+  "planningAuthorized": false,
+  "productionProfileActivated": false,
+  "schema": {
+    "canonicalPydanticSHA256": "a0a4e44bac98de466da291783ab78b948894defb09a91cfe39692ca4b490d39b",
+    "originalV3WireHashes": {
+      "openai": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "google": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+      "anthropic": "d8a82229876860f40f45128cc2000a2e09459540b502933d86c7ffaa83d487d0"
+    },
+    "unchangedAcrossReviewedPrompts": true,
+    "strictParserSchemaSHA256": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965"
+  },
+  "corpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+  "originalSixPins": {
+    "backend/journey_fixtures.py": "91a3675cefa2d121806194399d83c7bc71a55a62cd1c0129c3187d9c75194948",
+    "backend/evaluation/cases.json": "c4136f403644a04cd7069beab5cb970714728cb0ab154d865d16d580c1a90cd2",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/journey.py": "bec9a1fc241a9b0d118c8b99f00c679f04c7bc2904a983f749ebe5e7eabf3cee",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374"
+  },
+  "clock": {
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "timezonePolicy": "Freeze date resolver and specify destination timezone per case; unknown timezone must clarify, never assume.",
+    "timezoneFunction": "scripts.cloud_model52.timezone_for (source pinned as data/function; corpus() still refuses B2)",
+    "rawProvenance": "immutable decoded provider output; no legacy effective snapshot promoted to raw"
+  },
+  "promptConfigurations": {
+    "historicalV3": {
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "promptHash": "751fb278f570e1b15ca839f403ccc97798588e979870e2a0c554e3a7c6aa8da2",
+      "recordedVersions": [
+        "52b-v3-equivalent-default-compaction"
+      ]
+    },
+    "historicalV4": {
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "promptHash": "1614adf1a72843e987b5d5ebdbf33099ce94a0740c4efb9def07125da6ee84c8",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "scorer": "52b-semantic-v3-source-bound-generic-the"
+    }
+  },
+  "orderingPolicy": "52b-order-policy-v4-shadow",
+  "independentReviewComplete": false,
+  "applicabilityStates": [
+    "supported",
+    "not_applicable",
+    "awaiting_review"
+  ],
+  "artifactHashes": {
+    "docs/task52-q1-qualification-v1.md": "46649dccf0ff0119208e7e6b6ec296a2bc1bdbad66252241a8ebd540b51b24ed",
+    "docs/task52-q1-rubric-v1.json": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+    "docs/task52-q1-independent-review-v1.json": "24c58fa82092cceb3c413c80f0c53242b0ce48cc3918e284885c60baa7951ff4",
+    "docs/task52-runtime-phase-b2.json": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+    "docs/task52-b2-behavior-baseline-v1.json": "657472f95826452b19901a6e57c9ffe1bbad8e8a87367cc67cc38651ffe46545",
+    "docs/task52-source-identities-v1.json": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "docs/task52-prompt-revision-v3.json": "b4cfb074e7595187ae01d523486f4daf334ede2a0cb20c033b211aef2798f1c7",
+    "docs/task52-prompt-proposal-v4.json": "665937dc63dd928131ba8f7d4004e9254b2a24b3352adb1695998d66aa6d1ea9",
+    "docs/task52-v4-openai-approved-continuation.json": "9f3848311a9d4e7a39b585b42b30a4bc4bb9fe48e2dd4e8937d284d89f2b6984",
+    "docs/task52-openai-small-batch.json": "baa7f783b525b924b4c7453824b570dc39fc39c2b6defe5bdd837fdf409e5c1d",
+    "docs/task52-v4-openai-results.json": "1c521c6d5b905044a305454f358ac3e647321431ba285f49dc843bb5a4bae82f",
+    "docs/task52-ordering-v4-results.json": "dde02ceb1058285b363eb5f3e1c8832ab1ceaa357a1a13c00daf584adcb5237b",
+    "backend/evaluation/results-task50e-model-investigation.json": "36c582b6bbe71ce15319635225c8f0bce79659829ca8b2dbfb944b125d70aac3",
+    "docs/task52-ordering-qwen-review-v2.json": "cc85c0ced54296d8d0df3b9d1d5cd3ac00daef6ad208049b3448de33cbf1e964",
+    "scripts/cloud_model52.py": "0e49844488e5e6b70e79c5e6b6e7d6065df13ca8c16b4ea00a6770e4c291e470",
+    "scripts/cloud_model52_live.py": "12478fef504246f9215959e08c5198adc94521b510815f3944ebf2560d739685",
+    "scripts/cloud_model52_offline.py": "527b2efd9c05a924f863f884d063aa3a44a9408c0b4a999b4f0190baf5c886cf",
+    "scripts/cloud_model52_semantics.py": "e3291615e578169c3292e9177e78afba8d2a8d7cf8b154ae8e360289fc174661",
+    "scripts/cloud_model52_ordering.py": "228d8eb57ecac5f1002911c20012a0e5b416d3e710a8f95538b2747087c2acc6",
+    "scripts/cloud_model52_ordering_v2.py": "197957572a98dfed5c4b1aa7de2af8cd1bb059214926efe1895c6148e91c8925",
+    "scripts/cloud_model52_ordering_v3.py": "37555c4bac222888d1d5ef217457e15ca4af5aee7fa9bdc38c16ea25590bfd4e",
+    "scripts/cloud_model52_ordering_v4.py": "9264ba8c1143d78125879707f523581dcb0fdfa78de81a53a0436884cb63dc57",
+    "scripts/cloud_model52_v4.py": "429468bd1d6d95ca1e00f8a66f535e477623616721f8f23ae940eec73a4728ec",
+    "scripts/cloud_model52_v4_live.py": "8c6354f780bd3e2ef11cdd91eeb38f040400eab98d5d883187ef52b82e023ed5",
+    "scripts/task52_phase_b2_identity.py": "9b3035aaa09568e76150ca4e71d875828d7e60133b0af810bf56c5bc0d3ac114",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/journey.py": "681045405f33897d859a18394add1646236ab53c5e61b63562c1dea93b3b8d7e",
+    "backend/source_preparation.py": "829d2cdcdbe3ebcd2c18c46230c87b76e3a323b4d7e2a10c778e537e8ec1e9e1",
+    "backend/duration_preparation.py": "05072bc30bbb97f59de7ce08a7747c8e43413657bd70ab41d49f6ef784f9c0a8"
+  },
+  "responses": [
+    {
+      "case": "journey-01",
+      "repetition": 1,
+      "rowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "provider_error",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "8bab2d72f16e623b58faa8ae56880ed494db14f6c226741cf16b71b8dbfdb78e",
+      "responseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "contentHash": "4a53dfe716fbc79639c0db32a64dd0d043bb904d9f1572ac869ebcf85c2fabe5",
+      "reservationNanodollars": 2500000,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "ordinary-dinner",
+      "repetition": 1,
+      "rowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "ae490f259f2eba32c1c6bc75c303bd9e80f2770946887c7d56e29053fdf59eaf",
+      "responseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "contentHash": "78723b5bc9c2868ad73f56419e93832c1a2298542bab2bd31256e25ebe4fa38e",
+      "reservationNanodollars": 720250,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "journey-03",
+      "repetition": 1,
+      "rowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "d80254355cc28ffc486e5a17e2db65152906fcf36bc353a6c67b39b9f16f49b6",
+      "responseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "contentHash": "630293bcf50a95f56eeade2d609fb301a05e7eec9c3452e0f1474cc28b08aeb1",
+      "reservationNanodollars": 715375,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "journey-07",
+      "repetition": 1,
+      "rowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "6b610577b96bb5828ce4a44a7b95c8b2413141143e3f208f3efe77c03988af95",
+      "responseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "contentHash": "74c1f585876c802da43f44f0481d0627f84a795595b7b86b37d96e77e1db9f5e",
+      "reservationNanodollars": 731000,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "journey-04",
+      "repetition": 1,
+      "rowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "responseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "contentHash": "396402929cb233eb4fe4e5262cbf4c795729f15399278d99fbd9e5cffed8214c",
+      "reservationNanodollars": 2500000,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "extension-partial",
+      "repetition": 1,
+      "rowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "originalDatabaseState": "recorded",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "responseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "contentHash": "da9a5e66d687eef92c747ff5890b50a9627d6143e66fed6863b2e43819dd9b24",
+      "reservationNanodollars": 2500000,
+      "historicalClassificationChanged": false
+    },
+    {
+      "case": "extension-repeated",
+      "repetition": 1,
+      "rowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+      "originalDatabaseState": "recorded_halted",
+      "originalClassification": "complete",
+      "model": "gpt-6-luna",
+      "promptVersion": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "responseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "contentHash": "1064a0951b2ccac5eb5557b6a3680f2fc789a5a28bd03de8c5795173e98ea168",
+      "reservationNanodollars": 2500000,
+      "historicalClassificationChanged": false
+    }
+  ],
+  "paidEvidence": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "privateFileCount": 324,
+    "privateFileSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "correctionFileHashes": [
+      "787483c9ff1930899c16c6a026abbfb0d05bf058782a537be3e0c3df907fb98f"
+    ],
+    "persistentHalt": true,
+    "paidJournalReplacement": false
+  }
+}

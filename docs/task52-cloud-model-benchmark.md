@@ -1,3 +1,9 @@
+# Q1 offline contract — historical benchmark unchanged
+
+[Versioned contract](task52-q1-qualification-v1.md), [all66 rubric records](task52-q1-rubric-v1.json), [offline manifest](task52-q1-offline-manifest-v1.json), [replay](task52-q1-openai-replay-v1.json), [verification](task52-q1-verification-v1.json). Current-runtime reconstruction only: original scores, prompts, source pins, corpus and paid records remain unchanged. Seven structured-valid/six legacy accepted/five proposed guarded-compatible; the two historical failures remain distinct and no independent signoff is claimed. Six field-level ambiguities/seven noted cases plus all66 independent gold reviews remain open. Complete mechanical semantic comparison is not implemented; the contract explicitly requires review. No paid/source-gate readiness, provider call or model selection follows; journal10/594/$0.047366625/halt intact. Older measurements below stay historical.
+
+---
+
 # Backend regression gate repaired — model evaluation remains halted
 
 [Deterministic clock/process repair and complete verification](task52-backend-regression-repair.md): two full backend runs each 1,134 tests/1,097 passed/37 unchanged skips; frontend 285, TypeScript, lint/build pass. No production expiry/security/model/ordering behavior change or new inference/counting/provider call. Original paid records, model scores/timings, corpus/prompt/schema versions and persistent halt remain unchanged. OpenAI 7 / Google 2 / Anthropic 1=10/594,$0.047366625 retained/$11.952633375 remaining. This closes the test-suite blocker for a separate enforcement review; it neither selects a model nor resumes paid testing. Earlier failed verification/model measurements below remain historical.

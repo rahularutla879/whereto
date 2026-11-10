@@ -1,3 +1,9 @@
+# Q1 frozen semantic review contract
+
+[Versioned contract](task52-q1-qualification-v1.md), [all66 rubric records](task52-q1-rubric-v1.json), [offline manifest](task52-q1-offline-manifest-v1.json), [replay](task52-q1-openai-replay-v1.json), [verification](task52-q1-verification-v1.json). Current-runtime reconstruction only: original scores, prompts, source pins, corpus and paid records remain unchanged. Seven structured-valid/six legacy accepted/five proposed guarded-compatible; the two historical failures remain distinct and no independent signoff is claimed. Six field-level ambiguities/seven noted cases plus all66 independent gold reviews remain open. Complete mechanical semantic comparison is not implemented; the contract explicitly requires review. No paid/source-gate readiness, provider call or model selection follows; journal10/594/$0.047366625/halt intact. Older measurements below stay historical.
+
+---
+
 # Ordering enforcement design — review only
 
 [Proposed single-authority phase split, admission/session proof, clarification, compatibility and rollback](task52-ordering-enforcement-design.md), [fresh offline verification](task52-ordering-enforcement-verification.json). Current baseline is clean `4c3767a`, preserving the later destination spelling fix. No runtime, prompt, schema, corpus, frozen policy or paid state changes. No enforcement prototype/activation.
