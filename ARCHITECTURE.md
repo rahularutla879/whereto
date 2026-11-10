@@ -1,3 +1,7 @@
+# Task 52B original-journal integration interface
+
+`task52_real_integration` pairs Q4D's fixed read-only inspector with the diagnostic engine's registered synthetic fixture. The private SQL adapter exposes fixed reads and the existing reservation INSERT under the experiment lock. [Scope and evidence](docs/task52-real-integration-preparation-v1.md)
+
 # Task52B — separate diagnostic-only exception profile
 
 `task52_diag_scoring` adds a full raw/effective mutation/witness/envelope check over unchanged V5.1 A/B/C, plus conditional diagnostic eligibility and always-false planning authority. `task52_diag_auth` binds a new signed synthetic domain and explicit owner/reviewer exception acknowledgment. `task52_diag_protocol` reuses Q4C code in a fixed private fixture registry with a stricter review binding; `task52_diag_identity` pins exact sources/parents/allowlist. No production import, real writer or live activation; Q4D remains strict. [Policy and limits](docs/task52-diagnostic-progression-proposal-v1.md).

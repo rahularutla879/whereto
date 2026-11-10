@@ -1,0 +1,18 @@
+{
+  "identity": "52b-v51-original-journal-integration-preparation-offline-v1",
+  "diagnosticBuildSHA256": "2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b",
+  "q4dBuildSHA256": "4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4",
+  "ownerDecisionSHA256": "25ebab3999cb9dc6ac754291e75886e86663aa0e19460ef8b239926a4b4b0ede",
+  "originalInspectionDigest": "5619d8ef114b0bce7146c4cf9688636c3c4f1d556217fb850d1bf408a9934bde",
+  "syntheticWritesOnly": true,
+  "liveDispatchAvailable": false,
+  "financialAuthorization": false,
+  "artifactHashes": {
+    "docs/task52-owner-diagnostic-continuation-v1.json": "25ebab3999cb9dc6ac754291e75886e86663aa0e19460ef8b239926a4b4b0ede",
+    "scripts/task52_real_integration.py": "de415e11a4f921809f211427f2bfacff0b0119903050802c45db785302acd836",
+    "backend/test_task52_real_integration.py": "ca5f604831891c1985a4312d9f0cac1664366fbb938b3208822c8da0cfa3a85c",
+    "scripts/task52_diag_identity.py": "ed3d44e1b2faed20d19f6978456a9c3b718d2ef626395603fb40a937caa7b0d8",
+    "scripts/task52_q4d_identity.py": "c0fe3d21b4d78daf1d2561944e8a3d7d59fca58477e3bc812c9ae61210879821",
+    "docs/task52-diagnostic-progression-fake-v1.json": "803eaba2be03e952afd72741f65b0cc73f7974ce26af275c4222da64dba77cfd"
+  }
+}

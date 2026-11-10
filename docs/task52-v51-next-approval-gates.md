@@ -2,6 +2,8 @@
 
 This checklist is documentation, not a grant. Current prompt-freeze identity: `52b-cloud-v5.1-owner-list-order-REVIEWED-v1`. The [five-case owner product review](task52-v51-five-case-owner-review.md) records complete plain-English interpretation approval in the ChatGPT conversation, separately from independent field review. All real execution fields remain unset. No readiness/API operation is performed by checking off this document.
 
+The owner approved the exact diagnostic-only journey-06/r2 policy under the existing security and genuine independent-review conditions. The original-schema rehearsal, reviewer package and pending readiness checklist are available. [Owner decision](task52-owner-diagnostic-continuation-v1.json) · [Integration and checklists](task52-real-integration-preparation-v1.md)
+
 | Gate | Current state | Required evidence / permitted later action |
 | --- | --- | --- |
 |1 Product semantics|**Approved** general A–D, example10/12/15/19 meanings and all five diagnostic cases’ complete plain-English intended interpretations. Exact prompt/rubric consistency checked by Codex.|Preserve unchanged prompt/configuration hashes. Do not ask for these product decisions again or equate them with independent certification.|

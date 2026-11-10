@@ -1,3 +1,7 @@
+# Task 52B original-journal integration preparation
+
+Started clean at `3c5f83f`. The owner approved the exact journey-06/r2 diagnostic-only continuation policy subject to genuine independent review and existing security checks. The approval is documentary and grants zero paid attempts. The integration rehearses append-only SQL on fresh exact-schema fixtures using Q4C's existing protocol and Q4D's pinned read-only inspection. The real writer, protected enrollment, independent reviews, readiness and financial/operation permissions remain pending. [Decision](docs/task52-owner-diagnostic-continuation-v1.json) · [Integration and checklists](docs/task52-real-integration-preparation-v1.md) · [Verification](docs/task52-real-integration-verification-v1.json)
+
 # Task52B — proposed diagnostic progression after one known legacy loss
 
 Started clean `ea642a2`. [Bounded decision and A–E gates](docs/task52-diagnostic-progression-proposal-v1.md), [exact build/allowlist](docs/task52-diagnostic-progression-build-v1.json), [all-five fictional run](docs/task52-diagnostic-progression-fake-v1.json), [verification](docs/task52-diagnostic-progression-verification-v1.json). Proposed identity `52b-v51-known-legacy-loss-diagnostic-PROPOSED-offline-v1`; build SHA256 `2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b`.

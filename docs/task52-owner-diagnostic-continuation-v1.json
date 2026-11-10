@@ -1,0 +1,86 @@
+{
+  "identity": "52b-v51-owner-diagnostic-continuation-decision-v1",
+  "decisionDate": "2026-11-10",
+  "provenance": "Owner instruction in the Task 52B real-evaluation integration preparation conversation",
+  "recordType": "documentary owner approval of diagnostic semantics",
+  "verbatimDecision": "I approve the Task 52B V5.1 diagnostic-only continuation policy for the exact known journey-06/r2 legacy ordering-loss defect, subject to genuine independent review and all existing security checks. This does not authorize paid inference, production planning, or a financial grant.",
+  "policyIdentity": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+  "allowlistedDefectHash": "9223819d61e4e782e22135f2cac00d76abdfb00f947015ec92daa2f2e585f598",
+  "diagnosticBuildSHA256": "2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b",
+  "prompt": {
+    "identity": "52b-cloud-v5.1-owner-list-order-REVIEWED-v1",
+    "path": "docs/task52-cloud-prompt-v51-REVIEWED-v1.json",
+    "fileSHA256": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+    "promptHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+    "configurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8"
+  },
+  "rubric": {
+    "identity": "52b-q1-rubric-v3-owner-decisions-v5.1-PROPOSED",
+    "path": "docs/task52-q1-rubric-v3-v51-PROPOSED.json",
+    "fileSHA256": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+    "originalQ1Parent": "52b-q1-qualification-v1"
+  },
+  "fiveCaseOwnerReview": {
+    "path": "docs/task52-v51-five-case-owner-review-v1.json",
+    "identity": "52b-v5.1-five-case-owner-product-review-v1",
+    "sha256": "f70bacefcfd9bb1f703156ddaeedeaacac24141686b001aec0239f7acb8dab2b"
+  },
+  "fiveSlotProposal": {
+    "identity": "52b-q3-openai-b2-v5.1-owner-decisions-PROPOSED-v3",
+    "path": "docs/task52-q3-v51-PROPOSED-v3.json",
+    "fileSHA256": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc"
+  },
+  "slots": [
+    [
+      "openai",
+      "extension-repeated",
+      2
+    ],
+    [
+      "openai",
+      "journey-04",
+      2
+    ],
+    [
+      "openai",
+      "extension-partial",
+      2
+    ],
+    [
+      "openai",
+      "journey-06",
+      2
+    ],
+    [
+      "openai",
+      "journey-21",
+      1
+    ]
+  ],
+  "historicalJournal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "persistentHalt": true,
+    "haltedRowID": 10,
+    "correctionAndPrivateEvidenceSetHash": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285"
+  },
+  "independentRubricReview": null,
+  "independentResponseReview": null,
+  "cryptographicSignature": null,
+  "operationalExecutionPermission": false,
+  "financialAuthorization": false,
+  "historicalHaltOverride": false,
+  "planningAuthorized": false
+}

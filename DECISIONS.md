@@ -1,3 +1,7 @@
+# Task 52B owner diagnostic-only decision
+
+The owner approved the exact journey-06/r2 legacy order loss for diagnostic continuation subject to genuine independent review and existing security checks. The versioned record identifies that product decision and leaves execution and financial authority unset. [Owner decision](docs/task52-owner-diagnostic-continuation-v1.json)
+
 # Task52B — propose a diagnostic exception without claiming planning compatibility
 
 Keep Q4D's historical strict halt unchanged. A separately versioned synthetic purpose may distinguish correct raw/V5.1 evidence from one proven B2 normalizer-only defect, while retaining the lost effective graph and planning block. Only an explicitly bound owner purpose plus separate response-review acknowledgment may permit the next distinct fictional diagnostic; raw errors, unknown/additional mutations and uncertainty still halt. Real human certification/approval is neither inferred nor implemented. [Exact proposed gate](docs/task52-diagnostic-progression-proposal-v1.md).

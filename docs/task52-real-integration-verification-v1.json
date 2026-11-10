@@ -1,0 +1,213 @@
+{
+  "identity": "52b-v51-original-journal-integration-verification-v1",
+  "baselineCommit": "3c5f83fe9e517f88fc20555d2d9499bb274c80e5",
+  "buildIdentity": "52b-v51-original-journal-integration-preparation-offline-v1",
+  "buildSHA256": "6c7e93fdefa6d726b4be7d8e5da5d24c5d4cdc5b6652ff254767b14bf8f793ac",
+  "sourceSHA256": {
+    "scripts/task52_integration_identity.py": "d826c39e253114f287e8c82dbacd9784f88a7632cd8e8170b75bd4faf613c16e",
+    "scripts/task52_real_integration.py": "de415e11a4f921809f211427f2bfacff0b0119903050802c45db785302acd836",
+    "backend/test_task52_real_integration.py": "ca5f604831891c1985a4312d9f0cac1664366fbb938b3208822c8da0cfa3a85c"
+  },
+  "ownerDecisionSHA256": "25ebab3999cb9dc6ac754291e75886e86663aa0e19460ef8b239926a4b4b0ede",
+  "documentaryApprovalOnly": true,
+  "independentHumanReviewsCompleted": 0,
+  "realExecutionAuthorized": false,
+  "financialAuthorization": false,
+  "original": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ],
+    "schemaHash": "822c3e1130fddbabd6b64a919bc35236c16e78c7210d076ce8181013eebbf09a",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "readMode": "mode=ro&immutable=1; query_only; SQL authorizer; existing common SH lock"
+  },
+  "originalInspectionDigest": "5619d8ef114b0bce7146c4cf9688636c3c4f1d556217fb850d1bf408a9934bde",
+  "syntheticResults": {
+    "exactHistoricalDDL": true,
+    "copiedHistoricalFinancialRows": false,
+    "originalShapedPrefixPreserved": true,
+    "prefixRowIDs": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "appendedRowIDs": [
+      11,
+      12,
+      13,
+      14,
+      15
+    ],
+    "fiveOrderedSlotsMatched": true,
+    "AThroughEMatchedFrozenDiagnosticEvidence": true,
+    "rawResponsesUnchanged": true,
+    "systemIncompatibleLossRequiredExplicitReview": true,
+    "nextSlotRefusedBeforeSyntheticReview": true,
+    "syntheticAttemptTotals": {
+      "openai": 12,
+      "google": 2,
+      "anthropic": 1
+    },
+    "retainedChildNanodollars": 12500000,
+    "planningAuthorized": false,
+    "sixthOrReplayRefused": true,
+    "historicalHaltCoexists": true,
+    "immutableFactKinds": [
+      "SCOPE",
+      "START",
+      "INTENT",
+      "OUTCOME",
+      "REVIEW",
+      "START",
+      "INTENT",
+      "OUTCOME",
+      "REVIEW",
+      "START",
+      "INTENT",
+      "OUTCOME",
+      "REVIEW",
+      "START",
+      "INTENT",
+      "OUTCOME",
+      "REVIEW",
+      "START",
+      "INTENT",
+      "OUTCOME",
+      "REVIEW"
+    ],
+    "uncertainSendRetainedNanodollars": 2500000,
+    "processExitCheckpoints": [
+      "before_reserve",
+      "after_reserve",
+      "after_intent"
+    ],
+    "competingProcessRefused": true,
+    "terminalHaltRefusedOnReattach": true,
+    "fixedSqlRejectedUpdatesDeletesReplaceSchemaAndAttach": true,
+    "processExitLimit": "Synthetic local process exits only. Power-loss and protected real restart authority remain unverified."
+  },
+  "verification": [
+    {
+      "suite": "Q4B read-only and schema controls",
+      "passed": 12,
+      "seconds": 8.656,
+      "logSHA256": "3c49a6cb8c855baf6713e0a88e22a933de3327d98af5f842b9625066b82d967f"
+    },
+    {
+      "suite": "Q4A and Q4D",
+      "passed": 31,
+      "seconds": 334.133,
+      "logSHA256": "aff183e55b26df51dd48cb0ceb0d282528634381d681c80045774e6b49066898"
+    },
+    {
+      "suite": "Q4C signatures, nonce, caps and recovery",
+      "passed": 22,
+      "seconds": 120.86,
+      "logSHA256": "ce907d51e60cf948834d394c729057de97522f258b7ac27b02d1ee7f158ba7dd"
+    },
+    {
+      "suite": "V5.1 ordering, Q1 and prompt freeze with recorded Qwen/OpenAI replays",
+      "passed": 27,
+      "seconds": 33.869,
+      "logSHA256": "c7d312f00934dfd7c8304ba22d49bc57d434ac94f714d9790f5a28ac92351bc9"
+    },
+    {
+      "suite": "Diagnostic progression and mutation/binding refusals",
+      "passed": 5,
+      "seconds": 98.978,
+      "logSHA256": "ba1ea875288c0c3b3a4c04cf34ad14f7d946c3b29c95b2e7d75c54ef0540ef3f"
+    },
+    {
+      "suite": "Diagnostic review, crash and nonce refusals",
+      "passed": 5,
+      "seconds": 89.443,
+      "logSHA256": "0b7481b5e31836e584782e76e8c53de8292a1d4ef356a6868872bf43104b860b"
+    },
+    {
+      "suite": "Integration all-five append and exact A\u2013E comparisons",
+      "passed": 1,
+      "seconds": 54.53,
+      "logSHA256": "8af3ecf420f29ed3232a87aa92a3e2b1a71229af84a400e61b4b7fef01b7c0ec"
+    },
+    {
+      "suite": "Integration read-only, scope identity and process controls",
+      "passed": 3,
+      "seconds": 102.27,
+      "logSHA256": "92a9613872b5cd654e5c9dc34282c5579f7acf7e379f3e029b7110b57ca3ede2"
+    },
+    {
+      "suite": "Integration SQL, corrupt rows, budget and uncertain sends",
+      "passed": 3,
+      "seconds": 139.689,
+      "logSHA256": "ed89d31d8e4793d41642e276b0a8381a347a96712a9ef33e72891e42bdc908e0"
+    }
+  ],
+  "integrationTestsPassed": 7,
+  "regressionTestsPassed": 102,
+  "totalFinalChecksPassed": 109,
+  "draftCorrection": "The initial refusal assertion imported a nonexistent test helper attribute. The final suite uses the actual Refused class and exercises all live-dispatch aliases.",
+  "security": {
+    "appSecretValuesChecked": 2,
+    "evaluationSecretValuesChecked": 3,
+    "currentMatches": 0,
+    "historicalMatches": 0,
+    "configIgnoredAndMode600": true,
+    "originalWritableConnections": 0,
+    "providerRequests": 0,
+    "realReservations": 0,
+    "realApprovalsOrEnrollment": 0
+  },
+  "scope": {
+    "productionOrSharedRuntimeChanged": false,
+    "originalEvaluatorOrHistoricalArtifactsChanged": false,
+    "fullApplicationTestsRerun": false,
+    "mapsBillingInfrastructureOrTask53Changes": false
+  },
+  "remaining": [
+    "Genuine independent five-case rubric and two historical failure reviews",
+    "Protected role enrollment and independent response review procedure",
+    "Separately reviewed real append driver and durable same-lock all-scope recovery",
+    "Exact real build and controlled single-send transport",
+    "Separately approved fresh readiness and exact financial/operation grants"
+  ]
+}
