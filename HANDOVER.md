@@ -1,3 +1,11 @@
+# Task 52B scope / exit review — documentation only
+
+Clean start `e55de4f`. [Completion matrix and finite checkpoints](docs/task52-scope-exit-review.md) distinguish the current model-qualification Phase 1 from the original Task 52 requirement to deploy frontend/backend. B3/general C–E extraction is deferred, not a prerequisite for an isolated versioned offline comparison. Raw model accuracy, legacy acceptance and proposed guarded-system disposition remain separate. No model is qualified; OpenAI's accepted invented edge and paid halt remain. Provider compatibility, rubric review and separately approved same-journal continuation are the immediate gates. Full Task 52 hosting implementation still needs separate approval; Task 53 owns environment/HTTPS, Task 54 full hosted end-to-end/phone acceptance, Task 55 tester recruitment. No task is marked complete by this review.
+
+Read-only journal integrity/counts and all 324 private files match prior evidence: OpenAI7/Google2/Anthropic1=10/594; $0.047366625 retained/$11.952633375 remaining; SHA256 `241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028`, halt intact. Documentation-only delivery checks; prior B2 full regression results remain historical, not rerun. No runtime/provider/receipt/prompt/Maps/financial/infrastructure change, further extraction or Task 53 work. Stop for owner review of Q1; no approval to dispatch or clear halt.
+
+---
+
 # Task 52B B2 duration extraction — approved behavioral reconstruction
 
 Started clean `2fec366`. Owner approved current-runtime behavioral reconstruction, **not exact historical environment execution**. [One-helper extraction, limits and test-fixture trust boundary](docs/task52-b2-behavioral-extraction.md), [frozen pre-edit baseline](docs/task52-b2-behavior-baseline-v1.json), [runtime identity](docs/task52-runtime-phase-b2.json), [verification](docs/task52-b2-reconstruction-verification.json).

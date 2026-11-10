@@ -1,3 +1,5 @@
+Current scope review: Task 52 remains **in progress**. Its original requirement includes actual frontend/backend hosting deployment; current 52B Phase 1 can end with a reviewed model comparison or explicit no-selection/blocker report, not a hosting-complete claim. Further B3/general C–E extraction is deferred. [Completion matrix, finite gates and original Task 53/54/55 boundary](docs/task52-scope-exit-review.md). Paid evaluation remains halted at OpenAI7/Google2/Anthropic1, 10/594, $0.047366625 retained. Earlier checkpoints below are historical.
+
 Task 52B B2 duration-helper extraction completed under the owner-approved behavioral reconstruction baseline; full regressions pass. Original paid source gate refuses B2, historical evidence/allowances remain intact, and evaluation remains halted. Task 52 stays in progress. Stop for review before B3; no new numbered task. [Scope/evidence](docs/task52-b2-behavioral-extraction.md).
 
 ---
