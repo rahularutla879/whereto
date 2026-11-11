@@ -104,3 +104,7 @@ From the repository root: `npm run build`, then `backend/.venv/bin/python -m uni
 ## Approved dedicated local container profile
 
 Use `colima start whereto-task52`, then `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh` from the repository root. Stop it with `colima stop whereto-task52` to release memory. The approved profile is 2 CPUs/4 GiB RAM/40 GiB container data, Rosetta enabled, no host mounts or SSH forwarding, and no global Docker context activation. Do not reinstall tools, change resources, grant privileges or enable providers as a troubleshooting shortcut. See [actual verification/security findings](../task52-local-container-verification.md).
+
+## Container security dependency checks
+
+Use the existing Colima profile and `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh`. The backend Docker build enforces wheel hashes and `pip check`; never run an unreviewed `pip install -U` or `npm audit fix --force`. `backend/.venv/bin/python -m unittest deployment.test_packaging -v` checks the exact deployment security exception while preserving the frozen historical requirements. See [remediation](../task52-container-security-remediation.md) for the isolated patched-wheel test method and remaining lint/OS owner decisions.

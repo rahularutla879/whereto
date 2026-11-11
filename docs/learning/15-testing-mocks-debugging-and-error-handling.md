@@ -64,6 +64,10 @@ For this documentation-only delivery, link/organization/source checks are approp
 
 The approved named Colima context is selected per command: `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh`. Native tests remain separate. The container check now verifies mock planning, absent-SQL refusal, frontend/backend diagnostic protection, no published ports, non-privileged/read-only/capability-dropped execution, graceful stop and stale-receipt rejection after restart. Next deliberately exits 143 after its awaited SIGTERM cleanup; this is accepted alongside zero, while SIGKILL 137 and OOM are rejected. Backend shutdown-complete logging is required. Only a fictional receipt is streamed from tmpfs with `docker exec`; it is never printed or treated as real authority. [Actual results and limitations](../task52-local-container-verification.md).
 
+## Testing a bounded dependency patch
+
+The backend builder now performs `pip check` after installing the Linux hash lock. Runtime images still contain no pip/npm installer. Packaging tests compare every historical requirement, permit only the exact reviewed pyasn1 0.6.5 exception and check its wheel hash; they also assert the old requirements-file SHA. The historical local venv is not overwritten. Backend regressions can be exercised using an isolated verified universal wheel, while actual image imports and existing container smoke prove the deployed dependency is loaded. Comparing old and patched images under the same advisory database separates a fix from scanner-database drift. [Tests and exact evidence](../task52-container-security-verification.json).
+
 ## Five key takeaways
 
 1. Tests establish behavior under specific conditions.

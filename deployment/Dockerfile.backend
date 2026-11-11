@@ -3,7 +3,7 @@ FROM ${PYTHON_IMAGE} AS build
 ENV PIP_CONFIG_FILE=/dev/null PIP_DISABLE_PIP_VERSION_CHECK=1
 WORKDIR /source
 COPY deployment/requirements-linux-amd64.lock ./requirements.lock
-RUN python -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir --index-url https://pypi.org/simple --require-hashes --only-binary=:all: -r requirements.lock
+RUN python -m venv /opt/venv && /opt/venv/bin/pip install --no-cache-dir --index-url https://pypi.org/simple --require-hashes --only-binary=:all: -r requirements.lock && /opt/venv/bin/pip check
 COPY backend ./backend
 COPY data/mock-venues.json ./data/mock-venues.json
 COPY deployment/backend-files.json deployment/prepare_backend.py ./deployment/

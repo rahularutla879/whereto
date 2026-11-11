@@ -97,3 +97,7 @@ Exit 78 from a packaging launcher means configuration/deployment dependencies re
 ## Local Docker context, tmpfs and shutdown
 
 If Docker reports a missing default socket while Colima is running, select `DOCKER_CONTEXT=colima-whereto-task52` for the test command; the default context was deliberately preserved. If tmpfs receipt copying fails, the checked-in harness uses `docker exec` streams, not a host mount. Next SIGTERM exit 143 is intentional after cleanup in the installed framework; do not rewrite the launcher to force zero. SIGKILL 137, OOM or missing backend shutdown completion fails the test. A lost receipt after restart must remain rejected (409), not be reminted. Container success does not waive scanner findings or hosted startup refusal.
+
+## Vulnerability count rises after a patch
+
+Compare scanner version, database source/hash/date and exact package/advisory sets. In this checkpoint the original backend rose from 78 to 86 high matches under a new database; the patched image has 82 under that same database, with exactly four pyasn1 advisories removed. Do not hide unknown-severity records, force major overrides, repin historical manifests or infer exploitability from counts alone. If the historical requirements SHA test fails, review the source-version boundary rather than update the expected hash.

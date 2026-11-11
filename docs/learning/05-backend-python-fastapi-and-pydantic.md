@@ -43,6 +43,10 @@ Python dependencies are pinned in [requirements.txt](../../backend/requirements.
 
 `deployment/backend_entry.py` validates `PORT`, rejects development flags and model/provider substitutions, calls the existing `admission.validate_environment`, then uses `os.execv` to start one Uvicorn worker on `0.0.0.0`. Access logs are disabled and graceful shutdown is bounded to five seconds. Production/hosted settings still refuse. A local test-mode launch is not permission to deploy; `K_SERVICE` still triggers refusal. Runtime files are copied by `deployment/prepare_backend.py`, not by copying the whole repository.
 
+## Historical versus deployment Python dependencies
+
+`backend/requirements.txt` is part of frozen B1/B2 evidence and remains unchanged. The new `52-container-security-dependencies-v1` deployment profile uses `deployment/requirements-linux-amd64.lock` with one explicit patch: pyasn1 0.6.4→0.6.5. The application Python source and semantic policy are unchanged, but this dependency environment is not the old evaluation build. Docker runs `pip check` before removing runtime installers. Existing google-auth→rsa/pyasn1_modules constraints accept this patch; actual imports and BER/DER regression checks passed. See the [bounded remediation](../task52-container-security-remediation.md).
+
 ## Five key takeaways
 
 1. FastAPI handles HTTP; Pydantic validates data.

@@ -72,3 +72,7 @@ Reviewed/updated chapters 3, 5, 6, 12, 14, 15 and 18, plus file map, commands, g
 ## Task 52 actual local containers
 
 Updated chapters 14, 15 and 18 plus commands, glossary and debugging guidance for verified Colima/Rosetta builds, runtime tests and unresolved vulnerability findings. Reviewed packaging references in chapters 3/5/6/12; their unchanged application explanations remain valid. No other chapter was changed; the 20-chapter structure and existing exercises are preserved. Source paths and signal behavior were checked against the installed Next/Uvicorn code. [Verification](../task52-local-container-verification.json).
+
+## Task 52 container security remediation
+
+Reviewed and updated chapters 5/14/15/18 plus glossary, commands and debugging references. All other chapters, the 20-chapter structure and existing exercises remain unchanged. References match the actual deployment lock, Docker pip-check step and exact-override packaging test. [Original/control/patched scanner comparison and test evidence](../task52-container-security-verification.json) distinguish automated findings from confirmed exploitability and preserve historical qualification identities.

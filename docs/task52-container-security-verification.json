@@ -1,0 +1,740 @@
+{
+  "identity": "52-container-security-verification-v1",
+  "deploymentDependencyIdentity": "52-container-security-dependencies-v1",
+  "baseline": "ce0ec0f7f2e686c390709c680a385fd70f084265",
+  "date": "2026-11-11",
+  "scope": "bounded deployment-only dependency fix and complete high/critical triage; no deployment or financial authority",
+  "scanner": "anchore/grype:v0.121.3@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+  "scannerDigestReverified": true,
+  "scanSummaries": {
+    "originalBackend": {
+      "matches": 289,
+      "severityMatches": {
+        "Critical": 3,
+        "High": 78,
+        "Low": 18,
+        "Medium": 104,
+        "Negligible": 86
+      },
+      "dbBuilt": "2026-11-10T06:21:20Z",
+      "dbSource": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-10T00:20:15Z_1794291680.tar.zst?checksum=sha256%3Af536af5882d8e03ad3e3ea5b32b3fc1965d55321ddab67ad7a5d7aeec3725190",
+      "dbValid": true,
+      "rawReportSHA256": "8bab98f776da56dfc07445733ebbdc7e0b2be8c5baed0bda78b0510ce8e452b4"
+    },
+    "originalFrontend": {
+      "matches": 209,
+      "severityMatches": {
+        "Critical": 2,
+        "High": 49,
+        "Low": 16,
+        "Medium": 78,
+        "Negligible": 64
+      },
+      "dbBuilt": "2026-11-10T06:21:20Z",
+      "dbSource": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-10T00:20:15Z_1794291680.tar.zst?checksum=sha256%3Af536af5882d8e03ad3e3ea5b32b3fc1965d55321ddab67ad7a5d7aeec3725190",
+      "dbValid": true,
+      "rawReportSHA256": "7d63d3ca61e70cee98a0705572ae0333fa5e2978cf59242e15bb2554998f1f74"
+    },
+    "freshBackendControl": {
+      "matches": 351,
+      "severityMatches": {
+        "Critical": 3,
+        "High": 86,
+        "Low": 18,
+        "Medium": 124,
+        "Negligible": 86,
+        "Unknown": 34
+      },
+      "dbBuilt": "2026-11-11T06:21:32Z",
+      "dbSource": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-11T00:20:48Z_1794378092.tar.zst?checksum=sha256%3A47f709e0217cf091eaf8dc57c8cdea33f9ba2c7d5374237c5011871a0c99d24e",
+      "dbValid": true,
+      "rawReportSHA256": "7c6f9e588d2b35f86e0e074e62eb7fc2f0306452ea9bb6a9e1ba3f38e4bd70c1"
+    },
+    "patchedBackend": {
+      "matches": 347,
+      "severityMatches": {
+        "Critical": 3,
+        "High": 82,
+        "Low": 18,
+        "Medium": 124,
+        "Negligible": 86,
+        "Unknown": 34
+      },
+      "dbBuilt": "2026-11-11T06:21:32Z",
+      "dbSource": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-11T00:20:48Z_1794378092.tar.zst?checksum=sha256%3A47f709e0217cf091eaf8dc57c8cdea33f9ba2c7d5374237c5011871a0c99d24e",
+      "dbValid": true,
+      "rawReportSHA256": "fddd9cea079b889b37dbc1ad3f663dc7fc316bd40f8c93e4546559eb5d221bf4"
+    },
+    "freshFrontend": {
+      "matches": 209,
+      "severityMatches": {
+        "Critical": 2,
+        "High": 49,
+        "Low": 16,
+        "Medium": 78,
+        "Negligible": 64
+      },
+      "dbBuilt": "2026-11-11T06:21:32Z",
+      "dbSource": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-11T00:20:48Z_1794378092.tar.zst?checksum=sha256%3A47f709e0217cf091eaf8dc57c8cdea33f9ba2c7d5374237c5011871a0c99d24e",
+      "dbValid": true,
+      "rawReportSHA256": "efaed2fd8da354a3073eb86eae74bc0e242fa626e6c48ae65c934e6313767900"
+    }
+  },
+  "sameDatabaseControlledComparison": {
+    "removed": [
+      {
+        "package": "pyasn1",
+        "version": "0.6.4",
+        "advisory": "GHSA-2qm8-x737-gmw5",
+        "severity": "High"
+      },
+      {
+        "package": "pyasn1",
+        "version": "0.6.4",
+        "advisory": "GHSA-9m75-vc3g-4x39",
+        "severity": "High"
+      },
+      {
+        "package": "pyasn1",
+        "version": "0.6.4",
+        "advisory": "GHSA-fm9c-5rcf-2q5p",
+        "severity": "High"
+      },
+      {
+        "package": "pyasn1",
+        "version": "0.6.4",
+        "advisory": "GHSA-mm57-4v3p-rchx",
+        "severity": "High"
+      }
+    ],
+    "introduced": [],
+    "databaseAdditionsRelativeToHistoricalReport": [
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107364",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107884",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-111423",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112314",
+        "severity": "High"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112315",
+        "severity": "Medium"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112316",
+        "severity": "Medium"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112317",
+        "severity": "Medium"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112318",
+        "severity": "Medium"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112319",
+        "severity": "Medium"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112320",
+        "severity": "High"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-118380",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71199",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libgssapi-krb5-2",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71200",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107364",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107884",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-111423",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112314",
+        "severity": "High"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112315",
+        "severity": "Medium"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112316",
+        "severity": "Medium"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112317",
+        "severity": "Medium"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112318",
+        "severity": "Medium"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112319",
+        "severity": "Medium"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112320",
+        "severity": "High"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-118380",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71199",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libk5crypto3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71200",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107364",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107884",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-111423",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112314",
+        "severity": "High"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112315",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112316",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112317",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112318",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112319",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112320",
+        "severity": "High"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-118380",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71199",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5-3",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71200",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107364",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-107884",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-111423",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112314",
+        "severity": "High"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112315",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112316",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112317",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112318",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112319",
+        "severity": "Medium"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-112320",
+        "severity": "High"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-118380",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71199",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libkrb5support0",
+        "version": "1.20.1-2+deb12u5",
+        "advisory": "CVE-2026-71200",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libssl3",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-107496",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libssl3",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-88822",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libssl3",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-88823",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libssl3",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-95691",
+        "severity": "Unknown"
+      },
+      {
+        "package": "libssl3",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-95692",
+        "severity": "Unknown"
+      },
+      {
+        "package": "openssl",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-107496",
+        "severity": "Unknown"
+      },
+      {
+        "package": "openssl",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-88822",
+        "severity": "Unknown"
+      },
+      {
+        "package": "openssl",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-88823",
+        "severity": "Unknown"
+      },
+      {
+        "package": "openssl",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-95691",
+        "severity": "Unknown"
+      },
+      {
+        "package": "openssl",
+        "version": "3.0.22-1~deb12u2",
+        "advisory": "CVE-2026-95692",
+        "severity": "Unknown"
+      }
+    ],
+    "databaseRemovedRelativeToHistoricalReport": [],
+    "frontendPackageAdvisorySetsUnchanged": true,
+    "interpretation": "Four high upstream-patched pyasn1 advisories removed. Eight new high, twenty medium and34 unknown baseline backend matches are database drift, not new packages. Unknown remains unresolved."
+  },
+  "triage": {
+    "file": "docs/task52-container-security-triage.json",
+    "SHA256": "a30b30f4105d5fda87ca4e2223a60644361b9569a60695ede3bf940444476221",
+    "originalHighCriticalMatches": 132,
+    "freshHighMatches": 8,
+    "individuallyAssessedAdvisories": 35,
+    "suppressionRules": 0,
+    "independentExploitabilityCertification": false
+  },
+  "dependencyChain": {
+    "google-auth": "2.41.1 requires rsa>=3.1.4,<5 and pyasn1-modules>=0.2.1",
+    "rsa": "4.9.1 requires pyasn1>=0.1.3",
+    "pyasn1_modules": "0.4.2 requires pyasn1>=0.6.1,<0.7.0",
+    "patchedPyasn1": "0.6.5",
+    "wheelSHA256": "4017b0fce125096b8573b39c989fdb1a4b19cf761e683398184550fea0e66587",
+    "officialSource": "https://pypi.org/pypi/pyasn1/0.6.5/json",
+    "yanked": false,
+    "requiresPython": ">=3.8",
+    "pipCheck": "passed in actual Linux build",
+    "historicalRequirementsAndVenvChanged": false,
+    "sameAsHistoricalEvaluationBuild": false
+  },
+  "images": {
+    "backend": {
+      "tag": "whereto-backend:task52-1794412153-88212",
+      "imageIndexID": "sha256:e373e2410579d70365e0807068a3386ce814bb2d933bb7c1bc3949ea33ef2e7c",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "app",
+      "exposedPorts": [
+        "8080/tcp"
+      ],
+      "sizeBytes": 62814434,
+      "layerFilesScanned": 7835,
+      "configuredSecretMatches": 0,
+      "forbiddenFiles": 0,
+      "archiveSHA256": "8b833bd4b4f16ff1a387927ce6847422d86efe11ccdad20acf7a347ca323a2aa",
+      "lintDevToolingPresent": false,
+      "runtimeConfigSHA256": "ca7aeedf00e508dc84911308da1d81592d0f97f7f6ace3025d581339b495a30f",
+      "packageManagerBytesInLowerLayers": [
+        "pip"
+      ],
+      "mergedRuntimeInstallersAbsent": true
+    },
+    "frontend": {
+      "tag": "whereto-frontend:task52-1794412153-88212",
+      "imageIndexID": "sha256:1345598e804c6fb6d23a924dc192a6504758cf718fb1487d1d6c39a4c9cb4be1",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "node",
+      "exposedPorts": [
+        "8080/tcp"
+      ],
+      "sizeBytes": 104702421,
+      "layerFilesScanned": 7961,
+      "configuredSecretMatches": 0,
+      "forbiddenFiles": 0,
+      "archiveSHA256": "e794571dd8ebf2476724ee665a98f65e7624613e821573e7526886652f9bf33c",
+      "lintDevToolingPresent": false,
+      "runtimeConfigSHA256": "1aeb79b3d5c2547b45574f8c183a03208d35676ab5795ebffdd5e236a9d795b6",
+      "packageManagerBytesInLowerLayers": [
+        "npm",
+        "yarn"
+      ],
+      "mergedRuntimeInstallersAbsent": true
+    }
+  },
+  "actualRuntimeFeatures": {
+    "pyasn1": "0.6.5",
+    "libc": [
+      "glibc",
+      "2.36"
+    ],
+    "sqlite": "3.40.1",
+    "sqliteFeatures": [
+      "ENABLE_FTS5",
+      "ENABLE_SESSION"
+    ],
+    "perlPodTextPresent": false,
+    "perlArchiveTarPresent": false,
+    "infocmpPresent": true,
+    "setuidHelpers": {
+      "/usr/bin/mount": true,
+      "/usr/bin/umount": true
+    },
+    "uid": 10001,
+    "BERConstructedStringRegression": "passed"
+  },
+  "dockerHealthchecks": {
+    "backend": {
+      "health": "healthy",
+      "runtimeIdentity": "10001 Linux x86_64",
+      "privileged": false,
+      "readOnlyRoot": true,
+      "capabilitiesDropped": "ALL",
+      "hostBinds": false,
+      "publishedPorts": false,
+      "network": "none"
+    },
+    "frontend": {
+      "health": "healthy",
+      "runtimeIdentity": "1000 linux x64",
+      "privileged": false,
+      "readOnlyRoot": true,
+      "capabilitiesDropped": "ALL",
+      "hostBinds": false,
+      "publishedPorts": false,
+      "network": "none"
+    }
+  },
+  "runtimeKernelNoNewPrivs": 1,
+  "containerSmoke": {
+    "result": "passed both linux/amd64 images",
+    "nonRoot": true,
+    "readonly": true,
+    "capabilitiesDropped": "ALL",
+    "hostBinds": false,
+    "publishedPorts": false,
+    "externalRuntimeNetwork": false,
+    "backendProductionRefusal": 78,
+    "frontendMissingConfigurationRefusal": 78,
+    "AIUnavailable": 503,
+    "missingDatabase": 503,
+    "staleReceiptAfterRestart": 409,
+    "diagnostics": "denied",
+    "gracefulShutdown": {
+      "frontendExit": 143,
+      "backendExit": 0,
+      "OOMOrSIGKILL": false
+    },
+    "realDatabaseOrProviderCalls": 0
+  },
+  "tests": {
+    "backendCoreWithPatchedWheel": {
+      "run": 88,
+      "passed": 72,
+      "skipped": 16,
+      "failed": 0
+    },
+    "mockedTransportsWithPatchedWheel": {
+      "run": 49,
+      "passed": 49,
+      "skipped": 0,
+      "failed": 0
+    },
+    "packaging": {
+      "run": 7,
+      "passed": 7,
+      "skipped": 0,
+      "failed": 0
+    },
+    "frontend": {
+      "run": 289,
+      "passed": 289,
+      "skipped": 0,
+      "failed": 0
+    },
+    "fullBackendDiscovery": "not run; focused suite only",
+    "typecheck": "passed",
+    "eslint": "passed",
+    "productionBuild": "fresh native production build passed; actual Linux frontend image build also passed with unchanged cached build stage",
+    "dependencyBehavior": "actual patched image imports/constructed BER regression and isolated host BER/DER roundtrip passed",
+    "browser": "not run; actual HTTP container smoke, no UI changes"
+  },
+  "npmAudit": {
+    "moderate": 7,
+    "high": 0,
+    "critical": 0,
+    "allPathsDevOnly": true,
+    "retainedUpdates": false,
+    "reason": "upstream8.72.2 still requires minimatch10; trial fully restored; major override requires separate review"
+  },
+  "sourceSHA256": {
+    "deployment/Dockerfile.backend": "84b5769dab42ee590ec10ad34fa849e69a57aff9caa9fed6fd59787e93c2b560",
+    "deployment/Dockerfile.frontend": "b2ce1bfcc3c1ebf6f347c6933a86f3a3e141ce3719cd6c141e2dbeb2216b3c19",
+    "deployment/requirements-linux-amd64.lock": "aa89e396a2bc7298b30f073672d442a2788e03f9c942fa0180c379d334ffdddc",
+    "deployment/test_packaging.py": "da75bc3148e54da9f8d7b384192c76bec76c20dfcc8006829290d154cc44892d",
+    "deployment/base-images.json": "696994dd7d1df4c8a9560ce21b86af8ce0c1cae7a457a83893dfd8b3a3577a94",
+    "deployment/backend-files.json": "c651175236e13ddbedfa857a1e299098e18b167c1ff64301aad8fa465d55c158",
+    "deployment/backend_entry.py": "1e17a0c7dd1433d510f77bb880b3ee6cf2dccc02f978c3dff077eef0b2210045",
+    "deployment/frontend-entry.mjs": "8cfb878e2f76207e247ebf3c96150f9ef0e5818e3f78f5fb7c704e36deed9201",
+    "deployment/container-smoke.sh": "4e80003da30e27ae719f1649ed4736f4cf50191ee72eaf52b5df4f0d849caac0",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "package.json": "de70227dc8febb06a835091a1b17c942a9b223a6c1ed9d5b1c198fdbfd6dea3c",
+    "package-lock.json": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "docs/task52-runtime-phase-b2.json": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14"
+  },
+  "officialBaseTagsStillMatchPinnedDigests": true,
+  "baseImages": {
+    "purpose": "reviewed build inputs, not deployment approval",
+    "platform": "linux/amd64",
+    "images": {
+      "node": {
+        "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-bookworm-slim",
+        "reference": "node:24-bookworm-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9",
+        "linuxAmd64Digest": "sha256:c0a93797ee78814ae6d32fcca2561fdbbe423149c3f5389aad32d86e9fd85bd4"
+      },
+      "python": {
+        "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-bookworm",
+        "reference": "python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+        "linuxAmd64Digest": "sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4"
+      }
+    }
+  },
+  "journalBeforeAfterEqual": true,
+  "journal": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "persistentHistoricalHalt": true,
+    "sourcePinsAndQ4ABuildVerified": true
+  },
+  "secrets": "configured-value scan zero current/history/image-layer matches; unknown-secret absence not guaranteed",
+  "vm": {
+    "profile": "whereto-task52",
+    "cpus": 2,
+    "memoryGiB": 4,
+    "dataDiskGiB": 40,
+    "hostMounts": null,
+    "sshForwarding": false,
+    "resourcesChanged": false,
+    "finalState": "stopped; task containers removed; local images retained"
+  },
+  "handbook": {
+    "chaptersUpdated": [
+      5,
+      14,
+      15,
+      18
+    ],
+    "structure": 20,
+    "unaffectedChaptersPreserved": true
+  },
+  "applicationSourceChanged": false,
+  "productionModelOrOrderingActivated": false,
+  "hostedStagingReady": false,
+  "cloudResourcesOrRegistryPublication": false,
+  "Task53Started": false,
+  "remainingDecisions": [
+    "review retained OS/native/unknown findings and security acceptance, not waived",
+    "separately approve broader supported OS release/base compatibility proposal if desired",
+    "approve scoped minimatch major override review or await compatible upstream lint update"
+  ]
+}

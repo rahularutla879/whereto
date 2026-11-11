@@ -1,3 +1,7 @@
+# Task 52 deployment dependency identity
+
+`52-container-security-dependencies-v1` preserves the existing B2 application source/legacy policy with one separately pinned pyasn1 security patch in the deployment lock. Historical/local requirements and evaluator identities remain distinct. Build-time pip check runs before runtime installers are removed; hosted startup is still refused. No shared-state, inference, API or deployment topology change. [Scope](docs/task52-container-security-remediation.md).
+
 # Task 52 container packaging boundary
 
 The only application configuration change is Next standalone output. `deployment/` holds non-root frontend/backend image recipes, hash-locked Linux dependencies, explicit backend payload assembly and strict launchers. Images exclude evaluation/local fixtures and secrets. Current hosted startup refusal and legacy/Qwen behavior remain unchanged. Cloud Run templates are private placeholders, not an activated architecture. [Actual local container verification](docs/task52-local-container-verification.md) now exercises these artifacts; no hosted state/identity architecture is enabled. [Actual shared-state, inference and IAM blockers](docs/task52-cloud-deployment-preparation.md).

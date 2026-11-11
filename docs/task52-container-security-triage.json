@@ -1,0 +1,3513 @@
+{
+  "identity": "52-container-security-triage-v1",
+  "baseline": "ce0ec0f7f2e686c390709c680a385fd70f084265",
+  "reviewType": "Codex source/dependency triage, not independent exploitability certification",
+  "tracker": {
+    "url": "https://security-tracker.debian.org/tracker/data/json",
+    "retrievedDate": "2026-11-11",
+    "SHA256": "65c7c4b545703b9dc1cdf81e7266fa3d93cbfabf8193e4ec128e15c176fc3408"
+  },
+  "scope": "all132 baseline high/critical matches plus8 fresh-DB high matches, deduplicated into35 advisory assessments; no suppression",
+  "sourceReview": [
+    "backend/main.py",
+    "backend/models.py",
+    "backend/database_check.py",
+    "backend/saved_plans.py",
+    "backend/places_transport.py",
+    "backend/routes_transport.py",
+    "deployment/backend-files.json",
+    "app/",
+    "lib/"
+  ],
+  "runtimeFeatures": {
+    "pyasn1": "0.6.5",
+    "libc": [
+      "glibc",
+      "2.36"
+    ],
+    "sqlite": "3.40.1",
+    "sqliteFeatures": [
+      "ENABLE_FTS5",
+      "ENABLE_SESSION"
+    ],
+    "perlPodTextPresent": false,
+    "perlArchiveTarPresent": false,
+    "infocmpPresent": true,
+    "setuidHelpers": {
+      "/usr/bin/mount": true,
+      "/usr/bin/umount": true
+    },
+    "uid": 10001,
+    "BERConstructedStringRegression": "passed"
+  },
+  "advisories": {
+    "CVE-2025-13151": {
+      "mechanism": "libtasn1 octet expansion overflow",
+      "sourcePackage": "libtasn1-6",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "4.19.0-2+deb12u1",
+          "bookworm-security": "4.19.0-2+deb12u1"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "4.21.0-2"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "4.21.0-2"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "4.20.0-2+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "Python pyasn1 is a different library. App does not directly call this C libtasn1 function; transitive native consumers not exhaustively audited.",
+      "untrustedInputPrerequisites": "Malformed ASN.1 passed to affected libtasn1 expansion function.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2025-69720": {
+      "mechanism": "infocmp terminfo analysis overflow",
+      "sourcePackage": "ncurses",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "6.4-4"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "6.6+20251231-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "6.6+20251231-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "infocmp exists but server is headless and app never invokes it; client text does not become TERM or CLI input.",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2025-7458": {
+      "mechanism": "SQLite ORDER BY allocation overflow",
+      "sourcePackage": "sqlite3",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "3.40.1-2+deb12u2"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "3.42.0-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "3.42.0-1"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "3.42.0-1"
+        }
+      },
+      "applicationUseAssessment": "SQLite3.40.1 is present; app runtime has no sqlite import or arbitrary SQL/database upload interface. Historical evaluation journal is excluded; in-memory feature probe only.",
+      "untrustedInputPrerequisites": "Attacker SQL with many ORDER BY expressions; absence of current route is not a library fix.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-102010": {
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "sourcePackage": "gcc-12",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "12.2.0-14+deb12u1"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue, not fixed in upstream 12 branch",
+        "nodsa_reason": "ignored"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "12.5.0-11"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "12.5.0-11"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "Native Node/C-extension dependencies can use C++ runtime. No own application call to this exact container operation; native call graph not proven safe.",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-107778": {
+      "mechanism": "Kerberos GSS acceptor credential array",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No GSS acceptor service in app. Saved SQL uses restricted password/TLS; Kerberos libraries may be linked dependencies.",
+      "untrustedInputPrerequisites": "Kerberos client data reaching GSS acceptor; client-library linkage is not an acceptor endpoint.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-112314": {
+      "mechanism": "Kerberos GSS-RPC client reply-verifier leak",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "App uses HTTP OAuth and PostgreSQL password/TLS, not a GSS-RPC client interface. Client-library linkage alone does not prove clnttcp_call is reached; native reachability remains unproven.",
+      "untrustedInputPrerequisites": "Malicious/mismatched RPC replies or authentication retries reaching affected GSS-RPC client.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "fresh database disclosure, not a package update; retained unresolved; no compatible fixed Bookworm package",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-112320": {
+      "mechanism": "Kerberos admin transport authentication-context leak",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No kadmind/GSS-RPC server is started or exposed by the app. Retain the library source finding.",
+      "untrustedInputPrerequisites": "RPC authentication flavor switching on a Kerberos admin TCP connection.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "fresh database disclosure, not a package update; retained unresolved; no compatible fixed Bookworm package",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-112321": {
+      "mechanism": "Kerberos admin RPC argument leak",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No kadmind/Kerberos RPC server is started; FastAPI JSON and PostgreSQL password/TLS are separate protocols.",
+      "untrustedInputPrerequisites": "Crafted AUTH_GSSAPI init reaching kadmind.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-112322": {
+      "mechanism": "Kerberos admin client cleanup CPU",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No kadmind or Kerberos admin client list in app runtime. Libraries remain installed.",
+      "untrustedInputPrerequisites": "Many Kerberos admin RPC client entries and cleanup in kadmind.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-112323": {
+      "mechanism": "Kerberos admin failed-auth memory",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No kadmind endpoint; do not expose inherited library functions through new services.",
+      "untrustedInputPrerequisites": "Repeated failed AUTH_GSSAPI init to Kerberos admin daemon.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-11824": {
+      "mechanism": "SQLite FTS5 corrupted continuation page",
+      "sourcePackage": "sqlite3",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "3.40.1-2+deb12u2"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "3.53.2-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "3.53.2-1"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "3.46.1-7+deb13u2"
+        }
+      },
+      "applicationUseAssessment": "FTS5 is compiled in. App does not open attacker databases or expose MATCH queries; do not classify feature as disabled.",
+      "untrustedInputPrerequisites": "Crafted FTS5 database/query consumed by SQLite.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-119079": {
+      "mechanism": "Kerberos KDC sequence decoding CPU",
+      "sourcePackage": "krb5",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.20.1-2+deb12u5",
+          "bookworm-security": "1.20.1-2+deb12u5"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No KDC server started or ticket-input API. Outbound SQL client configuration is not a KDC.",
+      "untrustedInputPrerequisites": "Crafted Kerberos AS/TGS request to KDC sequence decoder.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-119373": {
+      "mechanism": "SQLite FTS5 doclist merge",
+      "sourcePackage": "sqlite3",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "3.40.1-2+deb12u2"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "3.54.1-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "FTS5 present, but no runtime SQL/database upload path. Untrusted activity text never becomes SQLite SQL.",
+      "untrustedInputPrerequisites": "Attacker-populated detail=none FTS5 table and prefix MATCH query.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-119374": {
+      "mechanism": "SQLite FTS5 secure-delete corruption",
+      "sourcePackage": "sqlite3",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "3.40.1-2+deb12u2"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "3.54.1-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "FTS5 present; no app-owned SQLite file or user SQL/delete interface in runtime.",
+      "untrustedInputPrerequisites": "Crafted database footer and secure-delete operation.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-119379": {
+      "mechanism": "SQLite session changeset overflow",
+      "sourcePackage": "sqlite3",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "3.40.1-2+deb12u2"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "3.54.1-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "ENABLE_SESSION is present; no changeset-apply endpoint or API in application.",
+      "untrustedInputPrerequisites": "Crafted changeset passed to sqlite3changeset_apply; library remains vulnerable.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-19499": {
+      "mechanism": "monetary formatting buffer padding",
+      "sourcePackage": "glibc",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.36-9+deb12u14",
+          "bookworm-security": "2.36-9+deb12u7"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.43-5"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.43-5"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No application strfmon call found; frontend uses JavaScript formatting. Upstream description starts at glibc2.38 but installed2.36 is marked open by Debian: version applicability remains disputed.",
+      "untrustedInputPrerequisites": "Affected C monetary format/buffer path; cannot dismiss Debian open status by version range alone.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-41992": {
+      "mechanism": "GNU gzip mixed LZW/LZH decompression",
+      "sourcePackage": "gzip",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1.12-1"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "1.14-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "1.14-1"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "1.13-1+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "App has no gzip CLI invocation or archive-upload/decompression pipeline. HTTP decompression is a different zlib path.",
+      "untrustedInputPrerequisites": "Crafted files processed sequentially by gzip CLI mixed-format state.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-53613": {
+      "mechanism": "restricted mount target race",
+      "sourcePackage": "util-linux",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.38.1-5+deb12u3",
+          "bookworm-security": "2.38.1-5+deb12u1"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.42.2-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.42.2-1"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "2.41.5-0+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "App does not invoke mount or accept fstab/filesystem uploads. Setuid mount helpers remain in base; observed no-new-privileges, dropped capabilities, non-root and no host binds mitigate prerequisites.",
+      "untrustedInputPrerequisites": "Local helper execution, suitable fstab authorization and writable path; source bug remains unresolved.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-53615": {
+      "mechanism": "DOS partition metadata probing",
+      "sourcePackage": "util-linux",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.38.1-5+deb12u3",
+          "bookworm-security": "2.38.1-5+deb12u1"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.42-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.42-1"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "2.41.5-0+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "App does not probe disk images; no host devices or user disk-upload endpoint. libblkid package remains.",
+      "untrustedInputPrerequisites": "Crafted block/partition image passed to libblkid and a consumer acting on false metadata.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-5435": {
+      "mechanism": "deprecated DNS record printing",
+      "sourcePackage": "glibc",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.36-9+deb12u14",
+          "bookworm-security": "2.36-9+deb12u7"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.43-3"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.43-3"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No application call to ns_printrr/ns_printrrf/fp_nquery. Ordinary DNS lookup does not establish use of these printers.",
+      "untrustedInputPrerequisites": "Affected TSIG record printer must be called; transitive native reachability unproven.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-54369": {
+      "mechanism": "pathname ACL symlink traversal",
+      "sourcePackage": "acl",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.3.1-3"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue; libacl acl_*_file() follow symlinks; fix adds new acl_*_at() ABI, not individually backportable",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.4.0-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.4.0-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "App performs no ACL changes. Non-root/no-new-privileges/readonly-root limits privileged filesystem effects.",
+      "untrustedInputPrerequisites": "Privileged ACL caller traversing an attacker-controlled pathname; not an HTTP activity-list input.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-54370": {
+      "mechanism": "pathname ACL TOCTOU race",
+      "sourcePackage": "acl",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.3.1-3"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue; local TOCTOU in recursive setfacl/chacl; fix needs 2.4.0 acl_*_at() ABI + walk_tree rewrite, not individually backportable",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.4.0-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.4.0-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No app ACL tooling call. Local path race requires additional execution/write/privilege capability.",
+      "untrustedInputPrerequisites": "Privileged getfacl/setfacl/chacl or library operation on attacker-controlled ancestor.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-5450": {
+      "mechanism": "scanf allocated character conversion",
+      "sourcePackage": "glibc",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.36-9+deb12u14",
+          "bookworm-security": "2.36-9+deb12u7"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.42-17"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.42-17"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "2.41-12+deb13u4"
+        }
+      },
+      "applicationUseAssessment": "No application scanf/%mc call found. JSON/text reaches native runtimes, but the specific vulnerable conversion path is not established.",
+      "untrustedInputPrerequisites": "Caller must invoke affected scanf format/width; no arbitrary C-format interface exposed.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-5928": {
+      "mechanism": "wide-character stream pushback",
+      "sourcePackage": "glibc",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.36-9+deb12u14",
+          "bookworm-security": "2.36-9+deb12u7"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": ""
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.42-17"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.42-17"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "2.41-12+deb13u4"
+        }
+      },
+      "applicationUseAssessment": "No application ungetwc interface; JSON encoding is UTF-8. Native runtime paths have not been exhaustively audited.",
+      "untrustedInputPrerequisites": "Special overlapping single/multibyte encoding and wide-stream pushback; not proven reachable.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-76844": {
+      "mechanism": "zlib gzip stream write-error state",
+      "sourcePackage": "zlib",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1:1.2.13.dfsg-1"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.2-4"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.2-4"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.1-1+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "HTTP compression/decompression can use zlib; no application gz* file-writing calls found. Deflate/inflate use does not prove this gz_write error path.",
+      "untrustedInputPrerequisites": "Failed gzip stream write followed by affected subsequent gz* operation; native reachability uncertain.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-78410": {
+      "mechanism": "restricted bind-mount source race",
+      "sourcePackage": "util-linux",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.38.1-5+deb12u3",
+          "bookworm-security": "2.38.1-5+deb12u1"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "2.42.3-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "2.42.3-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No app mount/fstab operation; helpers remain but tested privilege/device/host-mount boundaries restrict escalation.",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-82560": {
+      "mechanism": "Perl Pod::Text formatting exhaustion",
+      "sourcePackage": "perl",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "5.36.0-7+deb12u3",
+          "bookworm-security": "5.36.0-7+deb12u4"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No Perl POD rendering in app; Pod/Text.pm not found in inspected standard Perl directories. Package-source matching may overstate installed feature.",
+      "untrustedInputPrerequisites": "Attacker POD supplied to affected Perl formatter; no app route found.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-84243": {
+      "mechanism": "gettext catalog path/environment manipulation",
+      "sourcePackage": "glibc",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "2.36-9+deb12u14",
+          "bookworm-security": "2.36-9+deb12u7"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "HTTP inputs cannot set process environment or install locale catalogs; no host mounts or SSH service in app.",
+      "untrustedInputPrerequisites": "Attacker-controlled LANGUAGE/locale plus writable malicious catalog; would require additional capability.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-85091": {
+      "mechanism": "zlib nonblocking gzip write state",
+      "sourcePackage": "zlib",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "1:1.2.13.dfsg-1"
+        },
+        "urgency": "not yet assigned"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.2-4"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.2-4"
+        },
+        "trixie": {
+          "status": "resolved",
+          "fixed_version": "1:1.3.dfsg+really1.3.1-1+deb13u1"
+        }
+      },
+      "applicationUseAssessment": "Installed zlib1.2.13 is outside the description range1.3.1.2\u20131.3.2, but Debian marks it open. No own gzprintf/gzvprintf path; applicability remains unresolved.",
+      "untrustedInputPrerequisites": "Affected nonblocking gzwrite stall and later formatted write; retain mismatch for expert adjudication.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-9538": {
+      "mechanism": "Perl Archive::Tar memory allocation",
+      "sourcePackage": "perl",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "5.36.0-7+deb12u3",
+          "bookworm-security": "5.36.0-7+deb12u4"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue; wait for regressions upstream sorted out",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "resolved",
+          "fixed_version": "5.42.3-1"
+        },
+        "sid": {
+          "status": "resolved",
+          "fixed_version": "5.42.3-1"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "No Perl/archive processing in app; Archive/Tar.pm not found in inspected standard Perl directories. Retain source-package finding; do not call it patched.",
+      "untrustedInputPrerequisites": "Crafted tar read by Perl Archive::Tar; absence check is limited to standard paths.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "CVE-2026-95619": {
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "sourcePackage": "gcc-12",
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "bookworm": {
+        "status": "open",
+        "repositories": {
+          "bookworm": "12.2.0-14+deb12u1"
+        },
+        "urgency": "not yet assigned",
+        "nodsa": "Minor issue",
+        "nodsa_reason": "postponed"
+      },
+      "otherReleases": {
+        "forky": {
+          "status": "open"
+        },
+        "sid": {
+          "status": "open"
+        },
+        "trixie": {
+          "status": "open"
+        }
+      },
+      "applicationUseAssessment": "Native runtimes use allocation libraries and parse untrusted input. HTTP bounds help limit sizes, but exact native reachability is unknown.",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "exploitationEstablished": false,
+      "nativeReachabilityExhaustivelyProven": false,
+      "decision": "retained unresolved; no fixed compatible Bookworm package in current tracker; broader release change requires owner approval",
+      "mitigationIsNotPatch": true
+    },
+    "GHSA-2qm8-x737-gmw5": {
+      "mechanism": "constructed BIT STRING quadratic decode",
+      "source": "https://github.com/pyasn1/pyasn1/releases/tag/v0.6.5",
+      "applicationUseAssessment": "Indirect google-auth/rsa/pyasn1_modules ASN.1 dependency. No direct ASN.1 input endpoint; authentication/certificate material may reach decoders in future authorized flows. Do not assume safe because transport is gated.",
+      "untrustedInputPrerequisites": "Attacker-controlled encoded ASN.1 reaching the indicated decoder",
+      "exploitationEstablished": false,
+      "patchedVersion": "0.6.5",
+      "decision": "deployment-only official upstream patch; pip check, imports and constructed-string regression verified; no historical requirements/scoring relabel"
+    },
+    "GHSA-9m75-vc3g-4x39": {
+      "mechanism": "constructed string/ANY quadratic decode",
+      "source": "https://github.com/pyasn1/pyasn1/releases/tag/v0.6.5",
+      "applicationUseAssessment": "Indirect google-auth/rsa/pyasn1_modules ASN.1 dependency. No direct ASN.1 input endpoint; authentication/certificate material may reach decoders in future authorized flows. Do not assume safe because transport is gated.",
+      "untrustedInputPrerequisites": "Attacker-controlled encoded ASN.1 reaching the indicated decoder",
+      "exploitationEstablished": false,
+      "patchedVersion": "0.6.5",
+      "decision": "deployment-only official upstream patch; pip check, imports and constructed-string regression verified; no historical requirements/scoring relabel"
+    },
+    "GHSA-fm9c-5rcf-2q5p": {
+      "mechanism": "schemaless container tracking quadratic decode",
+      "source": "https://github.com/pyasn1/pyasn1/releases/tag/v0.6.5",
+      "applicationUseAssessment": "Indirect google-auth/rsa/pyasn1_modules ASN.1 dependency. No direct ASN.1 input endpoint; authentication/certificate material may reach decoders in future authorized flows. Do not assume safe because transport is gated.",
+      "untrustedInputPrerequisites": "Attacker-controlled encoded ASN.1 reaching the indicated decoder",
+      "exploitationEstablished": false,
+      "patchedVersion": "0.6.5",
+      "decision": "deployment-only official upstream patch; pip check, imports and constructed-string regression verified; no historical requirements/scoring relabel"
+    },
+    "GHSA-mm57-4v3p-rchx": {
+      "mechanism": "binary REAL mantissa quadratic decode",
+      "source": "https://github.com/pyasn1/pyasn1/releases/tag/v0.6.5",
+      "applicationUseAssessment": "Indirect google-auth/rsa/pyasn1_modules ASN.1 dependency. No direct ASN.1 input endpoint; authentication/certificate material may reach decoders in future authorized flows. Do not assume safe because transport is gated.",
+      "untrustedInputPrerequisites": "Attacker-controlled encoded ASN.1 reaching the indicated decoder",
+      "exploitationEstablished": false,
+      "patchedVersion": "0.6.5",
+      "decision": "deployment-only official upstream patch; pip check, imports and constructed-string regression verified; no historical requirements/scoring relabel"
+    }
+  },
+  "findings": [
+    {
+      "image": "backend",
+      "package": "libtasn1-6",
+      "installedVersion": "4.19.0-2+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "libtasn1-6",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-13151",
+      "patchedRuntimeVersion": "4.19.0-2+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "perl",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-82560",
+      "patchedRuntimeVersion": "5.36.0-7+deb12u4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5450",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5450",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "gzip",
+      "installedVersion": "1.12-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gzip",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-41992",
+      "patchedRuntimeVersion": "1.12-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "zlib",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-76844",
+      "patchedRuntimeVersion": "1:1.2.13.dfsg-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "pyasn1",
+      "installedVersion": "0.6.4",
+      "ecosystem": "python",
+      "advisory": "GHSA-9m75-vc3g-4x39",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": null,
+      "scannerFix": {
+        "versions": [
+          "0.6.5"
+        ],
+        "state": "fixed",
+        "available": [
+          {
+            "version": "0.6.5",
+            "date": "2026-10-31",
+            "kind": "first-observed"
+          }
+        ]
+      },
+      "advisoryAssessment": "GHSA-9m75-vc3g-4x39",
+      "patchedRuntimeVersion": "0.6.5",
+      "disposition": "patched in new deployment profile"
+    },
+    {
+      "image": "backend",
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "perl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-9538",
+      "patchedRuntimeVersion": "5.36.0-7+deb12u4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "zlib",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-85091",
+      "patchedRuntimeVersion": "1:1.2.13.dfsg-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libncursesw6",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libtinfo6",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "ncurses-base",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "ncurses-bin",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-7458",
+      "severity": "Critical",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "sqlite3",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-7458",
+      "patchedRuntimeVersion": "3.40.1-2+deb12u2",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "pyasn1",
+      "installedVersion": "0.6.4",
+      "ecosystem": "python",
+      "advisory": "GHSA-2qm8-x737-gmw5",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": null,
+      "scannerFix": {
+        "versions": [
+          "0.6.5"
+        ],
+        "state": "fixed",
+        "available": [
+          {
+            "version": "0.6.5",
+            "date": "2026-10-31",
+            "kind": "first-observed"
+          }
+        ]
+      },
+      "advisoryAssessment": "GHSA-2qm8-x737-gmw5",
+      "patchedRuntimeVersion": "0.6.5",
+      "disposition": "patched in new deployment profile"
+    },
+    {
+      "image": "backend",
+      "package": "pyasn1",
+      "installedVersion": "0.6.4",
+      "ecosystem": "python",
+      "advisory": "GHSA-fm9c-5rcf-2q5p",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": null,
+      "scannerFix": {
+        "versions": [
+          "0.6.5"
+        ],
+        "state": "fixed",
+        "available": [
+          {
+            "version": "0.6.5",
+            "date": "2026-10-31",
+            "kind": "first-observed"
+          }
+        ]
+      },
+      "advisoryAssessment": "GHSA-fm9c-5rcf-2q5p",
+      "patchedRuntimeVersion": "0.6.5",
+      "disposition": "patched in new deployment profile"
+    },
+    {
+      "image": "backend",
+      "package": "pyasn1",
+      "installedVersion": "0.6.4",
+      "ecosystem": "python",
+      "advisory": "GHSA-mm57-4v3p-rchx",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": null,
+      "scannerFix": {
+        "versions": [
+          "0.6.5"
+        ],
+        "state": "fixed",
+        "available": [
+          {
+            "version": "0.6.5",
+            "date": "2026-10-31",
+            "kind": "first-observed"
+          }
+        ]
+      },
+      "advisoryAssessment": "GHSA-mm57-4v3p-rchx",
+      "patchedRuntimeVersion": "0.6.5",
+      "disposition": "patched in new deployment profile"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-107778",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-107778",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-107778",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-107778",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5928",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5928",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-19499",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-19499",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "sqlite3",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119379",
+      "patchedRuntimeVersion": "3.40.1-2+deb12u2",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-84243",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-84243",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "sqlite3",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119374",
+      "patchedRuntimeVersion": "3.40.1-2+deb12u2",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5435",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5435",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-11824",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "sqlite3",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-11824",
+      "patchedRuntimeVersion": "3.40.1-2+deb12u2",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "sqlite3",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119373",
+      "patchedRuntimeVersion": "3.40.1-2+deb12u2",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "acl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-54369",
+      "patchedRuntimeVersion": "2.3.1-3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "acl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-54370",
+      "patchedRuntimeVersion": "2.3.1-3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112321",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112322",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112323",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119079",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112321",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112322",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112323",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119079",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112321",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112322",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112323",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119079",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112321",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112322",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112323",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-119079",
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libtasn1-6",
+      "installedVersion": "4.19.0-2+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "libtasn1-6",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-13151",
+      "patchedRuntimeVersion": "4.19.0-2+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "perl",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-82560",
+      "patchedRuntimeVersion": "5.36.0-7+deb12u4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5450",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5450",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "gzip",
+      "installedVersion": "1.12-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gzip",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-41992",
+      "patchedRuntimeVersion": "1.12-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "zlib",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-76844",
+      "patchedRuntimeVersion": "1:1.2.13.dfsg-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "perl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-9538",
+      "patchedRuntimeVersion": "5.36.0-7+deb12u4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "zlib",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-85091",
+      "patchedRuntimeVersion": "1:1.2.13.dfsg-1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libtinfo6",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "ncurses-base",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "ncurses-bin",
+      "installedVersion": "6.4-4",
+      "ecosystem": "deb",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "ncurses",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2025-69720",
+      "patchedRuntimeVersion": "6.4-4",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-95619",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5928",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5928",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "gcc-12",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-102010",
+      "patchedRuntimeVersion": "12.2.0-14+deb12u1",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-19499",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-19499",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-84243",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-84243",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5435",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "glibc",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-5435",
+      "patchedRuntimeVersion": "2.36-9+deb12u14",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-78410",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53615",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "1:2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "util-linux",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-53613",
+      "patchedRuntimeVersion": "2.38.1-5+deb12u3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "acl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-54369",
+      "patchedRuntimeVersion": "2.3.1-3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "frontend",
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "acl",
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "advisoryAssessment": "CVE-2026-54370",
+      "patchedRuntimeVersion": "2.3.1-3",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112314",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112314",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112314",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112314",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112320",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112320",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112320",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    },
+    {
+      "image": "backend",
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "ecosystem": "deb",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "runtimePresence": "present in baseline final runtime, not build-only",
+      "sourcePackage": "krb5",
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "advisoryAssessment": "CVE-2026-112320",
+      "freshDBAddition": true,
+      "patchedRuntimeVersion": "1.20.1-2+deb12u5",
+      "disposition": "retained unresolved; exposure assessment is not a patch"
+    }
+  ],
+  "duplicateRule": "same advisory in multiple binary packages/images is linked, never counted as distinct exploit proof",
+  "npmModerate": {
+    "advisory": "GHSA-g3hv-75wg-m249",
+    "matches": 7,
+    "runtimePresent": false,
+    "exposure": "Developer lint inputs/file globs; untrusted repository/tool input can cause denial of service, not current HTTP itinerary parsing.",
+    "upstreamPatch": "minimatch11.0.1",
+    "boundedTrial": "typescript-eslint8.72.2 still requires minimatch^10.2.2; original package/lock restored",
+    "ownerDecision": "Approve separately tested scoped minimatch major override or wait for upstream compatible dependency update; no audit fix --force."
+  }
+}

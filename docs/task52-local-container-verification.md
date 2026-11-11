@@ -1,5 +1,7 @@
 # Task 52 — actual local container verification
 
+Later checkpoint: [bounded security remediation](task52-container-security-remediation.md) patches pyasn1 in a separately identified deployment profile. Original findings and measurements below remain historical evidence, not current results for that new profile.
+
 Date: November 11, 2026. Repository baseline: clean `62f8e6efb26dcfec6c19d45e788c8d5faf0f3c31`. This follows the owner's explicit installation/Rosetta-license/VM approval. This is local packaging evidence, not cloud deployment, hosted AI qualification or production activation. Earlier [packaging evidence](task52-cloud-deployment-verification.json) remains unchanged as the pre-engine checkpoint.
 
 ## Installed environment and isolation

@@ -90,10 +90,17 @@ class PackagingTests(unittest.TestCase):
             with self.assertRaises(ValueError):prepare(ROOT,target)
 
     def test_linux_hash_lock_retains_original_versions_and_binary_dependency(self):
-        original=(ROOT/'backend/requirements.txt').read_text().splitlines()
+        historical=(ROOT/'backend/requirements.txt').read_bytes()
+        self.assertEqual(hashlib.sha256(historical).hexdigest(),'29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983')
+        original=historical.decode().splitlines()
         lock=(ROOT/'deployment/requirements-linux-amd64.lock').read_text().splitlines()[1:]
         pins={line.split(' --hash=')[0].casefold() for line in lock}
-        self.assertTrue({p.casefold() for p in original}<=pins)
+        # Only this reviewed deployment security patch may differ from historical evidence.
+        expected={p.casefold() for p in original}
+        self.assertIn('pyasn1==0.6.4',expected)
+        expected.remove('pyasn1==0.6.4');expected.add('pyasn1==0.6.5')
+        self.assertEqual(pins,expected|{'psycopg-binary==3.3.3'})
+        self.assertIn('pyasn1==0.6.5 --hash=sha256:4017b0fce125096b8573b39c989fdb1a4b19cf761e683398184550fea0e66587',lock)
         self.assertIn('psycopg-binary==3.3.3',pins)
         self.assertTrue(all(' --hash=sha256:' in line and len(line.rsplit(':',1)[1])==64 for line in lock))
 
