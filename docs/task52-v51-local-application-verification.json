@@ -1,0 +1,413 @@
+{
+  "identity": "52b-v51-local-application-fixture-v1",
+  "baselineCommit": "8116465e8f3bc9c5cc69afc6c13d3c2914d1dbf7",
+  "runtimeIdentity": "52b-runtime-phase-b2",
+  "sourceHashes": {
+    "scripts/task52_v51_application_fixture.py": "837d07025282ebcee1fb5582fc8eaff52a67d881cbf4560f98684dd985951f4a",
+    "scripts/task52_v51_application_cases.json": "ed85ec88e1cb95957edade7c93285f9f92d956f7ae5035ccd6ca2fa2f52dd88c",
+    "backend/test_v51_application_fixture.py": "3f81fbd0c98bf7604b4ad2aeab1edb3b3aa39da90c9b41054ef934a66b212d32",
+    "lib/v51-application.test.ts": "3d0a791db08559fddb70252622436ef796a2eb3b32549297fc61eb6aa73b392f"
+  },
+  "buildSHA256": "594cf9a1304758a276e98dac87fa0f4f1936e21e6e5983c676f9d8c7c6536dcd",
+  "productionSourcesChanged": false,
+  "productionV51Enabled": false,
+  "originalGeneralizedAdapterChanged": false,
+  "liveProviderTransportAvailable": false,
+  "realDatabaseWritesAvailable": false,
+  "referenceTime": "2026-11-05T15:00:00Z",
+  "fixtureEvidence": "server-owned authored extractions and invented public venues/matrix records; not model qualification",
+  "scenarios": [
+    {
+      "case": "extension-repeated",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "journey-04",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "extension-partial",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "journey-06",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "journey-21",
+      "outcome": "clarification before venue/routes"
+    },
+    {
+      "case": "sequence",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "list",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "optional-first",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "optional-middle",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "aur",
+      "outcome": "advanced options after explicit missing-context answers"
+    },
+    {
+      "case": "unsupported",
+      "outcome": "clarification before venue/routes"
+    },
+    {
+      "case": "ambiguous",
+      "outcome": "clarification before venue/routes"
+    },
+    {
+      "case": "ordinary-off",
+      "outcome": "legacy ordinary request preserved"
+    }
+  ],
+  "additionalAPIAssertions": [
+    "unreachable optional coffee omitted, groceries preserved",
+    "required unreachable route produces no options",
+    "unknown dwell keeps whole-trip bound unverified",
+    "explicit exact dwell verifies 180-minute inclusive bound",
+    "200-minute dwell overrun produces no options"
+  ],
+  "applicationTests": {
+    "frontendFull": {
+      "passed": 287,
+      "failed": 0
+    },
+    "finalApplicationBoundary": {
+      "passed": 2,
+      "failed": 0
+    },
+    "finalFixtureASGI": {
+      "passed": 7,
+      "failed": 0
+    },
+    "focusedBackend": {
+      "run": 238,
+      "passed": 222,
+      "skipped": 16,
+      "failed": 0
+    },
+    "orderingV1ThroughV51Q1AndPreservation": {
+      "passed": 83,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed"
+  },
+  "backendInventory": {
+    "standardDiscovery": 1466,
+    "distinctCompleted": 1432,
+    "passed": 1395,
+    "skipped": 37,
+    "failed": 0,
+    "errors": 0,
+    "incomplete": 34,
+    "incompleteTestIDs": [
+      "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+      "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+      "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+      "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+      "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+      "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+      "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+      "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+      "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+      "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+      "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+      "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+      "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+      "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+      "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review",
+      "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+    ],
+    "skippedTestIDs": [
+      "test_advanced_planning.HostedAdvancedTests.test_committed_restricted_write_fresh_process_reopen_and_cleanup",
+      "test_database_schema.HostedSchemaTests.test_actual_catalog_security_and_columns",
+      "test_database_schema.HostedSchemaTests.test_api_roles_are_denied",
+      "test_database_schema.HostedSchemaTests.test_constraints_match_current_request",
+      "test_database_schema.HostedSchemaTests.test_current_mock_candidate_references",
+      "test_database_schema.HostedSchemaTests.test_failed_migration_is_atomic",
+      "test_database_schema.HostedSchemaTests.test_foreign_keys_and_cascade",
+      "test_database_schema.HostedSchemaTests.test_ordering_uniqueness_and_many_options",
+      "test_database_schema.HostedSchemaTests.test_primary_keys_nulls_and_timestamps",
+      "test_database_schema.HostedSchemaTests.test_provider_identifiers_only",
+      "test_database_schema.HostedSchemaTests.test_repeated_migration_and_checksum_drift",
+      "test_database_schema.HostedSchemaTests.test_stop_times_and_ranking_bounds",
+      "test_database_security.HostedSecurityTests.test_actual_connection_interruption_then_fresh_reopen",
+      "test_database_security.HostedSecurityTests.test_concurrent_idempotent_writes_reads_and_restart",
+      "test_database_security.HostedSecurityTests.test_existing_nonexpired_documents_compatible_readonly",
+      "test_database_security.HostedSecurityTests.test_restricted_authenticated_tls_and_role_boundaries",
+      "test_database_security.HostedSecurityTests.test_runtime_write_failure_rolls_back_committed_state",
+      "test_database_security.HostedSecurityTests.test_two_capabilities_and_sql_injection_stay_isolated",
+      "test_dev_lifecycle.Lifecycle.test_01_five_backend_terminal_interrupt_cycles_and_reload",
+      "test_dev_lifecycle.Lifecycle.test_02_five_frontend_terminal_interrupt_cycles_and_proxy",
+      "test_dev_lifecycle.Lifecycle.test_03_healthy_duplicate_and_parent_loss",
+      "test_dev_lifecycle.Lifecycle.test_04_unrelated_listeners_never_terminated",
+      "test_dev_lifecycle.Lifecycle.test_05_owner_profile_and_repeated_signal_rapid_restart",
+      "test_dev_lifecycle.Lifecycle.test_06_legacy_abrupt_supervisor_loss_reproduces_inherited_socket",
+      "test_dev_lifecycle.Lifecycle.test_07_authentication_stale_metadata_and_explicit_stop",
+      "test_dev_lifecycle.Lifecycle.test_08_hung_owned_worker_has_bounded_cleanup",
+      "test_editable_preferences.HostedEditablePreferencesTests.test_committed_overrides_original_provenance_restart_read_and_exact_cleanup",
+      "test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback",
+      "test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied",
+      "test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving",
+      "test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table",
+      "test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider",
+      "test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write",
+      "test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval",
+      "test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips",
+      "test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied",
+      "test_task50e_final_acceptance.HostedClosedVisitTests.test_selected_override_committed_fresh_process_and_exact_cleanup"
+    ],
+    "completePassClaimed": false
+  },
+  "previous123": {
+    "completed": 89,
+    "failed": 0,
+    "errors": 0,
+    "incomplete": 34,
+    "incompleteTestIDs": [
+      "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+      "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+      "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+      "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+      "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+      "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+      "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+      "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+      "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+      "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+      "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+      "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+      "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+      "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+      "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review",
+      "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+    ]
+  },
+  "partitionRuns": [
+    {
+      "name": "current",
+      "limitSeconds": 240,
+      "completed": 519,
+      "skipped": 27,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "current-ordered",
+      "limitSeconds": 240,
+      "completed": 507,
+      "skipped": 27,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "current-remaining",
+      "limitSeconds": 240,
+      "completed": 657,
+      "skipped": 10,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "current-tail",
+      "limitSeconds": 120,
+      "completed": 139,
+      "skipped": 0,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-0",
+      "limitSeconds": 240,
+      "completed": 11,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-1",
+      "limitSeconds": 240,
+      "completed": 6,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-2",
+      "limitSeconds": 240,
+      "completed": 25,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round2-0",
+      "limitSeconds": 240,
+      "completed": 2,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round2-1",
+      "limitSeconds": 240,
+      "completed": 9,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round2-2",
+      "limitSeconds": 240,
+      "completed": 10,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round3-0",
+      "limitSeconds": 240,
+      "completed": 7,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round3-1",
+      "limitSeconds": 240,
+      "completed": 13,
+      "failed": 0,
+      "errors": 0
+    },
+    {
+      "name": "historical-round3-2",
+      "limitSeconds": 240,
+      "completed": 6,
+      "failed": 0,
+      "errors": 0
+    }
+  ],
+  "partitionMethod": "Standard unittest discovery, custom suite wrappers retained. Exact prior 123 IDs scheduled separately in three rounds of three bounded workers. Remaining discovery retried/prioritized in bounded partitions. No test implementation or skip altered. Counts deduplicated across passing focused/discovery runs. Incomplete methods timed out or were not reached within bounds, never counted as passing.",
+  "browser": {
+    "actualUI": true,
+    "desktopViewport": [
+      1280,
+      800
+    ],
+    "mobileViewport": [
+      390,
+      844
+    ],
+    "horizontalOverflowObserved": false,
+    "checked": [
+      "groceries optional coffee cards and View Plan",
+      "explicit starting-method/date/destination controls",
+      "choose second itinerary, save and reopen selected-only document",
+      "contradictory source clarification with no itinerary",
+      "mobile independent optional-middle order"
+    ],
+    "screenshots": [
+      "/tmp/whereto-v51-desktop.png",
+      "/tmp/whereto-v51-mobile.png"
+    ],
+    "allScenarioMatrixBrowserTested": false,
+    "realSQLVerifiedInThisWorkflow": false
+  },
+  "security": {
+    "configuredValueMatches": 0,
+    "genericCredentialPatternMatches": 0,
+    "fullDiffReviewed": true,
+    "providerAdmissionUnchanged": true,
+    "publicActivationSwitchAdded": false,
+    "clientExtractionAndGateFieldsRejected": true,
+    "forgedSaveBindingRejected": true,
+    "nonlocalOriginRejected": true,
+    "realTransportsBlockedBeforeIO": true
+  },
+  "journal": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "attempts": 10,
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "persistentHistoricalHalt": true,
+    "correctionsUnchanged": true,
+    "sourcePinsAndQ4ABuildVerified": true
+  },
+  "handbook": {
+    "reviewed": [
+      3,
+      6,
+      7,
+      9,
+      10,
+      12,
+      14,
+      15
+    ],
+    "updated": [
+      3,
+      7,
+      9,
+      12,
+      15
+    ],
+    "chaptersRetained": 20,
+    "otherChaptersPreserved": true
+  },
+  "limitations": [
+    "initial manual/pending interpretation overrides safely clarify",
+    "unknown hours/visit timing remain provisional",
+    "included optional attendance lacks an active-card badge; saved metadata remains optional",
+    "memory-only saves do not test durable SQL, RLS or expiry",
+    "independent semantic review and separate production approval remain outstanding",
+    "no real provider availability, production performance or model qualification established"
+  ]
+}

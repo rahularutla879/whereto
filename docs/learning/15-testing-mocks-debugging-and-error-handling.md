@@ -64,6 +64,14 @@ For this documentation-only delivery, link/organization/source checks are approp
 4. Compile, test, browser and live evidence are distinct.
 5. Investigate the first failed boundary rather than guessing a provider cause.
 
+## Local application-boundary V5.1 checks
+
+Run `backend/.venv/bin/python -m unittest backend.test_v51_application_fixture -v` for fixture isolation, API optional-stop omission, unreachable-route refusal and whole-trip timing. Run `node --import tsx --test lib/v51-application.test.ts` for the actual Next interpretation proxy, FastAPI advanced sessions, frontend card adaptation and selected save/reopen. The Node suite launches disposable loopback backends with minimal environments; each independent scenario owns its normal fresh process allowance. It never increases a running session's budget.
+
+The fixture blocks external HTTP, outbound sockets, real database connections and model factories. The browser smoke uses only synthetic public names and local requests. A provisional card with unknown visit duration is not a verified feasible whole-trip schedule. Cards retain the existing “Real venues” presentation for provider-shaped fixtures; all fixture venue names are explicitly Synthetic and have no verified live availability. Do not follow their Maps links.
+
+For debugging, compare source → supplied raw graph → validated handoff → session answers → option occurrence order → saved selected graph. Initial manual overrides safely clarify in this bounded adapter. Included optional stops lack an active-card optional badge in the current UI; the saved view preserves typed optional metadata. Do not fix that presentation by changing the extraction. [Scope, browser results and exact incomplete historical IDs](../task52-v51-local-application-integration.md).
+
 ## Check your understanding
 
 15.Q1. What is a fixture?

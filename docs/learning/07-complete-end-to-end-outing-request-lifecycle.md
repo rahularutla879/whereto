@@ -108,6 +108,12 @@ In real mode candidate generation, routing, hours and ranking follow the advance
 4. Repeated phrases need distinct occurrence identities.
 5. A source-based trace is not a live acceptance result.
 
+## Walking through the local V5.1 fixture
+
+Start only the explicit fixture and a separate local Next process using the commands in the [integration report](../task52-v51-local-application-integration.md). Enter an exact server-owned example such as “Buy groceries and maybe stop for coffee.” The existing form sends natural-language text; it never submits a trusted extraction or graph. A supplied fake response is checked against that source by `interpret_for_development`, then the existing interpretation endpoint creates its advanced session.
+
+Choose a starting method and answer missing date/destination in the existing controls, one requested follow-up at a time. Commit a date typed in words by leaving its input, then submit. Synthetic venues and matrix evidence pass through the real advanced resolution, routing and timing contracts. View Plan and selected save/reopen use the same UI and API routes as ordinary startup. Initial manual interpretation overrides and effective pending snapshots remain unsupported by this experimental adapter; they clarify instead of being ignored. Production retains its existing legacy path.
+
 ## Check your understanding
 
 07.Q1. Why can A fail in mock mode?

@@ -1,0 +1,610 @@
+{
+  "syntheticOnly": true,
+  "cases": [
+    {
+      "id": "extension-repeated",
+      "text": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+      "extraction": {
+        "activities": [
+          "Coffee",
+          "museum",
+          "coffee"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": "Jersey City",
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [
+          "tomorrow"
+        ],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "museum",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours."
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "source": "museum, then coffee"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": {
+            "kind": "origin",
+            "source": "return to the starting point"
+          },
+          "total_duration": {
+            "minutes": 180,
+            "relation": "maximum",
+            "source": "within three hours"
+          },
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "journey-04",
+      "text": "Go to SUNY College of Optometry and then get coffee.",
+      "extraction": {
+        "activities": [
+          "SUNY College of Optometry",
+          "coffee"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "SUNY College of Optometry",
+              "kind": "named_place",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "SUNY College of Optometry and then get coffee"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "extension-partial",
+      "text": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+      "extraction": {
+        "activities": [
+          "pharmacy",
+          "bank",
+          "coffee"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": "Jersey City",
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [
+          "tomorrow"
+        ],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "pharmacy",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "bank",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "pharmacy before the bank"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "journey-06",
+      "text": "Buy groceries and maybe stop for coffee.",
+      "extraction": {
+        "activities": [
+          "groceries",
+          "coffee"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "groceries",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "coffee",
+              "kind": "activity",
+              "requirement": "optional",
+              "evidence": "maybe stop for coffee",
+              "duration": null
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Buy groceries and maybe stop for coffee."
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "journey-21",
+      "text": "Visit the pharmacy before the bank, but the bank before the pharmacy.",
+      "extraction": {
+        "activities": [
+          "pharmacy",
+          "bank"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "pharmacy",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            },
+            {
+              "source": "bank",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": "",
+              "duration": null
+            }
+          ],
+          "order": [],
+          "ordering": "unspecified",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": "pharmacy before the bank, but the bank before the pharmacy"
+        }
+      }
+    },
+    {
+      "id": "sequence",
+      "text": "Tea, then museum, then dinner.",
+      "extraction": {
+        "activities": [
+          "Tea",
+          "museum",
+          "dinner"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Tea"
+            },
+            {
+              "source": "museum"
+            },
+            {
+              "source": "dinner"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Tea, then museum"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "source": "museum, then dinner"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "list",
+      "text": "Arcade, bowling, dinner, movie.",
+      "extraction": {
+        "activities": [
+          "Arcade",
+          "bowling",
+          "dinner",
+          "movie"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Arcade"
+            },
+            {
+              "source": "bowling"
+            },
+            {
+              "source": "dinner"
+            },
+            {
+              "source": "movie"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Arcade, bowling"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "source": "bowling, dinner"
+            },
+            {
+              "before": 2,
+              "after": 3,
+              "source": "dinner, movie"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "optional-first",
+      "text": "Maybe museum, then dinner.",
+      "extraction": {
+        "activities": [
+          "museum",
+          "dinner"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "museum",
+              "requirement": "optional",
+              "evidence": "Maybe museum"
+            },
+            {
+              "source": "dinner"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "museum, then dinner"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "optional-middle",
+      "text": "Museum, maybe bowling, dinner.",
+      "extraction": {
+        "activities": [
+          "Museum",
+          "bowling",
+          "dinner"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Museum"
+            },
+            {
+              "source": "bowling",
+              "requirement": "optional",
+              "evidence": "maybe bowling"
+            },
+            {
+              "source": "dinner"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Museum, maybe bowling"
+            },
+            {
+              "before": 1,
+              "after": 2,
+              "source": "bowling, dinner"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "aur",
+      "text": "Tea aur dinner in Hyderabad.",
+      "extraction": {
+        "activities": [
+          "Tea",
+          "dinner"
+        ],
+        "location": "Hyderabad",
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Tea"
+            },
+            {
+              "source": "dinner"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Tea aur dinner"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "unsupported",
+      "text": "Tea versus bowling.",
+      "extraction": {
+        "activities": [
+          "Tea",
+          "bowling"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Tea"
+            },
+            {
+              "source": "bowling"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Tea versus bowling"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ambiguous",
+      "text": "Tea, bowling, tea.",
+      "extraction": {
+        "activities": [
+          "Tea",
+          "bowling"
+        ],
+        "location": null,
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Tea"
+            },
+            {
+              "source": "bowling"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Tea, bowling"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "id": "ordinary-off",
+      "text": "Dinner and bowling in New York tomorrow.",
+      "extraction": {
+        "activities": [
+          "Dinner",
+          "bowling"
+        ],
+        "location": "New York",
+        "date": null,
+        "budget_per_person": null,
+        "preferences": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Dinner"
+            },
+            {
+              "source": "bowling"
+            }
+          ],
+          "ordering": "constrained",
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Dinner and bowling"
+            }
+          ]
+        },
+        "date_expressions": [
+          "tomorrow"
+        ]
+      }
+    }
+  ]
+}

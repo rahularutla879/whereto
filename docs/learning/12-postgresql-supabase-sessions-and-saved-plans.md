@@ -71,6 +71,12 @@ Reopening reads saved app-owned structure. Real routes are unavailable in reopen
 4. RLS checks hash-scoped access and expiry.
 5. Private links are bearer capabilities rather than accounts.
 
+## What the local V5.1 save fixture proves
+
+`MemoryDocuments` in `scripts/task52_v51_application_fixture.py` is a disposable store used only by an explicitly started test process. The existing save service validates the receipt, access-token binding, candidate IDs and selected itinerary before this store receives a document. Reopening validates the existing `SavedDocument` shape and returns that one selection, including occurrence indexes and optional-stop relationships. Current timing remains unverified.
+
+No PostgreSQL connection, persistent user document or migration is involved. This workflow proves selection, serialization and UI reopening; it does not reproduce SQL transactions, RLS or durable expiry. Existing persistence/security tests remain necessary. Stopping the fixture loses its test saves. Never treat a synthetic private link as a durable saved outing.
+
 ## Check your understanding
 
 12.Q1. What connects stops to itineraries?

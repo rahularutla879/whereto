@@ -92,3 +92,7 @@ Before an authorized documentation delivery, inspect status/diff/new files, then
 ## Commands deliberately excluded from exercises
 
 Do not run cloud model live/readiness/counting/account scripts, AI smoke/evaluation scripts, database setup/migration/hosted checks, billing/quota commands or real Maps calls to verify prose. Do not clear journals/halts, delete cost ledgers, print all environment variables, open private credential files, reset/clean the working tree, force-push or start Task 53. None is necessary to learn the implementation.
+
+## Disposable V5.1 application workflow
+
+The exact loopback-only launch commands, server-owned examples and shutdown boundaries are in [the local integration report](../task52-v51-local-application-integration.md#local-use). Run `node --import tsx --test lib/v51-application.test.ts` for the automated application-boundary checks. This never selects V5.1 in normal startup.

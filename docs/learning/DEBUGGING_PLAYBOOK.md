@@ -81,3 +81,7 @@ Use a focused offline test after understanding it. Do not unskip hosted or lifec
 [failures.evidence](../../backend/failures.py) logs a reference, stable code/operation and exception type. It deliberately omits exception messages, SQL, provider bodies, raw requests and tokens. [operations](../../backend/operations.py) has fixed structured events and bounded aggregates; protected [development diagnostics](../../app/dev/diagnostics/page.tsx) shows declared local snapshots only when enabled. The launcher inherits Terminal output rather than guaranteeing a persisted application log file.
 
 An older Network entry or terminal scrollback may no longer be available. Aggregates cannot reconstruct it. Say “original response unavailable; offline fixture reproduces X” rather than inventing a correlation ID, code or root cause. Do not add content logging or send a new paid request just to fill an evidentiary gap.
+
+## Local V5.1 fixture
+
+Use the [bounded fixture workflow](../task52-v51-local-application-integration.md). Unknown source requests cannot call a model. Initial manual/pending overrides clarify; answer supported missing context after source validation. If a broad scenario run exhausts the normal shared allowance, isolate independent scenarios in separate test processes rather than reset a live session or raise limits.

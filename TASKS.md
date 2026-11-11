@@ -1,3 +1,5 @@
+Task 52B local V5.1 application integration uses an explicit loopback-only synthetic fixture with unchanged frontend/backend/planner/save contracts. Production remains legacy; no paid work or Task 53. [Verification and limits](docs/task52-v51-local-application-integration.md).
+
 Task 52B recorded the owner diagnostic-only decision and rehearsed the original-schema append interface on synthetic state. Independent review and real writer/operator/security/readiness gates remain open. [Preparation checkpoint](docs/task52-real-integration-preparation-v1.md)
 
 Task52B [known-legacy-loss diagnostic policy proposal](docs/task52-diagnostic-progression-proposal-v1.md): a new exact synthetic purpose can permit the next distinct diagnostic slot after an explicit reviewed, allowlisted system-only loss; planning stays blocked, raw critical/unknown differences halt. Q4D strict behavior and historical journal unchanged. No real authorization/dispatch; Task52 remains in progress, no Task53.

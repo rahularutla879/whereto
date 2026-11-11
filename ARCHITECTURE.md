@@ -885,3 +885,7 @@ Readable duration presentation, named-venue closure recovery and explicit stop-s
 ## Task 50E bounded coverage and source fidelity
 
 Advanced initial planning can use one selective fill stage inside the original 27-element allowance. Server continuation flags drive found-so-far copy. Narrow source-reference equivalence preserves original Unicode text and supplied ordering. Public interpretation failures expose stable safe categories; protected diagnostics keep opaque references. Only the static body uses the one-level hydration escape hatch for external attributes.
+
+## Task 52B local V5.1 application fixture
+
+An explicit disposable Python fixture process temporarily installs the generalized source-first development interpreter at the existing FastAPI interpretation callback. Existing Next interfaces, session admission, advanced planning and selected save/reopen contracts are reused with synthetic evidence and an in-memory document store. No normal startup import, request switch, model transport, database connection or production activation was added. [Boundary and limitations](docs/task52-v51-local-application-integration.md).

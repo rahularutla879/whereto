@@ -56,3 +56,7 @@ No fresh model output, browser journey, real venue availability, Maps call, host
 - Mermaid rendering and a full accessibility/browser audit are not part of these source-based documentation checks.
 
 [Course contents](README.md) · [Debugging playbook](DEBUGGING_PLAYBOOK.md)
+
+## Task 52B local application fixture checkpoint
+
+Reviewed chapters 3, 6, 7, 9, 10, 12, 14 and 15 against the actual adapter, FastAPI callback, frontend proxies, advanced sessions, budgets and save service. Updated chapters 3/7/9/12/15 plus command/debug references for the explicit fixture and its limits. The other 15 chapters and 20-chapter structure are preserved. [Exact current verification](../task52-v51-local-application-verification.json) distinguishes real browser checks, API tests, synthetic persistence and incomplete historical simulations.

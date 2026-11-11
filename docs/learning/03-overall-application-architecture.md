@@ -59,6 +59,12 @@ A final habit: read historical architecture entries as history. The root archite
 4. Pure evaluators can run without providers.
 5. Current local state cannot safely become a fleet by copying processes.
 
+## Disposable local V5.1 application integration
+
+`scripts/task52_v51_application_fixture.py` is an explicit test process. Normal Next/FastAPI startup does not import it. It temporarily supplies the existing generalized development interpreter at `backend.main.interpret_request`; the existing handler still owns admission, advanced-session creation and response DTOs. The frontend and planner are unchanged. This is a fixture boundary, not a production feature flag or a new HTTP interpretation mode.
+
+Places/matrix evidence and saved storage are fictional. External transports, model creation and PostgreSQL connections are blocked. Loopback binding and request checks limit access to the local test workflow. [Exact flow and commands](../task52-v51-local-application-integration.md).
+
 ## Check your understanding
 
 03.Q1. Which layer renders cards?

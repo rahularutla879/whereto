@@ -62,6 +62,12 @@ Call `interpret_for_development(value, extraction=extraction, now=clock, preserv
 4. Legacy order behavior and V4/V5 policies differ.
 5. Unknown meaning must not become planning authority.
 
+## Source proof at the application test boundary
+
+The local application fixture supplies authored fake model extractions from `scripts/task52_v51_application_cases.json`. Exact-source lookup is only the fake provider: ordering approval still comes from the generalized source-first validator. A bad supplied graph, merged occurrence or contradictory source cannot gain a session merely by matching an example string. Supported output retains its original source-owned graph; no missing model edge is generated.
+
+`lib/v51-application.test.ts` follows that result through the actual Next proxies and FastAPI sessions. Unsafe examples must clarify before venue/routing operations. Existing typed answers can add a missing date, destination or visit duration after the original proof. These tests do not enable V5.1 for real users or make the historical evaluator compatible with changed source pins.
+
 ## Check your understanding
 
 09.Q1. What is provenance?
