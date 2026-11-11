@@ -1,0 +1,38 @@
+# REVIEW TEMPLATE ONLY. No deploy command or provisioning grant.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: __FRONTEND_SERVICE__
+  annotations:
+    run.googleapis.com/ingress: internal
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '0'
+        autoscaling.knative.dev/maxScale: '1'
+    spec:
+      serviceAccountName: __FRONTEND_SERVICE_ACCOUNT__
+      containerConcurrency: 1
+      timeoutSeconds: 120
+      containers:
+        - image: __FRONTEND_IMAGE_BY_DIGEST__
+          ports:
+            - containerPort: 8080
+          env:
+            - name: BACKEND_URL
+              value: https://__PRIVATE_BACKEND_HOST__
+          resources:
+            limits:
+              cpu: '1'
+              memory: 512Mi
+          startupProbe:
+            httpGet:
+              path: /
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 12
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080

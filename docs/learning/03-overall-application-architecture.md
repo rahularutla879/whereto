@@ -51,6 +51,10 @@ The ordinary path generates a fixed-order list of one to four activities. The ad
 
 A final habit: read historical architecture entries as history. The root architecture file's older “not implemented” extension heading is superseded by its later Task 50E implementation sections. This course follows the executable boundaries above.
 
+## Task 52 packaging boundary
+
+The application now has reviewed container recipes under `deployment/`, and `next.config.ts` emits a standalone Node server. This changes packaging, not planning. Backend assembly uses `deployment/backend-files.json`; scripts, local V5.1 fixtures and paid evaluation machinery are absent from the runtime payload. Existing hosted startup refusal remains authoritative. One frontend plus one backend service is still a proposal, not a deployed application. [Artifacts, shared-state blockers and verification](../task52-cloud-deployment-preparation.md).
+
 ## Five key takeaways
 
 1. Each layer has a different responsibility.

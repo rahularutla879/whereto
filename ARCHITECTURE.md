@@ -1,3 +1,7 @@
+# Task 52 container packaging boundary
+
+The only application configuration change is Next standalone output. `deployment/` holds non-root frontend/backend image recipes, hash-locked Linux dependencies, explicit backend payload assembly and strict launchers. Images exclude evaluation/local fixtures and secrets. Current hosted startup refusal and legacy/Qwen behavior remain unchanged. Cloud Run templates are private placeholders, not an activated architecture. [Actual shared-state, inference and IAM blockers](docs/task52-cloud-deployment-preparation.md).
+
 # Task 52B development-only V5.1 handoff
 
 A supplied extraction can enter the explicit Python-only ordering adapter. It proves source ownership and ordering, compares raw and legacy snapshots, and returns the existing advanced handoff type when compatible. Normal startup never imports this adapter. The advanced session, provider admission and persistence contracts remain the same. [Scope and verification](docs/task52-v51-ordering-preservation-generalization.md)

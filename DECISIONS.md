@@ -1,3 +1,7 @@
+# Task 52 packaging preserves hosted refusal
+
+Container packaging must not bypass `admission.validate_environment`. A single replica/concurrency one does not provide restart-durable budgets, sessions, replay or rollout fencing. Retain the reviewed Redis-ephemeral/SQL-durable role distinction until a separately reviewed equivalent is implemented. Build artifacts may exist while hosted activation remains refused. Native assembled-payload tests do not establish Linux container or cloud readiness; Docker verification is explicitly blocked in this environment. [Checkpoint](docs/task52-cloud-deployment-preparation.md).
+
 # Task 52B — keep local pending provenance separate from authority
 
 Use the existing pending DTO and source-first validator in the disposable fixture: verify issued snapshot/raw identity/expiry, re-prove raw source, then apply existing deterministic controls. Never normalize a client pending graph into raw evidence. Activity/order corrections require edited source. No public contract, production activation or durable authorization cache is introduced. [Bounded implementation](docs/task52-v51-manual-pending.md).

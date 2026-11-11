@@ -596,3 +596,7 @@ Local lifecycle tools, offline benchmarks/replays, frozen cloud evaluation and Q
 Private `.env`/database profiles, local cost/evaluation journals, credentials, installed dependencies, generated `.next` files and virtual environments are deliberately excluded. The course does not need their contents. V5 files now have committed source links at b1efe96; offline implementation is explicitly distinguished from proposed semantics review and absent runtime integration.
 
 Newly reconciled V5 guides: [specification](../task52-ordering-policy-v5.md), [review checklist](../task52-ordering-v5-review-checklist.md) and [proposed full Q1 amendment](../task52-q1-rubric-v2-owner-list-PROPOSED.json).
+
+## Deployment packaging
+
+`deployment/Dockerfile.frontend` / `Dockerfile.backend`: locked-input non-root image recipes. `prepare_backend.py` and `backend-files.json`: explicit runtime payload. `backend_entry.py` / `frontend-entry.mjs`: strict container startup. `requirements-linux-amd64.lock`: Python wheel hashes. `*.cloudrun.yaml.tmpl`: placeholder-only private hosting review templates. `container-smoke.sh`: local image test, not deployment.

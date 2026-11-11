@@ -39,6 +39,10 @@ The output of the ordinary planner is `RankingResult`: public request, confirmed
 
 Python dependencies are pinned in [requirements.txt](../../backend/requirements.txt): for example FastAPI `0.150.0`, Pydantic `2.14.1` and psycopg `3.3.3`. These are repository declarations, not a new claim about upstream releases.
 
+## Container startup without changing FastAPI
+
+`deployment/backend_entry.py` validates `PORT`, rejects development flags and model/provider substitutions, calls the existing `admission.validate_environment`, then uses `os.execv` to start one Uvicorn worker on `0.0.0.0`. Access logs are disabled and graceful shutdown is bounded to five seconds. Production/hosted settings still refuse. A local test-mode launch is not permission to deploy; `K_SERVICE` still triggers refusal. Runtime files are copied by `deployment/prepare_backend.py`, not by copying the whole repository.
+
 ## Five key takeaways
 
 1. FastAPI handles HTTP; Pydantic validates data.

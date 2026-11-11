@@ -63,6 +63,10 @@ Reopening reads saved app-owned structure. Real routes are unavailable in reopen
 
 `PersistenceError` distinguishes not configured, wrong role, connection/authentication/access, transaction, stale receipt and unavailable link failures. The interface keeps current cards if saving fails and must never create a success link for a failed transaction. No hosted database operation was run for this course.
 
+## Container persistence is not shared session authority
+
+Container images contain neither `.env.persistence` nor administrator credentials. A future approved backend needs a restricted runtime login, verified TLS CA mount and secret injection; a missing configuration must refuse saving. Native assembled-payload tests verify that refusal. They also demonstrate that a receipt issued before a backend restart is rejected afterward. Existing saved SQL rows and process-local capability/session state have different lifetimes. The proposed durable operational SQL ledger and ephemeral Redis evidence are not implemented by adding a Dockerfile.
+
 ## Five key takeaways
 
 1. PostgreSQL stores durable relational data.

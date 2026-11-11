@@ -729,3 +729,5 @@ Malicious script execution in a page, which can threaten bearer capabilities; ra
 ## Issued pending snapshot (local experiment)
 
 An existing pending DTO whose exact typed content and raw-evidence identity are remembered by the disposable V5.1 fixture until its original deadline. It is checked before renewed source proof, never accepted as a credential or raw AI output. [Implementation](../../scripts/task52_v51_local_continuation.py).
+
+**Standalone output:** Next.js server bundle and traced runtime dependencies emitted by `output: "standalone"`; static files must also be packaged. **Image digest:** SHA256 identity of a container image/index; pinning it fixes a build input, not application qualification. **Build context:** Files Docker can read during a build; this repository uses a default-deny `.dockerignore`. **Workload identity:** Service-owned cloud authentication, distinct from copying a developer credential into a container; required hosted adapters remain unimplemented.

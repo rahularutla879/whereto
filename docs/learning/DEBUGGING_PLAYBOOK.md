@@ -89,3 +89,7 @@ Use the [bounded fixture workflow](../task52-v51-local-application-integration.m
 ## Edited V5.1 request or pending answer refuses
 
 The [manual/pending bridge](../task52-v51-manual-pending.md) now supports issued snapshots and bounded manual controls. Check whether the textarea changed: old pending state must be cleared. A matching snapshot still needs fresh source proof. Check its reference, raw identity and original monotonic expiry; restart intentionally loses provenance. Activity/order changes require new source, not a date/location answer. Initial non-default spending/party/cost and unsupported source contexts remain blocked.
+
+## Packaging startup refusal
+
+Exit 78 from a packaging launcher means configuration/deployment dependencies require review; values are deliberately not echoed. Keep the backend production refusal intact. Check the [environment contract](../../deployment/environment-contract.md) and hosted blockers rather than adding an override. A green `/health` proves process reachability only. Test unavailable dependencies with loopback fakes, never paid inference or owner data. Docker absent means container verification is blocked; native tests are separate evidence.

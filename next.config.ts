@@ -8,6 +8,7 @@ if (Object.keys(process.env).some(key => /^NEXT_PUBLIC_.*(?:SUPABASE|DATABASE|DB
 
 const nextConfig: NextConfig = {
   poweredByHeader: false,
+  output: "standalone",
 };
 
 export default nextConfig;

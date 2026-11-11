@@ -96,3 +96,7 @@ Do not run cloud model live/readiness/counting/account scripts, AI smoke/evaluat
 ## Disposable V5.1 application workflow
 
 The exact loopback-only launch commands, server-owned examples and shutdown boundaries are in [the local integration report](../task52-v51-local-application-integration.md#local-use). Run `node --import tsx --test lib/v51-application.test.ts` for the automated application-boundary checks. This never selects V5.1 in normal startup.
+
+## Deployment packaging checks (no deployment)
+
+From the repository root: `npm run build`, then `backend/.venv/bin/python -m unittest deployment.test_packaging -v` runs native isolated payload checks. `sh deployment/container-smoke.sh` separately requires a running local Docker engine and builds Linux amd64 images. It makes no cloud deployment or provider request; missing Docker is a blocker, not a pass. See [environment contract](../../deployment/environment-contract.md).

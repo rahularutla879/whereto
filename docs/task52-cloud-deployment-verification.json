@@ -1,0 +1,164 @@
+{
+  "identity": "52-cloud-packaging-preparation-v1",
+  "baseline": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+  "scope": "build preparation and native verification only; no cloud activation or authorization",
+  "artifactSHA256": {
+    ".dockerignore": "379e1b99fdf45a5964d82702e41a8be1f4bf82df9b97ff964febaf10126477b2",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "deployment/Dockerfile.backend": "ca69dbb941a4901e66f5af1a9d27ae84815c210119328b8b670febb2dd7eeff8",
+    "deployment/Dockerfile.frontend": "2d26d2c41db94825393083d8fe4b05ca20854edac2f8fb08ba25086ca5557d2e",
+    "deployment/README.md": "90b32fb114fe2316ca4158de18372ee87a55a844a06cb3ec1628ce64824da18e",
+    "deployment/backend-files.json": "c651175236e13ddbedfa857a1e299098e18b167c1ff64301aad8fa465d55c158",
+    "deployment/backend.cloudrun.yaml.tmpl": "e911e96c48f23504da1bbf0cd6898393ca0ab2f9af979760a3577561e6d1f49a",
+    "deployment/backend_entry.py": "1e17a0c7dd1433d510f77bb880b3ee6cf2dccc02f978c3dff077eef0b2210045",
+    "deployment/base-images.json": "696994dd7d1df4c8a9560ce21b86af8ce0c1cae7a457a83893dfd8b3a3577a94",
+    "deployment/container-smoke.sh": "566e80f10c65fd2ad9ec6cc9bd2c2ff3350b62e9753737b9d05efa408b53b1e7",
+    "deployment/environment-contract.md": "cbc0e490513137b7a3b27d3a2cce221e764479e81d846d451dff8b680e1e7d9e",
+    "deployment/frontend-entry.mjs": "8cfb878e2f76207e247ebf3c96150f9ef0e5818e3f78f5fb7c704e36deed9201",
+    "deployment/frontend.cloudrun.yaml.tmpl": "32777e046f6e93a4c204304eff28b588e453a2f9b93c542e59764e85812c1cec",
+    "deployment/prepare_backend.py": "f2070d0a071e1dc64fc7fb18f706e0a0ffc5540e61b2a890e2dd1602a29b00e0",
+    "deployment/requirements-linux-amd64.lock": "4678dff9efa61a5e456a670ceba067d046a8fa3b5a7e47c219a44f437ed5b342",
+    "deployment/test_packaging.py": "8046d5b6674b1a23b494bd516e9c408e61e13ea4565b3ef104e879cb76e93943",
+    "next.config.ts": "8b25f1597640e547d20ad3b14a8dafd042f10c61b0a8f010a54cfef0468b8f63",
+    "package-lock.json": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404"
+  },
+  "tests": {
+    "packaging": {
+      "command": "backend/.venv/bin/python -m unittest deployment.test_packaging -v",
+      "run": 7,
+      "passed": 7,
+      "skipped": 0,
+      "failures": 0,
+      "errors": 0
+    },
+    "backendAdmissionPersistenceVersionsJournal": {
+      "modules": [
+        "test_planning_admission",
+        "test_provider_budget",
+        "test_saved_plans",
+        "test_database_security",
+        "test_location_lifecycle",
+        "test_task52_version_review",
+        "test_task52_real_integration",
+        "test_task52_prompt_freeze"
+      ],
+      "run": 97,
+      "passed": 82,
+      "skipped": 15,
+      "failures": 0,
+      "errors": 0
+    },
+    "backendInterpretationAdvanced": {
+      "modules": [
+        "test_interpretation",
+        "test_journey",
+        "test_advanced_planning",
+        "test_advanced_routing",
+        "test_advanced_timing",
+        "test_stop_resolution"
+      ],
+      "run": 197,
+      "passed": 196,
+      "skipped": 1,
+      "failures": 0,
+      "errors": 0
+    },
+    "fullBackendDiscovery": "not run; focused existing regressions only, no complete-backend claim",
+    "frontend": {
+      "command": "npm test",
+      "run": 289,
+      "passed": 289,
+      "failed": 0,
+      "skipped": 0
+    },
+    "typecheck": "npm run typecheck: passed",
+    "lint": "npm run lint: passed",
+    "productionBuild": "npm run build: passed, standalone output verified",
+    "linuxWheels": "25 packages downloaded for CPython 3.12 Linux amd64; offline --require-hashes resolution passed",
+    "shellSyntax": "sh -n deployment/container-smoke.sh: passed",
+    "dockerSmoke": {
+      "result": "BLOCKED",
+      "exitCode": 78,
+      "reason": "No installed/running Docker engine; no actual images built or run"
+    },
+    "browser": "not run; no UI changes; actual native HTTP frontend/backend smoke executed"
+  },
+  "nativeSmoke": {
+    "startupAndHealth": "real Uvicorn and standalone Node processes on temporary loopback ports",
+    "internalProxy": "200 while backend healthy; 503 after synthetic backend stopped",
+    "aiUnavailable": "one loopback fake HTTP503 invocation; safe503 response, no real inference",
+    "ordinaryPlan": "synthetic mock planning 200 and options returned",
+    "save": "missing SQL configuration503; old receipt after restart409",
+    "databaseFaults": "existing mocked connect/query/uncertain-commit tests pass without retry",
+    "diagnostics": "backend and frontend diagnostic endpoints denied; frontend diagnostic page404",
+    "privacy": "source and error canaries absent from backend logs/responses",
+    "shutdown": "SIGTERM cleanup completed within native test deadline",
+    "state": "restart loses receipts; independently created LocalAdmission stores each admit work: explicit cloud blocker"
+  },
+  "security": {
+    "configuredSecretScan": "2 configured sensitive values; zero current/history matches (final repeat after documentation)",
+    "publicNpmAudit": {
+      "moderate": 7,
+      "high": 0,
+      "critical": 0,
+      "chain": "dev-only typescript-eslint/minimatch; package-lock dev flags confirmed",
+      "advisory": "GHSA-g3hv-75wg-m249",
+      "dependenciesChanged": false
+    },
+    "pythonAndBaseImageVulnerabilityScan": "not established; Docker/image scanning blocked",
+    "imageExclusions": "explicit backend assembly and native standalone checked; no scripts/local fixtures/private evidence; actual image exclusion scan awaits Docker",
+    "diffReview": "all changed and new files reviewed; whitespace and added local-link checks passed"
+  },
+  "journal": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "persistentHistoricalHalt": true,
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "sourcePinsAndQ4ABuildVerified": true
+  },
+  "journalBeforeAfterEqual": true,
+  "application": {
+    "legacyAndQwenUnchanged": true,
+    "V51Activated": false,
+    "hostedStartup": "existing unconditional refusal retained",
+    "schemaOrProviderLimitsChanged": false
+  },
+  "handbook": {
+    "chaptersReviewedAndUpdated": [
+      3,
+      5,
+      6,
+      12,
+      14,
+      15,
+      18
+    ],
+    "structure": 20,
+    "otherChapters": "unchanged",
+    "supportingReferences": [
+      "DEVELOPMENT_COMMANDS",
+      "PROJECT_FILE_MAP",
+      "GLOSSARY",
+      "DEBUGGING_PLAYBOOK",
+      "VERIFICATION"
+    ]
+  },
+  "activationReady": false,
+  "blockingGates": [
+    "local Docker build/run/image scan",
+    "shared private sessions/replay and durable financial fencing",
+    "qualified approved hosted inference adapter",
+    "workload identity/private backend IAM invocation and trusted origin policy",
+    "restricted SQL secrets/CA/fleet connections",
+    "current exact cost/region/privacy review and explicit provisioning permission"
+  ],
+  "prohibitedOperationsPerformed": false
+}

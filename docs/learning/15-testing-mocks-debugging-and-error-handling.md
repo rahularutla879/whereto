@@ -56,6 +56,10 @@ For the explicit V5.1 development path, run `backend/.venv/bin/python -m unittes
 
 For this documentation-only delivery, link/organization/source checks are appropriate. Running paid services or all opt-in tests would not validate prose and would exceed scope. See [VERIFICATION.md](VERIFICATION.md) for exactly what was checked now. See [DEBUGGING_PLAYBOOK.md](DEBUGGING_PLAYBOOK.md) for symptoms and bounded read-only investigation.
 
+## Native packaging smoke versus real containers
+
+`deployment/test_packaging.py` tests manifest assembly, safe launch refusal, real temporary Uvicorn/Node startup, proxy health, a loopback fake unavailable AI service, missing-SQL refusal, receipt loss after restart and clean shutdown. It requires standalone output from `npm run build`. These are native-process tests, not Docker verification. `sh deployment/container-smoke.sh` is the separate Linux image test; it exits 78 when a local Docker engine is missing rather than claiming success. The script publishes no ports, uses no external network at runtime and never deploys or pushes an image.
+
 ## Five key takeaways
 
 1. Tests establish behavior under specific conditions.

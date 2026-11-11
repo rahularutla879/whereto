@@ -52,6 +52,10 @@ Use the response `code` and `message` with the status. Do not turn every 503 int
 
 The reference lists every current public proxy and backend route, request fields and response families. Do not experiment with POSTs merely to learn API syntax: an apparently harmless generation, origin lookup, detail refresh or continuation can perform real provider work on the owner's configured profile. Start with source inspection and health GETs.
 
+## Packaged service networking
+
+`deployment/frontend-entry.mjs` requires an explicit server-only `BACKEND_URL`. HTTPS origins are accepted; plain HTTP is limited to loopback for isolated native/container smoke. It imports Next’s standalone `server.js` in the same process so termination reaches the server. The current proxy does not attach Cloud Run IAM identity tokens, so private hosted invocation remains a blocker. `/api/health` verifies backend reachability; backend `/health` does not certify AI or database readiness. No paid inference is used as a health probe.
+
 ## Five key takeaways
 
 1. An endpoint includes method, path and contract.

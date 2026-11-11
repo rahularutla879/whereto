@@ -62,6 +62,10 @@ A save receipt authorizes selecting server-generated membership. A planning admi
 
 Operational logs use a fixed vocabulary and correlation IDs. A **correlation ID** groups observations for one operation without recording its private body. [operations.py](../../backend/operations.py), [performance.py](../../backend/performance.py) and protected diagnostics provide bounded evidence. A log category “other” cannot reconstruct missing original provider JSON; report that limit honestly.
 
+## Packaging safeguards and remaining cloud risk
+
+Both Docker recipes specify non-root runtime users and digest-pinned bases; the backend has a Linux wheel hash lock. The default-deny `.dockerignore` keeps private evaluation records, Git and credentials out of the build context. Actual Linux image execution/scan remains unverified without a Docker engine. Max instances one is a capacity cap, not shared financial protection: independent processes can both admit work, and rollout/restart can lose local authority. The existing hosted refusal must remain until shared reservations, replay state and fencing are verified. No development flag is accepted by the packaging launchers.
+
 ## Five key takeaways
 
 1. Admission, provider quotas and financial accounting solve different problems.

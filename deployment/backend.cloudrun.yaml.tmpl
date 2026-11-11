@@ -1,0 +1,46 @@
+# REVIEW TEMPLATE ONLY. Existing hosted-environment guard MUST refuse this build.
+# Shared state, workload authentication and hosted AI are unimplemented.
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: __BACKEND_SERVICE__
+  annotations:
+    run.googleapis.com/ingress: internal
+spec:
+  template:
+    metadata:
+      annotations:
+        autoscaling.knative.dev/minScale: '0'
+        autoscaling.knative.dev/maxScale: '1'
+    spec:
+      serviceAccountName: __BACKEND_SERVICE_ACCOUNT__
+      containerConcurrency: 1
+      timeoutSeconds: 120
+      containers:
+        - image: __BACKEND_IMAGE_BY_DIGEST__
+          ports:
+            - containerPort: 8080
+          env:
+            - name: WHERETO_ENV
+              value: production
+            - name: VENUE_DATA_MODE
+              value: mock
+            - name: WHERETO_DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: __RESTRICTED_DB_PASSWORD_SECRET__
+                  key: __PINNED_SECRET_VERSION__
+          resources:
+            limits:
+              cpu: '1'
+              memory: 1Gi
+          startupProbe:
+            httpGet:
+              path: /health
+              port: 8080
+            periodSeconds: 10
+            failureThreshold: 12
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 8080

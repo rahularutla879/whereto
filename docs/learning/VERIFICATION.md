@@ -64,3 +64,7 @@ Reviewed chapters 3, 6, 7, 9, 10, 12, 14 and 15 against the actual adapter, Fast
 ## Task 52B manual/pending compatibility
 
 Reviewed chapters 3/7/9/12/13/15 and their source references; updated those chapters plus glossary/debugging guidance. Other 14 chapters and the 20-chapter structure are preserved. [Current source/build identities, test totals and historical simulation results](../task52-v51-manual-pending-verification.json). Earlier fixture-only refusal and verification counts describe their earlier checkpoints.
+
+## Task 52 packaging maintenance
+
+Reviewed/updated chapters 3, 5, 6, 12, 14, 15 and 18, plus file map, commands, glossary and debugging references for the actual packaging artifacts. Existing 20-chapter structure and all other chapter content retained. No API contract or exercise answer was changed. Native assembled-payload checks and unavailable Docker verification must remain clearly distinguished; see [checkpoint](../task52-cloud-deployment-preparation.md).
