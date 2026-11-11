@@ -1,0 +1,22 @@
+{
+  "identity": "52-encrypted-shared-evidence-local-v1",
+  "baselineCommit": "72b888cde43104914db043bfd213a259499bebb7",
+  "parentIdentity": "52-server-action-bridge-local-v4",
+  "productionActive": false,
+  "liveTransportAvailable": false,
+  "realDataAdmitted": false,
+  "realTrustEnrollment": false,
+  "redisImage": "redis:7.2-bookworm@sha256:5b816bb37d9707a70f10ef5002ecf8ee431750d397010fc4314c93dca887962f",
+  "schemasSHA256": "fd5d63540999f422a0ef7e6b9c182a0fe09f348730d15ad6fb75470eff751b49",
+  "sources": {
+    "experiments/shared_state/evidence.sql": "b1fe0d4a98acf078a6080283ce37dfc0dc2b9cfe7b143b8d85b533462b2ae7f2",
+    "experiments/shared_state/evidence_models.py": "562df7e447adac1147c254acd13a562649e2f2e4b2a014c07428f4eb8df05cb2",
+    "experiments/shared_state/evidence_recovery.py": "8bcab3101d79d24b3a373063142588add8a1cfba720dfda30b4e22f27896409d",
+    "experiments/shared_state/redis_evidence.py": "9125fdcbceaf1aeb63f19f85c9e0152e9a58c2f579457818717f410e69f3548b",
+    "experiments/shared_state/requirements-evidence.lock": "494a7d0e9b72fecae3605c37d475ea609de2cbe9efdedd9b706c39164fff6a33",
+    "experiments/shared_state/evidence-dependencies.json": "64ca582ceded547dc6c12710f222d9825ab40f27f001eb6a64b735dfba611d0a",
+    "experiments/shared_state/run_evidence.py": "637c07cf89535c32994e3a583ba7be9eceff42c6583bd51821f8339c2e17f374",
+    "experiments/shared_state/test_evidence.py": "4a0c3f428b3b74412fafeffdc4011be74c9af35dd429b77a5c292331c938cd5c",
+    "experiments/shared_state/action-build.json": "d4a89da59cebf615f0bd1cf697c958b88974dd15288b99afa384062ba5834c8c"
+  }
+}

@@ -1,3 +1,9 @@
+## Task 52: encrypted evidence and exact read attestations
+
+Keep private typed evidence in Redis and financial/replay/fencing authority in SQL. Use AES-GCM with independently injected keys and AAD-bound source/session/budget/epoch identity; never pickle live sessions. A hash alone cannot prove a current evidence read: issuer-only exact five-second single-use attestations precede each SQL reserve/dispatch. Old runtime entry points are revoked only in the additive disposable profile; frozen profiles remain unchanged. Cross-store torn writes refuse rather than repair/refund. Restore requires an externally supplied epoch; coordinated local restore tests do not prove autonomous detection of malicious rollback. [Implemented boundaries and residual risks](docs/task52-shared-evidence.md).
+
+Real provider-content retention and hosted enrollment remain blocked. A data projection may omit published save bearer credentials, but cannot alter raw AI constraints or confer planning authority. Existing native600/300/1800s lifetimes are preserved; new ordinary sessions cannot request contact lifetimes. No dollar policy, model or production startup change.
+
 ## Task 52 private-staging preflight — November 11, 2026
 
 Recommend conditional reuse of existing Supabase with isolated operational roles/schema; private Memorystore for expiring evidence only; Cloud Run frontend/backend plus separately authenticated privileged authority. Existing process-local trusted issuer is not sufficient malicious-worker isolation. No infrastructure or production adapter is implemented by this decision report. Exact account plan/backup/pooler and regional pricing gates remain open.

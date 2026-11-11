@@ -1,0 +1,81 @@
+{
+  "identity": "52-shared-evidence-field-policy-synthetic-v1",
+  "productionAdmission": false,
+  "realGoogleContentAdmission": false,
+  "classificationIsNotPerformedBySyntheticLabel": true,
+  "fields": [
+    {
+      "group": "Original request, manual controls, reference clock, raw strict extraction",
+      "owner": "validated server source",
+      "retentionSeconds": 600,
+      "localSynthetic": "encrypted only",
+      "futureReal": "private user-data review and source-owned issuer required; no credentials solicited"
+    },
+    {
+      "group": "Effective pending interpretation and answers",
+      "owner": "server-issued pending snapshot",
+      "retentionSeconds": 600,
+      "localSynthetic": "encrypted, separate provenance; never fresh raw",
+      "futureReal": "revalidate source and fixed clock; no source reconstruction from browser state"
+    },
+    {
+      "group": "Advanced graph/context/result, ordinary input, ranked options, selected SavedDocument",
+      "owner": "actual typed application DTOs",
+      "retentionSeconds": 600,
+      "localSynthetic": "encrypted data projection; strip save bearer credentials explicitly",
+      "futureReal": "provider field permissions and native continuation decomposition still required"
+    },
+    {
+      "group": "Starting-place/area query and confirmed origin",
+      "owner": "explicit user input / server validation",
+      "retentionSeconds": 600,
+      "localSynthetic": "typed query encrypted; no naked provider response dictionary",
+      "futureReal": "user location consent/privacy; provider coordinates have separate terms, no universal cache exception"
+    },
+    {
+      "group": "Place IDs and membership",
+      "owner": "selected itinerary / checked server membership",
+      "retentionSeconds": 1800,
+      "localSynthetic": "encrypted purpose-specific membership, bounded by SQL expiry",
+      "futureReal": "Place IDs have a caching exemption; ownership, expiry, fresh RLS/capability and consumed SQL claims still required"
+    },
+    {
+      "group": "Names, addresses, hours, contact details, attributions, photos, ratings and provider search results",
+      "owner": "Google provider",
+      "retentionSeconds": null,
+      "localSynthetic": "only authored fixtures within declared DTO; live data path absent",
+      "futureReal": "BLOCKED pending field/purpose/display/attribution/license review; TLS/AEAD/short TTL alone do not authorize retention"
+    },
+    {
+      "group": "RouteResult legs and freshness",
+      "owner": "synthetic route evidence",
+      "retentionSeconds": 300,
+      "localSynthetic": "encrypted; SQL-clock deadline <= original aware observed_at +300s; missing/stale/future observations reject; not freshened by publication",
+      "futureReal": "BLOCKED pending Routes caching/use terms and observation-clock review; cannot become a guaranteed arrival"
+    },
+    {
+      "group": "Saved-plan read accessToken, published saveReceipt/saveAccessToken, provider credentials, passwords, encryption keys",
+      "owner": "secret/capability manager",
+      "retentionSeconds": 0,
+      "localSynthetic": "not admitted to record codec; no_credentials rejects non-null secret fields",
+      "futureReal": "separate key manager or capability hash; never a Redis evidence payload"
+    },
+    {
+      "group": "Session HMAC identity, action/source/interpretation hashes, revision, budget root/outing, fence, operation/capability hashes, ciphertext commitment, epoch",
+      "owner": "protected SQL",
+      "retentionSeconds": null,
+      "localSynthetic": "SQL pseudonymous authority metadata; no original text, coordinates or raw response copied into SQL",
+      "futureReal": "durable retention/reconciliation/access audit; never subject to Redis eviction or TTL"
+    }
+  ],
+  "sources": [
+    "https://developers.google.com/maps/documentation/places/web-service/policies",
+    "https://cloud.google.com/maps-platform/terms/maps-service-terms"
+  ],
+  "limitations": [
+    "This inventory is not legal approval or a content classifier.",
+    "No real Google payload can enter through this network-isolated synthetic adapter.",
+    "Logical TTL is not certified physical deletion; hosted snapshots, maintenance retention and DPA need review.",
+    "Saved viewing and refresh do not recreate omitted original interpretation evidence."
+  ]
+}

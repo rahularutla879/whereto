@@ -117,3 +117,10 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 A published provider price is not a spending grant. Current local SQL prices synthetic Maps requests; hosted LLM input/output token pricing and an application-wide gross-dollar grant remain unimplemented. The fake inference admission lease limits capacity but does not reserve LLM dollars. Future roots must survive worker restart and cannot be reset by a browser or midnight. Proposed staging dollar/timezone limits are owner decisions, not active controls. A separate authority service is proposed because an issuer factory in the same Python process does not isolate a malicious worker.
 
 See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.
+
+
+## Authenticated evidence and conservative failure
+
+AES-GCM encrypts private evidence and authenticates its source/session/epoch metadata. The key ring is injected separately and never stored in Redis or SQL. Changing the active key requires an explicit CAS rewrite with the original deadline; removing an old read key refuses old ciphertext. Redis has no financial authority. If Redis publication succeeds but SQL commitment fails, the mismatched record blocks use. Unknown sends keep their existing SQL charge. Synthetic issuer callbacks are not real workload authentication or a sandbox against malicious Python code.
+
+See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.

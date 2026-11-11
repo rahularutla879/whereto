@@ -117,3 +117,10 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 The next adapter is planned, not integrated: encrypted expiring session evidence in private Redis, with the existing application expiry and revision rules. Do not serialize process locks or treat an old browser card as fresh evidence. Redis loss must expire/refuse continuation; it must not reconstruct a request or retry a paid call. Durable SQL retains charges and replay consumption. A short TTL and encryption also do not by themselves grant permission to cache Google content; each field needs an allowed purpose and retention rule.
 
 See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.
+
+
+## What actually survives a local worker restart
+
+`evidence_models.pack` serializes only an explicit set of typed DTOs into bounded JSON. `RedisEvidence` encrypts them; reads never renew expiry. `CheckpointIssuer.capture` creates a separate source checkpoint, so finishing/revoking the original action does not delete that checkpoint. `restore_interpretation` rebuilds the existing validator using recorded raw evidence or separately tagged effective pending state, without another model request. It does not restore old admission authority. Advanced live resolvers, locks, arbitrary pagination contexts and receipt registries are still not automatically reconstructed. Lost evidence refuses rather than buying fresh provider data.
+
+See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.

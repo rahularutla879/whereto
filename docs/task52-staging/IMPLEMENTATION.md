@@ -2,6 +2,8 @@
 
 Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start incomplete. This is a dependency-ordered work plan, **not permission to execute the commands or purchases it describes**. No Task53. [Decisions/costs](../task52-private-staging-preflight.md) · [Owner actions](OWNER_APPROVALS.md).
 
+> Subsequent P2 checkpoint: the [inactive encrypted Redis/SQL evidence layer](../task52-shared-evidence.md) implements storage, typed source revalidation, exact read attestations and local failure tests. This does not complete hosted native resolver/history/receipt reconstruction, real key/epoch enrollment or Google-content retention approval. P3 financial/recovery authority remains the next bounded local checkpoint; original financial/resource proposals remain unapproved.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |

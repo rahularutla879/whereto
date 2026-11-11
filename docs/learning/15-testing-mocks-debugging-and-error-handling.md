@@ -122,3 +122,10 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-15).
 Run `backend/.venv/bin/python experiments/shared_state/run_local.py` from the repository root with the approved dedicated Colima profile. It creates/removes only its own synthetic PostgreSQL volume/containers, exposes no host port, copies reviewed runtime files and injects authored responses. `test_bridge.py` calls actual ordinary/advanced planning, pending answers, options, lookup, contact, refresh and selected receipt selection. Its crash test kills a worker after committed intent/dispatch. `test_action_identity.py` separately compares seven stored OpenAI legacy result hashes and 27 Qwen ordering results under the current build; it does not bypass an old evaluator. Old B2/Q1–Q4 checks intentionally refuse changed source identities: report those refusals, never silently repin them. These tests are not browser or hosted verification.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+
+## Disposable Redis and PostgreSQL evidence tests
+
+Run `PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_evidence` after downloading the isolated hash-pinned Linux test wheels. The harness uses the approved local Colima context, no host mounts/ports and loopback-only container networking. It exercises existing SQL/financial/bridge tests, new encryption/CAS/role tests, synthetic TLS certificates, Redis loss and an actual older synthetic SQL snapshot restore. Every created container/volume is removed. This does not test hosted Memorystore, real user data or Google accuracy. See the report for exact commands and failures; do not point the fixture at Supabase.
+
+See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.

@@ -1,0 +1,305 @@
+{
+  "identity": "52-shared-evidence-verification-v1",
+  "implementationIdentity": "52-encrypted-shared-evidence-local-v1",
+  "baselineCommit": "72b888cde43104914db043bfd213a259499bebb7",
+  "executionBuildSHA256": "19171e94dfe1c2d52a4d80a56035ee12519ad0b2d8201a759b4792b340913911",
+  "dateUTC": "2026-11-11",
+  "productionActive": false,
+  "liveTransportAvailable": false,
+  "ownerDatabaseWrites": 0,
+  "cloudResourcesProvisioned": 0,
+  "realProviderDispatches": 0,
+  "financialAuthorizationCreated": false,
+  "syntheticDatabaseWrites": true,
+  "finalEvidence": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -c \"from experiments.shared_state.run_evidence import main; main(('test_evidence',))\"",
+    "run": 31,
+    "passed": 31,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 114.408,
+    "fullRecoveryHarnessPassed": true
+  },
+  "existingPostgresRegression": {
+    "corePassed": 25,
+    "financialPassed": 31,
+    "providerBridgePassed": 25,
+    "totalPassed": 81,
+    "sourcesUnchanged": true,
+    "combinedInvocationRun": 111,
+    "combinedInvocationPassed": 111,
+    "seconds": 353.702,
+    "combinedProfileSHA256": "dc77c7521fc0fd79dc4249d44f95ce4ab286f3e796b864a7afdf8229883659f0",
+    "note": "Combined run includes30 evidence tests on the earlier profile; final31 evidence tests plus all recovery phases rechecked the sealed final profile. Do not sum repeated tests as unique passes."
+  },
+  "nativeBackend": [
+    {
+      "run": 83,
+      "passed": 68,
+      "skipped": 15,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 5.726,
+      "scope": [
+        "current build identity and all27 Qwen/seven OpenAI comparisons",
+        "planning admission",
+        "provider budget",
+        "saved ownership/privacy",
+        "database configuration/security"
+      ]
+    },
+    {
+      "run": 151,
+      "passed": 150,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 2.548,
+      "scope": [
+        "interpretation",
+        "ordinary planning",
+        "advanced planning",
+        "advanced routing",
+        "advanced timing"
+      ]
+    }
+  ],
+  "hostedSkipReason": "Existing opt-in hosted database tests not enabled; no owner-data writes authorized.",
+  "frontend": {
+    "passed": 289,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 116.860410875,
+    "command": "npm test",
+    "initialSandboxAttempt": "tsx IPC listen EPERM before test execution; same command passed with local IPC permission"
+  },
+  "typeScript": "npm run typecheck passed",
+  "eslint": "npm run lint passed",
+  "packaging": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 3.494,
+    "actualDockerImageRebuild": false
+  },
+  "runtime": {
+    "cryptography": "50.0.2",
+    "redisPy": "8.1.0",
+    "cffi": "2.1.1",
+    "psycopg": "3.3.3",
+    "redisServer": "7.2.17",
+    "networkInterfaces": [
+      "lo"
+    ]
+  },
+  "localResources": {
+    "engine": "existing dedicated colima-whereto-task52",
+    "cpu": 2,
+    "memoryGiB": 4,
+    "diskGiB": 40,
+    "hostMounts": false,
+    "sshForwarding": false,
+    "publishedPorts": false,
+    "networkInterfaces": [
+      "lo"
+    ],
+    "testClientArchitecture": "Linux amd64",
+    "containersAndVolumeRemovedByHarness": true,
+    "dedicatedVMReturnedToStoppedState": true
+  },
+  "security": {
+    "newTestDependencies": {
+      "source": "https://api.osv.dev/v1/querybatch",
+      "readOnlyPublicAdvisoryQuery": true,
+      "httpStatus": 200,
+      "verified": true,
+      "notComprehensiveSecurityCertification": true,
+      "packages": [
+        {
+          "package": "cffi",
+          "version": "2.1.1",
+          "advisoryIds": []
+        },
+        {
+          "package": "cryptography",
+          "version": "50.0.2",
+          "advisoryIds": []
+        },
+        {
+          "package": "pycparser",
+          "version": "3.12",
+          "advisoryIds": []
+        },
+        {
+          "package": "redis",
+          "version": "8.1.0",
+          "advisoryIds": []
+        }
+      ]
+    },
+    "configuredSecretScan": {
+      "sensitiveValues": 2,
+      "currentFilesAssets": 3524,
+      "historicalObjects": 3505,
+      "currentMatches": 0,
+      "historicalMatches": 0
+    },
+    "noCredentialFilesInRepository": true,
+    "restrictedRuntimeDMLAndIssuerCallsDenied": true,
+    "oldRuntimeFrontDoorsRevokedOnlyInNewProfile": true,
+    "parentBuildAndHistoricalPinsNotModified": true
+  },
+  "protectedHistoricalEvidence": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "failureTests": [
+    "concurrent Redis/SQL publication CAS",
+    "torn Redis-before-SQL commit refusal",
+    "ciphertext corruption/substitution",
+    "wrong key/key revocation and rotation",
+    "wrong environment/epoch",
+    "fixed original source deadline",
+    "SQL-clock route observation freshness",
+    "missing/expired/revoked/revised evidence",
+    "cross-process claim and stale fencing",
+    "duplicate capability and command grant",
+    "forged/altered/expired SQL read attestation",
+    "runtime direct DML/old routine/privilege escalation refusal",
+    "noeviction memory error",
+    "worker process termination",
+    "uncertain dispatch retains charges",
+    "actual older synthetic SQL dump restore with independent epoch rotation",
+    "actual Redis SIGKILL/restart and data loss",
+    "actual PostgreSQL SIGKILL/restart and durable charge/metadata",
+    "database and Redis outages without fallback"
+  ],
+  "developmentFailures": [
+    {
+      "attempt": "initial Docker harness",
+      "result": "sandbox daemon permission refusal before fixture execution"
+    },
+    {
+      "attempt": "run2",
+      "reportedTests": 82,
+      "errors": 1,
+      "reason": "81 frozen regressions passed; new module could not read temporary dependency directory as non-root; fixed directory traversal permissions"
+    },
+    {
+      "attempt": "run3",
+      "reportedTests": 107,
+      "errors": 9,
+      "reason": "new fixture missing advanced helper, duplicate fictional HTTP fingerprint, incomplete fake model, CONFIG response typing, missing fake payload digest, and a real CAS publication race; all addressed without changing frozen tests"
+    },
+    {
+      "attempt": "run4",
+      "reportedTests": 1,
+      "errors": 1,
+      "reason": "new uniqueness constraint accidentally applied to anchor table; corrected target table"
+    },
+    {
+      "attempt": "run5",
+      "reportedTests": 29,
+      "testsPassed": 29,
+      "recoveryHarness": "SQL crash removed inherited UNLOGGED action metadata; new digest-only profile changed to LOGGED; frozen schema untouched"
+    },
+    {
+      "attempt": "final-clock",
+      "reportedTests": 29,
+      "errors": 1,
+      "reason": "new route fixture used UI walking instead of actual RouteLeg walk; fixture corrected, contract unchanged"
+    }
+  ],
+  "notRun": [
+    "full backend discovery with frozen-source refusal modules",
+    "fresh production build",
+    "new production image builds or image vulnerability rescan",
+    "browser desktop/mobile E2E",
+    "hosted Redis/Supabase/cloud integration",
+    "managed failover/power-loss/disk-loss testing",
+    "real provider/model qualification"
+  ],
+  "notRunReason": "No production/runtime/frontend/deployment dependency files changed. New code is inactive, test dependencies isolated and excluded from deployment images. Existing historical identity refusals remain preserved, not counted as passes.",
+  "limitations": [
+    "Synthetic issuer/key/epoch callbacks share local OS trust; not protected hosted workload enrollment.",
+    "External epoch rotation is required for coordinated restore. Silent rollback with unchanged witness is not detected. No independent financial reconciliation implemented.",
+    "Native advanced resolvers/options history/receipt-service reconstruction and durable edit/revocation linkage remain later integration work.",
+    "Real Google content admission is blocked; synthetic tag is not a legal/content classifier.",
+    "Cross-store publication is fail-closed, not an atomic SQL/Redis transaction. Attestation certifies a checked snapshot for five seconds, not continuous availability.",
+    "Hosted all-provider/LLM spending limits and stable operator root lifecycle remain unimplemented/unapproved.",
+    "Current container security findings and hosted model qualification remain deployment blockers.",
+    "Key-ring removal stops new reads; immediate in-flight revocation must also revoke SQL session/issuer authority or update the anchor. Previously issued exact attestations expire within five seconds."
+  ],
+  "handbook": {
+    "reviewedAndUpdatedChapters": [
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "supportingFiles": [
+      "GLOSSARY.md",
+      "DEVELOPMENT_COMMANDS.md"
+    ],
+    "numberedChaptersPreserved": 20
+  },
+  "logSHA256": {
+    "whereto-evidence-run1.log": "2b054ad3bbcfc71fd17934e65e0b2df3ddda30c3d8ab93a5133edd072010b197",
+    "whereto-evidence-run2.log": "8aa5fb4e37e1bc66f35b5d91625c62f41e6bd779b894cef2feaaa45e2bb55997",
+    "whereto-evidence-run3.log": "0b5d9111d78255c7d29b51c7cbf33f2a0ae80d50110cf368610cddce587c9f31",
+    "whereto-evidence-run4.log": "3593ae3db71742d7d7bd26fbf890c43aa26e68fb92210c3c362fe3374a0232c4",
+    "whereto-evidence-run5.log": "0d228a8c5dc3622a3bf83894a840fc0374f2f0732e02a7230e57205b41b5d08f",
+    "whereto-evidence-final.log": "006c2f647111859b012a6bb6c34a3ac7525cdc29d541bd51cbb5052c1a6d6099",
+    "whereto-evidence-final-profile.log": "b1164a876255fac28f12ba6f71ce21f6e53dcf452077902e8f9d4cf59b16f55d",
+    "whereto-evidence-final-clock.log": "93f0b38575411f2c916eea18b8b9878e3b5b0336813b60fab44254c72341d714",
+    "whereto-evidence-final-verified.log": "9f5182d073094c65125245c953e29dafb52d1f499e8cdffc900fa23cc4db85af",
+    "whereto-evidence-backend.log": "06c740ca5426587c3bd7c9a1d87fcf80e72f6eedc194cb5aea6937ca7704cafe",
+    "whereto-evidence-application.log": "50415fccf1d7b37afd066375e41c888feddd20b8abcd2e66b41a9da5bd09642c",
+    "whereto-evidence-frontend.log": "61bb09341b9297c9d2bcf895b3cd183690e756a2a24cbbcc7257e43e99d1f8dd",
+    "whereto-evidence-frontend-approved.log": "d51c1b52cc9847ebac84b941dcc31982133dda1588956cde3706a408c9656220",
+    "whereto-evidence-types.log": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "whereto-evidence-lint.log": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "whereto-evidence-packaging.log": "8c0cf9b5cb67aa19c33bcee8c4d1691c3d888532f37155a971256ea656d398b4",
+    "whereto-evidence-integrity-before.log": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+    "whereto-evidence-integrity-after.log": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+    "whereto-evidence-secrets.log": "d29eae141e52560cfce2d4a12112539fb701e9db3293ab96de2232c299a39938",
+    "whereto-evidence-final-secrets.log": "1ee7adee2cd6705884575effa35b81402bf4dcea18a37285f6b85bbe73f25d95",
+    "whereto-evidence-final-integrity.log": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1"
+  },
+  "nextCheckpoint": "P3: protected global/application LLM financial authority and independent restore-epoch protocol using synthetic state; no live grant or automatic provisioning.",
+  "dependencyConsistency": "backend/.venv/bin/python -m pip check passed; four isolated test wheels resolved and imported in Linux amd64",
+  "documentationChecks": {
+    "stagedFiles": 25,
+    "localLinksChecked": 746,
+    "numberedHandbookChapters": 20,
+    "productionAndFrozenRuntimeDiffFiles": 0,
+    "allJSONAndBuildIdentitiesValid": true
+  }
+}

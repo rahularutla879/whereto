@@ -1,3 +1,9 @@
+## Inactive encrypted evidence layer
+
+`experiments/shared_state/redis_evidence.py` composes the existing bridge/financial SQL client with loopback-only Redis. `evidence.sql` adds protected anchors, epoch configuration and issuer-only read attestations; runtime has one constrained SQL front door. Ciphertext and SQL commitments are checked before each financial reserve/dispatch; SQL still atomically consumes capabilities and retains uncertainty. `evidence_models.py` contains typed codecs; `evidence_recovery.py` captures owned source checkpoints and reconstructs validation dependencies, not executable resolvers/locks or transferable admission. Neither module is imported by application startup or copied into production images.
+
+This is actual local synthetic integration, not the proposed hosted adapter. Production needs protected external key/epoch/workload enrollment, legal field retention, real PostgreSQL/Redis transport and native continuation reconstruction. A coordinated older-snapshot restore fails on epoch mismatch; silent rollback with an unchanged external witness remains a production blocker. [Architecture, field inventory and test limits](docs/task52-shared-evidence.md).
+
 ## Proposed private-staging target — inspected November 11, 2026; not deployed
 
 [Preflight](docs/task52-private-staging-preflight.md) recommends three separate authenticated Cloud Run identities: Next.js frontend with owner-only IAP, FastAPI backend, and privileged authority validating source-owned actions and exact provider payloads. Backend/authority internal ingress requires actual VPC routing and IAM, not merely same-project membership. Direct VPC/Private Google Access, private Redis and reviewed NAT for public database/LLM endpoints are proposed; templates do not yet implement them.

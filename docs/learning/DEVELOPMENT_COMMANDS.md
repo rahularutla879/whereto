@@ -125,3 +125,15 @@ The same explicit shared-state harness now runs the core security suite and the 
 ### Inactive provider-action bridge
 
 From the repository root, `backend/.venv/bin/python experiments/shared_state/run_local.py` runs core, financial and actual-application bridge tests with disposable isolated PostgreSQL and fake providers. The approved local Colima profile must be running; no hosted resources, live provider calls or evaluation approvals are created. `backend/.venv/bin/python -m unittest experiments.shared_state.test_action_identity -v` checks the new source identity and separately labelled recorded comparisons. Neither command enables production.
+
+
+## Inactive Redis evidence fixture
+
+From the repository root, after starting the already approved dedicated Colima profile:
+
+```sh
+backend/.venv/bin/python -m pip download --require-hashes --only-binary=:all: --platform manylinux2014_x86_64 --platform manylinux_2_28_x86_64 --python-version 312 --implementation cp --abi cp312 --abi abi3 --dest /tmp/whereto-evidence-wheels -r experiments/shared_state/requirements-evidence.lock
+PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_evidence
+```
+
+This downloads only pinned test wheels; it does not install them into the application. The harness verifies hashes, copies dependencies into a disposable non-root test client and removes its containers/volume afterward. It may pull the pinned official Redis/PostgreSQL images if absent. No cloud, live provider, owner database or real approval path exists. See [scope and exact verification](../task52-shared-evidence.md).

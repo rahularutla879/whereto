@@ -753,3 +753,12 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 
 
 **Purpose-specific authority:** permission for one narrowly defined operation, such as refreshing Details for an already-selected saved itinerary. It is not proof of original interpretation or permission for unrelated discovery. The inactive Task 52 bridge binds purpose, source/effective evidence, revision, admission and canonical payload before a SQL reservation.
+
+
+### Shared-evidence terms (inactive Task52 prototype)
+
+- **AEAD:** authenticated encryption with associated data. Private JSON is encrypted; the separate metadata is authenticated too.
+- **Ciphertext commitment:** a protected SQL hash of the exact encrypted record; changing Redis bytes breaks that binding.
+- **Compare-and-set (CAS):** replace a value only if the currently stored version matches the one read, so a competing writer cannot silently win twice.
+- **Read attestation:** an issuer-created, short-lived permission proving that a trusted verifier checked evidence for one exact SQL command. It is not planning permission.
+- **Restore epoch:** an independent generation identity that invalidates pre-restore authority. A local test file is only a synthetic witness, not a production trust service.

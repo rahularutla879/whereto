@@ -126,3 +126,10 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 The existing Supabase database was inspected read-only: PostgreSQL17.11,60 maximum connections and3 reserved slots. This is not proof of available pool capacity. The current four-slot Python semaphore is per process; two replicas and overlapping rollouts multiply connections. A future operational schema needs separate ownership and restricted routines without altering saved-plan RLS. Account plan, pooler limits and actual backups still need console verification. Restoring a backup may erase consumed capabilities and charges, so future recovery must invalidate the old authority epoch and reconcile independent exposure before paid work restarts.
 
 See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.
+
+
+## Encrypted evidence commitments
+
+The inactive local `evidence.sql` adds an issuer-owned ciphertext commitment and a five-second, exact-command read attestation. The restricted worker cannot update these tables or call the old protocol directly. A trusted verifier must decrypt the Redis record before requesting an attestation. PostgreSQL consumes it with the financial transition; a saved DTO or matching digest alone grants nothing. Details/refresh membership can retain its existing1800-second reference lifetime, while new provider actions still need fresh ownership/RLS/admission checks. An older SQL restore is blocked by an external epoch mismatch; independent hosted epoch ownership and financial reconciliation remain unimplemented.
+
+See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.

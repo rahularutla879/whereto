@@ -1,3 +1,7 @@
+## Task 52 — encrypted shared-evidence local boundary
+
+Implemented inactive Redis/SQL evidence integration: typed authenticated encryption, fixed expiry/CAS, restricted issuer commitments, exact single-use read attestations, source checkpoint revalidation and fail-closed recovery. [Evidence and remaining native/hosted gaps](docs/task52-shared-evidence.md). No production activation or cloud/provider/data operations. P2 storage/revalidation foundation is implemented; complete native resolver/history/receipt resumption is not declared complete. Next bounded P3 work is protected global/LLM financial authority and external restore-epoch ownership; existing cost proposals remain unapproved. Task52 stays in progress; Task53 and public launch remain unstarted.
+
 ## Task 52 — private-staging preflight completed; deployment acceptance remains open
 
 Read-only account/capacity/price/security review is complete with explicit unknowns and owner gates. No resource provisioned or paid permission created. [Evidence and decision matrix](docs/task52-private-staging-preflight.md) · [Executable dependency order](docs/task52-staging/IMPLEMENTATION.md) · [Owner actions](docs/task52-staging/OWNER_APPROVALS.md).

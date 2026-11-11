@@ -126,3 +126,10 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 The read-only preflight verified existing Google billing linkage/Maps quotas and Supabase catalog capacity, but not current Supabase subscription/backups or regional Redis pricing. The proposed target is three Cloud Run services: frontend, backend and separate authority. Owner-only frontend IAP, internal service IAM, VPC routing, private Redis, managed secrets and remote CI are not yet configured. Existing templates and containers are packaging evidence, not a functional hosted application: local Ollama, process-local state and startup guards remain. No model is independently qualified. Use the ordered checklist before provisioning, and keep resource approval separate from permission to launch.
 
 See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.
+
+
+## Redis foundation implemented, hosted adapter still absent
+
+The new inactive local evidence layer implements encryption, fixed TTLs, bounded pooling/CAS and SQL attestation integration. Its constructor accepts only isolated synthetic resources; it cannot be enabled for Memorystore with a flag. Local TLS/AUTH tests establish client verification behavior, not managed-network/failover readiness. A real deployment still requires private connectivity, authenticated issuer separation, cloud key/epoch ownership, financial recovery, current prices/approval and complete native session adapters. The Mac-off staging acceptance gate remains open.
+
+See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.
