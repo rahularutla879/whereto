@@ -1,5 +1,7 @@
 # Task 52 — cloud staging packaging checkpoint
 
+Later checkpoint: [actual local container verification](task52-local-container-verification.md) now resolves the engine/build uncertainty recorded below. Original packaging measurements and cost assumptions remain historical evidence; unresolved security and hosted-activation gates remain open.
+
 Baseline: clean `e7937e4ab1c2734a6576137dd4233fdaca8966c5`. This checkpoint prepares build artifacts and tests their assembled payloads. It does **not** deploy a working cloud application. Task 52 remains open; Task 53 is unstarted. No provider calls, purchases, provisioning, migrations or changes to the paid experiment are authorized.
 
 ## Implemented artifacts

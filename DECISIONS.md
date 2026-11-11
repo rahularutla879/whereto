@@ -1,6 +1,6 @@
 # Task 52 packaging preserves hosted refusal
 
-Container packaging must not bypass `admission.validate_environment`. A single replica/concurrency one does not provide restart-durable budgets, sessions, replay or rollout fencing. Retain the reviewed Redis-ephemeral/SQL-durable role distinction until a separately reviewed equivalent is implemented. Build artifacts may exist while hosted activation remains refused. Native assembled-payload tests do not establish Linux container or cloud readiness; Docker verification is explicitly blocked in this environment. [Checkpoint](docs/task52-cloud-deployment-preparation.md).
+Container packaging must not bypass `admission.validate_environment`. A single replica/concurrency one does not provide restart-durable budgets, sessions, replay or rollout fencing. Retain the reviewed Redis-ephemeral/SQL-durable role distinction until a separately reviewed equivalent is implemented. Build artifacts may exist while hosted activation remains refused. Native assembled-payload tests do not establish Linux container or cloud readiness; Docker verification was blocked at that initial packaging checkpoint; the [later approved local container run](docs/task52-local-container-verification.md) resolves that uncertainty while retaining hosted refusal and unresolved security findings. [Checkpoint](docs/task52-cloud-deployment-preparation.md).
 
 # Task 52B — keep local pending provenance separate from authority
 

@@ -1,3 +1,7 @@
+# Task 52 local container checkpoint
+
+Both frontend/backend Linux amd64 images now build and run locally under the approved Colima/Rosetta profile; strengthened smoke passed. Task 52 remains **in progress**: image security findings, hosted inference, shared financial/session/replay authority, private authentication and explicit provisioning approval remain blockers. No cloud deployment or Task 53. [Verification and next local security gate](docs/task52-local-container-verification.md).
+
 # Task 52 packaging checkpoint
 
 Task 52 remains **in progress**. Container recipes/native payload checks and private placeholder templates are prepared; actual container verification is blocked by no local engine. Functional hosting still requires shared authority/state, hosted inference, workload/private networking, security and explicit spending/provisioning approval. [Finite gates and cost assumptions](docs/task52-cloud-deployment-preparation.md). No Task 53 work.

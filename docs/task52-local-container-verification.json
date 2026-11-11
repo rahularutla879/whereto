@@ -1,0 +1,261 @@
+{
+  "identity": "52-local-container-verification-v1",
+  "date": "2026-11-11",
+  "baseline": "62f8e6efb26dcfec6c19d45e788c8d5faf0f3c31",
+  "scope": "actual local container builds/smoke/security evidence; no execution grant or hosted deployment",
+  "ownerApproval": "Chat conversation explicitly approved Colima/Docker/Buildx, Rosetta license and dedicated VM resources; no existing Buildx link overwritten",
+  "environment": {
+    "macOS": "27.0.1",
+    "hostArchitecture": "arm64",
+    "physicalRAMGiB": 16,
+    "availableDiskGiBAtStart": 238,
+    "swapGiBUsedBeforeInstallation": 7.95,
+    "hardwareVirtualization": true,
+    "colima": "0.10.3",
+    "docker": "29.9.3",
+    "buildx": "0.38.2",
+    "lima": "2.3.0",
+    "rosetta": "installed successfully with explicit license approval"
+  },
+  "vm": {
+    "profile": "whereto-task52",
+    "context": "colima-whereto-task52",
+    "cpus": 2,
+    "memoryGiB": 4,
+    "containerDataDiskGiB": 40,
+    "standardSeparateRootDiskGiB": 20,
+    "vmArchitecture": "aarch64",
+    "vmType": "vz",
+    "rosetta": true,
+    "hostMounts": null,
+    "sshAgentForwarding": false,
+    "sshConfigModification": false,
+    "autoActivate": false,
+    "defaultDockerContextPreserved": "default",
+    "resourceIncreases": false,
+    "finalState": "stopped after checks; local images retained"
+  },
+  "builds": {
+    "frontend": "passed Linux amd64; locked npm ci and production Next build",
+    "backend": "passed Linux amd64; exact reviewed CPython3.12 wheel hashes",
+    "target": "linux/amd64",
+    "reviewedBaseAndDependencyPinsChanged": false,
+    "imagePublication": false
+  },
+  "images": {
+    "backend": {
+      "tag": "whereto-backend:task52-1794375322-85082",
+      "imageIndexID": "sha256:0a63ab8f95072e4ce1c0f526fdaa27c2c47a502d4e177001fa65fe2aa63da717",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "app",
+      "exposedPorts": [
+        "8080/tcp"
+      ],
+      "sizeBytes": 62813153,
+      "layerFilesScanned": 7835,
+      "configuredSecretMatches": 0,
+      "forbiddenFiles": 0,
+      "archiveSHA256": "dd3945c67ea3381a3556ceed7e20e3f4b98372fcca8e619f4a922cd6c0a8c080",
+      "lintDevToolingPresent": false,
+      "runtimeConfigSHA256": "5523b2773e2de8e8e16858bed840ebc83c14099cbf033241814c2e64924c418d",
+      "packageManagerBytesInLowerLayers": [
+        "pip"
+      ],
+      "mergedRuntimeInstallersAbsent": true
+    },
+    "frontend": {
+      "tag": "whereto-frontend:task52-1794375322-85082",
+      "imageIndexID": "sha256:c9bd534fa07170d1568cc67b840220fe48a0568da250c0f79d2e6bcc8b5e6fd0",
+      "architecture": "amd64",
+      "os": "linux",
+      "user": "node",
+      "exposedPorts": [
+        "8080/tcp"
+      ],
+      "sizeBytes": 104702421,
+      "layerFilesScanned": 7961,
+      "configuredSecretMatches": 0,
+      "forbiddenFiles": 0,
+      "archiveSHA256": "44a8dd116625e84b957e5eb1d951cde93166f332933fb04ad0e05e027df0082b",
+      "lintDevToolingPresent": false,
+      "runtimeConfigSHA256": "1aeb79b3d5c2547b45574f8c183a03208d35676ab5795ebffdd5e236a9d795b6",
+      "packageManagerBytesInLowerLayers": [
+        "npm",
+        "yarn"
+      ],
+      "mergedRuntimeInstallersAbsent": true
+    }
+  },
+  "actualDockerHealthchecks": {
+    "backend": {
+      "health": "healthy",
+      "runtimeIdentity": "10001 Linux x86_64",
+      "privileged": false,
+      "readOnlyRoot": true,
+      "capabilitiesDropped": "ALL",
+      "hostBinds": false,
+      "publishedPorts": false,
+      "network": "none"
+    },
+    "frontend": {
+      "health": "healthy",
+      "runtimeIdentity": "1000 linux x64",
+      "privileged": false,
+      "readOnlyRoot": true,
+      "capabilitiesDropped": "ALL",
+      "hostBinds": false,
+      "publishedPorts": false,
+      "network": "none"
+    }
+  },
+  "containerSmoke": {
+    "result": "passed",
+    "command": "DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh",
+    "nonRoot": true,
+    "readOnlyRoot": true,
+    "privileged": false,
+    "capabilitiesDropped": "ALL",
+    "publishedHostPorts": false,
+    "runtimeExternalNetwork": false,
+    "backendProductionRefusal": 78,
+    "frontendMissingConfigurationRefusal": 78,
+    "httpHealthAndProxy": 200,
+    "unavailableAI": 503,
+    "missingSQLSave": 503,
+    "oldReceiptAfterRestart": 409,
+    "diagnostics": "denied frontend/backend, frontend page404",
+    "mockPlanning": "options produced; fictional venues/travel only",
+    "frontendSIGTERMExit": 143,
+    "backendSIGTERMExit": 0,
+    "backendShutdownCompleteLog": true,
+    "SIGKILLOrOOM": false,
+    "independentRepeat": "original smoke passed, strengthened/hardened smoke repeated successfully"
+  },
+  "additionalRefusals": {
+    "hostedTestMarker": "actual backend container refused exit78",
+    "publicSecret": "actual frontend container refused exit78 without echo; before runtime-only installer removal, launcher unchanged"
+  },
+  "focusedFixes": [
+    "stream fictional tmpfs receipt with docker exec; docker cp failed in this runtime",
+    "accept installed Next documented post-cleanup SIGTERM143; reject SIGKILL/OOM and require backend shutdown log",
+    "remove inherited final-stage npm/npx/yarn/corepack and system/venv pip; unchanged build stages/pins"
+  ],
+  "regressions": {
+    "packaging": {
+      "run": 7,
+      "passed": 7,
+      "skipped": 0,
+      "failed": 0
+    },
+    "backend": {
+      "modules": [
+        "test_planning_admission",
+        "test_provider_budget",
+        "test_database_security",
+        "test_saved_plans",
+        "test_advanced_planning",
+        "test_interpretation"
+      ],
+      "run": 88,
+      "passed": 72,
+      "skipped": 16,
+      "failed": 0
+    },
+    "fullBackendDiscovery": "not run; no full-suite claim",
+    "frontend": {
+      "run": 289,
+      "passed": 289,
+      "skipped": 0,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed inside Linux frontend build; unchanged cached build-stage reused during runtime hardening",
+    "shellSyntax": "passed",
+    "browser": "not run; actual HTTP container checks, no UI changes"
+  },
+  "security": {
+    "report": "docs/task52-local-container-security.json",
+    "reportSHA256": "1c3cc3852ef0c9c578ddc9370ee0b419f1e5b89d74f4a8401477ed4e35614d71",
+    "status": "unresolved retained findings; NOT a security clearance",
+    "npmAudit": {
+      "moderate": 7,
+      "high": 0,
+      "critical": 0,
+      "allAffectedPathsDevOnly": true,
+      "dependencyChanges": false
+    },
+    "configuredSecretScan": "zero configured-value matches in repository/generated assets/Git history and all saved image layers; unknown-secret absence not guaranteed",
+    "unnecessaryInstallers": "absent from merged final runtime; public bytes remain in immutable lower layers",
+    "scannerContainer": "non-root, capability-dropped; no host bind/socket/credentials; public DB retrieval only; 1GiB cap, no OOM"
+  },
+  "journal": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "persistentHistoricalHalt": true,
+    "sourcePinsAndQ4ABuildVerified": true
+  },
+  "journalBeforeAfterEqual": true,
+  "sourceSHA256": {
+    "deployment/Dockerfile.frontend": "b2ce1bfcc3c1ebf6f347c6933a86f3a3e141ce3719cd6c141e2dbeb2216b3c19",
+    "deployment/Dockerfile.backend": "ed80eec25ddcecdc7500b58c83b054998ff240fa08b672646cde198322ee4401",
+    "deployment/container-smoke.sh": "4e80003da30e27ae719f1649ed4736f4cf50191ee72eaf52b5df4f0d849caac0",
+    "deployment/frontend-entry.mjs": "8cfb878e2f76207e247ebf3c96150f9ef0e5818e3f78f5fb7c704e36deed9201",
+    "deployment/backend_entry.py": "1e17a0c7dd1433d510f77bb880b3ee6cf2dccc02f978c3dff077eef0b2210045",
+    "deployment/backend-files.json": "c651175236e13ddbedfa857a1e299098e18b167c1ff64301aad8fa465d55c158",
+    "deployment/base-images.json": "696994dd7d1df4c8a9560ce21b86af8ce0c1cae7a457a83893dfd8b3a3577a94",
+    "deployment/requirements-linux-amd64.lock": "4678dff9efa61a5e456a670ceba067d046a8fa3b5a7e47c219a44f437ed5b342",
+    ".dockerignore": "379e1b99fdf45a5964d82702e41a8be1f4bf82df9b97ff964febaf10126477b2",
+    "package-lock.json": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983"
+  },
+  "handbook": {
+    "reviewedChapters": [
+      3,
+      5,
+      6,
+      12,
+      14,
+      15,
+      18
+    ],
+    "updatedChapters": [
+      14,
+      15,
+      18
+    ],
+    "structure": 20,
+    "otherChaptersPreserved": true,
+    "references": [
+      "DEVELOPMENT_COMMANDS",
+      "DEBUGGING_PLAYBOOK",
+      "GLOSSARY",
+      "VERIFICATION"
+    ]
+  },
+  "hostedStagingReady": false,
+  "remainingGates": [
+    "retained base/application dependency vulnerability remediation and review",
+    "qualified approved hosted inference adapter",
+    "shared sessions/replay/financial authority and fencing",
+    "private workload identity and trusted-origin policy",
+    "restricted SQL secrets/CA/fleet connections",
+    "explicit resource/billing/provisioning approval"
+  ],
+  "productionBehaviorChanged": false,
+  "V51Activated": false,
+  "realProviderCalls": 0,
+  "realDatabaseOrJournalWrites": 0,
+  "cloudProvisioning": false,
+  "Task53Started": false
+}

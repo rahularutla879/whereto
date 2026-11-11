@@ -60,6 +60,10 @@ For this documentation-only delivery, link/organization/source checks are approp
 
 `deployment/test_packaging.py` tests manifest assembly, safe launch refusal, real temporary Uvicorn/Node startup, proxy health, a loopback fake unavailable AI service, missing-SQL refusal, receipt loss after restart and clean shutdown. It requires standalone output from `npm run build`. These are native-process tests, not Docker verification. `sh deployment/container-smoke.sh` is the separate Linux image test; it exits 78 when a local Docker engine is missing rather than claiming success. The script publishes no ports, uses no external network at runtime and never deploys or pushes an image.
 
+## Actual container smoke acceptance
+
+The approved named Colima context is selected per command: `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh`. Native tests remain separate. The container check now verifies mock planning, absent-SQL refusal, frontend/backend diagnostic protection, no published ports, non-privileged/read-only/capability-dropped execution, graceful stop and stale-receipt rejection after restart. Next deliberately exits 143 after its awaited SIGTERM cleanup; this is accepted alongside zero, while SIGKILL 137 and OOM are rejected. Backend shutdown-complete logging is required. Only a fictional receipt is streamed from tmpfs with `docker exec`; it is never printed or treated as real authority. [Actual results and limitations](../task52-local-container-verification.md).
+
 ## Five key takeaways
 
 1. Tests establish behavior under specific conditions.

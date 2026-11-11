@@ -93,3 +93,7 @@ The [manual/pending bridge](../task52-v51-manual-pending.md) now supports issued
 ## Packaging startup refusal
 
 Exit 78 from a packaging launcher means configuration/deployment dependencies require review; values are deliberately not echoed. Keep the backend production refusal intact. Check the [environment contract](../../deployment/environment-contract.md) and hosted blockers rather than adding an override. A green `/health` proves process reachability only. Test unavailable dependencies with loopback fakes, never paid inference or owner data. Docker absent means container verification is blocked; native tests are separate evidence.
+
+## Local Docker context, tmpfs and shutdown
+
+If Docker reports a missing default socket while Colima is running, select `DOCKER_CONTEXT=colima-whereto-task52` for the test command; the default context was deliberately preserved. If tmpfs receipt copying fails, the checked-in harness uses `docker exec` streams, not a host mount. Next SIGTERM exit 143 is intentional after cleanup in the installed framework; do not rewrite the launcher to force zero. SIGKILL 137, OOM or missing backend shutdown completion fails the test. A lost receipt after restart must remain rejected (409), not be reminted. Container success does not waive scanner findings or hosted startup refusal.

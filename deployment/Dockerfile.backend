@@ -16,6 +16,10 @@ RUN groupadd --gid 10001 app && useradd --uid 10001 --gid app --no-create-home -
 COPY --from=build /opt/venv /opt/venv
 COPY --from=build --chown=app:app /prepared ./
 COPY --chown=app:app deployment/backend_entry.py ./deployment/backend_entry.py
+# Neither the app nor startup installs packages at runtime.
+RUN /opt/venv/bin/python -m pip uninstall --yes pip \
+    && rm -rf /usr/local/lib/python3.12/site-packages/pip /usr/local/lib/python3.12/site-packages/pip-*.dist-info \
+    && rm -f /usr/local/bin/pip /usr/local/bin/pip3 /usr/local/bin/pip3.12
 USER app
 EXPOSE 8080
 HEALTHCHECK --interval=30s --timeout=3s CMD python -c "import os,urllib.request; urllib.request.urlopen('http://127.0.0.1:'+os.environ['PORT']+'/health',timeout=2)"

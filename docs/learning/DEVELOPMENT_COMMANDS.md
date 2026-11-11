@@ -100,3 +100,7 @@ The exact loopback-only launch commands, server-owned examples and shutdown boun
 ## Deployment packaging checks (no deployment)
 
 From the repository root: `npm run build`, then `backend/.venv/bin/python -m unittest deployment.test_packaging -v` runs native isolated payload checks. `sh deployment/container-smoke.sh` separately requires a running local Docker engine and builds Linux amd64 images. It makes no cloud deployment or provider request; missing Docker is a blocker, not a pass. See [environment contract](../../deployment/environment-contract.md).
+
+## Approved dedicated local container profile
+
+Use `colima start whereto-task52`, then `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh` from the repository root. Stop it with `colima stop whereto-task52` to release memory. The approved profile is 2 CPUs/4 GiB RAM/40 GiB container data, Rosetta enabled, no host mounts or SSH forwarding, and no global Docker context activation. Do not reinstall tools, change resources, grant privileges or enable providers as a troubleshooting shortcut. See [actual verification/security findings](../task52-local-container-verification.md).

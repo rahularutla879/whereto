@@ -68,3 +68,7 @@ Reviewed chapters 3/7/9/12/13/15 and their source references; updated those chap
 ## Task 52 packaging maintenance
 
 Reviewed/updated chapters 3, 5, 6, 12, 14, 15 and 18, plus file map, commands, glossary and debugging references for the actual packaging artifacts. Existing 20-chapter structure and all other chapter content retained. No API contract or exercise answer was changed. Native assembled-payload checks and unavailable Docker verification must remain clearly distinguished; see [checkpoint](../task52-cloud-deployment-preparation.md).
+
+## Task 52 actual local containers
+
+Updated chapters 14, 15 and 18 plus commands, glossary and debugging guidance for verified Colima/Rosetta builds, runtime tests and unresolved vulnerability findings. Reviewed packaging references in chapters 3/5/6/12; their unchanged application explanations remain valid. No other chapter was changed; the 20-chapter structure and existing exercises are preserved. Source paths and signal behavior were checked against the installed Next/Uvicorn code. [Verification](../task52-local-container-verification.json).

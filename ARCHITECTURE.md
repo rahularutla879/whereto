@@ -1,6 +1,6 @@
 # Task 52 container packaging boundary
 
-The only application configuration change is Next standalone output. `deployment/` holds non-root frontend/backend image recipes, hash-locked Linux dependencies, explicit backend payload assembly and strict launchers. Images exclude evaluation/local fixtures and secrets. Current hosted startup refusal and legacy/Qwen behavior remain unchanged. Cloud Run templates are private placeholders, not an activated architecture. [Actual shared-state, inference and IAM blockers](docs/task52-cloud-deployment-preparation.md).
+The only application configuration change is Next standalone output. `deployment/` holds non-root frontend/backend image recipes, hash-locked Linux dependencies, explicit backend payload assembly and strict launchers. Images exclude evaluation/local fixtures and secrets. Current hosted startup refusal and legacy/Qwen behavior remain unchanged. Cloud Run templates are private placeholders, not an activated architecture. [Actual local container verification](docs/task52-local-container-verification.md) now exercises these artifacts; no hosted state/identity architecture is enabled. [Actual shared-state, inference and IAM blockers](docs/task52-cloud-deployment-preparation.md).
 
 # Task 52B development-only V5.1 handoff
 
