@@ -1,3 +1,7 @@
+# Task 52B V5.1 development ordering preservation
+
+The exact groceries and optional coffee case preserves its source-proven conditional edge through an explicit Python-only development adapter. The four other reviewed cases retain their requirements or safely clarify. Synthetic advanced sessions and save/reopen checks exercise the existing planner and data contracts. Normal API startup and historical evaluation still use legacy normalization. The journal and all frozen review evidence are preserved. [Repair and verification](docs/task52-v51-ordering-preservation-dev.md)
+
 # Task 52B independent semantic review package
 
 The five V5.1 diagnostic cases are ready to share for independent semantic review. The packet pairs each original request with 24 proposed judgments and includes sanitized evidence for the journey-07/r1 provenance rejection and the historical extension-repeated/r1 accepted ordering error. Share both files together and ask the reviewer to return the completed form. All 120 judgments and both historical assessments still await independent review. [Review package](docs/task52-independent-review/PACKAGE.md) · [Blank review form](docs/task52-independent-review/REVIEW_FORM.md)
