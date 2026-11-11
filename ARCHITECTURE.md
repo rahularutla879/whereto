@@ -889,3 +889,7 @@ Advanced initial planning can use one selective fill stage inside the original 2
 ## Task 52B local V5.1 application fixture
 
 An explicit disposable Python fixture process temporarily installs the generalized source-first development interpreter at the existing FastAPI interpretation callback. Existing Next interfaces, session admission, advanced planning and selected save/reopen contracts are reused with synthetic evidence and an in-memory document store. No normal startup import, request switch, model transport, database connection or production activation was added. [Boundary and limitations](docs/task52-v51-local-application-integration.md).
+
+## Task 52B local manual/pending compatibility
+
+The explicit application fixture uses `LocalContinuation` as a provenance/overlay bridge around the unchanged generalized source proof. It reuses existing pending DTOs, deterministic controls, session admission and selected saving. A bounded monotonic cache binds issued pending content to raw source identity; it is not a new authorization system or distributed state. No normal startup import or production activation exists. [Contract and limitations](docs/task52-v51-manual-pending.md).

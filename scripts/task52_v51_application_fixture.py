@@ -9,6 +9,8 @@ from copy import deepcopy
 from datetime import datetime, timedelta, timezone
 import json
 import os
+import re
+from time import monotonic
 from pathlib import Path
 from threading import Lock
 from unittest.mock import patch
@@ -63,19 +65,22 @@ def application_fixture(*, enabled=True):
     from backend.test_advanced_planning import IntegrationTests
     from backend.test_advanced_routing import record
     from backend.testing_clock import calendar_clock
-    from scripts.task52_ordering_preservation_dev import interpret_for_development
+    from scripts.task52_v51_local_continuation import LocalContinuation
 
     document = json.loads(CASES.read_text())
     assert document['syntheticOnly']
     cases = {c['text']: c['extraction'] for c in document['cases']}
     store = MemoryDocuments()
     counts = {'extractions': 0, 'externalSends': 0}
+    continuation = LocalContinuation()
     with ExitStack() as stack:
         stack.enter_context(patch.dict(os.environ, WHERETO_AI_WARMUP_DEV='0', WHERETO_START_LOOKUP_DEV='1'))
         fixture = IntegrationTests()
         fixture.setUp()
         stack.callback(fixture.doCleanups)
-        stack.enter_context(calendar_clock())
+        stack.enter_context(calendar_clock(REFERENCE))
+        calendar = stack.enter_context(patch('backend.advanced_planning.datetime', wraps=datetime))
+        calendar.now.side_effect = lambda tz=None: REFERENCE.astimezone(tz or timezone.utc)
         for city in ('New York', 'Jersey City', 'Hyderabad'):
             for kind in ('cafe','museum','restaurant','bowling_alley','video_arcade','movie_theater','supermarket','bank','pharmacy'):
                 for i in range(3):
@@ -106,19 +111,14 @@ def application_fixture(*, enabled=True):
                               and v['addressComponents'][0]['longText'] == city][:3]}
 
         def extract(value, **_kwargs):
-            counts['extractions'] += 1
+            if value.pending is None:
+                counts['extractions'] += 1
             raw = cases.get(value.text)
             if raw is None:
                 from backend.ai import AIError
                 raise AIError('No server-owned extraction for this synthetic request', code='llm_invalid_response')
             if enabled:
-                try:
-                    return interpret_for_development(value, extraction=deepcopy(raw), now=REFERENCE, preserve_order=True)
-                except ValueError:
-                    from backend.interpretation import InterpretationResult
-                    from backend.journey import REPHRASE
-                    return InterpretationResult(interpretation=Interpretation.model_validate(raw),
-                        request=None, notes=[], issues=[REPHRASE], executionStatus='clarification_required')
+                return continuation.interpret(value, raw, REFERENCE)
             class Supplied:
                 def interpret(self, _text):
                     return Interpretation.model_validate(deepcopy(raw))
@@ -137,6 +137,23 @@ def application_fixture(*, enabled=True):
         stack.enter_context(patch('backend.saved_plans.write_document', store.write))
         stack.enter_context(patch('backend.saved_plans.read_document', store.read))
         from backend import main
+        from backend.provider_budget import ProviderBudget
+        stack.enter_context(patch.object(main, 'provider_budget', ProviderBudget()))
+        registry = main.advanced_sessions
+        original_run = registry.run
+
+        def advanced_answer(value):
+            if value.date and not re.fullmatch(r'\d{4}-\d{2}-\d{2}', value.date):
+                with registry.lock:
+                    session = registry.items.get(value.token)
+                if (session is not None and session.expires > monotonic()
+                        and session.context.timezoneBasis != 'destination_calendar'):
+                    from backend.advanced_planning import AdvancedAnswerError
+                    raise AdvancedAnswerError('advanced_answer_invalid',
+                        'Choose an exact YYYY-MM-DD date until the search area calendar is confirmed. Your request is kept.')
+            return original_run(value)
+
+        stack.enter_context(patch.object(registry, 'run', side_effect=advanced_answer))
         stack.enter_context(patch.object(main, 'interpret_request', side_effect=extract))
         yield main.app, fixture, counts, store
 

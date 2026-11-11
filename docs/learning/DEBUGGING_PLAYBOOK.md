@@ -84,4 +84,8 @@ An older Network entry or terminal scrollback may no longer be available. Aggreg
 
 ## Local V5.1 fixture
 
-Use the [bounded fixture workflow](../task52-v51-local-application-integration.md). Unknown source requests cannot call a model. Initial manual/pending overrides clarify; answer supported missing context after source validation. If a broad scenario run exhausts the normal shared allowance, isolate independent scenarios in separate test processes rather than reset a live session or raise limits.
+Use the [bounded fixture workflow](../task52-v51-local-application-integration.md). Unknown source requests cannot call a model. The original fresh-only helper refuses manual/pending overrides; use the later bridge below for current fixture compatibility. If a broad scenario run exhausts the normal shared allowance, isolate independent scenarios in separate test processes rather than reset a live session or raise limits.
+
+## Edited V5.1 request or pending answer refuses
+
+The [manual/pending bridge](../task52-v51-manual-pending.md) now supports issued snapshots and bounded manual controls. Check whether the textarea changed: old pending state must be cleared. A matching snapshot still needs fresh source proof. Check its reference, raw identity and original monotonic expiry; restart intentionally loses provenance. Activity/order changes require new source, not a date/location answer. Initial non-default spending/party/cost and unsupported source contexts remain blocked.

@@ -60,3 +60,7 @@ No fresh model output, browser journey, real venue availability, Maps call, host
 ## Task 52B local application fixture checkpoint
 
 Reviewed chapters 3, 6, 7, 9, 10, 12, 14 and 15 against the actual adapter, FastAPI callback, frontend proxies, advanced sessions, budgets and save service. Updated chapters 3/7/9/12/15 plus command/debug references for the explicit fixture and its limits. The other 15 chapters and 20-chapter structure are preserved. [Exact current verification](../task52-v51-local-application-verification.json) distinguishes real browser checks, API tests, synthetic persistence and incomplete historical simulations.
+
+## Task 52B manual/pending compatibility
+
+Reviewed chapters 3/7/9/12/13/15 and their source references; updated those chapters plus glossary/debugging guidance. Other 14 chapters and the 20-chapter structure are preserved. [Current source/build identities, test totals and historical simulation results](../task52-v51-manual-pending-verification.json). Earlier fixture-only refusal and verification counts describe their earlier checkpoints.

@@ -112,7 +112,13 @@ In real mode candidate generation, routing, hours and ranking follow the advance
 
 Start only the explicit fixture and a separate local Next process using the commands in the [integration report](../task52-v51-local-application-integration.md). Enter an exact server-owned example such as “Buy groceries and maybe stop for coffee.” The existing form sends natural-language text; it never submits a trusted extraction or graph. A supplied fake response is checked against that source by `interpret_for_development`, then the existing interpretation endpoint creates its advanced session.
 
-Choose a starting method and answer missing date/destination in the existing controls, one requested follow-up at a time. Commit a date typed in words by leaving its input, then submit. Synthetic venues and matrix evidence pass through the real advanced resolution, routing and timing contracts. View Plan and selected save/reopen use the same UI and API routes as ordinary startup. Initial manual interpretation overrides and effective pending snapshots remain unsupported by this experimental adapter; they clarify instead of being ignored. Production retains its existing legacy path.
+Choose a starting method and answer missing date/destination in the existing controls, one requested follow-up at a time. Commit a date typed in words by leaving its input, then submit. Synthetic venues and matrix evidence pass through the real advanced resolution, routing and timing contracts. View Plan and selected save/reopen use the same UI and API routes as ordinary startup. The generalized helper remains fresh-only; the later fixture bridge described below supports bounded manual controls and issued pending snapshots. Production retains its existing legacy path.
+
+## Editing and answering in the local V5.1 workflow
+
+The later fixture-only bridge supersedes the initial manual/pending refusal described above. Enter a supported fixture request, answer missing context in the existing controls, and regenerate. Date, area and mode remain explicit user controls; no model call reconstructs them. An issued pending snapshot can carry date/location answers, but the bridge independently re-proves the original server-owned raw extraction before returning a handoff.
+
+Editing the textarea uses the existing `replaceRequest` flow: old cards, pending references and accumulated advanced answers are cleared. Deliberate manual preferences remain separate. “Coffee, then groceries.” must obtain a fresh extraction and map coffee as occurrence zero; it cannot reuse the groceries-first graph. Contradictory source directions still clarify until the original text is corrected. [Current acceptance and limits](../task52-v51-manual-pending.md).
 
 ## Check your understanding
 

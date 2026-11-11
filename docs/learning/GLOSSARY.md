@@ -725,3 +725,7 @@ A separate checkout sharing Git history, useful for isolated later learning edit
 ## XSS — Cross-Site Scripting
 
 Malicious script execution in a page, which can threaten bearer capabilities; random tokens do not make theft harmless. [Project source](../../docs/database-security.md).
+
+## Issued pending snapshot (local experiment)
+
+An existing pending DTO whose exact typed content and raw-evidence identity are remembered by the disposable V5.1 fixture until its original deadline. It is checked before renewed source proof, never accepted as a credential or raw AI output. [Implementation](../../scripts/task52_v51_local_continuation.py).

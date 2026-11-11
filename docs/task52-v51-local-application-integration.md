@@ -1,5 +1,7 @@
 # Task 52B — V5.1 local application fixture
 
+This report describes the `e720a45` checkpoint. The later [manual/pending bridge](task52-v51-manual-pending.md) supersedes its local manual-override limitation; original verification results remain historical.
+
 Baseline: `8116465e8f3bc9c5cc69afc6c13d3c2914d1dbf7`. Integration identity: `52b-v51-local-application-fixture-v1`. This checkpoint adds a disposable test process, server-owned authored extractions and application-boundary tests. It changes no application startup, public DTO, ordering grammar, model prompt, dependency or production source file.
 
 ## Integration point

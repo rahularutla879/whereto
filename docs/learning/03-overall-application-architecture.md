@@ -65,6 +65,10 @@ A final habit: read historical architecture entries as history. The root archite
 
 Places/matrix evidence and saved storage are fictional. External transports, model creation and PostgreSQL connections are blocked. Loopback binding and request checks limit access to the local test workflow. [Exact flow and commands](../task52-v51-local-application-integration.md).
 
+## Local manual/pending bridge
+
+The explicit application fixture now calls `LocalContinuation` in `scripts/task52_v51_local_continuation.py`. It reuses the fresh-only generalized validator, then applies existing deterministic calendar, geography, mode and travel controls. A small bounded cache checks that a pending DTO was issued by this fixture and still belongs to the same raw source. This cache is provenance evidence, not a replacement session, admission receipt, login or durable service. Normal application startup still never imports it. [Current scope](../task52-v51-manual-pending.md).
+
 ## Check your understanding
 
 03.Q1. Which layer renders cards?

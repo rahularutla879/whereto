@@ -1,3 +1,5 @@
+Task 52B local manual/pending compatibility: bounded deterministic overlays and issued-snapshot provenance now work in the disposable fixture, with fresh source proof and unchanged production behavior. No grammar or public contract change. [Acceptance and remaining gates](docs/task52-v51-manual-pending.md). Task 52 remains in progress; no Task 53.
+
 Task 52B local V5.1 application integration uses an explicit loopback-only synthetic fixture with unchanged frontend/backend/planner/save contracts. Production remains legacy; no paid work or Task 53. [Verification and limits](docs/task52-v51-local-application-integration.md).
 
 Task 52B recorded the owner diagnostic-only decision and rehearsed the original-schema append interface on synthetic state. Independent review and real writer/operator/security/readiness gates remain open. [Preparation checkpoint](docs/task52-real-integration-preparation-v1.md)

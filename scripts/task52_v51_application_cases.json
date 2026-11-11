@@ -605,6 +605,168 @@
           "tomorrow"
         ]
       }
+    },
+    {
+      "id": "edit-reversed",
+      "text": "Coffee, then groceries.",
+      "extraction": {
+        "activities": [
+          "Coffee",
+          "groceries"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "Coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            },
+            {
+              "source": "groceries",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Coffee, then groceries"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "edit-required",
+      "text": "Buy groceries and coffee.",
+      "extraction": {
+        "activities": [
+          "groceries",
+          "coffee"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "groceries",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            },
+            {
+              "source": "coffee",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "Buy groceries and coffee"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
+    },
+    {
+      "id": "edit-corrected",
+      "text": "Visit the pharmacy before the bank.",
+      "extraction": {
+        "activities": [
+          "pharmacy",
+          "bank"
+        ],
+        "people": null,
+        "budget_per_person": null,
+        "date": null,
+        "location": null,
+        "preferences": [],
+        "suggested_activities": [],
+        "budget_group": null,
+        "currency": null,
+        "travel_total_minutes": null,
+        "travel_leg_minutes": null,
+        "transport": null,
+        "cost": null,
+        "date_expressions": [],
+        "time_expressions": [],
+        "uncertainties": [],
+        "journey": {
+          "stops": [
+            {
+              "source": "pharmacy",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            },
+            {
+              "source": "bank",
+              "kind": "activity",
+              "requirement": "required",
+              "evidence": ""
+            }
+          ],
+          "order": [
+            {
+              "before": 0,
+              "after": 1,
+              "source": "pharmacy before the bank"
+            }
+          ],
+          "ordering": "constrained",
+          "endpoint": null,
+          "total_duration": null,
+          "deadline": null,
+          "shared_place": null,
+          "clarification": ""
+        }
+      }
     }
   ]
 }

@@ -1,0 +1,391 @@
+{
+  "identity": "52b-v51-local-manual-pending-v1",
+  "parentCommit": "e720a458e06afa520d0c3e5ae10878855d7b7e95",
+  "sourceHashes": {
+    "scripts/task52_v51_local_continuation.py": "e4e19b866ac801daf49c0c068447cffad6043e0dac5d36a35f54bd7471bbd458",
+    "scripts/task52_v51_application_fixture.py": "5f9dc8ee03a3bf53e929ea20bbaf4f96ba98b62c40f92b6c0a36795f36ebc552",
+    "scripts/task52_v51_application_cases.json": "40e1f7118f4f94ebed8f1e8d4eb4aac99b03d83ab84817790907b2213f6fd3e0",
+    "backend/test_v51_manual_pending.py": "d96a4dcfac314a23a6f47ad40309bc86b14795569fbfa10844c693d3346da6e8",
+    "backend/test_v51_application_fixture.py": "b1cb3e38cdb78ca78bd93d5ab22e21bc6402fc97dfe2ded6ad18a975b9503c93",
+    "lib/v51-application.test.ts": "e9dc5eb77cfd9f8962b19cd7f4c5438cf85c1cac0eaba762a20c5cd12223b26c"
+  },
+  "buildSHA256": "7b7829b5915043db87e143bea1a0765348cbda2892df458591c1abd45f832a1c",
+  "productionChanged": false,
+  "generalizedGrammarChanged": false,
+  "original13FixtureCasesUnchanged": true,
+  "pendingProtocol": {
+    "publicDTOChanged": false,
+    "maximumEntries": 50,
+    "originalDeadlineSeconds": 600,
+    "monotonic": true,
+    "deadlineRenewed": false,
+    "snapshotAuthority": false,
+    "rawReproofRequired": true,
+    "restart": "refuse unknown snapshot",
+    "expiryRecheckedBeforeHandoff": true
+  },
+  "tests": {
+    "relevantBackend": {
+      "run": 239,
+      "passed": 212,
+      "skipped": 27,
+      "failed": 0,
+      "errors": 0
+    },
+    "lifecycleCalendarEdits": {
+      "run": 82,
+      "passed": 81,
+      "skipped": 1,
+      "failed": 0,
+      "errors": 0
+    },
+    "originalOrdering": {
+      "passed": 12
+    },
+    "newManualPending": {
+      "passed": 9
+    },
+    "applicationFixture": {
+      "passed": 7
+    },
+    "frontendFull": {
+      "passed": 289,
+      "failed": 0
+    },
+    "applicationBoundary": {
+      "passed": 4
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "productionBuild": "passed",
+    "fullBackendDiscoveryRerun": false,
+    "finalFocusedRecheck": {
+      "backend": 239,
+      "applicationBoundary": 4,
+      "failed": 0,
+      "errors": 0,
+      "reason": "final fixture-only advanced unknown-calendar date refusal; no production code change"
+    },
+    "finalBridgeRecheck": {
+      "passed": 9,
+      "failed": 0,
+      "errors": 0,
+      "scope": "manual ISO precedence, expiry during proof, final four HTTP boundary tests also passed"
+    }
+  },
+  "previous34": {
+    "requested": [
+      "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+      "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+      "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+      "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+      "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+      "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+      "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+      "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+      "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+      "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+      "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+      "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+      "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+      "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+      "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review",
+      "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+    ],
+    "completed": [
+      "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+      "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+      "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+      "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+      "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+      "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+      "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+      "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+      "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+      "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+      "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+      "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+      "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+      "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+      "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+      "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review",
+      "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role",
+      "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+    ],
+    "passed": 34,
+    "skipped": 0,
+    "failed": 0,
+    "errors": 0,
+    "incomplete": [],
+    "batches": [
+      {
+        "name": "historical-0",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+          "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+          "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+          "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+          "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+          "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+        ],
+        "completed": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_reproducible_unknown_additional_mutation_halts_signed_run",
+          "test_task52_q4a.SuccessorTests.test_all_ten_consumed_slots_and_wrong_next_slot",
+          "test_task52_q4a.SuccessorTests.test_uncertain_send_response_loss_and_restart_retain_reservation",
+          "test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next",
+          "test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection",
+          "test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt"
+        ]
+      },
+      {
+        "name": "historical-1",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+          "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+          "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+          "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+          "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+          "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+          "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused"
+        ],
+        "completed": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_stale_readiness_payload_and_incorrect_full_token_reservation",
+          "test_task52_q4a.SuccessorTests.test_overage_is_retained_without_refunding_lower_usage",
+          "test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money",
+          "test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract",
+          "test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses",
+          "test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse",
+          "test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_fixed_dependency_binding_reuses_core_and_preserves_original_globals"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused"
+        ]
+      },
+      {
+        "name": "historical-2",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+          "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+          "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+          "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+          "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role"
+        ],
+        "completed": [
+          "test_task52_diagnostic_progression.DiagnosticTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback",
+          "test_task52_q4a.SuccessorTests.test_review_disagreement_and_stale_review_halt_or_refuse",
+          "test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer",
+          "test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure",
+          "test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_input_count_bounds_and_stale_response_binding_reject",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": []
+      },
+      {
+        "name": "historical-round2-0",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error"
+        ],
+        "completed": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": []
+      },
+      {
+        "name": "historical-round2-1",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused"
+        ],
+        "completed": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_malformed_envelopes_and_changed_build_fail_closed",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_wrong_named_place_partial_order_optionality_and_contradiction_halt",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": []
+      },
+      {
+        "name": "historical-round2-2",
+        "limitSeconds": 240,
+        "requested": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt"
+        ],
+        "completed": [
+          "test_task52_v51_evaluator.V51IntegrationTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress",
+          "test_task52_v51_evaluator.V51IntegrationTests.test_missing_order_repeated_merge_return_duration_endpoint_and_inventions_halt"
+        ],
+        "failures": [],
+        "errors": [],
+        "incomplete": []
+      }
+    ]
+  },
+  "browser": {
+    "realUI": true,
+    "syntheticEvidenceOnly": true,
+    "desktop": [
+      1280,
+      800
+    ],
+    "mobile": [
+      390,
+      844
+    ],
+    "mobileDocumentWidth": 390,
+    "verified": [
+      "missing-context to simultaneous date/area edits to itinerary",
+      "source text edit removes old cards",
+      "reversed activity order",
+      "walking-mode regeneration",
+      "optional-to-required source edit",
+      "selected second itinerary save/reopen with both stops required",
+      "contradictory source clarification",
+      "new corrected source produces itinerary"
+    ],
+    "counters": {
+      "freshFixtureExtractions": 5,
+      "externalSends": 0,
+      "syntheticSearches": 10,
+      "syntheticMatrices": 5,
+      "savedDocuments": 1
+    },
+    "screenshots": [
+      "/tmp/v51-manual-saved-mobile.png",
+      "/tmp/v51-manual-corrected-desktop.png"
+    ],
+    "allAPINegativesBrowserTested": false
+  },
+  "journal": {
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "counts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFilesUnchanged": 324,
+    "correctionsUnchanged": true,
+    "persistentHistoricalHalt": true,
+    "sourcePinsAndQ4ABuildVerified": true
+  },
+  "safety": {
+    "realProviderCalls": 0,
+    "realSQLWrites": 0,
+    "realApprovalCreated": false,
+    "productionV51Enabled": false,
+    "configuredSecretMatches": 0,
+    "genericSecretMatches": 0,
+    "completeDiffReviewed": true
+  },
+  "limitations": [
+    "source must pass unchanged fresh-only grammar before overlays",
+    "generic activity/time/endpoint pending answers blocked",
+    "spending/party/cost/current-location-dependent requests remain unsupported locally",
+    "included optional active-card badge unchanged; saved requirement labels verified",
+    "old independent bearer sessions retain their existing expiry; no cross-request revocation added",
+    "memory-only store not a SQL/RLS durability test",
+    "pending provenance cache is not distributed/durable authentication",
+    "independent semantic review and production activation remain separately required"
+  ],
+  "handbook": {
+    "reviewedAndUpdated": [
+      3,
+      7,
+      9,
+      12,
+      13,
+      15
+    ],
+    "otherChaptersPreserved": 14,
+    "chapterCount": 20
+  }
+}

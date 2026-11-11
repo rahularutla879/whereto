@@ -68,6 +68,12 @@ The local application fixture supplies authored fake model extractions from `scr
 
 `lib/v51-application.test.ts` follows that result through the actual Next proxies and FastAPI sessions. Unsafe examples must clarify before venue/routing operations. Existing typed answers can add a missing date, destination or visit duration after the original proof. These tests do not enable V5.1 for real users or make the historical evaluator compatible with changed source pins.
 
+## Pending provenance is different from raw evidence
+
+`LocalContinuation` admits only a matching, unexpired, previously issued typed pending snapshot inside the disposable fixture. Its digest binds text, effective graph, answers and reference time to the recorded raw-extraction hash. After that check, the graph used for validation still comes from renewed proof of server-owned raw evidence. A client-supplied effective snapshot never becomes a raw AI extraction.
+
+Manual date/area/mode/travel values change effective `InterpretationContext`; they do not rewrite raw quotes or invent activity edges. Generic activity/time/endpoint answers remain blocked in this bounded path because they would change source meaning. Use edited source text for a new proof. The original generalized helper remains fresh-only, and historical policy/evaluator identities are unchanged.
+
 ## Check your understanding
 
 09.Q1. What is provenance?

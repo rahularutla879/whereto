@@ -1,3 +1,7 @@
+# Task 52B — keep local pending provenance separate from authority
+
+Use the existing pending DTO and source-first validator in the disposable fixture: verify issued snapshot/raw identity/expiry, re-prove raw source, then apply existing deterministic controls. Never normalize a client pending graph into raw evidence. Activity/order corrections require edited source. No public contract, production activation or durable authorization cache is introduced. [Bounded implementation](docs/task52-v51-manual-pending.md).
+
 # Task 52B owner diagnostic-only decision
 
 The owner approved the exact journey-06/r2 legacy order loss for diagnostic continuation subject to genuine independent review and existing security checks. The versioned record identifies that product decision and leaves execution and financial authority unset. [Owner decision](docs/task52-owner-diagnostic-continuation-v1.json)

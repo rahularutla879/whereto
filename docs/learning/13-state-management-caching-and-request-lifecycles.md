@@ -72,6 +72,12 @@ A session token identifies server-held context; it does not let the browser repl
 4. Route freshness is shorter than session lifetime.
 5. Explicit edits must remain distinct from automatic display values.
 
+## Local continuation ownership after editing
+
+In `app/page.tsx`, `replaceRequest` clears advanced continuation and remembered advanced answers; `manualPreferences` preserves deliberate controls independently. `invalidateResults` clears incompatible cards when preferences change. The fixture bridge now supports that existing re-entry path without changing the frontend.
+
+`LocalContinuation.issued` is at most 50 digest/deadline/raw-hash entries protected by a lock. A valid answer inherits the original ten-minute monotonic deadline; it cannot renew that deadline. Expiry, modified source, changed raw identity or process restart causes refusal. This cache verifies provenance only. The existing advanced session token still controls planning, and no new public receipt or request flag is introduced.
+
 ## Check your understanding
 
 13.Q1. What prevents a second page submission?

@@ -77,6 +77,12 @@ Reopening reads saved app-owned structure. Real routes are unavailable in reopen
 
 No PostgreSQL connection, persistent user document or migration is involved. This workflow proves selection, serialization and UI reopening; it does not reproduce SQL transactions, RLS or durable expiry. Existing persistence/security tests remain necessary. Stopping the fixture loses its test saves. Never treat a synthetic private link as a durable saved outing.
 
+## Saved revisions after edits
+
+The local manual/pending tests reuse the real receipt selection boundary. Mixing a previous receipt with a new revision's access token or candidates refuses; saving the selected current option retains its new source occurrence order and required/optional metadata. Expired receipts refuse before the memory store is called. The saved view already distinguishes required and optional visits; included optional visits still lack an active-card badge, since no fixture-only presentation hook exists.
+
+A textarea edit does not revoke every previously issued bearer capability on the server. Existing old tokens remain bound to their old session until their ordinary expiry. The frontend drops them when replacing the request; a production-wide revision/revocation protocol remains separate work. No real PostgreSQL writes are part of this fixture.
+
 ## Check your understanding
 
 12.Q1. What connects stops to itineraries?

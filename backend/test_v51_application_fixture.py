@@ -12,7 +12,7 @@ def connect_socket(socket):
     with socket.socket() as connection:
         connection.connect(('203.0.113.1',443))
 
-def post(path,payload):
+def post(path,payload,status=200):
     """Same dependency-free ASGI boundary used by existing shadow tests."""
     import asyncio
     from backend.main import app
@@ -32,7 +32,7 @@ def post(path,payload):
             'root_path':'','server':('localhost',8000),'client':('127.0.0.1',1234),
             'headers':[(b'host',b'localhost:8000'),(b'content-type',b'application/json')]}
         await app(scope,receive,send)
-        assert next(m['status'] for m in sent if m['type']=='http.response.start')==200
+        assert next(m['status'] for m in sent if m['type']=='http.response.start')==status
         return json.loads(b''.join(m.get('body',b'') for m in sent if m['type']=='http.response.body'))
     return asyncio.run(run())
 
@@ -48,7 +48,7 @@ class LocalApplicationFixtureTests(TestCase):
     def test_server_owned_cases_cover_originals_and_independent_inputs(self):
         cases = json.loads(CASES.read_text())
         self.assertTrue(cases['syntheticOnly'])
-        self.assertEqual(len({c['text'] for c in cases['cases']}),13)
+        self.assertEqual(len({c['text'] for c in cases['cases']}),16)
         self.assertEqual([c['id'] for c in cases['cases'][:5]],
                          ['extension-repeated','journey-04','extension-partial','journey-06','journey-21'])
         self.assertTrue(all(c['extraction']['activities'] for c in cases['cases']))
@@ -74,15 +74,16 @@ class LocalApplicationFixtureTests(TestCase):
             self.assertEqual(counts['extractions'],1)
         self.assertIs(main.interpret_request,original)
 
-    def test_manual_source_edits_safely_block_instead_of_ignoring_preferences(self):
+    def test_manual_area_uses_existing_context_without_changing_source_graph(self):
         from backend.interpretation import InterpretationInput
         with application_fixture() as (_app,_fixture,_counts,_store):
             from backend import main
             r=main.interpret_outing(InterpretationInput(
                 text='Buy groceries and maybe stop for coffee.',preferences={'location':'New York'}))
-            self.assertIsNone(r.advancedToken)
+            self.assertIsNotNone(r.advancedToken)
             self.assertIsNone(r.request)
-            self.assertEqual(r.executionStatus,'clarification_required')
+            self.assertEqual(r.context.destination,'New York')
+            self.assertEqual([(e.before,e.after) for e in r.interpretation.journey.order],[(0,1)])
 
     def test_journal_inspection_still_matches_and_grants_no_authority(self):
         report=inspect_original()

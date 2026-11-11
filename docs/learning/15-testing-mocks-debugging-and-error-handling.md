@@ -70,7 +70,13 @@ Run `backend/.venv/bin/python -m unittest backend.test_v51_application_fixture -
 
 The fixture blocks external HTTP, outbound sockets, real database connections and model factories. The browser smoke uses only synthetic public names and local requests. A provisional card with unknown visit duration is not a verified feasible whole-trip schedule. Cards retain the existing “Real venues” presentation for provider-shaped fixtures; all fixture venue names are explicitly Synthetic and have no verified live availability. Do not follow their Maps links.
 
-For debugging, compare source → supplied raw graph → validated handoff → session answers → option occurrence order → saved selected graph. Initial manual overrides safely clarify in this bounded adapter. Included optional stops lack an active-card optional badge in the current UI; the saved view preserves typed optional metadata. Do not fix that presentation by changing the extraction. [Scope, browser results and exact incomplete historical IDs](../task52-v51-local-application-integration.md).
+For debugging, compare source → supplied raw graph → validated handoff → session answers → option occurrence order → saved selected graph. The generalized helper remains fresh-only; the fixture bridge below handles bounded manual controls. Included optional stops lack an active-card optional badge in the current UI; the saved view preserves typed optional metadata. Do not fix that presentation by changing the extraction. [Scope, browser results and exact incomplete historical IDs](../task52-v51-local-application-integration.md).
+
+## Manual/pending compatibility checks
+
+Run `backend/.venv/bin/python -m unittest backend.test_v51_manual_pending -v` for source edits, tampered/expired pending state, raw-identity changes, deterministic overlays and expired planning/save capabilities. `node --import tsx --test lib/v51-application.test.ts` additionally crosses the actual Next proxies, FastAPI session boundary, planner and selected save/reopen service. The four tests include fresh source edits and pending reuse; fake-provider acquisition counts stay unchanged for a valid pending answer.
+
+The application fixture owns a fresh default provider-budget object per fixture lifetime and restores the prior object on exit. This isolates test contexts without increasing limits or resetting a running session. Calendar freshness and advanced answers share the frozen timezone-aware reference; monotonic capability expiry and provider accounting clocks remain independent. If a changed source is refused, inspect the new source proof before considering any old graph. Never turn an effective pending snapshot into raw evidence to make a test pass. [Exact verification](../task52-v51-manual-pending-verification.json).
 
 ## Check your understanding
 

@@ -13,7 +13,7 @@ import {PlanCard} from "../components/plan-card";
 import {SavedCards} from "../components/saved-cards";
 import {VenueDetailsSession} from "./venue-details";
 import {validateSaved} from "./saved-plans";
-import type {PlannerResult} from "./planner";
+import {EMPTY_PREFERENCES, type PlannerResult} from "./planner";
 
 type FixtureCase = {id:string;text:string};
 const cases = JSON.parse(readFileSync("scripts/task52_v51_application_cases.json","utf8")).cases as FixtureCase[];
@@ -164,4 +164,64 @@ test("legacy fixture keeps production interpretation behavior and only synthetic
     assert.equal(interpreted.advancedToken,null);
     assert.equal((await counts(server.base)).externalSends,0);
   }finally{await stop(server.child);}
+});
+
+
+test("local pending answers and source edits use new proof, selected saves retain the revision",async()=>{
+  const server=await fixture();const previous=process.env.BACKEND_URL;process.env.BACKEND_URL=server.base;
+  try{
+    const source="Buy groceries and maybe stop for coffee.";
+    const initial=await generateOuting(source,undefined,undefined,send);
+    assert.equal(initial.plans.length,0);
+    assert.ok(initial.advanced?.data.questions.some(q=>q.field==="date"));
+    const unlocated=await persistenceProxy("/api/plans/advanced",local("/api/plans/advanced",{token:initial.advanced!.data.token,date:"tomorrow"}));
+    assert.equal(unlocated.status,422);
+    const answered=await generateOuting(source,undefined,{continuation:initial.advanced!.continuation,
+      answers:{date:"2026-11-20",location:"New York"}},send);
+    assert.ok(answered.plans.length);
+    assert.equal((await counts(server.base)).extractions,1);
+    const prefs={...EMPTY_PREFERENCES,date:"2026-11-20",location:"New York",transport:"walking" as const};
+    // A changed textarea has no continuation. Its new occurrence zero is coffee.
+    const edited=await generateOuting("Coffee, then groceries.",prefs,undefined,send);
+    assert.ok(edited.plans.length,edited.message);
+    assert.deepEqual(edited.plans[0].advanced!.stops.map(s=>s.requested),["Coffee","groceries"]);
+    assert.ok(edited.plans.every(p=>p.transport==="walking"));
+    const required=await generateOuting("Buy groceries and coffee.",prefs,undefined,send);
+    assert.ok(required.plans.length,required.message);
+    assert.ok(required.plans.every(p=>p.advanced!.stops.every(s=>s.requirement==="required")));
+    const selected=required.plans[0];
+    const wrong=await persistenceProxy("/api/plans/save",local("/api/plans/save",{
+      receipt:answered.saveReceipt,accessToken:required.saveAccessToken,candidateIds:[selected.id],selectedId:selected.id}));
+    assert.equal(wrong.status,409);
+    const save=await persistenceProxy("/api/plans/save",local("/api/plans/save",{
+      receipt:required.saveReceipt,accessToken:required.saveAccessToken,candidateIds:required.plans.map(p=>p.id),selectedId:selected.id}));
+    assert.equal(save.status,200);
+    const opened=validateSaved(await (await persistenceProxy("/api/plans/reopen",local("/api/plans/reopen",{accessToken:required.saveAccessToken}))).json());
+    assert.equal(opened.itineraries.length,1);
+    assert.ok(opened.itineraries[0].advanced!.journey.stops.every(s=>s.requirement==="required"));
+    assert.equal((await counts(server.base)).extractions,3);
+    assert.equal((await counts(server.base)).externalSends,0);
+  }finally{if(previous===undefined)delete process.env.BACKEND_URL;else process.env.BACKEND_URL=previous;await stop(server.child);}
+});
+
+test("local manual mode edit reuses proved raw evidence; stale and invalid capabilities refuse",async()=>{
+  const server=await fixture();const previous=process.env.BACKEND_URL;process.env.BACKEND_URL=server.base;
+  try{
+    const source="Buy groceries and maybe stop for coffee.";
+    const prefs={...EMPTY_PREFERENCES,date:"2026-11-20",location:"New York"};
+    const first=await generateOuting(source,prefs,undefined,send);
+    assert.ok(first.plans.length);
+    const walked=await generateOuting(source,{...prefs,transport:"walking"},{continuation:first.advanced!.continuation},send);
+    assert.ok(walked.plans.length,walked.message);
+    assert.notEqual(walked.advanced!.data.token,first.advanced!.data.token);
+    assert.ok(walked.plans.every(p=>p.advanced!.legs.every(l=>l.mode==="walk")));
+    assert.equal((await counts(server.base)).extractions,1);
+    const bad=structuredClone(first.advanced!.continuation!.pending);
+    (bad.interpretation as {journey:{order:unknown[]}}).journey.order=[];
+    const rejected=await generateOuting(source,prefs,{continuation:{pending:bad,questions:[]}},send);
+    assert.equal(rejected.plans.length,0);assert.equal(rejected.advanced,undefined);
+    const invalid=await persistenceProxy("/api/plans/advanced",local("/api/plans/advanced",{token:"x".repeat(43)}));
+    assert.equal(invalid.status,422);
+    assert.equal((await counts(server.base)).externalSends,0);
+  }finally{if(previous===undefined)delete process.env.BACKEND_URL;else process.env.BACKEND_URL=previous;await stop(server.child);}
 });
