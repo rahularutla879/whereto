@@ -110,3 +110,10 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-14).
 `bridge.sql` adds immutable action bindings and refresh claims. Only the separate NOLOGIN issuer can register actions or approve request plans; the worker can execute only `bridge_protocol`. It cannot call the private arbitrary-charge core or change rates/history. SQL requires active HTTP ownership, revision/fence, intact evidence and once-only dispatch ordinals. Charges still come from protected V3 unit policies. A worker crash or uncertain fake send retains committed exposure without retries/refunds. The trusted issuer and same-process Python remain privileged; private attributes are not a hostile-code sandbox. Protected workload enrollment, shared evidence and hosted spending approval remain future requirements.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+
+## Preflight: separate prices, limits and permission
+
+A published provider price is not a spending grant. Current local SQL prices synthetic Maps requests; hosted LLM input/output token pricing and an application-wide gross-dollar grant remain unimplemented. The fake inference admission lease limits capacity but does not reserve LLM dollars. Future roots must survive worker restart and cannot be reset by a browser or midnight. Proposed staging dollar/timezone limits are owner decisions, not active controls. A separate authority service is proposed because an issuer factory in the same Python process does not isolate a malicious worker.
+
+See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.

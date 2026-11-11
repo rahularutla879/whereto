@@ -110,3 +110,10 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-13).
 `Source` in the local bridge is a deep-copied integrity-sealed record with a 600-second lifetime and a revision. A matching request digest alone is not permission: source ownership, native session/capability checks, current action admission and SQL authority must all agree. A ContextVar identifies the active fake-dispatch owner, and a nonblocking action lock prevents overlapping batches. PostgreSQL retains charges/replay/fences after a worker dies; local source/session maps are lost and fail closed. This is not a completed Redis or hosted session implementation.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+
+## Preflight: private evidence is not financial authority
+
+The next adapter is planned, not integrated: encrypted expiring session evidence in private Redis, with the existing application expiry and revision rules. Do not serialize process locks or treat an old browser card as fresh evidence. Redis loss must expire/refuse continuation; it must not reconstruct a request or retry a paid call. Durable SQL retains charges and replay consumption. A short TTL and encryption also do not by themselves grant permission to cache Google content; each field needs an allowed purpose and retention rule.
+
+See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.

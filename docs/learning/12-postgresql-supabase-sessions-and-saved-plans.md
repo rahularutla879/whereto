@@ -119,3 +119,10 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-12).
 Saved documents intentionally omit original interpretation evidence. The owner approved a fresh, narrow refresh purpose: reopen using current access/RLS/expiry checks, bind the selected saved itinerary and allowed IDs, and allow only the existing Details refresh operations. `Broker.refresh` rechecks the exact document before each reservation/send. Its stable-key replay identity is claimed in SQL with the first charged request for the existing 1800-second replay window. Viewing a plan needs no provider grant. Tests fake saved access; they do not write owner data, add a migration or prove hosted RLS integration.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+
+## Preflight: connection capacity and restore safety
+
+The existing Supabase database was inspected read-only: PostgreSQL17.11,60 maximum connections and3 reserved slots. This is not proof of available pool capacity. The current four-slot Python semaphore is per process; two replicas and overlapping rollouts multiply connections. A future operational schema needs separate ownership and restricted routines without altering saved-plan RLS. Account plan, pooler limits and actual backups still need console verification. Restoring a backup may erase consumed capabilities and charges, so future recovery must invalidate the old authority epoch and reconcile independent exposure before paid work restarts.
+
+See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.

@@ -1,3 +1,9 @@
+## Task 52 private-staging preflight — November 11, 2026
+
+Recommend conditional reuse of existing Supabase with isolated operational roles/schema; private Memorystore for expiring evidence only; Cloud Run frontend/backend plus separately authenticated privileged authority. Existing process-local trusted issuer is not sufficient malicious-worker isolation. No infrastructure or production adapter is implemented by this decision report. Exact account plan/backup/pooler and regional pricing gates remain open.
+
+Financial/replay authority stays in transactional SQL; Redis loss refuses safely. Restore requires independent epoch/exposure reconciliation or quarantine of the complete at-risk grant. LLM input/output token reservations, application-wide dollar ceiling, financial timezone and operator-owned budget-root lifecycle need explicit implementation/approval. Proposed limits are not grants. Container findings and independent model quality reviews retain their gates. [Evidence, alternatives, cost assumptions and approvals](docs/task52-private-staging-preflight.md).
+
 # Task 52: purpose-specific action issuer, exact payloads and unchanged production
 
 Reuse the complete legacy validator and existing native session/planner/budget paths; do not let a browser snapshot, saved DTO, handoff or compatible graph mint provider permission. A separate trusted local issuer binds actions and immutable unit plans; restricted SQL enforces current admission, evidence, revision/fence, scope accounting and exact dispatch digest. The fake responder is called only after all boundaries agree. No production switch or real transport is included. [Implementation/evidence](docs/task52-provider-action-bridge.md).

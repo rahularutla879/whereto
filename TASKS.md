@@ -1,3 +1,9 @@
+## Task 52 — private-staging preflight completed; deployment acceptance remains open
+
+Read-only account/capacity/price/security review is complete with explicit unknowns and owner gates. No resource provisioned or paid permission created. [Evidence and decision matrix](docs/task52-private-staging-preflight.md) · [Executable dependency order](docs/task52-staging/IMPLEMENTATION.md) · [Owner actions](docs/task52-staging/OWNER_APPROVALS.md).
+
+Next bounded local checkpoint: encrypted expiring shared session evidence, actual DTO/revision integration and external restore-epoch refusal using disposable stores. Then complete protected global/LLM financial authority, security remediation, separately approved resource batch/migration, issuer authentication, independently qualified hosted inference and private end-to-end staging. Neither existing local tests nor account availability establish deployment readiness. Public launch needs a separate owner decision; Task53 remains unstarted.
+
 # Task 52 server-action authority checkpoint
 
 Inactive local issuer bridge V4 connects actual validation/session operations to exact protected fake-provider plans. [Report and exact acceptance evidence](docs/task52-provider-action-bridge.md). No production/session-store migration, live dispatch or hosted-readiness claim. Task 52 remains **in progress**; next bounded checkpoint is private-staging infrastructure/security/capacity/pricing preflight, not another general evaluation framework. Public launch remains separately approved; no Task 53.

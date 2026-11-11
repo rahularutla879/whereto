@@ -116,6 +116,13 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-18).
 
 ## Bridge readiness is not hosted authority
 
-The Task 52 action bridge is an inactive local composition, with no startup switch, real issuer enrollment or live dispatch. Supabase operational-role capacity/RLS, private expiring shared evidence, Cloud Run service authentication/connection limits, hosted inference qualification and current provider prices still require private-staging preflight. Existing V3 rates are historical gross estimates, not current price certification or a new dollar allowance. The deployed application must ultimately run with the owner’s Mac off. Paid recurring resources and public launch still require their separate owner approvals.
+The Task 52 action bridge is an inactive local composition, with no startup switch, real issuer enrollment or live dispatch. The completed preflight below separates verified capacity/pricing facts from remaining account checks. Supabase operational-role implementation, private expiring shared evidence, Cloud Run authentication, hosted inference qualification and spending approval remain deployment gates. Existing V3 rates are historical gross estimates, not current price certification or a new dollar allowance. The deployed application must ultimately run with the owner’s Mac off. Paid recurring resources and public launch still require their separate owner approvals.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+
+## Private-staging preflight: concrete target, remaining work
+
+The read-only preflight verified existing Google billing linkage/Maps quotas and Supabase catalog capacity, but not current Supabase subscription/backups or regional Redis pricing. The proposed target is three Cloud Run services: frontend, backend and separate authority. Owner-only frontend IAP, internal service IAM, VPC routing, private Redis, managed secrets and remote CI are not yet configured. Existing templates and containers are packaging evidence, not a functional hosted application: local Ollama, process-local state and startup guards remain. No model is independently qualified. Use the ordered checklist before provisioning, and keep resource approval separate from permission to launch.
+
+See the [Task 52 preflight](../task52-private-staging-preflight.md) and [implementation gates](../task52-staging/IMPLEMENTATION.md). No production behavior changed in this documentation checkpoint.

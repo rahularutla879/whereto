@@ -1,0 +1,1477 @@
+{
+  "identity": "52-private-staging-preflight-v1",
+  "baselineCommit": "3f50032e3f55bf72fe0ca914bbca0bad7d00b8c6",
+  "dateUTC": "2026-11-11",
+  "status": "PREFLIGHT_COMPLETE_WITH_EXPLICIT_BLOCKERS_NOT_DEPLOYMENT_READY",
+  "cloudResourcesCreated": 0,
+  "cloudConfigurationChanges": 0,
+  "databaseWrites": 0,
+  "userRowsRead": 0,
+  "providerDataPlaneRequests": 0,
+  "paidAuthorizationCreated": false,
+  "google": {
+    "identity": "52-private-staging-account-inventory-v1",
+    "project": "where-to-512422",
+    "readOnly": true,
+    "cloudChanges": 0,
+    "providerDataPlaneRequests": 0,
+    "projectInspection": {
+      "verified": true,
+      "projectId": "where-to-512422",
+      "lifecycleState": "ACTIVE",
+      "projectNumberSHA256": "8f117b914b8cefae3ff9d12838fa65f6f54c3fdca289b458a49e79f856be0e06"
+    },
+    "enabledAPIs": {
+      "verified": true,
+      "names": [
+        "analyticshub.googleapis.com",
+        "apptopology.googleapis.com",
+        "bigquery.googleapis.com",
+        "bigqueryconnection.googleapis.com",
+        "bigquerydatapolicy.googleapis.com",
+        "bigquerydatatransfer.googleapis.com",
+        "bigquerymigration.googleapis.com",
+        "bigqueryreservation.googleapis.com",
+        "bigquerystorage.googleapis.com",
+        "cloudapis.googleapis.com",
+        "cloudtrace.googleapis.com",
+        "dataform.googleapis.com",
+        "dataplex.googleapis.com",
+        "datastore.googleapis.com",
+        "iam.googleapis.com",
+        "iamcredentials.googleapis.com",
+        "logging.googleapis.com",
+        "monitoring.googleapis.com",
+        "places.googleapis.com",
+        "routes.googleapis.com",
+        "servicemanagement.googleapis.com",
+        "serviceusage.googleapis.com",
+        "sql-component.googleapis.com",
+        "storage-api.googleapis.com",
+        "storage-component.googleapis.com",
+        "storage.googleapis.com",
+        "telemetry.googleapis.com"
+      ],
+      "reason": null
+    },
+    "cloudRun": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "cloudSQL": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "secrets": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "artifactRepositories": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "networks": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "redis": {
+      "verified": false,
+      "reason": "API_not_observed_enabled_no_automatic_enablement"
+    },
+    "serviceAccounts": {
+      "verified": true,
+      "accounts": [
+        {
+          "identitySHA256": "b94093d6ab835bc935a060e7bdd6b537046ab6e98c8828880e613d1b5519e36b",
+          "disabled": false,
+          "displayName": "Where To local Maps backend"
+        }
+      ]
+    },
+    "billing": {
+      "verified": true,
+      "billingEnabled": true,
+      "linkedAccountPresent": true,
+      "accountIdentitySHA256": "3f2bfa66c08af18d7cc140a33807032b8239af526836077a77b31e9aa6633217"
+    },
+    "projectIAM": {
+      "verified": true,
+      "roles": [
+        {
+          "role": "projects/where-to-512422/roles/wheretoMapsConsumer",
+          "memberCount": 1,
+          "principalKinds": [
+            "serviceAccount"
+          ]
+        },
+        {
+          "role": "roles/owner",
+          "memberCount": 1,
+          "principalKinds": [
+            "user"
+          ]
+        }
+      ]
+    },
+    "quotas": {
+      "places.googleapis.com": {
+        "httpStatus": 404,
+        "verified": false
+      },
+      "routes.googleapis.com": {
+        "httpStatus": 404,
+        "verified": false
+      }
+    },
+    "billingAccount": {
+      "verified": true,
+      "httpStatus": 200,
+      "open": true,
+      "creditBalance": "not_exposed_by_this_metadata_read",
+      "freeTrialOrPaidPlan": "not_verified"
+    }
+  },
+  "googleQuotaAndIAMFollowup": {
+    "readOnly": true,
+    "quotaEndpoint": "Service Usage v1beta1; no Places/Routes data-plane request",
+    "places.googleapis.com": {
+      "verified": true,
+      "httpStatus": 200,
+      "metrics": [
+        {
+          "metric": "places.googleapis.com/AutocompletePlacesRequest",
+          "displayName": "AutocompletePlacesRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "12000",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/GetPhotoMediaRequest",
+          "displayName": "GetPhotoMediaRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/GetPlaceRequest",
+          "displayName": "GetPlaceRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "40",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "10",
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/LookupMediaRequest",
+          "displayName": "LookupMediaRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/LookupReviewPostsRequest",
+          "displayName": "LookupReviewPostsRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/LookupUserContentSummaryRequest",
+          "displayName": "LookupUserContentSummaryRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/SearchMediaRequest",
+          "displayName": "SearchMediaRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/SearchNearbyRequest",
+          "displayName": "SearchNearbyRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "20",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "10",
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/SearchReviewPostsRequest",
+          "displayName": "SearchReviewPostsRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "600",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": null,
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "places.googleapis.com/SearchTextRequest",
+          "displayName": "SearchTextRequest",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "200",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "10",
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "paginationIncomplete": false
+    },
+    "routes.googleapis.com": {
+      "verified": true,
+      "httpStatus": 200,
+      "metrics": [
+        {
+          "metric": "routes.googleapis.com/compute_route_matrix_elements",
+          "displayName": "DistanceMatrix - ComputeRouteMatrix per-element quota",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "150",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "2000",
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "metric": "routes.googleapis.com/compute_routes_requests",
+          "displayName": "Directions - ComputeRoutes per request quota",
+          "limits": [
+            {
+              "unit": "1/min/{project}/{user}",
+              "values": [
+                {
+                  "effectiveLimit": "9223372036854775807",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/min/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "10",
+                  "dimensions": {}
+                }
+              ]
+            },
+            {
+              "unit": "1/d/{project}",
+              "values": [
+                {
+                  "effectiveLimit": "20",
+                  "dimensions": {}
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "paginationIncomplete": false
+    },
+    "existingMapsRole": {
+      "verified": true,
+      "permissions": [
+        "serviceusage.services.use"
+      ]
+    },
+    "existingMapsImpersonation": {
+      "verified": true,
+      "roleBindings": [
+        {
+          "role": "roles/iam.serviceAccountTokenCreator",
+          "memberCount": 1
+        }
+      ]
+    },
+    "projectHasParent": false
+  },
+  "googleIAMKeyMetadata": {
+    "readOnly": true,
+    "existingMapsUserManagedKeyCount": 0,
+    "projectRoleConditions": [
+      {
+        "role": "projects/where-to-512422/roles/wheretoMapsConsumer",
+        "conditional": false,
+        "conditionExpressionSHA256": null,
+        "mentionedGoogleAPIs": []
+      },
+      {
+        "role": "roles/owner",
+        "conditional": false,
+        "conditionExpressionSHA256": null,
+        "mentionedGoogleAPIs": []
+      }
+    ]
+  },
+  "supabase": {
+    "identity": "52-private-staging-database-inspection-v1",
+    "source": "existing separately saved Supabase connection settings",
+    "readOnly": true,
+    "userRowsRead": 0,
+    "mutations": 0,
+    "verified": true,
+    "transactionReadOnly": true,
+    "clientTLSSSLMode": "verify-full",
+    "serverVersion": "17.11",
+    "maxConnections": 60,
+    "superuserReservedConnections": 3,
+    "serverTimezone": "UTC",
+    "databaseSizeBytes": 14210739,
+    "projectIdentitySHA256": "c534ed62b8901c017404671a77fce4521303f24ce76d55dbb5d3cbc52ce6ba59",
+    "bootstrapPrincipalFlags": {
+      "createRole": true,
+      "createDatabase": true,
+      "superuser": false,
+      "bypassRLS": true
+    },
+    "connectionSnapshot": {
+      "databaseConnections": 8,
+      "active": 1,
+      "idle": 6,
+      "idleInTransaction": 0,
+      "notPoolerCapacityOrLoadTest": true
+    },
+    "applicationRoles": [
+      {
+        "role": "whereto_plan_runtime",
+        "superuser": false,
+        "createRole": false,
+        "createDatabase": false,
+        "bypassRLS": false,
+        "login": true
+      }
+    ],
+    "applicationSchemas": [
+      "whereto"
+    ],
+    "savedTableRLSMetadata": [
+      {
+        "schema": "whereto",
+        "table": "generated_itineraries",
+        "rls": true,
+        "forceRLS": true
+      },
+      {
+        "schema": "whereto",
+        "table": "itinerary_stops",
+        "rls": true,
+        "forceRLS": true
+      },
+      {
+        "schema": "whereto",
+        "table": "plan_constraints",
+        "rls": true,
+        "forceRLS": true
+      },
+      {
+        "schema": "whereto",
+        "table": "plans",
+        "rls": true,
+        "forceRLS": true
+      },
+      {
+        "schema": "whereto",
+        "table": "schema_migrations",
+        "rls": true,
+        "forceRLS": true
+      },
+      {
+        "schema": "whereto",
+        "table": "source_metadata",
+        "rls": true,
+        "forceRLS": true
+      }
+    ],
+    "policyCounts": [
+      {
+        "schema": "whereto",
+        "table": "generated_itineraries",
+        "count": 1
+      },
+      {
+        "schema": "whereto",
+        "table": "itinerary_stops",
+        "count": 1
+      },
+      {
+        "schema": "whereto",
+        "table": "plan_constraints",
+        "count": 1
+      },
+      {
+        "schema": "whereto",
+        "table": "plans",
+        "count": 1
+      },
+      {
+        "schema": "whereto",
+        "table": "source_metadata",
+        "count": 1
+      }
+    ],
+    "applicationRoutines": [],
+    "bootstrapCanCreateSchemaByPrivilege": true,
+    "closedAndRolledBack": true,
+    "poolerBackendSSLVersion": null,
+    "poolerEndpointRegion": "us-east-1",
+    "currentPlan": "not_verified_by_SQL",
+    "backupsAndPITR": "requires_management_console",
+    "dataAPIExposureConfiguration": "requires_management_console",
+    "restrictedRuntimeFollowup": {
+      "verified": true,
+      "role": "whereto_plan_runtime",
+      "readOnly": true,
+      "roleConnectionLimit": -1,
+      "clientTLSProtocol": null,
+      "superuser": false,
+      "bypassRLS": false
+    }
+  },
+  "regionalRedisQuote": {
+    "readOnly": true,
+    "source": "Google Cloud Billing Catalog API",
+    "region": "us-east4",
+    "verified": false,
+    "servicesHTTPStatus": 429
+  },
+  "recommendation": {
+    "region": "us-east4 (proposal, not selected on account)",
+    "sql": "existing Supabase project, isolated operational schema/roles; Pro-grade availability/backups or explicit time-bounded owner exception required before paid staging",
+    "redis": "Memorystore for Redis Basic, 1 GiB, Redis 7.2 if region-supported, TLS plus AUTH, private services access, noeviction, persistence off; same region as Cloud Run; regional price unverified",
+    "publicBetaRedis": "Standard HA conditional on owner pricing approval and failover test",
+    "cloudRun": {
+      "frontend": {
+        "cpu": 1,
+        "memoryMiB": 512,
+        "concurrency": 1,
+        "minInstances": 0,
+        "maxInstances": 1,
+        "timeoutSeconds": 120,
+        "access": "direct IAP owner/tester allowlist; no allUsers"
+      },
+      "backend": {
+        "cpu": 1,
+        "memoryMiB": 1024,
+        "concurrency": 1,
+        "minInstances": 0,
+        "maxInstances": 2,
+        "timeoutSeconds": 120,
+        "access": "internal ingress plus IAM frontend invoker only"
+      },
+      "authority": {
+        "cpu": 1,
+        "memoryMiB": 512,
+        "concurrency": 1,
+        "minInstances": 0,
+        "maxInstances": 1,
+        "timeoutSeconds": 120,
+        "access": "internal ingress, explicit caller allowlist, source/action proof revalidation; no arbitrary plan-signing endpoint"
+      }
+    },
+    "network": "Direct VPC all-traffic + Private Google Access + same-region Cloud NAT/static egress; no connector or load balancer initially",
+    "privateAuth": "direct IAP supported without an organization; initial OAuth console setup/identity allowlist still required",
+    "nextLocalCheckpoint": "shared private session-evidence adapter and restore-epoch fail-closed tests against disposable Redis/PostgreSQL; preserve existing application logic"
+  },
+  "costModel": {
+    "currency": "USD",
+    "monthHours": 730,
+    "estimatesNotQuotes": true,
+    "taxesExcluded": true,
+    "currentOwnerCreditsAndFreeCapsUnknown": true,
+    "mapsNanodollarsPerUnit": {
+      "search_pro": 32000000,
+      "search_enterprise": 35000000,
+      "details_enterprise": 20000000,
+      "details_pro": 17000000,
+      "matrix_essentials": 5000000,
+      "matrix_pro": 10000000
+    },
+    "mapsFreeEventsPerSKU": {
+      "search_pro": 5000,
+      "details_enterprise": 1000,
+      "matrix_essentials": 10000,
+      "matrix_pro": 5000
+    },
+    "llm": {
+      "gpt-6-luna": {
+        "inputUSDPerMillion": "0.10",
+        "outputUSDPerMillion": "0.50",
+        "maximum12k2kUSD": "0.0022",
+        "productionQualified": false
+      },
+      "gemini-3.8-flash": {
+        "inputUSDPerMillionThrough20261231": "0.75",
+        "outputUSDPerMillionThrough20261231": "3.75",
+        "maximum12k2kUSD": "0.0165",
+        "from20270101InputUSD": "1.50",
+        "from20270101OutputUSD": "7.50",
+        "maximum12k2kUSDFrom20270101": "0.033",
+        "productionQualified": false
+      },
+      "claude-haiku-5-5": {
+        "inputUSDPerMillionUnder100k": "0.10",
+        "outputUSDPerMillionUnder100k": "0.50",
+        "maximum12k2kUSD": "0.0022",
+        "productionQualified": false
+      },
+      "qwen3:4b": {
+        "hostedEquivalentQualified": false,
+        "cloudGPUOrManagedQuoteUSD": null
+      }
+    },
+    "redis": {
+      "basicLegacyIowaUSDPerGiBHour": "0.049",
+      "basic730HourReferenceUSD": "35.77",
+      "standardLegacyIowaUSDPerGiBHour": "0.064",
+      "standard730HourReferenceUSD": "46.72",
+      "freshRegionalQuoteVerified": false,
+      "why": "canonical public page redirects to 404; one Billing Catalog read returned 429; no automatic retry",
+      "stagingEstimateUSD": [
+        36,
+        60
+      ],
+      "publicBetaEstimateUSD": [
+        47,
+        75
+      ],
+      "upstashFreeUSD": 0,
+      "upstashPAYGUSDPer100kCommands": "0.20",
+      "upstashFixedUSD": 10,
+      "upstashEncryptionAtRestAddonUSD": 200,
+      "upstashNotRecommendedForPlaintextPrivateEvidenceWithoutRequiredControls": true
+    },
+    "supabase": {
+      "proFirstMicroMonthlyUSD": 25,
+      "proAdditionalMicroMonthlyUSD": 10,
+      "proWithMediumComputeMonthlyApproxUSD": 75,
+      "sevenDayPITRAdditionalApproxMonthlyUSD": 100,
+      "existingPlanUnknown": true
+    },
+    "cloudSQLReference": {
+      "dedicated2CPU8GiBSingleZoneCPUAndRAMMonthlyUSD": "101.178",
+      "sameHAComputeMonthlyUSD": "202.356",
+      "region": "published Iowa reference, not a us-east4 quote",
+      "storageBackupsNetworkingAdditional": true,
+      "selected": false
+    },
+    "networkAndOperations": {
+      "natStaticIPv4USDPerHour": "0.005",
+      "natGatewayUSDPerAssignedVMHour": "0.0014",
+      "natDataUSDPerGiB": "0.045",
+      "natPlanningMonthlyUSD": [
+        5,
+        40
+      ],
+      "secretVersionUSDPerMonth": "0.06",
+      "secretAccessUSDPer10000": "0.03",
+      "secretFreeActiveVersions": 6,
+      "secretFreeAccesses": 10000,
+      "artifactUSDPerGiBMonth": "0.10",
+      "artifactFreeGiB": "0.5",
+      "artifactManagedScanUSD": "0.26",
+      "managedScanningEnabled": false,
+      "cloudBuildReferenceUSDPerMinute": "0.006",
+      "cloudBuildEligibleFreeMinutes": 2500,
+      "loggingUSDPerGiB": "0.50",
+      "loggingEligibleFreeGiB": 50,
+      "loggingBeyond30DaysUSDPerGiBMonth": "0.01",
+      "prometheusCustomMetricsTraceDNSBackupCostsMustBeQuotedOrMetered": true
+    },
+    "scenarioAssumptions": "4 Pro searches +0.5 Enterprise Details +24 matrix elements per outing, 80% Drive Pro/20% Walk Essentials; one hypothetical Luna call with8000 input/800 output tokens; aggregate60 CPU seconds/42.5GiB seconds/50 Cloud Run requests; none are measured staging usage or qualification",
+    "scenarios": [
+      {
+        "id": "minimal_private_staging",
+        "outingsPerMonth": 100,
+        "units": {
+          "search_pro": 400,
+          "details_enterprise": 50,
+          "matrix_pro": 1920,
+          "matrix_essentials": 480
+        },
+        "mapsGrossFirstTierUSD": "35.4",
+        "mapsIfAllFreeCapsAvailableAndVolumeTiersUSD": "0",
+        "illustrativeLunaUSD": "0.12",
+        "cloudRunAggregateCPUSeconds": 6000,
+        "cloudRunAggregateGiBSeconds": "4250.0",
+        "cloudRunRequests": 5000,
+        "cloudRunCalculatedGrossUSD": "0.15662500",
+        "cloudRunCalculatedIfFreeTierAvailableUSD": "0E-7",
+        "infrastructureEstimateUSD": [
+          67,
+          135
+        ],
+        "allInGrossReservationPlanningUSD": [
+          "102.52",
+          "170.52"
+        ],
+        "allInIfMapsFreeCapsAvailableUSD": [
+          "67.12",
+          "135.12"
+        ],
+        "currentQuotaCompatibleAtUniformDailyAverage": true,
+        "currentBudgetRootPolicyWouldAdmitWholeScenario": false,
+        "notAuthorization": true
+      },
+      {
+        "id": "small_public_beta",
+        "outingsPerMonth": 1000,
+        "units": {
+          "search_pro": 4000,
+          "details_enterprise": 500,
+          "matrix_pro": 19200,
+          "matrix_essentials": 4800
+        },
+        "mapsGrossFirstTierUSD": "354",
+        "mapsIfAllFreeCapsAvailableAndVolumeTiersUSD": "142",
+        "illustrativeLunaUSD": "1.2",
+        "cloudRunAggregateCPUSeconds": 60000,
+        "cloudRunAggregateGiBSeconds": "42500.0",
+        "cloudRunRequests": 50000,
+        "cloudRunCalculatedGrossUSD": "1.56625000",
+        "cloudRunCalculatedIfFreeTierAvailableUSD": "0E-7",
+        "infrastructureEstimateUSD": [
+          80,
+          170
+        ],
+        "allInGrossReservationPlanningUSD": [
+          "435.2",
+          "525.2"
+        ],
+        "allInIfMapsFreeCapsAvailableUSD": [
+          "223.2",
+          "313.2"
+        ],
+        "currentQuotaCompatibleAtUniformDailyAverage": true,
+        "currentBudgetRootPolicyWouldAdmitWholeScenario": false,
+        "notAuthorization": true
+      },
+      {
+        "id": "moderate_growth",
+        "outingsPerMonth": 10000,
+        "units": {
+          "search_pro": 40000,
+          "details_enterprise": 5000,
+          "matrix_pro": 192000,
+          "matrix_essentials": 48000
+        },
+        "mapsGrossFirstTierUSD": "3540",
+        "mapsIfAllFreeCapsAvailableAndVolumeTiersUSD": "3076",
+        "illustrativeLunaUSD": "12",
+        "cloudRunAggregateCPUSeconds": 600000,
+        "cloudRunAggregateGiBSeconds": "425000.0",
+        "cloudRunRequests": 500000,
+        "cloudRunCalculatedGrossUSD": "15.66250000",
+        "cloudRunCalculatedIfFreeTierAvailableUSD": "10.24250000",
+        "infrastructureEstimateUSD": [
+          150,
+          300
+        ],
+        "allInGrossReservationPlanningUSD": [
+          "3702",
+          "3852"
+        ],
+        "allInIfMapsFreeCapsAvailableUSD": [
+          "3238",
+          "3388"
+        ],
+        "currentQuotaCompatibleAtUniformDailyAverage": false,
+        "currentBudgetRootPolicyWouldAdmitWholeScenario": false,
+        "notAuthorization": true
+      }
+    ]
+  },
+  "proposedStagingFinancialDecisions": {
+    "approved": false,
+    "totalInfrastructureAndUsageReviewEnvelopeUSD": 200,
+    "providerGrossGrantLifetimeUSD": 50,
+    "providerDailyGrossUSD": 5,
+    "providerPerOutingGrossUSD": "3.50",
+    "applicationAccountingTimezone": "UTC proposed, not existing host-local policy or provider invoice timezone",
+    "logicalRoot": "one explicitly enrolled staging test block across restarts/rollouts; existing50 requests/1500 matrix elements/10 lookups retained; new root requires protected operator admission, not worker/browser/time rollover",
+    "automaticRenewal": false,
+    "existingAIExperimentAllowanceReusable": false,
+    "globalGrantAndHostedLLMTokenFinancialPoliciesImplemented": false
+  },
+  "historicalVerificationReview": {
+    "priorErrorHeadings": 33,
+    "affectedModules": 30,
+    "currentApplicationAssertionDefectsDemonstratedByThoseHeadings": 0,
+    "allClassified": true,
+    "classification": [
+      {
+        "module": "test_cloud_model52",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_audit",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_batch",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_live",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_offline",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_ordering",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_ordering_v3",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c8d436f0e859e7bde3a019b6f2fa9da588094171f7c5076526f4b45dfdeadbe3"
+      },
+      {
+        "module": "test_cloud_model52_revision",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_semantics",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_v4",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_cloud_model52_v4_live",
+        "errorHeadings": 0,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "c2206e6e26226f402b00ce7c4de56ab495e35e902cbaed3b6160673199889b48"
+      },
+      {
+        "module": "test_duration_b2",
+        "errorHeadings": 3,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "dac6cb00639c9d2a2bfb018c88f3cb7bff569acee34d92748ae0b2bfc62d068a"
+      },
+      {
+        "module": "test_phase_b",
+        "errorHeadings": 2,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "bcd5013d5bb9e3506bb72c54b01a0b4414d9074ea0a6be9f799e001910210202"
+      },
+      {
+        "module": "test_task52_diagnostic_progression",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "9d2fcb3637262f790ef028a003c14c50d7e94d5f8d59c3a1dcc31045682cb13f"
+      },
+      {
+        "module": "test_task52_ordering_v5",
+        "errorHeadings": 4,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "e5e80a1944a916855d55e63b9b47aef84dd65c18cea6804d787b023cc89f72c0"
+      },
+      {
+        "module": "test_task52_ordering_v51",
+        "errorHeadings": 4,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "13f512770df010cddc0bb97496e17e9bf189192582b2bb1c2cd826eedfe7dd33"
+      },
+      {
+        "module": "test_task52_prompt_freeze",
+        "errorHeadings": 2,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "0f5e6f05034a1a4594c836042ea58202e70c8d885b44646530788056ce3b1fa3"
+      },
+      {
+        "module": "test_task52_q1",
+        "errorHeadings": 2,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "b0da580730a6f382075d7151c173d87558c91f873d81730a6e4f0ca8363eb1ce"
+      },
+      {
+        "module": "test_task52_q2",
+        "errorHeadings": 3,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "9f414ff0456a5027f86da01d9d753ee37db1243f39ea9b91aa7572a1729133a6"
+      },
+      {
+        "module": "test_task52_q3",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "5a7a5540faa60eb60eab7bc2964874567977a6e3e995b8059bd42e89751a374c"
+      },
+      {
+        "module": "test_task52_q4a",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "7c7b63ccdebf96c389e0d603c0d41c6630a67f97b2f4dfd01dcca009d7d61602"
+      },
+      {
+        "module": "test_task52_q4b",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "81b82655de817424d3810c9d531d67b2649a0ac419e428aef872589130cb20ef"
+      },
+      {
+        "module": "test_task52_q4c",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "cef17203e89d35b5e2da270848d937b6394c7abedda26996f628410884b944d0"
+      },
+      {
+        "module": "test_task52_q4d",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "2e72eff8726f1018b090b970e11bd910a1aa1a62bf0eb4f49bd4c8e98375dfc2"
+      },
+      {
+        "module": "test_task52_real_integration",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "8a540c098242cb998a2c77f13ef5949012ba0324d37355b50cb1c8a83c2816ff"
+      },
+      {
+        "module": "test_task52_v51_evaluator",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "4fa32cf812bf1d275128151f49b53b09588201903cf219986a318334e37beb1b"
+      },
+      {
+        "module": "test_task52_version_review",
+        "errorHeadings": 1,
+        "boundary": "B2 complete implementation root",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "7a23ada3de540effacbe780620fea3b77e9bdef398e629729f86a53894726f00"
+      },
+      {
+        "module": "test_v51_application_fixture",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "a8a1c22fe330d183ce77a4218e4e69214ff9a60600908edff8cf38fcca767620"
+      },
+      {
+        "module": "test_v51_manual_pending",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "ae3fcd2ce2927b5172b02aac913492c4be37a4c676bc08d0957f976eab30f7b6"
+      },
+      {
+        "module": "test_v51_ordering_preservation",
+        "errorHeadings": 1,
+        "boundary": "Q4C artifact hashes",
+        "reasonVerifiedFromPreservedLog": true,
+        "applicationAssertionFailure": false,
+        "originalLogSHA256": "dead6b74941a3d1b8e0ce76a0f323057578ffdf0fd04b1989353769450bd6ab1"
+      }
+    ],
+    "rootCause": "B2 freezes the complete selected implementation root; Q4C separately freezes nine provider-related files changed by the legitimate inactive bridge; original B2 explicit function hashes and Q4A artifacts still match",
+    "testsOrPinsModified": false,
+    "fullBackendGreenClaim": false
+  },
+  "publicSources": {
+    "cloudRun": {
+      "url": "https://cloud.google.com/run/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "cloudRunPrivateNetworking": {
+      "url": "https://docs.cloud.google.com/run/docs/securing/private-networking",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "cloudRunIAP": {
+      "url": "https://docs.cloud.google.com/run/docs/securing/identity-aware-proxy-cloud-run",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "cloudRunDirectVPC": {
+      "url": "https://docs.cloud.google.com/run/docs/configuring/vpc-direct-vpc",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "cloudRunSecurity": {
+      "url": "https://docs.cloud.google.com/run/docs/securing/security",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "official_search_result_review"
+    },
+    "cloudSQL": {
+      "url": "https://cloud.google.com/sql/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "supabase": {
+      "url": "https://supabase.com/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "supabaseCompute": {
+      "url": "https://supabase.com/docs/guides/platform/manage-your-usage/compute",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "official_search_result_review"
+    },
+    "supabaseConnections": {
+      "url": "https://supabase.com/docs/guides/database/connecting-to-postgres",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "supabaseBackups": {
+      "url": "https://supabase.com/docs/guides/platform/backups",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "supabasePITR": {
+      "url": "https://supabase.com/docs/guides/platform/manage-your-usage/point-in-time-recovery",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "redisPricingUnavailable": {
+      "url": "https://cloud.google.com/memorystore/docs/redis/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "failed_current_retrieval_cached_reference_only"
+    },
+    "redisTLS": {
+      "url": "https://docs.cloud.google.com/memorystore/docs/redis/about-in-transit-encryption",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "redisSecurity": {
+      "url": "https://docs.cloud.google.com/memorystore/docs/redis/security-overview",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "redisConfiguration": {
+      "url": "https://docs.cloud.google.com/memorystore/docs/redis/supported-redis-configurations",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "upstashPricing": {
+      "url": "https://upstash.com/pricing/redis",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "upstashEncryption": {
+      "url": "https://upstash.com/docs/common/help/compliance",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "mapsPrices": {
+      "url": "https://developers.google.com/maps/billing-and-pricing/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "mapsTerms": {
+      "url": "https://developers.google.com/maps/documentation/places/web-service/policies",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "mapsServiceTerms": {
+      "url": "https://cloud.google.com/maps-platform/terms/maps-service-terms",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "openaiModel": {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "openaiPricing": {
+      "url": "https://developers.openai.com/api/docs/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "openaiPrivacy": {
+      "url": "https://developers.openai.com/api/docs/guides/your-data",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "geminiModel": {
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "geminiPricing": {
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "anthropicModel": {
+      "url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "secretManager": {
+      "url": "https://cloud.google.com/secret-manager/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "artifactRegistry": {
+      "url": "https://cloud.google.com/artifact-registry/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "artifactScanning": {
+      "url": "https://cloud.google.com/artifact-analysis/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "cloudBuild": {
+      "url": "https://cloud.google.com/build/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "observability": {
+      "url": "https://cloud.google.com/products/observability/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    },
+    "nat": {
+      "url": "https://cloud.google.com/nat/pricing",
+      "reviewDateUTC": "2026-11-11",
+      "retrieval": "opened_official_documentation"
+    }
+  },
+  "protectedEvidence": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "productionBehaviorChanged": false,
+  "publicLaunchAuthorized": false,
+  "Task53Started": false,
+  "verification": {
+    "focusedBackend": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest experiments.shared_state.test_action_identity backend.test_planning_admission backend.test_provider_budget backend.test_saved_details_reliability backend.test_saved_plans backend.test_database_check backend.test_database_security -v",
+      "run": 83,
+      "passed": 68,
+      "skipped": 15,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 2.646,
+      "skips": "opt-in hosted database tests; no hosted writes authorized"
+    },
+    "packaging": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest deployment.test_packaging -v",
+      "run": 7,
+      "passed": 7,
+      "skipped": 0,
+      "seconds": 3.664,
+      "initialAttempt": "6 passed; one loopback bind PermissionError under sandbox; unchanged tests rerun with approved loopback permission"
+    },
+    "documentation": {
+      "costScenariosRecomputed": 3,
+      "localLinksChecked": 525,
+      "numberedHandbookChapters": 20,
+      "reviewedAndUpdatedChapters": [
+        12,
+        13,
+        14,
+        18
+      ],
+      "otherChaptersUnchanged": true,
+      "onlyMarkdownAndJSONChanged": true
+    },
+    "secretScan": {
+      "configuredSensitiveValues": 2,
+      "currentFilesAssets": 3511,
+      "historicalObjects": 3488,
+      "currentMatches": 0,
+      "historicalMatches": 0
+    },
+    "journalBeforeAfter": "unchanged SHA256, original root/ten rows/corrections,324 private files and historical halt",
+    "notRerun": [
+      "full backend discovery",
+      "frontend suite",
+      "TypeScript",
+      "ESLint",
+      "production build",
+      "Docker image builds/smoke/rescan",
+      "local PostgreSQL authority suites",
+      "browser end-to-end",
+      "hosted load or backup restore drills"
+    ],
+    "notRerunReason": "documentation-only preflight; application/runtime/dependencies/templates/frozen identities unchanged; no full-suite or hosted-readiness claim",
+    "evidenceLogSHA256": {
+      "whereto-preflight-tests.log": "4a63435fd2c42a6dcdfcc051dd6518801888cd3a94422673841665029ee6d677",
+      "whereto-preflight-packaging.log": "7d73efaaf04ab9927adabe8f107de7ff3d89485385f18ef5ef5a02632fa91ae9",
+      "whereto-preflight-packaging-approved.log": "3e990854a8bc4971ada80503ca8f0609e768998e25fa1b2eccd217e0ac95a6b6",
+      "whereto-preflight-secret.log": "06d6aa267186d2c931903e3fac804493057b84ca0042b9fb398910303d777318",
+      "whereto-preflight-final-integrity.log": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1"
+    }
+  }
+}
