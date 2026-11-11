@@ -182,18 +182,18 @@ class OutingBudget:
 
     @contextmanager
     def reserve(self, operation: Operation, request_id: str, *,
-                origins: int = 0, destinations: int = 0, details_pro: bool = False) -> Iterator[None]:
+                origins: int = 0, destinations: int = 0, details_pro: bool = False, payload=None) -> Iterator[None]:
         """request_id identifies an exact request within this outing, never a key.
 
         Matrix accounting charges the full origins × destinations, not one HTTP
         request or the number of results that happen to succeed. Errors retain
         consumed counters and request identity, so retries cannot loop for free.
         """
-        with self._reserve_batch([(operation, request_id, origins, destinations)], details_pro=details_pro):
+        with self._reserve_batch([(operation, request_id, origins, destinations)], details_pro=details_pro, payloads=[payload] if payload else None):
             yield
 
     @contextmanager
-    def reserve_matrices(self, matrices: list[tuple[str, int, int]], *, traffic_aware=False) -> Iterator[None]:
+    def reserve_matrices(self, matrices: list[tuple[str, int, int]], *, traffic_aware=False, payloads=None) -> Iterator[None]:
         """Admit a complete routing plan atomically, before authentication/I/O.
 
         All planned attempts remain charged locally even if a failure stops the
@@ -201,11 +201,11 @@ class OutingBudget:
         """
         if not matrices:
             raise ValueError("A matrix reservation needs at least one request.")
-        with self._reserve_batch([("matrix", key, rows, cols) for key, rows, cols in matrices], traffic_aware=traffic_aware):
+        with self._reserve_batch([("matrix", key, rows, cols) for key, rows, cols in matrices], traffic_aware=traffic_aware, payloads=payloads):
             yield
 
     @contextmanager
-    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False, details_pro=False) -> Iterator[None]:
+    def _reserve_batch(self, attempts: list[tuple[Operation, str, int, int]], *, traffic_aware=False, details_pro=False, payloads=None) -> Iterator[None]:
         from backend.planning_admission import guard_provider
         guard_provider()
         if details_pro and any(op != "details" for op, _, _, _ in attempts):
@@ -286,7 +286,8 @@ class OutingBudget:
             from backend.performance import stage
             category=attempts[0][0]
             from backend.operations import stage as measured_stage
-            with stage(category), measured_stage(category):
+            from backend.action_dispatch import budget as action_budget
+            with stage(category), measured_stage(category), action_budget(self,attempts,payloads):
                 try:
                     yield
                 except Exception as error:

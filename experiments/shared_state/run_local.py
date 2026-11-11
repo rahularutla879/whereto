@@ -19,7 +19,7 @@ def run(*args, **kwargs):
     return subprocess.run(D+list(args),check=True,**kwargs)
 
 
-def main():
+def main(suites=('test_store','test_financial','test_bridge')):
     suffix='whereto-shared-'+secrets.token_hex(6)
     volume=suffix+'-data';pg=client=None
     admin_password,worker_password=secrets.token_hex(24),secrets.token_hex(24)
@@ -42,12 +42,16 @@ def main():
             '-e','SYNTHETIC_ADMIN_PASSWORD='+admin_password,'-e','SYNTHETIC_WORKER_PASSWORD='+worker_password,
             '--entrypoint','sleep',BACKEND,'1800'],text=True).strip()
         run('cp',str(ROOT/'experiments'),client+':/app/experiments')
-        for name in ['testing_clock.py','journey_fixtures.py','hours_fixtures49.py','test_journey.py',
+        run('cp',str(ROOT/'deployment/backend-files.json'),client+':/app/deployment/backend-files.json')
+        for file in json.loads((ROOT/'deployment/backend-files.json').read_text())['files']:
+            run('cp',str(ROOT/file),client+':/app/'+file)
+        for name in ['test_real_planning.py','real_fixtures.py','location_fixtures.py','testing_clock.py','journey_fixtures.py','hours_fixtures49.py','test_journey.py',
                      'test_stop_resolution.py','test_advanced_routing.py','test_advanced_timing.py','test_advanced_planning.py']:
             run('cp',str(ROOT/'backend'/name),client+':/app/backend/'+name)
         print('Running real PostgreSQL synthetic state tests; no production integration.',flush=True)
-        run('exec',client,'python','-m','unittest','experiments.shared_state.test_store','-v')
-        run('exec',client,'python','-m','unittest','experiments.shared_state.test_financial','-v')
+        for suite in suites:
+            if suite not in ('test_store','test_financial','test_bridge'):raise ValueError('Unknown synthetic suite')
+            run('exec',client,'python','-m','unittest','experiments.shared_state.'+suite,'-v')
         run('exec',client,'python','-m','experiments.shared_state.test_financial','seed')
         run('kill','--signal','KILL',pg,stdout=subprocess.DEVNULL)
         run('exec',client,'python','-m','experiments.shared_state.test_financial','unavailable')

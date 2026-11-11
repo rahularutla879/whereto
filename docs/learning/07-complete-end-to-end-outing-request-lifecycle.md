@@ -139,3 +139,10 @@ For A–E draw a branch diagram and put a question mark at every fact the origin
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-07).
 
 [Previous chapter](06-apis-http-json-and-frontend-backend-communication.md) · [Contents](README.md) · [Next chapter](08-ai-interpretation-qwen-ollama-prompts-and-structured-json.md)
+
+
+## Local source-to-provider proof
+
+In the inactive Task 52 bridge, `Broker.interpret` retains owned copies of the original input, raw extraction and complete legacy result. `Broker.plan` consumes the existing ordinary/handoff receipt. An advanced handoff creates a Session but cannot search by itself; `Broker.advance` uses the actual Session continuation checks under a separate action. Pending answers go through the existing `validate_legacy` with the issued effective snapshot and a new revision, without pretending it is fresh model output. Source edits revoke the old handle. These are Python-only isolated tests, not new HTTP routes.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

@@ -103,3 +103,10 @@ Draw a duplicate-click race and insert the active fingerprint lock. Use fictiona
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-14).
 
 [Previous chapter](13-state-management-caching-and-request-lifecycles.md) · [Contents](README.md) · [Next chapter](15-testing-mocks-debugging-and-error-handling.md)
+
+
+## Registered actions and constrained issuer authority
+
+`bridge.sql` adds immutable action bindings and refresh claims. Only the separate NOLOGIN issuer can register actions or approve request plans; the worker can execute only `bridge_protocol`. It cannot call the private arbitrary-charge core or change rates/history. SQL requires active HTTP ownership, revision/fence, intact evidence and once-only dispatch ordinals. Charges still come from protected V3 unit policies. A worker crash or uncertain fake send retains committed exposure without retries/refunds. The trusted issuer and same-process Python remain privileged; private attributes are not a hostile-code sandbox. Protected workload enrollment, shared evidence and hosted spending approval remain future requirements.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

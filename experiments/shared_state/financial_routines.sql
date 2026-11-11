@@ -59,7 +59,7 @@ BEGIN
  SELECT * INTO STRICT c FROM synthetic_state.capabilities WHERE id=cap_id;
  SELECT * INTO STRICT b FROM synthetic_state.budget_bindings WHERE session=c.session;
  IF NOT EXISTS(SELECT 1 FROM synthetic_state.sessions s WHERE s.id=c.session AND s.revision=c.revision AND NOT s.revoked AND s.expires>now_at)
-   OR c.purpose<>'ordinary_plan' OR EXISTS(SELECT 1 FROM synthetic_state.request_plans WHERE capability=cap_id)
+   OR c.purpose NOT IN ('ordinary_plan','provider_action') OR EXISTS(SELECT 1 FROM synthetic_state.request_plans WHERE capability=cap_id)
    OR jsonb_typeof(items) IS DISTINCT FROM 'array' OR jsonb_array_length(items) NOT BETWEEN 1 AND 64
  THEN RAISE EXCEPTION 'request_plan'; END IF;
  FOR item IN SELECT * FROM jsonb_array_elements(items) LOOP

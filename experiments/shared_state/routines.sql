@@ -32,7 +32,7 @@ BEGIN
  PERFORM id FROM synthetic_state.gate WHERE id=1 FOR UPDATE;
  IF NOT FOUND THEN RAISE EXCEPTION 'gate_missing'; END IF;
  SELECT * INTO STRICT policy FROM synthetic_state.policy WHERE id=1;
- IF policy.version<>'52-shared-authority-financial-core-v3' THEN
+ IF policy.version<>'52-shared-authority-action-core-v4' THEN
    RAISE EXCEPTION 'policy_identity'; END IF;
  IF jsonb_typeof(policy.limits) IS DISTINCT FROM 'object'
    OR (SELECT count(*) FROM jsonb_object_keys(policy.limits))<>5
@@ -81,7 +81,7 @@ BEGIN
  IF jsonb_typeof(p->'session') IS DISTINCT FROM 'string' OR sid !~ '^[0-9a-f]{64}$' THEN RAISE EXCEPTION 'session'; END IF;
  IF a IN ('create','revise') THEN
    kind:=p->>'kind';binding:=p->>'binding';payload:=p->'payload';
-   IF kind IS NULL OR kind NOT IN ('ordinary','advanced_handoff','pending_effective','options','selected','advanced_results')
+   IF kind IS NULL OR kind NOT IN ('provider_action','ordinary','advanced_handoff','pending_effective','options','selected','advanced_results')
      OR jsonb_typeof(p->'binding') IS DISTINCT FROM 'string' OR binding !~ '^[0-9a-f]{64}$'
      OR jsonb_typeof(payload) IS DISTINCT FROM 'object' OR octet_length(payload::text)>131072
    THEN RAISE EXCEPTION 'evidence'; END IF;
@@ -131,7 +131,7 @@ BEGIN
    UPDATE synthetic_state.sessions SET revoked=true,fence=synthetic_state.sessions.fence+1 WHERE id=sid;
    RETURN '{}'::jsonb;
  ELSIF a='issue' THEN
-   expected:=CASE s.kind WHEN 'ordinary' THEN 'ordinary_plan' WHEN 'advanced_handoff' THEN 'handoff_only'
+   expected:=CASE s.kind WHEN 'provider_action' THEN 'provider_action' WHEN 'ordinary' THEN 'ordinary_plan' WHEN 'advanced_handoff' THEN 'handoff_only'
      WHEN 'pending_effective' THEN 'clarify_only' WHEN 'selected' THEN 'save_selection' ELSE 'browse_only' END;
    IF p->>'purpose' IS DISTINCT FROM expected OR jsonb_typeof(p->'capability') IS DISTINCT FROM 'string'
      OR p->>'capability' !~ '^[0-9a-f]{64}$' OR jsonb_typeof(p->'action') IS DISTINCT FROM 'string'
@@ -146,7 +146,7 @@ BEGIN
  SELECT * INTO cap FROM synthetic_state.capabilities c WHERE c.id=p->>'capability';
  IF NOT FOUND OR cap.session<>sid OR cap.revision<>revision OR cap.binding<>s.binding THEN RAISE EXCEPTION 'capability_binding'; END IF;
  IF a='reserve' THEN
-   IF s.kind<>'ordinary' OR cap.purpose<>'ordinary_plan' THEN RAISE EXCEPTION 'not_provider_ready'; END IF;
+   IF NOT ((s.kind='ordinary' AND cap.purpose='ordinary_plan') OR (s.kind='provider_action' AND cap.purpose='provider_action')) THEN RAISE EXCEPTION 'not_provider_ready'; END IF;
    IF p->>'provider' IS NULL OR p->>'provider' NOT IN ('synthetic_ai','synthetic_maps') OR
       NOT synthetic_state.valid_integer(p->'charge',0,1000000000000) THEN RAISE EXCEPTION 'reservation'; END IF;
    SELECT count(*) AS attempts,coalesce(sum(charge),0) AS gross,

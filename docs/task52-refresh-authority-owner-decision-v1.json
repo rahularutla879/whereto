@@ -1,0 +1,20 @@
+{
+  "identity": "52-refresh-purpose-authority-owner-decision-v1",
+  "provenance": "Explicit owner reply in this ChatGPT development conversation, 2026-11-11",
+  "decision": "Allow fresh purpose-specific saved-plan refresh authority without the omitted original interpretation",
+  "conditions": [
+    "Verify the explicit refresh request, current ownership/access capability, RLS and expiry",
+    "Bind the selected saved itinerary and its existing allowed venue IDs; introduce no venues, activities, destinations or planning requirements",
+    "Bind the saved document, refresh session, request, permitted operations and current revision",
+    "Require admission, protected financial reservation, canonical payload verification and single-use dispatch",
+    "Refuse replayed, stale, expired, revoked or otherwise unauthorized requests",
+    "Refuse out-of-scope refresh or require a separate validated planning action"
+  ],
+  "notOriginalInterpretationEvidence": true,
+  "freshInterpretationAuthorized": false,
+  "unrestrictedDiscoveryAuthorized": false,
+  "productionActivationAuthorized": false,
+  "financialGrant": false,
+  "independentReview": false,
+  "cryptographicSignature": null
+}

@@ -325,7 +325,8 @@ class GoogleRouteCalculator:
                                      distance_meters=0, provider="local_identity", estimate_type="same_location")
         if reservations:
             try:
-                with self.outing.reserve_matrices(reservations, traffic_aware=request.mode == "drive"):
+                from backend.action_dispatch import matrix as provider_request
+                with self.outing.reserve_matrices(reservations, traffic_aware=request.mode == "drive",payloads=[provider_request(body) for body in bodies]):
                     from backend.routes_transport import compute_matrix
                     computed = {}
                     routed_points = {p.id: p for origins, destinations in matrices for p in origins + destinations}

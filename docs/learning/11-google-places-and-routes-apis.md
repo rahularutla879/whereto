@@ -72,3 +72,10 @@ Draw a fictional two-by-two matrix and count all cells including diagonals. Use 
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-11).
 
 [Previous chapter](10-planning-algorithms-filtering-scheduling-and-ranking.md) · [Contents](README.md) · [Next chapter](12-postgresql-supabase-sessions-and-saved-plans.md)
+
+
+## Canonical fake-provider requests
+
+A canonical request is a reproducible byte representation of the exact operation, HTTP method, URL, field mask and body. `backend.action_dispatch.Request.make` uses sorted compact JSON and SHA256; it does not infer meaning or repair extraction. Actual builders attach Search/Details/Matrix payloads to native budget reservations only in the bound experiment. Matrix dimensions and Drive/Walk SKU remain checked. Before the fake callback runs, the bridge compares the original bytes and PostgreSQL compares the reserved line digest. The experiment has no Google credential loader or real HTTP client; the production transport remains unchanged when the context is absent.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

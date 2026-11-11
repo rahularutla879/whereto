@@ -112,3 +112,10 @@ Draw one plan with two option rows and their stops. Mark which rows must commit 
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-12).
 
 [Previous chapter](11-google-places-and-routes-apis.md) · [Contents](README.md) · [Next chapter](13-state-management-caching-and-request-lifecycles.md)
+
+
+## Purpose-specific refresh authority
+
+Saved documents intentionally omit original interpretation evidence. The owner approved a fresh, narrow refresh purpose: reopen using current access/RLS/expiry checks, bind the selected saved itinerary and allowed IDs, and allow only the existing Details refresh operations. `Broker.refresh` rechecks the exact document before each reservation/send. Its stable-key replay identity is claimed in SQL with the first charged request for the existing 1800-second replay window. Viewing a plan needs no provider grant. Tests fake saved access; they do not write owner data, add a migration or prove hosted RLS integration.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

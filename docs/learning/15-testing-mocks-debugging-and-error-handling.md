@@ -115,3 +115,10 @@ After inspecting backend/TESTING.md, run only backend/.venv/bin/python -m unitte
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-15).
 
 [Previous chapter](14-security-rate-limits-accounting-and-reliability.md) · [Contents](README.md) · [Next chapter](16-git-github-and-the-development-workflow.md)
+
+
+## Testing the inactive action bridge
+
+Run `backend/.venv/bin/python experiments/shared_state/run_local.py` from the repository root with the approved dedicated Colima profile. It creates/removes only its own synthetic PostgreSQL volume/containers, exposes no host port, copies reviewed runtime files and injects authored responses. `test_bridge.py` calls actual ordinary/advanced planning, pending answers, options, lookup, contact, refresh and selected receipt selection. Its crash test kills a worker after committed intent/dispatch. `test_action_identity.py` separately compares seven stored OpenAI legacy result hashes and 27 Qwen ordering results under the current build; it does not bypass an old evaluator. Old B2/Q1–Q4 checks intentionally refuse changed source identities: report those refusals, never silently repin them. These tests are not browser or hosted verification.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

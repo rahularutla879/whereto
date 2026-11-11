@@ -48,7 +48,8 @@ def lookup_starting_places(request, session):
     from backend.provider_budget import ProviderLimitError
     from backend.provider_errors import attach_accounting
     try:
-        with outing.reserve('lookup', sha256(request.query.casefold().encode()).hexdigest()):
+        from backend.action_dispatch import search as provider_request
+        with outing.reserve('lookup', sha256(request.query.casefold().encode()).hexdigest(),payload=provider_request({'textQuery':request.query,'pageSize':3,'languageCode':'en'},FIELD_MASK)):
             from backend.places_transport import text_search
             data = text_search({'textQuery': request.query, 'pageSize': 3, 'languageCode': 'en'}, field_mask=FIELD_MASK)
     except (ProviderLimitError,DiscoveryError) as error:raise attach_accounting(error,outing)

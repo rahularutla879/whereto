@@ -750,3 +750,6 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 **Budget root:** the issuer-provisioned logical equivalent of a provider-accounting session; it survives replacement evidence sessions and workers. It is not a browser-selected entitlement.
 **Approved request plan:** protected operation/digest/variant/dimensions used by SQL to derive units and price. It is not a model interpretation or permission to dispatch an API request.
 **Financial calendar identity:** protected accounting identity, timezone and local date attached to a reservation; changing a worker's timezone does not change it.
+
+
+**Purpose-specific authority:** permission for one narrowly defined operation, such as refreshing Details for an already-selected saved itinerary. It is not proof of original interpretation or permission for unrelated discovery. The inactive Task 52 bridge binds purpose, source/effective evidence, revision, admission and canonical payload before a SQL reservation.

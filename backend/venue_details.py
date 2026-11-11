@@ -45,6 +45,9 @@ def fetch_details(place_id):
     if not local_real_enabled() or os.environ.get("WHERETO_CONTACT_DETAILS_DEV") != "1":
         raise DiscoveryError("disabled", "Phone and website lookup is disabled for this development session. Use the Google Maps link to contact the venue.")
     from backend.places_transport import access_token
+    from backend.action_dispatch import send,details
+    handled,data=send(details(place_id,DETAILS_MASK))
+    if handled:return data
     with requests.Session() as session:
         session.mount("https://", requests.adapters.HTTPAdapter(max_retries=0))
         token = access_token(session)
@@ -107,7 +110,8 @@ class DetailsSessions:
         from backend.provider_errors import attach_accounting
         admitted=False
         try:
-            with entry[2].reserve("details", place_id):
+            from backend.action_dispatch import details as provider_request
+            with entry[2].reserve("details", place_id,payload=provider_request(place_id,DETAILS_MASK)):
                 admitted=True
                 result=fetch_details(place_id)
             return {**result, "diagnostics": entry[2].usage()}

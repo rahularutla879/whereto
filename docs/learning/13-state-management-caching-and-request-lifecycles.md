@@ -103,3 +103,10 @@ Draw three independent timelines: selected calendar date, 600-second session, 30
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-13).
 
 [Previous chapter](12-postgresql-supabase-sessions-and-saved-plans.md) · [Contents](README.md) · [Next chapter](14-security-rate-limits-accounting-and-reliability.md)
+
+
+## Action ownership versus provider payloads
+
+`Source` in the local bridge is a deep-copied integrity-sealed record with a 600-second lifetime and a revision. A matching request digest alone is not permission: source ownership, native session/capability checks, current action admission and SQL authority must all agree. A ContextVar identifies the active fake-dispatch owner, and a nonblocking action lock prevents overlapping batches. PostgreSQL retains charges/replay/fences after a worker dies; local source/session maps are lost and fail closed. This is not a completed Redis or hosted session implementation.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

@@ -98,3 +98,10 @@ Draw the architecture on paper and mark each component as browser, local service
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-03).
 
 [Previous chapter](02-programming-and-web-development-fundamentals.md) · [Contents](README.md) · [Next chapter](04-frontend-react-next-js-typescript-and-tailwind.md)
+
+
+## Inactive provider-action bridge
+
+`experiments/shared_state/action_bridge.py` is a separately constructed local test composition. It calls the existing interpreter, ordinary/advanced planners and saved-refresh functions; it does not create a second planner. Normal FastAPI startup does not construct it. `backend/action_dispatch.py` has a ContextVar whose default is `None`; normal application calls therefore keep the existing credential/transport and admission behavior. A reviewed build and isolated fake services are prerequisites for the experiment, not production activation.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

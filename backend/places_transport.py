@@ -58,6 +58,9 @@ def access_token(session: requests.Session) -> str:
 
 
 def text_search(body: dict, *, field_mask: str | None = None) -> dict:
+    from backend.action_dispatch import send,search as provider_request
+    handled,data=send(provider_request(body,field_mask))
+    if handled:return data
     require_development_discovery()
     from backend.search_fields import search_mask
     default=search_mask(FIELD_MASK)

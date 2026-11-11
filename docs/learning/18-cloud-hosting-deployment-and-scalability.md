@@ -112,3 +112,10 @@ On paper route a continuation to a second replica. List the state it would need 
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-18).
 
 [Previous chapter](17-task-52b-cloud-ai-evaluation-and-ordering-research.md) · [Contents](README.md) · [Next chapter](19-how-to-read-debug-and-modify-this-codebase-yourself.md)
+
+
+## Bridge readiness is not hosted authority
+
+The Task 52 action bridge is an inactive local composition, with no startup switch, real issuer enrollment or live dispatch. Supabase operational-role capacity/RLS, private expiring shared evidence, Cloud Run service authentication/connection limits, hosted inference qualification and current provider prices still require private-staging preflight. Existing V3 rates are historical gross estimates, not current price certification or a new dollar allowance. The deployed application must ultimately run with the owner’s Mac off. Paid recurring resources and public launch still require their separate owner approvals.
+
+See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.

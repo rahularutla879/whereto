@@ -34,6 +34,9 @@ def fetch_saved_details(identity, *, include_contacts=False, include_hours=False
     if not local_real_enabled() or os.environ.get('WHERETO_CONTACT_DETAILS_DEV')!='1':
         raise DiscoveryError('disabled','Venue refresh is disabled in this development session.')
     mask=(CONTACT_REFRESH_MASK if include_contacts else REFRESH_MASK)+(','+HOURS_REFRESH_FIELDS if include_hours else '')
+    from backend.action_dispatch import send,details as provider_request
+    handled,data=send(provider_request(identity,mask))
+    if handled:return data
     from backend.places_transport import access_token
     with requests.Session() as session:
         session.mount('https://',requests.adapters.HTTPAdapter(max_retries=0))
@@ -120,7 +123,9 @@ class RefreshSessions:
             if identity in results:continue
             admitted=False
             try:
-                with outing.reserve('details',digest(str(request.refreshId)+':'+identity), details_pro=not (request.includeContacts or request.includeHours)):
+                from backend.action_dispatch import details as provider_request
+                mask=(CONTACT_REFRESH_MASK if request.includeContacts else REFRESH_MASK)+(','+HOURS_REFRESH_FIELDS if request.includeHours else '')
+                with outing.reserve('details',digest(str(request.refreshId)+':'+identity), details_pro=not (request.includeContacts or request.includeHours),payload=provider_request(identity,mask)):
                     admitted=True
                     admitted_action=True
                     if request.includeHours:

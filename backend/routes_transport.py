@@ -28,6 +28,9 @@ def _validate_basic_body(body):
 
 
 def compute_matrix(body: dict) -> list:
+    from backend.action_dispatch import send,matrix as provider_request
+    handled,data=send(provider_request(body))
+    if handled:return data
     require_development_routes()
     # Defense in depth: only the selected TRAFFIC_AWARE policy is allowed; never OPTIMAL.
     _validate_basic_body(body)

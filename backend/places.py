@@ -302,7 +302,8 @@ class PlacesDiscovery:
         body = search_body(DiscoveryRequest(activity=ActivityType.coffee, destination=exact_area), limit)
         body['textQuery'] = query + (' in '+area.name if area.name and area.enforce_name else '')
         identity = sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
-        with self.outing.reserve('search', identity):
+        from backend.action_dispatch import search as provider_request
+        with self.outing.reserve('search', identity,payload=provider_request(body)):
             from backend.places_transport import text_search
             data = text_search(body)
         parsed = parse_response(data, exact_area, limit, identity_lookup=True)
@@ -410,7 +411,8 @@ class PlacesDiscovery:
         if request.page_token:
             body["pageToken"] = request.page_token
         identity = sha256(json.dumps(body, sort_keys=True).encode()).hexdigest()
-        with self.outing.reserve("search", identity):
+        from backend.action_dispatch import search as provider_request
+        with self.outing.reserve("search", identity,payload=provider_request(body)):
             if request.page_token:
                 self.outing.note_page()
             from backend.places_transport import text_search

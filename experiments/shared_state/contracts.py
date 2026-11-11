@@ -6,7 +6,7 @@ import json
 
 from backend.planning_admission import _plain
 
-VERSION = '52-shared-authority-financial-core-v3'
+VERSION = '52-shared-authority-action-core-v4'
 MAX_EVIDENCE = 65536
 
 
@@ -22,6 +22,7 @@ class Unavailable(RuntimeError):
 
 
 class Kind(str, Enum):
+    ACTION = 'provider_action'
     ORDINARY = 'ordinary'
     HANDOFF = 'advanced_handoff'
     PENDING = 'pending_effective'
@@ -31,12 +32,13 @@ class Kind(str, Enum):
 
 
 def types():
+    from experiments.shared_state.bridge_models import ProviderAction
     from backend.real_planning import PlannerInput
     from backend.interpretation import InterpretationResult, PendingClarification
     from backend.ranking import RankingResult
     from backend.saved_plans import SavedDocument
     from backend.advanced_planning import AdvancedResult
-    return {Kind.ORDINARY: PlannerInput, Kind.HANDOFF: InterpretationResult,
+    return {Kind.ACTION: ProviderAction, Kind.ORDINARY: PlannerInput, Kind.HANDOFF: InterpretationResult,
             Kind.PENDING: PendingClarification, Kind.OPTIONS: RankingResult,
             Kind.SELECTED: SavedDocument, Kind.ADVANCED_RESULTS: AdvancedResult}
 

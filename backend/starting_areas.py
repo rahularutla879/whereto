@@ -97,7 +97,8 @@ def _suggest_starting_areas(query,session,outing):
         body=search_body(DiscoveryRequest(activity=query.activities[0],destination=search_area),3)
         body.pop('includedType',None);body.pop('strictTypeFiltering',None)
         body['textQuery']=f'public transit stations and public squares in {query.destination}'
-        with outing.reserve('lookup',sha256(json.dumps(body,sort_keys=True).encode()).hexdigest()):
+        from backend.action_dispatch import search as provider_request
+        with outing.reserve('lookup',sha256(json.dumps(body,sort_keys=True).encode()).hexdigest(),payload=provider_request(body,FIELD_MASK)):
             from backend.places_transport import text_search
             raw=text_search(body,field_mask=FIELD_MASK)
         found=parse_response(raw,search_area,3)

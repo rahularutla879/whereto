@@ -11,7 +11,7 @@ CREATE TABLE synthetic_state.sessions (
  id text PRIMARY KEY, revision bigint NOT NULL CHECK(revision>0),
  fence bigint NOT NULL DEFAULT 0 CHECK(fence>=0), worker uuid,
  expires timestamptz NOT NULL, revoked boolean NOT NULL DEFAULT false,
- kind text NOT NULL CHECK(kind IN ('ordinary','advanced_handoff','pending_effective','options','selected','advanced_results')),
+ kind text NOT NULL CHECK(kind IN ('provider_action','ordinary','advanced_handoff','pending_effective','options','selected','advanced_results')),
  binding text NOT NULL CHECK(length(binding)=64)
 );
 -- Local synthetic substitute for volatile shared storage. NOT approved for real text.

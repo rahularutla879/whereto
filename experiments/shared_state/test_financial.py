@@ -22,7 +22,7 @@ ROOT='00000000-0000-4000-8000-000000000001'
 START=datetime(2026,11,1,5,30,tzinfo=timezone.utc)
 
 
-def fixture(profile='bounded',daily=None,settings=None):
+def fixture(profile='bounded',daily=None,settings=None,extension=None):
     settings=(settings or ProviderSettings()).model_dump(exclude={'mode','exploration'})
     def install(c):
         c.execute(Path(__file__).with_name('financial_schema.sql').read_text(),prepare=False)
@@ -30,6 +30,7 @@ def fixture(profile='bounded',daily=None,settings=None):
                   (VERSION,RATE_VERSION,Jsonb(RATES),Jsonb(settings),'America/New_York',daily,10000000,profile!='bounded','synthetic-local-project-v1',profile))
         c.execute("UPDATE synthetic_state.test_clock SET value=%s",(START,))
         c.execute(Path(__file__).with_name('financial_routines.sql').read_text(),prepare=False)
+        if extension:extension(c)
     core.fixture(LIMITS,extension=install)
 
 
