@@ -90,11 +90,11 @@ A high/critical match identifies an installed package/advisory association. It d
 
 Read RequestManagement and provider_work.run_work. Find where HTTP ownership and worker ownership differ.
 
-## Inactive shared-state reference
+## Inactive shared-state and financial authority
 
-The inactive V2 shared-state protocol enforces reservation and outcome rules in PostgreSQL, including when a caller skips the Python wrapper. The worker has no direct table, sequence, DDL or owner-role privileges; only the reviewed protocol routine may change protected state. It computes totals from immutable charge records, enforces caps/fences/unique consumption and appends outcomes. Failed/uncertain charges are never refunded automatically; uncertainty blocks new work. A SQL signature or evidence digest does not prove semantic correctness: `Reservation.planning_authorized` stays false. Runtime quotes are still fictional integer amounts under synthetic caps; real provider-unit rates and daily/outing budgets must be bound to protected policy before live use. Bootstrap/owner code remains privileged and must be separately controlled; SQL cannot independently verify the truth of an external outcome.
+The inactive `FinancialPostgres.reserve(lease, capability, operation_id)` accepts no financial quote or unit override. SQL prices the issuer-approved plan from protected rates and enforces outing/search/detail/matrix counts, logical-session limits, minute windows, daily exposure where enabled, replay and concurrency. A single-use dispatch ordinal prevents extra or repeated sends; no transport exists in this module. Preserve the actual source distinction: bounded planning currently has no dollar ledger, exploration records costs with the dollar ceiling disabled, and standalone `DevelopmentCost()` defaults to a configurable $10/day guard. V3 tests these configurations separately; it does not activate a new allowance. There is no invented monthly/lifetime app budget and the halted AI experiment is separate.
 
-[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
+[Financial policy audit, tests and limitations](../task52-financial-authority.md)
 
 ## Practical exercise — 14.P
 

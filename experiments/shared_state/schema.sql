@@ -50,3 +50,11 @@ CREATE TRIGGER no_cap_mutation BEFORE UPDATE OR DELETE ON synthetic_state.capabi
  FOR EACH ROW EXECUTE FUNCTION synthetic_state.immutable();
 CREATE TRIGGER no_policy_mutation BEFORE UPDATE OR DELETE ON synthetic_state.policy
  FOR EACH ROW EXECUTE FUNCTION synthetic_state.immutable();
+
+-- Disposable test clock; NULL always uses real database time. No runtime access.
+CREATE TABLE synthetic_state.test_clock (id integer PRIMARY KEY CHECK(id=1), value timestamptz);
+INSERT INTO synthetic_state.test_clock VALUES(1,NULL);
+CREATE FUNCTION synthetic_state.protocol_now() RETURNS timestamptz LANGUAGE sql
+ SET search_path=pg_catalog,pg_temp AS $$
+ SELECT coalesce(value,clock_timestamp()) FROM synthetic_state.test_clock WHERE id=1
+$$;

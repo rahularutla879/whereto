@@ -118,3 +118,5 @@ backend/.venv/bin/python experiments/shared_state/run_local.py
 ```
 
 Creates only new local containers and a disposable volume; never point a learning exercise at Supabase. Requires the previously verified backend image and digest-pinned PostgreSQL image. No application startup switch is installed. See [scope and failure interpretation](../../docs/task52-shared-state-foundations.md).
+
+The same explicit shared-state harness now runs the core security suite and the protected V3 financial suite. It uses fresh synthetic roots/issuer plans, deterministic private test time, fictional zero-I/O operations and an actual database crash. `FinancialPostgres` has no owner policy credentials, live transport or startup selector. Do not connect this exercise to a real database or reuse the AI evaluation journal. [Source policy and scope](../task52-financial-authority.md).

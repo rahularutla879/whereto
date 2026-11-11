@@ -99,11 +99,11 @@ A textarea edit does not revoke every previously issued bearer capability on the
 
 Read database, write_document and read_document in saved_plans.py, then locate the matching RLS policy.
 
-## Inactive shared-state reference
+## Inactive shared-state and financial authority
 
-`experiments/shared_state/schema.sql` and `routines.sql` initialize only new fictional local databases, never the saved-plan schema. The runtime worker can CONNECT, use the schema and execute `synthetic_state.protocol(text,jsonb)`; it cannot read or mutate tables or sequences directly. A separate NOLOGIN owner supplies privileges through a SECURITY DEFINER function with a fixed search path and qualified table/helper names. PUBLIC cannot execute the helpers. The function takes a fixed command and exact arguments, not SQL text. It locks the same `gate` row before checking totals under READ COMMITTED. An INSERTed reservation and RESERVED fact commit together; capability and operation uniqueness prevent replay. UNLOGGED synthetic evidence disappears on an unclean restart and must block continuation. Bootstrap/fault-injection administrator access is test-only; it must never be supplied to the runtime worker in a real deployment.
+The inactive V3 financial front door is in `experiments/shared_state/financial_routines.sql`. The runtime can execute that routine but cannot directly change pricing, scopes, plans, ledger rows or the private core. A separate non-login issuer enrolls a validated session into a persistent budget root and outing, then approves the request kind, dimensions, variant and digest. PostgreSQL calculates the price; the worker never supplies a charge. For example, a 2×3 Driving matrix reserves six `matrix_pro_element` units at the checked-in integer rate. All request lines and the consumed capability commit together. The schema is a disposable local fixture, not a Supabase migration. Bootstrap/routine ownership remains privileged and separately controlled.
 
-[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
+[Financial policy audit, tests and limitations](../task52-financial-authority.md)
 
 ## Practical exercise — 12.P
 

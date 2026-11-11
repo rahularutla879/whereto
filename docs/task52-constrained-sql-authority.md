@@ -1,5 +1,7 @@
 # Task 52 — constrained local SQL writer authority
 
+**V2 checkpoint record:** [V3 financial authority](task52-financial-authority.md) now prices approved units and protects outing/root/window/day scopes through a separately versioned front door. This V2 report and verification hashes retain their historical meaning; they are not relabeled as V3 results.
+
 Identity: `52-shared-authority-constrained-pg-v2`. Parent: `0a726083c9a6c6e38a751a83f701219c76422d2b` / `52-shared-authority-local-pg-v1`. Local synthetic databases only; no application activation, hosted adapter, migration or provider transport. [Original inventory and V1 evidence](task52-shared-state-foundations.md) remains the baseline. Source hashes and completed checks are in [verification](task52-constrained-sql-verification.json).
 
 ## Original bypass and current privileges

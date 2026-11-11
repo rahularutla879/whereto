@@ -102,11 +102,11 @@ The application fixture owns a fresh default provider-budget object per fixture 
 
 Read one test in test_hitec_geography.py and identify invented inputs, replaced dependencies and the assertion.
 
-## Inactive shared-state reference
+## Inactive shared-state and financial authority
 
-`experiments/shared_state/run_local.py` creates a disposable PostgreSQL container with no host ports/mounts or external container networking. Its synthetic bootstrap role installs the schema/routines; legitimate client operations and adversarial direct SQL use the restricted worker. Tests prove permission denials for table/history/sequence/DDL/role attacks and protocol refusal for stale, replayed, corrupted or over-budget operations. They also spawn competing workers and exit around commits. PostgreSQL SIGKILL/restart retains logged charges while volatile evidence disappears and continuation refuses. Startup readiness waits for the final TCP listener, avoiding the image's temporary initialization socket. This is local crash/SQL-permission evidence, not replicated failover, power-loss, browser or hosted verification.
+The synthetic PostgreSQL harness runs core security tests followed by V3 financial tests and a real SIGKILL/restart of the disposable database. The financial fixture installs all grants in one transaction. Tests bypass the Python wrapper to attempt price, unit, provider, scope and clock manipulation; the restricted SQL principal must refuse them. Two spawned workers compete at outing/session/day/minute/admission boundaries. A protected fixture clock tests exact 60-second and 10-second rollover, local midnight and DST without waiting in real time; runtime cannot set that clock. Existing interpreter/planner/save tests and native refresh tests still use fake evidence. Passing these tests does not demonstrate real API pricing, hosted failover, browser integration or production performance.
 
-[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
+[Financial policy audit, tests and limitations](../task52-financial-authority.md)
 
 ## Practical exercise — 15.P
 

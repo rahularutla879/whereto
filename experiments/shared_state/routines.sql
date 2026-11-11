@@ -32,7 +32,7 @@ BEGIN
  PERFORM id FROM synthetic_state.gate WHERE id=1 FOR UPDATE;
  IF NOT FOUND THEN RAISE EXCEPTION 'gate_missing'; END IF;
  SELECT * INTO STRICT policy FROM synthetic_state.policy WHERE id=1;
- IF policy.version<>'52-shared-authority-constrained-pg-v2' THEN
+ IF policy.version<>'52-shared-authority-financial-core-v3' THEN
    RAISE EXCEPTION 'policy_identity'; END IF;
  IF jsonb_typeof(policy.limits) IS DISTINCT FROM 'object'
    OR (SELECT count(*) FROM jsonb_object_keys(policy.limits))<>5
@@ -88,17 +88,17 @@ BEGIN
  END IF;
  IF a='create' THEN
    IF NOT synthetic_state.valid_integer(p->'ttl',1,600) THEN RAISE EXCEPTION 'expiry'; END IF;
-   SELECT count(*) INTO n FROM synthetic_state.sessions WHERE NOT revoked AND expires>clock_timestamp();
+   SELECT count(*) INTO n FROM synthetic_state.sessions WHERE NOT revoked AND expires>synthetic_state.protocol_now();
    IF n>=50 THEN RAISE EXCEPTION 'session_capacity'; END IF;
    INSERT INTO synthetic_state.sessions(id,revision,expires,kind,binding)
-     VALUES(sid,1,clock_timestamp()+(p->>'ttl')::int*interval '1 second',kind,binding);
+     VALUES(sid,1,synthetic_state.protocol_now()+(p->>'ttl')::int*interval '1 second',kind,binding);
    INSERT INTO synthetic_state.evidence VALUES(sid,1,payload,sha256(convert_to(payload::text,'UTF8')));
    RETURN '{}'::jsonb;
  END IF;
  IF NOT synthetic_state.valid_integer(p->'revision',1,1000000000000) THEN RAISE EXCEPTION 'revision'; END IF;
  revision:=(p->>'revision')::bigint;
  SELECT * INTO s FROM synthetic_state.sessions WHERE id=sid;
- IF NOT FOUND OR s.expires<=clock_timestamp() OR s.revoked OR s.revision<>revision THEN RAISE EXCEPTION 'session_revision'; END IF;
+ IF NOT FOUND OR s.expires<=synthetic_state.protocol_now() OR s.revoked OR s.revision<>revision THEN RAISE EXCEPTION 'session_revision'; END IF;
  IF a IN ('read','issue','reserve','transition') THEN
    IF NOT synthetic_state.valid_integer(p->'fence',1,1000000000000)
      OR jsonb_typeof(p->'worker') IS DISTINCT FROM 'string' THEN RAISE EXCEPTION 'fence'; END IF;

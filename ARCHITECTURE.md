@@ -1,3 +1,7 @@
+# Inactive financial SQL front door V3
+
+`experiments/shared_state/financial.py` and `financial_{schema,routines}.sql` extend the tested private core with immutable rates, logical budget roots/outings, source-bound approved request plans, financial lines/dispatch facts and persistent request/inference admission. A distinct NOLOGIN issuer enrolls scopes/plans; only `financial_protocol` is executable by the runtime in V3. The old core arbitrary-charge path is private. Database time and a protected timezone determine windows/days; a fixture-only clock supports deterministic tests. All bootstrap/grants install atomically. Existing app/session/planner/saved schema and deployment payload remain unchanged. [Architecture and source-policy audit](docs/task52-financial-authority.md).
+
 # Inactive constrained PostgreSQL authority V2
 
 `experiments/shared_state/routines.sql` is now the local authority state machine. The runtime worker only connects, uses the isolated schema and executes `protocol(text,jsonb)`; a separate non-login owner holds tables/functions, with PUBLIC execution revoked. Fixed search path, qualified SQL, shared gate and protected immutable policy preserve atomic accounting and fencing even for direct routine callers. `postgres.py` is a DTO/capability client with no table writes. No application-session manager, hosted adapter or real schema migration is introduced. [Scope and trust limits](docs/task52-constrained-sql-authority.md).

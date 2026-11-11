@@ -1,3 +1,7 @@
+# Task 52: protected unit pricing, explicit existing budget profiles
+
+Do not accept runtime charges or classify cheaper SKUs from untrusted worker fields. A separate protected issuer approves exact request kind/dimensions/variant/digest and immutable scope; SQL derives rates, full matrix units and exposure before reservation. Reuse the core gate/fence/capability/history code with its EXECUTE revoked from V3 runtime. Keep source-derived bounded/exploration/standalone-ledger configurations distinct: default normal planning has no dollar ledger, exploration disables its hard cost cap, and the standalone guard defaults to $10/day. Do not silently enable that guard, invent a monthly/lifetime grant, or borrow the halted paid AI budget. Hosted timezone/root/cap decisions and the actual payload/issuer/transport bridge remain blockers. [Evidence and boundaries](docs/task52-financial-authority.md).
+
 # Task 52: database-enforced local protocol; launch stays separate
 
 Replace V1's trusted INSERT-capable worker with an execute-only worker and fixed SECURITY DEFINER commands owned by a separate NOLOGIN principal. Keep SQL as the single protected transition implementation; do not duplicate financial authorization in Python. Treat bootstrap/routine owner as privileged reviewed code, and retain full charges for failed/uncertain outcomes. This is local synthetic enforcement, not validation of model semantics or completed real pricing/quotas. [Evidence and next gate](docs/task52-constrained-sql-authority.md).

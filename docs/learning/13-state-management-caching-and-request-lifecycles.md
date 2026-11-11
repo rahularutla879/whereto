@@ -90,11 +90,11 @@ In `app/page.tsx`, `replaceRequest` clears advanced continuation and remembered 
 
 Read PlanningSession.cancel, ItineraryPages.navigate and OptionSessions.get. Compare their failure behavior.
 
-## Inactive shared-state reference
+## Inactive shared-state and financial authority
 
-The inactive constrained SQL protocol owns fixed database-clock expiry, revision and worker fences. `LocalPostgres` passes the existing typed DTOs and capability bindings to the routine instead of updating tables. `claim` advances a fence; stale worker/revision calls refuse even when submitted directly as SQL. `revise` checks old evidence integrity before accepting replacement, advances revision without extending expiry, and invalidates old capabilities. Claim/revise/revoke retain abandoned-operation charges and append uncertainty. Database SHA256 detects corruption of protected payloads, while Python read still verifies its separate canonical HMAC. A pending effective DTO is not raw extraction or planning permission. This reference is not wired into current process-local session managers.
+V3 distinguishes an evidence session from a budget root. A new frontend request or restarted Python process must not get a new financial allowance automatically. Only the protected issuer can bind new evidence to its original logical root/outing; revisions preserve the binding. SQL totals come from immutable admitted lines, including failed or unsent work. An operation retains its original calendar day even if dispatch happens after midnight. Rolling windows use trusted database time and an explicit protected timezone, so a caller cannot choose yesterday or a new window. Uncertainty and crash-retained admission references are not automatically released. Real root lifecycle and recovery procedures remain staging blockers.
 
-[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
+[Financial policy audit, tests and limitations](../task52-financial-authority.md)
 
 ## Practical exercise — 13.P
 

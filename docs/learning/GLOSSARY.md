@@ -746,3 +746,7 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 
 **SECURITY DEFINER routine:** a database function that executes with its owner's privileges. V2's fixed routine belongs to a non-login owner, uses qualified SQL/fixed search path, and is the worker's only protected write path.
 **Execute-only runtime role:** a login allowed to invoke reviewed routines but not directly read/write protected tables, change schema or become the routine owner. This is local implementation evidence, not a deployed role.
+
+**Budget root:** the issuer-provisioned logical equivalent of a provider-accounting session; it survives replacement evidence sessions and workers. It is not a browser-selected entitlement.
+**Approved request plan:** protected operation/digest/variant/dimensions used by SQL to derive units and price. It is not a model interpretation or permission to dispatch an API request.
+**Financial calendar identity:** protected accounting identity, timezone and local date attached to a reservation; changing a worker's timezone does not change it.

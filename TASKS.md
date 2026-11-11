@@ -1,3 +1,7 @@
+# Task 52 protected financial-authority checkpoint
+
+V3 local SQL prices approved provider units and protects outing/logical-session/calendar/window/concurrency scope with an execute-only runtime. No production integration or hosted-readiness claim. Source profiles preserve the existing disabled dollar ceilings rather than inventing a hosted grant. [Audit, verification and owner decisions](docs/task52-financial-authority.md). Next bounded implementation is the validated server-action/canonical-payload issuer bridge with fake providers, followed by private-staging resource preflight. Task 52 remains in progress; no Task 53 or public launch.
+
 # Task 52 constrained-writer checkpoint
 
 Local SQL authority V2 verified with an execute-only runtime role; arbitrary operational DML and privilege escalation refuse. Task 52 stays **in progress**, not hosted-ready. [Tests, limits and next implementation gate](docs/task52-constrained-sql-authority.md). Next bounded implementation: protected provider-unit/outing/calendar-day reservation policy, then private-staging integration preflight. Updated owner authorization allows gated infrastructure preparation; explicit paid-service approval and separate public-launch approval remain required. No provisioning or Task 53 here.

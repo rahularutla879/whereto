@@ -1,0 +1,295 @@
+{
+  "identity": "52-financial-authority-local-pg-v3",
+  "coreIdentity": "52-shared-authority-financial-core-v3",
+  "baselineCommit": "22267d124afab69ed271fc19e9428812c787d540",
+  "sources": {
+    "experiments/shared_state/contracts.py": "d0504422a5f5991387bdff8abea5fad4ecc43177c23cd3c21b8943bf0167080d",
+    "experiments/shared_state/financial.py": "ec1abd9ffadc1cccf9c52ed3ab733625c0da8dfa0423dbe303f6c1d81dcfd6d7",
+    "experiments/shared_state/financial_routines.sql": "a2124213f18787d8164fe733c63aacf5ddbbdbe3325c6d91196714c026eaa187",
+    "experiments/shared_state/financial_schema.sql": "eee3872280602077f4a01d7e9b0172feb81a2330969891c60a9e0b2177937495",
+    "experiments/shared_state/postgres.py": "4e27b596599e1d2aa7ef0d486d8b2cdd2b2cf90ecfeadc562b8701f486aed974",
+    "experiments/shared_state/routines.sql": "62d3329148f9e7cb3d11a55038f3b3d23358bdb5f124242b23e30c774ed9cdf7",
+    "experiments/shared_state/run_local.py": "a77b710a649faaa82d33fb3bdebcb4a234baf9c8352b27465ccfc40b54898dcb",
+    "experiments/shared_state/schema.sql": "5952da404c64e5859a7c3e54e4bcb21fcfb4f118009bf241a73ea72db15fae20",
+    "experiments/shared_state/test_financial.py": "3f1bb1b1eee1f9a9e8f09466e915d207e15fd2ab09bf9e943317612fd289422d",
+    "experiments/shared_state/test_store.py": "d71b4a2a4eeb5015a8f9539d2839daf5d1cb62a7b1d1d0ccb529f1cf3fb60348"
+  },
+  "auditedApplicationSources": {
+    "backend/admission.py": "fb211c1f323c98ab3cb1b14b7fd4bc8c457e4ddf17836f26505b10c7b5cf9ce9",
+    "backend/provider_budget.py": "8d67052e2d8309a087e744b20f00483cb49e1e968c893c4996af4e7df7a7f3a5",
+    "backend/development_cost.py": "2d364ca5deadd284afacbf7314ecb5e5093266237a2df6f8d78b668eaf4c7180",
+    "backend/provider_work.py": "f39f0ef172e8d070bb7d2f4e1c8b8a00d1ee24265ba3680ec2a58887ae0232e7",
+    "backend/request_middleware.py": "5505e9752664aee87939eb0067774c47e27f2c5251fcc6c0f157c6889ae52c24",
+    "backend/places.py": "364e57c8cb8dc9c086e783613adc7cc6dd97396a0d72d05fa49792384bf4809e",
+    "backend/places_transport.py": "aa9ee8a10cfb5cc5a2e61c96cf3bc0804bd55a0ce178e4d4e5beabe67f8f0392",
+    "backend/starting_places.py": "f2d8714354341a08fd1b3c90280ee8f662b82471c285cbc35d5b2f0de775402c",
+    "backend/starting_areas.py": "b8587588dd979236889662ee1b61f37b8512fc5a1519b15addd7e5ccdd2e9558",
+    "backend/routes.py": "feb1448f7fb907a738448f623e988c11482e4f3a39783eb64e719c88d21669ee",
+    "backend/routes_transport.py": "7ba9c60161e3028c29da52d973f5da3834267cc1d2a1b94a5444a59663a9b27d",
+    "backend/search_fields.py": "a983d390a67f831bd728d250b19934d9bd8b3f0a18b7dee2d4119c86946bd624",
+    "backend/venue_details.py": "1b68fb3bd241e397ffd6f69958eddb96903983dfdadeb16c7393ec8573b68b9e",
+    "backend/saved_refresh.py": "fbeabf8b8844bc632c649c6ec12e685ae0569af5e99f4f404381562a2d30fd70",
+    "backend/real_planning.py": "5f07b291d71e8a61c93a983dece155e72c101b3e3d0d09d1f7292148b74e48fc",
+    "backend/advanced_planning.py": "9abc5f7cc58f9a26c6766604b9597587b85bd3915a53d8d915093e95fa0e09d8",
+    "backend/option_sessions.py": "30bad7f0a2811fb89c0ee1628a5092e214a33c0e15fee6bb0bf7f78251365d51",
+    "backend/interpretation.py": "b501e0ef3a6f91e6214cbe2530f14b37559f4e59e207c3e958818550159aa374",
+    "backend/saved_plans.py": "e52f6541e10e17761a0e7649cffd4751380e8d377e7419f81d3de96179653a9f",
+    "backend/ai/ollama.py": "607fbce96331540dc3abf72eb3177130e3bddf75645da68f76225272104eb6ad",
+    "backend/ai/__init__.py": "3a7a921121851faea3900a74a5698776edf895f1409ca26d947babafd9a1bd67"
+  },
+  "rateVersion": "development_cost.RATES-2026-11-03-v1",
+  "ratesMicrousdPerUnit": {
+    "search_pro": 32000,
+    "search_enterprise": 35000,
+    "details": 20000,
+    "details_pro": 17000,
+    "matrix_element": 5000,
+    "matrix_pro_element": 10000
+  },
+  "ratesAreCurrentCloudPriceCertification": false,
+  "sourceDefaultSettings": {
+    "searches_per_outing": 10,
+    "details_per_outing": 6,
+    "candidates_per_activity": 100,
+    "matrix_elements_per_outing": 300,
+    "requests_per_outing": 30,
+    "concurrent_requests": 1,
+    "retries": 0,
+    "requests_per_session": 50,
+    "matrix_elements_per_session": 1500,
+    "matrix_elements_per_minute": 150,
+    "lookups_per_session": 10
+  },
+  "profiles": {
+    "bounded": {
+      "dollarHardCeiling": null,
+      "sharedLedgerMinute": false,
+      "quantityLimits": true
+    },
+    "exploration": {
+      "dollarHardCeiling": null,
+      "sharedLedgerMinute": true,
+      "detailsPerOuting": 6,
+      "uncapped": [
+        "searches_per_outing",
+        "candidates_per_activity",
+        "matrix_elements_per_outing",
+        "requests_per_outing",
+        "requests_per_session",
+        "matrix_elements_per_session",
+        "lookups_per_session"
+      ]
+    },
+    "ledger_enforced": {
+      "componentCompositionNotCurrentStartupDefault": true,
+      "defaultDailyMicrousd": 10000000,
+      "defaultWarningMicrousd": 10000000,
+      "sharedLedgerMinute": true
+    }
+  },
+  "mappedPolicies": [
+    {
+      "scope": "outing",
+      "limits": {
+        "requests_per_outing": 30,
+        "searches_per_outing": 10,
+        "details_per_outing": 6,
+        "matrix_elements_per_outing": 300
+      },
+      "reset": "only new issuer-approved outing, never worker reset"
+    },
+    {
+      "scope": "logical_provider_session",
+      "limits": {
+        "requests_per_session": 50,
+        "matrix_elements_per_session": 1500,
+        "lookups_per_session": 10,
+        "concurrent_requests": 1
+      },
+      "reset": "only protected issuer/operator lifecycle, not evidence-session replacement or restart"
+    },
+    {
+      "scope": "root_rolling_60s",
+      "searches": 10,
+      "details": 10,
+      "matrixElements": 150,
+      "boundary": "age >=60 excluded"
+    },
+    {
+      "scope": "ledger_all_roots_rolling_60s",
+      "profiles": [
+        "exploration",
+        "ledger_enforced"
+      ],
+      "searches": 10,
+      "details": 10,
+      "matrixElements": 150
+    },
+    {
+      "scope": "calendar_day",
+      "timezone": "explicit protected policy",
+      "fixtureTimezone": "America/New_York",
+      "hostedTimezoneApproved": false,
+      "reservationDayImmutable": true
+    },
+    {
+      "scope": "http_admission",
+      "capacity": 16,
+      "burst": 240,
+      "seconds": 10,
+      "workerReferencesPersist": true
+    },
+    {
+      "scope": "inference_admission",
+      "capacity": 1,
+      "burst": 240,
+      "seconds": 10,
+      "financialAIPriceOrDispatch": false
+    },
+    {
+      "scope": "outing_dedupe",
+      "identity": [
+        "kind",
+        "request_digest"
+      ],
+      "reservedBatchSuffixRetained": true
+    },
+    {
+      "scope": "operation_capability",
+      "singleUse": true,
+      "noRetries": true,
+      "uncertaintyRetained": true
+    }
+  ],
+  "untranslatedApplicationControls": [
+    "candidate/route topology",
+    "source grounding and semantic admission",
+    "request body/timeouts",
+    "provider cancellation/auth and real egress",
+    "saved-refresh/option/detail/source/session ownership and expiry",
+    "RLS and selected-save membership",
+    "actual vendor quotas and billing"
+  ],
+  "applicationMonthlyOrLifetimeDollarGrant": null,
+  "inheritedCoreBounds": "10^12 integer envelope and 16-operation test bound; NOT an application financial grant",
+  "reservationInputs": [
+    "lease",
+    "capability",
+    "operation_id"
+  ],
+  "workerCanSupplyPriceProviderUnitsScopesOrDate": false,
+  "runtimeExecutableRoutine": "synthetic_state.financial_protocol(text,jsonb)",
+  "privateCoreExecuteRevokedFromRuntime": true,
+  "issuer": "separate synthetic NOLOGIN, enroll/approve only",
+  "policyAndBootstrapSeparatedFromRuntime": true,
+  "productionEnabled": false,
+  "planningAuthorized": false,
+  "providerTransportAvailable": false,
+  "applicationSessionIntegration": false,
+  "cloudResourcesProvisioned": [],
+  "verification": {
+    "corePostgres": {
+      "run": 25,
+      "passed": 25,
+      "failed": 0,
+      "skipped": 0,
+      "incomplete": 0
+    },
+    "financialPostgres": {
+      "run": 31,
+      "passed": 31,
+      "failed": 0,
+      "skipped": 0,
+      "incomplete": 0
+    },
+    "competingProcessesAtMappedBoundaries": true,
+    "actualWorkerCrashes": true,
+    "actualPostgresSigkillRestart": true,
+    "outageNoMemoryFallback": true,
+    "committedChargesAndUnitsSurvive": true,
+    "existingBackend": {
+      "run": 165,
+      "passed": 149,
+      "skipped": 16,
+      "failed": 0,
+      "incomplete": 0,
+      "modules": [
+        "backend.test_planning_admission",
+        "backend.test_provider_budget",
+        "backend.test_saved_plans",
+        "backend.test_database_security",
+        "backend.test_advanced_planning",
+        "backend.test_interpretation",
+        "backend.test_session_capacity49",
+        "backend.test_exploration",
+        "backend.test_open_exploration",
+        "backend.test_request_management",
+        "backend.test_saved_details_reliability",
+        "backend.test_refinements49"
+      ],
+      "skipReason": "existing opt-in hosted persistence/security checks"
+    },
+    "frontend": {
+      "run": 289,
+      "passed": 289,
+      "failed": 0,
+      "skipped": 0
+    },
+    "packaging": {
+      "run": 7,
+      "passed": 7,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "notRerun": [
+      "full backend discovery",
+      "production build",
+      "browser tests",
+      "hosted failover/power-loss/restore tests"
+    ],
+    "initialFailuresCorrected": [
+      "SQL CASE-expression syntax",
+      "nonexistent test module name corrected to actual refresh regression suites",
+      "Final diff-review NULL-command fall-through fixed; malformed action/object probes and full PostgreSQL suite rerun passed"
+    ]
+  },
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "attempts": 10,
+    "privateFiles": 324,
+    "historicalHalt": true,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "beforeAfterInspectionIdentical": true
+  },
+  "securityScan": {
+    "scope": "configured sensitive values in current files/assets and Git history",
+    "currentMatches": 0,
+    "historicalMatches": 0
+  },
+  "postgresImage": "postgres:17-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994",
+  "backendTestImage": "sha256:e373e2410579d70365e0807068a3386ce814bb2d933bb7c1bc3949ea33ef2e7c",
+  "handbook": {
+    "reviewedAndUpdated": [
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "chaptersPreserved": 20
+  },
+  "remainingDecisions": [
+    "hosted billing timezone and logical session-root lifecycle",
+    "explicit hosted dollar-policy approval",
+    "current rate/pricing verification before real use",
+    "validated canonical-payload issuer and transport bridge",
+    "private evidence storage and key lifecycle",
+    "uncertainty and backup-restore reconciliation",
+    "hosted role/TLS/pool/security readiness",
+    "bind HTTP/inference admission ownership to financial work; separate primitives are not I/O authority"
+  ],
+  "nextCheckpoint": "Server-owned validated action and canonical provider-payload issuer bridge using fake transport, then gated private-staging resource preflight.",
+  "dedicatedLocalVMStopped": true
+}

@@ -34,7 +34,7 @@ def main():
             time.sleep(.5)
         else:raise RuntimeError('Synthetic PostgreSQL startup deadline')
         # Hex-only generated password; no credential loader and no real role exists.
-        sql="CREATE ROLE whereto_synthetic_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS; CREATE ROLE whereto_synthetic_worker LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '"+worker_password+"'; REVOKE ALL ON DATABASE whereto_synthetic FROM PUBLIC; GRANT CONNECT ON DATABASE whereto_synthetic TO whereto_synthetic_worker; GRANT CREATE ON DATABASE whereto_synthetic TO whereto_synthetic_owner; REVOKE CREATE ON SCHEMA public FROM PUBLIC;"
+        sql="CREATE ROLE whereto_synthetic_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS; CREATE ROLE whereto_synthetic_issuer NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS; CREATE ROLE whereto_synthetic_worker LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '"+worker_password+"'; REVOKE ALL ON DATABASE whereto_synthetic FROM PUBLIC; GRANT CONNECT ON DATABASE whereto_synthetic TO whereto_synthetic_worker; GRANT CREATE ON DATABASE whereto_synthetic TO whereto_synthetic_owner; REVOKE CREATE ON SCHEMA public FROM PUBLIC;"
         run('exec','-i',pg,'psql','-v','ON_ERROR_STOP=1','-U','whereto_synthetic_admin','-d','whereto_synthetic',input=sql,text=True,stdout=subprocess.DEVNULL)
         client=subprocess.check_output(D+['run','-d','--platform','linux/amd64','--network','container:'+pg,
             '--memory','768m','--cpus','1','--cap-drop','ALL','--security-opt','no-new-privileges',
@@ -47,9 +47,10 @@ def main():
             run('cp',str(ROOT/'backend'/name),client+':/app/backend/'+name)
         print('Running real PostgreSQL synthetic state tests; no production integration.',flush=True)
         run('exec',client,'python','-m','unittest','experiments.shared_state.test_store','-v')
-        run('exec',client,'python','-m','experiments.shared_state.test_store','seed')
+        run('exec',client,'python','-m','unittest','experiments.shared_state.test_financial','-v')
+        run('exec',client,'python','-m','experiments.shared_state.test_financial','seed')
         run('kill','--signal','KILL',pg,stdout=subprocess.DEVNULL)
-        run('exec',client,'python','-m','experiments.shared_state.test_store','unavailable')
+        run('exec',client,'python','-m','experiments.shared_state.test_financial','unavailable')
         run('start',pg,stdout=subprocess.DEVNULL)
         for _ in range(60):
             if subprocess.run(D+['exec',pg,'pg_isready','-h','127.0.0.1','-U','whereto_synthetic_admin','-d','whereto_synthetic'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:break
@@ -59,7 +60,7 @@ def main():
         # Restart the test worker too; files/key remain, and it joins the new namespace.
         run('stop','--time','2',client,stdout=subprocess.DEVNULL)
         run('start',client,stdout=subprocess.DEVNULL)
-        run('exec',client,'python','-m','experiments.shared_state.test_store','after_crash')
+        run('exec',client,'python','-m','experiments.shared_state.test_financial','after_crash')
         print('Synthetic process/database crash checks passed; no live adapter is enabled.',flush=True)
     finally:
         for container in [client,pg]:

@@ -99,11 +99,11 @@ The official Node 24/Python 3.12 Bookworm tags still resolve to the existing pin
 
 Read validate_environment and the proposal shared-session contract. Find one state currently tied to monotonic process time that needs a shared representation.
 
-## Inactive shared-state reference
+## Inactive shared-state and financial authority
 
-Task 52 now has an inactive, execute-only local PostgreSQL protocol, not deployed shared state. Conditional Supabase operational isolation plus volatile evidence remains the infrastructure recommendation; a hosted role/TLS/pool/migration still needs review. Existing saved-plan RLS is untouched. Before private staging, real unit/window/day/outing budgets, server-computed charges, source/session issuers, volatile storage, stable keys and restore/uncertainty reconciliation remain required. The owner permits gated deployment preparation and genuinely free provisioning after configuration/security/pricing checks; paid/recurring services require explicit approval. Private staging must demonstrate end-to-end behavior and security before a separate owner-approved public launch. Local tests alone are not launch evidence.
+Protected local unit pricing is implemented, but no financial or shared-state adapter is active in the app. A real staging configuration still needs approved billing timezone, persistent budget-root ownership, a deliberate dollar policy, current price verification and an issuer/transport bridge that binds the exact canonical provider payload to its approved SKU and units. Advanced handoff and saved viewing remain non-provider permissions. Next, integrate actual server-owned ordinary/advanced/options/refresh action issuers using fake transport and existing session/validation contracts. Then perform private-staging infrastructure/security/capacity/cost preflight. Paid services require approval and public launch remains a separate owner decision after staging acceptance.
 
-[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
+[Financial policy audit, tests and limitations](../task52-financial-authority.md)
 
 ## Practical exercise — 18.P
 

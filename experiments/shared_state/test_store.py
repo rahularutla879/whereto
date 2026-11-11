@@ -24,7 +24,7 @@ def admin():
                            password=os.environ['SYNTHETIC_ADMIN_PASSWORD'], connect_timeout=2)
 
 
-def fixture(limits=DEFAULT):
+def fixture(limits=DEFAULT, extension=None):
     # Reset only between independent synthetic test cases, NEVER recovery.
     with admin() as c:
         c.execute('DROP SCHEMA IF EXISTS synthetic_state CASCADE')
@@ -33,6 +33,7 @@ def fixture(limits=DEFAULT):
         c.execute('INSERT INTO synthetic_state.policy VALUES(1,%s,%s,%s)',
                   (VERSION, digest(KEY,'key',VERSION), Jsonb(asdict(limits))))
         c.execute(Path(__file__).with_name('routines.sql').read_text(), prepare=False)
+        if extension is not None:extension(c)  # Atomic synthetic bootstrap; never runtime input.
 
 
 def store(limits=DEFAULT, key=KEY):
