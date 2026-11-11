@@ -90,6 +90,12 @@ A high/critical match identifies an installed package/advisory association. It d
 
 Read RequestManagement and provider_work.run_work. Find where HTTP ownership and worker ownership differ.
 
+## Inactive shared-state reference
+
+In the inactive shared-state reference, `reserve` inserts the entire fictional charge and RESERVED fact atomically before returning. `transition` appends INTENT and one terminal outcome. Failed and uncertain operations keep their charge; uncertainty blocks more work at the configured concurrency limit. There is no automatic retry or refund. HMAC protects the binding between evidence, revision and capability, but does not certify semantic correctness. `Reservation.planning_authorized` is always false. Lifetime synthetic caps do not replace real daily/minute/provider-unit/outing policies. Shared keys, constrained SQL permissions, reconciliation and restored-backup replay prevention remain unimplemented production requirements.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 14.P
 
 Draw a duplicate-click race and insert the active fingerprint lock. Use fictional requests and do not modify real quotas.

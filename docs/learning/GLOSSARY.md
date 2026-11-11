@@ -735,3 +735,11 @@ An existing pending DTO whose exact typed content and raw-evidence identity are 
 **Colima profile:** A named local Linux VM/runtime configuration; `whereto-task52` is isolated from the default Docker context. **Rosetta Linux emulation:** Apple’s translation support used here to execute amd64 application containers in an arm64 VM; it does not change the reviewed target dependencies. **Vulnerability match:** A scanner’s package/advisory association, distinct from proven exploitability; severity and fix status require contextual review.
 
 **Advisory-database drift:** Changed scanner results caused by new advisory data rather than changed image packages. Compare the same original image and the patched image using one database identity. **Deployment-only security override:** A single explicitly reviewed dependency version in the deployment lock that differs from historical/local evidence; it is not a new paid-evaluation approval.
+
+## Shared-authority reference terms
+
+- **Fencing number**: a monotonically increasing ownership number; an older worker cannot commit under a newer claim.
+- **Uncertain operation**: an admitted operation whose external result is unknown; retain exposure and do not resend automatically.
+- **UNLOGGED table**: PostgreSQL data without normal crash-recovery logging; the prototype uses it only for disposable fictional evidence. It is not an approved real private-data store.
+
+See [shared-state limits](../../docs/task52-shared-state-foundations.md).

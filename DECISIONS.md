@@ -1,3 +1,7 @@
+# Task 52: inactive SQL authority reference, conditional infrastructure reuse
+
+Use real local PostgreSQL transactions for shared-state correctness evidence rather than claiming SQLite or process locks prove fleet safety. Keep existing application admission authoritative. Recommend existing Supabase operational isolation only if the same atomic financial/replay/fencing invariants, capacity and privacy can be met; otherwise retain separate Cloud SQL + Redis. No live backend selection/migration is authorized. Lifetime synthetic limits and UNLOGGED synthetic evidence are test contracts, not final financial or retention policies. [Full rationale and gates](docs/task52-shared-state-foundations.md).
+
 # Task 52 deployment security profile preserves historical evidence
 
 Keep historical backend requirements and evaluator manifests unchanged. One exact pyasn1 security exception is pinned in the deployment-only Linux lock and fully tested; it is separately identified and never relabeled as an old evaluation build. Keep OS and lint findings open when no evidenced compatible fix exists. Do not force transitive majors, mix Debian releases or suppress matches to improve counts. [Decision/evidence](docs/task52-container-security-remediation.md).

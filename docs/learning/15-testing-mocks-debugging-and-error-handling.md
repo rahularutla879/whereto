@@ -102,6 +102,12 @@ The application fixture owns a fresh default provider-budget object per fixture 
 
 Read one test in test_hitec_geography.py and identify invented inputs, replaced dependencies and the assertion.
 
+## Inactive shared-state reference
+
+`experiments/shared_state/run_local.py` runs tests against an actual disposable PostgreSQL container with no host ports/mounts or external container networking. It uses the approved Colima profile and removes its own containers/volume afterward. Tests spawn competing processes and terminate workers around commits. The harness also SIGKILLs PostgreSQL and restarts both database and worker: logged charge/INTENT survives, volatile evidence disappears and continuation refuses. This establishes local crash behavior, not replicated failover, power-loss durability or hosted HTTP correctness. Existing interpreter/planner/selection DTO tests use synthetic providers; no browser verification is implied.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 15.P
 
 After inspecting backend/TESTING.md, run only backend/.venv/bin/python -m unittest backend.test_planner -v in a disposable learning checkout if desired. Record actual output, not expected totals.

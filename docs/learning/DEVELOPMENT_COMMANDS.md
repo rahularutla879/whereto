@@ -108,3 +108,13 @@ Use `colima start whereto-task52`, then `DOCKER_CONTEXT=colima-whereto-task52 sh
 ## Container security dependency checks
 
 Use the existing Colima profile and `DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh`. The backend Docker build enforces wheel hashes and `pip check`; never run an unreviewed `pip install -U` or `npm audit fix --force`. `backend/.venv/bin/python -m unittest deployment.test_packaging -v` checks the exact deployment security exception while preserving the frozen historical requirements. See [remediation](../task52-container-security-remediation.md) for the isolated patched-wheel test method and remaining lint/OS owner decisions.
+
+## Explicit synthetic shared-state verification
+
+From the repository root, with the already approved `whereto-task52` Colima profile running:
+
+```sh
+backend/.venv/bin/python experiments/shared_state/run_local.py
+```
+
+Creates only new local containers and a disposable volume; never point a learning exercise at Supabase. Requires the previously verified backend image and digest-pinned PostgreSQL image. No application startup switch is installed. See [scope and failure interpretation](../../docs/task52-shared-state-foundations.md).

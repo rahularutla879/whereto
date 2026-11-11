@@ -1,0 +1,65 @@
+{
+  "identity": "52-shared-authority-local-pg-v1",
+  "baseline": "ce4f3194d66083efedcf457f941547f4191ead89",
+  "sources": {
+    "experiments/shared_state/contracts.py": "8f7a4d645ad93f7cd2937ad5cbbaaca23d56f1e579535dd0a96ce25999317bf1",
+    "experiments/shared_state/postgres.py": "28fc84eafc5f09b459f1a8901e15628d9d4fb01670c99cb220e311e76cd21e10",
+    "experiments/shared_state/run_local.py": "c12215535a83973d9065a720c0cfd66758eeaf1e57122288911f9f1f29efad56",
+    "experiments/shared_state/schema.sql": "8b851253705f9eaf4b43c008c18aedd956b39344d32888b190e6b1a82dbd2693",
+    "experiments/shared_state/test_store.py": "2fec2c852e775f8a09f50d32e6b106a8246e626e2c58dffe4ba526841f38f29d"
+  },
+  "productionEnabled": false,
+  "hostedAdapter": false,
+  "planningAuthorized": false,
+  "postgresImage": "postgres:17-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994",
+  "localTests": {
+    "postgres": 18,
+    "failures": 0,
+    "actualDatabaseSigkillRecovery": true,
+    "actualTwoWorkerProcesses": true,
+    "outageRefuses": true,
+    "evidenceLossRefuses": true
+  },
+  "existingBackend": {
+    "run": 89,
+    "passed": 73,
+    "skipped": 16,
+    "failed": 0,
+    "fullDiscovery": false
+  },
+  "frontend": {
+    "passed": 289,
+    "failed": 0
+  },
+  "typecheck": "passed",
+  "lint": "passed",
+  "productionBuild": "not rerun; no application/runtime/dependency changes",
+  "browser": "not run; application DTO/planner integration only",
+  "limitations": [
+    "local PostgreSQL, not hosted failover/power loss/backup restore",
+    "trusted SQL principal; constrained real writer unimplemented",
+    "synthetic lifetime caps; complete existing financial-policy mapping unimplemented",
+    "volatile synthetic evidence is not approved real-data storage",
+    "no application session manager integration or live adapter",
+    "uncertainty reconciliation unimplemented; conservative blocking"
+  ],
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "attempts": 10,
+    "privateFiles": 324,
+    "historicalHalt": true,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "beforeAfterInspectionIdentical": true
+  },
+  "secretScan": {
+    "currentMatches": 0,
+    "historicalMatches": 0
+  },
+  "packaging": {
+    "run": 7,
+    "passed": 7,
+    "failed": 0,
+    "initialSandboxAttempt": "loopback bind denied; rerun with local-network permission passed"
+  }
+}

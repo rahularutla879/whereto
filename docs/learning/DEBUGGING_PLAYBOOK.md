@@ -101,3 +101,7 @@ If Docker reports a missing default socket while Colima is running, select `DOCK
 ## Vulnerability count rises after a patch
 
 Compare scanner version, database source/hash/date and exact package/advisory sets. In this checkpoint the original backend rose from 78 to 86 high matches under a new database; the patched image has 82 under that same database, with exactly four pyasn1 advisories removed. Do not hide unknown-severity records, force major overrides, repin historical manifests or infer exploitability from counts alone. If the historical requirements SHA test fails, review the source-version boundary rather than update the expected hash.
+
+## Synthetic shared-state refusal
+
+In `experiments/shared_state/postgres.py`, `Denied` means the evidence, revision, capability, ownership, policy or accounting check refused. `Unavailable` means database/lock access failed. Neither permits a memory fallback or retry of an external operation. Inspect synthetic counts through `snapshot()`; do not print private evidence or bearer tokens. After a database crash, missing UNLOGGED evidence is expected and must block continuation while logged charges remain. There is no uncertainty-reset command. See [the implementation boundary](../../docs/task52-shared-state-foundations.md).

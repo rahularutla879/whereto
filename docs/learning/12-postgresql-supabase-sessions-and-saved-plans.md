@@ -99,6 +99,12 @@ A textarea edit does not revoke every previously issued bearer capability on the
 
 Read database, write_document and read_document in saved_plans.py, then locate the matching RLS policy.
 
+## Inactive shared-state reference
+
+`experiments/shared_state/schema.sql` is for new fictional local databases only; it is not an application migration. `LocalPostgres` uses psycopg transactions and a single `gate` row locked with `FOR UPDATE`. All contenders acquire that lock before checking financial totals. Explicit READ COMMITTED isolation makes the next statement see the reservation committed by the preceding lock holder. A capability has a unique consumed operation, while reservation charges and status facts cannot be updated or deleted by the test worker. The worker is trusted server code: production still needs a reviewed constrained writer, not arbitrary INSERT privileges. UNLOGGED evidence is lost on an unclean database restart; this synthetic substitute deliberately causes refusal rather than reconstructing private evidence.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 12.P
 
 Draw one plan with two option rows and their stops. Mark which rows must commit together; do not connect to Supabase.

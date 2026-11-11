@@ -85,6 +85,12 @@ The explicit application fixture now calls `LocalContinuation` in `scripts/task5
 
 Read app/api/plans/generate/route.ts and backend/main.py. Find the two functions that receive the same path at different layers.
 
+## Inactive shared-state reference
+
+The inactive `experiments/shared_state/` reference separates durable SQL authority metadata from expiring private evidence. It does not replace the FastAPI session managers. Existing live sessions contain locks, callbacks and resolver objects that cannot be saved as JSON. Application integration still needs reviewed server-owned issuers and decomposed evidence DTOs. The ordinary, pending, advanced and saved DTO roundtrips tested here establish compatibility only at that boundary.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 03.P
 
 Draw the architecture on paper and mark each component as browser, local service, external service or proposed.

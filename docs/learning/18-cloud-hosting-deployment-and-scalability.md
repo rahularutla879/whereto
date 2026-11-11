@@ -99,6 +99,12 @@ The official Node 24/Python 3.12 Bookworm tags still resolve to the existing pin
 
 Read validate_environment and the proposal shared-session contract. Find one state currently tied to monotonic process time that needs a shared representation.
 
+## Inactive shared-state reference
+
+Task 52 now has an inactive local PostgreSQL authority reference, not deployed shared state. The conditional recommendation is an isolated operational schema/role in existing Supabase plus approved volatile shared evidence storage. Separate Cloud SQL plus Redis remains the alternative if capacity, privacy, availability or isolation cannot be met. SQL must retain consumption and financial facts even if Redis loses evidence. Existing saved-plan RLS is untouched. No operational schema, Redis adapter, hosted pool, stable key enrollment or production switch was added. Compare costs and owner gates in the linked implementation report; published connection ceilings are not measured spare capacity, and older Redis cost estimates are not current quotes.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 18.P
 
 On paper route a continuation to a second replica. List the state it would need and which proposed store owns each item.

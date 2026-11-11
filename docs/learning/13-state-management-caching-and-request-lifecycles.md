@@ -90,6 +90,12 @@ In `app/page.tsx`, `replaceRequest` clears advanced continuation and remembered 
 
 Read PlanningSession.cancel, ItineraryPages.navigate and OptionSessions.get. Compare their failure behavior.
 
+## Inactive shared-state reference
+
+The inactive `LocalPostgres` reference binds each session to a fixed database-clock expiry, revision and evidence HMAC. `revise` advances the revision without extending expiry. `claim` advances a fencing number and binds the lease to its issuing store instance/process. If worker B claims the session, worker A can no longer finish an operation using its old lease. Restarted workers must claim again; unresolved operations retain their charges and become uncertain. A pending effective snapshot stays pending evidence and cannot become fresh raw extraction or provider permission. Missing evidence blocks continuation. These rules are not wired into the current process-local session managers.
+
+[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+
 ## Practical exercise — 13.P
 
 Draw three independent timelines: selected calendar date, 600-second session, 300-second route evidence. Mark where a continuation can fail.

@@ -1,3 +1,7 @@
+# Inactive shared-state reference
+
+`experiments/shared_state/` separates typed expiring evidence from durable SQL revision/fence/capability/reservation facts. It is explicitly local-synthetic-only and absent from application startup and deployment runtime assembly. Actual session managers and saved-plan schema remain unchanged. Conditional option A recommendation (isolated Supabase ops role/schema + volatile evidence) requires review; it is not provisioned or approved. Complete session serialization, production budget mapping, constrained database issuer, shared keys and restore reconciliation remain integration blockers. [Full rationale and gates](docs/task52-shared-state-foundations.md).
+
 # Task 52 deployment dependency identity
 
 `52-container-security-dependencies-v1` preserves the existing B2 application source/legacy policy with one separately pinned pyasn1 security patch in the deployment lock. Historical/local requirements and evaluator identities remain distinct. Build-time pip check runs before runtime installers are removed; hosted startup is still refused. No shared-state, inference, API or deployment topology change. [Scope](docs/task52-container-security-remediation.md).
