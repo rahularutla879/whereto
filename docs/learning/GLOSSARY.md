@@ -743,3 +743,6 @@ An existing pending DTO whose exact typed content and raw-evidence identity are 
 - **UNLOGGED table**: PostgreSQL data without normal crash-recovery logging; the prototype uses it only for disposable fictional evidence. It is not an approved real private-data store.
 
 See [shared-state limits](../../docs/task52-shared-state-foundations.md).
+
+**SECURITY DEFINER routine:** a database function that executes with its owner's privileges. V2's fixed routine belongs to a non-login owner, uses qualified SQL/fixed search path, and is the worker's only protected write path.
+**Execute-only runtime role:** a login allowed to invoke reviewed routines but not directly read/write protected tables, change schema or become the routine owner. This is local implementation evidence, not a deployed role.

@@ -92,9 +92,9 @@ Read PlanningSession.cancel, ItineraryPages.navigate and OptionSessions.get. Com
 
 ## Inactive shared-state reference
 
-The inactive `LocalPostgres` reference binds each session to a fixed database-clock expiry, revision and evidence HMAC. `revise` advances the revision without extending expiry. `claim` advances a fencing number and binds the lease to its issuing store instance/process. If worker B claims the session, worker A can no longer finish an operation using its old lease. Restarted workers must claim again; unresolved operations retain their charges and become uncertain. A pending effective snapshot stays pending evidence and cannot become fresh raw extraction or provider permission. Missing evidence blocks continuation. These rules are not wired into the current process-local session managers.
+The inactive constrained SQL protocol owns fixed database-clock expiry, revision and worker fences. `LocalPostgres` passes the existing typed DTOs and capability bindings to the routine instead of updating tables. `claim` advances a fence; stale worker/revision calls refuse even when submitted directly as SQL. `revise` checks old evidence integrity before accepting replacement, advances revision without extending expiry, and invalidates old capabilities. Claim/revise/revoke retain abandoned-operation charges and append uncertainty. Database SHA256 detects corruption of protected payloads, while Python read still verifies its separate canonical HMAC. A pending effective DTO is not raw extraction or planning permission. This reference is not wired into current process-local session managers.
 
-[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
 
 ## Practical exercise — 13.P
 

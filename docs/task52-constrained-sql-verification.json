@@ -1,0 +1,125 @@
+{
+  "identity": "52-shared-authority-constrained-pg-v2",
+  "parentCommit": "0a726083c9a6c6e38a751a83f701219c76422d2b",
+  "parentIdentity": "52-shared-authority-local-pg-v1",
+  "sources": {
+    "experiments/shared_state/contracts.py": "c3c1e2d7be21e3ba3ad9567c4adc992e33a44d0c18af8faa878f27ffa69d23e9",
+    "experiments/shared_state/postgres.py": "4e27b596599e1d2aa7ef0d486d8b2cdd2b2cf90ecfeadc562b8701f486aed974",
+    "experiments/shared_state/routines.sql": "f6cfa7c9616d0bf73eca46be973b363027f8f15fe782572b6cb0b92e72175d07",
+    "experiments/shared_state/run_local.py": "4ac2a89492ef2b20993157591c2d970cb5e3c9112da5abf09dc673e4dda3faa4",
+    "experiments/shared_state/schema.sql": "6fb6b8e81fd3f674c1bd278346357f5fed940ce5c74acefb96009519783995bd",
+    "experiments/shared_state/test_store.py": "6589b788f540d20f6a2dfdf890dfe86540a82a0cae02d4bcd2ba3a9c9d2a336a"
+  },
+  "productionEnabled": false,
+  "hostedAdapter": false,
+  "planningAuthorized": false,
+  "runtimeRole": "whereto_synthetic_worker",
+  "runtimePrivileges": [
+    "database CONNECT",
+    "schema USAGE",
+    "EXECUTE synthetic_state.protocol(text,jsonb)"
+  ],
+  "runtimeDirectTablePrivileges": false,
+  "runtimeSequencePrivileges": false,
+  "runtimeOwnerMembership": false,
+  "routineOwner": "whereto_synthetic_owner (NOLOGIN, no superuser/createrole/createdb/replication/bypassrls)",
+  "routineSearchPath": "pg_catalog, pg_temp; fully qualified operational objects",
+  "postgresImage": "postgres:17-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994",
+  "verification": {
+    "postgres": {
+      "run": 25,
+      "passed": 25,
+      "skipped": 0,
+      "failed": 0,
+      "incomplete": 0,
+      "actualRestrictedPrincipalAttacks": true,
+      "directRoutineBypassTests": true,
+      "actualCompetingWorkers": true,
+      "actualWorkerProcessCrashes": true,
+      "actualDatabaseSigkillRecovery": true,
+      "outageNoFallback": true,
+      "committedChargesSurvive": true,
+      "missingEvidenceBlocks": true,
+      "historicalTestsExcluded": false
+    },
+    "focusedBackend": {
+      "run": 89,
+      "passed": 73,
+      "skipped": 16,
+      "failed": 0,
+      "incomplete": 0,
+      "fullDiscovery": false,
+      "modules": [
+        "backend.test_planning_admission",
+        "backend.test_provider_budget",
+        "backend.test_saved_plans",
+        "backend.test_database_security",
+        "backend.test_advanced_planning",
+        "backend.test_interpretation",
+        "backend.test_session_capacity49"
+      ],
+      "skipReason": "Existing opt-in hosted saved-persistence, database-security and advanced PostgreSQL tests"
+    },
+    "frontend": {
+      "run": 289,
+      "passed": 289,
+      "skipped": 0,
+      "failed": 0
+    },
+    "typecheck": "passed",
+    "lint": "passed",
+    "packaging": {
+      "run": 7,
+      "passed": 7,
+      "failed": 0
+    },
+    "notRerun": [
+      "full backend discovery",
+      "browser tests",
+      "production build"
+    ],
+    "initialFailuresResolved": [
+      "PL/pgSQL local variable qualification corrected",
+      "generated-column privilege test changed to valid mutable-column statement",
+      "fixture readiness waits for final TCP listener, not temporary initialization socket",
+      "tsx IPC sandbox restriction; unchanged frontend suite rerun with local IPC permission"
+    ]
+  },
+  "journal": {
+    "sha256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "attempts": 10,
+    "privateFiles": 324,
+    "historicalHalt": true,
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "beforeAfterInspectionIdentical": true
+  },
+  "secretScan": {
+    "currentMatches": 0,
+    "historicalMatches": 0,
+    "scope": "configured sensitive values in current files/assets and Git history"
+  },
+  "limitations": [
+    "bootstrap/NOLOGIN owner code remains privileged and trusted",
+    "SQL validates local protocol, not complete Pydantic/source semantics; real issuer not implemented",
+    "caller-supplied synthetic quote under fixed caps, not server-computed real unit prices or daily/outing budgets",
+    "no network transport or real provider egress authority",
+    "no real shared session integration, hosted adapter, pooling/TLS or volatile storage",
+    "no restore/reconciliation/key lifecycle implementation; no power-loss/hosted failover claim"
+  ],
+  "handbook": {
+    "reviewedAndUpdatedChapters": [
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "chapterCount": 20,
+    "unrelatedChaptersPreserved": true
+  },
+  "paidRequests": 0,
+  "nextBoundedCheckpoint": "Database-enforced mapping of existing provider-unit/outing/calendar-day policy and server-computed reservation charges; synthetic tests before private staging integration.",
+  "cloudResourcesProvisioned": [],
+  "dedicatedLocalVMStopped": true
+}

@@ -104,9 +104,9 @@ Read one test in test_hitec_geography.py and identify invented inputs, replaced 
 
 ## Inactive shared-state reference
 
-`experiments/shared_state/run_local.py` runs tests against an actual disposable PostgreSQL container with no host ports/mounts or external container networking. It uses the approved Colima profile and removes its own containers/volume afterward. Tests spawn competing processes and terminate workers around commits. The harness also SIGKILLs PostgreSQL and restarts both database and worker: logged charge/INTENT survives, volatile evidence disappears and continuation refuses. This establishes local crash behavior, not replicated failover, power-loss durability or hosted HTTP correctness. Existing interpreter/planner/selection DTO tests use synthetic providers; no browser verification is implied.
+`experiments/shared_state/run_local.py` creates a disposable PostgreSQL container with no host ports/mounts or external container networking. Its synthetic bootstrap role installs the schema/routines; legitimate client operations and adversarial direct SQL use the restricted worker. Tests prove permission denials for table/history/sequence/DDL/role attacks and protocol refusal for stale, replayed, corrupted or over-budget operations. They also spawn competing workers and exit around commits. PostgreSQL SIGKILL/restart retains logged charges while volatile evidence disappears and continuation refuses. Startup readiness waits for the final TCP listener, avoiding the image's temporary initialization socket. This is local crash/SQL-permission evidence, not replicated failover, power-loss, browser or hosted verification.
 
-[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
 
 ## Practical exercise — 15.P
 

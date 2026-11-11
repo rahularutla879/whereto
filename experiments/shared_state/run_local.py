@@ -30,11 +30,11 @@ def main():
             '-e','POSTGRES_USER=whereto_synthetic_admin','-e','POSTGRES_DB=whereto_synthetic',
             '-e','POSTGRES_PASSWORD='+admin_password,PG],text=True).strip()
         for _ in range(60):
-            if subprocess.run(D+['exec',pg,'pg_isready','-U','whereto_synthetic_admin','-d','whereto_synthetic'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:break
+            if subprocess.run(D+['exec',pg,'pg_isready','-h','127.0.0.1','-U','whereto_synthetic_admin','-d','whereto_synthetic'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:break
             time.sleep(.5)
         else:raise RuntimeError('Synthetic PostgreSQL startup deadline')
         # Hex-only generated password; no credential loader and no real role exists.
-        sql="CREATE ROLE whereto_synthetic_worker LOGIN PASSWORD '"+worker_password+"';"
+        sql="CREATE ROLE whereto_synthetic_owner NOLOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS; CREATE ROLE whereto_synthetic_worker LOGIN NOSUPERUSER NOCREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD '"+worker_password+"'; REVOKE ALL ON DATABASE whereto_synthetic FROM PUBLIC; GRANT CONNECT ON DATABASE whereto_synthetic TO whereto_synthetic_worker; GRANT CREATE ON DATABASE whereto_synthetic TO whereto_synthetic_owner; REVOKE CREATE ON SCHEMA public FROM PUBLIC;"
         run('exec','-i',pg,'psql','-v','ON_ERROR_STOP=1','-U','whereto_synthetic_admin','-d','whereto_synthetic',input=sql,text=True,stdout=subprocess.DEVNULL)
         client=subprocess.check_output(D+['run','-d','--platform','linux/amd64','--network','container:'+pg,
             '--memory','768m','--cpus','1','--cap-drop','ALL','--security-opt','no-new-privileges',
@@ -52,7 +52,7 @@ def main():
         run('exec',client,'python','-m','experiments.shared_state.test_store','unavailable')
         run('start',pg,stdout=subprocess.DEVNULL)
         for _ in range(60):
-            if subprocess.run(D+['exec',pg,'pg_isready','-U','whereto_synthetic_admin','-d','whereto_synthetic'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:break
+            if subprocess.run(D+['exec',pg,'pg_isready','-h','127.0.0.1','-U','whereto_synthetic_admin','-d','whereto_synthetic'],stdout=subprocess.DEVNULL,stderr=subprocess.DEVNULL).returncode==0:break
             time.sleep(.5)
         else:raise RuntimeError('Synthetic PostgreSQL recovery deadline')
         # Docker network=container uses the old namespace after a database restart.

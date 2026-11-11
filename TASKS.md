@@ -1,3 +1,7 @@
+# Task 52 constrained-writer checkpoint
+
+Local SQL authority V2 verified with an execute-only runtime role; arbitrary operational DML and privilege escalation refuse. Task 52 stays **in progress**, not hosted-ready. [Tests, limits and next implementation gate](docs/task52-constrained-sql-authority.md). Next bounded implementation: protected provider-unit/outing/calendar-day reservation policy, then private-staging integration preflight. Updated owner authorization allows gated infrastructure preparation; explicit paid-service approval and separate public-launch approval remain required. No provisioning or Task 53 here.
+
 # Task 52 shared-state implementation checkpoint
 
 Task 52 remains **in progress**. Inactive local PostgreSQL authority/reference tests now cover revisions, expiry, replay, competing reservations, fencing and restart uncertainty. No production integration or infrastructure approval is implied. Review operational backend/capacity/privacy, constrained SQL authority, full budget mapping, evidence storage and restore recovery before a separately approved integration. [Boundaries and owner gates](docs/task52-shared-state-foundations.md). No Task 53.

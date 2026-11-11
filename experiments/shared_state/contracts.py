@@ -6,7 +6,7 @@ import json
 
 from backend.planning_admission import _plain
 
-VERSION = '52-shared-authority-local-pg-v1'
+VERSION = '52-shared-authority-constrained-pg-v2'
 MAX_EVIDENCE = 65536
 
 

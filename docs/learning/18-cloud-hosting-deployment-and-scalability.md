@@ -101,9 +101,9 @@ Read validate_environment and the proposal shared-session contract. Find one sta
 
 ## Inactive shared-state reference
 
-Task 52 now has an inactive local PostgreSQL authority reference, not deployed shared state. The conditional recommendation is an isolated operational schema/role in existing Supabase plus approved volatile shared evidence storage. Separate Cloud SQL plus Redis remains the alternative if capacity, privacy, availability or isolation cannot be met. SQL must retain consumption and financial facts even if Redis loses evidence. Existing saved-plan RLS is untouched. No operational schema, Redis adapter, hosted pool, stable key enrollment or production switch was added. Compare costs and owner gates in the linked implementation report; published connection ceilings are not measured spare capacity, and older Redis cost estimates are not current quotes.
+Task 52 now has an inactive, execute-only local PostgreSQL protocol, not deployed shared state. Conditional Supabase operational isolation plus volatile evidence remains the infrastructure recommendation; a hosted role/TLS/pool/migration still needs review. Existing saved-plan RLS is untouched. Before private staging, real unit/window/day/outing budgets, server-computed charges, source/session issuers, volatile storage, stable keys and restore/uncertainty reconciliation remain required. The owner permits gated deployment preparation and genuinely free provisioning after configuration/security/pricing checks; paid/recurring services require explicit approval. Private staging must demonstrate end-to-end behavior and security before a separate owner-approved public launch. Local tests alone are not launch evidence.
 
-[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
 
 ## Practical exercise — 18.P
 

@@ -28,16 +28,11 @@ def fixture(limits=DEFAULT):
     # Reset only between independent synthetic test cases, NEVER recovery.
     with admin() as c:
         c.execute('DROP SCHEMA IF EXISTS synthetic_state CASCADE')
+        c.execute('SET LOCAL ROLE whereto_synthetic_owner')
         c.execute(Path(__file__).with_name('schema.sql').read_text(), prepare=False)
         c.execute('INSERT INTO synthetic_state.policy VALUES(1,%s,%s,%s)',
                   (VERSION, digest(KEY,'key',VERSION), Jsonb(asdict(limits))))
-        c.execute('GRANT USAGE ON SCHEMA synthetic_state TO whereto_synthetic_worker')
-        c.execute('GRANT SELECT ON ALL TABLES IN SCHEMA synthetic_state TO whereto_synthetic_worker')
-        c.execute('GRANT INSERT,UPDATE ON synthetic_state.sessions TO whereto_synthetic_worker')
-        c.execute('GRANT INSERT,UPDATE,DELETE ON synthetic_state.evidence TO whereto_synthetic_worker')
-        c.execute('GRANT UPDATE ON synthetic_state.gate TO whereto_synthetic_worker')
-        c.execute('GRANT INSERT ON synthetic_state.capabilities,synthetic_state.operations,synthetic_state.facts TO whereto_synthetic_worker')
-        c.execute('GRANT USAGE ON ALL SEQUENCES IN SCHEMA synthetic_state TO whereto_synthetic_worker')
+        c.execute(Path(__file__).with_name('routines.sql').read_text(), prepare=False)
 
 
 def store(limits=DEFAULT, key=KEY):
@@ -68,7 +63,7 @@ def child_crash(lease, cap, phase):
     s=store();lease=s.claim(lease.session,lease.revision);op=str(uuid4())
     if phase=='before_commit':
         with s._tx() as c:
-            c.execute('UPDATE synthetic_state.sessions SET fence=fence+1')
+            s._invoke(c,'claim',dict(session=s._hash(lease.session.token,'session'),revision=lease.revision,worker=s._worker))
             os._exit(41)  # real open transaction: PostgreSQL must roll back
     r=s.reserve(lease,cap,op,'synthetic_maps',30)
     if phase=='after_intent':s.transition(r,'INTENT')
@@ -222,6 +217,159 @@ class SharedPostgresTests(unittest.TestCase):
                 if state:
                     with self.assertRaises(Denied):s.reserve(l,cap,str(uuid4()),'synthetic_maps',1)
 
+    def raw(self, s, action, args):
+        # Deliberately bypass LocalPostgres validation and its check call.
+        with psycopg.connect(**s._connection) as c:
+            return c.execute('SELECT synthetic_state.protocol(%s,%s)',
+                             (action,Jsonb(args))).fetchone()['protocol']
+
+    def raw_reservation(self, s, lease, cap, **changes):
+        args=dict(**s._lease(lease),capability=s._hash(cap.token,'cap'),
+                  operation=str(uuid4()),provider='synthetic_maps',charge=30)
+        args.update(changes)
+        return args
+
+    def test_runtime_has_only_routine_not_table_sequence_or_admin_authority(self):
+        s=store();_,lease,cap=ready(s);s.reserve(lease,cap,str(uuid4()),'synthetic_maps',30)
+        for table,column in [('policy','id'),('gate','id'),('sessions','id'),('evidence','session'),
+                             ('capabilities','id'),('operations','id'),('facts','kind')]:
+            for sql in [f'SELECT * FROM synthetic_state.{table}',
+                        f'INSERT INTO synthetic_state.{table} DEFAULT VALUES',
+                        f'UPDATE synthetic_state.{table} SET {column}={column}',
+                        f'DELETE FROM synthetic_state.{table}',
+                        f'TRUNCATE synthetic_state.{table}',
+                        f'ALTER TABLE synthetic_state.{table} DISABLE TRIGGER ALL']:
+                with self.subTest(sql=sql),self.assertRaises(psycopg.errors.InsufficientPrivilege):
+                    with psycopg.connect(**s._connection) as c:c.execute(sql)
+        attacks=[
+            "SELECT nextval('synthetic_state.facts_sequence_seq')",
+            "SELECT setval('synthetic_state.facts_sequence_seq',1)",
+            'SET ROLE whereto_synthetic_owner',
+            'SET ROLE whereto_synthetic_admin',
+            'GRANT whereto_synthetic_owner TO whereto_synthetic_worker',
+            'ALTER ROLE whereto_synthetic_worker SUPERUSER',
+            'CREATE SCHEMA worker_bypass',
+            'CREATE TABLE public.worker_bypass(id int)',
+            'CREATE TEMP TABLE sessions(id text)',
+            'CREATE FUNCTION synthetic_state.bypass() RETURNS int LANGUAGE sql AS $$ SELECT 1 $$',
+            'ALTER FUNCTION synthetic_state.protocol(text,jsonb) SECURITY INVOKER',
+            "SELECT synthetic_state.abandon('forged')",
+            "SELECT synthetic_state.valid_integer('1'::jsonb,0,10)",
+            "SET session_replication_role='replica'",
+        ]
+        for sql in attacks:
+            with self.subTest(sql=sql),self.assertRaises(psycopg.errors.InsufficientPrivilege):
+                with psycopg.connect(**s._connection) as c:c.execute(sql)
+        # Structurally valid forged history, not merely missing DEFAULT fields.
+        attempts=[
+            ("INSERT INTO synthetic_state.operations(id,capability,session,revision,worker,fence,provider,charge) VALUES(%s,%s,%s,1,%s,%s,'synthetic_maps',0)",
+             (str(uuid4()),s._hash(cap.token,'cap'),s._hash(lease.session.token,'session'),lease.worker,lease.fence)),
+            ("INSERT INTO synthetic_state.facts(operation,kind) SELECT id,'SUCCEEDED' FROM synthetic_state.operations",()),
+            ("UPDATE synthetic_state.operations SET charge=0",()),
+            ("UPDATE synthetic_state.policy SET limits='{}'",()),
+        ]
+        for sql,args in attempts:
+            with self.assertRaises(psycopg.errors.InsufficientPrivilege):
+                with psycopg.connect(**s._connection) as c:c.execute(sql,args)
+        self.assertEqual(s.snapshot()['gross'],30)
+        with admin() as c:
+            rows=c.execute("SELECT rolname,rolsuper,rolcreaterole,rolcreatedb,rolreplication,rolbypassrls,rolcanlogin FROM pg_roles WHERE rolname IN ('whereto_synthetic_worker','whereto_synthetic_owner') ORDER BY rolname").fetchall()
+            self.assertEqual(rows,[('whereto_synthetic_owner',False,False,False,False,False,False),
+                                   ('whereto_synthetic_worker',False,False,False,False,False,True)])
+            self.assertFalse(c.execute("SELECT pg_has_role('whereto_synthetic_worker','whereto_synthetic_owner','MEMBER')").fetchone()[0])
+            functions=c.execute("SELECT p.proname,p.prosecdef,r.rolname,p.proconfig,has_function_privilege('whereto_synthetic_worker',p.oid,'EXECUTE') FROM pg_proc p JOIN pg_namespace n ON n.oid=p.pronamespace JOIN pg_roles r ON r.oid=p.proowner WHERE n.nspname='synthetic_state'").fetchall()
+            for name,definer,owner,config,executable in functions:
+                self.assertEqual(owner,'whereto_synthetic_owner')
+                self.assertEqual(executable,name=='protocol')
+                if name=='protocol':
+                    self.assertTrue(definer);self.assertEqual(config,['search_path=pg_catalog, pg_temp'])
+
+    def test_direct_routine_cannot_forge_or_replay_operation_or_fence(self):
+        s=store();h,lease,cap=ready(s);args=self.raw_reservation(s,lease,cap)
+        for changes in [dict(capability='f'*64),dict(fence=lease.fence+1),dict(worker=str(uuid4())),
+                        dict(revision=2),dict(session='f'*64),dict(provider='google'),
+                        dict(charge=-1),dict(charge=True),dict(charge=None),dict(charge='0')]:
+            with self.subTest(changes=changes),self.assertRaises(psycopg.Error):
+                self.raw(s,'reserve',dict(args,**changes))
+        transition={k:v for k,v in args.items() if k not in ('provider','charge')}
+        with self.assertRaises(psycopg.Error):self.raw(s,'transition',dict(transition,state='SUCCEEDED'))
+        self.raw(s,'reserve',args)
+        with self.assertRaises(psycopg.Error):self.raw(s,'transition',dict(transition,state='SUCCEEDED'))
+        self.raw(s,'transition',dict(transition,state='INTENT'))
+        self.raw(s,'transition',dict(transition,state='SUCCEEDED'))
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',dict(args,operation=str(uuid4())))
+        other=s.issue(lease,'ordinary_plan',str(uuid4()))
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',dict(args,capability=s._hash(other.token,'cap')))
+        newer=s.claim(h,1)
+        with self.assertRaises(psycopg.Error):self.raw(s,'transition',dict(transition,state='FAILED'))
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',dict(args,operation=str(uuid4())))
+        self.assertEqual(s.snapshot()['gross'],30);self.assertEqual(newer.fence,lease.fence+1)
+
+    def test_direct_routine_enforces_finances_uncertainty_and_policy(self):
+        limits=Limits(30,30,1,1);fixture(limits);s=store(limits);_,lease,cap=ready(s)
+        args=self.raw_reservation(s,lease,cap)
+        self.raw(s,'reserve',args)
+        transition={k:v for k,v in args.items() if k not in ('provider','charge')}
+        self.raw(s,'transition',dict(transition,state='UNCERTAIN'))
+        _,other,cap2=ready(s)
+        for changes in [dict(charge=1),dict(charge=0),dict(charge=0,provider='synthetic_ai')]:
+            with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,other,cap2,**changes))
+        with self.assertRaises(psycopg.Error):self.raw(s,'transition',dict(transition,state='INTENT'))
+        with self.assertRaises(psycopg.Error):self.raw(s,'check',dict(version=VERSION,fingerprint='x',limits=asdict(limits)))
+        self.assertEqual(s.snapshot(),dict(attempts=1,gross=30,states={'UNCERTAIN':1},planning_authorized=False))
+
+    def test_direct_routine_rejects_missing_evidence_expiry_wrong_kind_and_unknown_api(self):
+        s=store();_,lease,cap=ready(s);args=self.raw_reservation(s,lease,cap)
+        for action,payload in [('refund',{}),('reserve',dict(args,ignore=True)),('snapshot',{'force':True}),('snapshot',None)]:
+            with self.assertRaises(psycopg.Error):self.raw(s,action,payload)
+        with admin() as c:c.execute("UPDATE synthetic_state.evidence SET payload='{}'")
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',args)
+        with self.assertRaises(psycopg.Error):self.raw(s,'read',s._lease(lease))
+        with admin() as c:c.execute('DELETE FROM synthetic_state.evidence')
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',args)
+        fixture();s=store();_,lease,cap=ready(s)
+        with admin() as c:c.execute("UPDATE synthetic_state.sessions SET expires=clock_timestamp()-interval '1 second'")
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,lease,cap))
+        self.assertEqual(s.snapshot()['attempts'],0)
+
+    def test_direct_routine_caps_apply_after_success_without_active_lockout(self):
+        limits=Limits(80,60,2,1,2);fixture(limits);s=store(limits);_,lease,cap=ready(s)
+        args=self.raw_reservation(s,lease,cap);self.raw(s,'reserve',args)
+        transition={k:v for k,v in args.items() if k not in ('provider','charge')}
+        self.raw(s,'transition',dict(transition,state='INTENT'));self.raw(s,'transition',dict(transition,state='SUCCEEDED'))
+        _,other,cap2=ready(s)
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,other,cap2,charge=0))
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,other,cap2,charge=51,provider='synthetic_ai'))
+        self.raw(s,'reserve',self.raw_reservation(s,other,cap2,charge=50,provider='synthetic_ai'))
+        _,last,cap3=ready(s)
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,last,cap3,charge=0,provider='synthetic_ai'))
+        self.assertEqual(s.snapshot()['gross'],80);self.assertEqual(s.snapshot()['attempts'],2)
+
+    def test_corrupt_bootstrap_policy_cannot_be_used_through_direct_routine(self):
+        s=store();_,lease,cap=ready(s)
+        # Simulates a privileged configuration fault; runtime cannot disable triggers.
+        with admin() as c:
+            c.execute('ALTER TABLE synthetic_state.policy DISABLE TRIGGER USER')
+            c.execute("UPDATE synthetic_state.policy SET limits='{}'")
+            c.execute('ALTER TABLE synthetic_state.policy ENABLE TRIGGER USER')
+        with self.assertRaises(psycopg.Error):self.raw(s,'reserve',self.raw_reservation(s,lease,cap))
+        with self.assertRaises(Denied):s.snapshot()
+
+    def test_caller_isolation_search_path_and_rollback_cannot_bypass(self):
+        s=store();_,lease,cap=ready(s)
+        with psycopg.connect(**s._connection) as c:
+            c.execute('SET TRANSACTION ISOLATION LEVEL REPEATABLE READ')
+            with self.assertRaises(psycopg.errors.RaiseException):s._invoke(c,'snapshot',{})
+        with psycopg.connect(**s._connection) as c:
+            c.execute('SET LOCAL search_path=public,pg_temp')
+            self.assertEqual(s._invoke(c,'snapshot',{})['attempts'],0)
+            s._invoke(c,'reserve',self.raw_reservation(s,lease,cap));c.rollback()
+        # No committed reservation or send authority returned by LocalPostgres;
+        # rollback permits the same capability only because no operation committed.
+        self.assertEqual(s.snapshot()['attempts'],0)
+        s.reserve(lease,cap,str(uuid4()),'synthetic_maps',30)
+        self.assertEqual(s.snapshot()['gross'],30)
+
     def test_actual_ordinary_pending_options_and_selection_contracts(self):
         from backend.ai.ollama import Interpretation
         from backend.interpretation import InterpretationInput, ClarificationAnswers, interpret_request
@@ -300,7 +448,7 @@ class SharedPostgresTests(unittest.TestCase):
             modified=deepcopy(original);change(modified)
             with admin() as c:c.execute('UPDATE synthetic_state.evidence SET payload=%s',(Jsonb(modified),))
             with self.assertRaises(Denied):s.read(lease)
-        with admin() as c:c.execute('UPDATE synthetic_state.evidence SET payload=%s',(Jsonb(original),))
+        with admin() as c:c.execute("UPDATE synthetic_state.evidence SET payload=%s,integrity=sha256(convert_to((%s::jsonb)::text,'UTF8'))",(Jsonb(original),Jsonb(original)))
         self.assertEqual(encode(Kind.HANDOFF,s.read(lease)),encode(Kind.HANDOFF,result))
 
     def test_default_production_guards_and_real_provider_names_still_refuse(self):

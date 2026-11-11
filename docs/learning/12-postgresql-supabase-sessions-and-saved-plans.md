@@ -101,9 +101,9 @@ Read database, write_document and read_document in saved_plans.py, then locate t
 
 ## Inactive shared-state reference
 
-`experiments/shared_state/schema.sql` is for new fictional local databases only; it is not an application migration. `LocalPostgres` uses psycopg transactions and a single `gate` row locked with `FOR UPDATE`. All contenders acquire that lock before checking financial totals. Explicit READ COMMITTED isolation makes the next statement see the reservation committed by the preceding lock holder. A capability has a unique consumed operation, while reservation charges and status facts cannot be updated or deleted by the test worker. The worker is trusted server code: production still needs a reviewed constrained writer, not arbitrary INSERT privileges. UNLOGGED evidence is lost on an unclean database restart; this synthetic substitute deliberately causes refusal rather than reconstructing private evidence.
+`experiments/shared_state/schema.sql` and `routines.sql` initialize only new fictional local databases, never the saved-plan schema. The runtime worker can CONNECT, use the schema and execute `synthetic_state.protocol(text,jsonb)`; it cannot read or mutate tables or sequences directly. A separate NOLOGIN owner supplies privileges through a SECURITY DEFINER function with a fixed search path and qualified table/helper names. PUBLIC cannot execute the helpers. The function takes a fixed command and exact arguments, not SQL text. It locks the same `gate` row before checking totals under READ COMMITTED. An INSERTed reservation and RESERVED fact commit together; capability and operation uniqueness prevent replay. UNLOGGED synthetic evidence disappears on an unclean restart and must block continuation. Bootstrap/fault-injection administrator access is test-only; it must never be supplied to the runtime worker in a real deployment.
 
-[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
 
 ## Practical exercise — 12.P
 

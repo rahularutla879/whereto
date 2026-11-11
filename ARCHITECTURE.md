@@ -1,3 +1,7 @@
+# Inactive constrained PostgreSQL authority V2
+
+`experiments/shared_state/routines.sql` is now the local authority state machine. The runtime worker only connects, uses the isolated schema and executes `protocol(text,jsonb)`; a separate non-login owner holds tables/functions, with PUBLIC execution revoked. Fixed search path, qualified SQL, shared gate and protected immutable policy preserve atomic accounting and fencing even for direct routine callers. `postgres.py` is a DTO/capability client with no table writes. No application-session manager, hosted adapter or real schema migration is introduced. [Scope and trust limits](docs/task52-constrained-sql-authority.md).
+
 # Inactive shared-state reference
 
 `experiments/shared_state/` separates typed expiring evidence from durable SQL revision/fence/capability/reservation facts. It is explicitly local-synthetic-only and absent from application startup and deployment runtime assembly. Actual session managers and saved-plan schema remain unchanged. Conditional option A recommendation (isolated Supabase ops role/schema + volatile evidence) requires review; it is not provisioned or approved. Complete session serialization, production budget mapping, constrained database issuer, shared keys and restore reconciliation remain integration blockers. [Full rationale and gates](docs/task52-shared-state-foundations.md).

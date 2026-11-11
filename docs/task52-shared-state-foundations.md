@@ -1,5 +1,7 @@
 # Task 52 shared-state foundations — inactive local reference
 
+**Historical V1 report:** the constrained-writer checkpoint supersedes the trusted INSERT-capable SQL boundary below. See [V2 SQL authority, current tests and remaining gates](task52-constrained-sql-authority.md). V1 source hashes/results remain preserved in Git and the original verification record. The owner subsequently authorized gated deployment preparation/provisioning; no resource was provisioned by either checkpoint.
+
 Identity: `52-shared-authority-local-pg-v1`. Baseline: `ce4f3194d66083efedcf457f941547f4191ead89`. No application startup imports this implementation. No hosted adapter, migration, provider transport, public receipt or activation switch was added. Existing production refusal, legacy interpretation, Qwen, V5.1 development boundary, saved-plan schema/RLS and financial limits are unchanged.
 
 ## Current ownership and restart risks

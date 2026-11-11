@@ -17,7 +17,7 @@ CREATE TABLE synthetic_state.sessions (
 -- Local synthetic substitute for volatile shared storage. NOT approved for real text.
 CREATE UNLOGGED TABLE synthetic_state.evidence (
  session text PRIMARY KEY REFERENCES synthetic_state.sessions(id),
- revision bigint NOT NULL, payload jsonb NOT NULL
+ revision bigint NOT NULL, payload jsonb NOT NULL, integrity bytea NOT NULL
 );
 CREATE TABLE synthetic_state.capabilities (
  id text PRIMARY KEY CHECK(length(id)=64), session text NOT NULL REFERENCES synthetic_state.sessions(id),

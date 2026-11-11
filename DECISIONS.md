@@ -1,3 +1,9 @@
+# Task 52: database-enforced local protocol; launch stays separate
+
+Replace V1's trusted INSERT-capable worker with an execute-only worker and fixed SECURITY DEFINER commands owned by a separate NOLOGIN principal. Keep SQL as the single protected transition implementation; do not duplicate financial authorization in Python. Treat bootstrap/routine owner as privileged reviewed code, and retain full charges for failed/uncertain outcomes. This is local synthetic enforcement, not validation of model semantics or completed real pricing/quotas. [Evidence and next gate](docs/task52-constrained-sql-authority.md).
+
+Record the owner's updated deployment authorization: necessary provisioning is permitted after security/configuration/pricing/dependency checks; genuinely free actions must avoid billing/exposure, and paid/recurring services require explicit cost approval. Prepare private staging first. Public launch requires a separate owner decision after representative functional, reliability, AI/itinerary quality, latency, security, cost and rollback evidence. No provisioning or launch was performed in this checkpoint. Existing paid-evaluation halt and financial restrictions remain.
+
 # Task 52: inactive SQL authority reference, conditional infrastructure reuse
 
 Use real local PostgreSQL transactions for shared-state correctness evidence rather than claiming SQLite or process locks prove fleet safety. Keep existing application admission authoritative. Recommend existing Supabase operational isolation only if the same atomic financial/replay/fencing invariants, capacity and privacy can be met; otherwise retain separate Cloud SQL + Redis. No live backend selection/migration is authorized. Lifetime synthetic limits and UNLOGGED synthetic evidence are test contracts, not final financial or retention policies. [Full rationale and gates](docs/task52-shared-state-foundations.md).

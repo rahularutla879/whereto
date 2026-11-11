@@ -92,9 +92,9 @@ Read RequestManagement and provider_work.run_work. Find where HTTP ownership and
 
 ## Inactive shared-state reference
 
-In the inactive shared-state reference, `reserve` inserts the entire fictional charge and RESERVED fact atomically before returning. `transition` appends INTENT and one terminal outcome. Failed and uncertain operations keep their charge; uncertainty blocks more work at the configured concurrency limit. There is no automatic retry or refund. HMAC protects the binding between evidence, revision and capability, but does not certify semantic correctness. `Reservation.planning_authorized` is always false. Lifetime synthetic caps do not replace real daily/minute/provider-unit/outing policies. Shared keys, constrained SQL permissions, reconciliation and restored-backup replay prevention remain unimplemented production requirements.
+The inactive V2 shared-state protocol enforces reservation and outcome rules in PostgreSQL, including when a caller skips the Python wrapper. The worker has no direct table, sequence, DDL or owner-role privileges; only the reviewed protocol routine may change protected state. It computes totals from immutable charge records, enforces caps/fences/unique consumption and appends outcomes. Failed/uncertain charges are never refunded automatically; uncertainty blocks new work. A SQL signature or evidence digest does not prove semantic correctness: `Reservation.planning_authorized` stays false. Runtime quotes are still fictional integer amounts under synthetic caps; real provider-unit rates and daily/outing budgets must be bound to protected policy before live use. Bootstrap/owner code remains privileged and must be separately controlled; SQL cannot independently verify the truth of an external outcome.
 
-[Shared-state implementation and limits](../../docs/task52-shared-state-foundations.md)
+[Constrained authority, tests and limits](../task52-constrained-sql-authority.md)
 
 ## Practical exercise — 14.P
 
