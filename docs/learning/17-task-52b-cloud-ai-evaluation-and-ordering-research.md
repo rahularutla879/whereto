@@ -41,6 +41,7 @@ Historical seven-output reassessment distinguishes seven structurally valid outp
 | V3 | Source-first categories, independently proved unordered projection, local optional scope, binary start/finish | Offline; raw errors retained; three additional release wording gaps remained |
 | V4 | Close measured start/finish/city-suffix/imperative gaps; default-OFF raw observer | Frozen offline policy and observational context; no enforcement |
 | Owner-requested V5 | Default bounded itinerary lists to sequential order, preserving explicit exceptions and repeated occurrences | Committed offline prototype at `b1efe96`; no runtime integration, prompt amendment or paid authority |
+| V5.1 | Verify conditional sequence and bounded “aur” against the original text | Frozen research proof is reused by an explicit, default-OFF Python development adapter |
 
 “Cloud prompt v4” and “Ordering Policy V4” are different identities. One defines what is sent to a model; the other is an independent source-based inspection policy. Reusing the number does not make their authority interchangeable.
 
@@ -55,6 +56,8 @@ Its seven historical OpenAI comparisons now block the two dinner/drinks outputs 
 Optional-middle semantics propose computing source closure before projecting selected visits, preserving required surrounding order without forcing an optional stop. That conditional behavior and individual impacted cases still need review. The unchanged cloud v4 prompt explicitly forbids list-order inference and conflicts with V5. The [amended Q3 proposal](../task52-q3-openai-v5-PROPOSED-v2.json) keeps the same five unused slots and proposed maximum, but future prompt/configuration/payload/build identities are null and all slots remain inadmissible. Q4A–Q4C remain frozen V4 engineering evidence, not V5 execution grants. See [the blank review checklist](../task52-ordering-v5-review-checklist.md).
 
 ## Source compatibility and admission
+
+The generalized development adapter reads the current request and supplied extraction directly. It does not consult the benchmark answer. The original five cases remain regression fixtures, and new cases exercise the same source rules with different visits and wording. The frozen scorer, historical paid halt and the diagnostic exception retain their original meanings. A successful synthetic handoff leaves model qualification and production activation open. [Generalization report](../task52-v51-ordering-preservation-generalization.md)
 
 A **source version** identifies the exact code/schema/prompt/scorer environment used for evidence. Hash-pinned evaluation prevents results produced by one validator from being silently attributed to another. The B2 change extracted only `normalize_explicit_durations`; it was behaviorally reconstructed against frozen traces, not an exact historical execution environment. The original paid evaluator correctly refuses the changed source. Test-only fixture scopes are not live gate overrides.
 

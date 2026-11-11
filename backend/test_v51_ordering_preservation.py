@@ -124,10 +124,9 @@ class OrderingPreservationTests(TestCase):
                 self.assertEqual(result.executionStatus, 'clarification_required')
                 self.assertIsNone(result.pending)
 
-    def test_pending_and_unreviewed_requests_cannot_enter_gated_path(self):
+    def test_pending_and_manual_overrides_cannot_enter_gated_path(self):
         pending = self.interpret(3, enabled=False).pending
         for value in (InterpretationInput(text=pending.text, pending=pending),
-                      InterpretationInput(text='Do another outing'),
                       InterpretationInput(text=pending.text, preferences={'location':'New York'})):
             with self.assertRaises(ValueError):
                 interpret_for_development(value, extraction=self.payloads[3], now=NOW, preserve_order=True)
@@ -283,3 +282,172 @@ class OrderingPreservationTests(TestCase):
             with self.assertRaises(ProviderLimitError):
                 sessions.create(value.text, result, ProviderBudget(ProviderSettings()), value.preferences)
         self.assertFalse(sessions.items)
+
+
+class GeneralizedOrderingTests(TestCase):
+    def setUp(self):
+        self.enterContext(patch('requests.sessions.Session.send', side_effect=AssertionError('No provider requests')))
+        self.enterContext(patch('socket.socket.connect', side_effect=AssertionError('No outbound connections')))
+        self.enterContext(patch('backend.interpretation.create_provider', side_effect=AssertionError('No model factory')))
+
+    def validate(self, text, stops, edges, *, ordering_mode=None, **fields):
+        from scripts.task52_ordering_preservation_dev import validate_for_development
+
+        journey_fields = fields.pop('journey_fields', {})
+        entries = [stop if isinstance(stop, dict) else {'source': stop} for stop in stops]
+        extraction = {
+            'activities': [entry['source'] for entry in entries],
+            'date': None, 'location': None, 'budget_per_person': None, 'preferences': [],
+            'journey': {'stops': entries, 'ordering': ordering_mode or ('constrained' if edges else 'unspecified'),
+                        'order': [{'before': a, 'after': b, 'source': quote} for a, b, quote in edges],
+                        **journey_fields},
+            **fields,
+        }
+        original = deepcopy(extraction)
+        validation = validate_for_development(InterpretationInput(text=text), extraction=extraction, now=NOW)
+        self.assertEqual(extraction, original)
+        self.assertEqual(Interpretation.model_validate_json(validation.raw_snapshot), Interpretation.model_validate(original))
+        return validation
+
+    def test_independent_supported_phrases_reach_typed_handoff(self):
+        from backend.interpretation import InterpretationResult
+
+        cases = [
+            ('Tea, then bowling, then dinner.', ['Tea','bowling','dinner'],
+             [(0,1,'Tea, then bowling'), (1,2,'bowling, then dinner')], {}),
+            ('Arcade, bowling, dinner, movie.', ['Arcade','bowling','dinner','movie'],
+             [(0,1,'Arcade, bowling'), (1,2,'bowling, dinner'), (2,3,'dinner, movie')], {}),
+            ('Maybe skating, then lunch.', [{'source':'skating','requirement':'optional','evidence':'Maybe skating'},'lunch'],
+             [(0,1,'skating, then lunch')], {}),
+            ('Museum, maybe bowling, dinner.', ['Museum',{'source':'bowling','requirement':'optional','evidence':'maybe bowling'},'dinner'],
+             [(0,1,'Museum, maybe bowling'), (1,2,'bowling, dinner')], {}),
+            ('Bookstore and maybe tea.', ['Bookstore',{'source':'tea','requirement':'optional','evidence':'maybe tea'}],
+             [(0,1,'Bookstore and maybe tea')], {}),
+            ('Pharmacy before bank, tea whenever convenient.', ['Pharmacy','bank','tea'],
+             [(0,1,'Pharmacy before bank')], {}),
+            ('Arcade whenever convenient, bowling, dinner.', ['Arcade','bowling','dinner'],
+             [(1,2,'bowling, dinner')], {}),
+            ('Museum after dinner.', ['Museum','dinner'], [(1,0,'Museum after dinner')], {}),
+            ('Tea, museum, tea.', ['Tea','museum','tea'], [(0,1,'Tea, museum'),(1,2,'museum, tea')], {}),
+            ('Visit Harbor Art Museum, then pizza.', [{'source':'Harbor Art Museum','kind':'named_place'},'pizza'],
+             [(0,1,'Harbor Art Museum, then pizza')], {}),
+            ('Arcade aur bowling in Hyderabad.', ['Arcade','bowling'], [(0,1,'Arcade aur bowling')], {'location':'Hyderabad'}),
+            ('Tea and bowling, in any order.', ['Tea','bowling'], [], {'ordering_mode':'flexible'}),
+            ('Tea, dinner in New York on 2026-11-07, on foot.', ['Tea','dinner'],
+             [(0,1,'Tea, dinner')], {'location':'New York'}),
+            ('Tea, pizza in New York tomorrow, finish at Maple Community Library.', ['Tea','pizza'],
+             [(0,1,'Tea, pizza')], {'location':'New York','journey_fields':{
+                 'endpoint': {'kind':'named_place','source':'finish at Maple Community Library'}}}),
+        ]
+        for text, stops, edges, fields in cases:
+            with self.subTest(text=text):
+                check = self.validate(text, stops, edges, **fields)
+                result = check.result
+                self.assertEqual(check.disposition, 'source_order_preserved')
+                self.assertEqual(result.executionStatus, 'advanced_unavailable')
+                self.assertEqual([(e.before,e.after,e.source) for e in result.interpretation.journey.order], edges)
+                self.assertIsNone(result.advancedToken)
+                self.assertIsNone(result.request)
+                self.assertEqual(result.pending.interpretation, result.interpretation)
+                if text.startswith('Arcade, bowling'):
+                    old = InterpretationResult.model_validate_json(check.legacy_snapshot)
+                    self.assertEqual(old.interpretation.journey.order, [])
+                if 'on foot' in text:
+                    self.assertEqual(str(result.context.date), '2026-11-07')
+                    self.assertEqual(result.context.transport.value, 'walking')
+                    self.assertEqual(result.context.destination, 'New York')
+                if 'finish at' in text:
+                    self.assertEqual(result.interpretation.journey.endpoint.source, 'finish at Maple Community Library')
+
+    def test_forward_graphs_fail_when_source_or_non_order_constraints_are_unproved(self):
+        cases = [
+            ('Meeting Notes, tea.', [{'source':'Meeting Notes','kind':'named_place'},'tea'],
+             [(0,1,'Meeting Notes, tea')], {}),
+            ('Tea versus bowling.', ['Tea','bowling'], [(0,1,'Tea versus bowling')], {}),
+            ('Tea as well as bowling.', ['Tea','bowling'], [(0,1,'Tea as well as bowling')], {}),
+            ('Tea and bowling, in any order.', ['Tea','bowling'], [(0,1,'Tea and bowling')], {}),
+            ('Tea, bowling, tea.', ['Tea','bowling'], [(0,1,'Tea, bowling')], {}),
+            ('Tea, bowling, tea.', ['Tea','bowling','tea'], [(0,1,'Tea, bowling'),(1,2,'Tea, bowling')], {}),
+            ('Bowling before dinner, library.', ['Bowling','dinner','library'], [(0,1,'Bowling before dinner')], {}),
+            ('Bowling before dinner; if raining skip it.', ['Bowling','dinner'], [(0,1,'Bowling before dinner')], {}),
+            ('Bowling before dinner; bring umbrellas.', ['Bowling','dinner'], [(0,1,'Bowling before dinner')], {}),
+            ('Bowling before dinner, but dinner before bowling.', ['Bowling','dinner'],
+             [(0,1,'Bowling before dinner')], {}),
+            ('Bowling before dinner, tea whenever convenient.', ['Bowling','dinner','tea'],
+             [(0,1,'Bowling before dinner'),(1,2,'dinner, tea whenever convenient')], {}),
+            ('Tea, bowling, dinner.', ['Tea','bowling','dinner'], [(0,1,'Tea, bowling')], {}),
+            ('Tea, bowling, dinner.', ['Tea','bowling','dinner'], [(1,0,'Tea, bowling'),(1,2,'bowling, dinner')], {}),
+            ('Tea, bowling, dinner.', ['Tea, bowling','dinner'], [(0,1,'Tea, bowling, dinner')], {}),
+            ('Tea aurora bowling.', ['Tea','bowling'], [(0,1,'Tea aurora bowling')], {}),
+            ('Tea aur bowling.', ['Tea','bowling'], [(0,1,'Tea and bowling')], {}),
+            ('Tea, bowling in New York and Queens.', ['Tea','bowling'],
+             [(0,1,'Tea, bowling')], {'location':'New York and Queens'}),
+            ('Tea, bowling in New York tomorrow.', ['Tea','bowling'],
+             [(0,1,'Tea, bowling')], {'location':'New York','date_expressions':['today']}),
+            ('Tea, bowling tomorrow.', ['Tea','bowling'], [(0,1,'Tea, bowling')], {}),
+            ('Tea, bowling under $25.', ['Tea','bowling'],
+             [(0,1,'Tea, bowling')], {'budget_per_person':25, 'currency':'USD'}),
+            ('Tea, bowling by bike.', ['Tea','bowling'], [(0,1,'Tea, bowling')], {}),
+            ('Tea, bowling, return to where I started within 45 minutes.', ['Tea','bowling'],
+             [(0,1,'Tea, bowling')], {'journey_fields':{'endpoint':{'kind':'origin','source':'return to where I started'}}}),
+            ('Tea, bowling.', ['Tea','bowling'], [(0,1,'Tea, bowling')], {'transport':'walking'}),
+            ('Tea whenever convenient, then dinner.', ['Tea','dinner'], [], {'ordering_mode':'flexible'}),
+        ]
+        for text, stops, edges, fields in cases:
+            with self.subTest(text=text):
+                check = self.validate(text, stops, edges, **fields)
+                self.assertNotEqual(check.disposition, 'source_order_preserved')
+                self.assertEqual(check.result.executionStatus, 'clarification_required')
+                self.assertIsNone(check.result.request)
+                self.assertIsNone(check.result.pending)
+                self.assertIsNone(check.result.advancedToken)
+
+    def test_new_return_and_walking_reach_the_planner_with_real_timing_contract(self):
+        from backend.advanced_planning import AdvancedInput, Sessions
+        from backend.provider_budget import ProviderBudget, ProviderSettings
+        from backend.test_advanced_planning import IntegrationTests
+        from backend.test_advanced_routing import record, start
+
+        fixture = IntegrationTests()
+        fixture.setUp()
+        self.addCleanup(fixture.doCleanups)
+        fixture.records.append(record('Synthetic_dinner','Synthetic dinner',['restaurant']))
+        text = 'Tea, dinner in New York tomorrow, on foot, return to where I started within 45 minutes.'
+        checked = self.validate(text, ['Tea','dinner'], [(0,1,'Tea, dinner')], location='New York',
+                                journey_fields={'endpoint':{'kind':'origin','source':'return to where I started'},
+                                                'total_duration':{'minutes':45,'relation':'maximum','source':'within 45 minutes'}})
+        result = checked.result
+        self.assertEqual(checked.disposition, 'source_order_preserved')
+        sessions = Sessions()
+        token = sessions.create(text, result, ProviderBudget(ProviderSettings()), InterpretationInput(text=text).preferences)
+        self.assertIsNotNone(token)
+        # Missing origin is checked before any synthetic search.
+        self.assertEqual(sessions.run(AdvancedInput(token=token)).status, 'clarification')
+        self.assertFalse(fixture.searches)
+        inputs = {'token': token, 'startingLocation': start()}
+        unverified = sessions.run(AdvancedInput(**inputs))
+        self.assertEqual(unverified.status, 'results')
+        self.assertEqual(unverified.options[0].durationState, 'unverified')
+        self.assertEqual([s.occurrence for s in unverified.options[0].stops], [0,1])
+        self.assertEqual(unverified.options[0].ending, 'origin')
+        self.assertTrue(all(leg.mode == 'walk' for leg in unverified.options[0].legs))
+        with_dwell = sessions.run(AdvancedInput(**inputs, edits={'dwell':[
+            {'occurrence':0,'minutes':5,'relation':'exact'}, {'occurrence':1,'minutes':10,'relation':'exact'}]}))
+        self.assertEqual(with_dwell.options[0].durationState, 'feasible')
+        self.assertEqual(with_dwell.options[0].elapsedUpperSeconds, 2700)
+        over = sessions.run(AdvancedInput(**inputs, dwell={'occurrence':1,'minutes':11,'relation':'exact'}))
+        self.assertEqual(over.options, [])
+
+        fixture.records.append(record('Synthetic_library','Maple Community Library',['library']))
+        terminal = 'Tea, dinner in New York tomorrow, finish at Maple Community Library.'
+        checked = self.validate(terminal, ['Tea','dinner'], [(0,1,'Tea, dinner')], location='New York',
+                                journey_fields={'endpoint':{
+                                    'kind':'named_place','source':'finish at Maple Community Library'}})
+        self.assertEqual(checked.disposition, 'source_order_preserved')
+        token = sessions.create(terminal, checked.result, ProviderBudget(ProviderSettings()),
+                                InterpretationInput(text=terminal).preferences)
+        self.assertIsNotNone(token)
+        final = sessions.run(AdvancedInput(token=token))
+        self.assertEqual(final.status, 'results')
+        self.assertEqual(final.options[0].ending, 'named_destination')
+        self.assertEqual(final.options[0].legs[-1].role, 'final_destination')

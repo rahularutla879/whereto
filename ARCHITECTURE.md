@@ -1,3 +1,7 @@
+# Task 52B development-only V5.1 handoff
+
+A supplied extraction can enter the explicit Python-only ordering adapter. It proves source ownership and ordering, compares raw and legacy snapshots, and returns the existing advanced handoff type when compatible. Normal startup never imports this adapter. The advanced session, provider admission and persistence contracts remain the same. [Scope and verification](docs/task52-v51-ordering-preservation-generalization.md)
+
 # Task 52B original-journal integration interface
 
 `task52_real_integration` pairs Q4D's fixed read-only inspector with the diagnostic engine's registered synthetic fixture. The private SQL adapter exposes fixed reads and the existing reservation INSERT under the experiment lock. [Scope and evidence](docs/task52-real-integration-preparation-v1.md)

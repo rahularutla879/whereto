@@ -71,6 +71,8 @@ Initial constants are four occurrences, four shortlisted candidates per occurren
 
 For pharmacy P, bank B and coffee C with only P→B, valid orders are P-B-C, P-C-B and C-P-B. Directed seconds might differ in each direction; never infer B→P from P→B. The router constructs optional origin/return/final-destination legs, admits a finite union of missing pairs, and asks Google only for those admitted needs. Known beyond-limit candidates stay excluded unless explicit scoped permission applies.
 
+The default-OFF V5.1 development adapter sends a proved graph through this existing advanced handoff, including lists that legacy would otherwise handle with the ordinary linear planner. For museum → optional bowling → dinner, the ancestor set for dinner includes both visits before optional subsets are chosen. The route still requires museum before dinner when bowling is omitted. An allowed order still needs eligible venues, directed route evidence and timing checks. [Development verification](../task52-v51-ordering-preservation-generalization.md)
+
 Advanced route ranking is lexicographic, meaning compare the first criterion, then the next only on a tie: verification/beyond state, missing legs, preference deviations, total verified travel, rating tie-break and deterministic identity. Comparable candidates within 60 seconds diversify venue sets. Session timing selection prioritizes feasible, compliant options and optional inclusion within category before travel; it is not the ordinary weighted scoring formula.
 
 ## Whole-trip timing and limitations

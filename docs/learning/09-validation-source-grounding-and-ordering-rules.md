@@ -32,14 +32,21 @@ An **occurrence** is a particular requested visit. Coffee0 and coffee2 may share
 | Active advanced unspecified Journey | Retains source order during shortlist | Constrained/partial graphs govern allowed permutations | Current legacy checks, with known gaps |
 | Frozen Ordering V4 | Independently proven unordered list has no mandatory graph edges; may propose audited projection | Requires finite source-owned proof and reachability | Offline/default-OFF observer only |
 | Owner-requested V5 | Bounded itinerary lists default sequential; explicit flexibility/partial constraints take precedence | Requires a new versioned contract | Committed offline prototype at `b1efe96`; no runtime integration |
+| V5.1 development adapter | Recognizes reviewed list grammar, including bounded Roman-script Hindi “aur” | Requires proved occurrence ownership, direction, and required or optional status | Explicit Python-only development path, off by default |
 
-Do not confuse “ordinary code happens to preserve source order” with “a source-first policy proved the user required every adjacent edge.” Do not call V5 implemented application behavior. It changes the expected meaning of historical list cases and needs versioned rubrics/review rather than silently changing earlier scores.
+The ordinary planner can preserve source order even when there is no verified mandatory edge. Normal application startup still uses legacy interpretation. V5 and V5.1 use separate rubrics for changed expectations about historical list cases, and earlier scores keep their original meanings.
 
 ## The known unsafe branch
 
 Legacy code can remove grounded forward edges for plain lists with no explicit ordering cues. With a sentence containing “then,” it uses broader cue/quote checks; the recorded repeated-coffee extraction's extra 0→1 edge survived while valid 1→2 also survived. Another legacy limitation can erase true start/finish edges. V4 independently detects these problems in raw copies, but the observer never changes responses or authorizes planning. See [the policy](../../docs/task52-ordering-policy-v4.md) and [enforcement design](../../docs/task52-ordering-enforcement-design.md).
 
 **Absence proof** means independently establishing that a requirement is not present before removing a model assertion. It is stronger than “the model was probably over-specific.” V3/V4 experiments preserve raw errors even when an audited empty-graph projection is proposed. Unknown wording should clarify rather than gain authority from a guess.
+
+## Follow a proved edge in local development
+
+The adapter starts with a supplied typed extraction and runs the legacy interpreter with an in-memory provider. `validate_for_development` keeps separate raw and legacy snapshots, binds each visit to an original span, and checks every edge and required relationship with the frozen V5.1 proof. For “Museum, maybe bowling, dinner,” a valid supplied graph must place bowling between the other visits when included. A missing edge blocks the handoff. If legacy deletes the complete proved graph, the adapter compares all other validated fields before preserving the original edges.
+
+Call `interpret_for_development(value, extraction=extraction, now=clock, preserve_order=True)` with a fresh `InterpretationInput` and a supplied extraction. The optional flag defaults to false. A successful result can be handed to the existing local advanced contracts. Normal startup has no way to select this profile. [Python adapter](../../scripts/task52_ordering_preservation_dev.py) · [Language boundary and examples](../task52-v51-ordering-preservation-generalization.md)
 
 ## Other validation remains necessary
 

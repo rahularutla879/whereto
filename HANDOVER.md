@@ -1,3 +1,9 @@
+# Task 52B generalized V5.1 ordering preservation
+
+The existing Python-only development adapter uses V5.1 source evidence for bounded two-to-four-visit requests instead of looking up the five benchmark cases. It retains only verified supplied edges, keeps the raw and legacy snapshots separately, and uses the existing advanced contracts without issuing a session or admission receipt. Normal startup stays on the legacy path. [Scope, limits and verification](docs/task52-v51-ordering-preservation-generalization.md)
+
+Developer-handbook maintenance is now a standing rule in AGENTS.md. Changes to the application or its engineering contracts require checking the relevant material in `docs/learning/`, updating affected examples and references, and reporting the chapters reviewed and changed. Preserve the 20-chapter structure and unaffected material.
+
 # Task 52B V5.1 development ordering preservation
 
 The exact groceries and optional coffee case preserves its source-proven conditional edge through an explicit Python-only development adapter. The four other reviewed cases retain their requirements or safely clarify. Synthetic advanced sessions and save/reopen checks exercise the existing planner and data contracts. Normal API startup and historical evaluation still use legacy normalization. The journal and all frozen review evidence are preserved. [Repair and verification](docs/task52-v51-ordering-preservation-dev.md)

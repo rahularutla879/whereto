@@ -618,6 +618,10 @@ Cryptographic authentication of exact bytes under a pinned trusted public key. I
 
 Binding evidence to exact code/schema/prompt/scorer identities so changed runtime behavior is not mislabeled historical execution. [Project source](../../docs/task52-source-compatibility-v1.md).
 
+## Source-owned occurrence
+
+A specific visit tied to one position in the original words. In “Tea, museum, tea,” each tea visit has its own source span and index. The V5.1 development adapter requires the same visit to retain its source span and index through legacy validation before preserving its edges. [Validation chapter](09-validation-source-grounding-and-ordering-rules.md)
+
 ## SQL — Structured Query Language
 
 Database read/write/schema language; psycopg uses parameter binding rather than interpolating untrusted SQL values. [Project source](../../backend/saved_plans.py).

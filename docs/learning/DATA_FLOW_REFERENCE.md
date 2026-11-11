@@ -51,6 +51,8 @@ sequenceDiagram
 - `evaluate_advanced_timing` reads trusted routes, explicit bounds and calendar; it does not call the model or Google.
 - Advanced `action=different/discover/beyond` is distinct from ordinary `/api/plans/options`. Cached page arrows use neither endpoint.
 
+An explicit Python-only V5.1 test can supply an extraction to the development adapter. The adapter checks the raw graph against the source, compares it with the legacy result, and returns the existing advanced handoff type. Tests can then pass that result to an isolated `Sessions` instance. This experimental route does not appear in the browser sequence above. [Development data flow](../task52-v51-ordering-preservation-generalization.md)
+
 ## Data ownership and retention
 
 | Data | Browser / transient backend | Durable allowed purpose | Do not infer |

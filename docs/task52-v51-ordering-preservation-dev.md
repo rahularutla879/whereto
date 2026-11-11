@@ -1,5 +1,7 @@
 # Task 52B V5.1 ordering preservation in local development
 
+This records the original five-case repair. The current development scope and verification are in the [generalization report](task52-v51-ordering-preservation-generalization.md).
+
 The owner-approved case “Buy groceries and maybe stop for coffee.” requires groceries and allows coffee afterward. The raw typed extraction already has groceries 0 → coffee 1. In `backend/journey.py`, `validate_journey` clears source-forward edges and changes the mode to `unspecified` when their quotations contain both stop names and the request lacks a legacy temporal cue or arrow. That condition matches this request. The resulting advanced handoff still carries both visits and their required or optional status, but it has lost the conditional edge. The current router’s source-order fallback can mask the loss in the displayed itinerary. The original regression failed on the effective graph itself before this repair.
 
 ## Development boundary

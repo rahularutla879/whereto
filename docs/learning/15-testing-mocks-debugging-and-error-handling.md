@@ -36,6 +36,7 @@ Line 1 constructs a request with a declared historical date. Line 2 supplies a l
 | Browser-facing adapters | `lib/planning-client.test.ts`, `lib/request-management.test.ts` |
 | HTTP proxies | `app/api/interpret/route.test.ts`, `app/api/plans/generate/route.test.ts` |
 | Frozen cloud research | `backend/test_task52_q1.py` through `test_task52_q4c.py` and ordering suites |
+| Default-OFF V5.1 interpretation to synthetic planning | `backend/test_v51_ordering_preservation.py` |
 
 These are repository-relative paths; [the file map](PROJECT_FILE_MAP.md) links every indexed source/test. Normally enabled tests use fixtures; do not enable hosted resource or lifecycle flags as a study shortcut.
 
@@ -46,6 +47,8 @@ These are repository-relative paths; [the file map](PROJECT_FILE_MAP.md) links e
 A failed frontend fetch could mean a dead proxy/backend, a validation refusal, malformed upstream JSON or a provider failure. [failure-diagnostics.ts](../../lib/failure-diagnostics.ts), [proxy-failures.ts](../../lib/proxy-failures.ts) and [backend/failures.py](../../backend/failures.py) preserve categories. A **stack trace** shows function calls around an exception; a sanitized production message deliberately hides sensitive internals. Review private local traces carefully rather than logging whole bodies.
 
 The launcher inherits terminal output; there is no guaranteed application log file containing every prior request. Operational counters and sanitized events cannot recover all original response fields. The Hitech incident's missing original response demonstrates why uncertainty should be reported instead of filled with a plausible cause.
+
+For the explicit V5.1 development path, run `backend/.venv/bin/python -m unittest backend.test_v51_ordering_preservation -v`. Compare the raw graph, legacy snapshot and final result in the fixture before investigating routes. A missing edge in the raw snapshot is an extraction problem. A proved edge present only in the raw snapshot identifies the legacy deletion branch. A proved handoff followed by a missing route is a planning-evidence problem. Keep snapshot text local. [Development tests](../../backend/test_v51_ordering_preservation.py)
 
 ## Commands and honest reporting
 

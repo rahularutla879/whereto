@@ -36,6 +36,7 @@ Line 1 defaults identity evidence to unknown. Line 2 independently defaults pric
 |---|---|---|
 | What words did the model extract? | `Interpretation` | `OllamaProvider`, `parse_interpretation` |
 | What user constraints were accepted? | `InterpretationResult.request/context` | `interpret_request`, `validate_journey` |
+| How did a proved edge survive legacy normalization in development? | `validate_for_development` | Compare its raw snapshot, legacy snapshot and final result. [Adapter](../../scripts/task52_ordering_preservation_dev.py) |
 | What does stop 2 mean? | `Journey.stops[2]` | Source ownership and occurrence constraints |
 | Why did a plan fail? | Constraint issues / advanced reasons | Ranking or timing evaluator |
 | Which route was measured? | RouteLeg | Directed endpoints, mode and observation time |
@@ -51,7 +52,7 @@ A minute-after-midnight integer represents a local clock position: 1020 is 17:00
 
 ## Keeping the course accurate
 
-The handbook is a snapshot grounded in initial commit a7ed106 and reconciled with the independently committed offline V5 checkpoint b1efe96. When code changes, compare the affected contract, caller, failure handling, tests and historical claims before updating the lesson. Preserve old evaluation outputs and record new policy identities. Verify relative links and Mermaid diagrams after moves. [VERIFICATION.md](VERIFICATION.md) states the present evidence boundary and documentation discrepancies.
+The handbook began from the a7ed106 and b1efe96 checkpoints. The standing development rule requires checking affected contracts, callers, failure handling, tests and historical claims when implementation changes. Preserve the chapter structure and earlier evaluation evidence, verify links and examples, and record which chapters changed. [Development rules](../../AGENTS.md) · [Original verification snapshot](VERIFICATION.md)
 
 After chapter 20, repeat the chapter 7 traces using source searches alone, then explain the chapter 10 worked examples without looking at their answers. The goal is the ability to identify what you know, what the code checks, and what evidence is still missing before making a safe change.
 

@@ -12,6 +12,7 @@ These rules apply to every development session in this project.
 - Never expose secrets or make destructive changes without approval. Follow [CONSTRAINTS.md](CONSTRAINTS.md) for safeguards and hard planning constraints.
 - Distinguish fictional data from verified information and implemented features from future plans.
 - Update documentation when relevant: current state and checks in HANDOVER.md, milestone status in TASKS.md, significant decisions in DECISIONS.md, structural changes in ARCHITECTURE.md. Keep README.md as the beginner startup guide.
+- For application, architecture, contract, data-flow, algorithm, dependency, configuration, security or testing-strategy changes, review and update the affected developer-handbook material in `docs/learning/`. Preserve the 20-chapter structure and unaffected material. Verify examples and references against the code, distinguish production from experimental behavior, and report which chapters were reviewed and updated. Keep documentation-only, evaluation-record-only and fixture-only edits out of unaffected chapters. Commit handbook updates with the implementation.
 - Start by reading HANDOVER.md and CONSTRAINTS.md, then TASKS.md and relevant architecture/decisions. Inspect Git status and preserve unrelated work.
 
 <!-- BEGIN:nextjs-agent-rules -->
