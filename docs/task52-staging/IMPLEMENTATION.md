@@ -10,6 +10,8 @@ Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start i
 
 > Subsequent local service checkpoint: [authenticated service isolation](../task52-service-isolation.md) separates factory/validated-action issuer, counter, dispatcher and recovery in restricted synthetic containers, with owner-bound ticket routing, TLS/request-bound workload signatures and durable replay facts. This does not enroll Google IAM or end-user identities, migrate Supabase, implement real transports, qualify an LLM or approve money. Next bounded local gate is the hosted OIDC/end-user-forwarding contract and reviewed service/secret/role enrollment templates; existing P1–P10 spending, privacy and staging acceptance gates remain open.
 
+> Subsequent local hosted-identity checkpoint: [Google/IAP contract](../task52-hosted-identity-contract.md) verifies separate workload/user trust roots, request-bound frontend forwarding, native owner continuity and nonce-only frontend/backend roles using offline signed fixtures. The [enrollment matrix](hosted-enrollment-v1.json) is review-only. Real Next identity-port/metadata wiring, IAM/IAP, migration, secrets, independent hosted recovery, actual grants/model/provider and private staging remain unactivated.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |

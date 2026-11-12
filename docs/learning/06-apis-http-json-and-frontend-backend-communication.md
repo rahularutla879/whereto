@@ -87,3 +87,9 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-06).
 ## Private experimental RPC is not a public application API
 
 The inactive [service fixture](../../experiments/service_isolation/server.py) exposes fixed POST methods only on its disposable loopback network. TLS verifies the service certificate; a separate synthetic workload signature binds exact caller role, audience, path, body, build, epoch, expiry and a durable single-use nonce in the independent witness database. Typed application validation and SQL financial permission are still required afterward. Request bodies are capped at200KB and responses at1MiB to fit the existing plan DTO; no public DTO changes. Normal Next proxies and FastAPI routes do not select this mechanism. Hosted Google identity verification and independently verified user forwarding are still absent.
+
+## Request identity and user forwarding are different proofs
+
+The inactive [Node forwarding contract](../../experiments/hosted_identity/proxy.server.ts) lists fixed paths and original timeout/body limits. It drops browser Authorization, cookies and unsigned identity headers, never follows redirects/retries and never copies credential response headers. Its server-owned `ServerIdentityPort` must independently verify IAP and obtain/seal the service identity; that production composition is not wired. Tests of this helper are distinct from the Python TLS multi-process fixture and from browser verification.
+
+`HostedAuth` uses Google-only keys; `Auth` explicitly uses isolated offline keys. A separate frontend signature binds the IAP assertion to the exact action body/path/build/epoch, while each hop has its own Google identity and single-use request proof. An IAP user assertion cannot replace a workload token, nor can a workload choose a user through a header. Real Cloud Run IAM and all-ingress IAP configuration still require independent deployment tests.

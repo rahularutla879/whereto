@@ -610,3 +610,6 @@ Native restart reconstruction: `experiments/shared_state/native_sessions.py` (in
 
 - `experiments/service_isolation/`: inactive synthetic workload authentication, native ticket routing, narrow delivery-only SQL adapter, four isolated service processes and adversarial container tests; no startup import or provider HTTP client.
 - `docs/task52-service-isolation.md`: service/credential matrix, request and recovery contract, verified local limitations and next identity gate.
+
+- `experiments/hosted_identity/`: inactive Google/IAP verification, scoped forwarding, witness nonce roles, isolated signed-fixture tests, Node proxy contract and exact source manifest; not included in normal startup/images.
+- `docs/task52-staging/hosted-enrollment-v1.json`: inert identity/role/audience/secret/network/recovery review matrix; no resource is created.

@@ -773,3 +773,8 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **Request-bound nonce:** a single-use signed request identifier committed in protected SQL before action handling; service restart does not make it reusable.
 - **SCRAM-SHA-256:** PostgreSQL password authentication used by the isolated service fixture. A loopback TCP connection still needs the correct password; network location alone is not authority. Hosted database TLS remains a separate requirement.
 - **Redis ACL:** a list of allowed commands and key patterns for a Redis user. The fixture dispatcher can read only its epoch namespace; it cannot write evidence or administer Redis.
+
+- **OIDC workload ID token:** a signed service identity with a target audience; it is not a user identity or financial grant.
+- **IAP assertion:** a separately signed user assertion for a specific protected resource. Its keys/issuer/audience differ from a Cloud Run workload token.
+- **JWKS:** a JSON set of public verification keys. The new production cache loads only fixed Google HTTPS origins, never a token-supplied URL.
+- **User-forwarding scope:** frontend-owned proof binding a verified IAP assertion to one exact application action; it is not original interpretation or provider authority.

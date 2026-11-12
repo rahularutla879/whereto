@@ -1,0 +1,391 @@
+{
+  "additionalChecks": {
+    "cachedLinuxWheelHashes": "checked by every disposable harness; PyJWT public package SHA verified",
+    "eslint": "passed",
+    "frontendProductionBuild": "passed, normal production source unchanged",
+    "gitDiffReview": "all tracked/new task files reviewed; whitespace and secret checks passed",
+    "handbookChapters": 20,
+    "handbookReviewed": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18,
+      20
+    ],
+    "handbookUpdated": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "hostPipCheck": "no broken requirements",
+    "localLinks": "passed",
+    "npmAudit": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "moderate": 7,
+      "total": 7
+    },
+    "npmAuditExitCode": 1,
+    "npmAuditImpact": "seven retained moderate development-tooling matches; no dependency update/suppression; zero high/critical npm matches",
+    "npmAuditLogSHA256": "bfc252a027cfe6c39535d14a147909d3eaff6144bad612e41adeed733616eefd",
+    "productionApplicationAndDependencies": "unchanged tracked production sources, package locks, image artifacts and frozen evaluator manifests",
+    "pythonCompile": "passed",
+    "secretScan": "zero current/history configured credential matches",
+    "secretScanLogSHA256": "3380fe0e7d0eb3422ff313e346cddf5ff22dee6dc125998bbcf7e9815211bc78",
+    "typeScript": "passed",
+    "unaffectedChapters": "byte-identical to baseline; existing content retained"
+  },
+  "backendModulesExecuted": [
+    "experiments.shared_state.test_action_identity",
+    "backend.test_planning_admission",
+    "backend.test_provider_budget",
+    "backend.test_saved_plans",
+    "backend.test_saved_details_reliability",
+    "backend.test_session_capacity49",
+    "backend.test_interpretation",
+    "backend.test_real_planning",
+    "backend.test_advanced_planning",
+    "backend.test_advanced_routing",
+    "backend.test_advanced_timing",
+    "backend.test_database_security",
+    "backend.test_database_check",
+    "backend.test_ordering_shadow",
+    "backend.test_ordering_enforcement_design"
+  ],
+  "baseline": "02e363f5cd291a4aee97a795ebf988d835644518",
+  "buildSHA256": "afbd644bbd4af7efbe8d2ab8db18c94ff6236ee1aee25dd78effa0627dabdfa5",
+  "checks": [
+    {
+      "failed": 0,
+      "logSHA256": "574024deb4644dc282b5d7984d62676799b4088b3e0e6814358f0b3d4c982cca",
+      "name": "Google-shaped signature/JWKS/constructor tests + separate hosted-auth process workflows",
+      "passed": 20,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "43661b693fcd924cf8477681f9f87906df76d873eb6d9c6d19e7afd4a57e47e3",
+      "name": "server-only Node forwarding contract, 12 fixed routes",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "856054bee0e3487c1c46862730bfaeeab3be482bc527e947e7f4a68eca52f355",
+      "name": "unchanged authenticated service isolation",
+      "passed": 12,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "a55253badd4dbb980a4332c383c2c625709f86a1251379c289bd5e657085fd8b",
+      "name": "unchanged native codec/application/cross-process sessions",
+      "passed": 17,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "e925da8fe18382842f156cf1faa50f243a352a3be3c46f299e3bee6f2224ad55",
+      "name": "unchanged application grants/inference",
+      "passed": 30,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "43726f5771ec6b05fa9d6d6ca935cb6e5a1c8646d6a950a31a0a0f60992bc16c",
+      "name": "unchanged core/financial/action bridge/encrypted Redis evidence",
+      "passed": 112,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "15e3af41d3806be8981f94a258c8b262380bc6662008f8b580b651d79ef72a33",
+      "name": "separate-process interruption: lost_http",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "e21ec9a5f0e8a2bb96122d03ca504ef21fa66f5d6957a490fe8e8085ac344c83",
+      "name": "separate-process interruption: lost_inference",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "78c1de581093921275f64edcad48c4c8883f6a3b9e00c3639c1b655eeccd0d52",
+      "name": "separate-process interruption: dispatcher_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "7ea55355fd29b93447c5b5d16ec0983f70f22c586856af9c28012a7b9031620c",
+      "name": "separate-process interruption: factory_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "1678d27f2c5e33451353b0c60930b96772c6bcad9d6597d7e9a1489ae0257d11",
+      "name": "separate-process interruption: worker_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "dfd6fb744320f1a2480a29dcc01fc835fb16487cc806129513e1ce53c6c3376c",
+      "name": "host resource-allocation contract",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "9c48640248c877b868b24571cc2bcdaa1dad72335c4223d689b8eef51268db9c",
+      "name": "current backend contracts and unchanged 27 Qwen/7 OpenAI comparisons",
+      "passed": 237,
+      "skipped": 16
+    },
+    {
+      "failed": 0,
+      "logSHA256": "96f824a08617acc30226f3a3024187763fda5268c6d6b9f40cb584af6985468c",
+      "name": "existing frontend regressions",
+      "passed": 289,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "bb9b012dfaa5b77bbd86938ff9b8a948f7acc6c2da54f9c20d528a7e79abe691",
+      "name": "assembled native packaging smoke, not image or cloud proof",
+      "passed": 7,
+      "skipped": 0
+    }
+  ],
+  "cleanup": {
+    "colimaProfileStopped": true,
+    "namedFixtureResources": "final harness cleanup verified; six earlier task-owned code snapshots explicitly removed after creation-time attribution",
+    "oldCodeCleanupLogSHA256": "b6581e73e5eaf0df84eb1f805857fbb9ffb3dce727845420835c4dd414e1fd1c",
+    "runningContainersAfterTests": 0,
+    "unattributedAnonymousVolumes": "preserved, not pruned"
+  },
+  "cloudProvisioned": false,
+  "developmentTrialCounts": [
+    {
+      "cohort": "dev1",
+      "failed": 1,
+      "finalFrozenBuild": false,
+      "logSHA256": "3bdc2c1f27748676a78a1180fc315b99f0687b98eb0f99d12cfb61a345e284aa",
+      "phaseCounts": [
+        8,
+        5
+      ]
+    },
+    {
+      "cohort": "dev2",
+      "failed": 0,
+      "finalFrozenBuild": false,
+      "logSHA256": "d545335f8d8f13954e1b6efede8ae4261aa4107aef4593e697282d4e727a79cb",
+      "phaseCounts": [
+        8,
+        7
+      ]
+    },
+    {
+      "cohort": "final",
+      "failed": 0,
+      "finalFrozenBuild": false,
+      "logSHA256": "2f0b16795aa7b176ba7128040c8dfc3d4f69cc47483518223f42b1215c51ca2e",
+      "phaseCounts": [
+        8,
+        9
+      ]
+    },
+    {
+      "cohort": "final2",
+      "failed": 0,
+      "finalFrozenBuild": false,
+      "logSHA256": "ac0570cab93072fcc52afccd8a540887a82750657101702704b79cdda1ca76ba",
+      "phaseCounts": [
+        10,
+        9
+      ]
+    },
+    {
+      "cohort": "final3",
+      "failed": 0,
+      "finalFrozenBuild": false,
+      "logSHA256": "6093611c8a64dbaabd4c243e98c5df11169a1ef07de80085e2b6cc8f2fb4e942",
+      "phaseCounts": [
+        10,
+        10
+      ]
+    },
+    {
+      "cohort": "final4",
+      "failed": 0,
+      "finalFrozenBuild": false,
+      "logSHA256": "5a6d0bdc96f4ee97a8c5473f9416970d664fce3db805ee65abf2d5221f10cb37",
+      "phaseCounts": [
+        10,
+        10
+      ]
+    }
+  ],
+  "developmentTrials": [
+    {
+      "name": "extra frontend cleanup order",
+      "result": "Final disposal inspection found six code-snapshot volumes because frontend outlived parent volume removal. Wrapper now remembers only its exact fresh code mount and retries removal after frontend deletion. All six verified trial volumes removed explicitly; no broad prune or owner/private evidence volume touched. Final profile rerun after fix."
+    },
+    {
+      "name": "local VM restart CLI",
+      "result": "An unsupported --mounts flag failed parsing before startup; corrected by starting saved profile unchanged (2 CPU/4 GiB/40 GiB/no mounts/no SSH forwarding)."
+    },
+    {
+      "failed": 1,
+      "logSHA256": "7f625493adc6590c3de9e12d65e75d6d5eb1cad08d836ab5eefb6a2943cd6065",
+      "name": "unchanged native trial1",
+      "passed": 7,
+      "remainingNotRun": 9,
+      "result": "test_key_rotation_keeps_expiry_and_edit_durably_revokes observed expiry one millisecond earlier (1794511002231 vs 1794511002232). Existing native monotonic-to-SQL millisecond resampling/truncation remains unchanged. Fail-fast remainder was not run in this cohort; full unchanged suite rerun separately. No expiry extension, test assertion/pin change or authority reset."
+    },
+    {
+      "name": "dev1",
+      "result": "offline signature tests and first process cases passed; plan refused because fixture omitted explicit origin; authored fixture corrected, application unchanged"
+    },
+    {
+      "name": "dev2/final/final2/final3/final4",
+      "result": "intermediate green cohorts while adding security negatives; not added to final totals"
+    },
+    {
+      "name": "Node sandbox launch",
+      "result": "initial tsx IPC EPERM before tests; authorized loopback-capable rerun passed"
+    },
+    {
+      "name": "initial TypeScript",
+      "result": "test-only union header type mismatch fixed before final checks"
+    },
+    {
+      "name": "package download",
+      "result": "system Python CA validation failed; existing verified requests CA succeeded; TLS verification never disabled"
+    }
+  ],
+  "existingWarnings": [
+    "Frozen bridge process-crash probe emits Python fork-from-multithreaded-process deprecation warning; it passed here. No source/test changed to suppress it."
+  ],
+  "historicalIntegrity": {
+    "accountedUSD": "0.047366625",
+    "attempts": 10,
+    "beforeAfterIdentical": true,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "journalRootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorChangedCheckoutRefusalPreserved": true,
+    "originalSixPins": true,
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingUSD": "11.952633375"
+  },
+  "identity": "52-hosted-identity-contract-offline-v1",
+  "identityRules": {
+    "backendDatabaseAuthority": "own nonce/epoch only; no operational/issuer/financial/recovery privilege",
+    "forwarding": "frontend proof binds raw assertion to exact request; backend and factory independently verify both",
+    "frontendDatabaseCredential": false,
+    "iapAlgorithm": "ES256",
+    "iapAudience": "/projects/PROJECT_NUMBER/locations/REGION/services/FRONTEND_SERVICE_NAME",
+    "iapIssuer": "https://cloud.google.com/iap",
+    "owner": "verified IAP issuer/audience/subject; not unsigned headers/email/workload identity",
+    "productionTrust": "fixed HTTPS Google JWKS only; fixture constructors/kids refused; real metadata acquisition not implemented",
+    "proof": "separate request body/method/audience/build/epoch/token hash and durable one-use nonce",
+    "savedCapabilities": "anonymous bearer/RLS/expiry/selected-membership remain independent of tester identity",
+    "workloadAlgorithm": "RS256",
+    "workloadIssuer": "https://accounts.google.com"
+  },
+  "limitations": [
+    "Real Google signatures/key retrieval/metadata/IAM/IAP platform ingress and revocation not exercised; no account enrollment",
+    "Actual Next ServerIdentityPort, public RPC facade/canonical-byte bridge and hosted startup/image composition not implemented or activated",
+    "GET/status contract specified and Node-tested; private fixture only POST native RPC",
+    "No browser end-to-end or hosted ingress/network/latency claim",
+    "Private source pre-origin resolution, unrestricted exploration/Details and cross-build reconstruction retain frozen unsupported boundaries",
+    "Local Docker/OS administrator compromise or coordinated operational+witness+epoch rollback is outside guarantee",
+    "No power-loss/distributed managed PostgreSQL/Redis failover proof; independent hosted epoch/backup custody remains unverified",
+    "An unchanged native key-rotation regression observed one-millisecond earlier expiry during a trial; millisecond resampling stability remains a separate native-foundation follow-up, not silently repaired or repinned here",
+    "A compromised workload can consume its own nonce namespace/exhaust the shared bound and cause denial; it cannot thereby authorize financial work",
+    "Nonce storage is bounded and append-only; future reviewed retention/rotation maintenance required; full capacity refuses",
+    "Cached credentials do not prove instantaneous IAM logout/revocation; key/denylist rotation and all-ingress policy need actual staging verification",
+    "Source, admission, evidence, canonical payload, grant/reservation/dispatch checks remain mandatory; identity alone never authorizes planning/spending"
+  ],
+  "nextCheckpoint": "Compose real server-side Next identity port/private hosted startup locally with fake metadata/JWKS; do not start automatically. Actual account/secret/network enrollment, migration, approved costs/grants, qualified LLM, private acceptance and public-launch approval remain separate.",
+  "notRun": [
+    "full backend discovery and historical simulation inventory (including immutable source-identity headings); no repin/exclusion",
+    "browser automation against actual Next hosted path",
+    "production Docker image rebuild/rescan: deployment/app locks and image inclusion unchanged; experimental dependency not in production",
+    "real Google JWT/JWKS/metadata/account calls, provider inference/token counting, real Maps",
+    "hosted IAM/IAP, VPC, TLS/pooler, Memorystore, real SQL migrations or live authority enrollment",
+    "LLM qualification and independent semantic review"
+  ],
+  "optInSkips": [
+    "test_api_operations_against_real_postgres_rollback (backend.test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback) ... skipped 'Opt-in hosted rollback tests'",
+    "test_duplicate_save_is_idempotent_and_mutation_denied (backend.test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_legacy_null_transport_defaults_to_driving (backend.test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving) ... skipped 'Opt-in hosted rollback tests'",
+    "test_partial_failure_rolls_back_every_table (backend.test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table) ... skipped 'Opt-in hosted rollback tests'",
+    "test_real_storage_is_identifiers_only_and_reopens_without_provider (backend.test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider) ... skipped 'Opt-in hosted rollback tests'",
+    "test_runtime_no_ledger_ddl_delete_or_cross_capability_write (backend.test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write) ... skipped 'Opt-in hosted rollback tests'",
+    "test_transactional_save_and_complete_retrieval (backend.test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval) ... skipped 'Opt-in hosted rollback tests'",
+    "test_walking_transport_column_round_trips (backend.test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips) ... skipped 'Opt-in hosted rollback tests'",
+    "test_wrong_missing_expired_and_uuid_access_denied (backend.test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_committed_restricted_write_fresh_process_reopen_and_cleanup (backend.test_advanced_planning.HostedAdvancedTests.test_committed_restricted_write_fresh_process_reopen_and_cleanup) ... skipped 'Opt-in committed advanced PostgreSQL checks'",
+    "test_actual_connection_interruption_then_fresh_reopen (backend.test_database_security.HostedSecurityTests.test_actual_connection_interruption_then_fresh_reopen) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_concurrent_idempotent_writes_reads_and_restart (backend.test_database_security.HostedSecurityTests.test_concurrent_idempotent_writes_reads_and_restart) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_existing_nonexpired_documents_compatible_readonly (backend.test_database_security.HostedSecurityTests.test_existing_nonexpired_documents_compatible_readonly) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_restricted_authenticated_tls_and_role_boundaries (backend.test_database_security.HostedSecurityTests.test_restricted_authenticated_tls_and_role_boundaries) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_runtime_write_failure_rolls_back_committed_state (backend.test_database_security.HostedSecurityTests.test_runtime_write_failure_rolls_back_committed_state) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_two_capabilities_and_sql_injection_stay_isolated (backend.test_database_security.HostedSecurityTests.test_two_capabilities_and_sql_injection_stay_isolated) ... skipped 'Opt-in hosted Task 50 tests'"
+  ],
+  "parentServiceBuild": "e38ca7b4b84a4c5df6a1a30de8d91f3b3d7a203c8f20adb787f898bee1f6c1ec",
+  "productionActive": false,
+  "realFinancialGrantsActivated": 0,
+  "realGoogleIdentityEndpointsContacted": false,
+  "realIdentityTokensGenerated": false,
+  "realProviderRequests": 0,
+  "syntheticGrantsOnly": true,
+  "topology": {
+    "fixtures": "explicitly synthetic RSA Google-shaped workload + separate EC IAP signatures; private fixture signers only in controller",
+    "localProfile": "whereto-task52",
+    "realHumanAuthentication": false,
+    "resources": "unchanged 2 CPU / 4 GiB / 40 GiB; network=none, non-root readonly service containers; fresh disposable PostgreSQL/Redis/witness",
+    "services": [
+      "frontend",
+      "backend replicas A/B",
+      "native factory + issuer",
+      "counter",
+      "dispatcher",
+      "independent recovery"
+    ]
+  },
+  "totals": {
+    "failed": 0,
+    "fullBackendDiscovery": false,
+    "interrupted": 0,
+    "passed": 733,
+    "skipped": 16,
+    "timedOut": 0
+  },
+  "verifiedDate": "2026-11-12",
+  "verifierSourceSHA256": "02dcd0e3af0f8552e0249f44c4073cc786f97bf6c66c117ea88f406885611b07"
+}

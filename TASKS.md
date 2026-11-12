@@ -1,3 +1,7 @@
+# Task 52 — inactive hosted workload/IAP contract
+
+Implemented separately identified Google-root verifier, direct-IAP verifier and frontend-scoped user forwarding over the unchanged protected native/provider authority. Local signed fixtures and separate service processes test ownership and replay; real identities/resources/providers remain inactive. [Report](docs/task52-hosted-identity-contract.md), [verification](docs/task52-hosted-identity-verification.json), [review-only enrollment](docs/task52-staging/hosted-enrollment-v1.json). Next bounded work: real server-side Next identity-port/private startup composition tested locally against fake metadata/JWKS. Actual migration/provisioning/spending/public launch remain gated; Task 53 remains unstarted.
+
 # Task 52: authenticated service isolation — local, not activated
 
 Implemented the bounded synthetic four-service trust boundary and owner-bound native ticket routing; exact test completion is in [service verification](docs/task52-service-isolation-verification.json). Existing algorithms and production behavior remain unchanged. Hosted OIDC/end-user identity, real enrollment, independent recovery, current security findings, model qualification, protected real financial decisions and private staging acceptance remain blockers. Next: local hosted-identity/owner-forwarding contract tests and enrollment templates, not automatic provisioning or Task53.

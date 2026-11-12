@@ -1,0 +1,22 @@
+{
+  "baseline": "02e363f5cd291a4aee97a795ebf988d835644518",
+  "googleFixturesAreRealIdentity": false,
+  "identity": "52-hosted-identity-contract-offline-v1",
+  "parentServiceBuild": "e38ca7b4b84a4c5df6a1a30de8d91f3b3d7a203c8f20adb787f898bee1f6c1ec",
+  "productionActive": false,
+  "sources": {
+    "experiments/hosted_identity/__init__.py": "b3f41a10fd5d0d2e443f3c53f9abd07e137e8076d0429348478104ea539b63ee",
+    "experiments/hosted_identity/auth.py": "8fa017d8fbeec8d8222dd0608c5703673e7dceda8c991f8aff19a1c0847b5ea9",
+    "experiments/hosted_identity/bootstrap.py": "b72cb1b48789c3fe567f1626df1f98704cde3706dee945bf1c246ffd91f48317",
+    "experiments/hosted_identity/dependency.json": "a37ec417c93ca3b6762be6e5d84789c77157ba29222a0b2f7b4e8c476c09ca71",
+    "experiments/hosted_identity/nonce.sql": "13ccdfbd40248a5ae5396a99d98c7d763380ee44398116a2b01715b97cb4df16",
+    "experiments/hosted_identity/proxy.server.ts": "6f6b6872069f6279cc48fd91ca8d369433668aeb0a2d102367bbc857f0b6fba9",
+    "experiments/hosted_identity/proxy.test.ts": "87fe6187227d5b82e8c0436d40189446775fe5af5a4aa2cb789338b921b56e9b",
+    "experiments/hosted_identity/requirements.lock": "f8db4f53f8cca695283b4095a3efb1fd2e52fe16906db44d100a39614750611e",
+    "experiments/hosted_identity/run_local.py": "4c43e7cd2efc17c98d51e726dd47ac5d5262d50df31e53dbbf231b934ed4e243",
+    "experiments/hosted_identity/server.py": "406969c77fae11f09a4f5d86d87869a0e1611c6ac558e769cb7ab1dba896e68c",
+    "experiments/hosted_identity/test_local.py": "f528072f923ca67f345d40bc6f5e882216ae7a51b1b961763916a7c7e19ae26f",
+    "experiments/hosted_identity/test_tokens.py": "e0367c125271c5750eb0d4540faafcee73ecb12460ea6f8bb64bcb1d6c70924e",
+    "experiments/hosted_identity/tokens.py": "cc4752045cf7b83a18b19444985987dd7ba315a2c539c847317ad84584f84507"
+  }
+}

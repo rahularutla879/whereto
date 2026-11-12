@@ -109,3 +109,7 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 ## Inactive authenticated service composition
 
 [Task52 service isolation](../task52-service-isolation.md) now runs the native factory/validated-action issuer, counter, dispatcher and recovery in separately credentialed local containers. Workers receive none of their SQL/Redis/recovery keys. Existing planners and validators stay inside the trusted factory; they are not duplicated. This is a tested synthetic composition outside normal startup and deployment images, not a deployed replacement for the diagram above. Real Google workload and end-user authentication, enrollment, providers and private staging remain gates.
+
+## Inactive hosted identity contract
+
+[The hosted-identity experiment](../task52-hosted-identity-contract.md) adds a disposable frontend and two backend processes around the unchanged private factory/issuer/counter/dispatcher/recovery composition. Google workload identity answers which service is calling; independently verified IAP answers which private tester owns the planning session. Neither grants provider spending. Normal Next/FastAPI startup and local anonymous saved links are unchanged. Real metadata/Next wiring and hosted enrollment remain unimplemented.

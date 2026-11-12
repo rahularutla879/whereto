@@ -155,3 +155,7 @@ python3 -m experiments.service_isolation.run_local
 ```
 
 This creates disposable synthetic stores and restricted role containers, exercises private TLS interfaces, and cleans up its named resources. It is not a hosted deployment, approval issuer or live provider runner. The report lists additional isolated failure cohorts and the exact tested build. Never supply owner credentials or point synthetic bootstrap at a hosted database.
+
+## Inactive hosted identity contract
+
+From the repository root, with the approved local Colima profile running and hash-pinned parent wheels plus the PyJWT wheel in `/tmp/whereto-evidence-wheels`: `python3 -m experiments.hosted_identity.run_local`. The wrapper reuses the frozen disposable harness; no real metadata/key/account/provider endpoint is queried. Node-only contract tests: `node_modules/.bin/tsx --test experiments/hosted_identity/proxy.test.ts`. These commands neither provision nor enable normal authentication. See [requirements and scope](../task52-hosted-identity-contract.md).

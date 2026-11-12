@@ -88,3 +88,7 @@ Reviewed/updated chapters12–15/18 plus glossary/commands/file map. All20 chapt
 ## Authenticated local service checkpoint
 
 Reviewed chapters3/6/7/12–15/18/20; appended current experimental explanations to3/6/7/12–15/18, glossary, commands, file map and debugging references. All20 chapter files remain; unaffected chapter bytes and original explanations are preserved. Source paths, function names and local links were checked against the actual inactive profile. [Exact710-pass/16-skip verification and unexecuted checks](../task52-service-isolation-verification.json) distinguish local synthetic authority from hosted identity, model quality or production readiness.
+
+## Hosted identity contract
+
+Reviewed chapters3/6/7/12–15/18/20; appended current inactive explanations to3/6/7/12–15/18 and supporting references. All 20 chapters and unrelated examples/exercises remain. References match actual `HostedAuth`/offline `Auth`, token/JWKS and nonce roles, source ownership and the unimported Node port contract. [Exact checks, pre-fix trials and limits](../task52-hosted-identity-verification.json) distinguish signed local fixtures from real Google IAM/IAP and browser verification.

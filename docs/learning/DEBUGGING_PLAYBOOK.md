@@ -113,3 +113,7 @@ Use the V3 `FinancialPostgres` client, not the private core's older arbitrary-ch
 ## Local authenticated-service refusal
 
 For the inactive service fixture, inspect only sanitized service reason/stage/SQLSTATE/frame logs. Check exact build/epoch, enrolled caller/audience, absolute token/session expiry, consumed nonce/request/route revision and encrypted evidence availability. A replay or interrupted turn must not be solved by clearing SQL history, regenerating a grant, extending expiry or falling back to inline provider calls. A killed factory loses its live action proof deliberately; recovery requires reviewed evidence. See [service report](../task52-service-isolation.md).
+
+## Inactive hosted identity refusal
+
+Check identity type first: Google workload versus IAP user versus request proof. Check fixed issuer/key origin/audience, enrolled service-account subject/email, tester subject, body/path/build/epoch, nonce reuse and native revision/expiry. Never accept unsigned identity headers, use a saved bearer as a user account, disable TLS, inject fixture keys into production or retry a reserved provider request. The local IAP-agent ingress credential is only a platform simulation. Real Next metadata/IAP wiring and resource enrollment remain separate gates.

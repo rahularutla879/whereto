@@ -1,0 +1,189 @@
+{
+  "identity": "52-hosted-enrollment-review-v1",
+  "inert": true,
+  "applyAuthorized": false,
+  "projectId": null,
+  "projectNumber": null,
+  "region": "us-east4 (proposal; owner/account review required)",
+  "services": {
+    "frontend": {
+      "callers": [
+        "IAP_SERVICE_AGENT"
+      ],
+      "audience": "FRONTEND_RUN_APP_URL",
+      "ingress": "all, direct IAP on every ingress path",
+      "secrets": [
+        "frontend-request-proof-key",
+        "public-identity-enrollment"
+      ],
+      "db": "none; current epoch/nonces enforced independently by backend and factory before authority",
+      "redis": false,
+      "serviceAccountIdProposal": "whereto-frontend",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    },
+    "backend": {
+      "callers": [
+        "FRONTEND_SERVICE_ACCOUNT"
+      ],
+      "audience": "BACKEND_RUN_APP_URL",
+      "ingress": "internal, authenticated VPC routing required",
+      "secrets": [
+        "backend-request-proof-key",
+        "public-identity-enrollment",
+        "auth-witness-backend-nonce-role",
+        "existing-saved-plan-RLS-role"
+      ],
+      "db": "own auth nonce/epoch; existing saved role only under unchanged capability/RLS checks",
+      "redis": false,
+      "serviceAccountIdProposal": "whereto-backend",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    },
+    "factory": {
+      "callers": [
+        "BACKEND_SERVICE_ACCOUNT",
+        "DISPATCHER_SERVICE_ACCOUNT for current-action callback only"
+      ],
+      "audience": "FACTORY_RUN_APP_URL",
+      "ingress": "internal",
+      "secrets": [
+        "factory-request-proof-key",
+        "operational-runtime-role",
+        "restricted-issuer-role",
+        "factory-witness-role",
+        "evidence-keyset",
+        "source-HMAC-key",
+        "redis-publisher"
+      ],
+      "db": "constrained native/action/financial routines; no owner/admin",
+      "redis": "namespace publisher ACL; no Redis administration",
+      "serviceAccountIdProposal": "whereto-factory",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    },
+    "counter": {
+      "callers": [
+        "FACTORY_SERVICE_ACCOUNT"
+      ],
+      "audience": "COUNTER_RUN_APP_URL",
+      "ingress": "internal",
+      "secrets": [
+        "counter-request-proof-key",
+        "counter-SQL-role",
+        "counter-witness-nonce-epoch-role"
+      ],
+      "db": "protected count + own nonce/epoch only",
+      "redis": false,
+      "serviceAccountIdProposal": "whereto-counter",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    },
+    "dispatcher": {
+      "callers": [
+        "FACTORY_SERVICE_ACCOUNT"
+      ],
+      "audience": "DISPATCHER_RUN_APP_URL",
+      "ingress": "internal",
+      "secrets": [
+        "dispatcher-request-proof-key",
+        "delivery-only-SQL-role",
+        "delivery-witness-role",
+        "evidence-read-keys",
+        "source-HMAC-key",
+        "redis-readonly",
+        "separately-approved-provider-auth"
+      ],
+      "db": "delivery-only SQL; cannot reserve/count/administer grants",
+      "redis": "read-only epoch namespace",
+      "serviceAccountIdProposal": "whereto-dispatcher",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    },
+    "recovery": {
+      "callers": [
+        "PROTECTED_OPERATOR_WORKLOAD"
+      ],
+      "audience": "RECOVERY_RUN_APP_URL",
+      "ingress": "internal separate administration boundary",
+      "secrets": [
+        "recovery-request-proof-key",
+        "independent-witness-operator-role"
+      ],
+      "db": "stop/epoch/quarantine only; no grant creation/refund/reactivation",
+      "redis": false,
+      "serviceAccountIdProposal": "whereto-recovery",
+      "serviceAccountEmail": null,
+      "serviceAccountImmutableSubject": null,
+      "exactRunAudience": null,
+      "secretManagerRole": "roles/secretmanager.secretAccessor on listed secrets only"
+    }
+  },
+  "serviceAccountRules": [
+    "distinct SA per logical workload; worker replicas share their approved backend SA",
+    "exact immutable service-account subject and verified email enrollment",
+    "no allUsers/allAuthenticatedUsers Invoker bindings",
+    "resource-scoped roles/run.invoker only for listed callers; per-method authorization remains in application",
+    "no Owner/Editor, SA JSON keys, runtime Token Creator/actAs or cross-workload secret access",
+    "IAP service agent requires frontend Invoker; testers get resource-scoped roles/iap.httpsResourceAccessor, not backend Invoker"
+  ],
+  "iap": {
+    "mode": "direct Cloud Run IAP, not load-balancer-only IAP",
+    "audience": "/projects/PROJECT_NUMBER/locations/REGION/services/FRONTEND_SERVICE_NAME",
+    "issuer": "https://cloud.google.com/iap",
+    "algorithm": "ES256",
+    "jwks": "https://www.gstatic.com/iap/verify/public_key-jwk",
+    "testers": [],
+    "testersDefault": "deny until owner approves exact principals",
+    "permanentUserRegistration": false,
+    "anonymousSavedCapabilitySemantics": "unchanged; IAP limits staging exposure, never replaces capability/RLS/expiry/membership"
+  },
+  "workload": {
+    "issuer": "https://accounts.google.com",
+    "algorithm": "RS256",
+    "jwks": "https://www.googleapis.com/oauth2/v3/certs",
+    "tokenSource": "assigned service identity via metadata/auth library only; not implemented/activated here",
+    "authorizationHeader": "Authorization; no X-Serverless-Authorization alternate path; verify container signature preservation before deployment",
+    "audiences": "exact stable run.app service URLs; no guessed IDs, traffic-tag or custom-domain substitution"
+  },
+  "network": [
+    "Direct VPC egress/internal Cloud Run classification verified before activation",
+    "private Redis TLS+AUTH/ACL/noeviction; frontend/backend have no Redis credential",
+    "PostgreSQL verify-full, restricted logins and session_user semantics retained through approved pooler",
+    "public Google JWKS HTTPS egress only fixed origins; bounded cache expires closed",
+    "separately approved provider egress and quotas; no credentials/data-plane permission enabled by this manifest"
+  ],
+  "recovery": [
+    "witness backups/epoch ownership independent of operational PostgreSQL and Redis",
+    "no combined administrator credential in any runtime",
+    "restore quarantines at-risk grant; operator reconciliation only; no automated replay/refund",
+    "revocation and key rotation use reviewed enrollment versions; stale build/epoch fails; old financial state is never reset"
+  ],
+  "approvalsMissing": [
+    "actual project/region/service URLs and service-account unique IDs",
+    "IAP tester principal allowlist and external/no-organization OAuth configuration",
+    "Supabase capacity/pooler/backup/roles and separately reviewed migration",
+    "independent witness hosting/backup administration and key custody",
+    "real server identity acquisition/request-proof secret rotation and production dependency/image review",
+    "container security findings and separately approved resource costs",
+    "real financial grants, qualified LLM, provider transport and private staging acceptance"
+  ],
+  "provisionedResources": [],
+  "rotationAndRevocation": [
+    "Independently publish reviewed identity-enrollment versions and exact SA immutable subjects; never infer from an email domain.",
+    "Rotate each request-proof key in its own workload secret; bounded overlap must be explicitly reviewed. Revoke old proof keys and caller enrollments without altering financial history.",
+    "Bound JWKS cache age to one hour and refresh unknown keys at most once/minute; expired/unavailable trust fails closed. Measure legitimate Google rotation before activation.",
+    "Use fixed current audiences; rollout/tag URLs cannot substitute. Build and epoch mismatch invalidates session/request authority; never migrate authority automatically.",
+    "Test IAP removal, SA disablement, IAM policy changes and captured-token expiry in staging; do not claim instant token revocation."
+  ]
+}
