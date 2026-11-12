@@ -129,3 +129,10 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 Run `PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_evidence` after downloading the isolated hash-pinned Linux test wheels. The harness uses the approved local Colima context, no host mounts/ports and loopback-only container networking. It exercises existing SQL/financial/bridge tests, new encryption/CAS/role tests, synthetic TLS certificates, Redis loss and an actual older synthetic SQL snapshot restore. Every created container/volume is removed. This does not test hosted Memorystore, real user data or Google accuracy. See the report for exact commands and failures; do not point the fixture at Supabase.
 
 See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.
+
+
+## Two-database grant and restore tests
+
+Run `PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_grants` from the repository root with the existing approved Colima profile running and the hash-verified evidence wheels cached. This harness creates disposable operational PostgreSQL, separate witness PostgreSQL, Redis and an isolated client, all with synthetic accounts. It removes its own containers/volumes in `finally`; it never copies the real evaluation journal. Keep the existing VM resource limits.
+
+The test profile composes actual legacy interpretation/planning and saved-refresh contracts with fake providers, rather than inventing a second planner. Tests distinguish gross reserved exposure from reported token usage. Restore drills export only newly authored synthetic schemas, restore one component at a time, and require full-grant quarantine. Process/database kills test committed-state recovery, not power-loss or multi-region durability. Existing frozen tests are run separately without changing their source pins. See [exact verification](../task52-application-financial-verification.json).

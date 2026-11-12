@@ -124,3 +124,12 @@ See the [Task 52 preflight](../task52-private-staging-preflight.md) and [impleme
 AES-GCM encrypts private evidence and authenticates its source/session/epoch metadata. The key ring is injected separately and never stored in Redis or SQL. Changing the active key requires an explicit CAS rewrite with the original deadline; removing an old read key refuses old ciphertext. Redis has no financial authority. If Redis publication succeeds but SQL commitment fails, the mismatched record blocks use. Unknown sends keep their existing SQL charge. Synthetic issuer callbacks are not real workload authentication or a sandbox against malicious Python code.
 
 See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.
+
+
+## Conservative aggregate grants and fictional token accounting
+
+A spending grant is permission to consume a finite amount, not a provider price list. `grant_rules.sql` keeps operator-approved total/provider/day/outing limits separate from protected versioned prices. It computes exact integer micro-USD charges before a fake call. Midnight changes only the day bucket; total exposure does not reset. Existing request/unit/admission limits still apply. No real application spending grant is approved.
+
+`FakeInference` binds the source, canonical schema/prompt/model, active inference admission, maximum output allowance and payload digest. A separate SQL counter counts complete UTF-8 bytes under a fictional billing profile. These are **not real model token counts**. Caching, reasoning, tools and unknown prices refuse. A valid later usage report records a reported amount but releases zero conservative exposure. Unknown reports/sends stop the grant; they cannot be retried or refunded automatically.
+
+The witness commits delivery intent before fake I/O. Only the current call stack can send; a restart cannot regenerate that authority. Runtime table writes and privilege escalation are denied. A privileged issuer is still trusted for semantic correctness, and the two local databases share an administrator/host. Hosted isolation, independent epoch/backups and reviewed operator reconciliation remain required. SQL caps do not control cloud infrastructure bills. [Full audit and limitations](../task52-application-financial-authority.md).

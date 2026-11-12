@@ -1,0 +1,19 @@
+{
+  "baseline": "a94c3cc6b937de03ca5dbc31d3f6f80922d4704e",
+  "epochAuthority": "separate-disposable-postgres-volume-synthetic-roles-not-hosted-isolation",
+  "identity": "52-application-financial-authority-local-v1",
+  "liveTransportAvailable": false,
+  "parentIdentity": "52-encrypted-shared-evidence-local-v1",
+  "parentManifestSHA256": "19171e94dfe1c2d52a4d80a56035ee12519ad0b2d8201a759b4792b340913911",
+  "pricingProfile": "fictional-complete-utf8-bytes-v1-not-real-tokenization",
+  "productionActive": false,
+  "realGrantEnrolled": false,
+  "sources": {
+    "experiments/shared_state/application_grants.py": "877d22a167d1be0fad1e547afed6491a0b49a57a1709211accea2cbd8937fb85",
+    "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
+    "experiments/shared_state/grant_rules.sql": "f069b48d8812cfcc4f89518f6a7322f816931cb69614659f32874612be41b03f",
+    "experiments/shared_state/grant_witness.sql": "fab3095c6cc3d3a5558353b701559b4132cb7271379b0a47d68b1f1fe0a4a711",
+    "experiments/shared_state/run_grants.py": "5c0f3c3acb59be9a0b26deb809b9e84dd8443d2e78d93cb0c8a2fbb26efecd6d",
+    "experiments/shared_state/test_application_grants.py": "b18a60c8c7c24e01d9073ae6f4b38a17d78b45661871ba698cc2dc728a09a0e0"
+  }
+}

@@ -4,6 +4,8 @@ Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start i
 
 > Subsequent P2 checkpoint: the [inactive encrypted Redis/SQL evidence layer](../task52-shared-evidence.md) implements storage, typed source revalidation, exact read attestations and local failure tests. This does not complete hosted native resolver/history/receipt reconstruction, real key/epoch enrollment or Google-content retention approval. P3 financial/recovery authority remains the next bounded local checkpoint; original financial/resource proposals remain unapproved.
 
+> Subsequent P3 local checkpoint: [application grants, fictional inference accounting and separate recovery witness](../task52-application-financial-authority.md) implement local protocol mechanics only. No real grant, hosted independence, provider pricing/counting profile, service enrollment or P4 migration is approved. P2 native resolver/history/receipt rehydration remains incomplete.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |
@@ -43,4 +45,4 @@ Start with synthetic providers and disposable saved data, then a separately appr
 4. On authority/database restore, stop/revoke dispatch, quarantine old epochs, reconcile independent intent/exposure evidence or the full at-risk grant, and require operator financial approval. If unresolved, keep unavailable. Backups/PITR do not make this automatic.
 5. On Redis loss, expire affected outings and deny continuation. Never synthesize raw evidence from cards/saved snapshots or automatically buy fresh provider results to rebuild it.
 
-**Next task only:** P2 local shared evidence + epoch refusal tests, with a finite contract/test inventory. P1 security proposal and owner P0 reviews can proceed in parallel when separately requested. Do not automatically provision P4 or implement the entire table.
+**Next task only:** complete P2 native application-session reconstruction/continuation using the existing inactive evidence/grant contracts and fake providers, with a finite contract/test inventory. P1 security proposal and owner P0 reviews can proceed in parallel when separately requested. Do not automatically provision P4 or implement the entire table.

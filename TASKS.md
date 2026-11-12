@@ -1010,3 +1010,8 @@ The owner's explicit current-traffic decision replaces the earlier unactivated P
 ## November 4 — final Task 50E acceptance repair
 
 Readable duration presentation, named-venue closure recovery and explicit stop-specific outside-visit intent, fair optional coffee inclusion and model-free editable dwell are implemented. Shared cards, precise hard limits, existing provider authorization and private selected saving remain. Task 51 is unstarted. [Current acceptance record](docs/task50e-final-acceptance.md).
+
+
+### Task 52 — inactive application financial authority checkpoint
+
+Added `52-application-financial-authority-local-v1`: immutable aggregate/provider/calendar-day/outing grant, protected fictional LLM complete-input/max-output pricing, append-only usage with no refunds, and a separate synthetic PostgreSQL epoch/exposure witness. Existing SQL/Redis/issuer/planner algorithms and historical source identities remain frozen. No real grant, provider client, hosted enrollment, migration or production activation. [Acceptance evidence and remaining blockers](docs/task52-application-financial-authority.md) · [Verification](docs/task52-application-financial-verification.json). P3 local mechanics do not complete hosted independence or real-provider financial readiness. Next finite local gate is native session reconstruction/continuation; subsequent hosted service isolation, owner financial approvals and private-staging acceptance remain required. Task53 unstarted.

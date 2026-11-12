@@ -137,3 +137,7 @@ PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_evidence
 ```
 
 This downloads only pinned test wheels; it does not install them into the application. The harness verifies hashes, copies dependencies into a disposable non-root test client and removes its containers/volume afterward. It may pull the pinned official Redis/PostgreSQL images if absent. No cloud, live provider, owner database or real approval path exists. See [scope and exact verification](../task52-shared-evidence.md).
+
+### Inactive application grants and fictional inference
+
+From the repository root, with approved Colima running: `PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_grants`. Uses two disposable PostgreSQL volumes plus Redis; fake providers and synthetic grants only. See [financial-authority report](../task52-application-financial-authority.md) for required cached hash-pinned wheels, permissions, trust limits and results.

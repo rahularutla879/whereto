@@ -931,3 +931,10 @@ An explicit disposable Python fixture process temporarily installs the generaliz
 ## Task 52B local manual/pending compatibility
 
 The explicit application fixture uses `LocalContinuation` as a provenance/overlay bridge around the unchanged generalized source proof. It reuses existing pending DTOs, deterministic controls, session admission and selected saving. A bounded monotonic cache binds issued pending content to raw source identity; it is not a new authorization system or distributed state. No normal startup import or production activation exists. [Contract and limitations](docs/task52-v51-manual-pending.md).
+
+
+## Inactive Task 52 application grant composition
+
+`experiments/shared_state/application_grants.py` layers `GrantStore`, `GrantIssuer`, `GrantVerifier`, `GrantBroker`, `FakeInference` and `GrantService` over the frozen evidence and provider-action components. `application_grants.sql` is the worker's new constrained front door; `grant_rules.sql` supplies operator-owned immutable grant/rate math, while `grant_witness.sql` retains independent epoch/exposure/delivery history in a second synthetic PostgreSQL database. A separately authenticated counter attests complete fictional input bytes; no real LLM tokenizer/client is implemented.
+
+SQL and encrypted Redis evidence still supply session/source/revision/fence and exact request ownership. The independent witness serializes financial phases, detects prefix disagreement and conservatively stops the full grant. It is not an atomic cross-database transaction or a verified hosted service. Production startup has no import/selector; no credentials, live transport, enrollment or actual user-data writes are introduced. [Detailed sequence, protected roles and residual risks](docs/task52-application-financial-authority.md). Native advanced resolver/history and selected-receipt restart integration remain incomplete.

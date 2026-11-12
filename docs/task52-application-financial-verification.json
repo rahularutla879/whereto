@@ -1,0 +1,342 @@
+{
+  "baselineCommit": "a94c3cc6b937de03ca5dbc31d3f6f80922d4704e",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-application-financial-authority.md",
+    "docs/task52-application-financial-verification.json",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "experiments/shared_state/application_grants.py",
+    "experiments/shared_state/application_grants.sql",
+    "experiments/shared_state/grant-build.json",
+    "experiments/shared_state/grant_identity.py",
+    "experiments/shared_state/grant_rules.sql",
+    "experiments/shared_state/grant_witness.sql",
+    "experiments/shared_state/run_grants.py",
+    "experiments/shared_state/test_application_grants.py"
+  ],
+  "cloudResourcesProvisioned": 0,
+  "commands": {
+    "existing": "PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_evidence",
+    "finalInference": "PYTHONPATH=. backend/.venv/bin/python -c \"from experiments.shared_state.run_grants import main; main(('InferenceTests',))\"",
+    "frontend": "npm test",
+    "fullNew": "PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_grants",
+    "packaging": "PYTHONPATH=. backend/.venv/bin/python -m unittest deployment.test_packaging -v",
+    "planningBackend": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_interpretation backend.test_real_planning backend.test_advanced_planning backend.test_advanced_routing backend.test_advanced_timing -v",
+    "securityBackend": "PYTHONPATH=. backend/.venv/bin/python -m unittest experiments.shared_state.test_action_identity backend.test_planning_admission backend.test_provider_budget backend.test_saved_details_reliability backend.test_saved_plans backend.test_database_check backend.test_database_security -v"
+  },
+  "dateUTC": "2026-11-12",
+  "developmentFindings": [
+    "Initial witness SQL CASE concatenation syntax corrected before successful fixture installation.",
+    "Three early concurrent-setup runs hit the existing250ms lock timeout/barrier; synthetic action setup serialized before the financial race; no timeout increase.",
+    "One test expected a wrapped Denied from a direct issuer SQL call; corrected to expect PostgreSQL refusal.",
+    "Role switching from a superuser test connection permitted SET ROLE owner: replaced with separately authenticated restricted issuer and counter clients; permission negatives passed.",
+    "One earlier six-case application run hit fail-closed SQL Unavailable; isolated ordinary rerun and subsequent eight-case application cohort passed without increasing timeouts or adding runtime retries.",
+    "Review added independent terminal-outcome prefix comparison to detect lost completion facts.",
+    "The full new run stopped at a test-only nonexistent-column assertion; the first correction had a Python quoting syntax error (zero tests executed). Corrected, syntax checked, then all ten inference tests and recovery phases passed."
+  ],
+  "environment": {
+    "colimaProfile": "whereto-task52",
+    "externalNetworking": false,
+    "hostMounts": false,
+    "hostedIndependenceEstablished": false,
+    "publishedPorts": false,
+    "resourcesIncreased": false,
+    "separateSyntheticPostgresVolumes": true,
+    "syntheticContainersAndVolumesRemoved": true,
+    "vmCPUs": 2,
+    "vmDiskGiB": 40,
+    "vmMemoryGiB": 4,
+    "vmReturnedToPriorStoppedState": true
+  },
+  "executionBuildSHA256": "f52bdd92b86806eca16491c0d81d460649a2344c8c051c105a9595887e44cfa8",
+  "existingAuthorityRegression": {
+    "bridge": 25,
+    "core": 25,
+    "errors": 0,
+    "evidence": 31,
+    "failed": 0,
+    "financial": 31,
+    "fullRecoveryHarnessPassed": true,
+    "passed": 112,
+    "run": 112,
+    "seconds": 374.94,
+    "skipped": 0,
+    "sourcesAndFrozenManifestsUnchanged": true
+  },
+  "identity": "52-application-financial-verification-v1",
+  "implementationIdentity": "52-application-financial-authority-local-v1",
+  "journalReadOnlyBeforeAfter": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "liveTransportAvailable": false,
+  "nativeBackend": [
+    {
+      "errors": 0,
+      "failed": 0,
+      "passed": 68,
+      "run": 83,
+      "seconds": 2.572,
+      "skipped": 15
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "passed": 150,
+      "run": 151,
+      "seconds": 2.22,
+      "skipped": 1
+    }
+  ],
+  "newAuthorityTests": {
+    "application": 8,
+    "earlierCohortManifest": {
+      "baseline": "a94c3cc6b937de03ca5dbc31d3f6f80922d4704e",
+      "epochAuthority": "separate-disposable-postgres-volume-synthetic-roles-not-hosted-isolation",
+      "identity": "52-application-financial-authority-local-v1",
+      "liveTransportAvailable": false,
+      "parentIdentity": "52-encrypted-shared-evidence-local-v1",
+      "parentManifestSHA256": "19171e94dfe1c2d52a4d80a56035ee12519ad0b2d8201a759b4792b340913911",
+      "pricingProfile": "fictional-complete-utf8-bytes-v1-not-real-tokenization",
+      "productionActive": false,
+      "realGrantEnrolled": false,
+      "sources": {
+        "experiments/shared_state/application_grants.py": "877d22a167d1be0fad1e547afed6491a0b49a57a1709211accea2cbd8937fb85",
+        "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
+        "experiments/shared_state/grant_rules.sql": "f069b48d8812cfcc4f89518f6a7322f816931cb69614659f32874612be41b03f",
+        "experiments/shared_state/grant_witness.sql": "fab3095c6cc3d3a5558353b701559b4132cb7271379b0a47d68b1f1fe0a4a711",
+        "experiments/shared_state/run_grants.py": "5c0f3c3acb59be9a0b26deb809b9e84dd8443d2e78d93cb0c8a2fbb26efecd6d",
+        "experiments/shared_state/test_application_grants.py": "535d5f71f76480412a9716ecb4b0a0e519430135a7fc9caf8aea9888f5b270ed"
+      }
+    },
+    "finalInferenceCohort": {
+      "buildSHA256": "f52bdd92b86806eca16491c0d81d460649a2344c8c051c105a9595887e44cfa8",
+      "errors": 0,
+      "failed": 0,
+      "note": "Entire inference class rerun after correcting the test query and adding explicit issuer source/root/outing-rebind negatives. One earlier inference pass is a duplicate, not another unique case.",
+      "passed": 10,
+      "run": 10,
+      "seconds": 241.562,
+      "skipped": 0
+    },
+    "firstCohort": {
+      "buildSHA256": "3add7d5dbb1b2f58d994f7f5b87283cf21610e24c84811fa16824afd8a3c003c",
+      "errors": 1,
+      "failed": 0,
+      "note": "Eight application and twelve grant/security cases passed, plus the first inference case. An admin test assertion queried a nonexistent provider column instead of the quote JSON; remaining inference cases were not reached.",
+      "passed": 21,
+      "run": 22,
+      "seconds": 683.303,
+      "skipped": 0
+    },
+    "grantSecurity": 12,
+    "implementationAndHarnessHashesIdenticalAcrossCohorts": true,
+    "inference": 10,
+    "inventory": {
+      "ApplicationGrantTests": [
+        "test_ordinary_options_selection",
+        "test_pending_date",
+        "test_advanced_named_origin",
+        "test_optional_flexible",
+        "test_lookup",
+        "test_area",
+        "test_details",
+        "test_refresh"
+      ],
+      "GrantTests": [
+        "test_legitimate_maps_and_shared_limits_no_refund",
+        "test_concurrent_workers_cannot_exceed_one_lifetime_grant",
+        "test_exhausted_grant_new_worker_root_zero_charge_and_overflow",
+        "test_provider_day_outing_attempt_and_expiry_limits",
+        "test_calendar_rollover_never_renews_total_and_revocation_stops",
+        "test_missing_or_wrong_key_and_stale_fence_refuse_without_charge",
+        "test_runtime_and_issuer_cannot_change_grants_rates_epoch_or_counts",
+        "test_missing_evidence_before_reserve_and_modified_payload_after_charge",
+        "test_uncertain_transport_stops_full_grant_and_no_replay",
+        "test_process_death_retains_external_claim_and_unknown_exposure",
+        "test_missing_terminal_fact_is_restore_disagreement",
+        "test_epoch_rotation_invalidates_old_sql_and_cannot_roll_back"
+      ],
+      "InferenceTests": [
+        "test_owned_complete_inference_and_pending_no_second_model_charge",
+        "test_unknown_model_or_output_overflow_never_reserves",
+        "test_malformed_and_substituted_usage_never_refunds",
+        "test_inference_and_maps_share_grant_and_source_outing",
+        "test_maps_consumption_prevents_llm_over_grant_before_fake_send",
+        "test_zero_price_model_still_consumes_operation",
+        "test_changed_inference_payload_and_unbounded_categories_refuse",
+        "test_unknown_build_refuses_before_database_authority",
+        "test_second_model_rates_and_interrupted_fake_send",
+        "test_missing_usage_retains_maximum_and_quarantines"
+      ]
+    },
+    "manifestVerifierPinUpdatedForFinalTestArtifact": true,
+    "onlyChangedDeclaredSource": [
+      "experiments/shared_state/test_application_grants.py"
+    ],
+    "singleFullModuleInvocationPassed": false,
+    "uniqueVerified": 30
+  },
+  "nextCheckpoint": "Complete native application-session reconstruction/continuation with encrypted evidence and this inactive authority using fake providers; do not automatically begin it.",
+  "notRerun": [
+    "full backend discovery (33 historical source-identity error headings remain frozen, not repinned or excluded)",
+    "fresh production Next.js build (no frontend/shared production/dependency change)",
+    "fresh application image builds/container smoke (packaging tests passed; artifacts unchanged)",
+    "browser UI smoke",
+    "new vulnerability-database scan or dependency upgrades",
+    "hosted database, IAM, Redis/Memorystore, real token/pricing/model or network tests"
+  ],
+  "otherChecks": {
+    "credentialScan": {
+      "configuredSensitiveValues": 2,
+      "currentFilesAndAssets": 3534,
+      "currentMatches": 0,
+      "historicalMatches": 0,
+      "historicalObjects": 3537,
+      "scope": "configured-value scan over tracked/untracked project files, existing browser assets and all Git history; not proof against every possible unknown secret"
+    },
+    "dependencyChanges": false,
+    "eslint": "passed",
+    "frontend": {
+      "failed": 0,
+      "passed": 289,
+      "run": 289,
+      "skipped": 0
+    },
+    "fullDiffReviewed": true,
+    "handbook": {
+      "chapterCount": 20,
+      "reviewed": [
+        8,
+        12,
+        13,
+        14,
+        15,
+        18
+      ],
+      "unrelatedChaptersPreserved": true,
+      "updated": [
+        12,
+        13,
+        14,
+        15,
+        18
+      ]
+    },
+    "linuxTestWheels": "existing four wheels hash-verified each harness run",
+    "newRelativeLinksChecked": 21,
+    "packaging": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 7,
+      "run": 7,
+      "seconds": 3.535,
+      "skipped": 0
+    },
+    "pipCheck": "no broken requirements",
+    "sourceVersionChecks": "old and new manifest verification passed; current-build27 Qwen/seven OpenAI comparison checks passed",
+    "typescript": "passed",
+    "unexpectedProductionFilesChanged": false
+  },
+  "ownerDatabaseWrites": 0,
+  "policyBoundaries": {
+    "automaticRetries": false,
+    "fictionalModels": {
+      "fictional-free@offline-v1": {
+        "inputMicroUSD": 0,
+        "outputMicroUSD": 0
+      },
+      "fictional-other@offline-v1": {
+        "inputMicroUSD": 2,
+        "outputMicroUSD": 5
+      },
+      "fictional-tiny@offline-v1": {
+        "inputMicroUSD": 1,
+        "outputMicroUSD": 3
+      }
+    },
+    "fictionalTokenProfile": "complete canonical UTF-8 byte units, not real tokenization",
+    "infrastructureBillingControlledBySql": false,
+    "inputByteCap": 100000,
+    "maxOutputUnits": 64,
+    "productionProviderBudget": "unchanged; normal no dollar ledger, exploration hard dollar ceiling disabled",
+    "proposedStagingAmountsApproved": false,
+    "realMixedProviderQuantityAllocationApproved": false,
+    "standaloneTenDollarDaily": "existing separate component profile, not an approved application allowance",
+    "syntheticQuantityEnvelope": "fictional inference consumes one of existing30/50 outing/root request quantities; non-bounded inference profiles refuse as unreviewed",
+    "uncertainRefunds": false,
+    "usageReconciliationReleases": 0
+  },
+  "productionActive": false,
+  "providerTokenCountingRequests": 0,
+  "realGrantEnrolled": false,
+  "realProviderDispatches": 0,
+  "recovery": {
+    "actualOperationalSnapshotRestore": "full grant quarantine; no dispatch",
+    "actualPostgresSIGKILLAndRestart": "committed reservation retained in both volumes",
+    "actualRedisRestart": "lost evidence refuses; no reconstruction",
+    "actualWitnessFinancialSnapshotRestore": "full grant quarantine; no dispatch",
+    "coordinatedSqlRedisSnapshotRestore": "Conjunctive unit/parent composition only; no separate new three-component snapshot drill",
+    "epochRotation": "operator-only; stale SQL/evidence rejected; rotation back to previous epoch denied",
+    "newHarnessPassed": true,
+    "outsideBoundary": [
+      "correlated rollback of both authority databases",
+      "compromised superuser/issuer/counter/dispatcher or host",
+      "witness rollback losing only unmirrored epoch/revocation events",
+      "hosted independent IAM, backup ownership and operator reconciliation not implemented"
+    ],
+    "powerLossOrDistributedDurabilityTested": false,
+    "terminalFactLoss": "synthetic administrator corruption detected; full grant quarantine",
+    "workerDeathAfterIntent": "charge and intent retained",
+    "workerDeathBeforeOperationalCommit": "external claim retained; mismatch quarantines full grant"
+  },
+  "remainingBlockers": [
+    "native advanced resolver/options-history/selected-receipt reconstruction and complete restart continuation integration",
+    "separate authenticated hosted issuer/counter/dispatcher and independently controlled anti-rollback epoch/exposure storage",
+    "reviewed real token counts, model/rate/rounding/categories/usage privacy and bounded admission",
+    "owner-approved real grant/timezone/logical root lifecycle and mixed-provider quantity allocation; no proposed amount activated",
+    "hosted model independent qualification and unchanged halted evaluation authorization boundary",
+    "account capacity/pooling/backups, retained container advisories, resource pricing/approval, isolated migrations and private Cloud Run acceptance",
+    "measured responsiveness/reliability and recovery; local full-prefix/fresh-connection prototype does not establish the five-second objective",
+    "bounded field-level privacy/retention admission for real usage/error bodies; current observations are fictional only"
+  ],
+  "syntheticGrantsOnly": true
+}

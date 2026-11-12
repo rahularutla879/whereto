@@ -600,3 +600,8 @@ Newly reconciled V5 guides: [specification](../task52-ordering-policy-v5.md), [r
 ## Deployment packaging
 
 `deployment/Dockerfile.frontend` / `Dockerfile.backend`: locked-input non-root image recipes. `prepare_backend.py` and `backend-files.json`: explicit runtime payload. `backend_entry.py` / `frontend-entry.mjs`: strict container startup. `requirements-linux-amd64.lock`: Python wheel hashes. `*.cloudrun.yaml.tmpl`: placeholder-only private hosting review templates. `container-smoke.sh`: local image test, not deployment.
+
+- `experiments/shared_state/application_grants.py` / `.sql`: inactive application grant and fictional inference composition.
+- `experiments/shared_state/grant_rules.sql` / `grant_witness.sql`: protected pricing/limits and separate local epoch/exposure witness.
+- `experiments/shared_state/grant-build.json` / `grant_identity.py`: distinct source profile; not a grant.
+- `experiments/shared_state/run_grants.py` / `test_application_grants.py`: disposable two-database restore/concurrency and application-contract checks.

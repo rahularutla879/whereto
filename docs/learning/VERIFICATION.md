@@ -76,3 +76,7 @@ Updated chapters 14, 15 and 18 plus commands, glossary and debugging guidance fo
 ## Task 52 container security remediation
 
 Reviewed and updated chapters 5/14/15/18 plus glossary, commands and debugging references. All other chapters, the 20-chapter structure and existing exercises remain unchanged. References match the actual deployment lock, Docker pip-check step and exact-override packaging test. [Original/control/patched scanner comparison and test evidence](../task52-container-security-verification.json) distinguish automated findings from confirmed exploitability and preserve historical qualification identities.
+
+## Task52 application financial authority
+
+Reviewed chapters8/12–15/18; updated12–15/18 and glossary/commands/file map. Existing20-chapter structure and unrelated examples/exercises retained. New references name actual inactive modules/routines; UTF-8-byte accounting is explicitly fictional, and hosted isolation, model qualification and grant approval are not claimed. Exact results are in [the verification record](../task52-application-financial-verification.json).

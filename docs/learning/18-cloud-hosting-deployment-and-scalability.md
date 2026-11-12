@@ -133,3 +133,10 @@ See the [Task 52 preflight](../task52-private-staging-preflight.md) and [impleme
 The new inactive local evidence layer implements encryption, fixed TTLs, bounded pooling/CAS and SQL attestation integration. Its constructor accepts only isolated synthetic resources; it cannot be enabled for Memorystore with a flag. Local TLS/AUTH tests establish client verification behavior, not managed-network/failover readiness. A real deployment still requires private connectivity, authenticated issuer separation, cloud key/epoch ownership, financial recovery, current prices/approval and complete native session adapters. The Mac-off staging acceptance gate remains open.
 
 See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.
+
+
+## Local financial recovery prototype is not hosted enrollment
+
+The inactive application-grant prototype uses an independent PostgreSQL witness volume to retain spending/delivery evidence across an operational database restore. Local service/operator/reader/issuer/counter roles are separate, but one test host administrator controls both databases. Correlated rollback or privileged compromise is outside this prototype's guarantee. A hosted design must independently control witness credentials, epoch changes, backups and reconciliation, and must authenticate the issuer/counter/dispatcher separately from workers.
+
+No hosted model, real grant, cloud database, Redis resource or startup activation is introduced. The proposed staging dollar figures remain unapproved. Complete native session rehydration, real-provider count/pricing policies, account capacity, container-advisory decisions and private deployment/recovery tests remain gates before Mac-independent staging. [Implementation and next bounded step](../task52-application-financial-authority.md).

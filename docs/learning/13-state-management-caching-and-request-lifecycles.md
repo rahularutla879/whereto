@@ -124,3 +124,10 @@ See the [Task 52 preflight](../task52-private-staging-preflight.md) and [impleme
 `evidence_models.pack` serializes only an explicit set of typed DTOs into bounded JSON. `RedisEvidence` encrypts them; reads never renew expiry. `CheckpointIssuer.capture` creates a separate source checkpoint, so finishing/revoking the original action does not delete that checkpoint. `restore_interpretation` rebuilds the existing validator using recorded raw evidence or separately tagged effective pending state, without another model request. It does not restore old admission authority. Advanced live resolvers, locks, arbitrary pagination contexts and receipt registries are still not automatically reconstructed. Lost evidence refuses rather than buying fresh provider data.
 
 See [implemented evidence boundary and limitations](../task52-shared-evidence.md). Production behavior is unchanged.
+
+
+## Grant lifetime is longer than a session
+
+In the inactive `GrantStore` composition, a fresh worker/session/root cannot renew the application grant. An initial inference admission binds source, root and outing in SQL; subsequent planning actions use that same scope. Redis still supplies private, expiring evidence rather than balances or replay authority. A pending deterministic answer reuses its source and does not purchase another inference.
+
+Every financial operation verifies the separately supplied witness epoch and current encrypted evidence. A missing Redis record refuses before a new reservation; losing it after reservation never refunds a charge. Rotating the external epoch invalidates old sessions/grants. Advanced resolver/history and native receipt reconstruction remain integration gaps; this prototype does not make every application session restartable. See [boundaries and recovery](../task52-application-financial-authority.md).

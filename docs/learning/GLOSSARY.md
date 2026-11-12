@@ -762,3 +762,6 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **Compare-and-set (CAS):** replace a value only if the currently stored version matches the one read, so a competing writer cannot silently win twice.
 - **Read attestation:** an issuer-created, short-lived permission proving that a trusted verifier checked evidence for one exact SQL command. It is not planning permission.
 - **Restore epoch:** an independent generation identity that invalidates pre-restore authority. A local test file is only a synthetic witness, not a production trust service.
+
+- **Conservative exposure:** the full maximum financial reservation retained even if a later reported charge is smaller or a request outcome is unknown.
+- **Independent financial witness:** separately controlled storage of grant/epoch/reservation/delivery history used to detect rollback of operational authority. The Task52 local witness is a prototype, not verified hosted independence.
