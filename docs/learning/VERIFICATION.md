@@ -80,3 +80,7 @@ Reviewed and updated chapters 5/14/15/18 plus glossary, commands and debugging r
 ## Task52 application financial authority
 
 Reviewed chapters8/12–15/18; updated12–15/18 and glossary/commands/file map. Existing20-chapter structure and unrelated examples/exercises retained. New references name actual inactive modules/routines; UTF-8-byte accounting is explicitly fictional, and hosted isolation, model qualification and grant approval are not claimed. Exact results are in [the verification record](../task52-application-financial-verification.json).
+
+## Task52 native reconstruction
+
+Reviewed/updated chapters12–15/18 plus glossary/commands/file map. All20 chapters and unrelated exercises/examples preserved. References match the inactive native factories, leased SQL transitions, reusable selection-only receipt and synthetic process/restore tests. No normal-startup, browser or hosted-readiness claim. [Exact results](../task52-native-session-verification.json).

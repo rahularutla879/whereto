@@ -1,0 +1,15 @@
+{
+  "baseline": "a0a456c171aaa021ef72958818aae34b5a555ff3",
+  "identity": "52-native-session-reconstruction-local-v1",
+  "liveTransportAvailable": false,
+  "parent": "52-application-financial-authority-local-v1",
+  "productionActive": false,
+  "sources": {
+    "experiments/shared_state/native_graph.py": "dcb15772ba093777775004f648f33b68e314f893ddee56bbcc53c61c56ddada4",
+    "experiments/shared_state/native_sessions.py": "a47ee4bb5ce592a17873d1423d0eae13d00f850eb50ee7b47e1008da760ecf02",
+    "experiments/shared_state/native_sessions.sql": "d1d70554b94e772fbc937bd0a9f24c3eb6b909e78f1cf01fb6c31a651392531a",
+    "experiments/shared_state/native_witness.sql": "573cf9b2bf30c653562b2a752e12c2fa6f2515866e7a68cd9fcef065c40b2fcd",
+    "experiments/shared_state/run_native.py": "283642aafe1de6a2998930511cb83123ac1b1f07a1d9698a0a5aa1f2d7664288",
+    "experiments/shared_state/test_native_sessions.py": "e89fc7f4c9899f2eeec90aa3057b0a749f2d3c5cfdc865c38272b1f002a7b115"
+  }
+}

@@ -6,6 +6,8 @@ Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start i
 
 > Subsequent P3 local checkpoint: [application grants, fictional inference accounting and separate recovery witness](../task52-application-financial-authority.md) implement local protocol mechanics only. No real grant, hosted independence, provider pricing/counting profile, service enrollment or P4 migration is approved. P2 native resolver/history/receipt rehydration remains incomplete.
 
+> Subsequent P2 native checkpoint: [native reconstruction](../task52-native-session-reconstruction.md) now exercises actual pending/advanced/options/Details/receipt/refresh contracts across fresh processes, plus checkpoint-history anti-rollback. This is inactive local synthetic coverage. Standalone origin/full1800s Details, exploration ledgers, hosted ticket routing, real privacy/enrollment and authenticated isolated services remain gates. Original P2/P3 notes above describe historical checkpoints, not current hosted readiness.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |

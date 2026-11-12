@@ -1,0 +1,491 @@
+{
+  "baseline": "a0a456c171aaa021ef72958818aae34b5a555ff3",
+  "buildManifestSHA256": "a398b07ad95aaa642fae7f991f12c57076f0e6b44c6454fa4e739effb34a2fd5",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-native-session-reconstruction.md",
+    "docs/task52-native-session-verification.json",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "experiments/shared_state/native-build.json",
+    "experiments/shared_state/native_graph.py",
+    "experiments/shared_state/native_identity.py",
+    "experiments/shared_state/native_sessions.py",
+    "experiments/shared_state/native_sessions.sql",
+    "experiments/shared_state/native_witness.sql",
+    "experiments/shared_state/run_native.py",
+    "experiments/shared_state/test_native_sessions.py"
+  ],
+  "checks": {
+    "backendAuthority": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest experiments.shared_state.test_action_identity backend.test_planning_admission backend.test_provider_budget backend.test_saved_details_reliability backend.test_saved_plans backend.test_database_check backend.test_database_security backend.test_session_capacity49 -v",
+      "errors": 0,
+      "failed": 0,
+      "passed": 69,
+      "run": 84,
+      "skipDetails": [
+        "test_api_operations_against_real_postgres_rollback (backend.test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback) ... skipped 'Opt-in hosted rollback tests'",
+        "test_duplicate_save_is_idempotent_and_mutation_denied (backend.test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied) ... skipped 'Opt-in hosted rollback tests'",
+        "test_legacy_null_transport_defaults_to_driving (backend.test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving) ... skipped 'Opt-in hosted rollback tests'",
+        "test_partial_failure_rolls_back_every_table (backend.test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table) ... skipped 'Opt-in hosted rollback tests'",
+        "test_real_storage_is_identifiers_only_and_reopens_without_provider (backend.test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider) ... skipped 'Opt-in hosted rollback tests'",
+        "test_runtime_no_ledger_ddl_delete_or_cross_capability_write (backend.test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write) ... skipped 'Opt-in hosted rollback tests'",
+        "test_transactional_save_and_complete_retrieval (backend.test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval) ... skipped 'Opt-in hosted rollback tests'",
+        "test_walking_transport_column_round_trips (backend.test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips) ... skipped 'Opt-in hosted rollback tests'",
+        "test_wrong_missing_expired_and_uuid_access_denied (backend.test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied) ... skipped 'Opt-in hosted rollback tests'",
+        "test_actual_connection_interruption_then_fresh_reopen (backend.test_database_security.HostedSecurityTests.test_actual_connection_interruption_then_fresh_reopen) ... skipped 'Opt-in hosted Task 50 tests'",
+        "test_concurrent_idempotent_writes_reads_and_restart (backend.test_database_security.HostedSecurityTests.test_concurrent_idempotent_writes_reads_and_restart) ... skipped 'Opt-in hosted Task 50 tests'",
+        "test_existing_nonexpired_documents_compatible_readonly (backend.test_database_security.HostedSecurityTests.test_existing_nonexpired_documents_compatible_readonly) ... skipped 'Opt-in hosted Task 50 tests'",
+        "test_restricted_authenticated_tls_and_role_boundaries (backend.test_database_security.HostedSecurityTests.test_restricted_authenticated_tls_and_role_boundaries) ... skipped 'Opt-in hosted Task 50 tests'",
+        "test_runtime_write_failure_rolls_back_committed_state (backend.test_database_security.HostedSecurityTests.test_runtime_write_failure_rolls_back_committed_state) ... skipped 'Opt-in hosted Task 50 tests'",
+        "test_two_capabilities_and_sql_injection_stay_isolated (backend.test_database_security.HostedSecurityTests.test_two_capabilities_and_sql_injection_stay_isolated) ... skipped 'Opt-in hosted Task 50 tests'"
+      ],
+      "skipped": 15
+    },
+    "backendPlanning": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_interpretation backend.test_real_planning backend.test_advanced_planning backend.test_advanced_routing backend.test_advanced_timing -v",
+      "errors": 0,
+      "failed": 0,
+      "passed": 150,
+      "run": 151,
+      "skipDetails": [
+        "test_committed_restricted_write_fresh_process_reopen_and_cleanup (backend.test_advanced_planning.HostedAdvancedTests.test_committed_restricted_write_fresh_process_reopen_and_cleanup) ... skipped 'Opt-in committed advanced PostgreSQL checks'"
+      ],
+      "skipped": 1
+    },
+    "dependencies": "passed backend/.venv/bin/python -m pip check",
+    "frontend": {
+      "command": "npm test",
+      "failed": 0,
+      "passed": 289,
+      "skipped": 0
+    },
+    "initialBackendAuthorityTypo": {
+      "error": "Requested nonexistent backend.test_session_capacity instead of backend.test_session_capacity49; corrected final84-case command passed with15 opt-in skips.",
+      "errors": 1,
+      "passed": 68,
+      "run": 84,
+      "skipped": 15
+    },
+    "lint": "passed npm run lint",
+    "nativePostgresRedis": {
+      "actualRecoveryDrills": [
+        "Operational-only pg_dump restore after a completed nonfinancial clarification/checkpoint: full synthetic grant quarantine.",
+        "Witness-only pg_dump restore losing a completed native checkpoint fact: full synthetic grant quarantine.",
+        "Operational PostgreSQL SIGKILL/outage/restart and witness/client restart: committed fictional inference exposure retained.",
+        "Actual Redis restart loses records: native resume refuses before model/provider work; no memory fallback."
+      ],
+      "buildManifestSHA256": "a398b07ad95aaa642fae7f991f12c57076f0e6b44c6454fa4e739effb34a2fd5",
+      "classes": {
+        "CodecTests": 3,
+        "NativeTests": 10,
+        "ProcessTests": 4
+      },
+      "command": "python3 -m experiments.shared_state.run_native",
+      "errors": 0,
+      "failed": 0,
+      "freshSpawnProcessTests": [
+        "Concurrent A/B workers: B completes clarification; A cannot revoke with obsolete fence; no model/charge reset.",
+        "Advanced history and cached router/resolver restored by fresh server factory; no provider/model work during reconstruction.",
+        "Actual os._exit(42) after durable BEGIN: another worker refuses; exposure unchanged; no automatic retry.",
+        "Pending -> answer -> plan -> options on new processes; detached selected receipt reusable across two further processes, no selection charge."
+      ],
+      "passed": 17,
+      "run": 17,
+      "seconds": 437.318,
+      "skipped": 0
+    },
+    "notRerunReasons": "Full Next build/images/browser not repeated: application/frontend/backend/startup/dependency/packaging paths unchanged. Full backend discovery not claimed; immutable historical pins preserved.",
+    "optionalHostCodecAttempt": {
+      "error": "Host backend venv lacks optional cryptography test dependency; no new host installation. Disposable client uses hash-checked existing evidence wheels.",
+      "loaderErrors": 1,
+      "status": "import_error",
+      "testsExecuted": 0
+    },
+    "orderingFrozenGroup": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_v51_ordering_preservation backend.test_v51_application_fixture backend.test_v51_manual_pending backend.test_ordering_shadow backend.test_ordering_enforcement_design -v",
+      "error": "Q4C source/configuration identity mismatch in frozen task52_v51_eval_protocol import; unchanged parent baseline incompatibility, no repin/bypass",
+      "status": "import_refused",
+      "testsExecuted": 0
+    },
+    "orderingIndependent": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_ordering_shadow backend.test_ordering_enforcement_design -v",
+      "failed": 0,
+      "passed": 18,
+      "run": 18,
+      "skipped": 0
+    },
+    "packaging": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest deployment.test_packaging -v",
+      "failed": 0,
+      "passed": 7,
+      "skipped": 0
+    },
+    "parentEvidence": {
+      "actualRecoveryDrills": "passed older SQL restore/epoch mismatch, Redis outage/loss/restart, SQL outage/SIGKILL/restart, worker restart and retained charged INTENT; original files untouched",
+      "command": "python3 -m experiments.shared_state.run_evidence",
+      "failed": 0,
+      "passed": 112,
+      "run": 112,
+      "seconds": 422.259,
+      "skipped": 0
+    },
+    "parentGrant": {
+      "actualRecoveryDrills": "passed older operational and witness financial snapshots/full grant quarantine, PostgreSQL SIGKILL/restart, Redis loss, retained reserved exposure and no resend",
+      "command": "python3 -c 'from experiments.shared_state.run_native import local_resources; from experiments.shared_state.run_grants import main\nwith local_resources(): main()'",
+      "containerCaps": "documented1CPU operational PostgreSQL/0.25CPU Redis, same2CPU4GiB VM; all SQL and Redis deadlines unchanged",
+      "failed": 0,
+      "parentSourcesUnchanged": true,
+      "passed": 30,
+      "run": 30,
+      "seconds": 459.968,
+      "skipped": 0
+    },
+    "parentGrantInitial": {
+      "command": "python3 -m experiments.shared_state.run_grants",
+      "errors": 1,
+      "notExecuted": 27,
+      "passed": 2,
+      "recoveryNotReached": true,
+      "run": 3,
+      "status": "initial fail-closed RedisUnavailable before details inference; subsequent complete unchanged30-case run and recovery drills passed with documented container caps"
+    },
+    "resourceHostUnit": {
+      "command": "python3 -m unittest experiments.shared_state.run_native.ResourceTests -v",
+      "failed": 0,
+      "passed": 1
+    },
+    "secretScan": "passed final configured-secret scan: current matches=0 and historical matches=0",
+    "sourceAndLinks": "passed final native/parent pins,20 handbook chapters, local relative links, unchanged application/dependency/packaging/scripts/frozen artifacts and diff whitespace",
+    "typecheck": "passed npm run typecheck"
+  },
+  "cleanup": {
+    "allOwnedContainersRemoved": true,
+    "allOwnedNamedPostgresVolumesRemoved": true,
+    "dedicatedVmReturnedToInitialStoppedState": true,
+    "olderVolumesAndImagesPreserved": true,
+    "ownAnonymousRedisVolumesRemoved": 18,
+    "vmSizeUnchanged": true
+  },
+  "cloudResourcesCreated": 0,
+  "developmentCohorts": [
+    {
+      "errors": [
+        "ERROR: test_advanced_resolver_router_and_history (experiments.shared_state.test_native_sessions.NativeTests.test_advanced_resolver_router_and_history)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "dev1",
+      "summary": [
+        "Ran 3 tests in 69.989s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_advanced_resolver_router_and_history (experiments.shared_state.test_native_sessions.NativeTests.test_advanced_resolver_router_and_history)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "dev2",
+      "summary": [
+        "Ran 1 test in 84.678s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_busy_missing_evidence_wrong_key_build_and_epoch_refuse (experiments.shared_state.test_native_sessions.NativeTests.test_busy_missing_evidence_wrong_key_build_and_epoch_refuse)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "dev3",
+      "summary": [
+        "Ran 4 tests in 105.869s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_ordinary_options_details_and_reusable_selected_receipt (experiments.shared_state.test_native_sessions.NativeTests.test_ordinary_options_details_and_reusable_selected_receipt)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "dev4",
+      "summary": [
+        "Ran 5 tests in 179.077s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_optional_flexible_return_state_and_corrupt_history_refuse (experiments.shared_state.test_native_sessions.NativeTests.test_optional_flexible_return_state_and_corrupt_history_refuse) (index=5)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "dev5",
+      "summary": [
+        "Ran 7 tests in 377.298s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_details_membership_and_attempts_survive_handoff (experiments.shared_state.test_native_sessions.NativeTests.test_details_membership_and_attempts_survive_handoff)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "final1",
+      "summary": [
+        "Ran 5 tests in 206.165s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [],
+      "finalAcceptanceEvidence": false,
+      "interrupted": true,
+      "label": "final2",
+      "summary": []
+    },
+    {
+      "errors": [
+        "ERROR: test_advanced_resolver_router_and_history (experiments.shared_state.test_native_sessions.NativeTests.test_advanced_resolver_router_and_history)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "interrupted": false,
+      "label": "final3",
+      "summary": [
+        "Ran 4 tests in 53.326s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [],
+      "finalAcceptanceEvidence": false,
+      "interrupted": true,
+      "label": "final4",
+      "summary": []
+    },
+    {
+      "errors": [
+        "ERROR: test_details_membership_and_attempts_survive_handoff (experiments.shared_state.test_native_sessions.NativeTests.test_details_membership_and_attempts_survive_handoff)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "label": "sealed",
+      "summary": [
+        "Ran 6 tests in 193.875s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_local_caps_change_only_disposable_fixture_creation (experiments.shared_state.test_native_sessions.CodecTests.test_local_caps_change_only_disposable_fixture_creation)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "label": "rebalanced-native",
+      "summary": [
+        "Ran 3 tests in 0.227s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_advanced_named_origin (experiments.shared_state.test_application_grants.ApplicationGrantTests.test_advanced_named_origin)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "label": "grant-followup-application",
+      "summary": [
+        "Ran 1 test in 26.395s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "ERROR: test_missing_or_wrong_key_and_stale_fence_refuse_without_charge (experiments.shared_state.test_application_grants.GrantTests.test_missing_or_wrong_key_and_stale_fence_refuse_without_charge)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "label": "grant-followup-security",
+      "summary": [
+        "Ran 7 tests in 128.625s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "errors": [
+        "FAIL: test_process_death_busy_turn_never_retries (experiments.shared_state.test_native_sessions.ProcessTests.test_process_death_busy_turn_never_retries)"
+      ],
+      "finalAcceptanceEvidence": false,
+      "label": "final-run",
+      "summary": [
+        "Ran 16 tests in 379.959s",
+        "FAILED (failures=1)"
+      ]
+    }
+  ],
+  "developmentFindings": [
+    "Earlier codec cohorts refused unregistered native model types DistinctVenue, DestinationContext and PlannerInput; added only reviewed fixed module identities.",
+    "Added explicit safe HttpUrl scalar after native ordinary-context audit; no generic object fallback.",
+    "One advanced test omitted original startingLocation; retained native preference-change refusal and corrected authored fixture.",
+    "An assertion used fenced worker A after B claimed ownership; changed assertion to compare the pre-handoff snapshot, not to bypass authority.",
+    "Initial backend authority command misspelled test_session_capacity49; corrected final invocation passed84 with15 opt-in skips.",
+    "One interim native run was deliberately interrupted/cleaned after identifying URL scalar gap; no pass claimed for it.",
+    "A local amd64 run hit unchanged PostgreSQL statement_timeout (57014) during pre-dispatch evidence validation and refused; no retry/fallback was added. Removed redundant parent guard evaluation in the new wrapper while retaining it for all native-only commands.",
+    "Final native code also restores the existing starting-place calendar lock and100-entry bound. Earlier prototype cohorts are development evidence; the final sealed-source cohort passed separately.",
+    "The unchanged full grant attempt stopped after2 passes on Redis Unavailable in the third case; preserved as failed infrastructure attempt, followed by separate bounded cohorts with identical limits/timeouts.",
+    "The first final process-death test exposed a spawn fixture lifetime error: a temporary Queue semaphore was collected before the child rebuilt it. Retained the Queue in the parent; application/fencing/financial code unchanged. Full final suite rerun."
+  ],
+  "finalTestTotals": {
+    "failedFinalRunnableCases": 0,
+    "formula": "17 native +1 host resource +112 authority/evidence +30 grants +237 backend +289 frontend +7 packaging =693 passed; backend16 opt-in skips; frozen V5.1 group import refused separately",
+    "frozenGroupImportRefusals": 1,
+    "fullBackendSuiteClaimed": false,
+    "passed": 693,
+    "skipped": 16
+  },
+  "fullDiffReviewed": true,
+  "handbook": {
+    "chapterCount": 20,
+    "reviewed": [
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "unaffectedChaptersPreserved": true,
+    "updated": [
+      12,
+      13,
+      14,
+      15,
+      18
+    ]
+  },
+  "historicalAfter": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "historicalBefore": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "historicalIntegrityUnchanged": true,
+  "identity": "52-native-session-reconstruction-local-v1",
+  "limitations": [
+    "Inactive internal server-owned ticket/factory interface; no normal endpoint/session-index integration.",
+    "Strict same-build profile; incompatible versions invalidate rather than migrate.",
+    "Interrupted turns/torn publication fail closed, no automatic recovery/retry.",
+    "Exploration live ledgers, standalone pre-source origins, full independent1800s Details not supported.",
+    "Same host/admin synthetic issuer/counter/witness is not malicious-worker isolation or hosted independent authority.",
+    "Correlated two-authority rollback, privileged compromise and unmirrored witness epoch-event rollback remain outside parent trust boundary.",
+    "Real Google field privacy/licensing/retention and hosted key/enrollment review remain required.",
+    "Slow fresh connections/full-prefix emulation does not establish five-second responsiveness."
+  ],
+  "localResourceProfile": {
+    "clientCPUCap": 1,
+    "initialThrottleEvidence": {
+      "cpuUsageMicroseconds": 19508039,
+      "periods": 410,
+      "throttledMicroseconds": 18582911,
+      "throttledPeriods": 381
+    },
+    "memoryAndImagesChanged": false,
+    "operationalPostgresCPUCap": 1,
+    "parentHarnessSourcesUnchanged": true,
+    "redisCPUCap": 0.25,
+    "redisSocketTimeoutSeconds": 1,
+    "sqlLockTimeoutMs": 250,
+    "sqlStatementTimeoutMs": 1500,
+    "vm": {
+      "cpus": 2,
+      "diskGiB": 40,
+      "increased": false,
+      "memoryGiB": 4
+    },
+    "witnessCPUCap": 0.5
+  },
+  "nextCheckpoint": "Local workload-authenticated separation of native ticket/factory, issuer/counter/dispatcher and independent recovery interfaces, using synthetic identities/providers before hosted enrollment or migration. Do not start automatically.",
+  "notRerun": [
+    "Full backend discovery, including33 historical source-identity error headings across30 frozen modules; pins preserved, not repinned or excluded.",
+    "Fresh production Next build, actual image rebuild/container smoke or browser E2E: no application/startup/dependency/packaging files changed. Existing frontend HTTP tests and native packaging checks were rerun; neither is browser verification.",
+    "Hosted Memorystore/Supabase/Cloud Run/IAM, actual provider/counting/pricing, user data/RLS writes, power loss and regional failover."
+  ],
+  "productionActive": false,
+  "realFinancialGrantsCreated": 0,
+  "realProviderDispatches": 0,
+  "remainingDeploymentBlockers": [
+    "Authenticated server-owned ticket routing/index and isolated native factories/issuer/counter/dispatcher services; no normal endpoint activation in this checkpoint.",
+    "Hosted independent epoch/backup ownership, restore reconciliation, service/key enrollment and operational monitoring.",
+    "Privacy/licensing admission for real provider fields and retention; hosted Redis TLS/auth/pooling/noeviction verification.",
+    "Supabase capacity/roles/pool/backup and separately reviewed operational migrations; no owner DB touched.",
+    "Real provider-rate/token bounds, owner-approved non-renewing grants/timezone/root lifecycle and credentials; proposed staging limits remain unapproved.",
+    "Qualified hosted model with independent source/response review and preserved halted evaluation; current Qwen/local inference unchanged.",
+    "Retained container security findings, private Cloud Run authentication/startup integration, and measured quality/latency/recovery/cost acceptance; separate public-launch approval."
+  ],
+  "status": "local_checkpoint_verified_inactive",
+  "verifiedUTC": "2026-11-12"
+}

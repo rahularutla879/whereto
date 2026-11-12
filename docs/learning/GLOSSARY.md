@@ -765,3 +765,5 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 
 - **Conservative exposure:** the full maximum financial reservation retained even if a later reported charge is smaller or a request outcome is unknown.
 - **Independent financial witness:** separately controlled storage of grant/epoch/reservation/delivery history used to detect rollback of operational authority. The Task52 local witness is a prototype, not verified hosted independence.
+
+**Native checkpoint:** encrypted typed application state bound to current SQL ownership, source and original expiry. It is not permission to call a provider. **Selection-only ticket:** internal portable receipt evidence that preserves reusable selection and cannot authorize new discovery. **Interrupted turn:** a durable BEGIN without a completed checkpoint; automatically repeating it is forbidden.

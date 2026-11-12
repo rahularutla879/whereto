@@ -141,3 +141,7 @@ This downloads only pinned test wheels; it does not install them into the applic
 ### Inactive application grants and fictional inference
 
 From the repository root, with approved Colima running: `PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_grants`. Uses two disposable PostgreSQL volumes plus Redis; fake providers and synthetic grants only. See [financial-authority report](../task52-application-financial-authority.md) for required cached hash-pinned wheels, permissions, trust limits and results.
+
+## Inactive native session reconstruction
+
+From the repository root, `python3 -m experiments.shared_state.run_native` uses the approved disposable local Colima PostgreSQL/Redis harness and synthetic providers. It does not read owner cloud credentials or enable production. Review [setup/trust limits](../task52-native-session-reconstruction.md) and do not run synthetic bootstrap against a hosted database.

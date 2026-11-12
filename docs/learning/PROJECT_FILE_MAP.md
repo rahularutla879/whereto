@@ -605,3 +605,5 @@ Newly reconciled V5 guides: [specification](../task52-ordering-policy-v5.md), [r
 - `experiments/shared_state/grant_rules.sql` / `grant_witness.sql`: protected pricing/limits and separate local epoch/exposure witness.
 - `experiments/shared_state/grant-build.json` / `grant_identity.py`: distinct source profile; not a grant.
 - `experiments/shared_state/run_grants.py` / `test_application_grants.py`: disposable two-database restore/concurrency and application-contract checks.
+
+Native restart reconstruction: `experiments/shared_state/native_sessions.py` (inactive composition), `native_graph.py` (fixed typed factories), `native_sessions.sql`/`native_witness.sql` (synthetic protected transitions), `run_native.py`/`test_native_sessions.py` (disposable process/restore tests), `native-build.json`/`native_identity.py` (separate exact-source profile). [Report](../task52-native-session-reconstruction.md).
