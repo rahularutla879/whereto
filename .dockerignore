@@ -41,3 +41,6 @@ backend/testing_clock.py
 **/*.pem
 **/*.p12
 **/*.pfx
+
+!deployment/build-identity-port.mjs
+!deployment/private-startup-v1.json

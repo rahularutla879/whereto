@@ -778,3 +778,7 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **IAP assertion:** a separately signed user assertion for a specific protected resource. Its keys/issuer/audience differ from a Cloud Run workload token.
 - **JWKS:** a JSON set of public verification keys. The new production cache loads only fixed Google HTTPS origins, never a token-supplied URL.
 - **User-forwarding scope:** frontend-owned proof binding a verified IAP assertion to one exact application action; it is not original interpretation or provider authority.
+
+- **Single-flight acquisition:** concurrent requests await one bounded identity fetch; it does not authorize repeated provider work.
+- **Liveness versus readiness:** a responsive process can still be unready to plan or spend. The current private health response is liveness only.
+- **Proposed outing handle:** a reviewed future opaque binding from a public workflow to its server-owned native source; no public handle field is implemented in this checkpoint.

@@ -1,9 +1,11 @@
+import {privateRoute} from "@/lib/private-server-boundary";
 import { classifiedFailure } from "@/lib/failure-diagnostics";
 import {timingHeaders} from "@/lib/server-timing";
 
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  const isolated=privateRoute("/api/interpret",request);if(isolated)return isolated;
   const started=performance.now();
   const headers:Record<string,string> = { "Cache-Control": "no-store" };
   let payload: unknown;

@@ -117,3 +117,7 @@ For the inactive service fixture, inspect only sanitized service reason/stage/SQ
 ## Inactive hosted identity refusal
 
 Check identity type first: Google workload versus IAP user versus request proof. Check fixed issuer/key origin/audience, enrolled service-account subject/email, tester subject, body/path/build/epoch, nonce reuse and native revision/expiry. Never accept unsigned identity headers, use a saved bearer as a user account, disable TLS, inject fixture keys into production or retry a reserved provider request. The local IAP-agent ingress credential is only a platform simulation. Real Next metadata/IAP wiring and resource enrollment remain separate gates.
+
+## Private route unavailable is an intentional boundary
+
+For selected private status mode, business503 and diagnostics404 are expected. A valid IAP/workload token cannot fill in the missing public source ticket. Do not pair by latest user request, trust saved cards as source evidence, clear nonce history, renew a grant, force production/test mode or fall back to Ollama. For liveness failures, check exact audience/issuer, cache expiry, bytes/method/build/epoch, current witness and server readiness using sanitized reasons only. No tokens or raw credential errors belong in logs.

@@ -12,6 +12,8 @@ Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start i
 
 > Subsequent local hosted-identity checkpoint: [Google/IAP contract](../task52-hosted-identity-contract.md) verifies separate workload/user trust roots, request-bound frontend forwarding, native owner continuity and nonce-only frontend/backend roles using offline signed fixtures. The [enrollment matrix](hosted-enrollment-v1.json) is review-only. Real Next identity-port/metadata wiring, IAM/IAP, migration, secrets, independent hosted recovery, actual grants/model/provider and private staging remain unactivated.
 
+> Current bounded P9 component: [server identity port and status seam](../task52-hosted-startup-integration.md) now connect actual Next/FastAPI liveness locally. Public ordinary requests still lack the durable source-ticket bridge; all private business routes and full hosted startup refuse. This does not complete P9 or authorize provisioning/spending. Review the source-handle/session contract before the next ordinary/pending facade checkpoint.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |

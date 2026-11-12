@@ -159,3 +159,7 @@ This creates disposable synthetic stores and restricted role containers, exercis
 ## Inactive hosted identity contract
 
 From the repository root, with the approved local Colima profile running and hash-pinned parent wheels plus the PyJWT wheel in `/tmp/whereto-evidence-wheels`: `python3 -m experiments.hosted_identity.run_local`. The wrapper reuses the frozen disposable harness; no real metadata/key/account/provider endpoint is queried. Node-only contract tests: `node_modules/.bin/tsx --test experiments/hosted_identity/proxy.test.ts`. These commands neither provision nor enable normal authentication. See [requirements and scope](../task52-hosted-identity-contract.md).
+
+## Server identity port checkpoint
+
+From the repository root: `node_modules/.bin/tsx --test lib/server-identity.test.ts lib/private-server-boundary.test.ts`. With the already approved Colima profile, pinned cached wheels and a current frontend build, run `PYTHONPATH=. backend/.venv/bin/python -m experiments.hosted_startup.run_local`. This is local liveness/refusal evidence only. `PYTHONPATH=. backend/.venv/bin/python -m deployment.private_startup` intentionally exits78; do not set test/ready flags to defeat it. No command deploys or enables paid work.

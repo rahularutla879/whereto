@@ -1,0 +1,103 @@
+{
+  "identity": "52-private-route-integration-review-v1",
+  "normalStartupChanged": false,
+  "fullHostedStartupImplemented": false,
+  "publicDTOChanged": false,
+  "activation": "trusted server code only; current profile status-only",
+  "routes": [
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "requestByteCap": 0,
+      "timeoutSeconds": 3,
+      "selectedPrivateDisposition": "authenticated_liveness"
+    },
+    {
+      "method": "GET",
+      "path": "/api/planning-mode",
+      "requestByteCap": 0,
+      "timeoutSeconds": 30,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/interpret",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 70,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/generate",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 115,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/advanced",
+      "requestByteCap": 4096,
+      "timeoutSeconds": 45,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/options",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 115,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/starting-areas",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 115,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/starting-places",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 30,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/venues/details",
+      "requestByteCap": 65536,
+      "timeoutSeconds": 30,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/save",
+      "requestByteCap": 4096,
+      "timeoutSeconds": 45,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/reopen",
+      "requestByteCap": 4096,
+      "timeoutSeconds": 45,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "POST",
+      "path": "/api/plans/refresh",
+      "requestByteCap": 4096,
+      "timeoutSeconds": 45,
+      "selectedPrivateDisposition": "blocked"
+    },
+    {
+      "method": "GET",
+      "path": "/api/development-diagnostics",
+      "requestByteCap": 0,
+      "timeoutSeconds": 5,
+      "selectedPrivateDisposition": "404"
+    }
+  ],
+  "planningAuthorization": false,
+  "paidDispatch": false,
+  "accountRegistration": false
+}

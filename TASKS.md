@@ -1,3 +1,7 @@
+# Task 52 — server identity port and guarded request integration
+
+Bounded components implemented; **full private hosted startup remains blocked** by public source/ticket mapping and real dependencies. Only authenticated liveness is selectable; all planning/persistence routes refuse, diagnostics404. Normal behavior remains unchanged. [Implementation and next contract decision](docs/task52-hosted-startup-integration.md) · [Verification](docs/task52-hosted-startup-verification.json). No cloud/provider/financial activation; Task53 remains unstarted.
+
 # Task 52 — inactive hosted workload/IAP contract
 
 Implemented separately identified Google-root verifier, direct-IAP verifier and frontend-scoped user forwarding over the unchanged protected native/provider authority. Local signed fixtures and separate service processes test ownership and replay; real identities/resources/providers remain inactive. [Report](docs/task52-hosted-identity-contract.md), [verification](docs/task52-hosted-identity-verification.json), [review-only enrollment](docs/task52-staging/hosted-enrollment-v1.json). Next bounded work: real server-side Next identity-port/private startup composition tested locally against fake metadata/JWKS. Actual migration/provisioning/spending/public launch remain gated; Task 53 remains unstarted.

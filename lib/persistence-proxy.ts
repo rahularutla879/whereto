@@ -1,9 +1,11 @@
+import {privateRoute} from "./private-server-boundary";
 import {timingHeaders} from "./server-timing";
 import { publicPlanningPayload } from "./public-planning-payload";
 import { classifiedFailure } from "./failure-diagnostics";
 import { developmentOriginHeaders } from "./development-origin";
 
 export async function persistenceProxy(path: "/api/plans/save" | "/api/plans/reopen" | "/api/plans/refresh" | "/api/plans/advanced", request: Request) {
+  const isolated=privateRoute(path,request);if(isolated)return isolated;
   const started=performance.now();
   const advanced=path==="/api/plans/advanced";
   const headers = { "Cache-Control": "no-store", "Referrer-Policy": "no-referrer" };

@@ -152,3 +152,9 @@ The normal cohort covers pending/advanced continuation, cross-owner and stale re
 ## Offline Google-shaped identity tests
 
 `python3 -m experiments.hosted_identity.run_local` uses the frozen local harness with new offline identities and authentication-only roles. The trusted controller alone holds synthetic RSA/EC issuer keys; services receive public fixture JWKS and only their own preissued workload tokens/proof keys. Separate frontend/backend/factory processes verify scoped user ownership through actual native planners. Pure token tests, Node forwarding tests and PostgreSQL/Redis process tests prove different things; none is a real Google/IAP/browser or hosted-readiness test. [Exact results and untested conditions](../task52-hosted-identity-verification.json).
+
+## Test the real seam without claiming hosted planning
+
+`experiments.hosted_startup.run_local` uses actual Next HTTP handlers and two actual FastAPI status processes, signed synthetic identities, fake metadata and fresh SQL/Redis/witness resources. Its Docker-exec transport and custom Next driver are test infrastructure, excluded from production images. Backend environment remains ordinary development; AI preparation alone is faked. Neither production admission check is patched. Business requests refuse and SQL confirms zero provider operations. Parent native/financial tests are separate evidence, not proof those flows traverse the new public facade.
+
+A restart test must wait for bounded non-billable socket readiness rather than assume Python is ready after one second. Preserve failed cohorts and immutable source pins; do not weaken tests to obtain a green total. Distinguish SDK unit tests, actual HTTP process tests, native container smoke, browser checks and hosted acceptance. [Exact results](../task52-hosted-startup-verification.json) list what was not run.

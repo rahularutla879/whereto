@@ -1,3 +1,4 @@
+import {privateRoute} from "@/lib/private-server-boundary";
 import { publicPlanningPayload } from "@/lib/public-planning-payload";
 import { invalidUpstreamResponse } from "@/lib/proxy-failures";
 import { classifiedFailure } from "@/lib/failure-diagnostics";
@@ -9,6 +10,7 @@ import {timingHeaders} from "@/lib/server-timing";
 export const runtime = "nodejs";
 
 export async function POST(request: Request) {
+  const isolated=privateRoute("/api/plans/generate",request);if(isolated)return isolated;
   const started=performance.now();
   const headers:Record<string,string> = { "Cache-Control": "no-store" };
   let payload: unknown;

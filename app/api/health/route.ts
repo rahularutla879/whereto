@@ -1,6 +1,10 @@
+import {privateRoute} from "@/lib/private-server-boundary";
 export const runtime = "nodejs";
 
-export async function GET() {
+export function GET():Promise<Response>;
+export function GET(request:Request):Promise<Response>;
+export async function GET(request?:Request) {
+  const isolated=privateRoute("/api/health",request);if(isolated)return isolated;
   const headers = { "Cache-Control": "no-store" };
 
   try {

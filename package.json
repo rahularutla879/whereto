@@ -13,6 +13,7 @@
     "test:backend": "backend/.venv/bin/python -m unittest discover -s backend -p 'test_*.py' -v"
   },
   "dependencies": {
+    "jose": "6.2.17",
     "lucide-react": "^0.468.0",
     "next": "^16.0.0",
     "react": "^19.0.0",

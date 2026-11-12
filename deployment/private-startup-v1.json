@@ -1,0 +1,19 @@
+{
+  "identity": "52-private-hosted-startup-contract-v1",
+  "active": false,
+  "launchable": false,
+  "providerDispatchEnabled": false,
+  "frontendDependency": "jose 6.2.17 (exact package-lock integrity)",
+  "frontendSelector": "trusted server bootstrap only; no environment/header toggle",
+  "availableLocalRoutes": ["GET /api/health"],
+  "healthMeaning": "authenticated liveness only; never planning/financial readiness",
+  "missingReviewedBindings": [
+    "public interpretation/options/advanced/receipt tokens to durable native owner/revision/fence routes",
+    "public DTO continuation, edits, pagination and selected-save mapping without new authorization",
+    "production SQL/Redis/independent recovery enrollment, authenticated current readiness and migration",
+    "qualified hosted LLM and real provider tokenization/complete maximum cost bounds",
+    "real canonical provider transport and independently approved finite financial grant",
+    "actual IAP/IAM ingress, private networking, key rotation/revocation and nonce retention"
+  ],
+  "forbidden": ["test environment override", "guard monkeypatch", "shared admin credential", "local Ollama fallback", "unmetered provider fallback"]
+}

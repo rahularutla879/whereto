@@ -9,13 +9,17 @@ COPY components ./components
 COPY lib ./lib
 COPY data ./data
 COPY next.config.ts tsconfig.json postcss.config.mjs ./
-RUN npm run build
+COPY deployment/build-identity-port.mjs deployment/private-startup-v1.json ./deployment/
+RUN npm run build && node deployment/build-identity-port.mjs
 
 FROM ${NODE_IMAGE} AS runtime
 WORKDIR /app
 ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=8080 HOSTNAME=0.0.0.0
 COPY --from=build --chown=node:node /app/.next/standalone ./
 COPY --from=build --chown=node:node /app/.next/static ./.next/static
+COPY --from=build --chown=node:node /app/private-runtime ./private-runtime
+COPY --from=build --chown=node:node /app/node_modules/jose/dist/webapi ./node_modules/jose/dist/webapi
+COPY --from=build --chown=node:node /app/node_modules/jose/package.json /app/node_modules/jose/LICENSE.md ./node_modules/jose/
 COPY --chown=node:node deployment/frontend-entry.mjs ./deployment/frontend-entry.mjs
 # Package installation belongs to build stage; remove inherited runtime installers.
 RUN rm -rf /usr/local/lib/node_modules/npm /usr/local/lib/node_modules/corepack /opt/yarn-* \

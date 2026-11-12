@@ -1,10 +1,12 @@
+import {privateRoute} from "./private-server-boundary";
 import { publicPlanningPayload } from "./public-planning-payload";
 import { classifiedFailure } from "./failure-diagnostics";
 import { recoveryCode } from "./destination-context";
 import { providerDiagnosticNotes } from "./provider-diagnostics";
 import { developmentOriginHeaders } from "./development-origin";
 // Fixed server-only upstream paths; never forward arbitrary URLs or credentials.
-export async function providerProxy(path: "/api/starting-areas" | "/api/planning-mode" | "/api/venues/details" | "/api/starting-places" | "/api/plans/options", request?: Request) {
+export async function providerProxy(path: "/api/starting-areas" | "/api/planning-mode" | "/api/venues/details" | "/api/starting-places" | "/api/plans/options", request?: Request, incoming?:Request) {
+  const isolated=privateRoute(path,request??incoming);if(isolated)return isolated;
   const headers = { "Cache-Control": "no-store" };
   try {
     const body = request ? JSON.stringify(await request.json()) : undefined;

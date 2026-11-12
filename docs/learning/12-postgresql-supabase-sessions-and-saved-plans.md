@@ -156,3 +156,7 @@ Ordinary workers have no SQL credentials. Only the trusted factory's restricted 
 ## Authentication-only SQL roles
 
 The inactive [hosted nonce routine](../../experiments/hosted_identity/nonce.sql) gives the backend a restricted witness login for epoch reads and its own service nonce namespace. The frontend has no database credential: backend/factory independently check current epoch and consume its signed forwarding scope. That restricted role grants no table mutation, financial reserve, issuer, delivery or recovery authority. Nonces are append-only and bounded; database failure denies authentication rather than using a memory fallback. Only disposable databases receive this schema. Existing saved-plan PostgreSQL/RLS and bearer-capability authorization are unchanged; private IAP tester identity does not become a saved-plan account.
+
+## Authentication replay facts do not create a planning session
+
+The new public status verifier consumes request/user nonces in the existing independent witness using its restricted backend login. It has no operational/issuer/counter/recovery or Redis credential. An authenticated health request therefore proves no source ownership or spending permission. A future public outing handle must map to a current native route/revision/fence and original root/outing, not create a new allowance. Selected receipts must remain reusable, and saved bearer/RLS/expiry/membership remain independent of IAP tester identity. No saved schema or real database is changed.

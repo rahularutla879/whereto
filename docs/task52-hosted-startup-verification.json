@@ -1,0 +1,406 @@
+{
+  "actualIntegratedRoutes": [
+    "GET /api/health"
+  ],
+  "additionalChecks": {
+    "buildLogSHA256": "fa889b70393b009f188a5eaa048077c1b7b079c6937f1d9ce8d0ccae2fb3c5f4",
+    "eslint": "passed",
+    "eslintLogSHA256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "frontendProductionBuild": "passed",
+    "gitDiffReview": "all tracked and new task files reviewed; whitespace/credential checks passed",
+    "handbookChapters": 20,
+    "handbookReviewed": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18,
+      20
+    ],
+    "handbookUpdated": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "hostPipCheck": "no broken requirements",
+    "jose": {
+      "integrity": "sha512-wOuK9V1yujQFH5S0ZWmLcDZN7+IKh9bUCC2ZPCf2HDlol3WWHy+PPyNjEI75FXRLMp3vDKQcupP59xhVU95hcg==",
+      "otherDependencyUpgrades": false,
+      "version": "6.2.17"
+    },
+    "localLinks": "checked",
+    "nativeRestoreCrashDrills": "passed operational/witness snapshot rollback quarantine, SQL outage, SIGKILL/restart exposure and missing-Redis refusal",
+    "npmAudit": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "moderate": 7,
+      "total": 7
+    },
+    "npmAuditExitCode": 1,
+    "npmAuditImpact": "seven retained moderate tooling matches; zero high/critical npm matches; no force fix or suppression",
+    "npmAuditLogSHA256": "b0039c64e1e9f1c017f2e48661868dd5fe3fe487886781b80886b185bbad64c4",
+    "pythonCompile": "passed",
+    "secretScan": "zero configured credential matches in current assets/history",
+    "secretScanLogSHA256": "70849d215101f3831275b3330f28b81a64383cd3e61f5fc0df69a4973878b331",
+    "sourceManifest": "all pins and frozen parent verified; no repin",
+    "typeScript": "passed",
+    "typeScriptLogSHA256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "unaffectedChapters": "12 byte-identical; all20 baseline contents retained; no rewrite"
+  },
+  "backendModulesExecuted": [
+    "experiments.shared_state.test_action_identity",
+    "backend.test_planning_admission",
+    "backend.test_provider_budget",
+    "backend.test_saved_plans",
+    "backend.test_saved_details_reliability",
+    "backend.test_session_capacity49",
+    "backend.test_interpretation",
+    "backend.test_real_planning",
+    "backend.test_advanced_planning",
+    "backend.test_advanced_routing",
+    "backend.test_advanced_timing",
+    "backend.test_database_security",
+    "backend.test_database_check",
+    "backend.test_ordering_shadow",
+    "backend.test_ordering_enforcement_design"
+  ],
+  "baseline": "92bc3263a5a6e2006c90d03111776ae28081d35c",
+  "boundedComponentsImplemented": true,
+  "businessRoutes": "ten POST routes and GET planning-mode return503 before provider work; diagnostics404",
+  "checks": [
+    {
+      "failed": 0,
+      "logSHA256": "adb2034081949ba352de69fbb31c81999f0e0d117666b03fbdc76644e272aca1",
+      "name": "Actual Next/FastAPI authenticated liveness/refusal/replicas/restart/outage/epoch",
+      "passed": 8,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "5a639845e68f6f0a51e7648d412f3fd602e9f617d87f17511729caeb1a2fb81b",
+      "name": "Frontend regressions including nine new identity/route tests",
+      "passed": 298,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "0b6d7ea21e50444161c4f9164fdc469eec4cc2f4ae10d094ecfc7699bcde3a8c",
+      "name": "Unchanged hosted identity signatures and separate-process workflows",
+      "passed": 20,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "912dd159f416d62e76fe62b3edc5839ffad416b7052a02e03ffd7717977b7309",
+      "name": "Frozen Node forwarding contract",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "8274d64385c4ed3f36fbd1d0461c069b98308d22e24bf3244917e7759680d01b",
+      "name": "Unchanged service-isolation processes",
+      "passed": 12,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "60034f1f7d0250779a5db3f5281d7451ee44473943c7a7db775b18d67549044a",
+      "name": "Protected grants/inference/restore drills",
+      "passed": 30,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "9354405029ca91a410aebb54a57b46b8ea77dc0b934442a59563b97e0772c6f2",
+      "name": "Core/financial/action bridge/encrypted Redis evidence",
+      "passed": 112,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "27e8b1be5dab1a4e4e0d872c7b8202831e84207f2a9b4bd1607c6d8e63d4744c",
+      "name": "Separate-process interruption: lost_http",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "5438f01381a5ef80ad44acc1d1c5e5643096ac985ea93a187f52b997944ce5fc",
+      "name": "Separate-process interruption: lost_inference",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "bceec1c866acfb9ffb9e0fbd6e4d4183a3a83eb62f8fb68d4ae59089cfd5a14b",
+      "name": "Separate-process interruption: dispatcher_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "672b0ca2e02f0b2353cd5df630866df761c3a1ca6221967b28cf87379f803b01",
+      "name": "Separate-process interruption: factory_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "d1c8526ceb92b19ad88c97b472ba2f2d6a82b255fee5d4d3db2840cce8be0e91",
+      "name": "Separate-process interruption: worker_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "830eb12458fddedefd05af35dfc0b880680eb64517e9fb0a4b2b7ebcab54fca3",
+      "name": "Unchanged native sessions: full selection, fail-fast disabled only",
+      "passed": 17,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "08ec99527dd8a3ed6f6f3185e04f2f00b96c809a76dd0ac739d0abffd37b3ac0",
+      "name": "Current backend contracts and 27 Qwen/seven OpenAI recorded replays",
+      "passed": 237,
+      "skipped": 16
+    },
+    {
+      "failed": 0,
+      "logSHA256": "0e77ee3de4a72aefca7f8522a5fab8c0b3f5f174f4833da69de02833192c27e6",
+      "name": "Seven packaging, five startup guard, two compiled artifact, one fixture resource tests",
+      "passed": 15,
+      "skipped": 0
+    }
+  ],
+  "cleanup": {
+    "colima": "stopped after all local checks; approved settings unchanged",
+    "disposableContainers": "removed after cohorts",
+    "images": "local only; no registry publication",
+    "namedFixtureVolumes": "removed; unrelated anonymous volumes preserved",
+    "temporaryKeys": "temporary synthetic directories deleted"
+  },
+  "cloudProvisioned": false,
+  "containers": {
+    "approvedVM": {
+      "cpus": 2,
+      "diskGiB": 40,
+      "hostMounts": false,
+      "memoryGiB": 4,
+      "sshForwarding": false
+    },
+    "images": [
+      {
+        "architecture": "amd64",
+        "id": "sha256:a80d4b96eac8fe789596fda36694db476110bec37a76ac685fd3caf3d4196fef",
+        "runtimeUser": "app",
+        "tags": [
+          "whereto-backend:task52-1794522614-67501"
+        ]
+      },
+      {
+        "architecture": "amd64",
+        "id": "sha256:8fb8e6146f77ad14a721a9633300f15ed4c5dce1de04bb590569183099a1e430",
+        "runtimeUser": "node",
+        "tags": [
+          "whereto-frontend:task52-1794522614-67501"
+        ]
+      }
+    ],
+    "newVulnerabilityImageRescan": "not run; prior OS/application residual findings remain, npm audit only rechecked",
+    "platform": "linux/amd64",
+    "sdkInspection": "passed Google-only factory, inactive contract, exact jose, no fixture/npm, non-root; networknone/readonly/capdropALL",
+    "sdkInspectionLogSHA256": "6e252ba6ddc912d482e7080f2aa6a5a5e8330da97a579a00cfb27bee1210d1a1",
+    "smoke": "passed; normal guards refuse, unchanged explicit synthetic test profile exercises mock planning/health/save refusal/restart; not hosted production startup",
+    "smokeLogSHA256": "22b136249d31b8acba9782b4ac25bc73fb7df8a55fd7a60261fbc5b7cb8307e3"
+  },
+  "developmentTrials": [
+    {
+      "failed": 1,
+      "logSHA256": "f9043db0b40ec30d9fc25c67d375063577746fcdd8e756b3ac26cf07bf9affb7",
+      "name": "Unchanged hosted cohort initial run",
+      "notExecutedAfterFailFast": 8,
+      "passed": 11,
+      "reason": "Valid forwarded-header/native lookup unexpectedly403; cause not established; unchanged quiet rerun20passed. No parent source edits."
+    },
+    {
+      "failed": 1,
+      "logSHA256": "003c9629c928a2c62dcf697e4b68192d2dff38355f116b513372ce1dbcc60885",
+      "name": "Native first run",
+      "notExecutedAfterFailFast": 9,
+      "passed": 7,
+      "reason": "Exact key-rotation expiry asserted1ms earlier than captured deadline; preserved failure, no source or timeout changes."
+    },
+    {
+      "failed": 1,
+      "logSHA256": "8a8dd0de7b387627fb5dc5634dd1a1de19cd93ff1ddba7f8bebaef122e88a1a7",
+      "name": "Native second run",
+      "notExecutedAfterFailFast": 13,
+      "passed": 3,
+      "reason": "database_protocol during advanced fixture inference cleanup/revoke; underlying cause not established. Full third selection retained separately."
+    },
+    {
+      "failed": 1,
+      "logSHA256": "d3df81cc8571be6994f2beec7005303ac26fbe17d10419b8e16e201ab7209557",
+      "name": "New local HTTP development trial",
+      "passed": 4,
+      "reason": "Fixed1-second restart wait insufficient; replaced with bounded socket readiness and reran final8cases; no financial retry."
+    },
+    {
+      "name": "Pre-test development and sandbox errors",
+      "rawSyntheticTraceRemoved": true,
+      "reason": "Initial system Python lacked Pydantic; inherited command interception injected duplicate code mount; networkless copy helper initially lacked write permission; Node CJS top-level await and Python indentation stopped startup; sandbox blocked local sockets/Docker before relevant tests. Fixed new fixture/bootstrap only, used project venv and authorized local test execution. A manual image probe used wrong contract filename, then passed with actual filename. No real credential affected; raw synthetic config trace not published.",
+      "removedTraceSHA256": "77bba404a19fecf02a4551d7701f14b806e3cd7d73085ff74745d13cf4cdd3ea"
+    }
+  ],
+  "filesChanged": [
+    ".dockerignore",
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "app/api/development-diagnostics/route.ts",
+    "app/api/health/route.ts",
+    "app/api/interpret/route.ts",
+    "app/api/planning-mode/route.ts",
+    "app/api/plans/generate/route.ts",
+    "deployment/Dockerfile.frontend",
+    "deployment/build-identity-port.mjs",
+    "deployment/private-startup-v1.json",
+    "deployment/private_startup.py",
+    "deployment/test_private_artifact.py",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-hosted-startup-integration.md",
+    "docs/task52-hosted-startup-verification.json",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "docs/task52-staging/route-integration-v1.json",
+    "experiments/hosted_startup/build.json",
+    "experiments/hosted_startup/identity.py",
+    "experiments/hosted_startup/next_fixture.ts",
+    "experiments/hosted_startup/public_auth.py",
+    "experiments/hosted_startup/public_server.py",
+    "experiments/hosted_startup/run_local.py",
+    "experiments/hosted_startup/test_startup.py",
+    "lib/identity-json.ts",
+    "lib/persistence-proxy.ts",
+    "lib/private-server-boundary.test.ts",
+    "lib/private-server-boundary.ts",
+    "lib/provider-proxy.ts",
+    "lib/server-identity.test.ts",
+    "lib/server-identity.ts",
+    "package-lock.json",
+    "package.json"
+  ],
+  "fullHostedStartupImplemented": false,
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "historicalIntegrityLogSHA256": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+  "identity": "52-next-server-identity-port-local-v1",
+  "limitations": [
+    "Full hosted startup and all public planning/persistence integration remain unavailable. No deployment or actual model/route-quality proof.",
+    "Actual native user-ticket theft, source/admission/financial checks remain independently tested parent paths, not public Next business routes.",
+    "Local FastAPI lifespan uses development environment with fake AI preparation only; original production guard remains untouched. Existing container smoke uses its unchanged explicit test profile.",
+    "Custom Next standalone warning retained; test driver excluded from images and not a deployment recipe. Packaged SDK is not an activated bootstrap.",
+    "Real metadata/JWKS/IAP all-ingress/IAM, key rotation/revocation, hosted networking/restore isolation not verified.",
+    "Frozen native expiry mismatch and unexplained SQL refusal retained as reliability follow-up even if final unchanged cohort passes.",
+    "Synthetic token bytes are not real tokenizer/billing; no qualified hosted LLM or real grant.",
+    "Existing image security residuals remain; no blanket suppression or new image-vulnerability scan."
+  ],
+  "nextCheckpoint": "Review opaque outing-handle/tab-safe ownership contract and native expiry/SQL reliability evidence; then implement only ordinary interpretation/pending/planning native mapping with synthetic services. No automatic continuation.",
+  "normalStartupChanged": false,
+  "notRun": [
+    "full backend discovery and frozen identity-error inventory",
+    "browser desktop/mobile hosted workflows: no safe functional hosted business path exists",
+    "real Google metadata/JWKS/IAM/IAP or any provider/account/token endpoint",
+    "real database migrations, cloud enrollment, production startup, public traffic",
+    "fresh full image vulnerability database scan"
+  ],
+  "optInSkips": [
+    "test_api_operations_against_real_postgres_rollback (backend.test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback) ... skipped 'Opt-in hosted rollback tests'",
+    "test_duplicate_save_is_idempotent_and_mutation_denied (backend.test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_legacy_null_transport_defaults_to_driving (backend.test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving) ... skipped 'Opt-in hosted rollback tests'",
+    "test_partial_failure_rolls_back_every_table (backend.test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table) ... skipped 'Opt-in hosted rollback tests'",
+    "test_real_storage_is_identifiers_only_and_reopens_without_provider (backend.test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider) ... skipped 'Opt-in hosted rollback tests'",
+    "test_runtime_no_ledger_ddl_delete_or_cross_capability_write (backend.test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write) ... skipped 'Opt-in hosted rollback tests'",
+    "test_transactional_save_and_complete_retrieval (backend.test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval) ... skipped 'Opt-in hosted rollback tests'",
+    "test_walking_transport_column_round_trips (backend.test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips) ... skipped 'Opt-in hosted rollback tests'",
+    "test_wrong_missing_expired_and_uuid_access_denied (backend.test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_committed_restricted_write_fresh_process_reopen_and_cleanup (backend.test_advanced_planning.HostedAdvancedTests.test_committed_restricted_write_fresh_process_reopen_and_cleanup) ... skipped 'Opt-in committed advanced PostgreSQL checks'",
+    "test_actual_connection_interruption_then_fresh_reopen (backend.test_database_security.HostedSecurityTests.test_actual_connection_interruption_then_fresh_reopen) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_concurrent_idempotent_writes_reads_and_restart (backend.test_database_security.HostedSecurityTests.test_concurrent_idempotent_writes_reads_and_restart) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_existing_nonexpired_documents_compatible_readonly (backend.test_database_security.HostedSecurityTests.test_existing_nonexpired_documents_compatible_readonly) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_restricted_authenticated_tls_and_role_boundaries (backend.test_database_security.HostedSecurityTests.test_restricted_authenticated_tls_and_role_boundaries) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_runtime_write_failure_rolls_back_committed_state (backend.test_database_security.HostedSecurityTests.test_runtime_write_failure_rolls_back_committed_state) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_two_capabilities_and_sql_injection_stay_isolated (backend.test_database_security.HostedSecurityTests.test_two_capabilities_and_sql_injection_stay_isolated) ... skipped 'Opt-in hosted Task 50 tests'"
+  ],
+  "parentHostedBuild": "afbd644bbd4af7efbe8d2ab8db18c94ff6236ee1aee25dd78effa0627dabdfa5",
+  "parentServiceBuild": "e38ca7b4b84a4c5df6a1a30de8d91f3b3d7a203c8f20adb787f898bee1f6c1ec",
+  "planningAuthorization": false,
+  "productionActive": false,
+  "publicDTOChanged": false,
+  "realFinancialGrantsActivated": 0,
+  "realGoogleIdentityEndpointsContacted": 0,
+  "realIdentityTokensGenerated": 0,
+  "realProviderRequests": 0,
+  "sourceManifestSHA256": "283f026a044df840564ede56d132b09cc04e7f8e8a1d24a70cef9ac5a3cae9cd",
+  "totals": {
+    "failed": 0,
+    "fullBackendDiscovery": false,
+    "interrupted": 0,
+    "passed": 757,
+    "skipped": 16,
+    "timedOut": 0
+  },
+  "verifiedDate": "2026-11-12"
+}

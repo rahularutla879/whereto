@@ -613,3 +613,8 @@ Native restart reconstruction: `experiments/shared_state/native_sessions.py` (in
 
 - `experiments/hosted_identity/`: inactive Google/IAP verification, scoped forwarding, witness nonce roles, isolated signed-fixture tests, Node proxy contract and exact source manifest; not included in normal startup/images.
 - `docs/task52-staging/hosted-enrollment-v1.json`: inert identity/role/audience/secret/network/recovery review matrix; no resource is created.
+
+- `lib/server-identity.ts`, `lib/identity-json.ts`: server-only verified metadata/IAP, bounded identity parsing/cache and public HTTP proofs.
+- `lib/private-server-boundary.ts`: trusted installation and actual proxy seam; current status-only profile refuses business requests.
+- `experiments/hosted_startup/`: local Next/FastAPI process checks, explicit source/bootstrap isolation and parent identity reuse.
+- `deployment/private_startup.py`: nonlaunchable production dependency gate, not an override of `backend.main`.

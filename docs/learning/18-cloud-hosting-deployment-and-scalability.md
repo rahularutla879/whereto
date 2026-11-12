@@ -156,3 +156,11 @@ Local TLS/Ed25519 identities, loopback-only networking and disposable SQL roles 
 ## Enrollment is not provisioning or activation
 
 [The inert hosted enrollment matrix](../task52-staging/hosted-enrollment-v1.json) specifies distinct service accounts, resource-scoped Invoker and Secret Manager access, exact run.app audiences, direct-IAP tester access, private authority routing, restricted SQL/Redis and independent recovery custody. Real project numbers/URLs/testers and resource approvals remain unresolved. No Owner/Editor runtime roles, SA JSON keys or public backend are allowed. The verified local contract does not deploy it: real Next server identity acquisition, current image/role/secret/network review and private staging quality/cost/recovery checks remain required. Public launch remains a separate owner decision.
+
+## Private startup is deliberately not launchable yet
+
+The normal pinned, non-root Docker artifacts remain the ordinary application. The frontend lock adds exact jose6.2.17 for server-side identity verification; no fixture or key is bundled. Real private bootstrap must explicitly package/trace identity acquisition and verify enrolled dependencies. Installed Next docs warn that a custom server is not traced by standalone output: the local test driver is not a production recipe. Do not replace the working entry with it or use test mode to evade backend refusal.
+
+The [startup contract](../../deployment/private-startup-v1.json) and [route matrix](../task52-staging/route-integration-v1.json) record blocked public/native mapping, real IAM/IAP/secret/network enrollment, SQL/Redis/recovery migration, qualified LLM/pricing/grants and private staging acceptance. No cloud resource is provisioned. Public launch remains separately approved.
+
+The frontend build also emits a small `/app/private-runtime/` component using the existing TypeScript compiler. Only the Google-root identity factory is exported; fixture injection is not a shipped export. Exact jose files are copied separately because an unused Next module may not be traced. The normal entry still imports only its generated Next server; packaging a component does not install a private profile or satisfy readiness.

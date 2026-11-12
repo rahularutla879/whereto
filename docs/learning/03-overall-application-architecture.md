@@ -113,3 +113,7 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 ## Inactive hosted identity contract
 
 [The hosted-identity experiment](../task52-hosted-identity-contract.md) adds a disposable frontend and two backend processes around the unchanged private factory/issuer/counter/dispatcher/recovery composition. Google workload identity answers which service is calling; independently verified IAP answers which private tester owns the planning session. Neither grants provider spending. Normal Next/FastAPI startup and local anonymous saved links are unchanged. Real metadata/Next wiring and hosted enrollment remain unimplemented.
+
+## Inactive public identity port and the missing planning bridge
+
+[Task52's server identity port](../task52-hosted-startup-integration.md) adds trusted metadata/IAP verification and real Next proxy entry seams. Without server-code installation, normal behavior is unchanged. The only selectable private capability is authenticated liveness; public planning/persistence refuse. Existing native factories remain authoritative, but ordinary public planning DTOs do not carry their owned source ticket. No second planner, account model or financial algorithm is introduced.

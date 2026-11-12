@@ -149,3 +149,7 @@ A lost initial response does not make repeating inference safe. The new profile 
 ## Stable user identity is not a reusable action grant
 
 The new inactive adapter derives planning ownership from verified IAP issuer/audience/subject, never email or workload identity. A frontend-owned proof scopes that assertion to one path/body/build/epoch and expires within 60 seconds. Backend/factory consume it independently; reusable Google/IAP tokens do not make a consumed request reusable. Fresh identity credentials do not renew the original native session or route expiry. Other testers with the correct saved bearer retain the existing separate saved-access semantics.
+
+## Two different caches and absolute authority
+
+The server identity port caches verified workload tokens, not application authorization. It uses single-flight acquisition, expiry headroom and a failure cooldown. A fresh ID token does not renew an outing, restore missing Redis evidence, reset nonce history or replenish SQL exposure. Request/user proofs are short-lived and single-use at the receiver. The current profile shares only authenticated liveness across backend processes; public planning-session reconstruction is still blocked pending the source-ticket bridge. Loss of its witness causes refusal with no in-memory fallback.

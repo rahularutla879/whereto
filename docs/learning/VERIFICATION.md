@@ -92,3 +92,7 @@ Reviewed chapters3/6/7/12–15/18/20; appended current experimental explanations
 ## Hosted identity contract
 
 Reviewed chapters3/6/7/12–15/18/20; appended current inactive explanations to3/6/7/12–15/18 and supporting references. All 20 chapters and unrelated examples/exercises remain. References match actual `HostedAuth`/offline `Auth`, token/JWKS and nonce roles, source ownership and the unimported Node port contract. [Exact checks, pre-fix trials and limits](../task52-hosted-identity-verification.json) distinguish signed local fixtures from real Google IAM/IAP and browser verification.
+
+## Public identity port and bounded startup checkpoint
+
+Reviewed chapters3/6/7/12–15/18/20; appended actual inactive mechanisms to3/6/7/12–15/18 and supporting references. All20 chapter originals, examples and exercises are preserved. Source references match real proxy entry seams, `composeIdentityPort`, `privateRoute` and the explicit nonlaunchable startup gate. [Final evidence](../task52-hosted-startup-verification.json) separates actual Next/FastAPI liveness from blocked hosted planning, development failures, inherited refusals, normal application compatibility and untested real cloud behavior.

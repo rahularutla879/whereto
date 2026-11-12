@@ -154,3 +154,7 @@ In the [authenticated local fixture](../task52-service-isolation.md), a worker s
 ## Inactive user-owned continuation across services
 
 In [the hosted-identity fixture](../task52-hosted-identity-contract.md), the frontend verifies an IAP assertion and creates a scoped user-forwarding proof. Backend and factory independently verify it before existing native ticket lookup/continuation. Backend A and B can continue the same tester's source; another tester cannot reuse that private planning ticket. Pending answers still avoid another inference charge. Native revision, fence, absolute expiry, encrypted evidence, root/outing and protected spending remain separate checks. Saved-document access continues to use its bearer/RLS/expiry/membership, not a newly invented account owner.
+
+## Why authenticated liveness is not a hosted outing
+
+The [new local composition](../task52-hosted-startup-integration.md) runs actual Next and two FastAPI processes for signed health requests. It does not run interpretation→plan through a hosted facade. Ordinary `InterpretationResult` has no durable outing handle; `PlannerInput` cannot prove which retained source/outing/revision owns a browser DTO. Selecting a user's latest request would mix concurrent tabs. Until a reviewed handle/session contract exists, all private business paths stop before provider work. Existing local/native workflows and anonymous saved capabilities retain their previous rules.
