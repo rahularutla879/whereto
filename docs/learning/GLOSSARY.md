@@ -767,3 +767,9 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **Independent financial witness:** separately controlled storage of grant/epoch/reservation/delivery history used to detect rollback of operational authority. The Task52 local witness is a prototype, not verified hosted independence.
 
 **Native checkpoint:** encrypted typed application state bound to current SQL ownership, source and original expiry. It is not permission to call a provider. **Selection-only ticket:** internal portable receipt evidence that preserves reusable selection and cannot authorize new discovery. **Interrupted turn:** a durable BEGIN without a completed checkpoint; automatically repeating it is forbidden.
+
+- **Workload identity:** the authenticated identity of a service process, distinct from the browser user. This checkpoint uses synthetic per-process keys, not hosted IAM.
+- **Service audience:** the exact target service a signed credential may address; a counter token cannot be used at the issuer.
+- **Request-bound nonce:** a single-use signed request identifier committed in protected SQL before action handling; service restart does not make it reusable.
+- **SCRAM-SHA-256:** PostgreSQL password authentication used by the isolated service fixture. A loopback TCP connection still needs the correct password; network location alone is not authority. Hosted database TLS remains a separate requirement.
+- **Redis ACL:** a list of allowed commands and key patterns for a Redis user. The fixture dispatcher can read only its epoch namespace; it cannot write evidence or administer Redis.

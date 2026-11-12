@@ -145,3 +145,13 @@ From the repository root, with approved Colima running: `PYTHONPATH=. backend/.v
 ## Inactive native session reconstruction
 
 From the repository root, `python3 -m experiments.shared_state.run_native` uses the approved disposable local Colima PostgreSQL/Redis harness and synthetic providers. It does not read owner cloud credentials or enable production. Review [setup/trust limits](../task52-native-session-reconstruction.md) and do not run synthetic bootstrap against a hosted database.
+
+## Inactive authenticated service fixture
+
+From `/Users/rahularutla/Documents/whereto`, with the existing approved Colima profile running and parent hash-pinned wheels available:
+
+```sh
+python3 -m experiments.service_isolation.run_local
+```
+
+This creates disposable synthetic stores and restricted role containers, exercises private TLS interfaces, and cleans up its named resources. It is not a hosted deployment, approval issuer or live provider runner. The report lists additional isolated failure cohorts and the exact tested build. Never supply owner credentials or point synthetic bootstrap at a hosted database.

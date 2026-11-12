@@ -1,3 +1,7 @@
+# Task 52: authenticated service isolation — local, not activated
+
+Implemented the bounded synthetic four-service trust boundary and owner-bound native ticket routing; exact test completion is in [service verification](docs/task52-service-isolation-verification.json). Existing algorithms and production behavior remain unchanged. Hosted OIDC/end-user identity, real enrollment, independent recovery, current security findings, model qualification, protected real financial decisions and private staging acceptance remain blockers. Next: local hosted-identity/owner-forwarding contract tests and enrollment templates, not automatic provisioning or Task53.
+
 ## Task 52 — native reconstruction local boundary
 
 Implemented inactive `52-native-session-reconstruction-local-v1`: actual native pending, advanced resolver/history, ordinary options/Details, reusable selected receipts and purpose-specific refresh use encrypted evidence plus protected SQL/witness ownership. [Verified scope, unsupported paths and next gate](docs/task52-native-session-reconstruction.md) · [Exact checks](docs/task52-native-session-verification.json). This is local synthetic P2 progress, not hosted integration or production activation. Remaining gates include authenticated ticket routing/factories and isolated authority services, real key/epoch enrollment, privacy admission, owner financial decisions, hosted LLM qualification, container remediation, migrations and private staging acceptance. Task52 stays in progress; Task53/public launch remain unapproved.

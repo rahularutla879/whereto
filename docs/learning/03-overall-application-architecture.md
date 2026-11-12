@@ -105,3 +105,7 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-03).
 `experiments/shared_state/action_bridge.py` is a separately constructed local test composition. It calls the existing interpreter, ordinary/advanced planners and saved-refresh functions; it does not create a second planner. Normal FastAPI startup does not construct it. `backend/action_dispatch.py` has a ContextVar whose default is `None`; normal application calls therefore keep the existing credential/transport and admission behavior. A reviewed build and isolated fake services are prerequisites for the experiment, not production activation.
 
 See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact boundaries and verification.
+
+## Inactive authenticated service composition
+
+[Task52 service isolation](../task52-service-isolation.md) now runs the native factory/validated-action issuer, counter, dispatcher and recovery in separately credentialed local containers. Workers receive none of their SQL/Redis/recovery keys. Existing planners and validators stay inside the trusted factory; they are not duplicated. This is a tested synthetic composition outside normal startup and deployment images, not a deployed replacement for the diagram above. Real Google workload and end-user authentication, enrollment, providers and private staging remain gates.

@@ -83,3 +83,7 @@ Write a JSON interpretation body in a scratch note, then identify each property 
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-06).
 
 [Previous chapter](05-backend-python-fastapi-and-pydantic.md) · [Contents](README.md) · [Next chapter](07-complete-end-to-end-outing-request-lifecycle.md)
+
+## Private experimental RPC is not a public application API
+
+The inactive [service fixture](../../experiments/service_isolation/server.py) exposes fixed POST methods only on its disposable loopback network. TLS verifies the service certificate; a separate synthetic workload signature binds exact caller role, audience, path, body, build, epoch, expiry and a durable single-use nonce in the independent witness database. Typed application validation and SQL financial permission are still required afterward. Request bodies are capped at200KB and responses at1MiB to fit the existing plan DTO; no public DTO changes. Normal Next proxies and FastAPI routes do not select this mechanism. Hosted Google identity verification and independently verified user forwarding are still absent.

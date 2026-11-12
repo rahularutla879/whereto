@@ -8,6 +8,8 @@ Parent: `52-private-staging-preflight-v1`, baseline `3f50032`. All boxes start i
 
 > Subsequent P2 native checkpoint: [native reconstruction](../task52-native-session-reconstruction.md) now exercises actual pending/advanced/options/Details/receipt/refresh contracts across fresh processes, plus checkpoint-history anti-rollback. This is inactive local synthetic coverage. Standalone origin/full1800s Details, exploration ledgers, hosted ticket routing, real privacy/enrollment and authenticated isolated services remain gates. Original P2/P3 notes above describe historical checkpoints, not current hosted readiness.
 
+> Subsequent local service checkpoint: [authenticated service isolation](../task52-service-isolation.md) separates factory/validated-action issuer, counter, dispatcher and recovery in restricted synthetic containers, with owner-bound ticket routing, TLS/request-bound workload signatures and durable replay facts. This does not enroll Google IAM or end-user identities, migrate Supabase, implement real transports, qualify an LLM or approve money. Next bounded local gate is the hosted OIDC/end-user-forwarding contract and reviewed service/secret/role enrollment templates; existing P1–P10 spending, privacy and staging acceptance gates remain open.
+
 | Gate | Dependencies / work location | One measurable deliverable and acceptance gate |
 |---|---|---|
 | P0 — decisions and account facts | Owner/read-only management consoles | Complete OWNER_APPROVALS with actual Supabase plan/pool/backups, Google credits/region quotas and fresh Redis regional quote. Record cost/privacy/financial choices, without broad recurring authorization. No unknown price is marked verified. |

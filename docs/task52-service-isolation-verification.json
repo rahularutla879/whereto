@@ -1,0 +1,446 @@
+{
+  "additionalChecks": {
+    "cachedLinuxWheelHashes": "verified by each disposable harness",
+    "eslint": "passed",
+    "gitDiffReview": "all tracked and new files reviewed; whitespace check passed",
+    "handbookChapters": 20,
+    "handbookUpdated": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "hostPipCheck": "no broken requirements",
+    "localLinks": "passed",
+    "productionApplicationAndDependencies": "byte-identical tracked sources/artifacts",
+    "pythonCompile": "passed",
+    "secretScan": "zero current/history configured-credential matches; final scan logged separately",
+    "secretScanLogSHA256": "bd06e9e4599c7d33991c77bcb3173bddb829de1ed056299a8feb1ab61fa361ce",
+    "typeScript": "passed",
+    "unaffectedChapters": "byte-identical to baseline"
+  },
+  "baseline": "82047f58518788e4cf139d94ac00555049f59c30",
+  "checks": [
+    {
+      "failed": 0,
+      "logSHA256": "683be952beee09d5df9839e91cb51e5067a53310862e34c09b539a4725ba6aa8",
+      "name": "unchanged native codec/application/process sessions",
+      "passed": 17,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "6c28b128e921db03553ce327e2fa299a1c90b43624ac4db61cf5d34995d622b0",
+      "name": "unchanged application grants/inference",
+      "passed": 30,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "b5de57234c2b94b92721420c3a89e791e3bde37bf8c5620f83c19546ed815276",
+      "name": "unchanged core/financial/bridge/Redis evidence",
+      "passed": 112,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "dfd6fb744320f1a2480a29dcc01fc835fb16487cc806129513e1ce53c6c3376c",
+      "name": "host resource-allocation contract",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "f61192b8dfc173d3c39f976044a1da36c49f9b37a3c9a532cb97b365688a40da",
+      "name": "current backend including action identity and 27 Qwen/7 OpenAI comparisons",
+      "passed": 237,
+      "skipped": 16
+    },
+    {
+      "failed": 0,
+      "logSHA256": "5a783a7d1b0bfa36650ad8945aa94648631768ecbaa50a4c68f525654173088e",
+      "name": "frontend",
+      "passed": 289,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "6ca672c1d4f0b916ed9a8fa415ed6fea0eac7c37af0996ab337ccd7c0f215191",
+      "name": "packaging",
+      "passed": 7,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "39abdedde0a01739b34d7c74c992378d4b604745696a5aac6313f26fa77383ec",
+      "name": "authenticated service processes, actual restricted principals and native workflows",
+      "passed": 12,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "9eeb17b710ffb5e71e7177dadfc67df25e7441b2d021aeef76417b86a44ec722",
+      "name": "service interruption: lost_http",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "5de9cea5fa760986b475a44588b107032b1e3649c39adc0821517ae6f8e481c9",
+      "name": "service interruption: lost_inference",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "b4345d3970b848d7aa06c0293df374ce6fa5c4dc8144069495557f11d61ba584",
+      "name": "service interruption: dispatcher_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "b13671e05d9f384a7148891355fdb044c5bc1e5e16eb6d5802a3be1f327e8343",
+      "name": "service interruption: factory_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "e423130c43c539b5eb06bc352945df537d0d71fbde8acd27c25c94e34f82654e",
+      "name": "service interruption: worker_crash",
+      "passed": 1,
+      "skipped": 0
+    }
+  ],
+  "cleanup": {
+    "colimaProfileStopped": true,
+    "namedFixtureResources": "removed by harness",
+    "realProviderDispatches": 0,
+    "runningContainersAfterTests": 0,
+    "unrelatedOrUnattributedAnonymousVolumes": "preserved; not pruned"
+  },
+  "cloudProvisioned": false,
+  "developmentFailures": [
+    {
+      "cohort": "dev1",
+      "reason": "PL/pgSQL CASE comparison required parentheses; fixed in new protocol only",
+      "stage": "fixture bootstrap"
+    },
+    {
+      "cohort": "dev2",
+      "reason": "cp -a attempted ownership changes under dropped capabilities; used cp -R and removed bytecode",
+      "stage": "fixture code snapshot"
+    },
+    {
+      "cohort": "dev3-dev5",
+      "reason": "execution JSON needed existing PlannerInput typed-field validation before native Source construction; fixed without changing application contracts",
+      "stage": "initial source capture"
+    },
+    {
+      "cohort": "dev6",
+      "reason": "PostgreSQL SUM Decimal was not JSON serializable; test aggregate now casts to bigint",
+      "stage": "test accounting snapshot"
+    },
+    {
+      "cohort": "normal1",
+      "reason": "Existing provider gate refused WHERETO_ENV=test; isolated fixture uses the existing development opt-in; normal startup guards unchanged",
+      "stage": "ordinary planning"
+    },
+    {
+      "cohort": "normal2-normal3",
+      "reason": "Valid native plan measured269683 bytes and exceeded200KB shared cap; bounded response cap now1MiB, request cap unchanged",
+      "stage": "RPC response"
+    },
+    {
+      "cohort": "normal4",
+      "reason": "Fake contact responder needed existing contact_links projection rather than raw Places shape; application code unchanged",
+      "stage": "contact fixture"
+    },
+    {
+      "cohort": "normal5",
+      "reason": "Existing advanced guard correctly refused place-ID-only origin; test now explicitly supplies the existing synthetic confirmed-coordinate fixture",
+      "stage": "advanced fixture"
+    },
+    {
+      "cohort": "normal6",
+      "reason": "Docker copy retained root ownership on0600 test metadata; now created as the non-root controller with exclusive0600 open, not broader permissions",
+      "stage": "private controller file"
+    },
+    {
+      "cohort": "normal7",
+      "reason": "Redis correctly denied SET; test handler referenced redis.NoPermissionError instead of redis.exceptions.NoPermissionError; fixed test only",
+      "stage": "adversarial Redis test"
+    }
+  ],
+  "developmentTrialCounts": [
+    {
+      "completed": 0,
+      "finalBuild": false,
+      "log": "whereto-services-dev1.log",
+      "status": "setup failure before unittest execution"
+    },
+    {
+      "completed": 0,
+      "finalBuild": false,
+      "log": "whereto-services-dev2.log",
+      "status": "setup failure before unittest execution"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-dev3.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-dev4.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-dev5.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-dev6.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal2.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal3.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 1,
+      "errors": 1,
+      "failed": 0,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal4.log",
+      "passed": 0,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 2,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal5.log",
+      "passed": 1,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 9,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal6.log",
+      "passed": 8,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    },
+    {
+      "completed": 9,
+      "errors": 0,
+      "failed": 1,
+      "finalBuild": false,
+      "log": "whereto-services-final-normal7.log",
+      "passed": 8,
+      "remaining": "fail-fast remainder not executed in this pre-fix trial"
+    }
+  ],
+  "failureCohorts": [
+    {
+      "automaticRetries": 0,
+      "chargeRetained": true,
+      "initialRequestReplayRefused": true,
+      "logSHA256": "9eeb17b710ffb5e71e7177dadfc67df25e7441b2d021aeef76417b86a44ec722",
+      "mode": "lost_http",
+      "passed": true
+    },
+    {
+      "automaticRetries": 0,
+      "chargeRetained": true,
+      "initialRequestReplayRefused": true,
+      "logSHA256": "5de9cea5fa760986b475a44588b107032b1e3649c39adc0821517ae6f8e481c9",
+      "mode": "lost_inference",
+      "passed": true
+    },
+    {
+      "automaticRetries": 0,
+      "chargeRetained": true,
+      "initialRequestReplayRefused": true,
+      "logSHA256": "b4345d3970b848d7aa06c0293df374ce6fa5c4dc8144069495557f11d61ba584",
+      "mode": "dispatcher_crash",
+      "passed": true
+    },
+    {
+      "automaticRetries": 0,
+      "chargeRetained": true,
+      "initialRequestReplayRefused": true,
+      "logSHA256": "b13671e05d9f384a7148891355fdb044c5bc1e5e16eb6d5802a3be1f327e8343",
+      "mode": "factory_crash",
+      "passed": true
+    },
+    {
+      "automaticRetries": 0,
+      "chargeRetained": true,
+      "initialRequestReplayRefused": true,
+      "logSHA256": "e423130c43c539b5eb06bc352945df537d0d71fbde8acd27c25c94e34f82654e",
+      "mode": "worker_crash",
+      "passed": true
+    }
+  ],
+  "historicalEvaluation": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "beforeAfterMatch": true,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375
+  },
+  "hostedIdentityImplemented": false,
+  "identity": "52-service-isolation-local-v1",
+  "identitySourceSHA256": "0fe3254dc45a6719872990cb02d236250181f039ad86c7eb923c47f842e14685",
+  "limitations": [
+    "synthetic authentication is not Google Cloud Run identity verification",
+    "fixed fictional owner enrollment does not prove real end-user identity",
+    "trusted validation/issuer and future provider-credential compromise remain separate privileged risks",
+    "host/Docker administrators control this local environment",
+    "nonce maintenance and interrupted-turn recovery remain fail-closed operational gates",
+    "correlated privileged database/witness/epoch restoration is outside independent local authority guarantee",
+    "parent unsupported session reconstruction paths remain blocked",
+    "no production or model qualification claim"
+  ],
+  "localAuthentication": {
+    "endUserIdentity": "fixed fictional enrollment only; real user/IAP proof not implemented",
+    "maxFutureSeconds": 5,
+    "maxLifetimeSeconds": 60,
+    "nonce": "append-only service/caller/jti key in independent witness DB for all services",
+    "nonceRecordCeilingPerDatabase": 10000,
+    "tls": "ephemeral private CA, distinct service DNS SAN certificates, verified server identity, no TLS fallback",
+    "workload": "synthetic per-principal Ed25519 exact role/audience/body/build/environment/epoch-bound JWT"
+  },
+  "localInfrastructure": {
+    "capabilities": "ALL dropped",
+    "code": "read-only volume",
+    "context": "colima-whereto-task52",
+    "dockerSocket": false,
+    "network": "shared disposable loopback namespace only; no external interface, published ports or host mounts",
+    "newDependencies": false,
+    "platform": "linux/amd64",
+    "postgresTCPAuthentication": "SCRAM-SHA-256 for both databases; wrong-password admin/issuer/counter refused from worker",
+    "redisAuthority": "separate epoch-scoped factory publisher and read-only dispatcher ACL users; no runtime Redis admin credential",
+    "resources": "disposable local PostgreSQL, separate witness volume, Redis and restricted role containers",
+    "rootFilesystem": "read-only",
+    "runtimeUser": 10001,
+    "vmCPU": 2,
+    "vmDiskGiB": 40,
+    "vmMemoryGiB": 4
+  },
+  "manifestSHA256": "e38ca7b4b84a4c5df6a1a30de8d91f3b3d7a203c8f20adb787f898bee1f6c1ec",
+  "nextCheckpoint": "Local hosted Google OIDC and independently verified end-user/IAP forwarding contract, plus reviewed service/secret/role enrollment templates; no automatic provisioning or spending",
+  "notRerun": [
+    "full backend discovery and historical simulation inventory",
+    "browser desktop/mobile smoke",
+    "production build/container image rebuild and vulnerability rescan (no application, runtime dependency or deployment artifact changed)",
+    "hosted IAM/OIDC/IAP, account, pooler, private networking, managed Redis TLS/failover, real provider/token-count operations",
+    "power-loss/distributed durability and independent hosted backup administration"
+  ],
+  "parentNativeBuild": "a398b07ad95aaa642fae7f991f12c57076f0e6b44c6454fa4e739effb34a2fd5",
+  "productionActive": false,
+  "realFinancialGrant": false,
+  "realProviderTransport": false,
+  "serviceTests": [
+    "test_01_actual_pending_cross_workers_and_selected_receipt",
+    "test_02_actual_advanced_factory_across_restart",
+    "test_035_strict_wire_and_tls_server_authentication",
+    "test_03_authentication_body_role_audience_replay_and_methods",
+    "test_045_no_loopback_passwordless_admin_or_redis_access",
+    "test_04_worker_credential_and_os_isolation",
+    "test_05_duplicate_action_two_workers_no_financial_reset",
+    "test_06_refresh_current_access_and_cross_worker_consumption",
+    "test_07_restricted_database_principals_cannot_escalate",
+    "test_08_worker_and_authority_restart_preserve_auth_replay",
+    "test_09_outages_refuse_without_spending_or_fallback",
+    "test_10_restore_and_independent_operator_epoch"
+  ],
+  "status": "local acceptance passed; inactive; not hosted-ready",
+  "topology": [
+    "worker-a",
+    "worker-b",
+    "worker-other",
+    "factory-and-validated-action-issuer",
+    "counter",
+    "delivery-only-dispatcher",
+    "independent-recovery"
+  ],
+  "totals": {
+    "failed": 0,
+    "fullBackendSuiteClaim": false,
+    "incompleteSelectedChecks": 0,
+    "passed": 710,
+    "scope": "final selected checks only; pre-fix trials below",
+    "skipped": 16
+  },
+  "unchanged": [
+    "backend application sources",
+    "frontend sources",
+    "package/dependency locks",
+    "deployment images and allowlists",
+    "parent shared-state sources/manifests",
+    "Qwen/prompts/ordering/saved schema/RLS",
+    "historical rubric/evaluator source pins"
+  ],
+  "verifiedAt": "2026-11-12"
+}

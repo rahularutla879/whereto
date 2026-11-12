@@ -109,3 +109,7 @@ In `experiments/shared_state/postgres.py`, `Denied` means the evidence, revision
 ## V3 financial reservation refuses
 
 Use the V3 `FinancialPostgres` client, not the private core's older arbitrary-charge API. Verify that the synthetic issuer enrolled the evidence session and approved the exact capability's request plan. Do not grant runtime access to `enroll_budget`, `approve_requests`, policy tables or the clock to make a test pass. A new worker/session does not clear original root/outing usage. Check nullable daily enforcement separately from recorded exposure; normal and exploration profiles must not be described as having the standalone $10 cap. Review [the policy map](../task52-financial-authority.md) for remaining issuer/transport/recovery boundaries. Never delete usage or replay records.
+
+## Local authenticated-service refusal
+
+For the inactive service fixture, inspect only sanitized service reason/stage/SQLSTATE/frame logs. Check exact build/epoch, enrolled caller/audience, absolute token/session expiry, consumed nonce/request/route revision and encrypted evidence availability. A replay or interrupted turn must not be solved by clearing SQL history, regenerating a grant, extending expiry or falling back to inline provider calls. A killed factory loses its live action proof deliberately; recovery requires reviewed evidence. See [service report](../task52-service-isolation.md).

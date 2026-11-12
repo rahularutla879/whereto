@@ -1,0 +1,21 @@
+{
+  "baseline": "82047f58518788e4cf139d94ac00555049f59c30",
+  "identity": "52-service-isolation-local-v1",
+  "parent": "52-native-session-reconstruction-local-v1",
+  "productionActive": false,
+  "realProviderTransport": false,
+  "sources": {
+    "experiments/service_isolation/__init__.py": "2e4a2a08e9d978d1af4dfe8ae2efa7205a11d1f5b6b3928420e3dec2a8084fb1",
+    "experiments/service_isolation/auth.py": "0e487a5674691634dd0aef7bf0ae12d95ec111bef08220808eb6fa502af9e3fa",
+    "experiments/service_isolation/bootstrap.py": "24a6c7a9f7036e14ae6127207eba2f01895017158d1055e3ad9faffca7bbd768",
+    "experiments/service_isolation/factory.py": "0209ffbbf400117aa7cd01bc416c3184f2ff1ea32fba8cb4918e48c4842d9bbd",
+    "experiments/service_isolation/protocol.sql": "234b8c7a8f4d6318707bc56b3c5d6e2f0d848f5a6de75b0e58379e05ed120d9d",
+    "experiments/service_isolation/run_local.py": "f54d684cd229a988ad9707cdbd460705958fa5cd3d1d588aec622fe15ae00c21",
+    "experiments/service_isolation/runtime.py": "8a630f921a666319241c1a93148006a18cfd483e8730a5f1b849d2343524ba4e",
+    "experiments/service_isolation/server.py": "c0cd84fc1a580cc1e71fabfa1374dabdcdec2abd78d30b32929c3bc8f758ec04",
+    "experiments/service_isolation/synthetic.py": "c79cb4d1f23daa9e15b6e88fd6acc9febe44c5bca5e0aed239379bbb2f8f04cf",
+    "experiments/service_isolation/test_local.py": "f319ada0d4dd38c75e00e62d9e506fa15e273bfc20b34096111e757c0bf0709b",
+    "experiments/service_isolation/witness.sql": "b967586678cd35d526e09de812ea2147c7720758f36dcdbcabb85ac67d8f4187",
+    "experiments/service_isolation/worker.py": "5933ecccf57799b0b49e56e987fe9fbade8f8ef54bbcc99b7077b2ca440fbc56"
+  }
+}
