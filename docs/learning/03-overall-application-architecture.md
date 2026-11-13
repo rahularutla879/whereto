@@ -127,3 +127,16 @@ The separately installed `createOrdinaryProfile` now connects actual Next interp
 ## Inactive ordinary private browser checkpoint
 
 The explicitly installed UI profile connects existing Next/FastAPI, native factories and protected authority. `Home` selects a private component from a scoped response; no environment/browser flag installs the server profile. Presentation components are reused and no planner is duplicated. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Task52 authenticated network component — inactive
+
+The existing private ordinary flow now has a real HTTPS channel between separately running components. The actual standalone Next container calls FastAPI; FastAPI calls the native factory/issuer; the factory calls the counter, dispatcher and independent recovery service. These are existing responsibilities, not another planner. `private_runtime/service_client.py` reuses the current signed body and source/user checks. The local runner in `experiments/ordinary_network/` still needs Docker to **create tests**, but the frontend does not need Docker to **serve requests**.
+
+Do not confuse network compatibility with deployability. SQL/Redis constructors still enforce local synthetic state, the counter/providers are fictional, and dispatch admission uses a process-local callback. The inert `deployment/private-network-v1.json` says `launchable:false`. These blockers must be resolved in reviewed hosted factories, not hidden by environment switches. [Evidence and exact boundaries](../task52-production-service-packaging.md).
+
+### Task 52 private role continuation (inactive candidate)
+
+The inactive private role candidate adds explicit connection ports, not a second planner. `private_runtime/registry.py` assigns each process only its required SQL/Redis/service clients. PostgreSQL controls durable authority; Redis holds encrypted evidence; the separately enrolled witness controls recovery. Generated role bytes have their own cohort identity and do not inherit frozen evaluator authorization.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.

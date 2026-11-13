@@ -174,3 +174,21 @@ The private ordinary API flow is now locally functional with fake services. The 
 ## Inactive ordinary private browser checkpoint
 
 A locally working ordinary synthetic UI is not a hosted startup approval. Existing production refusal remains. Docker images exclude experimental services and temporary identity roots. Real IAM/IAP, managed stores/recovery, qualified model/tokenization/pricing, finite grants, security and private staging acceptance remain required. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Closed frontend artifact; hosted authority still blocked
+
+`deployment/Dockerfile.frontend-network` retains the reviewed pinned amd64 Node build and non-root runtime. `deployment/prepare_network_context.py` creates a new isolated context containing explicit application/config files, excluding tests, experiments, private evidence and environment secrets. `build-network-port.mjs` creates closed identity/HTTPS SDK modules plus exact artifact hashes. The actual standalone image runs without Docker, owner files or test signers. Its default command remains the existing startup entry; no environment variable turns incomplete authority into hosted readiness.
+
+`deployment/private-network-v1.json` records roles/dependencies but is intentionally not a launcher. Real restricted SQL/Redis/witness lifecycle factories, callback routing/draining, independent recovery, approved content retention, qualified LLM/counter/rates/grants and IAM/IAP enrollment must precede private hosting. No cloud resources, real requests or public traffic were enabled by local container success. [Concrete next checkpoint and limitations](../task52-production-service-packaging.md#remaining-deployment-work-and-concrete-next-checkpoint).
+
+### Task 52 private role continuation (inactive candidate)
+
+`deployment/prepare_private_services.py` projects reviewed source into separately pinned role contexts; `Dockerfile.private-service` builds backend/factory/counter/dispatcher/recovery images. Runtime uses non-root, root-owned read-only source and injected role secrets; production entry has no fixture trust or local bootstrap switch. The inert `private-services-v1.json` remains non-launchable. Future deployment needs direct/session-affine witness SQL, exact factory revision routing/draining, hosted enrollment and combined acceptance. A separate same-major Node base candidate does not replace reviewed pins automatically.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+
+### Task 52 closed frontend and immutable recovery checks
+
+The separately selected `deployment/Dockerfile.frontend-private` packages the actual standalone Next server plus a fixed closed bootstrap. `deployment/private-frontend-v1.json` records exact image/build identities and remains launchable:false. Runtime configuration and configuration-hash enrollment arrive independently at fixed `/run/secrets` paths; no host mount, external preload or Docker administration is needed by the frontend. A separate synthetic local image has a different pin and refuses hosted context. Real Google IAM/IAP, revision routing, managed storage, vulnerability disposition, tokenization/model quality and financial approval remain unverified deployment prerequisites. See [verification report](../task52-closed-frontend-verification.md).

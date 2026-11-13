@@ -76,3 +76,15 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-04).
 ## Inactive ordinary private browser checkpoint
 
 `PrivateOrdinaryExperience` reuses existing styles, artwork, date/summary/card components. `PrivateOrdinaryClient` uses ordinary React-owned memory, not browser storage. Separate interpretation, pending-answer and confirmation/generation buttons prevent automatic repeated work. Native fetch is invoked through a closure rather than as a controller method; a real-browser finding and regression test cover that binding. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Private frontend server network channel
+
+`lib/server-https.ts` adds `createHTTPSChannel({audience, endpoint})`. A server-owned enrollment maps the exact intended backend audience to an HTTPS service origin. The existing identity port supplies verified user/workload proofs; browser headers never supply trusted service credentials. Request bytes are preserved, only five ordinary paths are allowed, redirects/retries are refused and cancellation closes the socket. The image contains a closed constructor; the more general test Agent constructor and synthetic preload are not exported in the shipped artifact.
+
+The existing UI is unchanged. Actual standalone-container tests cover pending date, confirmed coordinates, ordinary cards, local details and discard. Mobile390px and desktop1280px layouts were visually checked. Advanced/discovery/persistence remain blocked. The local fake IdP has its own test-only process/key; the frontend receives neither that signing key nor a Docker/controller credential. [Report](../task52-production-service-packaging.md).
+
+
+### Task 52 closed frontend and immutable recovery checks
+
+`lib/private-frontend-startup.ts` composes the existing ordinary server profile once. It waits for trusted identity initialization and a certificate-verified backend connection, then installs the existing handler. Failed initialization closes resources and cannot fall back to anonymous/local-model behavior. This is compiled only into the separate private image; normal Next startup does not import it. The sealed configuration contains endpoints and a frontend proof key, never client-selected extraction or financial authority. See [verification report](../task52-closed-frontend-verification.md).

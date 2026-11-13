@@ -1,0 +1,1190 @@
+{
+  "actualHead": "2c5bfcc651521639cb654b6e3940697b3cd880aa",
+  "artifacts": {
+    "identity-json.mjs": "320da1070acbe408ad06284cd367a9278b674c26ee35030b4181d4a08dd5f393",
+    "network-contract.json": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
+    "server-https.mjs": "47ce9e10354e78ff62454c00611b9cfb5e8806fd5b37cae850e8e9826312acb7",
+    "server-identity.mjs": "f01a850d3881bf79473f0cf22e91e55751db60fb959f22c7461d4a79133744f8"
+  },
+  "baseImages": {
+    "images": {
+      "node": {
+        "linuxAmd64Digest": "sha256:c0a93797ee78814ae6d32fcca2561fdbbe423149c3f5389aad32d86e9fd85bd4",
+        "reference": "node:24-bookworm-slim@sha256:01d566e8d94d8c619591d78652babfccd3c6992a3dffa9ed5ab39e11cf6c70e9",
+        "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-bookworm-slim"
+      },
+      "python": {
+        "linuxAmd64Digest": "sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4",
+        "reference": "python:3.12-slim-bookworm@sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+        "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-bookworm"
+      }
+    },
+    "platform": "linux/amd64",
+    "purpose": "reviewed build inputs, not deployment approval"
+  },
+  "baseline": "2c5bfcc651521639cb654b6e3940697b3cd880aa",
+  "browser": {
+    "mechanism": "Actual CUA browser to loopback separate fake IAP edge, actual standalone Next image and two FastAPI workers; synthetic signed users/providers/stores",
+    "notBrowserTested": [
+      "all fault cases",
+      "other-user identity theft",
+      "native expiry wait",
+      "simultaneously successful provider work in two tabs",
+      "full bfcache restore",
+      "real IAM/IAP/network/model/provider behavior"
+    ],
+    "passed": [
+      "pending date followed by generation",
+      "confirmed origin39.29,-76.61",
+      "three provisional Coffee then Museum cards",
+      "original date2026-11-07 and Baltimore/driving displayed",
+      "View Plan and local snapshot details",
+      "explicit discard reenables source controls",
+      "page refresh empties source/cards without automatic resumption",
+      "visually checked actual1280x900 desktop and390x844 mobile card layout"
+    ],
+    "screenshots": {
+      "/tmp/task52-network-desktop.png": "7887e9eb8705e75db67221235431098ce051f6057f09fa4bdeca0c7a1458ecc9",
+      "/tmp/task52-network-mobile.png": "82b52ab033ff5a73a9f52ef797fbaf5a06a05191cc9239aac15dd4e98120acfb",
+      "/tmp/task52-network-ui.png": "f4ab9790db1cd64318d85ae5d54df66e818b301349dcb5b4704207aa2ee54915"
+    }
+  },
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DATA_FLOW_REFERENCE.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "deployment/Dockerfile.frontend-network",
+    "deployment/build-network-port.mjs",
+    "deployment/prepare_network_context.py",
+    "deployment/private-network-v1.json",
+    "docs/task52-production-service-packaging-verification.json",
+    "docs/task52-production-service-packaging.md",
+    "experiments/ordinary_network/build.json",
+    "experiments/ordinary_network/client.py",
+    "experiments/ordinary_network/compile_fixture.mjs",
+    "experiments/ordinary_network/dns.py",
+    "experiments/ordinary_network/fixture.py",
+    "experiments/ordinary_network/identity.py",
+    "experiments/ordinary_network/ingress.py",
+    "experiments/ordinary_network/metrics.py",
+    "experiments/ordinary_network/preload.ts",
+    "experiments/ordinary_network/profile.py",
+    "experiments/ordinary_network/public_server.py",
+    "experiments/ordinary_network/relay.py",
+    "experiments/ordinary_network/resources.py",
+    "experiments/ordinary_network/run_local.py",
+    "experiments/ordinary_network/server.py",
+    "experiments/ordinary_network/test_network.py",
+    "lib/server-https.test.ts",
+    "lib/server-https.ts",
+    "private_runtime/google_identity.py",
+    "private_runtime/https.py",
+    "private_runtime/service_client.py",
+    "private_runtime/test_https.py",
+    "private_runtime/test_identity.py"
+  ],
+  "checks": [
+    {
+      "log": "network-unit-final.log",
+      "passed": 7,
+      "skipped": 0,
+      "suite": "Python independent HTTPS process"
+    },
+    {
+      "log": "network-backend.log",
+      "passed": 263,
+      "skipped": 16,
+      "suite": "Current selected backend/application/recorded-replay modules"
+    },
+    {
+      "log": "network-frontend.log",
+      "passed": 315,
+      "skipped": 0,
+      "suite": "Frontend including two new Node HTTPS cases"
+    },
+    {
+      "log": "network-packaging.log",
+      "passed": 15,
+      "skipped": 0,
+      "suite": "Existing packaging/startup/artifact/resource cases"
+    },
+    {
+      "log": "tool transcript; sandbox IPC refusal then authorized local test passed",
+      "passed": 3,
+      "skipped": 0,
+      "suite": "Existing frozen TypeScript identity proxy"
+    },
+    {
+      "log": "tool transcript",
+      "passed": 2,
+      "skipped": 0,
+      "suite": "Existing public JSON strictness"
+    },
+    {
+      "breakdown": {
+        "clock_reliability": 3,
+        "metadata_protocol_stub_units": 4,
+        "network": 4,
+        "ordinary_ui_authority_readiness_sql": 6,
+        "unchanged_ordinary_http": 13
+      },
+      "log": "network-final-all.log",
+      "passed": 30,
+      "skipped": 0,
+      "suite": "Final pinned actual standalone Next/FastAPI/network cohort"
+    },
+    {
+      "log": "network-parent-hosted.log",
+      "passed": 20,
+      "skipped": 0,
+      "suite": "Unchanged independently signed hosted identity cohort"
+    }
+  ],
+  "cloudResourcesProvisioned": 0,
+  "commit": null,
+  "commitDisposition": "Held: complete privately deployable startup acceptance remains unmet; no partial success represented as full checkpoint acceptance.",
+  "configuredCredentialScan": {
+    "configuredApplicationValues": 2,
+    "currentMatches": 0,
+    "evaluationValues": 3,
+    "historicalMatches": 0
+  },
+  "currentCohortStatus": "0",
+  "currentFailedTests": 0,
+  "dependencyChanges": false,
+  "developmentAttempts": [
+    "Host crypto import unavailable: test certificate generation switched to installed OpenSSL, no dependency change",
+    "Sandbox local socket/IPC refused; authorized local reruns passed",
+    "Readonly hosts-file mutation refused: fixed synthetic DNS port used instead; no hosts/security guard weakened",
+    "Missing frozen UI source projection: child snapshot now unions unchanged parent and child sources",
+    "Internal bridge had no host published ports: test edge uses bridge with masquerading disabled and loopback publications; protected core remains loopback-only",
+    "Node fake DNS lookup needed all-address mode; fixture corrected",
+    "Oversize Node response produced uncaught socket error; explicit rejection/clean destroy fixed client",
+    "Standalone preload outside/app could not resolvejose; fixture-only mount moved to/app/fixture",
+    "One role-denial test lacked new client module in controller snapshot; fixture copy fixed",
+    "Fake IAP signer correctly refused inherited production environment; explicit development enabled only for disposable signer process, not production startup",
+    "Initial ESLint missingprocess import fixed without suppression",
+    "A pre-final API cohort was explicitly interrupted for final transport truncation/deadline checks; no pass claimed",
+    "An intermediate browser fixture had no UI run before fake IdP configuration was corrected",
+    "Three dummy startup tests were deleted as redundant and excluded from totals",
+    "Initial npm registry DNS refusal; later read-only advisory audit succeeded"
+  ],
+  "earlierIncompleteCohorts": [
+    "One pre-final API cohort explicitly interrupted for transport hardening; excluded from pass totals"
+  ],
+  "eslint": "passed_after_explicit_node_process_import",
+  "finalResources": {
+    "engineCPU": 2,
+    "engineMemoryBytes": 4095639552,
+    "networks": [
+      "bridge",
+      "host",
+      "none",
+      "whereto-network-9badf9b7d06c37e11773a0b5"
+    ],
+    "noBroadPrune": true,
+    "originalAnonymousVolumesPreserved": 116,
+    "remainingVolumeCount": 117,
+    "runningContainers": 0,
+    "unattributedFirstTrialAnonymousVolumeRetained": 1
+  },
+  "freshImageScan": {
+    "counts": {
+      "Critical": 2,
+      "High": 49,
+      "Low": 18,
+      "Medium": 80,
+      "Negligible": 64
+    },
+    "db": {
+      "providers": {
+        "alma": {
+          "captured": "2026-11-12T00:23:24Z",
+          "input": "xxh64:62fbff7a468c7a52"
+        },
+        "alpine": {
+          "captured": "2026-11-12T00:22:52Z",
+          "input": "xxh64:d0f0357e17a52469"
+        },
+        "amazon": {
+          "captured": "2026-11-12T00:22:41Z",
+          "input": "xxh64:ed7a4557f7751e6a"
+        },
+        "arch": {
+          "captured": "2026-11-12T00:22:40Z",
+          "input": "xxh64:b1c5d210c8c6396d"
+        },
+        "bitnami": {
+          "captured": "2026-11-12T00:24:46Z",
+          "input": "xxh64:f2e42e7e88f3fb34"
+        },
+        "chainguard": {
+          "captured": "2026-11-12T00:23:00Z",
+          "input": "xxh64:8aecdd22752cb048"
+        },
+        "chainguard-libraries": {
+          "captured": "2026-11-12T00:22:53Z",
+          "input": "xxh64:906731660848ae37"
+        },
+        "debian": {
+          "captured": "2026-11-12T00:23:04Z",
+          "input": "xxh64:d8d9e470735eced0"
+        },
+        "echo": {
+          "captured": "2026-11-12T00:22:11Z",
+          "input": "xxh64:9306336304881253"
+        },
+        "eol": {
+          "captured": "2026-11-12T00:22:26Z",
+          "input": "xxh64:461cb3b5c85b9229"
+        },
+        "epss": {
+          "captured": "2026-11-12T00:25:03Z",
+          "input": "xxh64:0555f8aa7f8256c6"
+        },
+        "fedora": {
+          "captured": "2026-11-12T00:22:47Z",
+          "input": "xxh64:3b2505e884d215ea"
+        },
+        "github": {
+          "captured": "2026-11-12T00:22:46Z",
+          "input": "xxh64:999ef63e15810485"
+        },
+        "govulndb": {
+          "captured": "2026-11-12T00:22:27Z",
+          "input": "xxh64:306164c083c142c8"
+        },
+        "hummingbird": {
+          "captured": "2026-11-12T00:24:38Z",
+          "input": "xxh64:4780b8266619841f"
+        },
+        "kev": {
+          "captured": "2026-11-12T00:24:24Z",
+          "input": "xxh64:783f3e247b968528"
+        },
+        "mariner": {
+          "captured": "2026-11-12T00:22:10Z",
+          "input": "xxh64:2accf5c0cd3c1b3f"
+        },
+        "minimos": {
+          "captured": "2026-11-12T00:24:43Z",
+          "input": "xxh64:576a5288433c7934"
+        },
+        "nvd": {
+          "captured": "2026-11-12T00:23:17Z",
+          "input": "xxh64:85d0add556aef373"
+        },
+        "oracle": {
+          "captured": "2026-11-12T00:22:49Z",
+          "input": "xxh64:ac1d520a96aa4883"
+        },
+        "photon": {
+          "captured": "2026-11-12T00:22:37Z",
+          "input": "xxh64:ac1fea6445eafbce"
+        },
+        "rhel": {
+          "captured": "2026-11-12T00:23:43Z",
+          "input": "xxh64:2e01e3d4cee3227c"
+        },
+        "secureos": {
+          "captured": "2026-11-12T00:22:30Z",
+          "input": "xxh64:9f153e0e3992a8b7"
+        },
+        "sles": {
+          "captured": "2026-11-12T00:24:09Z",
+          "input": "xxh64:46a86770490ec7cb"
+        },
+        "ubuntu": {
+          "captured": "2026-11-12T00:23:00Z",
+          "input": "xxh64:f1be7d1c4bf8defc"
+        },
+        "wolfi": {
+          "captured": "2026-11-12T00:23:15Z",
+          "input": "xxh64:44c34697a08fdf9f"
+        }
+      },
+      "status": {
+        "built": "2026-11-12T06:20:58Z",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-12T00:22:10Z_1794464458.tar.zst?checksum=sha256%3Ac98bd6bd207590fa04c8e2fea3db1859f7f952b57400fc62e19f517f1b562f5e",
+        "path": "/work/grype-cache/6/vulnerability.db",
+        "schemaVersion": "v6.1.10",
+        "valid": true
+      }
+    },
+    "image": "sha256:30b62fc51e8b4fa283dff2cddc13274d7b2355c29aa9ea198eb934bb61d6f586",
+    "oom": false,
+    "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+    "status": 0
+  },
+  "frozenParentManifestSHA256": "c48e7b24d950ea3c28f767f8b49e724238c2299b60b3c2b597e42a6fcfc8f3d5",
+  "fullHostedStartupPassed": false,
+  "handbook": {
+    "reviewedAndUpdatedChapters": [
+      3,
+      4,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "twentyOriginalChaptersPreserved": true
+  },
+  "historicalBeforeAfterCompared": true,
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "hostedBlockers": [
+    "Native SQL/Redis constructors and namespace remain deliberately local/synthetic only",
+    "Reviewed production SQL/Redis/witness lifespan/connection factories and privileged role-specific images missing",
+    "Factory PENDING admission callbacks are process-local; replica/rollout callback ownership/draining not implemented",
+    "Counter is fictional UTF8 bytes; rates/models/providers synthetic; no qualification or actual complete-cost bound",
+    "Real-content privacy/retention approval missing",
+    "Actual IAM/IAP/private ingress/workload enrollment, independent hosted recovery/restore/secret ownership not verified",
+    "Operator financial grant/timezone/root lifecycle and staging costs not approved",
+    "Synthetic local ordinary flow roughly54s; no hosted SLO or provider/model accuracy proof"
+  ],
+  "hostedPoolLifecycleLimitation": "Connection/cache bounds are per client instance. Hosted factories must retain long-lived clients and bound inbound concurrency; the fixture retains original per-call client construction.",
+  "identity": "52-production-service-packaging-verification-v1",
+  "image": {
+    "frontend": {
+      "architecture": "amd64",
+      "id": "sha256:30b62fc51e8b4fa283dff2cddc13274d7b2355c29aa9ea198eb934bb61d6f586",
+      "os": "linux",
+      "size": 104746153,
+      "tag": "whereto-frontend:network-task52-v1",
+      "user": "node"
+    }
+  },
+  "imageScanComparison": {
+    "addedPackageAdvisoryRows": [
+      [
+        "libc-bin",
+        "2.36-9+deb12u14",
+        "CVE-2026-100290",
+        "Low"
+      ],
+      [
+        "libc-bin",
+        "2.36-9+deb12u14",
+        "CVE-2026-115819",
+        "Medium"
+      ],
+      [
+        "libc6",
+        "2.36-9+deb12u14",
+        "CVE-2026-100290",
+        "Low"
+      ],
+      [
+        "libc6",
+        "2.36-9+deb12u14",
+        "CVE-2026-115819",
+        "Medium"
+      ]
+    ],
+    "baselineDb": "2026-11-11T06:21:32Z",
+    "baselineTotalMatches": 209,
+    "currentDb": "2026-11-12T06:20:58Z",
+    "currentTotalMatches": 213,
+    "firstAttempt": "Non-root scanner refused600 archive; test-only archive readability fixed; no privilege increase",
+    "highCriticalMatches": [
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2025-13151",
+        "package": "libtasn1-6",
+        "severity": "High",
+        "version": "4.19.0-2+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-82560",
+        "package": "perl-base",
+        "severity": "High",
+        "version": "5.36.0-7+deb12u4"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5450",
+        "package": "libc-bin",
+        "severity": "Critical",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5450",
+        "package": "libc6",
+        "severity": "Critical",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-41992",
+        "package": "gzip",
+        "severity": "High",
+        "version": "1.12-1"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-76844",
+        "package": "zlib1g",
+        "severity": "High",
+        "version": "1:1.2.13.dfsg-1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-9538",
+        "package": "perl-base",
+        "severity": "High",
+        "version": "5.36.0-7+deb12u4"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-85091",
+        "package": "zlib1g",
+        "severity": "High",
+        "version": "1:1.2.13.dfsg-1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2025-69720",
+        "package": "libtinfo6",
+        "severity": "High",
+        "version": "6.4-4"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2025-69720",
+        "package": "ncurses-base",
+        "severity": "High",
+        "version": "6.4-4"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2025-69720",
+        "package": "ncurses-bin",
+        "severity": "High",
+        "version": "6.4-4"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-95619",
+        "package": "gcc-12-base",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-95619",
+        "package": "libgcc-s1",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-95619",
+        "package": "libstdc++6",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5928",
+        "package": "libc-bin",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5928",
+        "package": "libc6",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-102010",
+        "package": "gcc-12-base",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-102010",
+        "package": "libgcc-s1",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-102010",
+        "package": "libstdc++6",
+        "severity": "High",
+        "version": "12.2.0-14+deb12u1"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-19499",
+        "package": "libc-bin",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-19499",
+        "package": "libc6",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-84243",
+        "package": "libc-bin",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-84243",
+        "package": "libc6",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5435",
+        "package": "libc-bin",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-5435",
+        "package": "libc6",
+        "severity": "High",
+        "version": "2.36-9+deb12u14"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "bsdutils",
+        "severity": "High",
+        "version": "1:2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "libblkid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "libmount1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "libsmartcols1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "libuuid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "mount",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "util-linux",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-78410",
+        "package": "util-linux-extra",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "bsdutils",
+        "severity": "High",
+        "version": "1:2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "libblkid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "libmount1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "libsmartcols1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "libuuid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "mount",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "util-linux",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53615",
+        "package": "util-linux-extra",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "bsdutils",
+        "severity": "High",
+        "version": "1:2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "libblkid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "libmount1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "libsmartcols1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "libuuid1",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "mount",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "util-linux",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "not-fixed",
+          "versions": []
+        },
+        "id": "CVE-2026-53613",
+        "package": "util-linux-extra",
+        "severity": "High",
+        "version": "2.38.1-5+deb12u3"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-54369",
+        "package": "libacl1",
+        "severity": "High",
+        "version": "2.3.1-3"
+      },
+      {
+        "fix": {
+          "state": "wont-fix",
+          "versions": []
+        },
+        "id": "CVE-2026-54370",
+        "package": "libacl1",
+        "severity": "High",
+        "version": "2.3.1-3"
+      }
+    ],
+    "rawSHA256": "53fe010957577162c7bcca678d514f8285dca4e3e1b949410fd70041180d6fed",
+    "removedPackageAdvisoryRows": []
+  },
+  "imageScanInitialAttempt": {
+    "image": "sha256:30b62fc51e8b4fa283dff2cddc13274d7b2355c29aa9ea198eb934bb61d6f586",
+    "oom": false,
+    "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+    "status": 1
+  },
+  "latency": {
+    "controllerInclusiveMilliseconds": 53849.354167,
+    "countsAfter": {
+      "charge": 197710,
+      "inference": 2,
+      "operations": 5
+    },
+    "countsBefore": {
+      "charge": 6865,
+      "inference": 1,
+      "operations": 1
+    },
+    "note": "Inclusive nested spans; controller includes fictional IAP fixture setup and read-only diagnostic queries, not cloud/LLM latency.",
+    "scope": "Synthetic local inclusive spans; overlapping stages must not be summed. Not cloud/provider/model latency.",
+    "stages": {
+      "admission": {
+        "failed": 0,
+        "maxMilliseconds": 7319.384,
+        "p50Milliseconds": 1.109,
+        "p95Milliseconds": 7319.384,
+        "samples": 3
+      },
+      "authenticatedRPC": {
+        "failed": 0,
+        "maxMilliseconds": 31338.311,
+        "p50Milliseconds": 1779.735,
+        "p95Milliseconds": 31338.311,
+        "samples": 14
+      },
+      "fakeProvider": {
+        "failed": 0,
+        "maxMilliseconds": 22.126,
+        "p50Milliseconds": 0.2,
+        "p95Milliseconds": 22.126,
+        "samples": 5
+      },
+      "frontendHTTPS": {
+        "failed": 0,
+        "maxMilliseconds": 31395.365,
+        "p50Milliseconds": 10755.134,
+        "p95Milliseconds": 31395.365,
+        "samples": 3
+      },
+      "frontendIdentity": {
+        "failed": 0,
+        "maxMilliseconds": 2.586,
+        "p50Milliseconds": 2.2,
+        "p95Milliseconds": 2.586,
+        "samples": 3
+      },
+      "frontendTLSConnect": {
+        "failed": 0,
+        "maxMilliseconds": 181.942,
+        "p50Milliseconds": 9.145,
+        "p95Milliseconds": 181.942,
+        "samples": 3
+      },
+      "identity": {
+        "failed": 0,
+        "maxMilliseconds": 1.223,
+        "p50Milliseconds": 0.391,
+        "p95Milliseconds": 1.219,
+        "samples": 40
+      },
+      "providerDispatch": {
+        "failed": 0,
+        "maxMilliseconds": 2216.636,
+        "p50Milliseconds": 1792.942,
+        "p95Milliseconds": 2216.636,
+        "samples": 5
+      },
+      "publicAuthentication": {
+        "failed": 0,
+        "maxMilliseconds": 34.059,
+        "p50Milliseconds": 26.0,
+        "p95Milliseconds": 34.059,
+        "samples": 6
+      },
+      "redisRead": {
+        "failed": 0,
+        "maxMilliseconds": 1.903,
+        "p50Milliseconds": 0.281,
+        "p95Milliseconds": 1.756,
+        "samples": 32
+      },
+      "redisWrite": {
+        "failed": 0,
+        "maxMilliseconds": 2.027,
+        "p50Milliseconds": 0.638,
+        "p95Milliseconds": 2.027,
+        "samples": 9
+      },
+      "reservation": {
+        "failed": 0,
+        "maxMilliseconds": 1440.014,
+        "p50Milliseconds": 1371.566,
+        "p95Milliseconds": 1440.014,
+        "samples": 4
+      },
+      "serviceAuthentication": {
+        "failed": 0,
+        "maxMilliseconds": 19.918,
+        "p50Milliseconds": 15.764,
+        "p95Milliseconds": 19.918,
+        "samples": 14
+      },
+      "sessionLookup": {
+        "failed": 0,
+        "maxMilliseconds": 30.42,
+        "p50Milliseconds": 30.082,
+        "p95Milliseconds": 30.42,
+        "samples": 2
+      },
+      "sqlExecute": {
+        "failed": 0,
+        "maxMilliseconds": 352.301,
+        "p50Milliseconds": 0.241,
+        "p95Milliseconds": 80.453,
+        "samples": 2052
+      },
+      "tlsConnect": {
+        "failed": 0,
+        "maxMilliseconds": 6.924,
+        "p50Milliseconds": 3.569,
+        "p95Milliseconds": 6.924,
+        "samples": 14
+      },
+      "witnessProtocol": {
+        "failed": 0,
+        "maxMilliseconds": 24.311,
+        "p50Milliseconds": 1.878,
+        "p95Milliseconds": 21.215,
+        "samples": 71
+      }
+    }
+  },
+  "nativeProductionBuild": "passed",
+  "newComponentDefaultStartupExit": 78,
+  "newComponentImageBuilt": true,
+  "normalContainerSmoke": "0",
+  "notRerun": [
+    "Full backend discovery and33 historical source-identity headings; no frozen pins changed",
+    "Standalone parent112 SQL/Redis authority/evidence,30 grant,17 native and12 service-isolation full cohorts not rerun; current actual network workflow exercises their existing paths",
+    "Physical power loss and real hosted TLS/IAM/IAP/backup/multi-replica factory behavior",
+    "Fresh backend image OS scan; backend dependencies unchanged"
+  ],
+  "npmAudit": {
+    "critical": 0,
+    "high": 0,
+    "info": 0,
+    "low": 0,
+    "moderate": 7,
+    "total": 7
+  },
+  "npmAuditExitCode": 1,
+  "optInSkipped": 16,
+  "parentHostedStatus": "0",
+  "pipCheck": "passed",
+  "productionActive": false,
+  "push": false,
+  "rawLogSHA256": {
+    "network-backend.log": "3a3552ff07c78e73198d17f0f09dded872945d162473b114f5e8433a78549ce7",
+    "network-build-final-status.log": "10334d51e84ab31efdd0ab4b8318e29f0b67e3385f8dfb926dcbab912c759952",
+    "network-evaluation-key-scan.json": "da58ebe805b12deeb986092e34c03d37c2c88427c503fe026486a6fbdb6995d1",
+    "network-final-all.log": "4deac157816edd7e83d63dac10b3461b7f0a23650b8fe03195720e991ca962b8",
+    "network-frontend.log": "44533ca81890168cc197d7f5444bbe0aa581e939095c3e0bdc2e184369053c92",
+    "network-image-final-probe.log": "8cf81ce928a44753445cdf010c828220531215d9cf0bd6f6507430fa3e69c604",
+    "network-lint-final.log": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "network-normal-container-smoke.log": "912c1a18378dee77d64a7376b0a13e75fcdbb23c50df26a28f66155fe8ef075c",
+    "network-npm-audit-final.json": "222a78e87adc6a46925e5a74ac4f961abe09c502bfad1dc79850909674f646e4",
+    "network-packaging.log": "acfe649ea8c0d2345ec35dfd8c41f7016a4a7ac2ddc0ae7488a6cc8c13e53403",
+    "network-parent-hosted.log": "e40cbf677cb55fd39742dc2b512af491cbac8b3dbfa71caaae86b57932672d09",
+    "network-types-final.log": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "network-unit-final.log": "eafba3d8201a89df00124a2b2709e1ee93c9540abd43988dff16dcce096b4513"
+  },
+  "realFinancialGrant": false,
+  "realIdentityRequests": 0,
+  "realProviderCalls": 0,
+  "resourceCohorts": {
+    "network-resource-final-cohort.json": {
+      "allOriginalVolumesPreserved": true,
+      "originalVolumeCount": 117,
+      "provedOwnedRemoved": [
+        "1bda839149530b5a369a7ea3b8dce75c6fc41b9689f655aa657617dc631abe85"
+      ],
+      "provedOwnedRetained": [],
+      "unattributedNewVolumesPreserved": []
+    },
+    "network-resource-inventory.json": {
+      "allOriginalVolumesPreserved": true,
+      "originalVolumeCount": 117,
+      "provedOwnedRemoved": [
+        "83bebc8bd90218ec6d49b7a60045b6ec297b8372c974a3500b80aaa5513c7b29"
+      ],
+      "provedOwnedRetained": [],
+      "unattributedNewVolumesPreserved": []
+    },
+    "network-resource-parent-cohort.json": {
+      "allOriginalVolumesPreserved": true,
+      "originalVolumeCount": 117,
+      "provedOwnedRemoved": [
+        "83bebc8bd90218ec6d49b7a60045b6ec297b8372c974a3500b80aaa5513c7b29"
+      ],
+      "provedOwnedRetained": [],
+      "unattributedNewVolumesPreserved": []
+    }
+  },
+  "resourceResiduals": [
+    "116 original unattributed anonymous volumes preserved",
+    "one additional first-failed-trial anonymous volume lacks captured ownership provenance; preserved",
+    "possible failed-constructor bridge without sufficient ownership proof preserved; no broad prune"
+  ],
+  "sourceBuild": "52-ordinary-authenticated-network-v1",
+  "sourceManifestSHA256": "5640cd4c898f1f87c0e5ae04e03d77934d09a3e86be2b85a58d7befbec160f7d",
+  "status": "partial_blocked_full_hosted_startup",
+  "task53Started": false,
+  "typescript": "passed",
+  "uniqueAutomatedPassed": 655,
+  "vmStopped": true,
+  "preservedWorkContinuation": {
+    "report": "task52-private-role-continuation.md",
+    "verification": "task52-private-role-continuation-verification.json",
+    "acceptance": "incomplete; no commit/push",
+    "sourceCohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee"
+  },
+  "closedFrontendContinuation": {
+    "verification": "task52-closed-frontend-verification.json",
+    "report": "task52-closed-frontend-verification.md",
+    "security": "task52-closed-frontend-security.json",
+    "priorFieldsPreserved": true,
+    "notHostedActivation": true
+  }
+}

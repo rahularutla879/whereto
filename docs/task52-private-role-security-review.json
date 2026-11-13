@@ -1,0 +1,4304 @@
+{
+  "identity": "52-private-role-security-review-candidate-v1",
+  "accepted": false,
+  "scope": "Actual final local runtime image scanner matches; no exploit or hosted readiness claim",
+  "scans": {
+    "counter": {
+      "image": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "recovery": {
+      "image": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "backend": {
+      "image": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "factory": {
+      "image": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "dispatcher": {
+      "image": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "frontend": {
+      "image": "sha256:30b62fc51e8b4fa283dff2cddc13274d7b2355c29aa9ea198eb934bb61d6f586",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/work/grype-cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 49,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18
+      }
+    },
+    "frontendCandidate": {
+      "image": "sha256:c31984ff231db7ee07e7c601d48a0ae830db733b986a9446c0495fdd311e4807",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/work/grype-cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 49,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18
+      }
+    }
+  },
+  "criticalHighFindings": [
+    {
+      "package": "libtasn1-6",
+      "installedVersion": "4.19.0-2+deb12u1",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libncursesw6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libtinfo6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "ncurses-base",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "ncurses-bin",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2025-7458",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review",
+      "exposureEvidence": "Runtime libsqlite3 retained. Advisory requires crafted arbitrary SQL. Private ordinary authority uses PostgreSQL and exposes no SQLite SQL endpoint; library presence remains and this is not a proof of unreachability."
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-11824",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "gzip",
+      "installedVersion": "1.12-1",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review",
+      "exposureEvidence": "Runtime glibc retained. Vulnerability concerns scanf %mc with explicit width >1024. No direct application scanf call found; third-party/native reachability is not proven absent."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review",
+      "exposureEvidence": "Runtime glibc retained. Vulnerability concerns scanf %mc with explicit width >1024. No direct application scanf call found; third-party/native reachability is not proven absent."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "runtimePresent": true,
+      "exploitability": "Insufficient evidence to establish or exclude application reachability; not accepted or suppressed",
+      "disposition": "Unresolved staging security review"
+    }
+  ],
+  "suppressionCount": 0,
+  "dependencyUpdatesApplied": false,
+  "upstreamReview": [
+    {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "checked": "2026-11-13",
+      "finding": "Bookworm 2.36-9+deb12u14 listed vulnerable; fixed trixie/forky are different distribution cohorts, not compatible base substitutions authorized by this checkpoint"
+    },
+    {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "checked": "2026-11-13",
+      "finding": "Bookworm 3.40.1-2+deb12u2 listed vulnerable; no reviewed fixed Bookworm runtime available in this evidence"
+    }
+  ],
+  "npmAudit": {
+    "info": 0,
+    "low": 0,
+    "moderate": 7,
+    "high": 0,
+    "critical": 0,
+    "total": 7
+  },
+  "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+  "upstreamBaseMetadata": {
+    "python": {
+      "tag": "3.12-slim-bookworm",
+      "digest": "sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+      "updated": "2026-11-05T17:07:24.639547Z",
+      "amd64": [
+        "sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4"
+      ]
+    },
+    "node": {
+      "tag": "24-bookworm-slim",
+      "digest": "sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+      "updated": "2026-11-11T20:39:58.583762Z",
+      "amd64": [
+        "sha256:0e2646ab57e77b7a384a0cb59b6815b182c77e1f9c3ba36bd8435bd9c4e6680e"
+      ]
+    }
+  },
+  "frontendCandidatePromoted": false,
+  "comparisonToHistoricalBackend": {
+    "warning": "Different image cohorts and November10 versus November13 scanner databases; count differences are not isolated dependency effects. Frozen historical results are unchanged.",
+    "newlyReportedPackageAdvisoryPairs": [],
+    "noLongerMatchedPackageAdvisoryPairs": [
+      {
+        "package": "pyasn1",
+        "advisory": "GHSA-2qm8-x737-gmw5"
+      },
+      {
+        "package": "pyasn1",
+        "advisory": "GHSA-9m75-vc3g-4x39"
+      },
+      {
+        "package": "pyasn1",
+        "advisory": "GHSA-fm9c-5rcf-2q5p"
+      },
+      {
+        "package": "pyasn1",
+        "advisory": "GHSA-mm57-4v3p-rchx"
+      }
+    ],
+    "retainedPairs": 85
+  },
+  "uniqueAdvisoryCount": 31,
+  "frontendCandidateOutcome": "Compatible same-major candidate builds and starts, but retains2 critical/49 high advisory matches; not promoted. Python Bookworm tag still equals reviewed digest.",
+  "advisoryReviews": {
+    "CVE-2025-13151": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2025-13151",
+      "mechanism": "libtasn1 octet expansion overflow",
+      "applicationUseAssessment": "Python pyasn1 is a different library. App does not directly call this C libtasn1 function; transitive native consumers not exhaustively audited.",
+      "untrustedInputPrerequisites": "Malformed ASN.1 passed to affected libtasn1 expansion function.",
+      "currentOfficialStatus": {
+        "description": "Stack-based buffer overflow in libtasn1 version: v4.20.0. The function fails to validate the size of input data resulting in a buffer overflow in asn1_expend_octet_string.",
+        "debianbug": 1125063,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "4.19.0-2+deb12u1",
+              "bookworm-security": "4.19.0-2+deb12u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "4.21.0-2"
+            },
+            "fixed_version": "4.21.0-2",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "4.21.0-2"
+            },
+            "fixed_version": "4.21.0-2",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "4.20.0-2+deb13u1"
+            },
+            "fixed_version": "4.20.0-2+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2025-69720": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2025-69720",
+      "mechanism": "infocmp terminfo analysis overflow",
+      "applicationUseAssessment": "infocmp exists but server is headless and app never invokes it; client text does not become TERM or CLI input.",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "currentOfficialStatus": {
+        "description": "The infocmp command-line tool in ncurses before 6.5-20251213 has a stack-based buffer overflow in analyze_string in progs/infocmp.c.",
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "6.4-4"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "6.6+20260608-2"
+            },
+            "fixed_version": "6.6+20251231-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "6.6+20260608-2"
+            },
+            "fixed_version": "6.6+20251231-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "6.5+20250216-2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2025-7458": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2025-7458",
+      "mechanism": "SQLite ORDER BY allocation overflow",
+      "applicationUseAssessment": "SQLite3.40.1 is present; app runtime has no sqlite import or arbitrary SQL/database upload interface. Historical evaluation journal is excluded; in-memory feature probe only.",
+      "untrustedInputPrerequisites": "Attacker SQL with many ORDER BY expressions; absence of current route is not a library fix.",
+      "currentOfficialStatus": {
+        "description": "An integer overflow in the sqlite3KeyInfoFromExprList function in SQLite versions 3.39.2 through 3.41.1 allows an attacker with the ability to execute arbitrary SQL statements to cause a denial of service or disclose sensitive information from process memory via a crafted SELECT statement with a large number of expressions in the ORDER BY clause.",
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "3.40.1-2+deb12u2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "3.54.1-2"
+            },
+            "fixed_version": "3.42.0-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "3.54.1-2"
+            },
+            "fixed_version": "3.42.0-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "3.46.1-7+deb13u2"
+            },
+            "fixed_version": "3.42.0-1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-102010": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-102010",
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "applicationUseAssessment": "Native Node/C-extension dependencies can use C++ runtime. No own application call to this exact container operation; native call graph not proven safe.",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "currentOfficialStatus": {
+        "description": "A flaw was found in GCC. When an application calls the erase_if function on a binary heap priority queue in libstdc++, the library reallocates storage but fails to update its internal entry pointer. An attacker capable of triggering this operation can exploit this use-after-free condition, leading to a Denial of Service (DoS) via an application crash or potential memory corruption.",
+        "debianbug": 1150198,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "12.2.0-14+deb12u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue, not fixed in upstream 12 branch",
+            "nodsa_reason": "ignored"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "12.5.0-11"
+            },
+            "fixed_version": "12.5.0-11",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "12.5.0-11"
+            },
+            "fixed_version": "12.5.0-11",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "12.4.0-5"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-107778": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-107778",
+      "mechanism": "Kerberos GSS acceptor credential array",
+      "applicationUseAssessment": "No GSS acceptor service in app. Saved SQL uses restricted password/TLS; Kerberos libraries may be linked dependencies.",
+      "untrustedInputPrerequisites": "Kerberos client data reaching GSS acceptor; client-library linkage is not an acceptor endpoint.",
+      "currentOfficialStatus": {
+        "description": "MIT Kerberos 5 (krb5) through 1.22.2 contains a NULL pointer dereference in make_cred_list() in rd_cred.c that allows authenticated Kerberos clients to crash services by sending mismatched KRB-CRED arrays. Attackers can send forwarded credentials with more tickets than ticket_info entries through gss_accept_sec_context() to crash GSS-API acceptor services, causing denial of service.",
+        "debianbug": 1150461,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-112314": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-112314",
+      "mechanism": "Kerberos GSS-RPC client reply-verifier leak",
+      "applicationUseAssessment": "App uses HTTP OAuth and PostgreSQL password/TLS, not a GSS-RPC client interface. Client-library linkage alone does not prove clnttcp_call is reached; native reachability remains unproven.",
+      "untrustedInputPrerequisites": "Malicious/mismatched RPC replies or authentication retries reaching affected GSS-RPC client.",
+      "currentOfficialStatus": {
+        "description": "clnttcp_call() in lib/rpc/clnt_tcp.c in MIT Kerberos 5 (aka krb5) does not free the RPC reply verifier between retries, which allows remote attackers to cause a denial of service (memory leak in GSS-RPC client programs) by injecting RPC replies with mismatched XIDs or by triggering authentication retries.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-112320": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-112320",
+      "mechanism": "Kerberos admin transport authentication-context leak",
+      "applicationUseAssessment": "No kadmind/GSS-RPC server is started or exposed by the app. Retain the library source finding.",
+      "untrustedInputPrerequisites": "RPC authentication flavor switching on a Kerberos admin TCP connection.",
+      "currentOfficialStatus": {
+        "description": "The GSS-RPC transport layer in MIT Kerberos 5 (aka krb5) 1.4 and later does not release the previous authentication context when a client switches from an RPCSEC_GSS or AUTH_GSSAPI flavor to a non-GSS flavor on the same TCP connection. This allows remote attackers to cause a denial of service (memory exhaustion in kadmind) by repeatedly establishing and abandoning GSS authentication contexts.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-112321": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-112321",
+      "mechanism": "Kerberos admin RPC argument leak",
+      "applicationUseAssessment": "No kadmind/Kerberos RPC server is started; FastAPI JSON and PostgreSQL password/TLS are separate protocols.",
+      "untrustedInputPrerequisites": "Crafted AUTH_GSSAPI init reaching kadmind.",
+      "currentOfficialStatus": {
+        "description": "The AUTH_GSSAPI handler in lib/rpc/svc_auth_gssapi.c in MIT Kerberos 5 (aka krb5) does not free decoded arguments on certain error paths, which allows remote attackers to cause a denial of service (memory exhaustion in kadmind) via crafted AUTH_GSSAPI_INIT requests that trigger authentication failures.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-112322": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-112322",
+      "mechanism": "Kerberos admin client cleanup CPU",
+      "applicationUseAssessment": "No kadmind or Kerberos admin client list in app runtime. Libraries remain installed.",
+      "untrustedInputPrerequisites": "Many Kerberos admin RPC client entries and cleanup in kadmind.",
+      "currentOfficialStatus": {
+        "description": "clean_client() in lib/rpc/svc_auth_gssapi.c in MIT Kerberos 5 (aka krb5) restarts its scan from the head of the client list after each removal, resulting in quadratic CPU cost. Remote attackers can cause a denial of service (CPU consumption in kadmind) by accumulating a large number of AUTH_GSSAPI client entries.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-112323": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-112323",
+      "mechanism": "Kerberos admin failed-auth memory",
+      "applicationUseAssessment": "No kadmind endpoint; do not expose inherited library functions through new services.",
+      "untrustedInputPrerequisites": "Repeated failed AUTH_GSSAPI init to Kerberos admin daemon.",
+      "currentOfficialStatus": {
+        "description": "The AUTH_GSSAPI handler in lib/rpc/svc_auth_gssapi.c in MIT Kerberos 5 (aka krb5) 1.5.2 and later allows remote attackers to cause a denial of service (memory exhaustion in kadmind) by sending repeated failed AUTH_GSSAPI_INIT requests. Each failed request allocates client state that is only freed after a 15-minute expiration timeout, allowing an attacker to accumulate memory faster than it is reclaimed.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-11824": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-11824",
+      "mechanism": "SQLite FTS5 corrupted continuation page",
+      "applicationUseAssessment": "FTS5 is compiled in. App does not open attacker databases or expose MATCH queries; do not classify feature as disabled.",
+      "untrustedInputPrerequisites": "Crafted FTS5 database/query consumed by SQLite.",
+      "currentOfficialStatus": {
+        "description": "SQLite before 3.53.2 contains a heap-based buffer overflow vulnerability in the FTS5 full-text search extension that allows attackers to cause a crash or execute arbitrary code by supplying a crafted database with malicious continuation page metadata specifying a szLeaf value smaller than 4. Attackers can trigger an integer underflow in fts5ChunkIterate() causing an inflated remaining byte count during FTS5 MATCH query processing, leading to a heap buffer overflow of attacker-controlled data in applications compiled with SQLITE_ENABLE_FTS5.",
+        "debianbug": 1139960,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "3.40.1-2+deb12u2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "3.54.1-2"
+            },
+            "fixed_version": "3.53.2-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "3.54.1-2"
+            },
+            "fixed_version": "3.53.2-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "3.46.1-7+deb13u2"
+            },
+            "fixed_version": "3.46.1-7+deb13u2",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-119079": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-119079",
+      "mechanism": "Kerberos KDC sequence decoding CPU",
+      "applicationUseAssessment": "No KDC server started or ticket-input API. Outbound SQL client configuration is not a KDC.",
+      "untrustedInputPrerequisites": "Crafted Kerberos AS/TGS request to KDC sequence decoder.",
+      "currentOfficialStatus": {
+        "description": "decode_sequence_of() in lib/krb5/asn.1/asn1_encode.c in MIT Kerberos 5 (aka krb5) 1.11 and later grows the decoded element array one entry at a time, which allows remote attackers to cause a denial of service (CPU consumption in the KDC) by sending an unauthenticated AS-REQ or TGS-REQ with a large number of elements in a SEQUENCE OF field over TCP.",
+        "debianbug": 1153598,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.20.1-2+deb12u5",
+              "bookworm-security": "1.20.1-2+deb12u5"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "1.22.1-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "1.21.3-5+deb13u1",
+              "trixie-security": "1.21.3-5+deb13u1"
+            },
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-119373": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-119373",
+      "mechanism": "SQLite FTS5 doclist merge",
+      "applicationUseAssessment": "FTS5 present, but no runtime SQL/database upload path. Untrusted activity text never becomes SQLite SQL.",
+      "untrustedInputPrerequisites": "Attacker-populated detail=none FTS5 table and prefix MATCH query.",
+      "currentOfficialStatus": {
+        "description": "SQLite before 3.54.0 built with FTS5 contains a heap buffer overflow in fts5MergeRowidLists() that undersizes the output buffer when merging detail=none prefix doclists. Attackers who can populate a detail=none FTS5 table with negative rowids and run a prefix MATCH query can write past the allocation, corrupting heap memory and crashing the process.",
+        "debianbug": 1152790,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "3.40.1-2+deb12u2"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "3.46.1-7+deb13u2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-119374": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-119374",
+      "mechanism": "SQLite FTS5 secure-delete corruption",
+      "applicationUseAssessment": "FTS5 present; no app-owned SQLite file or user SQL/delete interface in runtime.",
+      "untrustedInputPrerequisites": "Crafted database footer and secure-delete operation.",
+      "currentOfficialStatus": {
+        "description": "SQLite before 3.54.0 built with FTS5 contains a heap buffer overflow in fts5DoSecureDelete() that allows attackers to write past the leaf page buffer via crafted footer key offsets. Attackers can supply a database file with a corrupted FTS5 index that, when deleted from with secure-delete enabled, corrupts heap memory and crashes the application.",
+        "debianbug": 1152790,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "3.40.1-2+deb12u2"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "3.46.1-7+deb13u2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-119379": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-119379",
+      "mechanism": "SQLite session changeset overflow",
+      "applicationUseAssessment": "ENABLE_SESSION is present; no changeset-apply endpoint or API in application.",
+      "untrustedInputPrerequisites": "Crafted changeset passed to sqlite3changeset_apply; library remains vulnerable.",
+      "currentOfficialStatus": {
+        "description": "SQLite before 3.54.0 built with the session extension contains a heap buffer overflow vulnerability in sqlite3changeset_apply() that allows attackers to corrupt heap memory by supplying crafted changesets. Attackers can repeat a table name in a second changeset block with a larger column count, causing sessionUpdateFind() to memset past the undersized aUpdateMask allocation.",
+        "debianbug": 1152790,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "3.40.1-2+deb12u2"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "3.54.1-2"
+            },
+            "fixed_version": "3.54.1-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "3.46.1-7+deb13u2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-19499": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-19499",
+      "mechanism": "monetary formatting buffer padding",
+      "applicationUseAssessment": "No application strfmon call found; frontend uses JavaScript formatting. Upstream description starts at glibc2.38 but installed2.36 is marked open by Debian: version applicability remains disputed.",
+      "untrustedInputPrerequisites": "Affected C monetary format/buffer path; cannot dismiss Debian open status by version range alone.",
+      "currentOfficialStatus": {
+        "description": "Calling strfmon and strfmon_l in the GNU C Library version 2.38 to 2.44 can write past the end of the caller-supplied output buffer when a conversion uses right-justified width padding.  Exploitation requires an application code path that calls strfmon or strfmon_l with right-justified width padding into a destination buffer that is large enough for the padding to succeed but too small for the internal memmove call. The field width or format may be attacker-influenced or a fixed susceptible pattern in the caller.  At the time of publication, no network-facing application impact is known.",
+        "debianbug": 1145891,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.36-9+deb12u14",
+              "bookworm-security": "2.36-9+deb12u7"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.43-7"
+            },
+            "fixed_version": "2.43-5",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.43-7"
+            },
+            "fixed_version": "2.43-5",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.41-12+deb13u4"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "",
+            "next_point_update": true
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-41992": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-41992",
+      "mechanism": "GNU gzip mixed LZW/LZH decompression",
+      "applicationUseAssessment": "App has no gzip CLI invocation or archive-upload/decompression pipeline. HTTP decompression is a different zlib path.",
+      "untrustedInputPrerequisites": "Crafted files processed sequentially by gzip CLI mixed-format state.",
+      "currentOfficialStatus": {
+        "description": "GNU gzip contains a global buffer overflow vulnerability in the LZH decompression logic caused by improper reuse of shared global state between different decompression formats within a single execution. GNU gzip maintains a global array that is shared across the LZ77, LZW, and LZH decompression routines and is not reinitialized between files processed in the same invocation. By decompressing a specially crafted LZW file followed by a specially crafted LZH file in a single gzip -d command, an attacker can poison the shared global state and subsequently trigger an out\u2011of\u2011bounds read in the LZH decoder. The LZH decompression logic follows stale values left in the shared array, causing reads past the end of the allocated global buffer.  This issue has been fixed in commits 63dbf6b3b9e6e781df1a6a64e609b10e23969681 and\u00a0e7378c2d421be6a286922374425680bbe9ad8b7d.",
+        "debianbug": 1141443,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1.12-1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "1.14-1"
+            },
+            "fixed_version": "1.14-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "1.14-1"
+            },
+            "fixed_version": "1.14-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "1.13-1+deb13u1"
+            },
+            "fixed_version": "1.13-1+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-53613": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-53613",
+      "mechanism": "restricted mount target race",
+      "applicationUseAssessment": "App does not invoke mount or accept fstab/filesystem uploads. Setuid mount helpers remain in base; observed no-new-privileges, dropped capabilities, non-root and no host binds mitigate prerequisites.",
+      "untrustedInputPrerequisites": "Local helper execution, suitable fstab authorization and writable path; source bug remains unresolved.",
+      "currentOfficialStatus": {
+        "description": "util-linux is a random collection of Linux utilities. In util-linux 2.17 through 2.41.6 and 2.42 through 2.42.3, and in 2.42.4 when the legacy `mount(2)` path is used without `/proc`, restricted non-root `mount` requests validate an `/etc/fstab` target before the mount operation re-resolves that pathname. A local low-privileged user authorized by an fstab `user` or `users` entry whose target has an attacker-writable ancestor can use `renameat2(RENAME_EXCHANGE)` to swap a path component and redirect an authorized mount to a root-owned location, such as mounting attacker-controlled content over `/etc/sudoers.d`, and thereby gain root privileges. Versions 2.41.5 and 2.42.2 pin targets for the new mount API, and 2.42.4 pins legacy targets through `/proc/self/fd`; the documented legacy fallback without `/proc` remains affected.",
+        "debianbug": 1140195,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.38.1-5+deb12u3",
+              "bookworm-security": "2.38.1-5+deb12u1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.42.4-1"
+            },
+            "fixed_version": "2.42.2-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.42.4-1"
+            },
+            "fixed_version": "2.42.2-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "2.41.5-0+deb13u1",
+              "trixie-security": "2.41.5-0+deb13u1"
+            },
+            "fixed_version": "2.41.5-0+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-53615": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-53615",
+      "mechanism": "DOS partition metadata probing",
+      "applicationUseAssessment": "App does not probe disk images; no host devices or user disk-upload endpoint. libblkid package remains.",
+      "untrustedInputPrerequisites": "Crafted block/partition image passed to libblkid and a consumer acting on false metadata.",
+      "currentOfficialStatus": {
+        "description": "util-linux is a random collection of Linux utilities. Before util-linux 2.41.4, `parse_dos_extended()` in `libblkid/src/partitions/dos.c` computes an extended-partition start sector with 32-bit addition and does not apply the extended-area bounds checks to the first two EBR entries. A local attacker who causes a crafted DOS extended-partition disk image or removable medium to be probed can wrap `cur_start + start` to sector zero and cause libblkid to report a false partition overlapping the MBR. This directly compromises the integrity of the reported partition metadata; disk modification or availability loss requires a separate downstream consumer to act on that metadata. This issue is fixed in 2.41.4.",
+        "debianbug": 1140197,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.38.1-5+deb12u3",
+              "bookworm-security": "2.38.1-5+deb12u1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.42.4-1"
+            },
+            "fixed_version": "2.42-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.42.4-1"
+            },
+            "fixed_version": "2.42-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "2.41.5-0+deb13u1",
+              "trixie-security": "2.41.5-0+deb13u1"
+            },
+            "fixed_version": "2.41.5-0+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-5435": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-5435",
+      "mechanism": "deprecated DNS record printing",
+      "applicationUseAssessment": "No application call to ns_printrr/ns_printrrf/fp_nquery. Ordinary DNS lookup does not establish use of these printers.",
+      "untrustedInputPrerequisites": "Affected TSIG record printer must be called; transitive native reachability unproven.",
+      "currentOfficialStatus": {
+        "description": "The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to enforce the caller-supplied buffer length, and can result in an out-of-bounds write when printing TSIG records.",
+        "debianbug": 1135230,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.36-9+deb12u14",
+              "bookworm-security": "2.36-9+deb12u7"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.43-7"
+            },
+            "fixed_version": "2.43-3",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.43-7"
+            },
+            "fixed_version": "2.43-3",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.41-12+deb13u4"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "",
+            "next_point_update": true
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-54369": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-54369",
+      "mechanism": "pathname ACL symlink traversal",
+      "applicationUseAssessment": "App performs no ACL changes. Non-root/no-new-privileges/readonly-root limits privileged filesystem effects.",
+      "untrustedInputPrerequisites": "Privileged ACL caller traversing an attacker-controlled pathname; not an HTTP activity-list input.",
+      "currentOfficialStatus": {
+        "description": "acl before version 2.4.0 contains a symlink traversal vulnerability in the libacl pathname-based functions acl_get_file(), acl_set_file(), acl_extended_file(), and acl_delete_def_file() that allows local attackers to escalate privileges by replacing any pathname component with a symbolic link. Attackers who control any component of a pathname processed by a privileged caller can redirect ACL read or write operations to arbitrary files or directories, enabling unauthorized manipulation of access control lists and local privilege escalation.",
+        "debianbug": 1141110,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.3.1-3"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue; libacl acl_*_file() follow symlinks; fix adds new acl_*_at() ABI, not individually backportable",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.4.0-1"
+            },
+            "fixed_version": "2.4.0-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.4.0-1"
+            },
+            "fixed_version": "2.4.0-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.3.2-2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Will be fixed first in unstable, then point release update; not to be backported by individual patches",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-54370": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-54370",
+      "mechanism": "pathname ACL TOCTOU race",
+      "applicationUseAssessment": "No app ACL tooling call. Local path race requires additional execution/write/privilege capability.",
+      "untrustedInputPrerequisites": "Privileged getfacl/setfacl/chacl or library operation on attacker-controlled ancestor.",
+      "currentOfficialStatus": {
+        "description": "acl before version 2.4.0 contains a time-of-check to time-of-use (TOCTOU) race condition vulnerability that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link between an lstat() check and subsequent symlink-following operations such as stat(), chown(), chmod(), acl_get_file(), and acl_set_file(). Attackers who control a pathname component can redirect file access control list operations to arbitrary files when getfacl, setfacl, or chacl is invoked by a privileged process over an attacker-controlled path, resulting in local privilege escalation.",
+        "debianbug": 1141110,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.3.1-3"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue; local TOCTOU in recursive setfacl/chacl; fix needs 2.4.0 acl_*_at() ABI + walk_tree rewrite, not individually backportable",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.4.0-1"
+            },
+            "fixed_version": "2.4.0-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.4.0-1"
+            },
+            "fixed_version": "2.4.0-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.3.2-2"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Will be fixed first in unstable, then point release update; not to be backported by individual patches",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-5450": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-5450",
+      "mechanism": "scanf allocated character conversion",
+      "applicationUseAssessment": "No application scanf/%mc call found. JSON/text reaches native runtimes, but the specific vulnerable conversion path is not established.",
+      "untrustedInputPrerequisites": "Caller must invoke affected scanf format/width; no arbitrary C-format interface exposed.",
+      "currentOfficialStatus": {
+        "description": "Calling the scanf family of functions with a %mc (malloc'd character match) in the GNU C Library version 2.7 to version 2.43 with a format width specifier with an explicit width greater than 1024 could result in a one byte heap buffer overflow.",
+        "debianbug": 1134543,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.36-9+deb12u14",
+              "bookworm-security": "2.36-9+deb12u7"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.43-7"
+            },
+            "fixed_version": "2.42-17",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.43-7"
+            },
+            "fixed_version": "2.42-17",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "2.41-12+deb13u4"
+            },
+            "fixed_version": "2.41-12+deb13u4",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-5928": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-5928",
+      "mechanism": "wide-character stream pushback",
+      "applicationUseAssessment": "No application ungetwc interface; JSON encoding is UTF-8. Native runtime paths have not been exhaustively audited.",
+      "untrustedInputPrerequisites": "Special overlapping single/multibyte encoding and wide-stream pushback; not proven reachable.",
+      "currentOfficialStatus": {
+        "description": "Calling the ungetwc function on a FILE stream with wide characters encoded in a character set that has overlaps between its single byte and multi-byte character encodings, in the GNU C Library version 2.43 or earlier, may result in an attempt to read bytes before an allocated buffer, potentially resulting in unintentional disclosure of neighboring data in the heap, or a program crash.  A bug in the wide character pushback implementation (_IO_wdefault_pbackfail in libio/wgenops.c) causes ungetwc() to operate on the regular character buffer (fp->_IO_read_ptr) instead of the actual wide-stream read pointer (fp->_wide_data->_IO_read_ptr). The program crash may happen in cases where fp->_IO_read_ptr is not initialized and hence points to NULL. The buffer under-read requires a special situation where the input character encoding is such that there are overlaps between single byte representations and multibyte representations in that encoding, resulting in spurious matches. The spurious match case is not possible in the standard Unicode character sets.",
+        "debianbug": 1134544,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.36-9+deb12u14",
+              "bookworm-security": "2.36-9+deb12u7"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.43-7"
+            },
+            "fixed_version": "2.42-17",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.43-7"
+            },
+            "fixed_version": "2.42-17",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "2.41-12+deb13u4"
+            },
+            "fixed_version": "2.41-12+deb13u4",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-76844": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-76844",
+      "mechanism": "zlib gzip stream write-error state",
+      "applicationUseAssessment": "HTTP compression/decompression can use zlib; no application gz* file-writing calls found. Deflate/inflate use does not prove this gz_write error path.",
+      "untrustedInputPrerequisites": "Failed gzip stream write followed by affected subsequent gz* operation; native reachability uncertain.",
+      "currentOfficialStatus": {
+        "description": "zlib 1.2.11 through 1.3.2 contains a heap buffer overflow: after an underlying write() fails, gz_write() returns without resetting strm.next_in, leaving it pointed at the caller's buffer. A later gz* write call then derives a position from the stale pointer and writes past a heap allocation; any write() failure reaches it, including EPIPE on a blocking descriptor, and in versions before 1.3.1.2 the failed write must be followed by a gzclearerr() call.",
+        "debianbug": 1153063,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1:1.2.13.dfsg-1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "1:1.3.dfsg+really1.3.2-4"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.2-4",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "1:1.3.dfsg+really1.3.2-4"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.2-4",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "1:1.3.dfsg+really1.3.1-1",
+              "trixie-security": "1:1.3.dfsg+really1.3.1-1+deb13u1"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-78410": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-78410",
+      "mechanism": "restricted bind-mount source race",
+      "applicationUseAssessment": "No app mount/fstab operation; helpers remain but tested privilege/device/host-mount boundaries restrict escalation.",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "currentOfficialStatus": {
+        "description": "A flaw was found in util-linux. Restricted bind mounts take the source path from fstab but do not pin that source before the privileged mount. A local unprivileged user who can replace the authorized source or a writable ancestor can redirect SUID mount(8) to bind another host directory. If the fstab entry also sets X-mount.owner, X-mount.group, or X-mount.mode, root then changes ownership or mode on that redirected inode.",
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.38.1-5+deb12u3",
+              "bookworm-security": "2.38.1-5+deb12u1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "2.42.4-1"
+            },
+            "fixed_version": "2.42.3-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "2.42.4-1"
+            },
+            "fixed_version": "2.42.3-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.41.5-0+deb13u1",
+              "trixie-security": "2.41.5-0+deb13u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-82560": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-82560",
+      "mechanism": "Perl Pod::Text formatting exhaustion",
+      "applicationUseAssessment": "No Perl POD rendering in app; Pod/Text.pm not found in inspected standard Perl directories. Package-source matching may overstate installed feature.",
+      "untrustedInputPrerequisites": "Attacker POD supplied to affected Perl formatter; no app route found.",
+      "currentOfficialStatus": {
+        "description": "Pod::Text versions before 6.1.1 for Perl allow CPU and memory exhaustion formatting a POD document whose =over nesting drives the margin to the output width.  Each =over adds its indent to the margin, which wrap() subtracts from the output width to get the space available for text. When that space reaches zero, the line-splitting substitution matches the empty string, and the loop consumes no input while appending the margin padding on every pass.  Formatting an attacker-supplied POD document never returns, and the output grows until memory is exhausted.",
+        "debianbug": 1148455,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "5.36.0-7+deb12u3",
+              "bookworm-security": "5.36.0-7+deb12u4"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "5.42.3-1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "5.44.0-3"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "5.40.1-6+deb13u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-84243": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-84243",
+      "mechanism": "gettext catalog path/environment manipulation",
+      "applicationUseAssessment": "HTTP inputs cannot set process environment or install locale catalogs; no host mounts or SSH service in app.",
+      "untrustedInputPrerequisites": "Attacker-controlled LANGUAGE/locale plus writable malicious catalog; would require additional capability.",
+      "currentOfficialStatus": {
+        "description": "The gettext family of functions in the GNU C Library version 2.0 and later accept LANGUAGE environment variable entries that contain '/' or that are equal to \"..\", unless the program is setuid or setgid (AT_SECURE).  An attacker who can set LANGUAGE in the environment of a program that uses gettext can make it load a message catalog (.mo file) from an arbitrary location in the file system.  A crafted .mo file can crash the program through out-of-range offsets, or supply translations whose format directives do not match the arguments passed by the program.  That causes undefined behaviour in the printf family of functions and may allow arbitrary code execution with the privileges of the program.  The safety of message catalogs relies on them being installed in trusted, read-only locations, and the directory traversal bypasses this.  The fix for CVE-2014-0475 rejects \"..\" path components in locale names passed to setlocale or taken from the LC_ALL, LC_* and LANG environment variables.  gettext reads LANGUAGE directly and appends each colon-separated entry to the message catalog directory, so that fix did not cover LANGUAGE.  LANGUAGE is only used when the LC_MESSAGES locale is not \"C\", \"C.<encoding>\" or \"POSIX\", so the attacker must also be able to select another installed locale, for example through LANG or LC_ALL.  Exploitation also requires that the attacker can place the crafted file in a location readable by the target program, and that the environment crosses a trust boundary without the program running as AT_SECURE.  An example is an SSH server that accepts LANGUAGE and LANG from clients through the AcceptEnv directive and restricts an account to a forced command; the attacker may use this to escape the restriction.",
+        "debianbug": 1152640,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "2.36-9+deb12u14",
+              "bookworm-security": "2.36-9+deb12u7"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "2.43-7"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "2.43-7"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "2.41-12+deb13u4"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-85091": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-85091",
+      "mechanism": "zlib nonblocking gzip write state",
+      "applicationUseAssessment": "Installed zlib1.2.13 is outside the description range1.3.1.2\u20131.3.2, but Debian marks it open. No own gzprintf/gzvprintf path; applicability remains unresolved.",
+      "untrustedInputPrerequisites": "Affected nonblocking gzwrite stall and later formatted write; retain mismatch for expert adjudication.",
+      "currentOfficialStatus": {
+        "description": "zlib versions 1.3.1.2 through 1.3.2 contain a heap buffer overflow vulnerability in the gz_vacate() function when processing non-blocking gzwrite() operations with stale external buffer pointers. Attackers can trigger the overflow by calling gzprintf() or gzvprintf() after a write stall, causing an unchecked memmove() to write beyond the internal input buffer boundary.",
+        "debianbug": 1146895,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "1:1.2.13.dfsg-1"
+            },
+            "urgency": "not yet assigned"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "1:1.3.dfsg+really1.3.2-4"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.2-4",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "1:1.3.dfsg+really1.3.2-4"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.2-4",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "resolved",
+            "repositories": {
+              "trixie": "1:1.3.dfsg+really1.3.1-1",
+              "trixie-security": "1:1.3.dfsg+really1.3.1-1+deb13u1"
+            },
+            "fixed_version": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+            "urgency": "not yet assigned"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-9538": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-9538",
+      "mechanism": "Perl Archive::Tar memory allocation",
+      "applicationUseAssessment": "No Perl/archive processing in app; Archive/Tar.pm not found in inspected standard Perl directories. Retain source-package finding; do not call it patched.",
+      "untrustedInputPrerequisites": "Crafted tar read by Perl Archive::Tar; absence check is limited to standard paths.",
+      "currentOfficialStatus": {
+        "description": "Archive::Tar versions before 3.10 for Perl allow memory exhaustion via attacker controlled entry size field in tar header.  _read_tar() reads each entry's payload with $handle->read($$data, $block), where $block is derived from the entry's 12-byte size field in the tar header with no upper bound on that value.  A crafted header declaring a multi-gigabyte size causes Perl to allocate a scalar of that size.",
+        "debianbug": 1138861,
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "5.36.0-7+deb12u3",
+              "bookworm-security": "5.36.0-7+deb12u4"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue; wait for regressions upstream sorted out",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "resolved",
+            "repositories": {
+              "forky": "5.42.3-1"
+            },
+            "fixed_version": "5.42.3-1",
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "resolved",
+            "repositories": {
+              "sid": "5.44.0-3"
+            },
+            "fixed_version": "5.42.3-1",
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "5.40.1-6+deb13u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue; wait for regressions upstream sorted out",
+            "nodsa_reason": "postponed"
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    },
+    "CVE-2026-95619": {
+      "priorAssessmentReference": "task52-container-security-triage.json#/advisories/CVE-2026-95619",
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "applicationUseAssessment": "Native runtimes use allocation libraries and parse untrusted input. HTTP bounds help limit sizes, but exact native reachability is unknown.",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "currentOfficialStatus": {
+        "description": "A flaw was found in libstdc++. An integer overflow can occur when processing large inputs to the aligned operator new in the C++ library. This vulnerability could lead to an undersized memory allocation, potentially causing memory corruption or application instability.",
+        "scope": "local",
+        "releases": {
+          "bookworm": {
+            "status": "open",
+            "repositories": {
+              "bookworm": "12.2.0-14+deb12u1"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": "postponed"
+          },
+          "forky": {
+            "status": "open",
+            "repositories": {
+              "forky": "12.5.0-11"
+            },
+            "urgency": "not yet assigned"
+          },
+          "sid": {
+            "status": "open",
+            "repositories": {
+              "sid": "12.5.0-11"
+            },
+            "urgency": "not yet assigned"
+          },
+          "trixie": {
+            "status": "open",
+            "repositories": {
+              "trixie": "12.4.0-5"
+            },
+            "urgency": "not yet assigned",
+            "nodsa": "Minor issue",
+            "nodsa_reason": ""
+          }
+        }
+      },
+      "newRoleScope": "Native SQL/libpq TLS, Redis TLS and HTTPS identity parsing are active in the candidate. No arbitrary SQL/CLI/SQLite API is exposed. Transitive native reachability is not exhaustively proven; retained unresolved, not accepted.",
+      "exploitationEstablished": false
+    }
+  },
+  "officialTracker": {
+    "url": "https://security-tracker.debian.org/tracker/data/json",
+    "retrieved": "2026-11-13",
+    "sha256": "9316c2d49a912099f0da92dfb96c490ed3e425a0ece26f1593a55ea86ff96560",
+    "reviewedAdvisories": 31
+  },
+  "closedFrontendContinuation": {
+    "verification": "task52-closed-frontend-verification.json",
+    "report": "task52-closed-frontend-verification.md",
+    "security": "task52-closed-frontend-security.json",
+    "priorFieldsPreserved": true,
+    "notHostedActivation": true
+  }
+}

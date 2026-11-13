@@ -109,3 +109,21 @@ Only the selected private profile returns `privateOuting` with `version`, opaque
 ## Inactive ordinary private browser checkpoint
 
 Only the selected UI profile adds authenticated GET `/api/planning-mode` and POST `/api/private-ordinary/revoke` alongside ordinary routes. Readiness returns `enabled:false` with a separately scoped synthetic-dependency flag, never financial or production permission. Normal revoke is404. Public/service proofs retain separate build identities; exact method/body and IAP ownership remain mandatory. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### HTTPS is a transport boundary, not planning authority
+
+`private_runtime/https.py` provides `Endpoint(url, audience)` and `HTTPS(...).request(endpoint, method, path, body, headers)`. The endpoint must be a reviewed HTTPS root origin. Certificate and hostname validation remain enabled, including in local tests that use a temporary trusted test CA. Requests, responses, simultaneous connections and deadlines are bounded. Redirects, truncated responses and alternate unauthenticated/plaintext routes refuse. There is no automatic retry.
+
+`ServiceClient` adds the existing canonical body signature, exact audience/path and user-forwarding context. The receiving service still verifies workload identity, nonce, user ownership and native/financial authority independently. A matching TLS hostname alone does not authorize a Maps call. Operating-system DNS can delay a synchronous connect; the adapter checks the elapsed deadline before sending. Local TLS fixtures do not prove Cloud Run IAM, IAP or private networking. [Source and tests](../../private_runtime/https.py).
+
+### Task 52 private role continuation (inactive candidate)
+
+A dispatcher callback uses a configured factory slot plus workload principal/build/epoch/random process boot and a one-use payload-bound permit (`dispatch_owner.py`). It cannot accept a caller-selected URL. A different process refuses the old permit, even when it has the same logical role. HTTPS authentication and protected financial checks are still independently required; a failed network response never permits automatic resend.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+
+### Task 52 closed frontend and immutable recovery checks
+
+The closed frontend uses the existing workload identity port, independently verifies IAP, and signs the exact forwarded request bytes. It strips browser credentials and does not redirect or retry. The external local fake metadata service is test infrastructure; no signer or controller enters the production frontend. Startup TLS connectivity is not application financial readiness. The separate authenticated planning-mode probe remains non-billable. See [verification report](../task52-closed-frontend-verification.md).

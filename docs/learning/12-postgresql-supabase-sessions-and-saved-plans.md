@@ -170,3 +170,16 @@ The new public status verifier consumes request/user nonces in the existing inde
 ## Inactive ordinary private browser checkpoint
 
 The new disposable SQL/witness readiness functions run in READ ONLY transactions, are owned by the existing NOLOGIN owner, revoke PUBLIC execute, and grant only issuer/factory-witness access. They compare protected grant/configuration and complete committed history without reserving or updating sessions. Ordinary workers have no direct execute or table-write privileges. No real migration occurs. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Shared storage does not make every dependency portable
+
+The network component reuses the encrypted Redis evidence, SQL grants/reservations and independent witness. It adds no migration, new financial scope or worker database privilege. Redis data still needs current SQL source/revision/fence/epoch checks. A network outage cannot reset committed charges.
+
+One remaining hosted issue is outside those durable tables: `experiments/service_isolation/runtime.py` stores a live admission callback in the factory process's `PENDING` dictionary until dispatch is checked. A callback reaching a different replica or restarted factory refuses. Do not serialize that callable or replace its checks with a digest. Hosted rollout needs an explicit exact-owner/drain or durable revalidation design before it can claim independent factory replicas. [Detailed limitations](../task52-production-service-packaging.md#reliability-resource-and-security-findings).
+
+### Task 52 private role continuation (inactive candidate)
+
+`private_runtime/connections.py` verifies TLS hostname/CA, exact database/session/current login/memberships and protected enrollment purpose on every checkout. Bounded connection reuse resets session state and never retries failed financial operations. The witness uses session advisory locks, so transaction poolers are unsupported. `deployment/sql/hosted-*-contract-v1.sql` are inert isolated-schema candidates, not applied Supabase migrations or worker bootstrap permissions. Saved-plan schema/RLS are unchanged.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.

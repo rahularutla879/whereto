@@ -1,3 +1,13 @@
+> Current Task52 bounded local result: [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md). Earlier candidate entries below are preserved historical development state. Local packaging verification does not approve private hosting, financial grants or public launch.
+
+## Task 52 — direct session-affine witness and source-derived private role candidate
+
+Retain existing protected accounting/lock/scoring algorithms. Use explicit TLS restricted-role pools and administrator-enrolled purpose/schema fingerprints; transaction poolers cannot preserve witness session locks and are unsupported. Bind nonserializable callbacks to exact configured workload/slot/build/epoch/process boot with bounded drain and no retry/failover. Derive role artifacts under a new manifest rather than editing or impersonating frozen source identities. No fixture trust or test clock is selectable from production entry. This is an inactive candidate pending combined acceptance and security review, not a hosted authority approval. [Details](docs/task52-private-role-continuation.md).
+
+# Task 52 decision — transport cannot confer hosted authority
+
+Use fixed authenticated HTTPS clients over unchanged ordinary/native protocols and preserve the source-pinned parent. Keep test orchestration, opaque loopback conduit and synthetic IdP outside images. Closed frontend SDK artifacts are reusable, but no hosted launcher may bypass synthetic SQL/Redis/epoch/provider checks. Existing process-local admission callbacks require an explicit routing/drain or durable revalidation design before replica overlap. Full startup acceptance remains blocked; see [network packaging report](docs/task52-production-service-packaging.md). No actual IAM, grant or spending permission is inferred.
+
 # Task 52 — discard-first private browser recovery
 
 Retain no outing or raw model evidence in browser storage. Use per-tab memory and the existing opaque handle. Refresh/navigation discards state; uncertain work is never automatically resumed. Lock meaning controls after interpretation and require an explicit authenticated native revoke before a new source action. Expose only confirmed coordinate controls before one generation. Readiness reports dependency availability separately from production and financial authorization, using restricted read-only probes and independent history/configuration agreement. See [ordinary private UI/recovery report](docs/task52-ordinary-private-ui.md).
@@ -783,3 +793,8 @@ This is a provisional owner decision package, not provider acceptance or provisi
 Use one protected operator-owned application grant over approved roots, with independent rate versions and integer conservative reservations for Maps plus fictional inference. Keep all proposed staging amounts unapproved, and keep infrastructure billing and the halted AI experiment separate. Record usage without releasing conservative exposure. Missing pricing/count categories refuse.
 
 Prototype independent recovery ownership with a second disposable PostgreSQL database/volume and separate operator/service/reader roles. Commit reservation/dispatch/delivery claims before fake I/O, mirror immutable operational facts, and quarantine the whole grant on incomplete history or rollback disagreement. No automatic refund/retry/epoch default or rotation-back exists. This trades availability for safety; local shared-admin isolation is not hosted independence and cannot defeat correlated privileged rollback. Separate real enrollment/service authentication/backups/reconciliation need review. [Implementation, threat boundary and verification](docs/task52-application-financial-authority.md). No production policy/model/ordering change.
+
+
+## Task 52 closed frontend / pinned interruption continuation
+
+Use a closed packaged frontend entry and root-owned configuration-hash enrollment instead of an externally mounted preload. Reject unsafe Node options before Node execution. Preserve independent authentication, evidence, financial and restore checks. Retain the original unpinned assertion as unattributed; a later immutable pass does not rewrite history. Python linecache mutation is demonstrated only as a possible mechanism. No real hosted activation or security-risk acceptance is implied. See [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md).

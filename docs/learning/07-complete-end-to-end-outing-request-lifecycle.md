@@ -168,3 +168,16 @@ Fresh interpretation reserves fictional inference cost before dispatch, validate
 ## Inactive ordinary private browser checkpoint
 
 Interpret once, answer only requested clarifications against the same source, confirm execution controls, then generate once. Date/location/mode/activity/budget meaning edits require discarding the source and an explicit new interpretation. Coordinates can change before generation under existing typed validation. Optional/flexible/return journeys remain unsupported rather than simplified. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Ordinary request through the network fixture
+
+The new source-pinned runner starts actual Next/FastAPI services and fake dependencies. The browser submits the original Coffee/museum request, receives a pending date question, answers it without new inference, confirms synthetic coordinates and generates once. Original source, absolute expiry, handle revision, outing and budget root remain owned by the native factory. Returned cards are display snapshots, never fresh provider authority. Discard requires authenticated native revoke; refresh clears memory and does not resume uncertain work.
+
+Only health, bounded readiness, ordinary interpretation/pending, generation and discard cross the new frontend network channel. Saving, refresh, advanced, pagination, origin discovery and provider Details stay blocked. Local View details expands already returned data. [Actual route matrix](../task52-production-service-packaging.md#actual-route-matrix).
+
+### Task 52 private role continuation (inactive candidate)
+
+Private-role startup is not an outing-success test. The candidate ordinary flow must pass original source/owner/revision, encrypted evidence, admission, reservation and exact canonical dispatch checks through its current role cohort. Deterministic clarification must retain source and avoid another inference. An encryption-metadata byte-contract regression was added during integration; prior ordinary UI results do not certify the changed cohort.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.

@@ -173,3 +173,9 @@ From the repository root, with the approved local Colima profile and pinned cach
 ## Inactive ordinary private browser checkpoint
 
 From the repository root, with the approved local VM/cached wheels and a current frontend build: `PYTHONPATH=. backend/.venv/bin/python -m experiments.ordinary_ui.run_local`. The `--browser` fixture option holds a loopback-only synthetic UI for a bounded manual check; it is not a hosted enablement switch. Focused tests: `node_modules/.bin/tsx --test lib/private-ordinary-client.test.ts`.
+
+## Task52 authenticated network component
+
+Use the [exact source-projection, local amd64 build and inspected-image runner instructions](../task52-production-service-packaging.md#local-reproduction-not-a-deployment-command) from the repository root. `backend/.venv/bin/python -m experiments.ordinary_network.run_local` creates only disposable local synthetic resources; it requires the existing approved dedicated Colima context. It is not a hosted entry point. No Docker socket or controller credentials enter the actual frontend process. The inert startup contract remains blocked; do not set test flags in a deployed workload to bypass it.
+
+Candidate private role projection (no deployment): from the repository root, use `PYTHONPATH=. backend/.venv/bin/python deployment/prepare_private_services.py /tmp/NEW_EMPTY_CONTEXT`. The output path must not already exist. Use `private_runtime.test_projection` for source/AAD checks and `experiments.hosted_ports.run_local` only with the approved disposable container fixture. These commands do not enroll hosted authority or authorize spending.

@@ -168,3 +168,21 @@ A restart test must wait for bounded non-billable socket readiness rather than a
 ## Inactive ordinary private browser checkpoint
 
 Separate real desktop/mobile browser observations from HTTP, unit and container results. The new controller tests cover late responses, expiry, no retries, no browser raw evidence, normal404 and non-entitling readiness. Controlled missing evidence yields SQLSTATE P0001; lock contention yields55P03 under unchanged deadlines. Neither proves the cause of an older unattributed refusal. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Reproducing the new network checks
+
+Run `backend/.venv/bin/python -m unittest private_runtime.test_https -v` for isolated TLS bounds/hostname/response failures, and `node_modules/.bin/tsx --test lib/server-https.test.ts` for the Node channel. These tests bind temporary local ports and generate fictional certificates with installed OpenSSL. They do not contact Google. The local full runner is `backend/.venv/bin/python -m experiments.ordinary_network.run_local`; it requires the approved disposable Docker engine, existing pinned backend image and a previously built/probed frontend image identity file as described in the deployment report.
+
+The runner is test-only: bootstrap uses disposable admin credentials, while application processes have restricted credentials. Do not copy it into hosted startup. Record final cohorts separately from earlier import, fixture, lint or socket failures. The final flow collects inclusive timings in `/tmp/network-ordinary-latency.json`; overlapping stage totals cannot be added. Roughly54 seconds for a synthetic three-request flow is a performance limitation, not a cloud SLO pass. Never rerun a real uncertain send for a timing sample.
+
+### Task 52 private role continuation (inactive candidate)
+
+New tests are in `private_runtime/test_dispatch_owner.py`, `test_dispatch_processes.py`, `test_projection.py` and `experiments/hosted_ports/`. The disposable fixture runs real restricted SQL principals/TLS Redis and distinct role processes. Its offline identity launcher stays outside images. Read current cohort evidence before interpreting a pass: source import, image liveness, direct HTTP, full browser and reserved-send crash recovery prove different things. Debug only sanitized category/SQLSTATE/filename/function/line; never print controller code containing credentials.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+
+### Task 52 closed frontend and immutable recovery checks
+
+`experiments/hosted_ports/pinned_run.py` snapshots and hashes source/image inputs before tests, runs from read-only files, captures the actually loaded assertion bytecode and checks the files afterward. Sealed fictional keys and complete requests stay outside Git. Python traceback source can differ from loaded bytecode after a file changes; a test demonstrates that mechanism without claiming it explains an earlier unattributed failure. `deployment/verify_closed_frontend.py --images /tmp/task52-closed-front-images.json --output /tmp/task52-closed-image-checks.json` performs network-disabled local image/refusal checks; it requires the approved local Docker context, not cloud access. See [verification report](../task52-closed-frontend-verification.md).

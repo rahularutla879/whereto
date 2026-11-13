@@ -1,0 +1,27 @@
+{
+  "identity": "52-private-network-startup-contract-v1",
+  "normalStartupChanged": false,
+  "launchable": false,
+  "providerDispatchEnabled": false,
+  "supportedUIContract": "52-private-ordinary-ui-v1",
+  "supportedRoutes": ["GET /api/health", "GET /api/planning-mode", "POST /api/interpret", "POST /api/plans/generate", "POST /api/private-ordinary/revoke"],
+  "workloads": {
+    "frontend": {"calls": ["backend"], "secrets": ["proof-key"]},
+    "backend": {"calls": ["factory"], "secrets": ["proof-key", "nonce-witness"]},
+    "factory": {"calls": ["counter", "dispatcher", "recovery"], "secrets": ["proof-key", "runtime-sql", "issuer-sql", "witness-service", "redis-publisher", "evidence-key"]},
+    "counter": {"calls": [], "secrets": ["proof-key", "counter-sql", "nonce-witness"]},
+    "dispatcher": {"calls": ["factory"], "secrets": ["proof-key", "delivery-sql", "nonce-witness", "redis-reader", "evidence-key"]},
+    "recovery": {"calls": [], "secrets": ["proof-key", "operator-witness", "independent-epoch"]}
+  },
+  "requiredTransport": "HTTPS with certificate/hostname verification, exact audience, Google workload identity and request proof; no redirects/retries/fallback",
+  "missingHostedBindings": [
+    "Versioned native authority connection factories: verified TLS SQL roles/schema/identity instead of local synthetic-only constructors",
+    "Managed Redis TLS/AUTH/key/namespace ports and approved real-content field admission",
+    "Independently operated witness/nonce/epoch connections, restore ownership and reconciliation",
+    "Qualified hosted LLM, real complete-input counter, reviewed rates and canonical provider transports",
+    "Finite operator-owned real grant, approved timezone/root lifecycle and workload enrollment",
+    "Reviewed production native factory/ASGI lifespan without test clocks, saved-record mocks or guard patches",
+    "Actual IAM/IAP ingress, source-pinned secret enrollment and private staging security/recovery acceptance"
+  ],
+  "forbidden": ["Docker socket or executable", "bootstrap/admin credential", "fixture signer/root", "dev/test guard override", "environment-only ready flag", "arbitrary Python module loading", "unmetered provider fallback", "local Ollama fallback"]
+}

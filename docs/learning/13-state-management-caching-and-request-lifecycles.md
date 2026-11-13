@@ -163,3 +163,16 @@ There is no latest-session-per-user lookup. Each outing carries its own unpredic
 ## Inactive ordinary private browser checkpoint
 
 Each tab has an independent controller/handle. No raw interpretation, graph, source, handle or itinerary enters browser storage. Refresh and persisted back navigation clear memory. A generation counter rejects late responses after discard. Absolute expiry is not renewed; cards never authorize another provider operation. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Network cancellation and uncertain results
+
+The new Node HTTPS channel rejects a request explicitly before destroying a timed-out/oversized socket. This avoids an unhandled socket error discovered by an adversarial response-size test. No fallback send is made. Python closes its connection and releases the bounded slot in `finally`; incomplete declared responses refuse even if their initial bytes look like valid JSON.
+
+Transport rejection is not proof that a provider did no work. Existing committed reservation/intent exposure and one-use dispatch facts remain authoritative. Lost results never become automatically retryable or refundable. Reconstructing a native session, refreshing a browser or starting a new worker cannot recreate financial permission. The ordinary UI retains its discard-only navigation policy.
+
+### Task 52 private role continuation (inactive candidate)
+
+`redis_port.py` supplies a TLS/AUTH lifecycle port to existing evidence CAS and encryption. Original absolute expiry remains authoritative. Derived AAD must be canonical bytes: decode inherited canonical metadata, add deployment/build binding, then encode it again. Never merge a bytes value as a dictionary. Live callback objects stay in their exact factory process; draining/replacement cannot reconstruct lost admission evidence.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.

@@ -1,0 +1,68 @@
+> Follow-up: [closed frontend / immutable continuation](task52-closed-frontend-verification.md) records the latest bounded local result. All earlier observations and failures below are retained, including the unattributed assertion.
+
+# Task 52 private role packaging continuation — acceptance remains open
+
+This continues the preserved 49-file working tree at `2c5bfcc651521639cb654b6e3940697b3cd880aa`. It is an inactive candidate, not a deployment or completed release. The earlier network/UI results remain in [the original report](task52-production-service-packaging.md); they do not certify the derived role cohort. [Machine evidence](task52-private-role-continuation-verification.json) records exact cohorts and completed checks. [Security inventory](task52-private-role-security-review.json) retains every critical/high package/advisory match without suppression.
+
+## Connection and lifecycle boundary
+
+`private_runtime/connections.py` introduces a separately versioned, TLS `verify-full` PostgreSQL port. Each checkout independently checks database, session/current login, exact transitive memberships, role flags, login validity, protected purpose and the administrator-enrolled schema/policy fingerprint. Runtime cannot bootstrap or enroll itself. Existing financial transactions, source evidence, revision/fence checks and witness reconciliation are retained.
+
+Each process has bounded pools (at most four connections each), 2-second connection setup, existing 1500ms statement/250ms lock timeouts and maximum 300-second connection age. Checkout is immediate refusal at capacity, never an in-memory fallback or automatic replay. Return resets connection state with `DISCARD ALL`; failed leases close. Startup validates dependencies and shutdown closes pools. Credentials are role-specific and not accepted from HTTP requests. Actual hosted credentials are unavailable in the fixture.
+
+The witness retains its session advisory lock. Only direct, session-affine SQL endpoints are supported; transaction poolers are explicitly unsupported. Witness statements additionally bind to the actual PostgreSQL backend PID in the same statement. Session hopping or revoked login refuses. A network/proxy failure can strand a lock and require operator action; this design does not claim to repair that automatically. Hosted connection capacity, endpoint affinity, TLS and operational grants still need independent enrollment review.
+
+`redis_port.py` reuses existing encrypted evidence and bounded compare-and-set code through TLS/hostname verification, separate AUTH identities, bounded connections, zero retries and absolute expiry. The explicit historical protocol alias maps into the private environment/epoch namespace. Derived native AAD binds that environment and the new runtime cohort. No pickle, callback or executable object is serialized. Real Google-content field admission, retention and licensing remain unapproved; only synthetic evidence is exercised.
+
+## Callback owner and overlapping revisions
+
+`dispatch_owner.py` and `owned_dispatch.py` bind each live callback to an enrolled endpoint slot, workload principal, source cohort, restore epoch, random process boot, single-use permit, operation, ordinal and canonical payload digest. The dispatcher selects only configured slots and verifies the authenticated sending principal. The receiving factory checks its original live source/admission callback; it does not manufacture replacement admission.
+
+Permits expire after five seconds and are consumed before checking. Draining refuses new actions, permits existing actions for at most eight seconds, then clears callbacks. Process replacement, wrong boot, unknown slot, stale build/epoch and replay refuse. There is no callback serialization, failover retry or refund. Existing committed exposure and uncertain-send handling remain owned by the protected SQL/witness protocol.
+
+Future Cloud Run enrollment must provide exact revision endpoint routing and at most one process per owner slot, or separately review another ownership design. Cloud Run affinity is not assumed. Local process tests establish process isolation and refusal; they do not establish real IAM or prove every reserved-send interruption in the combined application.
+
+## Source-derived role packaging
+
+`deployment/prepare_private_services.py` verifies the frozen network parent, then produces a new manifest with original input hashes, exact role-derived output hashes, dependency lock and base identities. Named/count-checked dependency replacements and AST pruning remove local fixture constructors, offline identity roots, generic test servers and unnecessary role code. Original source/evaluation identities are not edited or returned as authorization for these derived bytes. The transformation code itself is an input hash and needs explicit security review.
+
+`Dockerfile.private-service` creates distinct backend, factory/issuer, counter, dispatcher and recovery images. Counter/recovery use the smaller exact hash lock. Runtime is UID/GID10001, source root-owned/read-only, pip removed, with no Docker socket, host mount, signer, bootstrap, test modules, credential/key file or private evaluation evidence. `private_runtime.entry` accepts no fixture/configurable Python module loader and refuses without fixed runtime secret enrollment, real hosted identity, exact role/cohort/epoch and verified storage. Normal application and Docker startup are unchanged. [Inert enrollment contract](../deployment/private-services-v1.json) remains `launchable:false`.
+
+The candidate has only the explicit non-network synthetic ordinary responder and fictional UTF-8-byte counter. It cannot select a real model or make paid provider calls. Synthetic responders are not qualified inference or venue accuracy. Local offline identity injection exists exclusively in an external test entry; production entry has no switch for those roots. Authority routines are still the separately reviewed synthetic protocol; these artifacts do not authorize a real schema migration or financial grant.
+
+## Demonstrated failures and corrections
+
+Connection tests first exposed missing Redis CAS ACL commands and non-root certificate permissions; only required commands/public certificate readability were added. No extra capability, insecure TLS or broader runtime SQL grant was used. Fixture-only failures included wrong callback import hook, treating a build hash as a Docker container ID, wrong inert SQL filename, Docker network-none attachment, a host-only JWT import, a backend-only import in the minimal counter launcher and an incorrectly expected recovery membership. They are preserved as failed attempts, not passing cases.
+
+The combined role images start. An early application probe exposed a real derived adapter defect: `_aad` attempted dictionary expansion of canonical bytes. The correction explicitly decodes the inherited canonical document, adds namespace/build, and re-encodes canonical bytes. A deterministic regression checks byte type and retention of original session/anchor fields. The corrected images were rebuilt and reverified under the checked manifest. This failure is distinct from, and does not explain, the older unattributed `database_protocol` refusal.
+
+## Performance and security limits
+
+The SQL benchmark compares equivalent restricted TLS checkout + full enrollment verification + `SELECT 1` + reset, with twelve fresh connections versus one reusable pool. Its raw samples and cold/warm summaries are in the evidence. It excludes fixture/controller setup and changes no security checks or deadlines. It is not a complete user-request speedup. The earlier 53.849s flow includes setup/diagnostics and is not a valid cold/warm baseline. Successful first/second interpretation, clarification and generation timings and overlapping structural stage spans were captured. These do not establish Cloud Run cold-start performance.
+
+Fresh Grype scans use the pinned scanner and recorded November13 database. Existing Python-role images retain three critical/82 high matches each; frontend retains two critical/49 high. These are advisory matches, not demonstrated exploitation or accepted risk. Every high/critical row is retained with fix status and unresolved exposure. Debian still lists the reviewed Bookworm glibc and SQLite packages as affected: [glibc](https://security-tracker.debian.org/tracker/CVE-2026-5450), [SQLite](https://security-tracker.debian.org/tracker/CVE-2025-7458). No blanket exclusions, distro change or unsafe dependency upgrade was applied.
+
+Official Docker Hub metadata identifies no newer Python3.12 Bookworm base in this evidence, but a newer same-major Node24 Bookworm base was evaluated in a separately pinned, non-activated cohort. Build, isolated smoke and advisory comparison are recorded separately; no candidate silently replaces the working image or frozen base manifest. Seven moderate npm development-tooling advisories remain; no high/critical npm audit finding. Real staging requires compatible remediation or documented security review, not an AI-generated risk acceptance.
+
+## Completion gate and next action
+
+Do not commit/push this continuation while the unpinned earlier reserved-send assertion and complete closed hosted frontend startup remain unresolved. Preserve all working files. No full-backend or hosted readiness is claimed. The smallest next action is to run the captured-source, post-browser reserved-send sequence with immutable test inputs, attribute the earlier assertion discrepancy, then implement/review the closed hosted frontend installer without an external test preload. Complete security disposition before considering hosted enrollment. No cloud provisioning, real grant/provider calls, activation or Task53 follows automatically.
+
+## Final verified scope and blockers
+
+Current checked cohort: `2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee` ([exact manifest](../deployment/private-role-cohort-v1.json)). All five role images build, pass source/content/non-root/default-refusal checks and have fresh scans. The complete HTTPS API probe passes two independent outings, wrong-user refusal, cross-factory clarification with exactly two total model operations, generation of three **provisional** cards, duplicate refusal, unsupported routes and forged workload refusal. Unknown prices/hours were not promoted to confirmed feasibility. A prior test incorrectly counted only `plans`, ignoring the existing `provisionalPlans` contract; corrected without changing product behavior.
+
+Actual CUA desktop1280×900/mobile390×844 against standalone Next and the current role images passed pending→date→confirmed synthetic origin→three provisional cards, summary/View Plan, local non-provider details, explicit discard, source edit and refresh clearing state. Mobile DOM width/scrollWidth390/390. Browser screenshots are recorded in machine evidence. Multiple simultaneously successful browser tabs, every outage through the browser and assistive-technology completeness were not claimed.
+
+The final selected unit/regression cohorts total639 passes and10 opt-in skips, plus the separate HTTP matrix, image checks and actual browser checks. The unchanged grant suite passed30 in886.594s. Independent operational and witness snapshot restores quarantine the entire grant; operational crash/restart preserves exposure and Redis loss refuses reconstruction. No full-backend pass is claimed.
+
+The post-browser reserved-send test refused the killed-factory operation and found equal before/after accounting, but failed its expected-count assertion without saving the tuple. Test harness edits were occurring during development, so the precise loaded assertion/source for that attempt is not pinned. A subsequent stable, instrumented reproduction retained `(6845,1,0)` before/after:6845 synthetic charge units, one durable intent and zero delivery facts, with request refusal and factory restart. **The earlier discrepancy remains unattributed; the later pass does not erase it.** Save immutable harness snapshots before rerunning the exact post-browser history. The source snapshot of the passing reproduction is recorded separately; the later unique browser-finish-signal coordination change is fixture-only and compile-checked, not rerun as a browser cohort.
+
+The frontend image still contains closed Google identity/HTTPS components; actual local private selection uses an externally mounted test preload. It must not be described as a fully deployable, closed hosted frontend startup. A reviewed real installer/secret contract and root-owned application-file packaging are still needed there. The new backend/privileged entries are separate mandatory-dependency candidates; no normal production guard was relaxed. Cross-build live cutover also needs review: the original immutable service profile admits one cohort, and incompatible builds currently refuse rather than inheriting authority.
+
+No commit/push: bounded acceptance remains open. Normal production, providers, model/prompt/ordering, saved RLS, ten historical attempts/$0.047366625 accounting/324 evidence files/halt remain unchanged. No provisioning or spending occurred.
+
+
+## Subsequent closed-entry / immutable verification continuation
+
+The preceding results and open gates are retained as historical development evidence. See [the closed frontend continuation](task52-closed-frontend-verification.md) and its machine-readable record for final artifact identities, exact browser/crash checks and remaining hosted blockers. The original assertion remains unattributed; no frozen financial/evaluation record is reclassified.

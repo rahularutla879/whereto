@@ -1,0 +1,1840 @@
+{
+  "identity": "52-closed-frontend-immutable-continuation-v1",
+  "baseline": "2c5bfcc651521639cb654b6e3940697b3cd880aa",
+  "acceptance": "Bounded inactive local packaging/reproducibility passed; private cloud staging and public activation remain blocked",
+  "productionActivated": false,
+  "realProviderRequests": 0,
+  "cloudResourcesProvisioned": 0,
+  "realGrantsCreated": 0,
+  "original82Files": {
+    "ARCHITECTURE.md": {
+      "initialSHA256": "eed1542072e0c1e0ae5fab5e0dbdea32a144d6643d91564dd32fb9fdaff6148d",
+      "allOriginalBytesRetained": true
+    },
+    "DECISIONS.md": {
+      "initialSHA256": "eefca50c5fc824eb7b1b9b13c56f7764b93cf276a48f3cd209c2cc3b4c7966ed",
+      "allOriginalBytesRetained": true
+    },
+    "HANDOVER.md": {
+      "initialSHA256": "7d2cc3892686125931f0d3de4e7633b5f223ee16c95da0cefb4f91068ee42f8f",
+      "allOriginalBytesRetained": true
+    },
+    "TASKS.md": {
+      "initialSHA256": "8333523f84ed802a10bdc6ff155d8bfe0bc2e015a5c1f797f7e3e98a5a3dc497",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/Dockerfile.frontend-network": {
+      "initialSHA256": "8b1795923675913e81eb630261ffaf448bec7389d39824b3de8e6afcbfe62beb",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/Dockerfile.private-service": {
+      "initialSHA256": "c0a158dfea66ba0060bf24f7bda257970a2de309fa6cc501ca24ad0176c315e3",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/build-network-port.mjs": {
+      "initialSHA256": "7175f7d43045326e7d43997d9cd3277cf96e7a5aa26c257d463d95bb34a43cf3",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/prepare_network_context.py": {
+      "initialSHA256": "e9bae7eb7b6445f0e1d335e1b2d721781d80b2df776f1df37f250925f39ac49c",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/prepare_private_services.py": {
+      "initialSHA256": "9790a54b64e8f50938d3b504cb0e4396ab432d3bd4390daae55564f58e045e16",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/private-network-v1.json": {
+      "initialSHA256": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/private-role-cohort-v1.json": {
+      "initialSHA256": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/private-services-v1.json": {
+      "initialSHA256": "cc59fe2e6ce0bbcf1d72631bf22268653dc9b532cca35fd33064daac65455e3f",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/requirements-private-authority-linux-amd64.lock": {
+      "initialSHA256": "bd2ff66207cd5e17640e475b2868c8add2a544076e7629d9b972872985e8ce8f",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/requirements-private-linux-amd64.lock": {
+      "initialSHA256": "639af80d472e72aa90c4b0f0a4e68e385a14560436c49160c58a4f27bcfaa0a1",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/sql/hosted-operational-contract-v1.sql": {
+      "initialSHA256": "f06fc9002cb7b86a05ec55787e188de70a3d08f6fb340696c9f3e60a5f31a7b3",
+      "allOriginalBytesRetained": true
+    },
+    "deployment/sql/hosted-witness-contract-v1.sql": {
+      "initialSHA256": "6f6aa7a5547881ee5cf9a54a38b69a447ef1c530e29a4393301d01304c19768e",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/03-overall-application-architecture.md": {
+      "initialSHA256": "0cafdc0b2800984373e29ac5ea13f15682cae233746384be4fd1e0bb5e7c471b",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md": {
+      "initialSHA256": "3e3ed446987cbf626a9b4128f51b17daa5f5fd370da8f98713c30b29befc57e4",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md": {
+      "initialSHA256": "b46f2942bb3cb42fe18e8233c90739618e0ad33640f47ead44e32f7c829b7418",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md": {
+      "initialSHA256": "2e5fba24acbac51217c3ecae0b320c160f2fce4f4180d1025f32313769d02d4a",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": {
+      "initialSHA256": "94930a11b5f468405aa44f9db2906abd6037a82b280d5f15e7be8e49f251cd09",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md": {
+      "initialSHA256": "31a1b6dd9a65fadca16e761f8aebe52173edd24cc19a23b62ffa577a0b16220c",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md": {
+      "initialSHA256": "aa78a0ec5b637b118d901046c05a06266ec56320826d18be7f8abc68307e29b5",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md": {
+      "initialSHA256": "b729fc80e540d69cad45d11bd0796d8ef32d7fef9e745c61bf7b07912c3fd309",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md": {
+      "initialSHA256": "04cb8367527ba75b8716d90024ef51545c02025170aeba5014897cb25502d26b",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/DATA_FLOW_REFERENCE.md": {
+      "initialSHA256": "c27369536df495e03c81f192c9502152b97659c4e0f7fcd68b66a4f441fa0695",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/DEBUGGING_PLAYBOOK.md": {
+      "initialSHA256": "b20c3d79dd0a9d2a421ed1f24fb52ba2d5fb7db941bdec350398a36835239fce",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/DEVELOPMENT_COMMANDS.md": {
+      "initialSHA256": "df0d60aed12769fdaadad38a58c66a4116e363bcb30613d4abac275c38b97ae0",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/GLOSSARY.md": {
+      "initialSHA256": "f5f4c8c0e0e598e7bff6c3c5fb05268f6f02bd06f7c7c08d8a69185c19cab310",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/PROJECT_FILE_MAP.md": {
+      "initialSHA256": "089450c931c6792b91b4400ca1a1ec853167f1338a708faffa9c503c0baed55e",
+      "allOriginalBytesRetained": true
+    },
+    "docs/learning/VERIFICATION.md": {
+      "initialSHA256": "b9b4e5771d11366024e2cb4c82025b41da94063e6d7ff682e02af98aba2dbd08",
+      "allOriginalBytesRetained": true
+    },
+    "docs/task52-private-role-continuation-verification.json": {
+      "initialSHA256": "34f9b8e4b2acde447ea121b382172865ce5c5d0db06696e0a6f95454f1bd9c30",
+      "allOriginalBytesRetained": false,
+      "allOriginalJSONFieldsRetained": true
+    },
+    "docs/task52-private-role-continuation.md": {
+      "initialSHA256": "6971729aac42ab996af9bfa89865797be1f390f17f0c4a1c3ae2e193b0825c28",
+      "allOriginalBytesRetained": true
+    },
+    "docs/task52-private-role-security-review.json": {
+      "initialSHA256": "0729808e94083b9bac3bf04a2ddf6711cd4f56ad552767b75c7fdb880594fd3d",
+      "allOriginalBytesRetained": false,
+      "allOriginalJSONFieldsRetained": true
+    },
+    "docs/task52-production-service-packaging-verification.json": {
+      "initialSHA256": "a69238937cc7394721e015f92ce483242e0c07bfcd996b93ed7be9c8e7cc7564",
+      "allOriginalBytesRetained": false,
+      "allOriginalJSONFieldsRetained": true
+    },
+    "docs/task52-production-service-packaging.md": {
+      "initialSHA256": "f37af7c479eb084cc15f35322ec37c978d458c6b94704e2a5054b0dfa97c0420",
+      "allOriginalBytesRetained": true
+    },
+    "docs/task52-staging/IMPLEMENTATION.md": {
+      "initialSHA256": "84268801fbc13cd33fef4123905fd6e5f83e254d249ab7cfcda08a702fcca700",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/application_probe.py": {
+      "initialSHA256": "22e7020ac1f9277c4a176a266fd25582fc3487259862179e2eca7c828cff0300",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/metrics.py": {
+      "initialSHA256": "0fa32339e3de8462bfc205778a96fde61887df91464a6bf5e15a224c21b09a94",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/native_cluster.py": {
+      "initialSHA256": "d35cbeb9155cb166cf96b4df66323341138287ed477d1ee729284f2e02dd470a",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/run_local.py": {
+      "initialSHA256": "4fd23989df046f9d67f52e9751ceed2d7bfd873672b631e83354c5631fcb04c7",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/start_role.py": {
+      "initialSHA256": "e5b2925bae70be339bd1e453aa77f99584713d53d118ed0297f3d876f899e201",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/hosted_ports/test_connections.py": {
+      "initialSHA256": "0f2410a4be22e0c70e387b2f79021ebd6fb0d7b006b370abbf7a0f88987290d6",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/build.json": {
+      "initialSHA256": "5640cd4c898f1f87c0e5ae04e03d77934d09a3e86be2b85a58d7befbec160f7d",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/client.py": {
+      "initialSHA256": "9b9db4e1e6f24b83f06b4fdcbbad471eda36beeed0a26bc5042b30b79e576a0e",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/compile_fixture.mjs": {
+      "initialSHA256": "0897be32f05bfb062cb5fec9266122e9ffa8f166e8a87dde85a280022881015a",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/dns.py": {
+      "initialSHA256": "c7235c227598a51983125f4b8b1c0f3d5be34c251f76a4e6f6727961fb026674",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/fixture.py": {
+      "initialSHA256": "7898b8b1af49f6e045e92cdd651a9469c351c29eb6622bd3be5386b7cd020c79",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/identity.py": {
+      "initialSHA256": "9d4f72b4eab5140ca3e94636ad81416b81d546b932819780183af93ec61a3eef",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/ingress.py": {
+      "initialSHA256": "f69e259b9c248ffbdaad4a3d069bc919120cece1835ced443c384f07602d52ab",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/metrics.py": {
+      "initialSHA256": "dd941e604544aeb29275187384d8462edbce7eb4fa3771a328594bd1fcd7161a",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/preload.ts": {
+      "initialSHA256": "17727fa06dd69c23bf3cf6db5770fe2d6f8b1dc9986b5b7c2018b81ecfb41f9e",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/profile.py": {
+      "initialSHA256": "9681d820290904c738fc66a94c8255b150844a8384985588f42807c0b24835aa",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/public_server.py": {
+      "initialSHA256": "c937a19be37e3d988c385181dbd058b387a2f5fa1e8818244c29f9ce5927ccae",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/relay.py": {
+      "initialSHA256": "23397a1910e69cc759d512f8d12ac9a31ad7019a0fa62e9ed3c608ba716e8f6e",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/resources.py": {
+      "initialSHA256": "60eaa33fba59b2a37e1d139e086aa954615f15d755c1898d26ba315d053a6087",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/run_local.py": {
+      "initialSHA256": "8de03deef6e2629938802abed863f47449a7d63574b977fb23ed6fc7028415f2",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/server.py": {
+      "initialSHA256": "2228804d041a62f057caf8d443ba26b67b4040de51ce8ba836eb90852bfbadee",
+      "allOriginalBytesRetained": true
+    },
+    "experiments/ordinary_network/test_network.py": {
+      "initialSHA256": "268f220204a96104819b03a03a7f0f09a9117a1e41be65a929808214a0f5240a",
+      "allOriginalBytesRetained": true
+    },
+    "lib/server-https.test.ts": {
+      "initialSHA256": "e792208f67c8b3a476f85ab498d88f877b5975f81624ca56ff7518bca0834056",
+      "allOriginalBytesRetained": true
+    },
+    "lib/server-https.ts": {
+      "initialSHA256": "0ba5e790744810a49b729e70b8e93b18e27acdd06ec3ea10af1155f458e70e49",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/auth_port.py": {
+      "initialSHA256": "13ebd46d4c7b434d9f444b16a5a9d49b818c1ad510fb3d9b94a0837ffbfe462e",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/connections.py": {
+      "initialSHA256": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/dispatch_owner.py": {
+      "initialSHA256": "9406a73d723b8f8723782db8fc6e3cf1556b14753a85702e0d08df0413ca0995",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/entry.py": {
+      "initialSHA256": "55b7a24d00516e77d0e0cb0cbc99e6d7768183d4f189b55f7d427d9e60786fba",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/google_identity.py": {
+      "initialSHA256": "aa57e13693b4fcaf10b36107a9802045ea0757631024be7ee05735c5bbc3bbb9",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/https.py": {
+      "initialSHA256": "ee5a6bbd35607d50b0fee16c1e78dde60647e5642f4ee402133d3e2094ab8a50",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/image_identity.py": {
+      "initialSHA256": "23c122509d258ec6661b5018ad699d4e285973334d4e0962d6df372d9bd5e02d",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/native_ports.py": {
+      "initialSHA256": "bce527bb831b54c147206d7c51ad3889eea71cfe51b8fd13459effb69fda7b24",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/native_runtime.py": {
+      "initialSHA256": "0c3af969a6d09cd5d7db4e63565176f8e454c6cbd81057ebe143978dc39ff8e3",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/owned_dispatch.py": {
+      "initialSHA256": "1e500570fc8044a612323a0133801f9a0afddd22d6f8d025c023888a707094b4",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/private_service.py": {
+      "initialSHA256": "d88ef95605da9f931faaab2edb55ed33531a0b323918a46127611a8c11551d59",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/redis_port.py": {
+      "initialSHA256": "196d8e17fcc0978d230b004aa638e5988921d535fd1672894bc01f8f7ccf386e",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/registry.py": {
+      "initialSHA256": "1773ced0bcdfbf1014589c2b0d512fd17368946b25af0b57f617463aa5fef27d",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/service_client.py": {
+      "initialSHA256": "92708e866d99b2e9d2afef1ff687567659192162418baae49dae956da451c464",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/simulation.py": {
+      "initialSHA256": "62a8dadf9a01f44e3096120980527818248b1d1f2feee22395bed971803bb1f1",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_dispatch_owner.py": {
+      "initialSHA256": "932b8eae84d6dc9319b0a72be295ac2611749fae4f16d6bd4e702a103b8ca3af",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_dispatch_processes.py": {
+      "initialSHA256": "c5f060fb43776b18ad62163d913fdb6adf8b235880595f2f341104cc820bb802",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_https.py": {
+      "initialSHA256": "aee359adaa746d50f6164726e99bb6475461ed77ee36a07d5a8df3dbdb590916",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_identity.py": {
+      "initialSHA256": "fbd56653d82ebae61e2e85579895f6ab4e8ba37162b7f69ffbe75c94760a8cea",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_projection.py": {
+      "initialSHA256": "462fdad0eaa21cb7e204fbacca2daa7edb7d0f04455113d7ada73fe5b3c6b3fb",
+      "allOriginalBytesRetained": true
+    },
+    "private_runtime/test_simulation.py": {
+      "initialSHA256": "268a38954fbbed78bdde12f9b211f20e89576fd49d21c909cfd167176d675cfe",
+      "allOriginalBytesRetained": true
+    }
+  },
+  "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+  "images": {
+    "roles": {
+      "counter": {
+        "id": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+        "tag": "whereto-private-counter:task52-v1",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "bytes": 56908273
+      },
+      "recovery": {
+        "id": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+        "tag": "whereto-private-recovery:task52-v1",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "bytes": 56908050
+      },
+      "backend": {
+        "id": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+        "tag": "whereto-private-backend:task52-v1",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "bytes": 66354787
+      },
+      "factory": {
+        "id": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+        "tag": "whereto-private-factory:task52-v1",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "bytes": 66380705
+      },
+      "dispatcher": {
+        "id": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+        "tag": "whereto-private-dispatcher:task52-v1",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "bytes": 66380604
+      }
+    },
+    "frontend": {
+      "production": {
+        "id": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+        "architecture": "amd64",
+        "user": "node",
+        "bytes": 128460748,
+        "PIN": "0335e2018dbd4a3e1979085c2c3083adcaf44fd9d431d4355174a0f0dd2711d8",
+        "FIXTURE": false,
+        "manifest": {
+          "identity": "52-closed-private-frontend-v1",
+          "fixture": false,
+          "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+          "inputs": {
+            "lib/identity-json.ts": "3804d5770e5e74ced56a662051f83668591ff5a2b624825b272c4833a209677d",
+            "lib/server-identity.ts": "057a39327a64b495b7adc536eda79d0b84f2161e7475c5557fe5e7758eb5f4bd",
+            "lib/server-https.ts": "0ba5e790744810a49b729e70b8e93b18e27acdd06ec3ea10af1155f458e70e49",
+            "lib/private-server-boundary.ts": "cbfd4b935144d45028cee07d789251b2fe0eb116d6d79a5435e1b62fd48f7905",
+            "lib/private-frontend-startup.ts": "8835fd31fd51808f32efe780dc8d591f331ded36cd823907f9fda1ea74d27b76",
+            "deployment/frontend-private-launch.sh": "6b2e8a06a360f956c8a2d90a384fd24bbfd8ede856bbfd426a3075bb323db975",
+            "deployment/frontend-private-entry.mjs": "9980e539d5c1d204bb1387da6f5f15ca8800fb5654fbce787123a02519192f74",
+            "deployment/build-private-frontend.mjs": "4a43c111b9e73385a00ba7e68cc0661cff9d51d30968199f1b81ebd1ecf80209",
+            "app/api/development-diagnostics/route.ts": "d64cf564e65b3f88b9d2e4cc93c341ac30757ddfa109f57c356f4cbf4dfc9716",
+            "app/api/health/route.ts": "4fa7f0753f63fd2823f28b95bfab8749286cde39f55cb3a4e7b379fa1f4a27dc",
+            "app/api/interpret/route.ts": "fa2af4477a880e8367f0c1c131f7f5d142b0498291e6c4353ce653b8db79b15c",
+            "app/api/planning-mode/route.ts": "ec1d421e45bae42d136e10b17d314d25c88e3456fe7e5aebf45072d8f6e29596",
+            "app/api/plans/advanced/route.ts": "f1938a25cd67bf4ef5abfd4d6702cc01187b24cf006f1d79d1cea40a09c966e9",
+            "app/api/plans/generate/route.ts": "b95e1875a20d928e0152ead8a6456c24439635fc020fa47282343011d4f5c072",
+            "app/api/plans/options/route.ts": "25b807e5b7d3f361a74a8c97f248abb82ffe2faace6ea010af6a6ea5aea60a92",
+            "app/api/plans/refresh/route.ts": "5f5431bfd33be92d7e2bfe345d7ed7902f6de6f80b18d8f02363cde277891815",
+            "app/api/plans/reopen/route.ts": "6ae725110c308521e59dda475d37d37a81e1df3bcf9e71ada95299a397f59a81",
+            "app/api/plans/save/route.ts": "d7ac9713ebfd2e2439871b6749e1452a3a2dda06e2553c560b392836a060030a",
+            "app/api/private-ordinary/revoke/route.ts": "8fc745ef7163267a4cc46120f1a5fbf6f1de7c7a9b9ad51b0440904021f87c8d",
+            "app/api/starting-areas/route.ts": "3ae31178bcd775b584f6d4daceae7bc017a88f622cf634f8a3ec2db7985e44c4",
+            "app/api/starting-places/route.ts": "5e4d14c59ad665450a4a4733f2673ff63225a3a96b2d1e1f2f05537249c4c5cf",
+            "app/api/venues/details/route.ts": "b1aaca85319dcbead1f538326978a40cf8f7cbd10189893af7f291c347a8e344",
+            "app/dev/diagnostics/page.tsx": "61732a367146c0bd0219e8f24947cdbf9b3fef2c9bb3aeae473b36931114c4e1",
+            "app/globals.css": "b0f3da5b11b0496eee45af05d4d579d92e1fb537f19484377d8098d76f7a2ca8",
+            "app/how-it-works/page.tsx": "1938bf1417c0f82dde6173faddf2da694c183b46f9e9b6c9860f0870d39a8885",
+            "app/icon.svg": "0d1495aa2243f3d40e709635afc142cc60c3ff59ca4c237192f316c410a76b6c",
+            "app/layout.tsx": "56aea53e9e948eefff7cc1ae34392195917ae26164002458fa49ccd5a26f23c5",
+            "app/page.tsx": "97f6722529dc30d01ab0c4bde1254b8b0b9d47fe9f8f391ecdea3dc769d938d3",
+            "app/privacy/page.tsx": "811aaad3a88b948f629ef272368cea62870a3534a6a16fda92af34713f7004e4",
+            "app/supported-activities/page.tsx": "fd696a9a9c851bfd9253d4f186192de278cf7c71c3aa4f69e72a7bf41ff2c975",
+            "app/terms/page.tsx": "fccce022d3a6bcc66d03cfb25f28d987ed4d545a0145a591e1497aecc0e72e78",
+            "components/advanced-plan.tsx": "e6d45ba04b3d708c0224a56b045145001090a753031c6a8212e24192f6a3d77d",
+            "components/advanced-preferences.tsx": "70f6f361c5e6f9f6608efcaa8f4a172284bdb673512184c50fc2d196586f179c",
+            "components/alternative-actions.tsx": "352ceb0aca9bc323eef3101d1361f1fac5e271c4ee75a35e4e59575db29329fa",
+            "components/artwork.tsx": "5e5360d62e537f6f176239921689438ee501f6ade82b279e8d3e5b58759e7157",
+            "components/beyond-preferences.tsx": "7397fbfc886618ddef0544fa03ed3b69ad8f1cf0d12452c660a2cc22523c25f6",
+            "components/clarification-field.tsx": "6a4567d311dc0cfa40f2f1c1c86bab5bdbeb412b47cf987abb7c5809e304066d",
+            "components/development-diagnostics.tsx": "e2e1eb784d90473bcbf5dbc6e07ffc900a44ed2c1ccada6251e7e085ed369bbc",
+            "components/exploration-notice.tsx": "b904346ed2076c8e696bf52f3c51388cada065d2f79133a7d77bf268189057d0",
+            "components/first-leg-travel.tsx": "369743bbfa7ccf2ba6a85f3ebe43ba2f8a4a013f6927dd3d03617c41b263c2a7",
+            "components/itinerary-pagination.tsx": "a8f07df775543d3b6b74d33d6bc608c4663cb9ab342e4d0cc2faa0f2d908618f",
+            "components/itinerary-stop.tsx": "e790292c802736f20ca2dfe7ac179032c21f23ba2a5e3f47d5d5a83b01a2bfd5",
+            "components/location-controls.tsx": "2e47f175adc99c20785759461be1078524666f0cea1a036bbf7b266b5ddcec5c",
+            "components/opening-hours.tsx": "87ce531362c087131fbac2ab1359692c39b3f1629a466c102096c263853ab3e4",
+            "components/outing-date-field.tsx": "02ad9fc85cc08c15d020178831e5ce6e5d1b37e1a8068626ca8c081706a0c193",
+            "components/outing-summary.tsx": "a8386ac0d0972e4b5ebcdddbd909b4c10cd896210200346b78723ef7bb4fbeb0",
+            "components/plan-card.tsx": "ec6a75ee18fec3baed4b71dcb48a609b8c3a06a2a80d874624da9ad13ee16763",
+            "components/plan-cost.tsx": "aab933ab900b8bae40d17489adc43684cd70e2c863425406fe61a7a992673c88",
+            "components/planning-feedback.tsx": "305c0b383b79bcb65d21c161190404c3577de6b38e3945b0ac1292afaf43336b",
+            "components/private-ordinary-experience.tsx": "6b6a621c483f755ed9ec2e49613ceb2e40020ac9d115fad35b19422569c29d03",
+            "components/real-venue-facts.tsx": "a2e2b710e5bf907f35d34e015360d8c5fb1f6db7fd0649db9a24a03a329993b5",
+            "components/results-information.tsx": "ce94a60149df48a7c62bbdf68f362de7a31295cad4f19cc005787ceb40371fba",
+            "components/route-directions.tsx": "985084e6828e04fd0898218a794f559af5dde630be3bc89bc53feca252f4626f",
+            "components/saved-cards.tsx": "3aa728a76c54828ff376c21b286f0d64490c262fcd959207ce705bfe623e518f",
+            "components/saved-plans.tsx": "34a493a4d595f18be04efe14d37fa8868b6948d2dceaaa6fc239705980539b46",
+            "components/venue-details.tsx": "131bc140d77682aede15abd0a97c7d5f460e5250117aa1bc8a96800a43519e83",
+            "lib/advanced-planning.ts": "d452bf13a3ddae5d589349c545cc95992f5afdc6936328d96632d16f76c20d36",
+            "lib/advanced-preferences.ts": "8b4796376bc29d723fcb44582204bf342e68d857a9242bc1aa0e535bc8783ee0",
+            "lib/continuation.ts": "72776add36d80aa9786c9c9ae59d2b8f75c9ae1605b56874afac6496513c7ce9",
+            "lib/destination-context.ts": "e9b11ef744d8d57138ef091d6ad3338c0772661c4e91d27ac11c8d2bec4a71e4",
+            "lib/development-access.ts": "feccdc56878b78e8b5aeefa9ea0970896436a053d21c03b19eaf2c9b4fa6dbe4",
+            "lib/development-origin.ts": "2d44402843976dd69392e845d5eff717f8a55c6b2a2a4b8b639ef3cb3267fa03",
+            "lib/display-format.ts": "bb6587153df97fd0791f7fa3c9f4a5b5c258b2ffbdad2f4506b2cfe0182cffa6",
+            "lib/duration-format.ts": "dbc030ed889394c5c08e2041e2e98f8d5c0c19a5a072c28e0a3d92425d9bff28",
+            "lib/failure-diagnostics.ts": "ba8ca2d1a74201ea6d5a31b24e49775cecffbf2fdd5f63ea7b897e7f0cf34c24",
+            "lib/first-preference.ts": "f085e50ea05f8087e6262462a085a4bbd3792d71c030f66e8a93acc714ae5edb",
+            "lib/itinerary-pages.ts": "23dd6dd676e28829b1a3b55df82be1d3a7abe27d3313e76455a073addebb372d",
+            "lib/legacy/planner.ts": "de5b749d6f3d2e3f1b243042c6a7cb5ca71e5374be9905c1c0a28073942fe9f0",
+            "lib/location.ts": "3363b6e173db9753860805ef9fbbffb188e093c30588c906cce5783fc363b6b9",
+            "lib/maps-directions.ts": "bfdba578a689d20297bd9535aad385ee34e999ed5b1749d1abc76af8be136b69",
+            "lib/mock-data.ts": "e491b0f1cf3358bc4b411fdb47f4e9e14d7c4b53b5e3f26cb61bfdf0adcaa3be",
+            "lib/option-batches.ts": "3c64e7e5c67241f231b0cf3e11498d90567d08e30a33c31ad1466316b444a29e",
+            "lib/persistence-proxy.ts": "7831480fa384519936eabfd2f0c2ba82c59a8ab0ca2c3a5f43913a8ef8b2a2cf",
+            "lib/planner.ts": "e5e65362cd60ef00a094c52c9b37ef3cbd02ce8425e89be1eaa07bc8855f3ad5",
+            "lib/planning-client.ts": "655c6f55847e6be9507521e3f95e3d4e52e79e289b3da80ad2988149abd6425e",
+            "lib/planning-session.ts": "2b6e64b53db817b93c631fbe2dfd43d75a61f5a3cd682f3fc0f2bdb768fdfd0a",
+            "lib/planning-timing.ts": "a60fe7012679ae22d8f19f661a4dba209fc185230c48e978843abe8d248a400a",
+            "lib/preferences.ts": "f1f936fd4633383464d20f725e6c7a7a9d524892bbefa008422c442b7bec563c",
+            "lib/private-ordinary-client.ts": "87812910946c9e60baffe4d0f7df977cb2058c92367dfa29dd5cc5c4dd930bbc",
+            "lib/private-outing.ts": "96562106da379f043248731d628488e6a09daf0c9fcb242a94478afe0333c976",
+            "lib/provider-diagnostics.ts": "e8d76a8f947ab8eb4c84197d9480fff255bd3082424e0275c39ed2d3b458e6cf",
+            "lib/provider-proxy.ts": "00e7761bf8ec72e7646fa17bcc207aec569c641c88b0802522ab88dd16c10d21",
+            "lib/proxy-failures.ts": "3f713ecd3fe389c4e16ea1a4df582d22b702eed9f4ebaa9a8f4c12112d2e0f30",
+            "lib/public-planning-payload.ts": "1a3273c42c1da8103d1a227d46b93cdaa36814b4e5c1200237d264406870274c",
+            "lib/real-headlines.ts": "02ade195b4617f44e9a889e3f080a6ef2814e8e1c2e3d2cb905d2eaedb3312e0",
+            "lib/recommendation-copy.ts": "7cdd24864ec5458bfbe838b8c1478d96abac7e03acd06b73f1a9fabe35ef0453",
+            "lib/request.ts": "8d90ef620ea8203e037cffbd9a60b178ce6c5adf883e80195061cf42ba474172",
+            "lib/results-presentation.ts": "9eebcc7d5c580becaca59243398dd6256c19e5384506b48682ee8c3f10b379e7",
+            "lib/saved-details-request.ts": "93fde16a7c5de8869e34c976da18431532736056653e59973b46d5d8cedcfe2a",
+            "lib/saved-navigation.ts": "663fe626206f6604df370506fc583e0158cd394c8ea8a268454d6dce89a3dd81",
+            "lib/saved-plan-refresh.ts": "c98e172dfec2347aa6289dd4371229004ccaf73843aa787d5ac19a64f02ca116",
+            "lib/saved-plans.ts": "e8d3318bb37d5f52879190849fcd662ba8595f179ae2298abea297048c6b5877",
+            "lib/server-timing.ts": "1dbdb4152695a92d1c3c4732c7b3a45477af5cfec39198208344a04a9751a048",
+            "lib/starting-areas.ts": "06d5558fc3b18e3397187a107720fbd102c9cc9edba64c3ec22c346cd4376a88",
+            "lib/starting-confirmation.ts": "eb492f6a8893cc95fbdac73176098f58fcf36e7c556131ba4730d41b50822dc4",
+            "lib/starting-places.ts": "424628ea1c2be75f3dd739b342fb34d67daae923a3567bb909044295786e4bf6",
+            "lib/supported-activities.ts": "670cf348d942f6755bd050b35c06577c26c9fa71dac737e141932a904f15d67b",
+            "lib/surprise-history.ts": "fe63ca8a09857713a4f47cd3a2b0f35da97eeb8a6a9be338f6ab3ad478b1f711",
+            "lib/venue-details.ts": "c50e663d0b5eebd207b8130420234b25bb830aaeb63fdb140f9cee21c03964d2",
+            "lib/venue-hours.ts": "087024b208149f38e79e4ab32b17007baa9d75ff666a056f78936d65b979e0bc",
+            "data/demo-plans.json": "234840dd8db8c8206655ab07b8b42f4314103cb6a23638894b3e81dbd9efac47",
+            "data/mock-venues.json": "14a25f1008273fc101c231087c2af171568554d15f4aa5e5655ec226cd6055db",
+            "package.json": "5fa13718a5760a21f7eafe2eb37b7e96236d83670a67f852c34a01d06fce80f1",
+            "package-lock.json": "4839855e8e2ec9b60f186902ceb75d040c68e01a896f7813b4e46682e4a8b878",
+            "next.config.ts": "8b25f1597640e547d20ad3b14a8dafd042f10c61b0a8f010a54cfef0468b8f63",
+            "deployment/Dockerfile.frontend-private": "a23d3e9bab87ee5cea89c461a2edea2d26bfb3f727fcf6e9c802b2b15801a132"
+          },
+          "outputs": {
+            "identity-json.mjs": "320da1070acbe408ad06284cd367a9278b674c26ee35030b4181d4a08dd5f393",
+            "identity-port-v2.mjs": "63cc85d23b183c8676fea92486b7727d1c0d1ce82cd362bb61da57c7f539a92d",
+            "network-port-v2.mjs": "c64e3969e3148c88bcb28a7becb59c339d3503865fd1e42ffee135a8730e3cf4",
+            "boundary-v1.mjs": "f3161c6aab6bd74346989840c278a2c1db2a0ba48be2f6031eaeb961eda32f77",
+            "frontend-startup.mjs": "4c64b5ef7e7fac66a52c3f0a08cd0c417e8196ac36429826ac67bd33e66efe11",
+            "frontend-launch.sh": "6b2e8a06a360f956c8a2d90a384fd24bbfd8ede856bbfd426a3075bb323db975",
+            "frontend-entry.mjs": "9980e539d5c1d204bb1387da6f5f15ca8800fb5654fbce787123a02519192f74"
+          },
+          "application": {
+            ".next/BUILD_ID": "0c4389334cbe50ec5a7ca1c6ee05896453ba9b63310282b441e5ceda3cc2c0db",
+            ".next/app-path-routes-manifest.json": "1bf07de8976b7862f485c184a4d555bca4619c240303069b61ea0afc386114b7",
+            ".next/build-manifest.json": "8214a4f5e663404dc91822bbe985367c4ee71226095fc47e1b481e3dc475f98f",
+            ".next/package.json": "091a04fa67c7907b98e106fcff8b964e13129754fce72d24f3025b97c4887fa3",
+            ".next/prerender-manifest.json": "b66cd994260f5c2c228e0cc0cff6194ef4bcbf1b0c57a1833818ed410451b069",
+            ".next/react-loadable-manifest.json": "6249369150f41d21865bb2ef59ba74f912b479efe7cbdeb4b531f5d12ad9e65a",
+            ".next/required-server-files.json": "a9414fef7d6f5c8678c4fbbaff4563a1bd628473ddeb13d38beac955ea11e073",
+            ".next/routes-manifest.json": "2cf466023dc6e29974e380b9c2880db9010f319fd11663fdde35956ccc58f402",
+            ".next/server/app/_global-error/page.js": "d14ec315ec55a8beab3b5dd56c9edfdccf2495b444ab731571748f8913cccab0",
+            ".next/server/app/_global-error/page.js.nft.json": "355e5d088b3f6cfadc6976469a4aeeb5c7d25bcb58ed98e51c23cabfce840634",
+            ".next/server/app/_global-error/page_client-reference-manifest.js": "e1d066581a39438bbf7d62c34af7d2ce977873c0a793f28252ebee91b764e678",
+            ".next/server/app/_global-error.html": "a72ed2c9dde930495ee2888f0f5e7cb8b40cd15b4876731941aea796c97b15fa",
+            ".next/server/app/_global-error.meta": "9b8d904a303eb2ab75de615148275f9eb4d444da08ca188729e723ce9d7083e9",
+            ".next/server/app/_global-error.rsc": "0fd0136299c1d2c108e6820d3422a902e6c12a347f5165ed80ddea97d95d4709",
+            ".next/server/app/_global-error.segments/_full.segment.rsc": "0fd0136299c1d2c108e6820d3422a902e6c12a347f5165ed80ddea97d95d4709",
+            ".next/server/app/_global-error.segments/_global-error/__PAGE__.segment.rsc": "3ee4990a0306c5fd5eb6fc76b4e5b42840ef8cea5bfc1034c29618daa9a9b892",
+            ".next/server/app/_global-error.segments/_tree.segment.rsc": "bb131e2cedf8622da5b67f0b09b08a749981fe04770faccf3d2a427b2858a8cd",
+            ".next/server/app/_not-found/page.js": "b8cdd3e7dee8719adb54eb1c04b2e79d55606f09657450be1a497e4a56b9317e",
+            ".next/server/app/_not-found/page.js.nft.json": "355e5d088b3f6cfadc6976469a4aeeb5c7d25bcb58ed98e51c23cabfce840634",
+            ".next/server/app/_not-found/page_client-reference-manifest.js": "15e1837f7df6bb775902cc9140e9dfc9fa72b94902dbe4cdaf1712e89ba38794",
+            ".next/server/app/_not-found.html": "7ed29b532f7b272fdc5dee4a39eef7ea10713e03e504224b58dfb0136657a88a",
+            ".next/server/app/_not-found.meta": "4b112114c74c5dc53232472280e8b7ed0c236907b5f245e47dd2967d0f2bdef2",
+            ".next/server/app/_not-found.rsc": "5fe0e1dd8f7f2d5af063d83673da418639170e3dc3169d1f7a93b7bad0790fd0",
+            ".next/server/app/_not-found.segments/_full.segment.rsc": "5fe0e1dd8f7f2d5af063d83673da418639170e3dc3169d1f7a93b7bad0790fd0",
+            ".next/server/app/_not-found.segments/_not-found/__PAGE__.segment.rsc": "7ca2496435a7b3d27af988429356e80ba13ef6a1f7608ec0b2079209c445164b",
+            ".next/server/app/_not-found.segments/_tree.segment.rsc": "d5bbdaed3e8f6ad857d19ee5379600038a46e7664a5bbaba62c585a3f3718213",
+            ".next/server/app/api/development-diagnostics/route.js": "de787e086284fb4c13276a6b0b449350c089cbe059419eeaca385efe47c9eeb2",
+            ".next/server/app/api/development-diagnostics/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/development-diagnostics/route_client-reference-manifest.js": "3159b4cb3415178917ba2d7500e7bf492d7f6e4b9a33fc9b966c2f58e36bf176",
+            ".next/server/app/api/health/route.js": "f88d78b43fb23da3781ed87f272e58aa09074f55c7379c4a8b86fd04f54e66e4",
+            ".next/server/app/api/health/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/health/route_client-reference-manifest.js": "fda0bb35e4023145d5f282c44920d5ca4a1ea4a0b5c549121ccb97789c1ae144",
+            ".next/server/app/api/interpret/route.js": "13de856efec5360130da2d003aa513456f00da52abf0f93f3c64bd0450fc392e",
+            ".next/server/app/api/interpret/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/interpret/route_client-reference-manifest.js": "83d9480361a5f9ab371bb36f9bec6a83c0164fef40f7399276dda10fb7ba16c2",
+            ".next/server/app/api/planning-mode/route.js": "a41542b4392468b769a0c9d97d250f7f905c242de69e0c2b264bd12860a2c7b2",
+            ".next/server/app/api/planning-mode/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/planning-mode/route_client-reference-manifest.js": "865f73173b535c67a3eb865c6634712d97b57247f7836ea8ac05962f3d22605d",
+            ".next/server/app/api/plans/advanced/route.js": "b13b8323e2429ec415df0efd6127f824910370a42f2c544776129f5b349d1697",
+            ".next/server/app/api/plans/advanced/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/advanced/route_client-reference-manifest.js": "451377f82f130b0623b5bfaac0e25d309ed980eb156dfe8ee27f1fea01328cdc",
+            ".next/server/app/api/plans/generate/route.js": "2e2676557b4d2cdbae4f369fd0f723a06637bacd4fff13a8f09fee7f2bb5fbc0",
+            ".next/server/app/api/plans/generate/route.js.nft.json": "38e1276ee076e618627409b183fe7274380d970b75b51c88b93fe7b40a3bfdea",
+            ".next/server/app/api/plans/generate/route_client-reference-manifest.js": "507690570479ae1ba7ed91aa278ecd16a6fc444bc496bc234c576f46a42a30f0",
+            ".next/server/app/api/plans/options/route.js": "9b9f66c59cdac061a76e690053a04433703ce52924d26e2f7d58835460e2c723",
+            ".next/server/app/api/plans/options/route.js.nft.json": "7253e07d97b7194c8402040f538ac4f611911e081b6a104d666cb60201dc93f4",
+            ".next/server/app/api/plans/options/route_client-reference-manifest.js": "d30fa2cbd0811be8984690fd4b4c941f2cf53dd27b725cd98fdd36bb7ceb0f36",
+            ".next/server/app/api/plans/refresh/route.js": "0684e1fc77e718b106e2bdf0b875769f0d3884c69e8fd1909fc747f0a58f50ad",
+            ".next/server/app/api/plans/refresh/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/refresh/route_client-reference-manifest.js": "197180415080b35ca111eab62a1e2701618946be60e24c7c959bc6fe13b01500",
+            ".next/server/app/api/plans/reopen/route.js": "ad9aab8a4226fb90aa48dbe9598deeff556e5814e0c1543f1b4aba8b3f82641a",
+            ".next/server/app/api/plans/reopen/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/reopen/route_client-reference-manifest.js": "6b5b5b163cee52180f7870e8c9c8962275d5b915a763618e592d1d6772eafc33",
+            ".next/server/app/api/plans/save/route.js": "9b4278184f8d27909584270796824cca53b518edf9f2f7539717397138cfd253",
+            ".next/server/app/api/plans/save/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/save/route_client-reference-manifest.js": "cef5041d89b8f21b958833d8eb27cfd82123601b14051866fe8c3758116de43a",
+            ".next/server/app/api/private-ordinary/revoke/route.js": "b3fca38cf983fa8e3719a27fca69968120a060bea9d37b310fac1b11e51195bf",
+            ".next/server/app/api/private-ordinary/revoke/route.js.nft.json": "f8e44325031df8b3165b6a6351801545c047ec7211d2b4df33bcdecb82eabb70",
+            ".next/server/app/api/private-ordinary/revoke/route_client-reference-manifest.js": "be293443928c1bd6f5b5c9fc4b08bc5880cf761aaa0793678b81659ddf7e35c3",
+            ".next/server/app/api/starting-areas/route.js": "3728b024cfb4420a34221125b40e48a57f95749d529851b39008cb118e513972",
+            ".next/server/app/api/starting-areas/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/starting-areas/route_client-reference-manifest.js": "b3c8cbc260fe5f79ae28b88c2d2adfc0c8c408a88913ca042fdd568ba44aec9c",
+            ".next/server/app/api/starting-places/route.js": "9dfa9b7a57801b1a707f00d32d90fb512ce6c09359ecfb72b8350713550fe8f5",
+            ".next/server/app/api/starting-places/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/starting-places/route_client-reference-manifest.js": "19b564e622d7c0c35b85701dda1e00165415e56aa83e7fe2538b091869fe0ac9",
+            ".next/server/app/api/venues/details/route.js": "b2b4187c12fa0a1fa846127ab2e9c10df09069f92e9bb3f53e9fb50820867ea9",
+            ".next/server/app/api/venues/details/route.js.nft.json": "7253e07d97b7194c8402040f538ac4f611911e081b6a104d666cb60201dc93f4",
+            ".next/server/app/api/venues/details/route_client-reference-manifest.js": "38acd1a295aa7e1ef85c0b3d831fdafa09ce84a5d0602302cf921c090109cbab",
+            ".next/server/app/dev/diagnostics/page.js": "a67682779583f2cb084c5d6b1b4d2a431e0b05ad0d2608339c91b66d63d1f9f7",
+            ".next/server/app/dev/diagnostics/page.js.nft.json": "66c02345d9b8d61a1e3ceb7193df759d0a38b920d79c8a99f24452ce31a3cf15",
+            ".next/server/app/dev/diagnostics/page_client-reference-manifest.js": "5470a1eb8af17ace53a8e33349273aae0842130a1df13812caaab44b51eefc70",
+            ".next/server/app/how-it-works/page.js": "c4770969c35facc4f5c0fb8248191907b8ae17e92344629421af378460eccb9b",
+            ".next/server/app/how-it-works/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/how-it-works/page_client-reference-manifest.js": "fec3a1a6c9a70f0c6ecf24d668d64614db80669ff1a87c003de756a4196c7d94",
+            ".next/server/app/how-it-works.html": "81d0dca789afde67a9080b800bcfe7aed9a8e014308badbd3df254a863d7fb0e",
+            ".next/server/app/how-it-works.meta": "dd9daa1945097042bf6eb9807690dea14048ff8550384156a3ea255885b58eb7",
+            ".next/server/app/how-it-works.rsc": "9a1dcd4ac4cb4d193a6065c438e12a5a397fd85aa2a01ad563b445d5c798add9",
+            ".next/server/app/how-it-works.segments/_full.segment.rsc": "9a1dcd4ac4cb4d193a6065c438e12a5a397fd85aa2a01ad563b445d5c798add9",
+            ".next/server/app/how-it-works.segments/_tree.segment.rsc": "e3a666fed4f4646af149a1740ae85e26dd8bbcbe16c316077796c07985144804",
+            ".next/server/app/how-it-works.segments/how-it-works/__PAGE__.segment.rsc": "19ccfe4c5a955add06230dd5fed1541d64a94d87228f2bce3314feaf7d6e8d50",
+            ".next/server/app/icon.svg/route.js": "5363e111240c5cc5b2a4d7a1881195564d497a3af23da6c8462518a84a42ae38",
+            ".next/server/app/icon.svg/route.js.nft.json": "f13d01a00fe9b4058297d278337415d0658cca7f9e32714db8fdf7a12d8cc4d8",
+            ".next/server/app/icon.svg.body": "0d1495aa2243f3d40e709635afc142cc60c3ff59ca4c237192f316c410a76b6c",
+            ".next/server/app/icon.svg.meta": "9ec9ba0ae03e74495bfcac4edc2cea84baed269bedc9c045abba1302af543a8c",
+            ".next/server/app/index.html": "49624cacc9c1326002c1dde291078d84372bd8f7178aa23db35c8a203e47e5a8",
+            ".next/server/app/index.meta": "364b5f5dfdd03a659407755e2d891feb1100a3e1242d1753888957d41158c31c",
+            ".next/server/app/index.rsc": "1f3aba25e9f37ab5933ebd2e2206f99bfd03e7f3768a006dd3ad3f9faa66ee46",
+            ".next/server/app/index.segments/__PAGE__.segment.rsc": "e8f051ceb9fbfde02b026edd5b6eab38a25f5eff2fe75757243d23026ad75d5a",
+            ".next/server/app/index.segments/_full.segment.rsc": "1f3aba25e9f37ab5933ebd2e2206f99bfd03e7f3768a006dd3ad3f9faa66ee46",
+            ".next/server/app/index.segments/_tree.segment.rsc": "80a2606cc4e8513c8d842b0a620ca6fea2086577def2e279d225a2fb7a1992d6",
+            ".next/server/app/page.js": "ba56fcb546ee7f5564f22f5f48ed7d9139b0966a45b5e84d9177ef251e4398b3",
+            ".next/server/app/page.js.nft.json": "ede1da1f1379ce2441635fbb54ebc87bd87efa22716d6b6738c81bd757f242eb",
+            ".next/server/app/page_client-reference-manifest.js": "aa51cecd733f3050cf8a7cec23df749bc00341c031d51b0664cc16d0d67e7e43",
+            ".next/server/app/privacy/page.js": "eff0f653c286d4eb2f543b8a988602ea7a689b7d4e16128c6ce0db6227febdfc",
+            ".next/server/app/privacy/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/privacy/page_client-reference-manifest.js": "929812e38a26fd0c9d5d501c2ab6c4c807b3d28876e364c4e7407326c1c0fc4d",
+            ".next/server/app/privacy.html": "e4a65a61b0bfb314e5793178306287fe429324c7e852604134fad24fa6c0c83e",
+            ".next/server/app/privacy.meta": "995ac9a56b0caa32a6838d2fa0aecd97eb67e6c062fa0c1350bf304a650c5561",
+            ".next/server/app/privacy.rsc": "40b1be5b6a75bfe7ac52fd5d24cec6d991069cca961907113c752b463be9fbfd",
+            ".next/server/app/privacy.segments/_full.segment.rsc": "40b1be5b6a75bfe7ac52fd5d24cec6d991069cca961907113c752b463be9fbfd",
+            ".next/server/app/privacy.segments/_tree.segment.rsc": "62ae2b73e5c1109bb68cf7f152aa3ea4ca7668d4ee7a9e38b108ca1a58308882",
+            ".next/server/app/privacy.segments/privacy/__PAGE__.segment.rsc": "c1f5b4f34ebd7eabc4c99a3aded713089a464059b89cd78dbd5d8450a491aa60",
+            ".next/server/app/supported-activities/page.js": "d23460ca47648f90e399516e7da9a6bed95ec46125e574b235cd00b5925ad68b",
+            ".next/server/app/supported-activities/page.js.nft.json": "506e134f960f6e8951201d8180c280d27e8598bfada5f896c1d546d2d1b00b05",
+            ".next/server/app/supported-activities/page_client-reference-manifest.js": "ef6a19f2c836b76656698ead78ae76cd7baa33cba09739179be85cad7682bc7a",
+            ".next/server/app/supported-activities.html": "e15f46aab55b8801fda310406262dd801fab159c7225cc1454e18272e28456cc",
+            ".next/server/app/supported-activities.meta": "8a805845434b55401cb1b44d5569f99691f5703528af1b4db357abc23ea8f1f6",
+            ".next/server/app/supported-activities.rsc": "75d5734f3f9e1dbc2577d4a59a05faa2524025bac39e19417fb2a2d0a3b1c67c",
+            ".next/server/app/supported-activities.segments/_full.segment.rsc": "75d5734f3f9e1dbc2577d4a59a05faa2524025bac39e19417fb2a2d0a3b1c67c",
+            ".next/server/app/supported-activities.segments/_tree.segment.rsc": "5d274a571a109d10f5d2834efaa988ea47b457f89cbfd455cbd2645a5e96304c",
+            ".next/server/app/supported-activities.segments/supported-activities/__PAGE__.segment.rsc": "58d37d3f2733a0206005b5b79b34d308ac6ba5fb12bca34e9a4e29f5324105ec",
+            ".next/server/app/terms/page.js": "581b8ecdf09a0f5e4e2338a4a7cead656fd46fe8e091d21a279f801082b448ac",
+            ".next/server/app/terms/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/terms/page_client-reference-manifest.js": "d11cb9e721a1dac6f74a2c9389b8fd7c7f3968dd2e483ac6c11c9e8311c79853",
+            ".next/server/app/terms.html": "17040518560da57c9f63863293aba82f5cb5360ab5a0c9192e08bd2c3f61d128",
+            ".next/server/app/terms.meta": "c6a4f69706102a8fd679f3aa9ad6757163c84ad4da55b3297bacac03d594462f",
+            ".next/server/app/terms.rsc": "8691fa6d55af34f5c914eebd795dc2de8fbc2eaf8f0dfbcf7d68fb7061177b52",
+            ".next/server/app/terms.segments/_full.segment.rsc": "8691fa6d55af34f5c914eebd795dc2de8fbc2eaf8f0dfbcf7d68fb7061177b52",
+            ".next/server/app/terms.segments/_tree.segment.rsc": "2363d6867bdbfd5506fd3aed8ca0b0904daff6e615421cf63073aafce7f5bbea",
+            ".next/server/app/terms.segments/terms/__PAGE__.segment.rsc": "6959d9f992024478a8912b1c4792a787d5e12ae689b62d153239758ca0dd713e",
+            ".next/server/app-paths-manifest.json": "8f93bd560a4fd48fc3b9d082c0b82722489637f0ee678f2259f8491f24b78301",
+            ".next/server/chunks/286.js": "459ed355a8beb6f9cc98e408687b8ee3657eeec96d406eb8ab58d4c4a4ceb085",
+            ".next/server/chunks/430.js": "cd0aee606c65bb2eb9b352fbfed34fb528ae44b4aa1c9ceaef725e3280853704",
+            ".next/server/chunks/56.js": "e0e62112027ecceca8c345bd2950b2a210ba64a86f46d92ca024de26700118d6",
+            ".next/server/chunks/970.js": "b7f2fe25df5382f993d5f29e5cc9345b1dfc9f0d8f87fc27dd7fecea3a8a534a",
+            ".next/server/functions-config-manifest.json": "70afe3c692e2ad1990f7d7c7671c5a0d436cf85e3c3623178b1f6d84db73b481",
+            ".next/server/middleware-build-manifest.js": "ee81eb1bfbdf04c50e543d586726a439ad2faa91d6e2781e430ee92f186b5a67",
+            ".next/server/middleware-manifest.json": "0a8520bc7e076f7ae717c2d62713990c83e8a3d74626f327a3844bc0504e210c",
+            ".next/server/middleware-react-loadable-manifest.js": "a9fcb835ab1ca28b48fac5eee305a76758a5a812b56bf711f595955d2667150f",
+            ".next/server/next-font-manifest.js": "2c0f5bbb79d07dfea405146a62d7e15a7a9e890d29e38b7db2631fcf6e480da8",
+            ".next/server/next-font-manifest.json": "926e772d34a53f2a4d9b16071dd6ea77b051b2b7acc49d9165723debe3fbbe0f",
+            ".next/server/pages/404.html": "7ed29b532f7b272fdc5dee4a39eef7ea10713e03e504224b58dfb0136657a88a",
+            ".next/server/pages/500.html": "a72ed2c9dde930495ee2888f0f5e7cb8b40cd15b4876731941aea796c97b15fa",
+            ".next/server/pages-manifest.json": "c354059caa217e72bdeb145e351b2038990972872c52df215cb1e4105c35097b",
+            ".next/server/prefetch-hints.json": "2f8e5cc165e077851749f4bde40a303138197eb0cfbd88ab6610e6d43b975654",
+            ".next/server/preview-props.json": "a5a3accb15e980d0938ae725a791acacd146dc06203182d6429371a0866d57b6",
+            ".next/server/server-reference-manifest.js": "ce01006c00e1f63bcbfe41b3f7edd260d969b41d0a323b705c44e1ef9df13d8c",
+            ".next/server/server-reference-manifest.json": "c479de30111b3a2d2828cc026c5ab99042fb1af88ec5a973ef780f4ae92c49c8",
+            ".next/server/webpack-runtime.js": "68835a826bab0ddef47e9a0008c6625f0916f56f3e2f71f7b1de64929b20757b",
+            "data/mock-venues.json": "14a25f1008273fc101c231087c2af171568554d15f4aa5e5655ec226cd6055db",
+            "package.json": "5fa13718a5760a21f7eafe2eb37b7e96236d83670a67f852c34a01d06fce80f1",
+            "server.js": "f82b35d671df7faabc0fb2b88d94af304034707c838e2e1007ef72626a97ea11",
+            ".next/static/ROpMZDs9UkwWTMTQ7pfkA/_buildManifest.js": "1a5a4a393c00c61090dbbff45c1bfbc4750d44fe1dd1e125542a193953f40f98",
+            ".next/static/ROpMZDs9UkwWTMTQ7pfkA/_ssgManifest.js": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00",
+            ".next/static/chunks/4bd1b696-c7408084347438ae.js": "7d5ccf185a6f85ab38ce400a7f10aa0a3496eb4e9aee1e500a85e01c4222fcec",
+            ".next/static/chunks/649-b7656a60ea670ffe.js": "267386c2b49524a610e01cd17caf8b305386e15ebf8e9f11a5ce3386ac38cb18",
+            ".next/static/chunks/794-3c1567673e1f8cb7.js": "4213c2913f694875a79afd1bb6889c2049206b4902f8289fe4502e16eaf217c9",
+            ".next/static/chunks/app/_global-error/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/_not-found/page-577eba21b3a47d76.js": "df609e4208303bac1799493760ddc0353348f255e85e89c802d59dfc54f3e14f",
+            ".next/static/chunks/app/api/development-diagnostics/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/health/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/interpret/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/planning-mode/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/advanced/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/generate/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/options/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/refresh/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/reopen/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/save/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/private-ordinary/revoke/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/starting-areas/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/starting-places/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/venues/details/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/dev/diagnostics/page-da006e71bead5bca.js": "70a9fa3869bbfa78c9c374e99535b62383aaa43f0fc98d2e2e8a88706fb783c1",
+            ".next/static/chunks/app/how-it-works/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/layout-5e34bf2251d06b9e.js": "a50b907e06b3d4707be75958f0d89a874df9ce0bc6583e7409f6d88377b8dc93",
+            ".next/static/chunks/app/page-7ab99726edce717b.js": "e872f892e71d351e93d23f76926148b152d33513924daad0576e16562d4fd73d",
+            ".next/static/chunks/app/privacy/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/supported-activities/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/terms/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/framework-ea4f97ca039bd777.js": "61b92d4a1510be156591a4f12a6b5bcf70f338cf5f8db1d50e2be1305b6b761d",
+            ".next/static/chunks/main-6bbff23ea139b22e.js": "7c84d23e0ab75a01189858984902e52765efa55ea20e298b23a13d68a9a7731d",
+            ".next/static/chunks/main-app-1a6aaf075bf9cd72.js": "6da2881939ce08ee595bb25380745d4ecc2549283a751fd837b75cdba33cfb6b",
+            ".next/static/chunks/next/dist/client/components/builtin/app-error-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/forbidden-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/global-error-d40735cf059c9704.js": "2eea37c93c09407a5dd407b5a57406d5c1ef20938018471ee7bd670320768144",
+            ".next/static/chunks/next/dist/client/components/builtin/not-found-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/unauthorized-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/polyfills-42372ed130431b0a.js": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+            ".next/static/chunks/webpack-44d8aec3c26a0cdc.js": "d0a82fed8b37553509fe37aa7c8dfa791ba125f47b8a45899e0fd6a03936a339",
+            ".next/static/css/0d42180d95c871b4.css": "e55a39ea61824fe2932838122aab7f48c6ae5d0e58db8c09a4e31527700f922f"
+          }
+        }
+      },
+      "fixture": {
+        "id": "sha256:b1d44db039f1b38ba74ca07fe509676f3ab543614dd0608c6c14e305f675a6df",
+        "architecture": "amd64",
+        "user": "node",
+        "bytes": 128461986,
+        "PIN": "d5097a9351cea5f903d12963d243098f7b828180ff0af0389c99a2f993e39c5e",
+        "FIXTURE": true,
+        "manifest": {
+          "identity": "52-closed-private-frontend-v1",
+          "fixture": true,
+          "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+          "inputs": {
+            "lib/identity-json.ts": "3804d5770e5e74ced56a662051f83668591ff5a2b624825b272c4833a209677d",
+            "lib/server-identity.ts": "057a39327a64b495b7adc536eda79d0b84f2161e7475c5557fe5e7758eb5f4bd",
+            "lib/server-https.ts": "0ba5e790744810a49b729e70b8e93b18e27acdd06ec3ea10af1155f458e70e49",
+            "lib/private-server-boundary.ts": "cbfd4b935144d45028cee07d789251b2fe0eb116d6d79a5435e1b62fd48f7905",
+            "lib/private-frontend-startup.ts": "8835fd31fd51808f32efe780dc8d591f331ded36cd823907f9fda1ea74d27b76",
+            "experiments/hosted_ports/frontend_fixture_identity.mjs": "41bf86bfd0472436e334c80f9db6ad9581b150e910bc27b9e255cbc3aa16cca1",
+            "deployment/frontend-private-launch.sh": "6b2e8a06a360f956c8a2d90a384fd24bbfd8ede856bbfd426a3075bb323db975",
+            "deployment/frontend-private-entry.mjs": "9980e539d5c1d204bb1387da6f5f15ca8800fb5654fbce787123a02519192f74",
+            "deployment/build-private-frontend.mjs": "4a43c111b9e73385a00ba7e68cc0661cff9d51d30968199f1b81ebd1ecf80209",
+            "app/api/development-diagnostics/route.ts": "d64cf564e65b3f88b9d2e4cc93c341ac30757ddfa109f57c356f4cbf4dfc9716",
+            "app/api/health/route.ts": "4fa7f0753f63fd2823f28b95bfab8749286cde39f55cb3a4e7b379fa1f4a27dc",
+            "app/api/interpret/route.ts": "fa2af4477a880e8367f0c1c131f7f5d142b0498291e6c4353ce653b8db79b15c",
+            "app/api/planning-mode/route.ts": "ec1d421e45bae42d136e10b17d314d25c88e3456fe7e5aebf45072d8f6e29596",
+            "app/api/plans/advanced/route.ts": "f1938a25cd67bf4ef5abfd4d6702cc01187b24cf006f1d79d1cea40a09c966e9",
+            "app/api/plans/generate/route.ts": "b95e1875a20d928e0152ead8a6456c24439635fc020fa47282343011d4f5c072",
+            "app/api/plans/options/route.ts": "25b807e5b7d3f361a74a8c97f248abb82ffe2faace6ea010af6a6ea5aea60a92",
+            "app/api/plans/refresh/route.ts": "5f5431bfd33be92d7e2bfe345d7ed7902f6de6f80b18d8f02363cde277891815",
+            "app/api/plans/reopen/route.ts": "6ae725110c308521e59dda475d37d37a81e1df3bcf9e71ada95299a397f59a81",
+            "app/api/plans/save/route.ts": "d7ac9713ebfd2e2439871b6749e1452a3a2dda06e2553c560b392836a060030a",
+            "app/api/private-ordinary/revoke/route.ts": "8fc745ef7163267a4cc46120f1a5fbf6f1de7c7a9b9ad51b0440904021f87c8d",
+            "app/api/starting-areas/route.ts": "3ae31178bcd775b584f6d4daceae7bc017a88f622cf634f8a3ec2db7985e44c4",
+            "app/api/starting-places/route.ts": "5e4d14c59ad665450a4a4733f2673ff63225a3a96b2d1e1f2f05537249c4c5cf",
+            "app/api/venues/details/route.ts": "b1aaca85319dcbead1f538326978a40cf8f7cbd10189893af7f291c347a8e344",
+            "app/dev/diagnostics/page.tsx": "61732a367146c0bd0219e8f24947cdbf9b3fef2c9bb3aeae473b36931114c4e1",
+            "app/globals.css": "b0f3da5b11b0496eee45af05d4d579d92e1fb537f19484377d8098d76f7a2ca8",
+            "app/how-it-works/page.tsx": "1938bf1417c0f82dde6173faddf2da694c183b46f9e9b6c9860f0870d39a8885",
+            "app/icon.svg": "0d1495aa2243f3d40e709635afc142cc60c3ff59ca4c237192f316c410a76b6c",
+            "app/layout.tsx": "56aea53e9e948eefff7cc1ae34392195917ae26164002458fa49ccd5a26f23c5",
+            "app/page.tsx": "97f6722529dc30d01ab0c4bde1254b8b0b9d47fe9f8f391ecdea3dc769d938d3",
+            "app/privacy/page.tsx": "811aaad3a88b948f629ef272368cea62870a3534a6a16fda92af34713f7004e4",
+            "app/supported-activities/page.tsx": "fd696a9a9c851bfd9253d4f186192de278cf7c71c3aa4f69e72a7bf41ff2c975",
+            "app/terms/page.tsx": "fccce022d3a6bcc66d03cfb25f28d987ed4d545a0145a591e1497aecc0e72e78",
+            "components/advanced-plan.tsx": "e6d45ba04b3d708c0224a56b045145001090a753031c6a8212e24192f6a3d77d",
+            "components/advanced-preferences.tsx": "70f6f361c5e6f9f6608efcaa8f4a172284bdb673512184c50fc2d196586f179c",
+            "components/alternative-actions.tsx": "352ceb0aca9bc323eef3101d1361f1fac5e271c4ee75a35e4e59575db29329fa",
+            "components/artwork.tsx": "5e5360d62e537f6f176239921689438ee501f6ade82b279e8d3e5b58759e7157",
+            "components/beyond-preferences.tsx": "7397fbfc886618ddef0544fa03ed3b69ad8f1cf0d12452c660a2cc22523c25f6",
+            "components/clarification-field.tsx": "6a4567d311dc0cfa40f2f1c1c86bab5bdbeb412b47cf987abb7c5809e304066d",
+            "components/development-diagnostics.tsx": "e2e1eb784d90473bcbf5dbc6e07ffc900a44ed2c1ccada6251e7e085ed369bbc",
+            "components/exploration-notice.tsx": "b904346ed2076c8e696bf52f3c51388cada065d2f79133a7d77bf268189057d0",
+            "components/first-leg-travel.tsx": "369743bbfa7ccf2ba6a85f3ebe43ba2f8a4a013f6927dd3d03617c41b263c2a7",
+            "components/itinerary-pagination.tsx": "a8f07df775543d3b6b74d33d6bc608c4663cb9ab342e4d0cc2faa0f2d908618f",
+            "components/itinerary-stop.tsx": "e790292c802736f20ca2dfe7ac179032c21f23ba2a5e3f47d5d5a83b01a2bfd5",
+            "components/location-controls.tsx": "2e47f175adc99c20785759461be1078524666f0cea1a036bbf7b266b5ddcec5c",
+            "components/opening-hours.tsx": "87ce531362c087131fbac2ab1359692c39b3f1629a466c102096c263853ab3e4",
+            "components/outing-date-field.tsx": "02ad9fc85cc08c15d020178831e5ce6e5d1b37e1a8068626ca8c081706a0c193",
+            "components/outing-summary.tsx": "a8386ac0d0972e4b5ebcdddbd909b4c10cd896210200346b78723ef7bb4fbeb0",
+            "components/plan-card.tsx": "ec6a75ee18fec3baed4b71dcb48a609b8c3a06a2a80d874624da9ad13ee16763",
+            "components/plan-cost.tsx": "aab933ab900b8bae40d17489adc43684cd70e2c863425406fe61a7a992673c88",
+            "components/planning-feedback.tsx": "305c0b383b79bcb65d21c161190404c3577de6b38e3945b0ac1292afaf43336b",
+            "components/private-ordinary-experience.tsx": "6b6a621c483f755ed9ec2e49613ceb2e40020ac9d115fad35b19422569c29d03",
+            "components/real-venue-facts.tsx": "a2e2b710e5bf907f35d34e015360d8c5fb1f6db7fd0649db9a24a03a329993b5",
+            "components/results-information.tsx": "ce94a60149df48a7c62bbdf68f362de7a31295cad4f19cc005787ceb40371fba",
+            "components/route-directions.tsx": "985084e6828e04fd0898218a794f559af5dde630be3bc89bc53feca252f4626f",
+            "components/saved-cards.tsx": "3aa728a76c54828ff376c21b286f0d64490c262fcd959207ce705bfe623e518f",
+            "components/saved-plans.tsx": "34a493a4d595f18be04efe14d37fa8868b6948d2dceaaa6fc239705980539b46",
+            "components/venue-details.tsx": "131bc140d77682aede15abd0a97c7d5f460e5250117aa1bc8a96800a43519e83",
+            "lib/advanced-planning.ts": "d452bf13a3ddae5d589349c545cc95992f5afdc6936328d96632d16f76c20d36",
+            "lib/advanced-preferences.ts": "8b4796376bc29d723fcb44582204bf342e68d857a9242bc1aa0e535bc8783ee0",
+            "lib/continuation.ts": "72776add36d80aa9786c9c9ae59d2b8f75c9ae1605b56874afac6496513c7ce9",
+            "lib/destination-context.ts": "e9b11ef744d8d57138ef091d6ad3338c0772661c4e91d27ac11c8d2bec4a71e4",
+            "lib/development-access.ts": "feccdc56878b78e8b5aeefa9ea0970896436a053d21c03b19eaf2c9b4fa6dbe4",
+            "lib/development-origin.ts": "2d44402843976dd69392e845d5eff717f8a55c6b2a2a4b8b639ef3cb3267fa03",
+            "lib/display-format.ts": "bb6587153df97fd0791f7fa3c9f4a5b5c258b2ffbdad2f4506b2cfe0182cffa6",
+            "lib/duration-format.ts": "dbc030ed889394c5c08e2041e2e98f8d5c0c19a5a072c28e0a3d92425d9bff28",
+            "lib/failure-diagnostics.ts": "ba8ca2d1a74201ea6d5a31b24e49775cecffbf2fdd5f63ea7b897e7f0cf34c24",
+            "lib/first-preference.ts": "f085e50ea05f8087e6262462a085a4bbd3792d71c030f66e8a93acc714ae5edb",
+            "lib/itinerary-pages.ts": "23dd6dd676e28829b1a3b55df82be1d3a7abe27d3313e76455a073addebb372d",
+            "lib/legacy/planner.ts": "de5b749d6f3d2e3f1b243042c6a7cb5ca71e5374be9905c1c0a28073942fe9f0",
+            "lib/location.ts": "3363b6e173db9753860805ef9fbbffb188e093c30588c906cce5783fc363b6b9",
+            "lib/maps-directions.ts": "bfdba578a689d20297bd9535aad385ee34e999ed5b1749d1abc76af8be136b69",
+            "lib/mock-data.ts": "e491b0f1cf3358bc4b411fdb47f4e9e14d7c4b53b5e3f26cb61bfdf0adcaa3be",
+            "lib/option-batches.ts": "3c64e7e5c67241f231b0cf3e11498d90567d08e30a33c31ad1466316b444a29e",
+            "lib/persistence-proxy.ts": "7831480fa384519936eabfd2f0c2ba82c59a8ab0ca2c3a5f43913a8ef8b2a2cf",
+            "lib/planner.ts": "e5e65362cd60ef00a094c52c9b37ef3cbd02ce8425e89be1eaa07bc8855f3ad5",
+            "lib/planning-client.ts": "655c6f55847e6be9507521e3f95e3d4e52e79e289b3da80ad2988149abd6425e",
+            "lib/planning-session.ts": "2b6e64b53db817b93c631fbe2dfd43d75a61f5a3cd682f3fc0f2bdb768fdfd0a",
+            "lib/planning-timing.ts": "a60fe7012679ae22d8f19f661a4dba209fc185230c48e978843abe8d248a400a",
+            "lib/preferences.ts": "f1f936fd4633383464d20f725e6c7a7a9d524892bbefa008422c442b7bec563c",
+            "lib/private-ordinary-client.ts": "87812910946c9e60baffe4d0f7df977cb2058c92367dfa29dd5cc5c4dd930bbc",
+            "lib/private-outing.ts": "96562106da379f043248731d628488e6a09daf0c9fcb242a94478afe0333c976",
+            "lib/provider-diagnostics.ts": "e8d76a8f947ab8eb4c84197d9480fff255bd3082424e0275c39ed2d3b458e6cf",
+            "lib/provider-proxy.ts": "00e7761bf8ec72e7646fa17bcc207aec569c641c88b0802522ab88dd16c10d21",
+            "lib/proxy-failures.ts": "3f713ecd3fe389c4e16ea1a4df582d22b702eed9f4ebaa9a8f4c12112d2e0f30",
+            "lib/public-planning-payload.ts": "1a3273c42c1da8103d1a227d46b93cdaa36814b4e5c1200237d264406870274c",
+            "lib/real-headlines.ts": "02ade195b4617f44e9a889e3f080a6ef2814e8e1c2e3d2cb905d2eaedb3312e0",
+            "lib/recommendation-copy.ts": "7cdd24864ec5458bfbe838b8c1478d96abac7e03acd06b73f1a9fabe35ef0453",
+            "lib/request.ts": "8d90ef620ea8203e037cffbd9a60b178ce6c5adf883e80195061cf42ba474172",
+            "lib/results-presentation.ts": "9eebcc7d5c580becaca59243398dd6256c19e5384506b48682ee8c3f10b379e7",
+            "lib/saved-details-request.ts": "93fde16a7c5de8869e34c976da18431532736056653e59973b46d5d8cedcfe2a",
+            "lib/saved-navigation.ts": "663fe626206f6604df370506fc583e0158cd394c8ea8a268454d6dce89a3dd81",
+            "lib/saved-plan-refresh.ts": "c98e172dfec2347aa6289dd4371229004ccaf73843aa787d5ac19a64f02ca116",
+            "lib/saved-plans.ts": "e8d3318bb37d5f52879190849fcd662ba8595f179ae2298abea297048c6b5877",
+            "lib/server-timing.ts": "1dbdb4152695a92d1c3c4732c7b3a45477af5cfec39198208344a04a9751a048",
+            "lib/starting-areas.ts": "06d5558fc3b18e3397187a107720fbd102c9cc9edba64c3ec22c346cd4376a88",
+            "lib/starting-confirmation.ts": "eb492f6a8893cc95fbdac73176098f58fcf36e7c556131ba4730d41b50822dc4",
+            "lib/starting-places.ts": "424628ea1c2be75f3dd739b342fb34d67daae923a3567bb909044295786e4bf6",
+            "lib/supported-activities.ts": "670cf348d942f6755bd050b35c06577c26c9fa71dac737e141932a904f15d67b",
+            "lib/surprise-history.ts": "fe63ca8a09857713a4f47cd3a2b0f35da97eeb8a6a9be338f6ab3ad478b1f711",
+            "lib/venue-details.ts": "c50e663d0b5eebd207b8130420234b25bb830aaeb63fdb140f9cee21c03964d2",
+            "lib/venue-hours.ts": "087024b208149f38e79e4ab32b17007baa9d75ff666a056f78936d65b979e0bc",
+            "data/demo-plans.json": "234840dd8db8c8206655ab07b8b42f4314103cb6a23638894b3e81dbd9efac47",
+            "data/mock-venues.json": "14a25f1008273fc101c231087c2af171568554d15f4aa5e5655ec226cd6055db",
+            "package.json": "5fa13718a5760a21f7eafe2eb37b7e96236d83670a67f852c34a01d06fce80f1",
+            "package-lock.json": "4839855e8e2ec9b60f186902ceb75d040c68e01a896f7813b4e46682e4a8b878",
+            "next.config.ts": "8b25f1597640e547d20ad3b14a8dafd042f10c61b0a8f010a54cfef0468b8f63",
+            "deployment/Dockerfile.frontend-private": "a23d3e9bab87ee5cea89c461a2edea2d26bfb3f727fcf6e9c802b2b15801a132"
+          },
+          "outputs": {
+            "identity-json.mjs": "320da1070acbe408ad06284cd367a9278b674c26ee35030b4181d4a08dd5f393",
+            "identity-port-v2.mjs": "4eab2daa603de77a7552bca3f3bad5b262ac61eb66320aacb396a4a31eb73081",
+            "network-port-v2.mjs": "21363cad4a8702101c21f32594d8008499339d353bce3d7b2af807f0e6e01d95",
+            "boundary-v1.mjs": "f3161c6aab6bd74346989840c278a2c1db2a0ba48be2f6031eaeb961eda32f77",
+            "frontend-startup.mjs": "1c9d80fa8c632a0463d0b482f289d35be60e2c38b97846a4dcd81992ff0b5edb",
+            "fixture-identity.mjs": "41bf86bfd0472436e334c80f9db6ad9581b150e910bc27b9e255cbc3aa16cca1",
+            "frontend-launch.sh": "6b2e8a06a360f956c8a2d90a384fd24bbfd8ede856bbfd426a3075bb323db975",
+            "frontend-entry.mjs": "16c37705575c0d59314007ae242c3e249ac024bb0ea2a2df60b0a30019f5b509"
+          },
+          "application": {
+            ".next/BUILD_ID": "92081d7b0ea942dfcb8d4ba04a4e3d08776da9ec3c155c32595e09d7c2a6ce0e",
+            ".next/app-path-routes-manifest.json": "1bf07de8976b7862f485c184a4d555bca4619c240303069b61ea0afc386114b7",
+            ".next/build-manifest.json": "95cf78b994d18151593108274f091a8e2842b5bcb45e6ff8597954881420a41b",
+            ".next/package.json": "091a04fa67c7907b98e106fcff8b964e13129754fce72d24f3025b97c4887fa3",
+            ".next/prerender-manifest.json": "02db63d84d148643d38025dac81d3e14cd1ef891d09b963e466d9f65b4429a73",
+            ".next/react-loadable-manifest.json": "6249369150f41d21865bb2ef59ba74f912b479efe7cbdeb4b531f5d12ad9e65a",
+            ".next/required-server-files.json": "a9414fef7d6f5c8678c4fbbaff4563a1bd628473ddeb13d38beac955ea11e073",
+            ".next/routes-manifest.json": "2cf466023dc6e29974e380b9c2880db9010f319fd11663fdde35956ccc58f402",
+            ".next/server/app/_global-error/page.js": "d14ec315ec55a8beab3b5dd56c9edfdccf2495b444ab731571748f8913cccab0",
+            ".next/server/app/_global-error/page.js.nft.json": "355e5d088b3f6cfadc6976469a4aeeb5c7d25bcb58ed98e51c23cabfce840634",
+            ".next/server/app/_global-error/page_client-reference-manifest.js": "e1d066581a39438bbf7d62c34af7d2ce977873c0a793f28252ebee91b764e678",
+            ".next/server/app/_global-error.html": "5d4087ae9400a104d4d8fe0629553845cc1f43203763ee17cdfac832dd81a755",
+            ".next/server/app/_global-error.meta": "9b8d904a303eb2ab75de615148275f9eb4d444da08ca188729e723ce9d7083e9",
+            ".next/server/app/_global-error.rsc": "9ef1f68d19760b84f041342dfcd7e4e4594978da8ca3644344257abf4c7a20d7",
+            ".next/server/app/_global-error.segments/_full.segment.rsc": "9ef1f68d19760b84f041342dfcd7e4e4594978da8ca3644344257abf4c7a20d7",
+            ".next/server/app/_global-error.segments/_global-error/__PAGE__.segment.rsc": "10e36a610880382afce30721567d7147013813730e580f36cd1b3cca4a217b30",
+            ".next/server/app/_global-error.segments/_tree.segment.rsc": "82405869b617b1fde6a43e10429d7ebd52df0d2e7f7058e7fcee43eb7bc35721",
+            ".next/server/app/_not-found/page.js": "b8cdd3e7dee8719adb54eb1c04b2e79d55606f09657450be1a497e4a56b9317e",
+            ".next/server/app/_not-found/page.js.nft.json": "355e5d088b3f6cfadc6976469a4aeeb5c7d25bcb58ed98e51c23cabfce840634",
+            ".next/server/app/_not-found/page_client-reference-manifest.js": "15e1837f7df6bb775902cc9140e9dfc9fa72b94902dbe4cdaf1712e89ba38794",
+            ".next/server/app/_not-found.html": "bb513f288c1d5cbf625dab63ac483e4867b11e7d46b1d95e0a5d7b73c6aeb8b7",
+            ".next/server/app/_not-found.meta": "4b112114c74c5dc53232472280e8b7ed0c236907b5f245e47dd2967d0f2bdef2",
+            ".next/server/app/_not-found.rsc": "534d5245491438331f257c1ef7dff89276cc14c7e74218f2813573b720847610",
+            ".next/server/app/_not-found.segments/_full.segment.rsc": "534d5245491438331f257c1ef7dff89276cc14c7e74218f2813573b720847610",
+            ".next/server/app/_not-found.segments/_not-found/__PAGE__.segment.rsc": "a24c59534e9b416b5900b80d0dee84627b3ae6d86554d4dcac150a8b551ad8d7",
+            ".next/server/app/_not-found.segments/_tree.segment.rsc": "c0f00b2bf3faddc61728371a0b10277633f8df27b765633f1b3c79c3a34031af",
+            ".next/server/app/api/development-diagnostics/route.js": "de787e086284fb4c13276a6b0b449350c089cbe059419eeaca385efe47c9eeb2",
+            ".next/server/app/api/development-diagnostics/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/development-diagnostics/route_client-reference-manifest.js": "3159b4cb3415178917ba2d7500e7bf492d7f6e4b9a33fc9b966c2f58e36bf176",
+            ".next/server/app/api/health/route.js": "f88d78b43fb23da3781ed87f272e58aa09074f55c7379c4a8b86fd04f54e66e4",
+            ".next/server/app/api/health/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/health/route_client-reference-manifest.js": "fda0bb35e4023145d5f282c44920d5ca4a1ea4a0b5c549121ccb97789c1ae144",
+            ".next/server/app/api/interpret/route.js": "13de856efec5360130da2d003aa513456f00da52abf0f93f3c64bd0450fc392e",
+            ".next/server/app/api/interpret/route.js.nft.json": "7b39cd7a0cdbf8f8563a72b6b45fb43916e856ecd40e490070084e9e9ab22cff",
+            ".next/server/app/api/interpret/route_client-reference-manifest.js": "83d9480361a5f9ab371bb36f9bec6a83c0164fef40f7399276dda10fb7ba16c2",
+            ".next/server/app/api/planning-mode/route.js": "a41542b4392468b769a0c9d97d250f7f905c242de69e0c2b264bd12860a2c7b2",
+            ".next/server/app/api/planning-mode/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/planning-mode/route_client-reference-manifest.js": "865f73173b535c67a3eb865c6634712d97b57247f7836ea8ac05962f3d22605d",
+            ".next/server/app/api/plans/advanced/route.js": "b13b8323e2429ec415df0efd6127f824910370a42f2c544776129f5b349d1697",
+            ".next/server/app/api/plans/advanced/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/advanced/route_client-reference-manifest.js": "451377f82f130b0623b5bfaac0e25d309ed980eb156dfe8ee27f1fea01328cdc",
+            ".next/server/app/api/plans/generate/route.js": "2e2676557b4d2cdbae4f369fd0f723a06637bacd4fff13a8f09fee7f2bb5fbc0",
+            ".next/server/app/api/plans/generate/route.js.nft.json": "38e1276ee076e618627409b183fe7274380d970b75b51c88b93fe7b40a3bfdea",
+            ".next/server/app/api/plans/generate/route_client-reference-manifest.js": "507690570479ae1ba7ed91aa278ecd16a6fc444bc496bc234c576f46a42a30f0",
+            ".next/server/app/api/plans/options/route.js": "9b9f66c59cdac061a76e690053a04433703ce52924d26e2f7d58835460e2c723",
+            ".next/server/app/api/plans/options/route.js.nft.json": "7253e07d97b7194c8402040f538ac4f611911e081b6a104d666cb60201dc93f4",
+            ".next/server/app/api/plans/options/route_client-reference-manifest.js": "d30fa2cbd0811be8984690fd4b4c941f2cf53dd27b725cd98fdd36bb7ceb0f36",
+            ".next/server/app/api/plans/refresh/route.js": "0684e1fc77e718b106e2bdf0b875769f0d3884c69e8fd1909fc747f0a58f50ad",
+            ".next/server/app/api/plans/refresh/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/refresh/route_client-reference-manifest.js": "197180415080b35ca111eab62a1e2701618946be60e24c7c959bc6fe13b01500",
+            ".next/server/app/api/plans/reopen/route.js": "ad9aab8a4226fb90aa48dbe9598deeff556e5814e0c1543f1b4aba8b3f82641a",
+            ".next/server/app/api/plans/reopen/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/reopen/route_client-reference-manifest.js": "6b5b5b163cee52180f7870e8c9c8962275d5b915a763618e592d1d6772eafc33",
+            ".next/server/app/api/plans/save/route.js": "9b4278184f8d27909584270796824cca53b518edf9f2f7539717397138cfd253",
+            ".next/server/app/api/plans/save/route.js.nft.json": "b19d95f5f62460d0a5059dccc87bb474ae53e59fab938f88f1643310731b55bc",
+            ".next/server/app/api/plans/save/route_client-reference-manifest.js": "cef5041d89b8f21b958833d8eb27cfd82123601b14051866fe8c3758116de43a",
+            ".next/server/app/api/private-ordinary/revoke/route.js": "b3fca38cf983fa8e3719a27fca69968120a060bea9d37b310fac1b11e51195bf",
+            ".next/server/app/api/private-ordinary/revoke/route.js.nft.json": "f8e44325031df8b3165b6a6351801545c047ec7211d2b4df33bcdecb82eabb70",
+            ".next/server/app/api/private-ordinary/revoke/route_client-reference-manifest.js": "be293443928c1bd6f5b5c9fc4b08bc5880cf761aaa0793678b81659ddf7e35c3",
+            ".next/server/app/api/starting-areas/route.js": "3728b024cfb4420a34221125b40e48a57f95749d529851b39008cb118e513972",
+            ".next/server/app/api/starting-areas/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/starting-areas/route_client-reference-manifest.js": "b3c8cbc260fe5f79ae28b88c2d2adfc0c8c408a88913ca042fdd568ba44aec9c",
+            ".next/server/app/api/starting-places/route.js": "9dfa9b7a57801b1a707f00d32d90fb512ce6c09359ecfb72b8350713550fe8f5",
+            ".next/server/app/api/starting-places/route.js.nft.json": "850c2e0359f97ccef5b6dcbb8a1c0837f1a81596b18c6ecdfd66c0542cbe9a10",
+            ".next/server/app/api/starting-places/route_client-reference-manifest.js": "19b564e622d7c0c35b85701dda1e00165415e56aa83e7fe2538b091869fe0ac9",
+            ".next/server/app/api/venues/details/route.js": "b2b4187c12fa0a1fa846127ab2e9c10df09069f92e9bb3f53e9fb50820867ea9",
+            ".next/server/app/api/venues/details/route.js.nft.json": "7253e07d97b7194c8402040f538ac4f611911e081b6a104d666cb60201dc93f4",
+            ".next/server/app/api/venues/details/route_client-reference-manifest.js": "38acd1a295aa7e1ef85c0b3d831fdafa09ce84a5d0602302cf921c090109cbab",
+            ".next/server/app/dev/diagnostics/page.js": "a67682779583f2cb084c5d6b1b4d2a431e0b05ad0d2608339c91b66d63d1f9f7",
+            ".next/server/app/dev/diagnostics/page.js.nft.json": "66c02345d9b8d61a1e3ceb7193df759d0a38b920d79c8a99f24452ce31a3cf15",
+            ".next/server/app/dev/diagnostics/page_client-reference-manifest.js": "5470a1eb8af17ace53a8e33349273aae0842130a1df13812caaab44b51eefc70",
+            ".next/server/app/how-it-works/page.js": "c4770969c35facc4f5c0fb8248191907b8ae17e92344629421af378460eccb9b",
+            ".next/server/app/how-it-works/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/how-it-works/page_client-reference-manifest.js": "fec3a1a6c9a70f0c6ecf24d668d64614db80669ff1a87c003de756a4196c7d94",
+            ".next/server/app/how-it-works.html": "bd490267a8084a3f8f7e2e3aa65a8b39ee8d91e734e5adb7a080920d40dc4df0",
+            ".next/server/app/how-it-works.meta": "dd9daa1945097042bf6eb9807690dea14048ff8550384156a3ea255885b58eb7",
+            ".next/server/app/how-it-works.rsc": "acc6938852e6285bcb5003237fb0ab61234fb0eb22514f2234458a5abdb19649",
+            ".next/server/app/how-it-works.segments/_full.segment.rsc": "acc6938852e6285bcb5003237fb0ab61234fb0eb22514f2234458a5abdb19649",
+            ".next/server/app/how-it-works.segments/_tree.segment.rsc": "56ca7c024c05374791a0d4bb654759331f6bb2fed9eff104d0b96ab63ec6816c",
+            ".next/server/app/how-it-works.segments/how-it-works/__PAGE__.segment.rsc": "6e46ad72508a177c0bebd563b7e8dee1fbd702612936c7af09ec97969bd51630",
+            ".next/server/app/icon.svg/route.js": "5363e111240c5cc5b2a4d7a1881195564d497a3af23da6c8462518a84a42ae38",
+            ".next/server/app/icon.svg/route.js.nft.json": "f13d01a00fe9b4058297d278337415d0658cca7f9e32714db8fdf7a12d8cc4d8",
+            ".next/server/app/icon.svg.body": "0d1495aa2243f3d40e709635afc142cc60c3ff59ca4c237192f316c410a76b6c",
+            ".next/server/app/icon.svg.meta": "9ec9ba0ae03e74495bfcac4edc2cea84baed269bedc9c045abba1302af543a8c",
+            ".next/server/app/index.html": "9e6d6a1490ee5a3a4d063a1cfc0d33e3e6f03702384b77fbbccb09fdb350a176",
+            ".next/server/app/index.meta": "364b5f5dfdd03a659407755e2d891feb1100a3e1242d1753888957d41158c31c",
+            ".next/server/app/index.rsc": "8531d21c141b760aedf7dd3350243d97add7dd776530172ca23bef22b316f516",
+            ".next/server/app/index.segments/__PAGE__.segment.rsc": "8a43e4e280fa21dd140721547481a941b88428ffa6a85939acdad2011912c635",
+            ".next/server/app/index.segments/_full.segment.rsc": "8531d21c141b760aedf7dd3350243d97add7dd776530172ca23bef22b316f516",
+            ".next/server/app/index.segments/_tree.segment.rsc": "20e64f3f9a2cdea3686042ebe3bc44ad22a0c74560c8da7aeb3f569e774b8fb2",
+            ".next/server/app/page.js": "ba56fcb546ee7f5564f22f5f48ed7d9139b0966a45b5e84d9177ef251e4398b3",
+            ".next/server/app/page.js.nft.json": "ede1da1f1379ce2441635fbb54ebc87bd87efa22716d6b6738c81bd757f242eb",
+            ".next/server/app/page_client-reference-manifest.js": "aa51cecd733f3050cf8a7cec23df749bc00341c031d51b0664cc16d0d67e7e43",
+            ".next/server/app/privacy/page.js": "eff0f653c286d4eb2f543b8a988602ea7a689b7d4e16128c6ce0db6227febdfc",
+            ".next/server/app/privacy/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/privacy/page_client-reference-manifest.js": "929812e38a26fd0c9d5d501c2ab6c4c807b3d28876e364c4e7407326c1c0fc4d",
+            ".next/server/app/privacy.html": "c935dc7b220ff6059cb249dca1aea78948046ef7ffa85cf63ba02f5327854ce3",
+            ".next/server/app/privacy.meta": "995ac9a56b0caa32a6838d2fa0aecd97eb67e6c062fa0c1350bf304a650c5561",
+            ".next/server/app/privacy.rsc": "a371dd22250f9f6a48d5af51171a62381c6e1d9a8670960403ece4e87c5f2cb1",
+            ".next/server/app/privacy.segments/_full.segment.rsc": "a371dd22250f9f6a48d5af51171a62381c6e1d9a8670960403ece4e87c5f2cb1",
+            ".next/server/app/privacy.segments/_tree.segment.rsc": "ab63458d7b84cc9080b2d740b18a38a6c2fa8fc94cb2aaaba96749c3cadfe5a8",
+            ".next/server/app/privacy.segments/privacy/__PAGE__.segment.rsc": "f2ca387fa3de4ba109bcae4ff260fd2f48d57d1ea43f251c47e4ae464e33c812",
+            ".next/server/app/supported-activities/page.js": "d23460ca47648f90e399516e7da9a6bed95ec46125e574b235cd00b5925ad68b",
+            ".next/server/app/supported-activities/page.js.nft.json": "506e134f960f6e8951201d8180c280d27e8598bfada5f896c1d546d2d1b00b05",
+            ".next/server/app/supported-activities/page_client-reference-manifest.js": "ef6a19f2c836b76656698ead78ae76cd7baa33cba09739179be85cad7682bc7a",
+            ".next/server/app/supported-activities.html": "5147f1e40e17c4c43def37f2bc6cda32b7a9d2f253009a469883c1491f6e5164",
+            ".next/server/app/supported-activities.meta": "8a805845434b55401cb1b44d5569f99691f5703528af1b4db357abc23ea8f1f6",
+            ".next/server/app/supported-activities.rsc": "713bb3225f7f1447f1aab879e7704fa346a6c85ad9e5f881b834f3466cebab58",
+            ".next/server/app/supported-activities.segments/_full.segment.rsc": "713bb3225f7f1447f1aab879e7704fa346a6c85ad9e5f881b834f3466cebab58",
+            ".next/server/app/supported-activities.segments/_tree.segment.rsc": "c2bca190b56bb6598c80f0c725ec164bdbf2f98f4811a99086c333486d523ba2",
+            ".next/server/app/supported-activities.segments/supported-activities/__PAGE__.segment.rsc": "297604e7fefd4738a1ac4faf38ed9b48fc061f891ec8302a05a147f09fdabcce",
+            ".next/server/app/terms/page.js": "581b8ecdf09a0f5e4e2338a4a7cead656fd46fe8e091d21a279f801082b448ac",
+            ".next/server/app/terms/page.js.nft.json": "f89802f40fe2e7df26dec475d344686661a3b57690a3c958c4d64ca5697dec8f",
+            ".next/server/app/terms/page_client-reference-manifest.js": "d11cb9e721a1dac6f74a2c9389b8fd7c7f3968dd2e483ac6c11c9e8311c79853",
+            ".next/server/app/terms.html": "f69ca2f186888d4be39fe27e659632f87de4cc74a18f71c119fdefca6afe0732",
+            ".next/server/app/terms.meta": "c6a4f69706102a8fd679f3aa9ad6757163c84ad4da55b3297bacac03d594462f",
+            ".next/server/app/terms.rsc": "d5794f0adc312906344a340bec4cf09fdcaddd51f690ee831f65c6fa16f2b9fa",
+            ".next/server/app/terms.segments/_full.segment.rsc": "d5794f0adc312906344a340bec4cf09fdcaddd51f690ee831f65c6fa16f2b9fa",
+            ".next/server/app/terms.segments/_tree.segment.rsc": "40d2e9d1b2c66c46f669df379d90e78afa7b9c8a2bca005d8d17edaf1b82cb3c",
+            ".next/server/app/terms.segments/terms/__PAGE__.segment.rsc": "e4f46dcf7fc266c06ef119cec580532c60f2e254e6c22d2b8d231baf91ef7fd9",
+            ".next/server/app-paths-manifest.json": "8f93bd560a4fd48fc3b9d082c0b82722489637f0ee678f2259f8491f24b78301",
+            ".next/server/chunks/286.js": "459ed355a8beb6f9cc98e408687b8ee3657eeec96d406eb8ab58d4c4a4ceb085",
+            ".next/server/chunks/430.js": "cd0aee606c65bb2eb9b352fbfed34fb528ae44b4aa1c9ceaef725e3280853704",
+            ".next/server/chunks/56.js": "e0e62112027ecceca8c345bd2950b2a210ba64a86f46d92ca024de26700118d6",
+            ".next/server/chunks/970.js": "b7f2fe25df5382f993d5f29e5cc9345b1dfc9f0d8f87fc27dd7fecea3a8a534a",
+            ".next/server/functions-config-manifest.json": "70afe3c692e2ad1990f7d7c7671c5a0d436cf85e3c3623178b1f6d84db73b481",
+            ".next/server/middleware-build-manifest.js": "342875c45580646b707b8721f279670de64c6cd9751a2fff55330dfd393f0046",
+            ".next/server/middleware-manifest.json": "0a8520bc7e076f7ae717c2d62713990c83e8a3d74626f327a3844bc0504e210c",
+            ".next/server/middleware-react-loadable-manifest.js": "a9fcb835ab1ca28b48fac5eee305a76758a5a812b56bf711f595955d2667150f",
+            ".next/server/next-font-manifest.js": "2c0f5bbb79d07dfea405146a62d7e15a7a9e890d29e38b7db2631fcf6e480da8",
+            ".next/server/next-font-manifest.json": "926e772d34a53f2a4d9b16071dd6ea77b051b2b7acc49d9165723debe3fbbe0f",
+            ".next/server/pages/404.html": "bb513f288c1d5cbf625dab63ac483e4867b11e7d46b1d95e0a5d7b73c6aeb8b7",
+            ".next/server/pages/500.html": "5d4087ae9400a104d4d8fe0629553845cc1f43203763ee17cdfac832dd81a755",
+            ".next/server/pages-manifest.json": "c354059caa217e72bdeb145e351b2038990972872c52df215cb1e4105c35097b",
+            ".next/server/prefetch-hints.json": "2f8e5cc165e077851749f4bde40a303138197eb0cfbd88ab6610e6d43b975654",
+            ".next/server/preview-props.json": "e532ac0e37ffa59163e6d9bf3285bfb8cdb775fc17f8b039b9663ed4e36e201d",
+            ".next/server/server-reference-manifest.js": "ce01006c00e1f63bcbfe41b3f7edd260d969b41d0a323b705c44e1ef9df13d8c",
+            ".next/server/server-reference-manifest.json": "360205a048ce927cb192158649a362ba493cd0adb5e5225af6d7b79ba76fdd36",
+            ".next/server/webpack-runtime.js": "68835a826bab0ddef47e9a0008c6625f0916f56f3e2f71f7b1de64929b20757b",
+            "data/mock-venues.json": "14a25f1008273fc101c231087c2af171568554d15f4aa5e5655ec226cd6055db",
+            "package.json": "5fa13718a5760a21f7eafe2eb37b7e96236d83670a67f852c34a01d06fce80f1",
+            "server.js": "f82b35d671df7faabc0fb2b88d94af304034707c838e2e1007ef72626a97ea11",
+            ".next/static/chunks/4bd1b696-c7408084347438ae.js": "7d5ccf185a6f85ab38ce400a7f10aa0a3496eb4e9aee1e500a85e01c4222fcec",
+            ".next/static/chunks/649-b7656a60ea670ffe.js": "267386c2b49524a610e01cd17caf8b305386e15ebf8e9f11a5ce3386ac38cb18",
+            ".next/static/chunks/794-3c1567673e1f8cb7.js": "4213c2913f694875a79afd1bb6889c2049206b4902f8289fe4502e16eaf217c9",
+            ".next/static/chunks/app/_global-error/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/_not-found/page-577eba21b3a47d76.js": "df609e4208303bac1799493760ddc0353348f255e85e89c802d59dfc54f3e14f",
+            ".next/static/chunks/app/api/development-diagnostics/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/health/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/interpret/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/planning-mode/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/advanced/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/generate/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/options/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/refresh/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/reopen/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/plans/save/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/private-ordinary/revoke/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/starting-areas/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/starting-places/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/api/venues/details/route-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/dev/diagnostics/page-da006e71bead5bca.js": "70a9fa3869bbfa78c9c374e99535b62383aaa43f0fc98d2e2e8a88706fb783c1",
+            ".next/static/chunks/app/how-it-works/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/layout-5e34bf2251d06b9e.js": "a50b907e06b3d4707be75958f0d89a874df9ce0bc6583e7409f6d88377b8dc93",
+            ".next/static/chunks/app/page-7ab99726edce717b.js": "e872f892e71d351e93d23f76926148b152d33513924daad0576e16562d4fd73d",
+            ".next/static/chunks/app/privacy/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/supported-activities/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/app/terms/page-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/framework-ea4f97ca039bd777.js": "61b92d4a1510be156591a4f12a6b5bcf70f338cf5f8db1d50e2be1305b6b761d",
+            ".next/static/chunks/main-6bbff23ea139b22e.js": "7c84d23e0ab75a01189858984902e52765efa55ea20e298b23a13d68a9a7731d",
+            ".next/static/chunks/main-app-1a6aaf075bf9cd72.js": "6da2881939ce08ee595bb25380745d4ecc2549283a751fd837b75cdba33cfb6b",
+            ".next/static/chunks/next/dist/client/components/builtin/app-error-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/forbidden-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/global-error-d40735cf059c9704.js": "2eea37c93c09407a5dd407b5a57406d5c1ef20938018471ee7bd670320768144",
+            ".next/static/chunks/next/dist/client/components/builtin/not-found-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/next/dist/client/components/builtin/unauthorized-1f10c7ac3b2d300f.js": "f9da95db648be16f301edea4c4613580049e1bee84a926cca54e2de0e262e096",
+            ".next/static/chunks/polyfills-42372ed130431b0a.js": "0973c1d64c88adc8e3c950410cb58b288f72118d5965b78049438deb8f2f9683",
+            ".next/static/chunks/webpack-44d8aec3c26a0cdc.js": "d0a82fed8b37553509fe37aa7c8dfa791ba125f47b8a45899e0fd6a03936a339",
+            ".next/static/css/0d42180d95c871b4.css": "e55a39ea61824fe2932838122aab7f48c6ae5d0e58db8c09a4e31527700f922f",
+            ".next/static/iJzPirLy5kg2KptDsIYrH/_buildManifest.js": "1a5a4a393c00c61090dbbff45c1bfbc4750d44fe1dd1e125542a193953f40f98",
+            ".next/static/iJzPirLy5kg2KptDsIYrH/_ssgManifest.js": "678f6ce2cb80b1fe72fc67e7412be6e2ab6ada083111b64f7c40d35e3cba5e00"
+          }
+        }
+      }
+    }
+  },
+  "finalImmutableRun": {
+    "manifestSHA256": "927eae130a3f8549af0480d423ed881d048faf607ebc3169f74d0b436cb733ff",
+    "relevantSourceSHA256": {
+      "deployment/Dockerfile.backend": "84b5769dab42ee590ec10ad34fa849e69a57aff9caa9fed6fd59787e93c2b560",
+      "deployment/Dockerfile.frontend": "e3ccbae8ae8313c128cea8b6b6747f39a2615f6b469d182cb3712330a0dc6f30",
+      "deployment/Dockerfile.frontend-network": "8b1795923675913e81eb630261ffaf448bec7389d39824b3de8e6afcbfe62beb",
+      "deployment/Dockerfile.frontend-private": "a23d3e9bab87ee5cea89c461a2edea2d26bfb3f727fcf6e9c802b2b15801a132",
+      "deployment/Dockerfile.private-service": "c0a158dfea66ba0060bf24f7bda257970a2de309fa6cc501ca24ad0176c315e3",
+      "deployment/README.md": "2ddf7516ee14d37e20c44c26e3b989c136a4676107b45655996262b05e629872",
+      "deployment/backend-files.json": "aceeb846915703e6c6f53194f71ca221678dd3f37e7c35c381da76b1dc29f59c",
+      "deployment/backend.cloudrun.yaml.tmpl": "e911e96c48f23504da1bbf0cd6898393ca0ab2f9af979760a3577561e6d1f49a",
+      "deployment/backend_entry.py": "1e17a0c7dd1433d510f77bb880b3ee6cf2dccc02f978c3dff077eef0b2210045",
+      "deployment/base-images.json": "696994dd7d1df4c8a9560ce21b86af8ce0c1cae7a457a83893dfd8b3a3577a94",
+      "deployment/build-identity-port.mjs": "c78789e156e0a2efc255cd65c384686d81bb79fd7b0125438cf93535daf9ca29",
+      "deployment/build-network-port.mjs": "7175f7d43045326e7d43997d9cd3277cf96e7a5aa26c257d463d95bb34a43cf3",
+      "deployment/build-private-frontend.mjs": "4a43c111b9e73385a00ba7e68cc0661cff9d51d30968199f1b81ebd1ecf80209",
+      "deployment/container-smoke.sh": "4e80003da30e27ae719f1649ed4736f4cf50191ee72eaf52b5df4f0d849caac0",
+      "deployment/environment-contract.md": "cbc0e490513137b7a3b27d3a2cce221e764479e81d846d451dff8b680e1e7d9e",
+      "deployment/frontend-entry.mjs": "8cfb878e2f76207e247ebf3c96150f9ef0e5818e3f78f5fb7c704e36deed9201",
+      "deployment/frontend-private-entry.mjs": "9980e539d5c1d204bb1387da6f5f15ca8800fb5654fbce787123a02519192f74",
+      "deployment/frontend-private-launch.sh": "6b2e8a06a360f956c8a2d90a384fd24bbfd8ede856bbfd426a3075bb323db975",
+      "deployment/frontend.cloudrun.yaml.tmpl": "32777e046f6e93a4c204304eff28b588e453a2f9b93c542e59764e85812c1cec",
+      "deployment/prepare_backend.py": "f2070d0a071e1dc64fc7fb18f706e0a0ffc5540e61b2a890e2dd1602a29b00e0",
+      "deployment/prepare_closed_frontend.py": "27f99e099074b026e651032a78a4b5babcf55f74673aa6068d3ff5be680f29a7",
+      "deployment/prepare_network_context.py": "e9bae7eb7b6445f0e1d335e1b2d721781d80b2df776f1df37f250925f39ac49c",
+      "deployment/prepare_private_services.py": "9790a54b64e8f50938d3b504cb0e4396ab432d3bd4390daae55564f58e045e16",
+      "deployment/private-network-v1.json": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
+      "deployment/private-ordinary-startup-v1.json": "bc51085d4d4a5c224176bed154cbdd852323860e60483e69a8dd904f6dcbe16d",
+      "deployment/private-role-cohort-v1.json": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "deployment/private-services-v1.json": "cc59fe2e6ce0bbcf1d72631bf22268653dc9b532cca35fd33064daac65455e3f",
+      "deployment/private-startup-v1.json": "3f842b58ae4857314402b95e37052b439123c6f565565b796d7f9642646f1ded",
+      "deployment/private_startup.py": "4886511efdc1705eb7fb595349c668988e8e79fe634fabfc1da6328637218d6f",
+      "deployment/requirements-linux-amd64.lock": "aa89e396a2bc7298b30f073672d442a2788e03f9c942fa0180c379d334ffdddc",
+      "deployment/requirements-private-authority-linux-amd64.lock": "bd2ff66207cd5e17640e475b2868c8add2a544076e7629d9b972872985e8ce8f",
+      "deployment/requirements-private-linux-amd64.lock": "639af80d472e72aa90c4b0f0a4e68e385a14560436c49160c58a4f27bcfaa0a1",
+      "deployment/sql/hosted-operational-contract-v1.sql": "f06fc9002cb7b86a05ec55787e188de70a3d08f6fb340696c9f3e60a5f31a7b3",
+      "deployment/sql/hosted-witness-contract-v1.sql": "6f6aa7a5547881ee5cf9a54a38b69a447ef1c530e29a4393301d01304c19768e",
+      "deployment/test_packaging.py": "da75bc3148e54da9f8d7b384192c76bec76c20dfcc8006829290d154cc44892d",
+      "deployment/test_private_artifact.py": "99ce12929836366871039bc75156e6d8608b114dc3a34d02b34b3f2ebbe2e9fc",
+      "deployment/verify_closed_frontend.py": "71d3c186d03b2531faa7fa969ed0798e762eeecfafab1d6ff312de690f1d5dec",
+      "experiments/hosted_ports/application_probe.py": "22e7020ac1f9277c4a176a266fd25582fc3487259862179e2eca7c828cff0300",
+      "experiments/hosted_ports/fault_contract.py": "da090de592ec968c734a1c1cc29b2a7c4217d54916c3e55d1a8be84f39f9525f",
+      "experiments/hosted_ports/finish_cluster.py": "6e0b0baaf1e9ba73dcd9363c9e827abbec3504b57c6181a775751ec75ed981e5",
+      "experiments/hosted_ports/finish_start_role.py": "9a5323fdde4af24afa18cc6cb694bc9d0edda87c32c831e8761741c018874564",
+      "experiments/hosted_ports/frontend_fixture_identity.mjs": "41bf86bfd0472436e334c80f9db6ad9581b150e910bc27b9e255cbc3aa16cca1",
+      "experiments/hosted_ports/identity_server.py": "f338cf31fbc72c3ee93aaff9944ce7b7298fb6ef4892cf15c80bc43bac8c1311",
+      "experiments/hosted_ports/metrics.py": "0fa32339e3de8462bfc205778a96fde61887df91464a6bf5e15a224c21b09a94",
+      "experiments/hosted_ports/native_cluster.py": "d35cbeb9155cb166cf96b4df66323341138287ed477d1ee729284f2e02dd470a",
+      "experiments/hosted_ports/pinned_run.py": "9864de8784d9319c91207d3aec0dcb8d51fb700306e8de376be5dc1147756b0c",
+      "experiments/hosted_ports/run_local.py": "4fd23989df046f9d67f52e9751ceed2d7bfd873672b631e83354c5631fcb04c7",
+      "experiments/hosted_ports/start_role.py": "e5b2925bae70be339bd1e453aa77f99584713d53d118ed0297f3d876f899e201",
+      "experiments/hosted_ports/test_connections.py": "0f2410a4be22e0c70e387b2f79021ebd6fb0d7b006b370abbf7a0f88987290d6",
+      "experiments/hosted_ports/test_fault_contract.py": "99d8e43bca9ec2e1cc681a562836cff63fdc54540a9efb2a3c73620923f7aa97",
+      "lib/private-frontend-startup.test.ts": "2bfd1bbe353691a5bca9f76d1a9c42f74984f545297e45f3cdc6573e4461e158",
+      "lib/private-frontend-startup.ts": "8835fd31fd51808f32efe780dc8d591f331ded36cd823907f9fda1ea74d27b76",
+      "private_runtime/auth_port.py": "13ebd46d4c7b434d9f444b16a5a9d49b818c1ad510fb3d9b94a0837ffbfe462e",
+      "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+      "private_runtime/dispatch_owner.py": "9406a73d723b8f8723782db8fc6e3cf1556b14753a85702e0d08df0413ca0995",
+      "private_runtime/entry.py": "55b7a24d00516e77d0e0cb0cbc99e6d7768183d4f189b55f7d427d9e60786fba",
+      "private_runtime/google_identity.py": "aa57e13693b4fcaf10b36107a9802045ea0757631024be7ee05735c5bbc3bbb9",
+      "private_runtime/https.py": "ee5a6bbd35607d50b0fee16c1e78dde60647e5642f4ee402133d3e2094ab8a50",
+      "private_runtime/image_identity.py": "23c122509d258ec6661b5018ad699d4e285973334d4e0962d6df372d9bd5e02d",
+      "private_runtime/native_ports.py": "bce527bb831b54c147206d7c51ad3889eea71cfe51b8fd13459effb69fda7b24",
+      "private_runtime/native_runtime.py": "0c3af969a6d09cd5d7db4e63565176f8e454c6cbd81057ebe143978dc39ff8e3",
+      "private_runtime/owned_dispatch.py": "1e500570fc8044a612323a0133801f9a0afddd22d6f8d025c023888a707094b4",
+      "private_runtime/private_service.py": "d88ef95605da9f931faaab2edb55ed33531a0b323918a46127611a8c11551d59",
+      "private_runtime/redis_port.py": "196d8e17fcc0978d230b004aa638e5988921d535fd1672894bc01f8f7ccf386e",
+      "private_runtime/registry.py": "1773ced0bcdfbf1014589c2b0d512fd17368946b25af0b57f617463aa5fef27d",
+      "private_runtime/service_client.py": "92708e866d99b2e9d2afef1ff687567659192162418baae49dae956da451c464",
+      "private_runtime/simulation.py": "62a8dadf9a01f44e3096120980527818248b1d1f2feee22395bed971803bb1f1",
+      "private_runtime/test_dispatch_owner.py": "932b8eae84d6dc9319b0a72be295ac2611749fae4f16d6bd4e702a103b8ca3af",
+      "private_runtime/test_dispatch_processes.py": "c5f060fb43776b18ad62163d913fdb6adf8b235880595f2f341104cc820bb802",
+      "private_runtime/test_https.py": "aee359adaa746d50f6164726e99bb6475461ed77ee36a07d5a8df3dbdb590916",
+      "private_runtime/test_identity.py": "fbd56653d82ebae61e2e85579895f6ab4e8ba37162b7f69ffbe75c94760a8cea",
+      "private_runtime/test_projection.py": "462fdad0eaa21cb7e204fbacca2daa7edb7d0f04455113d7ada73fe5b3c6b3fb",
+      "private_runtime/test_simulation.py": "268a38954fbbed78bdde12f9b211f20e89576fd49d21c909cfd167176d675cfe"
+    },
+    "sealedInputsSHA256": "097aaab04a0c81d58c234a0aa66057246836ec39ef30375dd5bc4a94014e9a22",
+    "sealedRequestSHA256": "e31693af84ed8add16b71679c7d0a4b6f5791564ca094b2e6b1db5b9fb34dd09",
+    "beforeProtectedStateSHA256": "0867ce70582cb402dfa5b44787407adac7421f72ea65a3833534f984c1387202",
+    "afterProtectedStateSHA256": "0867ce70582cb402dfa5b44787407adac7421f72ea65a3833534f984c1387202",
+    "operation": "080c97a8-8149-4156-9b2b-2cc7c75c5765",
+    "loadedAssertion": {
+      "source": "def assert_state(before,after):\n if before!=after:raise AssertionError('Committed reservation or history changed')\n if tuple(before)!=EXPECTED:raise AssertionError('Unexpected synthetic charge/INTENT/delivery tuple')\n",
+      "bytecodeSHA256": "17d32ff708f98a92336bdf2f25ea2e45e5cad2f1972cbb2dffb1374ebcb09da6",
+      "expected": [
+        6845,
+        1,
+        0
+      ],
+      "operationScenario": "committed reservation and INTENT, before owner callback/delivery",
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee"
+    },
+    "sourceAfter": {
+      "unchanged": true,
+      "exit": 0
+    },
+    "result": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "before": [
+        6845,
+        1,
+        0
+      ],
+      "after": [
+        6845,
+        1,
+        0
+      ],
+      "newBoot": true,
+      "oldActionRefused": true,
+      "financialStateUnchanged": true,
+      "loadedAssertion": {
+        "source": "def assert_state(before,after):\n if before!=after:raise AssertionError('Committed reservation or history changed')\n if tuple(before)!=EXPECTED:raise AssertionError('Unexpected synthetic charge/INTENT/delivery tuple')\n",
+        "bytecodeSHA256": "17d32ff708f98a92336bdf2f25ea2e45e5cad2f1972cbb2dffb1374ebcb09da6",
+        "expected": [
+          6845,
+          1,
+          0
+        ],
+        "operationScenario": "committed reservation and INTENT, before owner callback/delivery",
+        "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee"
+      }
+    },
+    "sealedLocalArchive": {
+      "path": "backend/.local/task52-closed-verification-927eae130a3f8549",
+      "manifestSHA256": "927eae130a3f8549af0480d423ed881d048faf607ebc3169f74d0b436cb733ff",
+      "ignored": true,
+      "containsOnlyFictionalLocalEvidence": true
+    }
+  },
+  "priorImmutablePass": {
+    "manifestSHA256": "ddb29d935dc2b4cebdcd92148e28048836bc0ebc07bfbeac50bff66a49340d5e",
+    "sourceAfter": {
+      "unchanged": true,
+      "exit": 0
+    },
+    "result": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "before": [
+        6845,
+        1,
+        0
+      ],
+      "after": [
+        6845,
+        1,
+        0
+      ],
+      "newBoot": true,
+      "oldActionRefused": true,
+      "financialStateUnchanged": true,
+      "loadedAssertion": {
+        "source": "def assert_state(before,after):\n if before!=after:raise AssertionError('Committed reservation or history changed')\n if tuple(before)!=EXPECTED:raise AssertionError('Unexpected synthetic charge/INTENT/delivery tuple')\n",
+        "bytecodeSHA256": "d2016d91bb7a7b5b56d3f131971cb83ac08a998290b855420621975987980d3a",
+        "expected": [
+          6845,
+          1,
+          0
+        ],
+        "operationScenario": "committed reservation and INTENT, before owner callback/delivery",
+        "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee"
+      }
+    }
+  },
+  "originalDiscrepancy": {
+    "attributed": false,
+    "changedHistoricalClassification": false,
+    "loadedAssertionAndTupleCaptured": false,
+    "linecacheMechanism": "Demonstrated as possible; not proof of original cause",
+    "originalDatabaseProtocolRefusal": "Unresolved; no timeout/refund/retry change"
+  },
+  "tests": {
+    "frontend": {
+      "passed": 323,
+      "failed": 0,
+      "skipped": 0
+    },
+    "selectedBackend": {
+      "reported": 271,
+      "passed": 261,
+      "failed": 0,
+      "skipped": 10,
+      "seconds": 10.337
+    },
+    "tlsRolesRedis": {
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0
+    },
+    "pythonMetadataIdentity": {
+      "passed": 4,
+      "failed": 0
+    },
+    "isolatedOIDCIAP": {
+      "passed": 10,
+      "failed": 0,
+      "seconds": 1.595
+    },
+    "grantsInference": {
+      "passed": 22,
+      "failed": 0,
+      "seconds": 465.715
+    },
+    "totalSelectedPasses": 631,
+    "totalOptInSkips": 10,
+    "realDisposableRecoveryDrills": [
+      "operational snapshot rollback quarantines full grant",
+      "independent witness snapshot rollback quarantines full grant",
+      "operational outage retains exposure",
+      "SQL/witness restart retains reserved exposure",
+      "Redis loss refuses reconstruction"
+    ],
+    "typecheck": "passed",
+    "eslint": "passed",
+    "productionBuild": "passed",
+    "imageRefusals": {
+      "production": {
+        "image": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+        "inspection": {
+          "fixture": false,
+          "checkedFiles": 9,
+          "closedExports": true,
+          "nonroot": true,
+          "readonly": true
+        },
+        "unenrolledStartupExit": 78,
+        "preNodeRefusals": [
+          "NODE_OPTIONS",
+          "NODE_TLS_REJECT_UNAUTHORIZED",
+          "NODE_EXTRA_CA_CERTS",
+          "NODE_DEBUG",
+          "HTTP_PROXY"
+        ]
+      },
+      "fixture": {
+        "image": "sha256:b1d44db039f1b38ba74ca07fe509676f3ab543614dd0608c6c14e305f675a6df",
+        "inspection": {
+          "fixture": true,
+          "checkedFiles": 10,
+          "closedExports": true,
+          "nonroot": true,
+          "readonly": true
+        },
+        "unenrolledStartupExit": 78,
+        "preNodeRefusals": [
+          "NODE_OPTIONS",
+          "NODE_TLS_REJECT_UNAUTHORIZED",
+          "NODE_EXTRA_CA_CERTS",
+          "NODE_DEBUG",
+          "HTTP_PROXY"
+        ]
+      }
+    },
+    "notRerun": [
+      "full backend discovery/historical simulations",
+      "complete112 security/authority and17 native cohorts",
+      "eight inherited application-grant cases",
+      "real hosted identity/Cloud Run/managed database/Redis",
+      "all browser outage/accessibility/mobile permutations"
+    ],
+    "retainedFailedAttempts": [
+      "initial pinned runner unused host cryptography import; removed and rerun",
+      "eight lint errors; corrected",
+      "10 token setup errors in networked fixture",
+      "read-only container copy refused before tests",
+      "10 token setup errors with production environment; guard preserved",
+      "correct isolated explicit test process then passed10"
+    ]
+  },
+  "browser": {
+    "actualStandaloneNext": true,
+    "externalPreload": false,
+    "desktop": true,
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "passed": true
+    },
+    "verified": [
+      "interpretation",
+      "pending date",
+      "confirmed origin",
+      "three provisional cards",
+      "View Plan",
+      "local details without provider work",
+      "discard before source edit",
+      "refresh clears authority",
+      "independent live outings in two tabs; second remains pending while first generated/discarded"
+    ],
+    "concurrentInterpretation": "Overlapping second request refused; explicit discard/new request later succeeded. No automatic retry or simultaneous inference success claimed.",
+    "httpOnly": [
+      "wrong user",
+      "forged workload",
+      "duplicate generation",
+      "unsupported routes"
+    ],
+    "notBrowserVerified": [
+      "every service outage",
+      "separate human-authenticated tester accounts",
+      "complete accessibility audit"
+    ],
+    "screenshots": {
+      "task52-final-desktop.jpg": "3cfa1aee623db5b8d2d54a64655aa8ecabfcd41f499e478784011bf5a2b15cfd",
+      "task52-final-mobile.jpg": "600794e15c7c05f6ec7113f276b211aa7751094022bedee3d41a513575d628c6"
+    }
+  },
+  "performance": {
+    "finalAPI": {
+      "requests": [
+        {
+          "path": "/api/interpret",
+          "milliseconds": 9684.363,
+          "status": 200
+        },
+        {
+          "path": "/api/interpret",
+          "milliseconds": 163.742,
+          "status": 403
+        },
+        {
+          "path": "/api/interpret",
+          "milliseconds": 9014.19,
+          "status": 200
+        },
+        {
+          "path": "/api/interpret",
+          "milliseconds": 5280.218,
+          "status": 200
+        },
+        {
+          "path": "/api/plans/generate",
+          "milliseconds": 29979.585,
+          "status": 200
+        },
+        {
+          "path": "/api/plans/generate",
+          "milliseconds": 169.994,
+          "status": 403
+        },
+        {
+          "path": "/api/plans/advanced",
+          "milliseconds": 4.161,
+          "status": 503
+        },
+        {
+          "path": "/api/plans/options",
+          "milliseconds": 3.69,
+          "status": 503
+        },
+        {
+          "path": "/api/venues/details",
+          "milliseconds": 4.814,
+          "status": 503
+        },
+        {
+          "path": "/api/plans/save",
+          "milliseconds": 3.665,
+          "status": 503
+        },
+        {
+          "path": "/api/interpret",
+          "milliseconds": 8.868,
+          "status": 403
+        }
+      ],
+      "workflow": "interpret, independent outing, other-user refusal, cross-factory clarification, generation, duplicate refusal, unsupported routes and forged workload refusal",
+      "confirmedPlans": 0,
+      "provisionalPlans": 3,
+      "inferenceOperations": 2,
+      "deterministicClarificationAddedInference": false
+    },
+    "finalStages": {
+      "scope": "Inclusive overlapping synthetic local spans; do not sum; not cloud or LLM latency",
+      "stages": {
+        "admission.revalidation": {
+          "samples": 18,
+          "failed": 0,
+          "p50Milliseconds": 157.346,
+          "p95Milliseconds": 220.888,
+          "maxMilliseconds": 220.888
+        },
+        "authentication.with_nonce": {
+          "samples": 44,
+          "failed": 0,
+          "p50Milliseconds": 9.517,
+          "p95Milliseconds": 35.681,
+          "maxMilliseconds": 63.084
+        },
+        "financial.dispatch": {
+          "samples": 12,
+          "failed": 0,
+          "p50Milliseconds": 864.511,
+          "p95Milliseconds": 1184.069,
+          "maxMilliseconds": 1184.069
+        },
+        "financial.prepare": {
+          "samples": 19,
+          "failed": 0,
+          "p50Milliseconds": 323.447,
+          "p95Milliseconds": 478.567,
+          "maxMilliseconds": 478.567
+        },
+        "native.evidence_recovery": {
+          "samples": 32,
+          "failed": 0,
+          "p50Milliseconds": 313.547,
+          "p95Milliseconds": 482.11,
+          "maxMilliseconds": 503.536
+        },
+        "redis.operation": {
+          "samples": 49,
+          "failed": 0,
+          "p50Milliseconds": 0.416,
+          "p95Milliseconds": 94.995,
+          "maxMilliseconds": 118.545
+        },
+        "sql.connection_acquisition": {
+          "samples": 749,
+          "failed": 0,
+          "p50Milliseconds": 0.009,
+          "p95Milliseconds": 0.064,
+          "maxMilliseconds": 273.233
+        },
+        "sql.enrollment_check": {
+          "samples": 762,
+          "failed": 0,
+          "p50Milliseconds": 4.397,
+          "p95Milliseconds": 8.801,
+          "maxMilliseconds": 55.7
+        },
+        "sql.protected_statement": {
+          "samples": 811,
+          "failed": 0,
+          "p50Milliseconds": 0.228,
+          "p95Milliseconds": 18.866,
+          "maxMilliseconds": 58.551
+        },
+        "witness.history_check": {
+          "samples": 63,
+          "failed": 0,
+          "p50Milliseconds": 100.388,
+          "p95Milliseconds": 142.071,
+          "maxMilliseconds": 183.865
+        }
+      }
+    },
+    "pool": {
+      "fresh": {
+        "milliseconds": [
+          23.57,
+          22.762,
+          25.297,
+          29.652,
+          30.161,
+          22.856,
+          20.864,
+          20.521,
+          20.355,
+          20.848,
+          21.578,
+          50.321
+        ],
+        "scope": "Restricted TLS checkout, full enrollment verification, SELECT 1 and reset only; not user request/cloud latency"
+      },
+      "reused": {
+        "milliseconds": [
+          57.896,
+          11.438,
+          9.917,
+          7.169,
+          8.581,
+          16.74,
+          7.26,
+          8.289,
+          9.236,
+          14.883,
+          10.241,
+          19.577
+        ],
+        "scope": "Restricted TLS checkout, full enrollment verification, SELECT 1 and reset only; not user request/cloud latency"
+      }
+    },
+    "poolWarmMedianMilliseconds": 9.917,
+    "firstEquivalentAPISeconds": [
+      8.77462,
+      8.425921,
+      5.144481,
+      28.254106
+    ],
+    "scope": "Synthetic local inclusive/overlapping spans; controller/human time excluded; no hosted latency or end-to-end speedup claim; final run overlaps local grant test workload"
+  },
+  "security": "task52-closed-frontend-security.json",
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "handbook": {
+    "reviewed": [
+      "03",
+      "04",
+      "06",
+      "07",
+      "12",
+      "13",
+      "14",
+      "15",
+      "18"
+    ],
+    "updatedThisContinuation": [
+      "04",
+      "06",
+      "14",
+      "15",
+      "18",
+      "GLOSSARY"
+    ],
+    "earlierCombinedUpdatesPreserved": [
+      "03",
+      "07",
+      "12",
+      "13",
+      "DATA_FLOW_REFERENCE",
+      "DEBUGGING_PLAYBOOK",
+      "DEVELOPMENT_COMMANDS",
+      "PROJECT_FILE_MAP",
+      "VERIFICATION"
+    ],
+    "chapters": 20,
+    "unaffectedChaptersPreserved": true
+  },
+  "resourceBoundary": {
+    "finalInspection": {
+      "runningContainers": [],
+      "volumes": [
+        "0b96dd11ea444e91b02818f858663e4274e004b5eaf70b75ab71c5944e8e093b",
+        "0d1d280024892c7383a07df5cdd2a4f58e83c8b12432434fab6b7aa990fb0945",
+        "0fb17693495bf969393982381f39a38a7a95c80e9476c707ec0bd51d53152855",
+        "0fcbdf43a17e71da52de026cce2d87d1dcf055e1658cb82709ab724e75c4a9d4",
+        "1e6c29f26a9f9438de22f4c83db1d317b414d8d0c3d97b713220bdb0a7e8d687",
+        "1e918269e7e0afe846f2b88bfd6a512806105486707a9a7056233413755334bd",
+        "2b8378449ebdd30a089075b450a5c09eb2cebc65743206d683d6ff854ea570d7",
+        "2bec124382fc55bafa1b22c5b33525e6093de39df713e1666c98420ea27f5252",
+        "2cb5257d5512853583fe766de95098a71d083e9e8a9df4bb15b5f70c504667bb",
+        "2dd476275e1dd810273be6a503e53f18d34fa6cf6959217f354eca33863b5986",
+        "2ebc1e677b4ffbfedec91e9016bb0c44103271a2b8e4a38d6aefd90efce477e8",
+        "2ed200d279d3c9eda55ec6644f771b8d1f7bfcec61ab73cf3ef1e7bb02b7da3c",
+        "3ae25b4f200619c49754804959d8cba0d1aa34a8086ed9344a97b94e83d20abc",
+        "3c73b5cc2b87c880b4c913ca536740dd27f3e0f144b398c3a516020d583633f6",
+        "3fe106a11aae3431e2d5788f4035a87739c7b848c68abbb09484c63b6eadf22b",
+        "5c73db29d0e51dc817cc90474cf920511cafa56c3e14a911b0ff0c5e2899fdb6",
+        "5e0c873a4f689fe9b343dc63734ccc6918aa7e39421179d493b5eeeba810e0e0",
+        "5e2eea679c622fe70bcd4ca4b8b2a0f93c0ebf121fb92ccb2cc312c18651ac73",
+        "5e5ae6ce05961f506daa80abee00c6cc3a0f058302ba3a5f0b476214cfdc6b36",
+        "5e5efb0986f1973213eb8c9df451618fe864aeed0c952cb424041bd68ab25a49",
+        "5e832dd2871b6bac9f14cffecbcc1caee74293ed7d04eeba3ffbfb5e427298cf",
+        "5ef274c0a94691d5aeaae0c4639b9e4cccddffba675ca7d7cfeda28e1f65a8ca",
+        "5f46b1f7dc8008f32211b0b92df569f0b3f58ebdd20cd258d5b805e5427c5dc4",
+        "5f1332576e0deeeb167f9671fe6f55035be3b9b7ad6598559800155a43809dff",
+        "05f6f35f533a6b84deae12d8e48e4a96c3c678fd4e3272d941213016c5ce576f",
+        "05f0060817c13abbd452167dce80bee23cf0631c62ff12810816692fe5591b39",
+        "6a5b72013800fa5dd232a018d34b1377963ec765d3a3730231825aa9938b2001",
+        "06a98651dd34c68722382cd05310762fa5870a16efd8c8e8ff83d802aa9a1d0c",
+        "7a65f6e83aae385e57aca55f3f446ed16faa2381d38b4970c17075a543ea3ae5",
+        "7be47cc81861566266c63be4adb8259df9420ca8a301316d52a80cebc5629a2e",
+        "7d3bb01e2049be32a09e8449cc471e951c45e37f21e8a0e653eba4d9217d8efb",
+        "7dcb752d159a6e8fc4b135abd89c0926c2acc9f41708e6adcf44d2c4e39cc74d",
+        "9c1bdf9149b92c9a61ebafddfdf01978cf7503a67b1560925aa91d0ccd732ddf",
+        "9cbd819ebdab68ad11d31e78f90bf9aa8ebdf9d0b338ee84e453a87527c7f502",
+        "9d4f89e1136ac4f73a9ae18168e1754ef0eb016e2b564fe45a81c594296f8b4b",
+        "11b4f7490012654c57c4b85a3d375bd5bc4069e9272f19bba1fcd268845ce6c9",
+        "0013c86437bd7d8496412d58dac156d8938da6d45ccc85c28ff1b810a1435a19",
+        "15d76a1392247ab4289fd9ef78be11b346435890936dde9f6a29b2aa00b8eb40",
+        "19ebfa8e8d80eb18749919e6439b50a37075af6b99c862dd1dc9be46758d4a3f",
+        "20cbe9c7987731c18a11564b493312fd7a27e0542a34109b48b4a2280c470c2e",
+        "24c9d8b3d9aa8f1e84c3a6d60377bb1d12292d9a4145c6d62522223a846f42e3",
+        "37cb35f7a81491caee24901c73bc1062b888180c95848c36d27192ca54c72c3d",
+        "38de9e88738e53247746b10f612e51a9ac2eadf7624ec548698f1093954e42e8",
+        "44c0693724b08794885725544c12442ca058ac949b02b77a12bab9edcb3fd9bc",
+        "52f3ad5d5745bb44a9925794a90f726df3e69785673dee1f0604ed553badb342",
+        "56b432050958d6d886486594a2e6c6c53638cd0b860eac22dd495a22d79e0fbc",
+        "58be92aec5e8de9f75a64c7054bd0ab642a33113110fe3e08d053143db832837",
+        "74c68b3a94ef4922fa40c41aeaa17389e9405d295618aedef9b9dcba7421f2ec",
+        "75f89978f74c30daf0fcb393c451cf5acc9f3ab77726ef0560cebfa92884981c",
+        "78ea9e4dde819e57c1e1e0cdda73a8b866a47c8e2c7f52d93b9157c919113c8c",
+        "85a79f36fb49330a17ab735e7d763521edefcd5c9f8a5570044d4e2dd04b5ce7",
+        "94a25bd66f02334a7460ba4029fb1394db5b3fc2f9b6dfc8ffd2aab372ca779e",
+        "285cd9c988a7d30063dd1ea0eec103d04f7516fcb63630fe64d1c0739b716041",
+        "574b32e3d0ad8ad45220cfcbb35925dfa06a53c78f3a96e9f5f6f5626c1fb26c",
+        "704a206048e2858f44968f58202088135518d585cfa07596669d71d07a4817b2",
+        "715a7af4bdeed04c0cd2f87ec14d90e33667a7fcfc8bf7b3b0f4d757320876b5",
+        "958dfd6e7972ea01e8b72c859d68e9b2f67beeef2138ad72ae3401c02c3dfad8",
+        "2095c2ecf51401a67fbb617cd512752b08f32f6986450cc074734518a2ca48c4",
+        "02207e7d3d588da9b4afe860de90bd5d3736b1fbb679c0ca9c3266eb708cd4ce",
+        "6979fafc12e9641f61162a70f1883a5d961053cc68ffd9b4865886a6e1d67773",
+        "29492ea4e53310c67f18290b6563f3346d263b969aa34121f0f35a195fb54a51",
+        "64363b31eaf97b243bc4887feda02073e1fcb216c991d4dd7886e0bbd703fcd9",
+        "86054f04a30935190eba97dee728b55f89b0aa3bc7cbabc6607b3fd706e467e0",
+        "680194c3a25c151e6e51b0148a3147122dc915268656ad85c6cbe0e636ef0bc3",
+        "828619cd869701045bcd68544bffbf8f45089ff45343ff300754ae26cb7ba256",
+        "831799b87e390f05ac704d11f1e218b831cc996f7cfa2de428e2c7d654df84a2",
+        "72916161c3e88bd41454afb60d6cde678352946bd60f4c9c9f40bba7de2793a3",
+        "80477710a1db1d8864724d7e2392f8f50209e66ba937a0c40c1373ad16d9b094",
+        "81042099de93dbb003f998c886e9e8c1a3746236cc23bf179f71418fbdeba2a9",
+        "230250095eefbdc51356c4c5874a1205ed1031a1861b04867bdb9bb2519dd3bc",
+        "761217199b68cf5829cfdff825c899b39c78ad81ea115133d78842a80640f155",
+        "a3de7be19bad9c4998d78199f027c33d456423f893a0e6ca2fa657d9ef740cac",
+        "a4e24770d1c30feeb9067b63de3586e04245fcf1898a2167bf112cb217d9ed91",
+        "a12b431d21feeff8b70d129dfd5c2dae1fdbde40826c0cc0895fbd53dfb6a9eb",
+        "a065ead29d97a0ef4a22ab4f174e5b89ccd2801dec45f2a46c88918eb23b7128",
+        "a105a5ac0e0b1d8a76ae7d2ed871ddca91c7935f6b4701c819067a6cbe0b12a8",
+        "a292ac1eca3b3472ce53fd7006ecd9dcba60166f84befd6038e10d8d388824de",
+        "a918e607a38975d8873b5c54a5ebe5a44cadbfee42f09f458a3c7c5f6c392871",
+        "a0221703a334285f7275cb9d029f7fe340b725abb14f666f2b7b6229200d5334",
+        "a44876998e7fe5bedbe65528696f3ac4b61e56764ab956ed656096b1866a10d8",
+        "aa134ec43b2e5ec879d387b8a9e0674c45fde15f5d3c80df23f312aa3f17ba9d",
+        "b0b2c79c59e2f598571271a004baed38fbcdb601711d1a23f2d95d78e7473bce",
+        "b2ed3b84698d0eebd99ebdca4f7aebbc17012914137cb28772aa932ce4b91484",
+        "b9fd30c8435a97502bc716877b80955937c7bd659ed13176edf49919a0dd5b94",
+        "b59b76e034ead8d4960ca705195369fd26e49ab0d56c7da9b51775648a618fb9",
+        "b84c3578b30c953043ff3319fcd6518147cd2eb29e13ceaa01ee3233dd235abc",
+        "b735231d2ff46e17ae41fe0fa98e8d2f0662e63a0c56334e36895644a6051083",
+        "ba7724ac82c5b83f236fe52b715190f42683e16b6388aa861a55727886104791",
+        "bb80ceb17aa07575a1ba9ca2cefa2acac974cb7a34ccc5ef739c10bc3a4f7b89",
+        "bfc628296ba6ba08d93dcbfcf89a7fac260e1b3f8eca076daef439596e1bc63f",
+        "c4b5ce7eb33ddaefb3f630be39a9e71251d813cbe878741590ee4048afd1038c",
+        "c673dfc2421da8d34782f6339e06c5a31baff006b3029d33eaab7f95dd253e66",
+        "c5419e6acd03ee155a8b6c0682fb80f35c22c8e371c675ab54eca72263f3550e",
+        "ca77b51845d7349e37e408b24912243351a53e071990aeab3ed52f5db7946af1",
+        "cb90554f3ebeaee7d8882893ef9ffb670e6d726626f5e4b22b2eb30f53764501",
+        "cb9298971f438a2e1d1787db57431957555bf7d6f3fdcacb880ebc57754bdd4e",
+        "cba5addd796ddf133a0ad23ca3f98bc0dcea8762a8c0df61ae02ea9b8b95d5e9",
+        "cd8301e87d7965374432b03e32d68df3a6262063868403bfafcf0b2fb1c3a795",
+        "d25add3be0d1abf6d4158ca31aa7c9c26ce42dc249a60ccdd3869b3812b3243b",
+        "d883f170cd609a3c8be15f6144df30d2e44b43594a821fbf46d7ec83fef279b5",
+        "d130092ab09d499df7c3cf9a32cb52d53ac1cc98de8c9bb46f4e691517fbd4d8",
+        "dc3bb2c54aeea0237aec22411f09a33ab2a51f2593f384bb01f6fa0bef8b65e9",
+        "ddc163c44b97e71ea8a6fabab9678d70f0d8ca8bb5caabb578458ad6037e2274",
+        "e3accde8c2c43a7cd1108e3103bca61f87807605f1796122ef8dc689e384bf3f",
+        "e4ba664b13c6a9ba7f30f29d5178937f5c5765a51706537310a39dacf6aa435e",
+        "e703a6eec6062dccbb3cb46a84407c01d3ea8e1e0611180bf97fe078103e6bfe",
+        "ea7ea7131d56e7c515d91f010c441ad959ea38a419d5393178bbf26e34970805",
+        "ea21017091e9965d7f1cd0666fcd627aef014253b68e18a852e07f6b76bccd10",
+        "eed6296a4d1445747564beac04e61114aaba44f157e21a0b58638a0dfaa96195",
+        "f5cf2780cb52a402f48f808b2077b9a8c1ccf2f57c122030bc525e33caf79943",
+        "f22eb773360bbf89cc922603d69406d97977ee6fd1b6e46dc251b298f73195fa",
+        "f8868caebcc39eb67a2ad9d869a266874efd318b618e95d620c7e68e87a35148",
+        "f010964b8bfcabbcc66a5563c7efe4f5a13e1c2e20c74362bfe53ec7dcd8575f",
+        "fc82c117eadf21200f2f974a0bb8dcab7373867bb177e4e25bb8b05b810cc021",
+        "fc2417cf3c76ee65db323675e619c5328ea3c8f88b5910cf0534e7e159401b9d",
+        "fcbcb1112a51f3134fa85defce8e10616c5720d98e35b374475b8108a5c719d0",
+        "fcd9ea5ecf79a84dd301af13ab8891b12774b70a589694e67d8d3b10e83b5e61",
+        "ff9ba91f519a2845810d79b3b0759e2f9816bedfc5dc55319be19bfca5abe55d"
+      ],
+      "networks": [
+        "bridge",
+        "host",
+        "none",
+        "whereto-network-9badf9b7d06c37e11773a0b5"
+      ],
+      "noBroadPrune": true
+    },
+    "old117Retained": true,
+    "oneNewUnattributedAnonymousVolumeRetained": "958dfd6e7972ea01e8b72c859d68e9b2f67beeef2138ad72ae3401c02c3dfad8",
+    "overlappingResourceInventory": {
+      "originalVolumeCount": 121,
+      "provedOwnedRemoved": [
+        "e7ba3dda98edd6e1b525840d71343c3a2e8bd9f02d3b2ee00f8f31ef92d79305"
+      ],
+      "provedOwnedRetained": [],
+      "allOriginalVolumesPreserved": false,
+      "unattributedNewVolumesPreserved": []
+    },
+    "explanation": "Concurrent grant/scan task-owned fixtures finished during the cluster interval; no broad prune or unknown volume deletion"
+  },
+  "remainingBlockers": [
+    "retained critical/high findings need independent security disposition/remediation",
+    "real IAM/IAP/private network/secret and SQL/Redis/witness enrollment",
+    "exact Cloud Run revision-owner routing and drain verification",
+    "qualified hosted model, real counter, pricing and provider transport",
+    "real operator financial policy, timezone/root lifecycle and recovery reconciliation",
+    "remaining application ownership mappings and staging acceptance",
+    "original unpinned assertion and original database_protocol remain unattributed"
+  ],
+  "nextCheckpoint": "Compatible pinned container-security remediation and independent retained-risk disposition; no provisioning or public activation",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "deployment/Dockerfile.frontend-network",
+    "deployment/Dockerfile.frontend-private",
+    "deployment/Dockerfile.private-service",
+    "deployment/build-network-port.mjs",
+    "deployment/build-private-frontend.mjs",
+    "deployment/frontend-private-entry.mjs",
+    "deployment/frontend-private-launch.sh",
+    "deployment/prepare_closed_frontend.py",
+    "deployment/prepare_network_context.py",
+    "deployment/prepare_private_services.py",
+    "deployment/private-frontend-v1.json",
+    "deployment/private-network-v1.json",
+    "deployment/private-role-cohort-v1.json",
+    "deployment/private-services-v1.json",
+    "deployment/requirements-private-authority-linux-amd64.lock",
+    "deployment/requirements-private-linux-amd64.lock",
+    "deployment/sql/hosted-operational-contract-v1.sql",
+    "deployment/sql/hosted-witness-contract-v1.sql",
+    "deployment/verify_closed_frontend.py",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DATA_FLOW_REFERENCE.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-closed-frontend-security.json",
+    "docs/task52-closed-frontend-verification.json",
+    "docs/task52-closed-frontend-verification.md",
+    "docs/task52-private-role-continuation-verification.json",
+    "docs/task52-private-role-continuation.md",
+    "docs/task52-private-role-security-review.json",
+    "docs/task52-production-service-packaging-verification.json",
+    "docs/task52-production-service-packaging.md",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "experiments/hosted_ports/application_probe.py",
+    "experiments/hosted_ports/fault_contract.py",
+    "experiments/hosted_ports/finish_cluster.py",
+    "experiments/hosted_ports/finish_start_role.py",
+    "experiments/hosted_ports/frontend_fixture_identity.mjs",
+    "experiments/hosted_ports/identity_server.py",
+    "experiments/hosted_ports/metrics.py",
+    "experiments/hosted_ports/native_cluster.py",
+    "experiments/hosted_ports/pinned_run.py",
+    "experiments/hosted_ports/run_local.py",
+    "experiments/hosted_ports/start_role.py",
+    "experiments/hosted_ports/test_connections.py",
+    "experiments/hosted_ports/test_fault_contract.py",
+    "experiments/ordinary_network/build.json",
+    "experiments/ordinary_network/client.py",
+    "experiments/ordinary_network/compile_fixture.mjs",
+    "experiments/ordinary_network/dns.py",
+    "experiments/ordinary_network/fixture.py",
+    "experiments/ordinary_network/identity.py",
+    "experiments/ordinary_network/ingress.py",
+    "experiments/ordinary_network/metrics.py",
+    "experiments/ordinary_network/preload.ts",
+    "experiments/ordinary_network/profile.py",
+    "experiments/ordinary_network/public_server.py",
+    "experiments/ordinary_network/relay.py",
+    "experiments/ordinary_network/resources.py",
+    "experiments/ordinary_network/run_local.py",
+    "experiments/ordinary_network/server.py",
+    "experiments/ordinary_network/test_network.py",
+    "lib/private-frontend-startup.test.ts",
+    "lib/private-frontend-startup.ts",
+    "lib/server-https.test.ts",
+    "lib/server-https.ts",
+    "private_runtime/auth_port.py",
+    "private_runtime/connections.py",
+    "private_runtime/dispatch_owner.py",
+    "private_runtime/entry.py",
+    "private_runtime/google_identity.py",
+    "private_runtime/https.py",
+    "private_runtime/image_identity.py",
+    "private_runtime/native_ports.py",
+    "private_runtime/native_runtime.py",
+    "private_runtime/owned_dispatch.py",
+    "private_runtime/private_service.py",
+    "private_runtime/redis_port.py",
+    "private_runtime/registry.py",
+    "private_runtime/service_client.py",
+    "private_runtime/simulation.py",
+    "private_runtime/test_dispatch_owner.py",
+    "private_runtime/test_dispatch_processes.py",
+    "private_runtime/test_https.py",
+    "private_runtime/test_identity.py",
+    "private_runtime/test_projection.py",
+    "private_runtime/test_simulation.py"
+  ],
+  "securityChecks": {
+    "task52-finish-secret-scan-final.log": {
+      "sha256": "684145d772eb36f058a4074a43cb3f426d5d7a8acecc6e7b6dcd5cb4086a2747",
+      "result": "Credential scan: 2 configured sensitive values; 3730 current files/assets; 3947 historical objects; current matches=0; historical matches=0."
+    },
+    "task52-finish-evidence-secret-scan-final.log": {
+      "sha256": "da58ebe805b12deeb986092e34c03d37c2c88427c503fe026486a6fbdb6995d1",
+      "result": "{\"evaluationSecretValuesChecked\": 3, \"currentMatches\": 0, \"historicalMatches\": 0, \"configIgnoredAndMode600\": true}"
+    },
+    "task52-finish-integrity-final2.log": {
+      "sha256": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+      "result": "Read-only before/after identities match: ten rows, all 324 files and halt."
+    }
+  }
+}

@@ -133,3 +133,10 @@ A private action refusal may mean its source revision/turn is consumed. Do not r
 A private error never implies permission to retry. Check current owner/build/revision/epoch and dependency readiness with sanitized reasons. Refresh discards rather than restores an outing. Use explicit discard/new action for meaning changes; never restore cards/raw graphs as source authority or reset counters. Distinguish public UI proof identity from private service proof identity.
 
 Build the frontend **before** starting the custom local Next fixture. A second `npm run build` rewrites `.next` manifests underneath a running fixture and can cause client-manifest errors. Stop the fixture before rebuilding; do not resend an uncertain outing action to work around a broken page. A request absent from the fixed fake responder's source table is a synthetic provider error, not a model-quality result; its reservation may conservatively stop the whole fictional grant.
+
+
+## Network fixture refusal
+
+First distinguish TLS/hostname, workload/audience, body/nonce, user ownership, evidence/session and financial/dispatch refusal. Never disable verification to get a response. Read sanitized categories, not private request bodies or container environment dumps. The prior unexplained `database_protocol` incident remains unattributed despite controlled lock-refusal tests; do not raise deadlines or repin history. A dispatch callback to the wrong factory process is a concrete hosted routing blocker, not a reason to skip admission. [Report](../task52-production-service-packaging.md).
+
+Private role candidate: first verify the current cohort, then connection enrollment, then sanitized per-role refusal chains. `sql_role` means exact privilege/identity mismatch, not permission to add a role. Check public certificate readability separately from private-key secrecy. Never clear financial history or retry an uncertain provider operation to diagnose a refusal. See the [continuation report](../task52-private-role-continuation.md).

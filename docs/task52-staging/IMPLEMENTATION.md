@@ -60,3 +60,11 @@ Current bounded ordinary facade: [local interpretation/pending/generation](../ta
 
 
 The [inactive ordinary private UI/recovery checkpoint](../task52-ordinary-private-ui.md) adds memory-only browser ownership and non-billable probes; this is not complete P9, real hosted startup or public launch. Remaining native/public mappings, real enrollment/migration/recovery, LLM quality/tokenization, financial approval and private acceptance remain blocked.
+
+
+Current transport component: [authenticated HTTPS and standalone frontend packaging](../task52-production-service-packaging.md) removes Docker from the frontend request path. Full hosted native startup is still blocked by synthetic connection/data/counter guards and the process-local dispatch-admission callback. Next bounded source checkpoint: reviewed hosted connection/lifecycle factories and exact callback-owner/draining behavior before production-role images or resource provisioning. Existing P0/P1/P4–P10 decisions and approvals remain open. No real grant/provider/model/traffic is enabled.
+
+Private role continuation: finish the source-derived candidate combined application/recovery/owner-termination and security gates before hosted enrollment. See [exact continuation state](../task52-private-role-continuation.md). Direct/session-affine witness SQL is mandatory; transaction poolers are unsupported. No grants, infrastructure or public launch are approved here.
+
+
+Closed local ordinary packaging: [packaged bootstrap and immutable interruption verification](../task52-closed-frontend-verification.md) replaces the external preload in the separately selected image. This does not enroll IAM, approve financial policy, qualify a model, accept vulnerabilities or complete P9 staging. Next: bounded compatible container-security remediation/disposition, before real enrollment/provisioning.

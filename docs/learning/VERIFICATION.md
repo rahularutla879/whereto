@@ -106,3 +106,8 @@ Reviewed chapters 3/6/7/12–15/18/20; updated 3/6/7/12–15/18 and supporting r
 ## Inactive ordinary private browser checkpoint
 
 Reviewed chapters3/4/6/7/12–15/18/20 and updated3/4/6/7/12–15/18 plus supporting references. All20 original chapter contents are preserved. The [verification record](../task52-ordinary-private-ui-verification.json) distinguishes browser observations, direct HTTP tests, original frozen regressions, development failures and untested hosted behavior.
+
+
+## Task52 authenticated network update
+
+Reviewed and appended chapters3/4/6/7/12/13/14/15/18 and this supporting reference material against actual new code. All20 chapter originals and unrelated examples/exercises are retained. This changes transport/testing/packaging, not planning semantics. Exact current passes, opt-in skips, failed development attempts, unexecuted parent suites, browser viewport evidence and the full-startup blocker are recorded in [network verification](../task52-production-service-packaging-verification.json). No full-backend, real Google IAM/IAP, hosted-ready or model-quality claim is made.

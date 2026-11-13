@@ -1,0 +1,1627 @@
+{
+  "identity": "52-private-role-continuation-verification-candidate-v1",
+  "acceptance": "NOT_COMPLETE",
+  "commit": null,
+  "push": false,
+  "baseline": "2c5bfcc651521639cb654b6e3940697b3cd880aa",
+  "normalStartupChanged": false,
+  "realProviderCalls": 0,
+  "cloudProvisioning": 0,
+  "realGrants": 0,
+  "originalWorkingFiles": {
+    "ARCHITECTURE.md": {
+      "originalSHA256": "135e61c1b55f6e9938d084069bc9303f73ae2ba30640cfb7bb51be72c67e5f03",
+      "originalBytesRetained": true
+    },
+    "DECISIONS.md": {
+      "originalSHA256": "7dbf525574a5e2e09ea67ea366910fccc29573f5aa0861eca88da5ab41c57d16",
+      "originalBytesRetained": true
+    },
+    "HANDOVER.md": {
+      "originalSHA256": "6a626a3712f2d21785f391ee22ff5d29fe06bf8199404d55141ea335f34e5cba",
+      "originalBytesRetained": true
+    },
+    "TASKS.md": {
+      "originalSHA256": "1eeb140df820a5455ae453cbb8a233b1810f19a70637a9ee9e467af32134d62d",
+      "originalBytesRetained": true
+    },
+    "docs/learning/03-overall-application-architecture.md": {
+      "originalSHA256": "90ce22ec3ae16d2420e49bf94c7c65cd37a8ad946633b520148e4c989158930c",
+      "originalBytesRetained": true
+    },
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md": {
+      "originalSHA256": "3e3ed446987cbf626a9b4128f51b17daa5f5fd370da8f98713c30b29befc57e4",
+      "originalBytesRetained": true
+    },
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md": {
+      "originalSHA256": "44e2bff2b42529972cd902f0d6427f5de43d2f5f7be47b5cc0242630539ba06a",
+      "originalBytesRetained": true
+    },
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md": {
+      "originalSHA256": "bb662d9bc0daa362a099c3bcf92693579fe16dfa9e5f69f995146e991e918c4c",
+      "originalBytesRetained": true
+    },
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": {
+      "originalSHA256": "b539da191b7b73653021145fb5fad26c656f5263995cc5bfc8021f031532b408",
+      "originalBytesRetained": true
+    },
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md": {
+      "originalSHA256": "9c42be0ed4c31493a89413f520d84289ab8dca00325623a4f257744fccebf9a1",
+      "originalBytesRetained": true
+    },
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md": {
+      "originalSHA256": "d5de9cf4ea5a97052c8a609968dfbf1d9f5d27fe738a9aabb8da2f14bbfbd026",
+      "originalBytesRetained": true
+    },
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md": {
+      "originalSHA256": "0e59944496354aa4c989a6728eba170685217daa28cf882c0c3c60f6361df7fc",
+      "originalBytesRetained": true
+    },
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md": {
+      "originalSHA256": "157fc5da9cb8b3241e14cabc42bcf5ab3be4cbeb98fed99259f5d5f463b35df0",
+      "originalBytesRetained": true
+    },
+    "docs/learning/DATA_FLOW_REFERENCE.md": {
+      "originalSHA256": "c27369536df495e03c81f192c9502152b97659c4e0f7fcd68b66a4f441fa0695",
+      "originalBytesRetained": true
+    },
+    "docs/learning/DEBUGGING_PLAYBOOK.md": {
+      "originalSHA256": "e686f8c0649169f2eeb6b5be3d17dba886b455dd2e5515510c1db83a96537114",
+      "originalBytesRetained": true
+    },
+    "docs/learning/DEVELOPMENT_COMMANDS.md": {
+      "originalSHA256": "c088fb7b3fe5c6494c70c04f363ee71077fae4b1a7b6e1407e646291bf02a002",
+      "originalBytesRetained": true
+    },
+    "docs/learning/GLOSSARY.md": {
+      "originalSHA256": "845438b9c35bb6a312b61205c800361cd085a9e27a7ca62fca4a574adc039f58",
+      "originalBytesRetained": true
+    },
+    "docs/learning/PROJECT_FILE_MAP.md": {
+      "originalSHA256": "089450c931c6792b91b4400ca1a1ec853167f1338a708faffa9c503c0baed55e",
+      "originalBytesRetained": true
+    },
+    "docs/learning/VERIFICATION.md": {
+      "originalSHA256": "b9b4e5771d11366024e2cb4c82025b41da94063e6d7ff682e02af98aba2dbd08",
+      "originalBytesRetained": true
+    },
+    "docs/task52-staging/IMPLEMENTATION.md": {
+      "originalSHA256": "232f84cf87cc614dd165f50b8f75bbc0fab9ce788a439705717bb757bf79cffc",
+      "originalBytesRetained": true
+    },
+    "deployment/Dockerfile.frontend-network": {
+      "originalSHA256": "8b1795923675913e81eb630261ffaf448bec7389d39824b3de8e6afcbfe62beb",
+      "originalBytesRetained": true
+    },
+    "deployment/build-network-port.mjs": {
+      "originalSHA256": "7175f7d43045326e7d43997d9cd3277cf96e7a5aa26c257d463d95bb34a43cf3",
+      "originalBytesRetained": true
+    },
+    "deployment/prepare_network_context.py": {
+      "originalSHA256": "e9bae7eb7b6445f0e1d335e1b2d721781d80b2df776f1df37f250925f39ac49c",
+      "originalBytesRetained": true
+    },
+    "deployment/private-network-v1.json": {
+      "originalSHA256": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
+      "originalBytesRetained": true
+    },
+    "docs/task52-production-service-packaging-verification.json": {
+      "originalSHA256": "93eba401dc8fdffd621997e8b3d4caf7e8bc481d45933861c7ad12891d30adf7",
+      "originalBytesRetained": false,
+      "originalJSONFieldsRetained": true,
+      "change": "Additive continuation reference only; every original field/value retained"
+    },
+    "docs/task52-production-service-packaging.md": {
+      "originalSHA256": "90348ca58bbef5e2b5c21f163df19c7aa1b14ac5da06cd5e0651b98a80aa8e4c",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/build.json": {
+      "originalSHA256": "5640cd4c898f1f87c0e5ae04e03d77934d09a3e86be2b85a58d7befbec160f7d",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/client.py": {
+      "originalSHA256": "9b9db4e1e6f24b83f06b4fdcbbad471eda36beeed0a26bc5042b30b79e576a0e",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/compile_fixture.mjs": {
+      "originalSHA256": "0897be32f05bfb062cb5fec9266122e9ffa8f166e8a87dde85a280022881015a",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/dns.py": {
+      "originalSHA256": "c7235c227598a51983125f4b8b1c0f3d5be34c251f76a4e6f6727961fb026674",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/fixture.py": {
+      "originalSHA256": "7898b8b1af49f6e045e92cdd651a9469c351c29eb6622bd3be5386b7cd020c79",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/identity.py": {
+      "originalSHA256": "9d4f72b4eab5140ca3e94636ad81416b81d546b932819780183af93ec61a3eef",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/ingress.py": {
+      "originalSHA256": "f69e259b9c248ffbdaad4a3d069bc919120cece1835ced443c384f07602d52ab",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/metrics.py": {
+      "originalSHA256": "dd941e604544aeb29275187384d8462edbce7eb4fa3771a328594bd1fcd7161a",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/preload.ts": {
+      "originalSHA256": "17727fa06dd69c23bf3cf6db5770fe2d6f8b1dc9986b5b7c2018b81ecfb41f9e",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/profile.py": {
+      "originalSHA256": "9681d820290904c738fc66a94c8255b150844a8384985588f42807c0b24835aa",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/public_server.py": {
+      "originalSHA256": "c937a19be37e3d988c385181dbd058b387a2f5fa1e8818244c29f9ce5927ccae",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/relay.py": {
+      "originalSHA256": "23397a1910e69cc759d512f8d12ac9a31ad7019a0fa62e9ed3c608ba716e8f6e",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/resources.py": {
+      "originalSHA256": "60eaa33fba59b2a37e1d139e086aa954615f15d755c1898d26ba315d053a6087",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/run_local.py": {
+      "originalSHA256": "8de03deef6e2629938802abed863f47449a7d63574b977fb23ed6fc7028415f2",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/server.py": {
+      "originalSHA256": "2228804d041a62f057caf8d443ba26b67b4040de51ce8ba836eb90852bfbadee",
+      "originalBytesRetained": true
+    },
+    "experiments/ordinary_network/test_network.py": {
+      "originalSHA256": "268f220204a96104819b03a03a7f0f09a9117a1e41be65a929808214a0f5240a",
+      "originalBytesRetained": true
+    },
+    "lib/server-https.test.ts": {
+      "originalSHA256": "e792208f67c8b3a476f85ab498d88f877b5975f81624ca56ff7518bca0834056",
+      "originalBytesRetained": true
+    },
+    "lib/server-https.ts": {
+      "originalSHA256": "0ba5e790744810a49b729e70b8e93b18e27acdd06ec3ea10af1155f458e70e49",
+      "originalBytesRetained": true
+    },
+    "private_runtime/google_identity.py": {
+      "originalSHA256": "aa57e13693b4fcaf10b36107a9802045ea0757631024be7ee05735c5bbc3bbb9",
+      "originalBytesRetained": true
+    },
+    "private_runtime/https.py": {
+      "originalSHA256": "ee5a6bbd35607d50b0fee16c1e78dde60647e5642f4ee402133d3e2094ab8a50",
+      "originalBytesRetained": true
+    },
+    "private_runtime/service_client.py": {
+      "originalSHA256": "92708e866d99b2e9d2afef1ff687567659192162418baae49dae956da451c464",
+      "originalBytesRetained": true
+    },
+    "private_runtime/test_https.py": {
+      "originalSHA256": "aee359adaa746d50f6164726e99bb6475461ed77ee36a07d5a8df3dbdb590916",
+      "originalBytesRetained": true
+    },
+    "private_runtime/test_identity.py": {
+      "originalSHA256": "fbd56653d82ebae61e2e85579895f6ab4e8ba37162b7f69ffbe75c94760a8cea",
+      "originalBytesRetained": true
+    }
+  },
+  "sourceCohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+  "frozenParentNetworkManifest": "5640cd4c898f1f87c0e5ae04e03d77934d09a3e86be2b85a58d7befbec160f7d",
+  "roleImages": {
+    "counter": {
+      "id": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+      "tag": "whereto-private-counter:task52-v1",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "bytes": 56908273
+    },
+    "recovery": {
+      "id": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+      "tag": "whereto-private-recovery:task52-v1",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "bytes": 56908050
+    },
+    "backend": {
+      "id": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+      "tag": "whereto-private-backend:task52-v1",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "bytes": 66354787
+    },
+    "factory": {
+      "id": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+      "tag": "whereto-private-factory:task52-v1",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "bytes": 66380705
+    },
+    "dispatcher": {
+      "id": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+      "tag": "whereto-private-dispatcher:task52-v1",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "bytes": 66380604
+    }
+  },
+  "roleImageSmoke": {
+    "counter": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "files": 18,
+      "uid": 10001,
+      "fixtureFiles": false,
+      "dockerSocket": false,
+      "pip": false,
+      "startupWithoutEnrollment": "refused78",
+      "image": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0"
+    },
+    "recovery": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "files": 18,
+      "uid": 10001,
+      "fixtureFiles": false,
+      "dockerSocket": false,
+      "pip": false,
+      "startupWithoutEnrollment": "refused78",
+      "image": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445"
+    },
+    "backend": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "files": 102,
+      "uid": 10001,
+      "fixtureFiles": false,
+      "dockerSocket": false,
+      "pip": false,
+      "startupWithoutEnrollment": "refused78",
+      "image": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc"
+    },
+    "factory": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "files": 115,
+      "uid": 10001,
+      "fixtureFiles": false,
+      "dockerSocket": false,
+      "pip": false,
+      "startupWithoutEnrollment": "refused78",
+      "image": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550"
+    },
+    "dispatcher": {
+      "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+      "files": 115,
+      "uid": 10001,
+      "fixtureFiles": false,
+      "dockerSocket": false,
+      "pip": false,
+      "startupWithoutEnrollment": "refused78",
+      "image": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3"
+    }
+  },
+  "priorRoleCohort": "383be587fa92d8ca8f8fe5afdb27447f4e05e84fdfe3099f720e60d78ff6930c",
+  "candidateFrontend": {
+    "id": "sha256:c31984ff231db7ee07e7c601d48a0ae830db733b986a9446c0495fdd311e4807",
+    "architecture": "amd64",
+    "user": "node",
+    "bytes": 104763462,
+    "base": "node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+    "activated": false
+  },
+  "candidateFrontendSmoke": {
+    "image": "sha256:c31984ff231db7ee07e7c601d48a0ae830db733b986a9446c0495fdd311e4807",
+    "homepage200": true,
+    "nonroot": true,
+    "readOnlyFilesystem": true,
+    "droppedCapabilities": true,
+    "network": "none",
+    "privateProfileActivated": false
+  },
+  "upstreamBaseReview": {
+    "python": {
+      "tag": "3.12-slim-bookworm",
+      "digest": "sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+      "updated": "2026-11-05T17:07:24.639547Z",
+      "amd64": [
+        "sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4"
+      ]
+    },
+    "node": {
+      "tag": "24-bookworm-slim",
+      "digest": "sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+      "updated": "2026-11-11T20:39:58.583762Z",
+      "amd64": [
+        "sha256:0e2646ab57e77b7a384a0cb59b6815b182c77e1f9c3ba36bd8435bd9c4e6680e"
+      ]
+    }
+  },
+  "poolBenchmark": {
+    "fresh": {
+      "milliseconds": [
+        20.301,
+        20.308,
+        19.916,
+        20.476,
+        19.421,
+        20.906,
+        19.775,
+        20.23,
+        20.471,
+        19.507,
+        20.355,
+        19.687
+      ],
+      "scope": "Restricted TLS checkout, full enrollment verification, SELECT 1 and reset only; not user request/cloud latency",
+      "coldMilliseconds": 20.301,
+      "warmMedianMilliseconds": 20.23,
+      "medianMilliseconds": 20.2655
+    },
+    "reused": {
+      "milliseconds": [
+        20.236,
+        4.563,
+        4.507,
+        4.461,
+        4.4,
+        4.383,
+        4.455,
+        4.388,
+        4.354,
+        4.432,
+        4.705,
+        4.483
+      ],
+      "scope": "Restricted TLS checkout, full enrollment verification, SELECT 1 and reset only; not user request/cloud latency",
+      "coldMilliseconds": 20.236,
+      "warmMedianMilliseconds": 4.455,
+      "medianMilliseconds": 4.458
+    }
+  },
+  "applicationProbe": {
+    "requests": [
+      {
+        "path": "/api/interpret",
+        "milliseconds": 10081.321,
+        "status": 200
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 185.755,
+        "status": 403
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 8483.858,
+        "status": 200
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 5273.79,
+        "status": 200
+      },
+      {
+        "path": "/api/plans/generate",
+        "milliseconds": 28529.566,
+        "status": 200
+      },
+      {
+        "path": "/api/plans/generate",
+        "milliseconds": 164.472,
+        "status": 403
+      },
+      {
+        "path": "/api/plans/advanced",
+        "milliseconds": 4.958,
+        "status": 503
+      },
+      {
+        "path": "/api/plans/options",
+        "milliseconds": 3.77,
+        "status": 503
+      },
+      {
+        "path": "/api/venues/details",
+        "milliseconds": 3.716,
+        "status": 503
+      },
+      {
+        "path": "/api/plans/save",
+        "milliseconds": 3.701,
+        "status": 503
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 9.757,
+        "status": 403
+      }
+    ],
+    "workflow": "interpret, independent outing, other-user refusal, cross-factory clarification, generation, duplicate refusal, unsupported routes and forged workload refusal",
+    "confirmedPlans": 0,
+    "provisionalPlans": 3,
+    "inferenceOperations": 2,
+    "deterministicClarificationAddedInference": false
+  },
+  "applicationAttempt": {
+    "requests": [
+      {
+        "path": "/api/interpret",
+        "milliseconds": 10081.321,
+        "status": 200
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 185.755,
+        "status": 403
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 8483.858,
+        "status": 200
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 5273.79,
+        "status": 200
+      },
+      {
+        "path": "/api/plans/generate",
+        "milliseconds": 28529.566,
+        "status": 200
+      },
+      {
+        "path": "/api/plans/generate",
+        "milliseconds": 164.472,
+        "status": 403
+      },
+      {
+        "path": "/api/plans/advanced",
+        "milliseconds": 4.958,
+        "status": 503
+      },
+      {
+        "path": "/api/plans/options",
+        "milliseconds": 3.77,
+        "status": 503
+      },
+      {
+        "path": "/api/venues/details",
+        "milliseconds": 3.716,
+        "status": 503
+      },
+      {
+        "path": "/api/plans/save",
+        "milliseconds": 3.701,
+        "status": 503
+      },
+      {
+        "path": "/api/interpret",
+        "milliseconds": 9.757,
+        "status": 403
+      }
+    ],
+    "scope": "Synthetic local HTTPS requests only; excludes controller setup; concurrent local recovery/security workload may contend"
+  },
+  "inclusiveStageLatencies": {
+    "scope": "Inclusive overlapping synthetic local spans; do not sum; not cloud or LLM latency",
+    "stages": {
+      "admission.revalidation": {
+        "samples": 18,
+        "failed": 0,
+        "p50Milliseconds": 154.174,
+        "p95Milliseconds": 232.532,
+        "maxMilliseconds": 232.532
+      },
+      "authentication.with_nonce": {
+        "samples": 16,
+        "failed": 0,
+        "p50Milliseconds": 8.855,
+        "p95Milliseconds": 52.986,
+        "maxMilliseconds": 52.986
+      },
+      "financial.dispatch": {
+        "samples": 6,
+        "failed": 0,
+        "p50Milliseconds": 705.293,
+        "p95Milliseconds": 1003.518,
+        "maxMilliseconds": 1003.518
+      },
+      "financial.prepare": {
+        "samples": 13,
+        "failed": 0,
+        "p50Milliseconds": 313.024,
+        "p95Milliseconds": 367.479,
+        "maxMilliseconds": 367.479
+      },
+      "native.evidence_recovery": {
+        "samples": 23,
+        "failed": 0,
+        "p50Milliseconds": 302.257,
+        "p95Milliseconds": 481.796,
+        "maxMilliseconds": 1055.789
+      },
+      "redis.operation": {
+        "samples": 39,
+        "failed": 0,
+        "p50Milliseconds": 0.358,
+        "p95Milliseconds": 90.298,
+        "maxMilliseconds": 143.031
+      },
+      "sql.connection_acquisition": {
+        "samples": 532,
+        "failed": 0,
+        "p50Milliseconds": 0.008,
+        "p95Milliseconds": 0.055,
+        "maxMilliseconds": 201.626
+      },
+      "sql.enrollment_check": {
+        "samples": 542,
+        "failed": 0,
+        "p50Milliseconds": 4.325,
+        "p95Milliseconds": 6.189,
+        "maxMilliseconds": 158.744
+      },
+      "sql.protected_statement": {
+        "samples": 580,
+        "failed": 0,
+        "p50Milliseconds": 0.227,
+        "p95Milliseconds": 18.797,
+        "maxMilliseconds": 55.276
+      },
+      "witness.history_check": {
+        "samples": 45,
+        "failed": 0,
+        "p50Milliseconds": 96.987,
+        "p95Milliseconds": 107.93,
+        "maxMilliseconds": 116.275
+      }
+    }
+  },
+  "factoryCrash": {
+    "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+    "twoFactoryProcesses": true,
+    "factoryKilledBeforeCallback": true,
+    "reservationChargeRetained": true,
+    "chargeInteger": 6845,
+    "committedIntentCount": 1,
+    "providerDeliveryCount": 0,
+    "restartWithoutRetry": true,
+    "operationRefused": true
+  },
+  "sanitizedRoleRefusals": {
+    "counter": [],
+    "recovery": [],
+    "dispatcher": [
+      {
+        "event": "private_service_refused",
+        "role": "dispatcher",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "do_POST",
+                131
+              ],
+              [
+                "start_role.py",
+                "controlled_handle",
+                49
+              ],
+              [
+                "private_service.py",
+                "handle",
+                55
+              ],
+              [
+                "owned_dispatch.py",
+                "dispatch",
+                54
+              ],
+              [
+                "dispatch_owner.py",
+                "check",
+                73
+              ],
+              [
+                "service_client.py",
+                "request",
+                31
+              ]
+            ]
+          },
+          {
+            "category": "Refused",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "service_client.py",
+                "request",
+                27
+              ],
+              [
+                "https.py",
+                "request",
+                51
+              ]
+            ]
+          },
+          {
+            "category": "ConnectionRefusedError",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "https.py",
+                "request",
+                32
+              ],
+              [
+                "client.py",
+                "connect",
+                1520
+              ],
+              [
+                "client.py",
+                "connect",
+                1051
+              ],
+              [
+                "socket.py",
+                "create_connection",
+                865
+              ],
+              [
+                "socket.py",
+                "create_connection",
+                850
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "factory-r1": [
+      {
+        "event": "private_service_refused",
+        "role": "factory",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "do_POST",
+                131
+              ],
+              [
+                "start_role.py",
+                "controlled_handle",
+                49
+              ],
+              [
+                "private_service.py",
+                "handle",
+                45
+              ],
+              [
+                "server.py",
+                "ordinary",
+                16
+              ],
+              [
+                "factory.py",
+                "ordinary",
+                61
+              ],
+              [
+                "factory.py",
+                "get",
+                52
+              ],
+              [
+                "factory.py",
+                "sql",
+                28
+              ],
+              [
+                "registry.py",
+                "__exit__",
+                25
+              ],
+              [
+                "contextlib.py",
+                "__exit__",
+                158
+              ],
+              [
+                "connections.py",
+                "connection",
+                78
+              ]
+            ]
+          },
+          {
+            "category": "RaiseException",
+            "reason": null,
+            "sqlstate": "P0001",
+            "frames": [
+              [
+                "connections.py",
+                "connection",
+                75
+              ],
+              [
+                "factory.py",
+                "sql",
+                29
+              ],
+              [
+                "metrics.py",
+                "measured",
+                14
+              ],
+              [
+                "registry.py",
+                "execute",
+                35
+              ],
+              [
+                "connection.py",
+                "execute",
+                300
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "event": "private_service_refused",
+        "role": "factory",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "do_POST",
+                131
+              ],
+              [
+                "start_role.py",
+                "controlled_handle",
+                49
+              ],
+              [
+                "private_service.py",
+                "handle",
+                45
+              ],
+              [
+                "server.py",
+                "ordinary",
+                16
+              ],
+              [
+                "factory.py",
+                "ordinary",
+                61
+              ],
+              [
+                "factory.py",
+                "get",
+                52
+              ],
+              [
+                "factory.py",
+                "sql",
+                28
+              ],
+              [
+                "registry.py",
+                "__exit__",
+                25
+              ],
+              [
+                "contextlib.py",
+                "__exit__",
+                158
+              ],
+              [
+                "connections.py",
+                "connection",
+                78
+              ]
+            ]
+          },
+          {
+            "category": "RaiseException",
+            "reason": null,
+            "sqlstate": "P0001",
+            "frames": [
+              [
+                "connections.py",
+                "connection",
+                75
+              ],
+              [
+                "factory.py",
+                "sql",
+                29
+              ],
+              [
+                "metrics.py",
+                "measured",
+                14
+              ],
+              [
+                "registry.py",
+                "execute",
+                35
+              ],
+              [
+                "connection.py",
+                "execute",
+                300
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "factory-r2": [],
+    "backend-a": [
+      {
+        "event": "private_service_refused",
+        "role": "backend",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "__call__",
+                97
+              ],
+              [
+                "threads.py",
+                "to_thread",
+                25
+              ],
+              [
+                "thread.py",
+                "run",
+                59
+              ],
+              [
+                "service_client.py",
+                "request",
+                31
+              ]
+            ]
+          },
+          {
+            "category": "Refused",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "service_client.py",
+                "request",
+                27
+              ],
+              [
+                "https.py",
+                "request",
+                36
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "event": "private_service_refused",
+        "role": "backend",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "__call__",
+                97
+              ],
+              [
+                "threads.py",
+                "to_thread",
+                25
+              ],
+              [
+                "thread.py",
+                "run",
+                59
+              ],
+              [
+                "service_client.py",
+                "request",
+                31
+              ]
+            ]
+          },
+          {
+            "category": "Refused",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "service_client.py",
+                "request",
+                27
+              ],
+              [
+                "https.py",
+                "request",
+                36
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "event": "private_service_refused",
+        "role": "backend",
+        "chain": [
+          {
+            "category": "Denied",
+            "reason": "identity_token",
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "__call__",
+                90
+              ],
+              [
+                "threads.py",
+                "to_thread",
+                25
+              ],
+              [
+                "thread.py",
+                "run",
+                59
+              ],
+              [
+                "request_auth.py",
+                "check",
+                19
+              ],
+              [
+                "tokens.py",
+                "verify",
+                109
+              ],
+              [
+                "tokens.py",
+                "header",
+                33
+              ]
+            ]
+          },
+          {
+            "category": "ValueError",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "tokens.py",
+                "header",
+                26
+              ]
+            ]
+          }
+        ]
+      },
+      {
+        "event": "private_service_refused",
+        "role": "backend",
+        "chain": [
+          {
+            "category": "Unavailable",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "private_service.py",
+                "__call__",
+                97
+              ],
+              [
+                "threads.py",
+                "to_thread",
+                25
+              ],
+              [
+                "thread.py",
+                "run",
+                59
+              ],
+              [
+                "service_client.py",
+                "request",
+                31
+              ]
+            ]
+          },
+          {
+            "category": "Refused",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "service_client.py",
+                "request",
+                27
+              ],
+              [
+                "https.py",
+                "request",
+                51
+              ]
+            ]
+          },
+          {
+            "category": "RemoteDisconnected",
+            "reason": null,
+            "sqlstate": null,
+            "frames": [
+              [
+                "https.py",
+                "request",
+                35
+              ],
+              [
+                "client.py",
+                "getresponse",
+                1478
+              ],
+              [
+                "client.py",
+                "begin",
+                343
+              ],
+              [
+                "client.py",
+                "_read_status",
+                312
+              ]
+            ]
+          }
+        ]
+      }
+    ],
+    "backend-b": []
+  },
+  "securityInventory": "task52-private-role-security-review.json",
+  "securityAcceptance": false,
+  "tests": [
+    {
+      "scope": "Separate-process owner/callback, HTTPS and projection/AAD current source",
+      "passed": 22,
+      "failed": 0,
+      "skipped": 0,
+      "log": "continuation-final-all-local-tests.log"
+    },
+    {
+      "scope": "Hosted TLS SQL/Redis current focused fixture",
+      "passed": 11,
+      "failed": 0,
+      "skipped": 0,
+      "log": "continuation-ports-cluster10.log"
+    },
+    {
+      "scope": "Fake metadata identity port",
+      "passed": 4,
+      "failed": 0,
+      "skipped": 0
+    },
+    {
+      "scope": "Unchanged hosted identity signed/offline parent cohort",
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 199.954
+    },
+    {
+      "scope": "Protected application financial authority",
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 886.594,
+      "recoveryDrills": "Independent operational/witness snapshot restores, operational database outage/crash/restart and Redis-loss refusal passed"
+    },
+    {
+      "scope": "Existing frontend",
+      "passed": 315,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 116.691
+    },
+    {
+      "scope": "Focused backend admission/budget/request/saved-plan and packaging",
+      "passed": 57,
+      "failed": 0,
+      "skipped": 9,
+      "seconds": 4.563
+    },
+    {
+      "scope": "Existing journey/resolution/routing/timing/planner/session",
+      "passed": 180,
+      "failed": 0,
+      "skipped": 1,
+      "seconds": 1.735
+    }
+  ],
+  "checks": {
+    "typeScript": "passed",
+    "eslint": "passed",
+    "productionFrontendBuild": "passed",
+    "localPipConsistency": "passed",
+    "npmAudit": {
+      "moderate": 7,
+      "high": 0,
+      "critical": 0
+    },
+    "compileall": "passed",
+    "secretScan": {
+      "configuredValues": 2,
+      "currentMatches": 0,
+      "historicalMatches": 0
+    },
+    "frozenEvidence": "Read-only before/after identities match: ten rows, all324 files and halt",
+    "evaluationSecretScan": {
+      "valuesChecked": 3,
+      "currentMatches": 0,
+      "historicalMatches": 0
+    }
+  },
+  "notRunOrIncomplete": [
+    "Unpinned earlier post-browser reserved-send assertion remains unattributed; passing instrumented repeat does not erase it",
+    "Closed hosted frontend startup installer/root-owned frontend packaging; current browser uses external test preload",
+    "Full backend discovery, immutable historical simulations and complete112/17 authority/native suites not rerun; no historical source repinning",
+    "All network/outage/fencing variants on the newly derived cohort; parent suites/components are separately identified",
+    "Actual IAM/IAP/Cloud Run routing/TLS/session-affine database/managed Redis/independent backup enrollment",
+    "Real tokenization, model qualification, real provider pricing/grants/transport and Google-data admission; no activation"
+  ],
+  "historical": {
+    "attempts": 10,
+    "providers": {
+      "OpenAI": 7,
+      "Google": 2,
+      "Anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "persistentHalt": "unchanged"
+  },
+  "files": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "deployment/Dockerfile.frontend-network",
+    "deployment/Dockerfile.private-service",
+    "deployment/build-network-port.mjs",
+    "deployment/prepare_network_context.py",
+    "deployment/prepare_private_services.py",
+    "deployment/private-network-v1.json",
+    "deployment/private-role-cohort-v1.json",
+    "deployment/private-services-v1.json",
+    "deployment/requirements-private-authority-linux-amd64.lock",
+    "deployment/requirements-private-linux-amd64.lock",
+    "deployment/sql/hosted-operational-contract-v1.sql",
+    "deployment/sql/hosted-witness-contract-v1.sql",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DATA_FLOW_REFERENCE.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-private-role-continuation-verification.json",
+    "docs/task52-private-role-continuation.md",
+    "docs/task52-private-role-security-review.json",
+    "docs/task52-production-service-packaging-verification.json",
+    "docs/task52-production-service-packaging.md",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "experiments/hosted_ports/application_probe.py",
+    "experiments/hosted_ports/metrics.py",
+    "experiments/hosted_ports/native_cluster.py",
+    "experiments/hosted_ports/run_local.py",
+    "experiments/hosted_ports/start_role.py",
+    "experiments/hosted_ports/test_connections.py",
+    "experiments/ordinary_network/build.json",
+    "experiments/ordinary_network/client.py",
+    "experiments/ordinary_network/compile_fixture.mjs",
+    "experiments/ordinary_network/dns.py",
+    "experiments/ordinary_network/fixture.py",
+    "experiments/ordinary_network/identity.py",
+    "experiments/ordinary_network/ingress.py",
+    "experiments/ordinary_network/metrics.py",
+    "experiments/ordinary_network/preload.ts",
+    "experiments/ordinary_network/profile.py",
+    "experiments/ordinary_network/public_server.py",
+    "experiments/ordinary_network/relay.py",
+    "experiments/ordinary_network/resources.py",
+    "experiments/ordinary_network/run_local.py",
+    "experiments/ordinary_network/server.py",
+    "experiments/ordinary_network/test_network.py",
+    "lib/server-https.test.ts",
+    "lib/server-https.ts",
+    "private_runtime/auth_port.py",
+    "private_runtime/connections.py",
+    "private_runtime/dispatch_owner.py",
+    "private_runtime/entry.py",
+    "private_runtime/google_identity.py",
+    "private_runtime/https.py",
+    "private_runtime/image_identity.py",
+    "private_runtime/native_ports.py",
+    "private_runtime/native_runtime.py",
+    "private_runtime/owned_dispatch.py",
+    "private_runtime/private_service.py",
+    "private_runtime/redis_port.py",
+    "private_runtime/registry.py",
+    "private_runtime/service_client.py",
+    "private_runtime/simulation.py",
+    "private_runtime/test_dispatch_owner.py",
+    "private_runtime/test_dispatch_processes.py",
+    "private_runtime/test_https.py",
+    "private_runtime/test_identity.py",
+    "private_runtime/test_projection.py",
+    "private_runtime/test_simulation.py"
+  ],
+  "browser": {
+    "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+    "mechanism": "Actual CUA to external local synthetic IAP edge, actual standalone Next image and independently credentialed role images",
+    "passed": [
+      "ordinary interpretation",
+      "pending date tomorrow",
+      "Coffee then Museum summary dated November14",
+      "explicit invented origin39.29,-76.61",
+      "three synthetic provisional cards",
+      "View Plan and non-provider contact details",
+      "explicit discard unlocks edits and clears cards",
+      "source edit then refresh clears all client authority without automatic resumption",
+      "desktop1280x900 and mobile390x844; DOMwidth390/scrollWidth390"
+    ],
+    "notTested": [
+      "simultaneous browser tabs with successful provider work",
+      "all fault cases through browser",
+      "real IAM/IAP/provider/model/venue accuracy",
+      "full assistive technology audit"
+    ],
+    "screenshots": {
+      "/tmp/task52-private-role-desktop.jpg": "7aee4e797b6bb50ae76db9dc2b5c703c655904b21f240eb0e60150b52bc83e81",
+      "/tmp/task52-private-role-mobile.jpg": "7ab52ed30d0961a5a50e60e9b04718de323b70745fee11713c15d37a4c9758cb"
+    }
+  },
+  "factoryCrashAttempt": {
+    "cohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+    "before": [
+      6845,
+      1,
+      0
+    ],
+    "after": [
+      6845,
+      1,
+      0
+    ],
+    "operationRefused": true,
+    "factoryKilled": true,
+    "restarted": true
+  },
+  "passingCrashHarnessSHA256": {
+    "experiments/hosted_ports/native_cluster.py": "a3a61e0cd0ac7fffa234b9d2396cc5745ebac39e7fc017aba350da5d5b26acd5",
+    "experiments/hosted_ports/run_local.py": "4fd23989df046f9d67f52e9751ceed2d7bfd873672b631e83354c5631fcb04c7",
+    "experiments/hosted_ports/start_role.py": "e5b2925bae70be339bd1e453aa77f99584713d53d118ed0297f3d876f899e201",
+    "experiments/hosted_ports/application_probe.py": "22e7020ac1f9277c4a176a266fd25582fc3487259862179e2eca7c828cff0300",
+    "experiments/hosted_ports/metrics.py": "0fa32339e3de8462bfc205778a96fde61887df91464a6bf5e15a224c21b09a94"
+  },
+  "testTotals": {
+    "passed": 639,
+    "optInSkipped": 10,
+    "fullBackendPassClaimed": false
+  },
+  "statusExplanation": "Current components, API/browser, role image checks and parent recovery pass. Entire bounded acceptance remains incomplete due the earlier unattributed interruption assertion and absent closed hosted frontend installer. No commit/push.",
+  "diffReview": {
+    "combinedWorkingFiles": 82,
+    "originalFilesRetained": 49,
+    "allOriginalSourceBytesRetained": true,
+    "originalVerificationJSONFieldsRetained": true,
+    "JSONAndPythonSyntax": "passed",
+    "trackedAndUntrackedWhitespace": "passed",
+    "all20HandbookChapterPrefixesRetained": true,
+    "productionSourceFilesModified": false
+  },
+  "sourceFilesSHA256": {
+    "deployment/build-network-port.mjs": "7175f7d43045326e7d43997d9cd3277cf96e7a5aa26c257d463d95bb34a43cf3",
+    "deployment/prepare_network_context.py": "e9bae7eb7b6445f0e1d335e1b2d721781d80b2df776f1df37f250925f39ac49c",
+    "deployment/prepare_private_services.py": "9790a54b64e8f50938d3b504cb0e4396ab432d3bd4390daae55564f58e045e16",
+    "deployment/requirements-private-authority-linux-amd64.lock": "bd2ff66207cd5e17640e475b2868c8add2a544076e7629d9b972872985e8ce8f",
+    "deployment/requirements-private-linux-amd64.lock": "639af80d472e72aa90c4b0f0a4e68e385a14560436c49160c58a4f27bcfaa0a1",
+    "deployment/sql/hosted-operational-contract-v1.sql": "f06fc9002cb7b86a05ec55787e188de70a3d08f6fb340696c9f3e60a5f31a7b3",
+    "deployment/sql/hosted-witness-contract-v1.sql": "6f6aa7a5547881ee5cf9a54a38b69a447ef1c530e29a4393301d01304c19768e",
+    "experiments/hosted_ports/application_probe.py": "22e7020ac1f9277c4a176a266fd25582fc3487259862179e2eca7c828cff0300",
+    "experiments/hosted_ports/metrics.py": "0fa32339e3de8462bfc205778a96fde61887df91464a6bf5e15a224c21b09a94",
+    "experiments/hosted_ports/native_cluster.py": "d35cbeb9155cb166cf96b4df66323341138287ed477d1ee729284f2e02dd470a",
+    "experiments/hosted_ports/run_local.py": "4fd23989df046f9d67f52e9751ceed2d7bfd873672b631e83354c5631fcb04c7",
+    "experiments/hosted_ports/start_role.py": "e5b2925bae70be339bd1e453aa77f99584713d53d118ed0297f3d876f899e201",
+    "experiments/hosted_ports/test_connections.py": "0f2410a4be22e0c70e387b2f79021ebd6fb0d7b006b370abbf7a0f88987290d6",
+    "experiments/ordinary_network/client.py": "9b9db4e1e6f24b83f06b4fdcbbad471eda36beeed0a26bc5042b30b79e576a0e",
+    "experiments/ordinary_network/compile_fixture.mjs": "0897be32f05bfb062cb5fec9266122e9ffa8f166e8a87dde85a280022881015a",
+    "experiments/ordinary_network/dns.py": "c7235c227598a51983125f4b8b1c0f3d5be34c251f76a4e6f6727961fb026674",
+    "experiments/ordinary_network/fixture.py": "7898b8b1af49f6e045e92cdd651a9469c351c29eb6622bd3be5386b7cd020c79",
+    "experiments/ordinary_network/identity.py": "9d4f72b4eab5140ca3e94636ad81416b81d546b932819780183af93ec61a3eef",
+    "experiments/ordinary_network/ingress.py": "f69e259b9c248ffbdaad4a3d069bc919120cece1835ced443c384f07602d52ab",
+    "experiments/ordinary_network/metrics.py": "dd941e604544aeb29275187384d8462edbce7eb4fa3771a328594bd1fcd7161a",
+    "experiments/ordinary_network/preload.ts": "17727fa06dd69c23bf3cf6db5770fe2d6f8b1dc9986b5b7c2018b81ecfb41f9e",
+    "experiments/ordinary_network/profile.py": "9681d820290904c738fc66a94c8255b150844a8384985588f42807c0b24835aa",
+    "experiments/ordinary_network/public_server.py": "c937a19be37e3d988c385181dbd058b387a2f5fa1e8818244c29f9ce5927ccae",
+    "experiments/ordinary_network/relay.py": "23397a1910e69cc759d512f8d12ac9a31ad7019a0fa62e9ed3c608ba716e8f6e",
+    "experiments/ordinary_network/resources.py": "60eaa33fba59b2a37e1d139e086aa954615f15d755c1898d26ba315d053a6087",
+    "experiments/ordinary_network/run_local.py": "8de03deef6e2629938802abed863f47449a7d63574b977fb23ed6fc7028415f2",
+    "experiments/ordinary_network/server.py": "2228804d041a62f057caf8d443ba26b67b4040de51ce8ba836eb90852bfbadee",
+    "experiments/ordinary_network/test_network.py": "268f220204a96104819b03a03a7f0f09a9117a1e41be65a929808214a0f5240a",
+    "lib/server-https.test.ts": "e792208f67c8b3a476f85ab498d88f877b5975f81624ca56ff7518bca0834056",
+    "lib/server-https.ts": "0ba5e790744810a49b729e70b8e93b18e27acdd06ec3ea10af1155f458e70e49",
+    "private_runtime/auth_port.py": "13ebd46d4c7b434d9f444b16a5a9d49b818c1ad510fb3d9b94a0837ffbfe462e",
+    "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+    "private_runtime/dispatch_owner.py": "9406a73d723b8f8723782db8fc6e3cf1556b14753a85702e0d08df0413ca0995",
+    "private_runtime/entry.py": "55b7a24d00516e77d0e0cb0cbc99e6d7768183d4f189b55f7d427d9e60786fba",
+    "private_runtime/google_identity.py": "aa57e13693b4fcaf10b36107a9802045ea0757631024be7ee05735c5bbc3bbb9",
+    "private_runtime/https.py": "ee5a6bbd35607d50b0fee16c1e78dde60647e5642f4ee402133d3e2094ab8a50",
+    "private_runtime/image_identity.py": "23c122509d258ec6661b5018ad699d4e285973334d4e0962d6df372d9bd5e02d",
+    "private_runtime/native_ports.py": "bce527bb831b54c147206d7c51ad3889eea71cfe51b8fd13459effb69fda7b24",
+    "private_runtime/native_runtime.py": "0c3af969a6d09cd5d7db4e63565176f8e454c6cbd81057ebe143978dc39ff8e3",
+    "private_runtime/owned_dispatch.py": "1e500570fc8044a612323a0133801f9a0afddd22d6f8d025c023888a707094b4",
+    "private_runtime/private_service.py": "d88ef95605da9f931faaab2edb55ed33531a0b323918a46127611a8c11551d59",
+    "private_runtime/redis_port.py": "196d8e17fcc0978d230b004aa638e5988921d535fd1672894bc01f8f7ccf386e",
+    "private_runtime/registry.py": "1773ced0bcdfbf1014589c2b0d512fd17368946b25af0b57f617463aa5fef27d",
+    "private_runtime/service_client.py": "92708e866d99b2e9d2afef1ff687567659192162418baae49dae956da451c464",
+    "private_runtime/simulation.py": "62a8dadf9a01f44e3096120980527818248b1d1f2feee22395bed971803bb1f1",
+    "private_runtime/test_dispatch_owner.py": "932b8eae84d6dc9319b0a72be295ac2611749fae4f16d6bd4e702a103b8ca3af",
+    "private_runtime/test_dispatch_processes.py": "c5f060fb43776b18ad62163d913fdb6adf8b235880595f2f341104cc820bb802",
+    "private_runtime/test_https.py": "aee359adaa746d50f6164726e99bb6475461ed77ee36a07d5a8df3dbdb590916",
+    "private_runtime/test_identity.py": "fbd56653d82ebae61e2e85579895f6ab4e8ba37162b7f69ffbe75c94760a8cea",
+    "private_runtime/test_projection.py": "462fdad0eaa21cb7e204fbacca2daa7edb7d0f04455113d7ada73fe5b3c6b3fb",
+    "private_runtime/test_simulation.py": "268a38954fbbed78bdde12f9b211f20e89576fd49d21c909cfd167176d675cfe"
+  },
+  "developmentAttempts": [
+    {
+      "log": "continuation-ports-cluster1.log",
+      "disposition": "Resource tracker mistook printed cohort digest for container ID",
+      "reportedUnitRunCounts": [
+        8
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster2.log",
+      "disposition": "Fixture referenced nonexistent hosted_identity/protocol.sql; corrected to nonce.sql",
+      "reportedUnitRunCounts": [
+        8
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster3.log",
+      "disposition": "Docker refused bridge attachment while fixture namespace still network-none",
+      "reportedUnitRunCounts": [
+        10
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster4.log",
+      "disposition": "Redis public certificate was owner-only; subsequent run captured exact permission failure",
+      "reportedUnitRunCounts": [
+        10
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster5.log",
+      "disposition": "Captured TLS public-certificate permission refusal; fixed public certificate mode only",
+      "reportedUnitRunCounts": [
+        10
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster6.log",
+      "disposition": "Host fixture imported JWT-dependent runtime registry without host JWT dependency; replaced with static reviewed role data extraction",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster7.log",
+      "disposition": "External minimal counter launcher imported excluded backend_app",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster8.log",
+      "disposition": "Fixture incorrectly expected recovery login to have operator-role membership; exact actual permissions retained",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster9.log",
+      "disposition": "Derived AAD bytes expanded as dictionary; deterministic regression and correction added",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster10.log",
+      "disposition": "Captured sanitized AAD TypeError frames before correction",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster11.log",
+      "disposition": "Synthetic search responder did not support native source-grounded search shape",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster12.log",
+      "disposition": "Further narrowed synthetic query/coordinate fixture mismatch; no authority relaxation",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster13.log",
+      "disposition": "Native cafes query not matched by synthetic coffee label; exact fixture term added",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster14.log",
+      "disposition": "HTTP generation succeeded; assertion wrongly excluded provisionalPlans",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-cluster15.log",
+      "disposition": "API and actual browser passed; post-browser reserved-send expected-count assertion failed without persisted tuple; attribution unresolved",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    },
+    {
+      "log": "continuation-ports-crash16.log",
+      "disposition": "Stable instrumented repeat passed API and factory termination; before/after6845/1/0 retained; does not erase earlier unpinned attempt",
+      "reportedUnitRunCounts": [
+        11,
+        4
+      ]
+    }
+  ],
+  "additionalDevelopmentFailures": [
+    "Initial wrong test hook ran old20 identity tests rather than new ports; disclosed separately",
+    "Early Redis CAS ACL lacked zscore; required command added without broader privileges",
+    "Early test helper chown/chmod required capabilities and was replaced with correct file ownership/public certificate mode; runtime capabilities not expanded",
+    "First host HTTPS test/tsx attempt refused sandbox socket access; approved local-socket reruns passed",
+    "Initial host identity import lacked JWT; verified in existing disposable dependency environment rather than modifying dependencies",
+    "Early fresh projection build invocation lacked PYTHONPATH/required backend venv; corrected command documented",
+    "Python urllib official base lookup failed certificate verification; system-trust curl succeeded without disabling TLS"
+  ],
+  "resources": {
+    "runningContainers": 0,
+    "remainingVolumeCount": 117,
+    "original117UnattributedVolumesRetained": true,
+    "originalUnattributedNetworkRetained": true,
+    "newTaskNetworksRemaining": 0,
+    "newTaskVolumesRemaining": 0,
+    "vmCPU": 2,
+    "vmMemoryBytes": 4095635456,
+    "noBroadPrune": true,
+    "dedicatedVMStopped": true
+  },
+  "remainingAcceptanceBlockers": [
+    "Earlier post-browser reserved-send assertion was unpinned while fixture files were edited; exact failed values unavailable. Require immutable harness replay of the same history.",
+    "A real closed hosted frontend installer and root-owned frontend application files remain absent; external local test preload is not production startup."
+  ],
+  "nextBoundedAction": "Freeze the external harness inputs, repeat and attribute the exact post-browser reserved-send history, then review/implement the closed frontend bootstrap. No hosted provisioning or Task53.",
+  "handbook": {
+    "chaptersReviewed": [
+      3,
+      4,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "chaptersUpdatedInCombinedWorkingTree": [
+      3,
+      4,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "additionalContinuationUpdates": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "all20OriginalChapterPrefixesPreserved": true,
+    "referencesUpdated": [
+      "GLOSSARY.md",
+      "DEBUGGING_PLAYBOOK.md",
+      "DEVELOPMENT_COMMANDS.md"
+    ],
+    "unchangedChaptersPreserved": true
+  },
+  "deliveryChecks": {
+    "configuredAppSecrets": "2 values;0 current/0 historical matches",
+    "evaluationSecrets": "3 values;0 current/0 historical matches",
+    "journalEvidenceHalt": "Ten rows/all324 files/halt unchanged",
+    "commit": "not created",
+    "push": false
+  },
+  "closedFrontendContinuation": {
+    "verification": "task52-closed-frontend-verification.json",
+    "report": "task52-closed-frontend-verification.md",
+    "security": "task52-closed-frontend-security.json",
+    "priorFieldsPreserved": true,
+    "notHostedActivation": true
+  }
+}

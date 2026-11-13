@@ -75,3 +75,7 @@ Calendar dates use destination context; elapsed arithmetic uses aware instants/U
 Provider exception → provider_code/provider_status → main.failure with correlation ID and sanitized message → Next proxy classification → client failure/adapters → kept request/cards plus recovery. Some no-result/clarification outcomes are successful HTTP domain responses, not exceptions. No fallback silently drops required stops or substitutes fictional evidence for failed real service work.
 
 [API contracts](API_REFERENCE.md) · [Debugging](DEBUGGING_PLAYBOOK.md) · [Security lesson](14-security-rate-limits-accounting-and-reliability.md)
+
+## Task52 inactive ordinary network path
+
+Browser → separate fictional IAP test edge → actual standalone Next → verified HTTPS FastAPI worker → verified HTTPS native factory/issuer → counter/dispatcher/recovery. The existing source/session/evidence/admission/grant/payload/epoch checks remain mandatory; no card or browser handle replaces them. A test-only opaque TLS conduit preserves the frozen core loopback boundary; it is not a proposed hosted service. Current factory dispatch admission still references a process-local callback, so full hosted replica/rollout support is blocked. [Exact roles, verified scopes and limitations](../task52-production-service-packaging.md).

@@ -795,3 +795,20 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **Discard-first recovery:** lose local authority rather than automatically repeat uncertain billable work.
 - **Dependency snapshot:** a non-billable availability observation that never grants financial or planning permission.
 - **Late-response generation guard:** a counter that prevents an old asynchronous reply from reviving a discarded page.
+
+
+## Task52 network component terms
+
+- **Closed SDK artifact:** a built server module exposing only reviewed constructors; fixture injection helpers are not exported.
+- **Opaque TLS conduit:** test transport passing encrypted bytes without reading credentials or authorizing requests; not a hosted service design.
+- **Inclusive span:** elapsed time containing work measured by other spans. Adding all spans double-counts time.
+- **Dispatch callback ownership:** the particular factory process currently holding a live admission check. A durable session alone does not transfer this callback to another replica.
+
+- **Session-affine SQL connection**: repeated operations reach the same database backend process, required for witness session advisory locks. Transaction pooling cannot substitute.
+- **Factory owner boot**: an unpredictable identifier for one running factory; replacement processes cannot inherit its live admission callbacks.
+- **Role source projection**: newly hashed, reviewed derived runtime files for one workload, separate from frozen historical evaluation identities.
+
+
+**Closed frontend bootstrap:** A fixed server-only startup program that verifies its packaged source and protected configuration before installing private application routes. It is not a browser toggle or financial approval.
+
+**Loaded assertion identity:** A hash of the Python code object actually executing, recorded alongside source hashes to avoid confusing edited traceback text with executed code.

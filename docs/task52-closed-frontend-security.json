@@ -1,0 +1,2733 @@
+{
+  "identity": "52-closed-frontend-final-scan-review-v1",
+  "accepted": false,
+  "scans": {
+    "counter": {
+      "image": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "recovery": {
+      "image": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "backend": {
+      "image": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "factory": {
+      "image": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "dispatcher": {
+      "image": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 82,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 34
+      }
+    },
+    "frontend": {
+      "image": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 49,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18
+      }
+    },
+    "frontend-fixture": {
+      "image": "sha256:b1d44db039f1b38ba74ca07fe509676f3ab543614dd0608c6c14e305f675a6df",
+      "status": 0,
+      "oom": false,
+      "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+      "db": {
+        "status": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-13T00:21:35Z_1794584434.tar.zst?checksum=sha256%3A45d983a9834f587403cb814a0f8f6078c905a7c85a84c3c52efb994f125bcf84",
+          "built": "2026-11-13T15:40:34Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "providers": {
+          "alma": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:7c7f732182a20222"
+          },
+          "alpine": {
+            "captured": "2026-11-13T00:21:47Z",
+            "input": "xxh64:58e23ea952476873"
+          },
+          "amazon": {
+            "captured": "2026-11-13T08:09:30Z",
+            "input": "xxh64:175689076f391ba2"
+          },
+          "arch": {
+            "captured": "2026-11-13T00:21:41Z",
+            "input": "xxh64:6c29863d89e40f65"
+          },
+          "bitnami": {
+            "captured": "2026-11-13T00:21:38Z",
+            "input": "xxh64:1b1b44659e15469f"
+          },
+          "chainguard": {
+            "captured": "2026-11-13T00:21:59Z",
+            "input": "xxh64:b07c6675f4b68bab"
+          },
+          "chainguard-libraries": {
+            "captured": "2026-11-13T00:21:35Z",
+            "input": "xxh64:b0393b01520dedbb"
+          },
+          "debian": {
+            "captured": "2026-11-13T00:22:00Z",
+            "input": "xxh64:ef8ed24d89bc1fd4"
+          },
+          "echo": {
+            "captured": "2026-11-13T00:21:53Z",
+            "input": "xxh64:c8e777d8f016c742"
+          },
+          "eol": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:ffde365b89c82e35"
+          },
+          "epss": {
+            "captured": "2026-11-13T00:23:10Z",
+            "input": "xxh64:94fe05b01b9b6602"
+          },
+          "fedora": {
+            "captured": "2026-11-13T08:09:42Z",
+            "input": "xxh64:4c229e7b5b01dcf1"
+          },
+          "github": {
+            "captured": "2026-11-13T08:09:46Z",
+            "input": "xxh64:917da470427eb298"
+          },
+          "govulndb": {
+            "captured": "2026-11-13T00:21:42Z",
+            "input": "xxh64:62eb98444ae8ee02"
+          },
+          "hummingbird": {
+            "captured": "2026-11-13T00:44:46Z",
+            "input": "xxh64:745d16e779178a1d"
+          },
+          "kev": {
+            "captured": "2026-11-13T00:22:01Z",
+            "input": "xxh64:783f3e247b968528"
+          },
+          "mariner": {
+            "captured": "2026-11-13T00:21:51Z",
+            "input": "xxh64:c9285c93dc64ed8d"
+          },
+          "minimos": {
+            "captured": "2026-11-13T00:21:52Z",
+            "input": "xxh64:d92e5bf414909a1e"
+          },
+          "nvd": {
+            "captured": "2026-11-13T08:10:26Z",
+            "input": "xxh64:c50d065eba61f3d8"
+          },
+          "oracle": {
+            "captured": "2026-11-13T00:21:45Z",
+            "input": "xxh64:1d0a4566a7c5b420"
+          },
+          "photon": {
+            "captured": "2026-11-13T00:22:05Z",
+            "input": "xxh64:c4cc22d42ae165c7"
+          },
+          "rhel": {
+            "captured": "2026-11-13T00:40:40Z",
+            "input": "xxh64:f591bcf7eaa5a728"
+          },
+          "secureos": {
+            "captured": "2026-11-13T00:21:50Z",
+            "input": "xxh64:779faf39a5991ba5"
+          },
+          "sles": {
+            "captured": "2026-11-13T00:41:27Z",
+            "input": "xxh64:e291b42fdcd739a1"
+          },
+          "ubuntu": {
+            "captured": "2026-11-13T15:06:50Z",
+            "input": "xxh64:c214a441a3204864"
+          },
+          "wolfi": {
+            "captured": "2026-11-13T00:21:49Z",
+            "input": "xxh64:c85e4412eca6887a"
+          }
+        }
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 49,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18
+      }
+    }
+  },
+  "rawScanSHA256": {
+    "counter": "95d011b4ad23aa665793cd0b49c90022d9df90c5aa92b8fe11a4a3cfc10da0d4",
+    "recovery": "add227f3c7a445a401047e8452306f4fb3b94913748c5f608dab60d1b025c10c",
+    "backend": "cd1a5a040b85eb2151f8419a713993517581a55a4462c604c64e8206f020493e",
+    "factory": "fd6613e1751a67d3b40cad118dcc23aaf3dc9ebc4577aa320173af9785426f49",
+    "dispatcher": "d43a65bd04584f52777f603ab3ce1bf96916aad042d338b2b80acd8a95d037aa",
+    "frontend": "f4071e6043827f7dc43ba8cd42f76c89615b946220f769d1a8518f5ca40e2961",
+    "frontend-fixture": "4f5c71b96751b6b903fdaaa9c6f4368f8c5dd4b58289f48bef82e4dcd66b2808"
+  },
+  "criticalHighFindings": [
+    {
+      "package": "libtasn1-6",
+      "installedVersion": "4.19.0-2+deb12u1",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "gzip",
+      "installedVersion": "1.12-1",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libncursesw6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libtinfo6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "ncurses-base",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "ncurses-bin",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2025-7458",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-11824",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend",
+        "frontend-fixture"
+      ],
+      "runtimePresent": true,
+      "disposition": "Unresolved; not suppressed or accepted"
+    }
+  ],
+  "newPackageVersionAdvisories": [],
+  "removedPackageVersionAdvisories": [],
+  "priorExposureReviews": "task52-private-role-security-review.json#/advisoryReviews",
+  "suppressionCount": 0,
+  "updatesApplied": false,
+  "npm": {
+    "info": 0,
+    "low": 0,
+    "moderate": 7,
+    "high": 0,
+    "critical": 0,
+    "total": 7
+  }
+}

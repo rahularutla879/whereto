@@ -1,3 +1,23 @@
+# Task 52 — closed frontend and immutable recovery verification
+
+Current continuation: [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md). The complete earlier working tree and failed observations are preserved. Final bounded local verification passed: 631 selected test passes/10 opt-in skips, final desktop/mobile/browser + immutable kill/restart checks, image refusal checks and fresh scans. The earlier assertion remains unattributed and vulnerabilities remain staging blockers. Earlier “acceptance open” sections below describe prior cohorts, not permission to deploy. Production remains inactive. No cloud/provider/grant or Task53 action follows automatically.
+
+## Task 52 continuation result — acceptance remains open
+
+Current components/API/browser/recovery verification is recorded in [the continuation report](docs/task52-private-role-continuation.md).639 passes/10 opt-in skips are selected cohorts, not a full-backend claim. Keep all work uncommitted: attribute the earlier post-browser kill assertion using pinned fixture inputs and finish the closed hosted frontend bootstrap. Actual cloud enrollment, independent recovery operation, real data retention/model/counter qualification and approved financial policy remain later gates. No Task53.
+
+## Task 52 continuation — inactive private role packaging (in progress)
+
+TLS least-privilege connection/lifecycle ports, callback owner routing and role-specific images are implemented as a candidate. [Report](docs/task52-private-role-continuation.md) and [verification](docs/task52-private-role-continuation-verification.json) separate passing component checks from open combined application/recovery/browser and security gates. No hosted deployment, real provider grant or public launch acceptance. Original49-file work preserved; commit/push remains conditional. Task53 stays blocked.
+
+# Task 52 — authenticated network components; full hosted startup blocked
+
+Selected verification:655 passed,16 opt-in skips; TypeScript/lint/native build and actual normal container smoke passed. Actual ordinary browser/cards/discard/refresh were checked, including measured desktop/mobile layouts. No full-backend or hosted-startup pass. See linked evidence for exact scopes, development failures, security findings and remaining gates.
+
+Baseline `2c5bfcc`. Actual standalone Next/FastAPI ordinary UI now exercises explicit verified HTTPS clients through the existing factory/counter/dispatcher/recovery protocol, with no Docker/controller credential in the frontend. [Report](docs/task52-production-service-packaging.md) · [Exact verification](docs/task52-production-service-packaging-verification.json). Normal startup, frozen source identities, financial/recovery checks and historical evidence remain unchanged.
+
+The complete privately deployable composition is **not yet satisfied**: synthetic-only SQL/Redis constructors, fictional counter/rates/provider, real-content approval and process-local factory dispatch callbacks prevent safe hosted startup. Inert startup contract stays `launchable:false`; no development guard was bypassed or privileged hosted image claimed. Next concrete bounded work: reviewed hosted native connection/lifecycle ports and dispatch-callback ownership/draining, then role-specific image projections. No provisioning, public activation or Task53.
+
 # Task 52 — ordinary private browser integration
 
 The bounded inactive UI/recovery/readiness checkpoint is documented in the [ordinary private UI/recovery report](docs/task52-ordinary-private-ui.md). Task52 remains in progress: the ordinary synthetic browser flow does not complete hosted application readiness, advanced/persistence mappings, real model/grant enrollment, recovery operation or launch acceptance. No Task53 or provisioning begins automatically.

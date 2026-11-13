@@ -629,3 +629,8 @@ Native restart reconstruction: `experiments/shared_state/native_sessions.py` (in
 ## Inactive ordinary private browser checkpoint
 
 `components/private-ordinary-experience.tsx` is the inactive private UI; `lib/private-ordinary-client.ts` is its memory-only controller. `experiments/ordinary_ui/` contains the separately versioned local composition, read-only probes and tests. `app/api/private-ordinary/revoke/route.ts` returns404 without a selected profile.
+
+
+## Task52 authenticated network additions
+
+`private_runtime/https.py`, `service_client.py`, `google_identity.py`: reusable inactive HTTPS/identity components. `lib/server-https.ts`: server-only frontend channel. `deployment/Dockerfile.frontend-network`, `prepare_network_context.py`, `build-network-port.mjs`, `private-network-v1.json`: explicit frontend artifact and inert startup contract. `experiments/ordinary_network/`: source-pinned disposable local orchestration/tests, not production startup. [Full evidence](../task52-production-service-packaging.md).

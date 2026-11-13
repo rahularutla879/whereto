@@ -169,3 +169,21 @@ The ordinary facade compares proposed planning fields against server-retained in
 ## Inactive ordinary private browser checkpoint
 
 Readiness is a conservative snapshot, not a spending grant. Auth nonces may be consumed but financial/session state is unchanged. Revocation invokes existing protected native logic. Lost responses clear local authority without retries/refunds. The loopback cookie/IAP stand-in is synthetic only, excluded from deployment images and unavailable under hosted indicators. See the [UI/recovery report](../task52-ordinary-private-ui.md).
+
+
+### Workload credential separation in the network component
+
+The frontend receives only its own proof identity/public trust and allowed backend audience. Backend workers have their own proof and nonce-only witness access; they do not receive issuer, counter, delivery, recovery or operational evidence credentials. Factory/issuer, counter, dispatcher and recovery remain distinct privileged roles. `private_runtime/google_identity.py` is a dormant metadata-token producer for the assigned service identity: fixed metadata path, bounded response, exact audience and independently verified principal/expiry; no fixture-key or stale-token fallback.
+
+Tests use synthetic signed identities and a separate fake IdP. Positive fake metadata acquisition uses a trusted verifier stub; downstream fixture signature verification is separately tested. No real metadata/Google token request occurred. Actual hosted trust enrollment, independently controlled recovery, financial approval and role-specific images remain missing. Never describe the test configuration as a production grant. [Credential matrix](../../deployment/private-network-v1.json).
+
+### Task 52 private role continuation (inactive candidate)
+
+The new candidate connection pools verify restricted role and immutable schema/policy enrollment; runtime cannot enroll itself. Pool reuse is a performance mechanism, not an authorization cache. Exact-owner callback refusal preserves existing SQL/witness financial exposure and uncertainty rules. Critical/high scanner matches remain unresolved until assessed or compatibly remediated; `docs/task52-private-role-security-review.json` retains advisories and fix states without blanket suppression. No real grant is introduced.
+
+See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+
+### Task 52 closed frontend and immutable recovery checks
+
+A JavaScript check of NODE_OPTIONS runs too late to prevent a Node preload. `deployment/frontend-private-launch.sh` rejects unsafe preload, TLS-disable and proxy environment options before starting Node. The root-owned read-only image then verifies source/configuration hashes and closed identity enrollment. This is configuration integrity, not an operator financial grant. A factory killed after reservation/INTENT leaves its charge intact and cannot reconstruct lost callback admission after restart. See [verification report](../task52-closed-frontend-verification.md).
