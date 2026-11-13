@@ -168,3 +168,8 @@ From the repository root: `node_modules/.bin/tsx --test lib/server-identity.test
 ## Inactive ordinary hosted workflow
 
 From the repository root, with the approved local Colima profile and pinned cached wheels: `PYTHONPATH=. backend/.venv/bin/python -m experiments.ordinary_hosted.run_local`. It creates fresh synthetic stores and temporary test identities, never modifies Supabase or the paid journal, and does not enable hosted startup. Focused Node tests: `node_modules/.bin/tsx --test lib/private-outing.test.ts`.
+
+
+## Inactive ordinary private browser checkpoint
+
+From the repository root, with the approved local VM/cached wheels and a current frontend build: `PYTHONPATH=. backend/.venv/bin/python -m experiments.ordinary_ui.run_local`. The `--browser` fixture option holds a loopback-only synthetic UI for a bounded manual check; it is not a hosted enablement switch. Focused tests: `node_modules/.bin/tsx --test lib/private-ordinary-client.test.ts`.

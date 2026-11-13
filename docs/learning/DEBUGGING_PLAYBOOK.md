@@ -126,3 +126,10 @@ For selected private status mode, business503 and diagnostics404 are expected. A
 ## Inactive ordinary hosted workflow
 
 A private action refusal may mean its source revision/turn is consumed. Do not resend automatically, renew expiry, clear counters or fall back to local AI. Check authenticated owner/build/epoch, typed field equality, current SQL/Redis evidence and sanitized factory reason/stack. Start a new explicitly validated action when required. Planning-mode/UI integration remains unavailable; API/client-driver success is not browser verification.
+
+
+## Inactive ordinary private browser checkpoint
+
+A private error never implies permission to retry. Check current owner/build/revision/epoch and dependency readiness with sanitized reasons. Refresh discards rather than restores an outing. Use explicit discard/new action for meaning changes; never restore cards/raw graphs as source authority or reset counters. Distinguish public UI proof identity from private service proof identity.
+
+Build the frontend **before** starting the custom local Next fixture. A second `npm run build` rewrites `.next` manifests underneath a running fixture and can cause client-manifest errors. Stop the fixture before rebuilding; do not resend an uncertain outing action to work around a broken page. A request absent from the fixed fake responder's source table is a synthetic provider error, not a model-quality result; its reservation may conservatively stop the whole fictional grant.

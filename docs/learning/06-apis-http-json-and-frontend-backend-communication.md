@@ -104,3 +104,8 @@ The inactive [Node forwarding contract](../../experiments/hosted_identity/proxy.
 ## Optional private outing ownership
 
 Only the selected private profile returns `privateOuting` with `version`, opaque `handle`, protected `revision` and fixed `expiresMs`. `lib/private-outing.ts` validates this optional extension; `generateOuting` carries it in tab-local continuation and generation requests. Without it, normal request bodies remain unchanged. Private answers do not submit browser pending interpretations as evidence. Exact original bytes are signed before forwarding; duplicate-aware public JSON parsing permits whitespace without relaxing canonical financial/evidence records. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+Only the selected UI profile adds authenticated GET `/api/planning-mode` and POST `/api/private-ordinary/revoke` alongside ordinary routes. Readiness returns `enabled:false` with a separately scoped synthetic-dependency flag, never financial or production permission. Normal revoke is404. Public/service proofs retain separate build identities; exact method/body and IAP ownership remain mandatory. See the [UI/recovery report](../task52-ordinary-private-ui.md).

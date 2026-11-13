@@ -165,3 +165,8 @@ The new public status verifier consumes request/user nonces in the existing inde
 ## Owned ordinary locator, unchanged financial root
 
 `experiments/ordinary_hosted/factory.py` reuses existing protected service-route rows and encrypted locators. Its owner namespace includes verified IAP identity and the public adapter build. Current SQL session/revision/fence, native evidence and independent epoch remain mandatory. Answers advance revision without renewing expiry; all actions retain the original outing/root/inference identity. Anonymous saved capabilities and RLS remain unchanged, with private saved routes still unavailable. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+The new disposable SQL/witness readiness functions run in READ ONLY transactions, are owned by the existing NOLOGIN owner, revoke PUBLIC execute, and grant only issuer/factory-witness access. They compare protected grant/configuration and complete committed history without reserving or updating sessions. Ordinary workers have no direct execute or table-write privileges. No real migration occurs. See the [UI/recovery report](../task52-ordinary-private-ui.md).

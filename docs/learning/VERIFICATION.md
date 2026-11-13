@@ -101,3 +101,8 @@ Reviewed chapters3/6/7/12–15/18/20; appended actual inactive mechanisms to3/6/
 ## Inactive ordinary hosted workflow
 
 Reviewed chapters 3/6/7/12–15/18/20; updated 3/6/7/12–15/18 and supporting references. All 20 chapter originals, examples and exercises are preserved. The [machine record](../task52-ordinary-hosted-verification.json) distinguishes actual ordinary HTTP/client workflows, deterministic clock-pair checks, frozen regressions, development failures and untested hosted/browser behavior.
+
+
+## Inactive ordinary private browser checkpoint
+
+Reviewed chapters3/4/6/7/12–15/18/20 and updated3/4/6/7/12–15/18 plus supporting references. All20 original chapter contents are preserved. The [verification record](../task52-ordinary-private-ui-verification.json) distinguishes browser observations, direct HTTP tests, original frozen regressions, development failures and untested hosted behavior.

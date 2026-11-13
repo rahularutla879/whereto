@@ -624,3 +624,8 @@ Native restart reconstruction: `experiments/shared_state/native_sessions.py` (in
 
 - `experiments/ordinary_hosted/`: inactive public/native ordinary mapping, authenticated local facade, stable timestamp adapter and synthetic process tests.
 - `lib/private-outing.ts`: optional browser ownership extension; `lib/planning-client.ts` propagates it only when returned by the private profile.
+
+
+## Inactive ordinary private browser checkpoint
+
+`components/private-ordinary-experience.tsx` is the inactive private UI; `lib/private-ordinary-client.ts` is its memory-only controller. `experiments/ordinary_ui/` contains the separately versioned local composition, read-only probes and tests. `app/api/private-ordinary/revoke/route.ts` returns404 without a selected profile.

@@ -164,3 +164,8 @@ The production port fetches only the assigned metadata identity for its configur
 ## Execution controls cannot replace source or spending authority
 
 The ordinary facade compares proposed planning fields against server-retained interpretation. Only the reviewed typed origin/reference/search controls can change at generation; date/activity/transport/budget/timing meaning changes refuse. Existing admission is reissued from retained raw evidence for accepted controls, without inference or bypassing the registry. Every fake provider send still needs current session/evidence/admission, protected SQL prices/reservation, exact payload, one-use dispatch and current independent epoch. The local provider gates exist only inside the isolated synthetic factory; normal and hosted startup remain disabled. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+Readiness is a conservative snapshot, not a spending grant. Auth nonces may be consumed but financial/session state is unchanged. Revocation invokes existing protected native logic. Lost responses clear local authority without retries/refunds. The loopback cookie/IAP stand-in is synthetic only, excluded from deployment images and unavailable under hosted indicators. See the [UI/recovery report](../task52-ordinary-private-ui.md).

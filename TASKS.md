@@ -1,3 +1,7 @@
+# Task 52 — ordinary private browser integration
+
+The bounded inactive UI/recovery/readiness checkpoint is documented in the [ordinary private UI/recovery report](docs/task52-ordinary-private-ui.md). Task52 remains in progress: the ordinary synthetic browser flow does not complete hosted application readiness, advanced/persistence mappings, real model/grant enrollment, recovery operation or launch acceptance. No Task53 or provisioning begins automatically.
+
 # Task 52 — ordinary private application request integration
 
 Implemented the inactive ordinary interpretation→pending→generation ownership bridge using existing native/SQL/Redis/financial/service foundations. [Current verified scope and limitations](docs/task52-ordinary-hosted-integration.md). Only reviewed ordinary routes are eligible; advanced/options/origin/Details/persistence/manual paths remain blocked. Private hosted activation, model qualification, real grants/enrollment and browser quality gates remain incomplete; Task 52 stays in progress.

@@ -57,3 +57,6 @@ Start with synthetic providers and disposable saved data, then a separately appr
 
 
 Current bounded ordinary facade: [local interpretation/pending/generation](../task52-ordinary-hosted-integration.md) uses actual application contracts with opaque owner/revision handles and protected synthetic dispatch. This does not complete hosted P9: planning-mode/UI, remaining mappings, enrollment, production bootstrap, real model/pricing/grants and private staging acceptance remain blocked. No provisioning, spending or public launch is authorized by this result.
+
+
+The [inactive ordinary private UI/recovery checkpoint](../task52-ordinary-private-ui.md) adds memory-only browser ownership and non-billable probes; this is not complete P9, real hosted startup or public launch. Remaining native/public mappings, real enrollment/migration/recovery, LLM quality/tokenization, financial approval and private acceptance remain blocked.

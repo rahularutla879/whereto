@@ -163,3 +163,8 @@ The [new local composition](../task52-hosted-startup-integration.md) runs actual
 ## An ordinary private request across workers
 
 Fresh interpretation reserves fictional inference cost before dispatch, validates the raw extraction, captures encrypted native evidence and returns an owned handle. A pending answer reconstructs the original source/reference clock and uses the existing deterministic validator without another model call. Generation matches the retained request, revalidates supported typed execution controls and invokes the existing ordinary planner under protected reservations. Optional/flexible/endpoint journeys requiring the advanced planner remain blocked; they are not flattened into required ordinary stops. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+Interpret once, answer only requested clarifications against the same source, confirm execution controls, then generate once. Date/location/mode/activity/budget meaning edits require discarding the source and an explicit new interpretation. Coordinates can change before generation under existing typed validation. Optional/flexible/return journeys remain unsupported rather than simplified. See the [UI/recovery report](../task52-ordinary-private-ui.md).

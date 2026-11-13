@@ -158,3 +158,8 @@ The server identity port caches verified workload tokens, not application author
 ## Tab-safe handles and explicit source changes
 
 There is no latest-session-per-user lookup. Each outing carries its own unpredictable locator. Changing source/preferences under a handle revokes that source and requires a new interpretation; a request with no prior handle is an independent outing, not an inferred edit to another tab. The full browser edit/recovery UX still needs a separate checkpoint. Lost responses and interrupted turns do not make planning retryable. The new stable session adapter preserves the authenticated original integer creation timestamp instead of resampling wall/monotonic clocks on each publication. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+Each tab has an independent controller/handle. No raw interpretation, graph, source, handle or itinerary enters browser storage. Refresh and persisted back navigation clear memory. A generation counter rejects late responses after discard. Absolute expiry is not renewed; cards never authorize another provider operation. See the [UI/recovery report](../task52-ordinary-private-ui.md).

@@ -7,7 +7,7 @@ export interface ServerIdentityPort {
 }
 export type Enrollment={backendAudience:string;iapAudience:string;serviceSubject:string;serviceEmail:string;testers:readonly string[];build:string;environment:string;epoch:string;signingKey:string};
 export type IdentitySources={metadata:(signal:AbortSignal)=>Promise<Response>;workload:JWTVerifyGetKey;iap:JWTVerifyGetKey;fixture:boolean};
-const PUBLIC=new Set(['/api/interpret','/api/plans/generate','/api/plans/advanced','/api/plans/options','/api/plans/save','/api/plans/reopen','/api/plans/refresh','/api/venues/details','/api/starting-areas','/api/starting-places','/api/planning-mode','/health']);
+const PUBLIC=new Set(['/api/private-ordinary/revoke','/api/interpret','/api/plans/generate','/api/plans/advanced','/api/plans/options','/api/plans/save','/api/plans/reopen','/api/plans/refresh','/api/venues/details','/api/starting-areas','/api/starting-places','/api/planning-mode','/health']);
 export const REQUEST_ISSUER='urn:whereto:http-request-proof:v1', USER_ISSUER='urn:whereto:http-iap-forward:v1';
 export const hash=(v:Uint8Array|string)=>createHash('sha256').update(v).digest('hex');
 export const requestBinding=(aud:string,method:string,path:string,body:Uint8Array)=>hash(JSON.stringify([aud,method,path,hash(body)]));

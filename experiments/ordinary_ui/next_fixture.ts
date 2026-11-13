@@ -1,0 +1,38 @@
+// Local test driver, excluded from production images. No environment activation.
+import {readFileSync,writeFileSync} from 'node:fs';import {createServer} from 'node:http';import {spawn,execFileSync} from 'node:child_process';
+import {randomBytes} from 'node:crypto';import next from 'next';import {createLocalJWKSet} from 'jose';
+import {composeIdentityPort,type Enrollment} from '../../lib/server-identity';
+import {createOrdinaryUIProfile,installPrivateProfile} from '../../lib/private-server-boundary';
+async function main(){
+if(process.env.K_SERVICE||process.env.VERCEL||process.env.RENDER)throw Error('Local fixture only');
+const data=JSON.parse(readFileSync(process.argv[2],'utf8'));const c=data.frontend;
+if(c.identityEnvironment!=='offline-hosted-contract'||!Object.values(c.googleKeys).every((v)=>typeof v==='object'&&v!==null&&'fixture' in v&&v.fixture===true))throw Error('Explicit fixture required');
+const enrollment:Enrollment={backendAudience:c.audiences.backend,iapAudience:c.iapAudience,serviceSubject:c.enrollment.frontend.sub,serviceEmail:c.enrollment.frontend.email,testers:c.testers,build:c.ordinaryBuild,environment:c.identityEnvironment,epoch:c.epoch,signingKey:c.signingKey};
+let metadataCalls=0,nextBackend=0;
+const identity=composeIdentityPort(enrollment,{fixture:true,workload:createLocalJWKSet(c.googleKeys.workload),iap:createLocalJWKSet(c.googleKeys.iap),metadata:async()=>{metadataCalls++;return new Response(c.oidcTokens[c.audiences.backend],{headers:{'Metadata-Flavor':'Google'}});}});
+const send:typeof fetch=async(url,init)=>{
+ if(!['/health','/api/interpret','/api/plans/generate','/api/planning-mode','/api/private-ordinary/revoke'].some(p=>String(url)===c.audiences.backend+p)||!['GET','POST'].includes(init?.method??'')||init?.redirect!=='manual')throw Error('Fixed ordinary UI transport');
+ const body=JSON.stringify({index:nextBackend++%2,path:new URL(String(url)).pathname,method:init.method,body:init.body?Buffer.from(init.body as Uint8Array).toString('base64url'):'',headers:Object.fromEntries(new Headers(init.headers))});
+ writeFileSync(data.capture,body,{mode:0o600});
+ const source=`import sys,json\nfrom pathlib import Path\nfrom experiments.service_isolation.auth import TLS\np=json.load(open('/tmp/hosted-control.json'));v=json.load(sys.stdin);c=p['configs']['worker-a' if v['index']==0 else 'worker-b'];f=Path('/tmp/startup-client-ca');f.write_text(c['caPem']);conn=TLS(8098+v['index'],'worker-a.task52.invalid' if v['index']==0 else 'worker-b.task52.invalid',str(f),3 if v['method']=='GET' else 120);import base64;conn.request(v['method'],v['path'],base64.urlsafe_b64decode(v['body']+'='*((-len(v['body']))%4)),headers=v['headers']);r=conn.getresponse();wire=r.read(1048577);assert len(wire)<=1048576;print(json.dumps({'status':r.status,'body':wire.decode()}));conn.close()`;
+ return new Promise((resolve,reject)=>{const child=spawn('docker',['--context','colima-whereto-task52','exec','-i',data.client,'python','-c',source],{stdio:['pipe','pipe','pipe']});let output='';const cancel=()=>child.kill('SIGKILL');init.signal?.addEventListener('abort',cancel,{once:true});child.stdout.on('data',b=>{output+=b;if(output.length>1500000)cancel();});child.on('error',reject);child.on('exit',code=>{init.signal?.removeEventListener('abort',cancel);if(code!==0||init.signal?.aborted)return reject(Error('Local bridge unavailable'));try{const r=JSON.parse(output);resolve(new Response(r.body,{status:r.status}));}catch{reject(Error('Local response'));}});child.stdin.end(body);});
+};
+installPrivateProfile(createOrdinaryUIProfile('https://frontend-task52-offline.run.app',c.audiences.backend,identity,send));
+const app=next({dev:false,dir:process.cwd()});await app.prepare();const handle=app.getRequestHandler();
+const browserCookie=randomBytes(32).toString('base64url');
+const server=createServer((req,res)=>{
+ const path=new URL(req.url??'/', 'http://127.0.0.1').pathname;
+ const harness=req.headers['x-task52-local-ingress']===data.ingress;
+ if(!harness){
+  if(path.startsWith('/api/')){
+   if(req.headers.cookie?.split('; ').includes('task52-ui='+browserCookie)!==true||['authorization','x-goog-iap-jwt-assertion','x-whereto-context','x-whereto-user'].some(k=>req.headers[k])){res.writeHead(403);res.end();return;}
+   if(req.method==='POST'){if(req.headers.origin!=='http://127.0.0.1:'+process.argv[3]){res.writeHead(403);res.end();return;}req.headers.origin='https://frontend-task52-offline.run.app';}
+   try{req.headers['x-goog-iap-jwt-assertion']=execFileSync('docker',['--context','colima-whereto-task52','exec',data.client,'python','-m','experiments.ordinary_ui.iap_fixture','alice'],{encoding:'utf8',timeout:5000}).trim();}catch{res.writeHead(503,{'Content-Type':'application/json','Cache-Control':'no-store'});res.end(JSON.stringify({code:'fixture_identity_unavailable'}));return;}
+  }else if(path==='/')res.setHeader('Set-Cookie','task52-ui='+browserCookie+'; HttpOnly; SameSite=Strict; Path=/');
+ }
+ void handle(req,res);
+});server.listen(Number(process.argv[3]),'127.0.0.1',()=>process.stdout.write('Local Next ordinary UI fixture ready\n'));
+for(const signal of ['SIGTERM','SIGINT'] as const)process.on(signal,()=>{server.close();void app.close().then(()=>{process.stdout.write('Local metadata acquisitions: '+metadataCalls+'\n');process.exit(0);});});
+
+}
+void main().catch(()=>{process.stderr.write("Local Next ordinary UI startup refused.\n");process.exitCode=78;});

@@ -71,3 +71,8 @@ Use rg -n "useEffect|runPlanning|async function submit" app/page.tsx; inspect th
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-04).
 
 [Previous chapter](03-overall-application-architecture.md) · [Contents](README.md) · [Next chapter](05-backend-python-fastapi-and-pydantic.md)
+
+
+## Inactive ordinary private browser checkpoint
+
+`PrivateOrdinaryExperience` reuses existing styles, artwork, date/summary/card components. `PrivateOrdinaryClient` uses ordinary React-owned memory, not browser storage. Separate interpretation, pending-answer and confirmation/generation buttons prevent automatic repeated work. Native fetch is invoked through a closure rather than as a controller method; a real-browser finding and regression test cover that binding. See the [UI/recovery report](../task52-ordinary-private-ui.md).

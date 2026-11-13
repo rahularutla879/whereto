@@ -122,3 +122,8 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 ## Inactive ordinary application facade
 
 The separately installed `createOrdinaryProfile` now connects actual Next interpretation/generation requests to a FastAPI facade and the existing independently authenticated native factory, counter, dispatcher and recovery processes. This is local synthetic functionality, not hosted activation. No second planner or session store is introduced; other private business routes stay blocked. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+The explicitly installed UI profile connects existing Next/FastAPI, native factories and protected authority. `Home` selects a private component from a scoped response; no environment/browser flag installs the server profile. Presentation components are reused and no planner is duplicated. See the [UI/recovery report](../task52-ordinary-private-ui.md).

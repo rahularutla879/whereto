@@ -1,3 +1,7 @@
+# Task 52 — discard-first private browser recovery
+
+Retain no outing or raw model evidence in browser storage. Use per-tab memory and the existing opaque handle. Refresh/navigation discards state; uncertain work is never automatically resumed. Lock meaning controls after interpretation and require an explicit authenticated native revoke before a new source action. Expose only confirmed coordinate controls before one generation. Readiness reports dependency availability separately from production and financial authorization, using restricted read-only probes and independent history/configuration agreement. See [ordinary private UI/recovery report](docs/task52-ordinary-private-ui.md).
+
 # Task 52 — versioned opaque ordinary outing ownership
 
 Adopt the owner-authorized optional private handle extension instead of trusting browser interpretations, pairing latest user sessions or embedding graphs. Reuse protected native route/turns with owner namespaced by verified IAP and adapter build; preserve absolute expiry, original root/outing and one-use planning. Revalidate accepted typed execution controls through the existing admission registry using retained raw evidence. Meaning edits revoke/refuse rather than repairing old source. The new adapter retains exact original timestamp integers; frozen parent implementations/results remain unchanged. [Contract and evidence](docs/task52-ordinary-hosted-integration.md).

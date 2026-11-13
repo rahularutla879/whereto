@@ -169,3 +169,8 @@ The frontend build also emits a small `/app/private-runtime/` component using th
 ## Local ordinary functionality is not hosted startup
 
 The private ordinary API flow is now locally functional with fake services. The normal Docker entries and production refusal remain unchanged, and experimental Python services/custom Next driver stay excluded from deployment images. Planning-mode readiness, browser UI, advanced/persistence mappings, real IAM/IAP/secret/SQL/Redis/recovery enrollment, qualified hosted inference, real tokenization/pricing and explicit finite grants remain gates. Do not deploy the local fixture, use test mode to bypass startup, or treat health as financial readiness. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+A locally working ordinary synthetic UI is not a hosted startup approval. Existing production refusal remains. Docker images exclude experimental services and temporary identity roots. Real IAM/IAP, managed stores/recovery, qualified model/tokenization/pricing, finite grants, security and private staging acceptance remain required. See the [UI/recovery report](../task52-ordinary-private-ui.md).

@@ -163,3 +163,8 @@ A restart test must wait for bounded non-billable socket readiness rather than a
 ## Ordinary HTTP acceptance and clock-pair regression
 
 `experiments.ordinary_hosted.run_local` exercises actual Next/FastAPI requests and the existing `generateOuting` client using disposable PostgreSQL/Redis and offline identities. That client driver is not a browser UI test or real IAM/provider verification. `test_reliability.py` reproduces a one-millisecond loss in the original native `Session.state` clock-pair conversion and checks the new exact-integer adapter. The earlier redacted SQL refusal remains unattributed; sanitized reason/category/SQLSTATE/stack locations help future diagnosis. Never log raw queries, credentials or source bodies, or repin frozen tests to hide failures. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).
+
+
+## Inactive ordinary private browser checkpoint
+
+Separate real desktop/mobile browser observations from HTTP, unit and container results. The new controller tests cover late responses, expiry, no retries, no browser raw evidence, normal404 and non-entitling readiness. Controlled missing evidence yields SQLSTATE P0001; lock contention yields55P03 under unchanged deadlines. Neither proves the cause of an older unattributed refusal. See the [UI/recovery report](../task52-ordinary-private-ui.md).

@@ -18,7 +18,7 @@ const activityIcons: Partial<Record<Activity, typeof Sparkles>> = { bowling: Cir
 };
 
 
-export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: number; detailsSession: VenueDetailsSession }) {
+export function PlanCard({ plan, index, detailsSession, synthetic=false }: { plan: Plan; index: number; detailsSession: VenueDetailsSession; synthetic?:boolean }) {
   const real = plan.dataMode === "real";
   const [expanded, setExpanded] = useState(false);
   const warnings = plan.advanced ? [] : planWarnings(plan);
@@ -26,7 +26,7 @@ export function PlanCard({ plan, index, detailsSession }: { plan: Plan; index: n
   const PosterIcon = activityIcons[plan.venues[0].activity] ?? Sparkles;
   return <article className={`plan-card ${plan.theme}`}>
     <div className="card-visual">
-      <span className="card-number">0{index + 1}</span><span className="demo-pill">{real ? "REAL VENUES" : plan.feasibility === "preview" ? "DEMO PLAN" : "SAMPLE PLAN"}</span>
+      <span className="card-number">0{index + 1}</span><span className="demo-pill">{synthetic ? "SYNTHETIC VENUES" : real ? "REAL VENUES" : plan.feasibility === "preview" ? "DEMO PLAN" : "SAMPLE PLAN"}</span>
       {real ? <div className="real-route-poster" aria-hidden="true">{plan.venues.map((venue, i) => {
         const Icon = activityIcons[venue.activity] ?? Sparkles;
         return <div key={venue.id}><Icon size={22} strokeWidth={1.5} /><span>{i + 1}. {venue.name}</span></div>;

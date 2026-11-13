@@ -788,3 +788,10 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 
 - **Private outing handle:** an unpredictable locator bound to verified user, native source, build, revision and fixed expiry; possession alone cannot authorize spending.
 - **Clock-pair skew:** wall-clock and monotonic samples taken at different instants can change a reconstructed timestamp. The adapter retains the original protected integer deadline instead.
+
+
+## Inactive ordinary private browser checkpoint
+
+- **Discard-first recovery:** lose local authority rather than automatically repeat uncertain billable work.
+- **Dependency snapshot:** a non-billable availability observation that never grants financial or planning permission.
+- **Late-response generation guard:** a counter that prevents an old asynchronous reply from reviving a discarded page.

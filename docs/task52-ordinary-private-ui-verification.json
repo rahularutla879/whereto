@@ -1,0 +1,609 @@
+{
+  "backendModulesExecuted": [
+    "experiments.shared_state.test_action_identity",
+    "backend.test_planning_admission",
+    "backend.test_provider_budget",
+    "backend.test_saved_plans",
+    "backend.test_saved_details_reliability",
+    "backend.test_session_capacity49",
+    "backend.test_interpretation",
+    "backend.test_real_planning",
+    "backend.test_advanced_planning",
+    "backend.test_advanced_routing",
+    "backend.test_advanced_timing",
+    "backend.test_database_security",
+    "backend.test_database_check",
+    "backend.test_ordering_shadow",
+    "backend.test_ordering_enforcement_design",
+    "backend.test_api",
+    "backend.test_request_management"
+  ],
+  "baseline": "da7b99acd4217ec4d669140a8512d72b95b06e9b",
+  "browser": {
+    "browserNotRun": [
+      "Mobile responsive layout due ineffective viewport override",
+      "Waiting600seconds for native expiry in UI",
+      "Browser emulation of Bob identity",
+      "Browser back-forward cache restoration beyond controller/pagehide tests",
+      "Every outage in browser; outages exercised through authenticated HTTP instead"
+    ],
+    "desktop": {
+      "notProven": [
+        "Two concurrent provider workflows both successfully completing",
+        "Mobile itinerary success",
+        "Automatic recovery of interrupted work"
+      ],
+      "passed": [
+        "Coffee and museum in Baltimore: pending date visibly requested",
+        "Backend A restarted after pending response; date answer2026-11-07 continued original outing",
+        "Accounting before/after answer: count2, charge13710 integer synthetic units, inference2 unchanged",
+        "Confirmed synthetic origin39.29,-76.61; one generation yielded3 synthetic provisional options",
+        "Cards retain Coffee then Museum, Baltimore, date and driving mode",
+        "View plan expands selected local stop sequence; View details displays returned local contact limitations without provider Details",
+        "Synthetic venue labels, fictional availability disclosure; no raw development notes in display",
+        "Refresh clears source/handle/cards; accounting before/after both count6, charge204555, inference3",
+        "Second tab pending source discarded independently while other tab continued; no shared latest-outing state",
+        "Walking selected before interpretation and preserved in validated summary",
+        "Unknown fixed-fake input in concurrent second tab caused uncertain inference and stopped grant; other generation refused; no automatic retries",
+        "Manual readiness after stop displayed dependencies unavailable",
+        "Known authored groceries/optional-coffee fixture with explicit date/location: accurate advanced/unsupported message; no generation offered",
+        "Explicit discard completed; source/location/date/mode controls became editable without another inference",
+        "Redis readiness outage visibly unavailable; manual recheck after recovery available again; financial count2/charge13720/inference2 unchanged"
+      ],
+      "viewport": [
+        1280,
+        900
+      ]
+    },
+    "directHTTPOnly": [
+      "Different-user ownership, forged/expired identities, wrong audience/body proof",
+      "Expired/revoked native source and stale revision",
+      "Flexible/contradictory/return and manual route refusals; authored optional-stop refusal also exercised through browser",
+      "Financial cap exhaustion and source-continuation PostgreSQL/Redis/witness outages; Redis readiness separately browser-tested",
+      "Altered source/generation payload and replay refusal"
+    ],
+    "mechanism": "Actual in-app browser through loopback Next production build and FastAPI replicas, signed offline fixture identities and disposable authority stores; CUA UI operations only",
+    "mobile": {
+      "actualDOMViewport": [
+        1280,
+        720
+      ],
+      "attemptedViewport": [
+        390,
+        844
+      ],
+      "result": "Browser viewport capability accepted override but existing and newly created tabs retained1280px DOM viewport. No mobile-layout pass claimed; walking request was desktop-width and its generation stopped after unrelated unknown fake input quarantined grant."
+    },
+    "recovery": "Discard-only on page navigation; no storage/status recovery/automatic retry. Existing server absolute expiry and protected accounting unchanged.",
+    "screenshotSHA256": {
+      "/tmp/task52-private-ui-desktop.png": "fbd3282c55a306e00f92e7bfed469a01d398f2d1ff8479e2c028ac2b8b04c96b",
+      "/tmp/task52-private-ui-readiness.png": "abad331e870ee468ac707f8b79d805308033347a572df47f76ae1d892ed0461c",
+      "/tmp/task52-private-ui-stopped.png": "4e581e9b69fe525e122e6c4efc7b5ae2f217258fb5884aa893ac8f8c2ece74ed"
+    },
+    "screenshots": [
+      "/tmp/task52-private-ui-desktop.png",
+      "/tmp/task52-private-ui-stopped.png",
+      "/tmp/task52-private-ui-readiness.png"
+    ],
+    "sourceManifest": "c48e7b24d950ea3c28f767f8b49e724238c2299b60b3c2b597e42a6fcfc8f3d5",
+    "unitOrProcessOnly": [
+      "Late responses after clear",
+      "Lost HTTP response without automatic retry (unknown fake-provider failure separately exercised through browser)",
+      "Client absolute expiry",
+      "Separate worker/factory/dispatcher crashes and lost HTTP/inference admission"
+    ]
+  },
+  "cleanup": {
+    "anonymousVolumeNote": "Baseline aggregate count97, after116. No pre-task per-volume ID inventory; inherited Redis fixture uses image anonymous /data and rm -f. Preserve unattributed volumes rather than delete possible unrelated data.",
+    "anonymousVolumesRetained": 116,
+    "colima": "stopped; approved2CPU/4GiB/40GiB unchanged",
+    "disposableContainersAndNamedVolumes": "removed; no broad prune",
+    "images": "local only",
+    "keys": "temporary fixture/controller resources removed"
+  },
+  "cloudProvisioned": false,
+  "containers": {
+    "actualImages": {
+      "backend": {
+        "architecture": "amd64",
+        "id": "sha256:0005d72797ba743ff7b9f68e7971d1ddfc9d7a0e569ec765fc1b7b4cb95502c4",
+        "os": "linux",
+        "size": 62815534,
+        "tag": "whereto-backend:task52-1794542783-90832",
+        "user": "app"
+      },
+      "frontend": {
+        "architecture": "amd64",
+        "id": "sha256:afcbd9f24d0eb7642c952382ca1844caacefc3373306e19e50d36ee798ae006f",
+        "os": "linux",
+        "size": 104743680,
+        "tag": "whereto-frontend:task52-1794542783-90832",
+        "user": "node"
+      }
+    },
+    "artifactProbeLogSHA256": "3ccf20c716646b3ffa337fe0e36d75eee964f5fba1c897acb122631a7926b658",
+    "experimentsIncluded": false,
+    "freshOSVulnerabilityDatabaseRescan": false,
+    "registryPublication": false,
+    "result": "actual pinned amd64 builds and normal guards/mock smoke passed; not private production startup",
+    "smokeLogSHA256": "56bcb78d8c23d629b25b3dcca3559d0e7795ae3a60d82e5449a79af9755bb3df"
+  },
+  "developmentAdditionalFindings": [
+    "Initial tsx sandbox IPC refusal: rerun with authorized local socket access, not a product failure.",
+    "Initial React refs/effect lint errors corrected; no suppressions.",
+    "A concurrent host next build briefly removed live fixture manifests; completed build then reload recovered without an outing action. Final build is completed before starting browser fixture.",
+    "Synthetic stats helper initially tried JSON-encoding Decimal; fixed integer cast, no database mutation.",
+    "Historical integrity helper initial invocation lacked PYTHONPATH; import failed before journal access. Correct repository/venv invocation passed.",
+    "A synthetic aggregate diagnostic query requested a nonexistent state column and returned no evidence; no financial mutation was attempted or result claimed."
+  ],
+  "developmentTrials": [
+    {
+      "description": "3 clock passed; authority5 ran2pass/3fail due snapshot helper quoting; no readiness assessment from those failed assertions.",
+      "logSHA256": "419216983d305f9f76a85956d5c1e1ece3b5f721df7c08341f0813ced44a0103"
+    },
+    {
+      "description": "3 clock passed; authority5 ran3pass/2fail: separate public/service build misuse denied counter probe; wrong-user test incorrectly compared the advancing existing finance_time clock.",
+      "logSHA256": "a3991eb1fa5773488fb0b24c80da7349592dd005a517ae4e29e521eabc1c1123"
+    },
+    {
+      "description": "3clock passed; authority5 ran4pass/1fail. Sanitized auth diagnostics identified public build used on service probe; fixed caller, no verifier weakening.",
+      "logSHA256": "3798738f9b3f244eeec48cf4ab51156ce8e1356cab16e6f8c4f038cfbdd2de69"
+    },
+    {
+      "description": "3clock and5authority passed; HTTP13 ran12pass/1fail after crossing600s fixture IAP lifetime. Actual browser found native fetch method-binding bug before transport. Fresh assertions now come from separate fake IdP at unchanged lifetime.",
+      "logSHA256": "4c0ccb0c5ea4cb86b79561477073ebedb4ae97b443387fa8622fd707fb352cd7"
+    },
+    {
+      "description": "Fresh synthetic identities:3clock,5authority,13HTTP passed; no expired assertion accepted.",
+      "logSHA256": "3d2747faf69d199baf4c34af0f17196a000cf1ed87fec55fc93828c4bb3c79b3"
+    },
+    {
+      "description": "3clock/5authority passed. Browser safely refused unsupported radius for named destination with no Maps charge; corrected UI removed unsupported control/reset confirmation. Idle browser hold intentionally interrupted before HTTP13.",
+      "logSHA256": "e829d3b4408ea3bcedca91bd813f5ac377ccb4117d2c5b37b4bcf77176ec590c"
+    },
+    {
+      "description": "3clock/5authority passed. Browser completed pending/restart/plan/cards/local details and refresh; identified development notes/real-wording presentation. Presentation fixed; idle hold intentionally interrupted before HTTP13.",
+      "logSHA256": "c7dd551fc4a48b0c897b1c3640b1257dbfe3d0a89936fa06591b4379dfdf5f32"
+    },
+    {
+      "description": "Final-source browser concurrency trial: an input absent from the fixed fake responder failed after reservation; uncertainty stopped the grant and another concurrent generation refused grant_stopped. No automatic retry/refund. Idle hold interrupted; its HTTP13 not run. Separate fresh final state uses unchanged policies and known fake inputs.",
+      "logSHA256": "f4a717e8ff41d08c7e3384c434fb930404e2ed05a806011a13a5f6536a8c458d",
+      "sanitizedDiagnosticsSHA256": "471162ab3b3cee2c4e0f60bcff24c68e9fee7f9d52321a4aeae44edcb36c0022"
+    }
+  ],
+  "filesChanged": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "app/api/private-ordinary/revoke/route.ts",
+    "app/page.tsx",
+    "components/outing-summary.tsx",
+    "components/plan-card.tsx",
+    "components/private-ordinary-experience.tsx",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-ordinary-private-ui-verification.json",
+    "docs/task52-ordinary-private-ui.md",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "experiments/ordinary_ui/bootstrap.py",
+    "experiments/ordinary_ui/build.json",
+    "experiments/ordinary_ui/iap_fixture.py",
+    "experiments/ordinary_ui/identity.py",
+    "experiments/ordinary_ui/next_fixture.ts",
+    "experiments/ordinary_ui/public_server.py",
+    "experiments/ordinary_ui/readiness.sql",
+    "experiments/ordinary_ui/run_local.py",
+    "experiments/ordinary_ui/server.py",
+    "experiments/ordinary_ui/test_local.py",
+    "experiments/ordinary_ui/witness_readiness.sql",
+    "lib/private-ordinary-client.test.ts",
+    "lib/private-ordinary-client.ts",
+    "lib/private-server-boundary.ts",
+    "lib/server-identity.ts"
+  ],
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "identity": "52-private-ordinary-ui-local-v1",
+  "identityFixtures": {
+    "cookie": "temporary HttpOnly/SameSite fixture cookie separate from test-harness ingress secret; no outing in cookie",
+    "grantExpiryExtended": false,
+    "hostedIdentityVerified": false,
+    "iapLifetimeSeconds": 600,
+    "issuer": "fixed fictional testers in isolated bootstrap controller CLI; no HTTP signing endpoint or real Google key",
+    "keys": "ephemeral controller overlay; never in workers/frontend/source volume/Git",
+    "nativeExpiryExtended": false,
+    "productionFixtureSigningRefused": true,
+    "workerSigningRefused": true,
+    "workloadLifetimeSeconds": 3600
+  },
+  "limitations": [
+    "Only local synthetic ordinary workflow; all other business mappings blocked.",
+    "No qualified hosted LLM, real counting/pricing/transport, approved grant or real enrollment.",
+    "No refresh restoration or retry of unknown work; no manual-only or consumed-source regeneration.",
+    "Local VM/account, Docker-capable host test driver and fake ingress are not hosted security isolation; Docker administration, privileged/correlated restore risks remain.",
+    "Original SQL refusal remains unattributed. Synthetic outputs do not prove model accuracy or real route quality."
+  ],
+  "nativeRestoreDrills": [
+    "Operational-history rollback quarantined full synthetic grant",
+    "Witness-history rollback quarantined full synthetic grant",
+    "SQL outage refused without fallback",
+    "SQL/witness restart retained committed inference exposure; lost Redis refused without provider work"
+  ],
+  "nativeRunnerNote": "The exact17 unmodified frozen native tests ran using an external completion harness that disables fail-fast only; original test assertions, sources, identity pins and deadlines unchanged.",
+  "newDependencies": false,
+  "nextCheckpoint": "Production-compatible, source-pinned narrow ordinary service composition/packaging and dependency/bootstrap validation with fake services; preserve real enrollment/model/grant/hosting acceptance gates. No automatic provisioning or Task53.",
+  "normalStartupChanged": false,
+  "notRun": [
+    "full backend discovery/33 frozen historical source-identity headings",
+    "16 opt-in hosted-owner-database tests",
+    "real IAM/IAP/metadata/JWKS/accounts/providers/tokenization",
+    "real cloud provisioning/migration/grants/public traffic",
+    "fresh OS image vulnerability DB rescan",
+    "hosted failover, power-loss, Mac-off, production quality/latency/cost acceptance"
+  ],
+  "originalUnexplainedSQLCause": "Unattributed; controlled categories do not establish the original cause. Fail-closed preserved, no timeout increase/fallback/retry/refund.",
+  "otherChecks": {
+    "auditExitCode": 1,
+    "auditLogSHA256": "b0039c64e1e9f1c017f2e48661868dd5fe3fe487886781b80886b185bbad64c4",
+    "buildLogSHA256": "832a42c5125434e53137860371803886b90d636ea1173813bf8f6a985fc0b8de",
+    "dependencyAudit": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "moderate": 7,
+      "total": 7
+    },
+    "eslint": "passed",
+    "fullDiff": "reviewed all existing/new task files",
+    "handbook": {
+      "chapters": 20,
+      "preserved": "all20original chapter contents retained;11unaffected byte-identical",
+      "reviewed": [
+        3,
+        4,
+        6,
+        7,
+        12,
+        13,
+        14,
+        15,
+        18,
+        20
+      ],
+      "updated": [
+        3,
+        4,
+        6,
+        7,
+        12,
+        13,
+        14,
+        15,
+        18
+      ]
+    },
+    "links": "checked",
+    "lintLogSHA256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "pipCheck": "no broken requirements",
+    "productionBuild": "passed",
+    "pythonCompile": "passed",
+    "secretScan": "zero configured value matches current files/browser assets/history",
+    "secretScanLogSHA256": "d68eac797fddf7c20738720a8f44e9318cbf5104b097ff424d7372c372b24404",
+    "sourceIdentity": "new source manifest and unchanged parent algorithms verified; frozen whole-source parent refuses changed frontend, not repinned",
+    "typeScript": "passed",
+    "typeScriptLogSHA256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e"
+  },
+  "outingContract": "52-private-ordinary-outing-v1",
+  "ownership": {
+    "accounts": "no permanent account or saved-capability/RLS change",
+    "afterGeneration": "consumed; no same-source regeneration/automatic retry",
+    "executionControls": "confirmed coordinates before one generation; radius unavailable without a reviewed search-point workflow",
+    "expiry": "absolute; unchanged by reconstruction or fresh identity assertion",
+    "lateResponse": "generation guard cannot restore discarded authority",
+    "meaningEdits": "explicit protected discard then fresh user action",
+    "refresh": "discard-only, no automatic status recovery/provider action",
+    "source": "immutable original request and preferences retained in controller only; raw model data dropped",
+    "storage": "memory-only, no browser source/graph/handle/result persistence",
+    "tabs": "independent controllers/handles; no latest-user lookup"
+  },
+  "parentOrdinaryBuild": "7b9b2998e68c2396c519e909c8988aeefd4d793ddda5dcc3cc2e15638161d21d",
+  "productionActivated": false,
+  "readiness": {
+    "authorization": false,
+    "checks": [
+      "protected grant/configuration hash agreement",
+      "complete committed witness/operational prefix agreement",
+      "expiry/epoch/global availability/accounting",
+      "Redis PING",
+      "fixed authenticated counter/dispatcher/recovery probes"
+    ],
+    "doesNotProveIndividualSessionEvidenceExists": true,
+    "effects": "operational-state snapshot unchanged; only authentication nonce facts are consumed",
+    "perActionPermissionsStillRequired": true,
+    "pointInTimeOnly": true,
+    "productionReady": false,
+    "sql": "NOLOGIN-owner SECURITY DEFINER; PUBLIC revoked; issuer/factory-witness only; READ ONLY transactions"
+  },
+  "realGoogleIdentityCalls": 0,
+  "realGrants": 0,
+  "realProviderRequests": 0,
+  "reproductionCommands": [
+    "backend/.venv/bin/python -m experiments.ordinary_ui.run_local --browser",
+    "npm test",
+    "npm run typecheck",
+    "npm run lint",
+    "npm run build",
+    "backend/.venv/bin/python -m experiments.hosted_identity.run_local",
+    "backend/.venv/bin/python -m experiments.shared_state.run_native",
+    "backend/.venv/bin/python -m experiments.shared_state.run_evidence",
+    "backend/.venv/bin/python -m experiments.service_isolation.run_local",
+    "DOCKER_CONTEXT=colima-whereto-task52 sh deployment/container-smoke.sh",
+    "python3 scripts/security-scan.py"
+  ],
+  "routes": {
+    "blocked": [
+      "advanced",
+      "options",
+      "origin discovery",
+      "provider Details",
+      "save/reopen/refresh",
+      "manual-only"
+    ],
+    "discard": "POST /api/private-ordinary/revoke: owner-bound native revoke; normal404",
+    "liveness": "GET /api/health",
+    "ordinary": [
+      "POST /api/interpret",
+      "POST /api/plans/generate"
+    ],
+    "readiness": "GET /api/planning-mode: enabled=false, synthetic dependency availability only"
+  },
+  "sourceManifestSHA256": "c48e7b24d950ea3c28f767f8b49e724238c2299b60b3c2b597e42a6fcfc8f3d5",
+  "sqlDeadlines": {
+    "lockMilliseconds": 250,
+    "statementMilliseconds": 1500
+  },
+  "sqlReliability": [
+    {
+      "category": "RaiseException",
+      "frames": [
+        [
+          "postgres.py",
+          "_tx",
+          69
+        ],
+        [
+          "application_grants.py",
+          "_tx",
+          153
+        ],
+        [
+          "postgres.py",
+          "_call",
+          78
+        ],
+        [
+          "native_sessions.py",
+          "_invoke",
+          48
+        ],
+        [
+          "connection.py",
+          "execute",
+          300
+        ]
+      ],
+      "reason": "database_protocol",
+      "scenario": "missing_owned_evidence",
+      "sqlstate": "P0001"
+    },
+    {
+      "category": "LockNotAvailable",
+      "frames": [
+        [
+          "postgres.py",
+          "_tx",
+          67
+        ],
+        [
+          "native_sessions.py",
+          "_invoke",
+          48
+        ],
+        [
+          "connection.py",
+          "execute",
+          300
+        ]
+      ],
+      "reason": "unavailable",
+      "scenario": "protected_lock_contention",
+      "sqlstate": "55P03"
+    }
+  ],
+  "tests": [
+    {
+      "failed": 0,
+      "logSHA256": "53e7d8b3d013a6faed936ad73fb53855314f06b9845fdefd0e3352134698b379",
+      "name": "Actual Next/FastAPI ordinary HTTP security/continuation",
+      "passed": 13,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "53e7d8b3d013a6faed936ad73fb53855314f06b9845fdefd0e3352134698b379",
+      "name": "Nonbillable read-only authority, revocation, SQL categories, fixture isolation",
+      "passed": 6,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "53e7d8b3d013a6faed936ad73fb53855314f06b9845fdefd0e3352134698b379",
+      "name": "Preserved source-clock adapter",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "0a46ac6aade275e5cb131062c782ec14a81ce985077173296867e0f3f266bd8f",
+      "name": "Current backend contracts/API/admission and recorded Qwen/OpenAI replays",
+      "passed": 263,
+      "skipped": 16
+    },
+    {
+      "failed": 0,
+      "logSHA256": "7aa68a7ab13d8637e6f440426d318ca989d3f355aeea1774bb6265e0354a4d78",
+      "name": "Frontend including11 new controller/presentation/security checks",
+      "passed": 313,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "ac7b3ded0c22b26f14bf6cce3b41e24d6f4fc67caf864dd2e7bb11f9f36c36cc",
+      "name": "Packaging/startup/artifact/resource tests",
+      "passed": 15,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "a0883b68b73493a418590af7c8cedb0713e19ee60a714b39e5e04b327d5f7a52",
+      "name": "Frozen Node proxy contract",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "92c14e4699a35b966bf01639886cc00c91b5a6e04e24e29be6a52706f2aed3e8",
+      "name": "Public JSON syntax/limits",
+      "passed": 2,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "84e6b0a1094226a14b4fb9cc7816e5be34263a53472d1b19c70d744f8d968640",
+      "name": "Frozen hosted identity",
+      "passed": 20,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "2d089b305649093da148eb083907bfa646840b774d908c6f9950110a63a5456c",
+      "name": "Frozen native17; no fail-fast or source/pin/timeout change",
+      "passed": 17,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "f0a973d83b833d14ba4f47ae896d63d29c4db5a260422b85f829d7881a5a17a3",
+      "name": "Application grants and independent recovery drills",
+      "passed": 30,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "4fc16671440319ec520d66a64f06281760cd48fde5c5dec01f6675362dd3504f",
+      "name": "SQL/financial/action/evidence and recovery drills",
+      "passed": 112,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "25bfd32b3e5fac3a4468b08ddc376f9585e75abbbf50c1ed58f6e90212d7ce52",
+      "name": "Separated authenticated service contracts",
+      "passed": 12,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "6f9195bd03ba8d21e90eee6161fe9dd32fc835806c94ef6fd07a0b5d15f3b049",
+      "name": "Separate process lost_http",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "87fdcd90368e10a6955a59b99cd5a918e5955059ea4172db5001000140c234cf",
+      "name": "Separate process lost_inference",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "42224912876fcba7cae9f0f39bcdcb8e444613a0c4aa4aa5ee3991e0706cf4d6",
+      "name": "Separate process dispatcher_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "2e7be9da12666369cdc5fedd403b24cabe29bcaac0db9d6db489d2b49ff76088",
+      "name": "Separate process factory_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "acbdc1c72bd937054d37bd555f6d110f9efc439695007084cd3790c648181fed",
+      "name": "Separate process worker_crash",
+      "passed": 1,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "drillCasesIncludedInPassed": true,
+    "failed": 0,
+    "finalInterrupted": 0,
+    "finalTimedOut": 0,
+    "fullBackendDiscovery": false,
+    "passed": 814,
+    "processFaultDrillsPassed": 5,
+    "skipped": 16,
+    "testCasesPassed": 814
+  },
+  "uiContract": "52-private-ordinary-ui-v1",
+  "verifiedDate": "2026-11-12",
+  "warnings": [
+    "Python3.12 existing bridge process-crash test warns about fork from a multithreaded process; local case passed, no power-loss/distributed-durability claim."
+  ]
+}
