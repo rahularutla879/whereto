@@ -1,3 +1,7 @@
+# Task 52B — cloud-model selection returned to the review boundary
+
+[Current qualification audit and finite plan](docs/task52b-model-qualification-status.md): no model qualified; ten historical attempts unchanged. Owner product decisions and diagnostic exception are already recorded. Next action is a genuine independent human completing the existing120-field/failure packet plus the [normalizer checklist](docs/task52-independent-review/QUALIFICATION_CHECKLIST.md), then a narrow evaluator/readiness review and explicit five-slot/$0.0125 OpenAI authorization if all gates pass. Gemini/Anthropic remain separately blocked. No new infrastructure prerequisite, spending, halt clearance, model switch or Task53. Broader clean/held-out qualification needs a separate finite experiment decision; five diagnostic results cannot select production.
+
 # Task 52 — closed frontend and immutable recovery verification
 
 Current continuation: [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md). The complete earlier working tree and failed observations are preserved. Final bounded local verification passed: 631 selected test passes/10 opt-in skips, final desktop/mobile/browser + immutable kill/restart checks, image refusal checks and fresh scans. The earlier assertion remains unattributed and vulnerabilities remain staging blockers. Earlier “acceptance open” sections below describe prior cohorts, not permission to deploy. Production remains inactive. No cloud/provider/grant or Task53 action follows automatically.

@@ -1,0 +1,183 @@
+{
+  "identity": "52b-provider-public-documentation-2026-11-13-v1",
+  "scope": "Official public documentation only; no account/model/token/inference endpoint access",
+  "sources": [
+    {
+      "id": "openai-model",
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+      "effectiveURL": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "44dcc0a50961150ee700aa701df8d46c59488f003979f3c755c3230bd8a0dfb2",
+      "bytes": 4370
+    },
+    {
+      "id": "openai-schema",
+      "url": "https://developers.openai.com/api/docs/guides/structured-outputs.md",
+      "effectiveURL": "https://developers.openai.com/api/docs/guides/structured-outputs.md",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "db36d6846ba5bdcaafd4441792b27c90ad69971fe61d4cbc491a1c5d0a40bbef",
+      "bytes": 146519
+    },
+    {
+      "id": "openai-prices",
+      "url": "https://developers.openai.com/api/docs/pricing.md",
+      "effectiveURL": "https://developers.openai.com/api/docs/pricing.md",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "a1d8bbfbb336a18083d576e6df763a31648c08043f5d43b3e0e8dd3704c9a8be",
+      "bytes": 21230
+    },
+    {
+      "id": "openai-cache",
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "effectiveURL": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "4325bf7682fa23f1bd814c724e572cbc27981314d7bd4e4451ac918ba6e870ff",
+      "bytes": 56658
+    },
+    {
+      "id": "openai-data",
+      "url": "https://developers.openai.com/api/docs/guides/your-data.md",
+      "effectiveURL": "https://developers.openai.com/api/docs/guides/your-data.md",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "5b844687d1b0f09013d2ebaa36559e10a701e860ba69d48e1a8c5621f13760ce",
+      "bytes": 23417
+    },
+    {
+      "id": "google-model",
+      "url": "https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash",
+      "effectiveURL": "https://aistudio.google.com/docs/models/gemini-3.8-flash",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "c61d2a686d486598f31f6746a4fbacf71b8293295d54ec0cd004a15b898f0099",
+      "bytes": 4471
+    },
+    {
+      "id": "google-schema",
+      "url": "https://ai.google.dev/gemini-api/docs/structured-output",
+      "effectiveURL": "https://aistudio.google.com/docs/structured-output",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "9efe894bfc2fbf4fc5acc9dab45786a240584360b9d5f648b0ea6aa7034a13fe",
+      "bytes": 61423
+    },
+    {
+      "id": "google-api",
+      "url": "https://ai.google.dev/api/generate-content",
+      "effectiveURL": "https://aistudio.google.com/api-reference/generate-content",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "75de66c2bc7fb35373a832838468ca339c20a77df8ed795b7f42cb8b7d04f9e6",
+      "bytes": 96046
+    },
+    {
+      "id": "google-prices",
+      "url": "https://ai.google.dev/gemini-api/docs/pricing",
+      "effectiveURL": "https://aistudio.google.com/docs/pricing",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "2185b4ebe9b296fe5d6827fba6b9879ddef5c80ca7e41e7cedfe54d3e340085b",
+      "bytes": 111627
+    },
+    {
+      "id": "google-terms",
+      "url": "https://ai.google.dev/gemini-api/terms",
+      "effectiveURL": "https://aistudio.google.com/docs/terms",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "3541ca84c8be4c6de243a33165b495ab73b8de3280ce7c22a3858dca41872875",
+      "bytes": 22529
+    },
+    {
+      "id": "anthropic-model",
+      "url": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "effectiveURL": "https://platform.claude.com/docs/en/models/haiku-5-5/overview",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "ad5cbcaac35dbd0a15b9b93f11e34568360bea1223b9d5b6dd3f77f172044e33",
+      "bytes": 452283
+    },
+    {
+      "id": "anthropic-schema",
+      "url": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "effectiveURL": "https://platform.claude.com/docs/en/build-with-claude/structured-outputs",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "af827531a2629926e821b2e8b3a15fd7460a5cd4590dca07f3227c6f9fa023e2",
+      "bytes": 1755616
+    },
+    {
+      "id": "anthropic-prices",
+      "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "effectiveURL": "https://platform.claude.com/docs/en/about-claude/pricing",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "b40719aa5f619d85bd7a9b95e9a2c3b8c6f3db39272a188f56557ba1532bac3c",
+      "bytes": 783707
+    },
+    {
+      "id": "anthropic-versions",
+      "url": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "effectiveURL": "https://platform.claude.com/docs/en/about-claude/models/model-ids-and-versions",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "6fd4e94d9aab2681fff32f675ba3a22f3dcc44088bfc530a9dff6762f0caf6fa",
+      "bytes": 323864
+    },
+    {
+      "id": "anthropic-retention",
+      "url": "https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data",
+      "effectiveURL": "https://privacy.claude.com/en/articles/7996866-how-long-do-you-store-my-organization-s-data",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "2054396f2f011b6d14c3c981fe21d49818cbdfd3e51b6e80567b6d6957dd797c",
+      "bytes": 107527
+    },
+    {
+      "id": "anthropic-feature-retention",
+      "url": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "effectiveURL": "https://platform.claude.com/docs/en/manage-claude/api-and-data-retention",
+      "retrievedUTC": "2026-11-13",
+      "publicUnauthenticated": true,
+      "status": "retrieved",
+      "exitCode": 0,
+      "sha256": "f1910d146e75c276b0c98ab3fa19054c288d164ed2d53b1babbbd2625055a87d",
+      "bytes": 656874
+    }
+  ],
+  "sourcesNotAccountReadiness": true
+}

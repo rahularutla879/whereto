@@ -1,0 +1,713 @@
+{
+  "identity": "52b-model-qualification-offline-review-v1",
+  "baseline": "a981655eb84c21af5b1b498d3f5fefe9b04392b4",
+  "offlineReviewComplete": true,
+  "modelQualified": false,
+  "modelSelected": null,
+  "independentApprovalsCreated": 0,
+  "paidDispatchAuthorized": false,
+  "providerAccountRequests": 0,
+  "tokenCountingRequests": 0,
+  "inferenceRequests": 0,
+  "journalWrites": 0,
+  "infrastructureChanges": 0,
+  "staticChecks": {
+    "promptExactHash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+    "all19PairsPreserved": true,
+    "all66SourceHashesVerified": true,
+    "fiveOriginalSourcesAnd120FieldsMatch": true,
+    "all120ReviewerDecisionsBlank": true,
+    "existingQ2ProjectionsExactlyReproducedAndComposedContractEquivalent": true,
+    "frozenBeforeFileCount": 192,
+    "all66SourcesMatchAuthoritativeCorpus": true,
+    "all19CurrentTypedStructuralChecks": true,
+    "proposedAndReviewedTemplateExactlyEqual": true,
+    "noSemanticCertificationFromStructuralPass": true,
+    "fiveSlotsStillUnused": true,
+    "all1584RubricIndependentFieldsPending": true,
+    "frozenHistoricalDocumentsUnchanged": true,
+    "frozenDocumentHashes": {
+      "docs/task52-admission-transport-v1.md": "24a42d048f26bc1044e06482a114bb60f7402d0f8e8655527009b901a4c0bcc7",
+      "docs/task52-ai-performance-evaluation.md": "477089c7cecc0e0999a5d63d6101c97c86aa3ad37761ef42491793ba3e4c7f10",
+      "docs/task52-application-financial-authority.md": "896d941a586c4c33cde8affe725c7327bb4c1fc81043f788311696f7228fa736",
+      "docs/task52-application-financial-verification.json": "73b1e56a2403707b65086b553b867c6389eaee631b17d51984a177ba16c2b6af",
+      "docs/task52-b2-behavior-baseline-v1.json": "657472f95826452b19901a6e57c9ffe1bbad8e8a87367cc67cc38651ffe46545",
+      "docs/task52-b2-behavioral-extraction.md": "0acf40f3af2b9a71f1a469cc6bc57c9dee8af7dee5e039aaef5781b44aa38523",
+      "docs/task52-b2-reconstruction-verification.json": "c2c91e917d13ec8c32489627d04e676576570db21f89c0272cebee500b0441aa",
+      "docs/task52-backend-date-baseline.json": "530e7b42a21e06fc25ee030b0c3fa1a51e03bb9e7185bc3d6482a6793e2e7fd3",
+      "docs/task52-backend-regression-repair.md": "280891cbab4f718e8e8857cf62563ce0f3378f637d132449f69e6eaf5a541241",
+      "docs/task52-backend-regression-results.json": "747f75f8303bd24894817e1ac8f2cb9f3d3d4211686cc32ea60ff2e4e0e0f97f",
+      "docs/task52-closed-frontend-security.json": "395e8972a93bd2aac7af5daba5cb0697498dab59b00032d301bdcff96e21f221",
+      "docs/task52-closed-frontend-verification.json": "d99f68ba78fd5c4a33bf5e61dc9c75ab82497bcfeba454861ae71c9a1390661a",
+      "docs/task52-closed-frontend-verification.md": "7a20372b44738df45386eb4a9c637e10c0c5ebac618f05d3c1a30c42c24ba044",
+      "docs/task52-cloud-architecture-evaluation.md": "1682c5a36ae72fe7f77355714137d426e940f7aa3fe7078cc3dde7eb7719d47d",
+      "docs/task52-cloud-deployment-preparation.md": "0bf74ad3503cdac82fbd23926d52450b6b0788cde8856a386708f8f049341324",
+      "docs/task52-cloud-deployment-verification.json": "7a8a1cb22c5bf5d8c3ca27307de262d077c1330bc21c8cc36df3be8746a771d4",
+      "docs/task52-cloud-model-benchmark.md": "67cf043afec4a5c1c020cbf31c0465572d954559766268a66720b877404eaf8b",
+      "docs/task52-cloud-model-preparation.json": "1227df662f7fc60c22f5dd8bce725caec6774c2baec266eff888bba398fc812e",
+      "docs/task52-cloud-model-results.json": "7a18e96daff68f7227d4d407774c63ecf725017ae11bf13735d62578938c4ecd",
+      "docs/task52-cloud-prompt-v51-PROPOSED-v1.json": "8b9673895f77b4e890d82a900a61bc2ddc7ed31176cf2feb267c6cbf88f456cf",
+      "docs/task52-cloud-prompt-v51-REVIEWED-v1.json": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+      "docs/task52-constrained-sql-authority.md": "dc357b3a5251f88a4f936d53dd4202ae9878e49c09a7ca98cc5de2bfd91ed4af",
+      "docs/task52-constrained-sql-verification.json": "84ffcc5f9347331459f5bcfd93ea1c10dac419b31f0184a0697ea8e82847a0d8",
+      "docs/task52-container-security-remediation.md": "10f2f4ba1e8541d9d17b40f417e3370d1c81c3c09483b8cff3ad1f812a42b543",
+      "docs/task52-container-security-triage.json": "a30b30f4105d5fda87ca4e2223a60644361b9569a60695ede3bf940444476221",
+      "docs/task52-container-security-verification.json": "365aace17a6a06db3118cb5da5ddb86469f8d021d21fbeef984584baaa20e75f",
+      "docs/task52-diagnostic-progression-build-v1.json": "2241ea0c394ca6cab78b9c16b485641d2e08d68c6e20aa376b88e539657c332b",
+      "docs/task52-diagnostic-progression-fake-v1.json": "803eaba2be03e952afd72741f65b0cc73f7974ce26af275c4222da64dba77cfd",
+      "docs/task52-diagnostic-progression-proposal-v1.md": "6e3414d0e7a036ddb9adb6a79dd9585944089abc58f257a976943fdf3f2400eb",
+      "docs/task52-diagnostic-progression-verification-v1.json": "7225072aaf5b83ac991b0ccdbd559b5a892c7a8455e06534875867afafebcf47",
+      "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+      "docs/task52-financial-authority-verification.json": "4d3c4115fb3f8550a837e759a2f06cdb40ce0d8d0b2bbc73643997a5efe3ee6b",
+      "docs/task52-financial-authority.md": "1cbc7e4271cff247568e5b3d9fff853535266d1257f2f97d69ea20f2ba55a3bb",
+      "docs/task52-hosted-identity-contract.md": "75326c869ef8c419cc754c46086ace90a9246e9338f7e7a9e7431a4aca9eaa50",
+      "docs/task52-hosted-identity-verification.json": "986a38b8ed53b78162030205a55c44a150f8161260d7ab4700032dc29b29e809",
+      "docs/task52-hosted-startup-integration.md": "318838b64f9e3ab4c2484453f4a1ca7e9c7801a6265986bc16398ee058011847",
+      "docs/task52-hosted-startup-verification.json": "d13241e84eb87a177e53ad9cf48e5eda9f46f535146eefa6923a47bd35b49d1a",
+      "docs/task52-local-container-security.json": "1c3cc3852ef0c9c578ddc9370ee0b419f1e5b89d74f4a8401477ed4e35614d71",
+      "docs/task52-local-container-verification.json": "ec23070adde8966c73df79a5a98946477df003a078b8a4f3648e307d82ee788b",
+      "docs/task52-local-container-verification.md": "bbd24b9d182fa4a382ff73c8e0f81d899e6a25c08a1e57070627370f4fbe3010",
+      "docs/task52-native-session-reconstruction.md": "aba9e468151da2fc714ce76add58fae0daa6498ab7f3326efc0501dedc8db2d5",
+      "docs/task52-native-session-verification.json": "2ba2d3bfb4866f61a99f67999c147e1e47dde25111f02db37a2df7e53999a89b",
+      "docs/task52-offline-holdouts.json": "dbf658a16a3bc5bfbacb29674d7180f6cbfd096052a8eef09cd9e79b0b0f882a",
+      "docs/task52-offline-ordering-review.md": "6ae2018c019f0207ec955080f02560773028ea22f97bbc1718b5f9dee141fe33",
+      "docs/task52-offline-replay.json": "eb6dc56d0a68767d9a8f864abf9512c978ea5396234793dc1bfe891c0edf6eba",
+      "docs/task52-offline-results.json": "ce85a6ae837539ed5c52c9d86ba98b3f41c7112b8d76bdc1775c5c7a51b3ebbb",
+      "docs/task52-openai-first-attempt.json": "cc2a7d0bf18a87aff17876e4129c011b45aab8be90fe5581d814eeec29acc6e0",
+      "docs/task52-openai-small-batch.json": "baa7f783b525b924b4c7453824b570dc39fc39c2b6defe5bdd837fdf409e5c1d",
+      "docs/task52-ordering-compatibility-v2-cases.json": "f35b338ad525d1f891e15469460d0e4ec3522a31e557dc891e9e9ff2dd944461",
+      "docs/task52-ordering-compatibility-v2-holdouts.json": "d468e53ed86241cf9aba792877fbb81e29b9a4621114840519ecbc1dfc27035a",
+      "docs/task52-ordering-compatibility-v2.json": "d1a7b255fe443019c70d86358008355e5c2b90307f3b8bd495bdec039f17e219",
+      "docs/task52-ordering-compatibility-v3-cases.json": "c59be93b961fd9ee597dbbee92d9b719733bd9f52b6af9e799354f862b823909",
+      "docs/task52-ordering-compatibility-v3-holdouts.json": "a61534b6a9d656efcee32edcaa9db2a5a8c53fca372ba4874034d62fed32fbc0",
+      "docs/task52-ordering-compatibility-v3.json": "d9115e7367831eba7fe9e746597f22b2687bf5e4044c84bf23ee787357c73dda",
+      "docs/task52-ordering-enforcement-design.md": "429fa6324a03b519762e5206dffb5f30d0f95619a4330c493b1012af2fe1d152",
+      "docs/task52-ordering-enforcement-verification.json": "61f7b3fefa85e12bcf1a35a45c937a4a8fe64b7a6ba5497a8b16ecb9d6723950",
+      "docs/task52-ordering-policy-v3.md": "725f55ff636f44d244b8fedd7ccd1384f63c0c228d776e2ed1436dae0b1f452c",
+      "docs/task52-ordering-policy-v4.md": "6bb5ad9dc5ed174338a58ec99604458dbd27be7983fffb85abd5c4ee2fc75be0",
+      "docs/task52-ordering-policy-v5.md": "c944255ade24bd46f30d51548a81a9504215d1711d42339405b834f1acc7a90c",
+      "docs/task52-ordering-policy-v51.md": "a32d19715853cf161ac971c8ab5460d3fb2d091292355d27ab761af57f98d932",
+      "docs/task52-ordering-qwen-review-v2.json": "cc85c0ced54296d8d0df3b9d1d5cd3ac00daef6ad208049b3448de33cbf1e964",
+      "docs/task52-ordering-safety-cases.json": "53d8a247e7f31f38b422f538766ad80dd67aa34fdc23745031925948a860235c",
+      "docs/task52-ordering-safety-checks.json": "0ebb8a94b779303ea34acded7ae1f867d9dcfb93ddbe28ff4b04a8f6c7342d05",
+      "docs/task52-ordering-safety-holdouts.json": "5d3114b087703726d82e433770bb63de0f2961e71d5ec15bdc77912ab326df2a",
+      "docs/task52-ordering-safety-investigation.md": "91e73f86582411ad2c9a5470171618003c7fab87d217d47bb5f909c6c649d946",
+      "docs/task52-ordering-safety-replay.json": "5f8a0b4430def9446731038bbfab73c86680e1a5686cab542e4c79e21bcad527",
+      "docs/task52-ordering-v3-release-limits.json": "492df8a55270a14650fca08fc4f55ad0913da3b815f5b94d751fe29158a6cad0",
+      "docs/task52-ordering-v4-cases.json": "7fdac5913d3d047c447e2f3bc81766a8de64f142e2ff2ccbe02ab576838a2d08",
+      "docs/task52-ordering-v4-holdouts.json": "7e62271ead63b1f5f5046643f04ae221ac40c11ac35f96261ca4064bd7c08d4b",
+      "docs/task52-ordering-v4-results.json": "dde02ceb1058285b363eb5f3e1c8832ab1ceaa357a1a13c00daf584adcb5237b",
+      "docs/task52-ordering-v4-verification.json": "a6b5c66a2d47e59256e5db72610cd9550e994dddeebd959deffa279861f12fc6",
+      "docs/task52-ordering-v5-all66-impact-v1.json": "b00c92fe79ae6109c4c78f9f98b20f780d20f004f1ae311bf4da24bccfbd888e",
+      "docs/task52-ordering-v5-cases-v1.json": "f8d1630ba00e4de46ede388b995a2657846b67df2dd637a79751b992e010c587",
+      "docs/task52-ordering-v5-historical-replay-v1.json": "dc2488a1e67ed08b1a21a1b826e58be87e8747d34bf6dbb6b52c1644a11a0983",
+      "docs/task52-ordering-v5-holdouts-v1.json": "96755dff9adc6921db4f4c29e6bed284cae77fa92f4a99566eac5685a6263573",
+      "docs/task52-ordering-v5-manifest-v1.json": "27bc9c983cc9f1ea5331ea06c555204c4395bb4ce97159ebb1ac7fc3c74c1e88",
+      "docs/task52-ordering-v5-review-checklist.md": "f56401531335733ac6f9c7c293ccb664e9ad532f88c44b27d13921a1d967d066",
+      "docs/task52-ordering-v5-verification-v1.json": "8a381287f7eb65b82457e7fe0ec4a8531cf6ee210eeb8d2d6c11b8b09c33d4e2",
+      "docs/task52-ordering-v51-all66-impact-v1.json": "f875291f5c71b63eeb3212f5182c5745cc00fe9b3c50ea7b42df66039784917b",
+      "docs/task52-ordering-v51-cases-v1.json": "0e897221dab8932538ce82f471f7ced6c48a1ba064090032609e0a1996f8523a",
+      "docs/task52-ordering-v51-holdouts-v1.json": "9cdf92f32ef5013e682e892c425f2c6b9ea895823638544668f433b1fce49836",
+      "docs/task52-ordering-v51-manifest-v1.json": "9791c0235b01f2bbe20e92e4020e7c11eea1fb16ca3333fbd377cb274513ee66",
+      "docs/task52-ordering-v51-replay-v1.json": "e5db1efcfa1c72af7771814683f2aba3cf3904d3863960562362038db02b1228",
+      "docs/task52-ordering-v51-verification-v1.json": "bbc38d6f446f8b0b8a997fe30978b40555a2f882802f01a6d57326d0b1aa5464",
+      "docs/task52-ordinary-hosted-integration.md": "26881ade1a5ff68cf65c12f76a36830b574d8d4ce11a350d7cc1a674071563b1",
+      "docs/task52-ordinary-hosted-verification.json": "3a1157e4d15767ea57cc148e0f4ed169de59b5fa747a06599b659ecfd33c9667",
+      "docs/task52-ordinary-private-ui-verification.json": "7f92206488b4da66ea2dbe5207ca7a5224ac58f4675cc5fc69c516f073ea34e5",
+      "docs/task52-ordinary-private-ui.md": "ff17f59efbe7a35ebe571bbabf29aef13cdeea269cfbc53d804ad4e8be08019d",
+      "docs/task52-owner-diagnostic-continuation-v1.json": "25ebab3999cb9dc6ac754291e75886e86663aa0e19460ef8b239926a4b4b0ede",
+      "docs/task52-phase-b-extraction-v1.md": "2284c342b7a737fb0ce99d9b12875c81a360ff9c7845e9f6f6efde9ac174ea5b",
+      "docs/task52-phase-b-legacy-characterization-v1.json": "20401f483444922c81bad3a0550fdea9e8c87f7f28e7aaffee0e34c8779c830f",
+      "docs/task52-phase-b-verification-v1.json": "fddf87fef90058b0dc25128ade130a68211d7d5044dbed2db148c2bb2d26ca39",
+      "docs/task52-phase-b2-historical-replay-blocker.md": "4f6e9602b9736be0a0662a9af24d76a73e17a033c72ee63a4e7b89fda23e25fa",
+      "docs/task52-phase-b2-preflight-verification-v1.json": "34d9521dd426e675e792e1b7dd172f4c283c1065132ac4b686d08040bdc1b9a2",
+      "docs/task52-private-role-continuation-verification.json": "49996d96be410e0479807f4bb31d3d32f39590ba12347cf595f8b6242d447ce3",
+      "docs/task52-private-role-continuation.md": "ec9ec4d0511c86a6b9d43136e2fee51b0d598b779c8d63bac654fe9d8a94ab82",
+      "docs/task52-private-role-security-review.json": "0bc181afb7377a8783ec9edb3d3b76ab4603144bd72a70e4771fbba6d8eeff7e",
+      "docs/task52-private-staging-preflight.md": "ed858fc5e44001f39d42b38d70e88a8980949bac0f15d1e43e2412cadd073912",
+      "docs/task52-production-implementation-plan.md": "4a845de779c71d40a7eedf4b5e6542c8f52488e52da232b0685c5cfe5f9a0318",
+      "docs/task52-production-service-packaging-verification.json": "3fb7f9448578ced394868dbe64bfdf4391b768989ab1de6c88ab933922c8cce7",
+      "docs/task52-production-service-packaging.md": "3ab49cf102afcdcf99d52109196c077f37326fd453dd7f3ec3fd6c3576af8829",
+      "docs/task52-prompt-proposal-v4.json": "665937dc63dd928131ba8f7d4004e9254b2a24b3352adb1695998d66aa6d1ea9",
+      "docs/task52-prompt-revision-v3.json": "b4cfb074e7595187ae01d523486f4daf334ede2a0cb20c033b211aef2798f1c7",
+      "docs/task52-provider-action-bridge.md": "618104cafd5e095a673fc8765b65bf7def1c48bb5a1ffd1d30f5297b12924101",
+      "docs/task52-provider-action-verification.json": "b26ea9e43bc1e5022bafd3bb814d8c6b8bf4c4e4ccb34a30b71ccc6316ebb927",
+      "docs/task52-q1-independent-review-v1.json": "24c58fa82092cceb3c413c80f0c53242b0ce48cc3918e284885c60baa7951ff4",
+      "docs/task52-q1-offline-manifest-v1.json": "a2736b5412e8788b719c400f7121cec12e6359bc11ba327269b5af5eecb06f7b",
+      "docs/task52-q1-openai-replay-v1.json": "83a644cd646ef1486f2b2237bbe80ce01016ca26a123a2bf04744537c9ef4bad",
+      "docs/task52-q1-qualification-v1.md": "46649dccf0ff0119208e7e6b6ec296a2bc1bdbad66252241a8ebd540b51b24ed",
+      "docs/task52-q1-rubric-v1.json": "e71e024dec029b1a9daed00dd42352bc8cb60711d09d1c8e5e05f9651d771dec",
+      "docs/task52-q1-rubric-v2-owner-list-PROPOSED.json": "4ab6416ee076ec95e864275da9251f6b4a3fe291f4ff2478f9de339d1add53d6",
+      "docs/task52-q1-rubric-v3-v51-PROPOSED.json": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+      "docs/task52-q1-verification-v1.json": "0bee7e4b1dc49314180f88a9a8a30531347faac11df9bb74033160bcee2d032e",
+      "docs/task52-q2-anthropic-proposal-v1.json": "d9ba6cbb3f6e75f994d978b1e4b981bf27cfecfb3dbb8491de9e2402a70d5bbe",
+      "docs/task52-q2-decisions-v1.json": "2183f2b7c2b71bb50e5c5544178bb6b6e16a287ad6d0fa27f749217adc11d9b6",
+      "docs/task52-q2-evidence-v1.json": "5d8d9bfef2996721ca39e563e6332972e01b95acfd8835090913091c6c907377",
+      "docs/task52-q2-google-proposal-v1.json": "7e0c243bcb735451da393c33eed858348954b05983db68ee7f0ed6fc9b3a59a3",
+      "docs/task52-q2-provider-compatibility.md": "93615923314da28ac3a1497a15b8303183268d32718b8734a77da3ddac8a7af1",
+      "docs/task52-q2-verification-v1.json": "bce2d5b849086a4ca34f147babcc10388b092e2c1f89a5303498caa3c4d653ca",
+      "docs/task52-q3-continuation-design.md": "cc7797c7ea452893dfc396bd6e3b6da64a718f6d05f221e281000d2684011f9f",
+      "docs/task52-q3-independent-review-v1.json": "fbee9adc1a89f9b0ea5a4481f83a5bd8eec2c4eb580fcda8809a24335aef894e",
+      "docs/task52-q3-openai-proposal-v1.json": "79f6a463c292916cecf8ad248d763fabf991d23908ad23581cdcef48a79edb27",
+      "docs/task52-q3-openai-v5-PROPOSED-v2.json": "edacc7a76d6257acfe5af78487c03255c312b2571c508aa3d31446e5718ded4f",
+      "docs/task52-q3-v51-PROPOSED-v3.json": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc",
+      "docs/task52-q3-verification-v1.json": "210c68d0f0e6ab83a9d6532e9b9a2d77af4d172749d5e772e0eb06d656e4a2d0",
+      "docs/task52-q4a-execution-manifest-v1.json": "8406905232a36726c17960d56cf66527edd79111750530871502378c711275c1",
+      "docs/task52-q4a-fictional-results-v1.json": "85b2a1822d8f9e07c583cfdbcb1aee312695959364a0d42b8345197ab4356f9a",
+      "docs/task52-q4a-future-readiness-v1.json": "91ea6b3c66c8736c0837114c5e8162e5a2ab19776e876e69cc0c2d41baddb33e",
+      "docs/task52-q4a-independent-review-v1.md": "b2f5c8bb1535a64d58d50bde7d68ff44692031d4f91f2edce9d2e354b2658cb3",
+      "docs/task52-q4a-successor-offline-v1.md": "b55185d5983c576be96b1b468c5bbcd4a49565067105f3fb1bbdf668d242b284",
+      "docs/task52-q4a-verification-v1.json": "e996e8a05ac1f41ba3a3c4c013d36fd507a6d69a28a59d5b56e38e46a7b84646",
+      "docs/task52-q4b-journal-inspection-v1.json": "48ab2d38dbc67a51954483955501207ff2a36204b605613f7ca9b57a8c10a24e",
+      "docs/task52-q4b-journal-operator-review.md": "0a09deaefb909667ad5c42181084c1ae0bc466ee71843fd1b2815f57159b80d6",
+      "docs/task52-q4b-operator-design-v1.json": "b27e307eb23b81940d66b3ebcf6d18cdcec552b282f848302547359fa5669977",
+      "docs/task52-q4b-verification-v1.json": "12838e826f8c91f2c72ca1a6fd1e58217300606bc9ff3832ca210037fbb07cc7",
+      "docs/task52-q4c-build-v1.json": "f09da947167d8e37deebee5b69bfb86cac62b402e49acc770cb25b4ad38511fb",
+      "docs/task52-q4c-fictional-results-v1.json": "24945e7e148450e5935c6024a23770d7cbf41cc652d7947a6e7d4e51d3010b6d",
+      "docs/task52-q4c-offline-protocol-v1.md": "024a2f9eb9ea264f324cbfe51ae384f8e7e28d43d98e00578e4f421eff246eb3",
+      "docs/task52-q4c-verification-v1.json": "af471af6826e7e54f97a5dc472a25121ab7117231ab00162375b512a71b34375",
+      "docs/task52-q4d-build-v1.json": "4e9c2cd268a589cfa2d3e32a04aac67da6dfdf809792afa26e08e8d9a91841f4",
+      "docs/task52-q4d-fictional-results-v1.json": "795d5037e580d399035ba13cbb4e3ed0ea597cfb03dd3b4701fb47e1c0ec2e8e",
+      "docs/task52-q4d-inspection-v1.json": "580a40e2a39e6849521c96f019569274589e3790db2182da51818bae7e54a06c",
+      "docs/task52-q4d-v51-journal-integration.md": "c47897193eeb08d296cfd748e9f0525424243acdfa8ca336a914de2ea91be99b",
+      "docs/task52-q4d-verification-v1.json": "c1f76b8f376bb131bd071875b74b2a3d0eaf1c965f84ed3e8846b3b83bbd48a6",
+      "docs/task52-real-integration-build-v1.json": "6c7e93fdefa6d726b4be7d8e5da5d24c5d4cdc5b6652ff254767b14bf8f793ac",
+      "docs/task52-real-integration-preparation-v1.md": "b4c9914500bd899b9d0ac4e25aeeb51f4e2ccf1ec0d4742e357d5a27312c11ad",
+      "docs/task52-real-integration-verification-v1.json": "58e64ac673b2be34796d7f6b17d5e6dd5ad02863b237e342432eb1184c7e035a",
+      "docs/task52-refresh-authority-owner-decision-v1.json": "9800e4e4ad6312c53023632a0d7daed1506e05e646351ae613d45e7b6420cbb2",
+      "docs/task52-runtime-phase-b1.json": "bba7caeab233f515d038a84c42842cbd20e37c13be64e8d2cd2da1b992b7d5a9",
+      "docs/task52-runtime-phase-b2.json": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+      "docs/task52-scope-exit-review.md": "29cb4e3446103c7c00f5948ca8456f4db1ec37abf64ce82a26afeecf3bc71a31",
+      "docs/task52-semantic-review.md": "9138ac1e5beaeec141673b6669d5bcaf5416a1521fca4fb114fcd6fc17715cab",
+      "docs/task52-service-isolation-verification.json": "bc4c2dff27fe01138c545f295c718eb7cecdf337aabea5c63559d874f29f9092",
+      "docs/task52-service-isolation.md": "8ce6b031c2348f115e4e43960e05d993956046b710b09dd719e63de06dfb5096",
+      "docs/task52-shared-evidence-privacy-v1.json": "51a0df09905cb6ccbd30e06b61e9c92b7a8d2b28f9b25be2794f719d6321c0bc",
+      "docs/task52-shared-evidence-verification.json": "bae029be1c3ed6e4a9f6baf4a0211ede9cec1ba56288f7f97adb3c58dba04de7",
+      "docs/task52-shared-evidence.md": "9bd56e1ad1d1038dcaafea98ab5daf25bd5fe6f2f1c6e4592984ff55830894f1",
+      "docs/task52-shared-state-foundations.md": "295acee7497f525a50f6c5442901c9af526abe33e562fdc07e7624f686c02795",
+      "docs/task52-shared-state-verification.json": "b2d34826cf8ff8bf8bffd6e9b7732a77a6bbdea3b7b419ad5c0655dd3592f0fd",
+      "docs/task52-source-compatibility-v1.md": "25ee4d9b9e917bd03604ea6e1bc36ac827f830fa9b6d67cc688afe0df6d14a94",
+      "docs/task52-source-identities-v1.json": "af0f271bea2aceafce244f8d43a948b88682a5bae5e8c417bb827e513efda259",
+      "docs/task52-source-transport-verification-v1.json": "09e41e7b46dc634985d8666341ecb08f368d6e3d484c0b4ee7a02890d6cdeaad",
+      "docs/task52-v4-openai-approved-continuation.json": "9f3848311a9d4e7a39b585b42b30a4bc4bb9fe48e2dd4e8937d284d89f2b6984",
+      "docs/task52-v4-openai-results.json": "1c521c6d5b905044a305454f358ac3e647321431ba285f49dc843bb5a4bae82f",
+      "docs/task52-v4-openai-test-plan.json": "da345ba7ed8135e90eaddf4136e6dea33b07a7f0f5f8050de85f6ff1d6629816",
+      "docs/task52-v4-readiness.json": "e95fe088a6029f52fbecf310125baba28231f0cbc7e7c004f1e864539f13875c",
+      "docs/task52-v4-readiness.md": "e7024e751fc396d04c1977ec83a9851f53768b51ae4d77ac9084d4bc3ea8a568",
+      "docs/task52-v5-rubric-impact-decisions-v1.json": "4c80a4c126a3c525cdf00c8c53215af1590711a743efd88d962f729ed6971891",
+      "docs/task52-v51-evaluator-build-v1.json": "756976849efc43e58032f4c3ff5abeef8465f85e4b1860d3b93e5b128aefaf07",
+      "docs/task52-v51-evaluator-fake-results-v1.json": "028c8126e815dd12ce27b585fbef8ea1f73c27baab6b685c4c588209d9bd8d1c",
+      "docs/task52-v51-evaluator-historical-comparison-v1.json": "fe6d5cbb722829eef0cb6d197a7ccc0adf6a4632920996195917671e89fad09b",
+      "docs/task52-v51-evaluator-verification-v1.json": "329d3dc4e582734cf858858ecd977e891942289cfc83822c4015434fefae7217",
+      "docs/task52-v51-five-case-owner-review-v1.json": "f70bacefcfd9bb1f703156ddaeedeaacac24141686b001aec0239f7acb8dab2b",
+      "docs/task52-v51-five-case-owner-review.md": "2344a914de1156c2b3d173350fb4a3696185ab482a95d667920aa163bbd3700b",
+      "docs/task52-v51-five-case-owner-verification-v1.json": "a993a971453ab2c919f52a88e479aaac97dd6c16bd71ad20c91503b008dfff4d",
+      "docs/task52-v51-local-application-integration.md": "1bdfd08737595700f16c8449bc457464ef5f95ae6e7a7ec9f0713ec45a918e92",
+      "docs/task52-v51-local-application-verification.json": "e89fb4d42654a8f1deb35f55483d3f9768b50937d56850eda627e0cfd9d132d1",
+      "docs/task52-v51-manual-pending-verification.json": "d759bb68c71daeb211a6e0bcf46f108baf60c07a979543f9489fce5f2d1ab96a",
+      "docs/task52-v51-manual-pending.md": "982204f2c87f70bb58a054a08a27b0527b0ca3f1dd257825a6a87ae8a2312d1c",
+      "docs/task52-v51-next-approval-gates.md": "0c691dca09139bf5e510fad675008abafd395f8be40bb27da4f0ceeb41a7c0ec",
+      "docs/task52-v51-offline-evaluator-v1.md": "990744627d48a70c2797b743eafc158d6ed26a2f8128ae2098c0eb802de0f1e8",
+      "docs/task52-v51-ordering-generalization-verification.json": "9a9cb66ad0acf5d90bc2827a959f572b15ec651fe54157338218bcc0407970db",
+      "docs/task52-v51-ordering-preservation-dev.md": "ab3e7805a01cf1ec099a3dc5d3ce34a06ccb806aeaa92601857e2d312d220e27",
+      "docs/task52-v51-ordering-preservation-generalization.md": "9a9499c6a57761e5b486fc67e05140ace9f145cbaf3ab6921b5d1f6ceb30da03",
+      "docs/task52-v51-owner-example-decisions-v1.json": "b2b554e2806aa64d3659ad5d09ad47e500099543731559f11dcb2b4492fba782",
+      "docs/task52-v51-prompt-freeze-verification-v1.json": "6a63707a10580098a4d912684fd4bc4317d4d8faaf583733fc58f5557c33aaff",
+      "docs/task52-v51-prompt-freeze.md": "7fe72697461a0b43c1ebdac096f35b9bd58e06fc576f0c9eda5ad37b26072932",
+      "docs/task52-v51-review-checklist.md": "501dd77f20bb5bd842aa8fcaf431cf492f57e124dfffc671e5d7dad20238d48e",
+      "docs/task52-validation-admission-foundations.md": "8389a71a419b8b4824a95dcb073f407063703ee1aac8c0c71f432ddc062420e9",
+      "docs/task52-validation-admission-verification.json": "bf49556e22e07639ab95d0b83e0161b0008a29e3da2679079d4fb89ae9fd7db8",
+      "docs/task52-independent-review/PACKAGE.md": "6081a0224d750633a68e4a729782405a0d83a4f4034a3f8195bde183ddb253a3",
+      "docs/task52-independent-review/REVIEW_FORM.md": "a19d7ce45d691a3f4141ae0bd6066a3f4c3625df4364b7dc94a7466a5ffab52d"
+    },
+    "originalIndependentPacketAndFormUnchanged": true,
+    "conditionalFinancialArithmeticVerified": true,
+    "newJSONAndLinksVerified": true,
+    "all20HandbookOriginalBytesRetained": true
+  },
+  "historicalAttempts": [
+    {
+      "slot": [
+        "google",
+        "journey-01",
+        1
+      ],
+      "rowHash": "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "payloadHash": "2ae58be55d1ab5661b2c0ae7232eb32e5eca2d9c05801c6a7f4f4d5eef33a78f",
+      "configurationHash": null,
+      "HTTP": 400,
+      "cause": "unresolved_generic_INVALID_ARGUMENT",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": null,
+      "reservationNanodollars": 16500000,
+      "model": "gemini-3.8-flash",
+      "completeErrorOperationLatencyMs": 1149.79175,
+      "reportedUsage": null,
+      "actualInvoiceCharge": null
+    },
+    {
+      "slot": [
+        "google",
+        "journey-02",
+        1
+      ],
+      "rowHash": "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "responseHash": "1bf7d35f1138b14078df4a035fa20ac80351c25b372bc6e7181096a77be00ced",
+      "payloadHash": "209f8686fb98a1b16b6893e880481396a6d40acc53410ac945fa8ec36a693936",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "HTTP": 400,
+      "cause": "unresolved_generic_INVALID_ARGUMENT",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": true,
+      "reservationNanodollars": 16500000,
+      "model": "gemini-3.8-flash",
+      "completeErrorOperationLatencyMs": 1369.127542,
+      "reportedUsage": null,
+      "actualInvoiceCharge": null
+    },
+    {
+      "slot": [
+        "anthropic",
+        "journey-01",
+        1
+      ],
+      "rowHash": "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "responseHash": "9f0152e67f23d75183a8b33407f99adf34170d20d880190fe8b664f589528162",
+      "payloadHash": "0dc7a1b2ecae537abcd40613ad1b7d19e6688190beedb8cfa85af0ece183d7f9",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "HTTP": 400,
+      "cause": "structured_output_grammar_size_rejection",
+      "fieldDetailsAvailable": false,
+      "completeModelOutput": false,
+      "currentPureBuilderReproducesPayloadHash": true,
+      "reservationNanodollars": 2200000,
+      "model": "claude-haiku-5-5",
+      "completeErrorOperationLatencyMs": 396.463,
+      "reportedUsage": null,
+      "actualInvoiceCharge": null
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-01",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "8bab2d72f16e623b58faa8ae56880ed494db14f6c226741cf16b71b8dbfdb78e",
+      "responseHash": "e1d59ba1e521d8ee4c7d7eb738aa80a8707186018963fd3ba9311702ccfeb7d9",
+      "journalRowHash": "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "originalClassification": "provider_error",
+      "historicalRawFinding": "agent_review_correct_not_independently_qualified",
+      "legacy": "accepted_ordinary",
+      "v4Guard": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "v51OrderingOnly": "clarification_required",
+      "independentCorrectness": null,
+      "completeLatencyMs": 2764.7997090025456,
+      "providerUsage": [
+        5058,
+        180
+      ],
+      "retainedNanodollars": 2500000
+    },
+    {
+      "slot": [
+        "openai",
+        "ordinary-dinner",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "ae490f259f2eba32c1c6bc75c303bd9e80f2770946887c7d56e29053fdf59eaf",
+      "responseHash": "56e621249164c5ba64bfe1e24c97ec8c5f5afaa877c26565a8f88f5f30a7c627",
+      "journalRowHash": "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "originalClassification": "complete",
+      "historicalRawFinding": "agent_review_correct_not_independently_qualified",
+      "legacy": "accepted_ordinary",
+      "v4Guard": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "v51OrderingOnly": "clarification_required",
+      "independentCorrectness": null,
+      "completeLatencyMs": 3038.414125003328,
+      "providerUsage": [
+        5058,
+        176
+      ],
+      "retainedNanodollars": 720250
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-03",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "d80254355cc28ffc486e5a17e2db65152906fcf36bc353a6c67b39b9f16f49b6",
+      "responseHash": "ba14df15ddbdb0fc138b6b3a567cc745d0adab58d470f813d8d6e1a8e3f082e8",
+      "journalRowHash": "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "originalClassification": "complete",
+      "historicalRawFinding": "agent_review_correct_not_independently_qualified",
+      "legacy": "accepted_advanced_handoff",
+      "v4Guard": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "v51OrderingOnly": "verified_no_mandatory_order",
+      "independentCorrectness": null,
+      "completeLatencyMs": 2471.989792000386,
+      "providerUsage": [
+        5059,
+        166
+      ],
+      "retainedNanodollars": 715375
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-07",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v3-equivalent-default-compaction",
+      "configurationHash": "1c2352a7ec2b0bf826567de22b36ff2265bcd957e979d5b307cface7b5e0ee4e",
+      "payloadHash": "6b610577b96bb5828ce4a44a7b95c8b2413141143e3f208f3efe77c03988af95",
+      "responseHash": "bde5ab90c8a09670b4e2e869e1080280aaadee1db22cef162a963444eb62e4a9",
+      "journalRowHash": "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "originalClassification": "complete",
+      "historicalRawFinding": "incorrect_provenance",
+      "legacy": "blocked_or_clarify",
+      "v4Guard": "blocked_by_complete_legacy_validation",
+      "v51OrderingOnly": "clarification_required",
+      "independentCorrectness": null,
+      "completeLatencyMs": 2196.1186670014285,
+      "providerUsage": [
+        5060,
+        197
+      ],
+      "retainedNanodollars": 731000
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "4add1a8c78d25e2fab2810d038fe92619dc4fb7eef42bb9d7e86943f18b9d2ea",
+      "responseHash": "10ca8e203a41036b6fb39847fe70c4eb5da3139a15bb6c8225b12508b8c4f903",
+      "journalRowHash": "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "originalClassification": "complete",
+      "historicalRawFinding": "agent_review_correct_not_independently_qualified",
+      "legacy": "accepted_advanced_handoff",
+      "v4Guard": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "v51OrderingOnly": "verified_order",
+      "independentCorrectness": null,
+      "completeLatencyMs": 3080.241957999533,
+      "providerUsage": [
+        5127,
+        213
+      ],
+      "retainedNanodollars": 2500000
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "a1fb2d22a64e41e48cdc7d1463ac0292a63bb14be3605fd33640f5ff62ed02d1",
+      "responseHash": "6002a8b95944a85e8ddc5024d89be3f31c619e1f80f14e4f27ae95f5c85757f7",
+      "journalRowHash": "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "originalClassification": "complete",
+      "historicalRawFinding": "agent_review_correct_not_independently_qualified",
+      "legacy": "accepted_advanced_handoff",
+      "v4Guard": "candidate_acceptance_after_legacy_checks_not_planning_authority",
+      "v51OrderingOnly": "verified_order",
+      "independentCorrectness": null,
+      "completeLatencyMs": 3242.775167003856,
+      "providerUsage": [
+        5131,
+        233
+      ],
+      "retainedNanodollars": 2500000
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        1
+      ],
+      "model": "gpt-6-luna",
+      "prompt": "52b-v4-order-edge-quotes",
+      "configurationHash": "6c14d470f27ac95152d1c12eec6b48adbeba869901bd49b5548e4447499056e3",
+      "payloadHash": "8b23ba8b4f73f1f507494ab7fba54521c4575c4e39ddbf0726fc435c4ff5be34",
+      "responseHash": "2003d7e73339732e9f15e79e24b3d4da7cb48917a766e8acf22284da4bdcd1c3",
+      "journalRowHash": "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527",
+      "originalClassification": "complete",
+      "historicalRawFinding": "incorrect_unsupported_order",
+      "legacy": "accepted_advanced_handoff",
+      "v4Guard": "blocked_by_independent_ordering",
+      "v51OrderingOnly": "verified_order",
+      "independentCorrectness": null,
+      "completeLatencyMs": 3131.913541990798,
+      "providerUsage": [
+        5134,
+        257
+      ],
+      "retainedNanodollars": 2500000
+    }
+  ],
+  "historicalCounts": {
+    "cloud": 10,
+    "localQwenOrderingRecords": 27,
+    "q1V4OpenAI": {
+      "responses": 7,
+      "structuredValid": 7,
+      "agentRubricCorrect": 5,
+      "rawFailures": 2,
+      "legacyAccepted": 6,
+      "guardCandidateCompatible": 5,
+      "independentSignoffs": 0
+    },
+    "V51RecordedReplay": {
+      "Qwen": 27,
+      "QwenV51OrderingCompatible": 19,
+      "QwenWithLegacyJourneyCompatibleOnly": 8,
+      "OpenAI": 7,
+      "OpenAIV51OrderingCompatible": 4,
+      "OpenAIWithCompleteB2CompatibleOnly": 4,
+      "changedV5OrderingOutcomes": 0,
+      "independentApprovals": 0
+    },
+    "notFreshReplays": true
+  },
+  "recordedInputCounting": {
+    "v3": {
+      "openai": {
+        "countedInputTokens": 5077,
+        "countMargin": 2048,
+        "inputUpperBound": 7125,
+        "freshJourney01InputTokens": 5058,
+        "nonInferenceRequestsThisContinuation": 1,
+        "source": "Prior 66 complete case counts retained; exact journey-01 reasoning-none/schema payload recounted successfully before this single dispatch."
+      },
+      "google": {
+        "countedInputTokens": 5786,
+        "countMargin": 2048,
+        "inputUpperBound": 7834,
+        "nonInferenceRequests": 67
+      },
+      "anthropic": {
+        "countedInputTokens": 10931,
+        "countMargin": 512,
+        "inputUpperBound": 11443,
+        "nonInferenceRequests": 67
+      }
+    },
+    "v4OpenAIMin": 5117,
+    "v4OpenAIMax": 5141,
+    "v4OpenAIConservativeBound": 7189,
+    "freshV51CompleteInputCountsVerified": false
+  },
+  "publicDocs": {
+    "manifest": "task52b-provider-documentation-v1.json",
+    "retrieved": 16,
+    "officialAndUnauthenticated": true,
+    "notAccountOrCompilationReadiness": true
+  },
+  "tests": {
+    "command": "CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52_q1 backend.test_task52_q2 backend.test_task52_ordering_v51 backend.test_task52_version_review -v",
+    "status": "FAILED (errors=10)",
+    "reported": 37,
+    "passed": 27,
+    "assertionFailures": 0,
+    "errors": 10,
+    "skipped": 0,
+    "seconds": 25.007,
+    "errorTests": [
+      {
+        "test": "test_manifest_and_all_66_field_records",
+        "class": "backend.test_task52_q1.QualificationContractTests.test_manifest_and_all_66_field_records",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_seven_replay_both_failures_and_original_evidence",
+        "class": "backend.test_task52_q1.QualificationContractTests.test_seven_replay_both_failures_and_original_evidence",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_all_66_payloads_per_provider_construct_offline_with_same_prompt",
+        "class": "backend.test_task52_q2.ProviderCompatibilityTests.test_all_66_payloads_per_provider_construct_offline_with_same_prompt",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_exact_original_error_evidence_and_halt_unchanged",
+        "class": "backend.test_task52_q2.ProviderCompatibilityTests.test_exact_original_error_evidence_and_halt_unchanged",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_q1_stays_separate_and_original_paid_source_gate_still_refuses",
+        "class": "backend.test_task52_q2.ProviderCompatibilityTests.test_q1_stays_separate_and_original_paid_source_gate_still_refuses",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_all66_amendment_preserves_nonorder_gold_and_labels_resolution",
+        "class": "backend.test_task52_ordering_v51.OwnerV51Tests.test_all66_amendment_preserves_nonorder_gold_and_labels_resolution",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_manifest_unknown_or_authorizing_identity_refuses",
+        "class": "backend.test_task52_ordering_v51.OwnerV51Tests.test_manifest_unknown_or_authorizing_identity_refuses",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_prompt_examples_keep_nonorder_contract_and_full_exact_payload",
+        "class": "backend.test_task52_ordering_v51.OwnerV51Tests.test_prompt_examples_keep_nonorder_contract_and_full_exact_payload",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_replay_and_successor_keep_historical_failures_and_blank_authority",
+        "class": "backend.test_task52_ordering_v51.OwnerV51Tests.test_replay_and_successor_keep_historical_failures_and_blank_authority",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      },
+      {
+        "test": "test_working_source_changes_do_not_pass_as_historical_equality",
+        "class": "backend.test_task52_version_review.VersionReviewTests.test_working_source_changes_do_not_pass_as_historical_equality",
+        "exception": "scripts.task52_version_review.VersionError",
+        "gate": "frozen B2 identity verification"
+      }
+    ],
+    "logSHA256": "4a96fd7c91555c2152501da957c5d056930aac54159b160df154e169bdc94296",
+    "frozenB2ExpectedRoot": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+    "currentRoot": "65d0ecd43587dcb975962b9c623efeac7eff3e0a0b1ada2b116f97d537c6c24b",
+    "explicitPinnedDifferences": [
+      {
+        "path": "package-lock.json",
+        "expected": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+        "actual": "4839855e8e2ec9b60f186902ceb75d040c68e01a896f7813b4e46682e4a8b878"
+      }
+    ],
+    "refusalsNotRelabeledPass": true,
+    "notRerun": [
+      "actual27 Qwen/seven OpenAI end-to-end replay blocked by frozen identity",
+      "full backend/frontend/TypeScript/lint/build/container/browser suites: no application/build changes",
+      "paid readiness/account/token/inference tests: prohibited",
+      "independent semantic review: human evidence missing"
+    ],
+    "additionalOfflineChecks": [
+      "66 source-hash/corpus equality checks",
+      "5 selected sources and120 copied field judgments bound to frozen Q3",
+      "19 examples structurally validate under current typed model; template equality and hash",
+      "37 frozen-contract tests as reported above",
+      "existingQ2 schema projections and full expanded composition equivalence",
+      "all120 human response fields remain blank",
+      "all frozen evidence/document hashes unchanged",
+      "financial arithmetic and unused-slot checks",
+      "new document links/JSON/diff check"
+    ]
+  },
+  "journalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "humanBoundary": {
+    "packet": "task52-independent-review/PACKAGE.md",
+    "blankForm": "task52-independent-review/REVIEW_FORM.md",
+    "addendum": "task52-independent-review/QUALIFICATION_CHECKLIST.md",
+    "deliverable": "120 independent judgments +6 historical questions +4 normalizer questions; identity/date/independence/corrections/overall decision",
+    "answersGenerated": false
+  },
+  "handbook": {
+    "reviewed": [
+      "08",
+      "17",
+      "18"
+    ],
+    "updated": [
+      "17"
+    ],
+    "all20ChaptersPreserved": true,
+    "architectureReviewedUnchanged": true
+  },
+  "nextAction": "Independent human review of existing packet and normalizer addendum. Then narrow evaluator/readiness/financial approval review, not infrastructure implementation.",
+  "securityChecks": {
+    "task52b-selection-secrets.log": {
+      "sha256": "933a14d3d08186a0b4e4a527652faa277ab96f0831f9b3da371c0e1dfde2796a",
+      "result": "Credential scan: 2 configured sensitive values; 3735 current files/assets; 3967 historical objects; current matches=0; historical matches=0."
+    },
+    "task52b-selection-eval-secrets.log": {
+      "sha256": "da58ebe805b12deeb986092e34c03d37c2c88427c503fe026486a6fbdb6995d1",
+      "result": "{\"evaluationSecretValuesChecked\": 3, \"currentMatches\": 0, \"historicalMatches\": 0, \"configIgnoredAndMode600\": true}"
+    },
+    "task52b-selection-integrity-before.log": {
+      "sha256": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+      "result": "Read-only before/after identities match: ten rows, all 324 files and halt."
+    },
+    "task52b-selection-integrity-after.log": {
+      "sha256": "57a1c2a7d47ec98c19391a3163907b609d13973b0a9ec493da70256017563fc1",
+      "result": "Read-only before/after identities match: ten rows, all 324 files and halt."
+    }
+  },
+  "changedFiles": [
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52-independent-review/QUALIFICATION_CHECKLIST.md",
+    "docs/task52b-model-qualification-plan-v1.json",
+    "docs/task52b-model-qualification-status.md",
+    "docs/task52b-model-qualification-verification-v1.json",
+    "docs/task52b-provider-documentation-v1.json"
+  ],
+  "proposedReadinessScope": "At most1 model GET and5 exact input counts; currently unauthorized; no inference/retry/automatic refresh",
+  "reviewIssues": [
+    "Inherited explicit-order-case indexBasis note uses V4-era list wording; actual five-case expected graphs agree with V5.1. Recorded for independent editorial adjudication; no frozen field changed."
+  ],
+  "finalSecurityChecks": {
+    "task52b-final-credential-scan.log": "Credential scan: 2 configured sensitive values; 3735 current files/assets; 3967 historical objects; current matches=0; historical matches=0.",
+    "task52b-final-eval-scan.log": "{\"evaluationSecretValuesChecked\": 3, \"currentMatches\": 0, \"historicalMatches\": 0, \"configIgnoredAndMode600\": true}"
+  }
+}

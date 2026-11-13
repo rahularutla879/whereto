@@ -122,3 +122,8 @@ Create a paper comparison with columns original source, immutable raw output, ol
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-17).
 
 [Previous chapter](16-git-github-and-the-development-workflow.md) · [Contents](README.md) · [Next chapter](18-cloud-hosting-deployment-and-scalability.md)
+
+
+### Current cloud-model qualification review (documentation only)
+
+The [finite selection audit](../task52b-model-qualification-status.md) returns Task52B to model qualification. The existing five-case packet has120 independent judgments still blank. Owner-approved meanings need no repeat approval; a model screen needs independent review, a current exact execution identity and explicit financial permission. Older replay tests now refuse frozen B2 identity on the changed checkout; that is not a fresh model result. Five diagnostic successes cannot establish the broader clean-cohort/held-out gate. No infrastructure, model or evaluation runtime changed in this review.

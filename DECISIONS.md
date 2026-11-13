@@ -1,3 +1,7 @@
+## Task52B — finite model qualification, independent review first
+
+Recommend the exact existing five-slot OpenAI V5.1 diagnostic first for demonstrated request compatibility, not assumed accuracy superiority. Keep Anthropic grammar and Gemini schema/IP/count blockers separate. Reuse the blank120-field review packet and distinguish raw/legacy/V5.1/diagnostic/planning outcomes. No prior owner product decision needs repeat approval. No new infrastructure work, real grant or dispatch is authorized. Current B2 replay identity rejects changed dependency/source root; preserve the refusal and freeze a separately reviewed execution profile before live use. A clean broader cohort cannot reuse old v3/v4 consumed slots and needs an explicit finite slot/cap decision. [Evidence and proposed decisions](docs/task52b-model-qualification-status.md).
+
 > Current Task52 bounded local result: [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md). Earlier candidate entries below are preserved historical development state. Local packaging verification does not approve private hosting, financial grants or public launch.
 
 ## Task 52 — direct session-affine witness and source-derived private role candidate

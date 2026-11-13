@@ -1,0 +1,300 @@
+{
+  "identity": "52b-finite-model-qualification-PROPOSED-v1",
+  "approved": false,
+  "executionAuthorized": false,
+  "baseline": "a981655eb84c21af5b1b498d3f5fefe9b04392b4",
+  "prompt": {
+    "identity": "52b-cloud-v5.1-owner-list-order-REVIEWED-v1",
+    "path": "docs/task52-cloud-prompt-v51-REVIEWED-v1.json",
+    "fileSHA256": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+    "hash": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+    "configurationHash": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8",
+    "messages": 40,
+    "examplePairs": 19,
+    "canonicalSchema": "7ca1ed2e2701d4adc4735bc523abba1c7eb09060c5fa61b07da37673d8aec965",
+    "openaiWireSchema": "c272ae5a066c43bd76f65932a608303472df27b3aa400db936e3728849cb0766",
+    "policy": "52b-order-policy-v5.1-owner-decisions-offline",
+    "scorer": "52b-semantic-v5.1-owner-decisions-PROPOSED",
+    "rubric": "52b-q1-rubric-v3-owner-decisions-v5.1-PROPOSED",
+    "rubricSHA256": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+    "referenceTime": "2026-11-05T15:00:00Z",
+    "timezone": "America/New_York for these five sources; no invented date if absent",
+    "original66CaseCorpusSHA256": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f"
+  },
+  "originalLimits": {
+    "globalOriginalUSD": "12.00",
+    "globalOriginalAttempts": 594,
+    "originalProviderAttempts": 198,
+    "inputTokens": 12000,
+    "billableOutputIncludingReasoningTokens": 2000,
+    "concurrency": 1,
+    "retries": 0
+  },
+  "recommendedFirstScreen": {
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "endpoint": "POST /v1/responses",
+    "slots": [
+      {
+        "position": 1,
+        "slot": [
+          "openai",
+          "extension-repeated",
+          2
+        ],
+        "source": "Coffee, museum, then coffee in Jersey City tomorrow, return to the starting point within three hours.",
+        "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+        "proposedPayloadHash": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+        "rubricCaseDigest": "47805dff6e93274c6e8425dc1ab7da1deddcc9e698e1a7f8ba1ea69af27b490a",
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "all24Reference": "docs/task52-q3-v51-PROPOSED-v3.json#/slots/0/all24Expectations",
+        "all24SHA256": "c027e856bfc203be01cae117e4e9b28909b7d2c8a79b023e7f92bfd75ff113ff"
+      },
+      {
+        "position": 2,
+        "slot": [
+          "openai",
+          "journey-04",
+          2
+        ],
+        "source": "Go to SUNY College of Optometry and then get coffee.",
+        "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+        "proposedPayloadHash": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+        "rubricCaseDigest": "5ddec2e32f522a6c982d17ef1a945fbefc5bd30bf26fe983cea307a4004e1273",
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "all24Reference": "docs/task52-q3-v51-PROPOSED-v3.json#/slots/1/all24Expectations",
+        "all24SHA256": "f47102d075c975a139e6db1406e8d673af29a00cb9a876220b64aab7ad6369ce"
+      },
+      {
+        "position": 3,
+        "slot": [
+          "openai",
+          "extension-partial",
+          2
+        ],
+        "source": "Visit a pharmacy before the bank; get coffee whenever convenient, in Jersey City tomorrow.",
+        "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+        "proposedPayloadHash": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+        "rubricCaseDigest": "f4ebb1622af9562399652af1313dcb9e4e78ad6fe940bdb26d7c769ef71b3f42",
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "all24Reference": "docs/task52-q3-v51-PROPOSED-v3.json#/slots/2/all24Expectations",
+        "all24SHA256": "96d45d72b6099458a5a45d1d67a8af59e5dbe98df73c270babf1cd3050c6b58b"
+      },
+      {
+        "position": 4,
+        "slot": [
+          "openai",
+          "journey-06",
+          2
+        ],
+        "source": "Buy groceries and maybe stop for coffee.",
+        "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+        "proposedPayloadHash": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+        "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088",
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "all24Reference": "docs/task52-q3-v51-PROPOSED-v3.json#/slots/3/all24Expectations",
+        "all24SHA256": "8f38a4839c9f6018f921595d661abad4cca346bc9393233c66c4318e7a8cee0a"
+      },
+      {
+        "position": 5,
+        "slot": [
+          "openai",
+          "journey-21",
+          1
+        ],
+        "source": "Visit the pharmacy before the bank, but the bank before the pharmacy.",
+        "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+        "proposedPayloadHash": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+        "rubricCaseDigest": "986ab85d0c05081f25f99516457ce6c290133104fdb514c8632be1c493794daa",
+        "independentReviewComplete": false,
+        "currentlyAdmissible": false,
+        "all24Reference": "docs/task52-q3-v51-PROPOSED-v3.json#/slots/4/all24Expectations",
+        "all24SHA256": "a31460f940c3e9a3a9576c6f87fbf5090e57518c355fae9c3a47f4283735bbc6"
+      }
+    ],
+    "maximumAttempts": 5,
+    "inputCap": 12000,
+    "outputCap": 2000,
+    "maxReservationNanodollarsEach": 2500000,
+    "maximumGrossReservationNanodollars": 12500000,
+    "currentPublicRateBoundNanodollarsPerToken": {
+      "inputWithDefault30mCacheWrites": 125,
+      "outputIncludingReasoning": 500
+    },
+    "serviceTier": "default/standard global",
+    "modelRevision": "Public docs list gpt-6-luna only; fresh readiness must bind actual serving identity or explicitly approved alias/version policy. No invented dated snapshot.",
+    "requestBytesChanged": false,
+    "currentlyAdmissible": false,
+    "whyFirst": "Only exact candidate with demonstrated prior request acceptance; cheapest incremental compatibility uncertainty, not independently proven superior accuracy.",
+    "noSchemaWarmupsOrRetries": true,
+    "promptExposure": "SUNY and contradiction requests are verbatim few-shot examples; groceries/repeated visits overlap examples. Not held-out generalization.",
+    "allInLiabilityReadiness": "Unverified taxes/FX/account fees or any category that cannot fit the maximum approved gross reservation must refuse or require revised owner scope. Token-rate arithmetic is not a guaranteed invoice."
+  },
+  "conditionalMatchedCandidateScreens": [
+    {
+      "provider": "anthropic",
+      "model": "claude-haiku-5-5",
+      "endpoint": "POST /v1/messages",
+      "caseOrder": [
+        [
+          "extension-repeated",
+          2
+        ],
+        [
+          "journey-04",
+          2
+        ],
+        [
+          "extension-partial",
+          2
+        ],
+        [
+          "journey-06",
+          2
+        ],
+        [
+          "journey-21",
+          1
+        ]
+      ],
+      "maximumAttempts": 5,
+      "rateNanodollars": [
+        100,
+        500
+      ],
+      "conditionalNanodollarsEach": 2200000,
+      "conditionalTotalNanodollars": 11000000,
+      "status": "BLOCKED",
+      "wireProposalSHA256": "d9ba6cbb3f6e75f994d978b1e4b981bf27cfecfb3dbb8491de9e2402a70d5bbe",
+      "wireProposalActivated": false,
+      "providerV51FullPayloadHashes": null,
+      "prerequisites": [
+        "provider-supported grammar resolution for original/factored schema",
+        "freeze exact provider-specific V5.1 complete payloads",
+        "certify all formatting token overhead and disabled thinking",
+        "fresh account/privacy/rate readiness; independent/financial approvals"
+      ]
+    },
+    {
+      "provider": "google",
+      "model": "gemini-3.8-flash",
+      "endpoint": "POST /v1beta/models/gemini-3.8-flash:generateContent",
+      "caseOrder": [
+        [
+          "extension-repeated",
+          2
+        ],
+        [
+          "journey-04",
+          2
+        ],
+        [
+          "extension-partial",
+          2
+        ],
+        [
+          "journey-06",
+          2
+        ],
+        [
+          "journey-21",
+          1
+        ]
+      ],
+      "maximumAttempts": 5,
+      "rateNanodollars": [
+        750,
+        3750
+      ],
+      "conditionalNanodollarsEach": 16500000,
+      "conditionalTotalNanodollars": 82500000,
+      "status": "BLOCKED",
+      "wireProposalSHA256": "7e0c243bcb735451da393c33eed858348954b05983db68ee7f0ed6fc9b3a59a3",
+      "wireProposalActivated": false,
+      "providerV51FullPayloadHashes": null,
+      "prerequisites": [
+        "resolve generic400 independently from key/IP denial",
+        "provider-supported exact schema determination; existing projection not auto-activated",
+        "freeze V5.1 complete payloads and certify complete input plus all billed thinking within cap",
+        "fresh account/IP/privacy/pricing readiness; no restriction changes here"
+      ]
+    }
+  ],
+  "conditionalAllThreeScreenMaximumNanodollars": 106000000,
+  "conditionalAllThreeScreenAttempts": 15,
+  "conditionalQuotesNotDispatchable": true,
+  "broadQualificationNotAuthorized": {
+    "originalContract": "66x3/provider,zero critical errors,expanded >=98%,independent held-out >=20%",
+    "problem": "Old consumed r1 slots under v3/v4 cannot become a clean three-repeat V5.1 cohort. No relabeling or slot reuse.",
+    "finiteDesignForOwnerReview": {
+      "originalCases": 66,
+      "newIndependentHiddenCases": 17,
+      "totalCases": 83,
+      "heldOutShare": "17/83 = 20.48%",
+      "repetitions": 3,
+      "cleanNewOperationsPerCandidate": 249,
+      "screenMayCountOnlyIfAllConfigAndGoldStayFrozen": true,
+      "additionalAfterUnchangedPassingFiveScreen": 244,
+      "minimumFullyCorrectResponsesAt98Percent": 245,
+      "criticalErrorsPermitted": 0,
+      "countsNotIndependentIIDObservations": true,
+      "proposedHeldOutMinimumFullyCorrectResponses": 50
+    },
+    "requiresRevisedProviderSlotAuthorization": true,
+    "noExisting198CapChanged": true,
+    "threeCandidatesWouldExceedOriginal594": true,
+    "costIllustrationsOnlyNanodollars": {
+      "openai": 622500000,
+      "anthropic": 547800000,
+      "googleBefore2027Only": 4108500000
+    },
+    "heldOutSourcesAndHashes": "Not yet independently authored/frozen; this stage cannot be dispatched or presented for exact-slot execution approval."
+  },
+  "requiredIndependentReviews": [
+    "five source rubrics120 judgments incl absence checks",
+    "two historical failures6 existing form questions",
+    "exact known journey-06 legacy mutation, raw/effective separation",
+    "each new complete response24 dimensions before next slot",
+    "all66 plus remaining5 unresolved fields,7 historical outputs and17 independently hidden cases for broad qualification"
+  ],
+  "stopRules": [
+    "provider/error/timeout/incomplete/schema/refusal/unknown usage or cost => halt",
+    "any raw critical error => halt even if guarded safely rejects",
+    "unknown mapping or any non-allowlisted normalization difference => halt",
+    "only exact journey-06/r2 allowlisted defect may permit diagnostic continuation after genuine independent response review; planning false",
+    "uncertainty retains max committed exposure; no refund/retry/replacement",
+    "missing reviewer evidence or identity/source/build/payload/rate mismatch => halt"
+  ],
+  "ownerProductDecisionsAlreadyRecorded": {
+    "fiveCaseRecord": "52b-v5.1-five-case-owner-product-review-v1",
+    "fourExamples": "10/12/15/19 approved; do not ask again",
+    "diagnosticPolicy": "52b-v51-known-legacy-loss-diagnostic-policy-v1",
+    "allowlistedDefectHash": "9223819d61e4e782e22135f2cac00d76abdfb00f947015ec92daa2f2e585f598"
+  },
+  "remainingExecutionBoundary": [
+    "real protected reviewer/operator provenance",
+    "separately reviewed exact evaluator/runtime/dependency identity; frozen B2 rejects current checkout",
+    "minimal same-original-journal append-only writer/intent/recovery and narrow single-send transport; no broad hosting framework",
+    "separately authorized fresh account/key/access/credits/recharge/terms/prices/rate/token-count readiness",
+    "exact finite owner financial and per-operation authorization acknowledging persistent historical halt; old halt never cleared"
+  ],
+  "selectionRule": "No production selection from five. Among candidates passing independently reviewed safety/generalization/format/privacy gates, compare matched cohorts by failure rate, p95 complete latency and conservative cost per fully correct extraction. Original full-pipeline5s objective is separate and unverified; no new model-only SLO is invented. If no candidate passes, select none.",
+  "proposedFirstReadinessOnlyScope": {
+    "approved": false,
+    "provider": "openai",
+    "model": "gpt-6-luna",
+    "modelMetadataGETMaximum": 1,
+    "completeExactInputCountRequestsMaximum": 5,
+    "onePerFrozenSlot": true,
+    "inferenceRequests": 0,
+    "retries": 0,
+    "automaticRefresh": false,
+    "accountFacts": "Owner-controlled console/read-only evidence for key/access/expiry,credits,recharge,project,terms,rate/price/tax. No unnecessary credentials or billing changes.",
+    "freshness": "Preserve existing reviewed age/same-day limits. If evidence expires, stop and seek a separately bounded refresh; no background requests.",
+    "countPricing": "Must verify terms/cost before authorizing these readiness requests; do not infer free counting from old evidence."
+  }
+}
