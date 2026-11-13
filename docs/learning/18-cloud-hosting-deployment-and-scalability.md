@@ -164,3 +164,8 @@ The normal pinned, non-root Docker artifacts remain the ordinary application. Th
 The [startup contract](../../deployment/private-startup-v1.json) and [route matrix](../task52-staging/route-integration-v1.json) record blocked public/native mapping, real IAM/IAP/secret/network enrollment, SQL/Redis/recovery migration, qualified LLM/pricing/grants and private staging acceptance. No cloud resource is provisioned. Public launch remains separately approved.
 
 The frontend build also emits a small `/app/private-runtime/` component using the existing TypeScript compiler. Only the Google-root identity factory is exported; fixture injection is not a shipped export. Exact jose files are copied separately because an unused Next module may not be traced. The normal entry still imports only its generated Next server; packaging a component does not install a private profile or satisfy readiness.
+
+
+## Local ordinary functionality is not hosted startup
+
+The private ordinary API flow is now locally functional with fake services. The normal Docker entries and production refusal remain unchanged, and experimental Python services/custom Next driver stay excluded from deployment images. Planning-mode readiness, browser UI, advanced/persistence mappings, real IAM/IAP/secret/SQL/Redis/recovery enrollment, qualified hosted inference, real tokenization/pricing and explicit finite grants remain gates. Do not deploy the local fixture, use test mode to bypass startup, or treat health as financial readiness. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).

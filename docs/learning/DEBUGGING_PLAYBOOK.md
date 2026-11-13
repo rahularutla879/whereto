@@ -121,3 +121,8 @@ Check identity type first: Google workload versus IAP user versus request proof.
 ## Private route unavailable is an intentional boundary
 
 For selected private status mode, business503 and diagnostics404 are expected. A valid IAP/workload token cannot fill in the missing public source ticket. Do not pair by latest user request, trust saved cards as source evidence, clear nonce history, renew a grant, force production/test mode or fall back to Ollama. For liveness failures, check exact audience/issuer, cache expiry, bytes/method/build/epoch, current witness and server readiness using sanitized reasons only. No tokens or raw credential errors belong in logs.
+
+
+## Inactive ordinary hosted workflow
+
+A private action refusal may mean its source revision/turn is consumed. Do not resend automatically, renew expiry, clear counters or fall back to local AI. Check authenticated owner/build/epoch, typed field equality, current SQL/Redis evidence and sanitized factory reason/stack. Start a new explicitly validated action when required. Planning-mode/UI integration remains unavailable; API/client-driver success is not browser verification.

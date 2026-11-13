@@ -1,3 +1,7 @@
+# Inactive ordinary public/native facade
+
+`createOrdinaryProfile` selects only interpretation, generation and liveness at existing Next proxy seams. The local FastAPI facade retains existing request management and forwards original signed bytes through authenticated backend identity to a single allowlisted factory method. Factory verifies frontend/IAP independently, reconstructs encrypted native evidence, validates source/control ownership and reuses existing planner/counter/financial/dispatcher/recovery algorithms. Backend workers gain no issuer, operational Redis or recovery credentials. `experiments/ordinary_hosted/stable_session.py` preserves exact source timestamps in a separately versioned adapter. [Flow and boundaries](docs/task52-ordinary-hosted-integration.md).
+
 # Inactive Next identity acquisition and status boundary
 
 `lib/server-identity.ts` supplies verified audience-bound Google metadata tokens, separate IAP verification and new method-aware scoped proofs. `lib/private-server-boundary.ts` adds a trusted-code-only, one-install status profile at every actual proxy entry; absent installation, old paths run unchanged. `experiments/hosted_startup/` tests actual Next/FastAPI status through isolated witness nonce roles. Full public/native planning mapping is absent and blocked; `deployment/private_startup.py` cannot launch from configuration booleans. No second planner or financial algorithm. [Request matrix, ownership and package limits](docs/task52-hosted-startup-integration.md).

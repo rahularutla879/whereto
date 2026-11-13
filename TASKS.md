@@ -1,3 +1,7 @@
+# Task 52 — ordinary private application request integration
+
+Implemented the inactive ordinary interpretation→pending→generation ownership bridge using existing native/SQL/Redis/financial/service foundations. [Current verified scope and limitations](docs/task52-ordinary-hosted-integration.md). Only reviewed ordinary routes are eligible; advanced/options/origin/Details/persistence/manual paths remain blocked. Private hosted activation, model qualification, real grants/enrollment and browser quality gates remain incomplete; Task 52 stays in progress.
+
 # Task 52 — server identity port and guarded request integration
 
 Bounded components implemented; **full private hosted startup remains blocked** by public source/ticket mapping and real dependencies. Only authenticated liveness is selectable; all planning/persistence routes refuse, diagnostics404. Normal behavior remains unchanged. [Implementation and next contract decision](docs/task52-hosted-startup-integration.md) · [Verification](docs/task52-hosted-startup-verification.json). No cloud/provider/financial activation; Task53 remains unstarted.

@@ -1,3 +1,4 @@
+import {privateOuting,type PrivateOuting} from './private-outing';
 import {measurePlanning} from "./planning-timing";
 import {adaptAdvanced} from "./advanced-planning";
 import {planningMessage} from "./continuation";
@@ -105,6 +106,7 @@ export function adaptRanking(value: unknown): PlannerResult {
 export type ClarificationField = "location" | "people" | "date" | "activities" | "time" | "endpoint";
 export type ClarificationAnswers = Partial<Record<ClarificationField, string>>;
 export type PendingOuting = {
+  privateOuting?:PrivateOuting;
   pending: { text: string; interpretation: unknown; answers: ClarificationAnswers; referenceTime: string };
   questions: { field: ClarificationField; question: string; kind: "essential" | "ambiguous";
     reason?: string | null; helpText?: string | null }[];
@@ -144,8 +146,9 @@ export async function generateOuting(text: string, preferences: Preferences = EM
       context={...context,locationContext:prepared};
     }
     const interpreted = await send("/api/interpret", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ text, preferences, ...(relative&&context?.locationContext?.calendarTimezone?{calendarTimezone:context.locationContext.calendarTimezone}:{}), ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? { pending: context.continuation.pending, answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
+      body: JSON.stringify({ text, preferences, ...(relative&&context?.locationContext?.calendarTimezone?{calendarTimezone:context.locationContext.calendarTimezone}:{}), ...(context?.locationContext?.currentArea ? { hasCurrentLocation: true } : {}), ...(context?.continuation ? {...(context.continuation.privateOuting?{privateOuting:context.continuation.privateOuting}:{pending:context.continuation.pending}), answers: context.answers ?? {} } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(75000)]) : AbortSignal.timeout(75000) });
     const extraction = await interpreted.json();
+    const owned=privateOuting(extraction.privateOuting);
     if (!interpreted.ok) return failure(failureText(extraction, typeof extraction?.message === "string" ? extraction.message : "We couldn't finish understanding that request. Please try again or edit the wording."));
     if (!Array.isArray(extraction?.issues) || !extraction.issues.every((s: unknown) => typeof s === "string")
       || !Array.isArray(extraction.notes) || !extraction.notes.every((s: unknown) => typeof s === "string")) throw new Error("Invalid interpretation response");
@@ -159,7 +162,7 @@ export async function generateOuting(text: string, preferences: Preferences = EM
           && (q.reason == null || typeof q.reason === "string") && (q.helpText == null || typeof q.helpText === "string"))) throw new Error("Invalid clarification response");
       // A continuation is also returned for complete requests. Keep it in
       // onValidated for regeneration/retry; only actual questions are visible.
-      if (extraction.questions.length) context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions });
+      if (extraction.questions.length) context?.onClarification?.({ pending: extraction.pending, questions: extraction.questions, ...(owned?{privateOuting:owned}:{}) });
       else if (extraction.issues.length) context?.onClarification?.(null);
     } else if (extraction.issues.length) context?.onClarification?.(null);
     if (typeof extraction.advancedToken === "string") {
@@ -208,11 +211,11 @@ export async function generateOuting(text: string, preferences: Preferences = EM
     context?.onInterpreted?.(extractedPreferences);
     if (extraction.pending) context?.onValidated?.({ request: { ...extraction.request, ...(context?.locationContext?.firstTravel?{firstTravel:context.locationContext.firstTravel}:{}),
       ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravel: context.locationContext.maxFirstLegTravel, maxFirstLegTravelExclusive: false } : {}) },
-      continuation: { pending: extraction.pending, questions: [] },
+      continuation: { pending: extraction.pending, questions: [], ...(owned?{privateOuting:owned}:{}) },
       explicitCost: !!preferences.costExplicit || preferences.cost !== "balanced" || extraction.interpretation?.cost != null,
       explicitTime: !!extraction.interpretation?.time_expressions?.length || !!extraction.pending.answers?.time });
     const response = await send("/api/plans/generate", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...extraction.request, ...(context?.locationContext ?? {}), ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravelExclusive: false } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
+      body: JSON.stringify({ ...extraction.request, ...(owned?{privateOuting:owned}:{}), ...(context?.locationContext ?? {}), ...(context?.locationContext?.maxFirstLegTravel !== undefined ? { maxFirstLegTravelExclusive: false } : {}) }), cache: "no-store", signal: context?.signal ? AbortSignal.any([context.signal, AbortSignal.timeout(120000)]) : AbortSignal.timeout(120000) });
     if (!response.ok) {
       const errorBody=await response.clone().json().catch(()=>null);
       const classified=failureText(errorBody, "");

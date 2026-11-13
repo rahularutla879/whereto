@@ -158,3 +158,8 @@ In [the hosted-identity fixture](../task52-hosted-identity-contract.md), the fro
 ## Why authenticated liveness is not a hosted outing
 
 The [new local composition](../task52-hosted-startup-integration.md) runs actual Next and two FastAPI processes for signed health requests. It does not run interpretation→plan through a hosted facade. Ordinary `InterpretationResult` has no durable outing handle; `PlannerInput` cannot prove which retained source/outing/revision owns a browser DTO. Selecting a user's latest request would mix concurrent tabs. Until a reviewed handle/session contract exists, all private business paths stop before provider work. Existing local/native workflows and anonymous saved capabilities retain their previous rules.
+
+
+## An ordinary private request across workers
+
+Fresh interpretation reserves fictional inference cost before dispatch, validates the raw extraction, captures encrypted native evidence and returns an owned handle. A pending answer reconstructs the original source/reference clock and uses the existing deterministic validator without another model call. Generation matches the retained request, revalidates supported typed execution controls and invokes the existing ordinary planner under protected reservations. Optional/flexible/endpoint journeys requiring the advanced planner remain blocked; they are not flattened into required ordinary stops. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).

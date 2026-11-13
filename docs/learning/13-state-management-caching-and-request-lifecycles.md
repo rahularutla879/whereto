@@ -153,3 +153,8 @@ The new inactive adapter derives planning ownership from verified IAP issuer/aud
 ## Two different caches and absolute authority
 
 The server identity port caches verified workload tokens, not application authorization. It uses single-flight acquisition, expiry headroom and a failure cooldown. A fresh ID token does not renew an outing, restore missing Redis evidence, reset nonce history or replenish SQL exposure. Request/user proofs are short-lived and single-use at the receiver. The current profile shares only authenticated liveness across backend processes; public planning-session reconstruction is still blocked pending the source-ticket bridge. Loss of its witness causes refusal with no in-memory fallback.
+
+
+## Tab-safe handles and explicit source changes
+
+There is no latest-session-per-user lookup. Each outing carries its own unpredictable locator. Changing source/preferences under a handle revokes that source and requires a new interpretation; a request with no prior handle is an independent outing, not an inferred edit to another tab. The full browser edit/recovery UX still needs a separate checkpoint. Lost responses and interrupted turns do not make planning retryable. The new stable session adapter preserves the authenticated original integer creation timestamp instead of resampling wall/monotonic clocks on each publication. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).

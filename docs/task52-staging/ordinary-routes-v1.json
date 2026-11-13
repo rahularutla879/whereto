@@ -1,0 +1,23 @@
+{
+ "identity":"52-private-ordinary-route-integration-v1",
+ "normalStartupActive":false,
+ "publicProductionSchemaChanged":false,
+ "routes":[
+  {"method":"POST","path":"/api/interpret","disposition":"owned fresh interpretation or pending continuation","bytes":65536,"readSeconds":5,"timeoutSeconds":70},
+  {"method":"POST","path":"/api/plans/generate","disposition":"owned ordinary source plus validated execution controls","bytes":65536,"readSeconds":5,"timeoutSeconds":115},
+  {"method":"GET","path":"/api/health","disposition":"authenticated liveness only","timeoutSeconds":3},
+  {"method":"GET","path":"/api/planning-mode","disposition":"blocked503; full private UI readiness not exposed"},
+  {"method":"POST","path":"/api/plans/advanced","disposition":"blocked503"},
+  {"method":"POST","path":"/api/plans/options","disposition":"blocked503"},
+  {"method":"POST","path":"/api/starting-areas","disposition":"blocked503"},
+  {"method":"POST","path":"/api/starting-places","disposition":"blocked503"},
+  {"method":"POST","path":"/api/venues/details","disposition":"blocked503"},
+  {"method":"POST","path":"/api/plans/save","disposition":"blocked503"},
+  {"method":"POST","path":"/api/plans/reopen","disposition":"blocked503"},
+  {"method":"POST","path":"/api/plans/refresh","disposition":"blocked503"},
+  {"method":"GET","path":"/api/development-diagnostics","disposition":"404"}
+ ],
+ "manualOnlyPlanning":false,
+ "realProviderDispatch":false,
+ "publicLaunch":false
+}

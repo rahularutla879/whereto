@@ -160,3 +160,8 @@ The inactive [hosted nonce routine](../../experiments/hosted_identity/nonce.sql)
 ## Authentication replay facts do not create a planning session
 
 The new public status verifier consumes request/user nonces in the existing independent witness using its restricted backend login. It has no operational/issuer/counter/recovery or Redis credential. An authenticated health request therefore proves no source ownership or spending permission. A future public outing handle must map to a current native route/revision/fence and original root/outing, not create a new allowance. Selected receipts must remain reusable, and saved bearer/RLS/expiry/membership remain independent of IAP tester identity. No saved schema or real database is changed.
+
+
+## Owned ordinary locator, unchanged financial root
+
+`experiments/ordinary_hosted/factory.py` reuses existing protected service-route rows and encrypted locators. Its owner namespace includes verified IAP identity and the public adapter build. Current SQL session/revision/fence, native evidence and independent epoch remain mandatory. Answers advance revision without renewing expiry; all actions retain the original outing/root/inference identity. Anonymous saved capabilities and RLS remain unchanged, with private saved routes still unavailable. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).

@@ -96,3 +96,8 @@ Reviewed chapters3/6/7/12–15/18/20; appended current inactive explanations to3
 ## Public identity port and bounded startup checkpoint
 
 Reviewed chapters3/6/7/12–15/18/20; appended actual inactive mechanisms to3/6/7/12–15/18 and supporting references. All20 chapter originals, examples and exercises are preserved. Source references match real proxy entry seams, `composeIdentityPort`, `privateRoute` and the explicit nonlaunchable startup gate. [Final evidence](../task52-hosted-startup-verification.json) separates actual Next/FastAPI liveness from blocked hosted planning, development failures, inherited refusals, normal application compatibility and untested real cloud behavior.
+
+
+## Inactive ordinary hosted workflow
+
+Reviewed chapters 3/6/7/12–15/18/20; updated 3/6/7/12–15/18 and supporting references. All 20 chapter originals, examples and exercises are preserved. The [machine record](../task52-ordinary-hosted-verification.json) distinguishes actual ordinary HTTP/client workflows, deterministic clock-pair checks, frozen regressions, development failures and untested hosted/browser behavior.

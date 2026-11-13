@@ -117,3 +117,8 @@ See [Task 52 action bridge](../task52-provider-action-bridge.md) for exact bound
 ## Inactive public identity port and the missing planning bridge
 
 [Task52's server identity port](../task52-hosted-startup-integration.md) adds trusted metadata/IAP verification and real Next proxy entry seams. Without server-code installation, normal behavior is unchanged. The only selectable private capability is authenticated liveness; public planning/persistence refuse. Existing native factories remain authoritative, but ordinary public planning DTOs do not carry their owned source ticket. No second planner, account model or financial algorithm is introduced.
+
+
+## Inactive ordinary application facade
+
+The separately installed `createOrdinaryProfile` now connects actual Next interpretation/generation requests to a FastAPI facade and the existing independently authenticated native factory, counter, dispatcher and recovery processes. This is local synthetic functionality, not hosted activation. No second planner or session store is introduced; other private business routes stay blocked. See [Task 52 ordinary integration](../task52-ordinary-hosted-integration.md).

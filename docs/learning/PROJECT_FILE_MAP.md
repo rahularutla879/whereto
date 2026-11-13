@@ -618,3 +618,9 @@ Native restart reconstruction: `experiments/shared_state/native_sessions.py` (in
 - `lib/private-server-boundary.ts`: trusted installation and actual proxy seam; current status-only profile refuses business requests.
 - `experiments/hosted_startup/`: local Next/FastAPI process checks, explicit source/bootstrap isolation and parent identity reuse.
 - `deployment/private_startup.py`: nonlaunchable production dependency gate, not an override of `backend.main`.
+
+
+## Inactive ordinary hosted workflow
+
+- `experiments/ordinary_hosted/`: inactive public/native ordinary mapping, authenticated local facade, stable timestamp adapter and synthetic process tests.
+- `lib/private-outing.ts`: optional browser ownership extension; `lib/planning-client.ts` propagates it only when returned by the private profile.

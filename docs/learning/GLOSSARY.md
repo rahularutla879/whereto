@@ -782,3 +782,9 @@ See [shared-state limits](../../docs/task52-shared-state-foundations.md).
 - **Single-flight acquisition:** concurrent requests await one bounded identity fetch; it does not authorize repeated provider work.
 - **Liveness versus readiness:** a responsive process can still be unready to plan or spend. The current private health response is liveness only.
 - **Proposed outing handle:** a reviewed future opaque binding from a public workflow to its server-owned native source; no public handle field is implemented in this checkpoint.
+
+
+## Inactive ordinary hosted workflow
+
+- **Private outing handle:** an unpredictable locator bound to verified user, native source, build, revision and fixed expiry; possession alone cannot authorize spending.
+- **Clock-pair skew:** wall-clock and monotonic samples taken at different instants can change a reconstructed timestamp. The adapter retains the original protected integer deadline instead.

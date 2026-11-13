@@ -1,0 +1,458 @@
+{
+  "additionalChecks": {
+    "buildLogSHA256": "ff21c554d62d13c4dbfa50573104011bebb1be738348ad7540e617b428c3125f",
+    "diffReview": "all tracked/new files reviewed; no unrelated or dependency changes",
+    "eslint": "passed",
+    "eslintLogSHA256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "handbookChapters": 20,
+    "handbookPreservation": "all20original contents retained,12unaffected byte-identical",
+    "handbookReviewed": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18,
+      20
+    ],
+    "handbookUpdated": [
+      3,
+      6,
+      7,
+      12,
+      13,
+      14,
+      15,
+      18
+    ],
+    "localLinks": "checked",
+    "npmAudit": {
+      "critical": 0,
+      "high": 0,
+      "info": 0,
+      "low": 0,
+      "moderate": 7,
+      "total": 7
+    },
+    "npmAuditExitCode": 1,
+    "npmAuditLogSHA256": "b0039c64e1e9f1c017f2e48661868dd5fe3fe487886781b80886b185bbad64c4",
+    "pipCheck": "no broken requirements",
+    "productionBuild": "passed",
+    "pythonCompile": "passed",
+    "secretScan": "zero configured credential matches current assets/history",
+    "secretScanLogSHA256": "231b6c86cabb0bced39f8a1334903b44f4cd2244967150184fb39dcd0fa9dcc1",
+    "sourcePins": "new manifest and frozen parent verified; old status-only manifest now intentionally refuses changed frontend source, never repinned",
+    "typeScript": "passed",
+    "typeScriptLogSHA256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e"
+  },
+  "backendModulesExecuted": [
+    "experiments.shared_state.test_action_identity",
+    "backend.test_planning_admission",
+    "backend.test_provider_budget",
+    "backend.test_saved_plans",
+    "backend.test_saved_details_reliability",
+    "backend.test_session_capacity49",
+    "backend.test_interpretation",
+    "backend.test_real_planning",
+    "backend.test_advanced_planning",
+    "backend.test_advanced_routing",
+    "backend.test_advanced_timing",
+    "backend.test_database_security",
+    "backend.test_database_check",
+    "backend.test_ordering_shadow",
+    "backend.test_ordering_enforcement_design",
+    "backend.test_api",
+    "backend.test_request_management"
+  ],
+  "baseline": "e831346c096222a63eb08470985e62e92d71a59e",
+  "blocked": [
+    "planning-mode readiness/full private UI",
+    "advanced",
+    "options",
+    "starting-areas/places",
+    "Details",
+    "save/reopen/refresh",
+    "manual-only planning",
+    "unreviewed meaning/control edits"
+  ],
+  "bodyTimeoutRegression": {
+    "after": "503 before any seal/send, same five-second limit",
+    "afterLogSHA256": "109146285ce9e955b2158ae81a771d6b7e9dfe5d9e16cacc6d6b86bebe692988",
+    "before": "valid-looking unfinished body incorrectly returned200; failing regression demonstrated it",
+    "beforeLogSHA256": "f97cbbb351191405234970252fc1bb1d6abeb17740a6e034c012dcefbd8fae5b"
+  },
+  "cleanup": {
+    "colima": "stopped after all checks; approved2CPU/4GiB/40GiB unchanged",
+    "containersAndNamedVolumes": "removed after final checks; no prune",
+    "images": "local only, no registry publication",
+    "syntheticKeys": "temporary fixture directories removed"
+  },
+  "cloudProvisioned": false,
+  "containers": {
+    "artifactProbeLogSHA256": "5f0edbdf0f634ef6fac2ac481a7ed0a0009f49cf608878fbcf0619428596b77a",
+    "existingSecurityResiduals": "unchanged; seven moderate npm tooling advisories retained; fresh OS/image acceptance remains prerequisite",
+    "experimentalPythonIncluded": false,
+    "images": [
+      {
+        "architecture": "amd64",
+        "id": "sha256:e49889e10a0dee2c8c82bbc67c98f31580c74c7383d2465e2ed10179cff05dc5",
+        "os": "linux",
+        "sizeBytes": 62815534,
+        "user": "app"
+      },
+      {
+        "architecture": "amd64",
+        "id": "sha256:2fc73aaadbc4209260585d7927b0b64f22fc009cd0175993244699526e1aad01",
+        "os": "linux",
+        "sizeBytes": 104739251,
+        "user": "node"
+      }
+    ],
+    "newImageVulnerabilityRescan": false,
+    "platform": "linux/amd64",
+    "realHostedProfileInstalled": false,
+    "smoke": "passed normal guards/mock profile/health/proxy/privacy/nonroot/readonly/capdrop/shutdown/restart; not hosted production startup",
+    "smokeLogSHA256": "31c423b405dc719074737b7532fbdd7bcb593d58f0e57b9aa2c21c36a91b5389"
+  },
+  "developmentTrials": [
+    {
+      "description": "Fixture inherited production image environment and correctly refused offline factory startup; explicitly set development only for disposable process. No production guard bypass.",
+      "logSHA256": "fd2feec5cddd391f21304f4a3ab6d1ffdf1cdf155993a62a2923845a9a213cc4"
+    },
+    {
+      "description": "Three clock tests passed; HTTP8 ran with3passes,2failures,3errors. Canonical evidence parser rejected normal spaced public JSON; test transport also retained a health-only deadline.",
+      "logSHA256": "05ac4548c3f1544916c04eeb85a36fab52d4897a1dd3eb4e73f2e45a009c54ea"
+    },
+    {
+      "description": "Same HTTP failures persisted after correcting test-only TLS/client deadline; sanitized logs identified evidence_encoding. Added public JSON decoder after byte verification; strict evidence codec unchanged.",
+      "logSHA256": "0616decbc7bfcb85e29dfee3c72c83dd5f79125ae379d64900ccc9251c632e8b"
+    },
+    {
+      "description": "Three clock tests passed; HTTP8 ran5passes/3failures. Native receipt refused changed origin controls; pending planning also correctly refused missing local provider gates.",
+      "logSHA256": "e998035a62dc14940dedf5fef8d0de0ab57ffdfbb360bb8c4c81a6a689f207e1"
+    },
+    {
+      "description": "Clock3 passed; HTTP8 ran5passes/3failures. Receipt revalidation worked; trace proved require_live_provider refusal. Declared existing local-only provider gates in network-isolated fake factory, no credential loader or real transport.",
+      "logSHA256": "36c207668d75d3cc260e4f510233b2f942b684a1f668cb0aa7a1f8b4d5c45c61"
+    },
+    {
+      "description": "Clock3 and then-current HTTP10 passed. Expanded final13 cohort separately froze current build and added race, area/reference, expiry, replay and financial-stop checks.",
+      "logSHA256": "68b921cd1195b0103358a537595bd4aa6398dbdbde990a88d8c15f9177024093"
+    },
+    {
+      "description": "Initial Node ownership test2pass/1fail compared two separately sampled Date.now values; fixed test snapshot, no product deadline change. Host native-unit import failed before actual cases because optional experimental cryptography is Linux-fixture-only; all three ran in disposable Linux instead."
+    },
+    {
+      "description": "A diagnostic container-command listing exposed only a short-lived synthetic Redis password, never an owner credential; fixture removed, listing not committed. Later diagnostics filter locally and print sanitized service logs only."
+    },
+    {
+      "description": "Expanded13-case HTTP and3-clock cohort passed before the final partial-body timeout correction; final frozen build was rerun separately. Earlier uncommitted build is not the final identity.",
+      "logSHA256": "f84ad5b7e1b95880d26d4d3f79c958536522cd5f468e2d15aab71c622d859a28"
+    }
+  ],
+  "existingFinancialLimitsChanged": false,
+  "filesChanged": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "deployment/private-ordinary-startup-v1.json",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/learning/DEBUGGING_PLAYBOOK.md",
+    "docs/learning/DEVELOPMENT_COMMANDS.md",
+    "docs/learning/GLOSSARY.md",
+    "docs/learning/PROJECT_FILE_MAP.md",
+    "docs/learning/VERIFICATION.md",
+    "docs/task52-ordinary-hosted-integration.md",
+    "docs/task52-ordinary-hosted-verification.json",
+    "docs/task52-staging/IMPLEMENTATION.md",
+    "docs/task52-staging/ordinary-next-gates.md",
+    "docs/task52-staging/ordinary-outing-v1.json",
+    "docs/task52-staging/ordinary-routes-v1.json",
+    "experiments/ordinary_hosted/build.json",
+    "experiments/ordinary_hosted/client_driver.ts",
+    "experiments/ordinary_hosted/dispatcher_server.py",
+    "experiments/ordinary_hosted/factory.py",
+    "experiments/ordinary_hosted/factory_server.py",
+    "experiments/ordinary_hosted/identity.py",
+    "experiments/ordinary_hosted/next_fixture.ts",
+    "experiments/ordinary_hosted/public_json.py",
+    "experiments/ordinary_hosted/public_server.py",
+    "experiments/ordinary_hosted/request_auth.py",
+    "experiments/ordinary_hosted/run_local.py",
+    "experiments/ordinary_hosted/stable_session.py",
+    "experiments/ordinary_hosted/test_http.py",
+    "experiments/ordinary_hosted/test_public_json.py",
+    "experiments/ordinary_hosted/test_reliability.py",
+    "lib/planning-client.ts",
+    "lib/private-outing.test.ts",
+    "lib/private-outing.ts",
+    "lib/private-server-boundary.ts"
+  ],
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "rowHashes": [
+      "dd336c1eefafcab1a4f1fff1b8db1a4a2074e21b074d0177c3a72ed310a93e1c",
+      "60219a1c9435997d20dc6b1c17bf7a1132b5d94d8bd48f1139e0f170d68de0cd",
+      "2867186a0b57fd1a394a4b32732c248aa65abccaa00b315fdcf3620bd205c12e",
+      "596055d37f7419993214f54f6818312a28011af1d8cf32dd46dbf27be1553253",
+      "339d58fd557a07f9c677ffa9e6cda0ac8ae8dbaaa752bfa3715d36156921647b",
+      "d470ece8ff958efc85486367c2d164c4dacdc0c289f5ce079c752980e2cd37f2",
+      "2ae771ef7fdce1fd4acce943dc383f7dc9dca91942b80c08239eed944535d7bb",
+      "7555bf50be1f01ad09b5193e91c0ee3398d0dc757efa8bbc3aba353d99efcaab",
+      "671a9cfd2a82e1c9ea2205ef8ecd7a73d578dd666073e0a936043e289ba3eebb",
+      "5873e5073f9db348b0d9f23fd4a4829e492fe4fcc8641cda5d6916b2fd312527"
+    ]
+  },
+  "hostedStartupReady": false,
+  "identity": "52-private-ordinary-hosted-local-v1",
+  "limitations": [
+    "No real Google/IAP/IAM/account/token/provider verification or cloud resources. Offline fixture roots are not Google identity.",
+    "Actual generateOuting HTTP driver is not browser UI verification. Planning-mode stays blocked; full private UI readiness not implemented.",
+    "Only seven existing typed execution controls admitted; other date/time/transport/preferences edits and manual-only purpose require new reviewed actions.",
+    "Optional/flexible/contradictory advanced journeys preserve extraction but cannot publish ordinary plans. No production V5.1 activation.",
+    "Current custom Next/FastAPI fixture is development-only, not standalone deployment recipe. Normal production startup refusal unchanged.",
+    "Synthetic byte counts are not real tokenization; no qualified hosted LLM or approved real grant. Infrastructure billing separate.",
+    "Local separate services/volumes share one controlled VM/account; correlated privileged restore/admin compromise and physical/hosted failures remain outside verified boundary.",
+    "Original unexplained SQL refusal remains an operational follow-up. Frozen parent profiles/results remain unchanged.",
+    "No proof of unrestricted semantic/model accuracy, real venue/route quality, five-second latency, public launch readiness or independent human rubric review."
+  ],
+  "modelPromptOrderingChanged": false,
+  "newDependencies": false,
+  "newProcessScenarios": [
+    "01_actual_interpret_plan_and_duplicate_refusal",
+    "02_pending_no_new_inference_and_cross_replica",
+    "02b_missing_area_and_original_reference_clock",
+    "03_two_tabs_same_user_and_other_user",
+    "04_source_edit_revokes_and_wrong_payload_refuses",
+    "05_forged_missing_handle_and_unreviewed_routes",
+    "06_identity_body_binding_and_private_service_refusal",
+    "06a_factory_and_backend_restart",
+    "06b_actual_application_client_pending_generation",
+    "06c_optional_flexible_and_contradictory_journeys_never_flatten",
+    "07_store_and_witness_outages_refuse",
+    "07a_expired_sql_session_cannot_continue",
+    "08_financial_reservations_are_protected_and_operator_stop_refuses"
+  ],
+  "nextCheckpoint": "Ordinary private UI/edit/recovery and non-billable readiness contract; retain unsupported routes closed and investigate SQL reliability. No automatic next task/provisioning/Task53.",
+  "normalStartupChanged": false,
+  "notRun": [
+    "full backend discovery/33frozen historical identity headings",
+    "desktop/mobile browser private UI",
+    "real identity/JWKS/metadata, account or provider requests",
+    "real database migrations/enrollment/cloud launch",
+    "fresh image vulnerability DB rescan",
+    "hosted failover, physical power-loss, Mac-off, real quality/latency/cost acceptance"
+  ],
+  "optInSkips": [
+    "test_api_operations_against_real_postgres_rollback (backend.test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback) ... skipped 'Opt-in hosted rollback tests'",
+    "test_duplicate_save_is_idempotent_and_mutation_denied (backend.test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_legacy_null_transport_defaults_to_driving (backend.test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving) ... skipped 'Opt-in hosted rollback tests'",
+    "test_partial_failure_rolls_back_every_table (backend.test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table) ... skipped 'Opt-in hosted rollback tests'",
+    "test_real_storage_is_identifiers_only_and_reopens_without_provider (backend.test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider) ... skipped 'Opt-in hosted rollback tests'",
+    "test_runtime_no_ledger_ddl_delete_or_cross_capability_write (backend.test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write) ... skipped 'Opt-in hosted rollback tests'",
+    "test_transactional_save_and_complete_retrieval (backend.test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval) ... skipped 'Opt-in hosted rollback tests'",
+    "test_walking_transport_column_round_trips (backend.test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips) ... skipped 'Opt-in hosted rollback tests'",
+    "test_wrong_missing_expired_and_uuid_access_denied (backend.test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied) ... skipped 'Opt-in hosted rollback tests'",
+    "test_committed_restricted_write_fresh_process_reopen_and_cleanup (backend.test_advanced_planning.HostedAdvancedTests.test_committed_restricted_write_fresh_process_reopen_and_cleanup) ... skipped 'Opt-in committed advanced PostgreSQL checks'",
+    "test_actual_connection_interruption_then_fresh_reopen (backend.test_database_security.HostedSecurityTests.test_actual_connection_interruption_then_fresh_reopen) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_concurrent_idempotent_writes_reads_and_restart (backend.test_database_security.HostedSecurityTests.test_concurrent_idempotent_writes_reads_and_restart) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_existing_nonexpired_documents_compatible_readonly (backend.test_database_security.HostedSecurityTests.test_existing_nonexpired_documents_compatible_readonly) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_restricted_authenticated_tls_and_role_boundaries (backend.test_database_security.HostedSecurityTests.test_restricted_authenticated_tls_and_role_boundaries) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_runtime_write_failure_rolls_back_committed_state (backend.test_database_security.HostedSecurityTests.test_runtime_write_failure_rolls_back_committed_state) ... skipped 'Opt-in hosted Task 50 tests'",
+    "test_two_capabilities_and_sql_injection_stay_isolated (backend.test_database_security.HostedSecurityTests.test_two_capabilities_and_sql_injection_stay_isolated) ... skipped 'Opt-in hosted Task 50 tests'"
+  ],
+  "ownership": {
+    "binding": [
+      "verified IAP principal",
+      "public adapter build owner namespace",
+      "source/native checkpoint",
+      "absolute expiry",
+      "current SQL revision/fence",
+      "original root/outing/inference",
+      "independent epoch"
+    ],
+    "browserGraphTrusted": false,
+    "clientSelectsFinancialScope": false,
+    "crossBuildMigration": "unsupported: reject",
+    "edit": "explicit handle plus changed source/preferences revokes/refuses; unlinked fresh requests are independent outings",
+    "identity": "52-private-ordinary-outing-v1",
+    "newAccountModel": false,
+    "randomBits": 256,
+    "source": "existing protected service route and encrypted native locator",
+    "tabs": "separate explicit handle per outing; no latest-user pairing"
+  },
+  "parentHostedBuild": "afbd644bbd4af7efbe8d2ab8db18c94ff6236ee1aee25dd78effa0627dabdfa5",
+  "parentServiceBuild": "e38ca7b4b84a4c5df6a1a30de8d91f3b3d7a203c8f20adb787f898bee1f6c1ec",
+  "productionActive": false,
+  "realFinancialGrantsActivated": 0,
+  "realGoogleIdentityEndpointsContacted": 0,
+  "realProviderRequests": 0,
+  "reliability": {
+    "expiryCause": "Original Session.state resamples database wall milliseconds and a later monotonic clock, reproducing1ms earlier created/deadline on republication. New versioned adapter preserves exact authenticated original integer; original parent code unchanged.",
+    "expiryTests": 3,
+    "newAdmissionFinding": "Changing typed execution controls invalidates the original payload receipt. Revalidate retained raw source through existing admission registry with accepted controls, no inference or bypass.",
+    "sqlRefusalCause": "Unresolved: retained earlier redacted trace does not establish unique underlying protected SQL error. New logging includes safe reason/category/SQLSTATE/stack locations only. No deadline increase/retry/fallback."
+  },
+  "savedSchemaRLSChanged": false,
+  "sourceManifestSHA256": "7b9b2998e68c2396c519e909c8988aeefd4d793ddda5dcc3cc2e15638161d21d",
+  "supportedRoutes": [
+    "POST /api/interpret (fresh or pending)",
+    "POST /api/plans/generate (owned ordinary)",
+    "GET /api/health (liveness only)"
+  ],
+  "tests": [
+    {
+      "failed": 0,
+      "logSHA256": "27f320db38b4acd2a9ebd4d22640d2a5d332f8fc47aa569c09634348b9149551",
+      "name": "Actual Next/FastAPI ordinary workflow, native services and financial-stop acceptance",
+      "passed": 13,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "27f320db38b4acd2a9ebd4d22640d2a5d332f8fc47aa569c09634348b9149551",
+      "name": "Deterministic original clock-pair reproduction and stable adapter",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "7f8fa7e9b1ff124f5ed83f4284044d14e2f43969291a52ee4562e3cab61dee2d",
+      "name": "Current backend contracts/API/admission and recorded27 Qwen/seven OpenAI comparisons",
+      "passed": 263,
+      "skipped": 16
+    },
+    {
+      "failed": 0,
+      "logSHA256": "58f0bd657833d1929bd1cd76d68a5830b82c231517371001907a98854780f14e",
+      "name": "Frontend regressions including four new private ownership/client/byte tests",
+      "passed": 302,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "92c14e4699a35b966bf01639886cc00c91b5a6e04e24e29be6a52706f2aed3e8",
+      "name": "Duplicate-aware public JSON syntax and bounds",
+      "passed": 2,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "a7121e078bcf4f68f33bd7b458216ca36c585527f9b7c6e200b3e27caf7aa564",
+      "name": "Frozen Node proxy contract",
+      "passed": 3,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "7659fa490b88315c4067f6ed0a3e437e57895bd6c61e10004020f750f41f2297",
+      "name": "Packaging/startup/artifact/resource contracts",
+      "passed": 15,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "d0ee361e93f57c622f3cd7111cb784b933fb5d6230911b03a4c9775e4d4f43ea",
+      "name": "Unchanged hosted identity crypto and process workflows",
+      "passed": 20,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "e9fb10d997d0131a13cf612072615624f24a598125ac33eedbf6164048f9d1dc",
+      "name": "Frozen native sessions; all17selected with fail-fast disabled only",
+      "passed": 17,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "717543cd9b88eadbecd60780af3d0288bc15324ea0854bc831f27b2ca573ac6d",
+      "name": "Protected grant/inference and independent restore/crash drills",
+      "passed": 30,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "60e6747e32232a5edae359edd40bf3687550d1e2a4b71286d680a0bce584fefa",
+      "name": "Core SQL/financial/bridge/Redis evidence and restart drills",
+      "passed": 112,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "0b36ebc7ee8de3568a4e8a44b02e44d8f94b4fe141d4dd5a6d128a2579a7359d",
+      "name": "Authenticated separated service workflows",
+      "passed": 12,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "f9585514c433d7cf5e64a2d88e14224de085c66d96644d636774d648ac7621a2",
+      "name": "Separate-process interruption: lost_http",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "b66dc8c22583627a554db8abd27f6c1c352d54eaf06c2d2acb6e9ddbeefd22c8",
+      "name": "Separate-process interruption: lost_inference",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "00d68a33db2d5c0b8a54cd620add45362bb627888de76d81baee0cc3db712f8c",
+      "name": "Separate-process interruption: dispatcher_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "9091cde18afd88e6b746eccf6b04173c70f46d6e132c63eaff80339d2b5ccd04",
+      "name": "Separate-process interruption: factory_crash",
+      "passed": 1,
+      "skipped": 0
+    },
+    {
+      "failed": 0,
+      "logSHA256": "d682a21db1969d192741b3a263ee76af9f628daac09db63ce14dfe2b69e2214d",
+      "name": "Separate-process interruption: worker_crash",
+      "passed": 1,
+      "skipped": 0
+    }
+  ],
+  "totals": {
+    "failed": 0,
+    "fullBackendDiscovery": false,
+    "interrupted": 0,
+    "passed": 797,
+    "skipped": 16,
+    "timedOut": 0
+  },
+  "verifiedDate": "2026-11-12"
+}

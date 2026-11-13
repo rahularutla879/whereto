@@ -1,3 +1,7 @@
+# Task 52 — versioned opaque ordinary outing ownership
+
+Adopt the owner-authorized optional private handle extension instead of trusting browser interpretations, pairing latest user sessions or embedding graphs. Reuse protected native route/turns with owner namespaced by verified IAP and adapter build; preserve absolute expiry, original root/outing and one-use planning. Revalidate accepted typed execution controls through the existing admission registry using retained raw evidence. Meaning edits revoke/refuse rather than repairing old source. The new adapter retains exact original timestamp integers; frozen parent implementations/results remain unchanged. [Contract and evidence](docs/task52-ordinary-hosted-integration.md).
+
 # Task 52 decision — authentication cannot manufacture native source ownership
 
 Keep the public HTTP method-aware proof separate from frozen native POST RPC. Metadata tokens and IAP assertions identify callers/users, not original source or financial permission. Until a reviewed outing-handle/tab-safe session contract maps actual public requests to current native tickets, the selectable profile permits liveness only. Do not pair by latest user request, trust rendered DTOs, change anonymous saved capabilities or override production admission with test/ready flags. The local custom Next/FastAPI driver is not a standalone deployment artifact. [Evidence and limitations](docs/task52-hosted-startup-integration.md).

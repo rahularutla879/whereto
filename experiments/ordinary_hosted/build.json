@@ -1,0 +1,28 @@
+{
+  "baseline": "e831346c096222a63eb08470985e62e92d71a59e",
+  "identity": "52-private-ordinary-hosted-local-v1",
+  "parentHostedBuild": "afbd644bbd4af7efbe8d2ab8db18c94ff6236ee1aee25dd78effa0627dabdfa5",
+  "productionActive": false,
+  "realProviderDispatch": false,
+  "sources": {
+    "experiments/ordinary_hosted/client_driver.ts": "d004b08e056cfc8ba458e9d3328066f2910e9f7fb6727d66acd9dfedcbf1466a",
+    "experiments/ordinary_hosted/dispatcher_server.py": "55b3e379d089470bafa276995760b0d5ba84a03aa3ae2ad9d4343df20416d78b",
+    "experiments/ordinary_hosted/factory.py": "4ef5cd65c7a3a87a831d998d0265d3d6ec5c0cb5d8871e097858c58ce0aa2efb",
+    "experiments/ordinary_hosted/factory_server.py": "bcff120fff35a471362f0ac43f49234f35aecf18b3522e39f74a4370ba8ada95",
+    "experiments/ordinary_hosted/next_fixture.ts": "72fa83e40652f218056a30236881c1c5f68624a6633d64a1fbe0c8f47bb9086b",
+    "experiments/ordinary_hosted/public_json.py": "a0e3fbc9917e05441d420168298daaf4d4b08fd1cf9ffac63c54bd730c62d948",
+    "experiments/ordinary_hosted/public_server.py": "6d233624d03e1bed52d3bcd1f019a05221962117173ef7d5c10419d7f53d451a",
+    "experiments/ordinary_hosted/request_auth.py": "1db66575fb0ce9d36cd3527ad6ea69534176f02b2b1ae913f3f8288f9d5460ab",
+    "experiments/ordinary_hosted/run_local.py": "e100285a40c6c0f967d47b513891f74d1f8008263261907b3c445106c8b1e11e",
+    "experiments/ordinary_hosted/stable_session.py": "4d50482526e5ddee35c9df5950fd2d6348dee98728af77a90cd2a0d4f628b776",
+    "experiments/ordinary_hosted/test_http.py": "e1910e27be1f59faec2708924a5108fb1c651643d0106afa9980555f5759c024",
+    "experiments/ordinary_hosted/test_public_json.py": "f9cedfe31b3365cfaf6d7c2011a476fd567ef7428d5f758c43b9553471d5cc08",
+    "experiments/ordinary_hosted/test_reliability.py": "612b13e6176ecff09c89c216645b775bee881aa80e8a0843a258f42cffac5bef",
+    "lib/identity-json.ts": "3804d5770e5e74ced56a662051f83668591ff5a2b624825b272c4833a209677d",
+    "lib/planning-client.ts": "655c6f55847e6be9507521e3f95e3d4e52e79e289b3da80ad2988149abd6425e",
+    "lib/private-outing.test.ts": "bfba27622a9f3588d4083318d93f7668dc3e57b78804855d4f567efa0282c2f7",
+    "lib/private-outing.ts": "96562106da379f043248731d628488e6a09daf0c9fcb242a94478afe0333c976",
+    "lib/private-server-boundary.ts": "4f3c01db48e279ae641eb13ec97c5f4e4cddf52f0b720d90297747c11962baae",
+    "lib/server-identity.ts": "4692b654be07a65e86fab14430c619b3b9d3d53525e3667c5450695943a1000b"
+  }
+}

@@ -1,0 +1,10 @@
+{
+ "identity":"52-private-ordinary-startup-review-v1",
+ "launchable":false,
+ "productionActive":false,
+ "localSyntheticOrdinaryAPI":true,
+ "realProviderDispatch":false,
+ "approvedRealFinancialGrant":false,
+ "normalEntryChanged":false,
+ "remaining":["private UI/mode and edit/recovery compatibility","reviewed production service bootstrap and enrollment","real SQL/Redis/independent recovery readiness","qualified hosted inference and real tokenization/pricing","owner-approved finite grant and canonical real provider transports","image security acceptance, private quality/latency/recovery and rollback"]
+}

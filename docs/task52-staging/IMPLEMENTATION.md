@@ -54,3 +54,6 @@ Start with synthetic providers and disposable saved data, then a separately appr
 5. On Redis loss, expire affected outings and deny continuation. Never synthesize raw evidence from cards/saved snapshots or automatically buy fresh provider results to rebuild it.
 
 **Next task only:** complete P2 native application-session reconstruction/continuation using the existing inactive evidence/grant contracts and fake providers, with a finite contract/test inventory. P1 security proposal and owner P0 reviews can proceed in parallel when separately requested. Do not automatically provision P4 or implement the entire table.
+
+
+Current bounded ordinary facade: [local interpretation/pending/generation](../task52-ordinary-hosted-integration.md) uses actual application contracts with opaque owner/revision handles and protected synthetic dispatch. This does not complete hosted P9: planning-mode/UI, remaining mappings, enrollment, production bootstrap, real model/pricing/grants and private staging acceptance remain blocked. No provisioning, spending or public launch is authorized by this result.

@@ -163,3 +163,8 @@ From the repository root, with the approved local Colima profile running and has
 ## Server identity port checkpoint
 
 From the repository root: `node_modules/.bin/tsx --test lib/server-identity.test.ts lib/private-server-boundary.test.ts`. With the already approved Colima profile, pinned cached wheels and a current frontend build, run `PYTHONPATH=. backend/.venv/bin/python -m experiments.hosted_startup.run_local`. This is local liveness/refusal evidence only. `PYTHONPATH=. backend/.venv/bin/python -m deployment.private_startup` intentionally exits78; do not set test/ready flags to defeat it. No command deploys or enables paid work.
+
+
+## Inactive ordinary hosted workflow
+
+From the repository root, with the approved local Colima profile and pinned cached wheels: `PYTHONPATH=. backend/.venv/bin/python -m experiments.ordinary_hosted.run_local`. It creates fresh synthetic stores and temporary test identities, never modifies Supabase or the paid journal, and does not enable hosted startup. Focused Node tests: `node_modules/.bin/tsx --test lib/private-outing.test.ts`.

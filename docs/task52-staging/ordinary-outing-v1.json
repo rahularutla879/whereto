@@ -1,0 +1,18 @@
+{
+ "identity":"52-private-ordinary-outing-v1",
+ "activation":"explicit trusted server bootstrap only; inactive normally",
+ "extension":"privateOuting",
+ "fields":{"version":"exact identity","handle":"256-bit opaque URL-safe random factory locator","revision":"positive protected SQL revision","expiresMs":"original absolute SQL/evidence deadline, never extended"},
+ "ownership":["verified IAP issuer/audience/subject","public adapter build namespace","original native checkpoint","original outing/root/inference","current SQL revision/fence","encrypted Redis commitment","independent restore epoch"],
+ "clientMayChooseFinancialScope":false,
+ "embeddedGraph":false,
+ "bearerAloneAuthorizesWork":false,
+ "accountRegistration":false,
+ "pending":"server-retained raw/interpretation/reference plus validated answers; no browser pending evidence",
+ "edits":"changed source/preferences revoke and require new interpretation; no latest-user/tab inference",
+ "executionControls":["startingLocation","currentArea","locationFirst","useOriginAsSearchAnchor","referenceToken","manualStartingPlace","searchRadius"],
+ "generation":"typed effective fields must match original source; execution controls revalidated without inference; one consumed planning action",
+ "failure":"stale/unknown/expired/incompatible/uncertain authority refuses without retry/refund",
+ "savedCapabilities":"unchanged independent model; private saved routes not exposed",
+ "hostedReady":false
+}
