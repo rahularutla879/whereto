@@ -1,0 +1,193 @@
+{
+  "identity": "52b-openai-offline-preparation-verification-v1",
+  "recordedDate": "2026-11-14",
+  "scope": "Offline preparation complete with explicitly unresolved execution blockers; no live-readiness claim",
+  "manifestSHA256": "0f3179ea1cd5882631320df1cde42e350841a46055e4b67c416de8218154683f",
+  "reviewDeferralSHA256": "bde2c862038eb7bf06c8170bd3b942f8f5e61607601dd7f350bd68cc17b59162",
+  "baseline": "7e1df9962c0d8147c80759f9303d551e1c37708f",
+  "restoredSourceProbe": [
+    {
+      "commit": "8e360c0b6363376e12b271f907271e4bd02bb0d6",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "ecac9640673b745556b80e499470567e6a664525",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "49ba3cfcedcd787e7e337f5568e3b8f60896eb21",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "8116465e8f3bc9c5cc69afc6c13d3c2914d1dbf7",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "e720a458e06afa520d0c3e5ae10878855d7b7e95",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+      "root": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+      "rootMatchesB2": true,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 127
+    },
+    {
+      "commit": "3f50032e3f55bf72fe0ca914bbca0bad7d00b8c6",
+      "root": "65d0ecd43587dcb975962b9c623efeac7eff3e0a0b1ada2b116f97d537c6c24b",
+      "rootMatchesB2": false,
+      "packageLock": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+      "packageLockMatchesB2": true,
+      "selectedFiles": 128
+    }
+  ],
+  "tests": [
+    {
+      "suite": "backend.test_task52b_prepare_openai",
+      "command": "CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_prepare_openai -v",
+      "cwd": "current checkout",
+      "passed": 13,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "logSHA256": "8caec8578e289507ed542d04baf1f5037fb7f7ef77f60b7b3daca9308eb4e6b3",
+      "passingTestNames": [
+        "test_all_19_examples_unchanged_and_structurally_valid",
+        "test_changed_frozen_artifacts_refuse",
+        "test_changed_prepared_bytes_refuse",
+        "test_committed_bytes_are_canonical_and_complete",
+        "test_count_projection_includes_full_schema_and_reasoning",
+        "test_counts_unknown_malformed_or_over_cap_refuse",
+        "test_decoder_preserves_original_synthetic_response",
+        "test_exact_model_and_controls",
+        "test_five_exact_proposed_slots_and_payloads",
+        "test_frozen_accounting_exact_boundaries",
+        "test_no_network_or_authority_created",
+        "test_provider_errors_incomplete_and_refusal_not_success",
+        "test_required_and_unknown_response_fields_remain_enforced"
+      ]
+    },
+    {
+      "suite": "backend.test_task52_q1 backend.test_task52_q2 backend.test_task52_ordering_v51 backend.test_task52_version_review",
+      "command": "CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=. <current backend/.venv/bin/python> -m unittest backend.test_task52_q1 backend.test_task52_q2 backend.test_task52_ordering_v51 backend.test_task52_version_review -v",
+      "cwdCommit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+      "attempted": 37,
+      "passed": 33,
+      "failedAssertions": 0,
+      "errors": 4,
+      "skipped": 0,
+      "seconds": 48.669,
+      "errorsIn": [
+        "test_seven_replay_both_failures_and_original_evidence (backend.test_task52_q1.QualificationContractTests.test_seven_replay_both_failures_and_original_evidence)",
+        "test_exact_original_error_evidence_and_halt_unchanged (backend.test_task52_q2.ProviderCompatibilityTests.test_exact_original_error_evidence_and_halt_unchanged)",
+        "test_q1_stays_separate_and_original_paid_source_gate_still_refuses (backend.test_task52_q2.ProviderCompatibilityTests.test_q1_stays_separate_and_original_paid_source_gate_still_refuses)",
+        "test_replay_and_successor_keep_historical_failures_and_blank_authority (backend.test_task52_ordering_v51.OwnerV51Tests.test_replay_and_successor_keep_historical_failures_and_blank_authority)"
+      ],
+      "cause": "Original private evidence/journal intentionally absent from isolated source checkout. No copy, alias, repin or source-check bypass applied.",
+      "logSHA256": "33b7913a68e6dc3dc32b54fac89d1cb4c2addce53a565a8728ba443b0e9c6d08"
+    }
+  ],
+  "developmentFailure": {
+    "suite": "new preparation tests first run",
+    "passed": 11,
+    "failed": 1,
+    "cause": "Test incorrectly required compact frozen teaching examples to contain every strict response field. Corrected test assertion; all 19 examples and frozen schema unchanged. Compact examples validate as Pydantic examples, not complete provider responses.",
+    "logSHA256": "f06b4179b40d03282c34e9e31c53744298cd9682c16354d0635ce363e9d6f6bf"
+  },
+  "dependencyCheck": "pip check: No broken requirements found (read-only pip cache warning)",
+  "offlineChecks": {
+    "fiveQ3PayloadHashesExact": true,
+    "all120SlotExpectationsMatch": true,
+    "reviewed19ExamplesUnchanged": true,
+    "canonicalWireSchemaExact": true,
+    "allCountsUnknown": true,
+    "countProjectionIncludesReasoningAndSchema": true,
+    "q4cPureAdmissionBoundaryChecks": true,
+    "decoderErrorRefusalIncompletePreservation": true
+  },
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd"
+  },
+  "notRun": [
+    "Authenticated metadata/model/account/token-count/inference endpoints",
+    "Live transport or real append-only writer",
+    "Q4A-Q4D full crash/concurrency suites requiring original private-state colocation and exact source identity",
+    "Frontend/backend full application suites, TypeScript, lint, build, containers: no application/dependency/packaging change",
+    "Independent human review"
+  ],
+  "accountRequests": 0,
+  "countRequests": 0,
+  "inferenceRequests": 0,
+  "newReservations": 0,
+  "historicalWrites": 0,
+  "checksPending": [],
+  "finalChecks": {
+    "configuredSecretScan": {
+      "configuredValues": 2,
+      "currentMatches": 0,
+      "historicalMatches": 0
+    },
+    "evaluationKeyScan": {
+      "configuredValues": 3,
+      "currentMatches": 0,
+      "historicalMatches": 0,
+      "configIgnoredMode600": true
+    },
+    "beforeAfterHistoricalComparison": "PASS: original ten rows, all324 file hashes, corrections and persistent halt unchanged",
+    "handbook": {
+      "reviewed": [
+        8,
+        14,
+        15,
+        17
+      ],
+      "updated": [
+        17
+      ],
+      "unaffectedChaptersPreserved": 19
+    },
+    "architecture": "No architecture/runtime/infra changes; ARCHITECTURE.md reviewed and unchanged",
+    "manifestAndPayloadHashes": "PASS",
+    "changedMarkdownLinks": "PASS",
+    "fullCombinedDiffReview": "PASS: all modified prose/source and generated complete payloads checked against frozen template/Q3 hashes",
+    "liveDispatchRefusal": "PASS: existing task52_diag_protocol.live_dispatch raises Refused",
+    "sourceWorktreeLifecycle": "Separate clean matching checkout retained: managed archive refused because the app identifies it as the chat primary checkout. No private state copied there."
+  }
+}

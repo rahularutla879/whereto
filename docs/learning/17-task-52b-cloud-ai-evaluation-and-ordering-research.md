@@ -127,3 +127,14 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-17).
 ### Current cloud-model qualification review (documentation only)
 
 The [finite selection audit](../task52b-model-qualification-status.md) returns Task52B to model qualification. The existing five-case packet has120 independent judgments still blank. Owner-approved meanings need no repeat approval; a model screen needs independent review, a current exact execution identity and explicit financial permission. Older replay tests now refuse frozen B2 identity on the changed checkout; that is not a fresh model result. Five diagnostic successes cannot establish the broader clean-cohort/held-out gate. No infrastructure, model or evaluation runtime changed in this review.
+
+
+## Preparing exact requests without executing an evaluator
+
+`scripts/task52b_prepare_openai.py` is an offline artifact checker, not a provider runner. From the repository root, run `PYTHONPATH=. backend/.venv/bin/python -m scripts.task52b_prepare_openai`. It verifies frozen corpus/prompt/rubric/Q3 hashes, fills only the final user message, and checks the five committed generation/count drafts. It has no credentials, HTTP transport, journal writer or spending permission. See the [technical preparation report](../task52b-openai-technical-preparation.md).
+
+The count draft keeps model, all messages, strict output schema and reasoning configuration. Exact input counts remain unknown until separately authorized provider counting. A local token arithmetic test proves boundary handling, not how many tokens a real model receives. Compact teaching examples remain unchanged; they are not complete strict-wire responses. Actual responses still need every required field and source/semantic review.
+
+A retained Git checkout can match an old source manifest while the modern application correctly fails that identity. Task52B found matching B2 source and package lock at e7937e4;33 tests pass there, but four need the original private evidence at its protected location. Do not copy or symlink a financial journal, edit a hash, or weaken checks to make those pass. Source compatibility is narrower than exact historical environment reproduction.
+
+The owner has deferred human review. Record those120 source, six historical and four normalizer judgments as incomplete; never fill them with AI answers. Deferral is not a financial grant or an amendment of frozen per-response progression rules. Original product decisions remain valid. Current Qwen and production interpretation are unchanged. [Versioned deferral](../task52b-owner-review-deferral-v1.json) · [separate readiness gates](../task52b-openai-readiness-gates-v1.md).

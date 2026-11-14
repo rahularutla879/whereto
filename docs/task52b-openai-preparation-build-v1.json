@@ -1,0 +1,134 @@
+{
+  "identity": "52b-openai-five-slot-offline-preparation-v1",
+  "purpose": "Offline artifact construction/validation only; not an executable paid evaluator or historical build replacement",
+  "baselineCommit": "7e1df9962c0d8147c80759f9303d551e1c37708f",
+  "filesSHA256": {
+    "scripts/task52b_prepare_openai.py": "c5aac32f6491c67ac661b98255770fef4e6b93354bab4260c9435e552d8f86a8",
+    "backend/test_task52b_prepare_openai.py": "f64937e258ad4ee5ca5c123fb4e4eb86857bf2d6b3c5f20e1d56c997969040aa",
+    "docs/task52-cloud-prompt-v51-REVIEWED-v1.json": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+    "docs/task52-q3-v51-PROPOSED-v3.json": "27544ec1e57ffccf2b07cc802b0d4778a145795ac3d41f42e017985f60c9fafc",
+    "docs/task52-q1-rubric-v3-v51-PROPOSED.json": "fd0686aeb3b136d34da7cf586fa5413593500c95837c45fb302d0d179cf93abe",
+    "docs/task52-evaluation-corpus.json": "5c7be9828fd6690f5b11ef38bee019eff5a9962adaccef13ee572fca2ac8549f",
+    "docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.request.json": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+    "docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.count.json": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+    "docs/task52b-openai-diagnostic-prepared-v1/02-journey-04-r2.request.json": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+    "docs/task52b-openai-diagnostic-prepared-v1/02-journey-04-r2.count.json": "b13faceba308116461407d0e0604ae94b2217668489207f15ab1c2248bf7c921",
+    "docs/task52b-openai-diagnostic-prepared-v1/03-extension-partial-r2.request.json": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+    "docs/task52b-openai-diagnostic-prepared-v1/03-extension-partial-r2.count.json": "93ff397cc5fae40b5d0d3c80cf58bc4ce921557073d3d843824833372388eba1",
+    "docs/task52b-openai-diagnostic-prepared-v1/04-journey-06-r2.request.json": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+    "docs/task52b-openai-diagnostic-prepared-v1/04-journey-06-r2.count.json": "31ff68538cad7a379e5a5c581810b31af25bc57f6b8cd2e0559763d107e1070c",
+    "docs/task52b-openai-diagnostic-prepared-v1/05-journey-21-r1.request.json": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+    "docs/task52b-openai-diagnostic-prepared-v1/05-journey-21-r1.count.json": "c9f611bd42778b9355feeccd32568994680657f181fc49a333a1491cdabf61d2"
+  },
+  "executableObservation": {
+    "python": "3.12.1",
+    "pythonExecutableSHA256": "e7bdd7770f59ff7fa58d4e1074481051a462b03d4c6a6e36e07549dce546fe03",
+    "packages": {
+      "pydantic": "2.14.1",
+      "fastapi": "0.150.0",
+      "requests": "2.34.2"
+    },
+    "completeDistributionIdentity": "87b6bcbb4f4d123c0497ba07415f45a549e13a00936949c84a7ef2275445d2dd",
+    "historicalTransitiveEnvironmentReproduced": false,
+    "historicalNpmInstalled": false
+  },
+  "compatibleB2SourceEnvironment": {
+    "commit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+    "sourceRootSHA256": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+    "selectedFiles": 127,
+    "packageLockSHA256": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "runtimeManifestSHA256": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+    "privateEvidenceCollocated": false,
+    "oldEvaluatorStillRefusesNewCheckout": true
+  },
+  "slots": [
+    {
+      "slot": [
+        "openai",
+        "extension-repeated",
+        2
+      ],
+      "sourceSHA256": "7183ad071492d60d68a65a12f2e6b8cbdf77d25efdf1dc2e466152ca9d42bd6c",
+      "rubricCaseDigest": "47805dff6e93274c6e8425dc1ab7da1deddcc9e698e1a7f8ba1ea69af27b490a",
+      "requestFile": "01-extension-repeated-r2.request.json",
+      "requestSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+      "countFile": "01-extension-repeated-r2.count.json",
+      "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+      "verifiedInputTokens": null,
+      "dispatchAuthorized": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-04",
+        2
+      ],
+      "sourceSHA256": "608d5f41198d2d658bc288520dc8513eef6f2419d3779fb6ecd87137297d450e",
+      "rubricCaseDigest": "5ddec2e32f522a6c982d17ef1a945fbefc5bd30bf26fe983cea307a4004e1273",
+      "requestFile": "02-journey-04-r2.request.json",
+      "requestSHA256": "8166f0e97028d003a13a22ca57c78f1fc3404c32cf11b8b1fa4a94fd437ec105",
+      "countFile": "02-journey-04-r2.count.json",
+      "countSHA256": "b13faceba308116461407d0e0604ae94b2217668489207f15ab1c2248bf7c921",
+      "verifiedInputTokens": null,
+      "dispatchAuthorized": false
+    },
+    {
+      "slot": [
+        "openai",
+        "extension-partial",
+        2
+      ],
+      "sourceSHA256": "4038a95c47f7fc546989b1ed84ef43aac9fd586a18ad2a06c1e6d0415e42497f",
+      "rubricCaseDigest": "f4ebb1622af9562399652af1313dcb9e4e78ad6fe940bdb26d7c769ef71b3f42",
+      "requestFile": "03-extension-partial-r2.request.json",
+      "requestSHA256": "4a79183fdc6471925a6c9618c34dae1806ff0b3cabd50dbce7061da4f3aa28b4",
+      "countFile": "03-extension-partial-r2.count.json",
+      "countSHA256": "93ff397cc5fae40b5d0d3c80cf58bc4ce921557073d3d843824833372388eba1",
+      "verifiedInputTokens": null,
+      "dispatchAuthorized": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-06",
+        2
+      ],
+      "sourceSHA256": "abf56895dfb84aa1e7f3447b90f9295aa00155593408211514e0f42bf7473d1d",
+      "rubricCaseDigest": "53f82a0dc920a30b45fc72942b35e4af4c3176989223d3f3bbefe02c93931088",
+      "requestFile": "04-journey-06-r2.request.json",
+      "requestSHA256": "6bcc4fd15bd933cf58e36a78bb0ed89bbe103951b302895e62eae7f7533784bd",
+      "countFile": "04-journey-06-r2.count.json",
+      "countSHA256": "31ff68538cad7a379e5a5c581810b31af25bc57f6b8cd2e0559763d107e1070c",
+      "verifiedInputTokens": null,
+      "dispatchAuthorized": false
+    },
+    {
+      "slot": [
+        "openai",
+        "journey-21",
+        1
+      ],
+      "sourceSHA256": "5d88d74b325fd6b2f4c3178500a842dac423cd2ed9723305f8762504eea703da",
+      "rubricCaseDigest": "986ab85d0c05081f25f99516457ce6c290133104fdb514c8632be1c493794daa",
+      "requestFile": "05-journey-21-r1.request.json",
+      "requestSHA256": "78db82ab3bfbe2f66e04560312d52d14c25e3dc06dd00d82830f420d77495698",
+      "countFile": "05-journey-21-r1.count.json",
+      "countSHA256": "c9f611bd42778b9355feeccd32568994680657f181fc49a333a1491cdabf61d2",
+      "verifiedInputTokens": null,
+      "dispatchAuthorized": false
+    }
+  ],
+  "canonicalization": "JSON sorted keys, compact separators, ensure_ascii=false, allow_nan=false; UTF-8, no trailing newline. Repository convention, not RFC8785 claim.",
+  "promptSHA256": "1741e5b5ae344fff0e4fff1fba2c4b45fd73b0b86baf73bdae35607f4b1919c9",
+  "configurationSHA256": "4239ddf4810ce65dfc5593c64cb011372abb1e350560ed848ceded06811d28a8",
+  "inputCap": 12000,
+  "outputCap": 2000,
+  "countMargin": 2048,
+  "concurrency": 1,
+  "retries": 0,
+  "proposedReservationNanodollarsPerOperation": 2500000,
+  "proposedFiveGrossNanodollars": 12500000,
+  "quoteValidatedForAccount": false,
+  "countsVerified": false,
+  "executionAuthorized": false
+}
