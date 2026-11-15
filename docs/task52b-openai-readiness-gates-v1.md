@@ -1,3 +1,5 @@
+> First-slot-only follow-up: [one model GET + one exact first input-count request](task52b-first-slot-readiness-request-v1.json), not approved or executed. This narrower proposed readiness purpose cannot bypass the older five-count envelope. [HTTPS/enrollment review](task52b-first-slot-readiness.md) documents the real-role/storage/post-append gates still required. No account or financial permission is implied.
+
 > 2026-11-15 status: original-evidence replay is restored through the [read-only port](task52b-execution-boundary.md). The append/dispatch kernel is tested on fictional storage, not operationally enrolled. Gate1 still requires exact real purpose/build/storage/transport review and protected enrollment; the [minimal first-slot amendment](task52b-diagnostic-purpose-amendment-PROPOSED-v1.json) is a proposal only. Gates2–4 remain separate, unapproved and unexecuted. Actual counts and the account quote remain unknown.
 
 # Task 52B — separately gated OpenAI readiness and execution

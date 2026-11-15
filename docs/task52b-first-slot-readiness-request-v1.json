@@ -1,0 +1,38 @@
+{
+  "identity": "52b-first-slot-account-readiness-request-v1",
+  "status": "REQUEST PREPARED; NOT OWNER APPROVED OR EXECUTED",
+  "approved": false,
+  "accountProjectIdentity": null,
+  "credentialIdentity": null,
+  "credentialValuesRequestedInChat": false,
+  "requestedOwnerDecision": "Authorize readiness-only access for a specified owner-controlled OpenAI project: at most one model GET and one exact first-slot input-count POST, zero inference, retries or account changes. Endpoint costs must be independently bounded and explicitly approved before any call; this request does not assert counting is free.",
+  "scopeCannotExecuteUntilTargetAndCostAreApproved": true,
+  "requests": [
+    {"method":"GET","url":"https://api.openai.com/v1/models/gpt-6-luna","maximum":1},
+    {"method":"POST","url":"https://api.openai.com/v1/responses/input_tokens","maximum":1,"bodyFile":"docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.count.json","bodySHA256":"70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1"}
+  ],
+  "generationPayloadSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+  "inferenceMaximum": 0,
+  "retries": 0,
+  "automaticRefresh": false,
+  "actualRequests": 0,
+  "tokenCount": null,
+  "readinessMaximumCharge": null,
+  "ownerControlledReadOnlyEvidence": [
+    "Project/account and credential ownership, access, validity, expiry and revocation status without disclosing the key",
+    "Responses access, exact requested/resolved model identity and any approved alias/version mapping",
+    "Current account quotas and rate limits; model GET alone cannot prove all limits",
+    "Current standard/global processing and complete applicable input/cache/reasoning/output/fee/tax pricing",
+    "Processing, retention, data-sharing and storage terms; store:false alone is not a retention guarantee",
+    "Existing credit balance and expiry, billing status and auto-recharge disabled"
+  ],
+  "freshness": "Retain same-UTC-day/maximum24-hour evidence rules; expired evidence stops, never polls or refreshes automatically",
+  "inputRule": "Exact complete first payload count plus original2048-token margin must fit12000; no local tokenizer guess or historical count reuse",
+  "outputCap": 2000,
+  "firstOnlyContractNote": "This proposed one-count readiness scope is separate from the older unapproved five-count scope. It cannot be inserted into or used to bypass the frozen five-count envelope contract; the new first-only operational purpose/readiness schema needs governance review.",
+  "futureInferenceReservationProposalNanodollars": 2500000,
+  "inferenceFinancialPermission": false,
+  "broaderFiveOperationProposalNanodollars": 12500000,
+  "broaderProposalApproved": false,
+  "noAccountOrBillingChanges": true
+}

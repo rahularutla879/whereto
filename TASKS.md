@@ -1,3 +1,7 @@
+## Task52B — first-slot wire/enrollment preparation
+
+[Report](docs/task52b-first-slot-readiness.md): prepared inactive first-slot Responses transport with local TLS/crash verification over the existing append kernel, plus explicit real-writer/post-append and governance requirements. [Exact readiness-only authorization request](docs/task52b-first-slot-readiness-request-v1.json) remains unapproved. No actual account/count/inference, writer enrollment or grant. Semantic review remains deferred; no model qualification or automatic next-slot permission. Existing hosting/application/history are untouched; Task53 remains blocked.
+
 ## Task52B — original-evidence replay and execution-kernel preparation
 
 [Report](docs/task52b-execution-boundary.md): matching frozen B2 source now replays original evidence read-only; the four location errors are resolved. A separately pinned append/single-send kernel is exercised on fresh fictional journals with immutable raw/decode/grade records and crash/replay protection. [Exact verification](docs/task52b-execution-boundary-verification-v1.json). No real writable enrollment, provider transport, approved quote or model qualification is claimed. The limited purpose amendment is proposed only; independent reviews stay deferred. No provider/account access, grant, production, infrastructure or Task53 activation.

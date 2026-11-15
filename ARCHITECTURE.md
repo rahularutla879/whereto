@@ -1,3 +1,7 @@
+## Task52B — inactive first-slot HTTPS adapter
+
+`task52b_first_slot` supplies bounded single-dial HTTPS over the existing source-pinned journal kernel; a terminal outer gate admits only extension-repeated/r2. Response body, HTTP metadata hashes, decoded usage and grading remain distinct. `OpenAIResponsesTransport` has no enrolled real peer or credential source; only closed loopback fixtures can instantiate it. No application startup, hosted service, model, database or image integration is changed. Real writer enrollment/post-append verification remains a separate security gate. [Details](docs/task52b-first-slot-readiness.md).
+
 ## Task52B — offline composite execution, separate from the application
 
 The new `task52b_evidence_access` port routes only frozen private-evidence I/O to original read-only files/inodes under the existing lock. `task52b_run_offline` loads the separately pinned ports alongside unchanged B2 application imports. `task52b_execution_boundary` reuses Q4C transitions/diagnostic scoring and the existing append SQL guard, adding immutable raw/decode/grade capture on fresh fictional storage. Normal startup, distributed-state services and deployment images do not import it; real writable/transport enrollment is absent. [Contract and limitations](docs/task52b-execution-boundary.md).
