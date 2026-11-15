@@ -186,3 +186,10 @@ See [continuation evidence and limitations](../task52-private-role-continuation.
 ### Task 52 closed frontend and immutable recovery checks
 
 `experiments/hosted_ports/pinned_run.py` snapshots and hashes source/image inputs before tests, runs from read-only files, captures the actually loaded assertion bytecode and checks the files afterward. Sealed fictional keys and complete requests stay outside Git. Python traceback source can differ from loaded bytecode after a file changes; a test demonstrates that mechanism without claiming it explains an earlier unattributed failure. `deployment/verify_closed_frontend.py --images /tmp/task52-closed-front-images.json --output /tmp/task52-closed-image-checks.json` performs network-disabled local image/refusal checks; it requires the approved local Docker context, not cloud access. See [verification report](../task52-closed-frontend-verification.md).
+
+
+## Frozen evaluation tests and original private evidence
+
+The [Task52B replay launcher](../task52b-execution-boundary.md) explicitly composes unchanged B2 imports with a pinned read-only evidence port. A matching source checkout alone cannot replay private responses. Never copy the paid journal into a fixture, edit historical hashes or weaken a test to remove that distinction. New writer/crash tests use synthetic storage and keys only. Their original-journal checks never request a writable OS descriptor, even to test rejection; mode/flag guards are tested without risking owner files. Privileged test imports are explicit opt-in and skipped by normal backend discovery.
+
+A passing fictional send is not provider acceptance, real-token evidence, independent review, power-loss durability or operational enrollment. Report adapter mistakes and interrupted runs separately from final passes, and keep raw-model correctness separate from normalization and guarded safety.

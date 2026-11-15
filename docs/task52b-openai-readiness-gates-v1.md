@@ -1,13 +1,15 @@
+> 2026-11-15 status: original-evidence replay is restored through the [read-only port](task52b-execution-boundary.md). The append/dispatch kernel is tested on fictional storage, not operationally enrolled. Gate1 still requires exact real purpose/build/storage/transport review and protected enrollment; the [minimal first-slot amendment](task52b-diagnostic-purpose-amendment-PROPOSED-v1.json) is a proposal only. Gates2–4 remain separate, unapproved and unexecuted. Actual counts and the account quote remain unknown.
+
 # Task 52B — separately gated OpenAI readiness and execution
 
 Status: **procedure only; no account or provider access authorized or performed**. [Prepared identities](task52b-openai-preparation-build-v1.json) · [review deferral](task52b-owner-review-deferral-v1.json). Remaining historical allowance is not approval.
 
 ## Gate 1 — technical execution and review purpose
 
-- Complete a reviewed read-only original-evidence path in the matching B2 source environment. Preserve the original lock, ten-row prefix, corrections and halt. Resolve the four missing-private-state replay errors; do not repin.
-- Review a minimal real append-only child-scope writer and single-send transport, with durable pre-send reservation/INTENT, full raw response retention and uncertainty recovery. Existing synthetic-only components and unconditional live refusal cannot be enabled by a flag.
+- Read-only original-evidence replay is restored through the [versioned port](task52b-execution-boundary.md). Retain the matching B2 source, original lock/prefix/corrections/halt and read-only boundary. This completed replay supplies no execution permission; no repin or copied database is needed.
+- Review operational enrollment of the [tested append/single-send kernel](task52b-execution-boundary.md), its original-journal storage binding, exact live purpose/provenance and a real HTTP transport. Preserve durable reservation/INTENT, raw capture and uncertainty recovery. Closed synthetic components and unconditional live refusal cannot be enabled by a flag.
 - Independently review/enroll required real operator/reviewer authority under an exact new live build and purpose. No real keys or permissions were created here.
-- Record the owner's current deferral accurately. Complete the existing human reviews, or obtain a separately reviewed, explicit unreviewed technical-diagnostic purpose/progression amendment before seeking live scope permission. Do not silently remove the source/per-response review gates. No unreviewed response is certified; no diagnostic permits production planning.
+- The owner has deferred semantic review. The [unactivated first-slot-only purpose proposal](task52b-diagnostic-purpose-amendment-PROPOSED-v1.json) needs explicit owner/governance/security review before any live scope permission. It proposes no unreviewed batch progression. Existing per-response and journey-06 gates remain; no unreviewed response is certified and no diagnostic permits planning.
 
 ## Gate 2 — owner-approved readiness scope, no inference
 

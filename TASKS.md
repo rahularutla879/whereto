@@ -1,3 +1,7 @@
+## Task52B — original-evidence replay and execution-kernel preparation
+
+[Report](docs/task52b-execution-boundary.md): matching frozen B2 source now replays original evidence read-only; the four location errors are resolved. A separately pinned append/single-send kernel is exercised on fresh fictional journals with immutable raw/decode/grade records and crash/replay protection. [Exact verification](docs/task52b-execution-boundary-verification-v1.json). No real writable enrollment, provider transport, approved quote or model qualification is claimed. The limited purpose amendment is proposed only; independent reviews stay deferred. No provider/account access, grant, production, infrastructure or Task53 activation.
+
 ## Task52B — five-slot technical preparation (offline checkpoint complete; execution blocked)
 
 [Preparation report](docs/task52b-openai-technical-preparation.md) records owner review deferral, compatible historical B2 source/lock,13 new passes and33 restored-suite passes/four missing-private-state errors. Five frozen generation bodies/count drafts are prepared, all120 expectations bound; counts/account quote remain unverified. [Readiness/execution gates](docs/task52b-openai-readiness-gates-v1.md) retain separate approval, real-writer, halt and review-purpose boundaries. No inference, credentials, financial grant, journal mutation, production change or Task53. Model qualification remains incomplete.

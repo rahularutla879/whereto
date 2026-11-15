@@ -1,3 +1,5 @@
+> 2026-11-15 follow-up: [original-evidence replay and inactive writer/transport kernel](task52b-execution-boundary.md), [new verification](task52b-execution-boundary-verification-v1.json). All37 frozen replay tests now pass through the separately pinned read-only I/O port; the four private-state location errors below describe the prior checkpoint. Original source/pins, prepared requests and review deferral remain unchanged. New operational enrollment and live HTTP remain unavailable. No provider/account/count request or financial permission follows from these offline results.
+
 # Task 52B — five-slot OpenAI technical preparation
 
 Baseline `7e1df9962c0d8147c80759f9303d551e1c37708f`. This checkpoint prepares data and checks reproducibility. **No provider request, readiness call, token count, reservation, journal write or approval was issued.** No model is qualified or selected. [Build/payload manifest](task52b-openai-preparation-build-v1.json) · [Verification](task52b-openai-preparation-verification-v1.json).

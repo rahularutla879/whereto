@@ -1,0 +1,472 @@
+{
+  "identity": "52b-execution-boundary-offline-verification-v1",
+  "recordedDate": "2026-11-15",
+  "baseline": "17430785faee36c88ac6d65972061944488b6f9f",
+  "status": "Offline checkpoint verified; no operational enrollment, live transport, account readiness or financial permission",
+  "buildIdentity": "52b-append-single-send-execution-boundary-v1",
+  "buildSHA256": "a566f2c7e13acf83b991ee1d035586f09897c5830e132f7fa86e76f26f2746d9",
+  "bootstrapIdentitySourceSHA256": "71c5d032681453009f2638a0f705e11169de4f028cacfd42a8ce5debd4580ad6",
+  "frozenRuntime": {
+    "commit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+    "sourceRootSHA256": "eeaec6d0fcc502cb1df2388f9ab808f013cbf711b7f84c91d21e7132ff3d4b8b",
+    "runtimeManifestSHA256": "5151423b78a7140790c3e6951c3fb64be49b6887db5b230449b7b011bca4cf14",
+    "packageLockSHA256": "7fde3bb3c81a32f5149f56a3258a8dc9afc563c040a50337c85ea69f483b8404",
+    "sourceValidatorsChanged": false,
+    "originalEvidenceReplayed": true,
+    "paidHistoricalEnvironmentReproduced": false,
+    "independentHumanCertification": false
+  },
+  "runtimeObservation": {
+    "python": "3.12.1",
+    "executableSHA256": "e7bdd7770f59ff7fa58d4e1074481051a462b03d4c6a6e36e07549dce546fe03",
+    "packages": {
+      "pydantic": "2.14.1",
+      "fastapi": "0.150.0",
+      "requests": "2.34.2"
+    }
+  },
+  "evidencePort": {
+    "identity": "52b-original-evidence-readonly-port-v1",
+    "sourceROOTReplaced": false,
+    "privateIOExplicitlyMediated": true,
+    "originalFilesCopied": 0,
+    "symlinksOrMountsCreated": 0,
+    "all324ContentsAndInventoriesVerified": true,
+    "originalFileAndLockInodesVerified": true,
+    "originalReaderLocksPreserved": true,
+    "SQL": "exact original mode=ro&immutable=1; query_only; authorizer; shared lock leases",
+    "noncanonicalOriginalURIsRefused": true,
+    "processGlobalTrustedTestHooksNotOSSandbox": true,
+    "frozenProjectValidatorOrReplayFunctionsReplaced": false
+  },
+  "totals": {
+    "selectedPasses": 119,
+    "finalFailures": 0,
+    "finalErrors": 0,
+    "selectedSuiteSkips": 0
+  },
+  "suites": [
+    {
+      "suite": "unchanged frozen Q1/Q2/V5.1/version replay",
+      "passed": 37,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 70.968,
+      "logSHA256": "6d411a422b1fab8628c1515157c37d1dc9210a99c09da77884f0aff34f906857",
+      "passingTestIDs": [
+        "test_changed_source_or_corpus_fails_closed (backend.test_task52_q1.QualificationContractTests.test_changed_source_or_corpus_fails_closed)",
+        "test_manifest_and_all_66_field_records (backend.test_task52_q1.QualificationContractTests.test_manifest_and_all_66_field_records)",
+        "test_no_independent_approval_prefilled (backend.test_task52_q1.QualificationContractTests.test_no_independent_approval_prefilled)",
+        "test_readonly_network_and_journal_boundary (backend.test_task52_q1.QualificationContractTests.test_readonly_network_and_journal_boundary)",
+        "test_reference_fields_not_reinterpreted_as_model_accuracy (backend.test_task52_q1.QualificationContractTests.test_reference_fields_not_reinterpreted_as_model_accuracy)",
+        "test_seven_replay_both_failures_and_original_evidence (backend.test_task52_q1.QualificationContractTests.test_seven_replay_both_failures_and_original_evidence)",
+        "test_unknown_identity_and_changed_manifest_fail (backend.test_task52_q1.QualificationContractTests.test_unknown_identity_and_changed_manifest_fail)",
+        "test_all_66_payloads_per_provider_construct_offline_with_same_prompt (backend.test_task52_q2.ProviderCompatibilityTests.test_all_66_payloads_per_provider_construct_offline_with_same_prompt)",
+        "test_exact_original_error_evidence_and_halt_unchanged (backend.test_task52_q2.ProviderCompatibilityTests.test_exact_original_error_evidence_and_halt_unchanged)",
+        "test_exact_three_dispositions_without_dispatch_or_schema_activation (backend.test_task52_q2.ProviderCompatibilityTests.test_exact_three_dispositions_without_dispatch_or_schema_activation)",
+        "test_frozen_proposals_and_full_expanded_equivalence (backend.test_task52_q2.ProviderCompatibilityTests.test_frozen_proposals_and_full_expanded_equivalence)",
+        "test_original_local_bounds_remain_enforced_not_provider_descriptions (backend.test_task52_q2.ProviderCompatibilityTests.test_original_local_bounds_remain_enforced_not_provider_descriptions)",
+        "test_q1_stays_separate_and_original_paid_source_gate_still_refuses (backend.test_task52_q2.ProviderCompatibilityTests.test_q1_stays_separate_and_original_paid_source_gate_still_refuses)",
+        "test_reference_expansion_rejects_unsupported_forms (backend.test_task52_q2.ProviderCompatibilityTests.test_reference_expansion_rejects_unsupported_forms)",
+        "test_required_nulls_types_enums_order_evidence_and_extra_fields_unchanged (backend.test_task52_q2.ProviderCompatibilityTests.test_required_nulls_types_enums_order_evidence_and_extra_fields_unchanged)",
+        "test_actual_shortlister_closes_before_optional_selection_without_providers (backend.test_task52_ordering_v51.OwnerV51Tests.test_actual_shortlister_closes_before_optional_selection_without_providers)",
+        "test_all66_amendment_preserves_nonorder_gold_and_labels_resolution (backend.test_task52_ordering_v51.OwnerV51Tests.test_all66_amendment_preserves_nonorder_gold_and_labels_resolution)",
+        "test_aur_evidence_uses_actual_source_offsets_and_new_identity (backend.test_task52_ordering_v51.OwnerV51Tests.test_aur_evidence_uses_actual_source_offsets_and_new_identity)",
+        "test_flexible_required_stop_is_not_optional_or_chain (backend.test_task52_ordering_v51.OwnerV51Tests.test_flexible_required_stop_is_not_optional_or_chain)",
+        "test_frozen_v5_cases_holdouts_and_negative_edges (backend.test_task52_ordering_v51.OwnerV51Tests.test_frozen_v5_cases_holdouts_and_negative_edges)",
+        "test_manifest_unknown_or_authorizing_identity_refuses (backend.test_task52_ordering_v51.OwnerV51Tests.test_manifest_unknown_or_authorizing_identity_refuses)",
+        "test_new_connector_extra_reverse_and_missing_edges_reject (backend.test_task52_ordering_v51.OwnerV51Tests.test_new_connector_extra_reverse_and_missing_edges_reject)",
+        "test_optional_projection_keeps_required_closure_and_never_forces_optional (backend.test_task52_ordering_v51.OwnerV51Tests.test_optional_projection_keeps_required_closure_and_never_forces_optional)",
+        "test_post_freeze_contrasts_without_claiming_independence (backend.test_task52_ordering_v51.OwnerV51Tests.test_post_freeze_contrasts_without_claiming_independence)",
+        "test_predeclared_connector_and_scope_cases (backend.test_task52_ordering_v51.OwnerV51Tests.test_predeclared_connector_and_scope_cases)",
+        "test_prompt_examples_keep_nonorder_contract_and_full_exact_payload (backend.test_task52_ordering_v51.OwnerV51Tests.test_prompt_examples_keep_nonorder_contract_and_full_exact_payload)",
+        "test_replay_and_successor_keep_historical_failures_and_blank_authority (backend.test_task52_ordering_v51.OwnerV51Tests.test_replay_and_successor_keep_historical_failures_and_blank_authority)",
+        "test_budget_and_terminal_identity_mutation_never_authorize_work (backend.test_task52_version_review.AdmissionReviewThreatTests.test_budget_and_terminal_identity_mutation_never_authorize_work)",
+        "test_restart_cannot_recover_or_copy_old_process_authority (backend.test_task52_version_review.AdmissionReviewThreatTests.test_restart_cannot_recover_or_copy_old_process_authority)",
+        "test_altered_or_missing_manifest_hash_cannot_self_assert_authority (backend.test_task52_version_review.VersionReviewTests.test_altered_or_missing_manifest_hash_cannot_self_assert_authority)",
+        "test_historical_snapshots_survive_new_runtime_without_false_current_equality (backend.test_task52_version_review.VersionReviewTests.test_historical_snapshots_survive_new_runtime_without_false_current_equality)",
+        "test_missing_git_snapshot_never_falls_back_to_current_tree (backend.test_task52_version_review.VersionReviewTests.test_missing_git_snapshot_never_falls_back_to_current_tree)",
+        "test_missing_manifest_never_falls_back (backend.test_task52_version_review.VersionReviewTests.test_missing_manifest_never_falls_back)",
+        "test_missing_original_evidence_or_same_label_replay_refused (backend.test_task52_version_review.VersionReviewTests.test_missing_original_evidence_or_same_label_replay_refused)",
+        "test_replay_has_new_identity_preserves_original_and_defaults_unreviewed (backend.test_task52_version_review.VersionReviewTests.test_replay_has_new_identity_preserves_original_and_defaults_unreviewed)",
+        "test_unknown_missing_role_and_historical_runtime_confusion_fail (backend.test_task52_version_review.VersionReviewTests.test_unknown_missing_role_and_historical_runtime_confusion_fail)",
+        "test_working_source_changes_do_not_pass_as_historical_equality (backend.test_task52_version_review.VersionReviewTests.test_working_source_changes_do_not_pass_as_historical_equality)"
+      ]
+    },
+    {
+      "suite": "unchanged Q4B read-only journal",
+      "passed": 12,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 8.097,
+      "logSHA256": "c9cec7f48e7ab9544ad497d644a21c881152d3233c803589e0a4746ef923c1bc",
+      "passingTestIDs": [
+        "test_actual_schema_root_rows_accounting_halt_and_build (backend.test_task52_q4b.CompatibilityTests.test_actual_schema_root_rows_accounting_halt_and_build)",
+        "test_exact_sql_constraints_do_not_supply_semantic_or_financial_authority (backend.test_task52_q4b.CompatibilityTests.test_exact_sql_constraints_do_not_supply_semantic_or_financial_authority)",
+        "test_existing_lock_excludes_read_adapter_without_creating_files (backend.test_task52_q4b.CompatibilityTests.test_existing_lock_excludes_read_adapter_without_creating_files)",
+        "test_fake_old_or_missing_approval_cannot_authorize_a_real_run (backend.test_task52_q4b.CompatibilityTests.test_fake_old_or_missing_approval_cannot_authorize_a_real_run)",
+        "test_hot_side_journal_is_refused_not_ignored_or_recovered (backend.test_task52_q4b.CompatibilityTests.test_hot_side_journal_is_refused_not_ignored_or_recovered)",
+        "test_only_fixed_ro_immutable_connection_is_opened (backend.test_task52_q4b.CompatibilityTests.test_only_fixed_ro_immutable_connection_is_opened)",
+        "test_real_private_evidence_mismatch_never_opens_database (backend.test_task52_q4b.CompatibilityTests.test_real_private_evidence_mismatch_never_opens_database)",
+        "test_real_status_shaped_fictional_original_and_child_ceilings (backend.test_task52_q4b.CompatibilityTests.test_real_status_shaped_fictional_original_and_child_ceilings)",
+        "test_real_status_shaped_fictional_reservations_keep_anchors_halt_and_full_charge (backend.test_task52_q4b.CompatibilityTests.test_real_status_shaped_fictional_reservations_keep_anchors_halt_and_full_charge)",
+        "test_root_row_hash_status_reservation_rowid_and_missing_history_rejected (backend.test_task52_q4b.CompatibilityTests.test_root_row_hash_status_reservation_rowid_and_missing_history_rejected)",
+        "test_schema_unknown_trigger_index_and_read_profile_rejected (backend.test_task52_q4b.CompatibilityTests.test_schema_unknown_trigger_index_and_read_profile_rejected)",
+        "test_sql_authorizer_denies_writes_attach_and_pragma_setters_on_fiction_only (backend.test_task52_q4b.CompatibilityTests.test_sql_authorizer_denies_writes_attach_and_pragma_setters_on_fiction_only)"
+      ]
+    },
+    {
+      "suite": "unchanged Q4C signatures/accounting/crashes",
+      "passed": 22,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 183.096,
+      "logSHA256": "9095c2016338be683020bb155da398a6d171b0ea731a584f20462dd689e173c7",
+      "passingTestIDs": [
+        "test_admission_caps_and_aggregate_synthetic_exhaustion (backend.test_task52_q4c.Q4CTests.test_admission_caps_and_aggregate_synthetic_exhaustion)",
+        "test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields (backend.test_task52_q4c.Q4CTests.test_canonical_exact_signed_bytes_duplicate_json_float_unknown_fields)",
+        "test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed (backend.test_task52_q4c.Q4CTests.test_edited_prefix_negative_null_unknown_rows_and_schema_fail_closed)",
+        "test_expiry_future_time_and_scope_journal_binding (backend.test_task52_q4c.Q4CTests.test_expiry_future_time_and_scope_journal_binding)",
+        "test_five_signed_steps_require_reviews_and_retain_original_halt_and_money (backend.test_task52_q4c.Q4CTests.test_five_signed_steps_require_reviews_and_retain_original_halt_and_money)",
+        "test_global_nonce_collision_rejected_before_reservation_or_send (backend.test_task52_q4c.Q4CTests.test_global_nonce_collision_rejected_before_reservation_or_send)",
+        "test_input_count_bounds_and_stale_response_binding_reject (backend.test_task52_q4c.Q4CTests.test_input_count_bounds_and_stale_response_binding_reject)",
+        "test_malformed_envelopes_and_changed_build_fail_closed (backend.test_task52_q4c.Q4CTests.test_malformed_envelopes_and_changed_build_fail_closed)",
+        "test_missing_duplicate_conflicting_scope_and_wrong_slot (backend.test_task52_q4c.Q4CTests.test_missing_duplicate_conflicting_scope_and_wrong_slot)",
+        "test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission (backend.test_task52_q4c.Q4CTests.test_missing_outcome_and_reused_deleted_rowid_do_not_restore_permission)",
+        "test_partial_or_unresolved_signed_review_cannot_progress (backend.test_task52_q4c.Q4CTests.test_partial_or_unresolved_signed_review_cannot_progress)",
+        "test_positive_six_roles_openssh_signatures_and_offline_authority (backend.test_task52_q4c.Q4CTests.test_positive_six_roles_openssh_signatures_and_offline_authority)",
+        "test_process_crashes_seven_boundaries_never_retry_consumed_or_progress (backend.test_task52_q4c.Q4CTests.test_process_crashes_seven_boundaries_never_retry_consumed_or_progress)",
+        "test_review_disagreement_wrong_signer_and_critical_raw_order_error (backend.test_task52_q4c.Q4CTests.test_review_disagreement_wrong_signer_and_critical_raw_order_error)",
+        "test_rowid_deletion_and_reuse_cannot_erase_operation_identity (backend.test_task52_q4c.Q4CTests.test_rowid_deletion_and_reuse_cannot_erase_operation_identity)",
+        "test_stale_readiness_payload_and_incorrect_full_token_reservation (backend.test_task52_q4c.Q4CTests.test_stale_readiness_payload_and_incorrect_full_token_reservation)",
+        "test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key (backend.test_task52_q4c.Q4CTests.test_trust_revocation_pins_and_owner_cannot_enroll_reviewer_key)",
+        "test_two_process_operators_excluded_and_real_path_registry_loss_refused (backend.test_task52_q4c.Q4CTests.test_two_process_operators_excluded_and_real_path_registry_loss_refused)",
+        "test_uncertain_send_provider_error_missing_outcome_and_child_halt_restart (backend.test_task52_q4c.Q4CTests.test_uncertain_send_provider_error_missing_outcome_and_child_halt_restart)",
+        "test_unsigned_forged_signature_wrong_signer_namespace_and_role (backend.test_task52_q4c.Q4CTests.test_unsigned_forged_signature_wrong_signer_namespace_and_role)",
+        "test_verifier_timeout_and_revocation_document_tamper_never_fallback (backend.test_task52_q4c.Q4CTests.test_verifier_timeout_and_revocation_document_tamper_never_fallback)",
+        "test_wrong_binding_model_prompt_schema_proposal_build_root_slots_and_amounts (backend.test_task52_q4c.Q4CTests.test_wrong_binding_model_prompt_schema_proposal_build_root_slots_and_amounts)"
+      ]
+    },
+    {
+      "suite": "unchanged Q4D strict V5.1 continuation",
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 311.866,
+      "logSHA256": "836fe7d2b161265c347b5a1ccf3f5dda092616a2f2e01b7a1b33c0f2a3aee2c8",
+      "passingTestIDs": [
+        "test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract (backend.test_task52_q4d.Q4DTests.test_exact_schema_prefix_full_charge_halt_and_shared_lock_contract)",
+        "test_factory_no_arbitrary_path_live_switch_or_real_writer (backend.test_task52_q4d.Q4DTests.test_factory_no_arbitrary_path_live_switch_or_real_writer)",
+        "test_fifth_contradiction_still_checked_offline_not_skipped_or_planned (backend.test_task52_q4d.Q4DTests.test_fifth_contradiction_still_checked_offline_not_skipped_or_planned)",
+        "test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next (backend.test_task52_q4d.Q4DTests.test_known_loss_halts_without_altering_correct_raw_and_blocks_review_next)",
+        "test_missing_independent_response_review_never_progresses (backend.test_task52_q4d.Q4DTests.test_missing_independent_response_review_never_progresses)",
+        "test_original_exact_ro_connection_and_sanitized_compatibility (backend.test_task52_q4d.Q4DTests.test_original_exact_ro_connection_and_sanitized_compatibility)",
+        "test_process_exit_after_loss_outcome_before_outer_halt_remains_blocked (backend.test_task52_q4d.Q4DTests.test_process_exit_after_loss_outcome_before_outer_halt_remains_blocked)",
+        "test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure (backend.test_task52_q4d.Q4DTests.test_reviews_duplicate_scope_wrong_identity_consumed_slot_and_raw_failure)",
+        "test_uncertain_send_retains_charge_halts_and_cannot_retry (backend.test_task52_q4d.Q4DTests.test_uncertain_send_retains_charge_halts_and_cannot_retry)",
+        "test_unknown_build_or_parent_hash_refuses_before_inspection (backend.test_task52_q4d.Q4DTests.test_unknown_build_or_parent_hash_refuses_before_inspection)",
+        "test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse (backend.test_task52_q4d.Q4DTests.test_wrong_root_prefix_amount_halt_corrections_and_evidence_refuse)"
+      ]
+    },
+    {
+      "suite": "unchanged real-integration synthetic journal tests",
+      "passed": 7,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 370.083,
+      "logSHA256": "c72d60f9cbbab5ee1736fc9b9db9d82754bf4ced23ed9deb9b2cdebe9d0faf22",
+      "passingTestIDs": [
+        "test_document_build_and_stale_permission_refusals (backend.test_task52_real_integration.RealIntegrationTests.test_document_build_and_stale_permission_refusals)",
+        "test_exact_schema_and_sql_refusals (backend.test_task52_real_integration.RealIntegrationTests.test_exact_schema_and_sql_refusals)",
+        "test_five_slots_only_after_explicit_synthetic_loss_review (backend.test_task52_real_integration.RealIntegrationTests.test_five_slots_only_after_explicit_synthetic_loss_review)",
+        "test_invalid_rows_and_exhausted_budget (backend.test_task52_real_integration.RealIntegrationTests.test_invalid_rows_and_exhausted_budget)",
+        "test_original_connections_are_read_only (backend.test_task52_real_integration.RealIntegrationTests.test_original_connections_are_read_only)",
+        "test_process_exit_and_lock_exclusion (backend.test_task52_real_integration.RealIntegrationTests.test_process_exit_and_lock_exclusion)",
+        "test_raw_error_and_uncertain_send_stop (backend.test_task52_real_integration.RealIntegrationTests.test_raw_error_and_uncertain_send_stop)"
+      ]
+    },
+    {
+      "suite": "new boundary partition0",
+      "passed": 9,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 324.033,
+      "logSHA256": "a022e0009fb5d2190715ce33f57b802c97932e9a5607f5523b6e820e3301843e",
+      "passingTestIDs": [
+        "test_altered_capture_or_unknown_response_model_halts (_task52b_execution_tests.ExecutionTests.test_altered_capture_or_unknown_response_model_halts)",
+        "test_duplicate_operation_and_operator_permission (_task52b_execution_tests.ExecutionTests.test_duplicate_operation_and_operator_permission)",
+        "test_missing_captured_evidence_or_journal_blocks (_task52b_execution_tests.ExecutionTests.test_missing_captured_evidence_or_journal_blocks)",
+        "test_no_next_operation_without_independent_review (_task52b_execution_tests.ExecutionTests.test_no_next_operation_without_independent_review)",
+        "test_real_journal_and_live_transport_always_refuse (_task52b_execution_tests.ExecutionTests.test_real_journal_and_live_transport_always_refuse)",
+        "test_schema_failure_retains_raw_and_halts (_task52b_execution_tests.ExecutionTests.test_schema_failure_retains_raw_and_halts)",
+        "test_sql_update_delete_replacement_and_unbound_insert_refuse (_task52b_execution_tests.ExecutionTests.test_sql_update_delete_replacement_and_unbound_insert_refuse)",
+        "test_uncertain_timeouts_keep_full_charge_and_never_retry (_task52b_execution_tests.ExecutionTests.test_uncertain_timeouts_keep_full_charge_and_never_retry)",
+        "test_original_path_inodes_read_only_and_sql_mutation_refused (_task52b_execution_tests.ReadOnlyEvidenceTests.test_original_path_inodes_read_only_and_sql_mutation_refused)"
+      ]
+    },
+    {
+      "suite": "new boundary partition1",
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 364.598,
+      "logSHA256": "0df44855ef8ffcff8db706f5f7ced2ba5b8beda0537fc06b5562d0e3f19df2eb",
+      "passingTestIDs": [
+        "test_competing_process_refuses_common_experiment_lock (_task52b_execution_tests.ExecutionTests.test_competing_process_refuses_common_experiment_lock)",
+        "test_duplicate_review_and_scope_permissions (_task52b_execution_tests.ExecutionTests.test_duplicate_review_and_scope_permissions)",
+        "test_missing_model_and_duplicate_raw_response_keys_halt (_task52b_execution_tests.ExecutionTests.test_missing_model_and_duplicate_raw_response_keys_halt)",
+        "test_provider_refusal_is_not_success (_task52b_execution_tests.ExecutionTests.test_provider_refusal_is_not_success)",
+        "test_real_process_crashes_and_restart_never_resend (_task52b_execution_tests.ExecutionTests.test_real_process_crashes_and_restart_never_resend)",
+        "test_source_model_provider_payload_and_build_substitution_refuse (_task52b_execution_tests.ExecutionTests.test_source_model_provider_payload_and_build_substitution_refuse)",
+        "test_success_preserves_raw_bytes_and_distinct_evidence (_task52b_execution_tests.ExecutionTests.test_success_preserves_raw_bytes_and_distinct_evidence)",
+        "test_encoded_normalized_and_authority_aliases_refuse (_task52b_execution_tests.ReadOnlyEvidenceTests.test_encoded_normalized_and_authority_aliases_refuse)"
+      ]
+    },
+    {
+      "suite": "unchanged prepared payload regression",
+      "passed": 13,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.27,
+      "logSHA256": "ecb31ebc47d8bbe9680330fe20a2f84698ead0c4a391f3cb8d1013a2604d037a",
+      "passingTestIDs": [
+        "test_all_19_examples_unchanged_and_structurally_valid (backend.test_task52b_prepare_openai.PreparationTests.test_all_19_examples_unchanged_and_structurally_valid)",
+        "test_changed_frozen_artifacts_refuse (backend.test_task52b_prepare_openai.PreparationTests.test_changed_frozen_artifacts_refuse)",
+        "test_changed_prepared_bytes_refuse (backend.test_task52b_prepare_openai.PreparationTests.test_changed_prepared_bytes_refuse)",
+        "test_committed_bytes_are_canonical_and_complete (backend.test_task52b_prepare_openai.PreparationTests.test_committed_bytes_are_canonical_and_complete)",
+        "test_count_projection_includes_full_schema_and_reasoning (backend.test_task52b_prepare_openai.PreparationTests.test_count_projection_includes_full_schema_and_reasoning)",
+        "test_counts_unknown_malformed_or_over_cap_refuse (backend.test_task52b_prepare_openai.PreparationTests.test_counts_unknown_malformed_or_over_cap_refuse)",
+        "test_decoder_preserves_original_synthetic_response (backend.test_task52b_prepare_openai.PreparationTests.test_decoder_preserves_original_synthetic_response)",
+        "test_exact_model_and_controls (backend.test_task52b_prepare_openai.PreparationTests.test_exact_model_and_controls)",
+        "test_five_exact_proposed_slots_and_payloads (backend.test_task52b_prepare_openai.PreparationTests.test_five_exact_proposed_slots_and_payloads)",
+        "test_frozen_accounting_exact_boundaries (backend.test_task52b_prepare_openai.PreparationTests.test_frozen_accounting_exact_boundaries)",
+        "test_no_network_or_authority_created (backend.test_task52b_prepare_openai.PreparationTests.test_no_network_or_authority_created)",
+        "test_provider_errors_incomplete_and_refusal_not_success (backend.test_task52b_prepare_openai.PreparationTests.test_provider_errors_incomplete_and_refusal_not_success)",
+        "test_required_and_unknown_response_fields_remain_enforced (backend.test_task52b_prepare_openai.PreparationTests.test_required_and_unknown_response_fields_remain_enforced)"
+      ]
+    }
+  ],
+  "normalDiscovery": {
+    "status": "expected explicit-opt-in skips, not a passing executed suite",
+    "testsRun": 0,
+    "skipped": 17,
+    "exitCode": 5,
+    "logSHA256": "24a169648db0b8d1836d3c8140188de8032a19221f2d28533ba8f5befaa3beb5",
+    "privilegedProfileImportsBlocked": true
+  },
+  "commands": {
+    "cwd": "matching frozen B2 checkout for replay/protocol/boundary suites; current development checkout for prepared regression",
+    "environment": "CI=1 WHERETO_AI_WARMUP_DEV=0 PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=.",
+    "executable": "existing development backend/.venv/bin/python",
+    "committedEquivalent": "<development-root>/scripts/task52b_run_offline.py --suite replay|boundary|historical",
+    "actualFinalDriverSHA256": "d7eb2cdfb204eb03d03ed5f1a937d8be7f9b754d7a789e76827c4b88f3bed6b5",
+    "actualFinalDriverSource": "import importlib.util,sys,unittest\nfrom pathlib import Path\nROOT=Path('/Users/rahularutla/Documents/whereto')\ndef load(name,path):\n spec=importlib.util.spec_from_file_location(name,path);m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m);return m\nchoice=sys.argv[1]\nallowed={'q4b':'backend.test_task52_q4b','q4c':'backend.test_task52_q4c','q4d':'backend.test_task52_q4d','integration':'backend.test_task52_real_integration'}\nassert choice in (*allowed,'boundary-0','boundary-1','replay')\ne=load('scripts.task52b_evidence_access',ROOT/'scripts/task52b_evidence_access.py')\nwith e.original_evidence(lock_owner='frozen_q4b' if choice=='q4b' else 'port'):\n if choice.startswith('boundary'):\n  load('scripts.task52b_execution_identity',ROOT/'scripts/task52b_execution_identity.py')\n  load('scripts.task52b_execution_boundary',ROOT/'scripts/task52b_execution_boundary.py')\n  m=load('_task52b_execution_tests',ROOT/'backend/test_task52b_execution_boundary.py')\n  all_tests=list(unittest.defaultTestLoader.loadTestsFromModule(m));tests=[t for group in all_tests for t in group]\n  suite=unittest.TestSuite(t for i,t in enumerate(tests) if i%2==int(choice[-1]))\n elif choice=='replay':\n  suite=unittest.defaultTestLoader.loadTestsFromNames(['backend.test_task52_q1','backend.test_task52_q2','backend.test_task52_ordering_v51','backend.test_task52_version_review'])\n else:suite=unittest.defaultTestLoader.loadTestsFromName(allowed[choice])\n result=unittest.TextTestRunner(verbosity=2).run(suite)\nsys.exit(not result.wasSuccessful())\n",
+    "actualArguments": [
+      "q4b",
+      "q4c",
+      "q4d",
+      "integration",
+      "boundary-0",
+      "boundary-1",
+      "replay"
+    ],
+    "partitionAccounting": "all17 new test IDs covered exactly once across9+8 partitions; no exclusions. Q4B EX-lock probe ran first in isolation; remaining read-only suites ran concurrently."
+  },
+  "developmentRuns": [
+    {
+      "scope": "first mediated37-test replay",
+      "passed": 36,
+      "errors": 1,
+      "cause": "Port draft did not yet route Q4B direct os.open lock descriptor; fixed in new adapter, frozen code unchanged",
+      "logSHA256": "78935a5228f9a2d98746b46313fd3ab70c0274538f7f876577fa8ecae3c81c97"
+    },
+    {
+      "scope": "next37-test replay",
+      "passed": 37,
+      "errors": 0,
+      "logSHA256": "6c5cda8ec6cfde0f97a79e2c1570711913afb447af310e2156abe14dbb3cb866"
+    },
+    {
+      "scope": "first52 parent protocol tests",
+      "passed": 51,
+      "errors": 1,
+      "cause": "Extra session SH lease masked unchanged Q4B EX-lock test; fixed by explicit frozen-reader lock ownership/connection leases",
+      "logSHA256": "8e0ee55288deb779f944e67ba42cdc5dd909fa7d61a1ef632f0dbdd39962bd9f"
+    },
+    {
+      "scope": "new boundary draft1",
+      "completedPasses": 0,
+      "interrupted": true,
+      "cause": "Redundant full original-evidence scans per SQL accessor; operator interrupted task-owned test process",
+      "logSHA256": "08cf230ea9a290e2b9f76d179872e675a680f14184a0e8a117cef9def4b8fbbb"
+    },
+    {
+      "scope": "new boundary draft2",
+      "completedPasses": 0,
+      "interrupted": true,
+      "cause": "Repeated full historical Git validation per accessor; operator interrupted; full B2 retained at operation/setup boundary, frozen artifact/transition checks unchanged",
+      "logSHA256": "39dc298263c11677354c31dc2dbe50269cacc01f33c6e72a1c28d90fa28dbb58"
+    },
+    {
+      "scope": "new boundary earlier15-test cohort",
+      "passed": 15,
+      "errors": 0,
+      "seconds": 484.117,
+      "buildSHA256": "8b2cfc786e65426949ea68ec6c98176650296a0595e28a7aef4af882e65687f2",
+      "logSHA256": "48b12f0a68121425c70e5c1dc56a5ee872970e6776da978ff1b7d8866d6b4778"
+    },
+    {
+      "scope": "normal discovery draft",
+      "testsRun": 0,
+      "errors": 1,
+      "cause": "Eager frozen-profile imports refused current source before class skip; fixed by explicit opt-in import guard, no source check relaxed",
+      "logSHA256": "d23865c3e0396872279d265df7cb1e2fbfeb4dda38435448bd1787a73c28a918"
+    },
+    {
+      "scope": "before-alias selected cohort",
+      "passed": 118,
+      "finalErrors": 0,
+      "normalDiscoverySkips": 16,
+      "buildSHA256": "ec7fb2221f95a117ba9377be78db70cfe654ae3395d408c96fd32b755896fa39",
+      "reasonForFurtherTests": "Canonical protected-journal URI alias guard added during full review; final cohort reran all selected suites"
+    },
+    {
+      "scope": "temporary extra key-scan helper",
+      "error": "Prior /tmp helper no longer existed; replaced with read-only literal configured-value scan, passed"
+    }
+  ],
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "counts": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "executionAuthorized": false,
+    "historicalSixPinsVerified": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "oldEvaluatorRuntimeIdentity": "refused_as_required_changed_checkout",
+    "persistentHistoricalHalt": true,
+    "privateFiles": 324,
+    "privateSetSHA256": "86482031711cc896213fb1b7959e221b4b568b7dc629ce30e34a5bc34a9f8285",
+    "remainingNanodollars": 11952633375,
+    "rootHash": "b42f566a4525be25023e7ecc29fc41b86c8dc3d1c77899ca949fa0f31f4eb7dd",
+    "inspectionContext": "Independent original-root read-only integrity check; the changed development checkout still refuses B2, while the separate matching frozen checkout passes all37 mediated replay tests."
+  },
+  "preparedRequests": "All five original bodies/count drafts and all prepared build file hashes unchanged; actual input counts remain null.",
+  "newRequestOrder": [
+    "extension-repeated/r2",
+    "journey-04/r2",
+    "extension-partial/r2",
+    "journey-06/r2",
+    "journey-21/r1"
+  ],
+  "crashEvidence": {
+    "newKernelPoints": [
+      "after_reserve",
+      "after_intent",
+      "before_raw",
+      "after_send"
+    ],
+    "parentQ4CSevenPointsStillTested": true,
+    "independentForkedWorkers": true,
+    "noAutomaticResendOrRefund": true,
+    "notProved": [
+      "Physical power loss",
+      "Hostile same-UID operator/admin",
+      "Coherent rollback of all local state",
+      "Operational enrollment after full host/interpreter loss"
+    ]
+  },
+  "review": {
+    "ownerDecision": "deferred",
+    "independent120FieldsComplete": false,
+    "historical6QuestionsComplete": false,
+    "normalizer4QuestionsComplete": false,
+    "futureResponseReviewsComplete": false,
+    "amendmentActivated": false,
+    "proposalSHA256": "3b995b6f06163e426c6f504375368049dac50b1a608dc76839a77b5247ac74f4"
+  },
+  "authorization": {
+    "realWritableJournalEnrollment": false,
+    "realHTTPTransport": false,
+    "readinessApproved": false,
+    "financialApproved": false,
+    "accountFactsVerified": false,
+    "currentCountsVerified": false,
+    "accountQuoteVerified": false,
+    "grossFiveProposalNanodollars": 12500000,
+    "amountIncreased": false,
+    "planningAuthorized": false
+  },
+  "realOperations": {
+    "accountRequests": 0,
+    "tokenCountRequests": 0,
+    "inferenceRequests": 0,
+    "newOriginalReservations": 0,
+    "originalJournalWrites": 0,
+    "cloudProvisioning": 0
+  },
+  "dependencyCheck": "pip check: no broken requirements; no dependencies changed; read-only cache warning only",
+  "securityChecks": {
+    "configuredValuesChecked": 2,
+    "configuredEvaluationValuesChecked": 3,
+    "currentMatches": 0,
+    "historicalMatches": 0,
+    "evaluationConfigIgnoredMode600": true,
+    "evaluationScannerSHA256": "7a6a761df1b32ba7b18b389a1ed6822cf6f6100372703c9d476ab80dd31d5dc1"
+  },
+  "notRun": [
+    "Full backend discovery",
+    "Frontend/browser/TypeScript/ESLint/build/image scans: no application/dependency/deployment change",
+    "Full Q4A suite (unchanged Q4C/Q4D and reused core algorithms exercised)",
+    "Authenticated readiness/count/metadata/inference endpoints",
+    "Independent human semantic/security/operational review",
+    "Real writer/HTTP transport enrollment"
+  ],
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      15,
+      17
+    ],
+    "totalChapters": 20,
+    "unaffectedChaptersPreserved": 18
+  },
+  "remainingGates": [
+    "Owner/governance/security decision on unactivated first-slot-only purpose proposal or completed deferred reviews",
+    "Protected real operator/role provenance, trusted clock/storage and exact original-journal operational enrollment",
+    "Reviewed real single-send HTTP implementation bound to this experiment, not application grant",
+    "Separately authorized finite current account/model/terms/price/count readiness",
+    "Explicit financial/scope and next-operation permission preserving historical halt"
+  ],
+  "nextOwnerDecision": "Review the proposed first-slot technical-only purpose; this alone cannot authorize readiness or inference.",
+  "negativeRuntimeProbe": {
+    "status": "expected refusal before private evidence access",
+    "exitCode": 1,
+    "category": "VersionError: changed current source is not frozen B2",
+    "logSHA256": "957a8e66c7275b00c6367cfa54d2ccddba833194ecb88dcc36a705755561b5ec"
+  },
+  "finalReview": {
+    "completeCombinedDiffReviewed": true,
+    "manifestBootstrapAndPreparedHashes": "PASS",
+    "changedMarkdownLinks": "PASS",
+    "PythonJSONSyntax": "PASS",
+    "frozenCheckoutClean": true,
+    "historicalArtifactsUnmodified": true,
+    "containerPackaging": "Source inspection only: scripts/docs outside ordinary Docker COPY lists; backend test excluded by .dockerignore. No images built/scanned."
+  }
+}

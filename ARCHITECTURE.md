@@ -1,3 +1,7 @@
+## Task52B — offline composite execution, separate from the application
+
+The new `task52b_evidence_access` port routes only frozen private-evidence I/O to original read-only files/inodes under the existing lock. `task52b_run_offline` loads the separately pinned ports alongside unchanged B2 application imports. `task52b_execution_boundary` reuses Q4C transitions/diagnostic scoring and the existing append SQL guard, adding immutable raw/decode/grade capture on fresh fictional storage. Normal startup, distributed-state services and deployment images do not import it; real writable/transport enrollment is absent. [Contract and limitations](docs/task52b-execution-boundary.md).
+
 > Current Task52 bounded local result: [closed frontend and immutable interruption verification](docs/task52-closed-frontend-verification.md). Earlier candidate entries below are preserved historical development state. Local packaging verification does not approve private hosting, financial grants or public launch.
 
 ## Task 52 — inactive private role connection/ownership candidate

@@ -1,0 +1,27 @@
+{
+  "identity": "52b-unreviewed-first-slot-purpose-amendment-PROPOSED-v1",
+  "status": "PROPOSAL ONLY; requires owner and independent governance/security review",
+  "activated": false,
+  "operationalAuthorization": false,
+  "planningAuthorization": false,
+  "historicalHaltOverride": false,
+  "purpose": "Collect one technical diagnostic response while source-rubric human review is deferred; no independent accuracy claim",
+  "unchangedPreparedSequence": ["extension-repeated/r2", "journey-04/r2", "extension-partial/r2", "journey-06/r2", "journey-21/r1"],
+  "proposedUnreviewedOperationMaximum": 1,
+  "proposedFirstSlot": ["openai", "extension-repeated", 2],
+  "conditionalReservationMaximumNanodollars": 2500000,
+  "originalFiveOperationCeilingNanodollars": 12500000,
+  "scopeChangeProposed": "For the first operation only, explicitly record the 120 source judgments, six historical questions and four normalizer questions as deferred rather than inventing a rubric certification. Treat rubric expectations as proposed mechanical references, not independently certified gold.",
+  "progression": "Stop after the first received response or any error/uncertainty. The next slot still requires genuine independent response review and separately bound operation permission under the existing contract. No unreviewed batch progression is proposed.",
+  "journey06": "The exact allowlisted legacy-loss hash and all its restrictions remain unchanged, including genuine independent response review, system-incompatible status and planning=false. This proposal does not authorize reaching or progressing after that slot.",
+  "requiredBeforeActivation": [
+    "Independent governance/security review of the exact amended purpose, live build, journal and protected enrollment",
+    "Explicit owner acceptance of the unreviewed technical-only first-operation purpose",
+    "Separately authorized fresh account/readiness evidence and exact complete-payload token counts",
+    "Confirmed current price/cost bound without increasing the original proposal",
+    "Explicit owner financial/scope permission and exact first-operation operator permission preserving the old halt"
+  ],
+  "noGrantCreated": true,
+  "noReviewerAnswersCreated": true,
+  "noCountOrProviderRequests": true
+}
