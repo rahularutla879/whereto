@@ -1,3 +1,7 @@
+## Task 52 — conditional private staging purchase packet
+
+[Selected infrastructure, finite costs and red gates](docs/task52-staging-purchase-decision-v1.md). Local compatible Node candidate and seven fresh scans complete; no candidate promoted, no independent vulnerability exception. Redis regional quote, separate witness restore custodian, operational account checks and exact paid-resource/migration/private-traffic approval remain pending. Existing default-OFF application and Task52B evaluation remain untouched; no Task53.
+
 ## Task52B — first-slot wire/enrollment preparation
 
 [Report](docs/task52b-first-slot-readiness.md): prepared inactive first-slot Responses transport with local TLS/crash verification over the existing append kernel, plus explicit real-writer/post-append and governance requirements. [Exact readiness-only authorization request](docs/task52b-first-slot-readiness-request-v1.json) remains unapproved. No actual account/count/inference, writer enrollment or grant. Semantic review remains deferred; no model qualification or automatic next-slot permission. Existing hosting/application/history are untouched; Task53 remains blocked.

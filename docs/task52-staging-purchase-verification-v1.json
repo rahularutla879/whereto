@@ -1,0 +1,404 @@
+{
+  "identity": "52-staging-purchase-verification-v1",
+  "baseline": "6c8c388d91b0aadc9b476013ebbd261e13dc779a",
+  "createdUTC": "2026-11-15T21:04:19.742495+00:00",
+  "deploymentReady": false,
+  "scope": "Verified offline purchase proposal, not independently accepted security or cloud enrollment",
+  "runtimeFilesChanged": false,
+  "modelQualificationRevisited": false,
+  "cloudResourcesCreated": 0,
+  "realProviderCalls": 0,
+  "newFinancialGrants": 0,
+  "credentialChanges": 0,
+  "normalStartupChanged": false,
+  "roleCohort": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+  "baseMetadata": {
+    "python": {
+      "name": "3.12-slim-bookworm",
+      "digest": "sha256:935c3c5b12357a7e10caa9c1e6ca5692344d97cf229832ef584be2cec9fc03df",
+      "last_updated": "2026-11-05T17:07:24.639547Z",
+      "amd64": [
+        {
+          "digest": "sha256:0f086103b026048cc50cb5da25ec435c023c5241a83fc44daea593377abc61c4",
+          "size": 45269504
+        }
+      ]
+    },
+    "node": {
+      "name": "24-bookworm-slim",
+      "digest": "sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+      "last_updated": "2026-11-11T20:39:58.583762Z",
+      "amd64": [
+        {
+          "digest": "sha256:0e2646ab57e77b7a384a0cb59b6815b182c77e1f9c3ba36bd8435bd9c4e6680e",
+          "size": 81065194
+        }
+      ]
+    }
+  },
+  "freshScans": "task52-staging-purchase-security-v1.json",
+  "candidateImage": "sha256:d042bb27a55599216074b7bb664f1a7134448d3a0f35482f36d35d76045ccba9",
+  "candidateDockerfile": "deployment/Dockerfile.frontend-private",
+  "candidateBuildArgument": "NODE_IMAGE=node:24-bookworm-slim@sha256:dc26ae92c9fb15cf6b1d63e20f0944b2efe0f115b20e00be48fb23fceb061c54",
+  "candidatePromoted": false,
+  "candidateNodeBuild": "passed; real Next16.4.2 production build, exact unchanged lock",
+  "unchangedLocks": {
+    "package-lock.json": "4839855e8e2ec9b60f186902ceb75d040c68e01a896f7813b4e46682e4a8b878",
+    "deployment/requirements-private-linux-amd64.lock": "639af80d472e72aa90c4b0f0a4e68e385a14560436c49160c58a4f27bcfaa0a1",
+    "deployment/requirements-private-authority-linux-amd64.lock": "bd2ff66207cd5e17640e475b2868c8add2a544076e7629d9b972872985e8ce8f"
+  },
+  "tests": {
+    "backendSelected": {
+      "passed": 92,
+      "failed": 0,
+      "skipped": 0,
+      "log": "/tmp/task52-purchase-backend-final.log"
+    },
+    "lockedImageMetadataIdentity": {
+      "passed": 4,
+      "failed": 0,
+      "network": "none"
+    },
+    "frontendNpm": {
+      "executed": 323,
+      "passed": 322,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "lib/surprise.test.ts:69 expects200 for fixed2026-11-14; exact loopback reproduction422 outing_date_expired on2026-11-15; no fixture/source edited"
+    },
+    "duplicateSequentialFrontend": {
+      "status": "interrupted with SIGINT after no-progress interval; preserved log; incomplete, not a second pass",
+      "completedPassingTAPJudgments": 206,
+      "recordedFailingTAPJudgments": 0,
+      "finalSummaryPresent": false
+    },
+    "typeScript": "passed",
+    "eslint": "passed",
+    "pipCheck": "passed, cache permission warning",
+    "candidateAndExistingFixtureImageChecks": {
+      "production": {
+        "image": "sha256:d042bb27a55599216074b7bb664f1a7134448d3a0f35482f36d35d76045ccba9",
+        "inspection": {
+          "fixture": false,
+          "checkedFiles": 9,
+          "closedExports": true,
+          "nonroot": true,
+          "readonly": true
+        },
+        "unenrolledStartupExit": 78,
+        "preNodeRefusals": [
+          "NODE_OPTIONS",
+          "NODE_TLS_REJECT_UNAUTHORIZED",
+          "NODE_EXTRA_CA_CERTS",
+          "NODE_DEBUG",
+          "HTTP_PROXY"
+        ]
+      },
+      "fixture": {
+        "image": "sha256:b1d44db039f1b38ba74ca07fe509676f3ab543614dd0608c6c14e305f675a6df",
+        "inspection": {
+          "fixture": true,
+          "checkedFiles": 10,
+          "closedExports": true,
+          "nonroot": true,
+          "readonly": true
+        },
+        "unenrolledStartupExit": 78,
+        "preNodeRefusals": [
+          "NODE_OPTIONS",
+          "NODE_TLS_REJECT_UNAUTHORIZED",
+          "NODE_EXTRA_CA_CERTS",
+          "NODE_DEBUG",
+          "HTTP_PROXY"
+        ]
+      }
+    },
+    "productionBuild": "passed inside Node candidate image",
+    "freshImageScans": {
+      "completed": 7,
+      "errors": 0,
+      "sameDatabase": true
+    },
+    "notRun": [
+      "full backend discovery",
+      "new desktop/mobile browser run",
+      "complete SQL/Redis/grant/witness end-to-end recovery suites",
+      "normal full container-smoke.sh",
+      "hosted IAM/IAP/network/account inspections",
+      "actual managed Redis or Supabase/CloudSQL connections",
+      "remote independent security review"
+    ],
+    "npmAudit": {
+      "counts": {
+        "info": 0,
+        "low": 0,
+        "moderate": 7,
+        "high": 0,
+        "critical": 0,
+        "total": 7
+      },
+      "exit": 1,
+      "meaning": "completed audit with7moderate advisories; not a clean-vulnerability result; no fixes applied"
+    },
+    "containerBuildCount": 1,
+    "buildScope": "One compatible Node candidate rebuilt; Python base/tag/eligible package versions unchanged, so no alternative Python remediation cohort rebuilt. Existing five exact Python runtime images rescanned, not claimed rebuilt.",
+    "nativePackaging": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "log": "/tmp/task52-purchase-packaging-tests.log"
+    }
+  },
+  "developmentAttempts": [
+    {
+      "status": "Docker context absent, existing VM stopped; restarted previously approved2CPU4GiB40GiB profile; no resource increase"
+    },
+    {
+      "status": "Python public Hub metadata HTTPS failed host trust; system curl with normal certificate verification succeeded; no TLS bypass"
+    },
+    {
+      "status": "APT dropped-capability sandbox user-switch failed; successful query uses container root APT sandbox and no additional capabilities; disposable image unchanged"
+    },
+    {
+      "status": "tsx IPC denied by initial sandbox; reran with local IPC enabled"
+    },
+    {
+      "status": "initial backend selection90passed/1import error PyJWT absent on host;92final selected pass and4metadata tests in existing locked image pass; no dependency installed"
+    },
+    {
+      "status": "copy into read-only test container refused; replaced by stdin-only tests, keeping read-only/network-none settings"
+    }
+  ],
+  "cost": {
+    "currency": "USD",
+    "hours": 730,
+    "taxIncluded": false,
+    "freeTierDiscountsAssumed": false,
+    "realProviderCost": 0,
+    "redisRegionalQuote": null,
+    "redisIllustrativeHourlyMarketingFloor": ".007",
+    "redisIllustrative730Hours": "5.110",
+    "expectedExcludingRedis": "75.4755000",
+    "expectedIfRedis511": "80.5855000",
+    "planningExcludingRedis": "97.5790000",
+    "planningIfRedis511": "102.6890000",
+    "suggestedOwnerReviewEnvelope": 110,
+    "envelopeApproved": false,
+    "envelopeIsCloudBillingHardCap": false,
+    "expected": {
+      "cloudRun": "0.9445000",
+      "operationalSQL": "29.0150",
+      "witnessSQL": "29.0150",
+      "natAndStaticIPv4": "11.8710",
+      "secretManager": "1.83",
+      "artifactStorage": "0.50",
+      "logs": "1.00",
+      "dns": "0.240",
+      "cloudBuild": "0.060",
+      "otherTransferContingency": "1"
+    },
+    "planning": {
+      "cloudRun": "9.4450000",
+      "operationalSQL": "29.0150",
+      "witnessSQL": "29.0150",
+      "natAndStaticIPv4": "16.3640",
+      "secretManager": "2.10",
+      "artifactStorage": "1.00",
+      "logs": "5.00",
+      "dns": "0.280",
+      "cloudBuild": "0.360",
+      "otherTransferContingency": "5"
+    },
+    "zeroUserFixedExcludingRedis": "64.180",
+    "oneTimeProviderSetupFee": 0,
+    "setupUsageAllowance": 5,
+    "independentReviewerFee": null,
+    "accountAndRegionalQuoteVerified": false,
+    "billingNote": "Full operational Pro subscription included; if already paid with spare capacity subtract existing cost rather than count it twice. Witness must have a separate Pro organization/admin. No free balances or credits assumed. Redis starting price is not an exact regional account quote. Transfer entries are contingency estimates, not verified per-destination quotes.",
+    "purchasePriceKnown": false
+  },
+  "selectedServices": {
+    "cloudRun": [
+      "frontend",
+      "backend",
+      "factory",
+      "counter",
+      "dispatcher",
+      "recovery"
+    ],
+    "region": "us-east4",
+    "redis": {
+      "provider": "Redis Cloud",
+      "plan": "Paid Essentials RAM-only250MB nonreplicated",
+      "cloud": "GCP",
+      "region": "us-east4",
+      "tls": true,
+      "aclUsers": [
+        "evidence_publisher",
+        "evidence_reader"
+      ],
+      "policy": "noeviction",
+      "applicationEncryptedRecordCapBytes": 134217728,
+      "regionalQuoteVerified": false,
+      "privateIP": false,
+      "network": "TLS public endpoint; default-deny CIDR restricted to dedicated Cloud NAT static egress; explicit owner/security approval required"
+    },
+    "operationalSQL": {
+      "provider": "existing Supabase",
+      "planAssumption": "Pro/Micro plus dedicated IPv4",
+      "region": "retain existing region; account confirmation outstanding",
+      "endpoint": "direct db hostname:5432 verify-full; no pooler",
+      "userDataReadsOrMigrations": false
+    },
+    "witness": {
+      "provider": "Supabase",
+      "plan": "separate organization Pro, one Micro project plus dedicated IPv4",
+      "region": "AWS us-east-1 North Virginia",
+      "separateRestoreAdminRequired": true,
+      "adminNamed": false,
+      "monthly730Hours": "29.015",
+      "connection": "direct5432 verify-full; restricted named roles; same native advisory-lock protocol",
+      "backup": "included daily7days; separate restore control; all restored authority stopped until explicit reconciliation",
+      "alternativeCloudSQL": {
+        "sku": "Enterprise PostgreSQL17 db-g1-small,10GiB SSD, single zone",
+        "referenceRegion": "us-central1",
+        "compute730Hours": "25.55",
+        "storage730HoursApprox": "1.70",
+        "backup10GiBApprox": ".80",
+        "subtotalBeforePrivateNetworking": "28.05",
+        "selected": false,
+        "reason": "No SLA shared core; separate project/restore permissions plus cross-project private networking/shared-CA DNS needed. Full network quote not established, not represented as complete price."
+      }
+    }
+  },
+  "historicalIntegrity": {
+    "readOnlyVerified": true,
+    "attempts": 10,
+    "providers": {
+      "OpenAI": 7,
+      "Google": 2,
+      "Anthropic": 1
+    },
+    "accounted": "0.047366625",
+    "remaining": "11.952633375",
+    "evidenceFiles": 324,
+    "halt": true,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028"
+  },
+  "logsSHA256": {
+    "/tmp/task52-purchase-node-build.log": "1e856bc083a02721d87833e3f54c0ce636cbb22f1d6e8c76af3f520f34a91396",
+    "/tmp/task52-purchase-debian-policy.log": "415eefa73e56ca720b620826ff40d2f25e2a876473987d084442cc8316a63f81",
+    "/tmp/task52-purchase-frontend-tests.log": "1b7887c3dc2b30e4da15ac23103aca825f7490eeeae4b17bdcba6b17dead588a",
+    "/tmp/task52-purchase-frontend-tests-verified.log": "66ef7b4e8068b0975d1996ca10e36b2c20ed05f08e0c92a0f625b110c09ccaff",
+    "/tmp/task52-purchase-frontend-sequential.log": "eaccf7ada633187876802720bc1cc274b0bf0e8554f96dcecc44fb1a764a8106",
+    "/tmp/task52-purchase-backend-tests.log": "cfee524758c321835d71d7845d12ff5cb4b307729c4281b62a5d05cb530e120a",
+    "/tmp/task52-purchase-backend-final.log": "36a1120d58df47a7056ec380f8fa9160bb04a55bce9265613ee2d127bd42f30e",
+    "/tmp/task52-purchase-image-identity-tests.log": "9b718ea47824e93faf3e3d64cdf4ee6f39003384aed891b5761ecd15c059d189",
+    "/tmp/task52-purchase-image-checks.log": "327ff0afe1a6b99ca0b4fb1ef026cb06e26ef5ecd18802ec693d67de022cbe77",
+    "/tmp/task52-purchase-image-checks.json": "73de13f222c92335d7fdcb908c2c69574ab567491a3a47e78516136bc8d54c3f",
+    "/tmp/task52-purchase-surprise-reproduction.json": "97d41e49070fa72189bb115517cef63b508d333b0d68927e731c00c60764920f",
+    "/tmp/task52-purchase-typecheck.log": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "/tmp/task52-purchase-lint.log": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "/tmp/task52-purchase-npm-audit.json": "0c25b5842efd440b2c43a92c460a9bc6d764c93ce112f2e86fadd33b23a8a0f1",
+    "/tmp/task52-python-tag.json": "ddfa616a0a3930d6a161db8bb14345f39ce5b9fd868c0d73b3868e16b72363a1",
+    "/tmp/task52-node-tag.json": "525c23a810017c985c574f3b1892caed423ae68fa11934dcbce182cde6782da5",
+    "/tmp/task52-purchase-packaging-tests.log": "cbf63cab81bf32b0fa7e19dddbabb133a6b0f28148370691044a5e335a8e58e7"
+  },
+  "handbook": {
+    "reviewed": [
+      14,
+      18
+    ],
+    "updated": [
+      14,
+      18
+    ],
+    "numberedChapters": 20,
+    "otherChaptersPreserved": true
+  },
+  "blockingApprovals": [
+    "Independent vulnerability disposition or separately approved broader base remediation cohort",
+    "Exact Redis us-east4 checkout quote, single static-IP public TLS exposure approval",
+    "Independent named witness administrator/restore owner and separate organization",
+    "Existing Supabase plan/region/capacity/backup/network-restriction confirmation and exact isolated SQL migration review",
+    "Resource-scoped infrastructure costs and private tester approval; no public traffic or provider spending"
+  ],
+  "nodeRuntimeVersions": {
+    "baseline": "24.22.2",
+    "candidate": "24.22.3",
+    "opensslBoth": "3.5.9",
+    "uidBoth": 1000
+  },
+  "securityReview": "Local engineering audit complete; independent acceptance missing; deployment remains blocked.",
+  "publicSources": [
+    "https://redis.io/pricing/",
+    "https://redis.io/docs/latest/operate/rc/supported-regions/",
+    "https://redis.io/docs/latest/operate/rc/security/access-control/data-access-control/role-based-access-control/",
+    "https://redis.io/docs/latest/operate/rc/security/database-security/tls-ssl/",
+    "https://redis.io/docs/latest/operate/rc/security/cidr-whitelist/",
+    "https://redis.io/docs/latest/operate/rc/databases/configuration/data-eviction-policies/",
+    "https://redis.io/docs/latest/commands/eval/",
+    "https://supabase.com/pricing",
+    "https://supabase.com/docs/guides/platform/manage-your-usage/compute",
+    "https://supabase.com/docs/guides/platform/manage-your-usage/ipv4",
+    "https://cloud.google.com/sql/pricing",
+    "https://cloud.google.com/run/pricing",
+    "https://cloud.google.com/nat/pricing",
+    "https://cloud.google.com/secret-manager/pricing",
+    "https://cloud.google.com/artifact-registry/pricing",
+    "https://cloud.google.com/products/observability/pricing",
+    "https://cloud.google.com/dns/pricing",
+    "https://cloud.google.com/build/pricing"
+  ],
+  "proposedResourceNames": {
+    "cloudRun": [
+      "whereto-stg-frontend",
+      "whereto-stg-backend",
+      "whereto-stg-factory",
+      "whereto-stg-counter",
+      "whereto-stg-dispatcher",
+      "whereto-stg-recovery"
+    ],
+    "googleProject": "where-to-512422 (existing; no changes made)",
+    "witnessSupabaseOrganization": "new separate organization, owner/custodian identity pending",
+    "maximumNewWitnessProjects": 1,
+    "maximumRedisDatabases": 1,
+    "maximumNetworks": 1,
+    "maximumNATGateways": 1,
+    "maximumStaticIPv4Addresses": 1,
+    "maximumSecretVersionsBudgeted": 30,
+    "maximumPrivateTesters": 2,
+    "maximumPilotOutings": 100,
+    "reviewDays": 30,
+    "recurringBillingExpiresAutomatically": false
+  },
+  "proposalFileSHA256": "18d67761f202fa0bc22115bae625ac204f3bbe418bc09d90f24ac85bab4fd1b6",
+  "securityInventorySHA256": "cdc090228d20c06bcd072e2d503f9aa2e1bc908ba2735a7c40231ea2dba0a2eb",
+  "finalChecks": {
+    "gitDiffCheck": "passed",
+    "jsonCostHashAndLinkAudit": "passed",
+    "handbookCount": 20,
+    "unaffectedNumberedChapters": 18,
+    "configuredApplicationSecrets": {
+      "values": 2,
+      "currentMatches": 0,
+      "historyMatches": 0
+    },
+    "configuredHistoricalEvaluationSecrets": {
+      "values": 3,
+      "currentMatches": 0,
+      "historyMatches": 0
+    },
+    "allCurrentEvaluationKeysIncludingReplacement": {
+      "values": 4,
+      "files": 948,
+      "matches": 0,
+      "ownerOnlyFiles": true
+    },
+    "originalJournalAnd324Files": "unchanged read-only comparison",
+    "colima": "task-owned profile stopped after checks;2CPU4GiB40GiB unchanged;all118preexisting volumes preserved",
+    "runtimeDependencyAndHistoricalPins": "unchanged",
+    "independentSecurityReview": "not performed or fabricated",
+    "deploymentApproval": "absent; no provisioning"
+  }
+}

@@ -1,0 +1,2070 @@
+{
+  "identity": "52-staging-purchase-security-review-v1",
+  "independentReviewComplete": false,
+  "exceptionsAccepted": false,
+  "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+    "built": "2026-11-15T06:19:39Z",
+    "path": "/cache/6/vulnerability.db",
+    "valid": true
+  },
+  "scans": {
+    "counter": {
+      "image": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "dc127d1a67899a5f38f5e46cc532a5c4a19eafa05785f2196aac088f35f2758c",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 86,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 35
+      }
+    },
+    "recovery": {
+      "image": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "bf721c44fcbede0d045991566a51845617b67d1931f7da7aa9a378915f02b733",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 86,
+        "Medium": 126,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 35
+      }
+    },
+    "backend": {
+      "image": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "c54fc96371c95790e1831b015ca52923a05dd74ca5929563d11d7e2fe0109893",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 86,
+        "Medium": 127,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 35
+      }
+    },
+    "factory": {
+      "image": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "c1210513c2263745566a1f8d04861ecbe39d5a022846e9d600f22afd8bd06b10",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 86,
+        "Medium": 127,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 35
+      }
+    },
+    "dispatcher": {
+      "image": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "95636cba2c5375859822062dc912bf5f637582a666de76e248b2ec957587298d",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 86,
+        "High": 86,
+        "Medium": 127,
+        "Critical": 3,
+        "Low": 20,
+        "Unknown": 35
+      }
+    },
+    "frontend-baseline": {
+      "image": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "5573be7c38089ba59aeac7dba15a7d2418913061978444bc94252d9d6bda5528",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 53,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18,
+        "Unknown": 1
+      }
+    },
+    "frontend-candidate": {
+      "image": "sha256:d042bb27a55599216074b7bb664f1a7134448d3a0f35482f36d35d76045ccba9",
+      "exit": 0,
+      "oom": false,
+      "rawSHA256": "0b56b1c73a81e2bee9ce11f1e4f4bac7620336cd5592646a88ba086a85c568fb",
+      "database": {
+        "schemaVersion": "v6.1.10",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T00:23:02Z_1794723579.tar.zst?checksum=sha256%3A96ada30f3287fd04be595a8f419df98efdf19955e7bfa28eae80ef7c5fe27eb7",
+        "built": "2026-11-15T06:19:39Z",
+        "path": "/cache/6/vulnerability.db",
+        "valid": true
+      },
+      "counts": {
+        "Negligible": 64,
+        "High": 53,
+        "Medium": 80,
+        "Critical": 2,
+        "Low": 18,
+        "Unknown": 1
+      }
+    }
+  },
+  "uniqueCriticalHighAdvisories": 32,
+  "criticalHighPackageAdvisoryRows": 89,
+  "criticalHighFindings": [
+    {
+      "package": "libtasn1-6",
+      "version": "4.19.0-2+deb12u1",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-13151"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112314"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112314"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112314"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112314"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112321"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112321"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112321"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112321"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112322"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112322"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112322"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112322"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112320"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112320"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112320"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112320"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119079"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119079"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119079"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119079"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112323"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112323"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112323"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-112323"
+    },
+    {
+      "package": "zlib1g",
+      "version": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-76844"
+    },
+    {
+      "package": "perl-base",
+      "version": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-82560"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5450"
+    },
+    {
+      "package": "libc6",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5450"
+    },
+    {
+      "package": "gzip",
+      "version": "1.12-1",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-41992"
+    },
+    {
+      "package": "libncursesw6",
+      "version": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-69720"
+    },
+    {
+      "package": "libtinfo6",
+      "version": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-69720"
+    },
+    {
+      "package": "ncurses-base",
+      "version": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-69720"
+    },
+    {
+      "package": "ncurses-bin",
+      "version": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-69720"
+    },
+    {
+      "package": "perl-base",
+      "version": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-9538"
+    },
+    {
+      "package": "libpam-modules",
+      "version": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": null,
+      "exposureReview": "New database match, not new installed code: pam_namespace local symlink/race privilege escalation. No PAM login service exposed by role entry points; local compromise/root transitions and transitive reachability still require independent review. Debian marks installed Bookworm version vulnerable; do not dismiss as duplicate."
+    },
+    {
+      "package": "libpam-modules-bin",
+      "version": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": null,
+      "exposureReview": "New database match, not new installed code: pam_namespace local symlink/race privilege escalation. No PAM login service exposed by role entry points; local compromise/root transitions and transitive reachability still require independent review. Debian marks installed Bookworm version vulnerable; do not dismiss as duplicate."
+    },
+    {
+      "package": "libpam-runtime",
+      "version": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": null,
+      "exposureReview": "New database match, not new installed code: pam_namespace local symlink/race privilege escalation. No PAM login service exposed by role entry points; local compromise/root transitions and transitive reachability still require independent review. Debian marks installed Bookworm version vulnerable; do not dismiss as duplicate."
+    },
+    {
+      "package": "libpam0g",
+      "version": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": null,
+      "exposureReview": "New database match, not new installed code: pam_namespace local symlink/race privilege escalation. No PAM login service exposed by role entry points; local compromise/root transitions and transitive reachability still require independent review. Debian marks installed Bookworm version vulnerable; do not dismiss as duplicate."
+    },
+    {
+      "package": "zlib1g",
+      "version": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-85091"
+    },
+    {
+      "package": "gcc-12-base",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-95619"
+    },
+    {
+      "package": "libgcc-s1",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-95619"
+    },
+    {
+      "package": "libstdc++6",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-95619"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2025-7458",
+      "severity": "Critical",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2025-7458"
+    },
+    {
+      "package": "gcc-12-base",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-102010"
+    },
+    {
+      "package": "libgcc-s1",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-102010"
+    },
+    {
+      "package": "libstdc++6",
+      "version": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-102010"
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-107778"
+    },
+    {
+      "package": "libk5crypto3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-107778"
+    },
+    {
+      "package": "libkrb5-3",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-107778"
+    },
+    {
+      "package": "libkrb5support0",
+      "version": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-107778"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5928"
+    },
+    {
+      "package": "libc6",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5928"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-19499"
+    },
+    {
+      "package": "libc6",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-19499"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119379"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-84243"
+    },
+    {
+      "package": "libc6",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-84243"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119374"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5435"
+    },
+    {
+      "package": "libc6",
+      "version": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-5435"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "mount",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "util-linux-extra",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-78410"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-11824",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-11824"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "mount",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "util-linux-extra",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53615"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-119373"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "mount",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "util-linux-extra",
+      "version": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-53613"
+    },
+    {
+      "package": "libacl1",
+      "version": "2.3.1-3",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-54369"
+    },
+    {
+      "package": "libacl1",
+      "version": "2.3.1-3",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "fix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "roles": [
+        "counter",
+        "recovery",
+        "backend",
+        "factory",
+        "dispatcher",
+        "frontend-baseline",
+        "frontend-candidate"
+      ],
+      "status": "UNRESOLVED; independent disposition required; no exception accepted",
+      "previousAssessment": "task52-private-role-security-review.json#/advisoryReviews/CVE-2026-54370"
+    }
+  ],
+  "candidateDifference": {
+    "removed": [],
+    "added": [],
+    "sameDatabaseSeverityChanges": [],
+    "promoted": false
+  },
+  "previousDatabaseChange": "November13 to November15; PAM CVE-2025-6020 adds four High package matches per image and one Unknown match. New counts must not be compared as remediation.",
+  "allOriginalVolumesPreserved": true,
+  "noSuppression": true,
+  "bookwormCandidateQuery": "No newer installed libc6/libc-bin, libsqlite3-0, libtasn1-6, libssl3, libkrb5-3 or zlib1g package candidate. No compatible Python base change. Broader distro/source-backport change not attempted or approved."
+}

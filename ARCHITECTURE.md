@@ -1,3 +1,7 @@
+## Task 52 — private staging purchase boundary
+
+[Current conditional packet](docs/task52-staging-purchase-decision-v1.md) reuses the six existing Cloud Run roles and source-pinned SQL/Redis ports. It proposes direct verified-TLS Supabase operational and separately administered witness projects, plus paid Redis Cloud Essentials with named publisher/reader users and noeviction. No runtime topology/source/lock/startup change or hosted resource exists from this checkpoint. Account region/capacity, restricted-public Redis network exposure, separate restore ownership, final image security and pricing enrollment still block deployment.
+
 ## Task52B — inactive first-slot HTTPS adapter
 
 `task52b_first_slot` supplies bounded single-dial HTTPS over the existing source-pinned journal kernel; a terminal outer gate admits only extension-repeated/r2. Response body, HTTP metadata hashes, decoded usage and grading remain distinct. `OpenAIResponsesTransport` has no enrolled real peer or credential source; only closed loopback fixtures can instantiate it. No application startup, hosted service, model, database or image integration is changed. Real writer enrollment/post-append verification remains a separate security gate. [Details](docs/task52b-first-slot-readiness.md).

@@ -187,3 +187,7 @@ See [continuation evidence and limitations](../task52-private-role-continuation.
 ### Task 52 closed frontend and immutable recovery checks
 
 A JavaScript check of NODE_OPTIONS runs too late to prevent a Node preload. `deployment/frontend-private-launch.sh` rejects unsafe preload, TLS-disable and proxy environment options before starting Node. The root-owned read-only image then verifies source/configuration hashes and closed identity enrollment. This is configuration integrity, not an operator financial grant. A factory killed after reservation/INTENT leaves its charge intact and cannot reconstruct lost callback admission after restart. See [verification report](../task52-closed-frontend-verification.md).
+
+## Reading a fresh scan without inventing a fix
+
+The [Task52 purchase review](../task52-staging-purchase-decision-v1.md) rescans unchanged Python images and a separately built Node patch candidate with one pinned database. The November15 database adds four PAM package matches for one advisory; that is new advisory knowledge, not a code change. Node24.22.3 removes no advisory matches and remains unpromoted. `wont-fix` and `no-dsa` do not authorize deployment. Independent reviewers must assess exact image/package/advisory exposure and either require remediation or explicitly disposition a bounded residual risk; automated tests cannot sign that decision.
