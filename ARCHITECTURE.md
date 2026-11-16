@@ -1,3 +1,7 @@
+## Task 52 — inactive provider codecs at existing service seams
+
+`backend.provider_responses.GoogleResponseAdapter.dispatch` delegates to `private_runtime.owned_dispatch.dispatch`; its callback decodes canonical Pro Search/Matrix responses for existing parsers/planner. `backend.ai.openai_candidate.OpenAICandidateProvider` uses the exact frozen V5.1 template and existing Interpretation validators with an injected exchange. Normal create_provider, six role images/startup, SQL policies and real evidence admission are unchanged. No exchange/real pricing/credential is enrolled. [Verified boundaries](docs/task52-real-provider-integration.md).
+
 ## Task 52 — real-provider connection boundary remains inactive
 
 The owner-selected staging target uses real cloud LLM/Places/Routes through the existing six roles. Current dispatcher simulation and fictional byte counter are test implementations, not deployed real providers. Reuse `backend.action_dispatch` Search/Matrix canonical requests and the existing `AIProvider` interface; qualified model policy, workload OAuth transport, reviewed real-data evidence and native real-planner dependency mapping are still missing. No architecture or runtime activation is implemented by this documentation checkpoint. [Source audit, costs and exact gates](docs/task52-real-provider-critical-path.md).

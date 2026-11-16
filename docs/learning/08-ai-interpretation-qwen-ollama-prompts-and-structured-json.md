@@ -77,3 +77,7 @@ Run rg -n "model:|base_url:|timeout_seconds:|num_predict" backend/ai/__init__.py
 See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-08).
 
 [Previous chapter](07-complete-end-to-end-outing-request-lifecycle.md) · [Contents](README.md) · [Next chapter](09-validation-source-grounding-and-ordering-rules.md)
+
+## Inactive cloud candidate decoder
+
+[OpenAICandidateProvider](../../backend/ai/openai_candidate.py) implements the same `interpret(text)` contract using the pinned reviewed V5.1 GPT-6 Luna template. Only a trusted injected exchange supplies response bytes. Required wire fields/types are checked before existing `parse_interpretation`; source validation remains in the interpretation service. Raw request/response and reported usage stay separate. There is no model repair, retry or normal-startup selection. Missing model/cost/credential/grant enrollment still blocks real inference; the current application remains local Ollama. Fixture usage is not a token-count attestation.

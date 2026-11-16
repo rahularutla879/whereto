@@ -1,0 +1,28 @@
+{
+  "identity": "52-real-provider-retention-review-v1",
+  "status": "technical-review-only-real-shared-evidence-not-enrolled",
+  "reviewedDate": "2026-11-16",
+  "accountAgreementVerified": false,
+  "realRedisAdmission": false,
+  "sources": [
+    "https://developers.google.com/maps/documentation/places/web-service/policies",
+    "https://developers.google.com/maps/documentation/routes/policies",
+    "https://cloud.google.com/maps-platform/terms/maps-service-terms"
+  ],
+  "fields": [
+    {"paths": ["places.id", "waypoint.placeId"], "publishedException": "Google ID caching", "publishedMaximum": "indefinite", "applicationMaximum": "original absolute session expiry; no renewal", "currentlyAdmitted": false},
+    {"paths": ["places.location.latitude", "places.location.longitude"], "publishedException": "Places service terms section 14.3", "publishedMaximum": "30 consecutive calendar days then delete", "applicationMaximum": "original absolute session expiry if separately admitted", "currentlyAdmitted": false},
+    {"paths": ["routes.latitude", "routes.longitude"], "publishedException": "Routes service terms section 19.3", "publishedMaximum": "30 consecutive calendar days then delete", "applicationMaximum": "original absolute session expiry if separately admitted", "currentlyAdmitted": false},
+    {"paths": ["places.displayName", "places.formattedAddress", "places.addressComponents", "places.types", "places.primaryType", "places.containingPlaces", "places.attributions", "nextPageToken"], "publishedException": "no general retention exception established by this review", "applicationMaximum": "no Redis, SQL response archive, logs or persistent snapshot admission", "currentlyAdmitted": false},
+    {"paths": ["originIndex", "destinationIndex", "status", "condition", "duration", "distanceMeters"], "publishedException": "no duration/distance caching permission established for the selected Routes API; do not borrow Mobility/Fleet Engine terms", "applicationMaximum": "no persistent route/candidate recovery snapshot admission", "currentlyAdmitted": false},
+    {"paths": ["rating", "userRatingCount", "currentOpeningHours", "regularOpeningHours", "timeZone", "phone", "website", "photos", "reviews"], "publishedException": "outside selected Pro Search/Matrix profile", "applicationMaximum": "not requested by new adapter and not admitted", "currentlyAdmitted": false}
+  ],
+  "requiredDisposition": [
+    "Confirm applicable account agreement and billing jurisdiction, including whether EEA terms apply.",
+    "Review whether request-scoped processing and private card display, existing geometry filtering and derived planner outputs comply with the applicable terms.",
+    "Approve exact fields and deletion/backup/log retention before real evidence enrollment; TTL/encryption alone are insufficient.",
+    "Do not project away required names, geometry, route status or time evidence to pretend recovery is safe. Keep restart continuation blocked where permitted evidence is insufficient.",
+    "Verify Google Maps and third-party credits in cards/View Plan, required public Terms/Privacy documents, and Google-only map display obligations.",
+    "Never automatically re-fetch missing data or retry a consumed operation. No financial accounting or historical evidence deletion as retention cleanup."
+  ]
+}

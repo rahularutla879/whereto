@@ -191,3 +191,7 @@ A JavaScript check of NODE_OPTIONS runs too late to prevent a Node preload. `dep
 ## Reading a fresh scan without inventing a fix
 
 The [Task52 purchase review](../task52-staging-purchase-decision-v1.md) rescans unchanged Python images and a separately built Node patch candidate with one pinned database. The November15 database adds four PAM package matches for one advisory; that is new advisory knowledge, not a code change. Node24.22.3 removes no advisory matches and remains unpromoted. `wont-fix` and `no-dsa` do not authorize deployment. Independent reviewers must assess exact image/package/advisory exposure and either require remediation or explicitly disposition a bounded residual risk; automated tests cannot sign that decision.
+
+## Response parsing does not authorize spending
+
+The inactive [response adapter](../../backend/provider_responses.py) sits below `GrantService.send`, which commits protected delivery authority before the callback. A matching request digest still requires owned source, admission, revision/fence, Redis evidence, grant and independent epoch. `real_inference_accounting` refuses absent reviewed provider-specific count/rate/grant evidence. The existing fictional byte-counter tests must never be relabeled OpenAI accounting; real token rates remain unenrolled. Interrupted response tests retain charges and quarantine rather than refunding/retrying.

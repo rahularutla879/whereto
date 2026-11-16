@@ -1,3 +1,7 @@
+## Task 52 — connect codecs without inventing financial or storage permission
+
+Reuse existing protected dispatcher callbacks and ordinary planner for new response adapters. Preserve the original failed resource cohort and sanitized diagnostics; use the existing native fixture CPU profile for new response tests, retaining1500ms SQL/250ms lock/5s attestation boundaries. Passing current cohorts do not retroactively explain missing historical SQLSTATEs or approve hosted capacity. No real OpenAI financial profile exists: a direct substitution correctly refuses budget_scope; retain that guard rather than mapping GPT-6 Luna onto fictional byte rates. Real Google snapshots remain unadmitted where required retention evidence is missing. New offline candidate ports are not a model selection or hosted activation. [Implementation](docs/task52-real-provider-integration.md).
+
 ## Task 52 — real-provider milestone, existing architecture retained
 
 Owner requires real cloud interpretation, Places and Routes in private cloud staging. Synthetic providers remain offline tests; do not purchase/deploy a synthetic application as the final staging product. Reuse the six roles, existing AI/provider interfaces and native planners. Real data cannot use synthetic evidence provenance. Qualification, retention/security review and separate explicit infrastructure/provider authorizations precede activation. [Exact bounded path and conditional costs](docs/task52-real-provider-critical-path.md); prior purchase evidence remains unchanged.

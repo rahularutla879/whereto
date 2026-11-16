@@ -1,0 +1,1060 @@
+{
+  "attemptLogs": {
+    "task52-provider-backend-final-http.log": {
+      "failedSummary": [],
+      "sha256": "40be0f45c113ff685f6ce9e27ebad649ffcf988841044675ce8abf5d0df6aeb0",
+      "unittestSummaries": [
+        "Ran 173 tests in 4.543s"
+      ]
+    },
+    "task52-provider-backend-final.log": {
+      "failedSummary": [],
+      "sha256": "8ed9dcb22b099945bae1a66dae9cba5a6d5de16d7da55f4e3b6e9120cf0d9e2b",
+      "unittestSummaries": [
+        "Ran 170 tests in 4.483s"
+      ]
+    },
+    "task52-provider-backend-final2.log": {
+      "failedSummary": [
+        "FAILED (errors=1, skipped=9)"
+      ],
+      "sha256": "d82ff675b929d0e96dbe81ffb3c0c1c26d42a0a66dec1467afefac18cba22586",
+      "unittestSummaries": [
+        "Ran 171 tests in 4.874s"
+      ]
+    },
+    "task52-provider-backend-final3.log": {
+      "failedSummary": [],
+      "sha256": "9f218b97979562cc6c256a395f02f0a38deb4df4f7f8c9bca2a335f5c9626be3",
+      "unittestSummaries": [
+        "Ran 171 tests in 4.547s"
+      ]
+    },
+    "task52-provider-backend-verified-final.log": {
+      "failedSummary": [],
+      "sha256": "b1ede56af953f10a0a3fed5952cc27d8f15b158b8069ea5df273f0266efc689d",
+      "unittestSummaries": [
+        "Ran 172 tests in 4.357s"
+      ]
+    },
+    "task52-provider-backend-verified.log": {
+      "failedSummary": [],
+      "sha256": "166cafe033158b8c15893392e91b7dc926249028b6e71ce8f3e8c35b5d29a0d9",
+      "unittestSummaries": [
+        "Ran 172 tests in 4.386s"
+      ]
+    },
+    "task52-provider-calendar-diagnostic.log": {
+      "failedSummary": [],
+      "sha256": "c63470b6fb57981d44177c0034afc96b0c2bbbd14d74a3ca2ab83d84979a5c65",
+      "unittestSummaries": [
+        "Ran 1 test in 32.210s"
+      ]
+    },
+    "task52-provider-codec-final.log": {
+      "failedSummary": [
+        "FAILED (failures=1)"
+      ],
+      "sha256": "ca652a53772162c83d3bb748cd7104a7a0f559a7ac691298c942cf57acb1235f",
+      "unittestSummaries": [
+        "Ran 9 tests in 0.046s"
+      ]
+    },
+    "task52-provider-codec-final2.log": {
+      "failedSummary": [],
+      "sha256": "65c4c0d7a2e8d0818cb2ba8b33004a363c5ff64c515b2d81327c6184252d5d63",
+      "unittestSummaries": [
+        "Ran 10 tests in 0.066s"
+      ]
+    },
+    "task52-provider-financial-remaining.log": {
+      "failedSummary": [
+        "FAILED (errors=1)"
+      ],
+      "sha256": "5560dbcf790ba6955d9b96c92a3cd4715cb0a938cee8cab02eb29849f4fb7de6",
+      "unittestSummaries": [
+        "Ran 1 test in 21.601s"
+      ]
+    },
+    "task52-provider-frontend-final.log": {
+      "failedSummary": [],
+      "sha256": "11be6ef5ef42f0391135f742483fb929356e29611a48be3f8b82320cfda2a116",
+      "unittestSummaries": []
+    },
+    "task52-provider-frontend.log": {
+      "failedSummary": [],
+      "sha256": "e59a926466d12590a4636a73b27e2b17cbbfa5eeae8eb219e4c0138721adc8aa",
+      "unittestSummaries": []
+    },
+    "task52-provider-http-sql-final.log": {
+      "failedSummary": [],
+      "sha256": "cc0588ffbe17783d3ecc79a2c9ce3a522c57012f2c6dd7b58025a68cdc58874a",
+      "unittestSummaries": [
+        "Ran 3 tests in 78.289s"
+      ]
+    },
+    "task52-provider-http-tests.log": {
+      "failedSummary": [],
+      "sha256": "82ff191e63a03be77efb18b82770378bd132a710b3c2d6dc5d657662197c690c",
+      "unittestSummaries": [
+        "Ran 11 tests in 0.064s"
+      ]
+    },
+    "task52-provider-lint.log": {
+      "failedSummary": [],
+      "sha256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+      "unittestSummaries": []
+    },
+    "task52-provider-pending-diagnostic.log": {
+      "failedSummary": [],
+      "sha256": "4bbf59e55d3667b97a0395cba342cd96a4f5b824387718087540dcca91ec2d83",
+      "unittestSummaries": [
+        "Ran 1 test in 46.238s"
+      ]
+    },
+    "task52-provider-post-review.log": {
+      "failedSummary": [],
+      "sha256": "1c13902ab37edee852b185add4942b4bedc479f1662e763366e253a7fc490dbc",
+      "unittestSummaries": [
+        "Ran 11 tests in 0.060s"
+      ]
+    },
+    "task52-provider-regressions.log": {
+      "failedSummary": [],
+      "sha256": "8e9047b4daf67fef3eed0c5b0481dd5a48202afe733d666a61194a41745280d2",
+      "unittestSummaries": [
+        "Ran 117 tests in 0.913s"
+      ]
+    },
+    "task52-provider-security-final.log": {
+      "failedSummary": [],
+      "sha256": "6476079da6d919118092fb863403371b01f83cd304f6a477c29a5075b347b155",
+      "unittestSummaries": []
+    },
+    "task52-provider-security.log": {
+      "failedSummary": [],
+      "sha256": "1216acd3dfd1e2d8f08bab3d5ea9e97a8d0b58bf695cadd6a1fee2bdc3df903d",
+      "unittestSummaries": []
+    },
+    "task52-provider-sql-final-current.log": {
+      "failedSummary": [],
+      "sha256": "17f888308f4552bc34cd104eee2f1dcd84a75cd20c8e4fb6789bf61d28f06e90",
+      "unittestSummaries": [
+        "Ran 3 tests in 75.100s"
+      ]
+    },
+    "task52-provider-sql-final.log": {
+      "failedSummary": [],
+      "sha256": "9dd21459186e2295cde5eac6e858d9d8189d06d4abce1ce7a180d387bb974c0e",
+      "unittestSummaries": []
+    },
+    "task52-provider-sql-run3.log": {
+      "failedSummary": [
+        "FAILED (errors=1)"
+      ],
+      "sha256": "3ea4e99f0056f27c165a654117d245f2f69f13b7df1ea183d53cfedb4a347ab0",
+      "unittestSummaries": [
+        "Ran 1 test in 4.885s"
+      ]
+    },
+    "task52-provider-sql-run4.log": {
+      "failedSummary": [
+        "FAILED (errors=1)"
+      ],
+      "sha256": "2684427b7d543f166a62084c5df901ef6caa60aa38e0725c65ed15f02ec5904a",
+      "unittestSummaries": [
+        "Ran 3 tests in 75.367s",
+        "Ran 7 tests in 369.753s"
+      ]
+    },
+    "task52-provider-sql.log": {
+      "failedSummary": [],
+      "sha256": "bf858789855fdc6e41aba8bcbede35204dee96c984797d33de1da45d05c9a0ad",
+      "unittestSummaries": []
+    },
+    "task52-provider-tests-final.log": {
+      "failedSummary": [],
+      "sha256": "8f9ca09b794609bfbd3714a15e52789a505466a4327000ce46e0f49a304d76d3",
+      "unittestSummaries": [
+        "Ran 7 tests in 0.060s"
+      ]
+    },
+    "task52-provider-tests.log": {
+      "failedSummary": [
+        "FAILED (errors=1)"
+      ],
+      "sha256": "5304db123ba09f3af330bfa66a8a83d87aa30dd51db4685d3f6501aba55454fd",
+      "unittestSummaries": [
+        "Ran 7 tests in 0.053s"
+      ]
+    },
+    "task52-provider-typecheck.log": {
+      "failedSummary": [],
+      "sha256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+      "unittestSummaries": []
+    },
+    "task52-provider-wheel-cache.log": {
+      "failedSummary": [],
+      "sha256": "ed20afcb8d2a238afe3d37ce2be81a63506bf7303e74451601bf0caf9bc08711",
+      "unittestSummaries": []
+    }
+  },
+  "baseline": "8b4f21b81791f3833fbf7f66191bca5434ca2d09",
+  "calendarIsolatedDiagnostic": {
+    "executed": 1,
+    "explainsOriginalFailure": false,
+    "passed": 1,
+    "seconds": 32.21,
+    "sourcePinsPreserved": true
+  },
+  "cloudProvisioning": false,
+  "commitEligible": true,
+  "configuredSecretScan": {
+    "currentFilesAndAssets": 3782,
+    "currentMatches": 0,
+    "historicalMatches": 0,
+    "historicalObjects": 4075,
+    "sensitiveValues": 2
+  },
+  "continuation": {
+    "baseline": "8b4f21b81791f3833fbf7f66191bca5434ca2d09",
+    "beforeSnapshotSHA256": "86f77e6ec8d64faa3a8db70f69b7fcebf1b21d3b6bf3a5344bd41d2fe138ad52",
+    "capturedPrimaryRefusal": {
+      "event": "synthetic_sql_refusal",
+      "locations": [
+        {
+          "function": "synthetic_state.finance_guard",
+          "line": 6
+        },
+        {
+          "function": "synthetic_state.app_protocol",
+          "line": 5
+        }
+      ],
+      "protectedState": {
+        "anchors": [
+          1,
+          1,
+          1,
+          0
+        ],
+        "attestations": [
+          2,
+          2
+        ],
+        "clock": [
+          1903
+        ],
+        "evidence_version": [
+          "synthetic",
+          "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+          "52-encrypted-shared-evidence-local-v1"
+        ],
+        "financial": [
+          1,
+          "6845"
+        ],
+        "policy": [
+          "52-financial-authority-local-pg-v3",
+          "development_cost.RATES-2026-11-03-v1",
+          "synthetic-local-project-v1",
+          "bounded"
+        ],
+        "sessions": [
+          1,
+          0,
+          0,
+          1,
+          1
+        ]
+      },
+      "reason": "redacted",
+      "sqlstate": "57014",
+      "statementFunction": "synthetic_state.app_protocol",
+      "test": "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_pending_date"
+    },
+    "changedFiles": [
+      "ARCHITECTURE.md",
+      "DECISIONS.md",
+      "HANDOVER.md",
+      "TASKS.md",
+      "backend/ai/openai_candidate.py",
+      "backend/provider_responses.py",
+      "backend/test_financial_diagnostics.py",
+      "backend/test_provider_responses.py",
+      "docs/learning/08-ai-interpretation-qwen-ollama-prompts-and-structured-json.md",
+      "docs/learning/11-google-places-and-routes-apis.md",
+      "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+      "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+      "docs/task52-real-provider-integration-verification.json",
+      "docs/task52-real-provider-integration.md",
+      "docs/task52-real-provider-retention-v1.json",
+      "experiments/shared_state/financial_diagnostics.py",
+      "experiments/shared_state/run_real_responses.py",
+      "experiments/shared_state/test_real_provider_response.py"
+    ],
+    "checks": [
+      "complete combined diff reviewed",
+      "Python/JSON syntax and local links passed",
+      "all20 chapters preserved;4 updated",
+      "runtime adapters byte-identical to initial16 snapshot",
+      "no dependency/deployment/production factory or frozen source changes"
+    ],
+    "configuredSecretScanLogSHA256": "c6253ca7d6644a8920befe0294a79f8cceb5580a21920a95c00297d65a2960b6",
+    "dependencies": "pip check passed",
+    "eslint": "passed",
+    "failedCohortSourcePins": {
+      "experiments/shared_state/action_bridge.py": "205d6d7641926ba1dcf41f79a41335c7f4b706f58b9df8b3d0d0b626dcac3cba",
+      "experiments/shared_state/action_identity.py": "19b83969094600dc4fbea8c9934ece65065eb97c573031b35b144e2abd721ead",
+      "experiments/shared_state/application_grants.py": "877d22a167d1be0fad1e547afed6491a0b49a57a1709211accea2cbd8937fb85",
+      "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
+      "experiments/shared_state/bridge.sql": "6af8e10d172fc188cf76f30c83479da9a3fcae98e3191dedbd3965453b81ca3b",
+      "experiments/shared_state/bridge_models.py": "b38b8474059c90a05434613f281ff66eafca35da56fdf6468363949320498af7",
+      "experiments/shared_state/contracts.py": "6fd31ac8786a5a5a80409737682507cbef6753b427d648f3e314f9a663f3b4e2",
+      "experiments/shared_state/evidence.sql": "b1fe0d4a98acf078a6080283ce37dfc0dc2b9cfe7b143b8d85b533462b2ae7f2",
+      "experiments/shared_state/evidence_identity.py": "2a2fc10c8c5aad0cd55436ac9e0644c5925991dee11358d8b787f9699b00b970",
+      "experiments/shared_state/evidence_models.py": "562df7e447adac1147c254acd13a562649e2f2e4b2a014c07428f4eb8df05cb2",
+      "experiments/shared_state/evidence_recovery.py": "8bcab3101d79d24b3a373063142588add8a1cfba720dfda30b4e22f27896409d",
+      "experiments/shared_state/financial.py": "ec1abd9ffadc1cccf9c52ed3ab733625c0da8dfa0423dbe303f6c1d81dcfd6d7",
+      "experiments/shared_state/financial_diagnostics.py": "7a1195883ffa5bde6bf18dffdd94f8003f5774e422ca00b5181dacb48b4e627a",
+      "experiments/shared_state/financial_routines.sql": "69179211e0b4971b329f77bb8ee639d6ce0f339b53eeb3f6da436ec73fe2fe8c",
+      "experiments/shared_state/financial_schema.sql": "eee3872280602077f4a01d7e9b0172feb81a2330969891c60a9e0b2177937495",
+      "experiments/shared_state/grant_identity.py": "9bd31a8c9025567051ac9b79f811400f42fc7126e05b51f867a36d8d2225d813",
+      "experiments/shared_state/grant_rules.sql": "f069b48d8812cfcc4f89518f6a7322f816931cb69614659f32874612be41b03f",
+      "experiments/shared_state/grant_witness.sql": "fab3095c6cc3d3a5558353b701559b4132cb7271379b0a47d68b1f1fe0a4a711",
+      "experiments/shared_state/native_graph.py": "dcb15772ba093777775004f648f33b68e314f893ddee56bbcc53c61c56ddada4",
+      "experiments/shared_state/native_identity.py": "ef71b74c9b3f0f3c19d79a37fbc7c925f94fda357a21643e4f5616815fed4f53",
+      "experiments/shared_state/native_sessions.py": "a47ee4bb5ce592a17873d1423d0eae13d00f850eb50ee7b47e1008da760ecf02",
+      "experiments/shared_state/native_sessions.sql": "d1d70554b94e772fbc937bd0a9f24c3eb6b909e78f1cf01fb6c31a651392531a",
+      "experiments/shared_state/native_witness.sql": "573cf9b2bf30c653562b2a752e12c2fa6f2515866e7a68cd9fcef065c40b2fcd",
+      "experiments/shared_state/postgres.py": "4e27b596599e1d2aa7ef0d486d8b2cdd2b2cf90ecfeadc562b8701f486aed974",
+      "experiments/shared_state/redis_evidence.py": "9125fdcbceaf1aeb63f19f85c9e0152e9a58c2f579457818717f410e69f3548b",
+      "experiments/shared_state/routines.sql": "47a85e04311ec2efb483ebd15f1ecd2798b14a3d295db9006b164d175a7fd758",
+      "experiments/shared_state/run_evidence.py": "637c07cf89535c32994e3a583ba7be9eceff42c6583bd51821f8339c2e17f374",
+      "experiments/shared_state/run_grants.py": "5c0f3c3acb59be9a0b26deb809b9e84dd8443d2e78d93cb0c8a2fbb26efecd6d",
+      "experiments/shared_state/run_local.py": "ce00e783bd214ed9b0f3968896b59bfbd3acbf081855bd853e40de35d38f2f48",
+      "experiments/shared_state/run_native.py": "283642aafe1de6a2998930511cb83123ac1b1f07a1d9698a0a5aa1f2d7664288",
+      "experiments/shared_state/run_real_responses.py": "d3a58d174468f5ea65396c6d23a2835cf4a42e3a6d667163631c5a3adb6b2432",
+      "experiments/shared_state/schema.sql": "464e4430f8fac8ba9cccc7d32607c7775bf25d594b2936d565ec4561a97d3aae",
+      "experiments/shared_state/test_action_identity.py": "6be04b5b56eb34e1b2b989caa844abe8dab365abd2078affd09d2f324bc4fa44",
+      "experiments/shared_state/test_application_grants.py": "b18a60c8c7c24e01d9073ae6f4b38a17d78b45661871ba698cc2dc728a09a0e0",
+      "experiments/shared_state/test_bridge.py": "bec905d69914989b2a5f6bd5c235f45cf35358e544374b9f5faa22f01ad4cd95",
+      "experiments/shared_state/test_evidence.py": "4a0c3f428b3b74412fafeffdc4011be74c9af35dd429b77a5c292331c938cd5c",
+      "experiments/shared_state/test_financial.py": "c19f01ec7c6e0ae50a16decb30ef708348e8181e37a6d85419b16fbdf12ecd46",
+      "experiments/shared_state/test_native_sessions.py": "e89fc7f4c9899f2eeec90aa3057b0a749f2d3c5cfdc865c38272b1f002a7b115",
+      "experiments/shared_state/test_real_provider_response.py": "570344290ba400e837a6fbb3eda826fc0f389a29852b6c54c9f359c155d4bf3c",
+      "experiments/shared_state/test_store.py": "d71b4a2a4eeb5015a8f9539d2839daf5d1cb62a7b1d1d0ccb529f1cf3fb60348"
+    },
+    "financialCasesPreviouslyUnexecuted": 22,
+    "financialCasesStillUnexecuted": 0,
+    "financialCompletedIDs": [
+      [
+        "test_advanced_named_origin",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_advanced_named_origin"
+      ],
+      [
+        "test_area",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_area"
+      ],
+      [
+        "test_details",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_details"
+      ],
+      [
+        "test_lookup",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_lookup"
+      ],
+      [
+        "test_optional_flexible",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_optional_flexible"
+      ],
+      [
+        "test_ordinary_options_selection",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_ordinary_options_selection"
+      ],
+      [
+        "test_pending_date",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_pending_date"
+      ],
+      [
+        "test_refresh",
+        "experiments.shared_state.test_application_grants.ApplicationGrantTests.test_refresh"
+      ],
+      [
+        "test_calendar_rollover_never_renews_total_and_revocation_stops",
+        "experiments.shared_state.test_application_grants.GrantTests.test_calendar_rollover_never_renews_total_and_revocation_stops"
+      ],
+      [
+        "test_concurrent_workers_cannot_exceed_one_lifetime_grant",
+        "experiments.shared_state.test_application_grants.GrantTests.test_concurrent_workers_cannot_exceed_one_lifetime_grant"
+      ],
+      [
+        "test_epoch_rotation_invalidates_old_sql_and_cannot_roll_back",
+        "experiments.shared_state.test_application_grants.GrantTests.test_epoch_rotation_invalidates_old_sql_and_cannot_roll_back"
+      ],
+      [
+        "test_exhausted_grant_new_worker_root_zero_charge_and_overflow",
+        "experiments.shared_state.test_application_grants.GrantTests.test_exhausted_grant_new_worker_root_zero_charge_and_overflow"
+      ],
+      [
+        "test_legitimate_maps_and_shared_limits_no_refund",
+        "experiments.shared_state.test_application_grants.GrantTests.test_legitimate_maps_and_shared_limits_no_refund"
+      ],
+      [
+        "test_missing_evidence_before_reserve_and_modified_payload_after_charge",
+        "experiments.shared_state.test_application_grants.GrantTests.test_missing_evidence_before_reserve_and_modified_payload_after_charge"
+      ],
+      [
+        "test_missing_or_wrong_key_and_stale_fence_refuse_without_charge",
+        "experiments.shared_state.test_application_grants.GrantTests.test_missing_or_wrong_key_and_stale_fence_refuse_without_charge"
+      ],
+      [
+        "test_missing_terminal_fact_is_restore_disagreement",
+        "experiments.shared_state.test_application_grants.GrantTests.test_missing_terminal_fact_is_restore_disagreement"
+      ],
+      [
+        "test_process_death_retains_external_claim_and_unknown_exposure",
+        "experiments.shared_state.test_application_grants.GrantTests.test_process_death_retains_external_claim_and_unknown_exposure"
+      ],
+      [
+        "test_provider_day_outing_attempt_and_expiry_limits",
+        "experiments.shared_state.test_application_grants.GrantTests.test_provider_day_outing_attempt_and_expiry_limits"
+      ],
+      [
+        "test_runtime_and_issuer_cannot_change_grants_rates_epoch_or_counts",
+        "experiments.shared_state.test_application_grants.GrantTests.test_runtime_and_issuer_cannot_change_grants_rates_epoch_or_counts"
+      ],
+      [
+        "test_uncertain_transport_stops_full_grant_and_no_replay",
+        "experiments.shared_state.test_application_grants.GrantTests.test_uncertain_transport_stops_full_grant_and_no_replay"
+      ],
+      [
+        "test_changed_inference_payload_and_unbounded_categories_refuse",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_changed_inference_payload_and_unbounded_categories_refuse"
+      ],
+      [
+        "test_inference_and_maps_share_grant_and_source_outing",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_inference_and_maps_share_grant_and_source_outing"
+      ],
+      [
+        "test_malformed_and_substituted_usage_never_refunds",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_malformed_and_substituted_usage_never_refunds"
+      ],
+      [
+        "test_maps_consumption_prevents_llm_over_grant_before_fake_send",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_maps_consumption_prevents_llm_over_grant_before_fake_send"
+      ],
+      [
+        "test_missing_usage_retains_maximum_and_quarantines",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_missing_usage_retains_maximum_and_quarantines"
+      ],
+      [
+        "test_owned_complete_inference_and_pending_no_second_model_charge",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_owned_complete_inference_and_pending_no_second_model_charge"
+      ],
+      [
+        "test_second_model_rates_and_interrupted_fake_send",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_second_model_rates_and_interrupted_fake_send"
+      ],
+      [
+        "test_unknown_build_refuses_before_database_authority",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_unknown_build_refuses_before_database_authority"
+      ],
+      [
+        "test_unknown_model_or_output_overflow_never_reserves",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_unknown_model_or_output_overflow_never_reserves"
+      ],
+      [
+        "test_zero_price_model_still_consumes_operation",
+        "experiments.shared_state.test_application_grants.InferenceTests.test_zero_price_model_still_consumes_operation"
+      ]
+    ],
+    "formatterChange": "Original failing event retained redacted message category; server fixed-message counts separately identified timeout. Current observer recognizes the two fixed PostgreSQL cancellation messages; formatting unit tests pass.",
+    "frontend": {
+      "discovered": 323,
+      "expiredDateFixtureUnchanged": true,
+      "failed": 1,
+      "passed": 322,
+      "skipped": 0
+    },
+    "frozenFinancialSourcesModified": false,
+    "historicalCalendarFailure": {
+      "exactCause": "unattributed",
+      "noAttestationOrClockChecksWeakened": true,
+      "oldDisposableStateAvailable": false,
+      "originalSQLSTATE": "not captured",
+      "passedInBothCompleteResourceCohorts": true
+    },
+    "historicalIntegrityLogSHA256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "historicalPendingFailure": {
+      "exactCauseProven": false,
+      "financialChecksWeakened": false,
+      "newReproductionAttributedToStatementTimeout": true
+    },
+    "hostBackend": {
+      "discovered": 195,
+      "errors": 0,
+      "failed": 0,
+      "logSHA256": "7a1eded3c7361d02e4518509a4372702142b34ed0781ab8a0b599c9b50daa2a9",
+      "passed": 186,
+      "runs": [
+        {
+          "count": 195,
+          "seconds": 5.507
+        }
+      ],
+      "skipped": 9
+    },
+    "hostImportAttempts": [
+      {
+        "cause": "host PyJWT missing",
+        "discovered": 180,
+        "errors": 1,
+        "logSHA256": "0907bedc4ff310871975cf11a220958e6cba873204a9a6cdcfd26a902ab90a41",
+        "skipped": 9
+      },
+      {
+        "cause": "host cryptography missing for intended isolated identity modules",
+        "discovered": 181,
+        "errors": 2,
+        "logSHA256": "700c7af9c27c7f85304d8f4efc57fc6259a71f60651c33fb1e7022c295b67377",
+        "skipped": 9
+      }
+    ],
+    "identityDiagnosticRun": {
+      "changes": "temporary SQL/connect/TLS/ready observation only; no retries or deadline changes",
+      "codeAndTestsUnchanged": true,
+      "launcherSHA256": "f6aba306a5c68c8a9b4b89e7668e896357f7ef476d7dd0f4ac9262fa7fa2893e",
+      "notAProofOfOriginalCause": true,
+      "results": {
+        "discovered": 20,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "9e736e663b586caea59e17221f5010f1912eebef60345472a0452312b017de47",
+        "passed": 20,
+        "runs": [
+          {
+            "count": 10,
+            "seconds": 1.632
+          },
+          {
+            "count": 10,
+            "seconds": 202.704
+          }
+        ],
+        "skipped": 0
+      }
+    },
+    "identityInitialRun": {
+      "applicationSeconds": 211.566,
+      "case": "test_06_restarts_outages_epoch_and_expired_ownership",
+      "cause": "unattributed; fixed two-second startup wait is a hypothesis only",
+      "discovered": 20,
+      "errors": 0,
+      "failed": 1,
+      "logSHA256": "edfbfafca25cb30a02e7d4e7a3c181b293e558d4d2b1f15bfa1d54dc94248537",
+      "noFinancialBypassObserved": true,
+      "passed": 19,
+      "result": "503 authority_unavailable on lookup after restart",
+      "skipped": 0,
+      "tokenSeconds": 1.837
+    },
+    "lockDeadlineMs": 250,
+    "nativeAndFinancialRecovery": "Operational and witness snapshot restoration, database outage, SQL/witness restart and Redis loss drills passed. Full grant quarantined on history disagreement; no automatic retries/refunds/reconstruction.",
+    "notAFullBackendOrHostedPass": true,
+    "npmConsistency": {
+      "fullLocalTree": "npm ls --all failed ELSPROBLEMS",
+      "fullTreeLogSHA256": "fffcfdca3100412af5b78f8e103a68fc0cdbc48a757649af3b2b7deb8339c2de",
+      "locksUnchanged": true,
+      "problems": [
+        "@emnapi/core@1.10.0 missing on disk but present in node_modules/.package-lock.json; optional Tailwind WASM dependency expects ^1.11.1",
+        "@emnapi/wasi-threads@1.2.1 missing on disk but present in node_modules/.package-lock.json; optional Tailwind WASM dependency expects ^1.2.2"
+      ],
+      "runtime": "npm ls --omit=dev --all passed",
+      "runtimeLogSHA256": "a03cb59004ee423c306b3f52a2ac484fae0786206413792b10bc546a20665966"
+    },
+    "observation": {
+      "committedSyntheticCharge": 6845,
+      "epochsAndVersionsMatch": true,
+      "expiredAnchors": 0,
+      "expiredSessions": 0,
+      "functionLine": 6,
+      "pendingNewReproductionFunction": "synthetic_state.finance_guard",
+      "pendingNewReproductionSQLSTATE": "57014",
+      "previousFailureExactCauseProven": false,
+      "secondaryReason": "state_transition",
+      "secondarySQLSTATE": "P0001"
+    },
+    "original16FilesPreserved": true,
+    "originalResourceCohort": {
+      "discovered": 30,
+      "errors": 1,
+      "failed": 0,
+      "logSHA256": "f371fc3cd2008165448afd6351f3c0091f7a54f182761031c60d9fe5d389f7f8",
+      "passed": 29,
+      "primarySQLSTATE": "57014",
+      "reason": "statement_timeout",
+      "secondaryReason": "state_transition",
+      "secondarySQLSTATE": "P0001",
+      "seconds": 839.296,
+      "serverStatementTimeoutCount": 1,
+      "serverUserCancellationCount": 0,
+      "skipped": 0
+    },
+    "preservedInputFiles": 16,
+    "refusalSourceLocations": [
+      {
+        "context": "finance_guard PL/pgSQL line6 policy IF statement; subexpression bottleneck not proven",
+        "file": "experiments/shared_state/financial_routines.sql",
+        "line": 8
+      },
+      {
+        "context": "app_protocol PL/pgSQL line5 finance_guard call",
+        "file": "experiments/shared_state/application_grants.sql",
+        "line": 111
+      }
+    ],
+    "resourceEvidence": {
+      "originalOperationalCPUs": 0.5,
+      "periods": 4095,
+      "quota": "50000/100000",
+      "throttledMicroseconds": 198279259,
+      "throttledPeriods": 4036
+    },
+    "resources": {
+      "after": 126,
+      "allInheritedPreserved": true,
+      "containersRemaining": 0,
+      "createdResourcesRemaining": false,
+      "inherited": 126,
+      "vmStopped": true
+    },
+    "results": {
+      "backend": {
+        "discovered": 195,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "7a1eded3c7361d02e4518509a4372702142b34ed0781ab8a0b599c9b50daa2a9",
+        "passed": 186,
+        "runs": [
+          {
+            "count": 195,
+            "seconds": 5.507
+          }
+        ],
+        "skipped": 9
+      },
+      "evidence": {
+        "discovered": 112,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "c52629237c69c8424a57287b391e465c0c86ca7b698ae4181c6aefcb6b3b3a25",
+        "passed": 112,
+        "runs": [
+          {
+            "count": 112,
+            "seconds": 380.269
+          }
+        ],
+        "skipped": 0
+      },
+      "financial": {
+        "discovered": 30,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "e62d8b580b59ea50faaf1205bec61817be10679e01a9512632aeb7648b131036",
+        "passed": 30,
+        "runs": [
+          {
+            "count": 30,
+            "seconds": 434.002
+          }
+        ],
+        "skipped": 0
+      },
+      "identity": {
+        "discovered": 20,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "9e736e663b586caea59e17221f5010f1912eebef60345472a0452312b017de47",
+        "passed": 20,
+        "runs": [
+          {
+            "count": 10,
+            "seconds": 1.632
+          },
+          {
+            "count": 10,
+            "seconds": 202.704
+          }
+        ],
+        "skipped": 0
+      },
+      "native": {
+        "discovered": 17,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "ff143560260e7beed76f57bbbab930f5650dd0c784afa346b05f25209726ffda",
+        "passed": 17,
+        "runs": [
+          {
+            "count": 17,
+            "seconds": 509.859
+          }
+        ],
+        "skipped": 0
+      },
+      "providers": {
+        "discovered": 3,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "d1427ce00f01b70117eb0a34b2caa700dbb2b2ea7e593fb2877fe71e5574ef42",
+        "passed": 3,
+        "runs": [
+          {
+            "count": 3,
+            "seconds": 37.09
+          }
+        ],
+        "skipped": 0
+      },
+      "services": {
+        "discovered": 12,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "b395628f4f2d6e4ead968ed3e47b0d200efc5cf380067db5385edf683def6375",
+        "passed": 12,
+        "runs": [
+          {
+            "count": 12,
+            "seconds": 342.015
+          }
+        ],
+        "skipped": 0
+      }
+    },
+    "runtimeAdaptersUnchangedFromIncomingSnapshot": true,
+    "serviceDiagnosticLauncherSHA256": "c0c970952dd085f804409317d04022f05baaf8ee29dae4db646ba7fe8a5525df",
+    "servicePinsSHA256": "9434c36367c344c0ca2b188ec06c5f1a08c4ac4c2bf04d10ad4818c049c00343",
+    "snapshotLimit": "Read-only aggregate queries after refusal, separate transactions; not an atomic cross-store snapshot. Operational charge subtotal is not full independent-witness exposure.",
+    "sqlDeadlineMs": 1500,
+    "status": "bounded-offline-acceptance-passed-real-execution-blocked",
+    "supportedResourceCohort": {
+      "deadlinesUnchanged": true,
+      "operationalCPUs": 1,
+      "otherLimitsUnchanged": true,
+      "redisCPUs": 0.25,
+      "results": {
+        "discovered": 30,
+        "errors": 0,
+        "failed": 0,
+        "logSHA256": "e62d8b580b59ea50faaf1205bec61817be10679e01a9512632aeb7648b131036",
+        "passed": 30,
+        "runs": [
+          {
+            "count": 30,
+            "seconds": 434.002
+          }
+        ],
+        "skipped": 0
+      },
+      "vmCPUs": 2,
+      "vmGiB": 4
+    },
+    "typeScript": "passed"
+  },
+  "dependencyConsistency": "pip check passed; no lock or dependency change",
+  "eslint": "passed",
+  "finalFocusedBackend": {
+    "discovered": 195,
+    "errors": 0,
+    "failed": 0,
+    "logSHA256": "7a1eded3c7361d02e4518509a4372702142b34ed0781ab8a0b599c9b50daa2a9",
+    "passed": 186,
+    "runs": [
+      {
+        "count": 195,
+        "seconds": 5.507
+      }
+    ],
+    "skipped": 9
+  },
+  "finalProtectedResponseIntegration": {
+    "discovered": 3,
+    "errors": 0,
+    "failed": 0,
+    "logSHA256": "d1427ce00f01b70117eb0a34b2caa700dbb2b2ea7e593fb2877fe71e5574ef42",
+    "passed": 3,
+    "runs": [
+      {
+        "count": 3,
+        "seconds": 37.09
+      }
+    ],
+    "skipped": 0
+  },
+  "financialFullAttempt": {
+    "category": "database_protocol",
+    "errors": 1,
+    "executed": 7,
+    "failedID": "ApplicationGrantTests.test_pending_date",
+    "location": "GrantService.send -> sync -> app_observed -> existing PostgreSQL protocol guard",
+    "passed": 6,
+    "planned": 30,
+    "unexecuted": 23
+  },
+  "frontend": {
+    "discovered": 323,
+    "durationMs": 116713.585791,
+    "failed": 1,
+    "failure": "lib/surprise.test.ts:69: unchanged November14 fixture is expired;422 versus200",
+    "initialSandboxIPCRefusal": true,
+    "passed": 322,
+    "skipped": 0
+  },
+  "frozenPromptSHA256": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+  "handbook": {
+    "chaptersPreserved": 20,
+    "reviewed": [
+      8,
+      11,
+      14,
+      15,
+      17,
+      18
+    ],
+    "updated": [
+      8,
+      11,
+      14,
+      15
+    ]
+  },
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "baselineJournalAndPrivateHashesMatch": true,
+    "frozenPinsPreserved": true,
+    "persistentHalt": true,
+    "privateFiles": 324,
+    "providers": {
+      "anthropic": 1,
+      "google": 2,
+      "openai": 7
+    },
+    "remainingNanodollars": 11952633375
+  },
+  "identity": "52-inactive-real-provider-integration-v1",
+  "knownContainerBlockers": {
+    "freshlyScannedHere": false,
+    "frontend": {
+      "critical": 2,
+      "high": 53
+    },
+    "independentDisposition": false,
+    "pythonEach": {
+      "critical": 3,
+      "high": 86
+    }
+  },
+  "newResponseTests": {
+    "includedInFocusedBackend": true,
+    "passed": 11
+  },
+  "nextAction": "Obtain missing model readiness/cost/qualification and independent real-provider accounting/transport and retention approvals; separately disposition image vulnerabilities and infrastructure enrollment. No live operation or provisioning automatically follows.",
+  "notRun": [
+    "full backend discovery including immutable historical simulations",
+    "new desktop/mobile browser or Next/FastAPI UI process run (no UI/route changes)",
+    "production build or container rebuild/smoke/fresh vulnerability scans (no runtime dependency, deployment or image projection change)",
+    "host private_runtime.test_identity module in a crypto-capable host environment; existing isolated hosted identity suite completed instead",
+    "any real provider, token-count, identity or account endpoint; any hosted deployment"
+  ],
+  "pendingIsolatedDiagnostic": {
+    "executed": 1,
+    "explainsOriginalFailure": false,
+    "passed": 1,
+    "seconds": 46.238,
+    "sourcePinsPreserved": true
+  },
+  "postSQLDocstringCorrection": {
+    "executableASTUnchanged": true,
+    "file": "backend/provider_responses.py",
+    "reason": "Remove outdated no-HTTP-client module description after adding GoogleHTTPExchange"
+  },
+  "previousCheckpoint": {
+    "commitEligible": false,
+    "finalFocusedBackend": {
+      "discovered": 173,
+      "errors": 0,
+      "failed": 0,
+      "passed": 164,
+      "seconds": 4.543,
+      "skipIDs": [
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_api_operations_against_real_postgres_rollback",
+          "method": "test_api_operations_against_real_postgres_rollback",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_duplicate_save_is_idempotent_and_mutation_denied",
+          "method": "test_duplicate_save_is_idempotent_and_mutation_denied",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_legacy_null_transport_defaults_to_driving",
+          "method": "test_legacy_null_transport_defaults_to_driving",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_partial_failure_rolls_back_every_table",
+          "method": "test_partial_failure_rolls_back_every_table",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_real_storage_is_identifiers_only_and_reopens_without_provider",
+          "method": "test_real_storage_is_identifiers_only_and_reopens_without_provider",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_runtime_no_ledger_ddl_delete_or_cross_capability_write",
+          "method": "test_runtime_no_ledger_ddl_delete_or_cross_capability_write",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_transactional_save_and_complete_retrieval",
+          "method": "test_transactional_save_and_complete_retrieval",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_walking_transport_column_round_trips",
+          "method": "test_walking_transport_column_round_trips",
+          "reason": "'Opt-in hosted rollback tests'"
+        },
+        {
+          "class": "backend.test_saved_plans.HostedPersistenceTests.test_wrong_missing_expired_and_uuid_access_denied",
+          "method": "test_wrong_missing_expired_and_uuid_access_denied",
+          "reason": "'Opt-in hosted rollback tests'"
+        }
+      ],
+      "skipped": 9
+    },
+    "finalProtectedResponseIntegration": {
+      "browserVerified": false,
+      "errors": 0,
+      "executedSourcePins": {
+        "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
+        "backend/provider_responses.py": "e198424a8f02e79ba48519b95aa9a66af84e75629cfade35f0e508df8eb7704f",
+        "backend/test_provider_responses.py": "96e690d10196eb7d418e9e9f0c4500caa1a029fddd3cfd13f6e0978969937bf6",
+        "docs/task52-cloud-prompt-v51-REVIEWED-v1.json": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+        "experiments/shared_state/run_real_responses.py": "d3a58d174468f5ea65396c6d23a2835cf4a42e3a6d667163631c5a3adb6b2432",
+        "experiments/shared_state/test_real_provider_response.py": "570344290ba400e837a6fbb3eda826fc0f389a29852b6c54c9f359c155d4bf3c"
+      },
+      "failed": 0,
+      "inferenceFinancialProfile": "fictional-envelope-only-not-real-Luna-tokenization",
+      "ordinaryPlannerUsed": true,
+      "passed": 3,
+      "placesAndRoutesHTTPSCodeUsed": true,
+      "seconds": 78.289,
+      "sourcePinsPreserved": true,
+      "transport": "socket-free-authored-recorded-HTTP-shapes"
+    },
+    "notRun": [
+      "full backend discovery",
+      "production build",
+      "new images or fresh vulnerability scan",
+      "actual desktop/mobile browser",
+      "full native cross-worker suite",
+      "financial restore/crash drills after fail-fast errors",
+      "any real provider or identity endpoint"
+    ],
+    "remainingFinancialCasesNotRun": 22,
+    "remainingFinancialIDsNotRun": [
+      "ApplicationGrantTests.test_refresh",
+      "GrantTests.test_concurrent_workers_cannot_exceed_one_lifetime_grant",
+      "GrantTests.test_epoch_rotation_invalidates_old_sql_and_cannot_roll_back",
+      "GrantTests.test_exhausted_grant_new_worker_root_zero_charge_and_overflow",
+      "GrantTests.test_legitimate_maps_and_shared_limits_no_refund",
+      "GrantTests.test_missing_evidence_before_reserve_and_modified_payload_after_charge",
+      "GrantTests.test_missing_or_wrong_key_and_stale_fence_refuse_without_charge",
+      "GrantTests.test_missing_terminal_fact_is_restore_disagreement",
+      "GrantTests.test_process_death_retains_external_claim_and_unknown_exposure",
+      "GrantTests.test_provider_day_outing_attempt_and_expiry_limits",
+      "GrantTests.test_runtime_and_issuer_cannot_change_grants_rates_epoch_or_counts",
+      "GrantTests.test_uncertain_transport_stops_full_grant_and_no_replay",
+      "InferenceTests.test_changed_inference_payload_and_unbounded_categories_refuse",
+      "InferenceTests.test_inference_and_maps_share_grant_and_source_outing",
+      "InferenceTests.test_malformed_and_substituted_usage_never_refunds",
+      "InferenceTests.test_maps_consumption_prevents_llm_over_grant_before_fake_send",
+      "InferenceTests.test_missing_usage_retains_maximum_and_quarantines",
+      "InferenceTests.test_owned_complete_inference_and_pending_no_second_model_charge",
+      "InferenceTests.test_second_model_rates_and_interrupted_fake_send",
+      "InferenceTests.test_unknown_build_refuses_before_database_authority",
+      "InferenceTests.test_unknown_model_or_output_overflow_never_reserves",
+      "InferenceTests.test_zero_price_model_still_consumes_operation"
+    ],
+    "resources": {
+      "after": 126,
+      "positivelyIdentifiedFinalRedisVolumeRemoved": 1,
+      "preexisting": 118,
+      "preexistingPreserved": true,
+      "remainingContainers": [],
+      "unattributedNewVolumesRetained": [
+        "03c35773cfb96f6670d5ee9a3df79cc21cde7ad165698aaf1b09f1d85e72b883",
+        "40447cee47376c324e39ad248b40092c15b3b5f5f6d0abb41bd8a4a5705c0288",
+        "66efe182923a1a532d48ed8307f31ae2e22f6417178e3f748f8304bdf4568f66",
+        "7005dfe29cfb72026ac551acabdf59a7535404fce27988d45f1fd44b0e681279",
+        "9a1db7894e54d76f8741cdeed3261d47ea19b3137dac814c9f4efc69af3fe57a",
+        "d1ee9ab63e7fd0a7dee8b2307e0f9a094688e338b26f4d01a1ac82f96a627d7b",
+        "e717ffe8846a3fdca2f5361c35a7c7094e405ce0e1ef2536d0f54bea8ead062b",
+        "f26624f4f005513f6f131327622a0f7c53015173e7417df57a97b42ddc3c4948"
+      ],
+      "vmStopped": true
+    },
+    "sources": {
+      "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
+      "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
+      "backend/test_provider_responses.py": "96e690d10196eb7d418e9e9f0c4500caa1a029fddd3cfd13f6e0978969937bf6",
+      "experiments/shared_state/run_real_responses.py": "d3a58d174468f5ea65396c6d23a2835cf4a42e3a6d667163631c5a3adb6b2432",
+      "experiments/shared_state/test_real_provider_response.py": "570344290ba400e837a6fbb3eda826fc0f389a29852b6c54c9f359c155d4bf3c"
+    },
+    "status": "acceptance-open-financial-regressions-unresolved"
+  },
+  "productionActive": false,
+  "realFinancialGrants": false,
+  "realProviderRequests": 0,
+  "realRedisAdmission": false,
+  "recordedDate": "2026-11-16",
+  "remainingFinancialAttempt": {
+    "category": "evidence_attestation",
+    "errors": 1,
+    "executed": 1,
+    "failedID": "GrantTests.test_calendar_rollover_never_renews_total_and_revocation_stops",
+    "passed": 0,
+    "planned": 23,
+    "underlyingSQLSTATE": "not captured in initial attempt",
+    "unexecuted": 22
+  },
+  "remainingFinancialCasesNotRun": 0,
+  "remainingFinancialIDsNotRun": [],
+  "resources": {
+    "after": 126,
+    "allInheritedPreserved": true,
+    "containersRemaining": 0,
+    "createdResourcesRemaining": false,
+    "inherited": 126,
+    "vmStopped": true
+  },
+  "resultScope": "continuation.results records the completed bounded cohorts. Earlier top-level attempt fields and previousCheckpoint preserve superseded failed/incomplete development evidence; they are not deleted or relabeled passes. Initial restart, half-CPU and frontend/npm failures remain explicitly recorded. No full-backend or hosted-readiness pass.",
+  "retentionContract": "docs/task52-real-provider-retention-v1.json",
+  "sources": {
+    "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
+    "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
+    "backend/test_financial_diagnostics.py": "10e613fbc33cc9c7c71cb9de898d20ddd09f253b6f79abd6db5f2045d35fd1ac",
+    "backend/test_provider_responses.py": "3e3cacfb4566fc1127e26df2da10f8d3d2316ac013c1336c1477e92af8973f27",
+    "experiments/shared_state/financial_diagnostics.py": "9b6c78b91e81b6c1462e5abb932d5b64f82814e527ef039d7bb84eb46d152fb1",
+    "experiments/shared_state/run_real_responses.py": "12490725379e4b308b63ff85c9e0f4f5cb6a7015ce5b6552c0e61c6308a0eb68",
+    "experiments/shared_state/test_real_provider_response.py": "75282e280850be5a79d7c25d76b650732f66d7e40bbcd287af64f3bef8b3b1ee"
+  },
+  "status": "bounded-offline-acceptance-passed-real-execution-blocked",
+  "typeScript": "passed"
+}
