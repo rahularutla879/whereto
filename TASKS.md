@@ -1,3 +1,7 @@
+## Task 52 — next milestone requires real providers
+
+In progress: [real-provider private deployment critical path](docs/task52-real-provider-critical-path.md). Synthetic-only cloud deployment is not the product acceptance target. Existing ordinary UI and six service roles are retained. Remaining gates: qualified hosted LLM, approved real-data retention and provider integration, independently disposed runtime images, quoted infrastructure/independent witness enrollment and explicit separate infrastructure/provider spending approvals. No provisioning or activation. Focused Google contracts:81 passed; no live-provider or cloud acceptance claimed.
+
 ## Task 52 — conditional private staging purchase packet
 
 [Selected infrastructure, finite costs and red gates](docs/task52-staging-purchase-decision-v1.md). Local compatible Node candidate and seven fresh scans complete; no candidate promoted, no independent vulnerability exception. Redis regional quote, separate witness restore custodian, operational account checks and exact paid-resource/migration/private-traffic approval remain pending. Existing default-OFF application and Task52B evaluation remain untouched; no Task53.

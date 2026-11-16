@@ -1,3 +1,7 @@
+## Task 52 — real-provider milestone, existing architecture retained
+
+Owner requires real cloud interpretation, Places and Routes in private cloud staging. Synthetic providers remain offline tests; do not purchase/deploy a synthetic application as the final staging product. Reuse the six roles, existing AI/provider interfaces and native planners. Real data cannot use synthetic evidence provenance. Qualification, retention/security review and separate explicit infrastructure/provider authorizations precede activation. [Exact bounded path and conditional costs](docs/task52-real-provider-critical-path.md); prior purchase evidence remains unchanged.
+
 ## Task 52 — proposed compatible Redis and independent witness purchase, not approved
 
 The [purchase decision](docs/task52-staging-purchase-decision-v1.md) proposes paid Redis Cloud Essentials RAM-only250MB in GCPus-east4 with verified TLS, separate ACL identities and dedicated NAT/CIDR restrictions. Its restricted public endpoint needs explicit security/owner approval; earlier Memorystore Basic lacks the required ACLs. Prefer a separately administered Supabase Pro/Micro organization/project for the recovery witness over a shared operational restore boundary. No operator, quote, financial policy, resource creation or vulnerability exception is enrolled by this proposal. The new Node24Bookworm patch cohort has no advisory reduction and is not promoted; broader distro/backport changes require a separate scoped decision.

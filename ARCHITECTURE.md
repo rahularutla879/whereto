@@ -1,3 +1,7 @@
+## Task 52 — real-provider connection boundary remains inactive
+
+The owner-selected staging target uses real cloud LLM/Places/Routes through the existing six roles. Current dispatcher simulation and fictional byte counter are test implementations, not deployed real providers. Reuse `backend.action_dispatch` Search/Matrix canonical requests and the existing `AIProvider` interface; qualified model policy, workload OAuth transport, reviewed real-data evidence and native real-planner dependency mapping are still missing. No architecture or runtime activation is implemented by this documentation checkpoint. [Source audit, costs and exact gates](docs/task52-real-provider-critical-path.md).
+
 ## Task 52 — private staging purchase boundary
 
 [Current conditional packet](docs/task52-staging-purchase-decision-v1.md) reuses the six existing Cloud Run roles and source-pinned SQL/Redis ports. It proposes direct verified-TLS Supabase operational and separately administered witness projects, plus paid Redis Cloud Essentials with named publisher/reader users and noeviction. No runtime topology/source/lock/startup change or hosted resource exists from this checkpoint. Account region/capacity, restricted-public Redis network exposure, separate restore ownership, final image security and pricing enrollment still block deployment.

@@ -1,0 +1,58 @@
+# Task 52 — real-provider private deployment critical path
+
+Owner decision, November 15, 2026; audited baseline `f7a4884a624ce955ee54d4f574572f92c2ae9430`. The next product milestone uses a qualified real cloud LLM, Google Places and Google Routes in the existing private application. Synthetic responses remain offline test fixtures. The [earlier purchase packet](task52-staging-purchase-decision-v1.md) remains an infrastructure estimate and historical security inventory, not approval to deploy a synthetic product. Nothing is activated by this report.
+
+## What is already real
+
+Read-only Google management checks today confirmed project `where-to-512422` ACTIVE, billing linked, Places and Routes APIs enabled. Run, Secret Manager, Artifact Registry, Compute and Redis APIs are not enabled. No API was enabled, billing changed or Maps data requested. Current quotas, credits and account restrictions remain unverified. Last recorded quotas are 200 Text Searches/day, 40 Details/day, 2,000 matrix elements/day; minute limits 10 searches, 10 Details and 150 matrix elements. Those October records are not fresh account evidence or new spending permission.
+
+`backend/places_transport.py` implements Places Text Search; `backend/routes_transport.py` implements Compute Route Matrix, walking Essentials and driving TRAFFIC_AWARE Pro. Existing controlled local live records include successful Places and matrix responses, alongside failures; advanced combinations are not comprehensively live-qualified. There is no implemented full Compute Routes/polyline transport to claim. Existing itinerary travel times can use the matrix and existing Maps links.
+
+Authentication currently uses restricted local impersonated ADC for `whereto-local-maps@where-to-512422.iam.gserviceaccount.com`, not a Maps API key. Do not export the owner's ADC/refresh credentials. Hosted dispatcher must obtain OAuth access tokens through its own approved workload identity, with exact project/service-use permission. Local opt-ins and production refusal remain intact.
+
+No cloud LLM is qualified. Normal `backend/ai/__init__.py` still selects local Ollama/Qwen. The replacement OpenAI evaluation key is securely stored separately for project `proj_E4EfEvC5uQYN4nqFaYZoo3I4`; no secret was read or copied for this audit. Restricted Responses Read does not yet establish permission to count or generate. The owner-reported $5 project limit is not execution authorization.
+
+## Shortest sequence, with parallel work
+
+| Gate | Smallest action and responsible decision | What it unlocks |
+|---|---|---|
+| OpenAI readiness | Owner decides whether to resume the deferred written clarification of input-count cost/permission, or commission review of a different exact bounded counting method. Current count cost remains unbounded by documented evidence; do not repeat the investigation or send a speculative request. Then explicitly approve the exact readiness request and its bounded exposure. | Account/model/price/count evidence, not inference. |
+| First diagnostic | Activate only after owner plus required independent governance/security disposition of the proposed diagnostic-purpose amendment, real append-writer enrollment/post-append verification, and explicit one-operation authorization. Preserve first slot `extension-repeated/r2`, GPT-6 Luna, frozen bytes, single send and conditional $0.0025 maximum. | One technical observation; no semantic certification, retry or slot two. |
+| Model qualification | Reuse the finite qualification plan and deferred review packet; freeze the independent held-out sources, adjudicate gold and response semantics, approve a clean bounded study. Existing proposed 83 sources × 3 = 249 operations requires separate scope/cost approval; five diagnostic slots alone cannot qualify a model. | A reviewed model/prompt/schema/token-policy choice with accuracy, latency and reliability evidence. |
+| Security and purchasing, parallel | Independent disposition/remediation of retained image findings; obtain actual Redis quote, confirm operational Supabase plan/region/connections/backups, name independent witness custodian and tester/IAM owners. | Exact infrastructure purchase decision, not implicit approval of provider use. |
+| Real integration, after profiles are reviewed | Implement the narrow seams below using fake transports first, then approve exact real provider limits, credentials and one cloud acceptance run. | Functional private cloud workflow with no synthetic substitution. |
+
+Human semantic review remains deferred, not waived or completed. The known raw-model failures, legacy normalizer loss and restricted journey-06 diagnostic exception remain distinct. Do not promote V5.1 to production merely because its guarded offline adapter passed.
+
+## Minimum code work within the existing six roles
+
+Keep frontend, backend, native factory/issuer, counter, dispatcher and recovery. No additional service is required by this audit.
+
+1. Implement the selected cloud `AIProvider.interpret` adapter returning the existing `Interpretation`, with the reviewed prompt/schema and current source validation. Replace fictional byte counting with an approved exact provider-specific conservative cost policy. The frozen diagnostic clock/payload remains historical; application clock/configuration needs its own reviewed version.
+2. Replace `private_runtime.simulation.respond` only at the protected dispatcher boundary. Reuse `backend/action_dispatch.py` canonical Search/Matrix requests, response normalization and existing real planner. Google Search and Matrix already enter this seam before local transport. Preserve source/session/fence, encrypted evidence, admission, grant, reservation, INTENT, single-use dispatch and independent epoch checks. No automatic resend/refund.
+3. Review and admit a real-data evidence schema: `experiments/shared_state/evidence_models.py` currently permits only synthetic provenance. Never label real data synthetic. Field-level retention, permitted storage, expiry and attribution must comply with [Places](https://developers.google.com/maps/documentation/places/web-service/policies) and [Routes policies](https://developers.google.com/maps/documentation/routes/policies). Encryption does not grant caching rights. Publish the required Terms/Privacy documents and verify credits in the actual cards.
+4. Map real ordinary planner dependencies and confirmed-origin controls through existing native factories. Keep unsupported advanced/optional/flexible/return workflows blocked rather than flattening them. Details has a local guard before its dispatch seam; provider Details, pagination, origin discovery and saved workflows remain separately closed. Saved schema/RLS is unchanged.
+
+## Revised cost and approvals
+
+The unchanged six-role infrastructure estimate is **$75.4755 + R/month low-use**, **$97.579 + R planning**, before tax, where R is the unverified regional Redis quote. At illustrative R=$5.11 these are $80.59/$102.69. Operational Supabase capacity and incremental versus already-paid cost require confirmation. Retained zero-user resources cost about $64.18 + R; subscriptions require cancellation. Proposed Redis: paid Essentials RAM-only 250MB GCP us-east4, TLS/ACL/noeviction and restricted NAT /32; witness: separately administered Supabase Pro/Micro organization, direct TLS IPv4, us-east-1. Neither is approved/purchased.
+
+Current public gross Maps rates: Pro Text Search $0.032/request, driving Pro matrix $0.010/element, walking Essentials $0.005/element. Enterprise masks change charges; leave them and Details closed for this example. [Official pricing](https://developers.google.com/maps/billing-and-pricing/pricing). Ignore free tiers/credits conservatively.
+
+Illustration only: 100 outings, each four Pro searches + 24 driving matrix elements + one conditionally bounded $0.0025 inference = **$37.05 variable**, or **$117.64 total** with illustrative low-use infrastructure. At existing technical ceilings of 10 searches/300 Pro elements, the same assumption is **$3.3225/outing**, **$332.25/100 outings**, or **$434.94** with illustrative planning infrastructure. These are arithmetic scenarios, not authorized grants or a verified LLM quote. Extra inference, counting, Enterprise fields, tax, fees and qualification are excluded. Real counts/prices may invalidate the inference assumption. Existing session/root/minute/concurrency caps still apply; an outing allowance cannot bypass them.
+
+Before provisioning, approve the exact quoted subscriptions/resource maximums, migration boundaries, independent recovery ownership and final disposed image digests. Separately approve provider grant identity, aggregate/day/outing limits, billing timezone/root lifecycle, quotas and the finite real test. Infrastructure billing is outside SQL provider caps. Prior $200/$50/$5/$3.50 proposals remain unapproved.
+
+Security remains blocking: latest recorded Python images each 3 critical/86 high, frontend 2 critical/53 high. The newer Node candidate removed no findings. No exception exists; the prior synthetic-only exception proposal cannot cover real credentials/data. Independent review must address the actual real-provider exposure or require compatible remediation. Historical SQL/assertion uncertainties remain disclosed in the existing reports.
+
+## First genuine acceptance run
+
+After the gates above, use an allowlisted private cloud URL: submit an ordinary coffee-then-museum request with explicit destination, future date, start time, confirmed origin, mode and dwell durations. Verify real model extraction and source order, real Place IDs/attributions, real matrix travel times, feasible existing planner cards and View Plan. A separate missing-date variant must clarify without a second inference. Unknown hours/prices remain unknown; fewer than three feasible cards is acceptable. Unsupported complex requests must refuse.
+
+Verify owner isolation, expiry/revision, explicit discard before meaning changes, refresh/end without automatic provider work, worker replacement and uncertain-send refusal. Record actual charged units against the approved global grant. Demonstrate all services and recovery work with the owner's Mac switched off. This proves a bounded real workflow, not public-launch readiness.
+
+## This checkpoint's verification and stopping point
+
+81 focused tests passed: `backend.test_places`, `backend.test_routes`, `backend.test_provider_budget`, `backend.test_real_planning` (1.204s; controlled transports, no live Maps calls). Original read-only integrity check matches ten attempts, all 324 files, accounting and persistent halt. No inference/count/account OpenAI access, grant, provider dispatch, provisioning or runtime change. Configured-secret scans found zero current/historical matches (2 general sensitive values across 3,774 current files/assets and 4,067 historical objects; 3 evaluation values checked separately). Local links, four financial calculations, Git whitespace and 20-chapter count passed. No fresh image scan, browser, full backend/frontend suite or cloud acceptance was run; previous findings are carried, not rescanned. Handbook chapters 11, 17 and 18 reviewed; unchanged implementation requires no teaching-example edits; all 20 chapters preserved.
+
+**Next actual authorization boundary:** decide how to resolve the deferred OpenAI count-cost/permission blocker and commission the exact independent real-provider security/purpose review. Infrastructure quote/custodian confirmation can proceed in parallel; no purchase, financial reservation or provider send follows automatically.
