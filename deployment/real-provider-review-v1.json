@@ -1,0 +1,59 @@
+{
+  "applicationModel": {
+    "applicationTemplateSHA256": null,
+    "candidate": "gpt-6-luna",
+    "counterVersion": null,
+    "extrasAndRoundingReview": null,
+    "inputMaximum": null,
+    "outputMaximum": null,
+    "priceEvidenceSHA256": null,
+    "qualifiedRevision": null,
+    "rates": null
+  },
+  "billingTimezone": null,
+  "budgetRootLifecycle": null,
+  "dispatchAuthorized": false,
+  "enabled": false,
+  "google": {
+    "accountPriceEvidenceSHA256": null,
+    "accountPriceExpiry": null,
+    "publicCheckedDate": "2026-11-16",
+    "publicPriceURL": "https://developers.google.com/maps/billing-and-pricing/pricing",
+    "referenceMicroUsdPerUnit": {
+      "matrix_element": 5000,
+      "matrix_pro_element": 10000,
+      "search_pro": 32000
+    }
+  },
+  "grant": null,
+  "identity": "52-real-provider-enrollment-review-v1",
+  "purpose": "Offline review data only; no grant, counter attestation, SQL enrollment or activation",
+  "requiredApprovals": {
+    "finalImageSecurity": null,
+    "financialPolicy": null,
+    "googleRetention": null,
+    "infrastructurePurchase": null,
+    "modelQualification": null,
+    "transportAndCredentials": null
+  },
+  "runtimeRefusal": "Existing SQL permits fictional providers/byte attestations only. This file cannot change that. Environment variables and review calculations are not authority.",
+  "sourcePins": {
+    "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
+    "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
+    "deployment/private-network-v1.json": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
+    "deployment/private-role-cohort-v1.json": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+    "docs/task52-real-provider-retention-v1.json": "08dae7518068be75a2571e5feb97dcbeb938c7135329da2e56de394d44f7d64a",
+    "docs/task52-staging/hosted-enrollment-v1.json": "fa4c1bb262aeadae4acff2b1cddac5a162e62af457e3c59a72120b85c498a74b",
+    "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
+    "experiments/shared_state/bridge.sql": "6af8e10d172fc188cf76f30c83479da9a3fcae98e3191dedbd3965453b81ca3b",
+    "experiments/shared_state/evidence.sql": "b1fe0d4a98acf078a6080283ce37dfc0dc2b9cfe7b143b8d85b533462b2ae7f2",
+    "experiments/shared_state/financial_routines.sql": "69179211e0b4971b329f77bb8ee639d6ce0f339b53eeb3f6da436ec73fe2fe8c",
+    "experiments/shared_state/financial_schema.sql": "eee3872280602077f4a01d7e9b0172feb81a2330969891c60a9e0b2177937495",
+    "experiments/shared_state/grant_rules.sql": "f069b48d8812cfcc4f89518f6a7322f816931cb69614659f32874612be41b03f",
+    "experiments/shared_state/grant_witness.sql": "fab3095c6cc3d3a5558353b701559b4132cb7271379b0a47d68b1f1fe0a4a711",
+    "experiments/shared_state/native_sessions.sql": "d1d70554b94e772fbc937bd0a9f24c3eb6b909e78f1cf01fb6c31a651392531a",
+    "experiments/shared_state/native_witness.sql": "573cf9b2bf30c653562b2a752e12c2fa6f2515866e7a68cd9fcef065c40b2fcd",
+    "experiments/shared_state/routines.sql": "47a85e04311ec2efb483ebd15f1ecd2798b14a3d295db9006b164d175a7fd758",
+    "experiments/shared_state/schema.sql": "464e4430f8fac8ba9cccc7d32607c7775bf25d594b2936d565ec4561a97d3aae"
+  }
+}

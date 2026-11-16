@@ -1,3 +1,7 @@
+## Task 52 — non-billable real enrollment preparation complete; activation blocked
+
+[Small activation packet](docs/task52-real-provider-activation-review.md) and disabled review checker replace no runtime authority. Required external decisions: qualified model/count/prices, scoped credentials/transport, Google retention/credits, final-image security, actual Redis quote, operational capacity, independent witness custodian and exact owner cost/IAM/tester approval. Existing architecture retained; no cloud/synthetic product deployment or Task53.
+
 ## Task 52 — bounded inactive provider integration verified; staging still blocked
 
 [Completed integration and preserved failures](docs/task52-real-provider-integration.md); [exact cohorts](docs/task52-real-provider-integration-verification.json). All22 interrupted financial cases and snapshot/crash drills completed.30 financial/112 SQL-evidence/17 native/20 hosted-identity/12 isolated-service/3 new response cases passed; focused backend186 passed/9 skips. Frontend322 passed/1 unchanged expired-date fixture failure; first hosted restart attempt1 refusal remains unattributed despite a passing diagnostic run; full local npm-tree optional WASM metadata check fails while production dependencies pass. No full-backend/browser/hosted claim. New timeout traced to57014 under throttled original fixture; older calendar cause remains unknown. Existing native fixture profile passes without weakened checks. Real provider accounting/qualification/retention, security disposition and paid enrollment remain closed; no Task53.

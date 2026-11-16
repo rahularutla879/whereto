@@ -1,0 +1,123 @@
+{
+  "actualRealSQLCounterProfileImplemented": false,
+  "authenticatedAccountCalls": 0,
+  "baseline": "0be42bae2aa3839f8f012f6d59d23dbe7643f8c4",
+  "cloudProvisioning": false,
+  "enabled": false,
+  "firstOutingProposal": {
+    "aggregateDayOuting": "398000 + independently verified L",
+    "approved": false,
+    "concurrency": 1,
+    "countingAndQualificationSeparate": true,
+    "drivingMatrixElements": 27,
+    "expiryHoursProposal": 24,
+    "infrastructureSeparate": true,
+    "llmMaximumMicroUsd": null,
+    "llmRequests": 1,
+    "mapsMaximumMicroUsd": 398000,
+    "outings": 1,
+    "retries": 0,
+    "searchProRequests": 4,
+    "timezoneProposal": "UTC"
+  },
+  "freshness": "Proposed same UTC day/max24h review evidence; not runtime authorization",
+  "handbook": {
+    "preservedChapters": 20,
+    "reviewed": [
+      11,
+      14,
+      17,
+      18
+    ],
+    "updated": [
+      14
+    ]
+  },
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "halt": true,
+    "logSHA256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "privateFiles": 324,
+    "providers": {
+      "Anthropic": 1,
+      "Google": 2,
+      "OpenAI": 7
+    },
+    "remainingNanodollars": 11952633375,
+    "verifiedReadOnly": true
+  },
+  "identity": "52-real-provider-activation-preparation-v1",
+  "moneyUnit": "micro-USD; historical nanodollar domain separate",
+  "nextBoundary": "Independent model/count/rate/transport/retention/security review and nonsecret account capacity/quote/custodian decisions. No purchase, migration, grant or send.",
+  "realGrant": null,
+  "realProviderCalls": 0,
+  "reviewNotAuthority": true,
+  "secretScan": {
+    "configuredValues": 2,
+    "currentFilesChecked": 3789,
+    "currentMatches": 0,
+    "historicalObjectsChecked": 4101,
+    "historyMatches": 0,
+    "logSHA256": "aaade5938a19727413bcc9d6ee0a0f14242ac47c8ad045378a6c197470b8916f"
+  },
+  "security": {
+    "existingImages": {
+      "backend": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+      "counter": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+      "dispatcher": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+      "factory": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+      "frontend": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+      "recovery": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445"
+    },
+    "frontend": {
+      "critical": 2,
+      "high": 53
+    },
+    "independentDisposition": false,
+    "inventorySHA256": "cdc090228d20c06bcd072e2d503f9aa2e1bc908ba2735a7c40231ea2dba0a2eb",
+    "newScan": false,
+    "notFinalRealProviderImages": true,
+    "pythonEach": {
+      "critical": 3,
+      "high": 86
+    }
+  },
+  "sources": {
+    "backend/provider_enrollment_review.py": "a6cd2d7bc99f28988cd7efce85a279967fc9183ed3661e5063c6270b42b1e784",
+    "backend/test_provider_enrollment_review.py": "61d2ae3e94f27cc09792a8afe72e2b5bc989d03aa93d90d377960d84ea3df310",
+    "deployment/real-provider-review-v1.json": "22089aa23fed57d20274f5fe1b5c8b5223b4f67d5edb0224ddf4ef5df896ab2f"
+  },
+  "tests": {
+    "focusedBackendProviderFinancialReviewAndConfiguration": {
+      "errors": 0,
+      "failed": 0,
+      "logSHA256": "1fd51368b45ddec63f090992912b72d49c14af1f8fdf84ddfe8c78719cffad7c",
+      "newReviewCases": 11,
+      "passed": 157,
+      "seconds": 5.082,
+      "skipped": 0
+    },
+    "notRerun": [
+      "unchanged SQL/Redis/witness container cohorts (prior0be42ba evidence retained, source pins unchanged)",
+      "frontend/TypeScript/ESLint/build (no frontend or runtime dependency change)",
+      "images/container smoke/vulnerability audit (no image projection or patched candidate)",
+      "full backend and frozen historical simulations",
+      "any real provider/account/count endpoint"
+    ],
+    "pipCheck": "passed; no broken requirements",
+    "priorDevelopmentRuns": [
+      {
+        "failed": 0,
+        "passed": 9,
+        "scope": "initial new checker cases"
+      },
+      {
+        "failed": 0,
+        "passed": 156,
+        "scope": "prior draft before UTC rollover regression"
+      }
+    ],
+    "syntaxLinksAndTwentyChapters": "passed"
+  }
+}

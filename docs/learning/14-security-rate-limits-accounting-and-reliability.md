@@ -195,3 +195,10 @@ The [Task52 purchase review](../task52-staging-purchase-decision-v1.md) rescans 
 ## Response parsing does not authorize spending
 
 The inactive [response adapter](../../backend/provider_responses.py) sits below `GrantService.send`, which commits protected delivery authority before the callback. A matching request digest still requires owned source, admission, revision/fence, Redis evidence, grant and independent epoch. `real_inference_accounting` refuses absent reviewed provider-specific count/rate/grant evidence. The existing fictional byte-counter tests must never be relabeled OpenAI accounting; real token rates remain unenrolled. Interrupted response tests retain charges and quarantine rather than refunding/retrying.
+
+
+## Reviewing a real-provider enrollment without granting money
+
+`backend.provider_enrollment_review.load_draft()` checks the fixed disabled draft and pinned source files. `review_bound(policy, wire, now=..., count=...)` checks proposed evidence expiry, canonical request/model/template/count binding and conservative integer arithmetic. It never calls a provider or authenticates the supplied evidence. `ReviewBound` is review data, not a capability; the protected SQL still refuses real profiles. A missing qualification, rate/count attestation, grant or terms/security approval cannot be repaired by a Boolean flag.
+
+Application SQL amounts use micro-USD (1000000 equals$1), separately from the halted experiment's nanodollars. The review calculator rounds each input/output category upward before summing. It never refunds reported lower usage or treats byte length as real tokens. The [activation handoff](../task52-real-provider-activation-review.md) explains the exact missing provider-specific SQL/counter enrollment and external approvals; normal startup is unchanged.

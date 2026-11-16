@@ -1,3 +1,7 @@
+## Task 52 — offline enrollment checker, no new runtime layer
+
+`backend.provider_enrollment_review` reuses the canonical Google codec and checks a pinned disabled draft for external review. It has no I/O transport, credential discovery, SQL mutation, grant or capability issuance and is not imported by startup/images. All six responsibilities, protected SQL, Redis and recovery boundaries remain unchanged; actual real-profile migration/enrollment stays blocked. [Exact handoff](docs/task52-real-provider-activation-review.md).
+
 ## Task 52 — inactive provider codecs at existing service seams
 
 `backend.provider_responses.GoogleResponseAdapter.dispatch` delegates to `private_runtime.owned_dispatch.dispatch`; its callback decodes canonical Pro Search/Matrix responses for existing parsers/planner. `backend.ai.openai_candidate.OpenAICandidateProvider` uses the exact frozen V5.1 template and existing Interpretation validators with an injected exchange. Normal create_provider, six role images/startup, SQL policies and real evidence admission are unchanged. No exchange/real pricing/credential is enrolled. [Verified boundaries](docs/task52-real-provider-integration.md).
