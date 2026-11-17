@@ -1,0 +1,160 @@
+{
+  "identity": "52-trixie-compatibility-v1",
+  "promotionApproved": false,
+  "realProviderTransport": false,
+  "candidateForReview": {
+    "backend": "sha256:37f670a2a4e75260033dfeb86615c34a90b422ea3d0c7fa408852d3dc5334252",
+    "factory": "sha256:1bb4343140ac88e00c9a798b1766a63e75e1b7dde8e5ca159fcae6746ebdd588",
+    "counter": "sha256:e34061d8247d51d303a06a6cdfcca7a792152877c147bf1cbbd5a9cdf91b2b86",
+    "dispatcher": "sha256:5d431643ea4df3ec163c0565fc2453b3472b83a6b57d544689e857d53a56e77f",
+    "recovery": "sha256:5a8da13cd12af12095d3b4fc8cf6aa051ee6157adb43b0377b3b1a4ff9b8ff38",
+    "frontend": "sha256:70e45bfde6826e137c9fc99599dd6aa54bedcb0324bc40cdb9b74ada4e715570"
+  },
+  "controls": {
+    "frontend-trixie": "sha256:43be74f68e6b89429c6f39dce65d5c6c78a581e6f90afe0f29f4d6385740e8be",
+    "frontend-bookworm-next": "sha256:124b456d07d2cdc15b302a7ed5d3e11338985c43aa737d0b363b470e44f3fc74"
+  },
+  "testOnlyFrontend": {
+    "image": "sha256:2a1ca15f8678d5302a0022ae633196747ccd97fad9930acb6b643ebbb36a06e2",
+    "PIN": "ae80239e19efc79a3c51115d1b5df3996ce6bbf2c2e4783de760ea7e23bfce40",
+    "fixture": true,
+    "eligibleForPromotion": false
+  },
+  "runtimeChecks": {
+    "backend": {
+      "image": "sha256:37f670a2a4e75260033dfeb86615c34a90b422ea3d0c7fa408852d3dc5334252",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "factory": {
+      "image": "sha256:1bb4343140ac88e00c9a798b1766a63e75e1b7dde8e5ca159fcae6746ebdd588",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "counter": {
+      "image": "sha256:e34061d8247d51d303a06a6cdfcca7a792152877c147bf1cbbd5a9cdf91b2b86",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "dispatcher": {
+      "image": "sha256:5d431643ea4df3ec163c0565fc2453b3472b83a6b57d544689e857d53a56e77f",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "recovery": {
+      "image": "sha256:5a8da13cd12af12095d3b4fc8cf6aa051ee6157adb43b0377b3b1a4ff9b8ff38",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "frontend-trixie": {
+      "image": "sha256:43be74f68e6b89429c6f39dce65d5c6c78a581e6f90afe0f29f4d6385740e8be",
+      "architecture": "amd64",
+      "user": "node",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "node": "v24.22.3",
+        "next": "16.4.2",
+        "fixture": false,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "frontend-bookworm-next": {
+      "image": "sha256:124b456d07d2cdc15b302a7ed5d3e11338985c43aa737d0b363b470e44f3fc74",
+      "architecture": "amd64",
+      "user": "node",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "node": "v24.22.2",
+        "next": "16.4.5",
+        "fixture": false,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 12 (bookworm)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"12\"\nVERSION=\"12 (bookworm)\"\nVERSION_CODENAME=bookworm\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "frontend-trixie-next": {
+      "image": "sha256:70e45bfde6826e137c9fc99599dd6aa54bedcb0324bc40cdb9b74ada4e715570",
+      "architecture": "amd64",
+      "user": "node",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "node": "v24.22.3",
+        "next": "16.4.5",
+        "fixture": false,
+        "cohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    }
+  }
+}

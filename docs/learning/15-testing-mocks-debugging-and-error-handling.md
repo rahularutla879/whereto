@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Separate packaging compatibility from security acceptance
+
+[Candidate overlay tests](../../deployment/test_trixie_candidate.py) prove unchanged application output bytes, a distinct candidate cohort and rejection of unrelated lock/promotion changes. Existing 175 backend/provider cases also pass using the Trixie venv, with immutable test source mounted read-only and no network. Test-process setup is distinct from production startup; all eight normal candidate/control images refuse missing enrollment. Existing TLS/SQL/Redis and immutable multi-process browser/restart fixtures verify the actual new role images without real providers. Record the unchanged expired-date frontend failure and each setup refusal rather than modifying frozen tests or weakening guards. [Exact scope/unrun checks](../task52-trixie-compatibility.md).
+
+
 ## Verify retention without legal or live-provider claims
 
 [Unit tests](../../backend/test_google_retention.py) reject extra content fields and IDs masquerading as checkpoints. [Disposable integration cases](../../experiments/shared_state/test_google_reference_cache.py) exercise real encrypted Redis plus restricted PostgreSQL for TTL/no renewal, key corruption, revision/revocation, cleanup and unchanged gross charges. Authored transport fixtures exercise real planner/React code, not a substitute planner. Desktop/mobile browser checks verified cards/View Plan/logo; they did not verify Cloud Run IAM or real Maps quality. Record the existing expired-date frontend failure rather than repinning it.

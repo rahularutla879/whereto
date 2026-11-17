@@ -1,0 +1,35 @@
+{
+  "name": "where-to",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "node scripts/dev-server.mjs frontend",
+    "dev:backend": "node scripts/dev-server.mjs backend",
+    "build": "next build --webpack",
+    "start": "next start",
+    "lint": "eslint .",
+    "typecheck": "tsc --noEmit",
+    "test": "tsx --test lib/*.test.ts app/api/health/*.test.ts app/api/plans/generate/*.test.ts app/api/interpret/*.test.ts",
+    "test:backend": "backend/.venv/bin/python -m unittest discover -s backend -p 'test_*.py' -v"
+  },
+  "dependencies": {
+    "jose": "6.2.17",
+    "lucide-react": "^0.468.0",
+    "next": "16.4.5",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.0.0",
+    "@tailwindcss/postcss": "^4.0.0",
+    "@types/node": "^22.0.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "eslint": "^9.0.0",
+    "eslint-plugin-react-hooks": "^7.0.0",
+    "tailwindcss": "^4.0.0",
+    "tsx": "^4.0.0",
+    "typescript": "^5.0.0",
+    "typescript-eslint": "^8.0.0"
+  }
+}

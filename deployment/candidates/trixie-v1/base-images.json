@@ -1,0 +1,18 @@
+{
+  "purpose": "isolated Debian13 compatibility candidate, not promotion or activation",
+  "platform": "linux/amd64",
+  "promotionApproved": false,
+  "realProviderTransport": false,
+  "images": {
+    "python": {
+      "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-trixie",
+      "reference": "python:3.12-slim-trixie@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b",
+      "linuxAmd64Digest": "sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177"
+    },
+    "node": {
+      "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-trixie-slim",
+      "reference": "node:24-trixie-slim@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+      "linuxAmd64Digest": "sha256:60587baa7c895cf438d44f691e4ac8248b36c13b26be77332f874bebb3a64201"
+    }
+  }
+}

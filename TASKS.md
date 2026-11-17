@@ -1,3 +1,7 @@
+## Task 52 — isolated Debian 13 / Next 16.4.5 compatibility (2026-11-17)
+
+Bounded local candidate passes build/runtime/authenticated application/browser/recovery checks; no promotion. Same-DB results: Python 3/86→0/61 critical/high; frontend 2/53→0/60. New util-linux high findings and vendored-library mapping remain unresolved, not accepted. Candidate artifacts are isolated; original source/runtime selections and financial SQL remain unchanged. [Report](docs/task52-trixie-compatibility.md), [exact checks](docs/task52-trixie-compatibility-verification.json). Task52 remains in progress; no real providers/cloud/Task53.
+
 ## Task 52 — bounded identifier retention / attribution checkpoint (2026-11-16)
 
 Implemented and fixture-tested factory-only encrypted Place IDs with fixed expiry/exact deletion and official card attribution. Full real-provider recovery remains blocked, not silently projected. Six images rebuilt; same-DB scans retain all 89 C/H package/advisory rows (32 IDs), with no compatible Bookworm fix or risk acceptance. Exact tests and remaining gates: [report](docs/task52-security-and-google-data.md), [record](docs/task52-security-and-google-data-verification.json). Task52 stays in progress; no real provider/cloud activation or Task53.

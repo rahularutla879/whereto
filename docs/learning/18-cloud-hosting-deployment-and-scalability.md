@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Reproducible OS candidate without deployment selection
+
+`deployment.prepare_trixie_candidate` builds on the existing projectors and emits isolated role/Next contexts with pinned official Debian 13 Python 3.12 and Node 24 references. [Candidate manifests](../../deployment/candidates/trixie-v1/README.md) preserve the original Bookworm/default inputs and mark promotion false. Source code is byte-identical; the base-bound cohort changes intentionally, so real enrollment/old-session compatibility must be reviewed separately without resetting financial history. Local ABI/TLS/browser success and zero scanned critical findings do not establish Cloud Run IAM/kernel enforcement, backup recovery, qualified LLM or security acceptance. No synthetic provider was deployed as a product and no cloud resource was created.
+
+
 ## A rebuilt image is not an approved deployment
 
 The [current bounded checkpoint](../task52-security-and-google-data.md) builds all six amd64 roles from unchanged base/dependency locks and changed source cohort, checks non-root/read-only runtime and refusal without enrollment, then scans baseline/candidate with the same Grype database. No C/H advisories disappeared. Current Python Bookworm base is unchanged; the available Node patch was already tried without security improvement. Current maintained Distroless uses Debian 13; silently adopting deprecated Debian 12 or switching OS major would bypass compatibility review. A separate approved Debian 13 candidate or supported vendor backport is concrete follow-up, not completed security remediation.

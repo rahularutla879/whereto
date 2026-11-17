@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Read an OS security comparison at several levels
+
+The [Trixie comparison](../task52-trixie-compatibility-verification.json) preserves binary package/version/CVE identities, advisory-level additions and current vendor status. Python candidates have 0 critical/61 high, frontend 0/60; original Python 3/86 and frontend 2/53 remain selected. Installed glibc/SQLite contain vendor fixes, whereas omitted distro Kerberos packages do not prove unchanged psycopg-bundled components are fixed. Three new util-linux IDs and a zlib/scanner conflict remain unresolved. Non-root/read-only/no-new-privileges/capability restrictions constrain prerequisites; they are not independent exceptions or a promise about hosted enforcement. No financial SQL/epoch/price/admission rule changed, and image rollback cannot restore spending authority.
+
+
 ## Narrow content rights and residual native-code risk
 
 The optional [ID-only cache](../../backend/google_retention.py) binds encrypted identifiers to current SQL source and independent epoch before/after I/O. Create-only Redis CAS and original absolute expiry prevent renewal; exact-key expiration never deletes financial history. Missing/corrupt/revoked data refuses and cannot trigger paid retries. It is not native session evidence, a refund or a financial grant.

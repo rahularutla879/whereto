@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Isolated Next security patch, not an active upgrade
+
+The [Trixie candidate](../task52-trixie-compatibility.md) tests Next 16.4.5 separately from the OS change. Candidate package files update only Next/env/matching SWC entries; normal package-lock remains 16.4.2. All unrelated metadata stays intact. Both Bookworm and Trixie patch controls build; the patched frontend regression has 324 passes and the same expired-date fixture failure. Actual private desktop/mobile tests use the separately tagged local fixture image; deployable candidate has no fixture module/signer. Do not confuse a test-only frontend or successful build with public/real-provider activation.
+
+
 ## Build the interface from components
 
 A **component** is a reusable interface function. React calls components to describe what should appear; the browser updates its **DOM**, Document Object Model, the tree of elements on the page. Where To? needs reusable components because ordinary, advanced and saved plans share card and detail presentation.
