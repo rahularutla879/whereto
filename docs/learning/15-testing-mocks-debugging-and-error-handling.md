@@ -2,6 +2,12 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Verify retention without legal or live-provider claims
+
+[Unit tests](../../backend/test_google_retention.py) reject extra content fields and IDs masquerading as checkpoints. [Disposable integration cases](../../experiments/shared_state/test_google_reference_cache.py) exercise real encrypted Redis plus restricted PostgreSQL for TTL/no renewal, key corruption, revision/revocation, cleanup and unchanged gross charges. Authored transport fixtures exercise real planner/React code, not a substitute planner. Desktop/mobile browser checks verified cards/View Plan/logo; they did not verify Cloud Run IAM or real Maps quality. Record the existing expired-date frontend failure rather than repinning it.
+
+For images, compare package+version+advisory using one fixed scanner DB across baseline/candidate, not just totals. Rebuilding unchanged dependencies is not remediation. Preserve earlier failed fixture/sandbox attempts separately from final runs; distinguish a source inspection from a browser test and a safe startup refusal from authenticated readiness. [Exact current scope](../task52-security-and-google-data.md).
+
 ## A test is a controlled claim
 
 A **test** runs code under declared conditions and compares actual behavior with expected behavior. A **unit test** targets a small piece; an **integration test** exercises connected pieces; an **end-to-end test** follows a larger user journey. A **mock** replaces a dependency; a **fixture** supplies known data. Developers use them to reproduce failures without relying on changing external services. Where To? particularly needs invented venue/routes/model responses so verification does not spend money or expose owner data.

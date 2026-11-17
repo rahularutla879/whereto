@@ -3,7 +3,7 @@ from pathlib import Path
 from hashlib import sha256
 import json,shutil,sys
 from deployment.prepare_network_context import prepare as base
-EXTRA=['deployment/frontend-private-launch.sh','deployment/Dockerfile.frontend-private','deployment/build-private-frontend.mjs','deployment/frontend-private-entry.mjs','deployment/private-role-cohort-v1.json','experiments/hosted_ports/frontend_fixture_identity.mjs']
+EXTRA=['data/google-attribution.json','deployment/frontend-private-launch.sh','deployment/Dockerfile.frontend-private','deployment/build-private-frontend.mjs','deployment/frontend-private-entry.mjs','deployment/private-role-cohort-v1.json','experiments/hosted_ports/frontend_fixture_identity.mjs']
 def prepare(source,target):
  source,target=Path(source).resolve(),Path(target).resolve();values=base(source,target)
  for name in EXTRA:

@@ -1,0 +1,3709 @@
+{
+  "version": "52-security-google-identifiers-v1",
+  "baselineCommit": "0f9ebcbaa4ee20bf5afb6901631221101658e073",
+  "date": "2026-11-16",
+  "productionActivation": false,
+  "realProviderCalls": 0,
+  "securityAccepted": false,
+  "remediatedCriticalHigh": 0,
+  "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+  "database": {
+    "schemaVersion": "v6.1.10",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+    "built": "2026-11-16T06:30:54Z",
+    "path": "/cache/6/vulnerability.db",
+    "valid": true
+  },
+  "images": {
+    "frontend": {
+      "baseline": {
+        "image": "sha256:e7caf6264b547e8096fd964da0f78d0dd1b7cc5c2d0cb15886a245aea64e0c85",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "5f7e2c5b6ef9f7d53643d1f6afeca7e2cc742a67ed1b77b987a8bd48c37b87c0",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 64,
+          "High": 53,
+          "Medium": 83,
+          "Critical": 2,
+          "Low": 18,
+          "Unknown": 1
+        }
+      },
+      "candidate": {
+        "image": "sha256:3ae6505690863a7165b7c02bd1da4c84d3ccd4857b10f66e86084e8a3d987fb1",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "b6655d2926329c44d3f3dccbfaa3c4b8d6734e601489c71d0ef875fe4f644366",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 64,
+          "High": 53,
+          "Medium": 83,
+          "Critical": 2,
+          "Low": 18,
+          "Unknown": 1
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 55
+    },
+    "backend": {
+      "baseline": {
+        "image": "sha256:9a7621ccaeed5909d3994724a653afa337fb29814c2f0e2ed7ac97851975c2dc",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "b7577d3d6b87afd9863f51eab5a5c81bd5e73fa742d667871da2e862450c2013",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "candidate": {
+        "image": "sha256:05901f2528574a03832f69bed9d1c058f39859d020f23d30d0ff03109c3eb6d9",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "6a2cdb8c418e8d4ac398b9e7412fd4be2a20a5f4ff0bf142ceaa278f1c5bf3a4",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 89
+    },
+    "factory": {
+      "baseline": {
+        "image": "sha256:223d65362a6404319a9eb31d390fb8db1cd87a1c2dda22cbbdbdfba606511550",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "d07c8019c2a51a20687247c9fdbd57960a0c9931385cfc23e9f40c9e3b42095c",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "candidate": {
+        "image": "sha256:b60d803cf9bd5886a523068cc3184ac7dda62f976d9730e62c90b7d2c256341d",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "a3eed49e8c61261efaf5fcd33341dfa8cbede700ee2b5380451f9f1ca35ff125",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 89
+    },
+    "counter": {
+      "baseline": {
+        "image": "sha256:8dfced5a6d8bce9ff130d9307666802aa9d14eac39f84dc602b31b2e4bf812b0",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "7c735cd6f2dadc39cdff0e73ceba71df98bb35c8b1cd42ee61565d85cacfc4fe",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 129,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "candidate": {
+        "image": "sha256:ecc67f9d3f849f75b66b9eaf3df4c879eb9953b906cd2f72df7c836b0dab6b4e",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "b68dbdd8a9abbc52413cad63cb9f0f8beefc6f26c58ad508bbc4b70f3ba75591",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 129,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 89
+    },
+    "dispatcher": {
+      "baseline": {
+        "image": "sha256:d9457775e69987c8a49489a69bceda9b162b0035e294a543da87477e03bf9bf3",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "7f38024df34700248542d2e86e61b85af45384c3bb52a4a6cbfca9928fb452dd",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "candidate": {
+        "image": "sha256:337b66ad7fb4649a68f55771ab89dd715a459583ab39a784c17c7b1ce61986d3",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "db8bd44a9cf591aeda67fa048eabc7fe0c509fb42dc5afac426d2a70d936d5b1",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 130,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 89
+    },
+    "recovery": {
+      "baseline": {
+        "image": "sha256:ff93e17eba27bd21aa5f5f69d08a04920b4088fc164324f6bf676e4ccf981445",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "5595054db18475d5c5b3336bce978d2b548c2677d89d1d14bd4a6126d2b7bd75",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 129,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "candidate": {
+        "image": "sha256:8a2f64522fb8201bd730e3453e6aa2145e42fa7e6e908fe3f046e110a2c05cf9",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "8a679b1f583cdae9881d1256e080ed71f1da2b8377dca65a0f8f80abee473f86",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-15T16:11:12Z_1794810654.tar.zst?checksum=sha256%3Add51add686f29657dd7d71af8dc61d33cbb3e99772e263d2949b7adec4ce4102",
+          "built": "2026-11-16T06:30:54Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "Negligible": 86,
+          "High": 86,
+          "Medium": 129,
+          "Critical": 3,
+          "Low": 20,
+          "Unknown": 35
+        }
+      },
+      "removed": [],
+      "introduced": [],
+      "retained": 89
+    }
+  },
+  "uniqueCriticalHighPackageVersionAdvisoryRows": 89,
+  "uniqueAdvisories": 32,
+  "findings": [
+    {
+      "package": "libtasn1-6",
+      "installedVersion": "4.19.0-2+deb12u1",
+      "advisory": "CVE-2025-13151",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-13151",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-76844",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-76844",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-82560",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5450",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5450",
+      "severity": "Critical",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5450",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "gzip",
+      "installedVersion": "1.12-1",
+      "advisory": "CVE-2026-41992",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-41992",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libtinfo6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-69720",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "ncurses-base",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-69720",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "ncurses-bin",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-69720",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "perl-base",
+      "installedVersion": "5.36.0-7+deb12u4",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-9538",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libpam-modules",
+      "installedVersion": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2025-6020",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libpam-modules-bin",
+      "installedVersion": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2025-6020",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libpam-runtime",
+      "installedVersion": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2025-6020",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libpam0g",
+      "installedVersion": "1.5.2-6+deb12u2",
+      "advisory": "CVE-2025-6020",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2025-6020",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "zlib1g",
+      "installedVersion": "1:1.2.13.dfsg-1",
+      "advisory": "CVE-2026-85091",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-85091",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-95619",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-95619",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-95619",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "gcc-12-base",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-102010",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgcc-s1",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-102010",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libstdc++6",
+      "installedVersion": "12.2.0-14+deb12u1",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-102010",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5928",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5928",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5928",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-19499",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-19499",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-84243",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-84243",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc-bin",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5435",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libc6",
+      "installedVersion": "2.36-9+deb12u14",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-5435",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-78410",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53615",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53615",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "bsdutils",
+      "installedVersion": "1:2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libblkid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libmount1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsmartcols1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libuuid1",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "mount",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "util-linux-extra",
+      "installedVersion": "2.38.1-5+deb12u3",
+      "advisory": "CVE-2026-53613",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-53613",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-54369",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libacl1",
+      "installedVersion": "2.3.1-3",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "roles": [
+        "frontend",
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-54370",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112314",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112314",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112314",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112314",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112314",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112321",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112321",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112321",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112321",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112321",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112322",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112322",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112322",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112322",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112322",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112320",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112320",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112320",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112320",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112320",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112323",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119079",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112323",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119079",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112323",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119079",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-112323",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-112323",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-119079",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119079",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libncursesw6",
+      "installedVersion": "6.4-4",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-69720",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2025-7458",
+      "severity": "Critical",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2025-7458",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libgssapi-krb5-2",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-107778",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libk5crypto3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-107778",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5-3",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-107778",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libkrb5support0",
+      "installedVersion": "1.20.1-2+deb12u5",
+      "advisory": "CVE-2026-107778",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-107778",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119379",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119374",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-11824",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "vendorReview": "CVE-2026-11824",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    },
+    {
+      "package": "libsqlite3-0",
+      "installedVersion": "3.40.1-2+deb12u2",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "runtime": true,
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "vendorReview": "CVE-2026-119373",
+      "status": "unresolved; private staging blocked; no exception accepted",
+      "remediationAttempt": "Signed Bookworm APT candidate/base metadata reviewed; no compatible fixed binary found. No arbitrary removal or major upgrade.",
+      "mitigations": "Non-root, read-only filesystem, dropped capabilities, no-new-privileges; not a vulnerability fix."
+    }
+  ],
+  "advisoryReviews": {
+    "CVE-2025-13151": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "pageSHA256": "2f30b3b88ee41c98838aefd3441f1d03668f59a62ced95a0e7f1e4b515f6b951",
+      "vendorReleaseRows": [
+        [
+          "libtasn1-6 (PTS)",
+          "bookworm, bookworm (security)",
+          "4.19.0-2+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "4.20.0-2+deb13u1",
+          "fixed"
+        ],
+        [
+          "libtasn1-6",
+          "source",
+          "trixie",
+          "4.20.0-2+deb13u1",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "libtasn1 octet expansion overflow",
+      "applicationUseAssessment": "Python pyasn1 is a different library. App does not directly call this C libtasn1 function; transitive native consumers not exhaustively audited.",
+      "untrustedInputPrerequisites": "Malformed ASN.1 passed to affected libtasn1 expansion function.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-76844": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "pageSHA256": "089f82b8c9fcca107156a0bb86e050cd4a73a3e44cb5aa6b2dff873ca041a8e2",
+      "vendorReleaseRows": [],
+      "mechanism": "Current vendor description: webpack-dev-middleware path traversal. Scanner package: zlib1g. Attribution mismatch unresolved.",
+      "applicationUseAssessment": "The preserved older assessment described a zlib gz_write path. That mechanism is not established for the current CVE description; it must not be treated as current reachability evidence.",
+      "untrustedInputPrerequisites": "Failed gzip stream write followed by affected subsequent gz* operation; native reachability uncertain.",
+      "uncertainty": "Need scanner/vendor correction or independent disposition. Match retained without suppression; no safe/fixed conclusion.",
+      "currentDiscrepancy": "Fresh Grype associates this ID with zlib1g, but its own description and current Debian page describe webpack-dev-middleware and NOT-FOR-US. No current Bookworm zlib row exists. This is an unresolved scanner/vendor identity conflict, not a remediated package."
+    },
+    "CVE-2026-82560": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "pageSHA256": "b9bff184cc25fd9ec8f5726c13708d1d49e86fba083d69ef89d30954a042d133",
+      "vendorReleaseRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Perl Pod::Text formatting exhaustion",
+      "applicationUseAssessment": "No Perl POD rendering in app; Pod/Text.pm not found in inspected standard Perl directories. Package-source matching may overstate installed feature.",
+      "untrustedInputPrerequisites": "Attacker POD supplied to affected Perl formatter; no app route found.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-5450": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "pageSHA256": "3466d5c3e9f5d0a2bf5a8d36f299721e8c5144eff5564f6aea8d68aa352ef4b1",
+      "vendorReleaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "fixed"
+        ],
+        [
+          "glibc",
+          "source",
+          "trixie",
+          "2.41-12+deb13u4",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "scanf allocated character conversion",
+      "applicationUseAssessment": "No application scanf/%mc call found. JSON/text reaches native runtimes, but the specific vulnerable conversion path is not established.",
+      "untrustedInputPrerequisites": "Caller must invoke affected scanf format/width; no arbitrary C-format interface exposed.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-41992": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "pageSHA256": "23c64845212bf6eafcc398c596b4cbeed977de4ce5acfbb0afa6bbae07016132",
+      "vendorReleaseRows": [
+        [
+          "gzip (PTS)",
+          "bookworm",
+          "1.12-1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "1.13-1+deb13u1",
+          "fixed"
+        ],
+        [
+          "gzip",
+          "source",
+          "trixie",
+          "1.13-1+deb13u1",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "GNU gzip mixed LZW/LZH decompression",
+      "applicationUseAssessment": "App has no gzip CLI invocation or archive-upload/decompression pipeline. HTTP decompression is a different zlib path.",
+      "untrustedInputPrerequisites": "Crafted files processed sequentially by gzip CLI mixed-format state.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2025-69720": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "pageSHA256": "3542be519daaef8f60a0fd662f4a6129a238f59ef9b86155869d49cfd2b3af78",
+      "vendorReleaseRows": [
+        [
+          "ncurses (PTS)",
+          "bookworm",
+          "6.4-4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "6.5+20250216-2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "infocmp terminfo analysis overflow",
+      "applicationUseAssessment": "infocmp exists but server is headless and app never invokes it; client text does not become TERM or CLI input.",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-9538": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "pageSHA256": "f9466371b6a5bd0094c5a53028d43144ca3115918fb37ca7ae0d48eb9dc350b1",
+      "vendorReleaseRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Perl Archive::Tar memory allocation",
+      "applicationUseAssessment": "No Perl/archive processing in app; Archive/Tar.pm not found in inspected standard Perl directories. Retain source-package finding; do not call it patched.",
+      "untrustedInputPrerequisites": "Crafted tar read by Perl Archive::Tar; absence check is limited to standard paths.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2025-6020": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "pageSHA256": "4772ce36a77c1ca0c948641d4d9f8a4d0bf1a9be136d02547ca5f8930322e51e",
+      "vendorReleaseRows": [
+        [
+          "pam (PTS)",
+          "bookworm",
+          "1.5.2-6+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "1.7.0-5",
+          "fixed"
+        ]
+      ],
+      "mechanism": "A flaw was found in linux-pam. The module pam_namespace may use access user-controlled paths without proper protection, allowing local users to elevate their privileges to root via multiple symlink attacks and race conditions.",
+      "applicationUseAssessment": "Application authentication uses IAP/OIDC and capability checks, not PAM sessions. pam_namespace call reachability through installed native utilities has not been exhaustively audited. Non-root/no capabilities restrict root-escalation prerequisites, but are not a fix.",
+      "untrustedInputPrerequisites": "Affected PAM namespace setup accessing attacker-controlled paths/symlinks/races, according to vendor. No application PAM entrypoint identified.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-85091": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "pageSHA256": "8befe16c18c63a7ba5e979b7d6b7f852b34b3083a329bba835cedcd15a6b7252",
+      "vendorReleaseRows": [
+        [
+          "zlib (PTS)",
+          "bookworm",
+          "1:1.2.13.dfsg-1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "1:1.3.dfsg+really1.3.1-1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "fixed"
+        ],
+        [
+          "zlib",
+          "source",
+          "trixie",
+          "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "",
+          "DSA-6613-1",
+          ""
+        ]
+      ],
+      "mechanism": "zlib nonblocking gzip write state",
+      "applicationUseAssessment": "Installed zlib1.2.13 is outside the description range1.3.1.2\u20131.3.2, but Debian marks it open. No own gzprintf/gzvprintf path; applicability remains unresolved.",
+      "untrustedInputPrerequisites": "Affected nonblocking gzwrite stall and later formatted write; retain mismatch for expert adjudication.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-95619": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "pageSHA256": "b461b164c216d2f344a365f577ddfd9349f2590c7218ce00f0fe4fbd99ee89f6",
+      "vendorReleaseRows": [
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "applicationUseAssessment": "Native runtimes use allocation libraries and parse untrusted input. HTTP bounds help limit sizes, but exact native reachability is unknown.",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-102010": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "pageSHA256": "7c738bd8ea9f772d8126b5a7be90b1202a8888b3f5821d942d567830cd468dda",
+      "vendorReleaseRows": [
+        [
+          "gcc-11 (PTS)",
+          "bookworm",
+          "11.3.0-12",
+          "vulnerable"
+        ],
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "applicationUseAssessment": "Native Node/C-extension dependencies can use C++ runtime. No own application call to this exact container operation; native call graph not proven safe.",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-5928": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "pageSHA256": "20b69d07d0fa45ddd7ab18a6aea921b1886226ef0618f631dac9a0481d78694a",
+      "vendorReleaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "fixed"
+        ],
+        [
+          "glibc",
+          "source",
+          "trixie",
+          "2.41-12+deb13u4",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "wide-character stream pushback",
+      "applicationUseAssessment": "No application ungetwc interface; JSON encoding is UTF-8. Native runtime paths have not been exhaustively audited.",
+      "untrustedInputPrerequisites": "Special overlapping single/multibyte encoding and wide-stream pushback; not proven reachable.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-19499": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "pageSHA256": "5ae203e2503db74b024563d3a6cbac974337438d5f3db69b93cbdd0ec38aecd7",
+      "vendorReleaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "monetary formatting buffer padding",
+      "applicationUseAssessment": "No application strfmon call found; frontend uses JavaScript formatting. Upstream description starts at glibc2.38 but installed2.36 is marked open by Debian: version applicability remains disputed.",
+      "untrustedInputPrerequisites": "Affected C monetary format/buffer path; cannot dismiss Debian open status by version range alone.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-84243": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "pageSHA256": "98865d37ee29c5c0734e80b8389d5a071afe6b2edd358bb63d1ea47cf7ac7b47",
+      "vendorReleaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "gettext catalog path/environment manipulation",
+      "applicationUseAssessment": "HTTP inputs cannot set process environment or install locale catalogs; no host mounts or SSH service in app.",
+      "untrustedInputPrerequisites": "Attacker-controlled LANGUAGE/locale plus writable malicious catalog; would require additional capability.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-5435": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "pageSHA256": "2361f3d31bc16c0ed30e5f79e4398e73155b117f7c2097c4208f9d756cdd0959",
+      "vendorReleaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "deprecated DNS record printing",
+      "applicationUseAssessment": "No application call to ns_printrr/ns_printrrf/fp_nquery. Ordinary DNS lookup does not establish use of these printers.",
+      "untrustedInputPrerequisites": "Affected TSIG record printer must be called; transitive native reachability unproven.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-78410": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "pageSHA256": "370b52136365d440004d915421bd2b2529393511c802bdc04f3e3a873241621b",
+      "vendorReleaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "restricted bind-mount source race",
+      "applicationUseAssessment": "No app mount/fstab operation; helpers remain but tested privilege/device/host-mount boundaries restrict escalation.",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-53615": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "pageSHA256": "c2d7d74d4d1cd7f56939745b493e57b286477cf35862d8f74bc84b26a1c34354",
+      "vendorReleaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "fixed"
+        ],
+        [
+          "util-linux",
+          "source",
+          "trixie",
+          "2.41.5-0+deb13u1",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "DOS partition metadata probing",
+      "applicationUseAssessment": "App does not probe disk images; no host devices or user disk-upload endpoint. libblkid package remains.",
+      "untrustedInputPrerequisites": "Crafted block/partition image passed to libblkid and a consumer acting on false metadata.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-53613": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "pageSHA256": "fb99059a6d0ea60bca86c49a817f4298a09bfeaa5893ae788221739307412320",
+      "vendorReleaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "fixed"
+        ],
+        [
+          "util-linux",
+          "source",
+          "trixie",
+          "2.41.5-0+deb13u1",
+          "",
+          "DSA-6442-1",
+          ""
+        ]
+      ],
+      "mechanism": "restricted mount target race",
+      "applicationUseAssessment": "App does not invoke mount or accept fstab/filesystem uploads. Setuid mount helpers remain in base; observed no-new-privileges, dropped capabilities, non-root and no host binds mitigate prerequisites.",
+      "untrustedInputPrerequisites": "Local helper execution, suitable fstab authorization and writable path; source bug remains unresolved.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-54369": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "pageSHA256": "4677cdb2b848eca7bc76f57dd54e5d01e309f438bba58d892550db432fbde5ca",
+      "vendorReleaseRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "pathname ACL symlink traversal",
+      "applicationUseAssessment": "App performs no ACL changes. Non-root/no-new-privileges/readonly-root limits privileged filesystem effects.",
+      "untrustedInputPrerequisites": "Privileged ACL caller traversing an attacker-controlled pathname; not an HTTP activity-list input.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-54370": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "pageSHA256": "36c932e9051decbe74a402bbe4df1e60f52a17c39cab2785b83901467b36758e",
+      "vendorReleaseRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "pathname ACL TOCTOU race",
+      "applicationUseAssessment": "No app ACL tooling call. Local path race requires additional execution/write/privilege capability.",
+      "untrustedInputPrerequisites": "Privileged getfacl/setfacl/chacl or library operation on attacker-controlled ancestor.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-112314": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "pageSHA256": "92e85c2b2dbeb1f63f321831846e9fef1e33a2116ba17ac90f71fddf05ce2ea2",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos GSS-RPC client reply-verifier leak",
+      "applicationUseAssessment": "App uses HTTP OAuth and PostgreSQL password/TLS, not a GSS-RPC client interface. Client-library linkage alone does not prove clnttcp_call is reached; native reachability remains unproven.",
+      "untrustedInputPrerequisites": "Malicious/mismatched RPC replies or authentication retries reaching affected GSS-RPC client.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-112321": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "pageSHA256": "d1be8a98949bae4639f156c5b71099d77cadf731aa618d998703513783dd19ad",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos admin RPC argument leak",
+      "applicationUseAssessment": "No kadmind/Kerberos RPC server is started; FastAPI JSON and PostgreSQL password/TLS are separate protocols.",
+      "untrustedInputPrerequisites": "Crafted AUTH_GSSAPI init reaching kadmind.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-112322": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "pageSHA256": "a2d63e888c206329cf519d346dee77cb3239fe3278cf6a254a5c9eb003a6c87f",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos admin client cleanup CPU",
+      "applicationUseAssessment": "No kadmind or Kerberos admin client list in app runtime. Libraries remain installed.",
+      "untrustedInputPrerequisites": "Many Kerberos admin RPC client entries and cleanup in kadmind.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-112320": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "pageSHA256": "464a18f2a88323c9c832d2ef35f1cded1c750686f23ef62c117df908abe9ca0e",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos admin transport authentication-context leak",
+      "applicationUseAssessment": "No kadmind/GSS-RPC server is started or exposed by the app. Retain the library source finding.",
+      "untrustedInputPrerequisites": "RPC authentication flavor switching on a Kerberos admin TCP connection.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-112323": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "pageSHA256": "8c70bb85b73422193f2dc717fbfb6e82cbfc300a58df98a05adbbfddc4ffec52",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos admin failed-auth memory",
+      "applicationUseAssessment": "No kadmind endpoint; do not expose inherited library functions through new services.",
+      "untrustedInputPrerequisites": "Repeated failed AUTH_GSSAPI init to Kerberos admin daemon.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-119079": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "pageSHA256": "d83f24be45252604d09ba1047acfe44bd83c96a19f75ccb154a5751f490eb79e",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos KDC sequence decoding CPU",
+      "applicationUseAssessment": "No KDC server started or ticket-input API. Outbound SQL client configuration is not a KDC.",
+      "untrustedInputPrerequisites": "Crafted Kerberos AS/TGS request to KDC sequence decoder.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2025-7458": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "pageSHA256": "b3ceee96b7c069f53e914d3e798cbcf55f5cb704c29c40bb97fd609612b64a26",
+      "vendorReleaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "fixed"
+        ]
+      ],
+      "mechanism": "SQLite ORDER BY allocation overflow",
+      "applicationUseAssessment": "SQLite3.40.1 is present; app runtime has no sqlite import or arbitrary SQL/database upload interface. Historical evaluation journal is excluded; in-memory feature probe only.",
+      "untrustedInputPrerequisites": "Attacker SQL with many ORDER BY expressions; absence of current route is not a library fix.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-107778": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "pageSHA256": "14f4ad8f3d9cdefd76c9ff1ca78ef11bbce526e59309b4d07553f84d4c8c48a2",
+      "vendorReleaseRows": [
+        [
+          "krb5 (PTS)",
+          "bookworm, bookworm (security)",
+          "1.20.1-2+deb12u5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "1.21.3-5+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "Kerberos GSS acceptor credential array",
+      "applicationUseAssessment": "No GSS acceptor service in app. Saved SQL uses restricted password/TLS; Kerberos libraries may be linked dependencies.",
+      "untrustedInputPrerequisites": "Kerberos client data reaching GSS acceptor; client-library linkage is not an acceptor endpoint.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-119379": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "pageSHA256": "d7171e070be82e7ea297bad3ab3d2ca5aee54a70b198c5a2bec2b762ac942679",
+      "vendorReleaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "SQLite session changeset overflow",
+      "applicationUseAssessment": "ENABLE_SESSION is present; no changeset-apply endpoint or API in application.",
+      "untrustedInputPrerequisites": "Crafted changeset passed to sqlite3changeset_apply; library remains vulnerable.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-119374": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "pageSHA256": "08ee3a28b1be9e9dfcbad161a79731b08cc08a6b54caef90098da46bfc574cdc",
+      "vendorReleaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "SQLite FTS5 secure-delete corruption",
+      "applicationUseAssessment": "FTS5 present; no app-owned SQLite file or user SQL/delete interface in runtime.",
+      "untrustedInputPrerequisites": "Crafted database footer and secure-delete operation.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-11824": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "pageSHA256": "dff1dc247b70083bc550de4a35cbbce817289a01c1dd1dece9fd7d121efa87e3",
+      "vendorReleaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "fixed"
+        ],
+        [
+          "sqlite3",
+          "source",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "mechanism": "SQLite FTS5 corrupted continuation page",
+      "applicationUseAssessment": "FTS5 is compiled in. App does not open attacker databases or expose MATCH queries; do not classify feature as disabled.",
+      "untrustedInputPrerequisites": "Crafted FTS5 database/query consumed by SQLite.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    },
+    "CVE-2026-119373": {
+      "officialURL": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "pageSHA256": "caa306ace78626cf4c28044f3d1053a2d7a5785ebe88d42504218e5ffa23aaee",
+      "vendorReleaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "mechanism": "SQLite FTS5 doclist merge",
+      "applicationUseAssessment": "FTS5 present, but no runtime SQL/database upload path. Untrusted activity text never becomes SQLite SQL.",
+      "untrustedInputPrerequisites": "Attacker-populated detail=none FTS5 table and prefix MATCH query.",
+      "uncertainty": "Earlier application-use assessment is preserved, not independent acceptance. Current page reviewed; no matching supported Bookworm fixed package established. no-DSA/wont-fix does not mean safe."
+    }
+  },
+  "sourceChecks": {
+    "python-tag": {
+      "url": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-bookworm",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "e150257a5f55eb118989a1fe7b928d684dc51b00ca7dd1d45ac9fb56ef0bc8a3"
+    },
+    "node-tag": {
+      "url": "https://hub.docker.com/v2/repositories/library/node/tags/24-bookworm-slim",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "04f5da930f8a00203303d35c448f7f9243abaacc127578000fd94d7c2faa6c5f"
+    },
+    "CVE-2025-13151": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-13151",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "2f30b3b88ee41c98838aefd3441f1d03668f59a62ced95a0e7f1e4b515f6b951"
+    },
+    "CVE-2026-112314": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-112314",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "92e85c2b2dbeb1f63f321831846e9fef1e33a2116ba17ac90f71fddf05ce2ea2"
+    },
+    "CVE-2026-112321": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-112321",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "d1be8a98949bae4639f156c5b71099d77cadf731aa618d998703513783dd19ad"
+    },
+    "CVE-2026-112322": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-112322",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "a2d63e888c206329cf519d346dee77cb3239fe3278cf6a254a5c9eb003a6c87f"
+    },
+    "CVE-2026-112320": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-112320",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "464a18f2a88323c9c832d2ef35f1cded1c750686f23ef62c117df908abe9ca0e"
+    },
+    "CVE-2026-119079": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119079",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "d83f24be45252604d09ba1047acfe44bd83c96a19f75ccb154a5751f490eb79e"
+    },
+    "CVE-2026-112323": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-112323",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "8c70bb85b73422193f2dc717fbfb6e82cbfc300a58df98a05adbbfddc4ffec52"
+    },
+    "CVE-2026-76844": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-76844",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "089f82b8c9fcca107156a0bb86e050cd4a73a3e44cb5aa6b2dff873ca041a8e2"
+    },
+    "CVE-2026-82560": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "b9bff184cc25fd9ec8f5726c13708d1d49e86fba083d69ef89d30954a042d133"
+    },
+    "CVE-2026-5450": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-5450",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "3466d5c3e9f5d0a2bf5a8d36f299721e8c5144eff5564f6aea8d68aa352ef4b1"
+    },
+    "CVE-2026-41992": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-41992",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "23c64845212bf6eafcc398c596b4cbeed977de4ce5acfbb0afa6bbae07016132"
+    },
+    "CVE-2025-69720": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "3542be519daaef8f60a0fd662f4a6129a238f59ef9b86155869d49cfd2b3af78"
+    },
+    "CVE-2026-9538": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "f9466371b6a5bd0094c5a53028d43144ca3115918fb37ca7ae0d48eb9dc350b1"
+    },
+    "CVE-2025-6020": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-6020",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "4772ce36a77c1ca0c948641d4d9f8a4d0bf1a9be136d02547ca5f8930322e51e"
+    },
+    "CVE-2026-85091": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "8befe16c18c63a7ba5e979b7d6b7f852b34b3083a329bba835cedcd15a6b7252"
+    },
+    "CVE-2026-95619": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "b461b164c216d2f344a365f577ddfd9349f2590c7218ce00f0fe4fbd99ee89f6"
+    },
+    "CVE-2025-7458": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-7458",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "b3ceee96b7c069f53e914d3e798cbcf55f5cb704c29c40bb97fd609612b64a26"
+    },
+    "CVE-2026-102010": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "7c738bd8ea9f772d8126b5a7be90b1202a8888b3f5821d942d567830cd468dda"
+    },
+    "CVE-2026-107778": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-107778",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "14f4ad8f3d9cdefd76c9ff1ca78ef11bbce526e59309b4d07553f84d4c8c48a2"
+    },
+    "CVE-2026-5928": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-5928",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "20b69d07d0fa45ddd7ab18a6aea921b1886226ef0618f631dac9a0481d78694a"
+    },
+    "CVE-2026-19499": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "5ae203e2503db74b024563d3a6cbac974337438d5f3db69b93cbdd0ec38aecd7"
+    },
+    "CVE-2026-119379": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "d7171e070be82e7ea297bad3ab3d2ca5aee54a70b198c5a2bec2b762ac942679"
+    },
+    "CVE-2026-84243": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "98865d37ee29c5c0734e80b8389d5a071afe6b2edd358bb63d1ea47cf7ac7b47"
+    },
+    "CVE-2026-119374": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "08ee3a28b1be9e9dfcbad161a79731b08cc08a6b54caef90098da46bfc574cdc"
+    },
+    "CVE-2026-5435": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "2361f3d31bc16c0ed30e5f79e4398e73155b117f7c2097c4208f9d756cdd0959"
+    },
+    "CVE-2026-78410": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "370b52136365d440004d915421bd2b2529393511c802bdc04f3e3a873241621b"
+    },
+    "CVE-2026-11824": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-11824",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "dff1dc247b70083bc550de4a35cbbce817289a01c1dd1dece9fd7d121efa87e3"
+    },
+    "CVE-2026-53615": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-53615",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "c2d7d74d4d1cd7f56939745b493e57b286477cf35862d8f74bc84b26a1c34354"
+    },
+    "CVE-2026-119373": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "caa306ace78626cf4c28044f3d1053a2d7a5785ebe88d42504218e5ffa23aaee"
+    },
+    "CVE-2026-53613": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-53613",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "fb99059a6d0ea60bca86c49a817f4298a09bfeaa5893ae788221739307412320"
+    },
+    "CVE-2026-54369": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "4677cdb2b848eca7bc76f57dd54e5d01e309f438bba58d892550db432fbde5ca"
+    },
+    "CVE-2026-54370": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "ok": true,
+      "error": "URLError",
+      "sha256": "36c932e9051decbe74a402bbe4df1e60f52a17c39cab2785b83901467b36758e"
+    }
+  },
+  "runtimeChecks": {
+    "frontend": {
+      "image": "sha256:3ae6505690863a7165b7c02bd1da4c84d3ccd4857b10f66e86084e8a3d987fb1",
+      "architecture": "amd64",
+      "user": "node",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "logoSource": "87d1eb466eb0ad181a0b8b44751bcb464541fa2794bb1a0bc2d48af94d3a551b",
+        "fixture": false
+      },
+      "missingEnrollmentExit": 78
+    },
+    "backend": {
+      "image": "sha256:05901f2528574a03832f69bed9d1c058f39859d020f23d30d0ff03109c3eb6d9",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "googleReferences": false
+      },
+      "missingEnrollmentExit": 78
+    },
+    "factory": {
+      "image": "sha256:b60d803cf9bd5886a523068cc3184ac7dda62f976d9730e62c90b7d2c256341d",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "googleReferences": true
+      },
+      "missingEnrollmentExit": 78
+    },
+    "counter": {
+      "image": "sha256:ecc67f9d3f849f75b66b9eaf3df4c879eb9953b906cd2f72df7c836b0dab6b4e",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "googleReferences": false
+      },
+      "missingEnrollmentExit": 78
+    },
+    "dispatcher": {
+      "image": "sha256:337b66ad7fb4649a68f55771ab89dd715a459583ab39a784c17c7b1ce61986d3",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "googleReferences": true
+      },
+      "missingEnrollmentExit": 78
+    },
+    "recovery": {
+      "image": "sha256:8a2f64522fb8201bd730e3453e6aa2145e42fa7e6e908fe3f046e110a2c05cf9",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+        "googleReferences": false
+      },
+      "missingEnrollmentExit": 78
+    }
+  },
+  "sourceCohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+  "google": {
+    "schema": "google-place-identifiers-only-v1",
+    "allowedPersistentFields": [
+      "kind",
+      "place_ids"
+    ],
+    "deniedContent": [
+      "displayName",
+      "formattedAddress",
+      "location",
+      "types",
+      "hours",
+      "prices",
+      "rating",
+      "attributions",
+      "rawResponse",
+      "duration",
+      "distanceMeters",
+      "route status",
+      "route legs",
+      "candidate cards"
+    ],
+    "ttlMs": 600000,
+    "ttlRule": "min(SQL absolute expiry, trusted Redis TIME + 10 minutes); reads never renew",
+    "backup": "No real evidence enrolled. Future Redis backup/export disabled; expired ciphertext in old snapshots is unreadable by protocol. Operational SQL stores no Google content. IDs do not authorize continuation.",
+    "deletion": "Absolute Redis expiry and factory-owned exact-key forget; SQL revocation immediately blocks reads; no financial deletion.",
+    "recovery": "Full real checkpoints still denied by existing pack/provenance; no lossy checkpoint projection, refetch, retry or financial refund.",
+    "logo": "62c52df68d8f450c860d5d65068fc96d63c2dfaec849b91ac64b3256a898936e",
+    "approval": "Only explicit published identifier exemption used. No general content/derived-use legal approval."
+  },
+  "verification": {
+    "backend": {
+      "passed": 175,
+      "failed": 0,
+      "skipped": 0,
+      "modules": [
+        "backend.test_google_retention",
+        "backend.test_provider_enrollment_review",
+        "backend.test_provider_responses",
+        "backend.test_venue_normalization",
+        "backend.test_evidence",
+        "backend.test_places",
+        "backend.test_routes",
+        "backend.test_provider_budget",
+        "backend.test_real_planning",
+        "backend.test_planning_admission",
+        "private_runtime.test_dispatch_owner",
+        "private_runtime.test_dispatch_processes",
+        "private_runtime.test_projection"
+      ]
+    },
+    "newRedisPostgres": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0,
+      "sourcePins": {
+        "/Users/rahularutla/Documents/whereto/backend/google_retention.py": "64ee253b87fc792fe93d0492491769c338cf8f7c878df41f36fc5f563a7a67b5",
+        "/Users/rahularutla/Documents/whereto/experiments/shared_state/test_google_reference_cache.py": "c004a083c149da9daf9e6c972fb659301b6b36d6dc809899a9454b09b499cdf2"
+      },
+      "seconds": 14.945
+    },
+    "frontend": {
+      "passed": 324,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "unchanged expired-date offline Surprise fixture; HTTP422 expected200"
+    },
+    "focusedAttribution": {
+      "passed": 8,
+      "failed": 0
+    },
+    "browser": {
+      "actual": true,
+      "desktop": "1280x900",
+      "mobile": "390x844",
+      "workflows": [
+        "interpretation",
+        "confirmed fixture origin",
+        "three provisional ordinary cards",
+        "View Plan",
+        "official logo and third-party credit",
+        "no mobile horizontal overflow"
+      ],
+      "providerEvidence": "authored transport fixtures, NOT live Google or model evidence",
+      "notExercised": [
+        "private hosted IAP composition",
+        "advanced/options/save/reopen/refresh",
+        "browser worker restart and outage"
+      ]
+    },
+    "imageBuilds": {
+      "passed": 6,
+      "platform": "linux/amd64",
+      "productionNextBuild": "passed inside actual closed frontend image build"
+    },
+    "sameDatabaseScans": {
+      "passed": 12,
+      "criticalHighFixed": 0
+    },
+    "historical": {
+      "attempts": 10,
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1,
+      "accountedUSD": "0.047366625",
+      "remainingUSD": "11.952633375",
+      "privateFiles": 324,
+      "halt": true,
+      "unchanged": true
+    },
+    "notRun": [
+      "full backend suite",
+      "frozen B2 evaluator replay",
+      "live provider/model/account checks",
+      "hosted IAM/network/restore acceptance"
+    ],
+    "developmentAttempts": [
+      "Initial frontend run:323 passed,2 failed: intended logo text expectation and unchanged expired-date fixture. Ordinary logo assertion updated to official asset. Final324/1.",
+      "New authored PlanCard test initially omitted required issues array; corrected own fixture.",
+      "First packaging attempt:6 case passes,1 case error plus a setUpClass error (2 artifact cases not run), both sandbox write-permission errors; first final TypeScript attempt could not write tsbuildinfo. Approved main-checkout rerun recorded separately.",
+      "System Python public-fetch SSL trust failed; system curl used with full default certificate verification. No TLS bypass.",
+      "APT no-install metadata check emitted cache-clean permission warning; reviewed package candidates remain installed versions.",
+      "Scanner CVE-2026-76844/zlib package association conflicts with the current Debian description (webpack-dev-middleware); retained without suppression and separately marked uncertain.",
+      "One final integrity invocation lacked PYTHONPATH and stopped at import before evidence access. Corrected PYTHONPATH=. invocation passed read-only; original earlier integrity check also passed."
+    ],
+    "packaging": {
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "modules": [
+        "deployment.test_packaging",
+        "deployment.test_private_artifact"
+      ]
+    },
+    "typescript": {
+      "passed": true
+    },
+    "eslint": {
+      "passed": true
+    },
+    "pythonDependencyConsistency": {
+      "passed": true
+    },
+    "npmProductionTree": {
+      "passed": true
+    },
+    "npmAudit": {
+      "vulnerabilities": {
+        "moderate": 8,
+        "high": 0,
+        "critical": 0
+      },
+      "rawSHA256": "640be622046e07e1c0b671ca4478fcb5ff84b95c12e057a7f1b64d53c7e0c2d7",
+      "newRuntimeAdvisory": "GHSA-mfr8-8qww-v76h; Next16.4.2; moderate; patch available; no use cache/unstable_cache app calls found, not independent acceptance",
+      "lockChanged": false,
+      "vendorURL": "https://github.com/vercel/next.js/security/advisories/GHSA-mfr8-8qww-v76h",
+      "vendorPatchedVersion": "16.4.5; not installed; independent patch cohort not part of critical/high remediation"
+    },
+    "configuredSecrets": {
+      "configuredValues": 2,
+      "currentFiles": 3621,
+      "historicalObjects": 4117,
+      "matches": 0
+    },
+    "financialRecovery": {
+      "passed": 30,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 875.686,
+      "module": "experiments.shared_state.test_application_grants",
+      "testSourceSHA256": "b18a60c8c7c24e01d9073ae6f4b38a17d78b45661871ba698cc2dc728a09a0e0",
+      "drills": [
+        "operational SQL snapshot rollback quarantines full grant; no new dispatch",
+        "independent witness snapshot rollback quarantines full grant; no new dispatch",
+        "operational DB crash/outage + worker/witness/SQL restart retains reserved exposure; Redis loss refuses evidence reconstruction"
+      ],
+      "drillsPassed": true,
+      "resourceProfile": "Existing run_native.local_resources (1CPU SQL fixture) inside approved Colima2CPU/4GiB/40GiB. No SQL deadlines changed.",
+      "historicalReliability": "This passing run does not identify earlier generic refusals or hosted-restart uncertainty. Prior57014 CPU-throttling finding and required realistic capacity test remain recorded."
+    }
+  },
+  "localArtifacts": "/tmp/task52-security-retention (sanitized scan outputs/logs/fixture screenshots; not immutable Git evidence, hashes recorded above)",
+  "cleanup": {
+    "initialVolumes": 126,
+    "scannerOriginalVolumesPreserved": true,
+    "originalVolumes": 126,
+    "finalVolumes": 126,
+    "exactVolumeSetPreserved": true,
+    "runningContainers": 0,
+    "localFixtureServersStopped": true,
+    "colimaProfile": "whereto-task52",
+    "cpu": 2,
+    "memoryGiB": 4,
+    "diskGiB": 40,
+    "colimaStopped": true
+  },
+  "harnessPins": {
+    "scan.py": "684859da1da141ee44c079056124e62310e4ec4c758c59223528ffb14a8dba90",
+    "image-checks.py": "40749041b97967f52e260f8e267aa26d8c2e078f823a93a121c1cfec3c5f8510",
+    "task52-run-retention-final.py": "970206d51cbc7ccf848c371dd10b6d0d8956f6f27f659a466287017b7e3897b8",
+    "run-financial.py": "885a5974742731fdbf851ab606598a5c6141c7da8741185515ba0734affab369"
+  },
+  "scannerVersion": "0.121.3",
+  "sourceRetrieval": "Official pages/metadata fetched read-only using system curl with default certificate/hostname verification. Initial system-Python trust-store errors are preserved in sourceChecks; no TLS bypass.",
+  "localLogHashes": {
+    "backend-final.log": "46b2641645a9530924c0b678007de68ad7ba85cf154adf192a2de9ad36d97a8e",
+    "redis-verified.log": "53e12fe9cf2b262fc0a9e97d8c5ad9a43202aa8e6a9a5f04557223c0fdeac839",
+    "attribution-verified.log": "a5ab275a78544fe98ab3acc5322d85cfbf2f59867ab1b571eb5891e069bbc132",
+    "frontend-final.log": "e262a3c148c97a538bf737bde9ed545faeaa928fed8a2e0c7e3ca0f54d5a9369",
+    "packaging-verified.log": "dbcd878ff4e71fd83c59f20795b61648f4f2c25ca708a6f55429bc3ba024c17e",
+    "types-verified.log": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "lint-final.log": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "pip-final.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "npm-final.log": "47b2501e8fcac606ddb23439ce75c60b7390c54cae18373c1bc61f9f0cde0382",
+    "financial-final.log": "14201fe5a52871ed6d025687a0da38d42965cb50fe01fe72a295ade3d1beef41",
+    "builds-verified.log": "d4e7b1bbecbee7a5d5d5fdff21d09867c48fd20aecedf41ece7892d4cf145550",
+    "image-checks.log": "c436b8772bbbd71c969bcd077ea373aa90e1f1a24a2cbcd167f89ebca123bc42",
+    "history-confirmed.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "secrets-verified.log": "916f909be8e9a0f2aaaceaba3f356ad3c4a33e2dde3f760538fa4612a296ced4",
+    "colima-stop.log": "49b42583884143f9bc2e5f04831489c2d1de8b12fe7bd4239ba049148ba58971"
+  },
+  "filesChanged": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "app/globals.css",
+    "backend/provider_enrollment_review.py",
+    "components/venue-details.tsx",
+    "deployment/prepare_closed_frontend.py",
+    "deployment/private-role-cohort-v1.json",
+    "deployment/real-provider-review-v1.json",
+    "docs/learning/11-google-places-and-routes-apis.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "lib/final-acceptance49.test.ts",
+    "private_runtime/redis_port.py",
+    "backend/google_retention.py",
+    "backend/test_google_retention.py",
+    "data/google-attribution.json",
+    "docs/task52-security-and-google-data-verification.json",
+    "docs/task52-security-and-google-data.md",
+    "experiments/shared_state/test_google_reference_cache.py",
+    "lib/google-attribution.test.ts"
+  ],
+  "result": "Bounded identifier-cache/attribution implementation verified; unchanged expired-date frontend failure disclosed. Container security and real deployment NOT accepted."
+}

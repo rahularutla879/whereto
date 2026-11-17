@@ -1,3 +1,7 @@
+## Inactive Google identifier cache and attribution (2026-11-16)
+
+Factory `EvidenceRedis.references(store, lease)` constructs the optional `backend.google_retention.ReferenceCache` over existing encrypted Redis and protected SQL source checks. Its strict model contains Place IDs only; current SQL revision/fence/expiry, environment, epoch and AES-GCM integrity are checked around I/O. It has create-only absolute TTL and exact-key cleanup, no new service/endpoint/financial authority. IDs cannot become a native graph; full real-provider continuation remains refused. `GoogleCredits` embeds the official local logo, packaged through the existing closed frontend projector. New source cohort/disabled review draft match this code; historical evaluator pins/base locks/SQL are unchanged. [Contract and verified limits](docs/task52-security-and-google-data.md).
+
 ## Task 52 — offline enrollment checker, no new runtime layer
 
 `backend.provider_enrollment_review` reuses the canonical Google codec and checks a pinned disabled draft for external review. It has no I/O transport, credential discovery, SQL mutation, grant or capability issuance and is not imported by startup/images. All six responsibilities, protected SQL, Redis and recovery boundaries remain unchanged; actual real-profile migration/enrollment stays blocked. [Exact handoff](docs/task52-real-provider-activation-review.md).

@@ -213,7 +213,7 @@ textarea:focus-visible { outline-offset: 4px; border-radius: 2px; }
 .venue-contact { background: #fffaf5; padding: 12px; border-radius: 10px; margin-top: 8px; overflow-wrap: anywhere; }
 .venue-contact p { margin: 8px 0; }
 .venue-contact a, .provider-credits a { text-decoration: underline; }
-.google-attribution { white-space: nowrap; font-family: sans-serif; font-style: normal; font-weight: 400; font-size: 12px; letter-spacing: normal; color: #1f1f1f; }
+.google-attribution { display: inline-flex; padding: 10px 10px 5px; white-space: nowrap; font-family: sans-serif; font-style: normal; font-weight: 400; font-size: 12px; letter-spacing: normal; color: #1f1f1f; }
 .provider-credits { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 6px; }
 .plan-details[hidden], .venue-contact[hidden] { display: none; }
 .plan-details li div > .provider-credits { display: flex; }

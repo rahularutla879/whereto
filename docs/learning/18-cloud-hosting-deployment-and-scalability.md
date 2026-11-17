@@ -2,6 +2,12 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## A rebuilt image is not an approved deployment
+
+The [current bounded checkpoint](../task52-security-and-google-data.md) builds all six amd64 roles from unchanged base/dependency locks and changed source cohort, checks non-root/read-only runtime and refusal without enrollment, then scans baseline/candidate with the same Grype database. No C/H advisories disappeared. Current Python Bookworm base is unchanged; the available Node patch was already tried without security improvement. Current maintained Distroless uses Debian 13; silently adopting deprecated Debian 12 or switching OS major would bypass compatibility review. A separate approved Debian 13 candidate or supported vendor backport is concrete follow-up, not completed security remediation.
+
+Only Place IDs have a narrow optional shared cache; full real results still cannot be safely reconstructed from permitted fields. Existing real provider/model/financial/credential/retention and cloud enrollment gates remain mandatory. No synthetic staging deployment is represented as the final product. No cloud resource, grant or public traffic was activated by these builds.
+
 ## Deployment means running beyond the owner's computer
 
 **Hosting** provides machines/services that run the application. **Deployment** installs a reviewed version there. **Scalability** is handling more work while preserving correctness and cost controls. Where To? cannot safely scale by launching independent copies of local sessions and budgets: two processes might each believe the same allowance is unused, or a continuation might land on a server without its session.

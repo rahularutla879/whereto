@@ -1,10 +1,12 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
+import googleAttribution from "../data/google-attribution.json";
 import type { DisplayVenue } from "../lib/planner";
 import { ContactLookupError, safeWebsite, safeMapsUrl, type Credit, type ContactDetails, VenueDetailsSession } from "../lib/venue-details";
 
 export function GoogleCredits({ credits = [],showGoogle=true }: { credits?: Credit[];showGoogle?:boolean }) {
-  return <span className="provider-credits">{showGoogle&&<span className="google-attribution" translate="no">Google Maps</span>}{credits.filter((credit,i,all)=>all.findIndex(c=>c.provider===credit.provider&&c.uri===credit.uri)===i).map((credit, i) => <span key={i}>{safeWebsite(credit.uri) ? <a href={safeWebsite(credit.uri)!} target="_blank" rel="noopener noreferrer">{credit.provider ?? "Provider credit"}</a> : credit.provider}</span>)}</span>;
+  return <span className="provider-credits">{showGoogle&&<span className="google-attribution" translate="no"><Image src={googleAttribution.dataUrl} width={98} height={18} alt="Google Maps" unoptimized /></span>}{credits.filter((credit,i,all)=>all.findIndex(c=>c.provider===credit.provider&&c.uri===credit.uri)===i).map((credit, i) => <span key={i}>{safeWebsite(credit.uri) ? <a href={safeWebsite(credit.uri)!} target="_blank" rel="noopener noreferrer">{credit.provider ?? "Provider credit"}</a> : credit.provider}</span>)}</span>;
 }
 export function VenueDetails({ venue, token, session, primaryMaps=false,primaryCredits=[] }: { venue: DisplayVenue; token?: string; session: VenueDetailsSession;primaryMaps?:boolean;primaryCredits?:Credit[] }) {
   const [open, setOpen] = useState(false);

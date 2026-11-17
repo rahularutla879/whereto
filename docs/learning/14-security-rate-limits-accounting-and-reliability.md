@@ -2,6 +2,12 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Narrow content rights and residual native-code risk
+
+The optional [ID-only cache](../../backend/google_retention.py) binds encrypted identifiers to current SQL source and independent epoch before/after I/O. Create-only Redis CAS and original absolute expiry prevent renewal; exact-key expiration never deletes financial history. Missing/corrupt/revoked data refuses and cannot trigger paid retries. It is not native session evidence, a refund or a financial grant.
+
+Current six image scans still retain3 critical / 86 high per Python role and2 critical / 53 high frontend. These are scanner matches, not established exploits or accepted risks. Non-root/read-only/no capabilities mitigate prerequisites without fixing vulnerable glibc/SQLite/PAM. Current Bookworm APT candidates offer no compatible fix. `wont-fix`/no-DSA and absent direct app calls cannot substitute for a security disposition. [Per-advisory vendor and runtime evidence](../task52-security-and-google-data-verification.json) preserves all findings. No suppression/OS-major upgrade/production activation is implied.
+
 ## Safety is a collection of independent gates
 
 **Security** limits who may do what with which data. **Reliability** preserves correct behavior during failures, delays and overlap. A **rate limit** bounds work within a time interval; a **quota** bounds an allowed quantity. **Accounting** records attempted/billable work. Where To? needs all four because duplicate clicks, canceled workers, concurrent provider calls and private links create different risks.

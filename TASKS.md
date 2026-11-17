@@ -1,3 +1,7 @@
+## Task 52 — bounded identifier retention / attribution checkpoint (2026-11-16)
+
+Implemented and fixture-tested factory-only encrypted Place IDs with fixed expiry/exact deletion and official card attribution. Full real-provider recovery remains blocked, not silently projected. Six images rebuilt; same-DB scans retain all 89 C/H package/advisory rows (32 IDs), with no compatible Bookworm fix or risk acceptance. Exact tests and remaining gates: [report](docs/task52-security-and-google-data.md), [record](docs/task52-security-and-google-data-verification.json). Task52 stays in progress; no real provider/cloud activation or Task53.
+
 ## Task 52 — non-billable real enrollment preparation complete; activation blocked
 
 [Small activation packet](docs/task52-real-provider-activation-review.md) and disabled review checker replace no runtime authority. Required external decisions: qualified model/count/prices, scoped credentials/transport, Google retention/credits, final-image security, actual Redis quote, operational capacity, independent witness custodian and exact owner cost/IAM/tester approval. Existing architecture retained; no cloud/synthetic product deployment or Task53.

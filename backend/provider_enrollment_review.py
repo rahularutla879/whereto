@@ -12,7 +12,7 @@ import json,re
 from backend.provider_responses import google_request,strict_object
 
 DRAFT=Path(__file__).resolve().parents[1]/'deployment/real-provider-review-v1.json'
-DRAFT_SHA='22089aa23fed57d20274f5fe1b5c8b5223b4f67d5edb0224ddf4ef5df896ab2f'
+DRAFT_SHA='1314e57011a32a382d9e6908403a991fa6383f9584e3dbd1427d7f3c08b579a7'
 MAX_MONEY=10**12  # micro-USD, matching existing SQL integer bound; not a grant.
 
 class ReviewError(ValueError):pass

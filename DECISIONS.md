@@ -1,3 +1,7 @@
+## 2026-11-16 — use only explicit Google identifier exemption; retain container gate
+
+Use the existing encrypted Redis port for optional typed Place IDs only, with original SQL source/epoch and min(session expiry, 10 minutes) retention. It is not a planning checkpoint or spending authority. Keep names/routes/derived candidates out of real shared evidence until exact rights are established; refuse incomplete continuation without automatic paid reconstruction. Use official local Google Maps logo and existing third-party credits. Do not equate encryption/TTL with permission or prior reachability assessments with independent acceptance. Current supported Bookworm package candidates do not fix the retained C/H findings; do not silently change OS major or promote the already-unsuccessful Node patch. [Evidence and remaining conditions](docs/task52-security-and-google-data.md). No financial/model/evaluation policy changes.
+
 ## Task 52 — review calculations never become spending authority
 
 `ReviewBound` validates operator review-data shape/freshness/canonical identity and integer micro-USD arithmetic only; a hash does not authenticate prices or counts. Keep the draft disabled and actual SQL/counter/source/dispatch unchanged. Real profiles require independently reviewed provider semantics and a protected, separately versioned enrollment in operational and witness rules. No worker, environment flag or review result can replace it. [Scope](docs/task52-real-provider-activation-review.md).

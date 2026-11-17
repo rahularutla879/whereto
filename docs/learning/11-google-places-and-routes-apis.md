@@ -2,6 +2,12 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+## Identifier caching is not planning recovery
+
+The inactive [Google identifier adapter](../../backend/google_retention.py) uses only the published Place-ID exception: explicit IDs, encrypted using existing Redis, fixed min(session expiry, 10 minutes), no TTL extension. Names/addresses/coordinates/types/credits/route durations/raw replies are denied. `require_checkpoint()` refuses: IDs alone cannot restore venue suitability, route feasibility or cards, and no automatic provider fetch is allowed. SQL source/revision/fence/epoch remains mandatory; this cache never creates provider authority. Existing full-real graph admission stays off. Google rules differ by field/product/account agreement; neither encryption nor short retention grants permission. Radius/address filtering and derived outputs still require exact applicable-terms confirmation; do not invent a polygon violation or relax constraints. [Current field/security report](../task52-security-and-google-data.md).
+
+`GoogleCredits` now renders an unmodified official local 98×18 Google Maps logo with clear space and safe deduplicated third-party links, outside hidden View Plan. It adds no provider call. Authored fixture browser success is not live Google acceptance.
+
 ## Two services answer different questions
 
 **Google Places** supplies venue identity and descriptive facts. **Google Routes** estimates travel between supplied points. Neither answers whether a cricket court has a slot or a cinema ticket is available. Where To? needs both: suitable venues without usable travel do not establish a feasible outing, while a fast route to the wrong activity is irrelevant.

@@ -40,9 +40,9 @@ test('continuation control flags cover known combinations, discovery, exhausted,
 test('one card-level Google attribution can deduplicate required third-party credits',()=>{
  const credits=[{provider:'Synthetic credit',uri:'https://example.com'},{provider:'Synthetic credit',uri:'https://example.com'}];
  const html=renderToStaticMarkup(React.createElement(GoogleCredits,{credits}));
- assert.equal((html.match(/>Google Maps</g)??[]).length,1);assert.equal((html.match(/>Synthetic credit</g)??[]).length,1);
+ assert.equal((html.match(/alt="Google Maps"/g)??[]).length,1);assert.equal((html.match(/>Synthetic credit</g)??[]).length,1);
  const supplemental=renderToStaticMarkup(React.createElement(GoogleCredits,{credits,showGoogle:false}));
- assert.doesNotMatch(supplemental,/>Google Maps</);assert.match(supplemental,/Synthetic credit/);
+ assert.doesNotMatch(supplemental,/alt="Google Maps"/);assert.match(supplemental,/Synthetic credit/);
 });
 test('saved management starts collapsed with no primary saved document',()=>{
  const html=renderToStaticMarkup(React.createElement(SavedPlans,{active:false,onOpen(){},contextKey:'normal'}));

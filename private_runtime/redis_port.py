@@ -38,6 +38,12 @@ class EvidenceRedis(RedisEvidence):
     def path(self,environment,epoch,sid):
         if environment not in (self.c.environment,self.c.protocol_alias) or epoch!=self.c.epoch or not re.fullmatch('[0-9a-f]{64}',sid):raise Denied('evidence_namespace')
         return f'{VERSION}:{{{self.c.environment}:{epoch}}}:{sid}'
+    def references(self,store,lease):
+        # Factory-only, non-authoritative Place IDs; never full native evidence.
+        from private_runtime.registry import current
+        if current('factory').evidence is not self or store.evidence is not self:raise Denied('google_reference_role')
+        from backend.google_retention import ReferenceCache
+        return ReferenceCache(store,lease)
     def start(self):
         if self._run(self.client.ping) is not True:raise Unavailable()
         return self

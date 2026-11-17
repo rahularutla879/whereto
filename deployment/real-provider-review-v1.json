@@ -41,7 +41,7 @@
     "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
     "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
     "deployment/private-network-v1.json": "699bd3487e4fecf07769aa58988d8645ee469d82dd034c5d2e7b45fb31f6e5df",
-    "deployment/private-role-cohort-v1.json": "2db736f5c65fd029aa20ac142de03331bd4b446a9b05409532fb95c3e57daeee",
+    "deployment/private-role-cohort-v1.json": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
     "docs/task52-real-provider-retention-v1.json": "08dae7518068be75a2571e5feb97dcbeb938c7135329da2e56de394d44f7d64a",
     "docs/task52-staging/hosted-enrollment-v1.json": "fa4c1bb262aeadae4acff2b1cddac5a162e62af457e3c59a72120b85c498a74b",
     "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
