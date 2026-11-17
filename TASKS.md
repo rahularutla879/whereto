@@ -1,3 +1,7 @@
+## Task52B — offline count-only continuation prepared; execution blocked
+
+New fixed POST-only protocol and fictional process/TLS/crash/replay tests prepared. [Evidence and remaining gates](docs/task52b-count-only-preparation.md). Owner-reported Write change is not independent permission verification or send approval. No new live scope/authorization, GET, count or inference; old scope remains consumed. All model qualification and deployment gates remain. Task53 not started.
+
 ## Task52B authorized readiness — stopped at permission boundary
 
 Exactly one modelGET200/exactID and one first-slot countPOST401 executed under owner authority. Server reports missing api.responses.write; count absent. Separate durable scope consumed with no retry/permission change. [Report and exact verification](docs/task52b-authorized-readiness.md).72selected preflight tests pass. Original evidence/accounting/halt remain intact; model qualification and real staging remain incomplete. No Task53.

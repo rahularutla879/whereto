@@ -1,3 +1,7 @@
+## Prepared count-only continuation — not enrolled
+
+`scripts/task52b_count_only.py` narrows existing readiness validation/TLS/exclusive evidence primitives to one fixed count POST. Prior terminal scope is read-only; new source build binds future permission receipt, GET bundle and scope to separate owner confirmation. Independent process fixture claims/INTENT/wire facts prevent replay after crashes. No actual scope, operational supervisor or credential reader is registered; live entry remains closed. No application/service/SQL architecture change. [Contract and trust limits](docs/task52b-count-only-preparation.md).
+
 ## Explicit local readiness-only enrollment (terminal)
 
 `task52b_readiness_enrolled` and `task52b_run_readiness_once` add a manually invoked, fixed two-operation HTTPS path over the prior validators, verbatim reviewed dial class and existing exclusive/fsynced writer. Build/bootstrap/CA/interpreter and existing replacement-file metadata are pinned; only the OpenAI line is read. No service/image/startup/SQL/ledger redesign. Scope and wire facts live separately under ignored owner-only.local storage. The actual authorized pair is consumed after GET200/count401; no normal startup or environment flag can mint another scope. [Trust limits/outcome](docs/task52b-authorized-readiness.md).

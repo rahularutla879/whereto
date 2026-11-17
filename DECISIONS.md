@@ -1,3 +1,7 @@
+## 2026-11-17 — separate count-only preparation, no live authorization
+
+Preserve old terminal401/consumed scope and Read metadata. Record owner-reported manual Responses Write separately; require independently established updated permission evidence rather than self-certifying it. Reuse exact validated GET only within same UTC day and24hours, with original thirteen-file/source binding. New operation has no GET/inference/retry permission, uses existing fixed TLS/evidence primitives, and requires separately reviewed supervision/enrollment after new explicit send approval. Do not create authorization during preparation. [Contract](docs/task52b-count-only-preparation.md).
+
 ## 2026-11-17 — consume exact readiness authority; preserve401 boundary
 
 Implement only the explicit one-GET/conditional-one-count owner scope, separate from the halted inference journal and app grants. Reuse exact reviewed dial/writer/validators without importing or weakening frozen inference guards. Bind existing replacement key identity/source/runtime; consume durably before reading/sending, and never retry uncertainty. Actual modelGET200 followed by count401 reports missing api.responses.write. Do not widen permissions or reuse the scope. Owner must separately approve Write/new count; neither action authorizes inference or qualification. [Evidence](docs/task52b-authorized-readiness.md).

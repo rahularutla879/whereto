@@ -1,0 +1,155 @@
+{
+  "identity": "52b-count-only-offline-verification-v1",
+  "baselineCommit": "3ec6b6822abb3c0b29c5c1307058df1478bb821c",
+  "verifiedAt": "2026-11-17T21:15:38.000844+00:00",
+  "buildSHA256": "3f606e0ebd27330115faaee692b011c542c78426db05ae8fb535081ccb98a776",
+  "operation": "52b-count-only-owner-3ec6b68-v1",
+  "status": "offline-preparation-passed-live-enrollment-blocked",
+  "commands": [
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_count_only backend.test_task52b_readiness_enrolled backend.test_task52b_readiness backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "passed": 76,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 21.201,
+      "environment": "local loopback/spawn permitted; fictional keys only"
+    },
+    {
+      "command": "PYTHONPATH=. /Users/rahularutla/Documents/whereto/backend/.venv/bin/python /tmp/task52-openai-readiness-check/frozen-focused.py",
+      "cwd": "/Users/rahularutla/.codex/worktrees/task52b-frozen-b2-verification/whereto",
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.369
+    },
+    {
+      "command": "backend/.venv/bin/python -m pip check",
+      "result": "No broken requirements found; pip cache-not-writable warning"
+    },
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python /tmp/task52-provider-integrity.py",
+      "result": "PASS before and after; read-only journal lock/source/private hash verification"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "earlierAttempts": [
+    {
+      "log": "/tmp/task52-count-only-tests.log",
+      "passed": 18,
+      "result": "PASS before added build-tamper test"
+    },
+    {
+      "log": "/tmp/task52-count-only-cohort.log",
+      "testsRun": 75,
+      "reportedErrors": 22,
+      "result": "FAILED: sandbox PermissionError on local test socket binds; not a provider failure; same cohort rerun with loopback permission plus added build test"
+    },
+    {
+      "result": "Initial pattern scan refused seven within-word matches in existing documentation; confirmed all began inside words, corrected token-boundary pattern, final zero matches. No findings suppressed."
+    }
+  ],
+  "logSHA256": {
+    "/tmp/task52-count-only-tests.log": "91b15a09971b7b01077a97a6cab543ebc6568910085e961c2d0a875fa2ae4fb1",
+    "/tmp/task52-count-only-cohort.log": "5bd7c04708819180224edf2a445209b6289665371ea170795ad87519db9b29b4",
+    "/tmp/task52-count-only-final-cohort.log": "9ef310132e6a3bb9fac3bbdd5a37ce67b7554b0585f7b2335eb8ed5795ca1b16",
+    "/tmp/task52-count-only-frozen.log": "a0d1d3bd2649b0c45695256c2c256b67aa7514e7daa0af2f17699add73ae6ed9",
+    "/tmp/task52-count-only-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-count-only-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-count-only-secret-patterns.log": "b5585dcf62501b8bce3f4ef0e04ed7dd83542cd0e3431e65a04414a0c28e425b",
+    "/tmp/task52-count-only-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52-count-only-secret-patterns-final.log": "d3792571365228e147ef6a7bef5491f6906feb8b926213d14f7b574792617108"
+  },
+  "newSourceFiles": [
+    "scripts/task52b_count_only.py",
+    "backend/test_task52b_count_only.py"
+  ],
+  "history": {
+    "paidAttempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateEvidenceFiles": 324,
+    "frozenPayloadPairs": 5,
+    "persistentHalt": true,
+    "oldReadinessFileCount": 13,
+    "oldReadinessFilesUnchanged": true,
+    "oldScopeConsumed": true,
+    "credentialMetadataUnchanged": true
+  },
+  "ownerReportedResponsesWrite": true,
+  "independentPermissionVerification": "pending; preserved historical Read receipt",
+  "priorGET": {
+    "validAtVerification": true,
+    "observedAt": "2026-11-17T19:48:46.517118+00:00",
+    "expiresAt": "2026-11-18T00:00:00+00:00",
+    "rawSHA256": "021f4df106ec44d507466a894f661b25681774c1b51951dcc04387ba2b810bdb",
+    "rule": "same UTC day AND maximum24h; reject future timestamps"
+  },
+  "liveState": {
+    "newScopeCreated": false,
+    "newAuthorizationCreatedOrConsumed": false,
+    "permissionEvidenceCreated": false,
+    "credentialValueRead": false,
+    "outboundProviderRequests": 0,
+    "inference": 0,
+    "modelGET": 0,
+    "countPOST": 0,
+    "permissionChangesByCodex": 0
+  },
+  "securityChecks": {
+    "changedGitVisibleSecretPatternMatches": 0,
+    "privateCredentialOrEvidencePathsAdded": 0,
+    "configuredCredentialValueScan": "NOT RUN: would read actual credential values, prohibited by owner",
+    "immutableOriginalScopeInventory": "PASS all13files",
+    "currentAndOriginalSourcePins": "PASS",
+    "dependencyChanges": false
+  },
+  "notRun": [
+    "full backend suite",
+    "full frozen B2 replay suite",
+    "full PostgreSQL/Redis/financial suites",
+    "frontend/TypeScript/lint/build",
+    "browser/container/cloud checks",
+    "authenticated permission/account/model/count requests"
+  ],
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      17
+    ],
+    "chaptersPreserved": 20
+  },
+  "remainingGates": [
+    "independently established Write permission receipt bound to existing credential",
+    "fresh prior GET evidence at send time; no automatic new GET",
+    "separate explicit owner count-only send confirmation",
+    "reviewed operational supervisor/key-loader registration; current live entry remains closed",
+    "inference purpose/security/real-writer/model/financial approvals remain separate"
+  ],
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/test_task52b_count_only.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-count-only-PROPOSED-v1.json",
+    "docs/task52b-count-only-build-v1.json",
+    "docs/task52b-count-only-preparation.md",
+    "docs/task52b-count-only-verification-v1.json",
+    "scripts/task52b_count_only.py"
+  ]
+}

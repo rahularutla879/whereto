@@ -1,0 +1,23 @@
+{
+  "identity": "52b-count-only-proposal-v1",
+  "baselineCommit": "3ec6b6822abb3c0b29c5c1307058df1478bb821c",
+  "operation": "52b-count-only-owner-3ec6b68-v1",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "model": "gpt-6-luna",
+  "endpoint": "https://api.openai.com/v1/responses/input_tokens",
+  "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+  "getMaximum": 0,
+  "postMaximum": 1,
+  "inferenceMaximum": 0,
+  "retries": 0,
+  "liveSendAuthorized": false,
+  "liveScopeCreated": false,
+  "ownerReportedPermissionChange": "Changed only Responses to Write",
+  "independentPermissionVerification": "pending",
+  "oldReadMetadataPreserved": true,
+  "priorGETFreshness": "same UTC calendar day AND at most 24 hours; reject future evidence",
+  "priorGETExpiresAt": "2026-11-18T00:00:00+00:00",
+  "oldScopePermanentlyConsumed": true,
+  "independentSemanticReview": "deferred, not approved",
+  "futureGate": "Independent updated permission evidence and separate explicit owner send confirmation, then separately supervised enrollment; no key read in preparation."
+}
