@@ -1,0 +1,108 @@
+{
+  "identity": "52b-two-request-readiness-PROPOSED-v1",
+  "enabled": false,
+  "operationalEnrollmentAvailable": false,
+  "ownerApproved": false,
+  "inferenceAuthorized": false,
+  "financialAuthorization": false,
+  "intendedProjectOwnerReported": {
+    "name": "WhereTo Model Evaluation",
+    "id": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+    "accountVerifiedThisCheckpoint": false
+  },
+  "restrictedPermissions": {
+    "listModels": "Read",
+    "responses": "Read",
+    "unrelated": "None",
+    "automaticExpansion": false
+  },
+  "requests": [
+    {
+      "method": "GET",
+      "url": "https://api.openai.com/v1/models/gpt-6-luna",
+      "maximum": 1
+    },
+    {
+      "method": "POST",
+      "url": "https://api.openai.com/v1/responses/input_tokens",
+      "maximum": 1,
+      "bodyFile": "docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.count.json",
+      "bodySHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1"
+    }
+  ],
+  "generationSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+  "retries": 0,
+  "inferenceRequests": 0,
+  "readinessApprovedMaximumNanodollars": null,
+  "actualProviderRequests": 0,
+  "actualCount": null,
+  "modelRevision": null,
+  "supportInformation": {
+    "source": "Owner-reported OpenAI AI-assisted Support; no signed/provider-account evidence supplied",
+    "countFeeStatement": "Free including failed requests",
+    "completeInputAndSchemaStatement": true,
+    "lunaCountingStatement": "Supported subject to access",
+    "responsesReadSufficiency": "Unknown; Write may be required",
+    "independentlyVerified": false,
+    "operationalOrFinancialApproval": false
+  },
+  "publicRatesNanoPerMillion": {
+    "input": 100000000,
+    "cached_input": 10000000,
+    "cache_write_30m": 125000000,
+    "cache_write_12h": 250000000,
+    "output": 500000000
+  },
+  "cacheSemantics": "Official guide: input/read/write rates are alternatives, not additive. Exact unchanged payload has no TTL/breakpoint override, so30m default; reserve max(input,cached_input,write30m), no cache-hit assumption.12h rate retained separately but not selected.",
+  "output": "Frozen max_output_tokens2000 includes visible, reasoning and formatting tokens; no later actual-usage refund or authorization.",
+  "extras": {
+    "tools": null,
+    "separate_reasoning": null,
+    "other_fees": null,
+    "upliftBasisPoints": null
+  },
+  "feesAndAccountTermsVerified": false,
+  "conditionalInferenceProposalNanodollars": 2500000,
+  "broaderFiveProposalNanodollars": 12500000,
+  "bothFinancialProposalsApproved": false,
+  "privacy": "Counting sends the entire frozen prompt/examples/schema/source to OpenAI. Count projection excludes generation-only store:false; that field never proves endpoint/account retention. Account processing/retention/data-sharing terms need reviewed evidence.",
+  "sources": {
+    "model": {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+      "retrievedUTC": "2026-11-17T19:06:04.294644+00:00",
+      "sha256": "dacc9870e67c0d68e4272f8394d4296ffe7cf70f18d3f4675ee6bd4c666966b7",
+      "bytes": 4520,
+      "publicUnauthenticated": true
+    },
+    "pricing": {
+      "url": "https://developers.openai.com/api/docs/pricing.md",
+      "retrievedUTC": "2026-11-17T19:06:04.367390+00:00",
+      "sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+      "bytes": 24045,
+      "publicUnauthenticated": true
+    },
+    "caching": {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "retrievedUTC": "2026-11-17T19:06:04.453918+00:00",
+      "sha256": "248c29075e1790bf644f6c40ffe1df6ad71f30dc036c0632e06e467e7556cf30",
+      "bytes": 56899,
+      "publicUnauthenticated": true
+    },
+    "counting": {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting.md",
+      "retrievedUTC": "2026-11-17T19:06:04.544356+00:00",
+      "sha256": "696836465d98fbd38929a9e8700e03408c8d19a227d4bbfedb9e8a34dba95604",
+      "bytes": 22729,
+      "publicUnauthenticated": true
+    },
+    "endpoint": {
+      "url": "https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count.md",
+      "retrievedUTC": "2026-11-17T19:06:04.638559+00:00",
+      "sha256": "5a0e01ab9fef894ac5daba5fb4cc97de63a8b504ca707479b78f9405cb979980",
+      "bytes": 187575,
+      "publicUnauthenticated": true
+    }
+  },
+  "actualCredentialRead": false,
+  "historicalHaltPreserved": true
+}

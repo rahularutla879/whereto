@@ -1,3 +1,7 @@
+## Task52B inactive readiness preparation
+
+`scripts/task52b_readiness.py` is a narrow offline layer over frozen payload preparation, existing HTTPResult parsing and Q4A exclusive/fsynced fixture writes. No new service/ledger, credential system, application import, image source selection or production financial profile. Real constructor stays closed; only canned fictional responses exercise the fixed GET/count pair. Project/model/revision-bound arithmetic is review data only. [Scope](docs/task52b-readiness-preparation.md).
+
 ## Task 52 bounded Trixie artifact selection (inactive)
 
 `deployment/prepare_zlib_candidate.py` reuses the existing Trixie/role projectors; it adds one verified Debian security archive as a build-only bind and produces a separate cohort for the same six responsibilities. `candidates/trixie-zlib-v2/promotion-PROPOSED.json` pins local OCI images and guarded replacements, retaining old image references. Root startup selection and architecture are unchanged. Shadow contracts remain nonlaunchable, require separate enrollment and cannot grant spending or enable real transport. New cohort rejects old native evidence; explicit session draining/fencing must preserve SQL financial/replay and independent witness history. No new financial epoch follows from a package update alone. [Report](docs/task52-candidate-promotion.md).

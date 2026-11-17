@@ -1,3 +1,7 @@
+## Task52B bounded readiness preparation — inactive
+
+Exact one-model/one-count validation, closed fixture replay/capture and conservative project/model/payload-bound cost arithmetic implemented. [Report and verification](docs/task52b-readiness-preparation.md). No live readiness/inference, permission change, financial grant or model qualification. Task52 remains in progress; original five-slot ordering and deferred-review gates preserved. Task53 not started.
+
 ## Task 52 checkpoint — bounded patched-candidate promotion preparation
 
 Single-package Trixie candidate and exact inactive promotion packet verified: six builds,18 packaging,175 backend,11 TLS/SQL/Redis,4 identity and actual API/browser/crash checks passed. Frontend324passes/1 unchanged date-fixture failure, types/lint pass. See [verification/report](docs/task52-candidate-promotion.md) and [residual security inventory](docs/task52-candidate-promotion-security.json). No candidate selected or security risk accepted; Task52 remains in progress. Separate real LLM/accounting, Google content rights, infrastructure capacity/ownership, IAM/IAP/secrets and spending gates remain. Task53 not started.

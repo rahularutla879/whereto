@@ -1,0 +1,186 @@
+{
+  "identity": "52b-two-request-readiness-offline-verification-v1",
+  "date": "2026-11-17",
+  "baselineCommit": "6d9b263b6437911d58b8978e861da66102ea0ba8",
+  "scope": "Inactive exact modelGET/count validation and non-authorizing cost review; no real credential/endpoint/writer/grant",
+  "buildSHA256": "d38c9f4d434e30837ad7118861a484683d8deedc6d0996b93e76cd91807ed6be",
+  "profileSHA256": "ce57a82d377f6ceb5e115a74ada2281f77a973d833950f5e47a474021e01492b",
+  "totals": {
+    "selectedTestsPassed": 58,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "cohorts": [
+    {
+      "name": "readiness+existing real-provider/enrollment",
+      "newReadinessTests": 21,
+      "existingEnrollmentTests": 11,
+      "existingProviderTests": 11,
+      "passed": 43,
+      "seconds": 3.256
+    },
+    {
+      "name": "unchanged frozen-compatible payload/financial/closed-transport",
+      "preparationTests": 13,
+      "firstSlotTests": 2,
+      "passed": 15,
+      "seconds": 1.376,
+      "frozenCommit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5"
+    }
+  ],
+  "dependencyConsistency": "passed; no changes",
+  "publicDocumentationSources": {
+    "model": {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+      "retrievedUTC": "2026-11-17T19:06:04.294644+00:00",
+      "sha256": "dacc9870e67c0d68e4272f8394d4296ffe7cf70f18d3f4675ee6bd4c666966b7",
+      "bytes": 4520,
+      "publicUnauthenticated": true
+    },
+    "pricing": {
+      "url": "https://developers.openai.com/api/docs/pricing.md",
+      "retrievedUTC": "2026-11-17T19:06:04.367390+00:00",
+      "sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+      "bytes": 24045,
+      "publicUnauthenticated": true
+    },
+    "caching": {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "retrievedUTC": "2026-11-17T19:06:04.453918+00:00",
+      "sha256": "248c29075e1790bf644f6c40ffe1df6ad71f30dc036c0632e06e467e7556cf30",
+      "bytes": 56899,
+      "publicUnauthenticated": true
+    },
+    "counting": {
+      "url": "https://developers.openai.com/api/docs/guides/token-counting.md",
+      "retrievedUTC": "2026-11-17T19:06:04.544356+00:00",
+      "sha256": "696836465d98fbd38929a9e8700e03408c8d19a227d4bbfedb9e8a34dba95604",
+      "bytes": 22729,
+      "publicUnauthenticated": true
+    },
+    "endpoint": {
+      "url": "https://developers.openai.com/api/reference/resources/responses/subresources/input_tokens/methods/count.md",
+      "retrievedUTC": "2026-11-17T19:06:04.638559+00:00",
+      "sha256": "5a0e01ab9fef894ac5daba5fb4cc97de63a8b504ca707479b78f9405cb979980",
+      "bytes": 187575,
+      "publicUnauthenticated": true
+    }
+  },
+  "supportEvidence": {
+    "ownerReportedAIAssisted": true,
+    "statement": "Counting free including failures, supports schema/full input and Luna subject to access; Read permission uncertain",
+    "actualAccountBillingAccessPermissionVerified": false,
+    "ownerOperationalApproval": false
+  },
+  "credentialRead": false,
+  "providerRequests": 0,
+  "inferenceRequests": 0,
+  "journalWrites": 0,
+  "realGrants": 0,
+  "cloudResourcesProvisioned": 0,
+  "historical": {
+    "attempts": 10,
+    "providerCounts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "haltPreserved": true,
+    "journalHashSourcePinsVerified": true
+  },
+  "costArithmetic": {
+    "unit": "integer nanodollars",
+    "ratesNanoPerMillion": {
+      "input": 100000000,
+      "cached_input": 10000000,
+      "cache_write_30m": 125000000,
+      "cache_write_12h": 250000000,
+      "output": 500000000
+    },
+    "defaultCacheTTL": "30m",
+    "inputCategoriesAlternativeNotAdditive": true,
+    "noGuaranteedCachedDiscount": true,
+    "rounding": "each input/output category and final explicit basis-point uplift upward",
+    "maximumInputBound": 12000,
+    "frozenOutputCap": 2000,
+    "conditionalNoExtrasMaximumNano": 2500000,
+    "conditionalTenPercentPremiumExampleNano": 2750000,
+    "proposalNanoUnchanged": 2500000,
+    "approved": false,
+    "financialAuthorization": false,
+    "actualCount": null,
+    "actualAccountModelRevision": null
+  },
+  "limitations": [
+    "Real readiness constructor remains unavailable until separate reviewed enrollment; no live CLI",
+    "Canned HTTPResult exchanges only; no live permission or billing proof",
+    "Replayed scope tested across replacement objects/competing threads, not process or hosted power-loss recovery",
+    "Counter/SQL/provider operational grants remain closed",
+    "Human120+6+4judgments deferred; technical diagnostic never qualifies a model",
+    "Model GET does not prove inference entitlement or immutable model revision"
+  ],
+  "notRerun": [
+    "full backend",
+    "full direct financial/SQL/Redis/crash suites",
+    "full frozen B2 replay",
+    "frontend/TypeScript/ESLint/build/images/browser",
+    "real identity/provider/account/TLS requests"
+  ],
+  "logSHA256": {
+    "task52-readiness-tests.log": "d9194c906dba569b758e4148fd908c86f706735404f2894e1a1aa7d59a84e861",
+    "task52-readiness-final-tests.log": "877599572a17508f58e6382a64ccb33ef10e113717e863b3cbdd53b34661bce7",
+    "task52-readiness-final20-tests.log": "3de3d0b00a909a159137d8b80701f074d3a1871c3790470fd1cfb190cc153059",
+    "task52-readiness-final21-tests.log": "6003005d793710f0f95c6f4959a86b3990659344b2a11a86b69c1a7688c4c3e8",
+    "task52-readiness-final-tests-verified.log": "fbebe3465daa474f12ff9ea82a94704262af6e15e6830f7043d8c633b12eca9c",
+    "task52-readiness-frozen15.log": "08323e245f48f5e5631a7b1689658f8fab007fe56536815561acf422d0665262",
+    "task52-readiness-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "task52-readiness-pip.log": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09",
+    "task52-readiness-build.log": "41a5c3fd48c86df684af0d273bf7e8eadb55b33fc76eea2c4a8a08cdd40aaade",
+    "task52-readiness-doc-fetch.log": "521f1fa9a2958c7e931a0d56b515791f8c9ebd301e99565d23a0133921d1b0ec",
+    "task52-readiness-audit-final.log": "565772cc54c3444acd798c3bc5f90e4207ff1a743f4e1b34e40aeb38f2cb2cd9"
+  },
+  "developmentAttempts": [
+    "Public-doc collector default Python CA missing issuer; existing certifi roots used with TLS/hostname verification retained",
+    "Initial doc assertion failed on Markdown backtick formatting; corrected against actual source",
+    "Link audit ran before verification file was created; rerun after creation",
+    "Provisional additive cache overbound replaced by documented alternative-rate/default30m rule before final build pin"
+  ],
+  "handbook": {
+    "updated": [
+      17
+    ],
+    "reviewedUnchanged": [
+      14,
+      15
+    ],
+    "chaptersPreserved": 20
+  },
+  "realExecutionAuthorized": false,
+  "finalAudit": {
+    "boundFilesVerified": 32,
+    "frozenParentsAndAllPreparedFilesUnchanged": true,
+    "runtimeSQLDeploymentAndDependenciesUnchanged": true,
+    "chaptersPreserved": 20,
+    "chapterUpdated": 17,
+    "patternSecretScanFiles": 1000,
+    "secretMatches": 0,
+    "credentialFilesRead": false,
+    "changedFiles": [
+      "ARCHITECTURE.md",
+      "DECISIONS.md",
+      "HANDOVER.md",
+      "TASKS.md",
+      "backend/test_task52b_readiness.py",
+      "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+      "docs/task52b-readiness-build-v1.json",
+      "docs/task52b-readiness-preparation.md",
+      "docs/task52b-readiness-profile-PROPOSED-v1.json",
+      "docs/task52b-readiness-verification-v1.json",
+      "scripts/task52b_readiness.py"
+    ]
+  }
+}
