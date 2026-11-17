@@ -1,3 +1,7 @@
+## Task52B authorized readiness — stopped at permission boundary
+
+Exactly one modelGET200/exactID and one first-slot countPOST401 executed under owner authority. Server reports missing api.responses.write; count absent. Separate durable scope consumed with no retry/permission change. [Report and exact verification](docs/task52b-authorized-readiness.md).72selected preflight tests pass. Original evidence/accounting/halt remain intact; model qualification and real staging remain incomplete. No Task53.
+
 ## Task52B bounded readiness preparation — inactive
 
 Exact one-model/one-count validation, closed fixture replay/capture and conservative project/model/payload-bound cost arithmetic implemented. [Report and verification](docs/task52b-readiness-preparation.md). No live readiness/inference, permission change, financial grant or model qualification. Task52 remains in progress; original five-slot ordering and deferred-review gates preserved. Task53 not started.

@@ -1,0 +1,204 @@
+{
+  "identity": "52b-authorized-readiness-outcome-v1",
+  "baselineCommit": "63ecdbbbf520a4e8154c81341eb8d4394b3c38ce",
+  "operation": "52b-readiness-owner-63ecdbb-first-v1",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "model": "gpt-6-luna",
+  "buildSHA256": "3a7a8dd5c9c6b0272d515e742b158bb42f4d01e50e14529bf374c9f65d034517",
+  "authorizationSHA256": "fd795b4fa6851c046be44fea340b344966af77e629d75190586832a2853a1077",
+  "scopeConsumed": true,
+  "terminal": true,
+  "result": "Stopped after countHTTP401; no retry or permission change",
+  "operations": [
+    {
+      "index": 1,
+      "status": 200,
+      "complete": true,
+      "rawSHA256": "021f4df106ec44d507466a894f661b25681774c1b51951dcc04387ba2b810bdb",
+      "at": "2026-11-17T19:48:46.517118+00:00",
+      "validatedModel": "gpt-6-luna"
+    },
+    {
+      "index": 2,
+      "status": 401,
+      "complete": true,
+      "rawSHA256": "94a9535a75dbc9ced98840d28d62e00a4f855c6e1f677450053dd73c060edc69",
+      "at": "2026-11-17T19:48:47.669112+00:00",
+      "errorType": "invalid_request_error",
+      "errorCode": null,
+      "reportedScopes": [
+        "api.responses.write"
+      ]
+    }
+  ],
+  "requestBodiesSHA256": {
+    "GET": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "POST": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1"
+  },
+  "attemptedModelGET": 1,
+  "attemptedCountPOST": 1,
+  "actualValidatedInputTokens": null,
+  "inferenceRequests": 0,
+  "retries": 0,
+  "permissionChanges": 0,
+  "credentialChanges": 0,
+  "alternateKeysProjectsModels": 0,
+  "cloudProvisioning": 0,
+  "historicalJournalWrites": 0,
+  "applicationFinancialGrants": 0,
+  "acceptedSupportZeroCountFee": true,
+  "actualBillingIndependentlyVerified": false,
+  "actualBilledUSD": null,
+  "privateEvidence": {
+    "location": "backend/.local/task52b-readiness/52b-readiness-owner-63ecdbb-first-v1",
+    "fileCount": 13,
+    "ownerOnlyFiles0600": true,
+    "directory0700": true,
+    "rawResponsesCommitted": false,
+    "credentialContentsStored": false,
+    "fileSHA256": {
+      "consumed.json": "8845371e0aa7bc35bdb50e46b685852693e356f4b65ac1aad1b37de826b2ea16",
+      "intent-1.json": "143179f0442ba7a3569c6b52eedc1497034816094e9e4783a895e58847c38014",
+      "intent-2.json": "79b3c24f489c967dcb5fb94d6179ca44d44e2c531471aebfad8e7bf2327f58bd",
+      "response-1.json": "908ea3b714ab6e64d7c2a531dfa3c39cc6782b7f186118cf51a52bb3291a6f65",
+      "response-2.json": "f69f9332e70dacfddd275730bb820850e92046942a3332fb4ea86908b2a7b6fb",
+      "result.json": "43a213257da3eb9301a50d46837338a86f378058bfe93299caaa7f12b33188b5",
+      "runtime.json": "a918d77644db6318cba7757f07b95418c2e25ac33d60da9c78a9e9cfdc986dbf",
+      "scope.json": "9ace0efc1798a3757333cc3553707dca7bad2eed172cc6975b6aa105ea1e8806",
+      "supervisor-claim.json": "323d8ffff8adc17844c57bde61d1d2238165c687d265b952ddae4559a3b7c4ca",
+      "supervisor.json": "ac0c501995c34bb10156ec9e8d89509030fb255d35682777a235e84000c19b53",
+      "validated-1.json": "dcdacbbcebd08d07094b9a73578b8763736dafd9f24c61418016e091ed0d6ca6",
+      "wire-consumed-1.json": "238a307afb31bc3a22ca1680958a204a1cf9ebd2011a6828bc10bc3843e91981",
+      "wire-consumed-2.json": "7c070d2ebd52b5016d71da7c2fdce5aa7972a49abc1ccf9b4a7068a0301427ee"
+    }
+  },
+  "credentialEnrollment": {
+    "metadataIdentityVerified": true,
+    "approvedExistingMechanism": "owner-only replacement dotenv+metadata; first OpenAI line read only",
+    "readOnlyPermissionsVerifiedFromOwnerReceipt": true,
+    "liveReadCountPermission": "Rejected: provider reports api.responses.write missing",
+    "actualServerProjectMembershipIndependentlyAdminVerified": false,
+    "requestProjectHeader": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+    "keyAndMetadataUnchanged": true,
+    "unrelatedSecretsReadOrExported": false,
+    "privateCredentialLocationCommitted": false
+  },
+  "verification": {
+    "preexistingFocusedPassed": 58,
+    "currentCohort": {
+      "passed": 57,
+      "newTests": 14,
+      "existingTests": 43,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 12.751
+    },
+    "frozenCompatible": {
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.505
+    },
+    "finalSelectedTotalPassed": 72,
+    "newCoverage": [
+      "local verified TLS exact GET/count body/project header",
+      "GET refusal prevents POST",
+      "401/403/malformed/incomplete/redirect/late/oversize/wrong-project/credential-echo refusal",
+      "actual process death after consumption/GET INTENT/POST INTENT; replacement refuses",
+      "competing independent processes only one scope",
+      "wire-consumed fact prevents resend",
+      "project/metadata/expiry/mode/symlink/first-line credential guards",
+      "source/CA/interpreter/bootstrap pins and frozen SingleDial AST equality"
+    ],
+    "notRerun": [
+      "full backend",
+      "full frozen B2 replay",
+      "full application PostgreSQL/Redis/grant suites",
+      "frontend/TypeScript/lint/build/images/browser"
+    ],
+    "dependencyChanges": false,
+    "historicalBeforeAfter": "verified read-only; hashes unchanged",
+    "secretChecks": "Git-visible patterns plus private response echo refusal; no credential values printed",
+    "dependencyConsistency": "passed"
+  },
+  "historical": {
+    "attempts": 10,
+    "providerCounts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateEvidenceFiles": 324,
+    "persistentHalt": true,
+    "frozenPayloadPairsUnchanged": 5
+  },
+  "trustLimits": [
+    "Local operator/same-user filesystem trust; not a sandbox against compromised OS administrator",
+    "Build/policy/enrollment are explicit owner-approved readiness scope, not fabricated cryptographic owner/reviewer signatures",
+    "Model visibility does not qualify the model or establish inference capability; no count obtained",
+    "Support zero-fee statement accepted for this scope only; no independent billing evidence",
+    "Any later count needs new owner authorization; consumed scope never reset"
+  ],
+  "nextAuthorization": "Explicit owner permission to change this same key Responses permission toWrite and separately authorize a new single-count readiness scope, with reviewed reuse of this GET only if still fresh. No automatic GET repetition/inference; preserve old evidence/consumption.",
+  "handbook": {
+    "updated": [
+      17
+    ],
+    "reviewedUnchanged": [
+      14,
+      15
+    ],
+    "chaptersPreserved": 20
+  },
+  "logSHA256": {
+    "task52-readiness-live-existing43.log": "8c7189261f78fc4af51bc330cdfea8310cfc591f57967c70e185089ca3e68631",
+    "task52-readiness-live-existing15.log": "3110e7319eb87ee5ba6d0ef73d4ee5eeef175f899f7173756dd2b771f12ce300",
+    "task52-readiness-live-final57.log": "067914d263ba2435551ef0d33ede3458005a9e7ca359b26c94f7ec0a8fb8880f",
+    "task52-readiness-live-new-tests.log": "184f6c2ff264932f0bd3362f56f92a0dbca0f0443f72cd4791460e5d81b7b2e0",
+    "task52-readiness-live-new-tests-second.log": "cc713df56ae433d71b8691a6d0b0b092cbb5a105b849f2fe4578e6b53cdfa4bc",
+    "task52-readiness-live-new-tests-third.log": "40e4d318e72d8d4e786645b0e5c2210676586320e997354c2fc7f3537dc4ba0f",
+    "task52-readiness-live-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "task52-readiness-live-pre-send-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "task52-readiness-live-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "task52-readiness-live-execution.log": "40bd8d0e05171c9ec03609748d81baa84c4a5fcb89cdff9ced3cc0efac1f6132",
+    "task52-readiness-live-final-audit.log": "763ec0effcd903b8076ffcc5757d636fc47605ac0cadc68f4ce0d7d26b09032f",
+    "task52-readiness-live-dependencies.log": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+  },
+  "developmentAttempts": [
+    "Initial metadata exclusion check used git check-ignore --quiet with two paths; corrected to one-path checks before enrollment; no key value/API request",
+    "Direct frozen first-slot import refused Q4C source identity before new tests; guard retained and exact low-level class reused with AST comparison; no repin",
+    "A local preflight used system Python withoutpydantic; rerun under pinned existing backend venv before enrollment; no provider retry"
+  ],
+  "countSchemaAcceptanceConfirmed": false,
+  "actualCountEndpointPermissionCheck": "HTTP401; server-reported missing api.responses.write for this key; no permission change",
+  "finalAudit": {
+    "sourceBuildFiles": 38,
+    "frozenPreparationFiles": 32,
+    "oldPinsAndPayloadsUnchanged": true,
+    "boundManifestSHA256": "3a7a8dd5c9c6b0272d515e742b158bb42f4d01e50e14529bf374c9f65d034517",
+    "gitVisibleFilesScanned": 1007,
+    "secretPatternMatches": 0,
+    "privateBodiesCredentialEchoes": 0,
+    "credentialMetadataUnchanged": true,
+    "consumedScopeAndTwoWireFactsVerified": true,
+    "chapters": 20,
+    "filesChanged": [
+      "ARCHITECTURE.md",
+      "DECISIONS.md",
+      "HANDOVER.md",
+      "TASKS.md",
+      "backend/test_task52b_readiness_enrolled.py",
+      "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+      "docs/task52b-authorized-readiness-result-v1.json",
+      "docs/task52b-authorized-readiness.md",
+      "docs/task52b-readiness-live-build-v1.json",
+      "docs/task52b-readiness-owner-authorization-v1.json",
+      "scripts/task52b_readiness_enrolled.py",
+      "scripts/task52b_run_readiness_once.py"
+    ]
+  }
+}

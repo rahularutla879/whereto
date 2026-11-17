@@ -1,3 +1,7 @@
+## Explicit local readiness-only enrollment (terminal)
+
+`task52b_readiness_enrolled` and `task52b_run_readiness_once` add a manually invoked, fixed two-operation HTTPS path over the prior validators, verbatim reviewed dial class and existing exclusive/fsynced writer. Build/bootstrap/CA/interpreter and existing replacement-file metadata are pinned; only the OpenAI line is read. No service/image/startup/SQL/ledger redesign. Scope and wire facts live separately under ignored owner-only.local storage. The actual authorized pair is consumed after GET200/count401; no normal startup or environment flag can mint another scope. [Trust limits/outcome](docs/task52b-authorized-readiness.md).
+
 ## Task52B inactive readiness preparation
 
 `scripts/task52b_readiness.py` is a narrow offline layer over frozen payload preparation, existing HTTPResult parsing and Q4A exclusive/fsynced fixture writes. No new service/ledger, credential system, application import, image source selection or production financial profile. Real constructor stays closed; only canned fictional responses exercise the fixed GET/count pair. Project/model/revision-bound arithmetic is review data only. [Scope](docs/task52b-readiness-preparation.md).

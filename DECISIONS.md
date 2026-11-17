@@ -1,3 +1,7 @@
+## 2026-11-17 — consume exact readiness authority; preserve401 boundary
+
+Implement only the explicit one-GET/conditional-one-count owner scope, separate from the halted inference journal and app grants. Reuse exact reviewed dial/writer/validators without importing or weakening frozen inference guards. Bind existing replacement key identity/source/runtime; consume durably before reading/sending, and never retry uncertainty. Actual modelGET200 followed by count401 reports missing api.responses.write. Do not widen permissions or reuse the scope. Owner must separately approve Write/new count; neither action authorizes inference or qualification. [Evidence](docs/task52b-authorized-readiness.md).
+
 ## 2026-11-17 — distinguish Support guidance, readiness evidence and financial authority
 
 Preserve AI-assisted Support's zero-count-fee statement as owner-supplied guidance, not account verification or spending approval. Keep Restricted Responses Read and terminal401/403 refusal. Reuse exact first-slot count bytes and existing exclusive/fsynced fixture evidence writes; real readiness construction remains closed. Official caching documentation establishes default30m and non-additive token categories, allowing a conservative max-rate quote without changing frozen prompts or the$0.0025 proposal. Review arithmetic/counts never enroll SQL/counter grants or waive semantic review. [Details](docs/task52b-readiness-preparation.md).
