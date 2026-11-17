@@ -1,0 +1,90 @@
+{
+  "identity": "52-bounded-image-promotion-PROPOSED-v2",
+  "status": "proposal-only; no approval recorded",
+  "approved": false,
+  "securityAcceptance": false,
+  "applyAuthorized": false,
+  "cloudActivationAuthorized": false,
+  "financialAuthorization": false,
+  "realProviderDispatchAuthorized": false,
+  "candidateImages": {
+    "backend": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+    "factory": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+    "counter": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+    "dispatcher": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+    "recovery": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+    "frontend": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce"
+  },
+  "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+  "frontendPIN": "cfea72ba19730eadb3e96b559ded096d12394a6e345bdc43777ad14b632814cc",
+  "replacements": [
+    {
+      "target": "deployment/private-services-v1.json",
+      "beforeSHA256": "cc59fe2e6ce0bbcf1d72631bf22268653dc9b532cca35fd33064daac65455e3f",
+      "proposedReplacement": "deployment/candidates/trixie-zlib-v2/proposed/private-services-v1.json",
+      "afterSHA256": "c52f2481a0f854a38518d3b644ba5f50a0aa7ace86fc27ad6516ed64551ab3f2",
+      "applyAuthorized": false
+    },
+    {
+      "target": "deployment/private-frontend-v1.json",
+      "beforeSHA256": "f78f63a2f1dd6f8a6edfd130813fa11a3b5ef008a088547936df7db0b3a03211",
+      "proposedReplacement": "deployment/candidates/trixie-zlib-v2/proposed/private-frontend-v1.json",
+      "afterSHA256": "f93c95710c97c063887d1fe788811c5fd24ed6936d6c8991bb47d90de5bd9444",
+      "applyAuthorized": false
+    }
+  ],
+  "rollbackReferences": {
+    "originalInertContractHashes": {
+      "deployment/private-services-v1.json": "cc59fe2e6ce0bbcf1d72631bf22268653dc9b532cca35fd33064daac65455e3f",
+      "deployment/private-frontend-v1.json": "f78f63a2f1dd6f8a6edfd130813fa11a3b5ef008a088547936df7db0b3a03211"
+    },
+    "lastVerifiedBookworm": {
+      "frontend": "sha256:3ae6505690863a7165b7c02bd1da4c84d3ccd4857b10f66e86084e8a3d987fb1",
+      "backend": "sha256:05901f2528574a03832f69bed9d1c058f39859d020f23d30d0ff03109c3eb6d9",
+      "factory": "sha256:b60d803cf9bd5886a523068cc3184ac7dda62f976d9730e62c90b7d2c256341d",
+      "counter": "sha256:ecc67f9d3f849f75b66b9eaf3df4c879eb9953b906cd2f72df7c836b0dab6b4e",
+      "dispatcher": "sha256:337b66ad7fb4649a68f55771ab89dd715a459583ab39a784c17c7b1ce61986d3",
+      "recovery": "sha256:8a2f64522fb8201bd730e3453e6aa2145e42fa7e6e908fe3f046e110a2c05cf9"
+    },
+    "priorTrixieCandidate": {
+      "backend": "sha256:37f670a2a4e75260033dfeb86615c34a90b422ea3d0c7fa408852d3dc5334252",
+      "factory": "sha256:1bb4343140ac88e00c9a798b1766a63e75e1b7dde8e5ca159fcae6746ebdd588",
+      "counter": "sha256:e34061d8247d51d303a06a6cdfcca7a792152877c147bf1cbbd5a9cdf91b2b86",
+      "dispatcher": "sha256:5d431643ea4df3ec163c0565fc2453b3472b83a6b57d544689e857d53a56e77f",
+      "recovery": "sha256:5a8da13cd12af12095d3b4fc8cf6aa051ee6157adb43b0377b3b1a4ff9b8ff38",
+      "frontend": "sha256:70e45bfde6826e137c9fc99599dd6aa54bedcb0324bc40cdb9b74ada4e715570"
+    },
+    "rollbackOfFinancialOrSessionHistoryAllowed": false,
+    "note": "References preserve provenance, not permission to launch vulnerable or incompatible images."
+  },
+  "registry": {
+    "published": false,
+    "registryManifestVerified": false,
+    "requiredBeforeCloudRun": "Separate owner-authorized Artifact Registry enrollment/publication; confirm registry content digest/provenance against these local OCI identities. No publication performed.",
+    "serviceImageBindings": {
+      "backend": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-backend@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__",
+      "factory": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-factory@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__",
+      "counter": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-counter@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__",
+      "dispatcher": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-dispatcher@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__",
+      "recovery": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-recovery@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__",
+      "frontend": "__REGION__-docker.pkg.dev/__PROJECT__/__REPOSITORY__/whereto-frontend@sha256:__VERIFIED_REGISTRY_MANIFEST_DIGEST__"
+    }
+  },
+  "transition": {
+    "drain": "Stop new actions to old revisions, drain configured factory owner slots (existing8s drain/5s permits), fence old workers; retain charges for lost/uncertain sends. No resend/refund.",
+    "sessions": "Explicitly revoke/fence old outings before switching. Changed cohort rejects old ticket/evidence build; native_incompatible_evidence is not permission to reconstruct or repeat inference. No automatic migration/TTL renewal.",
+    "financialEpoch": "Retain the independently verified current epoch; an image/package update does not authorize rotation, a new grant, reset counters or renewed expiry. If consistency cannot be proven, refuse/quarantine and use separately approved reconciliation.",
+    "schema": "No SQL/schema/RLS/financial-policy migration in this proposal. New build/config enrollment must be separately reviewed while preserving grant identities, balances and replay history.",
+    "rollback": "Code-only artifact rollback requires explicit approval, drains/revokes current sessions and fences workers. Never restore operational/Redis/witness snapshots or resurrect old capabilities/allowances.",
+    "startup": "Both proposed contracts remain launchable=false; fixed runtime configuration/enrollment paths, schema/role/build/epoch checks and real-provider refusals remain intact."
+  },
+  "separateDeploymentGates": [
+    "qualified cloud LLM and independently verified provider-specific token/count/price policy",
+    "reviewed real provider credentials/transports and explicit financial grant",
+    "Google content use/retention/attribution enrollment (unchanged ID-only permission is insufficient)",
+    "approved Redis/database capacity/independent witness ownership",
+    "real IAM/IAP tester/service identities, SecretManager configuration and exact resource/provider spending approval"
+  ],
+  "existingCloudTemplates": "Existing frontend/backend templates are inert legacy review templates, not a ready-to-apply six-service deployment. Do not treat image bindings as full IAM/network/secret enrollment. Reuse the existing hosted-enrollment contract when separately authorized.",
+  "cloudStateInspected": false
+}

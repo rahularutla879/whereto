@@ -1,0 +1,3917 @@
+{
+  "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+  "scannerVersion": "0.121.3",
+  "database": {
+    "status": {
+      "schemaVersion": "v6.1.10",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+      "built": "2026-11-17T06:20:58Z",
+      "path": "/cache/6/vulnerability.db",
+      "valid": true
+    },
+    "providers": {
+      "alma": {
+        "captured": "2026-11-17T00:22:53Z",
+        "input": "xxh64:19c0ec9b8e82f66a"
+      },
+      "alpine": {
+        "captured": "2026-11-17T00:22:30Z",
+        "input": "xxh64:fa987f9392d28fb3"
+      },
+      "amazon": {
+        "captured": "2026-11-17T00:23:05Z",
+        "input": "xxh64:7504f7c74a9c361d"
+      },
+      "arch": {
+        "captured": "2026-11-17T00:22:24Z",
+        "input": "xxh64:d2577d0ce5ffb172"
+      },
+      "bitnami": {
+        "captured": "2026-11-17T00:22:29Z",
+        "input": "xxh64:c732250cc2011e83"
+      },
+      "chainguard": {
+        "captured": "2026-11-17T00:23:29Z",
+        "input": "xxh64:7cb9477b6a50b2e9"
+      },
+      "chainguard-libraries": {
+        "captured": "2026-11-17T00:22:35Z",
+        "input": "xxh64:5d096d7cce578b12"
+      },
+      "debian": {
+        "captured": "2026-11-17T00:23:26Z",
+        "input": "xxh64:c6a2230483ad9fdc"
+      },
+      "dhi": {
+        "captured": "2026-11-17T00:22:47Z",
+        "input": "xxh64:8fc49640234eaa72"
+      },
+      "echo": {
+        "captured": "2026-11-17T00:22:53Z",
+        "input": "xxh64:a3e2e025951b7594"
+      },
+      "eol": {
+        "captured": "2026-11-17T00:22:34Z",
+        "input": "xxh64:9272c69742a4ae10"
+      },
+      "epss": {
+        "captured": "2026-11-17T00:22:37Z",
+        "input": "xxh64:9d628fe7247000c3"
+      },
+      "fedora": {
+        "captured": "2026-11-17T00:24:14Z",
+        "input": "xxh64:db3008dbf1d69a87"
+      },
+      "github": {
+        "captured": "2026-11-17T00:22:53Z",
+        "input": "xxh64:f751a10108e14e08"
+      },
+      "govulndb": {
+        "captured": "2026-11-17T00:22:34Z",
+        "input": "xxh64:3196a429310da9e4"
+      },
+      "hummingbird": {
+        "captured": "2026-11-17T00:24:38Z",
+        "input": "xxh64:a0e26b96324ff59a"
+      },
+      "kev": {
+        "captured": "2026-11-17T00:22:27Z",
+        "input": "xxh64:4568728f33b4c2af"
+      },
+      "mariner": {
+        "captured": "2026-11-17T00:22:29Z",
+        "input": "xxh64:00f342be7a313fbc"
+      },
+      "minimos": {
+        "captured": "2026-11-17T00:22:34Z",
+        "input": "xxh64:63429d277e62af8e"
+      },
+      "nvd": {
+        "captured": "2026-11-17T00:23:42Z",
+        "input": "xxh64:4a51752f6e4ef385"
+      },
+      "oracle": {
+        "captured": "2026-11-17T00:22:26Z",
+        "input": "xxh64:3ae32942f2da894e"
+      },
+      "photon": {
+        "captured": "2026-11-17T00:22:35Z",
+        "input": "xxh64:973abed9db5baccb"
+      },
+      "rhel": {
+        "captured": "2026-11-17T01:49:22Z",
+        "input": "xxh64:dc3ed2a669377a28"
+      },
+      "secureos": {
+        "captured": "2026-11-17T00:23:37Z",
+        "input": "xxh64:045fed684fb2646f"
+      },
+      "sles": {
+        "captured": "2026-11-17T00:25:02Z",
+        "input": "xxh64:ef6348f8bda1727f"
+      },
+      "ubuntu": {
+        "captured": "2026-11-17T00:23:29Z",
+        "input": "xxh64:7a8a7271f5590bf2"
+      },
+      "wolfi": {
+        "captured": "2026-11-17T00:22:50Z",
+        "input": "xxh64:ee98272bfeac5d14"
+      }
+    }
+  },
+  "rawScans": {
+    "recovery-baseline.json": "2dbb9d2714fe29b2b64eb405b9261da28d0a7c3ff89fa989dbed7344b5f3959c",
+    "counter-candidate.json": "bbeca4f5294cf8cdba88a184dfdc5a4b0a909e1c54e8cf2b1d6d0b1531ac9922",
+    "frontend-baseline.json": "cf70944296f895708022aceebb6be478d4f891ca850e2de514ef8aa9fdac5ca6",
+    "factory-candidate.json": "a73127204a4980b600c0a7dd59e540a10ac3bdc6b5ea1e56884d6b99c42fa088",
+    "counter-baseline.json": "3b95f074f32eae817a06219bad40775c0068b900e45bd678c00a8a1efa5dc16e",
+    "dispatcher-candidate.json": "90bfa95ba82ff6d561cc3c7a7516eac1a2102a962a9cbb83e9936e804e02c653",
+    "dispatcher-baseline.json": "dac653b952b30a0bfcdd0a393ed5ea55c1e9567dbc5f3b90ccc2a61f809691a0",
+    "backend-baseline.json": "13d64ba835db246ae0cb3c624f73be3c0121342c9211bfb0129d8b1f642d4760",
+    "frontend-candidate.json": "14cd4c049d67fa09e52c7c6bd5a5d0e9f66c98dc041748c8c0ab4d90539a0f02",
+    "backend-candidate.json": "6cca7e87c705b2c4771532487ba6aa8e0752224c2819b5f73dc6fccbfdad6d10",
+    "recovery-candidate.json": "38a09294a75f5607be6dbeee4964fc27d9162b79355a9735cb1b27e307b311f1",
+    "factory-baseline.json": "93bef556f72b9bb5cf8565081bb7ccbf5fbd319367f61ceb1ccfcf71e62f4826"
+  },
+  "comparisons": {
+    "backend": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    },
+    "factory": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    },
+    "counter": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    },
+    "dispatcher": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    },
+    "recovery": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    },
+    "frontend": {
+      "removed": [
+        [
+          "zlib1g",
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "CVE-2026-85091",
+          "High"
+        ]
+      ],
+      "added": []
+    }
+  },
+  "remainingHighCritical": [
+    {
+      "package": "perl-base",
+      "version": "5.40.1-6+deb13u1",
+      "advisory": "CVE-2026-82560",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "perl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian base interpreter; not used for application interpretation/planning (Python/JS), no direct Perl provider flow identified. Essential dependency removal not attempted.",
+      "mechanism": "Perl Pod::Text formatting exhaustion",
+      "untrustedInputPrerequisites": "Attacker POD supplied to affected Perl formatter; no app route found.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-82560"
+    },
+    {
+      "package": "libncursesw6",
+      "version": "6.5+20250216-2",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "sourcePackage": [
+        {
+          "name": "ncurses"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython/base terminal libraries, not the browser UI; no direct application curses/menu flow identified. Transitive use not exhaustively audited; not removed.",
+      "mechanism": "infocmp terminfo analysis overflow",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2025-69720"
+    },
+    {
+      "package": "libtinfo6",
+      "version": "6.5+20250216-2",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "ncurses"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython/base terminal libraries, not the browser UI; no direct application curses/menu flow identified. Transitive use not exhaustively audited; not removed.",
+      "mechanism": "infocmp terminfo analysis overflow",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2025-69720"
+    },
+    {
+      "package": "ncurses-base",
+      "version": "6.5+20250216-2",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "ncurses"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython/base terminal libraries, not the browser UI; no direct application curses/menu flow identified. Transitive use not exhaustively audited; not removed.",
+      "mechanism": "infocmp terminfo analysis overflow",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2025-69720"
+    },
+    {
+      "package": "ncurses-bin",
+      "version": "6.5+20250216-2",
+      "advisory": "CVE-2025-69720",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "ncurses"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython/base terminal libraries, not the browser UI; no direct application curses/menu flow identified. Transitive use not exhaustively audited; not removed.",
+      "mechanism": "infocmp terminfo analysis overflow",
+      "untrustedInputPrerequisites": "Attacker-controlled terminfo/analysis input consumed by infocmp.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2025-69720"
+    },
+    {
+      "package": "perl-base",
+      "version": "5.40.1-6+deb13u1",
+      "advisory": "CVE-2026-9538",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "perl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian base interpreter; not used for application interpretation/planning (Python/JS), no direct Perl provider flow identified. Essential dependency removal not attempted.",
+      "mechanism": "Perl Archive::Tar memory allocation",
+      "untrustedInputPrerequisites": "Crafted tar read by Perl Archive::Tar; absence check is limited to standard paths.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-9538"
+    },
+    {
+      "package": "gcc-14-base",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95619"
+    },
+    {
+      "package": "libgcc-s1",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95619"
+    },
+    {
+      "package": "libstdc++6",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-95619",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ aligned allocation overflow",
+      "untrustedInputPrerequisites": "Extremely large aligned allocation reaching the affected operator; no proof of non-exploitability.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95619"
+    },
+    {
+      "package": "gcc-14-base",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-102010"
+    },
+    {
+      "package": "libgcc-s1",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-102010"
+    },
+    {
+      "package": "libstdc++6",
+      "version": "14.2.0-19",
+      "advisory": "CVE-2026-102010",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "gcc-14"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Native C/C++ runtime ABI dependency (including Node/native extensions); no application compiler shipped or requested. gcc-14-base is a base/metadata package, not an installed C++ compiler; source-package association does not establish vulnerable function reachability.",
+      "mechanism": "libstdc++ heap priority-queue erase_if",
+      "untrustedInputPrerequisites": "Trigger vulnerable native heap-container erase_if; installed package match alone does not establish caller.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-102010"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "monetary formatting buffer padding",
+      "untrustedInputPrerequisites": "Affected C monetary format/buffer path; cannot dismiss Debian open status by version range alone.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-19499"
+    },
+    {
+      "package": "libc6",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-19499",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "monetary formatting buffer padding",
+      "untrustedInputPrerequisites": "Affected C monetary format/buffer path; cannot dismiss Debian open status by version range alone.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-19499"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.46.1-7+deb13u2",
+      "advisory": "CVE-2026-119379",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "sqlite3"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython sqlite3 uses the system library; operational authority uses PostgreSQL. No untrusted SQLite database/SQL ingestion path is established in these cloud roles. Removal would break a supported stdlib module and was not attempted.",
+      "mechanism": "SQLite session changeset overflow",
+      "untrustedInputPrerequisites": "Crafted changeset passed to sqlite3changeset_apply; library remains vulnerable.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-119379"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "gettext catalog path/environment manipulation",
+      "untrustedInputPrerequisites": "Attacker-controlled LANGUAGE/locale plus writable malicious catalog; would require additional capability.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-84243"
+    },
+    {
+      "package": "libc6",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-84243",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "gettext catalog path/environment manipulation",
+      "untrustedInputPrerequisites": "Attacker-controlled LANGUAGE/locale plus writable malicious catalog; would require additional capability.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-84243"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.46.1-7+deb13u2",
+      "advisory": "CVE-2026-119374",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "sqlite3"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython sqlite3 uses the system library; operational authority uses PostgreSQL. No untrusted SQLite database/SQL ingestion path is established in these cloud roles. Removal would break a supported stdlib module and was not attempted.",
+      "mechanism": "SQLite FTS5 secure-delete corruption",
+      "untrustedInputPrerequisites": "Crafted database footer and secure-delete operation.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-119374"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "liblastlog2-2",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "login",
+      "version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "mount",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78408",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "nsenter join-cgroup retains a file descriptor opened with root credentials across namespace/credential changes.",
+      "untrustedInputPrerequisites": "Privileged nsenter invocation with an affected cgroup descriptor path.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78408"
+    },
+    {
+      "package": "libc-bin",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "deprecated DNS record printing",
+      "untrustedInputPrerequisites": "Affected TSIG record printer must be called; transitive native reachability unproven.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-5435"
+    },
+    {
+      "package": "libc6",
+      "version": "2.41-12+deb13u4",
+      "advisory": "CVE-2026-5435",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "glibc"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Required C runtime for Python/Node and native extensions; cannot be removed without changing the supported runtime.",
+      "mechanism": "deprecated DNS record printing",
+      "untrustedInputPrerequisites": "Affected TSIG record printer must be called; transitive native reachability unproven.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-5435"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "liblastlog2-2",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "login",
+      "version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "mount",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-76642",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Mount helper completion not checked before privileged post-mount hooks.",
+      "untrustedInputPrerequisites": "Access to affected mount helper paths/options and privileged mount/hook execution.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-76642"
+    },
+    {
+      "package": "libssl3t64",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95692",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Setting an AES-GCM-SIV IV shorter than the expected nonce length via EVP_CipherInit_ex() may trigger a heap out-of-bounds read. Supplying a longer IV is silently truncated instead of rejected.  Impact summary: An application passing a caller-supplied IV of the wrong length may crash or read beyond its buffer. Because trailing IV bytes are ignored, an attacker who knows one message and tag may forge messages under a different IV.  CWE: CWE-125: Out-of-bounds Read  Description: AES-GCM-SIV copies the caller-supplied IV or nonce into its internal state using a copy whose length is taken from the expected nonce size rather than from the length the caller actually provided. When the caller passes a shorter IV, the copy reads past the end of the caller's buffer; AddressSanitizer confirms a heap out-of-bounds read reached through EVP_CipherInit_ex() into ossl_aes_gcm_siv_init(). When the caller passes a longer IV, the implementation silently discards the trailing bytes instead of rejecting the length.  The truncation breaks the binding between the IV and the computed authentication tag. An attacker who has observed a message and its tag under one IV can produce a message and tag that verify under a different IV whose first bytes match, since the surplus bytes never influence the computation. The message itself is unchanged, so this is a failure of IV commitment rather than a classic existential forgery.  Only applications that call EVP_CipherInit_ex() (or the equivalent provider cipher initialization) with an IV length other than the standard 12 bytes for AES-GCM-SIV are affected. The severity is limited because the out-of-bounds read is small and attacker-controlled only in length, and the forgery requires an unusual IV length choice by the application.  FIPS impact: no The FIPS modules are not affected by this issue, as AES-GCM-SIV is not an approved algorithm.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV invocation with short IV; evidence AES-GCM uses fixed reviewed nonce length, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95692"
+    },
+    {
+      "package": "openssl",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95692",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Setting an AES-GCM-SIV IV shorter than the expected nonce length via EVP_CipherInit_ex() may trigger a heap out-of-bounds read. Supplying a longer IV is silently truncated instead of rejected.  Impact summary: An application passing a caller-supplied IV of the wrong length may crash or read beyond its buffer. Because trailing IV bytes are ignored, an attacker who knows one message and tag may forge messages under a different IV.  CWE: CWE-125: Out-of-bounds Read  Description: AES-GCM-SIV copies the caller-supplied IV or nonce into its internal state using a copy whose length is taken from the expected nonce size rather than from the length the caller actually provided. When the caller passes a shorter IV, the copy reads past the end of the caller's buffer; AddressSanitizer confirms a heap out-of-bounds read reached through EVP_CipherInit_ex() into ossl_aes_gcm_siv_init(). When the caller passes a longer IV, the implementation silently discards the trailing bytes instead of rejecting the length.  The truncation breaks the binding between the IV and the computed authentication tag. An attacker who has observed a message and its tag under one IV can produce a message and tag that verify under a different IV whose first bytes match, since the surplus bytes never influence the computation. The message itself is unchanged, so this is a failure of IV commitment rather than a classic existential forgery.  Only applications that call EVP_CipherInit_ex() (or the equivalent provider cipher initialization) with an IV length other than the standard 12 bytes for AES-GCM-SIV are affected. The severity is limited because the out-of-bounds read is small and attacker-controlled only in length, and the forgery requires an unusual IV length choice by the application.  FIPS impact: no The FIPS modules are not affected by this issue, as AES-GCM-SIV is not an approved algorithm.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV invocation with short IV; evidence AES-GCM uses fixed reviewed nonce length, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95692"
+    },
+    {
+      "package": "openssl-provider-legacy",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95692",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Setting an AES-GCM-SIV IV shorter than the expected nonce length via EVP_CipherInit_ex() may trigger a heap out-of-bounds read. Supplying a longer IV is silently truncated instead of rejected.  Impact summary: An application passing a caller-supplied IV of the wrong length may crash or read beyond its buffer. Because trailing IV bytes are ignored, an attacker who knows one message and tag may forge messages under a different IV.  CWE: CWE-125: Out-of-bounds Read  Description: AES-GCM-SIV copies the caller-supplied IV or nonce into its internal state using a copy whose length is taken from the expected nonce size rather than from the length the caller actually provided. When the caller passes a shorter IV, the copy reads past the end of the caller's buffer; AddressSanitizer confirms a heap out-of-bounds read reached through EVP_CipherInit_ex() into ossl_aes_gcm_siv_init(). When the caller passes a longer IV, the implementation silently discards the trailing bytes instead of rejecting the length.  The truncation breaks the binding between the IV and the computed authentication tag. An attacker who has observed a message and its tag under one IV can produce a message and tag that verify under a different IV whose first bytes match, since the surplus bytes never influence the computation. The message itself is unchanged, so this is a failure of IV commitment rather than a classic existential forgery.  Only applications that call EVP_CipherInit_ex() (or the equivalent provider cipher initialization) with an IV length other than the standard 12 bytes for AES-GCM-SIV are affected. The severity is limited because the out-of-bounds read is small and attacker-controlled only in length, and the forgery requires an unusual IV length choice by the application.  FIPS impact: no The FIPS modules are not affected by this issue, as AES-GCM-SIV is not an approved algorithm.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV invocation with short IV; evidence AES-GCM uses fixed reviewed nonce length, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95692"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "liblastlog2-2",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "login",
+      "version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "mount",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78410",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "restricted bind-mount source race",
+      "untrustedInputPrerequisites": "Local authorized bind source and mutable path plus ownership/mode mount options.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78410"
+    },
+    {
+      "package": "libssl3t64",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95691",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: A retransmitted QUIC CRYPTO frame can release packet storage while the TLS record layer retains a direct pointer into that storage causing use after free.  Impact summary: A malicious QUIC server can cause a heap-use-after-free read in the OpenSSL QUIC client. The server can also identify one allocator-adjacent byte through the client's protected Handshake response.  CWE: CWE-416: Use After Free  Description: During CRYPTO stream processing, a pointer into the first frame's memory on the stream is lent to the TLS handshake processing. The memory must remain stable until it is processed and released. However the processing of retransmitted CRYPTO frames could release the memory if the retransmitted frame fully overlapped the existing frame. This then causes use-after-free read when the TLS handshake processing continues.  The use-after-free read can lead to a Denial-of-Service of the client application or a minor leak of information about the heap memory contents that might be overwritten with other data, subsequently allocated by the application, to the peer.  FIPS impact: no The FIPS module is not affected as the QUIC implementation is outside of the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "QUIC retransmission and attacker-controlled CRYPTO frames; reviewed HTTP clients use TLS over TCP, not QUIC.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95691"
+    },
+    {
+      "package": "openssl",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95691",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: A retransmitted QUIC CRYPTO frame can release packet storage while the TLS record layer retains a direct pointer into that storage causing use after free.  Impact summary: A malicious QUIC server can cause a heap-use-after-free read in the OpenSSL QUIC client. The server can also identify one allocator-adjacent byte through the client's protected Handshake response.  CWE: CWE-416: Use After Free  Description: During CRYPTO stream processing, a pointer into the first frame's memory on the stream is lent to the TLS handshake processing. The memory must remain stable until it is processed and released. However the processing of retransmitted CRYPTO frames could release the memory if the retransmitted frame fully overlapped the existing frame. This then causes use-after-free read when the TLS handshake processing continues.  The use-after-free read can lead to a Denial-of-Service of the client application or a minor leak of information about the heap memory contents that might be overwritten with other data, subsequently allocated by the application, to the peer.  FIPS impact: no The FIPS module is not affected as the QUIC implementation is outside of the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "QUIC retransmission and attacker-controlled CRYPTO frames; reviewed HTTP clients use TLS over TCP, not QUIC.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95691"
+    },
+    {
+      "package": "openssl-provider-legacy",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-95691",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: A retransmitted QUIC CRYPTO frame can release packet storage while the TLS record layer retains a direct pointer into that storage causing use after free.  Impact summary: A malicious QUIC server can cause a heap-use-after-free read in the OpenSSL QUIC client. The server can also identify one allocator-adjacent byte through the client's protected Handshake response.  CWE: CWE-416: Use After Free  Description: During CRYPTO stream processing, a pointer into the first frame's memory on the stream is lent to the TLS handshake processing. The memory must remain stable until it is processed and released. However the processing of retransmitted CRYPTO frames could release the memory if the retransmitted frame fully overlapped the existing frame. This then causes use-after-free read when the TLS handshake processing continues.  The use-after-free read can lead to a Denial-of-Service of the client application or a minor leak of information about the heap memory contents that might be overwritten with other data, subsequently allocated by the application, to the peer.  FIPS impact: no The FIPS module is not affected as the QUIC implementation is outside of the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "QUIC retransmission and attacker-controlled CRYPTO frames; reviewed HTTP clients use TLS over TCP, not QUIC.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-95691"
+    },
+    {
+      "package": "bsdutils",
+      "version": "1:2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "libblkid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "liblastlog2-2",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "libmount1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "libsmartcols1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "libuuid1",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "login",
+      "version": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux",
+          "version": "2.41.5-0+deb13u1"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "mount",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "util-linux"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "util-linux",
+      "version": "2.41.5-0+deb13u1",
+      "advisory": "CVE-2026-78409",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Inherited Debian essential/base utilities and libraries. The web application has no identified mount/nsenter command flow; some utilities are not needed by application business logic. Source-package matches span binaries/libraries. No-new-privileges, non-root, read-only and dropped capabilities constrain privileged helper prerequisites, not a fix. No arbitrary essential-package purge.",
+      "mechanism": "Detached-tree subdirectory mounting can follow intermediate symlinks outside the intended tree.",
+      "untrustedInputPrerequisites": "Affected X-mount.subdir path on Linux6.15+ with privileged mount capability; hosted kernel not verified.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-78409"
+    },
+    {
+      "package": "libsqlite3-0",
+      "version": "3.46.1-7+deb13u2",
+      "advisory": "CVE-2026-119373",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "sqlite3"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "CPython sqlite3 uses the system library; operational authority uses PostgreSQL. No untrusted SQLite database/SQL ingestion path is established in these cloud roles. Removal would break a supported stdlib module and was not attempted.",
+      "mechanism": "SQLite FTS5 doclist merge",
+      "untrustedInputPrerequisites": "Attacker-populated detail=none FTS5 table and prefix MATCH query.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-119373"
+    },
+    {
+      "package": "libacl1",
+      "version": "2.3.2-2+b1",
+      "advisory": "CVE-2026-54369",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "acl",
+          "version": "2.3.2-2"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Base filesystem ACL support, potentially used by coreutils; no application ACL administration flow identified. No arbitrary library removal.",
+      "mechanism": "pathname ACL symlink traversal",
+      "untrustedInputPrerequisites": "Privileged ACL caller traversing an attacker-controlled pathname; not an HTTP activity-list input.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-54369"
+    },
+    {
+      "package": "libssl3t64",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-88823",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: The AES-GCM-SIV implementation treats a zero-length Additional Authenticated Data (AAD) update as a reset of all the AAD supplied so far, instead of leaving the AAD unchanged. An application that supplies its AAD in several fragments, one of which is empty, therefore produces or verifies messages whose authentication tag does not cover the AAD supplied before the empty fragment.  Impact summary: Data an application intended to authenticate alongside a message is silently left unauthenticated. An attacker can forge the AAD of such a message.  CWE: CWE-325: Missing Cryptographic Step  Description: An application passing AAD in multiple chunks of which some have zero length will have the previous AAD chunks effectively unauthenticated. Also, on context re-initialisation, the AAD was not reset, which meant that any AAD accumulated from the previous context usage were also included in the AAD of the new message.  The fix makes a zero-length AAD update a no-op and clears any accumulated AAD whenever the context is re-initialised with a key or a nonce. A re-initialisation that only changes parameters keeps the AAD.  FIPS impact: no The FIPS modules are not affected, as AES-GCM-SIV is not a FIPS approved algorithm and is implemented only in the default provider, outside the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV and subsequent zero-length AAD update; evidence uses AES-GCM with nonempty bound AAD, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-88823"
+    },
+    {
+      "package": "openssl",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-88823",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: The AES-GCM-SIV implementation treats a zero-length Additional Authenticated Data (AAD) update as a reset of all the AAD supplied so far, instead of leaving the AAD unchanged. An application that supplies its AAD in several fragments, one of which is empty, therefore produces or verifies messages whose authentication tag does not cover the AAD supplied before the empty fragment.  Impact summary: Data an application intended to authenticate alongside a message is silently left unauthenticated. An attacker can forge the AAD of such a message.  CWE: CWE-325: Missing Cryptographic Step  Description: An application passing AAD in multiple chunks of which some have zero length will have the previous AAD chunks effectively unauthenticated. Also, on context re-initialisation, the AAD was not reset, which meant that any AAD accumulated from the previous context usage were also included in the AAD of the new message.  The fix makes a zero-length AAD update a no-op and clears any accumulated AAD whenever the context is re-initialised with a key or a nonce. A re-initialisation that only changes parameters keeps the AAD.  FIPS impact: no The FIPS modules are not affected, as AES-GCM-SIV is not a FIPS approved algorithm and is implemented only in the default provider, outside the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV and subsequent zero-length AAD update; evidence uses AES-GCM with nonempty bound AAD, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-88823"
+    },
+    {
+      "package": "openssl-provider-legacy",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-88823",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: The AES-GCM-SIV implementation treats a zero-length Additional Authenticated Data (AAD) update as a reset of all the AAD supplied so far, instead of leaving the AAD unchanged. An application that supplies its AAD in several fragments, one of which is empty, therefore produces or verifies messages whose authentication tag does not cover the AAD supplied before the empty fragment.  Impact summary: Data an application intended to authenticate alongside a message is silently left unauthenticated. An attacker can forge the AAD of such a message.  CWE: CWE-325: Missing Cryptographic Step  Description: An application passing AAD in multiple chunks of which some have zero length will have the previous AAD chunks effectively unauthenticated. Also, on context re-initialisation, the AAD was not reset, which meant that any AAD accumulated from the previous context usage were also included in the AAD of the new message.  The fix makes a zero-length AAD update a no-op and clears any accumulated AAD whenever the context is re-initialised with a key or a nonce. A re-initialisation that only changes parameters keeps the AAD.  FIPS impact: no The FIPS modules are not affected, as AES-GCM-SIV is not a FIPS approved algorithm and is implemented only in the default provider, outside the OpenSSL FIPS module boundary.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "AES-GCM-SIV and subsequent zero-length AAD update; evidence uses AES-GCM with nonempty bound AAD, not GCM-SIV.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-88823"
+    },
+    {
+      "package": "libssl3t64",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-107496",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Encrypting a CMS message to an EC certificate whose group order is 1 may cause CMS_encrypt() or CMS_encrypt_ex() to loop indefinitely.  Impact summary: An attacker able to supply the recipient certificate to an application performing CMS encryption can cause that application to loop indefinitely, consuming CPU and resulting in Denial of Service.  CWE: CWE-835: Loop with Unreachable Exit Condition ('Infinite Loop')  Description: CMS_encrypt() and CMS_encrypt_ex() encrypt a message to one or more recipient certificates and, for an EC recipient, generate an ephemeral key in the recipient's group. If the certificate declares a group order of 1, random scalar generation can only produce zero. The key generation routine then retries without limit while waiting for a nonzero private scalar, so the call never returns.  The OpenSSL TLS and QUIC implementations do not use this path. An application is exposed only if it calls CMS_encrypt() or CMS_encrypt_ex() with a recipient certificate whose EC parameters are attacker-controlled. Certificates with normal EC group orders do not trigger the loop.  OpenSSL 4.0 and later reject unknown explicit EC groups in default builds. These versions are affected only when configured with the enable-ec_explicit_curves option.  The result is a hang that consumes a CPU core until the process is interrupted, a Denial of Service. The severity is Low because the attacker must supply the recipient certificate and the application must choose to encrypt to it; ordinary CMS encryption to trusted recipients is unaffected.  The fix makes EC key generation fail when the group has no valid nonzero private scalar, instead of retrying indefinitely.  FIPS impact: no The FIPS modules in 4.1, 4.0, 3.5 and 3.0 are not affected. The FIPS provider does not support arbitrary explicit EC domain parameters, so an order-1 group is rejected during key import before the vulnerable key generation path is reached.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "CMS encryption to adversarial EC recipient certificate with order-one group; no application CMS API path identified.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-107496"
+    },
+    {
+      "package": "openssl",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-107496",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery"
+      ],
+      "sourcePackage": [],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Encrypting a CMS message to an EC certificate whose group order is 1 may cause CMS_encrypt() or CMS_encrypt_ex() to loop indefinitely.  Impact summary: An attacker able to supply the recipient certificate to an application performing CMS encryption can cause that application to loop indefinitely, consuming CPU and resulting in Denial of Service.  CWE: CWE-835: Loop with Unreachable Exit Condition ('Infinite Loop')  Description: CMS_encrypt() and CMS_encrypt_ex() encrypt a message to one or more recipient certificates and, for an EC recipient, generate an ephemeral key in the recipient's group. If the certificate declares a group order of 1, random scalar generation can only produce zero. The key generation routine then retries without limit while waiting for a nonzero private scalar, so the call never returns.  The OpenSSL TLS and QUIC implementations do not use this path. An application is exposed only if it calls CMS_encrypt() or CMS_encrypt_ex() with a recipient certificate whose EC parameters are attacker-controlled. Certificates with normal EC group orders do not trigger the loop.  OpenSSL 4.0 and later reject unknown explicit EC groups in default builds. These versions are affected only when configured with the enable-ec_explicit_curves option.  The result is a hang that consumes a CPU core until the process is interrupted, a Denial of Service. The severity is Low because the attacker must supply the recipient certificate and the application must choose to encrypt to it; ordinary CMS encryption to trusted recipients is unaffected.  The fix makes EC key generation fail when the group has no valid nonzero private scalar, instead of retrying indefinitely.  FIPS impact: no The FIPS modules in 4.1, 4.0, 3.5 and 3.0 are not affected. The FIPS provider does not support arbitrary explicit EC domain parameters, so an order-1 group is rejected during key import before the vulnerable key generation path is reached.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "CMS encryption to adversarial EC recipient certificate with order-one group; no application CMS API path identified.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-107496"
+    },
+    {
+      "package": "openssl-provider-legacy",
+      "version": "3.5.7-1~deb13u3",
+      "advisory": "CVE-2026-107496",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "openssl"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "not-fixed"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "mechanism": "Issue summary: Encrypting a CMS message to an EC certificate whose group order is 1 may cause CMS_encrypt() or CMS_encrypt_ex() to loop indefinitely.  Impact summary: An attacker able to supply the recipient certificate to an application performing CMS encryption can cause that application to loop indefinitely, consuming CPU and resulting in Denial of Service.  CWE: CWE-835: Loop with Unreachable Exit Condition ('Infinite Loop')  Description: CMS_encrypt() and CMS_encrypt_ex() encrypt a message to one or more recipient certificates and, for an EC recipient, generate an ephemeral key in the recipient's group. If the certificate declares a group order of 1, random scalar generation can only produce zero. The key generation routine then retries without limit while waiting for a nonzero private scalar, so the call never returns.  The OpenSSL TLS and QUIC implementations do not use this path. An application is exposed only if it calls CMS_encrypt() or CMS_encrypt_ex() with a recipient certificate whose EC parameters are attacker-controlled. Certificates with normal EC group orders do not trigger the loop.  OpenSSL 4.0 and later reject unknown explicit EC groups in default builds. These versions are affected only when configured with the enable-ec_explicit_curves option.  The result is a hang that consumes a CPU core until the process is interrupted, a Denial of Service. The severity is Low because the attacker must supply the recipient certificate and the application must choose to encrypt to it; ordinary CMS encryption to trusted recipients is unaffected.  The fix makes EC key generation fail when the group has no valid nonzero private scalar, instead of retrying indefinitely.  FIPS impact: no The FIPS modules in 4.1, 4.0, 3.5 and 3.0 are not affected. The FIPS provider does not support arbitrary explicit EC domain parameters, so an order-1 group is rejected during key import before the vulnerable key generation path is reached.",
+      "status": "Unresolved high runtime match; installed security package is newest signed Trixie candidate. No independent acceptance.",
+      "requiredUseAssessment": "OpenSSL is required by TLS/crypto; specific affected operation not identified in reviewed application paths. Bundled-library mappings remain separate.",
+      "untrustedInputPrerequisites": "CMS encryption to adversarial EC recipient certificate with order-one group; no application CMS API path identified.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-107496"
+    },
+    {
+      "package": "libacl1",
+      "version": "2.3.2-2+b1",
+      "advisory": "CVE-2026-54370",
+      "severity": "High",
+      "roles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery",
+        "frontend"
+      ],
+      "sourcePackage": [
+        {
+          "name": "acl",
+          "version": "2.3.2-2"
+        }
+      ],
+      "scannerFix": {
+        "versions": [],
+        "state": "wont-fix"
+      },
+      "namespace": "debian:distro:debian:13",
+      "runtimePackageRecord": true,
+      "accepted": false,
+      "remediationAttempted": "Signed Debian APT candidate check; no compatible Trixie fix for retained matches. No sid/forky or source replacement.",
+      "requiredUseAssessment": "Base filesystem ACL support, potentially used by coreutils; no application ACL administration flow identified. No arbitrary library removal.",
+      "mechanism": "pathname ACL TOCTOU race",
+      "untrustedInputPrerequisites": "Privileged getfacl/setfacl/chacl or library operation on attacker-controlled ancestor.",
+      "status": "Unresolved runtime match. No security acceptance or suppression.",
+      "mitigations": "Non-root/read-only/no-new-privileges/dropped capabilities locally verified; no proof of complete unreachability, hosted enforcement or independent risk acceptance.",
+      "vendorReference": "CVE-2026-54370"
+    }
+  ],
+  "remainingAdvisoryIDs": [
+    "CVE-2025-69720",
+    "CVE-2026-102010",
+    "CVE-2026-107496",
+    "CVE-2026-119373",
+    "CVE-2026-119374",
+    "CVE-2026-119379",
+    "CVE-2026-19499",
+    "CVE-2026-5435",
+    "CVE-2026-54369",
+    "CVE-2026-54370",
+    "CVE-2026-76642",
+    "CVE-2026-78408",
+    "CVE-2026-78409",
+    "CVE-2026-78410",
+    "CVE-2026-82560",
+    "CVE-2026-84243",
+    "CVE-2026-88823",
+    "CVE-2026-9538",
+    "CVE-2026-95619",
+    "CVE-2026-95691",
+    "CVE-2026-95692"
+  ],
+  "confirmedVendorFix": {
+    "package": "zlib1g",
+    "old": "1:1.3.dfsg+really1.3.1-1+b1",
+    "new": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+    "advisory": "CVE-2026-85091"
+  },
+  "databaseDrift": {
+    "previousDatabaseBuilt": "2026-11-16T06:30:54Z",
+    "unchangedBaselinePythonHigh": [
+      61,
+      72
+    ],
+    "unchangedBaselineFrontendHigh": [
+      60,
+      67
+    ],
+    "newOpenSSLAdvisories": [
+      "CVE-2026-107496",
+      "CVE-2026-88823",
+      "CVE-2026-95691",
+      "CVE-2026-95692"
+    ],
+    "CVE-2026-76844": "No longer associated with zlib even in unchanged baseline; not a patch result. Current Debian tracker describes webpack-dev-middleware, DSA-6613-1 still lists this ID for zlib. Official-source identity conflict remains unresolved."
+  },
+  "bundledNativeLibraries": {
+    "psycopgIdentical": true,
+    "hashes": {
+      "libpq-2be5f14a.so.5.18": "a745c39b867c6f8a3a33a772d89781952f54e6935065954e0fe0958417abe91e",
+      "libgssapi_krb5-497db0c6.so.2.2": "2a74b0330ee973281b26f8ebe4acef0ebf9ee99c6b68497cf9151fff6c4c34e1",
+      "libcrypt-13f4f5d0.so.1": "a74d1e8438d224e0fff14da0001f5e50129b0d666a103bf981b976770158d106",
+      "libcrypto-2a5143d4.so.3": "23da537ad394dd2bcd86c22743937fbd971ce98c506736c5461599bd3f298a98",
+      "libsasl2-84219a89.so.3.0.0": "ae3f8967d5fa191dac7c6ae5f9130f659cf2f5cb66b2f7e5c5a1a5a47369fe5a",
+      "libldap-957a14d7.so.2.0.200": "1c0382ff2d47c6ef0bfb690496253c53c989cc89c81369bbc0a71d6fba25f9d5",
+      "libcom_err-2abe824b.so.2.1": "5426dcb54dd01c9eedda05e2179f0e47114e8b48a534ffe9e94916e79471b257",
+      "libpcre-9513aab5.so.1.2.0": "02eda850e04931656d8af81f5171bff74d8bec1553d3d85c3d32d7fc5efe8864",
+      "libk5crypto-b1f99d5c.so.3.1": "9844e5009e70a6ad2fb22b587306810fe2a7b1b9f6b9922daa1c78ba3466de27",
+      "libkeyutils-dfe70bd6.so.1.5": "c29e41b03cf4b2dffbfb4960946e2b42f82c0ca5d53d231d3f0fc597ba274488",
+      "libselinux-0922c95c.so.1": "d4fa8e7fb3add960a68325a59c9694244aea3213fd739a50815cb067c4965654",
+      "libssl-4a840876.so.3": "2d9c875576b07e51c03bc74e6ed5d7b47ca7ee7655895f55394baf3c7c632687",
+      "libkrb5-fcafa220.so.3.3": "b2aab528ff4cab2144e5ce01b246ac09f574a072a53ff63ea81d6bb29b26b8f1",
+      "liblber-1ca05b8b.so.2.0.200": "49fdea56a7a283b5ad38946e8805d48c3a582d19eab5b86d24bc1a0cc1b57b3a",
+      "libkrb5support-d0bcff84.so.0.1": "6a71f57d748fef79b4e736d5348875545d0a224fa8928b5d62a3cf2647fc109f"
+    },
+    "risk": "Psycopg wheel still bundles unchanged Kerberos/OpenSSL/LDAP libraries. Absence of distro Kerberos matches is not proof those bundled components are fixed or unaffected; version/component mapping remains a security review requirement. No exploitability claim."
+  },
+  "suppressions": [],
+  "securityAcceptance": false,
+  "vendorReviews": {
+    "CVE-2026-82560": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "success": true,
+      "sha256": "b9bff184cc25fd9ec8f5726c13708d1d49e86fba083d69ef89d30954a042d133",
+      "releaseRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Pod::Text versions before 6.1.1 for Perl allow CPU and memory exhaustion formatting a POD document whose =over nesting drives the margin to the output width.  Each =over adds its indent to the margin, which wrap() subtracts from the output width to get the space available for text. When that space reaches zero, the line-splitting substitution matches the empty string, and the loop consumes no input while appending the margin padding on every pass.  Formatting an attacker-supplied POD document never returns, and the output grows until memory is exhausted.",
+      "allPackageRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "5.44.0-3",
+          "vulnerable"
+        ],
+        [
+          "perl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          "1148455"
+        ],
+        [
+          "podlators-perl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2025-69720": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "success": true,
+      "sha256": "3542be519daaef8f60a0fd662f4a6129a238f59ef9b86155869d49cfd2b3af78",
+      "releaseRows": [
+        [
+          "ncurses (PTS)",
+          "bookworm",
+          "6.4-4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "6.5+20250216-2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "The infocmp command-line tool in ncurses before 6.5-20251213 has a stack-based buffer overflow in analyze_string in progs/infocmp.c.",
+      "allPackageRows": [
+        [
+          "ncurses (PTS)",
+          "bookworm",
+          "6.4-4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "6.5+20250216-2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "6.6+20260608-2",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-9538": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "success": true,
+      "sha256": "f9466371b6a5bd0094c5a53028d43144ca3115918fb37ca7ae0d48eb9dc350b1",
+      "releaseRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Archive::Tar versions before 3.10 for Perl allow memory exhaustion via attacker controlled entry size field in tar header.  _read_tar() reads each entry's payload with $handle->read($$data, $block), where $block is derived from the entry's 12-byte size field in the tar header with no upper bound on that value.  A crafted header declaring a multi-gigabyte size causes Perl to allocate a scalar of that size.",
+      "allPackageRows": [
+        [
+          "perl (PTS)",
+          "bookworm",
+          "5.36.0-7+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "5.36.0-7+deb12u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "5.40.1-6+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "5.44.0-3",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-95619": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "success": true,
+      "sha256": "b461b164c216d2f344a365f577ddfd9349f2590c7218ce00f0fe4fbd99ee89f6",
+      "releaseRows": [
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "A flaw was found in libstdc++. An integer overflow can occur when processing large inputs to the aligned operator new in the C++ library. This vulnerability could lead to an undersized memory allocation, potentially causing memory corruption or application instability.",
+      "allPackageRows": [
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky",
+          "12.5.0-11",
+          "vulnerable"
+        ],
+        [
+          "",
+          "sid",
+          "12.5.0-12",
+          "vulnerable"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky",
+          "13.5.0-3",
+          "fixed"
+        ],
+        [
+          "",
+          "sid",
+          "13.5.0-4",
+          "fixed"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "14.4.0-4",
+          "fixed"
+        ],
+        [
+          "gcc-15 (PTS)",
+          "forky",
+          "15.3.0-5",
+          "fixed"
+        ],
+        [
+          "",
+          "sid",
+          "15.3.0-6",
+          "fixed"
+        ],
+        [
+          "gcc-16 (PTS)",
+          "forky, sid",
+          "16.2.0-4",
+          "fixed"
+        ],
+        [
+          "gcc-12",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2026-102010": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "success": true,
+      "sha256": "7c738bd8ea9f772d8126b5a7be90b1202a8888b3f5821d942d567830cd468dda",
+      "releaseRows": [
+        [
+          "gcc-11 (PTS)",
+          "bookworm",
+          "11.3.0-12",
+          "vulnerable"
+        ],
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "A flaw was found in GCC. When an application calls the erase_if function on a binary heap priority queue in libstdc++, the library reallocates storage but fails to update its internal entry pointer. An attacker capable of triggering this operation can exploit this use-after-free condition, leading to a Denial of Service (DoS) via an application crash or potential memory corruption.",
+      "allPackageRows": [
+        [
+          "gcc-11 (PTS)",
+          "bookworm",
+          "11.3.0-12",
+          "vulnerable"
+        ],
+        [
+          "",
+          "sid",
+          "11.5.0-14",
+          "fixed"
+        ],
+        [
+          "gcc-12 (PTS)",
+          "bookworm",
+          "12.2.0-14+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "12.4.0-5",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky",
+          "12.5.0-11",
+          "fixed"
+        ],
+        [
+          "",
+          "sid",
+          "12.5.0-12",
+          "fixed"
+        ],
+        [
+          "gcc-13 (PTS)",
+          "trixie",
+          "13.3.0-16",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky",
+          "13.5.0-3",
+          "fixed"
+        ],
+        [
+          "",
+          "sid",
+          "13.5.0-4",
+          "fixed"
+        ],
+        [
+          "gcc-14 (PTS)",
+          "trixie",
+          "14.2.0-19",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "14.4.0-4",
+          "fixed"
+        ],
+        [
+          "gcc-15 (PTS)",
+          "forky",
+          "15.3.0-5",
+          "fixed"
+        ],
+        [
+          "",
+          "sid",
+          "15.3.0-6",
+          "fixed"
+        ],
+        [
+          "gcc-16 (PTS)",
+          "forky, sid",
+          "16.2.0-4",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-19499": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "success": true,
+      "sha256": "5ae203e2503db74b024563d3a6cbac974337438d5f3db69b93cbdd0ec38aecd7",
+      "releaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Calling strfmon and strfmon_l in the GNU C Library version 2.38 to 2.44 can write past the end of the caller-supplied output buffer when a conversion uses right-justified width padding.  Exploitation requires an application code path that calls strfmon or strfmon_l with right-justified width padding into a destination buffer that is large enough for the padding to succeed but too small for the internal memmove call. The field width or format may be attacker-influenced or a fixed susceptible pattern in the caller.  At the time of publication, no network-facing application impact is known.",
+      "allPackageRows": [
+        [
+          "Description",
+          "Calling strfmon and strfmon_l in the GNU C Library version 2.38 to 2.44 can write past the end of the caller-supplied output buffer when a conversion uses right-justified width padding.  Exploitation requires an application code path that calls strfmon or strfmon_l with right-justified width padding into a destination buffer that is large enough for the padding to succeed but too small for the internal memmove call. The field width or format may be attacker-influenced or a fixed susceptible pattern in the caller.  At the time of publication, no network-facing application impact is known."
+        ],
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.43-7",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-119379": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "success": true,
+      "sha256": "d7171e070be82e7ea297bad3ab3d2ca5aee54a70b198c5a2bec2b762ac942679",
+      "releaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "SQLite before 3.54.0 built with the session extension contains a heap buffer overflow vulnerability in sqlite3changeset_apply() that allows attackers to corrupt heap memory by supplying crafted changesets. Attackers can repeat a table name in a second changeset block with a larger column count, causing sessionUpdateFind() to memset past the undersized aUpdateMask allocation.",
+      "allPackageRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.54.1-2",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-84243": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "success": true,
+      "sha256": "98865d37ee29c5c0734e80b8389d5a071afe6b2edd358bb63d1ea47cf7ac7b47",
+      "releaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "The gettext family of functions in the GNU C Library version 2.0 and later accept LANGUAGE environment variable entries that contain '/' or that are equal to \"..\", unless the program is setuid or setgid (AT_SECURE).  An attacker who can set LANGUAGE in the environment of a program that uses gettext can make it load a message catalog (.mo file) from an arbitrary location in the file system.  A crafted .mo file can crash the program through out-of-range offsets, or supply translations whose format directives do not match the arguments passed by the program.  That causes undefined behaviour in the printf family of functions and may allow arbitrary code execution with the privileges of the program.  The safety of message catalogs relies on them being installed in trusted, read-only locations, and the directory traversal bypasses this.  The fix for CVE-2014-0475 rejects \"..\" path components in locale names passed to setlocale or taken from the LC_ALL, LC_* and LANG environment variables.  gettext reads LANGUAGE directly and appends each colon-separated entry to the message catalog directory, so that fix did not cover LANGUAGE.  LANGUAGE is only used when the LC_MESSAGES locale is not \"C\", \"C.\" or \"POSIX\", so the attacker must also be able to select another installed locale, for example through LANG or LC_ALL.  Exploitation also requires that the attacker can place the crafted file in a location readable by the target program, and that the environment crosses a trust boundary without the program running as AT_SECURE.  An example is an SSH server that accepts LANGUAGE and LANG from clients through the AcceptEnv directive and restricts an account to a forced command; the attacker may use this to escape the restriction.",
+      "allPackageRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.43-7",
+          "vulnerable"
+        ],
+        [
+          "glibc",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          "1152640"
+        ]
+      ]
+    },
+    "CVE-2026-119374": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "success": true,
+      "sha256": "08ee3a28b1be9e9dfcbad161a79731b08cc08a6b54caef90098da46bfc574cdc",
+      "releaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "SQLite before 3.54.0 built with FTS5 contains a heap buffer overflow in fts5DoSecureDelete() that allows attackers to write past the leaf page buffer via crafted footer key offsets. Attackers can supply a database file with a corrupted FTS5 index that, when deleted from with secure-delete enabled, corrupts heap memory and crashes the application.",
+      "allPackageRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.54.1-2",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-78408": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "success": true,
+      "sha256": "c2ce37b05cca7f05768d22c20645c174592a837fb20423fa7f106dc4e6e0d104",
+      "releaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "bookworm",
+          "(not affected)",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "notForUs": false,
+      "description": "The nsenter --join-cgroup option opens the target cgroup.procs file as root and leaves that file descriptor open across later namespace and credential changes and across execve(). Because the kernel checks later cgroup migrations using the credentials from the original open, a program run in an attacker-controlled target can inherit root's ability to move host processes between cgroups. After a privileged operator uses --join-cgroup against that target, an unprivileged user can migrate and terminate unrelated root processes.",
+      "allPackageRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.42.4-1",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-5435": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "success": true,
+      "sha256": "2361f3d31bc16c0ed30e5f79e4398e73155b117f7c2097c4208f9d756cdd0959",
+      "releaseRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "The deprecated functions ns_printrrf, ns_printrr and fp_nquery in the GNU C Library version 2.2 and newer fail to enforce the caller-supplied buffer length, and can result in an out-of-bounds write when printing TSIG records.",
+      "allPackageRows": [
+        [
+          "glibc (PTS)",
+          "bookworm",
+          "2.36-9+deb12u14",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.36-9+deb12u7",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.41-12+deb13u4",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.43-7",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-76642": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "success": true,
+      "sha256": "fd40eb589f4edd1f5b2df060db1d418501f7138459069481c60471abe1efde24",
+      "releaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "bookworm",
+          "(not affected)",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "notForUs": false,
+      "description": "util-linux versions through 2.41.5 and 2.42.2 fail to check mount helper exit status before running post-mount hooks, allowing unprivileged users to execute privileged operations on pre-existing filesystems. Attackers can exploit X-mount.idmap or X-mount.owner hooks to clone filesystems with inherited suid bits or modify target inode permissions after a helper fails, achieving privilege escalation.",
+      "allPackageRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.42.4-1",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-95692": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95692",
+      "success": true,
+      "sha256": "90e931a578181373ef74cf7dbfee3d518f73a1829171e6f1ffb3586d7665eeba",
+      "releaseRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Issue summary: Setting an AES-GCM-SIV IV shorter than the expected nonce length via EVP_CipherInit_ex() may trigger a heap out-of-bounds read. Supplying a longer IV is silently truncated instead of rejected.  Impact summary: An application passing a caller-supplied IV of the wrong length may crash or read beyond its buffer. Because trailing IV bytes are ignored, an attacker who knows one message and tag may forge messages under a different IV.  CWE: CWE-125: Out-of-bounds Read  Description: AES-GCM-SIV copies the caller-supplied IV or nonce into its internal state using a copy whose length is taken from the expected nonce size rather than from the length the caller actually provided. When the caller passes a shorter IV, the copy reads past the end of the caller's buffer; AddressSanitizer confirms a heap out-of-bounds read reached through EVP_CipherInit_ex() into ossl_aes_gcm_siv_init(). When the caller passes a longer IV, the implementation silently discards the trailing bytes instead of rejecting the length.  The truncation breaks the binding between the IV and the computed authentication tag. An attacker who has observed a message and its tag under one IV can produce a message and tag that verify under a different IV whose first bytes match, since the surplus bytes never influence the computation. The message itself is unchanged, so this is a failure of IV commitment rather than a classic existential forgery.  Only applications that call EVP_CipherInit_ex() (or the equivalent provider cipher initialization) with an IV length other than the standard 12 bytes for AES-GCM-SIV are affected. The severity is limited because the out-of-bounds read is small and attacker-controlled only in length, and the forgery requires an unusual IV length choice by the application.  FIPS impact: no The FIPS modules are not affected by this issue, as AES-GCM-SIV is not an approved algorithm.",
+      "allPackageRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.6.5-1",
+          "vulnerable"
+        ],
+        [
+          "openssl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2026-78410": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "success": true,
+      "sha256": "370b52136365d440004d915421bd2b2529393511c802bdc04f3e3a873241621b",
+      "releaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "A flaw was found in util-linux. Restricted bind mounts take the source path from fstab but do not pin that source before the privileged mount. A local unprivileged user who can replace the authorized source or a writable ancestor can redirect SUID mount(8) to bind another host directory. If the fstab entry also sets X-mount.owner, X-mount.group, or X-mount.mode, root then changes ownership or mode on that redirected inode.",
+      "allPackageRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.42.4-1",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-95691": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95691",
+      "success": true,
+      "sha256": "c43aa478060aaf69f38280a4b79e069cde7f92446219f406bd67b502c202740a",
+      "releaseRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Issue summary: A retransmitted QUIC CRYPTO frame can release packet storage while the TLS record layer retains a direct pointer into that storage causing use after free.  Impact summary: A malicious QUIC server can cause a heap-use-after-free read in the OpenSSL QUIC client. The server can also identify one allocator-adjacent byte through the client's protected Handshake response.  CWE: CWE-416: Use After Free  Description: During CRYPTO stream processing, a pointer into the first frame's memory on the stream is lent to the TLS handshake processing. The memory must remain stable until it is processed and released. However the processing of retransmitted CRYPTO frames could release the memory if the retransmitted frame fully overlapped the existing frame. This then causes use-after-free read when the TLS handshake processing continues.  The use-after-free read can lead to a Denial-of-Service of the client application or a minor leak of information about the heap memory contents that might be overwritten with other data, subsequently allocated by the application, to the peer.  FIPS impact: no The FIPS module is not affected as the QUIC implementation is outside of the OpenSSL FIPS module boundary.",
+      "allPackageRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.6.5-1",
+          "vulnerable"
+        ],
+        [
+          "openssl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2026-78409": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "success": true,
+      "sha256": "7762ce7d10558ca03e3fcc3995b97e7a24d13ab4b1d6cdd3e4bf9ff7d357ba48",
+      "releaseRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "util-linux",
+          "source",
+          "bookworm",
+          "(not affected)",
+          "",
+          "",
+          ""
+        ]
+      ],
+      "notForUs": false,
+      "description": "The X-mount.subdir option uses a detached-tree fast path on Linux 6.15 and later and passes the configured subdirectory to open_tree() with AT_SYMLINK_NOFOLLOW. That flag does not stop intermediate symlink traversal or keep resolution inside the newly mounted filesystem. A local unprivileged user with an fstab-authorized X-mount.subdir entry can attach a host path at the intended mountpoint.",
+      "allPackageRows": [
+        [
+          "util-linux (PTS)",
+          "bookworm",
+          "2.38.1-5+deb12u3",
+          "fixed"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "2.38.1-5+deb12u1",
+          "fixed"
+        ],
+        [
+          "",
+          "trixie (security), trixie",
+          "2.41.5-0+deb13u1",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.42.4-1",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-119373": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "success": true,
+      "sha256": "caa306ace78626cf4c28044f3d1053a2d7a5785ebe88d42504218e5ffa23aaee",
+      "releaseRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "SQLite before 3.54.0 built with FTS5 contains a heap buffer overflow in fts5MergeRowidLists() that undersizes the output buffer when merging detail=none prefix doclists. Attackers who can populate a detail=none FTS5 table with negative rowids and run a prefix MATCH query can write past the allocation, corrupting heap memory and crashing the process.",
+      "allPackageRows": [
+        [
+          "sqlite3 (PTS)",
+          "bookworm",
+          "3.40.1-2+deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.46.1-7+deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.54.1-2",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-54369": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "success": true,
+      "sha256": "4677cdb2b848eca7bc76f57dd54e5d01e309f438bba58d892550db432fbde5ca",
+      "releaseRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "acl before version 2.4.0 contains a symlink traversal vulnerability in the libacl pathname-based functions acl_get_file(), acl_set_file(), acl_extended_file(), and acl_delete_def_file() that allows local attackers to escalate privileges by replacing any pathname component with a symbolic link. Attackers who control any component of a pathname processed by a privileged caller can redirect ACL read or write operations to arbitrary files or directories, enabling unauthorized manipulation of access control lists and local privilege escalation.",
+      "allPackageRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.4.0-1",
+          "fixed"
+        ]
+      ]
+    },
+    "CVE-2026-88823": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-88823",
+      "success": true,
+      "sha256": "ad528196ace29a5da990c7daa769d533b521d14e625260647671682d8b5256dc",
+      "releaseRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Issue summary: The AES-GCM-SIV implementation treats a zero-length Additional Authenticated Data (AAD) update as a reset of all the AAD supplied so far, instead of leaving the AAD unchanged. An application that supplies its AAD in several fragments, one of which is empty, therefore produces or verifies messages whose authentication tag does not cover the AAD supplied before the empty fragment.  Impact summary: Data an application intended to authenticate alongside a message is silently left unauthenticated. An attacker can forge the AAD of such a message.  CWE: CWE-325: Missing Cryptographic Step  Description: An application passing AAD in multiple chunks of which some have zero length will have the previous AAD chunks effectively unauthenticated. Also, on context re-initialisation, the AAD was not reset, which meant that any AAD accumulated from the previous context usage were also included in the AAD of the new message.  The fix makes a zero-length AAD update a no-op and clears any accumulated AAD whenever the context is re-initialised with a key or a nonce. A re-initialisation that only changes parameters keeps the AAD.  FIPS impact: no The FIPS modules are not affected, as AES-GCM-SIV is not a FIPS approved algorithm and is implemented only in the default provider, outside the OpenSSL FIPS module boundary.",
+      "allPackageRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.6.5-1",
+          "vulnerable"
+        ],
+        [
+          "openssl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2026-107496": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-107496",
+      "success": true,
+      "sha256": "62b742d6e0bfb178b71827ee016743366ac04ca67d05c12a69788e8c19dc75f1",
+      "releaseRows": [
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "Issue summary: Encrypting a CMS message to an EC certificate whose group order is 1 may cause CMS_encrypt() or CMS_encrypt_ex() to loop indefinitely.  Impact summary: An attacker able to supply the recipient certificate to an application performing CMS encryption can cause that application to loop indefinitely, consuming CPU and resulting in Denial of Service.  CWE: CWE-835: Loop with Unreachable Exit Condition ('Infinite Loop')  Description: CMS_encrypt() and CMS_encrypt_ex() encrypt a message to one or more recipient certificates and, for an EC recipient, generate an ephemeral key in the recipient's group. If the certificate declares a group order of 1, random scalar generation can only produce zero. The key generation routine then retries without limit while waiting for a nonzero private scalar, so the call never returns.  The OpenSSL TLS and QUIC implementations do not use this path. An application is exposed only if it calls CMS_encrypt() or CMS_encrypt_ex() with a recipient certificate whose EC parameters are attacker-controlled. Certificates with normal EC group orders do not trigger the loop.  OpenSSL 4.0 and later reject unknown explicit EC groups in default builds. These versions are affected only when configured with the enable-ec_explicit_curves option.  The result is a hang that consumes a CPU core until the process is interrupted, a Denial of Service. The severity is Low because the attacker must supply the recipient certificate and the application must choose to encrypt to it; ordinary CMS encryption to trusted recipients is unaffected.  The fix makes EC key generation fail when the group has no valid nonzero private scalar, instead of retrying indefinitely.  FIPS impact: no The FIPS modules in 4.1, 4.0, 3.5 and 3.0 are not affected. The FIPS provider does not support arbitrary explicit EC domain parameters, so an order-1 group is rejected during key import before the vulnerable key generation path is reached.",
+      "allPackageRows": [
+        [
+          "Description",
+          "Issue summary: Encrypting a CMS message to an EC certificate whose group order is 1 may cause CMS_encrypt() or CMS_encrypt_ex() to loop indefinitely.  Impact summary: An attacker able to supply the recipient certificate to an application performing CMS encryption can cause that application to loop indefinitely, consuming CPU and resulting in Denial of Service.  CWE: CWE-835: Loop with Unreachable Exit Condition ('Infinite Loop')  Description: CMS_encrypt() and CMS_encrypt_ex() encrypt a message to one or more recipient certificates and, for an EC recipient, generate an ephemeral key in the recipient's group. If the certificate declares a group order of 1, random scalar generation can only produce zero. The key generation routine then retries without limit while waiting for a nonzero private scalar, so the call never returns.  The OpenSSL TLS and QUIC implementations do not use this path. An application is exposed only if it calls CMS_encrypt() or CMS_encrypt_ex() with a recipient certificate whose EC parameters are attacker-controlled. Certificates with normal EC group orders do not trigger the loop.  OpenSSL 4.0 and later reject unknown explicit EC groups in default builds. These versions are affected only when configured with the enable-ec_explicit_curves option.  The result is a hang that consumes a CPU core until the process is interrupted, a Denial of Service. The severity is Low because the attacker must supply the recipient certificate and the application must choose to encrypt to it; ordinary CMS encryption to trusted recipients is unaffected.  The fix makes EC key generation fail when the group has no valid nonzero private scalar, instead of retrying indefinitely.  FIPS impact: no The FIPS modules in 4.1, 4.0, 3.5 and 3.0 are not affected. The FIPS provider does not support arbitrary explicit EC domain parameters, so an order-1 group is rejected during key import before the vulnerable key generation path is reached."
+        ],
+        [
+          "openssl (PTS)",
+          "bookworm",
+          "3.0.20-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "bookworm (security)",
+          "3.0.22-1~deb12u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "3.5.7-1~deb13u2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie (security)",
+          "3.5.7-1~deb13u3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "3.6.5-1",
+          "vulnerable"
+        ],
+        [
+          "openssl",
+          "source",
+          "(unstable)",
+          "(unfixed)",
+          "",
+          "",
+          ""
+        ]
+      ]
+    },
+    "CVE-2026-54370": {
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "success": true,
+      "sha256": "36c932e9051decbe74a402bbe4df1e60f52a17c39cab2785b83901467b36758e",
+      "releaseRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ]
+      ],
+      "notForUs": false,
+      "description": "acl before version 2.4.0 contains a time-of-check to time-of-use (TOCTOU) race condition vulnerability that allows local attackers to escalate privileges by replacing a pathname component with a symbolic link between an lstat() check and subsequent symlink-following operations such as stat(), chown(), chmod(), acl_get_file(), and acl_set_file(). Attackers who control a pathname component can redirect file access control list operations to arbitrary files when getfacl, setfacl, or chacl is invoked by a privileged process over an attacker-controlled path, resulting in local privilege escalation.",
+      "allPackageRows": [
+        [
+          "acl (PTS)",
+          "bookworm",
+          "2.3.1-3",
+          "vulnerable"
+        ],
+        [
+          "",
+          "trixie",
+          "2.3.2-2",
+          "vulnerable"
+        ],
+        [
+          "",
+          "forky, sid",
+          "2.4.0-1",
+          "fixed"
+        ]
+      ]
+    }
+  }
+}

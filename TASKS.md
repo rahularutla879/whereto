@@ -1,3 +1,7 @@
+## Task 52 checkpoint — bounded patched-candidate promotion preparation
+
+Single-package Trixie candidate and exact inactive promotion packet verified: six builds,18 packaging,175 backend,11 TLS/SQL/Redis,4 identity and actual API/browser/crash checks passed. Frontend324passes/1 unchanged date-fixture failure, types/lint pass. See [verification/report](docs/task52-candidate-promotion.md) and [residual security inventory](docs/task52-candidate-promotion-security.json). No candidate selected or security risk accepted; Task52 remains in progress. Separate real LLM/accounting, Google content rights, infrastructure capacity/ownership, IAM/IAP/secrets and spending gates remain. Task53 not started.
+
 ## Task 52 — isolated Debian 13 / Next 16.4.5 compatibility (2026-11-17)
 
 Bounded local candidate passes build/runtime/authenticated application/browser/recovery checks; no promotion. Same-DB results: Python 3/86→0/61 critical/high; frontend 2/53→0/60. New util-linux high findings and vendored-library mapping remain unresolved, not accepted. Candidate artifacts are isolated; original source/runtime selections and financial SQL remain unchanged. [Report](docs/task52-trixie-compatibility.md), [exact checks](docs/task52-trixie-compatibility-verification.json). Task52 remains in progress; no real providers/cloud/Task53.

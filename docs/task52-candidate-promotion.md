@@ -1,0 +1,62 @@
+# Task 52 — bounded Trixie candidate promotion preparation
+
+November 17, 2026. Baseline `07c87673b6cf614818e79ae870ce66ed76856443`.
+[Exact six images/source cohort](../deployment/candidates/trixie-zlib-v2/images.json) · [inactive promotion packet](../deployment/candidates/trixie-zlib-v2/promotion-PROPOSED.json) · [per-package/advisory security evidence](task52-candidate-promotion-security.json) · [verification](task52-candidate-promotion-verification.json).
+
+## Decision for the owner
+
+A single compatible Debian security update is implemented in six separate local candidates. **Technical promotion preparation does not accept the remaining security risks or authorize deployment.** Original images, defaults, source locks and financial/session history remain intact. No real provider, account, cloud, grant or public operation occurred.
+
+| Same November 17 scanner database | Original Trixie | Patched candidate |
+| --- | --- | --- |
+| Each Python role | 0 critical / 72 high | 0 critical / 71 high |
+| Frontend | 0 critical / 67 high | 0 critical / 66 high |
+
+All six lose exactly one high association, **CVE-2026-85091**, with no new critical/high association caused by this change. Twenty-one distinct advisory IDs remain across 71 distinct package/advisory rows; duplicate role matches are retained in the machine-readable inventory. These are scanner findings, not confirmed application exploits. No suppression, exception or independent acceptance was applied.
+
+## Exact change and provenance
+
+System `zlib1g` changes `1:1.3.dfsg+really1.3.1-1+b1` → `1:1.3.dfsg+really1.3.1-1+deb13u1`, amd64, archive SHA256 `8c27c342230503b73dfde629642c3b352e87b554e06d60cf58772f236a305ceb`. Signed APT metadata confirms the package; a simulated install changes one package, adds/removes none. [Debian tracker](https://security-tracker.debian.org/tracker/CVE-2026-85091) and [DSA-6613-1](https://www.debian.org/security/2026/dsa-6613) identify the security update. Its affected `gz_write` error path is not the same as general decompression; the fix is installed regardless of uncertain app reachability.
+
+`prepare_zlib_candidate.py` wraps the existing projector. It verifies exact archive/hash/size/architecture/version and original package before installing, checks Debian13 and dpkg consistency, and derives a new source cohort. The archive is a build-only mount; no download, installer archive, compiler, fixture signer or bootstrap is shipped. Both stages inherit the patched base. Original Dockerfiles, base references, Python dependency/hash locks, application bytes and SQL remain unchanged. Official Python3.12.16/Node24.22.3 bases and the candidate-only Next16.4.5 lock are retained.
+
+## Residual security decision
+
+Grype0.121.3 image `13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887` scanned twelve exact images using one database (v6.1.10, built `2026-11-17T06:20:58Z`). Raw hashes/archive identity are recorded. After its first download, updates/network were disabled for subsequent scans. All twelve exited0.
+
+**Database drift is not a code regression or a fix.** The unchanged baseline rose from Python61→72 high and frontend60→67 high versus November16. Four new OpenSSL IDs appear: CVE-2026-107496 (CMS/EC group), CVE-2026-88823 (GCM-SIV AAD), CVE-2026-95691 (QUIC retransmission), CVE-2026-95692 (GCM-SIV IV). Signed current Trixie repositories still offer installed `3.5.7-1~deb13u3`; no newer compatible security package was available in this check. The tracker shows vulnerable release rows based on u2; that does not prove u3 fixes these advisories. No sid/forky substitution was made.
+
+Reviewed application clients use TCP TLS rather than QUIC, evidence AES-GCM rather than GCM-SIV, and no identified CMS encryption entry point. These observations reduce identified exposure for particular paths; they are not exhaustive transitive reachability proof or an accepted exception. Other retained findings cover glibc, SQLite, util-linux, ACL, ncurses, Perl and GCC runtime packages. Per-ID/package versions, vendor descriptions/status, prerequisites, assessed use and controls are preserved in the security record. Supported fixes were checked; no unsupported library replacement or package purge was attempted.
+
+CVE-2026-76844 is no longer associated with zlib **even in the unchanged baseline**. Current Debian tracker describes webpack-dev-middleware while DSA-6613 still lists it under zlib. This unresolved official-source/scanner identity conflict is retained; its absence is not claimed as another patch. Node's bundled zlib `1.3.2.1-motley-285e94b` is unchanged, distinct from patched distro zlib. Psycopg-binary3.3.3 retains its bundled native libraries; disappearance of distro package matches does not prove bundled Kerberos/OpenSSL/LDAP security. Component mapping remains unresolved.
+
+Real API credentials and private provider data increase the consequences of compromise. Residual high findings and bundled-library uncertainty still require supported remediation or explicit independent disposition before exposure. Non-root/read-only/no capabilities do not constitute a vulnerability fix. No production security acceptance is recorded.
+
+## Bounded promotion and safe transition
+
+The packet lists six exact local image IDs and two proposed, hash-guarded contract replacements. Root contracts and normal startup are untouched. Shadow manifests are still `launchable=false`; every security, apply, financial and real-provider flag is false. The deployable frontend has FIXTURE=false. The separately tagged browser fixture has a different PIN/image and is excluded.
+
+The new cohort is `e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625`. Drain old factory owner slots, fence workers and explicitly invalidate old outings when selecting a different build. Old native evidence refuses `native_incompatible_evidence`; do not renew expiry, reinterpret automatically or retry provider work. Retain the independently verified current restore epoch and original grants/balances. **An image update alone requires no financial epoch reset.** If consistency cannot be proved, refuse/quarantine and use the existing separately approved reconciliation procedure. Rollback restores code references only, never operational/Redis/witness snapshots, consumed capabilities or financial allowances.
+
+No registry publication occurred. Owner-authorized registry enrollment/publication and verification of registry manifest digests against these local identities precede CloudRun image selection. Existing cloud templates remain inert, incomplete enrollment templates; the packet is not a ready-to-apply IAM/network deployment.
+
+## Verification and honest limits
+
+- All six Linux amd64 builds passed; five Python hash-lock/pip consistency checks and two frontend production builds (production candidate and separate fixture) passed. Actual runtimes remain Python3.12.16/Node24.22.3/Next16.4.5. All122 cohort-bound source/build inputs and original application outputs verified unchanged.
+- Six actual image source/import/crypto/SQLite/zlib roundtrip/refusal checks passed. Startup without enrollment exits78. Six kernel checks passed: nonroot, root/app read-only, CapEff=0, CapBnd=0, NoNewPrivs=1. No npm/pip installer, test signer/bootstrap, private evaluation files, installer archive or owner credential included. Representative Python/frontend dpkg inventories differ only in zlib1g; unchanged native wheel identities retained.
+- Focused existing backend/provider/retention/admission/owner/projection cohort in the patched Trixie factory: **175 passed**, zero failures/errors/skips (10.274s). Existing packaging/artifact/candidate/promotion cohort: **18 passed**, zero failures/errors/skips (6.055s); the three new delta cases also passed separately.
+- Disposable hosted connection suite: **11 passed**, identity port: **4 passed**. Actual TLS SQL with restricted roles, Redis TLS/AUTH/encryption/CAS/expiry, and pool lifecycle checked. The seven independent Python service processes comprise two backends, two factories, counter, dispatcher and recovery, retaining the six logical responsibilities including frontend. Immutable authenticated API probe passed with cross-worker deterministic clarification, two owned outings, cross-user/forged/replayed/unsupported refusal and protected synthetic inference/Maps dispatch.
+- Actual standalone Next/browser tests passed at desktop1280×900/mobile390×844: interpretation→pending date→confirmed authored origin→three provisional cards→View Plan/local details/credits. All three Google logos loaded; no horizontal overflow. Discard/refresh left protected operation count9→9 and empty browser authority. This is synthetic offline coverage, not live model/Maps/IAM or route-quality proof. Two separately operated browser users and exhaustive browser outage permutations were not exercised.
+- Immutable post-browser kill/restart drill passed:6,845 fictional units, one committed INTENT, zero deliveries before and after termination. New factory boot refused the old action; no retry/refund or accounting reset. Source and loaded assertion stayed unchanged. This does not retrospectively attribute earlier unexplained database_protocol or assertion observations; unchanged deadlines and hosted restart/capacity tests remain requirements.
+- Candidate-only Next16.4.5 frontend tests: **324 passed,1 unchanged expired-date fixture failed,0 skipped** (117.740s). `lib/surprise.test.ts:59` expects200 but receives422; frozen-date fixture was not edited. TypeScript and ESLint passed. npm audit retains **7 moderate development-tooling matches,0 high/critical**; no force update.
+- Read-only integrity verified10 historical attempts (OpenAI7/Google2/Anthropic1),$0.047366625 accounted,$11.952633375 remaining,324 private files, original journal hash/source pins and persistent halt. Configured-secret scan:0 current/history matches. Full backend/full direct financial30-case suite/frozen B2 replay were not rerun; no full-suite claim. Actual protected reservations/replay/crash were exercised above. No live provider, account/token-count, hosted IAM/IAP, cloud capacity or backup ownership verification.
+
+Retained development failures: initial APT cache ownership denied under cap-dropALL, resolved by fresh root-owned APT state with unchanged signature checks/capabilities; missing pinned PyJWT fixture wheel stopped initial application run before its tests, exact hash-verified public wheel restored; first new inventory test used a wrong field name (16passed/1error), corrected to actual schema;17passed, then18passed after adding the artifact-only policy-difference check; initial comparison included an ignored nonsecret tracking filename, corrected using376 tracked source/test files and unchanged Next lock. Source/config/SQL/deadlines/attestations were never loosened. Raw failed logs remain outside Git with hashes in verification.
+
+The build-bound `security-package.json` field `signedAPTMetadataSHA256` identifies the successful APT verification **transcript**, not raw InRelease bytes; `packageMetadataSHA256` identifies apt-cache package metadata. The exact archive checksum is independently pinned. This local provenance record is not a detached vendor signature or independent security approval.
+
+## Smallest next deployment action
+
+Obtain exact-image security disposition for this packet (or a supported patch for unresolved findings), then an owner-controlled promotion decision. This cannot certify the separate real-provider gates: qualified cloud LLM and verified pricing/counts, protected real financial enrollment, scoped provider credentials/transport approval, Google content recovery/attribution rights, approved Redis/PostgreSQL capacity and independent witness administration, real IAM/IAP/tester/SecretManager enrollment and exact infrastructure/provider spending permission. Task52B account/count uncertainty and deferred semantic review remain unresolved. The next resource step is a separately authorized bounded CloudRun/ArtifactRegistry enrollment using the existing six responsibilities, after those conditions—not a synthetic product launch. No resources are created here; Task53 remains untouched.
+
+Final cleanup verified all126 original Docker volumes and all18 distinct candidate/rollback image IDs retained, with zero running containers. All20 handbook chapters preserved:14/15/18 updated,4/11 reviewed unchanged.

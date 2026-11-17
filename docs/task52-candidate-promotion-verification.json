@@ -1,0 +1,764 @@
+{
+  "identity": "52-bounded-candidate-promotion-verification-v2",
+  "date": "2026-11-17",
+  "baselineCommit": "07c87673b6cf614818e79ae870ce66ed76856443",
+  "result": "Bounded technical preparation passed with unchanged known frontend fixture failure; no security acceptance/promotion/deployment.",
+  "promotionApproved": false,
+  "securityAccepted": false,
+  "realProviderCalls": false,
+  "cloudResourcesProvisioned": false,
+  "financialAuthorization": false,
+  "candidate": {
+    "identity": "52-trixie-zlib-v2",
+    "promotionApproved": false,
+    "securityAccepted": false,
+    "realProviderTransport": false,
+    "candidateForReview": {
+      "backend": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+      "factory": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+      "counter": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+      "dispatcher": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+      "recovery": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+      "frontend": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce"
+    },
+    "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+    "frontendPIN": "cfea72ba19730eadb3e96b559ded096d12394a6e345bdc43777ad14b632814cc",
+    "runtimeChecks": {
+      "backend": {
+        "image": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+          "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+          "psycopg": "3.3.3",
+          "libpq": 180000,
+          "cryptography": "50.0.2",
+          "sqlite": "3.46.1",
+          "zlibRuntime": "1.3.1",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      },
+      "factory": {
+        "image": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+          "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+          "psycopg": "3.3.3",
+          "libpq": 180000,
+          "cryptography": "50.0.2",
+          "sqlite": "3.46.1",
+          "zlibRuntime": "1.3.1",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      },
+      "counter": {
+        "image": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+          "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+          "psycopg": "3.3.3",
+          "libpq": 180000,
+          "cryptography": "50.0.2",
+          "sqlite": "3.46.1",
+          "zlibRuntime": "1.3.1",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      },
+      "dispatcher": {
+        "image": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+          "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+          "psycopg": "3.3.3",
+          "libpq": 180000,
+          "cryptography": "50.0.2",
+          "sqlite": "3.46.1",
+          "zlibRuntime": "1.3.1",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      },
+      "recovery": {
+        "image": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+        "architecture": "amd64",
+        "user": "10001:10001",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+          "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+          "psycopg": "3.3.3",
+          "libpq": 180000,
+          "cryptography": "50.0.2",
+          "sqlite": "3.46.1",
+          "zlibRuntime": "1.3.1",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      },
+      "frontend-trixie-next": {
+        "image": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce",
+        "architecture": "amd64",
+        "user": "node",
+        "checks": {
+          "nonroot": true,
+          "readonly": true,
+          "node": "v24.22.3",
+          "nodeBundledZlib": "1.3.2.1-motley-285e94b",
+          "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+          "next": "16.4.5",
+          "fixture": false,
+          "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+          "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+        },
+        "missingEnrollmentExit": 78
+      }
+    }
+  },
+  "build": {
+    "bases": {
+      "images": {
+        "node": {
+          "linuxAmd64Digest": "sha256:60587baa7c895cf438d44f691e4ac8248b36c13b26be77332f874bebb3a64201",
+          "reference": "node:24-trixie-slim@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+          "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-trixie-slim"
+        },
+        "python": {
+          "linuxAmd64Digest": "sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177",
+          "reference": "python:3.12-slim-trixie@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b",
+          "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-trixie"
+        }
+      },
+      "platform": "linux/amd64",
+      "promotionApproved": false,
+      "purpose": "isolated Debian13 compatibility candidate, not promotion or activation",
+      "realProviderTransport": false
+    },
+    "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+    "contexts": [
+      "roles",
+      "frontend-trixie-next"
+    ],
+    "identity": "52-trixie-zlib-v2",
+    "nextLockSHA256": "7123a4a0d8c1045f5a0c2e1925cb158f8e45acec823b0c0fb02ee263d2ec1d98",
+    "nextPackageSHA256": "4fb6e7cc58c87ae036c2912e0d7a289df962cf0cbeaeaafb3a101139949e5584",
+    "nextPatchChanges": [
+      "",
+      "node_modules/@next/env",
+      "node_modules/@next/swc-darwin-arm64",
+      "node_modules/@next/swc-darwin-x64",
+      "node_modules/@next/swc-linux-arm64-gnu",
+      "node_modules/@next/swc-linux-arm64-musl",
+      "node_modules/@next/swc-linux-x64-gnu",
+      "node_modules/@next/swc-linux-x64-musl",
+      "node_modules/@next/swc-win32-arm64-msvc",
+      "node_modules/@next/swc-win32-x64-msvc",
+      "node_modules/next"
+    ],
+    "parentCohort": "53c8a313b0bf1f80f5b743f7753c88cea62c98590c70b880dfe6a5a1de8f44e4",
+    "priorCandidateCohort": "8e94732c63d46df3ebc550e13a7daa4018a8ff67ab8150c036264f7e5824a479",
+    "promotionApproved": false,
+    "realProviderTransport": false,
+    "securityPackage": {
+      "advisory": "https://security-tracker.debian.org/tracker/CVE-2026-85091",
+      "architecture": "amd64",
+      "confirmedFix": "CVE-2026-85091",
+      "depends": "libc6 (>= 2.14)",
+      "distribution": "trixie-security",
+      "identificationConflict": {
+        "advisory": "CVE-2026-76844",
+        "status": "Current Debian describes webpack-dev-middleware, not zlib; scanner disappearance is not proof of a fix to this CVE."
+      },
+      "identity": "52-trixie-zlib-security-package-v2",
+      "oldVersion": "1:1.3.dfsg+really1.3.1-1+b1",
+      "package": "zlib1g",
+      "packageMetadataSHA256": "19e902bceb6711759d15761d176d04e347dc99d4867a732864e98ba52188059c",
+      "plan": "one upgrade, no new packages/removals; no broad apt upgrade",
+      "promotionApproved": false,
+      "securityAnnouncement": "https://www.debian.org/security/2026/dsa-6613",
+      "sha256": "8c27c342230503b73dfde629642c3b352e87b554e06d60cf58772f236a305ceb",
+      "signaturePolicy": "Fresh APT list directory, normal Debian archive-keyring GPG verification; no allow-unauthenticated or disabled expiry/signature checks",
+      "signedAPTMetadataSHA256": "c5288a932967f1bf0783aa0da678e4fa4f002a341178c9b23a33eed1c32e309e",
+      "simulatedPlanSHA256": "ae095ac87d0eb5a7f4f12683b56ce317db55412bf0eb305f79827baf24e4b242",
+      "size": 88720,
+      "sourcePackage": "zlib",
+      "url": "https://deb.debian.org/debian-security/pool/updates/main/z/zlib/zlib1g_1.3.dfsg+really1.3.1-1+deb13u1_amd64.deb",
+      "version": "1:1.3.dfsg+really1.3.1-1+deb13u1"
+    }
+  },
+  "securityInventory": "docs/task52-candidate-promotion-security.json",
+  "scanSummary": {
+    "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+    "ownedVolume": "whereto-zlib-grype-329267484b55d699",
+    "images": {
+      "backend-baseline": {
+        "image": "sha256:37f670a2a4e75260033dfeb86615c34a90b422ea3d0c7fa408852d3dc5334252",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "13d64ba835db246ae0cb3c624f73be3c0121342c9211bfb0129d8b1f642d4760",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 72,
+          "Medium": 76,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "factory-baseline": {
+        "image": "sha256:1bb4343140ac88e00c9a798b1766a63e75e1b7dde8e5ca159fcae6746ebdd588",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "93bef556f72b9bb5cf8565081bb7ccbf5fbd319367f61ceb1ccfcf71e62f4826",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 72,
+          "Medium": 76,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "counter-baseline": {
+        "image": "sha256:e34061d8247d51d303a06a6cdfcca7a792152877c147bf1cbbd5a9cdf91b2b86",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "3b95f074f32eae817a06219bad40775c0068b900e45bd678c00a8a1efa5dc16e",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 72,
+          "Medium": 75,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "dispatcher-baseline": {
+        "image": "sha256:5d431643ea4df3ec163c0565fc2453b3472b83a6b57d544689e857d53a56e77f",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "dac653b952b30a0bfcdd0a393ed5ea55c1e9567dbc5f3b90ccc2a61f809691a0",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 72,
+          "Medium": 76,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "recovery-baseline": {
+        "image": "sha256:5a8da13cd12af12095d3b4fc8cf6aa051ee6157adb43b0377b3b1a4ff9b8ff38",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "2dbb9d2714fe29b2b64eb405b9261da28d0a7c3ff89fa989dbed7344b5f3959c",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 72,
+          "Medium": 75,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "frontend-baseline": {
+        "image": "sha256:70e45bfde6826e137c9fc99599dd6aa54bedcb0324bc40cdb9b74ada4e715570",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "cf70944296f895708022aceebb6be478d4f891ca850e2de514ef8aa9fdac5ca6",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 67,
+          "Medium": 67,
+          "Negligible": 49,
+          "Low": 16
+        }
+      },
+      "backend-candidate": {
+        "image": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "6cca7e87c705b2c4771532487ba6aa8e0752224c2819b5f73dc6fccbfdad6d10",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 71,
+          "Medium": 75,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "factory-candidate": {
+        "image": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "a73127204a4980b600c0a7dd59e540a10ac3bdc6b5ea1e56884d6b99c42fa088",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 71,
+          "Medium": 75,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "counter-candidate": {
+        "image": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "bbeca4f5294cf8cdba88a184dfdc5a4b0a909e1c54e8cf2b1d6d0b1531ac9922",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 71,
+          "Medium": 74,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "dispatcher-candidate": {
+        "image": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "90bfa95ba82ff6d561cc3c7a7516eac1a2102a962a9cbb83e9936e804e02c653",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 71,
+          "Medium": 75,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "recovery-candidate": {
+        "image": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "38a09294a75f5607be6dbeee4964fc27d9162b79355a9735cb1b27e307b311f1",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 71,
+          "Medium": 74,
+          "Negligible": 50,
+          "Low": 17
+        }
+      },
+      "frontend-candidate": {
+        "image": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce",
+        "exit": 0,
+        "oom": false,
+        "rawSHA256": "14cd4c049d67fa09e52c7c6bd5a5d0e9f66c98dc041748c8c0ab4d90539a0f02",
+        "database": {
+          "schemaVersion": "v6.1.10",
+          "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-17T00:22:24Z_1794896458.tar.zst?checksum=sha256%3A3f0cbdbc9d40fb69eaeacec1869b27a8c74f1894108804ace8b7468513e2df07",
+          "built": "2026-11-17T06:20:58Z",
+          "path": "/cache/6/vulnerability.db",
+          "valid": true
+        },
+        "counts": {
+          "High": 66,
+          "Medium": 66,
+          "Negligible": 49,
+          "Low": 16
+        }
+      }
+    },
+    "databaseMustMatch": true,
+    "allOriginalVolumesPreserved": true,
+    "afterVolumeCount": 126
+  },
+  "packageDeltaAndKernelChecks": {
+    "counter": {
+      "changes": {
+        "zlib1g": [
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "1:1.3.dfsg+really1.3.1-1+deb13u1"
+        ]
+      },
+      "packageCount": 87
+    },
+    "frontend": {
+      "changes": {
+        "zlib1g": [
+          "1:1.3.dfsg+really1.3.1-1+b1",
+          "1:1.3.dfsg+really1.3.1-1+deb13u1"
+        ]
+      },
+      "packageCount": 79
+    },
+    "backendKernel": {
+      "Uid": "10001\t10001\t10001\t10001",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    "factoryKernel": {
+      "Uid": "10001\t10001\t10001\t10001",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    "counterKernel": {
+      "Uid": "10001\t10001\t10001\t10001",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    "dispatcherKernel": {
+      "Uid": "10001\t10001\t10001\t10001",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    "recoveryKernel": {
+      "Uid": "10001\t10001\t10001\t10001",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    },
+    "frontend-trixie-nextKernel": {
+      "Uid": "1000\t1000\t1000\t1000",
+      "CapEff": "0000000000000000",
+      "CapBnd": "0000000000000000",
+      "NoNewPrivs": "1"
+    }
+  },
+  "verification": {
+    "packaging": {
+      "passed": 18,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 6.055
+    },
+    "deltaSeparate": {
+      "passed": 3,
+      "failed": 0,
+      "skipped": 0
+    },
+    "backendInCandidate": {
+      "passed": 175,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 10.274
+    },
+    "connectionTLS": {
+      "passed": 11,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "identity": {
+      "passed": 4,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "authenticatedApplicationProbe": "passed",
+    "browser": {
+      "desktop": [
+        1280,
+        900
+      ],
+      "mobile": [
+        390,
+        844
+      ],
+      "workflow": "interpretation/pending-date/confirmed-authored-origin/3provisional-cards/ViewPlan/local-details/attribution/discard/refresh",
+      "passed": true,
+      "logosLoaded": 3,
+      "horizontalOverflow": false,
+      "operationCountBeforeAfter": [
+        9,
+        9
+      ],
+      "fixturesOnly": true,
+      "twoBrowserUsersTested": false,
+      "exhaustiveBrowserOutagesTested": false
+    },
+    "fault": {
+      "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+      "before": [
+        6845,
+        1,
+        0
+      ],
+      "after": [
+        6845,
+        1,
+        0
+      ],
+      "newBoot": true,
+      "oldActionRefused": true,
+      "financialStateUnchanged": true,
+      "loadedAssertion": {
+        "source": "def assert_state(before,after):\n if before!=after:raise AssertionError('Committed reservation or history changed')\n if tuple(before)!=EXPECTED:raise AssertionError('Unexpected synthetic charge/INTENT/delivery tuple')\n",
+        "bytecodeSHA256": "9dcf2d01bb2d0cea99cc3c65bbd42436e9ae80fe12d3f127ffa2b9f9ece388e0",
+        "expected": [
+          6845,
+          1,
+          0
+        ],
+        "operationScenario": "committed reservation and INTENT, before owner callback/delivery",
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625"
+      }
+    },
+    "immutableSourceAfter": {
+      "unchanged": true,
+      "exit": 0
+    },
+    "sourceInputsUnchanged": 122,
+    "frontend": {
+      "passed": 324,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 117.74006,
+      "failure": "unchanged expired-date fixture lib/surprise.test.ts:59; HTTP422 vs200",
+      "typecheck": "passed",
+      "eslint": "passed",
+      "productionBuildsPassed": 2,
+      "trackedSourceTestFilesMatched": 376
+    },
+    "npmAudit": {
+      "info": 0,
+      "low": 0,
+      "moderate": 7,
+      "high": 0,
+      "critical": 0,
+      "total": 7
+    },
+    "buildPipConsistency": {
+      "passed": 5
+    },
+    "notRerun": [
+      "full backend suite",
+      "full direct financial30case suite",
+      "frozen B2 replay"
+    ],
+    "notAuthorizedOrVerified": [
+      "live model/count/account/Maps",
+      "cloud IAM/IAP/enrollment/capacity",
+      "independent backup ownership",
+      "real-provider grant"
+    ]
+  },
+  "historical": {
+    "attempts": 10,
+    "providerCounts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "persistentHalt": true,
+    "journalHashAndSourcePinsVerified": true
+  },
+  "developmentAttempts": [
+    {
+      "scope": "APT first cache",
+      "result": "permission failure; fresh owned state resolved; no caps/signature weakening"
+    },
+    {
+      "scope": "initial application harness",
+      "result": "missing exact pinned PyJWT test wheel; no app cases ran; restored verified exact wheel"
+    },
+    {
+      "scope": "first packaging",
+      "passed": 16,
+      "errors": 1,
+      "reason": "new test wrong inventory field name; corrected before final17pass"
+    },
+    {
+      "scope": "initial frontend source comparison",
+      "result": "included ignored tracking filename; no credential content read/copied; tracked whitelist376match"
+    }
+  ],
+  "sourceSnapshot": {
+    "manifestSHA256": "269741330be828bf668cfb42620a9ff243117ad462ad82ff330a2b6d8e7c3a42",
+    "location": "/var/folders/c7/gjbfmqw50_n042sn1snttvw40000gn/T/whereto-pinned-evidence-ksva9wu3",
+    "sensitiveFixtureTranscriptsCommitted": false
+  },
+  "APTProvenanceNote": "security-package.signedAPTMetadataSHA256 hashes successful signed-APT update transcript, not raw InRelease; packageMetadataSHA256 hashes apt-cache metadata. No detached vendor signature or independent acceptance claimed.",
+  "localEvidence": "/tmp/task52-promotion",
+  "logSHA256": {
+    "scans.log": "5d5bdfbbbed3652bf0620a5a56527ea384c4ce007b91cbda9e022b58467be1f4",
+    "types.log": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "packaging.log": "fab5fcf4f648888b318eec402a1796fbf7e6f049f63c8ab5c2e0740aa8923f58",
+    "apt-policy.log": "895205bd49d9cc68b91102f5db1cccd2a9298b8aee71de2408a16346380e70b5",
+    "network.log": "e4678b52ac8b93be09abf4768e75ff9d5c074ea5a6693bb11f6cc91fe47097e9",
+    "network-restored.log": "576252ed484f489f5f87c0633f525285062a27d2118b2ca9fab7e75f114c053c",
+    "apt-update-owned.log": "c5288a932967f1bf0783aa0da678e4fa4f002a341178c9b23a33eed1c32e309e",
+    "apt-update.log": "e22373f838cdc0df522634f0d5678ff486f54e2ed7012a5ec42e1b9069428e01",
+    "lint.log": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "frontend.log": "f1f83c071498f10d0fccd0b4328c645b32918819387a4da11f91a98fc56fa2e4",
+    "openssl-inspection.log": "f31ab9f514d47b1f64f42d3157640b5d271f6febdd3692083221f6b6a61a367c",
+    "history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "apt-plan.log": "ae095ac87d0eb5a7f4f12683b56ce317db55412bf0eb305f79827baf24e4b242",
+    "frontend-source-check.txt": "b7ffd336582b0169efc3b12ba71a6cd34961a3974832d80f7c09ee31c91fd905",
+    "apt-policy-openssl.log": "533d56b0ab35fc808d94da0e4e77a907b223b909bfb3b805c539508fc801a2a5",
+    "zlib-package.txt": "19e902bceb6711759d15761d176d04e347dc99d4867a732864e98ba52188059c",
+    "delta-tests.log": "281dcf5e9a8fd1f46c3bb1f5b19d16a46b00288baa63d4281cfd9bd7cd12c83d",
+    "restore-wheel.log": "0a78196a12a6aa06a733742202b3d25b18f3d918909e0cc178ab83c49938ad42",
+    "source-integrity.txt": "7aa981210ff42fb77f319b15c402b1920d616cdd14d4e7ab69a44b7a0aa13c84",
+    "vendor.log": "3e76313d5d15a8a2ae53a889402204892da521a128edf5d8c4234fe0f82a173d",
+    "browser-after-count.txt": "2e6d31a5983a91251bfae5aefa1c0a19d8ba3cf601d0e8a706b4cfa9661a6b8a",
+    "fixture-build.log": "bf6f0aeeaf1d4bfb1b89e1670a4c519049190aeb9e7962484af148763f64e41d",
+    "apt-update-openssl.log": "e956936790b5fe2f4723ae6f5d88867f372fc1debd2557fe38fc24a11f930aed",
+    "colima-start.log": "203a1d7b277aaa3ecb5fb5e2f8ffc6fe0ae8dd56bf487e89dc965651f4d09872",
+    "runtime-tests.log": "a73dd95b274e0e4bdc0875268aae7e75f972fd9b9171ebc31a586b4ca1d60588",
+    "secret-scan.log": "9b50031e3be470ff994f3e69d7bc487293d2f6fa6fada369bce66c5633e9a1d1",
+    "packaging-final.log": "7d72f69fa5ae496348248ffbe5ac382326b013bf1909563675ecbb9d6908778b",
+    "prepare.log": "a53596ae09591d586380e9511f24a00ae4e57aefdead85d31ccd167a8e4b1795",
+    "browser-before-count.txt": "2e6d31a5983a91251bfae5aefa1c0a19d8ba3cf601d0e8a706b4cfa9661a6b8a",
+    "apt-inspection.log": "bf8fef5e3a2408c234f53cbb4df0d62b314712d4fafa9b2786e6623d2cd6a5c2",
+    "image-checks.log": "4cd3aec58c27be75ce31f3fe614c5e2b336c3496a8ebc5fbef540b3128b60426",
+    "apt-inspection-owned.log": "f31ab9f514d47b1f64f42d3157640b5d271f6febdd3692083221f6b6a61a367c",
+    "package-delta.log": "da000f37a0a2866da02d7b693d30903c2e69d7c3376756576614b08c36f46a48",
+    "build.log": "c3c656755fa78cd60c516c943fbb5518e7b21638ed2942853d4b46f9347854f6",
+    "secret-final.log": "2e4af767449d0a281bfa85327180f645bdaa257b17f9e1bd5933c3bf7d38d43f",
+    "packaging-final18.log": "ba08c217e587175044e150b919951ca691a714d26ed4b1f3f9db1f90994d30de",
+    "history-final.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "colima-stop.log": "c9d8466363a354651ce96ca3c6c700c03748a64b34efc814213209126f19ca32",
+    "secret-staged.log": "2e4af767449d0a281bfa85327180f645bdaa257b17f9e1bd5933c3bf7d38d43f"
+  },
+  "screenshots": {
+    "desktop.jpg": "f5b5f4ca7e61845094a8c4341a51d6f54d875420a76593c53994c302463fe8d9",
+    "mobile.jpg": "05a82528313d9c88896694f1d88af0ea51f458a34e7a2a219d9ad073ffa0e3cb"
+  },
+  "handbook": {
+    "reviewedUnchanged": [
+      4,
+      11
+    ],
+    "updated": [
+      14,
+      15,
+      18
+    ],
+    "chaptersPreserved": 20
+  },
+  "cleanup": {
+    "originalVolumeCount": 126,
+    "finalVolumeCount": 126,
+    "allAndOnlyOriginalVolumes": true,
+    "runningContainers": 0,
+    "candidateAndRollbackImageIDsVerified": 18,
+    "normalInputsAndApplicationUnchanged": true,
+    "cohortInputsUnchanged": 122,
+    "handbookChapters": 20,
+    "dedicatedVMStopped": true
+  },
+  "configuredSecretScan": "Credential scan: 2 configured sensitive values; 3644 current files/assets; 4178 historical objects; current matches=0; historical matches=0.",
+  "fullDiffReview": "Application/financial source unchanged; exact manifest replacement hashes and artifact-only semantic difference checked; original defaults/locks untouched.",
+  "filesChanged": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "deployment/candidates/trixie-zlib-v2/README.md",
+    "deployment/candidates/trixie-zlib-v2/cohort.json",
+    "deployment/candidates/trixie-zlib-v2/images.json",
+    "deployment/candidates/trixie-zlib-v2/promotion-PROPOSED.json",
+    "deployment/candidates/trixie-zlib-v2/proposed/private-frontend-v1.json",
+    "deployment/candidates/trixie-zlib-v2/proposed/private-services-v1.json",
+    "deployment/candidates/trixie-zlib-v2/security-package.json",
+    "deployment/prepare_zlib_candidate.py",
+    "deployment/test_candidate_promotion.py",
+    "deployment/test_zlib_candidate.py",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/task52-candidate-promotion-security.json",
+    "docs/task52-candidate-promotion-verification.json",
+    "docs/task52-candidate-promotion.md"
+  ]
+}

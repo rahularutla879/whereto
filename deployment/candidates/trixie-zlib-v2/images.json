@@ -1,0 +1,135 @@
+{
+  "identity": "52-trixie-zlib-v2",
+  "promotionApproved": false,
+  "securityAccepted": false,
+  "realProviderTransport": false,
+  "candidateForReview": {
+    "backend": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+    "factory": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+    "counter": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+    "dispatcher": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+    "recovery": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+    "frontend": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce"
+  },
+  "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+  "frontendPIN": "cfea72ba19730eadb3e96b559ded096d12394a6e345bdc43777ad14b632814cc",
+  "runtimeChecks": {
+    "backend": {
+      "image": "sha256:aea763fc26f88d1fc59c9876fdb4c9243e3b13e3c46bb0efb0bba8b5a45c3712",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "zlibRuntime": "1.3.1",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "factory": {
+      "image": "sha256:0639b0e57be427bdb65a5315cf5e2198ce1ddfce8ee1562e860e8cf4100ba173",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "zlibRuntime": "1.3.1",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "counter": {
+      "image": "sha256:e1eea338cb713b543de48668817e3c3c57b5a87e039e965f0044b67e84bcbb55",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "zlibRuntime": "1.3.1",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "dispatcher": {
+      "image": "sha256:510c8b55e0fc51120c9b64d8330f100d49eb759065da6c26957506a7b02e6486",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "zlibRuntime": "1.3.1",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "recovery": {
+      "image": "sha256:91843758faa49659c5a4683c45e8e14d72d401855a891310978e1f9ce598b8ea",
+      "architecture": "amd64",
+      "user": "10001:10001",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "python": "3.12.16 (main, Nov  5 2026, 07:58:20) [GCC 14.2.0]",
+        "openssl": "OpenSSL 3.5.7 9 Jun 2026",
+        "psycopg": "3.3.3",
+        "libpq": 180000,
+        "cryptography": "50.0.2",
+        "sqlite": "3.46.1",
+        "zlibRuntime": "1.3.1",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    },
+    "frontend-trixie-next": {
+      "image": "sha256:e894191dd812e1aac9aee274262c7a2fa893d7fec81c7a22fb1505b144f2d7ce",
+      "architecture": "amd64",
+      "user": "node",
+      "checks": {
+        "nonroot": true,
+        "readonly": true,
+        "node": "v24.22.3",
+        "nodeBundledZlib": "1.3.2.1-motley-285e94b",
+        "zlibPackage": "1:1.3.dfsg+really1.3.1-1+deb13u1",
+        "next": "16.4.5",
+        "fixture": false,
+        "cohort": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+        "os": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n"
+      },
+      "missingEnrollmentExit": 78
+    }
+  }
+}

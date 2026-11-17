@@ -213,3 +213,8 @@ The inactive [response adapter](../../backend/provider_responses.py) sits below 
 `backend.provider_enrollment_review.load_draft()` checks the fixed disabled draft and pinned source files. `review_bound(policy, wire, now=..., count=...)` checks proposed evidence expiry, canonical request/model/template/count binding and conservative integer arithmetic. It never calls a provider or authenticates the supplied evidence. `ReviewBound` is review data, not a capability; the protected SQL still refuses real profiles. A missing qualification, rate/count attestation, grant or terms/security approval cannot be repaired by a Boolean flag.
 
 Application SQL amounts use micro-USD (1000000 equals$1), separately from the halted experiment's nanodollars. The review calculator rounds each input/output category upward before summing. It never refunds reported lower usage or treats byte length as real tokens. The [activation handoff](../task52-real-provider-activation-review.md) explains the exact missing provider-specific SQL/counter enrollment and external approvals; normal startup is unchanged.
+
+
+## Exact patch evidence and residual risk
+
+The [bounded Trixie promotion packet](../task52-candidate-promotion.md) installs one signed Debian zlib package. Compare old and new images using one scanner DB: a later database can add findings to an unchanged image, and disappearing advisory mappings do not prove patches. Track distro zlib separately from Node's bundled fork and psycopg native libraries. Privilege restrictions limit exposure but cannot certify unreachability or independently accept vulnerabilities. An artifact promotion never resets grants, charges, replay history or independent restore epoch.
