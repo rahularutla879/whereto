@@ -1,3 +1,7 @@
+## 2026-11-17 — actual permission observation and fixed count supervisor
+
+Use the independently inspected existing key dashboard to establish Write evidence, matching project/tracking/expiry and original credential metadata hash without secret access. Preserve historical Read receipt and old consumed scope. Commit only sanitized hashes; keep observation/receipt owner-only. Prepare the existing single-spawn supervision pattern and exact POST transport behind absent live authorization; recheck unchanged GET deadline after TLS before HTTP. V2 preparation source identity does not repin frozen evaluation evidence or grant inference. [Trust limits and checks](docs/task52b-count-only-enrollment.md).
+
 ## 2026-11-17 — separate count-only preparation, no live authorization
 
 Preserve old terminal401/consumed scope and Read metadata. Record owner-reported manual Responses Write separately; require independently established updated permission evidence rather than self-certifying it. Reuse exact validated GET only within same UTC day and24hours, with original thirteen-file/source binding. New operation has no GET/inference/retry permission, uses existing fixed TLS/evidence primitives, and requires separately reviewed supervision/enrollment after new explicit send approval. Do not create authorization during preparation. [Contract](docs/task52b-count-only-preparation.md).

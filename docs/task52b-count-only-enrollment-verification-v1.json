@@ -1,0 +1,176 @@
+{
+  "identity": "52b-count-only-enrollment-preparation-verification-v1",
+  "baselineCommit": "4d9280582ec23e31df921d36dccddbcb06f5de27",
+  "verifiedAt": "2026-11-17T21:31:15.442339+00:00",
+  "status": "offline-preparation-passed-await-explicit-send-confirmation",
+  "operation": "52b-count-only-owner-3ec6b68-v1",
+  "buildSHA256": "2f8c344b4cc59482e36e74bdb0d7e1599f2fe8f224d0ba909f42e8a7880010ba",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/test_task52b_count_enrollment.py",
+    "backend/test_task52b_count_only.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-count-only-build-v2.json",
+    "docs/task52b-count-only-dashboard-binding-v1.json",
+    "docs/task52b-count-only-enrollment-verification-v1.json",
+    "docs/task52b-count-only-enrollment.md",
+    "scripts/task52b_count_only.py",
+    "scripts/task52b_run_count_once.py"
+  ],
+  "permissionEvidence": {
+    "valid": true,
+    "basis": "actual owner dashboard read-only observation; not provider-signed or API tested",
+    "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+    "projectName": "WhereTo Model Evaluation",
+    "keyName": "WhereTo Task52B Evaluation",
+    "existingTrackingIdentityMatched": true,
+    "permissions": {
+      "listModels": "Read",
+      "responses": "Write",
+      "unrelated": "None"
+    },
+    "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+    "observationSHA256": "331e7e5a263f68f10fb03413d36e5eac6245afda3e3b79cd576fc3f964661f52",
+    "permissionSHA256": "1cac54344378648a708fb1a56e77bbfbb1f478728562052be101e76383fb1c10",
+    "observedAt": "2026-11-17T21:26:18.884620+00:00",
+    "privateFilesCreated": 2,
+    "privateFileMode": "0600",
+    "privateParentMode": "0700",
+    "historicalReadMetadataUnchanged": true,
+    "credentialMetadataSHA256": "f54ab884a5bdd3032a41dfe99673a7018e548dbf9a2c1aef416ab0232bf2d516",
+    "permissionChanges": 0,
+    "dashboardDialog": "canceled without saving; temporary tab closed"
+  },
+  "priorGET": {
+    "validAtVerification": true,
+    "observedAt": "2026-11-17T19:48:46.517118+00:00",
+    "hardExpiry": "2026-11-18T00:00:00+00:00",
+    "ownerLocalExpiry": "2026-11-17T19:00:00-05:00",
+    "deadlineChanged": false,
+    "sameUTCdayAndMaximum24hours": true,
+    "afterTLSBeforeHTTPRecheck": true,
+    "exactDeadlineRefusalTest": "PASS",
+    "newGETRequests": 0
+  },
+  "commands": [
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_count_enrollment backend.test_task52b_count_only backend.test_task52b_readiness_enrolled backend.test_task52b_readiness backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "passed": 85,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 26.824,
+      "providers": "fictional keys/journals and local loopback TLS only"
+    },
+    {
+      "command": "PYTHONPATH=. /Users/rahularutla/Documents/whereto/backend/.venv/bin/python /tmp/task52-openai-readiness-check/frozen-focused.py",
+      "cwd": "/Users/rahularutla/.codex/worktrees/task52b-frozen-b2-verification/whereto",
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    {
+      "command": "backend/.venv/bin/python -m pip check",
+      "result": "PASS; no broken requirements; pip cache-not-writable warning only"
+    },
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python /tmp/task52-provider-integrity.py",
+      "result": "PASS original journal/private-set/source verification"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "developmentRuns": [
+    {
+      "passed": 27,
+      "result": "PASS before the new post-TLS expiry test"
+    }
+  ],
+  "failedTestsThisCheckpoint": 0,
+  "logSHA256": {
+    "/tmp/task52-count-enrollment-tests.log": "cd645b2fa8d1a871eefcb78c54cb57e2085adbfa2e233db963d07f027569cf5d",
+    "/tmp/task52-count-enrollment-final.log": "448159f597a0477bf9fef30f582462540256b8f89288da88ee69967ddecea9b7",
+    "/tmp/task52-count-enrollment-frozen.log": "c48a06cb8e100af307a56ad2b6b89645f596242b75fb1d2ec07c4ecc08a9f65e",
+    "/tmp/task52-count-enrollment-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-count-enrollment-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52-count-enrollment-patterns.log": "02ce9c6241187068a1adf1e424984e3dc4df2abae4d61748f4a613663b7ed3ad"
+  },
+  "actualSupervisorCoverage": [
+    "one spawn supervisor and worker with fictional enrollment/provider/key substitutes",
+    "exclusive launcher and worker consumption",
+    "core-dump suppression and parent/worker/runtime identity",
+    "success, death before INTENT, after INTENT and during response persistence",
+    "competing independent supervisors",
+    "replay/replacement refusal",
+    "expired preparation and absent authorization refuse before any claim"
+  ],
+  "history": {
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPairs": 5,
+    "originalReadinessFiles": 13,
+    "originalScopeRemainsConsumed": true,
+    "persistentHalt": true,
+    "original38SourcePinsUnchanged": true,
+    "oldCountPreparationManifestPreserved": true
+  },
+  "liveState": {
+    "sendAuthorizationCreated": false,
+    "sendAuthorizationConsumed": false,
+    "liveScopeCreated": false,
+    "credentialValueRead": false,
+    "newModelsAPIRequests": 0,
+    "newCountAPIRequests": 0,
+    "inference": 0,
+    "retries": 0,
+    "grants": 0,
+    "cloudProvisioning": 0,
+    "permissionsChanged": false,
+    "dashboardReadOnlyInspection": true
+  },
+  "securityChecks": {
+    "credentialPatternScan": "PASS Git-visible changed source/metadata only; no private artifacts",
+    "configuredValueComparison": "NOT RUN: would read actual secrets",
+    "sourceAndBootstrapRuntimeCAPins": "PASS",
+    "dependencyChanges": false,
+    "originalPayloadAndMetadataHashes": "PASS"
+  },
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      17
+    ],
+    "chapters": 20
+  },
+  "notRun": [
+    "full backend suite",
+    "full frozen B2 replay suite",
+    "full SQL/Redis/financial recovery suites",
+    "frontend TypeScript/lint/build/application browser tests",
+    "container builds/scans/cloud checks",
+    "actual key loading or provider permission/count probes"
+  ],
+  "remainingRequirements": [
+    "explicit owner authorization for one frozen count POST only under the exact scope and Support zero-count-fee basis",
+    "then create source/evidence/credential-bound private authorization and scope, never during this preparation",
+    "all evidence must still be fresh at execution; original GET deadline cannot move",
+    "terminal failures or uncertainty never authorize retry, inference or automatic permission change"
+  ]
+}

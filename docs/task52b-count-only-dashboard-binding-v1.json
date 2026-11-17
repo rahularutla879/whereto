@@ -1,0 +1,15 @@
+{
+  "identity": "52b-dashboard-binding-v1",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+  "observationSHA256": "331e7e5a263f68f10fb03413d36e5eac6245afda3e3b79cd576fc3f964661f52",
+  "permissionSHA256": "1cac54344378648a708fb1a56e77bbfbb1f478728562052be101e76383fb1c10",
+  "observedAt": "2026-11-17T21:26:18.884620+00:00",
+  "basis": "independently-observed-dashboard",
+  "permissionEvidenceOwnerOnly": true,
+  "historicalReadMetadataUnchanged": true,
+  "credentialMetadataSHA256": "f54ab884a5bdd3032a41dfe99673a7018e548dbf9a2c1aef416ab0232bf2d516",
+  "liveSendAuthorized": false,
+  "apiPermissionAcceptance": "not tested",
+  "getEvidenceExpiresAt": "2026-11-18T00:00:00+00:00"
+}

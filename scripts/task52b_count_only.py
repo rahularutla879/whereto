@@ -23,7 +23,10 @@ STATE=e.BASE/OPERATION  # Proposed only: this checkpoint never creates it.
 AUTHORIZATION=e.BASE/(OPERATION+'.send-authorization.json')
 PERMISSION=e.BASE/(OPERATION+'.permission-evidence.json')
 PROFILE=ROOT/'docs/task52b-count-only-PROPOSED-v1.json'
-BUILD=ROOT/'docs/task52b-count-only-build-v1.json'
+BUILD=ROOT/'docs/task52b-count-only-build-v2.json'
+BINDING=ROOT/'docs/task52b-count-only-dashboard-binding-v1.json'
+OBSERVATION=e.BASE/(OPERATION+'.dashboard-observation-v1.json')
+BOOTSTRAP=ROOT/'scripts/task52b_run_count_once.py'
 ENDPOINT='https://api.openai.com/v1/responses/input_tokens'
 PROJECT=e.PROJECT
 _SingleDial=e._SingleDial
@@ -100,6 +103,32 @@ def permission_record(record,identity,now):
     return e.digest(json.dumps(record,sort_keys=True).encode())
 
 
+def verified_permission(now):
+    """Verify the separately observed dashboard transcript and pinned receipt.
+
+    Owner-only observer evidence is not a provider-signed permission guarantee.
+    Neither this record nor Write capability authorizes a provider send.
+    """
+    identity=e.digest(e.private_read(e.PRIVATE_ENROLLMENT))
+    record=e.record(PERMISSION);binding=json.loads(BINDING.read_bytes())
+    raw=e.private_read(OBSERVATION);observed=json.loads(raw)
+    value=permission_record(record,identity,now)
+    if (binding['credentialIdentity']!=identity or binding['permissionSHA256']!=value or
+            binding['observationSHA256']!=e.digest(raw) or record['evidenceSHA256']!=e.digest(raw)):
+        raise q.Refused('permission_observation_binding')
+    enrollment=e.record(e.PRIVATE_ENROLLMENT)
+    original=json.loads(e.private_read(Path(enrollment['metadataPath'])))
+    if (observed['project']!=PROJECT or observed['projectName']!='WhereTo Model Evaluation' or
+            observed['trackingId']!=enrollment['trackingId'] or observed['trackingId']!=original['trackingId'] or
+            observed['keyName']!='WhereTo Task52B Evaluation' or observed['status']!='Active' or
+            observed['expiresOn']!=original['expiresOn'] or observed['permissions']!=record['permissions'] or
+            observed['credentialIdentity']!=identity or observed['observedAt']!=record['observedAt'] or
+            observed['changedPermissions'] is not False or observed['secretValueAccessed'] is not False):
+        raise q.Refused('observed_key_identity')
+    fresh(observed['observedAt'],now)
+    return value
+
+
 def proposed_scope():
     return {'operation':OPERATION,'project':PROJECT,'model':q.MODEL,'method':'POST','endpoint':ENDPOINT,
             'countSHA256':q.COUNT_SHA,'getMaximum':0,'postMaximum':1,'inferenceMaximum':0,'retries':0}
@@ -111,7 +140,7 @@ def validate_scope(s):
 
 
 def inspect_preparation(now=None):
-    now=now or datetime.now(timezone.utc);proof=None;blockers=[]
+    now=now or datetime.now(timezone.utc);proof=None;blockers=[];permission_verified=False
     try:proof=prior_get(now)
     except q.Refused as why:blockers.append(str(why))
     # Only metadata/stat, never the credential descriptor or value.
@@ -120,11 +149,11 @@ def inspect_preparation(now=None):
     old_auth=json.loads(e.AUTHORIZATION.read_bytes());e.metadata(enrollment,old_auth['credentialMetadataSHA256'])
     if not PERMISSION.exists():blockers.append('independently_established_write_record_missing')
     else:
-        try:permission_record(e.record(PERMISSION),e.digest(e.private_read(e.PRIVATE_ENROLLMENT)),now)
+        try:verified_permission(now);permission_verified=True
         except q.Refused as why:blockers.append(str(why))
     if not AUTHORIZATION.exists():blockers.append('separate_explicit_send_confirmation_missing')
     return {'operation':OPERATION,'priorGET':proof,'storedHistoricalPermissions':original['permissions'],
-            'ownerReportedWriteChange':True,'permissionIndependentlyVerified':False,'blockers':blockers,
+            'ownerReportedWriteChange':True,'permissionIndependentlyVerified':permission_verified,'blockers':blockers,
             'liveScopeExists':STATE.exists(),'liveAuthorizationExists':AUTHORIZATION.exists(),'sendAuthorized':False}
 
 
@@ -135,7 +164,28 @@ def verify_count_build(expected):
     for name,h in b['filesSHA256'].items():
         path=ROOT/name
         if path.is_symlink() or e.digest(path.read_bytes())!=h:raise q.Refused('count_source_identity')
+    # Same frozen interpreter/CA checks as the prior transport; normalize only
+    # the bootstrap's manifest literal to avoid a self-referential source hash.
+    if (e.digest(Path(e.sys.executable).resolve().read_bytes())!=b['pythonExecutableSHA256'] or
+            e.digest(Path(e.certifi.where()).read_bytes())!=b['caBundleSHA256']):
+        raise q.Refused('count_runtime_identity')
+    boot=BOOTSTRAP.read_text();match=re.search(r"(?m)^MANIFEST_SHA = '([0-9a-f]{64})'$",boot)
+    if match is None or match.group(1)!=expected:raise q.Refused('count_bootstrap_identity')
+    normalized=boot[:match.start(1)]+'__BUILD_SHA__'+boot[match.end(1):]
+    if e.digest(normalized.encode())!=b['bootstrapTemplateSHA256']:raise q.Refused('count_bootstrap_source')
+    if e.os.environ.get('SSLKEYLOGFILE') or e.os.environ.get('PYTHONINSPECT'):
+        raise q.Refused('unsafe_runtime_environment')
     return b
+
+
+def validate_preparation(expected,now=None):
+    """Read-only readiness. Never creates a scope, authorization or INTENT."""
+    now=now or datetime.now(timezone.utc)
+    b=verify_count_build(expected);proof=prior_get(now);p=verified_permission(now)
+    enrollment=e.record(e.PRIVATE_ENROLLMENT)
+    e.metadata(enrollment,json.loads(e.AUTHORIZATION.read_bytes())['credentialMetadataSHA256'])
+    request()
+    return b,proof,p
 
 
 def live_preconditions(directory,now):
@@ -144,12 +194,12 @@ def live_preconditions(directory,now):
     auth=e.record(AUTHORIZATION)
     if auth.get('explicitOwnerSendConfirmation') is not True or auth.get('operation')!=OPERATION:
         raise q.Refused('separate_explicit_send_confirmation_required')
-    proof=prior_get(now);s=e.record(STATE/'scope.json');validate_scope(s)
-    raw=BUILD.read_bytes();b=verify_count_build(auth.get('buildSHA256'))
+    b,proof,p=validate_preparation(auth.get('buildSHA256'),now)
+    s=e.record(STATE/'scope.json');validate_scope(s)
+    raw=BUILD.read_bytes()
     if s['buildSHA256']!=e.digest(raw) or auth.get('scopeSHA256')!=e.digest(e.private_read(STATE/'scope.json')):
         raise q.Refused('count_build_or_scope_identity')
     identity=e.digest(e.private_read(e.PRIVATE_ENROLLMENT))
-    p=permission_record(e.record(PERMISSION),identity,now)
     if auth.get('permissionSHA256')!=p or auth.get('priorGETBundleSHA256')!=proof['bundleSHA256']:
         raise q.Refused('owner_authorization_evidence_binding')
     enrollment=e.record(e.PRIVATE_ENROLLMENT)
@@ -164,7 +214,8 @@ def live_preconditions(directory,now):
 def verify_intent(directory):
     if str(directory) in _FIXTURES:
         s=e.record(directory/'scope.json');validate_scope(s)
-    else:s=live_preconditions(directory,datetime.now(timezone.utc))
+    else:
+        s=live_preconditions(directory,datetime.now(timezone.utc));verify_supervision(s,require_runtime=True)
     if (e.record(directory/'consumed.json')['scopeSHA256']!=e.digest(e.private_read(directory/'scope.json')) or
         e.record(directory/'intent.json')!={'operation':OPERATION,'method':'POST','endpoint':ENDPOINT,'bodySHA256':q.COUNT_SHA,'buildSHA256':s['buildSHA256']}):
         raise q.Refused('count_intent')
@@ -191,7 +242,9 @@ class CountOnlyHTTPS(e.FixedReadinessHTTPS):
                 left=DEADLINE-(monotonic()-began)
                 if left<=0:raise TimeoutError()
                 stream.settimeout(left)
-            deadline();started=True
+            deadline()
+            verify_intent(self.directory)  # Recheck absolute evidence expiry after TLS, before HTTP.
+            started=True
             c.request(request.method,path,request.body,{'Authorization':'Bearer '+key,
                 'OpenAI-Project':PROJECT,'Content-Type':'application/json','Accept':'application/json',
                 'Accept-Encoding':'identity','Connection':'close'})
@@ -264,9 +317,29 @@ class FictionalCount:
     def close(self):_FIXTURES.pop(str(self.directory),None);self.temp.cleanup()
 
 
-def execute_count_only():
-    """Preparation has no private send confirmation/permission scope to consume."""
-    live_preconditions(STATE,datetime.now(timezone.utc))
-    # Real supervisor/credential registration must be explicitly reviewed after
-    # the owner's next confirmation; this checkpoint installs none of it.
-    raise q.Refused('count_supervised_enrollment_pending')
+def verify_supervision(scope,require_runtime=False):
+    launcher=e.record(STATE/'launcher-claim.json')
+    if (launcher.get('operation')!=OPERATION or launcher.get('buildSHA256')!=scope['buildSHA256'] or
+            launcher.get('supervisorPID')!=e.os.getppid()):
+        raise q.Refused('count_supervisor_identity')
+    if require_runtime:
+        runtime=e.record(STATE/'runtime.json')
+        if (runtime.get('workerPID')!=e.os.getpid() or runtime.get('buildSHA256')!=scope['buildSHA256'] or
+                runtime.get('loadedWireBytecodeSHA256')!=e.digest(e.marshal.dumps(CountOnlyHTTPS.exchange.__code__))):
+            raise q.Refused('count_worker_identity')
+
+
+def execute_count_only(expected=None):
+    """Prepared real worker. Missing live authorization refuses before any write."""
+    scope=live_preconditions(STATE,datetime.now(timezone.utc))
+    if expected!=scope['buildSHA256']:raise q.Refused('supervised_build_identity')
+    verify_supervision(scope)
+    import resource
+    if resource.getrlimit(resource.RLIMIT_CORE)!=(0,0):raise q.Refused('core_dump_protection')
+    private_create(STATE/'runtime.json',{'workerPID':e.os.getpid(),'buildSHA256':expected,
+        'loadedWireBytecodeSHA256':e.digest(e.marshal.dumps(CountOnlyHTTPS.exchange.__code__)),'at':e.stamp()})
+    def key():
+        live_preconditions(STATE,datetime.now(timezone.utc));verify_supervision(scope,True)
+        enrollment=e.record(e.PRIVATE_ENROLLMENT)
+        return e.read_openai_only(enrollment,json.loads(e.AUTHORIZATION.read_bytes())['credentialMetadataSHA256'])
+    return run_count(STATE,key,CountOnlyHTTPS(STATE))

@@ -1,3 +1,7 @@
+## Task52B — minimum count enrollment preparation verified; await send approval
+
+Existing key's Write permission independently observed in the actual dashboard, recorded owner-only and bound to original credential identity. Count-only supervised runner prepared and100selected offline tests pass. [Evidence](docs/task52b-count-only-enrollment.md). No live authorization, count, GET, inference or grant. Original GET expires Nov18,00:00UTC; never extend or silently renew. Separate exact count-send approval is next; model qualification and deployment remain blocked. Task53 not started.
+
 ## Task52B — offline count-only continuation prepared; execution blocked
 
 New fixed POST-only protocol and fictional process/TLS/crash/replay tests prepared. [Evidence and remaining gates](docs/task52b-count-only-preparation.md). Owner-reported Write change is not independent permission verification or send approval. No new live scope/authorization, GET, count or inference; old scope remains consumed. All model qualification and deployment gates remain. Task53 not started.

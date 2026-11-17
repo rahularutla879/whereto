@@ -86,7 +86,7 @@ class CountTests(unittest.TestCase):
  def test_live_entry_remains_closed_no_credential_or_network(self):
   with patch.object(c.e,'read_openai_only',side_effect=AssertionError('No credential read')),patch('socket.socket',side_effect=AssertionError('No network')):
    with self.assertRaises((FileNotFoundError,c.q.Refused)):c.execute_count_only()
-  self.assertFalse(c.STATE.exists());self.assertFalse(c.AUTHORIZATION.exists());self.assertFalse(c.PERMISSION.exists())
+  self.assertFalse(c.STATE.exists());self.assertFalse(c.AUTHORIZATION.exists())  # Permission receipt is evidence, never send authority.
 
 class EvidenceTests(unittest.TestCase):
  def records(self):
@@ -141,7 +141,12 @@ class TLSTests(unittest.TestCase):
   def local(host,port,**kw):
    if host!='127.0.0.1' or port!=server.server_address[1]:raise AssertionError('Unexpected destination')
    return original(host,port,**kw)
-  with patch('socket.getaddrinfo',side_effect=local),(patch.object(c,'DEADLINE',.05) if mode=='late' else nullcontext()):v=c.run_count(d,lambda:KEY,wire)
+  original_intent=c.verify_intent;verified=[]
+  def verify(directory):
+   verified.append(True)
+   if mode=='expire' and len(verified)==2:raise c.q.Refused('prior_evidence_stale')
+   return original_intent(directory)
+  with patch('socket.getaddrinfo',side_effect=local),patch.object(c,'verify_intent',side_effect=verify),(patch.object(c,'DEADLINE',.05) if mode=='late' else nullcontext()):v=c.run_count(d,lambda:KEY,wire)
   return v,calls,d,wire
  def test_exact_count_bytes_single_send_and_replay(self):
   v,calls,d,w=self.check_tls();self.assertEqual((v['result'],v['count']),('completed',100));self.assertEqual(calls,[('POST','/v1/responses/input_tokens',c.q.COUNT_SHA)])
@@ -153,6 +158,9 @@ class TLSTests(unittest.TestCase):
     v,calls,d,w=self.check_tls(mode,wrong);self.assertEqual(v['result'],'stopped');self.assertLessEqual(len(calls),1)
     with patch('socket.socket',side_effect=AssertionError('No resend')):
      with self.assertRaises(FileExistsError):w.exchange(KEY)
+ def test_evidence_expiring_during_tls_refuses_before_http(self):
+  v,calls,d,w=self.check_tls('expire');self.assertEqual(v['result'],'stopped');self.assertEqual(calls,[])
+  self.assertFalse(c.e.record(d/'response-1.json')['sendStarted']);self.assertTrue((d/'consumed.json').exists())
  def test_tls_context_cannot_disable_verification(self):
   f=c.FictionalCount();self.addCleanup(f.close);ctx=ssl._create_unverified_context()
   with self.assertRaises(c.q.Refused):c.CountOnlyHTTPS(f.directory,ctx)

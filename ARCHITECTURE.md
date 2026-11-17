@@ -1,3 +1,7 @@
+## Count-only supervised readiness preparation v2
+
+The existing count-only adapter now verifies a separately observed owner-only dashboard transcript/permission receipt and sanitized hash binding. `task52b_run_count_once` pins its normalized bootstrap/build/interpreter/CA, checks preparation and absent-or-explicit send authority before exclusive launcher claim, and spawns one worker with parent/runtime identity, core-dump protection and no replacement/retry. Existing INTENT/single-wire/response writer and credential loader are reused. A post-TLS freshness check preserves the original absolute deadline. No actual scope/authorization, service or startup integration is created. [Contract](docs/task52b-count-only-enrollment.md).
+
 ## Prepared count-only continuation — not enrolled
 
 `scripts/task52b_count_only.py` narrows existing readiness validation/TLS/exclusive evidence primitives to one fixed count POST. Prior terminal scope is read-only; new source build binds future permission receipt, GET bundle and scope to separate owner confirmation. Independent process fixture claims/INTENT/wire facts prevent replay after crashes. No actual scope, operational supervisor or credential reader is registered; live entry remains closed. No application/service/SQL architecture change. [Contract and trust limits](docs/task52b-count-only-preparation.md).
