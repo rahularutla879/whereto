@@ -8,7 +8,7 @@ import resource
 import sys
 from datetime import datetime,timezone
 from scripts import task52b_count_only as run
-MANIFEST_SHA = '9adaaa19c20e6bead0aab4fd6ed638946d3e2e894fd1a3fcf3c58f5fe7879344'
+MANIFEST_SHA = 'fde73dc43aa646c171c22e55caa42b9dcd852ccf03cdaaaa5456875df0bef152'
 
 
 def child():

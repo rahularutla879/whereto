@@ -1,0 +1,187 @@
+{
+  "identity": "52b-count-get-binding-verification-v1",
+  "baselineCommit": "762a5f07ec392e5c64cd7f94ca98377b5495859d",
+  "offlineOnly": true,
+  "preparationTechnicallyReady": true,
+  "liveCountEnrolled": false,
+  "liveAuthorizationCreated": false,
+  "countScopeCreated": false,
+  "countScope": "52b-count-only-owner-3ec6b68-v1",
+  "countPayloadSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+  "countBuildSHA256": "fde73dc43aa646c171c22e55caa42b9dcd852ccf03cdaaaa5456875df0bef152",
+  "priorGET": {
+    "at": "2026-11-18T05:20:39.450452+00:00",
+    "consumedScopeInventories": [
+      13,
+      10,
+      11
+    ],
+    "allPrivateHashesAndPriorAuthorizationsUnchanged": true,
+    "oldPermissionReceiptsUnchanged": true,
+    "originalGETAndCountBuildsUnchanged": true,
+    "countBuildSHA256": "fde73dc43aa646c171c22e55caa42b9dcd852ccf03cdaaaa5456875df0bef152",
+    "getBundleSHA256": "0a8312d9d83826ab91193c5429d14aa2a1be6169fb586d7640e5d5010cd80756",
+    "priorGETExpiry": "2026-11-19T00:00:00+00:00",
+    "writePermissionFresh": true,
+    "countScopeExists": false,
+    "countAuthorizationExists": false,
+    "realCredentialValueRead": false
+  },
+  "permission": {
+    "freshDashboardObservationAt": "2026-11-18T05:16:01.056494+00:00",
+    "readOnlyInspection": true,
+    "projectTrackingAndExpiryMatched": true,
+    "listModels": "Read",
+    "responses": "Write",
+    "unrelated": "None",
+    "oldRecordsPreserved": true,
+    "providerSignedReceipt": false,
+    "endpointAcceptanceTested": false,
+    "noChangesSaved": true
+  },
+  "verification": {
+    "currentFocused": {
+      "run": 127,
+      "passed": 126,
+      "failures": 0,
+      "errors": 1,
+      "skips": 0,
+      "seconds": 177.797,
+      "error": "backend.test_task52b_model_get.ProtocolTests.test_exact_source_pin_and_closed_real_entry: get_source_identity",
+      "disposition": "Unchanged GET test expects its original v3 manifest to match the current working files. Count code/fixture changes correctly cause refusal. Original manifest/test left untouched; original source/build is independently verified read-only from Git. This is not an active count-dispatch failure and no all-green or full-backend result is claimed.",
+      "modules": [
+        "backend.test_task52b_get_evidence",
+        "backend.test_task52b_count_supervised_tls",
+        "backend.test_task52b_get_supervised_tls",
+        "backend.test_task52b_code_identity",
+        "backend.test_task52b_model_get",
+        "backend.test_task52b_count_enrollment",
+        "backend.test_task52b_count_only",
+        "backend.test_task52b_readiness_enrolled",
+        "backend.test_task52b_readiness",
+        "backend.test_provider_enrollment_review",
+        "backend.test_provider_responses"
+      ]
+    },
+    "integratedCurrentCountTests": {
+      "passed": 8,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "coverage": "actual parent/child, exact POST payload, fictional key boundary after INTENT, TLS, successful response, 400/401/403/malformed/invalid counts, crashes, replay, concurrency, source/build/bootstrap/metadata/permission substitutions, stale GET, original defective-code negative control"
+    },
+    "newGETBindingTests": {
+      "passed": 11,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0
+    },
+    "frozenCompatibleSelected": {
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.412
+    },
+    "developmentRuns": [
+      {
+        "cohort": "count supervised local TLS before final freshness pinning",
+        "passed": 8,
+        "seconds": 101.514
+      },
+      {
+        "cohort": "initial GET binding unit tests before three extra cases",
+        "passed": 8,
+        "seconds": 1.414
+      }
+    ],
+    "dependencyCheck": "PASS: no broken requirements; pip cache permission warning only",
+    "sourceArchive": "PASS original manifest, all pinned files, original bootstrap/interpreter/CA identity",
+    "readOnlyRealPreparation": "PASS; only missing separate explicit send confirmation",
+    "secretPatterns": "PASS; no Git-visible credential/private artifact patterns",
+    "fullBackendPassClaimed": false,
+    "configuredSecretValueScan": "NOT RUN: would read forbidden real credential values",
+    "originalGETTestInMatchingAbsoluteCheckout": "NOT RUN; current checkout preserved",
+    "autoReviewRejection": {
+      "action": "change existing GET source test to expect working-tree mismatch and verify archive",
+      "reason": "risk of weakening or modifying frozen historical source-integrity tests",
+      "actionExecuted": false,
+      "disposition": "test left unchanged; its error retained, new non-frozen archive tests provide separate coverage"
+    }
+  },
+  "history": {
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPayloadPairs": 5,
+    "persistentHalt": true,
+    "priorConsumedScopesAndAuthorizationsUnchanged": true,
+    "oldPermissionReceiptsUnchanged": true
+  },
+  "boundaries": {
+    "modelGETRequests": 0,
+    "countPOSTRequests": 0,
+    "inference": 0,
+    "retries": 0,
+    "realCredentialValueReads": 0,
+    "permissionChanges": 0,
+    "financialGrants": 0,
+    "cloudProvisioning": 0
+  },
+  "notRun": [
+    "live model/count/inference or account-permission probe",
+    "full backend/B2/SQL/Redis/application/frontend/build/image suites",
+    "private application desktop/mobile checks; dashboard read-only inspection only"
+  ],
+  "handbook": {
+    "updated": [
+      17
+    ],
+    "reviewedUnchanged": [
+      14,
+      15
+    ],
+    "chaptersPreserved": 20
+  },
+  "remaining": [
+    "separate explicit owner authorization for exactly one count POST",
+    "reviewed owner-only enrollment bound to final build/GET/permission hashes after approval",
+    "revalidate original GET and fresh permission before transmission; stop at unchanged 2026-11-19T00:00:00Z deadline",
+    "actual endpoint acceptance and billing not independently probed; 401/403/error/uncertainty terminal; no retries",
+    "model qualification and independent semantic review remain separate/deferred"
+  ],
+  "logSHA256": {
+    "/tmp/task52b-count-binding-focused.log": "214e23940b3eced0e1ec9a10a70d9e728da2a6265218d6d385348e9ad33ad742",
+    "/tmp/task52b-count-binding-frozen.log": "c2b6dceb9cecf40be437644d87ae3459375b120bb61a12b56fb81d8339cee9e8",
+    "/tmp/task52b-count-binding-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52b-count-binding-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-count-binding-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-count-binding-integrity.log": "80056c05262565167b078a3460df047db6bbece1793b09681b524b44a727e9ed",
+    "/tmp/task52b-count-binding-patterns.log": "c8a5ab2baf25089a2cc734d8e89791260bed24d69c9d2b029baed7222fd0c0fd",
+    "/tmp/task52b-count-binding-tls-dev.log": "ea243430ccaead9501fdfdb9a2aa1b78495864ae7510af96bbbedd3087440084",
+    "/tmp/task52b-get-binding-tests.log": "3a1cae91b51cbfb0d3dfd316ab7c2119c90a75feaac302cd6f9cdcc1e8baefc7"
+  },
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/task52b_count_tls_fixture.py",
+    "backend/test_task52b_get_evidence.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-count-get-binding-v1.json",
+    "docs/task52b-count-get-binding-verification-v1.json",
+    "docs/task52b-count-get-binding.md",
+    "docs/task52b-count-only-build-v4.json",
+    "docs/task52b-count-only-dashboard-binding-v2.json",
+    "scripts/task52b_count_only.py",
+    "scripts/task52b_get_evidence.py",
+    "scripts/task52b_run_count_once.py"
+  ]
+}

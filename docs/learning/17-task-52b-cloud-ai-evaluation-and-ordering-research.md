@@ -220,3 +220,10 @@ A new GET-only proposal is not a count authorization. Count's frozen payload/sco
 ## Corrected runner: one real GET200
 
 The [fresh authorized GET](../task52b-authorized-fresh-model-get.md) validated gpt-6-luna at2026-11-18T04:35:55.524545Z and expires2026-11-19T00:00Z. Its body hash equals the older response, but freshness comes from this separately authorized actual send and scope, never from editing the older observation. Both prior consumed scopes remain intact and this new scope is also permanently consumed. The real execution passed deterministic source/runtime checks; model visibility still does not certify model quality, counts, prices or inference authority. No POST follows without reviewed actual-evidence binding, fresh permission evidence and separate owner approval.
+
+
+## Binding actual model visibility without rewriting evidence
+
+The [actual-GET count preparation](../task52b-count-get-binding.md) verifies the successful consumed GET's original source from local Git objects, original build/bootstrap/runtime identity and immutable owner-only records. Later count source changes do not justify repinning that earlier evidence. A new count build pins the selector and separately observed fresh Write receipt, leaving original Read metadata and expired observations intact.
+
+GET and permission freshness remain same UTC day and at most24hours. Recheck after TLS before HTTP; at2026-11-19T00:00UTC this particular GET expires and no count may transmit. No automatic renewal, replay or new model request is allowed. A prepared runner is not an authorization: the actual count scope and send approval remain absent until separate owner confirmation and bound enrollment. Integrated parent/child/local-TLS fixtures exercise real guards with fictional credentials; they do not certify actual API permission acceptance, billing or model accuracy. Chapter14/15 remain applicable without changes; all20chapters are retained.

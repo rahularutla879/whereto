@@ -1,0 +1,33 @@
+{
+  "identity": "52b-count-get-binding-v1",
+  "operation": "52b-model-get-owner-3e2ba62-v1",
+  "executionCommit": "5c6f44832eca0b8dd737fd904cf6ccd722576beb",
+  "originalManifest": "docs/task52b-model-get-build-v3.json",
+  "sourceBuildSHA256": "7b103d93089a50293f132914440d3632e2d9403c2d6f142b57f8166a64d4faa4",
+  "originalCAFileSHA256": "50f79f98dac192b20dbf73f35c56f0b0c557ab267ff5199d1117cc1180b70785",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "model": "gpt-6-luna",
+  "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+  "authorizationSHA256": "7d5983d217b91c15534d7ee4d2780586da8dcd5b648f10dccc168d670687b840",
+  "privateFilesSHA256": {
+    "intent.json": "6cb609614c639bd8a2495c8236e94c7ca048deb58027ee6f66244e32a27071f4",
+    "runtime.json": "ccd638635ce86f7f2c9f7981c865cad55eb5864a1713359204947ff1739b1d69",
+    "wire-consumed.json": "d71c879adc6a9e296c8d4a60501e40f3e5055cc14aff2d0e9892c04c6c6a3626",
+    "result.json": "3388b17baa2bd580749332a1f9de120503f4db25ee8106d38538e9f99b7dfda9",
+    "supervisor.json": "7d033af33dd15e077e4d69beca016bf470ec8c3f73eea2409a5421e38a3709f5",
+    "scope.json": "16091e0293d2e9b6ff987dbd9e257e2898ca9fc4f0bf13f2555bab4f3d16b766",
+    "launcher-claim.json": "d9a63f8ecb09319f061f7eb02a0017cb71039076746ad52e7ad1c7e92e8b7864",
+    "consumed.json": "5c791f4a0c70c512bbf544bee93a29026383d336d410df3ef5e7982193f2127f",
+    "validated.json": "5cdbf433a14ac88283bf103c66ddbfa2dcd022ec3b75f29a286fe96e86713b41",
+    "response-1.json": "b055b2c6eb683897bfd7cce87118ab300435441f348e47432bba79a752d3aa38",
+    "supervisor-claim.json": "1258659c79f40d9059d7d96f2ec5054b01398c7e2d4ea8a92d48726ee75f32ce"
+  },
+  "rawResponseSHA256": "021f4df106ec44d507466a894f661b25681774c1b51951dcc04387ba2b810bdb",
+  "observedAt": "2026-11-18T04:35:55.524545+00:00",
+  "expiresAt": "2026-11-19T00:00:00+00:00",
+  "originalResultSHA256": "1058203210ca2fa01d50c10536155e065179a3985ed20fe835aa0cd87bcd45c2",
+  "originalGETAndAuthorizationReadOnly": true,
+  "countScope": "52b-count-only-owner-3ec6b68-v1",
+  "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+  "sendAuthorized": false
+}

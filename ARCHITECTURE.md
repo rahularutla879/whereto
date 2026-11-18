@@ -1,3 +1,7 @@
+## Count-only actual GET evidence binding
+
+The existing count preparation now calls a narrow read-only `task52b_get_evidence` verifier: source-pinned binding → original local Git blobs/build/bootstrap → original immutable consumed GET/auth/response chain. Current count code has a new v4 identity, without repinning original GET source. Separate owner-only v2 dashboard observation binds existing credentials to current Write state; same UTC-day freshness remains required. No service/startup/SQL/ledger/credential system or live scope is added. [Contract](docs/task52b-count-get-binding.md).
+
 ## Both readiness runners: deterministic identities, separate evidence gates
 
 Count now shares the unchanged deterministic code-identity mechanism with GET, using its own versioned build and selected prior-GET/permission bindings. New GET proposal/source scope is separate from consumed records; count's existing proof selector stays unchanged and refuses stale data. Both one-spawn/INTENT/credential-loader/TLS/single-send paths have actual isolated local-TLS regression coverage. No service, ledger, startup or credential system added. [Contracts and limits](docs/task52b-both-readiness-preparation.md).

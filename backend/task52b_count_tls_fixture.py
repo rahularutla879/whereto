@@ -14,8 +14,35 @@ def replace_fixture(path,value):
     Path(path).write_text(json.dumps(value));Path(path).chmod(0o600)
 
 
+def successful_get_fixture(root,base,identity,when):
+    """Authored fictional GET records; original public source archive only."""
+    profile=json.loads((ROOT/'docs/task52b-count-get-binding-v1.json').read_bytes())
+    build=json.loads((ROOT/profile['originalManifest']).read_bytes());op='FICTIONAL-successful-get';directory=base/op;c.e.make_directory(directory)
+    expiry=c.fresh(when,datetime.fromisoformat(when)).isoformat();bh=profile['sourceBuildSHA256']
+    body=json.dumps({'object':'model','id':c.q.MODEL,'created':1,'owned_by':'FICTIONAL'}).encode();h=c.digest(body)
+    scope={'operation':op,'project':c.PROJECT,'model':c.q.MODEL,'method':'GET','endpoint':c.q.requests()[0].url,'bodySHA256':c.digest(b''),'getMaximum':1,'postMaximum':0,'inferenceMaximum':0,'retries':0,'buildSHA256':bh,'credentialIdentity':identity,'supervisorIdentity':build['filesSHA256']['scripts/task52b_model_get.py'],'originalEvidenceBundleSHA256':'FICTIONAL'}
+    c.private_create(directory/'scope.json',scope);sh=c.digest((directory/'scope.json').read_bytes())
+    c.private_create(base/(op+'.send-authorization.json'),{'operation':op,'explicitOwnerSendConfirmation':True,'approvedAt':when,'expiresAt':expiry,'scopeSHA256':sh,'buildSHA256':bh,'credentialIdentity':identity,'getMaximum':1,'postMaximum':0,'inferenceMaximum':0,'retries':0,'originalEvidenceBundleSHA256':'FICTIONAL'})
+    c.private_create(directory/'intent.json',{'operation':op,'method':'GET','endpoint':scope['endpoint'],'bodySHA256':scope['bodySHA256'],'buildSHA256':bh})
+    c.private_create(directory/'consumed.json',{'at':when,'scopeSHA256':sh})
+    c.private_create(directory/'wire-consumed.json',{'at':when,'intentSHA256':c.digest((directory/'intent.json').read_bytes())})
+    c.private_create(directory/'runtime.json',{'at':when,'buildSHA256':bh,'identityScheme':build['loadedIdentityScheme'],'loadedWireIdentitySHA256':build['loadedCodeIdentities']['wire'],'workerPID':123})
+    c.private_create(directory/'launcher-claim.json',{'at':when,'operation':op,'buildSHA256':bh,'supervisorPID':122})
+    c.private_create(directory/'supervisor-claim.json',{'operation':op,'supervisorIdentity':scope['supervisorIdentity']})
+    c.private_create(directory/'supervisor.json',{'at':when,'reason':'worker_exit','exit':0})
+    c.private_create(directory/'response-1.json',{'at':when,'status':200,'complete':True,'sendStarted':True,'errorCategory':None,'credentialEchoRefused':False,'contentType':'application/json','bodyBase64':b64encode(body).decode(),'bodySHA256':h,'bodyBytes':len(body)})
+    c.private_create(directory/'validated.json',{'at':when,'observedAt':when,'expiresAt':expiry,'rawSHA256':h,'value':c.q.validate_response(c.q.requests()[0],HTTPResult(200,body))})
+    c.private_create(directory/'result.json',{'operation':op,'result':'completed','status':200,'model':c.q.MODEL,'rawSHA256':h,'observedAt':when,'expiresAt':expiry,'getMaximum':1,'postRequests':0,'inference':0,'retries':0})
+    profile.update(operation=op,credentialIdentity=identity,authorizationSHA256=c.digest((base/(op+'.send-authorization.json')).read_bytes()),privateFilesSHA256={p.name:c.digest(p.read_bytes()) for p in directory.iterdir()},rawResponseSHA256=h,observedAt=when,expiresAt=expiry,fixtureOnly=True)
+    path=root/'docs/task52b-count-get-binding-v1.json';path.write_text(json.dumps(profile))
+    return path,c.digest(path.read_bytes())
+
+
 def build_fixture(root,port,ca,mode='ok'):
-    cfg,_=get_fixture(root,port,ca);root=Path(root);base=Path(cfg['state']).parent;old=Path(cfg['original']);now=datetime.now(timezone.utc).isoformat()
+    cfg,_=get_fixture(root,port,ca);root=Path(root);
+    for n in ('scripts/task52b_get_evidence.py','docs/task52b-count-get-binding-v1.json','docs/task52b-count-only-dashboard-binding-v2.json'):
+        (root/n).write_bytes((ROOT/n).read_bytes())
+    base=Path(cfg['state']).parent;old=Path(cfg['original']);now=datetime.now(timezone.utc).isoformat()
     identity=c.digest(Path(cfg['enrollment']).read_bytes());get_time='2000-01-01T00:00:00+00:00' if mode=='stale_get' else now;raw=json.dumps({'object':'model','id':c.q.MODEL,'created':1,'owned_by':'FICTIONAL'}).encode();raw_sha=c.digest(raw)
     replace_fixture(old/'scope.json',{'operation':c.e.OPERATION,'project':c.PROJECT,'model':c.q.MODEL,'countSHA256':c.q.COUNT_SHA,'buildSHA256':cfg['oldSHA256'],'credentialIdentity':identity,'fixtureOnly':True})
     replace_fixture(old/'consumed.json',{'scopeSHA256':c.digest((old/'scope.json').read_bytes()),'fixtureOnly':True})
@@ -33,17 +60,19 @@ def build_fixture(root,port,ca,mode='ok'):
     binding.write_text(json.dumps({'credentialIdentity':identity,'permissionSHA256':ph,'observationSHA256':oh,'fixtureOnly':True}))
     if mode=='original_defect':
         (root/'scripts/task52b_count_only.py').write_bytes(subprocess.check_output(['git','show','3e2ba623e15b3f0ce73286775bb9acc62a3432ac:scripts/task52b_count_only.py'],cwd=ROOT))
-    b=json.loads(Path(cfg['build']).read_bytes());b['filesSHA256']={n:c.digest((root/n).read_bytes()) for n in b['filesSHA256'] if n not in ('scripts/task52b_run_count_once.py','scripts/task52b_run_model_get_once.py')}
+    get_binding,new_proof=successful_get_fixture(root,base,identity,get_time)
+    b=json.loads(Path(cfg['build']).read_bytes());names=set(b['filesSHA256'])|{'scripts/task52b_get_evidence.py','docs/task52b-count-get-binding-v1.json','docs/task52b-count-only-dashboard-binding-v2.json'}
+    b['filesSHA256']={n:c.digest((root/n).read_bytes()) for n in names if n not in ('scripts/task52b_run_count_once.py','scripts/task52b_run_model_get_once.py')}
     source=(ROOT/'scripts/task52b_run_count_once.py').read_text();normalized=re.sub(r"(?m)^MANIFEST_SHA = '[0-9a-f]{64}'$","MANIFEST_SHA = '__BUILD_SHA__'",source)
     b['bootstrapTemplateSHA256']=c.digest(normalized.encode())
     if hasattr(c,'identity_manifest'):b.update(c.identity_manifest())
     build=root/'docs/FICTIONAL-count-build.json';build.write_text(json.dumps(b));sha=c.digest(build.read_bytes())
     (root/'scripts/task52b_run_count_once.py').write_text(re.sub(r"(?m)^MANIFEST_SHA = '[0-9a-f]{64}'$","MANIFEST_SHA = '"+sha+"'",source))
-    proof=c.digest(json.dumps(pins,sort_keys=True).encode())
+    proof=c.digest(json.dumps(pins,sort_keys=True).encode()) if mode=='original_defect' else new_proof
     scope=c.proposed_scope()|{'operation':operation,'buildSHA256':sha,'credentialIdentity':identity,'permissionSHA256':ph,'priorGETBundleSHA256':proof,'supervisorIdentity':b['filesSHA256']['scripts/task52b_count_only.py'],'fixtureOnly':True}
     c.private_create(state/'scope.json',scope);auth=base/(operation+'.send-authorization.json')
     c.private_create(auth,{'operation':operation,'explicitOwnerSendConfirmation':True,'buildSHA256':sha,'scopeSHA256':c.digest((state/'scope.json').read_bytes()),'credentialIdentity':identity,'permissionSHA256':ph,'priorGETBundleSHA256':proof,'fixtureOnly':True})
-    cfg.update(mode=mode,state=str(state),authorization=str(auth),build=str(build),buildSHA256=sha,permission=str(permission),observation=str(observation),binding=str(binding))
+    cfg.update(mode=mode,state=str(state),authorization=str(auth),build=str(build),buildSHA256=sha,permission=str(permission),observation=str(observation),binding=str(binding),getBinding=str(get_binding))
     config=root/'count-config.json';config.write_text(json.dumps(cfg));config.chmod(0o600)
     historical=''
     if mode=='original_defect':historical='import importlib.util,scripts\nspec=importlib.util.spec_from_file_location("scripts.task52b_count_only",'+repr(str(root/'scripts/task52b_count_only.py'))+')\nm=importlib.util.module_from_spec(spec)\nsys.modules[spec.name]=m\nscripts.task52b_count_only=m\nspec.loader.exec_module(m)\n'
@@ -59,7 +88,7 @@ def build_fixture(root,port,ca,mode='ok'):
 
 def configure(path):
     cfg=json.loads(Path(path).read_bytes());root=Path(cfg['root']);state=Path(cfg['state']);e=c.e
-    c.ROOT=root;c.STATE=state;c.OPERATION='FICTIONAL-supervised-count';c.AUTHORIZATION=Path(cfg['authorization']);c.BUILD=Path(cfg['build']);c.BOOTSTRAP=root/'scripts/task52b_run_count_once.py';c.PERMISSION=Path(cfg['permission']);c.OBSERVATION=Path(cfg['observation']);c.BINDING=Path(cfg['binding'])
+    c.GET_BINDING=Path(cfg['getBinding']);c.ROOT=root;c.STATE=state;c.OPERATION='FICTIONAL-supervised-count';c.AUTHORIZATION=Path(cfg['authorization']);c.BUILD=Path(cfg['build']);c.BOOTSTRAP=root/'scripts/task52b_run_count_once.py';c.PERMISSION=Path(cfg['permission']);c.OBSERVATION=Path(cfg['observation']);c.BINDING=Path(cfg['binding'])
     e.ROOT=root;e.BASE=state.parent;e.STATE=Path(cfg['original']);e.PRIVATE_ENROLLMENT=Path(cfg['enrollment']);e.MANIFEST=Path(cfg['oldBuild']);e.AUTHORIZATION=Path(cfg['oldAuthorization']);e.certifi.core._CACERT_PATH=cfg['ca']
     boot.MANIFEST_SHA='0'*64 if cfg['mode']=='bad_build' else cfg['buildSHA256']
     real_dns=socket.getaddrinfo;real_socket=socket.socket

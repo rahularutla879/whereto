@@ -1,0 +1,9 @@
+{
+  "identity": "52b-count-only-dashboard-binding-v2",
+  "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+  "permissionSHA256": "baea3164b63c04e36faae74ef3e30801ff6d651bb692535ba65e10f978019110",
+  "observationSHA256": "85fd60d7949db40e1121438d0586e60c2c181dc512b0f828387cf8ca33e6c078",
+  "recordedAt": "2026-11-18T05:16:01.056494+00:00",
+  "historicalCredentialMetadataSHA256": "f54ab884a5bdd3032a41dfe99673a7018e548dbf9a2c1aef416ab0232bf2d516",
+  "evidence": "Separate owner-only read-only observation. Historical Read receipt unchanged. No API proof or send authority."
+}

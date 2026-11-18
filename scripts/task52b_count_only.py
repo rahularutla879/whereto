@@ -15,6 +15,7 @@ from time import monotonic
 from base64 import b64encode
 from scripts import task52b_readiness_enrolled as e
 from scripts import task52b_code_identity as code_identity
+from scripts import task52b_get_evidence as get_evidence
 from backend.provider_responses import HTTPResult
 
 q=e.q
@@ -22,11 +23,12 @@ ROOT=Path(__file__).resolve().parents[1]
 OPERATION='52b-count-only-owner-3ec6b68-v1'
 STATE=e.BASE/OPERATION  # Proposed only: this checkpoint never creates it.
 AUTHORIZATION=e.BASE/(OPERATION+'.send-authorization.json')
-PERMISSION=e.BASE/(OPERATION+'.permission-evidence.json')
+PERMISSION=e.BASE/(OPERATION+'.permission-evidence-v2.json')
 PROFILE=ROOT/'docs/task52b-count-only-PROPOSED-v1.json'
-BUILD=ROOT/'docs/task52b-count-only-build-v3.json'
-BINDING=ROOT/'docs/task52b-count-only-dashboard-binding-v1.json'
-OBSERVATION=e.BASE/(OPERATION+'.dashboard-observation-v1.json')
+BUILD=ROOT/'docs/task52b-count-only-build-v4.json'
+BINDING=ROOT/'docs/task52b-count-only-dashboard-binding-v2.json'
+OBSERVATION=e.BASE/(OPERATION+'.dashboard-observation-v2.json')
+GET_BINDING=ROOT/'docs/task52b-count-get-binding-v1.json'
 BOOTSTRAP=ROOT/'scripts/task52b_run_count_once.py'
 ENDPOINT='https://api.openai.com/v1/responses/input_tokens'
 PROJECT=e.PROJECT
@@ -72,22 +74,8 @@ def validate_get_record(raw,validated,expected,now):
 
 
 def prior_get(now):
-    """Original thirteen files and source/build chain verified without a GET."""
-    old=json.loads((ROOT/'docs/task52b-authorized-readiness-result-v1.json').read_bytes())
-    e.verify_build(old['buildSHA256']);e.private_directory(e.STATE)
-    pins=old['privateEvidence']['fileSHA256']
-    if {p.name for p in e.STATE.iterdir()}!=set(pins):raise q.Refused('prior_scope_inventory')
-    for name,h in pins.items():
-        if e.digest(e.private_read(e.STATE/name))!=h:raise q.Refused('prior_scope_integrity')
-    scope=e.record(e.STATE/'scope.json');consumed=e.record(e.STATE/'consumed.json')
-    result=e.record(e.STATE/'result.json')
-    if (scope['operation']!=e.OPERATION or scope['project']!=PROJECT or scope['model']!=q.MODEL or
-            scope['countSHA256']!=q.COUNT_SHA or scope['buildSHA256']!=old['buildSHA256'] or
-            consumed['scopeSHA256']!=e.digest(e.private_read(e.STATE/'scope.json')) or
-            not result['authorizationConsumed'] or result['operations'][1]['status']!=401):
-        raise q.Refused('prior_scope_binding')
-    out=validate_get_record(e.record(e.STATE/'response-1.json'),e.record(e.STATE/'validated-1.json'),old['operations'][0]['rawSHA256'],now)
-    return out|{'credentialIdentity':scope['credentialIdentity'],'bundleSHA256':e.digest(json.dumps(pins,sort_keys=True).encode()),'priorBuildSHA256':scope['buildSHA256']}
+    """Read-only verification of the successful GET's original immutable chain."""
+    return get_evidence.verify(GET_BINDING,now,fresh)
 
 
 def permission_record(record,identity,now):
@@ -176,8 +164,13 @@ def loaded_targets():
         'runner':(run_count,globals(),Path(__file__),'run_count'),
         'preconditions':(live_preconditions,globals(),Path(__file__),'live_preconditions'),
         'prior_get':(prior_get,globals(),Path(__file__),'prior_get'),
+        'get_evidence':(get_evidence.verify,get_evidence.__dict__,Path(get_evidence.__file__),'verify'),
+        'get_archive':(get_evidence.archived_build,get_evidence.__dict__,Path(get_evidence.__file__),'archived_build'),
+        'get_blob':(get_evidence.blobs,get_evidence.__dict__,Path(get_evidence.__file__),'blobs'),
         'permission':(verified_permission,globals(),Path(__file__),'verified_permission'),
         'permission_record':(permission_record,globals(),Path(__file__),'permission_record'),
+        'freshness':(fresh,globals(),Path(__file__),'fresh'),
+        'utc':(utc,globals(),Path(__file__),'utc'),
     }
 
 

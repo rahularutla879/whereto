@@ -1,3 +1,7 @@
+## 2026-11-18 — bind actual GET by original source archive, never repin it
+
+Use the actual successful consumed GET and its unchanged original Git source/build/CA identity for count preparation. A new count build verifies original immutable records and a separate fresh read-only dashboard receipt; never reinterpret the old Read metadata or retimestamp expired evidence. Keep the midnight deadline, absent count authorization, fixed POST-only payload, deterministic identity and post-TLS freshness guard. Archive source is read-only; unavailable provenance refuses. [Contract](docs/task52b-count-get-binding.md).
+
 ## 2026-11-17 — fresh GET is separate evidence, never implicit count authority
 
 Enroll/consume exactly the owner's one-GET scope using the corrected pinned supervisor. Keep the actual returned metadata private and publish sanitized hashes/time/ID only. Apply the unchanged next-UTC-midnight/24-hour expiry to this new observation, leaving the original expired record intact even though raw metadata hashes match. No count selector or authorization is updated automatically. [Outcome and verification](docs/task52b-authorized-fresh-model-get.md).

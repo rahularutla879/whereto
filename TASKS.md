@@ -1,3 +1,7 @@
+## Task52B — actual GET bound; count preparation only
+
+Successful GET200 evidence is now read-only bound to the original source archive and immutable eleven-file chain. Fresh read-only dashboard observation confirms existing Responses Write; old receipts/Read metadata preserved. Hard expiry remains **2026-11-19T00:00Z** (Nov18,7PM EST). [Contract and checks](docs/task52b-count-get-binding.md). New v4 count build retains exact frozen payload/scope and deterministic supervision; no live count scope/auth/key read/API call. 126/127current checks passed; one unchanged archived-GET source-pin test refuses current count files, disclosed in verification.15frozen-compatible passes. Separate explicit one-count approval and owner-only enrollment are still required before send. Historical10/$0.047366625/324/five pairs/halt preserved; no inference/Task53.
+
 ## Task52B — real fresh model visibility verified; count remains gated
 
 One authorized GET returned200 for gpt-6-luna under new permanently consumed scope. [Verified outcome](docs/task52b-authorized-fresh-model-get.md); expiry Nov19,00:00UTC.60selected preflight passes; history preserved. Count requires actual-result binding, fresh permission evidence and separate approval; no POST/inference/qualification/deployment/Task53 authorized.
