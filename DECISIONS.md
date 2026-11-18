@@ -1,3 +1,7 @@
+## 2026-11-18 — adapt original resources without replacing the experiment
+
+Use the existing canonical journal and original lock for SQL and separate child facts; preserve the original ten-row/metadata prefix after any future legitimate append. Reuse source-verified Q4C transition code, not a second ledger or row-updating path. Require separately source-enrolled public trust and genuine owner/security/operator signatures; keep the real trust pin absent. The new security namespace is not semantic review. Explicit owner permission in this checkpoint permits temporary complete-prefix copies for offline tests only. No real reservation, credential read or inference authorization follows. [Contract](docs/task52b-original-journal-enrollment.md).
+
 ## 2026-11-18 — prepare one supervised diagnostic without enrolling real authority
 
 Reuse the frozen Q4C append/INTENT kernel and first-slot transport; add a separately source-bound supervisor, mechanical financial/evidence checks and read-only post-append verification. Preserve every historical test/source pin and full source audit. Retain$0.0025proposal despite lower conditional arithmetic; unknown account fees/alias applicability refuse. Real-path/role writer and credential/peer enrollment remain closed until reviewed; fictional packets cannot certify human semantics or activate inference. [Contract](docs/task52b-generation-preparation.md).

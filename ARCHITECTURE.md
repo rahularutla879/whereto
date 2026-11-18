@@ -1,3 +1,7 @@
+## First-slot original-journal resource adapter (inactive)
+
+`task52b_original_journal` binds the existing experiment.lock and canonical SQLite identity to a separate child-fact directory, retaining the existing Q4C algorithm code objects. `task52b_real_enrollment` verifies source-pinned public trust plus distinct technical owner/security/operator signatures; no real trust is installed. `task52b_enrolled_transport` reuses the existing secure key-loader functions and single-dial TLS for the fixed frozen Responses request only. Supervisor and replacement parent independently fold the same-lock prefix, charges and raw/decode/grade evidence. No new service, ledger, credential store or application startup path. [Contract and limits](docs/task52b-original-journal-enrollment.md).
+
 ## First-slot supervised generation candidate (offline only)
 
 The explicit frozen-source lab loads `task52b_generation_policy` and `task52b_generation_candidate` around the existing first-slot/Q4C append engine. New code adds source/loaded-code and purpose/cost/evidence binding, exclusive supervision, fixed project forwarding and independent read-only prefix/fact verification. No new service, ledger, SQL financial domain, credential store or application startup path. Real constructor/opener/approval issuer remain unavailable; only registered fictional journals and loopback responders are writable/reachable. [Exact remaining real-enrollment adapter](docs/task52b-generation-preparation.md).

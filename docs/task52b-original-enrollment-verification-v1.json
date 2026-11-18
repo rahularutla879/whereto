@@ -1,0 +1,506 @@
+{
+  "identity": "52b-original-journal-enrollment-offline-verification-v1",
+  "baselineCommit": "953a69ad2456b23d36ea700de783ebf9d7256fe4",
+  "verifiedAtUTC": "2026-11-18T07:13:10.070183+00:00",
+  "buildSHA256": "2e11383bd6c6e7760940917ac957c6fcca025e255f477aa368ae74b39e2eef8c",
+  "supplementalRecoveryTestSHA256": "f880c466ad66673ae85c63e25ffe88d1aeeb644483d8573e5a3f65d051300954",
+  "frozenExecutionCommit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+  "cohorts": {
+    "flow": {
+      "runs": [
+        {
+          "passed": 3,
+          "seconds": 285.029,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 3,
+      "log": "/tmp/task52b-original-final-flow.log",
+      "logSHA256": "88d1feb16546ac0483ba84ea19d7f0f3019e46967d5b393ee58953ae565fcba9"
+    },
+    "crash": {
+      "runs": [
+        {
+          "passed": 1,
+          "seconds": 601.481,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 1,
+      "log": "/tmp/task52b-original-final-crash.log",
+      "logSHA256": "cc0db869a271dfeb48a9f0c5ffc5ede60f3dec827b489e0b766fb19e795ca1ad"
+    },
+    "http": {
+      "runs": [
+        {
+          "passed": 1,
+          "seconds": 474.234,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 1,
+      "log": "/tmp/task52b-original-final-http.log",
+      "logSHA256": "23b301af1c475e362df158327e00d24cc494f89e5720122ec6dbffa008dcbd8a"
+    },
+    "gates": {
+      "runs": [
+        {
+          "passed": 6,
+          "seconds": 159.281,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 6,
+      "log": "/tmp/task52b-original-final-gates.log",
+      "logSHA256": "23efeb761dd996546aa2a376be05bbd662f9b82040ae8ad5299dbc13dafd8cc6"
+    },
+    "replacement": {
+      "runs": [
+        {
+          "passed": 1,
+          "seconds": 117.794,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 1,
+      "log": "/tmp/task52b-original-final-recovery.log",
+      "logSHA256": "0b66cea29414629eb786e73c1cc31d3313f183a3e9b85444553205ba9ad438e2"
+    },
+    "historical": {
+      "runs": [
+        {
+          "passed": 12,
+          "seconds": 9.483,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        {
+          "passed": 40,
+          "seconds": 806.49,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 52,
+      "log": "/tmp/task52b-original-historical.log",
+      "logSHA256": "49b6be1f84f70fb862920504f42bd7f00dd07d93adea5b26c5298f1a601427ca"
+    },
+    "replay": {
+      "runs": [
+        {
+          "passed": 37,
+          "seconds": 52.925,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 37,
+      "log": "/tmp/task52b-original-replay.log",
+      "logSHA256": "8a5bf0a16909f3b9ff88fb903d4c764c17815416da4f88b5bf4f81722bda6d14"
+    },
+    "policy": {
+      "runs": [
+        {
+          "passed": 3,
+          "seconds": 0.002,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        }
+      ],
+      "passed": 3,
+      "log": "/tmp/task52b-original-policy.log",
+      "logSHA256": "d25a8321694258a74792aaec26e1d7ccbe5815eaa800f2c892438784353ccaa9"
+    }
+  },
+  "selectedPasses": 104,
+  "selectedFailures": 0,
+  "selectedErrors": 0,
+  "selectedSkips": 0,
+  "normalDiscovery": {
+    "ran": 0,
+    "intentionalOptInSkips": 12,
+    "exitCode": 5,
+    "isPassingExecutionEvidence": false,
+    "logSHA256": "7daf0f76ac7b3a28fbfee3935e42337ba9a30734498786535a2ba3435166f272"
+  },
+  "coverage": {
+    "primaryNewTests": 11,
+    "supplementalFreshSupervisorTests": 1,
+    "originalPrefixCopyExplicitlyOwnerAuthorized": true,
+    "copiesOutsideGitAndTemporary": true,
+    "sameCanonicalLockForSQLAndSeparateFacts": true,
+    "exactSignedSTARTRequiredForINSERT": true,
+    "sqlSynchronousFullAndDirectoryFsync": true,
+    "durableChildO_EXCL_NOFOLLOW_fsync": true,
+    "independentSameLockReadAndSignedFactFold": true,
+    "crashStages": [
+      "before_start",
+      "before_reserve",
+      "before_commit",
+      "after_reserve",
+      "after_intent",
+      "after_send",
+      "after_outcome",
+      "before_response_capture"
+    ],
+    "httpStatuses": [
+      200,
+      400,
+      401,
+      403
+    ],
+    "missingAndTruncatedMalformedResponse": true,
+    "separateCompleteMalformedJSONSyntaxCaseRun": false,
+    "concurrentSupervisors": true,
+    "freshReplacementProcessAfterIntent": true,
+    "sourceCredentialEpochAndSignedPurposeTampering": true,
+    "staleEvidenceAndUnknownPriceCategories": true,
+    "fullReservationAfterUncertainty": 2500000,
+    "automaticRetryOrRefund": false
+  },
+  "implementation": {
+    "originalCanonicalJournalAdapter": true,
+    "originalLockDeviceInodeBinding": true,
+    "separateChildFactStorage": true,
+    "sameFrozenQ4CAlgorithmCodeObjects": true,
+    "originalSecureCredentialLoaderReused": true,
+    "fixedRealPeerAndPinnedCA": true,
+    "signedNonSelfReferentialSpecification": true,
+    "distinctOwnerSecurityOperatorPublicIdentitiesRequired": true,
+    "sourcePinnedRealTrustInstalled": false,
+    "liveEntryAvailable": false,
+    "genuineApprovalIssued": false,
+    "realCredentialValueRead": false,
+    "realOriginalJournalOpenedWritable": false,
+    "realReservationCreated": false,
+    "providerRequests": 0,
+    "newReadinessRequests": 0,
+    "cloudOperations": 0
+  },
+  "financial": {
+    "domain": "experimental integer nanodollars, separate from application SQL microUSD",
+    "validatedInput": 5704,
+    "retainedInputMargin": 2048,
+    "inputBound": 7752,
+    "allOutputMaximum": 2000,
+    "conditionalStandardMaximumNanodollars": 1969000,
+    "proposedGrossReservationNanodollars": 2500000,
+    "accountSpecificFeesVerified": false,
+    "approved": false,
+    "unknownFeesOrPremiumOrProcessingCategoriesRefuse": true,
+    "actualReportedUsageNeverAuthorizesOrRefunds": true
+  },
+  "historical": {
+    "attempts": 10,
+    "providerCounts": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFiles": 324,
+    "journalSHA256": "241af59ffa81553c98feb1e093c75194d908191504a9e67a6ad16fcc13e49028",
+    "logicalTenRowPrefixSHA256": "88a8f112f918f28fac185f76b08a5226aa2daa52b7b094206b7272d8b2487a5f",
+    "metadataSHA256": "eb04c8d1ae644022ad340ec0d08c1f4db960d01f45b8c52288df0f27059afad5",
+    "fiveFrozenPayloadPairsUnchanged": true,
+    "originalSourcePinsAndTestsUnmodified": true,
+    "persistentHalt": true,
+    "beforeAndAfterHistoryLogEqual": true,
+    "finalHistoryLogSHA256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "afterAllChecksLogSHA256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f"
+  },
+  "readiness": {
+    "actualCredentialValueRead": false,
+    "consumedScopes": [
+      {
+        "immutableFiles": 13,
+        "permanentlyConsumed": true,
+        "scope": "52b-readiness-owner-63ecdbb-first-v1"
+      },
+      {
+        "immutableFiles": 10,
+        "permanentlyConsumed": true,
+        "scope": "52b-model-get-owner-128fa8c-v1"
+      },
+      {
+        "immutableFiles": 11,
+        "permanentlyConsumed": true,
+        "scope": "52b-model-get-owner-3e2ba62-v1"
+      },
+      {
+        "immutableFiles": 11,
+        "permanentlyConsumed": true,
+        "scope": "52b-count-only-owner-3ec6b68-v1"
+      }
+    ],
+    "readiness": {
+      "countBundleSHA256": "f57b7dfad47f9daab0f78482d050b0f10a57bcdf768491e879a1f5b0420c34aa",
+      "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+      "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+      "expiresAt": "2026-11-19T00:00:00+00:00",
+      "financialAuthorization": false,
+      "generationSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+      "inputTokens": 5704,
+      "model": "gpt-6-luna",
+      "modelGETBundleSHA256": "0a8312d9d83826ab91193c5429d14aa2a1be6169fb586d7640e5d5010cd80756",
+      "observedAt": "2026-11-18T05:30:48.871469+00:00",
+      "permissionSHA256": "baea3164b63c04e36faae74ef3e30801ff6d651bb692535ba65e10f978019110",
+      "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+      "realKeyValueRead": false
+    }
+  },
+  "semanticReview": "deferred, not completed",
+  "independentSecurityApproval": false,
+  "modelQualified": false,
+  "productionReady": false,
+  "checks": {
+    "pipCheck": "PASS; cache permission warning only",
+    "changedPythonJSONParse": "PASS",
+    "oldFiveSlotPreparationManifest": "all hashes match",
+    "sourceLoadedCodeInterpreterCA": "PASS separate new manifest; full parent audits retained",
+    "secretPatterns": "PASS changed Git-visible files only; no real value comparison",
+    "privateArtifactPaths": 0,
+    "allTwentyHandbookChaptersRetained": true,
+    "handbookUpdated": [
+      14,
+      15,
+      17
+    ],
+    "finalStagedWhitespace": "PASS after the single whitespace-only cleanup"
+  },
+  "developmentAttempts": [
+    {
+      "log": "/tmp/task52b-original-success.log",
+      "sha256": "128b231bc9a1f9eaf8335209e91379c6644ead7587fac4e5bb08f6307fe0af7c",
+      "reason": "missing original Q4C closing dependency in new rebound namespace",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 1 test in 9.963s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "log": "/tmp/task52b-original-success-2.log",
+      "sha256": "6894c18ca9cf3507e888d69a0a5cd8ab638b08078d31a80ced09e3dc18793ef9",
+      "reason": "fixture temp-root assumption incompatible with macOS TMPDIR",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 1 test in 64.859s",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "log": "/tmp/task52b-original-success-3.log",
+      "sha256": "f4d142e527bae2967f72de756481f0b96a4b4820e703c70d2a53a972d8533cdf",
+      "reason": "AST-subset compilation differed from full-module compiled identity",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 1 test in 63.819s",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "log": "/tmp/task52b-original-success-4.log",
+      "sha256": "eefae4d714f4bc72868265cdfc72ccfd75469c1fdda8b2f19ba988d44309f84a",
+      "reason": "isolated loader namespace omitted __builtins__; date.today reproduced KeyError",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 1 test in 66.258s",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "log": "/tmp/task52b-original-gates.log",
+      "sha256": "d1c1171eb78e79e70eeaa203d20f5a90d679cbfa92e669dc44a1932ccbaddbff",
+      "reason": "same loader namespace defect: five passes, one error",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 6 tests in 119.495s",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "log": "/tmp/task52b-original-success-5.log",
+      "sha256": "6c576189fef33edd590185f954e2efb1923a6fc82667b09c61367f8175bcaea3",
+      "reason": "intermediate complete-path pass before final exact credential and START checks",
+      "finalCohort": false,
+      "tailSummary": [
+        "Ran 1 test in 77.796s",
+        "OK"
+      ]
+    }
+  ],
+  "otherDevelopmentNotes": [
+    "First harness draft was accidentally written as a new untracked file in the frozen checkout, then moved into main; no frozen tracked source changed, final frozen status clean.",
+    "New manifest generation initially rejected generated dataclass methods and class closures; source-defined methods use independent compilation, and SQL base methods use explicit closure-free calls. No historical manifest or source validation was relaxed.",
+    "Read-only process-list probe was unavailable under the sandbox; no provider operation depended on it."
+  ],
+  "trustLimits": [
+    "Privileged host administrator compromise, signer collusion, clock compromise and coordinated journal/child/authority rollback are outside this local boundary.",
+    "Local signed epoch/revocation records require genuinely maintained trusted administration; they are not a hosted independent recovery witness.",
+    "Parent post-append verification is independent of the worker, not an independent human security certification.",
+    "Local TLS/fictional credentials do not prove real API access, billing, retention acceptance or model correctness."
+  ],
+  "remainingGates": [
+    "Independent security/operational review of this exact writer/loader/transport/source cohort and same-lock post-append verification.",
+    "Owner approval of the exact technical-only purpose amendment; semantic review remains deferred and no planning/next-slot authority follows.",
+    "Verified account-specific fees/premiums/processing/privacy terms and alias/count applicability, with unknown categories refusing.",
+    "Genuine public trust/resource/epoch/revocation enrollment, exact-build owner/security/operator signatures, no unsigned JSON switch.",
+    "Fresh original GET/count/Write and price evidence at send; current immutable hard expiry is 2026-11-19T00:00:00Z. No automatic refresh.",
+    "Separate exact one-inference owner/operator and financial authorization at proposed gross maximum $0.0025 after all prerequisites."
+  ],
+  "notRun": [
+    "Real credential load or enrollment activation",
+    "Real inference or model/count/account request",
+    "Actual original-journal append",
+    "Independent human security or semantic review",
+    "Full backend/frontend/TypeScript/build/container/browser/SQL/Redis/cloud suites: application and deployment unchanged",
+    "Configured-secret-value scan: prohibited real credential reads"
+  ],
+  "supplementalRecoveryHarnessSHA256": "0672bfcc8439320910cd7de2966bd6fc14948c528a3318a5079be602b97c1bc2",
+  "supplementalRecoveryInvocation": {
+    "cwd": "matching frozen B2 checkout",
+    "bootstrap": "Load scripts/task52b_run_original_enrollment_tests.py by absolute main path; call modules(); load primary test as _task52b_original_enrollment_tests, then supplemental test as _task52b_original_recovery_tests; run only IndependentReplacementTests.test_fresh_supervisor_after_intent_cannot_recover_send."
+  },
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/test_task52b_original_enrollment.py",
+    "backend/test_task52b_original_recovery.py",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-original-enrollment-build-v1.json",
+    "docs/task52b-original-enrollment-verification-v1.json",
+    "docs/task52b-original-journal-enrollment.md",
+    "scripts/task52b_enrolled_transport.py",
+    "scripts/task52b_original_journal.py",
+    "scripts/task52b_real_enrollment.py",
+    "scripts/task52b_run_original_enrollment_tests.py"
+  ],
+  "primaryCohortBuildSHA256": "7c2e32c72f73c3677b222a330aea4b17bbf88127044a34c3b95c4f7c14ac8404",
+  "formattingCleanup": {
+    "reason": "final staged diff check found one trailing space at enrollment source line 194",
+    "beforeBuildSHA256": "7c2e32c72f73c3677b222a330aea4b17bbf88127044a34c3b95c4f7c14ac8404",
+    "afterBuildSHA256": "2e11383bd6c6e7760940917ac957c6fcca025e255f477aa368ae74b39e2eef8c",
+    "onlyChangedSource": "scripts/task52b_real_enrollment.py",
+    "beforeSourceSHA256": "ab681201f60cd96ac84785f8b03bc09d7cdb9b25ac3bdebb8f6c584edcc882b3",
+    "afterSourceSHA256": "5bb1365efd86d667c2f1fc03b4a24a408be88525af086fe63d355564fa55236d",
+    "proof": {
+      "onlyTrailingWhitespaceRemoved": true,
+      "fullASTIncludingPositionsIdentical": true,
+      "entireModuleCompiledIdentityIdentical": true,
+      "moduleIdentity": "18eb3da3344c8ebc7ce4048e892393bad68b705ea6d3e0f7f14af3cd3ba78e6b"
+    },
+    "testedManifestBeforeCleanup": {
+      "version": "52b-original-enrollment-build-v1",
+      "baselineCommit": "953a69ad2456b23d36ea700de783ebf9d7256fe4",
+      "realTrustEnrolled": false,
+      "filesSHA256": {
+        "backend/test_task52b_original_enrollment.py": "a6acb21dcd109d9f24fdf9d9c5b45e56271043f8737a762f535c68d2f5b74085",
+        "scripts/task52b_real_enrollment.py": "ab681201f60cd96ac84785f8b03bc09d7cdb9b25ac3bdebb8f6c584edcc882b3",
+        "scripts/task52b_original_journal.py": "f71a29553f6159a1c9009ce36bb573c51139b9a365f44e524e7f88080d22797a",
+        "scripts/task52b_enrolled_transport.py": "31cbdaa477e62987fc2ef8843d1850e8a10c64c070cc158d0e4df80230565aaf",
+        "scripts/task52b_run_original_enrollment_tests.py": "9477463e04777878e16ff3cdb8d5c06f6f3e4d31f29dc864eea31fb7fb3e0372",
+        "scripts/task52b_readiness_enrolled.py": "ffdcdb97b81bddc7d3161d5301670eb2f4bc768b2abe21c4502f755e08314432",
+        "docs/task52b-generation-build-v1.json": "951b6e9d50db98b8d10c80d7da1f328d63e2e311281852015fa7c48736c195d0"
+      },
+      "loadedCodeIdentities": {
+        "scripts.task52b_original_journal.build_sha": "e1cafb20a823d6d5422db22446d0e8935c8bcf7b0680d7f6c02943c3a5e847e2",
+        "scripts.task52b_original_journal.targets": "aff4d3d82b2af678a2a33521d0840b0c0adc719895d91dc9ae242916663cc529",
+        "scripts.task52b_original_journal.verify_build": "ace06f08e8d8f4916e70b20859a367e0ebf97ab2fca98f03a00338e800de47e3",
+        "scripts.task52b_original_journal.snapshot_held": "68deb9f143194fca299db1873bee3555e83cdfc030ab7beaa956995735a70b74",
+        "scripts.task52b_original_journal.JournalSQL.__init__": "22dc698c526a6cef8ac1f6751831277d0cb3a8bcfb659b7c3f257ded59465248",
+        "scripts.task52b_original_journal.JournalSQL.execute": "fa1d23461aec12638664f9bd120694459a4ba328f0db19ba64af658774270dc2",
+        "scripts.task52b_original_journal.JournalSQL.commit": "f273e1016246bee8857157e3787f02e5209eaf6f9e91bc5b8e8191467e0c6865",
+        "scripts.task52b_original_journal.OriginalEngine.__init__": "3f8554849ad552c9ebf67cfd3fe66e9b826d886f5a024130a1251469f56be696",
+        "scripts.task52b_original_journal.OriginalEngine.check": "91bc68b6e149dcb9b305cf6e2105ddb86394764894a828ed76107aac0a52eebb",
+        "scripts.task52b_original_journal.OriginalEngine.lock": "39ed479b1a04ea73363f5ebbf3e1e856d11910894699417ad993420145b79378",
+        "scripts.task52b_original_journal.OriginalEngine.db": "77ebc3475e088c5882ea3c237009efdaa3b0b40f6afbdaf50600e4837a42e0f0",
+        "scripts.task52b_original_journal.OriginalEngine.signed": "09ab3cc81db8ceb0f78ca9cdf2e58e258bcd0e09a87536e112c78a6734063038",
+        "scripts.task52b_original_journal.OriginalEngine.record": "af6eefc1944490be231e8ee89069e9970261c51129b6d260c19b032e6acd07a1",
+        "scripts.task52b_original_journal.OriginalEngine.state": "8e48f578335342008f2375210a45e3ca8b898098ac5c6fe49f5b25c6bbfab74b",
+        "scripts.task52b_original_journal.OriginalEngine.activate_scope": "2088dd6c57e750157125745ebab0f7499776e525482a3e7548274b50143f8f06",
+        "scripts.task52b_original_journal.OriginalEngine.simulate_one": "b55853e377c376cc7f5d5796c997343c6fcf01f76243a85cdd95294fd50c1b01",
+        "scripts.task52b_original_journal.OriginalEngine.record_review": "38b5d985bda350bf205ff5537d88ab237f024f5142165237c822e2bc9c3d1997",
+        "scripts.task52b_original_journal._send": "53ee32af178c40b47705b6c067812aa290ed5b33e5d9635bb890ef1ecd206e6e",
+        "scripts.task52b_original_journal.bind_send": "b01a068330031171bd6f067689dacdb4036ca167621041e996adb2403be241b9",
+        "scripts.task52b_original_journal.independent_verify": "69c0c53d3643f4649eebb02acf2dcbbdedb86fda4fbd5d9e83de05208824b439",
+        "scripts.task52b_original_journal.worker": "524c7a5ec0f1ccaa705be28b5566eabeb9af3e2f5527d795c065d8f8c1f39973",
+        "scripts.task52b_original_journal.supervise": "95717f0bee1673cec3a1845241e1c417e4869abf6bc370ffaffc925e6748ab3d",
+        "scripts.task52b_real_enrollment.approved_trust_sha256": "026cf097d41440c366548bce9b82a3e3a2f0c4a21dd5e0260111aa3b3d18c37c",
+        "scripts.task52b_real_enrollment.now": "f6b5b9d79548468edfee193985c8abc2259c52a522991beeb5935142ba7efd53",
+        "scripts.task52b_real_enrollment.utc": "45462f9d74d49691d407b2c57611f56cc5dd8d3af102eb37462cdd4132740024",
+        "scripts.task52b_real_enrollment.canonical": "ed39f4b6434faed0a3ea9a1f5d9bc1abd543f631c70ea55ba219db9c0ee5acb5",
+        "scripts.task52b_real_enrollment.digest": "cf5999e2c973c2cb561dd27607f90036b1ae09e7c56744349dd5d05e59356f73",
+        "scripts.task52b_real_enrollment.private": "d12e5bbbea871b819b544773aed04a8a0bed52dbe478a5e451292c600c707ed6",
+        "scripts.task52b_real_enrollment.file_identity": "90dc64727e920f8f5bc144aadb3167bff8cba641b9c856a8fe9645a274d29b5b",
+        "scripts.task52b_real_enrollment.directory": "d3c7ee6763a432b991d02702a73e8b1e454330a09a1b196bcafa120e7f6e4a51",
+        "scripts.task52b_real_enrollment.verify_detached": "49f6fd6fed6e7929743f337e8b0683d05ab0c01d6c1f41c0119276f69a6ab2d9",
+        "scripts.task52b_real_enrollment.valid_time": "03c2162a9f7bfa787d7a8874ee79595e07510290482ac4ad7b992421eb609b43",
+        "scripts.task52b_real_enrollment.check_trust": "9501ebe5351160b07a7fa42c684fe6704a1f4c984109c1b1eae57a84dc029296",
+        "scripts.task52b_real_enrollment.Enrollment.trust": "14b468f70a8083d26f553873d5d855cf65e90833a2fda7e18a0abfe3ba638c51",
+        "scripts.task52b_real_enrollment.Enrollment.package": "554a5c91ca02838332de1cb54ce835253af84f770f237f071f254ed4df307286",
+        "scripts.task52b_real_enrollment.Enrollment.binding": "f31659bde7c03c6e3215555bfdbbd4b6b40bbd74492276d8c0552b6765a0f74d",
+        "scripts.task52b_real_enrollment.Enrollment.binding_hash": "7b4096586ee05bb5a591a7547d8f3734e9991ea94fe43583f25f6b42a0c35112",
+        "scripts.task52b_real_enrollment.Enrollment.journal": "9b41274a370a0dda3cfe051e4f24ac2d0c11bb6afbd3af5510d94bb38b824fa9",
+        "scripts.task52b_real_enrollment.Enrollment.lock": "45328da2eee6ff8dd5f56270e4112ae39ea3a7bcea826395d4d4432da128e51c",
+        "scripts.task52b_real_enrollment.Enrollment.facts": "28d6dba8d9929662d7819e3887410179873df1f073d294d45148dd50f73139a7",
+        "scripts.task52b_real_enrollment.Enrollment.journal_hash": "49c46774106f56b94835767a15db809bdd37fa6e11d2a8b9203e9f3c9d4e4b3c",
+        "scripts.task52b_real_enrollment.Enrollment.scope": "cbe61cbfa9e10bfbc205050c0224315970f486b1a744449b9e489cbc94fe165f",
+        "scripts.task52b_real_enrollment.Enrollment.authority": "52e52e81bb908fa727c230632658622f37af2b1018cfa2accc53f5202954639d",
+        "scripts.task52b_real_enrollment.Enrollment.signed": "452edef2591bd98e43f03da77f668993853d4a9ad3bf3b4767e46ca92b7100e3",
+        "scripts.task52b_real_enrollment.Enrollment.recheck_current": "cebc69e658bcbb47ff0c92f7781ed507e124789442cc21ad21b201469d4d4984",
+        "scripts.task52b_real_enrollment.Enrollment.guard": "9b54adcda73ea52d3b9a0b7d6c39a505a570f375592c422b5f7d2742e7011152",
+        "scripts.task52b_real_enrollment.enroll_real": "94df75c178583a9c96ef0ab15b09bde0625d3403b122adef7c49e04608623409",
+        "scripts.task52b_real_enrollment.enroll_fixture": "bf8fe49e54bff25fe55f91733653751ad628bd5d5a96a9828e3889ae19ff432a",
+        "scripts.task52b_enrolled_transport.binding": "6fae79575b1400ae434c363f01cbbc0f5e1aec41a6423a8300b879063a263792",
+        "scripts.task52b_enrolled_transport.credential_loader": "c323dd9612ac9e38df30bb361d74adc389065fb55e379991a75799a66395eda8",
+        "scripts.task52b_enrolled_transport.EnrolledTransport.__init__": "72cbb90d71e223cb082d3ebe39bbbe919fbefe11635aaa74261944061c61dca2",
+        "scripts.task52b_enrolled_transport.EnrolledTransport.exchange": "6f115557912be39956a7e0988ec5d526c39dd4b2c010c4788729793a8cf3b8bf",
+        "scripts.task52b_enrolled_transport.enroll_transport": "a9b48edb1f90813a793c384c14af98e5d7c3f1971d44f7b4f0058391d4ca6784",
+        "scripts.task52b_enrolled_transport.fixture_transport": "cdac65a9afd744b35a76c439277e807848507683d22ac6d751058026837fcb62",
+        "scripts.task52b_enrolled_transport.verify_captures": "11b8e6d8aa833d56158ce5d1ce770f885c04069b9962e62732c3ec00eb66b3a1"
+      },
+      "pythonExecutableSHA256": "e7bdd7770f59ff7fa58d4e1074481051a462b03d4c6a6e36e07549dce546fe03",
+      "caBundleSHA256": "50f79f98dac192b20dbf73f35c56f0b0c557ab267ff5199d1117cc1180b70785"
+    },
+    "sourceReconstruction": "The pre-cleanup public source differs only by one trailing U+0020 on line 194; its source SHA is retained above."
+  },
+  "postFormattingRechecks": {
+    "flow": {
+      "passed": 1,
+      "seconds": 80.503,
+      "failed": 0,
+      "errors": 0,
+      "logSHA256": "af80d285cd97ecb7b1135258ccab88524338e52a520b6cde46522e1a28440d55",
+      "buildSHA256": "2e11383bd6c6e7760940917ac957c6fcca025e255f477aa368ae74b39e2eef8c"
+    },
+    "gates": {
+      "passed": 6,
+      "seconds": 121.46,
+      "failed": 0,
+      "errors": 0,
+      "logSHA256": "6b753987e9727df8b4c90f821a1a4996557dad13b29f895d6e6847b461d39597",
+      "buildSHA256": "2e11383bd6c6e7760940917ac957c6fcca025e255f477aa368ae74b39e2eef8c"
+    }
+  },
+  "executedPassingChecksIncludingSevenRechecks": 111
+}

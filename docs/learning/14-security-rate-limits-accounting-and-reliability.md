@@ -218,3 +218,8 @@ Application SQL amounts use micro-USD (1000000 equals$1), separately from the ha
 ## Exact patch evidence and residual risk
 
 The [bounded Trixie promotion packet](../task52-candidate-promotion.md) installs one signed Debian zlib package. Compare old and new images using one scanner DB: a later database can add findings to an unchanged image, and disappearing advisory mappings do not prove patches. Track distro zlib separately from Node's bundled fork and psycopg native libraries. Privilege restrictions limit exposure but cannot certify unreachability or independently accept vulnerabilities. An artifact promotion never resets grants, charges, replay history or independent restore epoch.
+
+
+## One lock across an append-only journal and separate facts
+
+The inactive [first-slot resource adapter](../task52b-original-journal-enrollment.md) requires the enrolled original lock inode, PID/thread ownership and an exact signed START before its restricted SQL INSERT. SQL commit is synchronous FULL and fsyncs the journal directory; child facts use exclusive creation and fsync in a separate owner-only directory. Missing INTENT/capture after a crash cannot undo a committed reservation. One-use supervision prevents a replacement worker from retrying even when no reservation committed. Signed local authority is not a protection against administrator compromise or correlated rollback of all authority stores; no independent security acceptance is implied.

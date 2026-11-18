@@ -219,3 +219,8 @@ Run `PYTHONPATH=.:backend backend/.venv/bin/python -m unittest backend.test_prov
 ## Testing an inactive image promotion
 
 Run the existing packaging tests plus `deployment.test_zlib_candidate` and `deployment.test_candidate_promotion`. Set `TASK52_SECURITY_DEB` only to the exact independently downloaded hash-verified Debian archive; otherwise its build-projection case explicitly skips. The helper never downloads it or changes ordinary startup. Tests prove unchanged application bytes, package guards and exact inactive replacement hashes. Authenticated multi-process/browser/recovery checks still require disposable SQL/Redis and the separate fixture-only frontend. Preserve first failed attempts and immutable loaded assertions; a passing rerun is not retrospective attribution.
+
+
+## Test the original resource shape without writing original evidence
+
+The [explicit enrollment harness](../../scripts/task52b_run_original_enrollment_tests.py) uses the matching frozen source environment, an owner-authorized complete historical journal copy, a separate child-fact directory and fictional credentials. Parent/child processes, verified local TLS, constrained SQL and a separate same-lock post-append fold exercise the actual adapter. Fixture signatures test verification mechanics; they are not real approvals. Preserve every failed development run alongside final counts, and independently verify the original ten rows, 324 private files and consumed readiness scopes before/after. Normal discovery intentionally skips this opt-in cohort; no full-backend or browser claim follows.
