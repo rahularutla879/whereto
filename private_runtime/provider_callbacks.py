@@ -178,9 +178,17 @@ class DispatcherCallback:
         policy = deepcopy(enrolled['policy'])
         if policy.get('provider') != provider:
             raise ProviderResponseError('reserved_provider_binding')
+        if (provider == 'google' and getattr(self.accounting, 'profile', None) == '52-real-provider-finance-v1'
+                and policy.get('account') != getattr(self.google._exchange, 'account', None)):
+            raise ProviderResponseError('reserved_google_project_binding')
         if provider == 'openai' and policy.get('account') != self.openai.project:
             raise ProviderResponseError('reserved_project_binding')
-        bound = review_bound(policy, wire, now=self.clock(), count=enrolled['count'])
+        if getattr(self.accounting, 'profile', None) == '52-real-provider-finance-v1':
+            # Trusted role dependency: bound() revalidates a protected SQL receipt
+            # inside the committed-delivery context, including cache-write cost.
+            bound = self.accounting.bound(wire, enrolled, self.clock())
+        else:
+            bound = review_bound(policy, wire, now=self.clock(), count=enrolled['count'])
         # Exact integer conservative quote, not an allowance supplied by caller.
         if (type(enrolled['reservedMicroUSD']) is not int or
                 enrolled['reservedMicroUSD'] != bound.maximum_micro_usd):

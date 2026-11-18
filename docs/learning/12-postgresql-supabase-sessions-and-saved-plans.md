@@ -183,3 +183,7 @@ One remaining hosted issue is outside those durable tables: `experiments/service
 `private_runtime/connections.py` verifies TLS hostname/CA, exact database/session/current login/memberships and protected enrollment purpose on every checkout. Bounded connection reuse resets session state and never retries failed financial operations. The witness uses session advisory locks, so transaction poolers are unsupported. `deployment/sql/hosted-*-contract-v1.sql` are inert isolated-schema candidates, not applied Supabase migrations or worker bootstrap permissions. Saved-plan schema/RLS are unchanged.
 
 See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+### Inactive real-provider financial SQL profile
+
+`private_runtime/real_finance/profile.py` source-pins and projects the existing SQL into `provider_state/provider_rules/provider_witness`; it does not edit old SQL or install into Supabase. Both independently administered databases need matching reviewed immutable policies and explicit enrollment. Empty installers issue no rates/grant/epoch. INSERT validation plus immutable configuration allow per-operation current-rate checks without repeating full JSON validation. Existing hosted SQLPool contracts measure the new schema/build and refuse test clocks or DDL drift. Saved-plan schema/RLS is unchanged. See [the implementation report](../task52-real-financial-authority.md).

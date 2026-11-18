@@ -1,3 +1,7 @@
+## Current continuation — real SQL financial authority, inactive
+
+[The real-profile SQL/count/witness implementation](task52-real-financial-authority.md) now supplies the protected accounting boundary previously missing below. It does not activate or complete native real inference, transient Google session handling, six-role startup or image/browser verification. The earlier entries and their tests remain historical evidence, not a claim of complete hosted integration.
+
 # Task 52 — inactive real-provider response integration
 
 November 16, 2026; baseline `8b4f21b81791f3833fbf7f66191bca5434ca2d09`. Working code, offline transports only. The real-provider private-staging milestone remains required; no synthetic product deployment is authorized. [Verification](task52-real-provider-integration-verification.json) records exact results and development failures.

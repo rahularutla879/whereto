@@ -231,3 +231,7 @@ The [offline six-role compiler](../../deployment/cloud-run/README.md) grants no 
 ## A measured count is not financial authority
 
 The new real callbacks require protected `begin/commit/uncertain` counting and pre-send reservation dependencies; no production implementation is enrolled. The current SQL counts fictional UTF-8 bytes and cannot authorize the actual Responses payload. Offline rate arithmetic is repeated only after an authority-supplied quote and does not create a permit. Existing owner routing/witness/delivery checks must still surround the callback. The tests' accounting stand-ins cannot prove SQL durability, fleet-wide replay safety or independently authorized budgets. Never install them in a hosted role.
+
+### Actual-count financial authority (inactive)
+
+The real profile adds durable one-use complete-request counts and a count-only witness principal. The counter cannot approve prices, generate, issue grants or rotate epochs. Paid dispatch requires SQL-derived input-plus-margin/cache-write/maximum-output reservation and the original encrypted evidence, source/fence, admission, epoch and single-use delivery checks. Maps and LLM share immutable aggregate/day/outing/root/provider exposure; midnight or a worker restart cannot renew it. Usage never refunds; uncertainty quarantines. Only explicitly approved zero-fee counting and fully bounded fee categories are supported. No installed configuration or historical diagnostic count is implicit authority. [Detailed contracts and limits](../task52-real-financial-authority.md).

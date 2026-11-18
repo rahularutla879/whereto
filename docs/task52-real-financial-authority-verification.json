@@ -1,0 +1,574 @@
+{
+  "identity": "52-real-provider-finance-verification-v1",
+  "baselineCommit": "a964ccce7d4fdf81b39cb05a68575abaa309c933",
+  "scope": "Inactive provider-specific operational SQL and independently maintained witness; fictional HTTP responses and policy values only",
+  "realFinancialProfileTechnicallyComplete": true,
+  "sixRoleStartupComplete": false,
+  "approvedRealGrants": 0,
+  "realProviderCalls": 0,
+  "actualCredentialValueReads": 0,
+  "cloudResourcesCreated": 0,
+  "executionIdentity": {
+    "event": "real_finance_execution_identity",
+    "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+    "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+    "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+    "sqlSHA256": {
+      "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+      "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+    },
+    "contractSHA256": {
+      "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+      "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+    }
+  },
+  "sourceManifest": {
+    "identity": "52-real-finance-source-pins-v1",
+    "baseline": "a964ccce7d4fdf81b39cb05a68575abaa309c933",
+    "inputs": {
+      "experiments/shared_state/application_grants.sql": "aeb8b90576bfaa6ce7c48449e2608c92e1858e8107caf58085bab9a595839ab0",
+      "experiments/shared_state/bridge.sql": "6af8e10d172fc188cf76f30c83479da9a3fcae98e3191dedbd3965453b81ca3b",
+      "experiments/shared_state/evidence.sql": "b1fe0d4a98acf078a6080283ce37dfc0dc2b9cfe7b143b8d85b533462b2ae7f2",
+      "experiments/shared_state/financial_routines.sql": "69179211e0b4971b329f77bb8ee639d6ce0f339b53eeb3f6da436ec73fe2fe8c",
+      "experiments/shared_state/financial_schema.sql": "eee3872280602077f4a01d7e9b0172feb81a2330969891c60a9e0b2177937495",
+      "experiments/shared_state/grant_rules.sql": "f069b48d8812cfcc4f89518f6a7322f816931cb69614659f32874612be41b03f",
+      "experiments/shared_state/grant_witness.sql": "fab3095c6cc3d3a5558353b701559b4132cb7271379b0a47d68b1f1fe0a4a711",
+      "experiments/shared_state/native_sessions.sql": "d1d70554b94e772fbc937bd0a9f24c3eb6b909e78f1cf01fb6c31a651392531a",
+      "experiments/shared_state/native_witness.sql": "573cf9b2bf30c653562b2a752e12c2fa6f2515866e7a68cd9fcef065c40b2fcd",
+      "experiments/shared_state/routines.sql": "47a85e04311ec2efb483ebd15f1ecd2798b14a3d295db9006b164d175a7fd758",
+      "experiments/shared_state/schema.sql": "464e4430f8fac8ba9cccc7d32607c7775bf25d594b2936d565ec4561a97d3aae",
+      "experiments/shared_state/application_grants.py": "877d22a167d1be0fad1e547afed6491a0b49a57a1709211accea2cbd8937fb85",
+      "experiments/shared_state/redis_evidence.py": "9125fdcbceaf1aeb63f19f85c9e0152e9a58c2f579457818717f410e69f3548b",
+      "private_runtime/real_finance/profile.py": "80694d2a045c5fab0b9879553b1dc5d8f29d4764d8fede835b3a22588452dd20",
+      "private_runtime/real_finance/rules.sql": "a0e6f19bd4b34889fb33e90f4e8b8db9c2f068e68c09e645eecd456ae59ef716",
+      "private_runtime/real_finance/counter.sql": "ee95116c6764eef3bbb51c20dd6c9914b2d85fea1d0c36df08afaed99cc85530",
+      "private_runtime/real_finance/runtime.py": "586acfb0d802a075bdd35e4063c46d43255cefb71851642100edec523f2852db",
+      "private_runtime/real_finance/counter_witness.sql": "0ef3d3cb7a92ae729352832cf5d4938ee0c3f89cd1193292a77335fbbb5ad67f",
+      "experiments/shared_state/postgres.py": "4e27b596599e1d2aa7ef0d486d8b2cdd2b2cf90ecfeadc562b8701f486aed974",
+      "experiments/shared_state/financial.py": "ec1abd9ffadc1cccf9c52ed3ab733625c0da8dfa0423dbe303f6c1d81dcfd6d7",
+      "experiments/shared_state/contracts.py": "6fd31ac8786a5a5a80409737682507cbef6753b427d648f3e314f9a663f3b4e2",
+      "experiments/shared_state/bridge_models.py": "b38b8474059c90a05434613f281ff66eafca35da56fdf6468363949320498af7",
+      "experiments/shared_state/action_bridge.py": "205d6d7641926ba1dcf41f79a41335c7f4b706f58b9df8b3d0d0b626dcac3cba",
+      "experiments/shared_state/evidence_models.py": "562df7e447adac1147c254acd13a562649e2f2e4b2a014c07428f4eb8df05cb2",
+      "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0",
+      "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
+      "backend/provider_enrollment_review.py": "a8d40f5032a6a80336132831f52f805635cb0c7d87c3220dabbd650e373288b0",
+      "private_runtime/provider_callbacks.py": "f8d5b01f93c688851b74006c45a92088704b9b223d4f8839e3040b5e2b9a84e3",
+      "docs/task52-cloud-prompt-v51-REVIEWED-v1.json": "02b20af7fbabeb93d9d305a10c1327b8e97043b2b995f830fc88ab44f218f5da",
+      "deployment/sql/hosted-operational-contract-v1.sql": "f06fc9002cb7b86a05ec55787e188de70a3d08f6fb340696c9f3e60a5f31a7b3",
+      "deployment/sql/hosted-witness-contract-v1.sql": "6f6aa7a5547881ee5cf9a54a38b69a447ef1c530e29a4393301d01304c19768e"
+    }
+  },
+  "newSQL": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m private_runtime.real_finance.run_sql",
+    "tests": 27,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 223.896,
+    "drills": [
+      "operational snapshot rollback quarantines full at-risk grant",
+      "witness snapshot rollback quarantines full at-risk grant",
+      "operational outage refuses without fallback",
+      "operational/witness restart preserves reserved exposure",
+      "Redis loss cannot reconstruct evidence or permit resend"
+    ],
+    "limitations": [
+      "actual SQL and encrypted Redis on isolated loopback containers, not hosted TLS/IAM",
+      "two spending processes use staged source setup then simultaneous reservations",
+      "provider HTTPS substitute responses are fictional; no live provider acceptance",
+      "no full six-role application/browser verification"
+    ]
+  },
+  "originalFinancialAndRecovery": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_real_responses",
+    "cohorts": [
+      {
+        "tests": 3,
+        "passed": 3,
+        "seconds": 38.146
+      },
+      {
+        "tests": 30,
+        "passed": 30,
+        "seconds": 476.413
+      }
+    ],
+    "failed": 0,
+    "skipped": 0,
+    "restoreOutageRestartAndRedisDrills": "passed",
+    "sourcePins": "unchanged"
+  },
+  "focusedRegressions": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_provider_callbacks backend.test_provider_responses backend.test_provider_enrollment_review backend.test_google_retention deployment.test_cloud_run deployment.test_candidate_promotion deployment.test_packaging deployment.test_private_artifact private_runtime.test_dispatch_owner private_runtime.test_dispatch_processes -v",
+    "tests": 73,
+    "passed": 73,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 8.139
+  },
+  "sourceAndTLS": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest private_runtime.real_finance.test_profile private_runtime.test_https -v",
+    "tests": 14,
+    "passed": 14,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 0.249
+  },
+  "additionalMetadataIdentityAttempt": {
+    "result": "14 tests passed plus one test-module import error",
+    "reason": "host backend venv lacks PyJWT (jwt); no lock/dependency change to mask it",
+    "module": "private_runtime.test_identity",
+    "notClaimedPassed": true
+  },
+  "dependencies": {
+    "pipCheck": "passed",
+    "lockFiles": "unchanged",
+    "newDependencies": 0
+  },
+  "history": {
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFiles": 324,
+    "frozenPayloadPairs": 5,
+    "persistentHalt": true,
+    "consumedReadinessScopes": 4,
+    "unchanged": true,
+    "realKeysRead": false
+  },
+  "resourceCleanup": {
+    "event": "real_finance_resource_cleanup",
+    "preExistingPreserved": 135,
+    "newVolumesRemaining": 0
+  },
+  "resources": {
+    "startingVolumes": 126,
+    "finalStableVolumes": 135,
+    "preExistingVolumesPreserved": true,
+    "earlyAnonymousVolumesUnattributedAndPreserved": 9,
+    "finalNewVolumesRemaining": 0,
+    "localVM": "task-started local VM stopped after zero containers and final inventory verification",
+    "noBroadPrune": true,
+    "containersAfter": 0,
+    "finalStableInventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c"
+  },
+  "integrity": {
+    "protectedBaselineFilesUnchanged": 606,
+    "handbookChapters": 20,
+    "chaptersReviewedAndUpdated": [
+      "12",
+      "14",
+      "15",
+      "18"
+    ],
+    "unaffectedChaptersUnchanged": 16,
+    "secretPatternMatches": 0,
+    "privateConfigurationScan": "not run: configured scan reads credential values; safe source/diff pattern scan used",
+    "JSONPythonSyntax": "passed",
+    "fullDiffReview": "performed including new files"
+  },
+  "developmentDisposition": [
+    "Initial harness missing docs directory; fixed explicit fixture source copy, no real data copied.",
+    "SQL CASE syntax 42601 corrected; LLM source inference_binding required a distinct active-admission registration, original completed-source rules preserved.",
+    "42702 count phase id ambiguity and 42703 source alias corrected from precise SQL locations.",
+    "55P03 at original protocol gate during simultaneous source construction reproduced; spending race now stages source creation; deadlines unchanged. Hosted capacity remains unqualified.",
+    "2201B PostgreSQL regex repetition maximum corrected by separate length and alphabet checks.",
+    "Host-contract source files missing in fixture copied explicitly; no manifest weakening.",
+    "New usage lower-bound query 42703 corrected by joining immutable count_attempts and count_results.",
+    "New source/assertion tests initially used wrong literal SQL function names (two failures); corrected exact ACL assertions, no privilege change.",
+    "Expiry regression initially passed unsupported helper ttl (TypeError); corrected to 30-second count TTL within existing 600-second session maximum.",
+    "Expiry regression incorrectly expected zero witness exposure after OP refusal. Actual independent claim=7222 was correctly retained; test now requires retained charge/quarantine/zero dispatch.",
+    "Mixed-provider regression initially used another worker-owned helper (worker_instance refusal); fixture now binds the correct worker, protection unchanged.",
+    "Overlapping fixture cohorts triggered volume-preservation assertion when the other cohort removed its own volumes. Stable inventory returned exactly to 135/hash recorded; final acceptance run serial, guard unchanged.",
+    "Broad preliminary key regex matched seven pre-existing word/link substrings; token-boundary pattern corrected, zero actual credential matches."
+  ],
+  "attempts": [
+    {
+      "file": "whereto-real-finance-dev1.log",
+      "sha256": "fd66295249abe45491c6bca05d0c02d0d15724483ca55b156fc7f87304e42659",
+      "cohorts": [],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-dev10.log",
+      "sha256": "87b59b245bcc03a70c7151f35979a0214e88f483063c70cdb9b5c6b727c70100",
+      "cohorts": [
+        {
+          "tests": 8,
+          "seconds": 57.165
+        }
+      ],
+      "failures": [
+        "ERROR: test_google_enterprise_extra_fields_and_unit_substitution_refuse (private_runtime.real_finance.test_sql.AdversarialTests.test_google_enterprise_extra_fields_and_unit_substitution_refuse)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev11.log",
+      "sha256": "a748d0a6fe4adec8f42e47622d97aa57bbd02ff9b5a183cd67a4bbd6f01e1eae",
+      "cohorts": [
+        {
+          "tests": 22,
+          "seconds": 110.813
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-dev12.log",
+      "sha256": "4f200c4b5321936321e3f28ab688dc01bd91094aa1b78991f14ca0c6757d2215",
+      "cohorts": [],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-dev13.log",
+      "sha256": "8f82751863f7ae6259f3c17f6c55a780c2ee9db6e0b715bdcfd00d545de5be13",
+      "cohorts": [
+        {
+          "tests": 24,
+          "seconds": 140.499
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-dev2.log",
+      "sha256": "931924f1a8397816cfca24a09a346b1ea706988b6abbbb9ba8254ff029b87373",
+      "cohorts": [],
+      "failures": [
+        "ERROR: test_google_real_codec_and_sql_unit_price (private_runtime.real_finance.test_sql.Tests.test_google_real_codec_and_sql_unit_price)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev3.log",
+      "sha256": "b73c28db0a412917c6759cf04a47662bca7e8eb36f02c193c284a7d3e4b9b35e",
+      "cohorts": [
+        {
+          "tests": 2,
+          "seconds": 15.508
+        }
+      ],
+      "failures": [
+        "ERROR: test_openai_count_reservation_dispatch_and_non_refund (private_runtime.real_finance.test_sql.Tests.test_openai_count_reservation_dispatch_and_non_refund)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev4.log",
+      "sha256": "f353e04f5dc1d677501c41258ff2d7aaeb33aa9cea4ffda0e6a896ecbd59149b",
+      "cohorts": [
+        {
+          "tests": 2,
+          "seconds": 14.951
+        }
+      ],
+      "failures": [
+        "ERROR: test_openai_count_reservation_dispatch_and_non_refund (private_runtime.real_finance.test_sql.Tests.test_openai_count_reservation_dispatch_and_non_refund)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev5.log",
+      "sha256": "dc5882e6a18a1ec5eace6ece79de7c3ec1c00367f3513a9f300dca1c059de98d",
+      "cohorts": [
+        {
+          "tests": 2,
+          "seconds": 17.082
+        }
+      ],
+      "failures": [
+        "ERROR: test_openai_count_reservation_dispatch_and_non_refund (private_runtime.real_finance.test_sql.Tests.test_openai_count_reservation_dispatch_and_non_refund)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev6.log",
+      "sha256": "2eefe2da1939d360dd9b06062f3840d041f7a93f3634adee32b0f61a3461a669",
+      "cohorts": [
+        {
+          "tests": 2,
+          "seconds": 17.091
+        }
+      ],
+      "failures": [
+        "ERROR: test_openai_count_reservation_dispatch_and_non_refund (private_runtime.real_finance.test_sql.Tests.test_openai_count_reservation_dispatch_and_non_refund)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev7.log",
+      "sha256": "b095fb299149f4071ca2e938bf081361571f951e139d0db6815bde57f1ecb05e",
+      "cohorts": [
+        {
+          "tests": 2,
+          "seconds": 17.888
+        }
+      ],
+      "failures": [
+        "ERROR: test_openai_count_reservation_dispatch_and_non_refund (private_runtime.real_finance.test_sql.Tests.test_openai_count_reservation_dispatch_and_non_refund)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev8.log",
+      "sha256": "5211d5082e521e7fffb01830c938b04d7e8dc09814a40503f9e0516d441ed118",
+      "cohorts": [
+        {
+          "tests": 3,
+          "seconds": 63.281
+        }
+      ],
+      "failures": [
+        "FAIL: test_concurrent_workers_one_nonrenewing_grant (private_runtime.real_finance.test_sql.AdversarialTests.test_concurrent_workers_one_nonrenewing_grant)",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-dev9.log",
+      "sha256": "32da33200cdfe09ffc95696e3459ece1a8df8fdd91fd067f4b9ecff05b01d34a",
+      "cohorts": [
+        {
+          "tests": 3,
+          "seconds": 63.888
+        }
+      ],
+      "failures": [
+        "FAIL: test_concurrent_workers_one_nonrenewing_grant (private_runtime.real_finance.test_sql.AdversarialTests.test_concurrent_workers_one_nonrenewing_grant)",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-engine.log",
+      "sha256": "7bc7232921aba6508d04573c60e211423e11770f788fd2037d389c4a714041a8",
+      "cohorts": [],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-final.log",
+      "sha256": "d7f2c5cbb1a727704446313d6bc75e959aad63e2f36d411b6197d4f236c6a034",
+      "cohorts": [
+        {
+          "tests": 8,
+          "seconds": 77.138
+        }
+      ],
+      "failures": [
+        "ERROR: test_epoch_rotation_and_invalid_usage_stop_further_work (private_runtime.real_finance.test_sql.AdversarialTests.test_epoch_rotation_and_invalid_usage_stop_further_work)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-final2.log",
+      "sha256": "06452180fc9da49bccc2d3e04fee508a21ad15df98e74031f6b559eb262b226f",
+      "cohorts": [
+        {
+          "tests": 25,
+          "seconds": 184.673
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-final3.log",
+      "sha256": "6ab66ed98e7ae24eaaf044667cf8b6e6c014e52f1b943f1a36d83b711f4fa0d9",
+      "cohorts": [
+        {
+          "tests": 4,
+          "seconds": 52.189
+        }
+      ],
+      "failures": [
+        "ERROR: test_count_expiry_between_approval_reservation_and_dispatch_refuses (private_runtime.real_finance.test_sql.AdversarialTests.test_count_expiry_between_approval_reservation_and_dispatch_refuses) (reserved=False)",
+        "FAILED (errors=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-final4.log",
+      "sha256": "091a495defcdc5e5cc7f484abb6fb5d2f672c2b6073e9373ab5df06ba53556fe",
+      "cohorts": [
+        {
+          "tests": 4,
+          "seconds": 37.025
+        }
+      ],
+      "failures": [
+        "FAIL: test_count_expiry_between_approval_reservation_and_dispatch_refuses (private_runtime.real_finance.test_sql.AdversarialTests.test_count_expiry_between_approval_reservation_and_dispatch_refuses) (reserved=False)",
+        "FAILED (failures=1)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-final5.log",
+      "sha256": "1e49682802d133a936824b01cc45d13ed72a5bc2c7912cdcd25af495845d3481",
+      "cohorts": [
+        {
+          "tests": 26,
+          "seconds": 193.649
+        }
+      ],
+      "failures": [
+        "RuntimeError: Pre-existing volume changed"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-final6.log",
+      "sha256": "83af084775046f8d2e4b20a869c0c366f160a3a141c76031270b8168c6332297",
+      "cohorts": [
+        {
+          "tests": 14,
+          "seconds": 114.666
+        }
+      ],
+      "failures": [
+        "ERROR: test_maps_and_counted_llm_share_exact_aggregate_allowance (private_runtime.real_finance.test_sql.AdversarialTests.test_maps_and_counted_llm_share_exact_aggregate_allowance) (total=39221)",
+        "FAILED (errors=1)",
+        "RuntimeError: Pre-existing volume changed"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-final7.log",
+      "sha256": "acbaafad735b1565a42d4e608efc69fbbd4dd3dc3967df3e6212f52dac9b774e",
+      "cohorts": [
+        {
+          "tests": 27,
+          "seconds": 223.896
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-history.log",
+      "sha256": "4cf4cb937d37d1e762c60b54a8a8d6030e2cf6fc955870f62af469f12cd9e412",
+      "cohorts": [],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-original-regressions.log",
+      "sha256": "0aae5e141d7f7dcf128286ae58ec309d26fc68dda76052791626345092f830ff",
+      "cohorts": [
+        {
+          "tests": 3,
+          "seconds": 38.146
+        },
+        {
+          "tests": 30,
+          "seconds": 476.413
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-profile-final.log",
+      "sha256": "4a7a64aa68e3a20525af04d8afdc18aacb8c8d0af654eb353310f86b09d51fbb",
+      "cohorts": [
+        {
+          "tests": 7,
+          "seconds": 0.017
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-profile.log",
+      "sha256": "40a22aef3bf12a3a8acbc5a20b630b24613f8bc06070946cab838df29f4e4588",
+      "cohorts": [
+        {
+          "tests": 7,
+          "seconds": 0.028
+        }
+      ],
+      "failures": [
+        "FAIL: test_count_and_generation_authority_are_distinct (private_runtime.real_finance.test_profile.ProfileTests.test_count_and_generation_authority_are_distinct)",
+        "FAIL: test_installers_do_not_issue_grants_prices_or_epochs (private_runtime.real_finance.test_profile.ProfileTests.test_installers_do_not_issue_grants_prices_or_epochs)",
+        "FAILED (failures=2)"
+      ]
+    },
+    {
+      "file": "whereto-real-finance-regressions.log",
+      "sha256": "3921dd1d29d7f531958008bf977b897b8528d3418c68258858de124a61a215bb",
+      "cohorts": [
+        {
+          "tests": 73,
+          "seconds": 8.139
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-transport-final.log",
+      "sha256": "6601b18295915b218a47f9584616347f6f038d11d3fb2c666ad88769f79e9119",
+      "cohorts": [
+        {
+          "tests": 14,
+          "seconds": 0.249
+        }
+      ],
+      "failures": []
+    },
+    {
+      "file": "whereto-real-finance-transport.log",
+      "sha256": "8f378238d8fd3f2346030fd6d9327db49dfa2963a4cf2ab0821db672a1440fb8",
+      "cohorts": [
+        {
+          "tests": 15,
+          "seconds": 0.193
+        }
+      ],
+      "failures": [
+        "ERROR: test_identity (unittest.loader._FailedTest.test_identity)",
+        "FAILED (errors=1)"
+      ]
+    }
+  ],
+  "notRun": [
+    "full backend suite",
+    "frontend tests/TypeScript/ESLint/production build: no frontend or dependency changes",
+    "desktop/mobile browser",
+    "new role image builds or vulnerability scans: startup/images not changed",
+    "hosted SQL/Redis TLS and IAM enrollment",
+    "separate hard witness-network-outage drill (witness restore/restart and role refusal exercised)",
+    "live model/count/Maps/account operations",
+    "real grants or Supabase migrations"
+  ],
+  "residualRisks": [
+    "finite immutable profile/rate enrollment only; no automatic rate or grant renewal",
+    "qualified model/revision and all account fee categories/zero-fee counting need approved evidence",
+    "coordinated compromise/rollback of both databases and protected epoch outside trust boundary",
+    "trusted schema/operator/counter/issuer compromise outside ordinary-worker protections",
+    "count expiry between independent claim and OP commit may conservatively quarantine and consume exposure; no refund",
+    "native real source/usage bridge, Google terminal lifecycle and six-role startup/image/browser verification still required",
+    "unchanged container vulnerabilities/security acceptance, hosted capacity, managed Redis quote, independent witness administrator, IAM/IAP and spending approvals remain gates"
+  ],
+  "nextCodeCheckpoint": "Bind existing native real Responses source/usage bridge and request-local Google lifecycle to these restricted profile ports, then closed six-role startup; no live activation",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/task52-real-financial-authority-verification.json",
+    "docs/task52-real-financial-authority.md",
+    "docs/task52-real-provider-integration.md",
+    "private_runtime/provider_callbacks.py",
+    "private_runtime/real_finance/__init__.py",
+    "private_runtime/real_finance/counter.sql",
+    "private_runtime/real_finance/counter_witness.sql",
+    "private_runtime/real_finance/profile.py",
+    "private_runtime/real_finance/rules.sql",
+    "private_runtime/real_finance/run_sql.py",
+    "private_runtime/real_finance/runtime.py",
+    "private_runtime/real_finance/sources.json",
+    "private_runtime/real_finance/test_profile.py",
+    "private_runtime/real_finance/test_sql.py"
+  ]
+}
