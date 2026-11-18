@@ -81,3 +81,7 @@ See [separate answers and guidance](EXERCISE_SOLUTIONS.md#chapter-08).
 ## Inactive cloud candidate decoder
 
 [OpenAICandidateProvider](../../backend/ai/openai_candidate.py) implements the same `interpret(text)` contract using the pinned reviewed V5.1 GPT-6 Luna template. Only a trusted injected exchange supplies response bytes. Required wire fields/types are checked before existing `parse_interpretation`; source validation remains in the interpretation service. Raw request/response and reported usage stay separate. There is no model repair, retry or normal-startup selection. Missing model/cost/credential/grant enrollment still blocks real inference; the current application remains local Ollama. Fixture usage is not a token-count attestation.
+
+## Real HTTP callback seam is not model qualification
+
+`private_runtime/provider_callbacks.py` now constructs each application's input-bearing count projection and sends fixed count/generation POSTs over the existing verified HTTPS port with an explicitly supplied application credential. It never reuses the diagnostic5,704count or reads the historical key. `inference_response` restores exact raw bytes from the authenticated RPC envelope into the existing `OpenAICandidateProvider` decoder. This is not selected by startup or a qualified application model; real protected counting/financial/native source integration is still missing. [Current proof and limits](../task52-real-provider-integration.md#november18-continuation--real-https-callbacks-not-a-completed-six-role-runtime).

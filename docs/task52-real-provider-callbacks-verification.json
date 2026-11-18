@@ -1,0 +1,130 @@
+{
+  "identity": "52-real-provider-callbacks-verification-v1",
+  "baselineCommit": "8e59f140c681f2daf8dd946aece03ba66fea0baf",
+  "date": "2026-11-18",
+  "runtimeTechnicallyComplete": false,
+  "newImageCohortBuilt": false,
+  "realStartupEnrolled": false,
+  "newSourceSHA256": {
+    "private_runtime/provider_callbacks.py": "d191d08d51c2e2e0a5f64900ea3c5fdfb60127abef9e5bf0175719ce38ed0cec",
+    "backend/test_provider_callbacks.py": "4c1a6dfd0c1618aa7487df52ac170eb9a7a51fd29f7be588d983990d38ac0a28"
+  },
+  "focused": {
+    "tests": 64,
+    "passed": 64,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 6.051,
+    "newCallbackCases": 13,
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_provider_callbacks backend.test_provider_responses backend.test_provider_enrollment_review backend.test_google_retention deployment.test_cloud_run deployment.test_candidate_promotion deployment.test_packaging deployment.test_private_artifact -v"
+  },
+  "financialAndRecovery": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m experiments.shared_state.run_real_responses",
+    "existingResponseTests": {
+      "tests": 3,
+      "passed": 3,
+      "seconds": 38.738
+    },
+    "existingFinancialSuite": {
+      "tests": 30,
+      "passed": 30,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 411.305
+    },
+    "drills": [
+      "operational snapshot restore quarantines full grant/no dispatch",
+      "witness snapshot restore quarantines full grant",
+      "database outage retains external exposure",
+      "operational/witness restart retains reservations",
+      "Redis loss cannot reconstruct evidence"
+    ],
+    "sourcePinsPreserved": true,
+    "limitation": "unchanged fictional authority, not the missing real counter/grant implementation; cohorts overlap and are not full-backend coverage"
+  },
+  "frontend": {
+    "tests": 325,
+    "passed": 324,
+    "failed": 1,
+    "skipped": 0,
+    "cancelled": 0,
+    "seconds": 116.638,
+    "failure": "unchanged lib/surprise.test.ts:69 expected200/actual422; fixture2026-11-14 already expired; no test changed"
+  },
+  "typeScript": "passed",
+  "eslint": "passed",
+  "pipCheck": "passed; cache warning only",
+  "developmentAttempts": [
+    {
+      "check": "host Python TLS dependency probe",
+      "result": "cryptography missing from backend host venv; local HTTPS fixture uses stdlib ssl plus openssl, with no dependency changes"
+    },
+    {
+      "check": "initial Docker inspection",
+      "result": "engine stopped/context missing; non-destructive start succeeded; no reset/prune"
+    },
+    {
+      "check": "sandbox process inventory",
+      "result": "ps denied by sandbox; no process arguments retrieved; Docker resource inventory verified separately"
+    }
+  ],
+  "notRun": [
+    "six new real-role image builds/scans; protected real composition not complete",
+    "actual desktop/mobile browser",
+    "complete six-role real-profile application processes",
+    "new real SQL counting/grant policy tests; matching implementation absent",
+    "full backend suite",
+    "production build; no frontend/dependency changes",
+    "real provider/account requests",
+    "cloud or managed-storage enrollment"
+  ],
+  "testAuthorityLimit": "new callback tests use explicit fictional accounting/counter stand-ins, not durable SQL or independent approval",
+  "history": {
+    "attempts": 10,
+    "accountedNanodollars": 47366625,
+    "privateFiles": 324,
+    "frozenPayloadPairs": 5,
+    "halt": "unchanged",
+    "consumedScopes": "unchanged"
+  },
+  "images": "existing deployment/candidates/trixie-zlib-v2/images.json unchanged; not new real candidates",
+  "security": "prior0critical/71high each Python;0critical/66high frontend; no new scan or acceptance",
+  "resources": {
+    "existingVolumesBefore": 126,
+    "cloudCreated": 0,
+    "realProviderCalls": 0,
+    "keyReads": 0,
+    "realFinancialGrants": 0,
+    "containersAfter": 0,
+    "volumesAfter": 126,
+    "existingVolumesPreserved": true,
+    "localVM": "non-destructively started for disposable tests, then stopped again"
+  },
+  "remainingImplementation": [
+    "real protected SQL/counter/grant and matching witness profile",
+    "native real Responses inference/source/usage bridge",
+    "terminal request-local Google planning/owned context cleanup; no full native snapshots",
+    "closed six-role/Next startup source projection; remove fixture response dependencies",
+    "six image builds/scans and authenticated SQL/recovery/browser verification"
+  ],
+  "ownerProcesses": {
+    "tests": 9,
+    "passed": 9,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 1.067,
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest private_runtime.test_dispatch_owner private_runtime.test_dispatch_processes -v"
+  },
+  "dependencyTree": "npm ls --depth=0 passed",
+  "finalChecks": {
+    "newAndChangedFiles": 11,
+    "secretPatternMatches": 0,
+    "oldDeploymentPinsVerified": 22,
+    "JSONAndPythonSyntax": "passed",
+    "handbookChapters": 20,
+    "unaffectedChaptersUnchanged": 17,
+    "fullDiffReview": "performed",
+    "newImageSecurityScan": "not run; no new image cohort built or promoted",
+    "protectedSourceAndHistoricalArtifactsModified": false
+  }
+}

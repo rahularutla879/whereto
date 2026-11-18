@@ -228,3 +228,7 @@ The [explicit enrollment harness](../../scripts/task52b_run_original_enrollment_
 ## Deployment configuration tests are not cloud acceptance
 
 `deployment.test_cloud_run` exercises the offline compiler with fictional subjects/URLs and rejects source substitution, local addresses, wrong SQL scopes, non-TLS URLs, secret values, permissive identities and unsafe rollback. Packaging/provider-focused cohorts add coverage but do not prove actual IAM/IAP, hosted storage or a working browser. The current frontend suite has an unchanged Nov14 expired-date fixture: its local HTTP response is422/outing_date_expired. Preserve that evidence rather than changing frozen tests to claim a full pass. [Exact current checks and unexecuted gates](../task53-private-cloud-configuration-verification.json).
+
+## Provider-shaped HTTP versus complete service acceptance
+
+`backend.test_provider_callbacks` starts an independent local TLS responder and routes the real fixed-endpoint callbacks to it with fictional credentials, counts and prices. The existing validator, deterministic pending answer, Places/Routes transports and ordinary planner produce actual card DTOs. This proves network/codec/application compatibility, not model quality, Cloud IAM, six-role authentication, durable real accounting or browser behavior. Stand-in authority is explicitly labeled. [Exact results](../task52-real-provider-callbacks-verification.json).

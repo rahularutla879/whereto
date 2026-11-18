@@ -1,3 +1,7 @@
+## Fixed real-provider callbacks (inactive, partial integration)
+
+`private_runtime/provider_callbacks.py` reuses the existing verified HTTPS port and provider codecs for exact request-specific counting, fixed Responses generation and Google dispatch. `dispatch()` retains the original owned-dispatch entry; exact raw AI response bytes cross its existing JSON channel in a bounded hash/base64 envelope. Protected counter and accounting dependencies are mandatory and **not yet implemented/enrolled for real SQL**. Nothing imports this module in normal or private startup. Existing six images remain unchanged/synthetic-only. No new service, planner, transport framework or financial ledger. [Exact remaining composition work](docs/task52-real-provider-integration.md#november18-continuation--real-https-callbacks-not-a-completed-six-role-runtime).
+
 ## Private Cloud Run deployment compiler (inactive)
 
 `deployment/cloud_run.py` validates source-pinned nonsecret metadata and emits six-role publication/IAM/IAP/VPC/secret/deployment/rollback argv without executing commands or loading credentials. Runtime code, planners, financial SQL, provider transports and startup are unchanged. It verifies local-config versus registry-manifest identities separately and enforces direct SQL/named Redis/independent witness constraints. The current synthetic-only cohort remains release-ineligible; real-model/count/rate/dispatch/frontend purpose integration is not supplied by this compiler. [Exact topology, lifecycle and blockers](deployment/cloud-run/README.md).
