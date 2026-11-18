@@ -1,3 +1,7 @@
+## Task52B — fresh model GET-only proposal, no request authorized
+
+Original GET is expired at unchanged Nov18,00:00UTC. New proposed scope `52b-model-get-owner-128fa8c-v1` permits only one empty GET after separate explicit approval; no live state/authorization created. Existing count runner/evidence/receipts unchanged and no POST becomes authorized. [Report and checks](docs/task52b-model-get-preparation.md):101current+15frozen-compatible passes; initial oversized-fixture reporting error corrected without relaxing bounds, failed evidence retained. Historical10/$0.047366625/324/halt preserved. Next: exact owner GET-only approval, then bound enrollment. Task52/52B remain in progress.
+
 ## Task52B — dashboard permission verified; count runner prepared, no send authority
 
 Actual read-only dashboard inspection verified the existing active key/project/tracking identity with List models Read, Responses Write and unrelated None. Separate owner0600 observation/receipt bound to unchanged credential metadata; no key value read or permissions changed. Source-pinned count-only supervisor prepared; no actual scope/authorization created. Original GET deadline unchanged: Nov17,7PM EST / Nov18,00:00UTC. [Report and exact checks](docs/task52b-count-only-enrollment.md):85current+15frozen-compatible passes; history/dependencies/pins/pattern checks pass. Next: explicit one-POST confirmation, then bound enrollment only while fresh. Old13files/10attempts/$0.047366625/324/halt unchanged. Task52/52B remain in progress.

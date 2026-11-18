@@ -1,3 +1,7 @@
+## Task52B — separately scoped GET refresh prepared, awaiting approval
+
+Fixed GET-only supervision/transport prepared and116selected offline tests pass. [Evidence](docs/task52b-model-get-preparation.md). Original GET expired unchanged; no live GET/count/inference or authorization created. A successful future refresh cannot automatically update count authority. Separate one-GET owner approval required; no Task53.
+
 ## Task52B — minimum count enrollment preparation verified; await send approval
 
 Existing key's Write permission independently observed in the actual dashboard, recorded owner-only and bound to original credential identity. Count-only supervised runner prepared and100selected offline tests pass. [Evidence](docs/task52b-count-only-enrollment.md). No live authorization, count, GET, inference or grant. Original GET expires Nov18,00:00UTC; never extend or silently renew. Separate exact count-send approval is next; model qualification and deployment remain blocked. Task53 not started.

@@ -1,3 +1,7 @@
+## 2026-11-17 — refresh via new GET scope, never extend old evidence
+
+Preserve the expired original GET and consumed scopes. Prepare a new fixed empty GET with the existing loader/List models Read identity, supervised one-send/TLS/writer primitives and unchanged same-UTC-day/24h policy. Integrity of old evidence is distinct from freshness; do not invoke old validation with a fabricated earlier clock. Count runner/source/permission gates are untouched. Any future fresh model evidence needs its own authorized send and separate reviewed POST binding. [Contract](docs/task52b-model-get-preparation.md).
+
 ## 2026-11-17 — actual permission observation and fixed count supervisor
 
 Use the independently inspected existing key dashboard to establish Write evidence, matching project/tracking/expiry and original credential metadata hash without secret access. Preserve historical Read receipt and old consumed scope. Commit only sanitized hashes; keep observation/receipt owner-only. Prepare the existing single-spawn supervision pattern and exact POST transport behind absent live authorization; recheck unchanged GET deadline after TLS before HTTP. V2 preparation source identity does not repin frozen evaluation evidence or grant inference. [Trust limits and checks](docs/task52b-count-only-enrollment.md).

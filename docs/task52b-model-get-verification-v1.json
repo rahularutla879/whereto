@@ -1,0 +1,121 @@
+{
+  "identity": "52b-model-get-preparation-verification-v1",
+  "baselineCommit": "128fa8ce3d10026feb78c78e693788637805b45f",
+  "verifiedAt": "2026-11-18T00:16:39.491538+00:00",
+  "operation": "52b-model-get-owner-128fa8c-v1",
+  "buildSHA256": "b41fc246489612e6c1714068f7957363ad8e139bd3ee08398cd1630ef95e10fb",
+  "scope": {
+    "method": "GET",
+    "endpoint": "https://api.openai.com/v1/models/gpt-6-luna",
+    "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+    "getMaximum": 1,
+    "postMaximum": 0,
+    "inferenceMaximum": 0,
+    "retries": 0
+  },
+  "liveScopeCreated": false,
+  "liveAuthorizationCreatedOrConsumed": false,
+  "liveRequests": 0,
+  "actualCredentialValueRead": false,
+  "originalGET": {
+    "hardExpiry": "2026-11-18T00:00:00+00:00",
+    "status": "expired",
+    "deadlineChanged": false,
+    "thirteenOriginalFilesUnchanged": true,
+    "originalScopeRemainsConsumed": true
+  },
+  "countRunnerAndManifestsUnchanged": true,
+  "freshnessPolicy": "min(observedAt+24h,next UTC midnight); same UTC day; reject future times",
+  "newResponseOrExpiryCreated": false,
+  "commands": [
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_model_get backend.test_task52b_count_enrollment backend.test_task52b_count_only backend.test_task52b_readiness_enrolled backend.test_task52b_readiness backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "passed": 101,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 37.027
+    },
+    {
+      "command": "PYTHONPATH=. /Users/rahularutla/Documents/whereto/backend/.venv/bin/python /tmp/task52-openai-readiness-check/frozen-focused.py",
+      "cwd": "/Users/rahularutla/.codex/worktrees/task52b-frozen-b2-verification/whereto",
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.944
+    },
+    {
+      "command": "backend/.venv/bin/python -m pip check",
+      "result": "PASS; no broken requirements, cache-warning only"
+    },
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python /tmp/task52-provider-integrity.py",
+      "result": "PASS before/after read-only original evidence/journal/source checks"
+    },
+    {
+      "command": "git diff --check",
+      "result": "PASS"
+    }
+  ],
+  "earlierAttempt": {
+    "testsRun": 16,
+    "errors": 1,
+    "cause": "bounded reread of oversized synthetic response evidence escaped terminal reporting",
+    "correction": "GET failure path records terminal evidence refusal and preserves consumption; no retry or weakened bounds"
+  },
+  "logSHA256": {
+    "/tmp/task52-get-prepare-tests.log": "650f679dfa4fb2b9fa963881e45a35bef5c98c4827a6d9b9809185cfe1eb7fcc",
+    "/tmp/task52-get-prepare-final.log": "f31e08967d74bfdc64293d8446ec51b2a75190a04715a2858ad30257ad3bb7b4",
+    "/tmp/task52-get-prepare-frozen.log": "d9c1ebbde524fe20efa655359743dedeb1805dd104968364ec80df0c4465122f",
+    "/tmp/task52-get-prepare-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-get-prepare-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-get-prepare-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52-get-prepare-patterns.log": "411ef922107388548af4c83bf44ac29699faf73949a7ad22bf598583ae7b3ba7"
+  },
+  "history": {
+    "attempts": 10,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPayloadPairs": 5,
+    "persistentHalt": true
+  },
+  "securityChecks": {
+    "credentialPatternMatches": 0,
+    "privateArtifactsAddedToGit": 0,
+    "configuredValueScan": "not run: actual key values are not read",
+    "originalSourceCountBuildAndEvidencePins": "PASS"
+  },
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      17
+    ],
+    "chapters": 20
+  },
+  "notRun": [
+    "full backend/B2/SQL/Redis suites",
+    "frontend/build/browser/images/cloud checks",
+    "any live API request or actual key loading"
+  ],
+  "remainingAuthorization": "Explicit owner approval for one exact GET under this scope, then source/credential-bound private enrollment; no count/inference/retries.",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/test_task52b_model_get.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-model-get-PROPOSED-v1.json",
+    "docs/task52b-model-get-build-v1.json",
+    "docs/task52b-model-get-preparation.md",
+    "docs/task52b-model-get-verification-v1.json",
+    "scripts/task52b_model_get.py",
+    "scripts/task52b_run_model_get_once.py"
+  ]
+}

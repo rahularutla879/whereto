@@ -1,0 +1,20 @@
+{
+  "identity": "52b-model-get-proposal-v1",
+  "operation": "52b-model-get-owner-128fa8c-v1",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "model": "gpt-6-luna",
+  "method": "GET",
+  "endpoint": "https://api.openai.com/v1/models/gpt-6-luna",
+  "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "getMaximum": 1,
+  "postMaximum": 0,
+  "inferenceMaximum": 0,
+  "retries": 0,
+  "liveSendAuthorized": false,
+  "liveScopeCreated": false,
+  "originalGETHardExpiry": "2026-11-18T00:00:00+00:00",
+  "originalExpiryUnchanged": true,
+  "newResultFreshness": "minimum(receipt time +24hours, next UTC midnight); reject future timestamps",
+  "countEvidenceAutomaticallyReplaced": false,
+  "credentialLookup": "existing approved restricted-key loader, exact original metadata/stat/project binding, List models Read; no credential read during preparation"
+}

@@ -1,3 +1,7 @@
+## Prepared standalone model GET refresh
+
+`task52b_model_get` and its one-spawn supervisor specialize existing readiness TLS/identity/evidence primitives for one fixed empty GET. New scope/source binding, exclusive claims, durable INTENT and no-replay behavior remain independent from the consumed original pair and inactive count scope. No actual send authorization, application/service/startup changes or automatic evidence-selector update. Original expiry remains fixed. [Contract](docs/task52b-model-get-preparation.md).
+
 ## Count-only supervised readiness preparation v2
 
 The existing count-only adapter now verifies a separately observed owner-only dashboard transcript/permission receipt and sanitized hash binding. `task52b_run_count_once` pins its normalized bootstrap/build/interpreter/CA, checks preparation and absent-or-explicit send authority before exclusive launcher claim, and spawns one worker with parent/runtime identity, core-dump protection and no replacement/retry. Existing INTENT/single-wire/response writer and credential loader are reused. A post-TLS freshness check preserves the original absolute deadline. No actual scope/authorization, service or startup integration is created. [Contract](docs/task52b-count-only-enrollment.md).
