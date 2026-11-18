@@ -1,0 +1,23 @@
+# Task52B — authorized count-only readiness completed
+
+Execution source `1e15cd65d9dc43b0d171d9e33d20bcf62f1591e1`, November18,2026. [Sanitized immutable hashes and verification](task52b-authorized-count-only-result-v1.json). No runtime/source implementation changed.
+
+**Exactly one POST `/v1/responses/input_tokens` returned HTTP200 and5,704validated input tokens.** Scope `52b-count-only-owner-3ec6b68-v1` is permanently consumed. No GET, inference, retry, replacement request, key/permission change, financial grant or cloud operation occurred.
+
+The request used only the existing restricted key/project `proj_E4EfEvC5uQYN4nqFaYZoo3I4`, model `gpt-6-luna`, frozen `extension-repeated/r2` count payload SHA256 `70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1`. The complete63-byte application/json response was captured at `2026-11-18T05:30:48.871469+00:00`, SHA256 `9bf95c53004c43ba88e09400be300dcb29a9eff69bb54ee537e42489758f3aea`. Original generation payload and all five pairs remain unchanged. The count response does not echo a model; identity comes from the exact source-bound request and prior validated model GET.
+
+## Enrollment and evidence
+
+The owner's exact new count-only approval was recorded separately with source build `fde73dc43aa646c171c22e55caa42b9dcd852ccf03cdaaaa5456875df0bef152`, credential enrollment identity, fresh dashboard Write receipt and immutable successful-GET bundle. The GET retains its original `2026-11-19T00:00:00Z` expiry; no evidence deadline was extended. All preflight/source/permission/credential metadata/stat checks passed, then the existing fixed supervisor was invoked once with a stripped environment. The worker revalidated before key load and after TLS before HTTP; no source check was bypassed.
+
+Eleven owner0600 facts under ignored `backend/.local/task52b-readiness/52b-count-only-owner-3ec6b68-v1/` plus a separate owner0600 authorization retain launcher/worker/supervisor identity, consumed scope, durable INTENT, single wire claim, raw response, validated count and result. Parent directory is0700. Existing exclusive/no-follow/fsynced writes were used. Authorization SHA256 is `41f17724406adadd659cc23ed48b86e3a20ee22687b0b5c9da9c11551a342362`; scope SHA256 is `836c8c0461c9e74fb6d94f723e60bf09bf176442f0c659304bf47d80461dee1d`. Private bodies, approval text, credential files and permission transcripts were not committed. No real runner was invoked again to test replay; durable claims plus offline regressions establish refusal without risking a second request.
+
+## Verification and limits
+
+Immediately before enrollment, **50focused offline tests passed,0failures/errors/skips(101.225s)**: actual isolated parent/child local-TLS count flow, source/loaded identity, immutable GET/archive verification, Write receipt/metadata binding, denial/malformed/incomplete/oversized responses, crash stages, competing runners and replay refusal. Dependency consistency passed with only the existing pip cache warning. Actual post-send checks verified exact request/INTENT, complete HTTP200 capture, response parsing/count limits, code identity, consumed scope and all evidence hashes/modes. No changes to deadlines, payloads or safeguards.
+
+Historical before/after integrity checks were identical:10paid attempts(OpenAI7/Google2/Anthropic1),$0.047366625 accounted,$11.952633375 remaining,324private files,five frozen payload pairs,original journal/source pins and persistent halt. Prior13/10/11file scopes and their authorizations/permission receipts remain unchanged. The previous combined-suite126passes/1archived-GET source-identity error remains disclosed in its original report; this checkpoint does not alter that test or claim a full backend pass. Full backend/B2/application/frontend/SQL/Redis/build/image/cloud/browser suites were not rerun. Handbook17reviewed unchanged: this is an evaluation-outcome-only update; all20chapters preserved.
+
+Counting fees are accepted from the owner's AI-assisted Support statement, including failed counts. Actual billing was not independently queried or verified. The successful POST confirms this key/project could access this exact count request at that time; it does not prove broader permissions, model accuracy, an immutable model revision, prices or production suitability.
+
+**Stop.** No inference authorization, application SQL grant, financial reservation or historical-experiment resumption was created. Any first paid diagnostic still needs the separately approved purpose/security/real-writer gates, verified current price/model/cost bounds and exact owner execution approval. Independent semantic review remains deferred, not passed. No automatic next slot, infrastructure work or Task53.

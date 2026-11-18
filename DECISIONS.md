@@ -1,3 +1,7 @@
+## 2026-11-18 — consume count-only readiness without resuming inference
+
+Use the owner's exact one-POST approval and existing pinned supervisor, original successful GET and fresh independently observed Write receipt. Preserve all old consumed scopes and the historical halt. Record the actual5,704-token HTTP200 outcome privately with sanitized hashes; do not convert it into price evidence, a financial grant, semantic certification or permission for an inference/next slot. Owner acceptance of Support's free-count statement is distinct from independent billing verification. [Outcome](docs/task52b-authorized-count-only.md).
+
 ## 2026-11-18 — bind actual GET by original source archive, never repin it
 
 Use the actual successful consumed GET and its unchanged original Git source/build/CA identity for count preparation. A new count build verifies original immutable records and a separate fresh read-only dashboard receipt; never reinterpret the old Read metadata or retimestamp expired evidence. Keep the midnight deadline, absent count authorization, fixed POST-only payload, deterministic identity and post-TLS freshness guard. Archive source is read-only; unavailable provenance refuses. [Contract](docs/task52b-count-get-binding.md).
