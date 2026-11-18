@@ -1,0 +1,43 @@
+{
+  "identity": "52b-first-slot-supervised-generation-candidate-v1",
+  "baselineCommit": "9662709f20a60511a6a2df8a76598e96bdf03f8f",
+  "realEnrollmentAvailable": false,
+  "purposeApproved": false,
+  "financialGrantCreated": false,
+  "filesSHA256": {
+    "docs/task52b-generation-financial-PROPOSED-v1.json": "fbb60b6ca815148044b66d17e9ba9979de0fbcf8687685bf6e86746f5cf2e498",
+    "backend/test_task52b_generation_policy.py": "1665f0917c87f684564888f7e3796f99a5e60505d373f15093e1383388aa87a1",
+    "scripts/task52b_generation_policy.py": "ed0017490a4c0a43820d082b83f77ca42cc1338119d2207f42c8b764f35e702c",
+    "scripts/task52b_generation_candidate.py": "797d11a6224a720a1ee9aedca67045482324ff675db99dee92b18f14fb1a9db0",
+    "scripts/task52b_run_generation_tests.py": "7962a6d7a39aa699fbb7e56187ff31ffbfe0000a27e420628408672a15d8d8b9",
+    "backend/test_task52b_generation.py": "a11731fd10a387a47067bf66dc92138ca40a7eb23c879590ab92442654cf586f",
+    "scripts/task52b_code_identity.py": "51fbea57103d4d7cdb2f202a729ddc992c6a7cf2587de805c056f1296f4eba18",
+    "scripts/task52b_first_slot.py": "a1fbb1811f9760c13e31bf56dcbbfbe12b64620f9de64e8462d9ac4675c175c4",
+    "scripts/task52b_first_slot_identity.py": "eedd2d9464cbd96bc6b2e161113e4acd2279a9465bb32e5487865d6fb9e9e353",
+    "scripts/task52b_execution_boundary.py": "67be722df1b7971529560bf565175b97ec147dd3ab5c202cb64d816d48fc5910",
+    "scripts/task52b_execution_identity.py": "71c5d032681453009f2638a0f705e11169de4f028cacfd42a8ce5debd4580ad6",
+    "scripts/task52_q4a.py": "c89a7d8ad92354dd345d1b5e6a592c582c05472dcad4047ec6bfdc17915eebe7",
+    "docs/task52b-first-slot-build-v1.json": "5247519e91a71023ca63cea418e33174a817cbcd78add61f94752e71df73a41b",
+    "docs/task52b-execution-boundary-build-v1.json": "a566f2c7e13acf83b991ee1d035586f09897c5830e132f7fa86e76f26f2746d9",
+    "docs/task52b-authorized-count-only-result-v1.json": "ab8c6abfe53e80d3e9098b8cd74936998b343f7e8d12af341c06e234af68c493",
+    "docs/task52b-count-get-binding-v1.json": "0a8312d9d83826ab91193c5429d14aa2a1be6169fb586d7640e5d5010cd80756",
+    "docs/task52b-diagnostic-purpose-amendment-PROPOSED-v1.json": "3b995b6f06163e426c6f504375368049dac50b1a608dc76839a77b5247ac74f4",
+    "docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.request.json": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+    "docs/task52b-openai-diagnostic-prepared-v1/01-extension-repeated-r2.count.json": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1"
+  },
+  "identityScheme": "52b-source-compiled-code-v1",
+  "loadedCodeIdentities": {
+    "build_guard": "2fe23e6650ddd40ff8e49af6ea32b4ac3182ea6966dce7224a448c7ba75cc893",
+    "wire": "1e62817339febdf31732dc6d4184283a6ebf673f58b5ba448e22bffa28e3b90d",
+    "supervisor": "c824c94ffd585e8b64b6cc6e8fa57f2fa5845ac59d57d7a8e0455375db103c50",
+    "worker": "bb6c706fdf4ed72e0ba28965046a21013d06fea021e260f08228b68b93e6b946",
+    "financial": "fce606ec5a6feff09d3c1d12a054a80899b7599da8ccf384cbff6431296e4b09",
+    "authorization": "4f75e85d42bbfccf8387f1167b6a80f97c5e87b4d304f05fd66441c91ba2b744",
+    "payload": "d75af290eb83ef95eab769292125f5262f7f36036ca612902cd4a5b784a359f3",
+    "freshness": "b7482aeb0e061acedd31a612d823fdb5a866dd4b35d785850cb47e9c518bfc0e",
+    "dial": "369a44e777376fd6849c1850fbf1a572ec0fbbdcd8d329ab4365db458ff2035d",
+    "writer": "56edc6fe4a7db622afe9847faf0be7891b6183f02e9ac464e71622de41a553d4"
+  },
+  "runtime": "matching frozen B2 source checkout e7937e4ab1c2734a6576137dd4233fdaca8966c5 plus explicit current extension modules",
+  "pythonExecutableSHA256": "e7bdd7770f59ff7fa58d4e1074481051a462b03d4c6a6e36e07549dce546fe03"
+}

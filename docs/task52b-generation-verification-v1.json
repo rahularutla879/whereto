@@ -1,0 +1,232 @@
+{
+  "identity": "52b-supervised-generation-preparation-verification-v1",
+  "baselineCommit": "9662709f20a60511a6a2df8a76598e96bdf03f8f",
+  "candidateBuildSHA256": "951b6e9d50db98b8d10c80d7da1f328d63e2e311281852015fa7c48736c195d0",
+  "status": "Verified offline candidate preparation; real writer/key/peer enrollment still unavailable, so full real-execution readiness is NOT complete",
+  "realInferenceRequests": 0,
+  "readinessRequests": 0,
+  "realCredentialValueReads": 0,
+  "financialGrants": 0,
+  "originalJournalWrites": 0,
+  "newLiveScopeOrPermission": false,
+  "readiness": {
+    "model": "gpt-6-luna",
+    "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+    "inputTokens": 5704,
+    "generationSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+    "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+    "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+    "modelGETBundleSHA256": "0a8312d9d83826ab91193c5429d14aa2a1be6169fb586d7640e5d5010cd80756",
+    "countBundleSHA256": "f57b7dfad47f9daab0f78482d050b0f10a57bcdf768491e879a1f5b0420c34aa",
+    "permissionSHA256": "baea3164b63c04e36faae74ef3e30801ff6d651bb692535ba65e10f978019110",
+    "observedAt": "2026-11-18T05:30:48.871469+00:00",
+    "expiresAt": "2026-11-19T00:00:00+00:00",
+    "realKeyValueRead": false,
+    "financialAuthorization": false
+  },
+  "financial": {
+    "inputTokens": 5704,
+    "retainedMargin": 2048,
+    "inputBound": 7752,
+    "outputCap": 2000,
+    "standardMaximumNanodollars": 1969000,
+    "standardMaximumUSD": "0.001969",
+    "tenPercentPremiumMaximumNanodollars": 2165900,
+    "proposedReservationNanodollars": 2500000,
+    "reservationApproved": false,
+    "unknownAccountTermsOrFeesRefuse": true,
+    "maximumIsConditionalNotAnAccountBillingGuarantee": true
+  },
+  "tests": {
+    "integratedUniqueCasesPassingAfterCorrection": 16,
+    "networkPartition": {
+      "passed": 3,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 468.955
+    },
+    "authorityPartitionBeforeTestCorrection": {
+      "run": 12,
+      "passed": 11,
+      "failures": 1,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 303.054,
+      "failure": "new concurrency test expected duplicate-claim exit3 only; losing supervisor instead refused by existing nonblocking journal lock, exit1. Exactly one winning operation; no financial defect."
+    },
+    "correctedConcurrency": {
+      "passed": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 36.396,
+      "change": "test-only catch of existing Denied/BlockingIOError alongside FileExistsError; no runtime guard or retry added"
+    },
+    "cohortSourceProof": {
+      "runtimeSourcesAndLoadedIdentitiesIdenticalAcrossFinalCohorts": true,
+      "onlyTestChanges": [
+        "recognize existing nonblocking lock denial as refused competing supervisor",
+        "add explicit independent after-INTENT supervisor restart test"
+      ],
+      "currentSourceHashesMatchManifest": true,
+      "originalHistoricalBeforeAfterIdentical": true
+    },
+    "currentPolicy": {
+      "passed": 3,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 0.002,
+      "optInLabSkipsInNormalDiscovery": 16,
+      "skippedCasesRunSeparatelyInExplicitLab": true
+    },
+    "frozenOriginalEvidenceReplay": {
+      "passed": 37,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 57.49,
+      "sourceCommit": "e7937e4ab1c2734a6576137dd4233fdaca8966c5",
+      "frozenWorkingTreeClean": true
+    },
+    "fullBackendPassClaimed": false,
+    "independentAfterIntentSupervisorRestart": {
+      "passed": 1,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 35.778,
+      "processBoundary": "new independent forked supervisor with fictional inherited scope; not fresh exec/real role reenrollment"
+    }
+  },
+  "development": {
+    "firstPartialCohort": "Interrupted after new before-delivery failures; no final count; SIGINT then only four identified test processes terminated; log retained",
+    "attributedFailures": [
+      {
+        "kind": "NameError",
+        "location": "PreparedTransport.exchange line99",
+        "cause": "missing fixed SLOT alias in new wrapper",
+        "sourceSHA256BeforeFix": "244ce42fb1c4adf354951b1089ebe300b4a3042ae2211dfdccc94cf4f2e6f9b2",
+        "redSingleCaseSeconds": 34.875,
+        "financialExposure": "full synthetic2500000 retained; no real provider send"
+      },
+      {
+        "kind": "NameError",
+        "location": "PreparedTransport.exchange line165",
+        "cause": "missing q1 hashing alias in copied raw-capture boundary",
+        "redSingleCaseSeconds": 36.125,
+        "financialExposure": "full synthetic2500000 retained; fictional delivery not conclusively established from saved failing assertion alone"
+      }
+    ],
+    "correctedIdenticalSuccessRegression": {
+      "passed": 1,
+      "seconds": 36.844
+    },
+    "unboundGlobalAuditAdded": true,
+    "publicDocFetch": "initial Python default CA lookup failed; existing certifi CA succeeded without weakening TLS verification; public docs only",
+    "autoReviewRejection": {
+      "action": "remove redundant-looking full frozen source audit",
+      "reason": "risk of weakening required source validation",
+      "executed": false,
+      "disposition": "full identity.verify(full=True) retained; actual failures subsequently attributed to missing aliases and fixed without deadline/guard changes"
+    }
+  },
+  "integrity": {
+    "historicalBeforeAfterIdentical": true,
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "fivePayloadPairsUnchanged": true,
+    "persistentHalt": true,
+    "oldConsumedScopeInventories": [
+      13,
+      10,
+      11,
+      11
+    ],
+    "originalTestsSourceAndManifestsUnchanged": true,
+    "dependencyCheck": "PASS no broken requirements; pip cache permission warning",
+    "secretPatterns": "PASS Git-visible changed files; actual credential-value comparison not run",
+    "handbook": {
+      "updated": [
+        17
+      ],
+      "reviewedUnchanged": [
+        14,
+        15
+      ],
+      "allChapters": 20
+    }
+  },
+  "realWriter": {
+    "existingAppendKernelUsed": true,
+    "supervisedLoopbackCandidateVerified": true,
+    "readOnlyPostAppendVerifierImplemented": true,
+    "originalPathWritableAdapterImplemented": false,
+    "roleTrustAndRealCredentialPeerEnrolled": false,
+    "separateOriginalDBAndChildFactDurabilityTested": false,
+    "realConstructor": "always refuses; unsigned/test packets cannot activate",
+    "independentSecurityApproval": false,
+    "ownerPurposeApproval": false,
+    "newPacketCryptographicOperationalLinkInstalled": false,
+    "trustedRealClockAndRevocationEnrollment": false
+  },
+  "remainingGates": [
+    "owner approval of exact technical-only purpose amendment while human semantics remain deferred",
+    "genuine independent security/operational review and nonsynthetic role/trust enrollment",
+    "narrow real canonical journal/lock/dual-directory adapter, original-prefix/root/correction/post-append binding and approved key/real-peer/CA loader; not yet implemented or tested",
+    "reviewed current account fees/premiums/processing/privacy terms and alias/count applicability; refuse unknown/unbounded categories",
+    "fresh exact model/count/Write/price evidence at future send; immutable Nov19,00:00UTC deadline not extended",
+    "exact source-bound single-operation financial/operator authorization after all gates; no live authorization created"
+  ],
+  "notRun": [
+    "live inference, GET/count refresh or authenticated account operations",
+    "real original-journal writable opening or append",
+    "real writer/credential/peer enrollment and independent security acceptance",
+    "full backend/frontend/build/container/SQL/Redis or cloud suites",
+    "configured secret-value scans requiring real key reads"
+  ],
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/test_task52b_generation.py",
+    "backend/test_task52b_generation_policy.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-generation-build-v1.json",
+    "docs/task52b-generation-enrollment-PROPOSED-v2.json",
+    "docs/task52b-generation-financial-PROPOSED-v1.json",
+    "docs/task52b-generation-preparation.md",
+    "docs/task52b-generation-verification-v1.json",
+    "scripts/task52b_generation_candidate.py",
+    "scripts/task52b_generation_policy.py",
+    "scripts/task52b_run_generation_tests.py"
+  ],
+  "logSHA256": {
+    "/tmp/task52b-generation-lab-dev.log": "ee75d29491c173a98add23f39842a1ef321109d979a3fb49293843aeecb3c3f2",
+    "/tmp/task52b-generation-single-dev.log": "223afc94eef43774392c39010236fe644e70c2f847641b0f11a9a8277d8fe38f",
+    "/tmp/task52b-generation-single-after-slot.log": "4c6258103e27195f8264b4f955dcc0f56e8966370c4b6747e586c8bc1365a4b2",
+    "/tmp/task52b-generation-single-fixed.log": "ea4b889d2e4a014e92fa5b2a088ff316816e40eee5f9bfa83c1e8ea9f28fa87a",
+    "/tmp/task52b-generation-final-network.log": "e5cfea990d32f211b67baaa23e5df05db90313490e37b0a400632418aab190bc",
+    "/tmp/task52b-generation-final-authority.log": "305f1d9102f171f9089a17790b54f5a27481ebf70b83dd6499edc9b8566d3ffc",
+    "/tmp/task52b-generation-concurrency-fixed.log": "37ad06243956fadf4eef9cb2e3ad402556752fd653532beb98ea97eed9a4abb3",
+    "/tmp/task52b-generation-current-tests.log": "cc80fdb1917987acb278d727849d3ce44e0a1a1ca66f083d4d38ec5b7d332f04",
+    "/tmp/task52b-generation-frozen-replay.log": "f00a654fe5784ab37d80e96f09aa3961a98eb6552943b48357157ebfd12cc0a9",
+    "/tmp/task52b-generation-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-generation-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-generation-runtime-identity.log": "c22a6bdbc4e45f22472506683c7a330faed3685252ce42c809265830888fdaa2",
+    "/tmp/task52b-generation-readiness-verified.json": "afbc26fbcf729e718c3ed9b7c083cd6078108d5660b666902ff2c6305087016d",
+    "/tmp/task52b-generation-consumed-scopes.log": "5ac56dd3d05d4c4c9f09b4ff2497d6a5ee9da3e899e51fad3db9d573e9fb3615",
+    "/tmp/task52b-generation-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52b-generation-patterns.log": "c8a5ab2baf25089a2cc734d8e89791260bed24d69c9d2b029baed7222fd0c0fd",
+    "/tmp/task52b-generation-current-final-tests.log": "054e4253d5ce8251bea153cfbbf1e7d453dedf2f920c164e737a9cd15f7a2639",
+    "/tmp/task52b-generation-restart.log": "1b91cafca6631f1ec5fe4c05e1a83f5dd6550e8ac87284a0cd58d33ca6cbb8f2"
+  }
+}

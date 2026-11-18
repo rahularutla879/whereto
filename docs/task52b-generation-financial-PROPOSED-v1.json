@@ -1,0 +1,93 @@
+{
+  "identity": "52b-first-slot-generation-financial-PROPOSED-v1",
+  "activated": false,
+  "financialAuthorization": false,
+  "model": "gpt-6-luna",
+  "modelIdentity": "alias observed by immutable GET; no dated immutable snapshot advertised",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "slot": [
+    "openai",
+    "extension-repeated",
+    2
+  ],
+  "payloadSHA256": "5c2ad0aa457ae84497f489a1ca155ce805c8f160fd5260f59e0a4a3e8a078c02",
+  "countSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+  "countObservedAt": "2026-11-18T05:30:48.871469+00:00",
+  "readinessExpiresAt": "2026-11-19T00:00:00+00:00",
+  "exactInputTokens": 5704,
+  "retainedInputMargin": 2048,
+  "conservativeInputBound": 7752,
+  "maximumOutputTokens": 2000,
+  "ratesUSDPerMillionTokens": {
+    "input": "0.10",
+    "cached_input": "0.01",
+    "cache_write_30m": "0.125",
+    "cache_write_12h": "0.25",
+    "output": "0.50"
+  },
+  "ratesNanoPerMillion": {
+    "input": 100000000,
+    "cached_input": 10000000,
+    "cache_write_30m": 125000000,
+    "cache_write_12h": 250000000,
+    "output": 500000000
+  },
+  "cache": "unchanged body has no cache TTL/breakpoint override; default30m; per-token input/read/write alternatives, reserve highest applicable rate.12h not selected; no cache-hit discount assumed.",
+  "output": "2000 cap includes visible, reasoning and non-visible formatting tokens; effort none unchanged",
+  "inputMaximumNanodollars": 969000,
+  "outputMaximumNanodollars": 1000000,
+  "conditionalStandardMaximumNanodollars": 1969000,
+  "conditionalStandardMaximumUSD": "0.001969",
+  "conditional10PercentPremiumMaximumNanodollars": 2165900,
+  "conditional10PercentPremiumMaximumUSD": "0.002165900",
+  "proposedReservationNanodollars": 2500000,
+  "proposedReservationUSD": "0.0025",
+  "rounding": "ceil each input/output category to integer nanodollars; ceil subtotal premium; never automatically reduce reservation or refund usage",
+  "standardAssumptions": {
+    "serviceTier": "default",
+    "requestOrigin": "https://api.openai.com",
+    "inputContextBelow272k": true,
+    "tools": "not present in exact payload",
+    "separateReasoningFee": "no separately published category; all reasoning output within2000 cap",
+    "otherFees": null,
+    "accountPremiumOrTax": null,
+    "accountPricingAndTermsReviewed": false,
+    "modelAliasDiagnosticPurposeApproved": false
+  },
+  "refusal": "unknown/stale rates, unknown fees/premium, different model/payload/count, unapproved account/purpose, incompatible evidence or computed maximum above2500000 refuse. Public arithmetic is not authority.",
+  "originalPurposeProposal": "docs/task52b-diagnostic-purpose-amendment-PROPOSED-v1.json",
+  "ownerPurposeApproved": false,
+  "securityOperationalReviewApproved": false,
+  "originalJournalWritableEnrollmentAvailable": false,
+  "semanticReview": "deferred, not passed",
+  "sources": {
+    "model": {
+      "url": "https://developers.openai.com/api/docs/models/gpt-6-luna.md",
+      "retrievedAt": "2026-11-18T05:45:30.778819+00:00",
+      "sha256": "dacc9870e67c0d68e4272f8394d4296ffe7cf70f18d3f4675ee6bd4c666966b7",
+      "bytes": 4520,
+      "publicUnauthenticated": true
+    },
+    "pricing": {
+      "url": "https://developers.openai.com/api/docs/pricing.md",
+      "retrievedAt": "2026-11-18T05:45:31.833095+00:00",
+      "sha256": "427698a0c4f1cf4abb2569cb0f9a4ca7fcacfa2f45d61a75f221f0b590ac5114",
+      "bytes": 24045,
+      "publicUnauthenticated": true
+    },
+    "caching": {
+      "url": "https://developers.openai.com/api/docs/guides/prompt-caching.md",
+      "retrievedAt": "2026-11-18T05:45:31.911881+00:00",
+      "sha256": "41fd5ad72dc74045ffb0fbe33e8213a879cc018a473b1e022b7be8fa04057625",
+      "bytes": 58157,
+      "publicUnauthenticated": true
+    },
+    "reasoning": {
+      "url": "https://developers.openai.com/api/docs/guides/reasoning.md",
+      "retrievedAt": "2026-11-18T05:45:31.970764+00:00",
+      "sha256": "41279ffe43e21d54f1a3a76117f20e95bb7737644a26623ab424d176689e0d54",
+      "bytes": 73766,
+      "publicUnauthenticated": true
+    }
+  }
+}

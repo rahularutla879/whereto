@@ -1,3 +1,7 @@
+## 2026-11-18 — prepare one supervised diagnostic without enrolling real authority
+
+Reuse the frozen Q4C append/INTENT kernel and first-slot transport; add a separately source-bound supervisor, mechanical financial/evidence checks and read-only post-append verification. Preserve every historical test/source pin and full source audit. Retain$0.0025proposal despite lower conditional arithmetic; unknown account fees/alias applicability refuse. Real-path/role writer and credential/peer enrollment remain closed until reviewed; fictional packets cannot certify human semantics or activate inference. [Contract](docs/task52b-generation-preparation.md).
+
 ## 2026-11-18 — consume count-only readiness without resuming inference
 
 Use the owner's exact one-POST approval and existing pinned supervisor, original successful GET and fresh independently observed Write receipt. Preserve all old consumed scopes and the historical halt. Record the actual5,704-token HTTP200 outcome privately with sanitized hashes; do not convert it into price evidence, a financial grant, semantic certification or permission for an inference/next slot. Owner acceptance of Support's free-count statement is distinct from independent billing verification. [Outcome](docs/task52b-authorized-count-only.md).
