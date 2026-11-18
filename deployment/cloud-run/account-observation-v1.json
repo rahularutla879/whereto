@@ -1,0 +1,19 @@
+{
+  "observedDate": "2026-11-18",
+  "access": "existing approved gcloud read-only control-plane metadata; no data-plane provider requests",
+  "projectId": "where-to-512422",
+  "projectNumber": "895186533714",
+  "lifecycleState": "ACTIVE",
+  "billingEnabled": true,
+  "billingPlanTrialCreditsCurrencyAndQuotaVerified": false,
+  "enabledRelevantAPIs": ["iam.googleapis.com", "iamcredentials.googleapis.com", "places.googleapis.com", "routes.googleapis.com", "logging.googleapis.com", "monitoring.googleapis.com"],
+  "notInEnabledAPIList": ["run.googleapis.com", "artifactregistry.googleapis.com", "iap.googleapis.com", "secretmanager.googleapis.com", "compute.googleapis.com", "containerscanning.googleapis.com"],
+  "dedicatedRuntimeServiceAccountsObserved": [],
+  "existingLocalMapsIdentityIsNotRuntimeEnrollment": true,
+  "cloudRunServiceURLInventory": {"status": "unavailable", "reason": "SERVICE_DISABLED", "absenceOfResourcesEstablished": false},
+  "artifactRepositoryInventory": {"status": "unavailable", "reason": "gcloud HttpException object has no attribute content", "absenceOfResourcesEstablished": false},
+  "workloadSubjects": "unknown until separately authorized creation/observation",
+  "projectOrBillingChanges": false,
+  "APIEnablementOrResourcesCreated": false,
+  "secretsRead": false
+}

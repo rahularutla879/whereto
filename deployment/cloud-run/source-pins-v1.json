@@ -1,0 +1,29 @@
+{
+  "identity": "53-cloud-run-deployment-source-pins-v1",
+  "baselineCommit": "904afbaeb97aeb5ff0661860236a19f07a7b527d",
+  "filesSHA256": {
+    "deployment/cloud-run/account-observation-v1.json": "4a1b0f785a0d43c666a4139cdf0bbce09acd6d4a9bd0ccf4322425bc6534cdb0",
+    "deployment/cloud-run/prices-2026-11-18.json": "81e806e885f633c5f3de7af69ab2a73267d5a6ab02a4d5bcd9283211f32d9d9b",
+    "deployment/test_cloud_run.py": "1e4f5809cdf884f66c62e6f33f0a93a6f91324d40d0da25c875eb58e25cc215b",
+    "deployment/cloud_run.py": "fb5015551174a2652186755b7ad4e00b85fdc43e0b288c9acbdd19a07adc2eee",
+    "deployment/cloud-run/staging.example.json": "85b0e4115404668945da5367ca7fd4f23d38636942d0568a2c8a071722fae031",
+    "deployment/candidates/trixie-zlib-v2/images.json": "2e9ad482a9fe73a70a72761c7f25095d02afdbcb9a5ea6b918c972b57882ed51",
+    "deployment/candidates/trixie-zlib-v2/cohort.json": "e7961b699a0bd0cdf423197e0ae8b747233edd8cc1877d2ec2c58f565ba7e625",
+    "deployment/candidates/trixie-zlib-v2/promotion-PROPOSED.json": "c660851b1c503b238f6e5ce6235326f687acd47ad2e02684dda73ff3af6564d5",
+    "docs/task52-candidate-promotion-security.json": "907022bc9802976ee03fc485c25180223067453722707506b8227d13d4355fa9",
+    "deployment/real-provider-review-v1.json": "1314e57011a32a382d9e6908403a991fa6383f9584e3dbd1427d7f3c08b579a7",
+    "docs/task52-real-provider-retention-v1.json": "08dae7518068be75a2571e5feb97dcbeb938c7135329da2e56de394d44f7d64a",
+    "private_runtime/entry.py": "55b7a24d00516e77d0e0cb0cbc99e6d7768183d4f189b55f7d427d9e60786fba",
+    "private_runtime/private_service.py": "d88ef95605da9f931faaab2edb55ed33531a0b323918a46127611a8c11551d59",
+    "private_runtime/registry.py": "1773ced0bcdfbf1014589c2b0d512fd17368946b25af0b57f617463aa5fef27d",
+    "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+    "private_runtime/redis_port.py": "416c6432935f44d972cf6945d6e1e6cca6c252ca21c740fdce0f4cdf32dabdb3",
+    "private_runtime/dispatch_owner.py": "9406a73d723b8f8723782db8fc6e3cf1556b14753a85702e0d08df0413ca0995",
+    "private_runtime/google_identity.py": "aa57e13693b4fcaf10b36107a9802045ea0757631024be7ee05735c5bbc3bbb9",
+    "deployment/frontend-private-entry.mjs": "9980e539d5c1d204bb1387da6f5f15ca8800fb5654fbce787123a02519192f74",
+    "backend/provider_responses.py": "7fa94b77fce1df61a9a33950d7f290f688042e6a0e2fe35f9d91ab8033c56b9c",
+    "backend/provider_enrollment_review.py": "a8d40f5032a6a80336132831f52f805635cb0c7d87c3220dabbd650e373288b0",
+    "backend/ai/openai_candidate.py": "8c526a0c892763b3f0c6f419a58c43337cd716dc8129544026566e639eff18d0"
+  },
+  "purpose": "offline configuration and publication preparation; no deployment approval"
+}

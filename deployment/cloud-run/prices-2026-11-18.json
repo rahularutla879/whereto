@@ -1,0 +1,23 @@
+{
+  "identity": "53-staging-public-price-observation-v1",
+  "checkedDate": "2026-11-18",
+  "currency": "USD",
+  "isAccountQuote": false,
+  "discountsAndFreeTierAssumed": false,
+  "publicPrices": {
+    "run": {"cpuSecond": "0.000024", "gibSecond": "0.0000025", "millionRequests": "0.40", "source": "https://cloud.google.com/run/pricing"},
+    "registry": {"gibHour": "0.000136986", "source": "https://cloud.google.com/artifact-registry/pricing"},
+    "scan": {"perInitialImage": "0.26", "source": "https://cloud.google.com/artifact-analysis/pricing"},
+    "nat": {"assignedInstanceHour": "0.0014", "gibProcessed": "0.045", "staticIpHour": "0.005", "source": "https://cloud.google.com/nat/pricing"},
+    "secretManager": {"activeVersionHour": "0.000082192", "per10000Accesses": "0.03", "source": "https://cloud.google.com/secret-manager/pricing"},
+    "supabase": {"proOrganizationMonth": "25", "oneMicroComputeCreditIncluded": true, "dailyBackupDays": 7, "source": "https://supabase.com/pricing"},
+    "supabaseIPv4": {"hour": "0.0055", "source": "https://supabase.com/docs/guides/platform/manage-your-usage/ipv4"},
+    "redis": {"publicStartingHour": "0.007", "usEast4Paid250MBActualMonthlyQuote": null, "source": "https://redis.io/pricing/"},
+    "logs": {"gibGrossIngestion": "0.50", "source": "https://cloud.google.com/products/observability/pricing"},
+    "maps": {"searchProPer1000": "32", "matrixProPer1000Elements": "10", "source": "https://developers.google.com/maps/billing-and-pricing/pricing"}
+  },
+  "fullInfrastructure": {"fixedGrossExcludingRedisAt730Hours": "63.2600", "lowUseExcludingRedis": "75.4555", "planningExcludingRedis": "95.7190", "redisQuoteSymbol": "R", "actualTotal": null},
+  "providerCosts": {"notApproved": true, "applicationLlmPerOutingBound": null, "mapsConditionalMaximumPerOuting": "0.398", "maps100Outings": "39.80", "conditions": "4 Search Pro attempts and 27 Pro matrix elements maximum; exact approved account pricing, grants, daily limits and real runtime enrollment still required. No free tier assumed. LLM bound is not the experimental diagnostic ceiling."},
+  "unknowns": ["Redis regional quote and network option", "existing operational subscription/capacity/incremental cost", "independent witness organization and administrator", "account taxes/currency/trial/quotas", "security reviewer fees", "actual measured cold-start and network usage", "application LLM qualification/counting/price/financial scope"],
+  "purchaseAuthorization": false
+}

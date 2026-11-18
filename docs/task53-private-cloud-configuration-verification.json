@@ -1,0 +1,125 @@
+{
+  "identity": "53-private-cloud-configuration-verification-v1",
+  "baselineCommit": "904afbaeb97aeb5ff0661860236a19f07a7b527d",
+  "date": "2026-11-18",
+  "scope": "offline six-role deployment preparation plus approved read-only GCP metadata",
+  "completedDeployment": false,
+  "task52Complete": false,
+  "task53Accepted": false,
+  "checks": [
+    {
+      "name": "deployment/compiler/packaging/provider focused cohort",
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest deployment.test_cloud_run deployment.test_candidate_promotion deployment.test_packaging deployment.test_private_artifact backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "tests": 48,
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0,
+      "seconds": 4.227
+    },
+    {
+      "name": "frontend npm test",
+      "tests": 325,
+      "passed": 324,
+      "failed": 1,
+      "skipped": 0,
+      "failure": "unchanged lib/surprise.test.ts:69 expected200 actual422; source fixture date2026-11-14",
+      "localReproduction": "actual fully offline fixture server returned422/outing_date_expired; no provider request"
+    },
+    {
+      "name": "TypeScript npm run typecheck",
+      "status": "passed"
+    },
+    {
+      "name": "ESLint npm run lint",
+      "status": "passed"
+    },
+    {
+      "name": "gcloud590 local help/source flag compatibility",
+      "status": "passed locally; not server-side deployment validation"
+    },
+    {
+      "name": "historical financial/private evidence integrity",
+      "status": "passed read-only",
+      "attempts": 10,
+      "providers": {
+        "OpenAI": 7,
+        "Google": 2,
+        "Anthropic": 1
+      },
+      "accountedNanodollars": 47366625,
+      "remainingNanodollars": 11952633375,
+      "privateFiles": 324,
+      "frozenPayloadPairs": 5,
+      "halt": "preserved"
+    },
+    {
+      "name": "consumed readiness evidence inventories",
+      "status": "passed read-only",
+      "fourScopeFileCounts": [
+        13,
+        10,
+        11,
+        11
+      ],
+      "expiredEvidenceExtended": false
+    }
+  ],
+  "developmentAttempts": [
+    {
+      "name": "initial npm test under sandbox",
+      "result": "tsx IPC EPERM before test execution; final escalated run above completed"
+    },
+    {
+      "name": "first isolated expiry probe",
+      "result": "ImportError importing nonexistent PlannerInput from backend.models; corrected to the actual existing offline fixture server, no application code change"
+    }
+  ],
+  "notRun": [
+    "full backend suite",
+    "new image builds or scans; no specific new available patch identified",
+    "actual browser desktop/mobile",
+    "production build; no runtime/frontend/dependency/image changes",
+    "live PostgreSQL/Redis/TLS/ACL connections",
+    "SQL migrations or financial grant installation",
+    "hosted IAM/IAP/private networking and quota verification",
+    "hosted restart/callback owner overlap and constrained SQL capacity",
+    "real provider or readiness requests"
+  ],
+  "preservedSecurityInventory": {
+    "file": "docs/task52-candidate-promotion-security.json",
+    "pythonEach": {
+      "critical": 0,
+      "high": 71
+    },
+    "frontend": {
+      "critical": 0,
+      "high": 66
+    },
+    "independentlyAccepted": false,
+    "freshRescan": false
+  },
+  "accountMetadata": "../deployment/cloud-run/account-observation-v1.json",
+  "prices": "../deployment/cloud-run/prices-2026-11-18.json",
+  "historicalCredentialValueRead": false,
+  "resourcesCreated": false,
+  "financialAuthorityCreated": false,
+  "providerDataPlaneCalls": 0,
+  "realRuntimeActivationBlocked": true,
+  "finalIntegrityAndDependencyChecks": {
+    "pipCheck": "passed; cache permission warning only",
+    "npmLsDepth0": "passed",
+    "configuredSecretPatternScan": {
+      "files": 16,
+      "matches": 0,
+      "includesNewFiles": true,
+      "limitation": "pattern scan is not independent security acceptance"
+    },
+    "jsonAndPythonSyntax": "passed",
+    "sourcePins": 22,
+    "handbookChapters": 20,
+    "unaffectedChaptersUnchanged": 17,
+    "protectedHistoricalChanges": 0,
+    "gitDiffWhitespace": "passed",
+    "completeDiffReview": "performed before commit"
+  }
+}

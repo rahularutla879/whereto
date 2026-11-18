@@ -1,0 +1,144 @@
+{
+  "version": "53-private-real-demo-v1",
+  "project": "where-to-512422",
+  "region": "us-east4",
+  "projectNumber": "895186533714",
+  "repository": "whereto-private",
+  "subnetCidr": null,
+  "testers": [],
+  "workloads": {
+    "frontend": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "enrollment": null
+      }
+    },
+    "backend": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null
+      }
+    },
+    "factory": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null,
+        "operational-ca": null,
+        "redis-ca": null
+      }
+    },
+    "counter": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null,
+        "operational-ca": null
+      }
+    },
+    "dispatcher": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null,
+        "operational-ca": null,
+        "redis-ca": null,
+        "openai": null
+      }
+    },
+    "recovery": {
+      "url": null,
+      "subject": null,
+      "registryManifest": null,
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null
+      }
+    }
+  },
+  "epoch": null,
+  "approvalEvidence": {
+    "image-security": null,
+    "model-qualification": null,
+    "real-token-price-policy": null,
+    "provider-transport": null,
+    "google-content-use": null,
+    "financial-grant": null,
+    "storage-capacity": null,
+    "independent-recovery-owner": null,
+    "hosted-worker-replacement": null,
+    "iam-iap-enrollment": null,
+    "infrastructure-cost": null
+  },
+  "storage": {
+    "operational": {
+      "host": null,
+      "port": null,
+      "database": null,
+      "contract": null,
+      "caSHA256": null,
+      "connectionBudget": null,
+      "administrator": null,
+      "backupOwner": null
+    },
+    "witness": {
+      "host": null,
+      "port": null,
+      "database": null,
+      "contract": null,
+      "caSHA256": null,
+      "connectionBudget": null,
+      "administrator": null,
+      "backupOwner": null
+    },
+    "redis": {
+      "host": null,
+      "port": null,
+      "caSHA256": null,
+      "publisher": null,
+      "reader": null,
+      "acl": null,
+      "lua": null,
+      "noeviction": null,
+      "maximumBytes": null,
+      "quoteMonthlyUSD": null
+    },
+    "sqlLogins": {
+      "backend": {
+        "witness": null
+      },
+      "factory": {
+        "database": null,
+        "issuer": null,
+        "witness": null
+      },
+      "counter": {
+        "database": null,
+        "witness": null
+      },
+      "dispatcher": {
+        "database": null,
+        "witness": null
+      },
+      "recovery": {
+        "witness": null
+      }
+    }
+  },
+  "recoveryOperator": {
+    "email": null,
+    "subject": null
+  }
+}

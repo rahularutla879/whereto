@@ -1,3 +1,7 @@
+## Current owner scope — private deployment preparation
+
+The current request explicitly permits Task53 environment/HTTPS preparation alongside unfinished Task52/52B, superseding earlier session statements that forbade starting Task53 preparation. Neither task is accepted. No cloud resource creation, paid purchase, provider request, grant, API-key read/change, public activation or inference is authorized. Current synthetic-only images must never be presented as the real-provider demo. Deployment commands and nonsecret approval-reference hashes are review material, not authority. Preserve every historical attempt, halt, source pin, consumed readiness scope and private file. [Concrete boundary](deployment/cloud-run/README.md).
+
 ## Task 50E — explicit current traffic authorization
 
 The consolidated owner request authorizes Driving Matrix `TRAFFIC_AWARE` and its Pro tier within existing controlled local development. Walking stays unchanged. Do not use `TRAFFIC_AWARE_OPTIMAL`, a second verification pass, extra Cartesian cells, hidden retries, or change Cloud quotas/billing/identities/private profiles. Driving gross first-tier accounting is $0.010/element; Walking/legacy Essentials remains $0.005/element. Preserve existing usage when adding the Pro ledger key. Current evidence expires after five minutes and never establishes a guaranteed future arrival or consumer Maps parity. Automated/browser Google sends stay blocked. [Implementation and checks](docs/task50e-consolidated.md). Task 51 remains unstarted.

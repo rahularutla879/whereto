@@ -1,3 +1,7 @@
+## Private Cloud Run deployment compiler (inactive)
+
+`deployment/cloud_run.py` validates source-pinned nonsecret metadata and emits six-role publication/IAM/IAP/VPC/secret/deployment/rollback argv without executing commands or loading credentials. Runtime code, planners, financial SQL, provider transports and startup are unchanged. It verifies local-config versus registry-manifest identities separately and enforces direct SQL/named Redis/independent witness constraints. The current synthetic-only cohort remains release-ineligible; real-model/count/rate/dispatch/frontend purpose integration is not supplied by this compiler. [Exact topology, lifecycle and blockers](deployment/cloud-run/README.md).
+
 ## First-slot original-journal resource adapter (inactive)
 
 `task52b_original_journal` binds the existing experiment.lock and canonical SQLite identity to a separate child-fact directory, retaining the existing Q4C algorithm code objects. `task52b_real_enrollment` verifies source-pinned public trust plus distinct technical owner/security/operator signatures; no real trust is installed. `task52b_enrolled_transport` reuses the existing secure key-loader functions and single-dial TLS for the fixed frozen Responses request only. Supervisor and replacement parent independently fold the same-lock prefix, charges and raw/decode/grade evidence. No new service, ledger, credential store or application startup path. [Contract and limits](docs/task52b-original-journal-enrollment.md).
