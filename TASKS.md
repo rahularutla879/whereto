@@ -1,3 +1,7 @@
+## Task52B — offline GET execution fix verified; no live authority
+
+Stable independently source-compiled code identity and actual supervised local-TLS regression pass. [Exact results](docs/task52b-code-identity-fix.md):110current+15frozen-compatible passes; retained red test demonstrates original defect. Consumed scope remains unusable and no fresh model evidence exists. Next permitted checkpoint: prepare a new GET-only scope, then request separate explicit send approval. Count/inference and deployment are not authorized. Task53 not started.
+
 ## Task52B — GET refresh unsuccessful; local identity-check blocker
 
 One authorized supervised attempt consumed `52b-model-get-owner-128fa8c-v1` without recorded HTTP transmission or model validation. [Evidence and no-network diagnostic](docs/task52b-authorized-model-get.md).116preflight passes did not cover the combined real supervision/transport fingerprint behavior. Repair and integrated offline regression are required before a separately authorized fresh GET scope. No retry/count/inference/Task53.

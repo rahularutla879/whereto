@@ -1,3 +1,7 @@
+## 2026-11-17 — deterministic source-compiled identity, never disable the guard
+
+Replace marshal's reference-sensitive object representation with versioned typed full-code/default identity independently compiled from SHA-pinned source. Require loaded method/namespace and selected dependency/class bindings to match; retain source/bootstrap/interpreter/CA, immutable writer and one-use controls. Version runtime facts rather than reinterpret old marshal hashes. Replace mocked supervisor coverage with actual isolated local TLS and keep the original code as a failing control. Old consumed authorities remain untouched; this is offline correction, not a new grant or live retry. [Evidence](docs/task52b-code-identity-fix.md).
+
 ## 2026-11-17 — retain consumed GET authority after pre-send refusal
 
 Treat the supervised attempt as terminal despite sendStarted=false: preserve all claims/INTENT/capture and never reuse authority. Do not interpret no HTTP status as a model/permission result or fresh evidence. Preserve the reviewed source, use a socket-disabled fictional probe to identify the unstable marshal identity-check defect, and require an offline full-code-preserving fix/regression before any new separately authorized GET. [Outcome and limits](docs/task52b-authorized-model-get.md).

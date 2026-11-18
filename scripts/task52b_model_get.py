@@ -6,6 +6,7 @@ from time import monotonic
 from base64 import b64encode
 import json,re,http.client,resource
 from scripts import task52b_count_only as previous
+from scripts import task52b_code_identity as code_identity
 from backend.provider_responses import HTTPResult
 
 e=previous.e;q=e.q
@@ -13,7 +14,7 @@ ROOT=e.ROOT;PROJECT=e.PROJECT
 OPERATION='52b-model-get-owner-128fa8c-v1'
 STATE=e.BASE/OPERATION
 AUTHORIZATION=e.BASE/(OPERATION+'.send-authorization.json')
-BUILD=ROOT/'docs/task52b-model-get-build-v1.json'
+BUILD=ROOT/'docs/task52b-model-get-build-v2.json'
 BOOTSTRAP=ROOT/'scripts/task52b_run_model_get_once.py'
 ENDPOINT='https://api.openai.com/v1/models/gpt-6-luna'
 private_create=e.private_create;digest=e.digest;stamp=e.stamp
@@ -53,6 +54,54 @@ def original_integrity():
     return digest(json.dumps(pins,sort_keys=True).encode())
 
 
+def loaded_targets():
+    writer=e.sys.modules['scripts.task52_q4a']
+    return {
+        'wire':(GetOnlyHTTPS.exchange,globals(),Path(__file__),'GetOnlyHTTPS.exchange'),
+        'dial':(_SingleDial.connect,e.__dict__,Path(e.__file__),'_SingleDial.connect'),
+        'tls':(e.FixedReadinessHTTPS.__init__,e.__dict__,Path(e.__file__),'FixedReadinessHTTPS.__init__'),
+        'writer':(private_create,writer.__dict__,Path(writer.__file__),'private_create'),
+        'fsync':(e.fsync_dir,writer.__dict__,Path(writer.__file__),'fsync_dir'),
+        'reader':(e.read_openai_only,e.__dict__,Path(e.__file__),'read_openai_only'),
+        'metadata':(e.metadata,e.__dict__,Path(e.__file__),'metadata'),
+        'private_read':(e.private_read,e.__dict__,Path(e.__file__),'private_read'),
+        'request':(request,globals(),Path(__file__),'request'),
+        'intent_guard':(verify_intent,globals(),Path(__file__),'verify_intent'),
+        'supervision':(verify_supervision,globals(),Path(__file__),'verify_supervision'),
+        'worker':(execute_get_only,globals(),Path(__file__),'execute_get_only'),
+        'runner':(run_get,globals(),Path(__file__),'run_get'),
+        'preconditions':(live_preconditions,globals(),Path(__file__),'live_preconditions'),
+    }
+
+
+def identity_manifest():
+    """Build-time identities compiled independently; never trust live self hashes."""
+    identities={}
+    for name,(_,_,path,qualname) in loaded_targets().items():
+        identities[name]=code_identity.compiled(path,digest(path.read_bytes()),qualname)
+    return {'loadedIdentityScheme':code_identity.VERSION,'loadedCodeIdentities':identities}
+
+
+def verified_wire_identity(build=None):
+    b=build or json.loads(BUILD.read_bytes())
+    try:
+        if (b['loadedIdentityScheme']!=code_identity.VERSION or _SingleDial is not e._SingleDial or
+                private_create is not e.private_create or GetOnlyHTTPS.__bases__!=(e.FixedReadinessHTTPS,) or
+                GetOnlyHTTPS.__init__ is not e.FixedReadinessHTTPS.__init__ or
+                type(GetOnlyHTTPS) is not type or GetOnlyHTTPS.__getattribute__ is not object.__getattribute__ or
+                GetOnlyHTTPS.__new__ is not object.__new__ or GetOnlyHTTPS.__setattr__ is not object.__setattr__ or
+                set(GetOnlyHTTPS.__dict__)!={'__module__','__doc__','exchange'}):
+            raise code_identity.IdentityRefused('transport_binding')
+        values={}
+        for name,(function,namespace,path,qualname) in loaded_targets().items():
+            relative=str(path.relative_to(Path(__file__).resolve().parents[1]))
+            values[name]=code_identity.require(function,path,b['filesSHA256'][relative],qualname,namespace)
+        if values!=b['loadedCodeIdentities']:raise code_identity.IdentityRefused('manifest_code_identity')
+        return values['wire']
+    except (code_identity.IdentityRefused,KeyError,ValueError):
+        raise q.Refused('get_loaded_code_identity') from None
+
+
 def verify_build(expected):
     raw=BUILD.read_bytes()
     if digest(raw)!=expected:raise q.Refused('get_build_identity')
@@ -67,6 +116,7 @@ def verify_build(expected):
     if digest((boot[:m.start(1)]+'__BUILD_SHA__'+boot[m.end(1):]).encode())!=b['bootstrapTemplateSHA256']:
         raise q.Refused('get_bootstrap_source')
     if e.os.environ.get('SSLKEYLOGFILE') or e.os.environ.get('PYTHONINSPECT'):raise q.Refused('unsafe_runtime_environment')
+    verified_wire_identity(b)
     return b
 
 
@@ -104,7 +154,7 @@ def verify_supervision(s,require_runtime=False):
     if require_runtime:
         rt=e.record(STATE/'runtime.json')
         if (rt.get('workerPID')!=e.os.getpid() or rt.get('buildSHA256')!=s['buildSHA256'] or
-                rt.get('loadedWireBytecodeSHA256')!=digest(e.marshal.dumps(GetOnlyHTTPS.exchange.__code__))):
+                rt.get('identityScheme')!=code_identity.VERSION or rt.get('loadedWireIdentitySHA256')!=verified_wire_identity()):
             raise q.Refused('get_worker_identity')
 
 
@@ -218,7 +268,7 @@ def execute_get_only(expected=None):
     if expected!=s['buildSHA256']:raise q.Refused('supervised_build_identity')
     verify_supervision(s)
     if resource.getrlimit(resource.RLIMIT_CORE)!=(0,0):raise q.Refused('core_dump_protection')
-    private_create(STATE/'runtime.json',{'workerPID':e.os.getpid(),'buildSHA256':expected,'loadedWireBytecodeSHA256':digest(e.marshal.dumps(GetOnlyHTTPS.exchange.__code__)),'at':stamp()})
+    private_create(STATE/'runtime.json',{'workerPID':e.os.getpid(),'buildSHA256':expected,'identityScheme':code_identity.VERSION,'loadedWireIdentitySHA256':verified_wire_identity(),'at':stamp()})
     def key():
         live_preconditions(STATE);verify_supervision(s,True)
         return e.read_openai_only(e.record(e.PRIVATE_ENROLLMENT),json.loads(e.AUTHORIZATION.read_bytes())['credentialMetadataSHA256'])

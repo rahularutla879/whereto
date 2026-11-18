@@ -1,3 +1,7 @@
+## Deterministic supervised GET code identity
+
+Inactive GET execution now uses `task52b_code_identity` to compare full typed loaded code/constants/defaults with independently compiled SHA-pinned source and a versioned build expectation. Selected wire/loader/writer/guard/class bindings are checked; runtime facts use a new scheme and identity field. No reference-count or process-object IDs are hashed. Existing supervision/TLS/INTENT/single-send paths remain. The new local-TLS harness runs them intact with fictional configuration only. No new service, authority, credential mechanism or application startup profile. [Contract and trust limits](docs/task52b-code-identity-fix.md).
+
 ## Prepared standalone model GET refresh
 
 `task52b_model_get` and its one-spawn supervisor specialize existing readiness TLS/identity/evidence primitives for one fixed empty GET. New scope/source binding, exclusive claims, durable INTENT and no-replay behavior remain independent from the consumed original pair and inactive count scope. No actual send authorization, application/service/startup changes or automatic evidence-selector update. Original expiry remains fixed. [Contract](docs/task52b-model-get-preparation.md).

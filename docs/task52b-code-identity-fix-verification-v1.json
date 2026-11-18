@@ -1,0 +1,193 @@
+{
+  "identity": "52b-stable-code-identity-verification-v1",
+  "baselineCommit": "1d994c2dd8f2727d01e3df7ed1bd9ba2ef1c6404",
+  "verifiedAt": "2026-11-18T02:10:37.708171+00:00",
+  "status": "offline-fix-passed-no-live-enrollment",
+  "buildSHA256": "b8381f4ee3a41e8046ebb434fd20a19b0e1111a60e44155d502c4d3d0235173f",
+  "identityScheme": "52b-source-compiled-code-v1",
+  "rootCause": {
+    "baselineFunction": "scripts/task52b_model_get.py:108 verify_supervision",
+    "category": "reference-sensitive CPython marshal code serialization",
+    "controlledSupervisorBranch": "get_worker_identity",
+    "sourceASTCodeClassInterpreterUnchanged": true,
+    "referenceProbe": {
+      "python": "3.12.1",
+      "sourceSHA256": "4591c22d08af3a76a2bf94edd2d77058d5c61f43bdca450260564251bada877f",
+      "coCodeSHA256": "b9fafc835081b6f897b167d79d3f397a4a646ba13981d5d6efd4ed28853e481f",
+      "sameCodeObject": true,
+      "referenceCountBefore": 2,
+      "referenceCountWhileHeld": 3,
+      "marshalBefore": "e427db367dd903016b459a29061f2e10e6d967ab68daa5d24303f89321f770b1",
+      "marshalWhileHeld": "6f11db7f45d52def45207c77df011172ef1d233cc63542531efdb323cb151999",
+      "marshalAfterRelease": "e427db367dd903016b459a29061f2e10e6d967ab68daa5d24303f89321f770b1",
+      "sourceOrBytecodeChanged": false
+    },
+    "historicalLiveBranch": "still generic Refused; not retroactively attributed"
+  },
+  "developmentAttempts": [
+    {
+      "testsRun": 1,
+      "failures": 1,
+      "errors": 0,
+      "result": "RED actual supervised TLS on original source"
+    },
+    {
+      "testsRun": 6,
+      "failures": 0,
+      "errors": 0,
+      "result": "first fixed integrated+identity tests PASS"
+    },
+    {
+      "testsRun": 12,
+      "failures": 0,
+      "errors": 0,
+      "result": "extended integrated+identity tests PASS"
+    },
+    {
+      "testsRun": 110,
+      "failures": 0,
+      "errors": 0,
+      "result": "full selected cohort before final constructor guard PASS"
+    }
+  ],
+  "finalTests": [
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_get_supervised_tls backend.test_task52b_code_identity backend.test_task52b_model_get backend.test_task52b_count_enrollment backend.test_task52b_count_only backend.test_task52b_readiness_enrolled backend.test_task52b_readiness backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "passed": 110,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 77.705
+    },
+    {
+      "command": "PYTHONPATH=. /Users/rahularutla/Documents/whereto/backend/.venv/bin/python /tmp/task52-openai-readiness-check/frozen-focused.py",
+      "cwd": "/Users/rahularutla/.codex/worktrees/task52b-frozen-b2-verification/whereto",
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.368
+    }
+  ],
+  "integratedCoverage": {
+    "actualParentChildAndExchange": true,
+    "actualCredentialLoaderOnFictionalFile": true,
+    "originalCodeStillFails": true,
+    "cleanIndependentRuns": 3,
+    "substitutedApplicationValidatorsOrExchange": false,
+    "fixtureDataSourceCAAndDNSOnly": true,
+    "networkAllowed": "exact controlled loopback port only",
+    "filteredEnvironment": [
+      "PATH",
+      "LANG",
+      "TMPDIR"
+    ],
+    "tamperModes": [
+      "source",
+      "build",
+      "bootstrap",
+      "metadata",
+      "wire function",
+      "wire constant",
+      "dial method",
+      "class attribute access",
+      "base constructor",
+      "missing/expired fictional authorization"
+    ],
+    "responses": [
+      200,
+      401,
+      403,
+      "malformed JSON",
+      "wrong model"
+    ],
+    "crashes": [
+      "before INTENT",
+      "after INTENT",
+      "after TLS send before response persistence"
+    ],
+    "competingSupervisors": "only one HTTP send",
+    "expiredOrConsumedReplay": "refused"
+  },
+  "protectedState": {
+    "actualConsumedScopeFilesUnchanged": 10,
+    "originalPairFilesUnchanged": 13,
+    "oldGETAuthorizationUnchanged": true,
+    "oldScopeRefuses": true,
+    "originalGETExpiryUnchanged": "2026-11-18T00:00:00+00:00",
+    "newRealAuthorizationCreated": false,
+    "newBuildSHA256": "b8381f4ee3a41e8046ebb434fd20a19b0e1111a60e44155d502c4d3d0235173f",
+    "wireIdentity": "26ec44c5d3c7b602f5179c059b3e6f39bf2a41aa653a3bd6ea3880b299ee2273"
+  },
+  "history": {
+    "attempts": 10,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPairs": 5,
+    "persistentHalt": true
+  },
+  "actualCredentialValuesRead": false,
+  "realProviderRequests": 0,
+  "realAuthorizationCreatedOrConsumed": false,
+  "countOrInferenceAuthorized": false,
+  "dependencyChanges": false,
+  "dependencyCheck": "PASS no broken requirements; pip cache-warning only",
+  "secretPatternMatches": 0,
+  "configuredValueComparison": "not run; actual credentials are not read",
+  "logSHA256": {
+    "/tmp/task52b-identity-before.log": "f0dfb9fe44499a58ddd1be3a0da6c66211baca7b2113217f6b065d1d9f763a16",
+    "/tmp/task52b-reference-root-cause.log": "1b7a73e181475ecb53e23e9757e63378cf5d26153ee91835b87f81ca3401f3b5",
+    "/tmp/task52b-identity-before-source.json": "6dc9c8acc951d742ce4f8e989935ea5f245cbd71321c114dcd6b50e281369195",
+    "/tmp/task52b-identity-first-fix.log": "a8deb2d3f7d519072de20fd579d45c46264d0f4b796a8983f6a80bb563d661fd",
+    "/tmp/task52b-identity-integrated.log": "41515de3fe2dfc81c8bd47cb8846d74822c7fb3b7b41c7282d2605276d436730",
+    "/tmp/task52b-identity-final-cohort.log": "802b77a854db318cedf848d7553a7b90984a21268b92595f7bc3a8106a965bda",
+    "/tmp/task52b-identity-final-verified.log": "a3c90df8dbdbe544fd97a2c08590a3df6bef70ab299d24b116011d6ae97462f5",
+    "/tmp/task52b-identity-frozen.log": "0f4eedc0666cf5448e6c1fb22a2bdf0e634ccf775ecefe6126370b26ad276e79",
+    "/tmp/task52b-identity-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-identity-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-identity-final-protected.log": "a9828dc97493c91be4eddc0157514f6d34f8910779c64db6f62c5fbb83bf8bc8",
+    "/tmp/task52b-identity-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52b-identity-patterns.log": "66ba11f98063ec9d983ba150ef902ab963920a47fb9ae40004df09a1111f0369"
+  },
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      17
+    ],
+    "chapterCount": 20
+  },
+  "notRun": [
+    "full backend/B2/SQL/Redis suites",
+    "frontend TypeScript/lint/build/browser tests",
+    "container/cloud checks",
+    "any real-provider operation"
+  ],
+  "remainingLimits": [
+    "same-user administrator/trusted interpreter/stdlib remain outside the narrow anti-substitution boundary",
+    "historical live refusal branch remains unrecorded",
+    "separately pinned count runner not migrated",
+    "new GET-only scope and separate approval still required"
+  ],
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/task52b_get_tls_fixture.py",
+    "backend/test_task52b_code_identity.py",
+    "backend/test_task52b_get_supervised_tls.py",
+    "backend/test_task52b_model_get.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-code-identity-fix-verification-v1.json",
+    "docs/task52b-code-identity-fix.md",
+    "docs/task52b-model-get-build-v2.json",
+    "scripts/task52b_code_identity.py",
+    "scripts/task52b_model_get.py",
+    "scripts/task52b_run_model_get_once.py"
+  ]
+}
