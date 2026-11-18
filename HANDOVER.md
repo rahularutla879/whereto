@@ -1,3 +1,7 @@
+## Task52B — authorized model GET stopped before recorded HTTP; permanently consumed
+
+Scope `52b-model-get-owner-128fa8c-v1` enrolled and attempted once after116preflight passes. No HTTP status/model/new expiry; Refused,sendStarted=false,empty incomplete capture. No retry. [Outcome/evidence](docs/task52b-authorized-model-get.md). A socket-disabled fictional probe reproduces unstable marshal wire-code identity across function execution; actual generic refusal branch is not directly logged. Source/guard unchanged. Next: offline stable full-code fingerprint fix plus integrated supervisor/transport regression; any new GET needs new scope/approval. Historical10/$0.047366625/324/halt and original expired GET remain intact. Count/inference remain unauthorized.
+
 ## Task52B — fresh model GET-only proposal, no request authorized
 
 Original GET is expired at unchanged Nov18,00:00UTC. New proposed scope `52b-model-get-owner-128fa8c-v1` permits only one empty GET after separate explicit approval; no live state/authorization created. Existing count runner/evidence/receipts unchanged and no POST becomes authorized. [Report and checks](docs/task52b-model-get-preparation.md):101current+15frozen-compatible passes; initial oversized-fixture reporting error corrected without relaxing bounds, failed evidence retained. Historical10/$0.047366625/324/halt preserved. Next: exact owner GET-only approval, then bound enrollment. Task52/52B remain in progress.

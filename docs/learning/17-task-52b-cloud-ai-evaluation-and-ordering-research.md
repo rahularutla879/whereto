@@ -198,3 +198,9 @@ The fixed count supervisor reuses the existing one-spawn pattern, pinned runtime
 The original GET's Nov18,2026,00:00UTC deadline has passed. [GET-only preparation](../task52b-model-get-preparation.md) uses a new scope with one fixed empty model GET and no POST authority. Original integrity remains checkable after expiry; integrity does not restore freshness. Never pass a fabricated earlier clock, rewrite an observation or reset consumed facts.
 
 The existing supervisor/TLS/immutable-writer pattern is reused with source binding and INTENT before key load. A future successful authorized response would expire at the earlier of24hours or next UTC midnight. Neither GET preparation nor GET success authorizes counting or replaces pinned count evidence automatically. Exact owner approval and later reviewed evidence binding remain separate. Fictional spawned-worker/loopback tests cover single sends, failure and replay refusal; they do not establish actual provider availability or model quality.
+
+## Authorized GET stopped without fresh evidence
+
+The [authorized GET attempt](../task52b-authorized-model-get.md) produced no HTTP status or validated model, and remains consumed despite sendStarted=false. Never infer a fresh expiry or reset claims merely because transmission was not recorded. The original expired GET stays unchanged.
+
+A no-network probe reproduces an unstable marshal-based code fingerprint as local references change during an unchanged function's execution. The live capture's generic Refused category does not identify its exact branch. The selected116preflight tests passed, but supervisor fixtures replaced the exchange while TLS fixtures skipped actual supervision; that coverage gap matters. A stable full-code/constant identity and integrated supervised transport regression are needed before a new scoped live authorization. No guard was removed and no retry/count/inference was performed.

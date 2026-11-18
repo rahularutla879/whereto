@@ -1,0 +1,118 @@
+{
+  "identity": "52b-authorized-model-get-terminal-result-v1",
+  "executionSourceCommit": "37bb5d2eb878670be521a2b9795c5cb691b978ab",
+  "buildSHA256": "b41fc246489612e6c1714068f7957363ad8e139bd3ee08398cd1630ef95e10fb",
+  "operation": "52b-model-get-owner-128fa8c-v1",
+  "project": "proj_E4EfEvC5uQYN4nqFaYZoo3I4",
+  "endpoint": "https://api.openai.com/v1/models/gpt-6-luna",
+  "method": "GET",
+  "ownerAuthorized": true,
+  "supervisedAttempts": 1,
+  "recordedHTTPStarts": 0,
+  "httpStatus": null,
+  "validatedModel": null,
+  "newExpiry": null,
+  "result": "stopped",
+  "reason": "uncertain_or_incomplete_no_retry",
+  "errorCategory": "Refused",
+  "sendStarted": false,
+  "scopePermanentlyConsumed": true,
+  "postRequests": 0,
+  "inference": 0,
+  "retries": 0,
+  "credentialChanges": 0,
+  "financialGrants": 0,
+  "cloudProvisioning": 0,
+  "sourceCodeChangedAfterAttempt": false,
+  "evidence": {
+    "operation": "52b-model-get-owner-128fa8c-v1",
+    "scopeSHA256": "08d73c44df198991f2893b0ad01cc6228d196900d3f73c743b84f9ce5c6e8b30",
+    "authorizationSHA256": "4d70efbd7b1db9e52b4fb36b6274de695a554b86cc91fd8b76d0df23150a3d61",
+    "privateFileSHA256": {
+      "intent.json": "2e6f2851135c5c0e77cc2315647a627b2cfc065b025e9ade9474d09c6bcd0cb3",
+      "runtime.json": "248db03a8044391dce7b4ab54d9866de754d45408e6ff8d0ce09b478c9506541",
+      "wire-consumed.json": "102ea96e9efa3d201e411355f0cd167b67f4d75e8d3efa2992caeaa7d4cfdb2b",
+      "result.json": "3bf624ad0154735ca4a95b1ae0d9b88fb29fc0d7768c2c8f9f158a6bd7d75721",
+      "supervisor.json": "1e8c787f297f4e65e9840075e636629ebfaab84b29827b5196daf1e11db13b7c",
+      "scope.json": "08d73c44df198991f2893b0ad01cc6228d196900d3f73c743b84f9ce5c6e8b30",
+      "launcher-claim.json": "150e7f6d42861c29b59ab04499aa3cd0436fabf3f87f151f31165f4dab40d3ea",
+      "consumed.json": "a8aa168b04336ce8322885dd3debb4fc826a74007498338b5511962ac8b66aa4",
+      "response-1.json": "0e849da01ea9bd3f463a5c408949d0355902c9a617204d9748c6878b129e63f6",
+      "supervisor-claim.json": "217feb72bef2efe9f8fc345b7a4a1134115d5c19de2785e75f803000cdb0bd60"
+    },
+    "originalEvidenceBundleSHA256": "0d1bf9aa2f2b82b81dc1059d7c8c764784e694b5786cf74b8262cfe5d3ed1499",
+    "credentialIdentity": "ee2d112c232ba3ccab6cd41c054d135ac95cd00114d6aa926f013c2f9a19efca",
+    "historicalHaltPreserved": true,
+    "authorizationConsumed": true,
+    "validatedModel": null,
+    "newExpiry": null,
+    "wire": {
+      "status": null,
+      "complete": false,
+      "sendStarted": false,
+      "errorCategory": "Refused",
+      "bodyBytes": 0,
+      "bodySHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "at": "2026-11-18T01:22:46.247299+00:00"
+    }
+  },
+  "verification": {
+    "preflightCurrentTests": 101,
+    "preflightFrozenCompatibleTests": 15,
+    "failures": 0,
+    "errors": 0,
+    "skips": 0,
+    "currentSeconds": 36.825,
+    "frozenSeconds": 1.484,
+    "beforeAndAfterHistoricalIntegrity": "PASS",
+    "sourceRuntimeCAPins": "PASS",
+    "existingCredentialMetadataAndPermissions": "PASS; credential value loaded only inside authorized worker, not logged/persisted",
+    "privateEvidence": "ten scope files and separate authorization, owner0600/parent0700; excluded from Git"
+  },
+  "offlineDiagnostic": {
+    "fictionalOnly": true,
+    "networkCalls": 0,
+    "expectedCodeSerializationSHA256": "e427db367dd903016b459a29061f2e10e6d967ab68daa5d24303f89321f770b1",
+    "checks": [
+      "e427db367dd903016b459a29061f2e10e6d967ab68daa5d24303f89321f770b1",
+      "637a6d02125ea03450ab5b3d2f5688641735ab9afe0186591c642e89bbabaf85"
+    ],
+    "serializationStable": false,
+    "terminalReason": "uncertain_or_incomplete_no_retry",
+    "sendStarted": false,
+    "errorCategory": "Refused"
+  },
+  "diagnosticInterpretation": "No-network fictional probe reproduces a wire identity refusal: marshal.dumps of unchanged exchange code changes after local constant references are established. Actual stored runtime fingerprint equals probe first check and differs from second. Live capture logs only Refused, not its exact branch; do not claim conclusive branch attribution. No code fix, guard relaxation or live retry performed.",
+  "history": {
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPairs": 5,
+    "persistentHalt": true,
+    "originalGETExpiry": "2026-11-18T00:00:00+00:00",
+    "originalGETAndConsumedScopeUnchanged": true
+  },
+  "logSHA256": {
+    "/tmp/task52-model-get-live-preflight.log": "285dd99715b83943bf044abc8a01d62c752c1d72e1cecd821ea07b65bfc92b5f",
+    "/tmp/task52-model-get-live-frozen.log": "b4efaced552a464a96c517a6820ccef56018aaea676995c323d2bdf2c1a0c7ca",
+    "/tmp/task52-model-get-live-before-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-model-get-live-after-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52-model-get-live-verified.log": "30aa8f6e0221d98fc3adddfa9aa700e9f35bd8630023819cd9ae85a73a08b7c6",
+    "/tmp/task52-model-get-offline-refusal-probe.log": "e5c7e9e19e3fb296ee4380d86cd209663fc332c2e7ba586bbec196092fcc2975",
+    "/tmp/task52-model-get-live-patterns.log": "e48fb7bbafa46233f3e0cb3567389829f9c22f4cdc83f3d29e9c493e320d3a1f"
+  },
+  "notRunAfterFailure": [
+    "any additional live request",
+    "code fix or transport reenrollment",
+    "full backend/frontend/SQL/Redis/build/image tests"
+  ],
+  "nextBoundary": "Offline repair and regression of stable full wire-code identity under actual supervised transport, then separate owner approval for a new uniquely scoped GET. Never reuse this scope. Count/inference remain unauthorized.",
+  "existingKeyLoadedOnlyByAuthorizedWorker": true,
+  "credentialValueLoggedOrPersisted": false
+}

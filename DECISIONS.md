@@ -1,3 +1,7 @@
+## 2026-11-17 — retain consumed GET authority after pre-send refusal
+
+Treat the supervised attempt as terminal despite sendStarted=false: preserve all claims/INTENT/capture and never reuse authority. Do not interpret no HTTP status as a model/permission result or fresh evidence. Preserve the reviewed source, use a socket-disabled fictional probe to identify the unstable marshal identity-check defect, and require an offline full-code-preserving fix/regression before any new separately authorized GET. [Outcome and limits](docs/task52b-authorized-model-get.md).
+
 ## 2026-11-17 — refresh via new GET scope, never extend old evidence
 
 Preserve the expired original GET and consumed scopes. Prepare a new fixed empty GET with the existing loader/List models Read identity, supervised one-send/TLS/writer primitives and unchanged same-UTC-day/24h policy. Integrity of old evidence is distinct from freshness; do not invoke old validation with a fabricated earlier clock. Count runner/source/permission gates are untouched. Any future fresh model evidence needs its own authorized send and separate reviewed POST binding. [Contract](docs/task52b-model-get-preparation.md).

@@ -1,3 +1,7 @@
+## Task52B — GET refresh unsuccessful; local identity-check blocker
+
+One authorized supervised attempt consumed `52b-model-get-owner-128fa8c-v1` without recorded HTTP transmission or model validation. [Evidence and no-network diagnostic](docs/task52b-authorized-model-get.md).116preflight passes did not cover the combined real supervision/transport fingerprint behavior. Repair and integrated offline regression are required before a separately authorized fresh GET scope. No retry/count/inference/Task53.
+
 ## Task52B — separately scoped GET refresh prepared, awaiting approval
 
 Fixed GET-only supervision/transport prepared and116selected offline tests pass. [Evidence](docs/task52b-model-get-preparation.md). Original GET expired unchanged; no live GET/count/inference or authorization created. A successful future refresh cannot automatically update count authority. Separate one-GET owner approval required; no Task53.
