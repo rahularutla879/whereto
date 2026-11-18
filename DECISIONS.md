@@ -1,3 +1,7 @@
+## 2026-11-17 — fresh GET is separate evidence, never implicit count authority
+
+Enroll/consume exactly the owner's one-GET scope using the corrected pinned supervisor. Keep the actual returned metadata private and publish sanitized hashes/time/ID only. Apply the unchanged next-UTC-midnight/24-hour expiry to this new observation, leaving the original expired record intact even though raw metadata hashes match. No count selector or authorization is updated automatically. [Outcome and verification](docs/task52b-authorized-fresh-model-get.md).
+
 ## 2026-11-17 — migrate count identity; keep GET and count authorizations separate
 
 Reuse the verified source-compiled full-code identity for count, including independent prior-GET/permission callable checks; retain the frozen payload and scope. Prepare a distinct one-GET proposal rather than revive consumed authority. A successful future GET must be explicitly reviewed/bound for count, with genuinely fresh permission evidence and separate owner approval; never extend or retimestamp receipts. Actual local-TLS supervisor regressions supersede two fake-exchange process tests. [Evidence](docs/task52b-both-readiness-preparation.md).

@@ -1,3 +1,7 @@
+## Task52B — fresh authorized GET200; scope permanently consumed
+
+`52b-model-get-owner-3e2ba62-v1` sent exactly one GET, HTTP200/exact gpt-6-luna validated at2026-11-18T04:35:55.524545Z. New evidence expires2026-11-19T00:00:00Z (Nov18,7PM EST); old expiry/scopes untouched. [Outcome/hashes](docs/task52b-authorized-fresh-model-get.md).60focused preflight tests and all post-evidence/history checks passed. Existing restricted key used only by approved loader; no secret persistence/permission change, count, inference, retry, grant or provisioning. Count selector/auth unchanged; requires reviewed actual-GET binding, fresh Write evidence and separate owner approval. Ten/$0.047366625/324/halt preserved; no model qualification or Task53.
+
 ## Task52B — both deterministic runners verified; fresh GET proposal only
 
 Count's original supervised/TLS regression reproduced count_worker_identity at old line329; migrated to the unchanged independently source-compiled identity helper. Both actual supervisor/worker/loader/TLS paths pass. [Report/evidence](docs/task52b-both-readiness-preparation.md):116current+15frozen-compatible passes; retained red control. NEW proposed GET scope `52b-model-get-owner-3e2ba62-v1`, one empty GET only; no directory/auth created. Count scope/payload remain unchanged and unbound to future GET. Actual successful GET, reviewed evidence binding, fresh Write observation and separate count approval still required. Historical10/$0.047366625/324/halt and consumed10/13facts preserved. No live API/key use/grant/Task53.

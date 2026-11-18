@@ -1,3 +1,7 @@
+## Task52B — real fresh model visibility verified; count remains gated
+
+One authorized GET returned200 for gpt-6-luna under new permanently consumed scope. [Verified outcome](docs/task52b-authorized-fresh-model-get.md); expiry Nov19,00:00UTC.60selected preflight passes; history preserved. Count requires actual-result binding, fresh permission evidence and separate approval; no POST/inference/qualification/deployment/Task53 authorized.
+
 ## Task52B — count identity migration and new GET preparation passed offline
 
 Both supervised readiness profiles use deterministic independently compiled identities and pass actual guarded local-TLS regressions. [Exact results](docs/task52b-both-readiness-preparation.md):116current+15frozen-compatible passes. New GET scope `52b-model-get-owner-3e2ba62-v1` awaits separate owner approval/enrollment. Count transport is prepared; actual fresh-GET/permission binding remains explicitly blocked. No live calls, real authorizations or Task53.
