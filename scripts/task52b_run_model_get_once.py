@@ -8,7 +8,7 @@ import resource
 import sys
 from datetime import datetime,timezone
 from scripts import task52b_model_get as run
-MANIFEST_SHA = 'b8381f4ee3a41e8046ebb434fd20a19b0e1111a60e44155d502c4d3d0235173f'
+MANIFEST_SHA = '7b103d93089a50293f132914440d3632e2d9403c2d6f142b57f8166a64d4faa4'
 
 
 def child():

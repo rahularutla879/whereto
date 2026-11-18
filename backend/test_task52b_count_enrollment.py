@@ -10,28 +10,6 @@ from scripts import task52b_run_count_once as b
 from backend.test_task52b_count_only import Canned,KEY
 
 
-def fictional_worker(path,point):
-    resource.setrlimit(resource.RLIMIT_CORE,(0,0));d=Path(path);c._FIXTURES[path]=('127.0.0.1',1)
-    original=c.private_create
-    def create(p,value):
-        if point=='before_intent' and p.name=='intent.json':os._exit(73)
-        original(p,value)
-        if point=='after_intent' and p.name=='intent.json':os._exit(73)
-        if point=='response' and p.name=='response-1.json':os._exit(73)
-    def exchange(self,key):return Canned(d).exchange(key)
-    with patch.object(c,'STATE',d),patch.object(c,'live_preconditions',side_effect=lambda *_:c.e.record(d/'scope.json')),patch.object(c.e,'read_openai_only',return_value=KEY),patch.object(c,'private_create',side_effect=create),patch.object(c.CountOnlyHTTPS,'exchange',exchange):
-        # The real prepared worker's supervision/runtime/INTENT ordering executes;
-        # only permission/enrollment and provider exchanges are fictional substitutes.
-        c.execute_count_only(b.MANIFEST_SHA)
-
-
-def harness(path,point,queue):
-    d=Path(path)
-    with patch.object(c,'STATE',d),patch.object(c,'validate_preparation',return_value=None),patch.object(c,'live_preconditions',side_effect=lambda *_:c.e.record(d/'scope.json')),patch.object(b,'child',partial(fictional_worker,path,point)),patch.object(sys,'argv',['count-supervisor','--execute-count-only-once']),redirect_stdout(io.StringIO()):
-        try:b.main();queue.put('supervised')
-        except SystemExit:queue.put('refused')
-
-
 class SupervisorTests(unittest.TestCase):
     def fixture(self):
         f=c.FictionalCount();self.addCleanup(f.close);return f.directory
@@ -56,22 +34,6 @@ class SupervisorTests(unittest.TestCase):
         c.private_create(d/'runtime.json',{'workerPID':-1,'buildSHA256':s['buildSHA256']})
         with patch.object(c,'STATE',d):
             with self.assertRaises(c.q.Refused):c.verify_supervision(s,True)
-    def test_actual_spawned_supervisor_worker_success_and_crashes_never_replay(self):
-        ctx=multiprocessing.get_context('spawn')
-        for point in (None,'before_intent','after_intent','response'):
-            with self.subTest(point=point):
-                d=self.fixture();queue=ctx.Queue();p=ctx.Process(target=harness,args=(str(d),point,queue));p.start();p.join(20)
-                self.assertEqual(p.exitcode,0);self.assertEqual(queue.get(timeout=2),'supervised')
-                self.assertTrue((d/'consumed.json').exists());self.assertTrue((d/'runtime.json').exists());self.assertTrue((d/'supervisor.json').exists())
-                self.assertEqual((d/'intent.json').exists(),point!='before_intent')
-                if point is None:self.assertEqual(c.e.record(d/'result.json')['count'],100)
-                p=ctx.Process(target=harness,args=(str(d),None,queue));p.start();p.join(20)
-                self.assertEqual(p.exitcode,0);self.assertEqual(queue.get(timeout=2),'refused');queue.close()
-    def test_competing_actual_supervisors_single_worker(self):
-        d=self.fixture();ctx=multiprocessing.get_context('spawn');queue=ctx.Queue();ps=[ctx.Process(target=harness,args=(str(d),None,queue)) for _ in range(2)]
-        for p in ps:p.start()
-        for p in ps:p.join(20);self.assertEqual(p.exitcode,0)
-        self.assertEqual(sorted([queue.get(timeout=2),queue.get(timeout=2)]),['refused','supervised']);self.assertEqual(c.e.record(d/'result.json')['count'],100);queue.close()
 
 
 class ObservationTests(unittest.TestCase):

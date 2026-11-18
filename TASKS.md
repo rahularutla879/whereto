@@ -1,3 +1,7 @@
+## Task52B — count identity migration and new GET preparation passed offline
+
+Both supervised readiness profiles use deterministic independently compiled identities and pass actual guarded local-TLS regressions. [Exact results](docs/task52b-both-readiness-preparation.md):116current+15frozen-compatible passes. New GET scope `52b-model-get-owner-3e2ba62-v1` awaits separate owner approval/enrollment. Count transport is prepared; actual fresh-GET/permission binding remains explicitly blocked. No live calls, real authorizations or Task53.
+
 ## Task52B — offline GET execution fix verified; no live authority
 
 Stable independently source-compiled code identity and actual supervised local-TLS regression pass. [Exact results](docs/task52b-code-identity-fix.md):110current+15frozen-compatible passes; retained red test demonstrates original defect. Consumed scope remains unusable and no fresh model evidence exists. Next permitted checkpoint: prepare a new GET-only scope, then request separate explicit send approval. Count/inference and deployment are not authorized. Task53 not started.

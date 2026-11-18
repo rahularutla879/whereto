@@ -14,6 +14,7 @@ import http.client
 from time import monotonic
 from base64 import b64encode
 from scripts import task52b_readiness_enrolled as e
+from scripts import task52b_code_identity as code_identity
 from backend.provider_responses import HTTPResult
 
 q=e.q
@@ -23,7 +24,7 @@ STATE=e.BASE/OPERATION  # Proposed only: this checkpoint never creates it.
 AUTHORIZATION=e.BASE/(OPERATION+'.send-authorization.json')
 PERMISSION=e.BASE/(OPERATION+'.permission-evidence.json')
 PROFILE=ROOT/'docs/task52b-count-only-PROPOSED-v1.json'
-BUILD=ROOT/'docs/task52b-count-only-build-v2.json'
+BUILD=ROOT/'docs/task52b-count-only-build-v3.json'
 BINDING=ROOT/'docs/task52b-count-only-dashboard-binding-v1.json'
 OBSERVATION=e.BASE/(OPERATION+'.dashboard-observation-v1.json')
 BOOTSTRAP=ROOT/'scripts/task52b_run_count_once.py'
@@ -157,6 +158,57 @@ def inspect_preparation(now=None):
             'liveScopeExists':STATE.exists(),'liveAuthorizationExists':AUTHORIZATION.exists(),'sendAuthorized':False}
 
 
+def loaded_targets():
+    writer=e.sys.modules['scripts.task52_q4a']
+    return {
+        'wire':(CountOnlyHTTPS.exchange,globals(),Path(__file__),'CountOnlyHTTPS.exchange'),
+        'dial':(_SingleDial.connect,e.__dict__,Path(e.__file__),'_SingleDial.connect'),
+        'tls':(e.FixedReadinessHTTPS.__init__,e.__dict__,Path(e.__file__),'FixedReadinessHTTPS.__init__'),
+        'writer':(private_create,writer.__dict__,Path(writer.__file__),'private_create'),
+        'fsync':(e.fsync_dir,writer.__dict__,Path(writer.__file__),'fsync_dir'),
+        'reader':(e.read_openai_only,e.__dict__,Path(e.__file__),'read_openai_only'),
+        'metadata':(e.metadata,e.__dict__,Path(e.__file__),'metadata'),
+        'private_read':(e.private_read,e.__dict__,Path(e.__file__),'private_read'),
+        'request':(request,globals(),Path(__file__),'request'),
+        'intent_guard':(verify_intent,globals(),Path(__file__),'verify_intent'),
+        'supervision':(verify_supervision,globals(),Path(__file__),'verify_supervision'),
+        'worker':(execute_count_only,globals(),Path(__file__),'execute_count_only'),
+        'runner':(run_count,globals(),Path(__file__),'run_count'),
+        'preconditions':(live_preconditions,globals(),Path(__file__),'live_preconditions'),
+        'prior_get':(prior_get,globals(),Path(__file__),'prior_get'),
+        'permission':(verified_permission,globals(),Path(__file__),'verified_permission'),
+        'permission_record':(permission_record,globals(),Path(__file__),'permission_record'),
+    }
+
+
+def identity_manifest():
+    """Build-time identities compiled independently; never trust live self hashes."""
+    identities={}
+    for name,(_,_,path,qualname) in loaded_targets().items():
+        identities[name]=code_identity.compiled(path,digest(path.read_bytes()),qualname)
+    return {'loadedIdentityScheme':code_identity.VERSION,'loadedCodeIdentities':identities}
+
+
+def verified_wire_identity(build=None):
+    b=build or json.loads(BUILD.read_bytes())
+    try:
+        if (b['loadedIdentityScheme']!=code_identity.VERSION or _SingleDial is not e._SingleDial or
+                private_create is not e.private_create or CountOnlyHTTPS.__bases__!=(e.FixedReadinessHTTPS,) or
+                CountOnlyHTTPS.__init__ is not e.FixedReadinessHTTPS.__init__ or
+                type(CountOnlyHTTPS) is not type or CountOnlyHTTPS.__getattribute__ is not object.__getattribute__ or
+                CountOnlyHTTPS.__new__ is not object.__new__ or CountOnlyHTTPS.__setattr__ is not object.__setattr__ or
+                set(CountOnlyHTTPS.__dict__)!={'__module__','__doc__','exchange'}):
+            raise code_identity.IdentityRefused('transport_binding')
+        values={}
+        for name,(function,namespace,path,qualname) in loaded_targets().items():
+            relative=str(path.relative_to(Path(__file__).resolve().parents[1]))
+            values[name]=code_identity.require(function,path,b['filesSHA256'][relative],qualname,namespace)
+        if values!=b['loadedCodeIdentities']:raise code_identity.IdentityRefused('manifest_code_identity')
+        return values['wire']
+    except (code_identity.IdentityRefused,KeyError,ValueError):
+        raise q.Refused('count_loaded_code_identity') from None
+
+
 def verify_count_build(expected):
     raw=BUILD.read_bytes()
     if expected!=e.digest(raw):raise q.Refused('count_build_identity')
@@ -175,6 +227,7 @@ def verify_count_build(expected):
     if e.digest(normalized.encode())!=b['bootstrapTemplateSHA256']:raise q.Refused('count_bootstrap_source')
     if e.os.environ.get('SSLKEYLOGFILE') or e.os.environ.get('PYTHONINSPECT'):
         raise q.Refused('unsafe_runtime_environment')
+    verified_wire_identity(b)
     return b
 
 
@@ -325,7 +378,7 @@ def verify_supervision(scope,require_runtime=False):
     if require_runtime:
         runtime=e.record(STATE/'runtime.json')
         if (runtime.get('workerPID')!=e.os.getpid() or runtime.get('buildSHA256')!=scope['buildSHA256'] or
-                runtime.get('loadedWireBytecodeSHA256')!=e.digest(e.marshal.dumps(CountOnlyHTTPS.exchange.__code__))):
+                runtime.get('identityScheme')!=code_identity.VERSION or runtime.get('loadedWireIdentitySHA256')!=verified_wire_identity()):
             raise q.Refused('count_worker_identity')
 
 
@@ -337,7 +390,7 @@ def execute_count_only(expected=None):
     import resource
     if resource.getrlimit(resource.RLIMIT_CORE)!=(0,0):raise q.Refused('core_dump_protection')
     private_create(STATE/'runtime.json',{'workerPID':e.os.getpid(),'buildSHA256':expected,
-        'loadedWireBytecodeSHA256':e.digest(e.marshal.dumps(CountOnlyHTTPS.exchange.__code__)),'at':e.stamp()})
+        'identityScheme':code_identity.VERSION,'loadedWireIdentitySHA256':verified_wire_identity(),'at':e.stamp()})
     def key():
         live_preconditions(STATE,datetime.now(timezone.utc));verify_supervision(scope,True)
         enrollment=e.record(e.PRIVATE_ENROLLMENT)

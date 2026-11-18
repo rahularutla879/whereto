@@ -1,3 +1,7 @@
+## 2026-11-17 — migrate count identity; keep GET and count authorizations separate
+
+Reuse the verified source-compiled full-code identity for count, including independent prior-GET/permission callable checks; retain the frozen payload and scope. Prepare a distinct one-GET proposal rather than revive consumed authority. A successful future GET must be explicitly reviewed/bound for count, with genuinely fresh permission evidence and separate owner approval; never extend or retimestamp receipts. Actual local-TLS supervisor regressions supersede two fake-exchange process tests. [Evidence](docs/task52b-both-readiness-preparation.md).
+
 ## 2026-11-17 — deterministic source-compiled identity, never disable the guard
 
 Replace marshal's reference-sensitive object representation with versioned typed full-code/default identity independently compiled from SHA-pinned source. Require loaded method/namespace and selected dependency/class bindings to match; retain source/bootstrap/interpreter/CA, immutable writer and one-use controls. Version runtime facts rather than reinterpret old marshal hashes. Replace mocked supervisor coverage with actual isolated local TLS and keep the original code as a failing control. Old consumed authorities remain untouched; this is offline correction, not a new grant or live retry. [Evidence](docs/task52b-code-identity-fix.md).

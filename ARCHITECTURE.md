@@ -1,3 +1,7 @@
+## Both readiness runners: deterministic identities, separate evidence gates
+
+Count now shares the unchanged deterministic code-identity mechanism with GET, using its own versioned build and selected prior-GET/permission bindings. New GET proposal/source scope is separate from consumed records; count's existing proof selector stays unchanged and refuses stale data. Both one-spawn/INTENT/credential-loader/TLS/single-send paths have actual isolated local-TLS regression coverage. No service, ledger, startup or credential system added. [Contracts and limits](docs/task52b-both-readiness-preparation.md).
+
 ## Deterministic supervised GET code identity
 
 Inactive GET execution now uses `task52b_code_identity` to compare full typed loaded code/constants/defaults with independently compiled SHA-pinned source and a versioned build expectation. Selected wire/loader/writer/guard/class bindings are checked; runtime facts use a new scheme and identity field. No reference-count or process-object IDs are hashed. Existing supervision/TLS/INTENT/single-send paths remain. The new local-TLS harness runs them intact with fictional configuration only. No new service, authority, credential mechanism or application startup profile. [Contract and trust limits](docs/task52b-code-identity-fix.md).

@@ -1,0 +1,170 @@
+{
+  "identity": "52b-both-readiness-preparation-verification-v1",
+  "baselineCommit": "3e2ba623e15b3f0ce73286775bb9acc62a3432ac",
+  "verifiedAt": "2026-11-18T02:42:28.777796+00:00",
+  "status": "offline-preparation-passed-no-live-authority",
+  "countRootCause": {
+    "originalLocation": "scripts/task52b_count_only.py:329 verify_supervision",
+    "observedBranch": "count_worker_identity",
+    "cause": "reference-sensitive marshal code serialization; same code/constant semantics",
+    "originalPositiveTest": "FAIL one failure, no HTTP delivery",
+    "fixedPositiveTest": "PASS"
+  },
+  "identityHelperChanged": false,
+  "identityScheme": "52b-source-compiled-code-v1",
+  "countBuildSHA256": "9adaaa19c20e6bead0aab4fd6ed638946d3e2e894fd1a3fcf3c58f5fe7879344",
+  "getBuildSHA256": "7b103d93089a50293f132914440d3632e2d9403c2d6f142b57f8166a64d4faa4",
+  "proposedGETScope": "52b-model-get-owner-3e2ba62-v1",
+  "proposedGET": {
+    "method": "GET",
+    "endpoint": "https://api.openai.com/v1/models/gpt-6-luna",
+    "getMaximum": 1,
+    "postMaximum": 0,
+    "inferenceMaximum": 0,
+    "retries": 0,
+    "liveScopeCreated": false,
+    "sendAuthorizationCreated": false
+  },
+  "count": {
+    "operation": "52b-count-only-owner-3ec6b68-v1",
+    "frozenSHA256": "70939877e0df3fca79fb68cab25d5449ae2533ec31892ed91b762ddbd2c8e6d1",
+    "scopeOrAuthorizationCreated": false,
+    "priorGETSelectorChanged": false,
+    "newGETBound": false,
+    "newLivePermissionReceiptCreated": false,
+    "transportTechnicallyPrepared": true,
+    "liveEvidenceEnrollment": "blocked pending actual successful GET, reviewed source/evidence binding, fresh permission evidence and separate owner approval"
+  },
+  "developmentAttempts": [
+    {
+      "tests": 1,
+      "failures": 1,
+      "result": "RED unchanged count actual supervised TLS"
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "result": "first corrected count actual supervised TLS PASS"
+    },
+    {
+      "tests": 15,
+      "failures": 0,
+      "result": "both integrated suites PASS before expiry-case strengthening"
+    }
+  ],
+  "finalTests": [
+    {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_task52b_count_supervised_tls backend.test_task52b_get_supervised_tls backend.test_task52b_code_identity backend.test_task52b_model_get backend.test_task52b_count_enrollment backend.test_task52b_count_only backend.test_task52b_readiness_enrolled backend.test_task52b_readiness backend.test_provider_enrollment_review backend.test_provider_responses -v",
+      "passed": 116,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 153.301
+    },
+    {
+      "command": "PYTHONPATH=. /Users/rahularutla/Documents/whereto/backend/.venv/bin/python /tmp/task52-openai-readiness-check/frozen-focused.py",
+      "cwd": "/Users/rahularutla/.codex/worktrees/task52b-frozen-b2-verification/whereto",
+      "passed": 15,
+      "failures": 0,
+      "errors": 0,
+      "skips": 0,
+      "seconds": 1.356
+    }
+  ],
+  "integratedCoverage": [
+    "actual parent/child/source/evidence/permission/loader/INTENT/TLS/capture",
+    "exact count-body SHA and project",
+    "both original-code controls still fail",
+    "three independent clean count and GET runs",
+    "401/403/400, malformed/invalid counts and model responses terminal",
+    "before/after INTENT and after-send crashes",
+    "competing supervisors/replay",
+    "source/build/bootstrap/metadata/wire/constant/dial/class mutation",
+    "missing/Read-only permission evidence",
+    "integrity-valid expired GET rejects prior_evidence_stale",
+    "both CLI profiles reject inference and wrong operations"
+  ],
+  "logSHA256": {
+    "/tmp/task52b-count-identity-before.log": "4d776857ab31ffbad2cf29402ae39f6a90d374a1cf55d1a4435c15b4284ca2c6",
+    "/tmp/task52b-count-identity-first-fix.log": "ae5fc12be128e1a13893006a3e67c81e1d1e34630f66a000c43c4fa5946c3069",
+    "/tmp/task52b-both-integrated.log": "24c3ca85f610135ae282606fe24db2d96a09649dad02ab234a4303ff29e430aa",
+    "/tmp/task52b-both-final-cohort.log": "edc76245563343af30828d5c0ccf1d32261e5c3786cfb97e01cd9619fa029e09",
+    "/tmp/task52b-both-frozen.log": "c6fc7ff7da36db350b3575b0caf65cf2f2ebdaf55d1fee567ace6514bae8507f",
+    "/tmp/task52b-both-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-both-dependencies.log": "58c75361f095fad69da526aa7c8708bd6ae5ba620fe55bdae3a8386c853428f7",
+    "/tmp/task52b-both-final-protected.log": "5a5800e85ac4b6bdea8a108a34b93280ad44e6736de5e2729f9a803d43f9ca55",
+    "/tmp/task52b-both-final-history.log": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "/tmp/task52b-both-patterns.log": "02460448271a002a6c8e888a1278adcc0f72eb4dd5cb9068873b0def0606c222"
+  },
+  "history": {
+    "attempts": 10,
+    "accountedUSD": "0.047366625",
+    "remainingUSD": "11.952633375",
+    "privateFiles": 324,
+    "frozenPairs": 5,
+    "persistentHalt": true,
+    "originalPairFilesUnchanged": 13,
+    "failedGETFilesUnchanged": 10,
+    "oldAuthorizationsUnchanged": true,
+    "originalGETExpiryUnchanged": "2026-11-18T00:00:00+00:00"
+  },
+  "actualCredentialValuesRead": false,
+  "realProviderRequests": 0,
+  "realFinancialGrants": 0,
+  "cloudProvisioning": 0,
+  "dependencyCheck": "PASS; no broken requirements, cache warning only",
+  "dependencyChanges": false,
+  "secretPatternMatches": 0,
+  "configuredValueScan": "not run: actual key values are not read",
+  "handbook": {
+    "reviewed": [
+      14,
+      15,
+      17
+    ],
+    "updated": [
+      17
+    ],
+    "chapters": 20
+  },
+  "notRun": [
+    "full backend/B2/SQL/Redis suites",
+    "frontend TypeScript/lint/build/browser tests",
+    "container/cloud checks",
+    "any authenticated provider/account operation"
+  ],
+  "remainingAuthorization": "Separate exact one-GET owner confirmation then reviewed private source/credential-bound enrollment. No count or inference authorization follows.",
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "backend/task52b_count_tls_fixture.py",
+    "backend/test_task52b_count_enrollment.py",
+    "backend/test_task52b_count_supervised_tls.py",
+    "docs/learning/17-task-52b-cloud-ai-evaluation-and-ordering-research.md",
+    "docs/task52b-both-readiness-preparation.md",
+    "docs/task52b-both-readiness-verification-v1.json",
+    "docs/task52b-count-only-build-v3.json",
+    "docs/task52b-model-get-PROPOSED-v2.json",
+    "docs/task52b-model-get-build-v3.json",
+    "scripts/task52b_count_only.py",
+    "scripts/task52b_model_get.py",
+    "scripts/task52b_run_count_once.py",
+    "scripts/task52b_run_model_get_once.py"
+  ],
+  "protectedState": {
+    "failedGETFilesPreserved": 10,
+    "failedAuthorizationPreserved": true,
+    "originalPairFilesPreserved": 13,
+    "identityHelperPreserved": true,
+    "oldCountProposalAndBindingPreserved": true,
+    "frozenCountPayloadPreserved": true,
+    "actualGETScopeOrAuthorizationCreated": false,
+    "actualCountScopeOrAuthorizationCreated": false,
+    "getScope": "52b-model-get-owner-3e2ba62-v1",
+    "countScope": "52b-count-only-owner-3ec6b68-v1",
+    "getBuildSHA256": "7b103d93089a50293f132914440d3632e2d9403c2d6f142b57f8166a64d4faa4",
+    "countBuildSHA256": "9adaaa19c20e6bead0aab4fd6ed638946d3e2e894fd1a3fcf3c58f5fe7879344"
+  }
+}

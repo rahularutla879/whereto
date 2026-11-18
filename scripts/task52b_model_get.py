@@ -11,10 +11,10 @@ from backend.provider_responses import HTTPResult
 
 e=previous.e;q=e.q
 ROOT=e.ROOT;PROJECT=e.PROJECT
-OPERATION='52b-model-get-owner-128fa8c-v1'
+OPERATION='52b-model-get-owner-3e2ba62-v1'
 STATE=e.BASE/OPERATION
 AUTHORIZATION=e.BASE/(OPERATION+'.send-authorization.json')
-BUILD=ROOT/'docs/task52b-model-get-build-v2.json'
+BUILD=ROOT/'docs/task52b-model-get-build-v3.json'
 BOOTSTRAP=ROOT/'scripts/task52b_run_model_get_once.py'
 ENDPOINT='https://api.openai.com/v1/models/gpt-6-luna'
 private_create=e.private_create;digest=e.digest;stamp=e.stamp
