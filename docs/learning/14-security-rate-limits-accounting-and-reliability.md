@@ -256,3 +256,7 @@ The new real bindings use actual complete-request count SQL/witness and a delive
 ## Real-role packaging checkpoint — November19,2026
 
 Packaging and successful fixture tests create no financial or identity authority. All candidate entrypoints refuse unenrolled startup; frontend has no genuine trust key yet. Counter has no provider credential and can use only the protected count RPC to dispatcher. Exact source checks, original SQL/witness deadlines, reservations, single-send uncertainty and historical halt remain unchanged. Residual high scanner matches remain hosting blockers pending remediation or independent disposition. [Implementation and exact results](../task52-real-role-packaging.md).
+
+## Owner artifact enrollment checkpoint — November19,2026
+
+The exact455high scanner matches now have a23-advisory applicability table:2Perl components absent,17conditional application paths,4native dependency/callsite questions unresolved. None is an automatic risk exception. Offline owner key proof verifies possession, not independent identity; only owner-supplied signatures are accepted. It never reads an enrollment private key or grants provider spending. Local NoNewPrivs/capability observations are not claimed as hosted measurements. [Exact workflow and decisions](../task52-owner-enrollment-handoff.md).

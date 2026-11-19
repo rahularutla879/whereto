@@ -257,3 +257,7 @@ From the repository root, `PYTHONPATH=. backend/.venv/bin/python -c "from privat
 ## Real-role packaging checkpoint — November19,2026
 
 Actual image verification now uses disposable SQL/witness/Redis and external read-only fixture volumes; no fixture responder/signer is installed into production images. The actual Next.js UI passed desktop/mobile Chrome emulation and image-level replacement/replay/uncertainty tests. Production default CMD is separately checked to refuse. External fixture trust is not proof of Cloud IAM/IAP, live model accuracy or real Maps behavior. Exact logs include failed development attempts, the unchanged expired-date frontend failure, host-only missing cryptography, and frozen old compiler source refusal. [Implementation and exact results](../task52-real-role-packaging.md).
+
+## Owner artifact enrollment checkpoint — November19,2026
+
+New operator-tool tests use ephemeral fictional Ed25519 keys held in memory and controlled Docker/scan ports. They test the actual existing frontend verifier, source-context byte substitution, image/config binding, exact publication scope and fail-closed missing owner proof. No fixture signer or owner metadata is enrolled in a production image. Six unchanged images were re-inspected; prior browser/SQL evidence is reused, not counted as a new browser run. [Exact workflow and decisions](../task52-owner-enrollment-handoff.md).

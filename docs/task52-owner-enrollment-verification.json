@@ -1,0 +1,221 @@
+{
+  "accountCalls": 0,
+  "actualImageInspection": {
+    "backend": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "counter": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "dispatcher": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "factory": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "frontend": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "bd53dff15ee055b402a6055bc783ac11025c827e5952c5f009fc356d76d540a8",
+      "diagnostics": "1000\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fffff7bf000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fffff559000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fffff469000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fffff43c000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fffff437000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fffff243000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "recovery": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    }
+  },
+  "baselineCommit": "e2f1797c8bc9cc7e60f88d1c4b9ed56035dbd9e0",
+  "checks": {
+    "eslint": {
+      "exit": 0,
+      "path": "/tmp/task52-owner-enrollment/verified-lint.log",
+      "sha256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff"
+    },
+    "existingFrontendStartup": {
+      "failures": 0,
+      "passed": 9,
+      "path": "/tmp/task52-owner-enrollment/frontend-startup.log",
+      "sha256": "6c40c049d978e51e4d5bcbb334a1576f8e74b3e0f24453ce8b8967941f0f360d",
+      "skips": 0,
+      "tests": 9
+    },
+    "historicalIntegrity": {
+      "exit": 0,
+      "path": "/tmp/task52-owner-enrollment/history.log",
+      "sha256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f"
+    },
+    "pythonCompilerPublicationProjection": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 27,
+      "path": "/tmp/task52-owner-enrollment/verified-python.log",
+      "sha256": "ef730dc0c41fd892f2c658f3235945e6a5ada8c7418431e4e8871ce491f5792a",
+      "skips": 0,
+      "tests": 27
+    },
+    "trust": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 11,
+      "path": "/tmp/task52-owner-enrollment/verified-trust.log",
+      "sha256": "2834b8e92240b168797f4374c6b7f17342d11afc7a93fd8072371ebe607293ce",
+      "skips": 0,
+      "tests": 11
+    },
+    "typescript": {
+      "exit": 0,
+      "path": "/tmp/task52-owner-enrollment/types.log",
+      "sha256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e"
+    }
+  },
+  "cloudResourcesCreated": 0,
+  "dateUTC": "2026-11-19T20:25:07.376005+00:00",
+  "developmentEvidence": [
+    {
+      "failures": 2,
+      "path": "/tmp/task52-owner-enrollment/publication-tests-before.log",
+      "reason": "offline renderer had seventh push; fixed before publishing",
+      "sha256": "ae829d47734f3f6694c822e53fc40bbc60747851ef2b9fc57d62577650ce7e60",
+      "tests": 2
+    },
+    {
+      "passed": 2,
+      "path": "/tmp/task52-owner-enrollment/publication-tests-after.log",
+      "sha256": "692e6c1b85a8b1c1b47ae72cc059f6928f07902cf2d2d302c3fd1ae0c58837ce",
+      "tests": 2
+    },
+    {
+      "exit": 78,
+      "path": "/tmp/task52-owner-enrollment/publication-refusal.log",
+      "reason": "missing-owner negative guard test stopped before Docker; no publication",
+      "sha256": "2c55e679c5647a0a5a5c43dac42382dc8204075b60a3abc0927da8df18e94d7b"
+    },
+    {
+      "exit": 1,
+      "path": "/tmp/task52-owner-enrollment/lint.log",
+      "reason": "missing explicit console/process imports; corrected",
+      "sha256": "25bc3096973e8fc8bd6181075f472123643bb08b8810188995bc36e2aebc65f8"
+    }
+  ],
+  "financialGrantsCreated": 0,
+  "genuineFrontendTrustEnrolled": false,
+  "genuineKeyGenerated": false,
+  "genuineOwnerApprovalCreated": false,
+  "genuinePrivateSigningKeyRead": false,
+  "handbook": {
+    "chapters": 20,
+    "reviewedUnchanged": [
+      3,
+      17
+    ],
+    "updated": [
+      14,
+      15,
+      18
+    ]
+  },
+  "history": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "consumedScopesUnchanged": true,
+    "frozenPayloadsUnchanged": true,
+    "persistentHalt": true,
+    "privateFiles": 324,
+    "remainingNanodollars": 11952633375
+  },
+  "identity": "52-owner-artifact-enrollment-verification-v1",
+  "imageIdentitiesRegenerated": false,
+  "imageRebuilt": false,
+  "notRerun": [
+    "actual browser/SQL/witness workflow: unchanged images; prior e2f verification preserved",
+    "full backend suite",
+    "full frontend suite (previous328/329 unchanged expired-date failure)",
+    "Grype scans: no image changes; original same-database77/70 evidence retained"
+  ],
+  "realProviderRequests": 0,
+  "registryPublicationOperations": 0,
+  "remainingOwnerInputs": [
+    "genuine production public key/proof and actual frontend rebuild/scan",
+    "explicit security disposition of four native callsite uncertainties/conditional host assumptions",
+    "exact Redis regional quote/ACL and network plan",
+    "actual operational SQL capacity/connection evidence",
+    "independent witness administrator and restore/backup owner",
+    "qualified model/application credentials/current count-rate-extra-fee policy",
+    "Google content/attribution approval and finite provider grants",
+    "actual IAM/IAP tester identities/secret versions/resources",
+    "explicit finite artifact, infrastructure and provider spending decisions"
+  ],
+  "resources": {
+    "imagesUnchanged": {
+      "backend": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "counter": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "dispatcher": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "factory": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "frontend": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "recovery": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
+    },
+    "originalVolumesPreserved": 135,
+    "proposedServiceURLs": {
+      "observed": false,
+      "project": "where-to-512422",
+      "region": "us-east4",
+      "requirement": "Confirm project/SA subjects before enrollment and status.url before any tester/provider action; stop on mismatch",
+      "source": "https://docs.cloud.google.com/run/docs/triggering/https-request",
+      "urls": {
+        "backend": "https://whereto-backend-895186533714.us-east4.run.app",
+        "counter": "https://whereto-counter-895186533714.us-east4.run.app",
+        "dispatcher": "https://whereto-dispatcher-895186533714.us-east4.run.app",
+        "factory": "https://whereto-factory-895186533714.us-east4.run.app",
+        "frontend": "https://whereto-frontend-895186533714.us-east4.run.app",
+        "recovery": "https://whereto-recovery-895186533714.us-east4.run.app"
+      }
+    },
+    "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+    "taskContainersRemaining": 0,
+    "taskVolumesAdded": 0
+  },
+  "security": {
+    "compatibleStableFixVerified": false,
+    "componentAbsent": 2,
+    "conditional": 17,
+    "fixesApplied": 0,
+    "matches": 455,
+    "scannerEvidenceReusedUnchanged": true,
+    "securityAccepted": false,
+    "uniqueAdvisories": 23,
+    "unresolvedNative": 4
+  },
+  "status": "Offline operator workflow verified; genuine owner/security/provider/storage enrollment absent"
+}

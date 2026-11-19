@@ -1,0 +1,1267 @@
+{
+  "advisories": {
+    "CVE-2025-69720": {
+      "advisory": "CVE-2025-69720",
+      "applicationExposure": "No application command/terminfo input path; binary remains installed.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 23,
+      "packages": {
+        "libncursesw6@6.5+20250216-2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ],
+        "libtinfo6@6.5+20250216-2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "ncurses-base@6.5+20250216-2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "ncurses-bin@6.5+20250216-2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "sourcePackage": "ncurses",
+      "trigger": "infocmp CLI parses crafted terminfo",
+      "upstreamOrOtherSuiteFix": "6.6+20251231-1 (unstable; not a reviewed Trixie fix)",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-102010": {
+      "advisory": "CVE-2026-102010",
+      "applicationExposure": "Native C++ callsite/compiler provenance not exhaustively established; Node links libstdc++.",
+      "classification": "unresolved-native",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 18,
+      "packages": {
+        "gcc-14-base@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libgcc-s1@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libstdc++6@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "sourcePackage": "gcc-14",
+      "trigger": "GNU PBDS binary-heap erase_if template",
+      "upstreamOrOtherSuiteFix": "14.4.0-3 (unstable, not Trixie)",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-107493": {
+      "advisory": "CVE-2026-107493",
+      "applicationExposure": "Browser/model input cannot provide PEM or CA files. Vendor says OpenSSL TLS CA loading passes NULL. Custom native callers remain a review condition.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107493",
+      "sourcePackage": "openssl",
+      "trigger": "reuse non-NULL X509_INFO stack after failed PEM parse",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-107496": {
+      "advisory": "CVE-2026-107496",
+      "applicationExposure": "No CMS encryption interface; vendor explicitly excludes TLS/QUIC from this API path. Keep certificate inputs operator-controlled.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-107496",
+      "sourcePackage": "openssl",
+      "trigger": "CMS encryption to hostile order-1 EC certificate",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-119373": {
+      "advisory": "CVE-2026-119373",
+      "applicationExposure": "Real runtime uses restricted PostgreSQL/witness, no arbitrary SQLite SQL/file admission; historical evaluator excluded. SQLite library still installed.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "libsqlite3-0@3.46.1-7+deb13u2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "sourcePackage": "sqlite3",
+      "trigger": "FTS5 detail=none prefix MATCH on crafted rows",
+      "upstreamOrOtherSuiteFix": "3.54.1-1 unstable; upstream3.54.0, not stable Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-119374": {
+      "advisory": "CVE-2026-119374",
+      "applicationExposure": "No SQLite query/database-upload path in selected real profile. Any new SQLite feature invalidates this assessment.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "libsqlite3-0@3.46.1-7+deb13u2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "sourcePackage": "sqlite3",
+      "trigger": "delete crafted FTS5 index with secure-delete",
+      "upstreamOrOtherSuiteFix": "3.54.1-1 unstable; upstream3.54.0, not stable Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-119379": {
+      "advisory": "CVE-2026-119379",
+      "applicationExposure": "No changeset/import operation in real application; no application use of sqlite3changeset_apply.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "libsqlite3-0@3.46.1-7+deb13u2": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "sourcePackage": "sqlite3",
+      "trigger": "apply crafted SQLite session changeset",
+      "upstreamOrOtherSuiteFix": "3.54.1-1 unstable; upstream3.54.0, not stable Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-124709": {
+      "advisory": "CVE-2026-124709",
+      "applicationExposure": "No QUIC server; Cloud Run edge termination does not turn application TCP HTTPS into QUIC. Scanner High and vendor Low distinction retained.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-124709",
+      "sourcePackage": "openssl",
+      "trigger": "OpenSSL QUIC server rejected-stream retention",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-19499": {
+      "advisory": "CVE-2026-19499",
+      "applicationExposure": "No application money-formatting call found; native dependency closure remains unproven.",
+      "classification": "unresolved-native",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 12,
+      "packages": {
+        "libc-bin@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libc6@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "sourcePackage": "glibc",
+      "trigger": "right-justified strfmon output padding",
+      "upstreamOrOtherSuiteFix": "2.43-5 (unstable, not Trixie)",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-5435": {
+      "advisory": "CVE-2026-5435",
+      "applicationExposure": "Application uses normal TLS/DNS, not DNS debug printing; native dependency closure remains unproven.",
+      "classification": "unresolved-native",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 12,
+      "packages": {
+        "libc-bin@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libc6@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "sourcePackage": "glibc",
+      "trigger": "deprecated DNS debug printing of TSIG",
+      "upstreamOrOtherSuiteFix": "2.43-3 (unstable, not Trixie)",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-54369": {
+      "advisory": "CVE-2026-54369",
+      "applicationExposure": "No application ACL API or privileged user-controlled pathname; local images non-root, caps0/NoNewPrivs1. Hosted controls still need confirmation.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "libacl1@2.3.2-2+b1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "sourcePackage": "acl",
+      "trigger": "privileged pathname ACL operations over attacker-controlled symlinks",
+      "upstreamOrOtherSuiteFix": "2.4.0-1 unstable; vendor warns ABI/backport complications",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-54370": {
+      "advisory": "CVE-2026-54370",
+      "applicationExposure": "No ACL tool/API exposed. Do not infer hosted privilege guarantees from local Docker flags.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "libacl1@2.3.2-2+b1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "sourcePackage": "acl",
+      "trigger": "privileged recursive ACL/chown symlink race",
+      "upstreamOrOtherSuiteFix": "2.4.0-1 unstable; walk_tree rewrite not an isolated safe backport",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-76642": {
+      "advisory": "CVE-2026-76642",
+      "applicationExposure": "No mount invocation/API; local non-root/caps0/NoNewPrivs1. SUID binaries remain; do not assume hosting acceptance.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 54,
+      "packages": {
+        "bsdutils@1:2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libblkid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "liblastlog2-2@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libmount1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libsmartcols1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libuuid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "login@1:4.16.0-2+really2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "mount@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "util-linux@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "sourcePackage": "util-linux",
+      "trigger": "failed mount helper followed by privileged hooks",
+      "upstreamOrOtherSuiteFix": "2.42.3-1 unstable, not Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-78408": {
+      "advisory": "CVE-2026-78408",
+      "applicationExposure": "No nsenter/namespace interface or root role in app. Reassess any privileged operator access.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 54,
+      "packages": {
+        "bsdutils@1:2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libblkid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "liblastlog2-2@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libmount1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libsmartcols1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libuuid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "login@1:4.16.0-2+really2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "mount@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "util-linux@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "sourcePackage": "util-linux",
+      "trigger": "root nsenter --join-cgroup against attacker target",
+      "upstreamOrOtherSuiteFix": "2.42.4-1 unstable, not Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-78409": {
+      "advisory": "CVE-2026-78409",
+      "applicationExposure": "No fstab/mount input path; root filesystem controlled, no host binds in application.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 54,
+      "packages": {
+        "bsdutils@1:2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libblkid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "liblastlog2-2@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libmount1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libsmartcols1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libuuid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "login@1:4.16.0-2+really2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "mount@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "util-linux@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "sourcePackage": "util-linux",
+      "trigger": "fstab-authorized mount subdir with intermediate symlinks",
+      "upstreamOrOtherSuiteFix": "2.42.3-1 unstable, not Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-78410": {
+      "advisory": "CVE-2026-78410",
+      "applicationExposure": "Application never invokes mount; local privilege safeguards measured, hosted contract not yet observed.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 54,
+      "packages": {
+        "bsdutils@1:2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libblkid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "liblastlog2-2@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libmount1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libsmartcols1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libuuid1@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "login@1:4.16.0-2+really2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "mount@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "util-linux@2.41.5-0+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "sourcePackage": "util-linux",
+      "trigger": "SUID bind mount from replaceable authorized source",
+      "upstreamOrOtherSuiteFix": "2.42.3-1 unstable, not Trixie",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-82560": {
+      "advisory": "CVE-2026-82560",
+      "applicationExposure": "Pod::Text cannot be loaded: vulnerable module absent in every exact image. No Perl application path.",
+      "classification": "component-absent",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "perl-base@5.40.1-6+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "sourcePackage": "perl",
+      "trigger": "Pod::Text formatting malicious POD",
+      "upstreamOrOtherSuiteFix": "Upstream Pod::Text6.1.1; Trixie remains vulnerable source-package status",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-84243": {
+      "advisory": "CVE-2026-84243",
+      "applicationExposure": "Only C/C.utf8/POSIX installed; no HTTP-to-environment or uploaded message-catalog path. Reassess if locale/env contract changes.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 12,
+      "packages": {
+        "libc-bin@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libc6@2.41-12+deb13u4": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "sourcePackage": "glibc",
+      "trigger": "hostile LANGUAGE, non-C locale and crafted message catalog",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-88823": {
+      "advisory": "CVE-2026-88823",
+      "applicationExposure": "Evidence uses AESGCM, not AESGCMSIV; TLS is not GCM-SIV. No caller-controlled cipher selection.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-88823",
+      "sourcePackage": "openssl",
+      "trigger": "AES-GCM-SIV empty AAD fragment resets prior AAD",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-9538": {
+      "advisory": "CVE-2026-9538",
+      "applicationExposure": "Archive/Tar.pm explicitly absent in all six images. Do not install full Perl to address a source-package match.",
+      "classification": "component-absent",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 6,
+      "packages": {
+        "perl-base@5.40.1-6+deb13u1": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "sourcePackage": "perl",
+      "trigger": "Archive::Tar processing hostile entry sizes",
+      "upstreamOrOtherSuiteFix": "Perl5.42.3-1 unstable / Archive::Tar3.10; no Trixie fix",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-95619": {
+      "advisory": "CVE-2026-95619",
+      "applicationExposure": "Native Node/addon allocation callsites not fully proven safe by request limits alone.",
+      "classification": "unresolved-native",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 18,
+      "packages": {
+        "gcc-14-base@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libgcc-s1@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "libstdc++6@14.2.0-19": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "sourcePackage": "gcc-14",
+      "trigger": "oversized aligned C++ allocation",
+      "upstreamOrOtherSuiteFix": "14.4.0-3 (unstable, not Trixie)",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-95691": {
+      "advisory": "CVE-2026-95691",
+      "applicationExposure": "Current Python/Node ports use TCP HTTPS only, no QUIC client; not a generic TLS vulnerability.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95691",
+      "sourcePackage": "openssl",
+      "trigger": "OpenSSL QUIC client CRYPTO frame retransmission",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    },
+    "CVE-2026-95692": {
+      "advisory": "CVE-2026-95692",
+      "applicationExposure": "No GCM-SIV use; evidence AESGCM nonce is fixed12bytes. Do not weaken TLS or switch cipher as remediation.",
+      "classification": "conditional",
+      "compatibleRemediation": "None verified; do not install unstable/forky or mix glibc/ABI solely to clear a scan",
+      "matches": 17,
+      "packages": {
+        "libssl3t64@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl-provider-legacy@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "frontend",
+          "recovery"
+        ],
+        "openssl@3.5.7-1~deb13u3": [
+          "backend",
+          "counter",
+          "dispatcher",
+          "factory",
+          "recovery"
+        ]
+      },
+      "roles": [
+        "backend",
+        "counter",
+        "dispatcher",
+        "factory",
+        "frontend",
+        "recovery"
+      ],
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-95692",
+      "sourcePackage": "openssl",
+      "trigger": "AES-GCM-SIV non-standard IV length",
+      "upstreamOrOtherSuiteFix": "No fixed release listed",
+      "vendorStatus": "Installed Trixie source version remains vulnerable; no supported stable fixed package listed on review date"
+    }
+  },
+  "classificationCounts": {
+    "component-absent": 2,
+    "conditional": 17,
+    "unresolved-native": 4
+  },
+  "genuineOwnerTrustEnrolled": false,
+  "highMatches": 455,
+  "identity": "52-production-artifact-security-review-v1",
+  "images": {
+    "backend": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+    "counter": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+    "dispatcher": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+    "factory": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+    "frontend": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+    "recovery": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
+  },
+  "independentSecurityDecision": "Four native callsite/closure judgments remain unresolved. Existing measured absence/vendor facts do not require another reviewer to repeat them. Conditional controls require explicit disposition/hosted confirmation, not automatic acceptance.",
+  "localImageVerification": {
+    "backend": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "counter": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "dispatcher": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "factory": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "frontend": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "bd53dff15ee055b402a6055bc783ac11025c827e5952c5f009fc356d76d540a8",
+      "diagnostics": "1000\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibdl.so.2 => /lib/x86_64-linux-gnu/libdl.so.2 (0x00007fffff7bf000)\n\tlibstdc++.so.6 => /lib/x86_64-linux-gnu/libstdc++.so.6 (0x00007fffff559000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007fffff469000)\n\tlibgcc_s.so.1 => /lib/x86_64-linux-gnu/libgcc_s.so.1 (0x00007fffff43c000)\n\tlibpthread.so.0 => /lib/x86_64-linux-gnu/libpthread.so.0 (0x00007fffff437000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007fffff243000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    },
+    "recovery": {
+      "defaultExit": 78,
+      "diagnosticSHA256": "1150cf810aecd7d58ba23ea7bd52b04098366548264b454a5e79c7e7668d4cc4",
+      "diagnostics": "10001\nLOCALES\nC\nC.utf8\nPOSIX\nTOOLS\n/usr/bin/infocmp\n/usr/bin/perl\n/usr/bin/nsenter\nSUID\n/usr/bin/gpasswd\n/usr/bin/umount\n/usr/bin/chfn\n/usr/bin/passwd\n/usr/bin/newgrp\n/usr/bin/chsh\n/usr/bin/su\n/usr/bin/mount\nPERL_MODULES\nCan't locate Pod/Text.pm in @INC (you may need to install the Pod::Text module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).\nBEGIN failed--compilation aborted.\nNODE_OR_PY_LINKS\n\tlibpython3.12.so.1.0 => /usr/local/bin/../lib/libpython3.12.so.1.0 (0x00007fffff16b000)\n\tlibc.so.6 => /lib/x86_64-linux-gnu/libc.so.6 (0x00007ffffef75000)\n\tlibm.so.6 => /lib/x86_64-linux-gnu/libm.so.6 (0x00007ffffee85000)\n\t/lib64/ld-linux-x86-64.so.2 (0x00007ffffffc8000)\nOpenSSL 3.5.7 9 Jun 2026\nsqlite 3.46.1\nLIMITS\nCapEff:\t0000000000000000\nNoNewPrivs:\t1\n",
+      "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "network": "none",
+      "noNewPrivileges": true,
+      "readOnly": true
+    }
+  },
+  "moduleEvidence": {
+    "backend": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738"
+    },
+    "counter": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad"
+    },
+    "dispatcher": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6"
+    },
+    "factory": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3"
+    },
+    "frontend": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884"
+    },
+    "recovery": {
+      "ArchiveTarMissing": true,
+      "firstLine": "Can't locate Archive/Tar.pm in @INC (you may need to install the Archive::Tar module) (@INC entries checked: /etc/perl /usr/local/lib/x86_64-linux-gnu/perl/5.40.1 /usr/local/share/perl/5.40.1 /usr/lib/x86_64-linux-gnu/perl5/5.40 /usr/share/perl5 /usr/lib/x86_64-linux-gnu/perl-base /usr/lib/x86_64-linux-gnu/perl/5.40 /usr/share/perl/5.40 /usr/local/lib/site_perl).",
+      "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
+    }
+  },
+  "reviewedAtUTC": "2026-11-19T20:10:14.435407+00:00",
+  "scannerCountsUnchanged": true,
+  "securityAccepted": false,
+  "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+  "sourceSecuritySHA256": "d7a245325243562e1a4e644266071a786952bcd29b265f31cf9da11d0202479a",
+  "uniqueAdvisories": 23,
+  "vendorDocuments": {
+    "CVE-2026-88823.html": {
+      "sha256": "5ca2a3af9f4d1e62ff33f9e2759c990cc4a8a9f2aab96275edd4bf68393aa4fb",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-88823"
+    },
+    "CVE-2026-95691.html": {
+      "sha256": "1c0f10c82f112f9dc0de62828590d89198c613ae4c98466852f979d6f50ce462",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95691"
+    },
+    "CVE-2026-95692.html": {
+      "sha256": "c690797efa2625d43f3a0cebfb834e151020797a570e72c8870792eb14521036",
+      "url": "https://security-tracker.debian.org/tracker/CVE-2026-95692"
+    }
+  }
+}
