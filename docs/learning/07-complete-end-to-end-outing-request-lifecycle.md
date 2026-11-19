@@ -185,3 +185,7 @@ See [continuation evidence and limitations](../task52-private-role-continuation.
 ### Inactive real-native ordinary slice
 
 `private_runtime/real_application` now connects the existing native interpreter/clarification/ordinary planner to complete-input counting, SQL-reserved generation and canonical Google Search/Matrix. Missing-date clarification reuses original source/clock without inference. Results are terminal/request-local; no Google graph becomes a checkpoint. This is not yet the public six-role/browser path: the old factory session lifecycle needs an owned source-only checkpoint and terminal-ticket mapping. [Exact path and tests](../task52-real-native-application.md).
+
+### Tested real public factory sequence
+
+A verified public interpretation creates one completed inference and an encrypted source-only ticket. Another authenticated factory can resume the owner’s original source, deterministically answer a date question and retain its fixed expiry/root. Validated device origin is supplied before the original ordinary planner makes canonical Places/Matrix operations. Terminal cards contain no new continuation handle: the source turn is consumed/revoked, including on uncertainty. Network tests cover actual FastAPI and privileged processes; the complete Next.js/browser/six-role path is still not accepted. [Exact implementation and verification](../task52-real-factory-rpc.md).

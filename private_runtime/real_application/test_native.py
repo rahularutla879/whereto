@@ -100,7 +100,7 @@ class Tests(unittest.TestCase):
             self.assertEqual([v.activity for v in card.candidate.venues],['coffee','museum']);self.assertGreater(card.totalTravel,0)
             self.assertEqual(card.stops[0].venue.evidenceLabels['attribution']['brand'],'Google Maps')
             self.assertEqual(card.stops[0].venue.evidenceLabels['attribution']['third_party'][0]['provider'],'Synthetic credit')
-        self.assertIn('refreshing will not retry',result.continuationStatus['message']);self.assertIsNone(result.optionsToken);self.assertIsNone(result.detailsToken);self.assertFalse(result.canExpand)
+        self.assertIn('refreshing will not retry',result.continuationStatus.message);self.assertIsNone(result.optionsToken);self.assertIsNone(result.detailsToken);self.assertFalse(result.canExpand)
         from backend.option_sessions import option_sessions
         from backend.venue_details import details_sessions
         self.assertFalse(option_sessions.entries);self.assertFalse(details_sessions.entries)

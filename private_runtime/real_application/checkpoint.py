@@ -158,7 +158,18 @@ class Checkpoint:
         if method not in ('answer','plan'):raise Denied('real_source_method')
         s=self.store;self.check();s.service.sync(s);s._call('native_begin',**s._lease(self.lease));self.running=True
         try:
-            result=getattr(self.broker,method)(self.token,*args)
+            if method=='plan' and args:
+                if len(args)!=1 or type(args[0])is not Execution:raise Denied('real_execution_controls')
+                source=self.broker._source(self.token)
+                if source.result.request is None:raise Denied('real_ordinary_required')
+                source.execution=args[0].controls();source.payload=PlannerInput.model_validate({**source.result.request.model_dump(),**source.execution});source.digest=self.broker._seal(source)
+                if source.outcome is not None:
+                    doc=self.record.model_dump();doc.update(value=source.value,raw=source.raw,result=source.result,reference=self.record.reference,execution=source.execution,answers=self.record.answers)
+                    with self.broker._action('pending',source.value,source.result,source.revision,verify=lambda:s.meta(self.lease)):
+                        registry,scope,out=restore_validation(doc,self.clock())
+                    source.scope=scope;source.outcome=(registry,out);source.digest=self.broker._seal(source)
+                result=self.broker.plan(self.token)
+            else:result=getattr(self.broker,method)(self.token,*args)
             if method=='answer':
                 source=self.broker._source(self.token)
                 record=self.record.model_copy(update=dict(result=source.result,revision=source.revision,answers=[*self.record.answers,args[0]]))

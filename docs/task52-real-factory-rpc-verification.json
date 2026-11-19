@@ -1,0 +1,384 @@
+{
+  "identity": "52-real-factory-rpc-verification-v1",
+  "baselineCommit": "e12ea57f76c1d4d6280aa324d49ed03f21389190",
+  "verifiedAtUTC": "2026-11-19T04:53:26.505521+00:00",
+  "checkpoint": "verified public factory and real RPC functional slice; closed six-role startup/frontend incomplete",
+  "fullRequestedAcceptance": false,
+  "authenticatedPublicFastAPIFactoryConnected": true,
+  "realCounterRPCConnected": true,
+  "realDispatcherRPCConnected": true,
+  "sixServiceStartupComplete": false,
+  "actualNextFrontendExercised": false,
+  "desktopBrowserExercised": false,
+  "mobileBrowserExercised": false,
+  "normalStartupChanged": false,
+  "newImagesBuilt": false,
+  "newImagesScanned": false,
+  "newImageIdentities": {},
+  "publishedImages": 0,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "actualFinancialGrantsEnrolled": 0,
+  "fictionalDisposableGrantsUsed": true,
+  "cloudResourcesCreated": 0,
+  "sourceIdentity": "52-real-native-service-bindings-v3",
+  "sourceManifest": "private_runtime/real_application/sources.json",
+  "sourceManifestFileSHA256": "15ec0924e2d5c76182c9b89224975fe23692399e1671462288102b1c187b7727",
+  "sourceBuildSHA256": "024e6209a3a0fe3bf4878330c4e9ad8c9963f741ccadefe47d0fced82c409a9b",
+  "releaseEligible": false,
+  "sourceInputs": 22,
+  "projectedBackendFiles": 72,
+  "priorManifestPreserved": "private_runtime/real_application/sources-native-v2.json",
+  "cohorts": {
+    "nativeSource": {
+      "logPath": "/tmp/task52-real-rpc-native-diagnostic.log",
+      "logSHA256": "fe635dff122700f6a4b6cbf28f530673fb18c62c0743e6363d6399f17bf11478",
+      "tests": 22,
+      "passed": 22,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 394.378,
+      "executionIdentities": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_checkpoint",
+            "private_runtime.real_application.test_native"
+          ],
+          "sourcesSHA256": "d257cb56752fb48d737a59ec1f2c55e8fec1625835729176faef793ca182b4b1",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "f69e46aca2254d31a5e9919c005a2c86a2a13e8fda65e6da701565730b997f88",
+          "harnessSHA256": "91f5d5e8d7b748fe12a6d24a8b6f3391a2c000e02561695122c0d7c056971069",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_inventory": {
+          "event": "real_finance_resource_inventory",
+          "volumes": 135,
+          "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c"
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "sourceDifferenceFromFinal": "Before final HTTP source-bytes compilation check; same native/checkpoint/financial code. Final network cohort covers final real source manifest."
+    },
+    "financial": {
+      "logPath": "/tmp/task52-real-rpc-financial-final.log",
+      "logSHA256": "b71c5694bee8734da3c10fe18fcc7451d2fa19833978bcd03de8eead7415d7a9",
+      "tests": 27,
+      "passed": 27,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 201.753,
+      "executionIdentities": {
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_inventory": {
+          "event": "real_finance_resource_inventory",
+          "volumes": 135,
+          "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c"
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      }
+    },
+    "network": {
+      "logPath": "/tmp/task52-real-rpc-network-final.log",
+      "logSHA256": "63dfe146e6b88362377c33f436162863ce28ef9483480f3e0395dae340590637",
+      "tests": 8,
+      "passed": 8,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 334.618,
+      "executionIdentities": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "15ec0924e2d5c76182c9b89224975fe23692399e1671462288102b1c187b7727",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "97769309bff8de4401062097185313e2774aff7458e23db19c5dc296d844c2b6",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "bfb42fcec91785d685a9ce8c8370273882c81250fc793ae2aaed5e601de3eb4a",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_inventory": {
+          "event": "real_finance_resource_inventory",
+          "volumes": 135,
+          "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c"
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "applicationRoles": [
+        "backend",
+        "factory",
+        "counter",
+        "dispatcher",
+        "recovery-epoch-probe"
+      ],
+      "applicationRoleCount": 5,
+      "processInstanceCount": 6,
+      "factoryInstances": 2,
+      "frontendProofSource": "offline test controller; no Next.js process",
+      "credentialIsolation": "only explicit role credentials; controller/admin seeds removed before spawn",
+      "providerFixtures": "authored OpenAI/Google-shaped HTTPS responses; actual callback/SQL code",
+      "syntheticAccountingSubstitute": false,
+      "fixtureChargesMicroUSD": {
+        "inference": 6148,
+        "completeOuting": 190148,
+        "uncertainFirstSearch": 38148
+      },
+      "expectedProviderCallsPerCompleteOuting": {
+        "count": 1,
+        "generation": 1,
+        "search": 2,
+        "matrix": 2
+      },
+      "matrixRequestsDistinct": true,
+      "terminalHandleReturned": false
+    },
+    "focusedSourceProviderHTTPSOwnerPackaging": {
+      "logPath": "/tmp/task52-real-rpc-regressions-verified.log",
+      "logSHA256": "6f700d7bf7be0d880bc6419e54e7a2f446dca2c79a2c96cf63598c4de4b51ddd",
+      "tests": 88,
+      "passed": 88,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 9.693,
+      "executionIdentities": {}
+    },
+    "unchangedClosedStartupRefusal": {
+      "logPath": "/tmp/task52-real-rpc-startup-refusal.log",
+      "logSHA256": "c7ba020eeca358e73bb0d8711842366ee6a5bc1e0641f581a06983810e6fff3e",
+      "tests": 5,
+      "passed": 5,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.348,
+      "executionIdentities": {}
+    },
+    "frontend": {
+      "logPath": "/tmp/task52-real-rpc-frontend.log",
+      "logSHA256": "7258dae41078a42787feeb291ee80d9727b91fd24bf76685829164eeeaf2a4af",
+      "tests": 325,
+      "passed": 324,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "failure": "Unchanged expired-date fixture lib/surprise.test.ts:69 expected HTTP200 actual422",
+      "sourceChanged": false
+    }
+  },
+  "typeScript": {
+    "logPath": "/tmp/task52-real-rpc-types.log",
+    "logSHA256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e",
+    "result": "passed"
+  },
+  "eslint": {
+    "logPath": "/tmp/task52-real-rpc-lint.log",
+    "logSHA256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff",
+    "result": "passed"
+  },
+  "dependencies": {
+    "pipCheck": "passed; cache-permission warning only",
+    "npmProductionTree": "passed; unchanged Next16.4.2 host lock; candidate16.4.5 untouched",
+    "lockFilesChanged": false
+  },
+  "historicalIntegrity": {
+    "logPath": "/tmp/task52-real-rpc-history.log",
+    "logSHA256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f",
+    "result": "passed read-only under original shared lock",
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedNanodollars": 47366625,
+    "remainingNanodollars": 11952633375,
+    "privateFileCount": 324,
+    "persistentHistoricalHalt": true,
+    "originalJournalHashUnchanged": true,
+    "frozenSourcePinsUnchanged": true,
+    "originalFinancialProviderDeploymentEvaluatorFilesChanged": 0
+  },
+  "developmentAttempts": [
+    {
+      "logPath": "/tmp/task52-real-services-dev1.log",
+      "logSHA256": "6e2d897e5d53ed9fe6fc363725d9331a4ace9c8622ef421014c4a67e65be8b0b",
+      "result": "1 pass plus drills; earlier fixture environment inherited controller seeds until child cleanup; not final credential-isolation evidence"
+    },
+    {
+      "logPath": "/tmp/task52-real-services-dev2.log",
+      "logSHA256": "6ef457c51eb53f043063ee0986ded3ba4316ea6188ec666ca4dae07a77f85887",
+      "result": "2 tests: 1 pass /1 assertion failure, test incorrectly expected one Matrix request. Original planner needs two distinct rectangular requests; corrected observation, exact190148 charge unchanged."
+    },
+    {
+      "logPath": "/tmp/task52-real-services-dev3.log",
+      "logSHA256": "4a9a4328952f9cb9e85d89491b1f22e34b0d8f749a6e0f7a264cbd95be894bd3",
+      "result": "4 pass plus drills; before typed terminal DTO correction and later cases"
+    },
+    {
+      "logPath": "/tmp/task52-real-services-final.log",
+      "logSHA256": "d77392b60b5f741c0dcdc54533031539804556066293472442d2a84cb81699ab",
+      "result": "5 pass plus drills; earlier source/test snapshot"
+    },
+    {
+      "logPath": "/tmp/task52-real-services-verified.log",
+      "logSHA256": "267626c79c2795013789abf1f1c683ea03b95228e5cbec26b8eacec88cedd5e2",
+      "result": "7 pass plus drills; before before-spawn credential isolation, final HTTP source guard and changed-source case"
+    },
+    {
+      "logPath": "/tmp/task52-real-rpc-native-final.log",
+      "logSHA256": "b12a0c3d6c3474eec2003e62ac723122e3e4d03a157e237569113aad604b0c2a",
+      "result": "4 tests: 3 pass /1 error, failfast; session_revision/P0001; no drills; cleanup135/0new"
+    }
+  ],
+  "unresolvedReliability": [
+    {
+      "test": "private_runtime.real_application.test_checkpoint.Tests.test_only_completed_inference_enrollment_is_exposed_to_issuer",
+      "category": "session_revision",
+      "sqlstate": "P0001",
+      "location": "provider_state.protocol line86 via native_protocol; inference dispatch evidence_meta; subsequent cleanup revoke also refused",
+      "status": "unattributed historical observation; later instrumented pass does not explain original failure",
+      "originalDiagnostic": "synthetic namespace snapshots unavailable for real schema",
+      "newDiagnostic": "test-only read-only present/revoked/revision-match/expiry/test-clock flags; no SQL parameters/content",
+      "deadlinesOrGuardsRelaxed": false
+    }
+  ],
+  "notRun": [
+    "full backend suite",
+    "standalone full hosted identity/service-isolation Docker cohorts (existing auth exercised by new network tests)",
+    "actual Next.js real-profile entrypoint",
+    "desktop/mobile browser or View Plan rendering",
+    "complete real recovery-administration service",
+    "new production build/container builds/scans/image smoke (startup still incomplete)",
+    "live OpenAI/Google/IAM/IAP/hosted storage or capacity checks",
+    "two simultaneous public outings or multiple browser tabs (native turn and financial concurrency tested separately)",
+    "mid-send real-RPC factory/dispatcher termination (owner primitives and native committed-INTENT crash tested separately)"
+  ],
+  "remainingCodeConnections": [
+    "source-bound real dependency construction through existing entry/Ports, hosted SQL/Redis/identity/provider enrollment and per-role projection",
+    "enforceable real count-only provider credential/transport ownership; Responses Write must not be assumed count-only",
+    "real private frontend/device-origin route/UI profile; no synthetic label/manual-origin substitution",
+    "actual all-six-role Next.js/browser acceptance before final images"
+  ],
+  "externalGates": [
+    "qualified application model and exact account rates/count fees/financial grants",
+    "approved application provider credentials/transport (not historical evaluation key)",
+    "Google content-use/attribution contracts",
+    "residual container vulnerability disposition",
+    "realistic unchanged-deadline SQL capacity and hosted replacement tests",
+    "independent witness owner and managed storage/IAM/IAP/Secret Manager/cloud purchasing authorization"
+  ],
+  "handbook": {
+    "chapters": 20,
+    "reviewedAndUpdated": [
+      6,
+      7,
+      13,
+      14,
+      15,
+      18
+    ],
+    "other14ByteIdentical": true
+  },
+  "resources": {
+    "preExistingVolumes": 135,
+    "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c",
+    "newVolumesRemaining": 0,
+    "taskContainersRemaining": 0,
+    "unknownPreExistingResourcesPreserved": true
+  },
+  "securityChecks": {
+    "diffCheck": "passed",
+    "changedFileSecretPatterns": "passed; no actual key/credential files read",
+    "oldV2ManifestExact": true,
+    "autoReviewDevelopmentTimeout": "One invocation timed out in automatic review without execution; reviewed retry completed; no remaining rejection"
+  },
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/task52-real-factory-rpc-verification.json",
+    "docs/task52-real-factory-rpc.md",
+    "private_runtime/real_application/checkpoint.py",
+    "private_runtime/real_application/factory.py",
+    "private_runtime/real_application/identity.py",
+    "private_runtime/real_application/native.py",
+    "private_runtime/real_application/rpc.py",
+    "private_runtime/real_application/rpc_sql.py",
+    "private_runtime/real_application/run_native.py",
+    "private_runtime/real_application/service.py",
+    "private_runtime/real_application/sources-native-v2.json",
+    "private_runtime/real_application/sources.json",
+    "private_runtime/real_application/test_diagnostics.py",
+    "private_runtime/real_application/test_native.py",
+    "private_runtime/real_application/test_services.py",
+    "private_runtime/real_application/test_sources.py"
+  ]
+}

@@ -127,3 +127,7 @@ See [continuation evidence and limitations](../task52-private-role-continuation.
 ### Task 52 closed frontend and immutable recovery checks
 
 The closed frontend uses the existing workload identity port, independently verifies IAP, and signs the exact forwarded request bytes. It strips browser credentials and does not redirect or retry. The external local fake metadata service is test infrastructure; no signer or controller enters the production frontend. Startup TLS connectivity is not application financial readiness. The separate authenticated planning-mode probe remains non-billable. See [verification report](../task52-closed-frontend-verification.md).
+
+### Real source tickets at the public HTTP boundary
+
+The inactive real factory now reuses the original workload/IAP/body-proof verifier and opaque outing locator for `/api/interpret`, `/api/plans/generate` and explicit revoke. It maps only to source-only checkpoints, never the old graph Session. Real `/count` and `/send` use the existing authenticated HTTPS channels and restricted SQL/witness authority. The counter cannot generate; dispatcher JSON cannot select prices or forge SQL receipts. Public HTTP tests use an offline frontend proof generator, not the actual Next.js server. The real Next.js/profile startup connection remains unfinished. [Exact implementation and verification](../task52-real-factory-rpc.md).

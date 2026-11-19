@@ -16,6 +16,7 @@ from psycopg.types.json import Jsonb
 from backend import action_dispatch as io
 from backend.ai.openai_candidate import OpenAICandidateProvider,request_bytes
 from backend.interpretation import InterpretationInput,ClarificationAnswers
+from backend.models import ContinuationStatus
 from backend.provider_budget import ProviderBudget,ProviderSettings
 from experiments.shared_state.contracts import Denied,Unavailable,Kind
 from experiments.shared_state.bridge_models import ProviderAction
@@ -179,7 +180,7 @@ class Broker(GrantBroker):
             self._deadline=source.created+600
             try:
                 result=super().plan(token)
-                return result.model_copy(update=dict(optionsToken=None,detailsToken=None,saveReceipt=None,saveAccessToken=None,canExpand=False,canDiscover=False,canShowBeyond=False,continuationStatus={'kind':'search_exhausted','message':'This private outing is complete. Additional provider actions and restart continuation are unavailable; refreshing will not retry provider work.'}),deep=True)
+                return result.model_copy(update=dict(optionsToken=None,detailsToken=None,saveReceipt=None,saveAccessToken=None,canExpand=False,canDiscover=False,canShowBeyond=False,continuationStatus=ContinuationStatus(kind='search_exhausted',message='This private outing is complete. Additional provider actions and restart continuation are unavailable; refreshing will not retry provider work.')),deep=True)
             finally:
                 # Financial history survives; no Google graph or source can replay.
                 source.revoked=True;self._Broker__sources.pop(token,None)
