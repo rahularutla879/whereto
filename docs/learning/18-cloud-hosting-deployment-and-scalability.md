@@ -226,3 +226,7 @@ The present candidates remain synthetic-only. Real provider adapters exist but a
 ### Real financial profile before six-role enrollment
 
 The inactive `private_runtime/real_finance` module accepts the existing restricted SQL/TLS and Redis ports and measures new-schema contracts; it creates no new service or credential discovery. Separate owner-controlled rate/grant/epoch enrollment, count-only witness credentials and exact billed provider accounts are mandatory. It is not yet selected by the six-role startup or current candidate images. Next work is the native real-inference/source/usage bridge and transient Google lifecycle, followed by closed role composition and image/browser verification. No environment switch can turn the fixture policies into real spending. [Financial boundary and remaining gates](../task52-real-financial-authority.md).
+
+### Native functional slice before role publication
+
+A source-pinned real-native backend slice exists, with strict action gates, no direct provider/Ollama fallback and no global Google continuation retention. Its manifest is explicitly release-ineligible. Current role startup still selects the old factory/counter/delivery contracts; an environment switch cannot turn it into the real demo. Complete the source-only owned ticket/terminal lifecycle and real role bindings before building/publishing six images. Existing rollback image identities, vulnerability findings and infrastructure approvals are unchanged. [Precise missing code connection](../task52-real-native-application.md).

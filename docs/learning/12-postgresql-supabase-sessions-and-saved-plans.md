@@ -187,3 +187,7 @@ See [continuation evidence and limitations](../task52-private-role-continuation.
 ### Inactive real-provider financial SQL profile
 
 `private_runtime/real_finance/profile.py` source-pins and projects the existing SQL into `provider_state/provider_rules/provider_witness`; it does not edit old SQL or install into Supabase. Both independently administered databases need matching reviewed immutable policies and explicit enrollment. Empty installers issue no rates/grant/epoch. INSERT validation plus immutable configuration allow per-operation current-rate checks without repeating full JSON validation. Existing hosted SQLPool contracts measure the new schema/build and refuse test clocks or DDL drift. Saved-plan schema/RLS is unchanged. See [the implementation report](../task52-real-financial-authority.md).
+
+### Native response receipts and atomic provider batches
+
+The inactive real-application SQL extension delegates existing financial state transitions, adds issuer-only raw-response/normalized-usage hashes, and requires matching valid receipts before successful model completion. It revokes the runtime's direct parent-protocol entry in that separate extension. Full Google batches validate before approval; final delivery rechecks admission. Original financial SQL, saved-plan schema/RLS and historical journal are unchanged; no real migration is applied. [Application extension](../task52-real-native-application.md).

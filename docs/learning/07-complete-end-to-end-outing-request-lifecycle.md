@@ -181,3 +181,7 @@ Only health, bounded readiness, ordinary interpretation/pending, generation and 
 Private-role startup is not an outing-success test. The candidate ordinary flow must pass original source/owner/revision, encrypted evidence, admission, reservation and exact canonical dispatch checks through its current role cohort. Deterministic clarification must retain source and avoid another inference. An encryption-metadata byte-contract regression was added during integration; prior ordinary UI results do not certify the changed cohort.
 
 See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+### Inactive real-native ordinary slice
+
+`private_runtime/real_application` now connects the existing native interpreter/clarification/ordinary planner to complete-input counting, SQL-reserved generation and canonical Google Search/Matrix. Missing-date clarification reuses original source/clock without inference. Results are terminal/request-local; no Google graph becomes a checkpoint. This is not yet the public six-role/browser path: the old factory session lifecycle needs an owned source-only checkpoint and terminal-ticket mapping. [Exact path and tests](../task52-real-native-application.md).
