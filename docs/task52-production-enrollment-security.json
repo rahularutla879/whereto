@@ -1244,6 +1244,100 @@
       "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
     }
   },
+  "nativeFollowup": {
+    "baselineCommit": "250f1cea077ae7d3bb31b3056fbd0787e2058e71",
+    "elfFiles": {
+      "backend": 768,
+      "counter": 768,
+      "dispatcher": 768,
+      "factory": 768,
+      "frontend": 660,
+      "recovery": 768
+    },
+    "evidence": {
+      "aligned-new.disassembly.txt": {
+        "path": "/tmp/task52-native-followup/aligned-new.disassembly.txt",
+        "sha256": "36564738f6971342c49933cc231c5e9d89973a8a515ebf9b10eface60176ce3a"
+      },
+      "elf-evidence.json": {
+        "path": "/tmp/task52-native-followup/elf-evidence.json",
+        "sha256": "2a348a5b7529cd87572104639c67aa77679f74c78d1b227a6ede00acdde8c78a"
+      },
+      "inspect-final.log": {
+        "path": "/tmp/task52-native-followup/inspect-final.log",
+        "sha256": "45751e427c85f6e8be16ba0dce697373eb2c625a77b31ff3e2c63b9fcbbf82f7"
+      },
+      "inspect.py": {
+        "path": "/tmp/task52-native-followup/inspect.py",
+        "sha256": "ef6cbc5c64dfff3d190e00be0b9b3e31d75b7e99339e4716cbd7380b54034c9b"
+      },
+      "venv-tests.log": {
+        "path": "/tmp/task52-native-followup/venv-tests.log",
+        "sha256": "f2e3573e05280c921b2a291952801cdab33d5162f4137808809cd99d4487901e"
+      }
+    },
+    "findings": {
+      "CVE-2026-102010": {
+        "proposedClassification": "unresolved-inline-template-provenance",
+        "reason": "No __gnu_pbds or binary_heap/erase_if indicators in installed ELF symbols/strings or direct application source. Vendor fix is header-template code, so negative symbols cannot exclude stripped/inlined compiled instantiations. This remains the specific unresolved native judgment.",
+        "source": "https://github.com/gcc-mirror/gcc/commit/aaa8351f4d2e636f9680a1f0a8ebc2f0a60611e6"
+      },
+      "CVE-2026-19499": {
+        "proposedClassification": "conditional-no-imported-callsite",
+        "reason": "No strfmon/strfmon_l/__strfmon_l imports across installed ELF files or direct application call found; libc still defines vulnerable functions. Does not prove every internal/dynamic native path absent. Preserve immutable dependency/configuration boundary.",
+        "source": "https://security-tracker.debian.org/tracker/CVE-2026-19499"
+      },
+      "CVE-2026-5435": {
+        "proposedClassification": "conditional-no-imported-callsite",
+        "reason": "No affected DNS-printing API imports across installed ELF files or direct application call found; libresolv still defines __fp_nquery. Normal DNS use is not invocation of deprecated TSIG printing; internal/dynamic paths remain a condition.",
+        "source": "https://security-tracker.debian.org/tracker/CVE-2026-5435"
+      },
+      "CVE-2026-95619": {
+        "proposedClassification": "binary-implementation-non-applicability",
+        "reason": "Identical libstdc++ bytes in all six images. Scalar aligned-new calls posix_memalign directly without vulnerable size rounding; array aligned-new jumps to scalar. Upstream explicitly excludes this implementation. Node/libvips do import aligned new: no unsupported claim of absent API use.",
+        "source": "https://github.com/gcc-mirror/gcc/commit/59d235ffa5a69231eb42e5290d52dc8c90d28b7a"
+      }
+    },
+    "fixesApplied": 0,
+    "genuineKeyOrSignatureCreated": false,
+    "imageConfigDigests": {
+      "backend": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+      "counter": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+      "dispatcher": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+      "factory": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+      "frontend": "sha256:7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+      "recovery": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0"
+    },
+    "imagesChanged": false,
+    "libstdcSHA256": "972bb2a18b71140dab0240f8a1f68ab3fb1d56bcd4c4f824a91b70888faf5a00",
+    "limitations": [
+      "ELF symbol/string evidence is not exhaustive whole-program reachability or a vulnerability exception",
+      "Old raw scanner findings/classifications preserved; follow-up judgments require actual scoped disposition",
+      "No genuine key command/signature/rebuild/publication performed; local OpenSSL 3.5.9 Ed25519 and pkeyutl rawin support inspected via help/list only",
+      "Full browser/runtime/financial suites not repeated for read-only evidence review"
+    ],
+    "method": "Read-only Docker-save archives: verify actual OCI config digest and each layer SHA; parse ELF64 little-endian SYMTAB/DYNSYM; inspect exact aligned-new disassembly with Xcode llvm-objdump. No image run/rebuild/scan, private-key access, account or provider request.",
+    "reviewedAtUTC": "2026-11-19T21:14:15.131311+00:00",
+    "scannerCountsUnchanged": true,
+    "securityAccepted": false,
+    "supportedTrixieFixVerified": false,
+    "tests": {
+      "command": "-m unittest deployment.test_publication_batch deployment.test_cloud_run_real deployment.test_real_candidates -q",
+      "correctInterpreter": "backend/.venv/bin/python",
+      "developmentAttempt": {
+        "cause": "Projection setup child lacks pydantic; confirmed from captured stderr; no dependency installed or identity bypassed",
+        "errors": 1,
+        "interpreter": "system python3.12",
+        "passed": 20
+      },
+      "errors": 0,
+      "failures": 0,
+      "nodeSyntaxExit": 0,
+      "passed": 27,
+      "skipped": 0,
+      "sourcePinsVerified": true
+    }
+  },
   "reviewedAtUTC": "2026-11-19T20:10:14.435407+00:00",
   "scannerCountsUnchanged": true,
   "securityAccepted": false,
