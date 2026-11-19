@@ -240,3 +240,7 @@ Run `PYTHONPATH=. backend/.venv/bin/python -m unittest private_runtime.real_fina
 ### Testing native code against actual real financial SQL
 
 `PYTHONPATH=. backend/.venv/bin/python -m private_runtime.real_application.run_native` reuses the approved serial disposable SQL/witness/Redis harness and finite backend source projection. A separate TLS process supplies authored provider HTTP responses; actual restricted SQL roles perform counting/reservation/delivery and receipt validation. It tests the native flow, deterministic answers, replay/source/expiry/admission failures, lost-worker refusal and financial restore drills. It does not run all six services or prove live provider/model/browser quality. [Machine-readable results and development failures](../task52-real-native-application-verification.json).
+
+### Test reconstruction in the same admitted mode
+
+A new source-ticket regression reproduced a notes mismatch when retained interpretation was validated outside the real broker action. The interpreter consults the real-mode guard, so merely deserializing correct typed evidence was insufficient. The fix restores the existing admitted real-mode context and keeps full canonical comparison. Source-only tests use actual disposable operational/witness PostgreSQL and Redis with local HTTPS provider fixtures; independent worker processes are distinct from six authenticated service processes or browser acceptance. Failed development runs and exact omitted scopes remain in [the verification record](../task52-real-source-ticket-verification.json).

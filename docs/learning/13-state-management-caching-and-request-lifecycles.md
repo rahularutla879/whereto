@@ -176,3 +176,7 @@ Transport rejection is not proof that a provider did no work. Existing committed
 `redis_port.py` supplies a TLS/AUTH lifecycle port to existing evidence CAS and encryption. Original absolute expiry remains authoritative. Derived AAD must be canonical bytes: decode inherited canonical metadata, add deployment/build binding, then encode it again. Never merge a bytes value as a dictionary. Live callback objects stay in their exact factory process; draining/replacement cannot reconstruct lost admission evidence.
 
 See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+### Real-source tickets before Google work (inactive)
+
+The new real source checkpoint retains typed original request/interpretation, clarification answers, reference clock and fixed expiry in encrypted Redis. SQL binds owner/build/completed inference and original root/outing; the existing independent witness commits the ciphertext identity. A fresh process can reconstruct validators without inference. Only explicit device-coordinate origin is admitted; Google graphs, manual/geocoded provenance, callbacks and cards are excluded. Each action consumes a SQL turn; planning revokes the ticket and never publishes its results as resumable evidence. This library is not yet selected by the authenticated public factory. [Exact boundary](../task52-real-source-ticket.md).

@@ -1,0 +1,286 @@
+{
+  "identity": "52-real-source-ticket-verification-v1",
+  "baselineCommit": "aa82c05d806b4b8e40a802b5576b22bdecaee874",
+  "checkpoint": "verified source-only functional slice; full requested six-role integration unfinished",
+  "sixServiceStartupComplete": false,
+  "authenticatedPublicFactoryConnected": false,
+  "realCounterRPCConnected": false,
+  "realDispatcherRPCConnected": false,
+  "newImagesBuilt": false,
+  "newImagesScanned": false,
+  "newImageIdentities": {},
+  "publishedImages": 0,
+  "actualProviderCalls": 0,
+  "actualKeyReads": 0,
+  "realGrantsEnrolled": 0,
+  "cloudResourcesCreated": 0,
+  "normalStartupChanged": false,
+  "executionIdentities": {
+    "real_native_execution_identity": {
+      "event": "real_native_execution_identity",
+      "testModules": [
+        "private_runtime.real_application.test_checkpoint"
+      ],
+      "sourcesSHA256": "4acd1cf376c00e9b38f7837fab24d42bc3ebd0c9a8a53e2c5cc5c372f58f7ffb",
+      "testSHA256": "e6cff33a35026fb2e53d269f6d37160f3968b05c63374719b967e82b126ba8c0",
+      "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+      "harnessSHA256": "ea29abaf9803fe55e6163f8f09a51b7062212c8fb5dcd806f55ad4b3fb2043a5",
+      "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+    },
+    "real_finance_execution_identity": {
+      "event": "real_finance_execution_identity",
+      "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+      "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+      "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+      "sqlSHA256": {
+        "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+        "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+      },
+      "contractSHA256": {
+        "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+        "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+      }
+    },
+    "real_finance_resource_inventory": {
+      "event": "real_finance_resource_inventory",
+      "volumes": 135,
+      "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c"
+    },
+    "real_finance_resource_cleanup": {
+      "event": "real_finance_resource_cleanup",
+      "preExistingPreserved": 135,
+      "newVolumesRemaining": 0
+    }
+  },
+  "sourceManifest": "private_runtime/real_application/sources.json",
+  "sourceIdentity": "52-real-native-source-ticket-slice-v2",
+  "sourceBuildSHA256": "f7d9afe6789be0a576bb30f112acf715eec462b06180e36898c36da35d23d1c9",
+  "sourceInputs": 13,
+  "projectedBackendFiles": 72,
+  "releaseEligible": false,
+  "priorManifestPreserved": "private_runtime/real_application/sources-native-v1.json",
+  "fullIntegrationBeforeFinalPublicationValidation": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m private_runtime.real_application.run_native",
+    "tests": 22,
+    "seconds": 397.792,
+    "passed": 22,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "logSHA256": "40f6e6aa84a97b47092c186c9b53a26dae1c4dd030c931d5c1071b3b6eedd43c",
+    "note": "9 source-ticket + 13 existing native cases. Before final typed publication revalidation; earlier exact build retained in log hash."
+  },
+  "finalSourceIntegration": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python: from private_runtime.real_application.run_native import main; main(source_only=True)",
+    "tests": 9,
+    "seconds": 213.653,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "logSHA256": "322e56a091660290454035d6aa51f155161adcd02b28962e827c5891266e139e",
+    "note": "All 9 source-ticket cases on final application source, including invalid internal model_copy publication. Full suite remains default; no historical tests removed."
+  },
+  "recoveryDrills": {
+    "finalSourceAwareOperationalSnapshotRestore": "passed; full grant quarantined",
+    "finalSourceAwareWitnessSnapshotRestore": "passed; full grant quarantined",
+    "operationalOutage": "passed; refused",
+    "operationalAndWitnessRestart": "passed; reserved exposure retained",
+    "redisLoss": "passed; refused without resend",
+    "crashAfterIntent": "passed; 32000 fictional micro-USD retained"
+  },
+  "focusedRegressions": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest backend.test_provider_callbacks backend.test_provider_responses backend.test_provider_enrollment_review backend.test_google_retention deployment.test_cloud_run deployment.test_candidate_promotion deployment.test_packaging deployment.test_private_artifact private_runtime.test_dispatch_owner private_runtime.test_dispatch_processes private_runtime.test_https -v",
+    "tests": 80,
+    "seconds": 6.885,
+    "passed": 80,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "logSHA256": "f3ce8ac7698bdf2b531a0f0fb30e4273dd65df5dafc5e40ac3f1bdd201e4bbd8"
+  },
+  "sourceProjection": {
+    "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest private_runtime.real_application.test_projection",
+    "tests": 5,
+    "seconds": 2.911,
+    "passed": 5,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "logSHA256": "a1b21ee742e9e0d28dea572175acc76401e9443fd62d2c4b135b69151f4cf173"
+  },
+  "frontend": {
+    "command": "npm test",
+    "tests": 325,
+    "passed": 324,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "failure": "Unchanged expired-date fixture: lib/surprise.test.ts:69; expected 200, actual 422",
+    "logSHA256": "d1782c45a0ee0d2a5a862b7f8701d22c087efda76dda881754423ea5afca76be"
+  },
+  "typeScript": "npm run typecheck: passed",
+  "eslint": "npm run lint: passed",
+  "dependencies": {
+    "pipCheck": "passed",
+    "npmProductionTree": "passed",
+    "newDependencies": 0,
+    "locksChanged": false
+  },
+  "sourceReplayDefect": {
+    "originalFailure": "native_validation_difference",
+    "differencePaths": [
+      "result.notes.length"
+    ],
+    "cause": "Revalidation outside admitted native real mode selected non-real interpreter behavior",
+    "fix": "Run unchanged restore_validation under current-fence native HTTP admission; Recorded returns retained raw interpretation only; keep complete canonical comparison",
+    "regression": "Out-of-action reproduction still demonstrates notes difference; admitted reconstruction succeeds in fresh worker without inference"
+  },
+  "verifiedPaths": [
+    "source-only encrypted capture linked to completed inference",
+    "owner/build/revision/epoch/fence checks",
+    "unchanged root/outing and absolute expiry",
+    "fresh-process deterministic date answer without inference or financial reset",
+    "three ordinary fixture-backed cards with original coffee/museum order",
+    "terminal consumed/revoked source ticket",
+    "two competing independent workers: one answer succeeds, one refuses",
+    "direct legacy enrollment and unfinished-inference enrollment denied",
+    "wrong owner/revision, corruption, Redis loss, expiry and interrupted-turn refusal",
+    "unknown graph and excessive internal revision/history publication refused"
+  ],
+  "storage": {
+    "redis": "AES-GCM typed source/interpretation/answers/reference clock and explicit device-coordinate origin only; bounded CAS and absolute expiry",
+    "sql": "owner/build/completed inference, root/outing, source/revision/fence, encrypted commitments, immutable turns and original financial facts",
+    "witness": "existing same-lock native checkpoint commitments and financial prefix",
+    "forbidden": [
+      "Google result graphs",
+      "manual/geocoded/suggested origin provenance",
+      "route snapshots",
+      "provider callbacks",
+      "itinerary result snapshots",
+      "serialized locks or clients"
+    ],
+    "maximumLifetimeMs": 600000
+  },
+  "history": {
+    "attempts": 10,
+    "providers": {
+      "openai": 7,
+      "google": 2,
+      "anthropic": 1
+    },
+    "accountedUSD": "0.047366625",
+    "remainingHistoricalCeilingUSD": "11.952633375",
+    "privateFiles": 324,
+    "persistentHistoricalHalt": true,
+    "readOnlyIntegrity": "passed; journal baseline SHA and 324-file set unchanged",
+    "frozenPromptPayloadAndFinancialInputs": "unchanged"
+  },
+  "secretChecks": {
+    "actualKeysRead": 0,
+    "newCredentialPatterns": 0,
+    "privateRawEvidenceCommitted": false,
+    "initialBroadScan": "8 unchanged embedded-word false positives; independently classified without printing matches; zero actual key-token matches"
+  },
+  "handbook": {
+    "chapters": 20,
+    "updated": [
+      13,
+      14,
+      15,
+      18
+    ],
+    "reviewedUnchanged": [],
+    "unrelatedMaterialPreserved": true
+  },
+  "notRun": [
+    "complete authenticated six-service real-profile runtime",
+    "actual desktop/mobile browser and View Plan clicks",
+    "real-profile counter/delivery RPC and callback-owner crash/restart composition",
+    "dedicated 27-case financial suite this continuation: original financial source unchanged; native/source SQL cohorts and restore drills ran",
+    "full backend suite",
+    "hosted identity/JWKS full cohort this continuation",
+    "production frontend build: no frontend changes or complete real startup",
+    "six final candidate builds/scans/smoke tests: prerequisite runtime incomplete",
+    "live provider, account, model/count or inference calls",
+    "actual financial grants, cloud provisioning or production migrations"
+  ],
+  "remainingCode": [
+    "Map existing authenticated public outing factory to source-only capture/resume/terminal response and reviewed execution controls",
+    "Bind existing /count RPC to real count authority rather than fictional byte counter",
+    "Bind existing /send owned routing to real delivery-only SQL/witness/receipt store; preserve exact callback owner",
+    "Select measured restricted-role/namespace/source/epoch contracts in closed startup and role projection",
+    "Verify six separate services via actual Next.js/FastAPI entry, browser, final images and scans"
+  ],
+  "externalGates": [
+    "qualified application model/revision and current bounded price/count policy",
+    "approved application provider credentials/transport and financial grants",
+    "Google content terms/attribution enrollment",
+    "container vulnerability disposition",
+    "exact Redis/operational PostgreSQL capacity and independent witness administrator",
+    "IAM/IAP/Secret Manager and explicit infrastructure/provider spending approval"
+  ],
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/task52-real-native-application.md",
+    "docs/task52-real-source-ticket-verification.json",
+    "docs/task52-real-source-ticket.md",
+    "private_runtime/real_application/checkpoint.py",
+    "private_runtime/real_application/checkpoint_sql.py",
+    "private_runtime/real_application/identity.py",
+    "private_runtime/real_application/native.py",
+    "private_runtime/real_application/run_native.py",
+    "private_runtime/real_application/sources-native-v1.json",
+    "private_runtime/real_application/sources.json",
+    "private_runtime/real_application/sql.py",
+    "private_runtime/real_application/store.py",
+    "private_runtime/real_application/test_checkpoint.py",
+    "private_runtime/real_application/test_native.py"
+  ],
+  "developmentAttempts": [
+    {
+      "logPath": "/tmp/task52-source-checkpoint-run1.log",
+      "logSHA256": "cb2b12998c5e083fceb0bf9de8d312bd0297dd94b57beeb6c817cac032011bf7",
+      "result": "interrupted after original native cohort and duplicate discovery; no overall pass"
+    },
+    {
+      "logPath": "/tmp/task52-source-checkpoint-run2.log",
+      "logSHA256": "5c483719c22a6e959663c73abcd33515ef1c326bd1725d15fc9e1cecf81ffbcc",
+      "result": "2 cases: 1 pass, 1 reconstruction error; strict comparison refused"
+    },
+    {
+      "logPath": "/tmp/task52-source-checkpoint-run3.log",
+      "logSHA256": "49cc03c0b394d4d18b29ecc723d9526ca9f090c428e8db20008efb78fe1729a5",
+      "result": "2 cases: 1 pass, 1 same error; sanitized diagnostics attributed notes difference"
+    },
+    {
+      "logPath": "/tmp/task52-source-checkpoint-run4.log",
+      "logSHA256": "00cc9ec11d25c1fe7c6c61ffddad8611184f597cba1e70337d59d4f27f3a2157",
+      "result": "1 case: test call-history assertion failed after replacement pipe hid original calls; fixture observation corrected"
+    },
+    {
+      "logPath": "/tmp/task52-source-checkpoint-run5.log",
+      "logSHA256": "d7cf5d2509ff1f7487e3f6e8207559c5eba1e77c3ac7accf2bc58557184cc22b",
+      "result": "20 cases passed plus restore/crash drills; before later privilege/concurrency and publication hardening"
+    },
+    {
+      "logPath": "/tmp/task52-source-checkpoint-final.log",
+      "logSHA256": "40f6e6aa84a97b47092c186c9b53a26dae1c4dd030c931d5c1071b3b6eedd43c",
+      "result": "22 cases passed plus source-aware restore/crash drills; before final publication hardening"
+    }
+  ],
+  "resourceCleanup": {
+    "preExistingVolumes": 135,
+    "preExistingInventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c",
+    "newVolumesRemaining": 0,
+    "containersRemaining": 0,
+    "unknownPreExistingVolumesPreserved": true
+  }
+}

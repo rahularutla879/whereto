@@ -1,16 +1,21 @@
 {
-  "identity": "52-real-native-ordinary-slice-v1",
-  "baseline": "8aa0d7f0a042a9396ec25240db9b90ba3b939eef",
+  "identity": "52-real-native-source-ticket-slice-v2",
+  "baseline": "aa82c05d806b4b8e40a802b5576b22bdecaee874",
   "releaseEligible": false,
   "inputs": {
     "private_runtime/real_application/__init__.py": "5760b0ff5839f7118b9016f7e646a11737600645e2e70bbd1cd90203cffa718a",
-    "private_runtime/real_application/identity.py": "f20bdf958f5b0c0a3ab2bd08bb7b07d0657d76db91d6a6eef358ea90af6d0b09",
-    "private_runtime/real_application/native.py": "a61e49d4cd228b5d24daff947aa28a57aca3cb09b4039d7dbb0788dfec1f4669",
+    "private_runtime/real_application/checkpoint.py": "6c196cebf2a10fed892f2f56cf25ef659829cbe17f4c8023a08b063e6683614e",
+    "private_runtime/real_application/checkpoint_sql.py": "68784571df1a98deb64f7931b6b0e4e825dd090ede6dd645b308861209ab99fe",
+    "private_runtime/real_application/identity.py": "7fcce461140a43f4f388215f4587566aeaed96f7b44199e934e34b44c1624d6c",
+    "private_runtime/real_application/native.py": "e56a723e60561227298c842bcda57c35720d63f6494103be1442a1a110767683",
     "private_runtime/real_application/projection.py": "0bd53663e1b8fe3f3b57cc796667eb3e3e530b1e47edd10fbd60fb0596e33083",
-    "private_runtime/real_application/sql.py": "191d6b61df7bfab91e575916672f4578b0d8551e7e26b5ed885f0ee11dbe47f7",
-    "private_runtime/real_application/store.py": "c82b0c15e23caa2392836d5c54bf8c3d2593d6cf500b9314cf58309093e9648c",
+    "private_runtime/real_application/sql.py": "832309a2198e00acf47f3d9814241eaa3d2ce4e534420e5870cd2da2487a7570",
+    "private_runtime/real_application/store.py": "bf2e425d8d9aa10c21ff3061647354a17e47e411b8cef320dd12e9ae6ea52a7b",
     "private_runtime/real_finance/sources.json": "6260001ecaa5397ce50a68137ff381ee0d0880aef4a19d9332d6b9078968391d",
-    "deployment/prepare_private_services.py": "9790a54b64e8f50938d3b504cb0e4396ab432d3bd4390daae55564f58e045e16"
+    "deployment/prepare_private_services.py": "9790a54b64e8f50938d3b504cb0e4396ab432d3bd4390daae55564f58e045e16",
+    "experiments/shared_state/native_sessions.sql": "d1d70554b94e772fbc937bd0a9f24c3eb6b909e78f1cf01fb6c31a651392531a",
+    "experiments/shared_state/native_witness.sql": "573cf9b2bf30c653562b2a752e12c2fa6f2515866e7a68cd9fcef065c40b2fcd",
+    "experiments/shared_state/native_sessions.py": "a47ee4bb5ce592a17873d1423d0eae13d00f850eb50ee7b47e1008da760ecf02"
   },
   "backendOutputs": {
     "backend/action_dispatch.py": "0c57eec10bf294faf2710ca49e3f45c52046e53ded56490e3dd27d11c60d8859",

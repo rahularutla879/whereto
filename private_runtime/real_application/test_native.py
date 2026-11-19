@@ -41,7 +41,7 @@ def responder(pipe,cert,key,behavior):
 
 def app_store():
     from private_runtime.real_finance.runtime import Service,namespaced
-    from experiments.shared_state.application_grants import Witness
+    from .checkpoint import Witness
     service=Service(Witness(namespaced(lambda:g.connect('witness')),namespaced(lambda:g.connect('reader'))),lambda:g.connect('issuer'))
     return Store(connection=lambda **kw:g.connect('runtime',**kw),issuer=lambda:g.connect('issuer'),service=service,evidence=g.cache(),key=g.KEY,limits=g.LIMITS)
 
@@ -50,6 +50,8 @@ def fixture(rates=None):
         rates=g.rates();rates['models']['gpt-6-luna']['cache_write_ppm']=0
     g.fixture(r=rates)
     with g.admin() as c:c.execute('SET LOCAL ROLE whereto_real_owner');c.execute(application_sql(),prepare=False)
+    from .checkpoint_sql import scripts
+    with g.admin(True) as c:c.execute('SET LOCAL ROLE whereto_real_owner');c.execute(scripts()['witness'],prepare=False)
 
 class Tests(unittest.TestCase):
     def setUp(self):
@@ -217,8 +219,9 @@ def refuse_lost_source(queue,token):
     else:raise AssertionError('Missing source reconstructed')
 
 def seed_restore():
-    t=Tests()
-    try:t.setUp();b=t.broker();t.ready(b)
+    from .test_checkpoint import Tests as SourceTests
+    t=SourceTests()
+    try:t.setUp();t.pending()
     finally:t.doCleanups()
 def consume_restore():
     s=app_store();r,_=g.perform(s,g.maps(s),DispatcherCallback(None,g.GoogleFixture(),Accounting(),lambda:time.time()));s.transition(r,'SUCCEEDED')
@@ -228,7 +231,9 @@ def detect_restore():
     except Exception:pass
     else:raise AssertionError('Restored application financial history accepted')
     status=s.service.witness.call('status');assert status['quarantined'] and status['quarantineExposure']==g.grant()['total']
-    with g.admin() as c:assert c.execute('SELECT count(*) FROM provider_state.real_response_receipts').fetchone()[0]==1
+    with g.admin() as c:
+        assert c.execute('SELECT count(*) FROM provider_state.real_response_receipts').fetchone()[0]==1
+        assert c.execute('SELECT count(*) FROM provider_state.real_source_owners').fetchone()[0]==1
     print('Real-native response receipt/history restore mismatch: full grant quarantined.',flush=True)
 def seed_crash():
     fixture();s=app_store();data=g.maps(s);r=s.reserve(data[0],data[1],str(__import__('uuid').uuid4()));s.transition(r,'INTENT')

@@ -91,6 +91,11 @@ class Inference:
 class Issuer:
     def __init__(self,connection,root):self.connection,self.root=connection,root;self.broker=None;self.wires=None
     def register(self,s,lease,http,inference=None,refresh=None):
+        checkpoint=getattr(self,'checkpoint',None)
+        if checkpoint is not None:
+            if refresh is not None:raise Denied('real_unsupported_refresh')
+            with self.connection() as c:c.execute('SELECT provider_state.native_action(%s,%s,%s)',(Jsonb(s._lease(checkpoint)),s._hash(lease.session.token,'session'),http))
+            return
         if refresh is not None:raise Denied('real_unsupported_refresh')
         with self.connection() as c:c.execute('SELECT provider_state.register_action(%s,%s,%s,NULL)',(s._hash(lease.session.token,'session'),http,inference))
     def _approve(self,s,lease,cap):
@@ -98,7 +103,8 @@ class Issuer:
         if b is not self.broker or self.wires is None:raise Denied('real_server_batch_required')
         with self.connection() as c:c.execute('SELECT provider_state.real_approve_google_batch(%s,%s)',(s._hash(cap.token,'cap'),list(self.wires)))
     def approve(self,s,lease,cap,outing,plans):
-        with self.connection() as c:c.execute('SELECT provider_state.app_enroll_budget(%s,%s,NULL)',(s._hash(lease.session.token,'session'),self.root))
+        if getattr(self,'checkpoint',None) is None:
+            with self.connection() as c:c.execute('SELECT provider_state.app_enroll_budget(%s,%s,NULL)',(s._hash(lease.session.token,'session'),self.root))
         self._approve(s,lease,cap)
         a=self.broker._check();result=a['interpretation'];result=result[0] if isinstance(result,list) else result
         s.publish(lease,{'request':a['source'],'interpretation_result':result},'real-source-v1',self.connection,lifetime=self.broker.remaining())
@@ -118,6 +124,17 @@ class Broker(GrantBroker):
         self._Broker__key=store._key;self._Broker__sources={};self._Broker__current=None;self._Broker__batch=None;self._Broker__action_lock=Lock()
         self._deadline=0.0;self._plan_lock=Lock();self._start_lock=Lock();self._started=False
         issuer.broker=model.broker=self
+    def _source(self,token):
+        source=super()._source(token)
+        if getattr(self,'checkpoint',None) is not None:self.checkpoint.check()
+        return source
+    def _check(self):
+        if getattr(self,'checkpoint',None) is not None:self.checkpoint.check()
+        return super()._check()
+    @contextmanager
+    def _action(self,*args,**kwargs):
+        if getattr(self,'checkpoint',None) is not None and not self.checkpoint.running:raise Denied('real_source_turn_required')
+        with super()._action(*args,**kwargs) as action:yield action
     def check_current(self):
         # Existing owner callback executes in another authenticated HTTP thread.
         # One broker owns one outing; the absolute scalar deadline never renews.

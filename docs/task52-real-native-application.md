@@ -1,3 +1,5 @@
+> Continuation: the new [source-only ticket slice](task52-real-source-ticket.md) supersedes the process-local-only source limitation below. Public factory/RPC/six-role startup remains unfinished. Prior verification and source identities below are historical and unchanged.
+
 # Task52/53 — real native ordinary application slice
 
 Baseline `8aa0d7f0a042a9396ec25240db9b90ba3b939eef`. **A functional native slice, not a completed six-service release.** No live provider/account request, key read, real grant, cloud resource, published image or production activation. [Exact verification](task52-real-native-application-verification.json).

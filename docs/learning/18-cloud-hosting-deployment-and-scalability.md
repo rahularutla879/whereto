@@ -230,3 +230,7 @@ The inactive `private_runtime/real_finance` module accepts the existing restrict
 ### Native functional slice before role publication
 
 A source-pinned real-native backend slice exists, with strict action gates, no direct provider/Ollama fallback and no global Google continuation retention. Its manifest is explicitly release-ineligible. Current role startup still selects the old factory/counter/delivery contracts; an environment switch cannot turn it into the real demo. Complete the source-only owned ticket/terminal lifecycle and real role bindings before building/publishing six images. Existing rollback image identities, vulnerability findings and infrastructure approvals are unchanged. [Precise missing code connection](../task52-real-native-application.md).
+
+### Source-only handoff before real role enrollment
+
+An inactive source-only ticket adapter now reuses native SQL/witness turns and encrypted Redis, preserving original clock/expiry/root/outing and completed inference. It never uses graph Session capture/resume/persist or stores terminal Google results. The public outing mapping and actual real counter/delivery role adapters remain missing, so closed startup and final six-image inclusion are not claimed complete. Existing rollback candidates/security findings remain unchanged; no new image cohort is eligible merely because source reconstruction works. [Current implementation boundary](../task52-real-source-ticket.md).

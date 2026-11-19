@@ -1,6 +1,7 @@
 """Additive application routines over the existing real financial authority."""
 from pathlib import Path
 from private_runtime.real_finance.profile import verify,replace
+from .checkpoint_sql import scripts as checkpoint_scripts
 
 def application_sql():
     verify()
@@ -74,4 +75,4 @@ END $$;
 REVOKE EXECUTE ON FUNCTION provider_state.app_protocol(text,jsonb,text,text,text) FROM whereto_real_worker;
 REVOKE ALL ON FUNCTION provider_state.real_application_protocol(text,jsonb,text,text,text) FROM PUBLIC;
 GRANT EXECUTE ON FUNCTION provider_state.real_application_protocol(text,jsonb,text,text,text) TO whereto_real_worker;
-'''
+'''+checkpoint_scripts()['operational']
