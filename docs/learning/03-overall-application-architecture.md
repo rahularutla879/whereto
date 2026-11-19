@@ -145,3 +145,7 @@ Do not confuse network compatibility with deployability. SQL/Redis constructors 
 The inactive private role candidate adds explicit connection ports, not a second planner. `private_runtime/registry.py` assigns each process only its required SQL/Redis/service clients. PostgreSQL controls durable authority; Redis holds encrypted evidence; the separately enrolled witness controls recovery. Generated role bytes have their own cohort identity and do not inherit frozen evaluator authorization.
 
 See [continuation evidence and limitations](../task52-private-role-continuation.md). Normal application behavior remains unchanged.
+
+## Real-role packaging checkpoint — November19,2026
+
+The six-role architecture is unchanged. A new real-native source projection/build cohort now runs the existing ordinary UI with protected SQL/witness/Redis through actual containers. Historical source proof bytes are non-importable text, while derived executable bytes have an independent image manifest. Runtime credentials remain role-scoped despite a common strict Python dependency closure. [Implementation and exact results](../task52-real-role-packaging.md).

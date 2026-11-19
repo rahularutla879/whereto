@@ -6,7 +6,9 @@ function replace(s,a,b){if(s.split(a).length!==2)throw Error('Reviewed frontend 
 const inputs={},files={};
 const argument=name=>{const at=process.argv.indexOf(name);return at<0?undefined:process.argv[at+1];};
 const publicFile=argument('--enrollment-public-key');const publicKey=real&&publicFile?fs.readFileSync(publicFile,'utf8').trim():null;
-if(real&&(!publicKey||!/^[A-Za-z0-9_-]{43}$/.test(publicKey)))throw Error('Reviewed real frontend enrollment public key required');
+const unenrolled=real&&!fixture&&process.argv.includes('--unenrolled-real-candidate');
+if(real&&(!publicKey||!/^[A-Za-z0-9_-]{43}$/.test(publicKey))&&!unenrolled)throw Error('Reviewed real frontend enrollment public key required');
+if(unenrolled&&publicKey)throw Error('Unenrolled candidate cannot select a trust key');
 const cohortFile=real?'deployment/real-role-cohort-v1.json':'deployment/private-role-cohort-v1.json';let cohort;
 if(real&&fixture)cohort='1'.repeat(64);
 else {

@@ -8,12 +8,18 @@ from experiments.shared_state import run_grants
 from private_runtime.real_finance import run_sql
 from .projection import backend
 
-def main(*,source_only=False,service_only=False,browser_hold=False,service_cases=()):
+def main(*,source_only=False,service_only=False,browser_hold=False,service_cases=(),image_cohort=None,image_cases=()):
     if type(source_only)is not bool or type(service_only)is not bool or type(browser_hold)is not bool or source_only and service_only or browser_hold and not service_only:raise ValueError('Offline cohort selection')
     test_names=['private_runtime.real_application.test_checkpoint']
     if not source_only:test_names.append('private_runtime.real_application.test_native')
     if service_only:test_names=['private_runtime.real_application.test_services','private_runtime.real_application.test_sources','private_runtime.test_identity']
     if browser_hold:test_names=['private_runtime.real_application.test_services.Tests.test_browser_entry']
+    if image_cohort is not None:
+        import re
+        if not service_only or not re.fullmatch('[a-f0-9]{64}',image_cohort):raise ValueError('Image browser cohort')
+        allowed=('test_image_replacement_and_replay','test_image_uncertain','test_image_redis_loss','test_000_count_relay_rejects_substitution_replay_and_generation')
+        if image_cases and (browser_hold or type(image_cases)is not tuple or any(x not in allowed for x in image_cases)):raise ValueError('Image safety test selection')
+        test_names=['private_runtime.real_application.test_image_browser.Tests.'+x for x in (image_cases or ('test_browser_entry',))]
     if service_cases:
         import re
         if not service_only or browser_hold or type(service_cases)is not tuple or any(type(x)is not str or not re.fullmatch('test_[a-z0-9_]+',x) for x in service_cases):raise ValueError('Offline service test selection')
@@ -23,8 +29,9 @@ def main(*,source_only=False,service_only=False,browser_hold=False,service_cases
     test_hash=sha256((root/'test_native.py').read_bytes()).hexdigest()
     service_test_hash=sha256((root/'test_services.py').read_bytes()).hexdigest()
     checkpoint_test_hash=sha256((root/'test_checkpoint.py').read_bytes()).hexdigest()
+    image_test_hash=sha256((root/'test_image_browser.py').read_bytes()).hexdigest() if image_cohort else None
     diagnostic_hash=sha256((root/'test_diagnostics.py').read_bytes()).hexdigest()
-    print(json.dumps(dict(event='real_native_execution_identity',testModules=test_names,sourcesSHA256=sha256((root/'sources.json').read_bytes()).hexdigest(),testSHA256=test_hash,checkpointTestSHA256=checkpoint_test_hash,serviceTestSHA256=service_test_hash,diagnosticSHA256=diagnostic_hash,harnessSHA256=sha256(Path(__file__).read_bytes()).hexdigest(),applicationSQLSHA256=sha256(application_sql().encode()).hexdigest())),flush=True)
+    print(json.dumps(dict(event='real_native_execution_identity',testModules=test_names,sourcesSHA256=sha256((root/'sources.json').read_bytes()).hexdigest(),testSHA256=test_hash,checkpointTestSHA256=checkpoint_test_hash,serviceTestSHA256=service_test_hash,diagnosticSHA256=diagnostic_hash,imageTestSHA256=image_test_hash,harnessSHA256=sha256(Path(__file__).read_bytes()).hexdigest(),applicationSQLSHA256=sha256(application_sql().encode()).hexdigest())),flush=True)
     original=run_grants.run
     with TemporaryDirectory(prefix='whereto-real-native-run-') as tmp:
         projected=Path(tmp)/'backend';manifest=backend(projected)
@@ -32,7 +39,7 @@ def main(*,source_only=False,service_only=False,browser_hold=False,service_cases
         def run(*args,**kw):
             if len(args)>4 and args[0]=='exec' and args[2:4]==('python','-c') and 'private_runtime.real_finance.test_sql' in args[4]:
                 client=args[1]
-                if browser_hold:
+                if browser_hold or image_cohort:
                     import os
                     marker=Path('/tmp/task52-six-browser-container.json');fd=os.open(marker,os.O_WRONLY|os.O_CREAT|os.O_EXCL,0o600)
                     with os.fdopen(fd,'w') as stream:json.dump(dict(client=client),stream)
@@ -54,7 +61,7 @@ def main(*,source_only=False,service_only=False,browser_hold=False,service_cases
                 original('cp',str(run_sql.ROOT/'deployment/native_parent.py'),client+':/app/deployment/native_parent.py')
                 for name in ('test_provider_responses.py',):original('cp',str(run_sql.ROOT/'backend'/name),client+':/app/backend/'+name)
                 original('cp',str(projected)+'/.',client+':/app/backend')
-                return original('exec',client,'python','-c',f"import unittest,os\nos.environ['TASK52_REAL_BROWSER_HOLD']={'1' if browser_hold else '0'!r}\nfrom hashlib import sha256\nfrom pathlib import Path\nassert sha256(Path('/app/private_runtime/real_application/test_native.py').read_bytes()).hexdigest()=={test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_checkpoint.py').read_bytes()).hexdigest()=={checkpoint_test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_services.py').read_bytes()).hexdigest()=={service_test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_diagnostics.py').read_bytes()).hexdigest()=={diagnostic_hash!r}\nfrom private_runtime.real_application.test_diagnostics import observe as session_observe\nfrom experiments.shared_state.financial_diagnostics import observe\nwith observe(),session_observe():\n r=unittest.TextTestRunner(verbosity=2,failfast=True).run(unittest.defaultTestLoader.loadTestsFromNames({test_names!r}))\nraise SystemExit(not r.wasSuccessful())")
+                return original('exec',client,'python','-c',f"import unittest,os\nos.environ['TASK52_REAL_BROWSER_HOLD']={'1' if browser_hold else '0'!r}\nos.environ['TASK52_IMAGE_COHORT']={image_cohort or ''!r}\nfrom hashlib import sha256\nfrom pathlib import Path\nassert sha256(Path('/app/private_runtime/real_application/test_native.py').read_bytes()).hexdigest()=={test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_checkpoint.py').read_bytes()).hexdigest()=={checkpoint_test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_services.py').read_bytes()).hexdigest()=={service_test_hash!r}\nassert sha256(Path('/app/private_runtime/real_application/test_diagnostics.py').read_bytes()).hexdigest()=={diagnostic_hash!r}\nassert not {bool(image_cohort)!r} or sha256(Path('/app/private_runtime/real_application/test_image_browser.py').read_bytes()).hexdigest()=={image_test_hash!r}\nfrom private_runtime.real_application.test_diagnostics import observe as session_observe\nfrom experiments.shared_state.financial_diagnostics import observe\nwith observe(),session_observe():\n r=unittest.TextTestRunner(verbosity=2,failfast=True).run(unittest.defaultTestLoader.loadTestsFromNames({test_names!r}))\nraise SystemExit(not r.wasSuccessful())")
             if len(args)>5 and args[0]=='exec' and args[2:5]==('python','-m','private_runtime.real_finance.test_sql'):
                 return original('exec',args[1],'python','-m','private_runtime.real_application.test_native',*args[5:],**kw)
             return original(*args,**kw)

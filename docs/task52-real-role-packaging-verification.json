@@ -1,0 +1,549 @@
+{
+  "approvalReview": {
+    "rejectedActions": [
+      "production fixture switch",
+      "cleanup without sufficient ownership evidence"
+    ],
+    "rejectedActionsExecuted": false,
+    "saferAlternativesCompleted": true
+  },
+  "baselineCommit": "da3fd66c328fed69c8db1ff55c9368b5b5df9c55",
+  "browser": {
+    "outings": 2,
+    "passed": true,
+    "permissionDenialTested": true,
+    "results": [
+      {
+        "cards": 3,
+        "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+        "passed": true,
+        "refreshDiscard": true,
+        "viewPlan": true,
+        "viewport": "desktop1440x1000"
+      },
+      {
+        "cards": 3,
+        "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+        "passed": true,
+        "refreshDiscard": true,
+        "viewPlan": true,
+        "viewport": "mobile-emulation-390x844"
+      }
+    ],
+    "simultaneousGenerations": false,
+    "simultaneousInterpretations": false,
+    "twoOpenOutings": true
+  },
+  "checks": {
+    "candidateProductionNpmAudit": {
+      "credentialsDisabled": true,
+      "exit": 0,
+      "firstAttempt": "npm duplicate empty-config-path refusal before any request; corrected using two distinct empty files",
+      "log": "/tmp/task52-real-images-v7/npm-audit.json",
+      "sha256": "b4636e964243f130cd6af3191c333e8bd25f004066f19a244868ae7e4b680e4b",
+      "vulnerabilities": {
+        "critical": 0,
+        "high": 0,
+        "info": 0,
+        "low": 0,
+        "moderate": 0,
+        "total": 0
+      }
+    },
+    "eslint": {
+      "exit": 0,
+      "log": "/tmp/task52-real-images-v7/lint-final.log",
+      "sha256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff"
+    },
+    "historicalIntegrity": {
+      "exit": 0,
+      "log": "/tmp/task52-real-images-v7/history-final.log",
+      "sha256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f"
+    },
+    "npmAll": {
+      "exit": 1,
+      "log": "/tmp/task52-real-images-v7/npm-ls.log",
+      "sha256": "bf241d0a8290af91800dc781ca08833c2d1377bfdab11212d9fc6d67ff9f21d3"
+    },
+    "npmRequired": {
+      "exit": 0,
+      "log": "/tmp/task52-real-images-v7/npm-required.log",
+      "sha256": "f3a3323f6d8b3d70b13444674bf086d621b26c44e2447e89c837a2df04724ed0"
+    },
+    "optimizedRecorderRefusal": {
+      "exit": 1,
+      "expectedRefusal": true,
+      "log": "/tmp/task52-real-images-v7/optimized-recorder.log",
+      "sha256": "a1e7f49c19b92221dec493fe12efe0a5b1b30e0c8c22959c2cd2031afa2730b6"
+    },
+    "pipCheck": {
+      "exit": 0,
+      "log": "/tmp/task52-real-images-v7/pip-check.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    "typecheck": {
+      "exit": 0,
+      "log": "/tmp/task52-real-images-v7/typecheck.log",
+      "sha256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e"
+    }
+  },
+  "cohorts": [
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/container-browser-services.log",
+      "name": "actualImageBrowser",
+      "passed": 1,
+      "seconds": 279.188,
+      "sha256": "f57b630711ca69e1b7488884e6b3375b6136a3894bd2bcccf87d8324ab4a2707",
+      "skipped": 0,
+      "tests": 1
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7-safety2/container-safety-services.log",
+      "name": "actualImageSecurityReplacement",
+      "passed": 4,
+      "seconds": 274.916,
+      "sha256": "e225ad114f97caf91aca1fdb452ad14dfac16e9a79050f3b7b93c98d2807c826",
+      "skipped": 0,
+      "tests": 4
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/real-deployment-tests-final3.log",
+      "name": "realDeploymentAndProjection",
+      "passed": 21,
+      "seconds": 2.653,
+      "sha256": "bf4c1ac8fdac5af018890db56683133ce3b3d9928fe1092831f242dcb9353735",
+      "skipped": 0,
+      "tests": 21
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/backend-focused.log",
+      "name": "backendProviderFinancial",
+      "passed": 48,
+      "seconds": 1.862,
+      "sha256": "46f6fe64e5c2cde5fecfa4ba0f1f011fe133a31f3991e17ca0cbc3e211ce97cf",
+      "skipped": 0,
+      "tests": 48
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/transport-tests.log",
+      "name": "httpsOwnerProcesses",
+      "passed": 16,
+      "seconds": 0.548,
+      "sha256": "f288e709de5594def81340c61d582a2f8995fbf78eddc853708042e94ef65ae0",
+      "skipped": 0,
+      "tests": 16
+    },
+    {
+      "errors": 3,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/source-tests.log",
+      "name": "sourceProfileHost",
+      "passed": 15,
+      "seconds": 5.164,
+      "sha256": "176d4a5449a7e3fc7b7ce10f6d3734cf1dfb04256a4395e6eca4b4c7fea842bb",
+      "skipped": 0,
+      "tests": 18
+    },
+    {
+      "errors": 0,
+      "failed": 0,
+      "log": "/tmp/task52-real-images-v7/image-closed-entry-tests.log",
+      "name": "unchangedClosedEntryTestsInCounterImage",
+      "passed": 3,
+      "seconds": 0.587,
+      "sha256": "194748f226cd2641b8e6dd050e3e0e4cb6c163cf6d3e6276146edcfb03a324e5",
+      "skipped": 0,
+      "tests": 3
+    },
+    {
+      "errors": 5,
+      "failed": 1,
+      "log": "/tmp/task52-real-images-v7/original-cloud-tests.log",
+      "name": "historicalCompilerOnCurrentSources",
+      "passed": 8,
+      "seconds": 0.076,
+      "sha256": "6c2dd57dca88af98e8096400e9129ef747e4b97312fe8b86e95c31b4cb0946cc",
+      "skipped": 0,
+      "tests": 14
+    },
+    {
+      "errors": 0,
+      "failed": 1,
+      "log": "/tmp/task52-real-images-v7/frontend-tests.log",
+      "name": "fullFrontend",
+      "passed": 328,
+      "seconds": null,
+      "sha256": "d412d3f945e2d8d6cec6d14a1a5e523f86eb4083abddf7413109bd48870254db",
+      "skipped": 0,
+      "tests": 329
+    }
+  ],
+  "configDigests": {
+    "backend": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+    "counter": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+    "dispatcher": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+    "factory": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+    "frontend": "sha256:7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+    "recovery": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0"
+  },
+  "developmentAttempts": [
+    {
+      "path": "/tmp/task52-real-images-v6",
+      "status": "interrupted browser; not accepted"
+    },
+    {
+      "cause": "offline discovery marker absent; no role started",
+      "failures": 2,
+      "path": "/tmp/task52-real-images-v7/container-safety-services.log",
+      "tests": 1
+    },
+    {
+      "cause": "parent compiler Refused class identity; corrected",
+      "errors": 1,
+      "passed": 20,
+      "path": "/tmp/task52-real-images-v7/real-deployment-tests.log",
+      "tests": 21
+    },
+    {
+      "cause": "missing package import path; preserved",
+      "path": "/tmp/task52-real-images-v7/record-attempt1-partial"
+    },
+    {
+      "cause": "bounded public vendor download incomplete",
+      "path": "/tmp/task52-real-images-v7/debian-security-tracker.json.partial"
+    }
+  ],
+  "financialManifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+  "fullDiffReview": {
+    "changedFiles": [
+      "ARCHITECTURE.md",
+      "DECISIONS.md",
+      "HANDOVER.md",
+      "TASKS.md",
+      "deployment/build-private-frontend.mjs",
+      "deployment/build_real_candidates.py",
+      "deployment/candidates/real-native-v1/Dockerfile.frontend",
+      "deployment/candidates/real-native-v1/Dockerfile.python",
+      "deployment/candidates/real-native-v1/README.md",
+      "deployment/candidates/real-native-v1/build.json",
+      "deployment/candidates/real-native-v1/cohort.json",
+      "deployment/candidates/real-native-v1/config/backend.json",
+      "deployment/candidates/real-native-v1/config/counter.json",
+      "deployment/candidates/real-native-v1/config/dispatcher.json",
+      "deployment/candidates/real-native-v1/config/factory.json",
+      "deployment/candidates/real-native-v1/config/frontend.json",
+      "deployment/candidates/real-native-v1/config/recovery.json",
+      "deployment/candidates/real-native-v1/frontend-build.json",
+      "deployment/candidates/real-native-v1/frontend-source.json",
+      "deployment/candidates/real-native-v1/images.json",
+      "deployment/candidates/real-native-v1/security.json",
+      "deployment/cloud-run/real-source-pins-v1.json",
+      "deployment/cloud_run_real.py",
+      "deployment/prepare_real_candidate.py",
+      "deployment/prepare_real_services.py",
+      "deployment/record_real_candidates.py",
+      "deployment/scan_real_candidates.py",
+      "deployment/smoke_real_candidates.py",
+      "deployment/test_cloud_run_real.py",
+      "deployment/test_real_candidates.py",
+      "docs/learning/03-overall-application-architecture.md",
+      "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+      "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+      "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+      "docs/task52-real-role-packaging-verification.json",
+      "docs/task52-real-role-packaging.md",
+      "experiments/real_images/browser.mjs",
+      "experiments/real_images/role.py",
+      "experiments/real_images/run.py",
+      "private_runtime/real_application/run_native.py",
+      "private_runtime/real_application/test_image_browser.py"
+    ],
+    "files": 41,
+    "handbookChapters": 20,
+    "jsonParse": "pass",
+    "newSecretPatternMatches": 0,
+    "preexistingDocumentationMarkers": [
+      {
+        "baselineMarkers": 3,
+        "currentMarkers": 3,
+        "file": "ARCHITECTURE.md",
+        "newMatches": 0
+      },
+      {
+        "baselineMarkers": 1,
+        "currentMarkers": 1,
+        "file": "DECISIONS.md",
+        "newMatches": 0
+      },
+      {
+        "baselineMarkers": 3,
+        "currentMarkers": 3,
+        "file": "TASKS.md",
+        "newMatches": 0
+      },
+      {
+        "baselineMarkers": 1,
+        "currentMarkers": 1,
+        "file": "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+        "newMatches": 0
+      }
+    ],
+    "pythonSyntax": "pass"
+  },
+  "handbook": {
+    "chapters": 20,
+    "reviewedUnchanged": [
+      17
+    ],
+    "updated": [
+      3,
+      14,
+      15,
+      18
+    ]
+  },
+  "historical": {
+    "accountedNanodollars": 47366625,
+    "anthropic": 1,
+    "attempts": 10,
+    "cloudProvisioning": false,
+    "google": 2,
+    "halt": true,
+    "openai": 7,
+    "originalJournalUnchanged": true,
+    "privateFiles": 324,
+    "realCredentialRead": false,
+    "realGrants": 0,
+    "realProviderCalls": 0,
+    "registryPublication": false,
+    "remainingNanodollars": 11952633375
+  },
+  "identity": "52-real-role-packaging-verification-v1",
+  "imageSmoke": {
+    "backend": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Real private startup refused: verified enrollment required.",
+      "fixtureMounts": false,
+      "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "backend",
+        "uid": 10001
+      }
+    },
+    "counter": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Real private startup refused: verified enrollment required.",
+      "fixtureMounts": false,
+      "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "counter",
+        "uid": 10001
+      }
+    },
+    "dispatcher": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Real private startup refused: verified enrollment required.",
+      "fixtureMounts": false,
+      "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "dispatcher",
+        "uid": 10001
+      }
+    },
+    "factory": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Real private startup refused: verified enrollment required.",
+      "fixtureMounts": false,
+      "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "factory",
+        "uid": 10001
+      }
+    },
+    "frontend": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Private frontend startup refused: verified enrollment, identity and network required.",
+      "fixtureMounts": false,
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "artifact": "c46140cf3c37e77a823807efde4ec9caf65738b5ddec6464a5550122b2e9983e",
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "fixture": false,
+        "next": "16.4.5",
+        "node": "v24.22.3",
+        "publicTrustEnrolled": false,
+        "real": true,
+        "uid": 1000
+      }
+    },
+    "recovery": {
+      "capabilitiesDropped": "ALL",
+      "closedStartupMessage": "Real private startup refused: verified enrollment required.",
+      "fixtureMounts": false,
+      "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "network": "none",
+      "readOnly": true,
+      "unenrolledStartupExit": 78,
+      "verified": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "recovery",
+        "uid": 10001
+      }
+    }
+  },
+  "images": {
+    "backend": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+    "counter": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+    "dispatcher": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+    "factory": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+    "frontend": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+    "recovery": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
+  },
+  "limitations": [
+    "Production positive startup uses external trusted fixture constructors in tests; genuine Google trust/SQL/secret enrollment not performed",
+    "Frontend genuine trust key absent; source-bound rebuild mandatory",
+    "Physical mobile and simultaneous paid operations not tested",
+    "Full backend suite not run",
+    "Original unexpected session_revision/database_protocol not attributed",
+    "Hosted CPU/57014 capacity and callback revision overlap still require staging validation",
+    "Independent residual vulnerability disposition incomplete",
+    "Vendor bulk-download attempt incomplete, not used as evidence"
+  ],
+  "nativeBuild": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+  "nativeManifestSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+  "recordedUTC": "2026-11-19T16:06:44.393131+00:00",
+  "releaseEligible": false,
+  "resourceCleanup": {
+    "newVolumesRemaining": 0,
+    "originalVolumesPreserved": 135,
+    "taskContainersRemaining": 0
+  },
+  "restoreCrashOutageDrills": {
+    "browserCohort": "passed",
+    "imageSafetyCohort": "passed"
+  },
+  "security": {
+    "database": {
+      "built": "2026-11-19T06:23:17Z",
+      "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-19T00:22:15Z_1795069397.tar.zst?checksum=sha256%3Acf30f15bf29c0b7addc26938fcd6e22fa8a5f8740143962a0e77666ed9747030",
+      "schemaVersion": "v6.1.10"
+    },
+    "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+    "scans": {
+      "backend": {
+        "counts": {
+          "High": 77,
+          "Low": 18,
+          "Medium": 90,
+          "Negligible": 51
+        },
+        "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+        "oom": false,
+        "rawScanSHA256": "c29333902ec1f7c775f6b52b7943d8ca0df83f6b391304551af1c2fc3989ddbb",
+        "scannerExit": 0
+      },
+      "counter": {
+        "counts": {
+          "High": 77,
+          "Low": 18,
+          "Medium": 90,
+          "Negligible": 51
+        },
+        "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+        "oom": false,
+        "rawScanSHA256": "d551e2ae11ca1a9aad99a1ada45bccb5f0b9ecd03e6abde559173f4123a98ade",
+        "scannerExit": 0
+      },
+      "dispatcher": {
+        "counts": {
+          "High": 77,
+          "Low": 18,
+          "Medium": 90,
+          "Negligible": 51
+        },
+        "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+        "oom": false,
+        "rawScanSHA256": "9f626adb10d6ac2e97ee08bb5d4f0192cdae3d01b80cfa44ae226bf74249aaed",
+        "scannerExit": 0
+      },
+      "factory": {
+        "counts": {
+          "High": 77,
+          "Low": 18,
+          "Medium": 90,
+          "Negligible": 51
+        },
+        "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+        "oom": false,
+        "rawScanSHA256": "a5d1997c54a763b61bde1aa2bf73e1d0359e585f0db2fb2727863c57a7a1dee6",
+        "scannerExit": 0
+      },
+      "frontend": {
+        "counts": {
+          "High": 70,
+          "Low": 16,
+          "Medium": 76,
+          "Negligible": 49
+        },
+        "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+        "oom": false,
+        "rawScanSHA256": "cc38ba7c2e1faf98cb1a169b275f8081d6d8d9739807a8672bd18a4fb3a9de68",
+        "scannerExit": 0
+      },
+      "recovery": {
+        "counts": {
+          "High": 77,
+          "Low": 18,
+          "Medium": 90,
+          "Negligible": 51
+        },
+        "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+        "oom": false,
+        "rawScanSHA256": "926934164422321692cef7e7aa9e7b19b6dd871baef553771a2301ad2b2ffb0a",
+        "scannerExit": 0
+      }
+    },
+    "securityAccepted": false
+  },
+  "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+  "status": "Bounded local image packaging acceptance passed; hosted activation blocked"
+}

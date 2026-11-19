@@ -1,0 +1,40 @@
+{
+  "bases": {
+    "images": {
+      "node": {
+        "linuxAmd64Digest": "sha256:60587baa7c895cf438d44f691e4ac8248b36c13b26be77332f874bebb3a64201",
+        "reference": "node:24-trixie-slim@sha256:af02d57b57719b9657a45199a79264a9437940cd55b3c7b3fc99615654f124a0",
+        "source": "https://hub.docker.com/v2/repositories/library/node/tags/24-trixie-slim"
+      },
+      "python": {
+        "linuxAmd64Digest": "sha256:05a994d2344eb364cc186910f4fc8786a38215f39f00d0acc25bff33a08f4177",
+        "reference": "python:3.12-slim-trixie@sha256:5e2bdb1b0d542d5039cffb8181c65930093949194a65c365dfb1b0fe13a4fa5b",
+        "source": "https://hub.docker.com/v2/repositories/library/python/tags/3.12-slim-trixie"
+      }
+    },
+    "platform": "linux/amd64",
+    "promotionApproved": false,
+    "purpose": "isolated Debian13 compatibility candidate, not promotion or activation",
+    "realProviderTransport": false
+  },
+  "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+  "contexts": {
+    "frontend": "frontend",
+    "python": "roles"
+  },
+  "dockerfiles": {
+    "frontend": "54bc40e38fc83b945afa3404bfeefe58a27fb07e555333bba3bf7efb99ab5333",
+    "python": "abe1e156cd65f73cc938ec022b75525fb36e75281308fc5ba1ed7fc0c22dee8d"
+  },
+  "frontendTrustEnrolled": false,
+  "identity": "52-real-provider-candidates-v1",
+  "inputs": {
+    "deployment/build-private-frontend.mjs": "e8f1c11e2250df157456015ecccd80c1b5832fc35b13a3662968e47a4b2c8ae4",
+    "deployment/frontend-private-entry.mjs": "d04ac17a0b33fcc3ec493a431776389833414871f1d8fca9a43376f9b85ff96b",
+    "deployment/prepare_real_candidate.py": "6fb744c096f815c7d74d8089633945eaba49af028fdc801c88fb9f7ba92e4231",
+    "deployment/prepare_real_frontend.py": "d4af0b30ebb03494647fea1d77cae805dc57ad03de5e32fe4dc6f3ecf9616ca8"
+  },
+  "profile": "52-real-native-six-role-v4",
+  "promotionApproved": false,
+  "releaseEligible": false
+}

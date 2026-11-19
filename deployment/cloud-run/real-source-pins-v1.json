@@ -1,0 +1,25 @@
+{
+  "baselineCommit": "da3fd66c328fed69c8db1ff55c9368b5b5df9c55",
+  "filesSHA256": {
+    "deployment/candidates/real-native-v1/Dockerfile.frontend": "54bc40e38fc83b945afa3404bfeefe58a27fb07e555333bba3bf7efb99ab5333",
+    "deployment/candidates/real-native-v1/Dockerfile.python": "abe1e156cd65f73cc938ec022b75525fb36e75281308fc5ba1ed7fc0c22dee8d",
+    "deployment/candidates/real-native-v1/build.json": "0fbecf678888f3e7544fc12f29d5352fcfdbb9b0079b31e9e69aa5ff1981cdd7",
+    "deployment/candidates/real-native-v1/cohort.json": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+    "deployment/candidates/real-native-v1/config/backend.json": "efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+    "deployment/candidates/real-native-v1/config/counter.json": "a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+    "deployment/candidates/real-native-v1/config/dispatcher.json": "9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+    "deployment/candidates/real-native-v1/config/factory.json": "6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+    "deployment/candidates/real-native-v1/config/frontend.json": "7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+    "deployment/candidates/real-native-v1/config/recovery.json": "5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+    "deployment/candidates/real-native-v1/frontend-build.json": "c46140cf3c37e77a823807efde4ec9caf65738b5ddec6464a5550122b2e9983e",
+    "deployment/candidates/real-native-v1/frontend-source.json": "61938b28702932d30ba4ddf44cb398553bd1126cfd6e44b478c0c86d623e36d4",
+    "deployment/candidates/real-native-v1/images.json": "343c32fad6a5d160484d8caad40f3298194fb4988ab04919da3f11713e1441db",
+    "deployment/candidates/real-native-v1/security.json": "d7a245325243562e1a4e644266071a786952bcd29b265f31cf9da11d0202479a",
+    "deployment/cloud-run/staging.example.json": "85b0e4115404668945da5367ca7fd4f23d38636942d0568a2c8a071722fae031",
+    "deployment/cloud_run.py": "fb5015551174a2652186755b7ad4e00b85fdc43e0b288c9acbdd19a07adc2eee",
+    "deployment/cloud_run_real.py": "4a93e4b25429fefc7b895156e2dc84be4466f072296b3f3e1f96fb571e2beee2",
+    "deployment/test_cloud_run_real.py": "bf360b2dcb2ebfd8b15a66baea2b2ac05d5daab78d59f24c7971536a432f10e8"
+  },
+  "identity": "53-real-native-deployment-source-pins-v1",
+  "purpose": "Offline exact-image enrollment preparation, never provisioning or spending authority"
+}

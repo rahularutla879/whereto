@@ -1,0 +1,247 @@
+{
+  "artifactsSHA256": {
+    "Dockerfile.frontend": "54bc40e38fc83b945afa3404bfeefe58a27fb07e555333bba3bf7efb99ab5333",
+    "Dockerfile.python": "abe1e156cd65f73cc938ec022b75525fb36e75281308fc5ba1ed7fc0c22dee8d",
+    "build.json": "0fbecf678888f3e7544fc12f29d5352fcfdbb9b0079b31e9e69aa5ff1981cdd7",
+    "cohort.json": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+    "config/backend.json": "efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+    "config/counter.json": "a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+    "config/dispatcher.json": "9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+    "config/factory.json": "6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+    "config/frontend.json": "7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+    "config/recovery.json": "5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+    "frontend-build.json": "c46140cf3c37e77a823807efde4ec9caf65738b5ddec6464a5550122b2e9983e",
+    "frontend-source.json": "61938b28702932d30ba4ddf44cb398553bd1126cfd6e44b478c0c86d623e36d4",
+    "security.json": "d7a245325243562e1a4e644266071a786952bcd29b265f31cf9da11d0202479a"
+  },
+  "buildInputs": {
+    "deployment/build-private-frontend.mjs": "e8f1c11e2250df157456015ecccd80c1b5832fc35b13a3662968e47a4b2c8ae4",
+    "deployment/build_real_candidates.py": "49869dac9346aec6f2f858a130610a5b343cd8e2e8e9cc8ffab135a6d7954e01",
+    "deployment/frontend-private-entry.mjs": "d04ac17a0b33fcc3ec493a431776389833414871f1d8fca9a43376f9b85ff96b",
+    "deployment/prepare_real_candidate.py": "6fb744c096f815c7d74d8089633945eaba49af028fdc801c88fb9f7ba92e4231",
+    "deployment/prepare_real_frontend.py": "d4af0b30ebb03494647fea1d77cae805dc57ad03de5e32fe4dc6f3ecf9616ca8",
+    "deployment/record_real_candidates.py": "a74bc0edc404a56b2178643b9dd837d01118a6b2d3cd82fb37214e4a5138f694",
+    "deployment/scan_real_candidates.py": "543882e75dc59151cdc239fe64d3ece9687a56f233209191e466c7c29c459978",
+    "deployment/smoke_real_candidates.py": "95d55e034f211537fb00340139b9251eca07d644cadcd56e3a21720aa5fa0ddb"
+  },
+  "candidateForReview": {
+    "backend": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+    "counter": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+    "dispatcher": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+    "factory": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+    "frontend": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+    "recovery": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655"
+  },
+  "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+  "configDigests": {
+    "backend": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+    "counter": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+    "dispatcher": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+    "factory": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+    "frontend": "sha256:7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+    "recovery": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0"
+  },
+  "containerAcceptancePassed": true,
+  "frontendTrustEnrolled": false,
+  "identity": "52-real-native-built-images-v1",
+  "localTagsAreNotPublishedRegistryDigests": true,
+  "mountExpectations": {
+    "backend": {
+      "config": "/run/secrets/whereto-private.json",
+      "witness-ca": "/run/secrets/witness-ca.pem"
+    },
+    "counter": {
+      "config": "/run/secrets/whereto-private.json",
+      "operational-ca": "/run/secrets/operational-ca.pem",
+      "witness-ca": "/run/secrets/witness-ca.pem"
+    },
+    "dispatcher": {
+      "config": "/run/secrets/whereto-private.json",
+      "openai": "/run/secrets/whereto-openai-key.json",
+      "operational-ca": "/run/secrets/operational-ca.pem",
+      "redis-ca": "/run/secrets/redis-ca.pem",
+      "witness-ca": "/run/secrets/witness-ca.pem"
+    },
+    "factory": {
+      "config": "/run/secrets/whereto-private.json",
+      "operational-ca": "/run/secrets/operational-ca.pem",
+      "redis-ca": "/run/secrets/redis-ca.pem",
+      "witness-ca": "/run/secrets/witness-ca.pem"
+    },
+    "frontend": {
+      "config": "/run/secrets/whereto-frontend.json",
+      "enrollment": "/run/secrets/whereto-frontend-enrollment.json"
+    },
+    "recovery": {
+      "config": "/run/secrets/whereto-private.json",
+      "witness-ca": "/run/secrets/witness-ca.pem"
+    }
+  },
+  "nativeBuild": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+  "promotionApproved": false,
+  "published": false,
+  "realProviderTransport": true,
+  "recordedAtUTC": "2026-11-19T16:03:52.456549+00:00",
+  "releaseEligible": false,
+  "roles": {
+    "backend": {
+      "command": [
+        "python",
+        "-m",
+        "private_runtime.entry"
+      ],
+      "configDigest": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+      "entrypoint": null,
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "backend",
+        "uid": 10001
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-backend:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "10001:10001"
+    },
+    "counter": {
+      "command": [
+        "python",
+        "-m",
+        "private_runtime.entry"
+      ],
+      "configDigest": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+      "entrypoint": null,
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "counter",
+        "uid": 10001
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-counter:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "10001:10001"
+    },
+    "dispatcher": {
+      "command": [
+        "python",
+        "-m",
+        "private_runtime.entry"
+      ],
+      "configDigest": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+      "entrypoint": null,
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "dispatcher",
+        "uid": 10001
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-dispatcher:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "10001:10001"
+    },
+    "factory": {
+      "command": [
+        "python",
+        "-m",
+        "private_runtime.entry"
+      ],
+      "configDigest": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+      "entrypoint": null,
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "factory",
+        "uid": 10001
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-factory:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "10001:10001"
+    },
+    "frontend": {
+      "command": [
+        "/bin/sh",
+        "/app/private-runtime/frontend-launch.sh"
+      ],
+      "configDigest": "sha256:7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90",
+      "entrypoint": [
+        "docker-entrypoint.sh"
+      ],
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "artifact": "c46140cf3c37e77a823807efde4ec9caf65738b5ddec6464a5550122b2e9983e",
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "fixture": false,
+        "next": "16.4.5",
+        "node": "v24.22.3",
+        "publicTrustEnrolled": false,
+        "real": true,
+        "uid": 1000
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-frontend:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "node"
+    },
+    "recovery": {
+      "command": [
+        "python",
+        "-m",
+        "private_runtime.entry"
+      ],
+      "configDigest": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+      "entrypoint": null,
+      "fixtureCredentialsOrRespondersInImage": false,
+      "image": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "legacyCatalogLoader": "Compatibility import only; Python fixture data absent; not selected in real profile",
+      "platform": "linux/amd64",
+      "readOnlyApplication": true,
+      "runtime": {
+        "cohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+        "native": "f9444b8ec3885fdcd14afea60ad5a8bab842c8d9e8e5447e307331cd4827316e",
+        "python": "3.12.16",
+        "role": "recovery",
+        "uid": 10001
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "whereto-recovery:real-native-v2",
+      "unenrolledExit": 78,
+      "user": "10001:10001"
+    }
+  },
+  "rollbackReferences": {
+    "automaticRollbackPermitted": false,
+    "cohort": "deployment/candidates/trixie-zlib-v2/cohort.json",
+    "images": "deployment/candidates/trixie-zlib-v2/images.json"
+  }
+}

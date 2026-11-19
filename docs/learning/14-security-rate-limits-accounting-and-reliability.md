@@ -252,3 +252,7 @@ The inactive source-ticket extension checks SQL owner/build/revision/fence, comp
 ### Real count and delivery RPC separation
 
 The new real bindings use actual complete-request count SQL/witness and a delivery-only dispatcher SQL front door. Counter credentials cannot generate, grant or set rates. The factory rereads protected count authority before reservation; the dispatcher rereads protected receipts and checks exact owner/payload/epoch. Each test process receives only its own role credentials. Uncertain first-Search delivery retains its full fixture charge, quarantines and never retries. A separate native session_revision/P0001 refusal remains unattributed; an instrumented pass does not resolve it. No deadline, attestation or financial guard was relaxed. [Exact implementation and verification](../task52-real-factory-rpc.md).
+
+## Real-role packaging checkpoint — November19,2026
+
+Packaging and successful fixture tests create no financial or identity authority. All candidate entrypoints refuse unenrolled startup; frontend has no genuine trust key yet. Counter has no provider credential and can use only the protected count RPC to dispatcher. Exact source checks, original SQL/witness deadlines, reservations, single-send uncertainty and historical halt remain unchanged. Residual high scanner matches remain hosting blockers pending remediation or independent disposition. [Implementation and exact results](../task52-real-role-packaging.md).
