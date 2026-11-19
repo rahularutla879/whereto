@@ -1,0 +1,1203 @@
+{
+  "identity": "52-real-six-role-browser-verification-v1",
+  "baseline": "85a0e0b3a5626c69073853a7ac6ad8eb13180f92",
+  "date": "2026-11-19T06:29:22.232388+00:00",
+  "status": "Local six-role browser slice verified; production image projection incomplete",
+  "releaseEligible": false,
+  "sourceIdentity": "52-real-native-six-role-v4",
+  "sourceManifestSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+  "sourceInputs": 30,
+  "backendOutputs": 72,
+  "cohorts": {
+    "browser": {
+      "log": "/tmp/task52-six-browser-services-5.log",
+      "sha256": "5d16b5e684b8d0dc1cbff8f9497128e8afdd8220384998b39399ba5fcdb6fb2b",
+      "tests": 1,
+      "seconds": 188.399,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 1,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_browser_entry"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "3dddf310a269a63b5bd6f3b0737b81caf5d0a860db15cdc57d8c20eeed48704b",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "2ee333d9038bc8147f163f0fc7a403cb1d128f946a43dfced3acb9d4d82cc965",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        },
+        "real_browser_verified": {
+          "event": "real_browser_verified",
+          "result": {
+            "passed": true,
+            "outings": 2,
+            "twoOpenOutings": true,
+            "simultaneousInterpretations": false,
+            "simultaneousGenerations": false,
+            "permissionDenialTested": true,
+            "results": [
+              {
+                "viewport": "desktop1440x1000",
+                "passed": true,
+                "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+                "cards": 3,
+                "viewPlan": true,
+                "refreshDiscard": true
+              },
+              {
+                "viewport": "mobile-emulation-390x844",
+                "passed": true,
+                "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+                "cards": 3,
+                "viewPlan": true,
+                "refreshDiscard": true
+              }
+            ]
+          },
+          "providerOperations": {
+            "/v1/places:searchText": 4,
+            "/v1/responses": 2,
+            "/v1/responses/input_tokens": 2,
+            "/distanceMatrix/v2:computeRouteMatrix": 4
+          }
+        }
+      },
+      "restoreCrashDrills": "passed"
+    },
+    "servicesSourcesIdentity": {
+      "log": "/tmp/task52-six-services-final-2.log",
+      "sha256": "63701f477c2d1973aff9484cbf18c118e28c2061befe193d99151ccb43c6c2ce",
+      "tests": 22,
+      "seconds": 422.963,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 1,
+      "passed": 21,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services",
+            "private_runtime.real_application.test_sources",
+            "private_runtime.test_identity"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "eb590d664942e2759e1352560091c5ccca1a75f6a3afd9128c94238099bf1ea4",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "2ee333d9038bc8147f163f0fc7a403cb1d128f946a43dfced3acb9d4d82cc965",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "passed"
+    },
+    "strongRelayRestartWrongRole": {
+      "log": "/tmp/task52-six-relay-final.log",
+      "sha256": "3c090ff0edbd2c5a684423605647b6157d52143bef2e84013c07848ecd9e5988",
+      "tests": 2,
+      "seconds": 31.743,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 2,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_000_count_relay_rejects_substitution_replay_and_generation",
+            "private_runtime.real_application.test_services.Tests.test_invalid_auth_and_wrong_role_cannot_reach_provider_or_counter"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "f5d190549324fbf6862d7804fde69466b2c4e6958f7ba75b3416c4782237d792",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "3f0d11bec79594dc66d30f940532d2a74b27c5d4cac676b6dfc58f55232fe9ed",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "passed"
+    },
+    "nativeSourceRevision": {
+      "log": "/tmp/task52-six-native-source-final.log",
+      "sha256": "ea9192a0e81f05575cda0744e23825f429c4b3f5ecc447cffe5ea92bfd2a0957",
+      "tests": 9,
+      "seconds": 206.932,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 9,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_checkpoint"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "f5d190549324fbf6862d7804fde69466b2c4e6958f7ba75b3416c4782237d792",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "3f0d11bec79594dc66d30f940532d2a74b27c5d4cac676b6dfc58f55232fe9ed",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "passed"
+    },
+    "backendFocused": {
+      "log": "/tmp/task52-six-backend-focused.log",
+      "sha256": "0cc0104a827e1bf3b0db81d2d94e874c2708daf9368ef22085874d19a509375b",
+      "tests": 48,
+      "seconds": 1.938,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 48,
+      "restoreCrashDrills": "not completed in this log"
+    },
+    "sourceProjectionHost": {
+      "log": "/tmp/task52-six-source-final-host.log",
+      "sha256": "577cc5e8e58492915e6e12d02cdf4dd615a515259072ba9bcd685a07fbf672b3",
+      "tests": 8,
+      "seconds": 5.043,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 8,
+      "restoreCrashDrills": "not completed in this log"
+    },
+    "focusedFrontend": {
+      "log": "/tmp/task52-six-focused-ui-final.log",
+      "sha256": "c3d48a35786f668e911bcdb20b63b72e9a859771e2a4f1b69fb01b96ae46678b",
+      "tests": 23,
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "status": "pass",
+      "restoreCrashDrills": "not completed in this log"
+    },
+    "fullFrontend": {
+      "log": "/tmp/task52-six-frontend-tests.log",
+      "sha256": "2b2c86d809f10e347f1f9a12fc7d81dcff9c78b3ccb7380be381104fec1702f2",
+      "tests": 329,
+      "passed": 328,
+      "failed": 1,
+      "skipped": 0,
+      "status": "fail",
+      "restoreCrashDrills": "not completed in this log"
+    }
+  },
+  "developmentAttempts": [
+    {
+      "log": "/tmp/task52-six-relay-first.log",
+      "sha256": "94a69dd36f57bdfcb9a1af737663cfebf775a4d964e7c019dc00c4ff5d6435ff",
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "3a08ff3bca4cd79d30b97fe27366d5207a0dd76fa919d1413ea233e847292b2f",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "98d0059654ab4891e9f5b58d528daf4b2c915bf6d6e5e66e32ca514542737c15",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "bfb42fcec91785d685a9ce8c8370273882c81250fc793ae2aaed5e601de3eb4a",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Frozen frontend source mismatch before service execution; original parent now built in exact85a snapshot without repinning."
+    },
+    {
+      "log": "/tmp/task52-six-relay-second.log",
+      "sha256": "085fb2324c2165d09b9a042f8a39a883c1b6a630958c3bcc4507781816c15355",
+      "tests": 1,
+      "seconds": 4.117,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "c57fe5764e833f25cb54db19f15a279d498a800e0a5816fc81672f682365c39e",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "98d0059654ab4891e9f5b58d528daf4b2c915bf6d6e5e66e32ca514542737c15",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "bfb42fcec91785d685a9ce8c8370273882c81250fc793ae2aaed5e601de3eb4a",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Pinned build helper missing from disposable payload; copied the exact helper."
+    },
+    {
+      "log": "/tmp/task52-six-relay-third.log",
+      "sha256": "372509a7105f62f1e37c108a6e93b42b32a9c9852d0265caf3e294c86d8af659",
+      "tests": 8,
+      "seconds": 338.762,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 8,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "c57fe5764e833f25cb54db19f15a279d498a800e0a5816fc81672f682365c39e",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "98d0059654ab4891e9f5b58d528daf4b2c915bf6d6e5e66e32ca514542737c15",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "849231025ad9c0b9a749426c2fac51c283965dc66bfecd2afc9adb8d2b60e5f8",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "passed",
+      "reason": "Earlier eight-case relay cohort passed."
+    },
+    {
+      "log": "/tmp/task52-six-ports-first.log",
+      "sha256": "e5a32f57ddcdf305bd5a1219149aa41786bda5f0f9ed99faec23e0ca25978252",
+      "tests": 1,
+      "seconds": 6.15,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "7255664f96489b4c9aa17da804d2e9e91d5426ad445c82678580bf852967f4b2",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "06fa4dd0a44cf8cb2ea4c77495b293f3b483ded0e64c1f0472b814ebdcc79545",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "50c072f1a13c4842636fc5060218d554ad5c1efb46499998112c7d6e36040a60",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Missing dispatcher owner fixture configuration refused."
+    },
+    {
+      "log": "/tmp/task52-six-ports-second.log",
+      "sha256": "da8a831053c1641b940e577b93bbff0b9ba406be60c3599308c8a9fff0607551",
+      "tests": 1,
+      "seconds": 15.923,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "cf16f89c3b4f434a4b426f30c2f59836a0073d7f571d01d7aa8bf93a0b1af538",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "06fa4dd0a44cf8cb2ea4c77495b293f3b483ded0e64c1f0472b814ebdcc79545",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "50c072f1a13c4842636fc5060218d554ad5c1efb46499998112c7d6e36040a60",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Evidence namespace mismatch; real port accepts its configured environment and maps to existing real keys."
+    },
+    {
+      "log": "/tmp/task52-six-ports-third.log",
+      "sha256": "de8289a1558e2260fa6520e1aec67ef1cf8ec823b9bc34fbdea61dc25482638a",
+      "tests": 1,
+      "seconds": 26.647,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "0f4d5331eca51ae3bf0ff6b206df6d4aa65cee5996dec4697616784925350dda",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "06fa4dd0a44cf8cb2ea4c77495b293f3b483ded0e64c1f0472b814ebdcc79545",
+          "diagnosticSHA256": "47c09f1f0e19a86652e39bb65cc48b71df4594ca77ce39e7320da0711f9f0cd3",
+          "harnessSHA256": "50c072f1a13c4842636fc5060218d554ad5c1efb46499998112c7d6e36040a60",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Remote disconnection, initially unattributed."
+    },
+    {
+      "log": "/tmp/task52-six-ports-fourth.log",
+      "sha256": "dfa979942050b082f945a8d1e6b76ebd529dfd5ce14e99d53b281a91f3ad9022",
+      "tests": 1,
+      "seconds": 26.488,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "0f4d5331eca51ae3bf0ff6b206df6d4aa65cee5996dec4697616784925350dda",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "d6854c19bd372f7a67d24d457cf75d0a44dc2d7eccdbb3d9d4603ce0bf3c9ed0",
+          "diagnosticSHA256": "cc604720421da3c2537d44acf29825fb09a4dd8286c79656eaa3fe590f38f063",
+          "harnessSHA256": "50c072f1a13c4842636fc5060218d554ad5c1efb46499998112c7d6e36040a60",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Same disconnection with TLS-only instrumentation, not yet attributed."
+    },
+    {
+      "log": "/tmp/task52-six-ports-fifth.log",
+      "sha256": "2adc8e5b86f5c04bd1ccc68389bb4ec9d33fedf66368258ded5a521b6f3f84e1",
+      "tests": 1,
+      "seconds": 26.193,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "0f4d5331eca51ae3bf0ff6b206df6d4aa65cee5996dec4697616784925350dda",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "860f5da5e190cdcbe732425295b82585a599fc341a2421c95c0b3d293ba391de",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "50c072f1a13c4842636fc5060218d554ad5c1efb46499998112c7d6e36040a60",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Proven fixture cgroup OOM: two roles exit-9, oom_kill2 at768MiB."
+    },
+    {
+      "log": "/tmp/task52-six-ports-sixth.log",
+      "sha256": "43768a673536fb16a0bf6662aa10a584a85ab90a28da61f0f0118932009be3a3",
+      "tests": 6,
+      "seconds": 208.864,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 5,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "69a66c051aa6715e3ad5be52e09aef5862e2842014f91702d8b542fc09c08206",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "860f5da5e190cdcbe732425295b82585a599fc341a2421c95c0b3d293ba391de",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "a557897b4e8f73e442beb5f31329f7e7028a28d9c846525653a2343f5988191a",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Five pass/one refusal: replacement backend configuration lacked its exact witness enrollment; fixture enrolled the exact variant."
+    },
+    {
+      "log": "/tmp/task52-six-ports-seventh.log",
+      "sha256": "26dd8c574341d6cbe8350e26fd7b220c38849af53538eff6f76f3b85c10b515f",
+      "tests": 9,
+      "seconds": 358.057,
+      "status": "pass",
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 9,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services"
+          ],
+          "sourcesSHA256": "69a66c051aa6715e3ad5be52e09aef5862e2842014f91702d8b542fc09c08206",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "9da05fe9142ce7c7a727324926e7ff259c6a49b4caf964ebd5235e5a33137a3a",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "a557897b4e8f73e442beb5f31329f7e7028a28d9c846525653a2343f5988191a",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "passed",
+      "reason": "Nine-case strict TLS Ports cohort passed."
+    },
+    {
+      "log": "/tmp/task52-six-browser-services.log",
+      "sha256": "e9b7d70be46456956695923943142fba6a0d7b14e782c1badaef5c3f4be39c70",
+      "tests": 1,
+      "seconds": 217.455,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_browser_entry"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "0d2dea69b089027fb57b2a6e23c9637d18208bda77aebd6c0e4c844fcd331f1e",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "b7f0a8ce60ae8338b91fffd67e47f340a15b4e6a6b176b0d6d107648201ab90f",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Cold readiness unavailable; initial observation remains unattributed."
+    },
+    {
+      "log": "/tmp/task52-six-browser-services-2.log",
+      "sha256": "e3c6f40a0014a1b1675bf64000ca508f1c75e704eb8b6026d9f5baf9ea412c81",
+      "tests": 1,
+      "seconds": 152.867,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_browser_entry"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "0d2dea69b089027fb57b2a6e23c9637d18208bda77aebd6c0e4c844fcd331f1e",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "b7f0a8ce60ae8338b91fffd67e47f340a15b4e6a6b176b0d6d107648201ab90f",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Concurrent interpretations correctly refused admission_capacity_burst; no limit relaxed."
+    },
+    {
+      "log": "/tmp/task52-six-browser-services-3.log",
+      "sha256": "6d196b02a4fe49487d32849357f329b83cb879efe2c7c2f2d79a07742f2589af",
+      "tests": 1,
+      "seconds": 146.699,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_browser_entry"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "0d2dea69b089027fb57b2a6e23c9637d18208bda77aebd6c0e4c844fcd331f1e",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "b7f0a8ce60ae8338b91fffd67e47f340a15b4e6a6b176b0d6d107648201ab90f",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Mobile sensor observation became older than60s; production stale-location refusal worked."
+    },
+    {
+      "log": "/tmp/task52-six-browser-services-4.log",
+      "sha256": "acd69f6175cbbd0887e9a7b0a4804b1ed5cde4610b20942528a465298d184410",
+      "tests": 1,
+      "seconds": 251.486,
+      "status": "fail",
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "passed": 0,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services.Tests.test_browser_entry"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "2a2a772508cc230adae2e9116288eacf453744d17c6dfb8681b8dbedb4430845",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "b7f0a8ce60ae8338b91fffd67e47f340a15b4e6a6b176b0d6d107648201ab90f",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Added please became part of destination; destination_unresolved correctly refused."
+    },
+    {
+      "log": "/tmp/task52-six-services-final.log",
+      "sha256": "12612bc58ff5d745bbddaf2b2f782c5ca47d0594d1cefa8ba9c97639acd317d1",
+      "tests": 3,
+      "seconds": 114.57,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 1,
+      "passed": 1,
+      "executionEvidence": {
+        "real_native_execution_identity": {
+          "event": "real_native_execution_identity",
+          "testModules": [
+            "private_runtime.real_application.test_services",
+            "private_runtime.real_application.test_sources",
+            "private_runtime.test_identity"
+          ],
+          "sourcesSHA256": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+          "testSHA256": "793c800803ba664c2b0711a8873ff0d033c59e8b0cd698d905bba2009ad4b2bf",
+          "checkpointTestSHA256": "81b33fde003c58d272aab9ac1d69e70172e6e3fa41bc909d5cf7e877c90c266a",
+          "serviceTestSHA256": "158f6646c6fe8375b8e60e82d4b10e5605cfaae054a02fa57a7424ff483a43b6",
+          "diagnosticSHA256": "7c14b55275a1a11e8e16efcb79d15bf8446a16160dfdb39430fcac9f31651645",
+          "harnessSHA256": "2ee333d9038bc8147f163f0fc7a403cb1d128f946a43dfced3acb9d4d82cc965",
+          "applicationSQLSHA256": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+        },
+        "real_finance_execution_identity": {
+          "event": "real_finance_execution_identity",
+          "manifestSHA256": "b013640f3e7a8086e99efed882f954bf50af15d7b217bf85917971d142504313",
+          "testSHA256": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+          "harnessSHA256": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+          "sqlSHA256": {
+            "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+            "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+          },
+          "contractSHA256": {
+            "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+            "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+          }
+        },
+        "real_finance_resource_cleanup": {
+          "event": "real_finance_resource_cleanup",
+          "preExistingPreserved": 135,
+          "newVolumesRemaining": 0
+        }
+      },
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "New test incorrectly used revoked legacy app_protocol;42501. Corrected to native app_store, no SQL permissions changed."
+    },
+    {
+      "log": "/tmp/task52-six-source-checks.log",
+      "sha256": "7cf529e76629692fb51f7d2036c6e2fba6dfdeed85bba199a7d65e62a707198c",
+      "tests": 9,
+      "seconds": 5.129,
+      "status": "fail",
+      "failed": 0,
+      "errors": 1,
+      "skipped": 0,
+      "passed": 8,
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Host missing PyJWT:8 pass/1 import error."
+    },
+    {
+      "log": "/tmp/task52-six-source-checks-2.log",
+      "sha256": "8ec4d8e28b3df0788e5232989e62b0e4995eeff52ea54a9f3058992b1d0e6f42",
+      "tests": 12,
+      "seconds": 5.4,
+      "status": "fail",
+      "failed": 0,
+      "errors": 4,
+      "skipped": 0,
+      "passed": 8,
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Pinned JWT alone insufficient; host missing cryptography:8 pass/4 import errors. Rerun those cases in existing pinned Linux cohort."
+    },
+    {
+      "log": "/tmp/task52-six-lint.log",
+      "sha256": "c717f167ab90e546ebb2f3bee40361d0954f6992cb6fadc2691bac624be6450e",
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Eight undefined test-only Node/browser globals; fixed declarations."
+    },
+    {
+      "log": "/tmp/task52-six-next-build.log",
+      "sha256": "1ab22ba95ef42435c14709e21565f7fe7c573c53b7abfdbbf58506f36ebf41d2",
+      "restoreCrashDrills": "not completed in this log",
+      "reason": "Original16.4.2 build compiled but refused by Next security gate. Not suppressed; existing isolated16.4.5 patch reused."
+    }
+  ],
+  "actualProviderCalls": 0,
+  "actualCredentialsRead": 0,
+  "actualFinancialGrants": 0,
+  "cloudResources": 0,
+  "normalStartupChanged": false,
+  "financialSourceChanged": false,
+  "historicalEvaluationChanged": false,
+  "syntheticAccountingSubstitute": false,
+  "fixtureEnrollment": "fictional rates/review references/credentials/grants in disposable SQL only",
+  "browser": {
+    "passed": true,
+    "outings": 2,
+    "twoOpenOutings": true,
+    "simultaneousInterpretations": false,
+    "simultaneousGenerations": false,
+    "permissionDenialTested": true,
+    "results": [
+      {
+        "viewport": "desktop1440x1000",
+        "passed": true,
+        "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+        "cards": 3,
+        "viewPlan": true,
+        "refreshDiscard": true
+      },
+      {
+        "viewport": "mobile-emulation-390x844",
+        "passed": true,
+        "geolocation": "Chromium-emulated location; native permission granted; no manual input",
+        "cards": 3,
+        "viewPlan": true,
+        "refreshDiscard": true
+      }
+    ]
+  },
+  "browserFixtureArtifact": "2443f4e3612a8d2c2917ed39b774b8d872919b95ac2d33f13f7eea967a670305",
+  "finalFrontendMetadataArtifact": "c82f5ca64fd69a1aca995f4ece4dfc91689f1cf65583bff95ad1cd9c705ff8f1",
+  "frontendExecutableAndBuiltApplicationHashesUnchanged": true,
+  "frontendBuild": "isolated Next16.4.5 webpack production build passed; original package locks unchanged",
+  "checks": {
+    "history": {
+      "log": "/tmp/task52-six-history.log",
+      "sha256": "0322a8943aa13ae80096f3c1232cea32c6a338660c411e0b3d118e5018acf01f"
+    },
+    "pip": {
+      "log": "/tmp/task52-six-pip-check.log",
+      "sha256": "9261363b733079a641c2e4cc9bc46ffa1d8336945a87f807b6cf68847dbc9b09"
+    },
+    "npm": {
+      "log": "/tmp/task52-six-npm-check.log",
+      "sha256": "f3a3323f6d8b3d70b13444674bf086d621b26c44e2447e89c837a2df04724ed0"
+    },
+    "types": {
+      "log": "/tmp/task52-six-types-final.log",
+      "sha256": "dd8edb054dbe6137c4264ebe8ada5ed7bdd091cdadd91f62acb409174839c91e"
+    },
+    "lint": {
+      "log": "/tmp/task52-six-lint-last.log",
+      "sha256": "2a52e9938497c4a83c02ceb7ceb7a965a75fd7af59449f8b765bad3c039f53ff"
+    },
+    "productionBuild": {
+      "log": "/tmp/task52-six-real-next-build.log",
+      "sha256": "0e45a211699403172baedb415a6fd31253c26e295995e8a5b411a2183b34481d"
+    },
+    "changedFileAndBundleAudit": {
+      "log": "/tmp/task52-six-audit-2.log",
+      "sha256": "e6b96d81725375aecfe2cb254e9a9f466f5c2bb9a23e09e3cbec78391be18db5",
+      "status": "passed; first unanchored pattern falsely matched task filenames, corrected prefix boundary"
+    }
+  },
+  "performance": {
+    "scope": "local fixture bridge included,2CPU4GiB VM; not cloud/provider latency",
+    "interpretationSeconds": [
+      11.602,
+      11.335
+    ],
+    "clarificationSeconds": [
+      8.836,
+      8.846
+    ],
+    "generationSeconds": [
+      59.71,
+      59.592
+    ],
+    "securityDeadlinesChanged": false
+  },
+  "images": {
+    "built": 0,
+    "scanned": 0,
+    "promoted": 0,
+    "rollbackCandidatesUnchanged": true,
+    "existingSecurityInventory": "docs/task52-candidate-promotion-security.json",
+    "newSecurityException": false
+  },
+  "knownReliability": [
+    {
+      "category": "historical session_revision",
+      "status": "unattributed; no relaxed guard/deadline; read-only source observer retained"
+    },
+    {
+      "category": "first browser cold readiness",
+      "status": "unattributed initial refusal; later successful readiness does not explain it"
+    },
+    {
+      "category": "combined fixture OOM",
+      "status": "proven; test-only cap raised768MiB\u21922GiB for seven processes; zero OOM in successful strict Ports runs"
+    },
+    {
+      "category": "observed terminal session_revision",
+      "status": "expected negative test after terminal planning; evidence_meta/P0001; revoked=true, revisionMatches=false, expired=false,secondsRemaining531,testClockEnabled=false. Does not explain historical inference-time refusal."
+    }
+  ],
+  "notRun": [
+    "full backend suite",
+    "full historical27-case real finance cohort this checkpoint (source byte-identical)",
+    "full22-case native cohort this checkpoint (focused source/revision cohort selected)",
+    "final per-role projection and six image builds/scans/non-root/read-only smoke",
+    "actual Cloud Run IAM/IAP/Secret Manager/hosted storage or realistic cloud capacity",
+    "live provider/model qualification or account access",
+    "physical mobile GPS/device test",
+    "browser cross-user switch (covered through authenticated HTTP instead)",
+    "complete recovery-operator HTTP administration",
+    "every mid-RPC factory/dispatcher kill point",
+    "Browser discard-before-edit/back-navigation flow; client-controller and HTTP invalidation covered instead"
+  ],
+  "nextCodeConnection": "Finite real per-role entry/dependency/source projections and common cohort, frontend cohort binding and counter\u2192dispatcher IAM; then build/scan the six candidates.",
+  "externalGates": [
+    "application model qualification and exact pricing/count fees/grants",
+    "application provider credentials/transport and Google content approval",
+    "container findings disposition and unchanged-deadline capacity/restart validation",
+    "independent witness owner, managed SQL/Redis and IAM/IAP/secrets/purchasing authorization"
+  ],
+  "handbook": {
+    "chapters": 20,
+    "reviewedAndUpdated": [
+      3,
+      4,
+      6,
+      7,
+      13,
+      14,
+      15,
+      18
+    ],
+    "unaffectedChapters": 12
+  },
+  "changedFiles": [
+    "ARCHITECTURE.md",
+    "DECISIONS.md",
+    "HANDOVER.md",
+    "TASKS.md",
+    "app/page.tsx",
+    "components/private-ordinary-experience.tsx",
+    "deployment/build-private-frontend.mjs",
+    "deployment/frontend-private-entry.mjs",
+    "deployment/native_parent.py",
+    "deployment/prepare_real_frontend.py",
+    "docs/learning/03-overall-application-architecture.md",
+    "docs/learning/04-frontend-react-next-js-typescript-and-tailwind.md",
+    "docs/learning/06-apis-http-json-and-frontend-backend-communication.md",
+    "docs/learning/07-complete-end-to-end-outing-request-lifecycle.md",
+    "docs/learning/13-state-management-caching-and-request-lifecycles.md",
+    "docs/learning/14-security-rate-limits-accounting-and-reliability.md",
+    "docs/learning/15-testing-mocks-debugging-and-error-handling.md",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md",
+    "docs/task52-real-six-role-browser-verification.json",
+    "docs/task52-real-six-role-browser.md",
+    "experiments/real_frontend/browser.mjs",
+    "experiments/real_frontend/identity.mjs",
+    "experiments/real_frontend/run_local.py",
+    "lib/device-origin.test.ts",
+    "lib/device-origin.ts",
+    "lib/private-frontend-startup.test.ts",
+    "lib/private-frontend-startup.ts",
+    "lib/private-ordinary-client.ts",
+    "lib/private-server-boundary.ts",
+    "private_runtime/real_application/count_transport.py",
+    "private_runtime/real_application/count_transport.sql",
+    "private_runtime/real_application/count_transport_witness.sql",
+    "private_runtime/real_application/enrollment.sql",
+    "private_runtime/real_application/entry.py",
+    "private_runtime/real_application/factory.py",
+    "private_runtime/real_application/identity.py",
+    "private_runtime/real_application/ports.py",
+    "private_runtime/real_application/projection.py",
+    "private_runtime/real_application/rpc_sql.py",
+    "private_runtime/real_application/run_native.py",
+    "private_runtime/real_application/service.py",
+    "private_runtime/real_application/sources-service-v3.json",
+    "private_runtime/real_application/sources.json",
+    "private_runtime/real_application/startup.py",
+    "private_runtime/real_application/test_diagnostics.py",
+    "private_runtime/real_application/test_hosted.py",
+    "private_runtime/real_application/test_services.py",
+    "private_runtime/real_application/test_sources.py",
+    "private_runtime/real_application/test_tls_setup.py"
+  ],
+  "resources": {
+    "preExistingVolumes": 135,
+    "inventorySHA256": "8bff512e82d55b58c376ac0f36d30746b2c54a3dad7b83b6216fb411a363964c",
+    "newVolumesRemaining": 0,
+    "taskContainersRemaining": 0
+  }
+}

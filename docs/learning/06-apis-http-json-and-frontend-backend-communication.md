@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The counter sends an authenticated `/count-provider` RPC containing only the durable operation identity and exact complete generation wire. Dispatcher independently reads protected count authority, confirms current policy/source/epoch and consumes one-use facts in both databases before fixed-endpoint counting. Counter has no OpenAI key or `/send` capability. The existing frontend workload/IAP/body proofs still cross FastAPI and the factory independently. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## An API is a contract, not a magic connection
 
 An API specifies an address, method, allowed input, output and failure behavior. HTTP has a **method** such as GET (retrieve metadata) or POST (submit work), **headers** carrying metadata, an optional **body**, and a **status code** in the response. Where To? uses JSON bodies so TypeScript and Python can exchange structured values without sharing memory.

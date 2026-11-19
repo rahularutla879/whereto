@@ -15,15 +15,28 @@ from . import rpc
 from .factory import Factory
 
 class Role:
-    def __init__(self,config,*,auth,client,epoch,owner=None,broker=None,issuer=None,counter=None,delivery=None,router=None,responder=None):
-        self.c=deepcopy(config);self.role=config['service'];parent.enrollment(config)
+    def __init__(self,config,*,auth,client,epoch,owner=None,broker=None,issuer=None,counter=None,delivery=None,router=None,responder=None,count_delivery=None):
+        self.c=deepcopy(config);self.role=config['service']
+        checked=deepcopy(config)
+        if self.role=='dispatcher':
+            callers=checked['allow'].pop('/count-provider',None)
+            if not callers or any(checked['trust'].get(p,{}).get('role')!='counter' or p not in checked['enrollment'] for p in callers):raise Denied('count_transport_callers')
+        parent.enrollment(checked)
         self.auth,self.client,self.epoch=auth,client,epoch
         self.owner,self.broker,self.issuer=owner,broker,issuer
         self.counter,self.delivery,self.router,self.responder=counter,delivery,router,responder
+        self.count_delivery=count_delivery
+        if (self.role=='dispatcher')!=(count_delivery is not None):raise Denied('count_transport_role')
         if auth.c['service']!=self.role or auth.c['build']!=config['build'] or epoch()!=config['epoch']:raise Denied('real_role_identity')
         required={'factory':(owner,broker,issuer),'counter':(counter,),'dispatcher':(delivery,router,responder),'backend':(client,),'recovery':()}
         if self.role not in required or any(x is None for x in required[self.role]):raise Denied('real_role_dependencies')
         if self.role!='counter' and counter is not None or self.role!='dispatcher' and any(x is not None for x in (delivery,router,responder)) or self.role!='factory' and any(x is not None for x in (owner,broker,issuer)):raise Denied('real_role_separation')
+    def probe(self):
+        if self.role!='factory':raise Denied('real_probe_role')
+        broker=self.broker()
+        if broker.store.evidence.client.ping() is not True:raise Denied('real_probe_evidence')
+        for role in ('counter','dispatcher','recovery'):
+            if self.client.request(role,'/ui-probe',{})!={'available':True}:raise Denied('real_probe_dependency')
     def handle(self,config,path,value):
         if path=='/ui-probe':
             if value!={} or self.epoch()!=config['epoch']:raise Denied('real_probe')
@@ -31,8 +44,9 @@ class Role:
         if self.role=='factory':
             if path=='/dispatch-check':return self.owner.check(value)
             if path=='/ordinary':
-                with self.owner.action():return Factory(config,broker=self.broker,issuer=self.issuer,auth=self.auth).ordinary(value)
+                with self.owner.action():return Factory(config,broker=self.broker,issuer=self.issuer,auth=self.auth,readiness=self.probe).ordinary(value)
         if self.role=='counter' and path=='/count':return rpc.count(value,self.counter)
+        if self.role=='dispatcher' and path=='/count-provider':return self.count_delivery(value)
         if self.role=='dispatcher' and path=='/send':return rpc.dispatch(value,store_factory=self.delivery,router=self.router,caller=owned_dispatch.CALLER.get(),responder=self.responder)
         raise Denied('real_role_method')
 

@@ -34,6 +34,7 @@ from .store import Store
 from .rpc import RemoteSend,RemoteCounter,ScopedWitness,DeliveryStore
 from .service import Role,privileged_server,backend_app
 from .rpc_sql import scripts
+from .count_transport import RelayCounter,RemoteCount,CountDelivery
 
 BUILD='1'*64
 ROLES={'backend':'real_backend_auth','factory':'real_factory_witness','counter':'real_counter_witness_client','dispatcher':'real_dispatch_witness','recovery':'real_recovery_client'}
@@ -67,7 +68,7 @@ def configurations(ports,cert):
     aud={n:'https://'+n+'-task52-offline.run.app' for n in set(roles.values())};iap='/projects/000000000000/locations/us-east4/services/fixture-frontend';now=int(time.time())
     def token(kind,**claims):return jwt.encode(dict(iss=ISSUERS[kind],iat=now,exp=now+600,**claims),keys[kind],algorithm='RS256' if kind=='workload' else 'ES256',headers={'kid':'task52-offline-'+kind})
     users={n:token('iap',aud=iap,sub='accounts.google.com:fixture-'+n,email=n+'@example.invalid') for n in ('alice','bob')}
-    allow={'factory':{'/ordinary':['backend'],'/dispatch-check':['dispatcher']},'counter':{'/count':['factory-a','factory-b'],'/ui-probe':['factory-a','factory-b']},'dispatcher':{'/send':['factory-a','factory-b'],'/ui-probe':['factory-a','factory-b']},'recovery':{'/recover':['operator'],'/ui-probe':['factory-a','factory-b']},'backend':{},'frontend':{}}
+    allow={'factory':{'/ordinary':['backend'],'/dispatch-check':['dispatcher']},'counter':{'/count':['factory-a','factory-b'],'/ui-probe':['factory-a','factory-b']},'dispatcher':{'/send':['factory-a','factory-b'],'/ui-probe':['factory-a','factory-b'],'/count-provider':['counter']},'recovery':{'/recover':['operator'],'/ui-probe':['factory-a','factory-b']},'backend':{},'frontend':{}}
     # Operator is only a public trust record, no operator credential is created.
     trust['operator']=dict(role='operator',publicKey=trust['frontend']['publicKey']);enrollment['operator']=dict(sub='999999999999999999999',email='operator@example.invalid')
     configs={}
@@ -76,9 +77,10 @@ def configurations(ports,cert):
         if role=='backend':targets={'factory':'factory-a'}
         if role=='factory':targets={'counter':'counter','dispatcher':'dispatcher','recovery':'recovery'}
         if role=='dispatcher':targets={'factory-a':'factory-a','factory-b':'factory-b'}
+        if role=='counter':targets={'dispatcher':'dispatcher'}
         methods={'factory':['/ordinary'],'counter':['/count','/ui-probe'],'dispatcher':['/send','/ui-probe'],'recovery':['/ui-probe'],'factory-a':['/dispatch-check'],'factory-b':['/dispatch-check']}
-        configs[n]=dict(service=role,principal=n,port=ports.get(n,0),build=BUILD,identityBuild=BUILD,ordinaryBuild=BUILD,epoch=g.EPOCH,identityEnvironment='offline-hosted-contract',trust=trust,enrollment=enrollment,revoked=[],allow=allow[role],audiences=aud,iapAudience=iap,testers=['accounts.google.com:fixture-alice','accounts.google.com:fixture-bob'],googleKeys=docs,signingKey=b64(rawkey(proofkeys[n])),networkTargets={k:dict(url='https://localhost:'+str(ports[v]),audience=aud[roles[v]],service=roles[v]) for k,v in targets.items()},networkMethods={k:methods[k] for k in targets},oidcTokens={a:token('workload',aud=a,sub=enrollment[n]['sub'],email=enrollment[n]['email'],email_verified=True) for a in aud.values()})
-        if role=='factory':configs[n]['encryptionKey']=b64(b'f'*32)
+        configs[n]=dict(service=role,principal=n,port=ports.get(n,0),build=BUILD,identityBuild=BUILD,ordinaryBuild=BUILD,epoch=g.EPOCH,identityEnvironment='offline-hosted-contract',trust=trust,enrollment=enrollment,revoked=[],allow=allow[role],audiences=aud,iapAudience=iap,testers=['accounts.google.com:fixture-alice','accounts.google.com:fixture-bob'],googleKeys=docs,signingKey=b64(rawkey(proofkeys[n])),networkTargets={k:dict(url='https://localhost:'+str(ports[v]),audience=aud[roles[v]],service=roles[v]) for k,v in targets.items()},networkMethods={k:(['/count-provider'] if role=='counter' else methods[k]) for k in targets},oidcTokens={a:token('workload',aud=a,sub=enrollment[n]['sub'],email=enrollment[n]['email'],email_verified=True) for a in aud.values()})
+        if role=='factory':configs[n]['locatorKey']=b64(b'l'*32)
     return configs,users
 
 class Identity:
@@ -100,40 +102,20 @@ class Google:
 
 def serve(pipe,c,credentials,provider,cert,key):
     name=c['principal'];role=c['service']
-    expected={'SYNTHETIC_REDIS_PASSWORD'} if role in ('factory','dispatcher') else set()
-    if {k for k in os.environ if k.startswith('SYNTHETIC_')}!=expected:raise AssertionError('Privileged fixture credentials inherited')
-    if ('encryptionKey' in c)!=(role=='factory'):raise AssertionError('Unnecessary locator key')
-    def db(name='witness',**kw):
-        if name not in credentials:raise AssertionError('Role cannot acquire another credential')
-        return psycopg.connect(**credentials[name],connect_timeout=2,**kw)
+    if any(k.startswith('SYNTHETIC_') for k in os.environ):raise AssertionError('Controller credential inherited')
+    if ('locatorKey' in c)!=(role=='factory'):raise AssertionError('Locator key crossed role')
+    if ('encryptionKey' in c)!=(role in ('factory','dispatcher')):raise AssertionError('Evidence key crossed role')
+    from .ports import Ports
+    from .startup import compose
+    from .entry import serve as run
+    from .test_diagnostics import hosted
     try:
-        with calendar_clock(NOW):
-            def epoch():
-                with db() as connection:return connection.execute('SELECT provider_witness.epoch()').fetchone()[0]
-            def nonce(*args):
-                with db() as connection:connection.execute('SELECT provider_witness.hosted_nonce(%s,%s,%s,%s,%s)',args)
-            auth=Auth(c,nonce,epoch);client=ServiceClient(c,Identity(c),HTTPS(ca_file=cert)) if role not in ('counter','recovery') else None
-            kw={}
-            if role=='factory':
-                owner=DispatchOwner(Owner(name,BUILD,g.EPOCH,name))
-                def make():
-                    w=ScopedWitness(lambda:db(),lambda:db());service=RemoteSend(w,lambda:db('issuer'),client,owner)
-                    s=Store(connection=lambda **kw:db('runtime',**kw),issuer=lambda:db('issuer'),service=service,evidence=g.cache(),key=g.KEY,limits=g.LIMITS)
-                    issuer=Issuer(lambda:db('issuer'),g.ROOT)
-                    def no_send(*args):raise AssertionError('Factory cannot send provider traffic')
-                    model=Inference(s,lambda:db('issuer'),g.ROOT,RemoteCounter(client),no_send);b=Broker(s,issuer,model,no_send,now=NOW);service.check_current=b.check_current;return b
-                kw=dict(owner=owner,broker=make,issuer=lambda:db('issuer'))
-            if role=='counter':kw=dict(counter=CounterCallback(OpenAIHTTP(g.PROJECT,lambda:'sk-FICTIONAL-COUNT-ONLY',AITransport(provider,cert),purpose='count'),CounterAuthority(lambda:db('counter'),CounterWitness(lambda:db(),lambda:db()),g.PROJECT)))
+        with hosted(role),calendar_clock(NOW),Ports(role,c,identity=Identity(c),authentication_factory=Auth,transport=HTTPS(ca_file=cert)) as ports:
+            provider_ports=google=None
             if role=='dispatcher':
-                def store(worker):return DeliveryStore(worker,connection=lambda **kw:db('delivery',**kw),witness=ScopedWitness(lambda:db(),lambda:db()),evidence=g.cache(),key=g.KEY,limits=g.LIMITS)
-                router=OwnerRouter({n:Owner(n,BUILD,g.EPOCH,n) for n in ('factory-a','factory-b')},client)
-                kw=dict(delivery=store,router=router,responder=DispatcherCallback(OpenAIHTTP(g.PROJECT,lambda:'sk-FICTIONAL-GENERATION',AITransport(provider,cert),purpose='generation'),Google(provider,cert),Accounting(),time.time))
-            r=Role(c,auth=auth,client=client,epoch=epoch,**kw)
-            if role=='backend':
-                import uvicorn
-                server=uvicorn.Server(uvicorn.Config(backend_app(r),host='127.0.0.1',port=c['port'],ssl_certfile=cert,ssl_keyfile=key,log_level='warning',access_log=False));pipe.send('ready');server.run()
-            else:
-                server=privileged_server(r,tls=(cert,key));pipe.send('ready');server.serve_forever()
+                provider_ports={purpose:OpenAIHTTP(g.PROJECT,lambda:'sk-FICTIONAL-DISPATCHER',AITransport(provider,cert),purpose=purpose) for purpose in ('count','generation')};google=Google(provider,cert)
+            r=compose(ports,provider=provider_ports,google=google,clock=lambda:NOW)
+            pipe.send('ready');run(r,tls=(cert,key))
     except BaseException as e:pipe.send({'error':type(e).__name__+':'+str(e)});raise
 
 class Tests(unittest.TestCase):
@@ -157,6 +139,8 @@ class Tests(unittest.TestCase):
             if role=='counter':mapping['counter']=('real_counter_client',5432,'SYNTHETIC_COUNTER_PASSWORD')
             if role=='dispatcher':mapping['delivery']=('real_dispatch_client',5432,'SYNTHETIC_WORKER_PASSWORD')
             self.credentials[name]={k:dict(host='127.0.0.1',port=port,dbname='whereto_witness' if port==5433 else 'whereto_synthetic',user=user,password=sha256((os.environ[env]+'\0'+user).encode()).hexdigest()) for k,(user,port,env) in mapping.items()}
+        from .test_hosted import enroll
+        enroll(self.configs,self.credentials)
         for n in ('counter','dispatcher','recovery','factory-a','factory-b','backend'):
             pipe,process=self.start(serve,self.configs[n],self.credentials[n],self.provider_port,self.cert,self.key);self.assertTrue(pipe.poll(15));self.assertEqual(pipe.recv(),'ready')
             self.workers[-1]=(process,pipe,n)
@@ -180,21 +164,25 @@ class Tests(unittest.TestCase):
         # Strip controller/admin credential seeds BEFORE spawning, not after the
         # child has received them. Only explicit role-owned credentials cross.
         env={k:v for k,v in os.environ.items() if not k.startswith('SYNTHETIC_')}
-        if target is serve and args[0]['service'] in ('factory','dispatcher'):env['SYNTHETIC_REDIS_PASSWORD']=os.environ['SYNTHETIC_REDIS_PASSWORD']
         with patch.dict(os.environ,env,clear=True):p.start()
         self.workers.append((p,parent,'provider'));return parent,p
     def cleanup(self):
         for p,pipe,_ in reversed(self.workers):
             if p.is_alive():p.terminate()
-            p.join(5);pipe.close()
+            p.join(10)
+            if p.is_alive():p.kill();p.join(5)
+            self.assertFalse(p.is_alive());pipe.close()
     def call(self,path,value,who='alice',*,alter_body=False):
-        c=self.configs['frontend'];raw=json.dumps(value,separators=(',',':')).encode();now=int(time.time());iap=self.users[who]
-        f=signed(c,dict(iss=FORWARD,sub='frontend',aud='public-user-pipeline',iat=now,exp=now+60,jti=secrets.token_hex(16),build=BUILD,environment=c['identityEnvironment'],epoch=g.EPOCH,request=binding('public-user-pipeline','POST',path,raw),iap=digest(iap.encode())))
+        c=self.configs['frontend'];method='GET' if path=='/api/planning-mode' else 'POST';raw=b'' if method=='GET' else json.dumps(value,separators=(',',':')).encode();now=int(time.time());iap=self.users[who]
+        f=signed(c,dict(iss=FORWARD,sub='frontend',aud='public-user-pipeline',iat=now,exp=now+60,jti=secrets.token_hex(16),build=BUILD,environment=c['identityEnvironment'],epoch=g.EPOCH,request=binding('public-user-pipeline',method,path,raw),iap=digest(iap.encode())))
         oidc=c['oidcTokens'][c['audiences']['backend']]
-        proof=signed(c,dict(iss=REQUEST,sub='frontend',aud='backend',iat=now,exp=now+60,jti=secrets.token_hex(16),build=BUILD,environment=c['identityEnvironment'],epoch=g.EPOCH,request=binding('backend','POST',path,raw),oidc=digest(oidc.encode()),iap=digest(iap.encode()),forward=digest(f.encode())))
+        proof=signed(c,dict(iss=REQUEST,sub='frontend',aud='backend',iat=now,exp=now+60,jti=secrets.token_hex(16),build=BUILD,environment=c['identityEnvironment'],epoch=g.EPOCH,request=binding('backend',method,path,raw),oidc=digest(oidc.encode()),iap=digest(iap.encode()),forward=digest(f.encode())))
         headers={'Content-Type':'application/json','Authorization':'Bearer '+oidc,'X-Whereto-Context':b64(canonical(dict(proof=proof,iap=iap,forward=f)))}
         self.last_request=(path,raw,headers)
-        return json.loads(self.http.request(self.endpoint,'POST',path,raw+(b' ' if alter_body else b''),headers))
+        try:return json.loads(self.http.request(self.endpoint,method,path,raw+(b' ' if alter_body else b''),headers))
+        except BaseException:
+            print(json.dumps(dict(event='real_fixture_process_state',workers=[dict(role=n,alive=p.is_alive(),exitcode=p.exitcode) for p,_,n in self.workers],memoryEvents=Path('/sys/fs/cgroup/memory.events').read_text() if Path('/sys/fs/cgroup/memory.events').is_file() else 'unavailable')),flush=True)
+            raise
     def packets(self):
         out=[]
         while self.pp.poll(.05):out.append(self.pp.recv())
@@ -231,7 +219,7 @@ class Tests(unittest.TestCase):
     def test_invalid_auth_and_wrong_role_cannot_reach_provider_or_counter(self):
         counter=Endpoint('https://localhost:'+str(self.ports['counter']),self.configs['counter']['audiences']['counter'])
         with self.assertRaises(Exception):self.http.request(counter,'POST','/count',b'{}',{'Content-Type':'application/json'})
-        for principal,target,path in [('frontend','counter','/count'),('backend','dispatcher','/send')]:
+        for principal,target,path in [('frontend','counter','/count'),('backend','dispatcher','/send'),('factory-a','dispatcher','/count-provider'),('backend','dispatcher','/count-provider'),('counter','dispatcher','/send')]:
             c=deepcopy(self.configs[principal]);c['networkTargets']={target:dict(url='https://localhost:'+str(self.ports[target]),audience=c['audiences'][target],service=target)};c['networkMethods']={target:[path]}
             with self.assertRaises(Exception):ServiceClient(c,Identity(c),self.http).request(target,path,{})
         with self.assertRaises(Exception):self.call('/api/interpret',dict(text=TEXT),alter_body=True)
@@ -239,6 +227,53 @@ class Tests(unittest.TestCase):
         with g.admin() as c:
             self.assertEqual(c.execute('SELECT count(*) FROM provider_state.count_attempts').fetchone()[0],0)
             self.assertEqual(c.execute('SELECT count(*) FROM provider_state.operations').fetchone()[0],0)
+
+    def test_unapproved_runtime_configuration_refuses_before_provider(self):
+        from .ports import Ports
+        for changed in ('openaiProject','sourceBuild'):
+            c=deepcopy(self.configs['counter']);c[changed]='0'*64
+            with self.assertRaises(Exception):
+                with Ports('counter',c,identity=Identity(c),authentication_factory=Auth,transport=self.http):self.fail('Unapproved ports started')
+        self.assertFalse(self.paths())
+
+    def test_000_count_relay_rejects_substitution_replay_and_generation(self):
+        # Actual protected count source/SQL/witness; no financial stand-in.
+        from .test_native import app_store
+        s=app_store();data=g.source(s);s.recover(data[0]);_,cap,wire,_,_=data
+        counter=ServiceClient(self.configs['counter'],Identity(self.configs['counter']),self.http)
+        # An authenticated counter still cannot choose a provider endpoint/model.
+        altered=json.loads(wire);altered['model']='not-the-approved-model'
+        for value in (dict(operation=str(__import__('uuid').uuid4()),wire=b64(json.dumps(altered).encode())),dict(operation=str(__import__('uuid').uuid4()),wire=b64(wire),endpoint='/v1/responses')):
+            with self.assertRaises(Exception):counter.request('dispatcher','/count-provider',value)
+        self.assertFalse(self.paths())
+        factory=ServiceClient(self.configs['factory-a'],Identity(self.configs['factory-a']),self.http)
+        count=RemoteCounter(factory).count(s._hash(cap.token,'cap'),wire);self.assertEqual(count.tokens,100)
+        with g.admin() as c:
+            op=str(c.execute('SELECT operation FROM provider_state.count_attempts').fetchone()[0])
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.count_transport_uses').fetchone()[0],1)
+            self.assertEqual(c.execute('SELECT coalesce(sum(charge),0) FROM provider_state.operations').fetchone()[0],0)
+        with g.admin(True) as c:self.assertEqual(c.execute('SELECT count(*) FROM provider_witness.count_transport_uses').fetchone()[0],1)
+        self.assertEqual(self.paths(),['/v1/responses/input_tokens'])
+        # Replace the credential-owning process; durable uses must survive it.
+        for process,pipe,name in self.workers:
+            if name=='dispatcher':process.terminate();process.join(10);self.assertFalse(process.is_alive())
+        pipe,process=self.start(serve,self.configs['dispatcher'],self.credentials['dispatcher'],self.provider_port,self.cert,self.key)
+        self.assertTrue(pipe.poll(15));self.assertEqual(pipe.recv(),'ready');self.workers[-1]=(process,pipe,'dispatcher-replacement')
+        for _ in range(50):
+            try:
+                with socket.create_connection(('127.0.0.1',self.ports['dispatcher']),timeout=.2):break
+            except OSError:time.sleep(.1)
+        else:self.fail('Replacement dispatcher did not listen')
+        with g.admin(True) as c:before=c.execute("SELECT count(*) FROM provider_witness.hosted_nonces WHERE service='dispatcher' AND caller='counter'").fetchone()[0]
+        with self.assertRaises(Exception):counter.request('dispatcher','/count-provider',dict(operation=op,wire=b64(wire)))
+        with g.admin(True) as c:self.assertEqual(c.execute("SELECT count(*) FROM provider_witness.hosted_nonces WHERE service='dispatcher' AND caller='counter'").fetchone()[0],before+1)
+        with self.assertRaises(Exception):RemoteCounter(factory).count(s._hash(cap.token,'cap'),wire)
+        with self.assertRaises(Exception):counter.request('dispatcher','/send',{})
+        with self.assertRaises(Exception):counter.request('dispatcher','/v1/responses',{})
+        self.assertFalse(self.paths())
+        # Counter configuration contains no provider key, Redis key or issuer SQL.
+        c=self.configs['counter'];self.assertEqual(set(c['networkTargets']),{'dispatcher'});self.assertEqual(set(c['sql']),{'database','witness'})
+        self.assertFalse(any(k in c for k in ('openaiSecretSHA256','openaiCredentialId','encryptionKey','authorityKey')))
 
     def test_real_delivery_role_cannot_issue_or_override_financial_authority(self):
         from psycopg.errors import InsufficientPrivilege
@@ -305,3 +340,31 @@ class Tests(unittest.TestCase):
         with g.admin() as c:
             self.assertEqual(c.execute('SELECT sum(charge) FROM provider_state.operations').fetchone()[0],6148)
             self.assertEqual(c.execute('SELECT count(*) FROM provider_state.sessions s JOIN provider_state.native_checkpoints n ON n.session=s.id WHERE NOT s.revoked').fetchone()[0],0)
+
+    def test_ready_is_read_only_and_real_route_scoped(self):
+        result=self.call('/api/planning-mode',None);self.assertFalse(result['enabled']);self.assertEqual(result['privateOrdinary']['version'],'52-private-real-ordinary-ui-v1');self.assertTrue(result['privateOrdinary']['dependencyReady']);self.assertTrue(result['privateOrdinary']['fixture'])
+        self.assertFalse(self.paths())
+        with g.admin() as c:
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.operations').fetchone()[0],0)
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.sessions').fetchone()[0],0)
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.count_attempts').fetchone()[0],0)
+
+    @unittest.skipUnless(os.environ.get('TASK52_REAL_BROWSER_HOLD')=='1','explicit local browser cohort only')
+    def test_browser_entry(self):
+        from tempfile import gettempdir
+        control=Path('/tmp/real-browser-control.json');done=Path('/tmp/real-browser-done.json')
+        value=dict(frontend=self.configs['frontend'],users=self.users,backendPort=self.ports['backend'],serviceCA=self.cert,text=TEXT,answerDate='2026-11-07')
+        fd=os.open(control,os.O_CREAT|os.O_EXCL|os.O_WRONLY,0o600)
+        with os.fdopen(fd,'w') as stream:json.dump(value,stream)
+        print(json.dumps(dict(event='real_browser_services_ready',sourceBuild=self.configs['factory-a']['sourceBuild'])),flush=True)
+        for _ in range(1200):
+            if done.exists():break
+            time.sleep(.5)
+        else:self.fail('Bounded browser verification window ended')
+        result=json.loads(done.read_text());self.assertTrue(result['passed'])
+        paths=self.paths();self.assertEqual(paths.count('/v1/responses/input_tokens'),result['outings']);self.assertEqual(paths.count('/v1/responses'),result['outings'])
+        with g.admin() as c:
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.count_transport_uses').fetchone()[0],result['outings'])
+            self.assertEqual(c.execute('SELECT count(*) FROM provider_state.sessions s JOIN provider_state.native_checkpoints n ON n.session=s.id WHERE NOT s.revoked').fetchone()[0],0)
+            self.assertNotIn('Fixture_',json.dumps(c.execute('SELECT payload FROM provider_state.evidence').fetchall()))
+        print(json.dumps(dict(event='real_browser_verified',result=result,providerOperations={p:paths.count(p) for p in set(paths)})),flush=True)

@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The source-selected real Ports/constructor and signed Next bootstrap now work in local fixture composition; they remain default-closed. The old role projector still requires a real entry/profile and dependency/source projection, and the real frontend now refuses its old synthetic cohort. No six final images were built or scanned in this checkpoint. Local TLS/fixture success does not establish Cloud Run IAM/IAP, model qualification, Google content rights, paid enrollment or vulnerability acceptance. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## Reproducible OS candidate without deployment selection
 
 `deployment.prepare_trixie_candidate` builds on the existing projectors and emits isolated role/Next contexts with pinned official Debian 13 Python 3.12 and Node 24 references. [Candidate manifests](../../deployment/candidates/trixie-v1/README.md) preserve the original Bookworm/default inputs and mark promotion false. Source code is byte-identical; the base-bound cohort changes intentionally, so real enrollment/old-session compatibility must be reviewed separately without resetting financial history. Local ABI/TLS/browser success and zero scanned critical findings do not establish Cloud Run IAM/kernel enforcement, backup recovery, qualified LLM or security acceptance. No synthetic provider was deployed as a product and no cloud resource was created.

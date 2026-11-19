@@ -39,13 +39,14 @@ import demoPlans from "@/data/demo-plans.json";
 
 export default function Home() {
   const [privateUI,setPrivateUI]=useState(false);
+  const [privateReal,setPrivateReal]=useState(false),[privateFixture,setPrivateFixture]=useState(false);
   const [dataMode, setDataMode] = useState<"mock" | "real" | "unavailable">("unavailable");
   const startingControls = useRef<StartingLocationHandle>(null);
   const [lookupEnabled, setLookupEnabled] = useState(false);
   const [planningStage, setPlanningStage] = useState("Generating itinerary");
   const [locationContext, setLocationContext] = useState<LocationContext>({});
   const [detailsSession] = useState(()=>new VenueDetailsSession());
-  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if(active&&value.privateOrdinary?.version==='52-private-ordinary-ui-v1'){setPrivateUI(true);return;} if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
+  useEffect(() => { let active = true; void fetch("/api/planning-mode", { cache: "no-store", signal: AbortSignal.timeout(5000) }).then(r => r.json()).then(value => { if(active&&value.privateOrdinary?.version==='52-private-real-ordinary-ui-v1'){setPrivateReal(true);setPrivateFixture(value.privateOrdinary.fixture===true);setPrivateUI(true);return;} if(active&&value.privateOrdinary?.version==='52-private-ordinary-ui-v1'){setPrivateUI(true);return;} if (active && value.enabled && ["real", "mock"].includes(value.mode)) { setDataMode(value.mode); setLookupEnabled(value.startingLookupEnabled === true); } }).catch(() => {}); return () => { active = false; }; }, []);
   const advancedContinuation=useRef<PendingOuting|null>(null);
   const advancedAnswers=useRef<Record<string,unknown>[]>([]);
   const [advancedPreferenceDraft,setAdvancedPreferenceDraft]=useState<AdvancedDraft|null>(null);
@@ -301,7 +302,7 @@ export default function Home() {
   }
   const preferencesCount = [preferences.location, preferences.date, preferences.travel, preferenceState.manual.transport ? preferences.transport : ""].filter(Boolean).length;
 
-  if(privateUI)return <PrivateOrdinaryExperience/>;
+  if(privateUI)return <PrivateOrdinaryExperience real={privateReal} fixture={privateFixture}/>;
   return <>
     <a className="skip-link" href="#planner">Skip to planner</a>
     <header className="site-header shell">

@@ -14,4 +14,7 @@ def scripts():
 GRANT EXECUTE ON FUNCTION provider_state.real_accounting(jsonb) TO real_dispatch_client;
 '''
     wit=project('experiments/service_isolation/witness.sql')+'\n'+project('experiments/hosted_identity/nonce.sql')
+    op+=source_bytes('private_runtime/real_application/count_transport.sql').decode()
+    wit+=source_bytes('private_runtime/real_application/count_transport_witness.sql').decode()
+    wit+=source_bytes('private_runtime/real_application/enrollment.sql').decode()
     return dict(operational=op,witness=wit)

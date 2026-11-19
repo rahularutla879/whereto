@@ -8,7 +8,8 @@ import ast,json,shutil
 from hashlib import sha256
 from pathlib import Path
 from tempfile import TemporaryDirectory
-from deployment.prepare_private_services import prepare,replace
+from deployment.prepare_private_services import replace
+from deployment.native_parent import prepare
 ROOT=Path(__file__).resolve().parents[2]
 
 def backend(target):

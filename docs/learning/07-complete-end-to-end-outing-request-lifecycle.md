@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The actual local private website now exercises interpretation, source-only date clarification, browser-confirmed origin, protected Places/Matrix callbacks and three terminal cards using authored HTTPS fixtures. Clarification retains the original source/clock/expiry without recount/reinference. Terminal authority is revoked; View Plan is local display and refresh never resumes provider work. Two open outings were tested with serialized provider work; simultaneous interpretation hit the unchanged admission limit. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## How to read these traces
 
 A **lifecycle** is an operation's path from the user's action to completion, clarification, cancellation or failure. Each trace below is a source-grounded execution explanation, **not a newly executed model/Google/browser transcript**. Actual model JSON and real venues cannot be predicted. All durations and venue examples in worked lessons are fictional unless explicitly identified as recorded evidence.

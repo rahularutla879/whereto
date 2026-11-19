@@ -33,15 +33,17 @@ def _routing():
     cls=next(n for n in tree.body if isinstance(n,ast.ClassDef) and n.name=='Factory')
     funcs=[n for n in cls.body if isinstance(n,ast.FunctionDef) and n.name in ('put','get','public')]
     text=ast.unparse(ast.Module(body=funcs,type_ignores=[])).replace("'synthetic'","'real'")
+    if text.count("'encryptionKey'")!=2:raise ValueError('Locator projection changed')
+    text=text.replace("'encryptionKey'","'locatorKey'")
     ns=dict(globals());exec(compile(text,str(__file__)+':reviewed-locator','exec'),ns)
     return [ns[n] for n in ('put','get','public')]
 
 class Factory:
     put,get,public=_routing()
-    def __init__(self,config,*,broker,issuer,auth):
+    def __init__(self,config,*,broker,issuer,auth,readiness=None):
         from .identity import verify_application
         verify_application()
-        self.config=deepcopy(config);self.make_broker,self._issuer=broker,issuer;self.verifier=RequestVerifier(auth)
+        self.config=deepcopy(config);self.make_broker,self._issuer=broker,issuer;self.verifier=RequestVerifier(auth);self.readiness=readiness
         from experiments.ordinary_hosted import request_auth
         request_auth.PATHS={'/health':'GET','/api/interpret':'POST','/api/plans/generate':'POST','/api/planning-mode':'GET','/api/private-ordinary/revoke':'POST'}
         if auth.c['service']!='factory' or auth.c['build']!=config['build'] or auth.c['epoch']!=config['epoch']:raise Denied('real_factory_identity')
@@ -61,11 +63,15 @@ class Factory:
         return out
     def ordinary(self,envelope):
         path=envelope.get('path')
-        methods={'/api/interpret':'POST','/api/plans/generate':'POST','/api/private-ordinary/revoke':'POST'}
+        methods={'/api/planning-mode':'GET','/api/interpret':'POST','/api/plans/generate':'POST','/api/private-ordinary/revoke':'POST'}
         if type(envelope)is not dict or set(envelope)!={'path','body','headers'} or path not in methods or type(envelope['headers'])is not dict or set(envelope['headers'])!={'Authorization','X-Whereto-Context'}:raise Denied('real_public_envelope')
         headers=Message()
         for k,v in envelope['headers'].items():headers[k]=v
         wire=unb64(envelope['body']);owner=self.verifier.check(headers,methods[path],path,wire)
+        if path=='/api/planning-mode':
+            if wire or self.readiness is None:raise Denied('real_readiness')
+            self.readiness()
+            return dict(enabled=False,mode='unavailable',privateOrdinary=dict(version='52-private-real-ordinary-ui-v1',dependencyReady=True,productionReady=False,financialAuthorization=False,fixture=self.config.get('identityEnvironment')=='offline-hosted-contract'))
         value=decode(wire)
         if type(value)is not dict:raise Denied('real_public_input')
         broker=self.make_broker();s=broker.store;handle=value.pop('privateOuting',None)

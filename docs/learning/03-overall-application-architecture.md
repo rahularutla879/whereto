@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The inactive real constructor now supplies the existing six logical roles through real TLS SQL/witness/Redis Ports. Counter delegates only protected counting to the credential-owning dispatcher; factory retains source-only checkpoints and exact callback ownership. Actual local Next.js/browser acceptance does not finish the production role-image projection. No service or planner was added. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## Architecture is responsibility placement
 
 **Architecture** describes the parts of a system, how they communicate, and which part owns a decision. Developers separate responsibilities so interface changes do not require rewriting planning algorithms and private credentials do not enter browser code. Where To? needs this separation because language interpretation is uncertain, provider access can cost money, and saved links grant access to private data.

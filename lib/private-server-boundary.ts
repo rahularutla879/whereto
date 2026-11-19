@@ -6,7 +6,7 @@ const key=Symbol.for('whereto.private-boundary.v1');
 type Registry={profile?:Profile;brands:WeakSet<object>};
 const root=globalThis as typeof globalThis&{[key]?:Registry};
 function registry(){if(typeof window!=='undefined')throw Error('Server only');return root[key]??=( {brands:new WeakSet()} );}
-function createProfile(origin:string,backend:string,port:ServerIdentityPort,send:typeof fetch,ordinary:boolean,ui=false):Profile {
+function createProfile(origin:string,backend:string,port:ServerIdentityPort,send:typeof fetch,ordinary:boolean,ui=false,real=false):Profile {
  if(!/^https:\/\/[^/@?#]+$/.test(origin)||!/^https:\/\/[^/@?#]+\/?$/.test(backend))throw Error('Private configuration required');
  const profile=Object.freeze({async handle(path:string,request?:Request){
   const headers={'Cache-Control':'no-store','Referrer-Policy':'no-referrer'};
@@ -31,7 +31,7 @@ function createProfile(origin:string,backend:string,port:ServerIdentityPort,send
    try{while(true){signal.throwIfAborted();const v=await reader.read();if(v.done)break;size+=v.value.byteLength;if(size>(business?1048576:4096))throw Error();chunks.push(v.value);}}finally{signal.removeEventListener('abort',cancel);await reader.cancel().catch(()=>{});}
    const data=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(Buffer.concat(chunks)));signal.throwIfAborted();if(business||readiness)return Response.json(data,{headers});if(data?.status!=='ok')throw Error();
    return Response.json({status:'ok',backend:'ok'},{headers});
-  }catch{return Response.json(readiness?{enabled:false,mode:'unavailable',privateOrdinary:{version:'52-private-ordinary-ui-v1',dependencyReady:false,productionReady:false}}:business?{code:'private_action_refused',message:'This outing could not continue safely. Start a new request.'}:{status:'error',backend:'unavailable'},{status:503,headers});}
+  }catch{return Response.json(readiness?{enabled:false,mode:'unavailable',privateOrdinary:{version:real?'52-private-real-ordinary-ui-v1':'52-private-ordinary-ui-v1',dependencyReady:false,productionReady:false}}:business?{code:'private_action_refused',message:'This outing could not continue safely. Start a new request.'}:{status:'error',backend:'unavailable'},{status:503,headers});}
  }});registry().brands.add(profile);return profile;
 }
 export function installPrivateProfile(profile:Profile){const r=registry();if(r.profile||!r.brands.has(profile))throw Error('Private composition refused');r.profile=profile;}
@@ -41,3 +41,5 @@ export function createStatusOnlyProfile(origin:string,backend:string,port:Server
 export function createOrdinaryProfile(origin:string,backend:string,port:ServerIdentityPort,send:typeof fetch=fetch):Profile{return createProfile(origin,backend,port,send,true);}
 
 export function createOrdinaryUIProfile(origin:string,backend:string,port:ServerIdentityPort,send:typeof fetch=fetch):Profile{return createProfile(origin,backend,port,send,true,true);}
+
+export function createRealOrdinaryUIProfile(origin:string,backend:string,port:ServerIdentityPort,send:typeof fetch=fetch):Profile{return createProfile(origin,backend,port,send,true,true,true);}

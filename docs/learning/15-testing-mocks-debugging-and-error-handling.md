@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The real six-role local browser harness uses actual standalone Next.js, FastAPI and authenticated roles, verified local HTTPS provider transports, restricted SQL/witness roles and Redis TLS/ACL. Only the external fixture controller can use Docker; it is not part of the frontend. Mobile means Chromium emulation, not a physical handset. Preserve failed attempts: burst admission, stale emulated location, destination ambiguity and proven fixture OOM are distinct from the still-unattributed historical session_revision. Missing host crypto dependencies are errors, not passing tests. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## Separate packaging compatibility from security acceptance
 
 [Candidate overlay tests](../../deployment/test_trixie_candidate.py) prove unchanged application output bytes, a distinct candidate cohort and rejection of unrelated lock/promotion changes. Existing 175 backend/provider cases also pass using the Trixie venv, with immutable test source mounted read-only and no network. Test-process setup is distinct from production startup; all eight normal candidate/control images refuse missing enrollment. Existing TLS/SQL/Redis and immutable multi-process browser/restart fixtures verify the actual new role images without real providers. Record the unchanged expired-date frontend failure and each setup refusal rather than modifying frozen tests or weakening guards. [Exact scope/unrun checks](../task52-trixie-compatibility.md).

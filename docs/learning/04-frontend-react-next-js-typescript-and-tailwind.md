@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The existing private experience now has an explicitly source-selected real profile. Its location button calls the native browser geolocation API and requires a fresh fix and confirmation; there is no manual-coordinate field in that profile. A memory-only brand prevents accidental JSON/manual reuse in this UI, not malicious-browser spoofing or hardware attestation. Denial/staleness sends no plan request. Cards/View Plan and responsive design are reused; refresh discards authority. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## Isolated Next security patch, not an active upgrade
 
 The [Trixie candidate](../task52-trixie-compatibility.md) tests Next 16.4.5 separately from the OS change. Candidate package files update only Next/env/matching SWC entries; normal package-lock remains 16.4.2. All unrelated metadata stays intact. Both Bookworm and Trixie patch controls build; the patched frontend regression has 324 passes and the same expired-date fixture failure. Actual private desktop/mobile tests use the separately tagged local fixture image; deployable candidate has no fixture module/signer. Do not confuse a test-only frontend or successful build with public/real-provider activation.

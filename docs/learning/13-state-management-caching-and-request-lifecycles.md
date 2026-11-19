@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The real private client retains its owned handle/revision in memory. Device coordinates are obtained explicitly and checked for freshness before submission. A displayed card, cached UI object or browser refresh cannot create continuation/spending authority. Source-only encrypted checkpoints resume only approved clarification; Google result graphs/cards are not persisted. The local browser fixture verified terminal discard, not automatic interrupted-turn recovery. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## State is remembered context
 
 **State management** means deciding which information is remembered, who owns it and when it expires. A **cache** reuses previously computed evidence instead of repeating work. Where To? needs both to keep the form responsive and avoid duplicate model or Maps calls, but a cached result must remain bound to its original request/mode and freshness.

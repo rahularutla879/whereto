@@ -2,6 +2,11 @@
 
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
+
+## Real six-role local application boundary
+
+The new real startup requires an independently enrolled witness row bound to the complete role configuration, build/source, epoch and seven review references; no rows or grants are installed by runtime code. Counter has restricted SQL/witness access and no provider credential. Dispatcher consumes independent count-use facts before key/HTTP access. Source/body/model substitutions and replay refuse. The real frontend uses a signed artifact/purpose/configuration enrollment; production image projection and independent security acceptance remain open. [Implementation and exact limits](../task52-real-six-role-browser.md).
+
 ## Read an OS security comparison at several levels
 
 The [Trixie comparison](../task52-trixie-compatibility-verification.json) preserves binary package/version/CVE identities, advisory-level additions and current vendor status. Python candidates have 0 critical/61 high, frontend 0/60; original Python 3/86 and frontend 2/53 remain selected. Installed glibc/SQLite contain vendor fixes, whereas omitted distro Kerberos packages do not prove unchanged psycopg-bundled components are fixed. Three new util-linux IDs and a zlib/scanner conflict remain unresolved. Non-root/read-only/no-new-privileges/capability restrictions constrain prerequisites; they are not independent exceptions or a promise about hosted enforcement. No financial SQL/epoch/price/admission rule changed, and image rollback cannot restore spending authority.

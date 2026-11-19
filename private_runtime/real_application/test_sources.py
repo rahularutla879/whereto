@@ -17,3 +17,20 @@ class Tests(unittest.TestCase):
     def test_unenrolled_or_outside_path_refuses(self):
         for value in ('../unenrolled-input','/tmp/unenrolled-input','backend/test_real_planning.py'):
             with self.assertRaises(Denied):source_bytes(value)
+
+class ClosedEntryTests(unittest.TestCase):
+    def test_ordinary_image_cannot_select_real_startup(self):
+        import types,sys
+        from .entry import main
+        fake=types.ModuleType('private_runtime.image_build');fake.ROLE='counter';fake.PROFILE='unapproved'
+        with patch.dict(sys.modules,{'private_runtime.image_build':fake}),patch('os.getuid',return_value=10001),patch.dict('os.environ',{'K_SERVICE':'fictional-local-service'},clear=True),patch('os.open',side_effect=AssertionError('No secret access')):
+            with self.assertRaises(Denied):main()
+    def test_environment_credential_or_tls_override_refuses_before_secret(self):
+        from .entry import main
+        for name in ('OPENAI_API_KEY','GOOGLE_APPLICATION_CREDENTIALS','SSL_CERT_FILE'):
+            with patch('os.getuid',return_value=10001),patch.dict('os.environ',{name:'FICTIONAL-OVERRIDE'},clear=True),patch('os.open',side_effect=AssertionError('No secret access')):
+                with self.assertRaises(Denied):main()
+    def test_counter_cannot_enroll_provider_credential(self):
+        from .entry import credential
+        with patch('os.open',side_effect=AssertionError('No secret access')):
+            with self.assertRaises(Denied):credential({'service':'counter'})
