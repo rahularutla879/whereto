@@ -1,0 +1,160 @@
+{
+  "APIsForSeparateApproval": [
+    "run.googleapis.com",
+    "iap.googleapis.com",
+    "secretmanager.googleapis.com"
+  ],
+  "actualOwnerPublicProofAndSixRegistryReceiptsVerified": true,
+  "baselineCommit": "aa6d48cb24bde3340b139de45689010996b55675",
+  "blockers": [
+    "operational connection/capacity/backup enrollment missing",
+    "witness connection/capacity/backup enrollment missing",
+    "backend/witness restricted login missing",
+    "factory/database restricted login missing",
+    "factory/issuer restricted login missing",
+    "factory/witness restricted login missing",
+    "counter/database restricted login missing",
+    "counter/witness restricted login missing",
+    "dispatcher/database restricted login missing",
+    "dispatcher/witness restricted login missing",
+    "recovery/witness restricted login missing",
+    "Redis TLS/ACL/noeviction/regional quote enrollment missing",
+    "account-reviewed nonoverlapping VPC subnet missing",
+    "independent recovery workload identity missing",
+    "verified named tester allowlist missing",
+    "independent current restore epoch missing",
+    "image-security disposition missing",
+    "model-qualification disposition missing",
+    "real-token-price-policy disposition missing",
+    "provider-transport disposition missing",
+    "google-content-use disposition missing",
+    "financial-grant disposition missing",
+    "storage-capacity disposition missing",
+    "independent-recovery-owner disposition missing",
+    "hosted-worker-replacement disposition missing",
+    "iam-iap-enrollment disposition missing",
+    "infrastructure-cost disposition missing",
+    "frontend observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "backend observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "factory observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "counter observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "dispatcher observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "recovery observed URL/immutable SA subject/registry receipt/secret versions missing",
+    "Artifact-only owner signature is not hosting security acceptance, model qualification or provider financial authority"
+  ],
+  "computeAPIDeferred": true,
+  "cost": {
+    "RedisRegionalQuote": null,
+    "accountQuoteVerified": false,
+    "planningSubtotalBeforeTaxUSD": "167.57",
+    "proposedMonthlyInfrastructureCeilingUSD": "180.00",
+    "proposedOneTimeMeteredSetupUSD": "10.00",
+    "providerEnforcedHardCap": false,
+    "providerSpendingAuthorized": false,
+    "publicRatesChecked": "2026-11-20",
+    "purchaseAuthorized": false
+  },
+  "date": "2026-11-20",
+  "developmentAttempts": [
+    {
+      "cause": "Test fixture incorrectly assumed candidateForReview/configDigests at registry record root; corrected fixture only.",
+      "errors": 3,
+      "passed": 3,
+      "scope": "new six-test suite first attempt"
+    },
+    {
+      "cause": "Six retained legacy test cases use original synthetic source cohort; frontend-private-entry.mjs has changed in later committed real cohort. Refusal retained, no repin. Current real compiler cohort separately passes.",
+      "errors": 5,
+      "failed": 1,
+      "logSHA256": "a4d1038c7349d7ac54ebe58808a70729b7255773d6de4b6900af81ffe0badee7",
+      "passed": 41,
+      "scope": "broader 47-test run including retained synthetic compiler"
+    },
+    {
+      "cause": "Missing tsx loader for extensionless TypeScript imports; correct node --import tsx invocation passes11.",
+      "failed": 1,
+      "logSHA256": "2976dc815d2428dcb8fcc35c8511ea574ac203315f03e550fec9b2f83aac96ae",
+      "passed": 0,
+      "scope": "plain node trust invocation"
+    }
+  ],
+  "executedCloudCommands": 0,
+  "financialGrantsCreated": 0,
+  "foundationCommandsPrepared": 22,
+  "handbook": {
+    "chaptersPreserved": 20,
+    "reviewedUpdated": [
+      18
+    ]
+  },
+  "historicalPreservation": {
+    "newHistoricalFileChanges": 0,
+    "notAFreshPrivateJournalAudit": true,
+    "persistentHaltNotChanged": true,
+    "priorAccountedNanodollars": 47366625,
+    "priorPrivateFiles": 324,
+    "priorRecordedAttempts": 10,
+    "sourcePinsUnchanged": true
+  },
+  "identity": "53-published-image-private-hosting-preparation-v1",
+  "newArtifactsSHA256": {
+    "deployment/cloud-run/private-hosting-foundation-PROPOSED-v1.sh": "471d137c909a0beba981705d0057db9478274630732004dd0d03abb227f1ddf1",
+    "deployment/cloud-run/published-staging-v1.json": "f50b11bdab2038c84ebeb6efe0f37e2ead121acdbe523a863bd2cff6261f1a43",
+    "deployment/hosting_batch.py": "419b94dd79c0b8241c1500d7632020dd180949b95f0d3eddbe64f3705655084d",
+    "deployment/test_hosting_batch.py": "f51af26c1782406d2d084562445e68dd48d42fb7d6a7d4be831d321908fc309d",
+    "docs/task53-private-hosting-approval.md": "f0c99f5b8970d83460c39f2eb44b519a105fd63365b884f80df58c64e072a0e5"
+  },
+  "notRun": [
+    "Actual GCP account/resource inventory or billing/quote checks",
+    "Cloud deployment, managed SQL/Redis connectivity, hosted IAM/IAP and worker restart",
+    "New Docker builds/scans: exact images unchanged",
+    "Backend/frontend full suites, browser, TypeScript/lint/build: no application/runtime/dependency files changed; historical frontend expired-date failure remains recorded",
+    "Fresh historical private-evidence replay/file inventory: no journal or private evidence accessed"
+  ],
+  "providerCalls": 0,
+  "registryAMD64References": {
+    "backend": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-backend@sha256:ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+    "counter": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-counter@sha256:2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+    "dispatcher": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-dispatcher@sha256:2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+    "factory": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-factory@sha256:b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+    "frontend": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-frontend@sha256:ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+    "recovery": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-recovery@sha256:8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8"
+  },
+  "resourcesCreated": 0,
+  "riskAccepted": false,
+  "secretValuesRead": false,
+  "serviceDeploymentCommandsAvailable": 0,
+  "tests": {
+    "currentDeploymentSourceCohort": {
+      "errors": 0,
+      "failed": 0,
+      "logSHA256": "88d065b08778c9f353f2721c0a61e0071d0df575fa2cd40beee7ccf2d8e84307",
+      "passed": 33,
+      "skipped": 0
+    },
+    "diffWhitespace": "passed",
+    "frontendTrust": {
+      "command": "node --import tsx --test deployment/frontend_trust.test.mjs",
+      "failed": 0,
+      "logSHA256": "44986b58c705255fd52d4cdb26afc22bfadd5a6f9c18a76bef32e42bf60e0406",
+      "passed": 11,
+      "skipped": 0
+    },
+    "npmLsOffline": "passed",
+    "pipCheck": "passed",
+    "secretPatterns": {
+      "note": "Initial unanchored pattern found four task-prefixed handbook path substrings, independently classified; word-boundary scan passes.",
+      "privateKeyRead": false,
+      "unresolved": 0
+    },
+    "shellSyntax": "passed"
+  },
+  "unchangedPinnedSourcesSHA256": {
+    "deployment/candidates/registry-publication-v1/images.json": "a453bf40a2eee979616b591716e616a62b382b8ca2eba850a45adb1890bbd0ce",
+    "deployment/cloud-run/real-source-pins-v1.json": "1b3c5ccca3fddc0577048b02600f5a6e1abf8ba1ebb89787dc7521c573e2871b",
+    "deployment/cloud_run.py": "fb5015551174a2652186755b7ad4e00b85fdc43e0b288c9acbdd19a07adc2eee",
+    "deployment/cloud_run_real.py": "4a93e4b25429fefc7b895156e2dc84be4466f072296b3f3e1f96fb571e2beee2",
+    "deployment/frontend_trust.mjs": "2992493f744d5480554bccbcf79ae71a00a9035e7a2107d0ccadf2287e09600c",
+    "deployment/publication_batch.py": "f6665ab9ec0ab91c5f260866d2562c42ea4e18636b82658facd02781602cbf35"
+  }
+}

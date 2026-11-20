@@ -1,3 +1,7 @@
+## November20 — separate empty hosting foundation from runtime authority
+
+Reuse the owner-signed published-image compiler and exact remote receipts; omit consumed artifact creation/publication from the next finite batch. API/service-account/empty-secret enrollment may be approved before runtime/model risk decisions, but it must not deploy a service or activate providers. Missing subjects/versions/storage/epoch/approvals continue to withhold commands; current rates and conditional cost ceilings are not account quotes or financial grants. [Executable review and precise gates](docs/task53-private-hosting-approval.md).
+
 ## Owner-operated artifact trust — November19,2026
 
 Reuse the existing frontend Ed25519 domain and exact compiler; add only offline operator tools. Public-key possession is not independently certified owner identity or risk acceptance. The tool may verify owner-supplied signatures and source-bound image records, but never generate/sign genuine approvals or turn artifact-only permission into hosting/provider authority. Preserve old cohorts, pin files, hashes and financial history; select a genuine frontend replacement only through exact owner-signed image/config bindings and real OCI receipts. Group scanner duplicates and document measured applicability without suppressing raw matches; limit independent review to the genuinely unresolved technical judgments. [Commands/limits](docs/task52-owner-enrollment-handoff.md).

@@ -1,3 +1,7 @@
+## Published-image deployment projection (offline only)
+
+`deployment/hosting_batch.py` wraps the existing owner-enrolled compiler/receipt verifier without changing the signed runtime/source cohort. It fills only actual published amd64 digests and renders a22-command identity/empty-secret foundation, with no network executor or service activation. Completed registry publication is excluded; existing six-role authentication, source/epoch, SQL/witness, Redis and provider gates are unchanged. [Commands and missing inputs](docs/task53-private-hosting-approval.md).
+
 ## Owner-trust artifact replacement prepared, unselected
 
 The existing source cohort/entrypoints/workflow are unchanged. A frontend-only local rebuild now embeds the genuine owner-selected public key; its unsigned candidate/config/security records live separately under deployment/candidates/owner-frontend-v1. Old manifests/default selection and all five Python images remain intact. Configuration approval, hosting-risk acceptance, exact registry publication and provider financial enrollment remain absent. [Verified artifact](docs/task52-owner-frontend-rebuild.md).
