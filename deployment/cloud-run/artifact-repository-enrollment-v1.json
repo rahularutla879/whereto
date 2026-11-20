@@ -1,0 +1,227 @@
+{
+  "APIsChanged": [],
+  "IAMChangesRequested": 0,
+  "allExecutionOutcomes": [
+    {
+      "exit": 0,
+      "label": "active-account",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca"
+    },
+    {
+      "exit": 0,
+      "label": "apis-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+    },
+    {
+      "exit": 0,
+      "label": "apis-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+    },
+    {
+      "exit": 0,
+      "label": "apis-preflight-recheck",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+    },
+    {
+      "exit": 0,
+      "label": "billing-linkage",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+    },
+    {
+      "exit": 0,
+      "label": "create-private-repository-once",
+      "mutation": true,
+      "stderrSHA256": "e8842680b25f545a67ef91c5e90d9efa6ff7353cf46e3a8417df03046d85e166",
+      "stdoutSHA256": "c2ca956e123be728a7ceec077b88ade4850b5797eb31147e5bfab504e059a045"
+    },
+    {
+      "exit": 0,
+      "label": "linked-billing-account",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "eb41df079b17ebdf70b4c83cba541d2d16dd4c96f16bf0a2b31ff727289ff1e4"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "17edd5e4114ad7d1c595936424b0985fa0d20808a10f799d7c79335e9fe9b2d3"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "ceda52d0e849cf80b0005bafb4cbaef1db640570f3ceab60b37581b9b4151abe"
+    },
+    {
+      "exit": 0,
+      "label": "project",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a"
+    },
+    {
+      "exit": 1,
+      "label": "repositories-before",
+      "mutation": false,
+      "stderrSHA256": "b835c62d63b9ecdf5b94c9f273f322b7b0de3b88614d32b32d279da95946afa2",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit": 0,
+      "label": "repositories-preflight-recheck",
+      "mutation": false,
+      "stderrSHA256": "deffe83a34a4d9835666eff08e00ae3e083d6948adafbc28681c6b9e73700044",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "repository-after",
+      "mutation": false,
+      "stderrSHA256": "78157d3e589efaa079a1e4191285a4c9ded162bd589132b05cd20db43b63fcfe",
+      "stdoutSHA256": "c2ca956e123be728a7ceec077b88ade4850b5797eb31147e5bfab504e059a045"
+    },
+    {
+      "exit": 0,
+      "label": "repository-iam-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "repository-images-after",
+      "mutation": false,
+      "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "baselineCommit": "93edf520694c79dce9b9ef53611eaa1dba2edc37",
+  "billingAccountOpen": true,
+  "billingChanges": 0,
+  "calls": [
+    {
+      "exit": 0,
+      "label": "create-private-repository-once",
+      "mutation": true,
+      "stderrSHA256": "e8842680b25f545a67ef91c5e90d9efa6ff7353cf46e3a8417df03046d85e166",
+      "stdoutSHA256": "c2ca956e123be728a7ceec077b88ade4850b5797eb31147e5bfab504e059a045"
+    },
+    {
+      "exit": 0,
+      "label": "repository-after",
+      "mutation": false,
+      "stderrSHA256": "78157d3e589efaa079a1e4191285a4c9ded162bd589132b05cd20db43b63fcfe",
+      "stdoutSHA256": "c2ca956e123be728a7ceec077b88ade4850b5797eb31147e5bfab504e059a045"
+    },
+    {
+      "exit": 0,
+      "label": "repository-iam-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "17edd5e4114ad7d1c595936424b0985fa0d20808a10f799d7c79335e9fe9b2d3"
+    },
+    {
+      "exit": 0,
+      "label": "repository-images-after",
+      "mutation": false,
+      "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "apis-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+    }
+  ],
+  "cliInvocationCount": 15,
+  "costEvidence": "Official pricing2026-11-20: storage/transfer/optional scanning; no separate create fee. Repository empty, no data transfer or paid scanning. Not a posted-invoice verification or provider hard cap.",
+  "costIsIncrementalForThisEmptyRepositoryNotEntireAccount": true,
+  "costPricingReference": "https://cloud.google.com/artifact-registry/pricing",
+  "createAndVerificationSourceSHA256": "ed2a32ec42ce3cef8a130d38977726d95d43fe91de3ef22628170721757a4550",
+  "createCommandExit": 0,
+  "createRetries": 0,
+  "creationOnlyCostAuthorization": true,
+  "creationOutcomeUncertain": false,
+  "currency": "USD",
+  "durableCreateIntentSHA256": "575073a9f9a7e986c21a14376f0d61c895fafd08daa71f1197708cc4308c8bde",
+  "expectedIncrementalCreationUSD": "0.00",
+  "expectedIncrementalEmptyMonthlyUSD": "0.00",
+  "format": "DOCKER",
+  "futureUploadAuthorized": false,
+  "googleManagedAutomaticSideEffect": {
+    "explanation": "Google documents creating/granting this service agent on first repository creation. No explicit IAM or service-account creation command was issued.",
+    "explicitIAMMutationCommands": 0,
+    "observed": "One project roles/artifactregistry.serviceAgent binding added for service-895186533714@gcp-sa-artifactregistry.iam.gserviceaccount.com",
+    "otherProjectBindingsAddedOrRemoved": false,
+    "source": "https://docs.cloud.google.com/artifact-registry/docs/ar-service-account"
+  },
+  "identity": "53-owner-authorized-private-empty-artifact-repository-v1",
+  "images": 0,
+  "imagesUploaded": 0,
+  "immutableTags": true,
+  "initialPreflightRefusal": {
+    "boundedReadOnlyRecheckSucceeded": true,
+    "enablementRepeated": false,
+    "evidenceSHA256": "39d40b1af0d0e5e6646ba1ea3aa3b25792376b201a85f3a440bf32ec863f72d3",
+    "kind": "repository list SERVICE_DISABLED before creation; no create intent/send",
+    "preflightResultSHA256": "a7e85e81aa04c9828df164f5099f07a648d0ebb81aaba7ce8c0b6f7ed56d482a"
+  },
+  "mode": "STANDARD_REPOSITORY",
+  "monthlyCeilingUSD": "1.00",
+  "observedAtUTC": "2026-11-20T18:00:24.712609+00:00",
+  "oneTimeCeilingUSD": "5.00",
+  "otherResourceCreationsRequested": 0,
+  "ownerAuthorization": "Create only this private immutable Docker repository with automatic scanning disabled; no uploads; incremental limits$5one-time/$1monthly",
+  "postedInvoiceVerified": false,
+  "privacyVerified": "No public repository/project IAM binding; project has no parent; no anonymous artifact access grant made",
+  "project": "where-to-512422",
+  "projectIAMUnchanged": false,
+  "projectPublicBindings": [],
+  "providerCalls": 0,
+  "providerHardBillingCapInstalled": false,
+  "publicationOwnerSignatureCreated": false,
+  "rawEvidenceDirectoryOwnerOnly": "/tmp/task52-private-repository-create-v1",
+  "region": "us-east4",
+  "registryURL": "us-east4-docker.pkg.dev/where-to-512422/whereto-private",
+  "repository": "whereto-private",
+  "repositoryIAMBindingsCount": 0,
+  "repositoryPublicBindings": [],
+  "repositorySizeBytes": "not returned; empty image listing observed",
+  "resourceName": "projects/where-to-512422/locations/us-east4/repositories/whereto-private",
+  "runtimeRiskAccepted": false,
+  "scanningAPIs": {
+    "containeranalysis.googleapis.com": false,
+    "containerscanning.googleapis.com": false,
+    "ondemandscanning.googleapis.com": false,
+    "securitycenter.googleapis.com": false
+  },
+  "scanningConfiguration": {
+    "enablementConfig": "DISABLED",
+    "enablementState": "SCANNING_DISABLED",
+    "enablementStateReason": "API containerscanning.googleapis.com is not enabled."
+  },
+  "secretsRead": false,
+  "verifiedResumeSourceSHA256": "6cb0be43ad5937d0a2eb436c23422bbefbe107ce5598c2d1d932e5e4d1f249f9"
+}

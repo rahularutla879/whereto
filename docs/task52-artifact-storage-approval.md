@@ -1,3 +1,5 @@
+> Current repository update: owner separately authorized creation only. `whereto-private` now exists privately in `where-to-512422/us-east4`, Docker/standard, immutable tags, scanning explicitly disabled, zero images. Google added its documented first-repository service-agent role automatically; no public grant. [Verified outcome](../deployment/cloud-run/artifact-repository-enrollment-v1.json). **Do not rerun API enablement or repository creation. Uploads and runtime acceptance remain unauthorized.**
+
 > Current update: Artifact Registry API alone is now enabled under separate explicit owner authorization. A propagation-aware read-only listing confirms zero repositories in us-east4; project IAM is unchanged and scanning APIs remain disabled. [Exact outcome](../deployment/cloud-run/artifact-api-enrollment-v1.json). Do not rerun API enablement. No creation, publication, cost or runtime-risk approval is implied.
 
 # Exact private artifact proposal — unsigned, no execution
@@ -23,13 +25,13 @@ Source cohort: `5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d
 
 ## Account/cost boundary
 
-Six owner-authorized read-only CLI checks now pass: project ACTIVE; billing linked/open/USD; active CLI account has an existing direct project Owner role; no public project IAM bindings observed. At that initial read, Artifact Registry and scanning/Run/IAP/Secret Manager/Compute were absent from the enabled list. The separately authorized API update above now confirms Artifact Registry enabled and the target repository absent; other checked APIs remain disabled. Actual posted charges/tax/discounts/trial terms remain unknown. [Sanitized current observation](../deployment/cloud-run/artifact-account-observation-v2.json). There is **no approved cost envelope**; no new IAM role was granted.
+Six owner-authorized read-only CLI checks now pass: project ACTIVE; billing linked/open/USD; active CLI account has an existing direct project Owner role; no public project IAM bindings observed. At that initial read, Artifact Registry and scanning/Run/IAP/Secret Manager/Compute were absent from the enabled list. The separately authorized API update above now confirms Artifact Registry enabled and the target repository absent; other checked APIs remain disabled. Actual posted charges/tax/discounts/trial terms remain unknown. [Sanitized current observation](../deployment/cloud-run/artifact-account-observation-v2.json). The owner subsequently approved creation-only limits of$5one-time/$1monthly. Expected empty-repository usage is$0; this is not a posted-invoice claim or upload authorization. The documented Google-managed service-agent role appeared on first repository creation; no explicit IAM grant was made.
 
 Proposed limits: one private immutable-tag Docker repository `whereto-private`,project`where-to-512422`,region`us-east4`;six exact images/max5GiB;$5one-time/$1monthly ceilings. [Public storage pricing](https://cloud.google.com/artifact-registry/pricing) gives about$0.50gross/month at5GiB before account-specific terms; do not assume shared free tier. [Scanning pricing](https://cloud.google.com/artifact-analysis/pricing) has account-dependent charges; this proposed new repository explicitly disables automatic scanning and enables no scanning API. Existing policies are not changed. Local full security evidence stays attached. These limits are operator stop conditions, not a provider-enforced hard billing cap. Stop if actual charges/terms cannot fit them.
 
 ## Owner actions
 
-1. Exact API enablement and read-only repository checks are completed: Artifact Registry alone enabled; target repository absent; no public project bindings; scanning APIs disabled. Creation/publication are not authorized. Confirm actual billing plan/tax/discount/trial terms before the storage-only cost decision; USD/open status does not establish all charges.
+1. Exact API enablement and read-only repository checks are completed: Artifact Registry alone enabled; target repository absent; no public project bindings; scanning APIs disabled. Creation alone was subsequently authorized and verified; do not repeat it. Publication remains unauthorized. Confirm applicable account terms before any separately approved upload; USD/open status does not establish all charges.
 2. Review the full proposed decision and publication JSON. Do not sign until account/cost/private-access conditions are established and you decide to approve artifact-storage-only scope. An owner signature on the existing domain binds the exact decision hash and image/config/cost set; it is not a hosting vulnerability exception.
 3. After that decision, personally sign only `~/.whereto-production-frontend-v1/state/publication.bytes` into `publication.sig` with the already selected encrypted key. Codex must not open/sign with it. **No signature command was executed or real executable batch generated here.**
 4. After the valid owner signature, generate/review the existing six-push batch; require separate explicit owner execution authorization before creating/uploading anything.
@@ -42,7 +44,7 @@ The following exact API command was already separately authorized and completed.
 gcloud services enable artifactregistry.googleapis.com --project=where-to-512422 --quiet
 ```
 
-After verifying absence, access, API and costs, separately authorize this one creation; stop on collision/unknown state:
+This exact creation command was separately authorized and completed once. **Historical command — do not rerun:**
 
 ```sh
 gcloud artifacts repositories create whereto-private --project=where-to-512422 --location=us-east4 --repository-format=docker --mode=standard-repository --immutable-tags --disable-vulnerability-scanning --quiet
