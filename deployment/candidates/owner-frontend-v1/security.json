@@ -1,0 +1,5087 @@
+{
+  "configDigest": "sha256:85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+  "counts": {
+    "High": 72,
+    "Low": 18,
+    "Medium": 76,
+    "Negligible": 49
+  },
+  "critical": 0,
+  "criticalHigh": [
+    {
+      "advisory": "CVE-2026-82560",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-82560",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "5.40.1-6+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/perl-base/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/perl-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/perl-base.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/perl-base.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/perl-base.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/perl-base.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-82560"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "perl",
+              "version": "5.40.1-6+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "perl-base",
+      "purl": "pkg:deb/debian/perl-base@5.40.1-6%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=perl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-124709",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-124709",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-124709"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-124709",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-124709",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-124709"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2025-69720",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "6.5+20250216-2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libtinfo6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libtinfo6/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libtinfo6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libtinfo6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2025-69720"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "ncurses",
+              "version": "6.5+20250216-2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libtinfo6",
+      "purl": "pkg:deb/debian/libtinfo6@6.5%2B20250216-2?arch=amd64&distro=debian-13.7&upstream=ncurses",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2025-69720",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "6.5+20250216-2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/ncurses-base/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/ncurses-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/ncurses-base.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/ncurses-base.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/ncurses-base.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/ncurses-base.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/ncurses-base.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/ncurses-base.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2025-69720"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "ncurses",
+              "version": "6.5+20250216-2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "ncurses-base",
+      "purl": "pkg:deb/debian/ncurses-base@6.5%2B20250216-2?arch=all&distro=debian-13.7&upstream=ncurses",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2025-69720",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2025-69720",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "6.5+20250216-2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/ncurses-bin/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/ncurses-bin/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/ncurses-bin.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/ncurses-bin.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/ncurses-bin.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/ncurses-bin.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2025-69720"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "ncurses",
+              "version": "6.5+20250216-2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "ncurses-bin",
+      "purl": "pkg:deb/debian/ncurses-bin@6.5%2B20250216-2?arch=amd64&distro=debian-13.7&upstream=ncurses",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-9538",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-9538",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "5.40.1-6+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/perl-base/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/perl-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/perl-base.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/perl-base.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/perl-base.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/perl-base.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-9538"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "perl",
+              "version": "5.40.1-6+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "perl-base",
+      "purl": "pkg:deb/debian/perl-base@5.40.1-6%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=perl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95619",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/gcc-14-base/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/gcc-14-base:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/gcc-14-base:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95619"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "gcc-14-base",
+      "purl": "pkg:deb/debian/gcc-14-base@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95619",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libgcc-s1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libgcc-s1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libgcc-s1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95619"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libgcc-s1",
+      "purl": "pkg:deb/debian/libgcc-s1@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95619",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95619",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libstdc++6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libstdc++6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libstdc++6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95619"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libstdc++6",
+      "purl": "pkg:deb/debian/libstdc%2B%2B6@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95692",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95692",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95692"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95692",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95692",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95692"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-102010",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/gcc-14-base/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/gcc-14-base:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/gcc-14-base:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-102010"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "gcc-14-base",
+      "purl": "pkg:deb/debian/gcc-14-base@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-102010",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libgcc-s1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libgcc-s1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libgcc-s1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-102010"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libgcc-s1",
+      "purl": "pkg:deb/debian/libgcc-s1@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-102010",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-102010",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "14.2.0-19",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libstdc++6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/gcc-14-base/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libstdc++6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libstdc++6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-102010"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "gcc-14",
+              "version": "14.2.0-19"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libstdc++6",
+      "purl": "pkg:deb/debian/libstdc%2B%2B6@14.2.0-19?arch=amd64&distro=debian-13.7&upstream=gcc-14",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-107496",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107496",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-107496"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-107496",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107496",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-107496"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-19499",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc-bin/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc-bin/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.triggers",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.triggers"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-19499"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc-bin",
+      "purl": "pkg:deb/debian/libc-bin@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-19499",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-19499",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc6/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-19499"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc6",
+      "purl": "pkg:deb/debian/libc6@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-119379",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119379",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "3.46.1-7+deb13u2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsqlite3-0/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsqlite3-0/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-119379"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "sqlite3",
+              "version": "3.46.1-7+deb13u2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsqlite3-0",
+      "purl": "pkg:deb/debian/libsqlite3-0@3.46.1-7%2Bdeb13u2?arch=amd64&distro=debian-13.7&upstream=sqlite3",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95691",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95691",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95691"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-95691",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-95691",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-95691"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-84243",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc-bin/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc-bin/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.triggers",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.triggers"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-84243"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc-bin",
+      "purl": "pkg:deb/debian/libc-bin@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-84243",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84243",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc6/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-84243"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc6",
+      "purl": "pkg:deb/debian/libc6@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-88823",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-88823",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-88823"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-88823",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-88823",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-88823"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-119374",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119374",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "3.46.1-7+deb13u2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsqlite3-0/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsqlite3-0/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-119374"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "sqlite3",
+              "version": "3.46.1-7+deb13u2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsqlite3-0",
+      "purl": "pkg:deb/debian/libsqlite3-0@3.46.1-7%2Bdeb13u2?arch=amd64&distro=debian-13.7&upstream=sqlite3",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/bsdutils/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/bsdutils/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "bsdutils",
+      "purl": "pkg:deb/debian/bsdutils@1%3A2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libblkid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libblkid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libblkid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libblkid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libblkid1",
+      "purl": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/liblastlog2-2/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/liblastlog2-2/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "liblastlog2-2",
+      "purl": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libmount1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libmount1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libmount1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libmount1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libmount1",
+      "purl": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsmartcols1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsmartcols1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsmartcols1",
+      "purl": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libuuid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libuuid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libuuid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libuuid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libuuid1",
+      "purl": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/login/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/login/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.conffiles",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.md5sums",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.preinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.preinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "login",
+      "purl": "pkg:deb/debian/login@1%3A4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/mount/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/mount/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "mount",
+      "purl": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78408",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78408",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/util-linux/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/util-linux/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78408"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-direct-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "util-linux",
+      "purl": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-5435",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc-bin/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc-bin/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc-bin.triggers",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc-bin.triggers"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-5435"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc-bin",
+      "purl": "pkg:deb/debian/libc-bin@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-5435",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-5435",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41-12+deb13u4",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libc6/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libc6/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libc6:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libc6:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-5435"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "glibc",
+              "version": "2.41-12+deb13u4"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libc6",
+      "purl": "pkg:deb/debian/libc6@2.41-12%2Bdeb13u4?arch=amd64&distro=debian-13.7&upstream=glibc",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/bsdutils/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/bsdutils/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "bsdutils",
+      "purl": "pkg:deb/debian/bsdutils@1%3A2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libblkid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libblkid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libblkid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libblkid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libblkid1",
+      "purl": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/liblastlog2-2/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/liblastlog2-2/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "liblastlog2-2",
+      "purl": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libmount1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libmount1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libmount1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libmount1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libmount1",
+      "purl": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsmartcols1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsmartcols1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsmartcols1",
+      "purl": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libuuid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libuuid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libuuid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libuuid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libuuid1",
+      "purl": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/login/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/login/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.conffiles",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.md5sums",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.preinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.preinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "login",
+      "purl": "pkg:deb/debian/login@1%3A4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/mount/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/mount/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "mount",
+      "purl": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-76642",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-76642",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/util-linux/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/util-linux/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-76642"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-direct-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "util-linux",
+      "purl": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/bsdutils/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/bsdutils/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "bsdutils",
+      "purl": "pkg:deb/debian/bsdutils@1%3A2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libblkid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libblkid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libblkid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libblkid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libblkid1",
+      "purl": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/liblastlog2-2/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/liblastlog2-2/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "liblastlog2-2",
+      "purl": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libmount1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libmount1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libmount1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libmount1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libmount1",
+      "purl": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsmartcols1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsmartcols1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsmartcols1",
+      "purl": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libuuid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libuuid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libuuid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libuuid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libuuid1",
+      "purl": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/login/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/login/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.conffiles",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.md5sums",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.preinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.preinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "login",
+      "purl": "pkg:deb/debian/login@1%3A4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/mount/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/mount/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "mount",
+      "purl": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78410",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78410",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/util-linux/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/util-linux/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78410"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-direct-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "util-linux",
+      "purl": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/bsdutils/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/bsdutils/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/bsdutils.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/bsdutils.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "bsdutils",
+      "purl": "pkg:deb/debian/bsdutils@1%3A2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libblkid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libblkid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libblkid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libblkid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libblkid1",
+      "purl": "pkg:deb/debian/libblkid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/liblastlog2-2/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/liblastlog2-2/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/liblastlog2-2:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "liblastlog2-2",
+      "purl": "pkg:deb/debian/liblastlog2-2@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libmount1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libmount1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libmount1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libmount1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libmount1",
+      "purl": "pkg:deb/debian/libmount1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsmartcols1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsmartcols1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsmartcols1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsmartcols1",
+      "purl": "pkg:deb/debian/libsmartcols1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libuuid1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libuuid1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libuuid1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libuuid1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libuuid1",
+      "purl": "pkg:deb/debian/libuuid1@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "1:4.16.0-2+really2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/login/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/login/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.conffiles",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.md5sums",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.defs.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.defs.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.preinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.preinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/login.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/login.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "login",
+      "purl": "pkg:deb/debian/login@1%3A4.16.0-2%2Breally2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux%402.41.5-0%2Bdeb13u1",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/mount/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/mount/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/mount.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/mount.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "mount",
+      "purl": "pkg:deb/debian/mount@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7&upstream=util-linux",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-78409",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-78409",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.41.5-0+deb13u1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/util-linux/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/util-linux/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.conffiles",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.conffiles"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.list"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postinst",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postinst"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.postrm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.postrm"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/util-linux.prerm",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/util-linux.prerm"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-78409"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "util-linux",
+              "version": "2.41.5-0+deb13u1"
+            }
+          },
+          "type": "exact-direct-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "util-linux",
+      "purl": "pkg:deb/debian/util-linux@2.41.5-0%2Bdeb13u1?arch=amd64&distro=debian-13.7",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-119373",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-119373",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "3.46.1-7+deb13u2",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libsqlite3-0/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libsqlite3-0/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libsqlite3-0:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-119373"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "sqlite3",
+              "version": "3.46.1-7+deb13u2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libsqlite3-0",
+      "purl": "pkg:deb/debian/libsqlite3-0@3.46.1-7%2Bdeb13u2?arch=amd64&distro=debian-13.7&upstream=sqlite3",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-54369",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54369",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.3.2-2+b1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libacl1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libacl1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libacl1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libacl1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-54369"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "acl",
+              "version": "2.3.2-2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libacl1",
+      "purl": "pkg:deb/debian/libacl1@2.3.2-2%2Bb1?arch=amd64&distro=debian-13.7&upstream=acl%402.3.2-2",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-107493",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107493",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-107493"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-107493",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-107493",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-107493"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-84786",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84786",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libssl3t64/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libssl3t64/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libssl3t64:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-84786"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libssl3t64",
+      "purl": "pkg:deb/debian/libssl3t64@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-84786",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-84786",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "not-fixed",
+        "versions": []
+      },
+      "installed": "3.5.7-1~deb13u3",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/openssl-provider-legacy/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/openssl-provider-legacy/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.md5sums"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/openssl-provider-legacy.list",
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/openssl-provider-legacy.list"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-84786"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "openssl",
+              "version": "3.5.7-1~deb13u3"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "openssl-provider-legacy",
+      "purl": "pkg:deb/debian/openssl-provider-legacy@3.5.7-1~deb13u3?arch=amd64&distro=debian-13.7&upstream=openssl",
+      "severity": "High",
+      "type": "deb"
+    },
+    {
+      "advisory": "CVE-2026-54370",
+      "dataSource": "https://security-tracker.debian.org/tracker/CVE-2026-54370",
+      "disposition": "Unaccepted; existing conditional/native exposure evidence remains scoped to actual binary/source identity; no risk approval",
+      "fix": {
+        "state": "wont-fix",
+        "versions": []
+      },
+      "installed": "2.3.2-2+b1",
+      "locations": [
+        {
+          "accessPath": "/var/lib/dpkg/status",
+          "annotations": {
+            "evidence": "primary"
+          },
+          "layerID": "sha256:5722aac970cb87488d352c95d943b6a5987353f1eae61ee9156212bc63c41914",
+          "path": "/var/lib/dpkg/status"
+        },
+        {
+          "accessPath": "/usr/share/doc/libacl1/copyright",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/usr/share/doc/libacl1/copyright"
+        },
+        {
+          "accessPath": "/var/lib/dpkg/info/libacl1:amd64.md5sums",
+          "annotations": {
+            "evidence": "supporting"
+          },
+          "layerID": "sha256:dd57f90311a2567b55ff22eeacff1602fd04ad7566e315957731359eab173b90",
+          "path": "/var/lib/dpkg/info/libacl1:amd64.md5sums"
+        }
+      ],
+      "matchDetails": [
+        {
+          "found": {
+            "versionConstraint": "none (unknown)",
+            "vulnerabilityID": "CVE-2026-54370"
+          },
+          "matcher": "dpkg-matcher",
+          "searchedBy": {
+            "distro": {
+              "type": "debian",
+              "version": "13.7"
+            },
+            "namespace": "debian:distro:debian:13",
+            "package": {
+              "name": "acl",
+              "version": "2.3.2-2"
+            }
+          },
+          "type": "exact-indirect-match"
+        }
+      ],
+      "namespace": "debian:distro:debian:13",
+      "package": "libacl1",
+      "purl": "pkg:deb/debian/libacl1@2.3.2-2%2Bb1?arch=amd64&distro=debian-13.7&upstream=acl%402.3.2-2",
+      "severity": "High",
+      "type": "deb"
+    }
+  ],
+  "database": {
+    "built": "2026-11-20T06:21:00Z",
+    "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-20T00:20:17Z_1795155660.tar.zst?checksum=sha256%3A6866d1685025e6001d422fb4be59f26feebacb151b3ff77b012d999e12b9af24",
+    "path": "/cache/6/vulnerability.db",
+    "schemaVersion": "v6.1.10",
+    "valid": true
+  },
+  "existingExposureEvidence": "docs/task52-production-enrollment-security.json#nativeFollowup",
+  "fullRawScans": {
+    "new": {
+      "path": "/tmp/task52-frontend-owner-v1/scans/frontend.json",
+      "sha256": "c6eb0139f873a19f2fe9f9e961c409edf5cc1745b4790cc93ad29de479b677ea"
+    },
+    "previous": {
+      "path": "/tmp/task52-frontend-owner-v1/scans/previous-frontend.json",
+      "sha256": "4916838010bd6ad7cd5f0b16ae5fe532765a7a2282578ebe0a30ca17514864b1"
+    }
+  },
+  "high": 72,
+  "identity": "52-owner-frontend-image-security-v1",
+  "image": "sha256:e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+  "noExclusions": true,
+  "sameDatabaseComparison": {
+    "addedByRebuild": [],
+    "databaseAddedVersusNov19": [
+      {
+        "advisory": "CVE-2026-84786",
+        "installed": "3.5.7-1~deb13u3",
+        "package": "libssl3t64"
+      },
+      {
+        "advisory": "CVE-2026-84786",
+        "installed": "3.5.7-1~deb13u3",
+        "package": "openssl-provider-legacy"
+      }
+    ],
+    "new": {
+      "counts": {
+        "High": 72,
+        "Low": 18,
+        "Medium": 76,
+        "Negligible": 49
+      },
+      "database": {
+        "built": "2026-11-20T06:21:00Z",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-20T00:20:17Z_1795155660.tar.zst?checksum=sha256%3A6866d1685025e6001d422fb4be59f26feebacb151b3ff77b012d999e12b9af24",
+        "path": "/cache/6/vulnerability.db",
+        "schemaVersion": "v6.1.10",
+        "valid": true
+      },
+      "image": "sha256:e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+      "oom": false,
+      "scanSHA256": "c6eb0139f873a19f2fe9f9e961c409edf5cc1745b4790cc93ad29de479b677ea",
+      "scannerExit": 0,
+      "sourceConfigDigest": "sha256:85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f"
+    },
+    "previous": {
+      "counts": {
+        "High": 72,
+        "Low": 18,
+        "Medium": 76,
+        "Negligible": 49
+      },
+      "database": {
+        "built": "2026-11-20T06:21:00Z",
+        "from": "https://grype.anchore.io/databases/v6/vulnerability-db_v6.1.10_2026-11-20T00:20:17Z_1795155660.tar.zst?checksum=sha256%3A6866d1685025e6001d422fb4be59f26feebacb151b3ff77b012d999e12b9af24",
+        "path": "/cache/6/vulnerability.db",
+        "schemaVersion": "v6.1.10",
+        "valid": true
+      },
+      "image": "sha256:ed467eff26e0b368d45d44c9d90471982e0fd60300fc31e62440606b8cfbf884",
+      "oom": false,
+      "scanSHA256": "4916838010bd6ad7cd5f0b16ae5fe532765a7a2282578ebe0a30ca17514864b1",
+      "scannerExit": 0,
+      "sourceConfigDigest": "sha256:7e8416dbf83db51b6ed3b0d8f6b099369b68e67493478ec1e0a8d7f46fd4bf90"
+    },
+    "removedByRebuild": []
+  },
+  "scanner": "anchore/grype@sha256:13113eeceab017260370cf540e1d25442c59665fd07d1b09b66d63bb0c282887",
+  "scannerVersion": "0.121.3",
+  "securityAccepted": false,
+  "uniqueHighAdvisories": 24,
+  "vendorReview": {
+    "CVE-2026-84786": {
+      "applicationCondition": "Current JS HTTPS/tls ports do not request DANE/TLSA; no claim that OS OpenSSL matches establish bundled Node OpenSSL status; retain native dependency/host assumptions",
+      "compatibleFix": "None documented; installed Trixie and newer suite marked vulnerable; scanner not-fixed",
+      "description": "DANE-enabled TLS client NULL dereference when processing unusual certificate/TLSA combination",
+      "securityAccepted": false,
+      "source": "https://security-tracker.debian.org/tracker/CVE-2026-84786"
+    }
+  }
+}

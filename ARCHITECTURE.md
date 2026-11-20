@@ -1,3 +1,7 @@
+## Owner-trust artifact replacement prepared, unselected
+
+The existing source cohort/entrypoints/workflow are unchanged. A frontend-only local rebuild now embeds the genuine owner-selected public key; its unsigned candidate/config/security records live separately under deployment/candidates/owner-frontend-v1. Old manifests/default selection and all five Python images remain intact. Configuration approval, hosting-risk acceptance, exact registry publication and provider financial enrollment remain absent. [Verified artifact](docs/task52-owner-frontend-rebuild.md).
+
 ## Offline production artifact enrollment
 
 The six-service runtime is unchanged. New operator-only Ed25519 proof/context/image/configuration tooling remains outside runtime images and handles no private signing keys. A verified owner-signed frontend replacement can be composed with the exact five existing Python images through the source-pinned Cloud Run compiler; missing signatures or registry bytes withhold deployment commands. Artifact-only publication uses one authenticated snapshot and exactly six fixed-repository pushes, never app financial authority. No genuine enrollment or image replacement has occurred. [Handoff](docs/task52-owner-enrollment-handoff.md).

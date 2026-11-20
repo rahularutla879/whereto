@@ -1,3 +1,5 @@
+> November20update: owner trust selection and frontend-only local rebuild/scan are now verified. [New inactive image and exact remaining approval](task52-owner-frontend-rebuild.md). Do not regenerate the owner's key/challenge/signature or repeat this build. The preparation narrative below preserves the original workflow; no publication/configuration/hosting approval has been issued.
+
 # Private production enrollment — prepared, not authorized
 
 Six image/config identities remain exactly [real-native-v1/images.json](../deployment/candidates/real-native-v1/images.json). Actual local inspection reconfirmed all six IDs and default startup exit78 without network/secrets. No image changed; no redundant rebuild/scan is claimed. Original same-database counts remain0critical/77high per Python role and0critical/70high frontend. [23-advisory decisions](task52-production-enrollment-security.md) · [verification](task52-owner-enrollment-verification.json).
