@@ -1,0 +1,190 @@
+{
+  "APIsEnabledOrDisabled": 0,
+  "automaticAPIAndAgentReview": {
+    "additionalServiceAgentRoles": [
+      "roles/containerregistry.ServiceAgent",
+      "roles/pubsub.serviceAgent",
+      "roles/run.serviceAgent"
+    ],
+    "apiSetMatchesRecordedPostStop": true,
+    "automaticAPIs": [
+      "containerregistry.googleapis.com",
+      "pubsub.googleapis.com"
+    ],
+    "noRiskAcceptance": true,
+    "projectIAMMatchesRecordedPostStop": true,
+    "unexpectedDefaultAccountEditorRemains": true
+  },
+  "baselineCommit": "46e26064f43ec818209cb32b78090c1755c68382",
+  "bindingRemoved": false,
+  "decision": {
+    "atUTC": "2026-11-20T20:01:58.654627+00:00",
+    "cause": "Compute dependency inventory unavailable: gcloud exit0 and empty JSON conceal a partial-request failure warning; Compute API disabled. Empty output is not absence evidence.",
+    "failingInventory": "compute-instances-all-zones",
+    "mutationAttempted": false,
+    "stoppedBeforeIAMMutation": true
+  },
+  "historicalAndPublishedSourceFilesChanged": false,
+  "historicalHaltUnchanged": true,
+  "identity": "53-default-editor-remediation-readonly-stop-v1",
+  "initialVerification": {
+    "atUTC": "2026-11-20T20:00:24.629439+00:00",
+    "bindingExactUnconditional": true,
+    "defaultAccountDirectIAMBindingCount": 0,
+    "defaultAccountUniqueId": "101224639181581020016",
+    "defaultAccountUserManagedKeyCount": 0,
+    "enabledAPIs": [
+      "analyticshub.googleapis.com",
+      "apptopology.googleapis.com",
+      "artifactregistry.googleapis.com",
+      "bigquery.googleapis.com",
+      "bigqueryconnection.googleapis.com",
+      "bigquerydatapolicy.googleapis.com",
+      "bigquerydatatransfer.googleapis.com",
+      "bigquerymigration.googleapis.com",
+      "bigqueryreservation.googleapis.com",
+      "bigquerystorage.googleapis.com",
+      "cloudapis.googleapis.com",
+      "cloudtrace.googleapis.com",
+      "containerregistry.googleapis.com",
+      "dataform.googleapis.com",
+      "dataplex.googleapis.com",
+      "datastore.googleapis.com",
+      "iam.googleapis.com",
+      "iamcredentials.googleapis.com",
+      "iap.googleapis.com",
+      "logging.googleapis.com",
+      "monitoring.googleapis.com",
+      "places.googleapis.com",
+      "pubsub.googleapis.com",
+      "routes.googleapis.com",
+      "run.googleapis.com",
+      "secretmanager.googleapis.com",
+      "servicemanagement.googleapis.com",
+      "serviceusage.googleapis.com",
+      "sql-component.googleapis.com",
+      "storage-api.googleapis.com",
+      "storage-component.googleapis.com",
+      "storage.googleapis.com",
+      "telemetry.googleapis.com"
+    ],
+    "mutationAttempted": false,
+    "policyMatchesRecordedPostStop": true,
+    "sixIntendedNamesUnused": true
+  },
+  "originalFoundationBatchReplayed": false,
+  "policyMutationAttempted": false,
+  "privateEvaluationEvidenceAccessed": false,
+  "project": "where-to-512422",
+  "readOnlyCalls": [
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5e3ce75b0afbc9bcd79e2904d3e513ce97e2c1a22df55248b680b30b6ae0fe06"
+    },
+    {
+      "exit": 0,
+      "label": "apis",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "dd35cea18de20bad68ce7cd8e07801eb5c47ab67f096c5dde9fa80378c589b91"
+    },
+    {
+      "exit": 0,
+      "label": "default-sa",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "d92f7cc56b09d5115f731b8ac44f171eaf3026e7c43301edff8cb9282c1f031d"
+    },
+    {
+      "exit": 0,
+      "label": "default-sa-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "default-sa-user-key-metadata",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "service-account-inventory",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    }
+  ],
+  "remainingCommandsExecuted": 0,
+  "remainingCommandsPreparedAsReady": false,
+  "requiredNextEvidence": "Successful authoritative Compute workload/dependency inventory; current disabled API prevents it. Any API activation or acceptance of incomplete inventory requires separate owner authorization. Do not interpret exit0/empty list with failed-request warning as verification.",
+  "resourcesCreatedOrDeleted": 0,
+  "roleRemainsPresent": true,
+  "security": {
+    "defaultAccountUserManagedKeyMetadataOnly": true,
+    "directoryMode": "0700",
+    "filesMode": "0600",
+    "noSecretOrPrivateKeyValuesRead": true,
+    "rawEvidenceDirectory": "/tmp/task52-editor-remediation-v1"
+  },
+  "sixIntendedIdentities": {
+    "creationNotAttempted": true,
+    "defaultServiceAccountNotUsedByPlannedSixRoleConfiguration": true,
+    "effectiveCreatePermissionNotIndependentlyTested": true,
+    "namesAllUnused": true
+  },
+  "targetMember": "serviceAccount:895186533714-compute@developer.gserviceaccount.com",
+  "targetRole": "roles/editor",
+  "workloadChecks": [
+    {
+      "dependencyAbsenceEstablished": true,
+      "exit": 0,
+      "label": "run-services-all-regions",
+      "resourceCount": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "dependencyAbsenceEstablished": true,
+      "exit": 0,
+      "label": "run-jobs-all-regions",
+      "resourceCount": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "dependencyAbsenceEstablished": true,
+      "exit": 0,
+      "label": "run-worker-pools-all-regions",
+      "resourceCount": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "dependencyAbsenceEstablished": true,
+      "exit": 0,
+      "label": "pubsub-topics",
+      "resourceCount": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "dependencyAbsenceEstablished": true,
+      "exit": 0,
+      "label": "pubsub-subscriptions",
+      "resourceCount": 0,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "apiDisabled": true,
+      "dependencyAbsenceEstablished": false,
+      "exit": 0,
+      "label": "compute-instances-all-zones",
+      "partialResultWarning": true,
+      "resourceCount": 0,
+      "resourceCountNotEvidenceOfAbsence": true,
+      "stderrSHA256": "cb3503e0620e72279d167c82c35001d9760174a60c1040979e3d5903d4eb22f9",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ]
+}
