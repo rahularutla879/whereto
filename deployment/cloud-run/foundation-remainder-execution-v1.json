@@ -1,0 +1,298 @@
+{
+  "CLIResult": {
+    "exit": 1,
+    "mutation": true,
+    "stderrSHA256": "46225ed3892ca9e2d8fc3cedff8c8019e6b790ded200bff0bb5c1f6d47efd227",
+    "stdoutSHA256": "0accad1423750d28ddca34b6327546fb7ec2e5642b4cbbe495bbd7a57631cb6c"
+  },
+  "attemptedArgv": [
+    "gcloud",
+    "beta",
+    "services",
+    "identity",
+    "create",
+    "--service=run.googleapis.com",
+    "--project=where-to-512422"
+  ],
+  "attemptedOriginalCommand": 2,
+  "automaticInstallControlLimitation": "CLOUDSDK_COMPONENT_MANAGER_DISABLE_UPDATE_CHECK does not disable missing-component installation; noninteractive SDK prompt handling allowed the installer. Existing SDK source-file presence did not prove the beta component was enrolled.",
+  "baselineCommit": "eba0d9f8c1d9110e8c92d20423999f3511904ce3",
+  "billingChanges": 0,
+  "cloudSecretValuesAccessed": false,
+  "durableScopeConsumed": true,
+  "execution": {
+    "commandRetryOrResumeAttempted": false,
+    "commandsAttempted": 1,
+    "commandsVerified": 0,
+    "completed": false,
+    "consumed": true,
+    "exit": 78,
+    "finishedAtUTC": "2026-11-20T21:36:05.894390+00:00"
+  },
+  "financialGrantsCreated": 0,
+  "foundationCloudResourceChangesObserved": 0,
+  "historicalPreservation": {
+    "freshPrivateJournalAudit": false,
+    "historicalSourceOrPrivateJournalChanged": false,
+    "persistentHaltUnchanged": true,
+    "priorAccountedNanodollars": 47366625,
+    "priorAttempts": 10,
+    "priorPrivateFiles": 324,
+    "privateEvidenceAccessed": false
+  },
+  "identity": "53-owner-authorized-foundation-remainder-local-sdk-stop-v1",
+  "localAutomaticChanges": {
+    "SDKVirtualenvPackagesInstalledFromLogs": [
+      "crcmod1.7",
+      "grpcio1.84.0",
+      "cryptography50.0.1",
+      "pyopenssl26.4.0",
+      "google-crc32c1.9.0",
+      "certifi2026.10.23",
+      "cffi2.1.1",
+      "pycparser3.0",
+      "typing-extensions4.16.0"
+    ],
+    "allOtherMacApplicationsVerified": false,
+    "betaInstalled": true,
+    "currentCellarVersions": {
+      "ca-certificates": [
+        "2026-10-20"
+      ],
+      "lz4": [
+        "1.11.1"
+      ],
+      "openssl@3": [
+        "3.5.9"
+      ],
+      "openssl@4": [
+        "4.1.0"
+      ],
+      "python@3.13": [],
+      "python@3.14": [
+        "3.14.10"
+      ],
+      "zstd": [
+        "1.5.7_1"
+      ]
+    },
+    "existingOpenSSL3_5_9PreservedButUnlinked": true,
+    "homebrewAutoUpdate": true,
+    "newlyInstalledFromLogs": [
+      "python@3.14 3.14.10",
+      "openssl@4 4.1.0",
+      "lz4 1.11.1",
+      "zstd 1.5.7_1",
+      "Homebrew portable Ruby4.0.10"
+    ],
+    "privateSigningMaterialAccessed": false,
+    "removedFromLogs": [
+      "python@3.13 3.13.17",
+      "older openssl@3 3.5.0",
+      "older ca-certificates2025-05-20",
+      "Homebrew/pip cache cleanup"
+    ],
+    "restorationOrFurtherInstallAttempted": false,
+    "sdkVersionAfter": {
+      "Google Cloud SDK": "590.0.0",
+      "beta": "2026.10.16",
+      "bq": "2.1.40",
+      "bundled-python3-unix": "3.14.8",
+      "core": "2026.10.16",
+      "gcloud-crc32c": "1.0.0",
+      "gsutil": "5.37"
+    },
+    "unexpectedChangesNotRepresentedAsApproved": true
+  },
+  "nextDecision": "Review unexpected local SDK/Homebrew effects and approve a supported explicit interpreter for a fresh bounded execution attempt, with installed-component checks and no installer actions. Do not automatically repair, rerun or resume this consumed attempt.",
+  "originalCommands3Through22Attempted": 0,
+  "ownerScope": "Only reviewed original commands2-22; one script execution; immediate error/unexpected-change stop; no retry/resume without new review",
+  "postStopReadOnlyCalls": [
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef"
+    },
+    {
+      "exit": 0,
+      "label": "apis",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c"
+    },
+    {
+      "exit": 0,
+      "label": "service-accounts",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    },
+    {
+      "exit": 0,
+      "label": "secrets",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-services",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "repository-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "repository",
+      "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee",
+      "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b"
+    },
+    {
+      "exit": 0,
+      "label": "images",
+      "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+      "stdoutSHA256": "1f5e618db3c7bc586e8289c2c245e29aa5fd1a1204f2a8680a2871035af897df"
+    },
+    {
+      "exit": 0,
+      "label": "billing",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+    }
+  ],
+  "postStopVerification": {
+    "APIsUnchanged": true,
+    "EditorRemediationPreserved": true,
+    "RunServices": 0,
+    "atUTC": "2026-11-20T21:37:17.548911+00:00",
+    "billingLinkageUnchanged": true,
+    "mutationRetriedOrResumed": false,
+    "projectIAMUnchanged": true,
+    "publishedManifestSetUnchanged": true,
+    "readOnlyVerificationTemporaryPython": "Existing framework Python3.12.1, per-process CLOUDSDK_PYTHON only; no configuration repair",
+    "repositoryIAMUnchanged": true,
+    "repositoryPrivateImmutableScanningDisabled": true,
+    "secretContainers": 0,
+    "serviceAccountInventoryUnchanged": true,
+    "targetWorkloadAccounts": 0
+  },
+  "preflight": {
+    "APIsUnchanged": true,
+    "EditorRemediationPreserved": true,
+    "atUTC": "2026-11-20T21:33:59.193644+00:00",
+    "batchSHA256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d",
+    "billingLinkageUnchanged": true,
+    "commands": 21,
+    "expectedIncrementalPriceUSD": "0.00: identity/empty-secret management only; no active versions or paid runtime",
+    "postedInvoiceVerified": false,
+    "preflightPassed": true,
+    "projectIAMUnchanged": true,
+    "publishedImagesUnchanged": true,
+    "repositoryUnchangedPrivateImmutableScanningDisabled": true,
+    "runServices": 0,
+    "secretContainers": 0,
+    "workloadNameConflicts": 0
+  },
+  "preflightCalls": [
+    {
+      "exit": 0,
+      "label": "active-account",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca"
+    },
+    {
+      "exit": 0,
+      "label": "project",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef"
+    },
+    {
+      "exit": 0,
+      "label": "apis",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c"
+    },
+    {
+      "exit": 0,
+      "label": "service-accounts",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    },
+    {
+      "exit": 0,
+      "label": "secrets",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "repository",
+      "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee",
+      "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b"
+    },
+    {
+      "exit": 0,
+      "label": "repository-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "registry-images",
+      "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+      "stdoutSHA256": "1f5e618db3c7bc586e8289c2c245e29aa5fd1a1204f2a8680a2871035af897df"
+    },
+    {
+      "exit": 0,
+      "label": "run-services",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "billing",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+    }
+  ],
+  "project": "where-to-512422",
+  "providerCalls": 0,
+  "rawDirectoryMode": "0700",
+  "rawFileMode": "0600",
+  "rawOwnerOnlyEvidenceDirectory": "/tmp/task52-foundation-remainder-execution-v1",
+  "rootCause": "Preflight omitted installed beta-component verification. gcloud invoked automatic component installation before dispatching the command; post-processing ran Homebrew Python3.14 installation/cleanup. Python3.13 was autoremoved, then SDK restart referenced /opt/homebrew/bin/python3.13 and failed. No successful requested service-identity operation confirmed.",
+  "runtimeSecurityRiskAccepted": false,
+  "script": "deployment/cloud-run/private-hosting-foundation-remaining-PROPOSED-v1.sh",
+  "scriptMayBeRetriedWithoutNewReview": false,
+  "scriptSHA256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d",
+  "stop": {
+    "atUTC": "2026-11-20T21:36:05.888025+00:00",
+    "errorType": "RuntimeError",
+    "noCommandRetry": true,
+    "originalCommand": 2,
+    "reason": "STOP: command-01 failed or partial; do not retry"
+  },
+  "tests": {
+    "NodeVersionAfter": "24.2.0",
+    "backendPipCheckAfter": "passed",
+    "backendPythonVersionAfter": "3.12.1",
+    "focusedHostingPublicationRealSourceBeforeAndAfter": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 26,
+      "skipped": 0
+    },
+    "fullApplicationOrOtherMacPrograms": "not tested; no new runtime/container/application source or dependencies changed",
+    "originalShellSyntax": "passed",
+    "ownerPublicProofSixOCIReceipts": "passed offline"
+  }
+}
