@@ -1,0 +1,304 @@
+{
+  "actualRegistryReceipts": {
+    "backend": {
+      "actualConfigDigest": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+      "indexSHA256": "a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "manifestSHA256": "ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+      "rawRegistryConfigBytes": 9475,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-backend@sha256:ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-backend@sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "registryAMD64Manifest": "sha256:ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+      "registryIndex": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-backend",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+        "registryManifest": "ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+        "role": "backend",
+        "verified": true
+      }
+    },
+    "counter": {
+      "actualConfigDigest": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+      "indexSHA256": "101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "manifestSHA256": "2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+      "rawRegistryConfigBytes": 9475,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-counter@sha256:2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-counter@sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "registryAMD64Manifest": "sha256:2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+      "registryIndex": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-counter",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+        "registryManifest": "2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+        "role": "counter",
+        "verified": true
+      }
+    },
+    "dispatcher": {
+      "actualConfigDigest": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+      "indexSHA256": "4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "manifestSHA256": "2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+      "rawRegistryConfigBytes": 9487,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-dispatcher@sha256:2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-dispatcher@sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "registryAMD64Manifest": "sha256:2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+      "registryIndex": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-dispatcher",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+        "registryManifest": "2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+        "role": "dispatcher",
+        "verified": true
+      }
+    },
+    "factory": {
+      "actualConfigDigest": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+      "indexSHA256": "b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "manifestSHA256": "b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+      "rawRegistryConfigBytes": 9475,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-factory@sha256:b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-factory@sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "registryAMD64Manifest": "sha256:b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+      "registryIndex": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-factory",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+        "registryManifest": "b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+        "role": "factory",
+        "verified": true
+      }
+    },
+    "frontend": {
+      "actualConfigDigest": "sha256:85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+      "indexSHA256": "e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+      "manifestSHA256": "ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+      "rawRegistryConfigBytes": 10778,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-frontend@sha256:ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-frontend@sha256:e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+      "registryAMD64Manifest": "sha256:ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+      "registryIndex": "sha256:e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-frontend",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+        "registryManifest": "ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+        "role": "frontend",
+        "verified": true
+      }
+    },
+    "recovery": {
+      "actualConfigDigest": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+      "attestationManifestDescriptors": 1,
+      "configSHA256": "5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+      "indexSHA256": "730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "manifestSHA256": "8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+      "rawRegistryConfigBytes": 9479,
+      "rawRegistryConfigDownloaded": true,
+      "referenceByAMD64Manifest": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-recovery@sha256:8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+      "referenceByIndex": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-recovery@sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "registryAMD64Manifest": "sha256:8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+      "registryIndex": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "repository": "us-east4-docker.pkg.dev/where-to-512422/whereto-private/whereto-recovery",
+      "source": {
+        "config": "Actual registry file downloaded via gcloud artifacts files download; byte-identical to approved config",
+        "index": "Actual registry via Docker imagetools raw",
+        "manifest": "Actual registry via Docker imagetools raw"
+      },
+      "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+      "tag": "owner-5da873d60f54-730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+      "verifiedByExistingSourcePinnedReceiptValidator": {
+        "localConfigDigest": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+        "registryManifest": "8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+        "role": "recovery",
+        "verified": true
+      }
+    }
+  },
+  "artifactsSHA256": {
+    "backend.attestation-manifest.json": "4183b9a01a60a14eda470c160139ccd717eff7fe5cbf5aa2d8da284d3bb11ed5",
+    "backend.config.json": "efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+    "backend.index.json": "a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+    "backend.manifest.json": "ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+    "counter.attestation-manifest.json": "c614176c0b5b6595a99efad9edb7c089c06529cbaf3e6915c7f3a8924eec50f2",
+    "counter.config.json": "a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+    "counter.index.json": "101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+    "counter.manifest.json": "2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+    "dispatcher.attestation-manifest.json": "ff1968f90634d1efd7290fadaf1e377250b54d6bb92e03743ca35ead39423016",
+    "dispatcher.config.json": "9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+    "dispatcher.index.json": "4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+    "dispatcher.manifest.json": "2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+    "factory.attestation-manifest.json": "7500e8ea0b11f48cfc04e1a7be81c357fa1d98124a597058b3c7d83492f32214",
+    "factory.config.json": "6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+    "factory.index.json": "b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+    "factory.manifest.json": "b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+    "frontend.attestation-manifest.json": "6a477ba7b274f0010dd5b27a92d8a5e30848642f837da9d76e0205fe850c841b",
+    "frontend.config.json": "85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+    "frontend.index.json": "e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+    "frontend.manifest.json": "ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+    "recovery.attestation-manifest.json": "0faddf7908366dca6eb636d76005093c8e1054bf45300282f1d7ee74f17d04bf",
+    "recovery.config.json": "5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+    "recovery.index.json": "730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+    "recovery.manifest.json": "8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8"
+  },
+  "baselineCommit": "f7e9cf22174a9583ad31fe9886970012a47ae616",
+  "cloudRunDeployed": false,
+  "cost": {
+    "actualPostedInvoiceOrTaxesVerified": false,
+    "automaticScanningDisabled": true,
+    "conservativeUncompressedBoundBytes": 1373815296,
+    "currency": "USD account linkage verified",
+    "dataIngress": "Free under current published standard price",
+    "paidCloudScans": 0,
+    "providerHardCapInstalled": false,
+    "scope": "Incremental artifact storage only; not application provider grants or overall account spending",
+    "source": "https://cloud.google.com/artifact-registry/pricing",
+    "storageConservativeGrossMonthlyUpperBoundUSD": 0.1304000018449173,
+    "verifiedContentAddressedBlobBytes": 253390217
+  },
+  "developmentEvidence": [
+    {
+      "decodedViewFileSHA256": "b69eaa814321f733ccc62b21067e39c2b857decae2ac6ef359c6871e8c33c5b9",
+      "kind": "Docker formatted Image omitted Healthcheck",
+      "outcome": "Used original remote config byte download instead; no normalization or validator weakening"
+    },
+    {
+      "kind": "Temporary receipt caller passed prefixed digest to bare-hex validator",
+      "logSHA256": "254eeb2531a2e385e3fdb3ec72fb6a456ac2e7bff5547ef29093a8e111de7ef4",
+      "outcome": "Original validator refused. Corrected only temporary caller argument; failed evidence preserved; no extra push"
+    }
+  ],
+  "durableOperatorReplayMarkerOutsideGit": "publication.execution-started.json (owner-only; do not rerun batch)",
+  "execution": {
+    "authorizationConsumed": true,
+    "deliveryUncertainOrPartial": false,
+    "exit": 0,
+    "finishedAtUTC": "2026-11-20T18:57:53.268055+00:00",
+    "logSHA256": "f40f898b4a23edcd48c92df8bd9e0ca06ef8b112c414fae1ef7559128774030b",
+    "noRetry": true
+  },
+  "financialGrantsCreated": 0,
+  "helper": {
+    "applicationProviderCredentialsRead": false,
+    "configMode": "0600",
+    "inlineCredentialsWritten": false,
+    "name": "gcloud",
+    "registry": "us-east4-docker.pkg.dev"
+  },
+  "helperSetupSeparatelyAuthorized": true,
+  "identity": "53-owner-authorized-six-image-registry-publication-v1",
+  "notRun": [
+    "Cloud Run/runtime enrollment or hosted private app acceptance",
+    "New image builds/scans: exact already-scanned images published unchanged",
+    "Full frontend/backend suites: no app source/dependency/runtime change; previous expired-date test remains recorded"
+  ],
+  "ownerApprovalSHA256": "09a3ccaa87e702debc0fd2308d3bbf6587bad9ea1951e115cf20acd9bc64ebfe",
+  "ownerSignatureSHA256": "4b82a6ffe7a6c292b127194cd7f8039d5984c72b9cb9d5ce78a8b582f35a00e0",
+  "privateOwnerSignatureOrKeyCommitted": false,
+  "privateSigningKeyOpened": false,
+  "project": "where-to-512422",
+  "providersActivated": false,
+  "publishedAtUTC": "2026-11-20T18:57:53.268055+00:00",
+  "pushCommandsObserved": 6,
+  "rawPrivateEvidenceDirectory": "/tmp/task52-artifact-publication-v1",
+  "region": "us-east4",
+  "registryOnly": true,
+  "releaseEligible": false,
+  "repository": "whereto-private",
+  "runtimeRiskAccepted": false,
+  "securityDecisionSHA256": "d18813d160029e293c4cc6679be6834db0c4bd223b09d8d1cc5cf73cb9abafa5",
+  "signedScope": {
+    "artifactStorageOnly": true,
+    "maximumGiB": 5,
+    "maximumPushCommands": 6,
+    "monthlyCeilingUSD": "1.00",
+    "oneTimeCeilingUSD": "5.00"
+  },
+  "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+  "tests": {
+    "actualRegistryReceiptValidation": 6,
+    "existingRawManifestConfigValidatorUnmodified": true,
+    "failed": 0,
+    "focusedTrustPassed": 11,
+    "publicationSourceConfigurationPassed": 27,
+    "skipped": 0,
+    "source": "Existing source unchanged; logs in /tmp/task52-approved-publication-preflight-v1"
+  },
+  "verification": {
+    "APIsUnchanged": true,
+    "allOldImagesAnd135VolumesPreserved": true,
+    "authorizedBytesCap": 5368709120,
+    "cloudRunDeployed": false,
+    "conservativeUncompressedUpperBoundBytes": 1373815296,
+    "exactTaggedApplicationImages": 6,
+    "financialGrants": 0,
+    "grossMonthlyAt744HoursUpperBoundUSD": 0.1304000018449173,
+    "historicalAccountedNanodollars": 47366625,
+    "historicalAttempts": 10,
+    "historicalHalt": true,
+    "historicalPrivateFiles": 324,
+    "immutableTags": true,
+    "includedAMD64Manifests": 6,
+    "includedProvenanceManifests": 6,
+    "projectIAMUnchanged": true,
+    "providerCalls": 0,
+    "remainingTaskContainers": 0,
+    "remoteConfigsByteIdentical": true,
+    "repositoryIAMUnchanged": true,
+    "runtimeRiskAccepted": false,
+    "scanningDisabled": true,
+    "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+    "unexpectedPackagesTagsOrManifests": 0,
+    "uniqueContentAddressedBlobBytes": 253390217,
+    "uniqueContentAddressedBlobCount": 74,
+    "verifiedManifestRecords": 18
+  }
+}
