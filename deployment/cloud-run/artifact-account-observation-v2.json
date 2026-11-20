@@ -1,0 +1,107 @@
+{
+  "APIsEnabled": 0,
+  "SDKApiEnablePromptDisabled": true,
+  "SDKHTTPLoggingDisabled": true,
+  "activeAccountDirectProjectRoles": [
+    {
+      "conditional": false,
+      "role": "roles/owner"
+    }
+  ],
+  "activeAccountIdentityRawEvidenceOwnerOnly": true,
+  "activeCLIAccounts": 1,
+  "actualChargesVerified": false,
+  "baselineCommit": "c339bbf5c4830cea9e09e4e7c650b82f03a094f0",
+  "billingChanges": 0,
+  "billingEnabled": true,
+  "billingInterpretation": "Linkage/open/USD verified; this does not verify current posted charges, tax, discounts, trial/upgrade terms or authorize spending",
+  "billingLinkageRead": true,
+  "calls": [
+    {
+      "exit": 0,
+      "label": "active-cli-account",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca"
+    },
+    {
+      "exit": 0,
+      "label": "project",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a"
+    },
+    {
+      "exit": 0,
+      "label": "billing-linkage",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+    },
+    {
+      "exit": 0,
+      "label": "linked-billing-account",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "eb41df079b17ebdf70b4c83cba541d2d16dd4c96f16bf0a2b31ff727289ff1e4"
+    },
+    {
+      "exit": 0,
+      "label": "enabled-apis",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "f5080ed1495438afe0c9aeb2271dea13f61d5330743a71461568deb226ee6627"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "ceda52d0e849cf80b0005bafb4cbaef1db640570f3ceab60b37581b9b4151abe"
+    }
+  ],
+  "cloudMutations": 0,
+  "costEnvelopeApproved": false,
+  "currency": "USD",
+  "groupOrAncestorEffectivePermissionsNotProven": true,
+  "identity": "53-artifact-storage-readonly-account-observation-v2",
+  "imagesPublished": 0,
+  "lifecycleState": "ACTIVE",
+  "linkedBillingAccountOpen": true,
+  "linkedBillingAccountRead": true,
+  "localSDKApiEnablerGuardSource": {
+    "control": "CLOUDSDK_CORE_SHOULD_PROMPT_TO_ENABLE_API=false",
+    "file": "googlecloudsdk/api_lib/util/apis.py",
+    "reviewedSHA256": "5249d6f46ab02b7449f2b0ff8519aee38219a19f88e1d169434902cb6af08077"
+  },
+  "masterBillingAccountPresent": false,
+  "observedAtUTC": "2026-11-20T17:42:10.566654+00:00",
+  "ownerReadOnlyAuthorization": true,
+  "parentPresent": false,
+  "privateFilePermissionsVerified": true,
+  "projectIAMInterpretation": "No allUsers/allAuthenticatedUsers binding in observed project policy; repository and organization/group-effective access are not independently certified",
+  "projectIAMRead": true,
+  "projectId": "where-to-512422",
+  "projectNumber": "895186533714",
+  "projectPublicBindings": [],
+  "providerDataPlaneRequests": 0,
+  "rawEvidenceDirectoryOwnerOnly": "/tmp/task52-artifact-account-readonly-v1",
+  "readOnlyRunnerSHA256": "e58c4355f1eb4e9f1c0e509b619d85d76a9c6f63356f8a24241ee97cfff26814",
+  "region": "us-east4",
+  "relevantAPIs": {
+    "artifactregistry.googleapis.com": false,
+    "compute.googleapis.com": false,
+    "containeranalysis.googleapis.com": false,
+    "containerscanning.googleapis.com": false,
+    "iap.googleapis.com": false,
+    "ondemandscanning.googleapis.com": false,
+    "run.googleapis.com": false,
+    "secretmanager.googleapis.com": false,
+    "securitycenter.googleapis.com": false
+  },
+  "remainingBillingUnknowns": [
+    "trial/credits/auto-upgrade or paid-plan terms",
+    "applicable negotiated discounts and taxes",
+    "current posted/accrued charges and billing delay",
+    "Security Command Center or scanning subscription terms",
+    "actual future repository policy while API unavailable"
+  ],
+  "repositoryObservation": "not queried: Artifact Registry API absent from enabled list; repository existence/private policy unverified; no API enablement attempted",
+  "resourcesCreated": 0,
+  "secretsRead": false,
+  "sixSuccessfulCLICommandsNotSixHTTPRequests": true
+}
