@@ -1,0 +1,112 @@
+{
+  "APIsAdded": [
+    "artifactregistry.googleapis.com"
+  ],
+  "APIsRemoved": [],
+  "IAMChangesRequested": 0,
+  "artifactRegistryEnabled": true,
+  "baselineCommit": "5ec58be514e318e056cb7bf0bd041c0cdb499556",
+  "billingChanges": 0,
+  "calls": [
+    {
+      "exit": 0,
+      "label": "active-account",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca"
+    },
+    {
+      "exit": 0,
+      "label": "project",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a"
+    },
+    {
+      "exit": 0,
+      "label": "apis-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "f5080ed1495438afe0c9aeb2271dea13f61d5330743a71461568deb226ee6627"
+    },
+    {
+      "exit": 0,
+      "label": "enable-artifact-registry-only",
+      "mutation": true,
+      "stderrSHA256": "9b909d3f268758b8ba4ac3ef62651328659a74348f4c7892b277c1cc84799944",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "apis-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+    },
+    {
+      "category": "SERVICE_DISABLED",
+      "exit": 1,
+      "label": "regional-repositories",
+      "mutation": false,
+      "stderrSHA256": "b835c62d63b9ecdf5b94c9f273f322b7b0de3b88614d32b32d279da95946afa2",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "ceda52d0e849cf80b0005bafb4cbaef1db640570f3ceab60b37581b9b4151abe"
+    },
+    {
+      "exit": 0,
+      "label": "regional-repositories-recheck",
+      "mutation": false,
+      "stderrSHA256": "deffe83a34a4d9835666eff08e00ae3e083d6948adafbc28681c6b9e73700044",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "cliInvocations": 8,
+  "effectivePermissionsCaveat": "Direct grants observed; future create/upload not attempted; group/deny/effective authorization not certified",
+  "enableCommandExit": 0,
+  "enableOutcomeUncertain": false,
+  "enablementRepeated": false,
+  "exactSingleAPIEnablementAuthorized": true,
+  "existingActiveAccountDirectRoles": [
+    {
+      "conditional": false,
+      "role": "roles/owner"
+    }
+  ],
+  "identity": "53-artifact-registry-only-api-enrollment-v1",
+  "imagesUploaded": 0,
+  "initialRepositoryListRefusal": "SERVICE_DISABLED; server explicitly suggested waiting for propagation; original response preserved",
+  "mutationInvocations": 1,
+  "noGenuinePrivateKeyOrApplicationSecretRead": true,
+  "observedAtUTC": "2026-11-20T17:52:43.910227+00:00",
+  "project": "where-to-512422",
+  "projectIAMBindingsUnchanged": true,
+  "projectIAMRead": true,
+  "projectPublicBindings": [],
+  "providerCalls": 0,
+  "publicationAuthorized": false,
+  "rawEvidenceDirectoryOwnerOnly": "/tmp/task52-artifact-api-enable-v1",
+  "readOnlyRunnerSHA256": "6d7668717397aa5d17ef31ed6e0d37b60523df2ac7270d4b12b12b00feb073e7",
+  "region": "us-east4",
+  "regionalRepositoryCount": 0,
+  "repositoriesCreated": 0,
+  "repositoryCreationAuthorized": false,
+  "repositoryIAM": "not applicable: target repository does not exist",
+  "repositoryListingRead": true,
+  "repositoryReadOnlyRechecks": 1,
+  "repositoryScanning": "not applicable: target repository does not exist",
+  "retryEnablement": false,
+  "scanningAPIs": {
+    "containeranalysis.googleapis.com": false,
+    "containerscanning.googleapis.com": false,
+    "ondemandscanning.googleapis.com": false,
+    "securitycenter.googleapis.com": false
+  },
+  "secretsRead": false,
+  "wheretoPrivateExists": false
+}
