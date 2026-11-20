@@ -1,0 +1,325 @@
+{
+  "baselineCommit": "23456c32194589fc9ba9fd1739e720d10751b702",
+  "calls": [
+    {
+      "exit": 0,
+      "label": "iam-initial",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "99078ba558002b40c7377e7bfb6dfbfa13d69e3d96b3aa8af2bb56ad822b392e"
+    },
+    {
+      "exit": 0,
+      "label": "apis-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c"
+    },
+    {
+      "exit": 0,
+      "label": "default-account",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "d92f7cc56b09d5115f731b8ac44f171eaf3026e7c43301edff8cb9282c1f031d"
+    },
+    {
+      "exit": 0,
+      "label": "default-account-iam",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "default-account-user-key-metadata",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "instances",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "instance-templates",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "managed-instance-groups",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "machine-images",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "disks",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "snapshots",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "routers",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "addresses",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "forwarding-rules",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-services-all-regions",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-jobs-all-regions",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-worker-pools-all-regions",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "pubsub-topics",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "pubsub-subscriptions",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "networks",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a1b6ab6ca3f4ba55e643e84594efdd32b691654e55989848c2cf342bab55b9f3"
+    },
+    {
+      "exit": 0,
+      "label": "subnets",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5a87712a868e79411c5136295fbf921c84df6cf7617e9e04ee6e41069c949ca2"
+    },
+    {
+      "exit": 0,
+      "label": "firewall-rules",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "90d1a985317dddc11b04befa72ab5c4505b4d14861cbef335cab4a13985fef38"
+    },
+    {
+      "exit": 0,
+      "label": "workload-names-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    },
+    {
+      "exit": 0,
+      "label": "iam-pre-cas",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "99078ba558002b40c7377e7bfb6dfbfa13d69e3d96b3aa8af2bb56ad822b392e"
+    },
+    {
+      "exit": 0,
+      "label": "remove-exact-editor-once",
+      "mutation": true,
+      "stderrSHA256": "fdf100e88ceaa18b91b765c08497918e8fb9066079f3531ab21c33cdb82207b1",
+      "stdoutSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef"
+    },
+    {
+      "exit": 0,
+      "label": "iam-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef"
+    },
+    {
+      "exit": 0,
+      "label": "apis-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c"
+    },
+    {
+      "exit": 0,
+      "label": "default-account-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "d92f7cc56b09d5115f731b8ac44f171eaf3026e7c43301edff8cb9282c1f031d"
+    },
+    {
+      "exit": 0,
+      "label": "networks-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a1b6ab6ca3f4ba55e643e84594efdd32b691654e55989848c2cf342bab55b9f3"
+    },
+    {
+      "exit": 0,
+      "label": "subnets-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5a87712a868e79411c5136295fbf921c84df6cf7617e9e04ee6e41069c949ca2"
+    },
+    {
+      "exit": 0,
+      "label": "firewall-rules-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "90d1a985317dddc11b04befa72ab5c4505b4d14861cbef335cab4a13985fef38"
+    }
+  ],
+  "handbookReviewedUpdated": [
+    18
+  ],
+  "historicalPreservation": {
+    "evaluationSourceOrJournalChanged": false,
+    "freshPrivateJournalAudit": false,
+    "historicalHaltUnchanged": true,
+    "priorAccountedNanodollars": 47366625,
+    "priorAttempts": 10,
+    "priorPrivateInventory": 324
+  },
+  "identity": "53-owner-authorized-exact-default-editor-removal-v1",
+  "member": "serviceAccount:895186533714-compute@developer.gserviceaccount.com",
+  "mutatingCommandKind": "gcloud projects set-iam-policy with independently delta-checked full policy and original etag; no CLI conflict retry; only permission delta is approved membership deletion",
+  "noOtherActions": [
+    "No API change",
+    "No resource provisioning or deletion",
+    "No service-account deletion",
+    "No foundation command2-22",
+    "No provider or Secret Manager value access",
+    "No financial grant or historical evaluation mutation",
+    "No runtime security acceptance"
+  ],
+  "ownerScope": "Fresh dependency/IAM checks then remove only exact unconditional project membership; acknowledge prior automatic additions; preserve all else",
+  "privateRawPolicyOrCredentialCommitted": false,
+  "project": "where-to-512422",
+  "rawDirectoryMode": "0700",
+  "rawFileMode": "0600",
+  "rawOwnerOnlyEvidenceDirectory": "/tmp/task52-editor-final-removal-v1",
+  "remainingFoundationProposal": {
+    "authorizedToExecute": false,
+    "commandCount": 21,
+    "originalBatchMayBeReplayed": false,
+    "originalBatchSHA256": "471d137c909a0beba981705d0057db9478274630732004dd0d03abb227f1ddf1",
+    "path": "deployment/cloud-run/private-hosting-foundation-remaining-PROPOSED-v1.sh",
+    "sha256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d"
+  },
+  "result": {
+    "APIsUnchanged": true,
+    "EditorBindingRemoved": true,
+    "EditorRemovalAttempted": true,
+    "allOtherIAMMembershipsAndConditionsPreserved": true,
+    "completed": true,
+    "conditionalBindingsEncounteredForTarget": false,
+    "defaultAccountPreserved": true,
+    "dependencyCounts": {
+      "addresses": 0,
+      "disks": 0,
+      "firewall-rules": 4,
+      "forwarding-rules": 0,
+      "instance-templates": 0,
+      "instances": 0,
+      "machine-images": 0,
+      "managed-instance-groups": 0,
+      "networks": 1,
+      "pubsub-subscriptions": 0,
+      "pubsub-topics": 0,
+      "routers": 0,
+      "run-jobs-all-regions": 0,
+      "run-services-all-regions": 0,
+      "run-worker-pools-all-regions": 0,
+      "snapshots": 0,
+      "subnets": 42
+    },
+    "finalPolicySHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+    "financialGrantsCreated": 0,
+    "finishedAtUTC": "2026-11-20T21:03:05.052743+00:00",
+    "foundationCommandsExecuted": 0,
+    "intendedIdentityCreationPermissionsUnchanged": true,
+    "networkSubnetFirewallPreserved": true,
+    "nonbindingPolicyContentPreserved": true,
+    "policyVersionAfter": 1,
+    "policyVersionBefore": 1,
+    "proposalSHA256": "5c25422fd6979249ad668cfa385c1dfaff37be5b17225bc2aa2dc55931332d87",
+    "providerCalls": 0,
+    "sixIntendedNamesUnused": true,
+    "sourcePolicySHA256": "99078ba558002b40c7377e7bfb6dfbfa13d69e3d96b3aa8af2bb56ad822b392e"
+  },
+  "roleRemoved": "roles/editor",
+  "sourceMetadataOnlyChanges": true,
+  "verification": {
+    "allOtherMembersRolesConditionsAndAuditSettingsPreserved": true,
+    "etagConcurrencyProtectionUsed": true,
+    "focusedHostingPublicationRealSourceTests": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 26,
+      "skipped": 0
+    },
+    "mutationCommands": 1,
+    "offlineExactDeltaTests": {
+      "failed": 0,
+      "passed": 5
+    },
+    "originalAndReturnedAndReadBackPolicyDeltaExactlyOneMembership": true,
+    "ownerPublicProofAndSixPublishedOCIReceipts": "passed offline",
+    "policyConflictsRetried": false,
+    "remainingCommandsIdenticalToOriginal2Through22": true,
+    "remainingScriptExecuted": false,
+    "remainingScriptSyntax": "passed",
+    "sameReadOnlyAndWriteResultsRetained": true,
+    "sourcePinsAndPublishedArtifactsUnchanged": true
+  }
+}
