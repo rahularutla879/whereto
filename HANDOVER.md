@@ -1,3 +1,7 @@
+## Exact artifact-storage challenge prepared; owner/cost/execution decisions absent
+
+The new owner-trust frontend plus five unchanged Python images now have a byte-identical unsigned six-image publication challenge bound to a proposed storage-only security decision and$5one-time/$1monthly ceilings. No runtime vulnerability risk, credential/provider authority or tester traffic accepted. Archive image/leaf/config/layer identities verify(~1.28GiB);11trust+27publication/source tests pass. Separate read-only account authorization remains pending; no current fees/private IAM/API state verified, no executable batch generated before signature, no cloud calls/resources/publication/grants. [Exact proposal and remaining owner actions](docs/task52-artifact-storage-approval.md).
+
 ## Owner-trust frontend rebuilt locally; replacement remains inactive
 
 Genuine owner public trust verified and embedded in one new frontend image; all five Python images and old candidates preserved. Exact source/config/key/dependency/read-only/non-root checks pass; three missing-enrollment/unsafe-option cases exit78. Fresh same-database new/old frontend scans both0critical/72high (Nov19was70; new DANE advisory84786 adds2package matches). No risk accepted.11trust+27packaging tests pass; frontend328/329passes with unchanged expired-date failure; types/lint/history/dependency audit pass. Raw owner signatures/private key remain outside Git; no configuration/publication/provider/grant/provisioning authority. [Candidate and checks](docs/task52-owner-frontend-rebuild.md).

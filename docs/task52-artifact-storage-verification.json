@@ -1,0 +1,149 @@
+{
+  "accountVerification": {
+    "accountCalls": 0,
+    "actualChargesConfirmed": false,
+    "currentChecksPerformed": false,
+    "historicalObservation": "deployment/cloud-run/account-observation-v1.json,2026-11-18; billing enabled then; actual fees/currency/subscriptions/repository state not established",
+    "reason": "Separate explicit read-only authorization pending"
+  },
+  "authorization": {
+    "costEnvelopeApproved": false,
+    "livePublicationSignatureExists": false,
+    "ownerApproved": false,
+    "readOnlyAccountQuestion": "pending; no answer interpreted as approval",
+    "separateExecutionApproval": false
+  },
+  "cloudResourcesCreated": 0,
+  "developmentAttempts": [
+    {
+      "networkCalls": 0,
+      "reason": "Temporary verification script imported deployment without PYTHONPATH; corrected import path only"
+    },
+    {
+      "evidence": "/tmp/task52-artifact-storage-v1/image-check-compressed-layer-assumption.log",
+      "reason": "OCI leaf layers are compressed; initial uncompressed assumption refused. Corrected to verify compressed digest AND decompressed diff-id/size; no validator weakened"
+    }
+  ],
+  "existingRendererSafety": {
+    "gcloudCommands": 0,
+    "inferenceCapabilities": 0,
+    "pushes": 6,
+    "renderedInMemoryOnly": true,
+    "repository": "whereto-private",
+    "shellSyntaxValid": true
+  },
+  "financialGrantsCreated": 0,
+  "genuinePrivateKeyRead": false,
+  "genuineSignatureCreated": false,
+  "handbook": {
+    "chapters": 20,
+    "reason": "Proposed artifact/evidence only; existing operator code and runtime unchanged",
+    "reviewedUnchanged": [
+      14,
+      18
+    ]
+  },
+  "historicalIntegrity": {
+    "accountedNanodollars": 47366625,
+    "attempts": 10,
+    "frozenPayloadPairs": 5,
+    "persistentHalt": true,
+    "privateFiles": 324,
+    "remainingNanodollars": 11952633375
+  },
+  "imageBuilds": 0,
+  "imagesPublished": 0,
+  "notRun": [
+    "Real account/billing/repository/IAM/scanning checks pending owner authorization",
+    "Actual executable repository/publication batch: not generated before approval and signed evidence",
+    "Fresh image builds/scans or application/browser suites: unchanged images; previous evidence preserved"
+  ],
+  "ownerSelectionProofReadOnlyVerification": true,
+  "providerCalls": 0,
+  "publicationConfigurationSourceTests": {
+    "failed": 0,
+    "logSHA256": "d432235e0d780c03c491bf7d62a1bd29c380e1b8164a4fba252ac85bb13bc752",
+    "passed": 27,
+    "skipped": 0
+  },
+  "repositoryCommandSafety": {
+    "APIsEnabled": false,
+    "automaticScanning": false,
+    "mutationCommands": 1,
+    "publicIAMMutation": false
+  },
+  "scansRepeated": 0,
+  "sixArchiveIdentities": {
+    "aggregateUncompressedBytes": 1373815296,
+    "allArchiveImageLeafConfigLayerHashesVerified": true,
+    "images": {
+      "backend": {
+        "archive": "/tmp/task52-real-images-v7/scans/backend.tar",
+        "conservativeUncompressedLayerBytes": 198498816,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+        "localImage": "sha256:a77800a1c78d1a15f749954b20bfd302ff2f98f237da73167a29c73522eae738",
+        "ociConfig": "sha256:efccff6e32873726406c13ba279f23140239d03ddaf82eccb1407f3e48e7fbb8",
+        "registryManifest": null
+      },
+      "counter": {
+        "archive": "/tmp/task52-real-images-v7/scans/counter.tar",
+        "conservativeUncompressedLayerBytes": 198498816,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+        "localImage": "sha256:101cf0e92fb3523b43f8218e8b9977f090fcc20feeb1bc164c26d5396fd226ad",
+        "ociConfig": "sha256:a0ceac38af3e2bb602f14297b1b436cbd8c115d2d80c368a8271a37fa89d7bbb",
+        "registryManifest": null
+      },
+      "dispatcher": {
+        "archive": "/tmp/task52-real-images-v7/scans/dispatcher.tar",
+        "conservativeUncompressedLayerBytes": 198498816,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+        "localImage": "sha256:4468969bf84573f48c28f5387a1533fe6e69a62ee735c72cdbcaf97f7ca7bac6",
+        "ociConfig": "sha256:9f1c9e577b7bafbc66b5404882ad756384b4389fe5b08c0b53525ff87c82f93a",
+        "registryManifest": null
+      },
+      "factory": {
+        "archive": "/tmp/task52-real-images-v7/scans/factory.tar",
+        "conservativeUncompressedLayerBytes": 198498816,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+        "localImage": "sha256:b08e851e74d6f7eb12b0b692e44b006ca87fff0469f06a23d9f0c34999af37a3",
+        "ociConfig": "sha256:6edd9249751b84945104d490b6ba85ecffa3961fe3c5630ba366f3d5492e37c6",
+        "registryManifest": null
+      },
+      "frontend": {
+        "archive": "/tmp/task52-frontend-owner-v1/frontend.tar",
+        "conservativeUncompressedLayerBytes": 381321216,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+        "localImage": "sha256:e4dd1587e926a51bc8ac0bcc2cefc2a85294fe8d196eced66868c4865bea7ccc",
+        "ociConfig": "sha256:85dd5c1166163aacf666f12af1822a3168051fba0e59bac73cbe86992193171f",
+        "registryManifest": null
+      },
+      "recovery": {
+        "archive": "/tmp/task52-real-images-v7/scans/recovery.tar",
+        "conservativeUncompressedLayerBytes": 198498816,
+        "layersSHA256Verified": true,
+        "localAMD64Manifest": "sha256:8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+        "localImage": "sha256:730765b775f833dbaad6cd2361d8d43a8b852e05cff18a1fe3fb06979965d655",
+        "ociConfig": "sha256:5de182dc95db188dd98dc9f5ca0254998216fa2814351c31d22fec84fa1ba9c0",
+        "registryManifest": null
+      }
+    },
+    "maximumGiB": 5,
+    "registryReceiptsExist": false,
+    "sourceCohort": "5da873d60f542f266c8f7c4b0091995ed9b78084ae628e6c8bf56245e9a95e0d",
+    "vmStarted": false
+  },
+  "sourceAndCandidatePins": true,
+  "storageDecisionSHA256": "d18813d160029e293c4cc6679be6834db0c4bd223b09d8d1cc5cf73cb9abafa5",
+  "trustTests": {
+    "failed": 0,
+    "logSHA256": "60134a4e8c04410f353573f15c569f2e57676b4ffa83baceec124bf0921bff70",
+    "passed": 11,
+    "skipped": 0
+  },
+  "unsignedPublicationSHA256": "09a3ccaa87e702debc0fd2308d3bbf6587bad9ea1951e115cf20acd9bc64ebfe"
+}
