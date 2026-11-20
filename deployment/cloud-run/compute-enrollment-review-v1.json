@@ -1,0 +1,382 @@
+{
+  "APIAddsObserved": [
+    "backupdr.googleapis.com",
+    "compute.googleapis.com",
+    "oslogin.googleapis.com",
+    "servicenetworking.googleapis.com"
+  ],
+  "APIRemovalsObserved": [],
+  "EditorBindingRemoved": false,
+  "EditorBindingStillPresent": true,
+  "IAMRemovalAttempted": false,
+  "automaticallyCreatedNetworkResources": {
+    "firewall-rules": {
+      "count": 4,
+      "createdDuringComputeActivation": true,
+      "deletedOrModifiedByCodex": false,
+      "earliestCreationTimestamp": "2026-11-20T12:42:28.377-08:00",
+      "latestCreationTimestamp": "2026-11-20T12:42:28.397-08:00",
+      "rawMetadataSHA256": "90d1a985317dddc11b04befa72ab5c4505b4d14861cbef335cab4a13985fef38"
+    },
+    "networks": {
+      "count": 1,
+      "createdDuringComputeActivation": true,
+      "deletedOrModifiedByCodex": false,
+      "earliestCreationTimestamp": "2026-11-20T12:42:00.028-08:00",
+      "latestCreationTimestamp": "2026-11-20T12:42:00.028-08:00",
+      "rawMetadataSHA256": "a1b6ab6ca3f4ba55e643e84594efdd32b691654e55989848c2cf342bab55b9f3"
+    },
+    "subnets": {
+      "count": 42,
+      "createdDuringComputeActivation": true,
+      "deletedOrModifiedByCodex": false,
+      "earliestCreationTimestamp": "2026-11-20T12:42:08.993-08:00",
+      "latestCreationTimestamp": "2026-11-20T12:42:10.278-08:00",
+      "rawMetadataSHA256": "5a87712a868e79411c5136295fbf921c84df6cf7617e9e04ee6e41069c949ca2"
+    }
+  },
+  "baselineCommit": "8a5a0c1d7484656f7b1f8f2dc67b07c7d1a90129",
+  "billingChanged": false,
+  "calls": [
+    {
+      "exit": 0,
+      "label": "iam-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5e3ce75b0afbc9bcd79e2904d3e513ce97e2c1a22df55248b680b30b6ae0fe06"
+    },
+    {
+      "exit": 0,
+      "label": "apis-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "dd35cea18de20bad68ce7cd8e07801eb5c47ab67f096c5dde9fa80378c589b91"
+    },
+    {
+      "exit": 0,
+      "label": "accounts-before",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    },
+    {
+      "exit": 0,
+      "label": "enable-compute-once",
+      "mutation": true,
+      "stderrSHA256": "a3d240e075de9c79eb8cf3869ab2d87e7056d0fef99a082e2b3ccbc05297b0d3",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "apis-after",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c"
+    }
+  ],
+  "expectedIncrementalChargesUSD": "0.00: no observed billed Compute capacity/NAT/reservedIP; no subscription purchased; posted charges not independently verified",
+  "explicitMutatingCommands": [
+    {
+      "argv": [
+        "gcloud",
+        "services",
+        "enable",
+        "compute.googleapis.com",
+        "--project=where-to-512422",
+        "--format=json"
+      ],
+      "attempts": 1,
+      "exit": 0,
+      "intentSHA256": "83744e62a0b2548d6c63bec6e9b9030feb997350b4ca2e0103f245982623d16e"
+    }
+  ],
+  "explicitResourceCreateCommands": 0,
+  "finalIAMVerification": {
+    "EditorBindingStillPresent": true,
+    "atUTC": "2026-11-20T20:45:09.234776+00:00",
+    "exit": 0,
+    "noFurtherIAMDrift": true,
+    "noPublicProjectBindings": true,
+    "rawPolicySHA256": "99078ba558002b40c7377e7bfb6dfbfa13d69e3d96b3aa8af2bb56ad822b392e"
+  },
+  "financialGrantsCreated": 0,
+  "foundationCommands2Through22Executed": 0,
+  "historicalEvaluationJournalRead": false,
+  "historicalHaltUnchanged": true,
+  "identity": "53-compute-api-enrollment-and-editor-review-stop-v1",
+  "nextAuthorization": "No further API enablement needed for inspected Compute dependency inventory. Owner must review automatic API/default-network/service-agent additions and separately authorize only the exact default Compute Editor removal after fresh IAM check. Do not execute commands2-22 or delete/disable automatic resources without separate authorization.",
+  "otherIAMOrResourceChangesRequested": false,
+  "ownerScope": "Enable only Compute API; read-only review; conditional exact Editor removal; stop on unexpected changes/dependencies/charges",
+  "project": "where-to-512422",
+  "providersCalled": false,
+  "rawDirectoryMode": "0700",
+  "rawEvidenceOwnerOnlyDirectory": "/tmp/task52-compute-editor-v1",
+  "rawFilesMode": "0600",
+  "readOnlyPostStopCalls": [
+    {
+      "exit": 0,
+      "label": "project-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "99078ba558002b40c7377e7bfb6dfbfa13d69e3d96b3aa8af2bb56ad822b392e"
+    },
+    {
+      "exit": 0,
+      "label": "instances",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "instance-templates",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "managed-instance-groups",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "machine-images",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "disks",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "snapshots",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "networks",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "a1b6ab6ca3f4ba55e643e84594efdd32b691654e55989848c2cf342bab55b9f3"
+    },
+    {
+      "exit": 0,
+      "label": "subnets",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "5a87712a868e79411c5136295fbf921c84df6cf7617e9e04ee6e41069c949ca2"
+    },
+    {
+      "exit": 0,
+      "label": "firewall-rules",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "90d1a985317dddc11b04befa72ab5c4505b4d14861cbef335cab4a13985fef38"
+    },
+    {
+      "exit": 0,
+      "label": "routers",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "addresses",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "forwarding-rules",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-services-all-regions",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-jobs-all-regions",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "run-worker-pools-all-regions",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "pubsub-topics",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "pubsub-subscriptions",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "secret-containers",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    },
+    {
+      "exit": 0,
+      "label": "service-accounts",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+    },
+    {
+      "exit": 0,
+      "label": "repository",
+      "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee",
+      "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b"
+    },
+    {
+      "exit": 0,
+      "label": "repository-iam",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+    },
+    {
+      "exit": 0,
+      "label": "registry-images",
+      "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+      "stdoutSHA256": "1f5e618db3c7bc586e8289c2c245e29aa5fd1a1204f2a8680a2871035af897df"
+    },
+    {
+      "exit": 0,
+      "label": "billing",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+    }
+  ],
+  "readOnlyReview": {
+    "EditorBindingStillPresent": true,
+    "IAMAdded": [
+      {
+        "condition": "null",
+        "member": "serviceAccount:895186533714@cloudservices.gserviceaccount.com",
+        "role": "roles/compute.instanceGroupManagerServiceAgent"
+      },
+      {
+        "condition": "null",
+        "member": "serviceAccount:service-895186533714@compute-system.iam.gserviceaccount.com",
+        "role": "roles/compute.serviceAgent"
+      }
+    ],
+    "IAMRemoved": [],
+    "atUTC": "2026-11-20T20:43:44.024305+00:00",
+    "billingLinkageUnchanged": true,
+    "inventories": {
+      "addresses": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "disks": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "firewall-rules": {
+        "count": 4,
+        "partialRequestWarning": false
+      },
+      "forwarding-rules": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "instance-templates": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "instances": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "machine-images": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "managed-instance-groups": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "networks": {
+        "count": 1,
+        "partialRequestWarning": false
+      },
+      "pubsub-subscriptions": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "pubsub-topics": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "routers": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "run-jobs-all-regions": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "run-services-all-regions": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "run-worker-pools-all-regions": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "secret-containers": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "snapshots": {
+        "count": 0,
+        "partialRequestWarning": false
+      },
+      "subnets": {
+        "count": 42,
+        "partialRequestWarning": false
+      }
+    },
+    "newUserVisibleServiceAccounts": [],
+    "publishedRegistryVersionSetUnchanged": true,
+    "readOnlyAfterStop": true,
+    "registryIAMUnchanged": true,
+    "registryPrivateImmutableScanningDisabled": true,
+    "reviewCompletedAtUTC": "2026-11-20T20:44:00.372508+00:00",
+    "sixIntendedWorkloadNamesUnused": true
+  },
+  "rollbackAttempted": false,
+  "runtimeSecurityRiskAccepted": false,
+  "secretsRead": false,
+  "serviceAgentRoleReference": "https://docs.cloud.google.com/iam/docs/service-account-types",
+  "sourceAndHistoricalEvidenceChanged": false,
+  "stop": {
+    "EditorRemovalAttempted": false,
+    "atUTC": "2026-11-20T20:42:45.810247+00:00",
+    "errorType": "AssertionError",
+    "mutatingCommandsAttempted": 1,
+    "reason": "Unexpected API change",
+    "stopped": true
+  },
+  "unexpectedAPIs": [
+    "backupdr.googleapis.com",
+    "oslogin.googleapis.com",
+    "servicenetworking.googleapis.com"
+  ],
+  "unverifiedBilling": [
+    "Posted/accrued invoice charges and lag",
+    "Independent BackupDR account/subscription inventory not queried; API activation is not subscription or backup enrollment authorization"
+  ]
+}
