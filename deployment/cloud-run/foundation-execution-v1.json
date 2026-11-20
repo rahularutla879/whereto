@@ -1,0 +1,276 @@
+{
+  "attributionLimits": "All five API additions and four IAM additions observed after the sole exact enable command; no separate enable/IAM command issued. Default Compute account/automatic Editor behavior is vendor documented. Exact dependency edge for each additional API was not independently queried; no fabricated dependency proof.",
+  "baselineCommit": "977f73343b22dea5fdcadd7f9e86f56cc368b7dc",
+  "batchSHA256": "471d137c909a0beba981705d0057db9478274630732004dd0d03abb227f1ddf1",
+  "durableLocalMarker": "/tmp/task52-foundation-execution-v1/execution-started.json",
+  "enabledAPIsAdded": [
+    "containerregistry.googleapis.com",
+    "iap.googleapis.com",
+    "pubsub.googleapis.com",
+    "run.googleapis.com",
+    "secretmanager.googleapis.com"
+  ],
+  "enabledAPIsRemoved": [],
+  "execution": {
+    "atUTC": "2026-11-20T19:55:48.096404+00:00",
+    "commandsAttempted": 1,
+    "commandsSucceeded": 1,
+    "completed": false,
+    "exception": "AssertionError",
+    "noRetry": true,
+    "reason": "Unexpected API set change",
+    "stopped": true
+  },
+  "executionCalls": [
+    {
+      "exit": 0,
+      "label": "command-01",
+      "mutation": true,
+      "stderrSHA256": "60699c74b7dfb9a9214d9b3832f3b5d5bdd706324a0c1076bdf7b9f06fb5cb12",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "exit": 0,
+      "label": "post-enable-apis",
+      "mutation": false,
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdoutSHA256": "dd35cea18de20bad68ce7cd8e07801eb5c47ab67f096c5dde9fa80378c589b91"
+    }
+  ],
+  "explicitEnableCommandRequestedOnly": [
+    "run.googleapis.com",
+    "iap.googleapis.com",
+    "secretmanager.googleapis.com"
+  ],
+  "historicalPreservation": {
+    "evaluationOrFinancialSourcesChanged": false,
+    "freshPrivateJournalAudit": false,
+    "haltUnchanged": true,
+    "previousAccountedNanodollars": 47366625,
+    "previousPrivateFileInventory": 324,
+    "previousRecordedAttempts": 10,
+    "privateJournalAccessed": false
+  },
+  "identity": "53-owner-authorized-foundation-partial-stop-v1",
+  "newUnexpectedDefaultComputeServiceAccount": {
+    "createdBeforeAnyExplicitServiceAccountCommand": true,
+    "disabled": false,
+    "email": "895186533714-compute@developer.gserviceaccount.com",
+    "riskAccepted": false,
+    "role": "roles/editor",
+    "roleRemoved": false,
+    "uniqueId": "101224639181581020016",
+    "vendorDocumentedBehavior": "https://docs.cloud.google.com/run/docs/securing/service-identity#avoid_the_default_service_account_when_configuring_service_identity"
+  },
+  "notPerformed": [
+    "commands2-22",
+    "service deployment",
+    "network/IP/storage subscription creation",
+    "secret values or versions",
+    "provider calls",
+    "financial grants",
+    "billing changes",
+    "image publication/rebuild",
+    "runtime risk acceptance"
+  ],
+  "ownerAuthorization": "Exact reviewed22-command foundation; stop on unexpected state/error/charge",
+  "postStopVerification": {
+    "atUTC": "2026-11-20T19:56:28.156334+00:00",
+    "billingLinkageUnchanged": true,
+    "calls": [
+      {
+        "exit": 0,
+        "label": "run-services",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      {
+        "exit": 0,
+        "label": "secret-containers",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      {
+        "exit": 0,
+        "label": "service-accounts",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "1fd7dae164a13901436ed362c1c570970c7c84f6c1b8d20d646ad9a390a3ca4e"
+      },
+      {
+        "exit": 0,
+        "label": "project-iam",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "5e3ce75b0afbc9bcd79e2904d3e513ce97e2c1a22df55248b680b30b6ae0fe06"
+      },
+      {
+        "exit": 0,
+        "label": "repository",
+        "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee",
+        "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b"
+      },
+      {
+        "exit": 0,
+        "label": "repository-iam",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+      },
+      {
+        "exit": 0,
+        "label": "images",
+        "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+        "stdoutSHA256": "1f5e618db3c7bc586e8289c2c245e29aa5fd1a1204f2a8680a2871035af897df"
+      },
+      {
+        "exit": 0,
+        "label": "billing",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+      },
+      {
+        "exit": 0,
+        "label": "pubsub-topics",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      },
+      {
+        "exit": 0,
+        "label": "pubsub-subscriptions",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+      }
+    ],
+    "immutableTags": true,
+    "projectIAMAdded": [
+      {
+        "condition": "null",
+        "member": "serviceAccount:service-895186533714@containerregistry.iam.gserviceaccount.com",
+        "role": "roles/containerregistry.ServiceAgent"
+      },
+      {
+        "condition": "null",
+        "member": "serviceAccount:895186533714-compute@developer.gserviceaccount.com",
+        "role": "roles/editor"
+      },
+      {
+        "condition": "null",
+        "member": "serviceAccount:service-895186533714@gcp-sa-pubsub.iam.gserviceaccount.com",
+        "role": "roles/pubsub.serviceAgent"
+      },
+      {
+        "condition": "null",
+        "member": "serviceAccount:service-895186533714@serverless-robot-prod.iam.gserviceaccount.com",
+        "role": "roles/run.serviceAgent"
+      }
+    ],
+    "projectIAMRemoved": [],
+    "pubsubSubscriptions": 0,
+    "pubsubTopics": 0,
+    "readOnly": true,
+    "registryManifestRecords": 18,
+    "registryVersionSetUnchanged": true,
+    "repositoryIAMUnchanged": true,
+    "repositoryPrivate": true,
+    "runServices": 0,
+    "scanningDisabled": true,
+    "secretContainers": 0,
+    "targetWorkloadAccounts": 0
+  },
+  "preflight": {
+    "billingLinkageOnlyVerified": true,
+    "calls": [
+      {
+        "exit": 0,
+        "label": "active-account",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca"
+      },
+      {
+        "exit": 0,
+        "label": "project",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a"
+      },
+      {
+        "exit": 0,
+        "label": "billing",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af"
+      },
+      {
+        "exit": 0,
+        "label": "apis",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "0919242be5922056d0df7276232e4d5a19f4eaf13aaab7666b653434af378f01"
+      },
+      {
+        "exit": 0,
+        "label": "project-iam",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "17edd5e4114ad7d1c595936424b0985fa0d20808a10f799d7c79335e9fe9b2d3"
+      },
+      {
+        "exit": 0,
+        "label": "service-accounts",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "c9ce6868ab511b5955f70ad6a429d1703b3ef4c65c13747819c15250897d8314"
+      },
+      {
+        "exit": 0,
+        "label": "repository",
+        "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee",
+        "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b"
+      },
+      {
+        "exit": 0,
+        "label": "repository-iam",
+        "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "stdoutSHA256": "c6bc1f4315e66396fab83c1908f342f5dec34847e44f43e272d5a12be30295b0"
+      },
+      {
+        "exit": 0,
+        "label": "registry-inventory",
+        "stderrSHA256": "ff86c8447293ea21416e5ee6f6a92c0b52732357d68a26ceba635ab302592ce7",
+        "stdoutSHA256": "1f5e618db3c7bc586e8289c2c245e29aa5fd1a1204f2a8680a2871035af897df"
+      }
+    ],
+    "cloudMutations": 0,
+    "incrementalFoundationPriceBasis": "No runtime, active secret versions or provider operation; management operations free; no subscription required",
+    "observedAtUTC": "2026-11-20T19:54:46.638172+00:00",
+    "preflightPassed": true,
+    "project": "where-to-512422",
+    "projectNumber": "895186533714",
+    "publicBindings": 0,
+    "registryManifestRecords": 18,
+    "registryPrivateImmutableScanningDisabled": true,
+    "secretInventoryDeferredUntilAPIAvailable": true,
+    "targetAPIsExisting": 0,
+    "targetWorkloadAccountsExisting": 0
+  },
+  "pricing": {
+    "actualPostedChargesVerified": false,
+    "billingLinkageUnchanged": true,
+    "expectedIncrementalFoundationUSD": "0.00",
+    "managementOperationsSource": "https://cloud.google.com/secret-manager/pricing",
+    "paidResourceOrSubscriptionPurchased": false
+  },
+  "project": "where-to-512422",
+  "rawOwnerOnlyEvidenceDirectoryMode": "0700",
+  "rawOwnerOnlyEvidenceFilesMode": "0600",
+  "region": "us-east4",
+  "remainingBatchCommandsAttempted": 0,
+  "remainingCommands": 21,
+  "requiredNextDecision": "Separately authorize removal of only the unexpected default Compute Editor binding, review automatic API/service-agent additions, and explicitly authorize only remaining commands2-22 after fresh read-only checks; do not replay command1 or the whole original batch.",
+  "rollbackOrIAMRemovalAttempted": false,
+  "scopeMayBeReplayed": false,
+  "tests": {
+    "errors": 0,
+    "failed": 0,
+    "focusedHostingPublicationRealSourcePassed": 26,
+    "ownerPublicProofAndSixOCIReceipts": "passed",
+    "runtimeOrBrowser": "not run; no services deployed"
+  },
+  "unexpectedAPIsAdded": [
+    "containerregistry.googleapis.com",
+    "pubsub.googleapis.com"
+  ]
+}
