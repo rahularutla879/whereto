@@ -1,0 +1,178 @@
+{
+  "IAMPropagationInterpretation": {
+    "attribution": "Consistent with documented read-after-create propagation; server-internal causal trace not available. No repeated failing GET or creation was used to manufacture a pass.",
+    "observation": "Successful create followed immediately by NOT_FOUND; later independently scoped list/policy/key metadata verifies account.",
+    "retryRecommendedByVendorNotAuthorizedOrUsedHere": true,
+    "source": "https://docs.cloud.google.com/iam/docs/service-accounts-create",
+    "vendorBehavior": "Service-account read operations are eventually consistent; visibility can require60seconds or more after creation."
+  },
+  "approvedScript": "deployment/cloud-run/private-hosting-foundation-remaining-PROPOSED-v1.sh",
+  "approvedScriptSHA256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d",
+  "baselineCommit": "5c205e7e80c3d9af4ac847075d30a7e04f4298ab",
+  "cloudCommandResultsByOriginalNumber": {
+    "2": {
+      "exit": 0,
+      "mutation": true,
+      "stderrSHA256": "c8b27832e786c3e75fbbf1be1e5d57247547895837c8a10920486f45d9468ca3",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "3": {
+      "exit": 0,
+      "mutation": true,
+      "stderrSHA256": "f20fa4cd4c14e63c45629d9994c4c03bd200208b334eaa08393b4623e8f582e8",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "4": {
+      "exit": 0,
+      "mutation": true,
+      "stderrSHA256": "7472ce22445f90631d0842c7742f2e10d9ca6e65ba39f51bff864236169be859",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "command4": {
+    "createReportedSuccess": true,
+    "createRetried": false,
+    "describeRetried": false,
+    "failedVerificationPreserved": true,
+    "fullMetadata": {
+      "directIAMBindings": 0,
+      "disabled": false,
+      "email": "whereto-frontend@where-to-512422.iam.gserviceaccount.com",
+      "uniqueId": "108465691715334887263",
+      "userManagedKeys": 0
+    },
+    "immediateDescribeExit": 1,
+    "immediateDescribeHTTPClass": "NOT_FOUND",
+    "laterDifferentReadOnlyProjectInventoryConfirmedAccount": true
+  },
+  "commandsVerifiedBeforeStop": [
+    2,
+    3
+  ],
+  "completedCloudCommandRange": [
+    2,
+    4
+  ],
+  "developmentAttemptBeforeCloudPreflight": {
+    "batchExecutions": 0,
+    "cause": "Copied ephemeral preflight checker incorrectly asserted previous eba0d9f HEAD, while current known/reviewed HEAD5c205e7 was clean. Corrected checker baseline only, preserving exact reviewed script hash.",
+    "cloudRequests": 0,
+    "directory": "/tmp/task52-foundation-remainder-execution-v2",
+    "failurePreserved": true,
+    "notAResourceOrAuthorityCheckBypass": true
+  },
+  "durableExecutionMarker": "execution-started.json",
+  "execution": {
+    "commandRetryOrResumeAttempted": false,
+    "commandsAttempted": 3,
+    "commandsVerified": 2,
+    "completed": false,
+    "consumed": true,
+    "exit": 78,
+    "finishedAtUTC": "2026-11-21T02:18:54.896161+00:00"
+  },
+  "expectedIncrementalFoundationChargesUSD": "0.00; only identity/account management; no paid runtime/secret versions. Actual posted charges not independently verified.",
+  "finalReadOnlyVerification": {
+    "APIsUnchanged": true,
+    "EditorRemediationPreserved": true,
+    "RunServices": 0,
+    "atUTC": "2026-11-21T02:20:30.083476+00:00",
+    "billingLinkageUnchanged": true,
+    "describeNotRetried": true,
+    "firewall-rulesUnchanged": true,
+    "frontendAccountConfirmedByDifferentReadOnlyInventory": {
+      "directIAMBindings": 0,
+      "disabled": false,
+      "email": "whereto-frontend@where-to-512422.iam.gserviceaccount.com",
+      "uniqueId": "108465691715334887263",
+      "userManagedKeys": 0
+    },
+    "immediateDescribeFailurePreserved": true,
+    "networksUnchanged": true,
+    "otherFiveWorkloadAccountsAbsent": true,
+    "projectIAMAdded": [],
+    "projectIAMRemoved": [],
+    "publishedManifestSetUnchanged": true,
+    "registryPrivateImmutableScanningDisabled": true,
+    "remainingMutationsOrRepairAttempted": false,
+    "repositoryIAMUnchanged": true,
+    "secretContainers": 0,
+    "subnetsUnchanged": true
+  },
+  "financialGrantsCreated": 0,
+  "guardedSoftwarePolicy": {
+    "allowedWrites": "Owner-only attempt evidence and routine SDK credential cache/logs only",
+    "beta": "2026.10.16",
+    "defaultPython": "3.14.10",
+    "defaultSDK": "590.0.0",
+    "installerOutputObserved": false,
+    "softwareAndSDKConfigWritesDeniedByOSSandbox": true,
+    "softwareInstalledOrRepaired": false
+  },
+  "historicalPreservation": {
+    "freshPrivateInventoryNotPerformed": true,
+    "historicalJournalAccessed": false,
+    "historicalOrFinancialSourceChanged": false,
+    "persistentHaltUnchanged": true,
+    "priorAccountedNanodollars": 47366625,
+    "priorAttempts": 10,
+    "priorPrivateFiles": 324
+  },
+  "identity": "53-foundation-remainder-partial-success-original2-through4-v2",
+  "managedIdentities": {
+    "iap": {
+      "initializationExit": 0,
+      "newVersusAlreadyExistingNotClaimed": true,
+      "providerConfirmedEmail": "service-895186533714@gcp-sa-iap.iam.gserviceaccount.com"
+    },
+    "run": {
+      "initializationExit": 0,
+      "newVersusAlreadyExistingNotClaimed": true,
+      "providerConfirmedEmail": "service-895186533714@serverless-robot-prod.iam.gserviceaccount.com"
+    }
+  },
+  "nextRequiredReview": "Review original commands5-22 only and read-after-create verification for remaining accounts. Do not replay consumed commands2-4 or the old full remainder. No additional API/IAM permission expansion is needed for the recorded propagation symptom.",
+  "originalWholeRemainderMayBeReplayed": false,
+  "ownerScope": "Fresh exact reviewed remaining2-22 execution; installedSDK590 supported interpreter; no installations; stop on first error; no automatic retry/resume",
+  "preflight": {
+    "APIsUnchanged": true,
+    "EditorRemediationPreserved": true,
+    "PythonVersion": "3.14.10",
+    "SDKVersion": "590.0.0",
+    "atUTC": "2026-11-21T02:18:11.268146+00:00",
+    "batchSHA256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d",
+    "betaVersion": "2026.10.16",
+    "billingLinkageUnchanged": true,
+    "commands": 21,
+    "expectedIncrementalPriceUSD": "0.00: identity/empty-secret management only; no active versions or paid runtime",
+    "postedInvoiceVerified": false,
+    "preflightPassed": true,
+    "projectIAMUnchanged": true,
+    "publishedImagesUnchanged": true,
+    "repositoryUnchangedPrivateImmutableScanningDisabled": true,
+    "runServices": 0,
+    "secretContainers": 0,
+    "softwareWritesDenied": true,
+    "workloadNameConflicts": 0
+  },
+  "priorConsumedScopesPreserved": true,
+  "project": "where-to-512422",
+  "providerCalls": 0,
+  "rawEvidenceOwnerOnlyDirectory": "/tmp/task52-foundation-remainder-execution-v3",
+  "remainingCommandCount": 18,
+  "remainingCommandsAttempted": 0,
+  "remainingOriginalCommandRange": [
+    5,
+    22
+  ],
+  "resumeAuthorized": false,
+  "runtimeSecurityRiskAccepted": false,
+  "secretValuesAccessed": false,
+  "stop": {
+    "atUTC": "2026-11-21T02:18:54.891766+00:00",
+    "errorType": "RuntimeError",
+    "noCommandRetry": true,
+    "originalCommand": 4,
+    "reason": "STOP: command-03-account failed or partial; do not retry"
+  }
+}
