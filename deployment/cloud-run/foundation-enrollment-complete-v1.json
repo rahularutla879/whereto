@@ -1,0 +1,506 @@
+{
+  "SDK": "590.0.0",
+  "allOriginal2Through22NowCompletedAcrossAuthorizedScopes": true,
+  "allPreviousConsumedScopesPreserved": true,
+  "applicationFinancialGrantsCreated": 0,
+  "baselineCommit": "56b3fd651538a6e53bc9e4b561597b73e546d6bf",
+  "beta": "2026.10.16",
+  "checks": {
+    "focusedHostingPublicationRealSourceTests": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 26,
+      "skipped": 0
+    },
+    "handbookChaptersPreserved": 20,
+    "handbookReviewedUpdated": [
+      18
+    ],
+    "ownerPublicProofSixOCIReceipts": "passed offline",
+    "secretPatterns": "passed",
+    "sourcePinsAndReviewedScriptUnchanged": true
+  },
+  "cloudRunServices": 0,
+  "completedOriginalRange": [
+    5,
+    22
+  ],
+  "cost": {
+    "actualPostedChargesVerified": false,
+    "billingLinkageUnchanged": true,
+    "existingArtifactStorageContinues": true,
+    "expectedIncrementalFoundationUSD": "0.00",
+    "infrastructurePurchaseEnvelopeActivated": false,
+    "reason": "Service-account/empty-secret/IAM management only; zero secret versions and no runtime/network/DB/Redis resources purchased"
+  },
+  "defaultSDKPython": "3.14.10",
+  "execution": {
+    "atUTC": "2026-11-21T03:33:33.540943+00:00",
+    "completedOriginalRange": [
+      5,
+      22
+    ],
+    "creationCommandRetries": 0
+  },
+  "historicalPreservation": {
+    "freshPrivateInventoryNotPerformed": true,
+    "historicalJournalAccessed": false,
+    "historicalOrFinancialSourceChanged": false,
+    "persistentHaltUnchanged": true,
+    "priorAccountedNanodollars": 47366625,
+    "priorAttempts": 10,
+    "priorPrivateFiles": 324
+  },
+  "identity": "53-owner-authorized-foundation-original5-22-complete-v1",
+  "independentFinalReadLogSHA256": "6b9b35764389be9c674c63eea58a53ee2bf1a49df1a3847500603ec28fbc7b98",
+  "independentFinalVerification": {
+    "APIsUnchanged": true,
+    "EditorRemediationPreserved": true,
+    "RunServices": 0,
+    "atUTC": "2026-11-21T03:34:45.187519+00:00",
+    "billingLinkageUnchanged": true,
+    "completedOriginalRange": [
+      5,
+      22
+    ],
+    "emptySecretContainers": {
+      "backend": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-backend@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-backend-runtime",
+        "versions": 0
+      },
+      "counter": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-counter@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-counter-runtime",
+        "versions": 0
+      },
+      "dispatcher": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-dispatcher@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-dispatcher-runtime",
+        "versions": 0
+      },
+      "factory": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-factory@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-factory-runtime",
+        "versions": 0
+      },
+      "frontend": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-frontend@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-frontend-runtime",
+        "versions": 0
+      },
+      "recovery": {
+        "bindings": [
+          {
+            "conditional": false,
+            "member": "serviceAccount:whereto-recovery@where-to-512422.iam.gserviceaccount.com",
+            "role": "roles/secretmanager.secretAccessor"
+          }
+        ],
+        "region": "us-east4",
+        "secretId": "whereto-recovery-runtime",
+        "versions": 0
+      }
+    },
+    "existingNetworkResourcesUnchanged": {
+      "firewall-rules": 4,
+      "networks": 1,
+      "subnets": 42
+    },
+    "financialGrantsCreated": 0,
+    "independentFinalVerificationPassed": true,
+    "projectIAMUnchanged": true,
+    "providersCalled": 0,
+    "publishedImageManifestSetUnchanged": true,
+    "registryPrivateImmutableScanningDisabled": true,
+    "remainingFoundationCommands": 0,
+    "repositoryOnlyAddedReviewedRunReader": true,
+    "softwareOrSDKConfigWritesAllowed": false,
+    "workloadAccounts": {
+      "backend": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-backend@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "105964849681916243453",
+        "userManagedKeys": 0
+      },
+      "counter": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-counter@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "105801550076177238453",
+        "userManagedKeys": 0
+      },
+      "dispatcher": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-dispatcher@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "100760425956888109905",
+        "userManagedKeys": 0
+      },
+      "factory": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-factory@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "110189356631809936437",
+        "userManagedKeys": 0
+      },
+      "frontend": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-frontend@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "108465691715334887263",
+        "userManagedKeys": 0
+      },
+      "recovery": {
+        "directAccountIAMBindings": 0,
+        "email": "whereto-recovery@where-to-512422.iam.gserviceaccount.com",
+        "enabled": true,
+        "uniqueId": "109880245111948748312",
+        "userManagedKeys": 0
+      }
+    }
+  },
+  "mutationCommands": [
+    {
+      "atUTC": "2026-11-21T03:32:07.176299+00:00",
+      "exit": 0,
+      "label": "original-05",
+      "mutation": true,
+      "stderrSHA256": "ee3fc14ce005e96ccc2964b3c0e0a985c911f696167ffac4ea1f8b72f20fa72d",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:11.433863+00:00",
+      "exit": 0,
+      "label": "original-06",
+      "mutation": true,
+      "stderrSHA256": "5e80d2036f944b8cc8878f8e662386c69f0bf3c40b55d3a849e49855a410b8f6",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:25.908598+00:00",
+      "exit": 0,
+      "label": "original-07",
+      "mutation": true,
+      "stderrSHA256": "80d6ed33bf81189b32d9426869cdf5bcc5e5dc5eb1275bf7a434638277c67341",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:40.949650+00:00",
+      "exit": 0,
+      "label": "original-08",
+      "mutation": true,
+      "stderrSHA256": "c34fa82b5901ab9f8318a01f880c84c293f8b4c6e9b4d0831e20c3f82c0cf6a1",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:45.302302+00:00",
+      "exit": 0,
+      "label": "original-09",
+      "mutation": true,
+      "stderrSHA256": "6bdb2ebacd2e65caf7a4794d699b90bf01472cb3cef6320cfce2edd8278fa991",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:49.514049+00:00",
+      "exit": 0,
+      "label": "original-10",
+      "mutation": true,
+      "stderrSHA256": "1e2b4b3b3aa4f7439dd8e813e9e4680cb2d8ea1003b4032fd465fe1e30393e43",
+      "stdoutSHA256": "e8839f9e643cbc0bae854e76f2f00a15baab2f68e67066f3f6fc92dbde237f62"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:52.238531+00:00",
+      "exit": 0,
+      "label": "original-11",
+      "mutation": true,
+      "stderrSHA256": "cb0b17e55de6b9b5bd7e1009e80844840f80f8444f50a572a8032d92e86200d6",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:56.168106+00:00",
+      "exit": 0,
+      "label": "original-12",
+      "mutation": true,
+      "stderrSHA256": "e639f4942d16f0257ae53c47ae2a4b7d9e955ceb40daf31e8e86cc5ab8726a88",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:32:59.988544+00:00",
+      "exit": 0,
+      "label": "original-13",
+      "mutation": true,
+      "stderrSHA256": "d0d8e1a05be6786f01ba758f634d091d8b6c473e090c27a44c3b472c085f9951",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:03.782971+00:00",
+      "exit": 0,
+      "label": "original-14",
+      "mutation": true,
+      "stderrSHA256": "47a899c6a6b4ccef5b8f7c1be06ea3a49d6ded47ca8198f762a0c81427f24ff0",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:07.643164+00:00",
+      "exit": 0,
+      "label": "original-15",
+      "mutation": true,
+      "stderrSHA256": "a7984c857d4e741b40485ae53fb45c74743ad9fac8ca0cbc99fcaaf34211ed67",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:11.156620+00:00",
+      "exit": 0,
+      "label": "original-16",
+      "mutation": true,
+      "stderrSHA256": "6cd4be3089fc83ac51bb5151a158f28bf65f5ca7d214341a4a756c12530ea2a8",
+      "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:15.889539+00:00",
+      "exit": 0,
+      "label": "original-17",
+      "mutation": true,
+      "stderrSHA256": "05c00c41206586e72ff2848d275fae8caebdb502528e1a79122015d8436e08a4",
+      "stdoutSHA256": "27ca5c6c6dc9bca3aec61047497688685bf4edd4d45cadf8fb83ddbc67596385"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:18.957200+00:00",
+      "exit": 0,
+      "label": "original-18",
+      "mutation": true,
+      "stderrSHA256": "25a9760b919878e4d32ed27f012b4826136c3343a8a0a9ce20f473e074977652",
+      "stdoutSHA256": "dba2f7e0c494bb556b599647e018be623622a5881c430d69389b214a8e15398c"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:22.291257+00:00",
+      "exit": 0,
+      "label": "original-19",
+      "mutation": true,
+      "stderrSHA256": "10cd9eab0e498c612e59567900c79b485ef391cdd8ef3c69f06ddfbfc94ccfbf",
+      "stdoutSHA256": "50cf1d490e4df690e703d48b2242c45a65969515e2b027c8ed6538d9b4b9d4bd"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:25.466287+00:00",
+      "exit": 0,
+      "label": "original-20",
+      "mutation": true,
+      "stderrSHA256": "72ab9362dc0a4d6de848eb48a79aa4c2b1c5c7d466f9c7e90b8b57a446ffd055",
+      "stdoutSHA256": "40f169a05d838541aa5d2b437b8bbcb3238ad21f3867f380747cf4d9157cc514"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:28.510904+00:00",
+      "exit": 0,
+      "label": "original-21",
+      "mutation": true,
+      "stderrSHA256": "71e54dc685cfb1ca499194d080b62144703d4761efeb96f998ac6154ab287c91",
+      "stdoutSHA256": "2d7db1ea149acd12d245b17ec85da4eaff4e159d0d628779d478afbb6a4b9a62"
+    },
+    {
+      "atUTC": "2026-11-21T03:33:31.557487+00:00",
+      "exit": 0,
+      "label": "original-22",
+      "mutation": true,
+      "stderrSHA256": "93de3017a4c1e8a83796035354c68dea6dcf5b15a66cacf92ca35f4f1c5eb8d8",
+      "stdoutSHA256": "9dd2c687c12b7b6d06d5a16bbcb30166872f1f823d27746a06080f605ce1cacb"
+    }
+  ],
+  "notRun": [
+    "Full backend/frontend/browser suites: no app source/dependency change",
+    "New image build/scan: published images unchanged",
+    "Hosted startup/storage/provider enrollment: not authorized"
+  ],
+  "original1Through4NotRerun": true,
+  "ownerScope": "Only original5-22; bounded read-only IAM propagation allowed after successful creation; resource creation commands once; no API/software/runtime/provider/financial changes",
+  "permittedIAMVisibilityChecks": {
+    "NOT_FOUNDResponses": [
+      {
+        "atUTC": "2026-11-21T03:32:11.929485+00:00",
+        "exit": 1,
+        "label": "original-06-account-visibility-1",
+        "mutation": false,
+        "stderrSHA256": "5159d17d00bf8892a84d765dac12945feb3338789e86a374689d6695ea48a36a",
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      {
+        "atUTC": "2026-11-21T03:32:26.478839+00:00",
+        "exit": 1,
+        "label": "original-07-account-visibility-1",
+        "mutation": false,
+        "stderrSHA256": "5c752fde50b5df6bceae6b54ed29766f2fa26c69bd6ef387ab860e995cf2e59d",
+        "stdoutSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      }
+    ],
+    "actualTerminalErrors": 0,
+    "authenticationPermissionTimeoutConflictErrorsRetried": false,
+    "deadlineSecondsPerNewAccount": 150,
+    "onlyReadQueriesRepeated": true,
+    "pollIntervalSeconds": 10,
+    "resourceCreationCommandsRetried": false
+  },
+  "preflight": {
+    "GoogleOwnedAgentsNotQueriedThroughUnsupportedDirectIAMDescribe": true,
+    "IAMVisibilityDeadlineSecondsPerNewAccount": 150,
+    "RunIAPInitializationReceiptsVerified": true,
+    "atUTC": "2026-11-21T03:32:06.386071+00:00",
+    "baseCommit": "56b3fd651538a6e53bc9e4b561597b73e546d6bf",
+    "commandCount": 18,
+    "existingIAMAPIsAccountsSecretsRegistryUnchanged": true,
+    "frontendUniqueId": "108465691715334887263",
+    "mutationRetries": 0,
+    "noSoftwareOrConfigWritesAllowed": true,
+    "passed": true,
+    "reviewedScriptSHA256": "17a58fe96f61dc073b03571b6603c1b21e72ea5741c96a938aff4ffba2b9f82d",
+    "selectedOriginalRange": [
+      5,
+      22
+    ],
+    "visibilityPollIntervalSeconds": 10
+  },
+  "project": "where-to-512422",
+  "providerCalls": 0,
+  "providerCredentialsEnrolled": false,
+  "rawDirectoryMode": "0700",
+  "rawFilesMode": "0600",
+  "rawOwnerOnlyEvidenceDirectory": "/tmp/task52-foundation-original5-22-v1",
+  "realApplicationRuntimeActivated": false,
+  "region": "us-east4",
+  "remainingFoundationCommands": 0,
+  "runtimeSecurityRiskAccepted": false,
+  "secretContainerDefinition": "Secret Manager containers with user-managed replication restricted to us-east4, matching the reviewed --replication-policy=user-managed --locations=us-east4 commands",
+  "secretValuesAccessedOrCreated": false,
+  "softwareAndSDKConfigWritesDeniedByOSSandbox": true,
+  "stopAfterFoundation": true,
+  "successfulMutationCommandInvocations": 18,
+  "testersEnrolled": 0,
+  "thisScopeConsumed": true,
+  "verifiedOriginalCommands": [
+    {
+      "atUTC": "2026-11-21T03:32:10.508038+00:00",
+      "originalCommand": 5,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:24.901904+00:00",
+      "originalCommand": 6,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:39.840935+00:00",
+      "originalCommand": 7,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:44.292910+00:00",
+      "originalCommand": 8,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:48.304676+00:00",
+      "originalCommand": 9,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:51.506127+00:00",
+      "originalCommand": 10,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:55.309945+00:00",
+      "originalCommand": 11,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:32:59.161737+00:00",
+      "originalCommand": 12,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:03.127728+00:00",
+      "originalCommand": 13,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:06.799350+00:00",
+      "originalCommand": 14,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:10.470554+00:00",
+      "originalCommand": 15,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:14.901144+00:00",
+      "originalCommand": 16,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:17.861235+00:00",
+      "originalCommand": 17,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:21.256605+00:00",
+      "originalCommand": 18,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:24.406265+00:00",
+      "originalCommand": 19,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:27.502074+00:00",
+      "originalCommand": 20,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:30.489443+00:00",
+      "originalCommand": 21,
+      "verified": true
+    },
+    {
+      "atUTC": "2026-11-21T03:33:33.540747+00:00",
+      "originalCommand": 22,
+      "verified": true
+    }
+  ]
+}
