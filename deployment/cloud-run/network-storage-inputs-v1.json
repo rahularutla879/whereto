@@ -1,0 +1,22 @@
+{
+  "authorization": false,
+  "baselineCommit": "61de32e04845a995ce5c09d91ed347496a39d611",
+  "filesSHA256": {
+    "deployment/candidates/registry-publication-v1/images.json": "a453bf40a2eee979616b591716e616a62b382b8ca2eba850a45adb1890bbd0ce",
+    "deployment/cloud-run/foundation-enrollment-complete-v1.json": "dd5e6cdc8719e9ba4474339f1d4708c47f4c63db57f320d95d3685c9cc292ed9",
+    "deployment/cloud-run/network-N1-PROPOSED-v1.sh": "84f8bcc4db7c5adfc760e4cab64b5fb0123681513d64b724373f93d70986bbcc",
+    "deployment/cloud-run/network-N2-PROPOSED-v1.sh": "e28181c12a446a545663104eef4bdcbf1bc079b21f98b7eb323cae79c4ff6490",
+    "deployment/cloud-run/network-storage-observation-v1.json": "f9535493805309ccbf2860cf7ecd3cbd545e0ba957d37448e8d5ea5e0efc5033",
+    "deployment/cloud-run/network-storage-staging-PROPOSED-v1.json": "4a6744b9ab7ccb18220117ce0f728d562502fc46928675ea74466706eeba38ad",
+    "deployment/cloud-run/source-pins-v1.json": "58c5c4b934ae4e54a0bb7c679198af170c34f579711612bea11964dbfaf0862d",
+    "deployment/cloud_run.py": "fb5015551174a2652186755b7ad4e00b85fdc43e0b288c9acbdd19a07adc2eee",
+    "deployment/cloud_run_real.py": "4a93e4b25429fefc7b895156e2dc84be4466f072296b3f3e1f96fb571e2beee2",
+    "deployment/frontend_trust.mjs": "2992493f744d5480554bccbcf79ae71a00a9035e7a2107d0ccadf2287e09600c",
+    "deployment/hosting_batch.py": "419b94dd79c0b8241c1500d7632020dd180949b95f0d3eddbe64f3705655084d",
+    "deployment/network_storage.py": "787b3d87bf17e8d112c3200209b5276719ab9a91ef9aa27d4ccec0ae3200bce3",
+    "deployment/publication_batch.py": "f6665ab9ec0ab91c5f260866d2562c42ea4e18636b82658facd02781602cbf35",
+    "deployment/sql/hosted-capacity-readonly-v1.sql": "ab359f9a9155822211296fcd87b12d0e4c10a85139a9bb871a183e8618df63ca",
+    "deployment/test_network_storage.py": "496ff85181db70cfc0aaca296d06bf0cf33e3e6b18d90a97158637717b504712"
+  },
+  "identity": "53-network-storage-reviewed-inputs-v1"
+}

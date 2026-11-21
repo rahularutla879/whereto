@@ -1,0 +1,118 @@
+{
+  "baselineCommit": "61de32e04845a995ce5c09d91ed347496a39d611",
+  "cost": {
+    "AIAndMapsAuthorizedUSD": "0",
+    "N1ExpectedIncrementalFixedUSD": "0",
+    "N2MaximumIdleReservedIPUSD": "7.44",
+    "RedisRegionalQuoteUSD": null,
+    "SmallCPUCapacityVerified": false,
+    "accountQuote": false,
+    "actualSupabasePlanAndCreditEligibilityVerified": false,
+    "conditionalPlanningTotalUSD": "167.58",
+    "currency": "USD",
+    "hours": 744,
+    "lineItemsConditionalPlanningUSD": {
+      "18SecretVersions": "1.100715264",
+      "IPMaximumReservedUnused": "7.44",
+      "NAT50GiB": "2.250",
+      "NATGatewayMaximum": "32.736",
+      "RunPlanningAllowance": "9.40",
+      "conditionalRedisAllowance": "15",
+      "loggingAllowance": "5",
+      "otherEgressAllowance": "5",
+      "registry5GiB": "0.509587920",
+      "secret100kAccesses": "0.30",
+      "twoProSmallIPv4BeforeCredits": "88.8368"
+    },
+    "oneTimeFixedSetupFeeEstablished": false,
+    "proposed180MonthlyApproved": false,
+    "taxIncluded": false
+  },
+  "createdResources": 0,
+  "grantsIssued": 0,
+  "historicalPreservation": {
+    "freshPrivateFileCountPerformed": false,
+    "frozenPayloadsAndConsumedScopesChanged": false,
+    "historicalJournalAccessed": false,
+    "persistentHaltUnchanged": true,
+    "privateEvidenceAccessed": false,
+    "recordedAccountedNanodollars": 47366625,
+    "recordedAttempts": 10,
+    "recordedPrivateFiles": 324,
+    "sourceAndFinancialPoliciesUnmodified": true
+  },
+  "identity": "53-network-storage-preparation-verification-v1",
+  "nextOwnerDecision": "Authorize N1 only after confirming CIDR; owner signs into storage dashboards and names independent witness administrator before purchases.",
+  "notExecuted": [
+    "N1/N2 cloud resource commands",
+    "database capacity SQL against any target",
+    "restricted-role/schema migrations",
+    "Redis connectivity/ACL/Lua tests against any account",
+    "new SQL/witness/Redis capacity or restore/load tests",
+    "application/backend/frontend/browser functional suites",
+    "image builds/scans",
+    "billing invoice access",
+    "historical private evidence inventory"
+  ],
+  "observationSHA256": "f9535493805309ccbf2860cf7ecd3cbd545e0ba957d37448e8d5ea5e0efc5033",
+  "preparationInputsSHA256": "fa42d5346d05d82d735fce45ccfcaa6c2e50f1568976e062ba5d13b710c467b3",
+  "providerCalls": 0,
+  "purchases": 0,
+  "readOnly": {
+    "CIDR": "10.92.0.0/26",
+    "GCPMetadataCalls": 15,
+    "GCPOutcomes": "passed; sanitized observation contains call hashes, additional repository IAM read hash",
+    "RedisCloudDashboard": "sign-in required; no login attempted",
+    "RunServices": 0,
+    "SupabaseDashboard": "sign-in required; no login attempted",
+    "databaseConnected": false,
+    "existingFoundationSubjectsMatch": true,
+    "externalRangesVerified": false,
+    "newSupabaseRedisAccountPermission": "owner authorized read-only both",
+    "observedAtUTC": "2026-11-21T03:51:55.096615+00:00",
+    "observedOverlap": false,
+    "preliminaryLocalCLIProbe": "Unsupported --no-quiet flag refused locally; final metadata inventory used supported flags. No cloud mutation.",
+    "projectOrRepositoryPublicBindings": 0,
+    "reservedIPs": 0,
+    "routers": 0,
+    "secretValuesRead": false,
+    "secretVersionsFreshlyListed": false,
+    "storageAccountQuoteVerified": false
+  },
+  "scope": "offline preparation plus separately authorized read-only GCP and storage-dashboard inspections",
+  "secretVersionsAdded": 0,
+  "securityRiskAccepted": false,
+  "tests": {
+    "actualOwnerPublicProofAndSixOCIReceipts": "passed; no private signing key accessed",
+    "changedFilesSecretPatterns": "passed",
+    "command": "backend/.venv/bin/python -m unittest deployment.test_network_storage deployment.test_hosting_batch deployment.test_publication_batch deployment.test_cloud_run_real",
+    "dependencyCheck": "pip check passed",
+    "developmentAttempts": [
+      {
+        "cause": "New test incorrectly invoked frozen pre-owner raw compiler pins; historical frontend substitution was correctly refused. Replaced the test with independent exact finite command assertions, preserving all historical pins.",
+        "errors": 1,
+        "passed": 11
+      },
+      {
+        "errors": 0,
+        "note": "Before additional preparation-source mutation regression.",
+        "passed": 38
+      }
+    ],
+    "diffWhitespace": "passed",
+    "existingTests": 26,
+    "final": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 39,
+      "skipped": 0
+    },
+    "handbookChaptersPreserved": 20,
+    "handbookReviewedUpdated": [
+      18
+    ],
+    "newTests": 13,
+    "preparationInputsAndShellSyntax": "passed",
+    "realFinancialProfileSourceIntegrity": "passed"
+  }
+}

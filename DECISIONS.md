@@ -1,3 +1,7 @@
+## Separate free network preparation from paid egress/storage
+
+Reuse the owner-enrolled compiler unchanged; bind actual six subjects/manifests in an offline projection. Split original five network commands into N1(VPC/subnet) and N2(IP/router/NAT) so idle IPv4 charges require a separate decision. Do not infer direct PostgreSQL compatibility from the saved-plan pooler or witness independence from a second owner-controlled project. Exact Redis quote and account terms must precede purchases; the $180/month proposal is not approved or a hard cap.
+
 ## November20 — separate empty hosting foundation from runtime authority
 
 Reuse the owner-signed published-image compiler and exact remote receipts; omit consumed artifact creation/publication from the next finite batch. API/service-account/empty-secret enrollment may be approved before runtime/model risk decisions, but it must not deploy a service or activate providers. Missing subjects/versions/storage/epoch/approvals continue to withhold commands; current rates and conditional cost ceilings are not account quotes or financial grants. [Executable review and precise gates](docs/task53-private-hosting-approval.md).

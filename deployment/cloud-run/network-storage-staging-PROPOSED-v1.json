@@ -1,0 +1,144 @@
+{
+  "approvalEvidence": {
+    "financial-grant": null,
+    "google-content-use": null,
+    "hosted-worker-replacement": null,
+    "iam-iap-enrollment": null,
+    "image-security": null,
+    "independent-recovery-owner": null,
+    "infrastructure-cost": null,
+    "model-qualification": null,
+    "provider-transport": null,
+    "real-token-price-policy": null,
+    "storage-capacity": null
+  },
+  "epoch": null,
+  "project": "where-to-512422",
+  "projectNumber": "895186533714",
+  "recoveryOperator": {
+    "email": null,
+    "subject": null
+  },
+  "region": "us-east4",
+  "repository": "whereto-private",
+  "storage": {
+    "operational": {
+      "administrator": null,
+      "backupOwner": null,
+      "caSHA256": null,
+      "connectionBudget": null,
+      "contract": null,
+      "database": null,
+      "host": null,
+      "port": null
+    },
+    "redis": {
+      "acl": null,
+      "caSHA256": null,
+      "host": null,
+      "lua": null,
+      "maximumBytes": null,
+      "noeviction": null,
+      "port": null,
+      "publisher": null,
+      "quoteMonthlyUSD": null,
+      "reader": null
+    },
+    "sqlLogins": {
+      "backend": {
+        "witness": null
+      },
+      "counter": {
+        "database": null,
+        "witness": null
+      },
+      "dispatcher": {
+        "database": null,
+        "witness": null
+      },
+      "factory": {
+        "database": null,
+        "issuer": null,
+        "witness": null
+      },
+      "recovery": {
+        "witness": null
+      }
+    },
+    "witness": {
+      "administrator": null,
+      "backupOwner": null,
+      "caSHA256": null,
+      "connectionBudget": null,
+      "contract": null,
+      "database": null,
+      "host": null,
+      "port": null
+    }
+  },
+  "subnetCidr": "10.92.0.0/26",
+  "testers": [],
+  "version": "53-private-real-demo-v1",
+  "workloads": {
+    "backend": {
+      "registryManifest": "ddd0d355cf8027cd75c052a832c62483bd11c5ef53e9363b75ecfc88f73702ae",
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null
+      },
+      "subject": "105964849681916243453",
+      "url": null
+    },
+    "counter": {
+      "registryManifest": "2398c26fcf4ec54e9ca03828a364d1ba16fc5225cbc37a56e4fe6e1b7b8fc84b",
+      "secretVersions": {
+        "config": null,
+        "operational-ca": null,
+        "witness-ca": null
+      },
+      "subject": "105801550076177238453",
+      "url": null
+    },
+    "dispatcher": {
+      "registryManifest": "2a56fbc05b0c2fbb340f0f2385d16086a534d9f8ff1c3f87fea72710baab904a",
+      "secretVersions": {
+        "config": null,
+        "openai": null,
+        "operational-ca": null,
+        "redis-ca": null,
+        "witness-ca": null
+      },
+      "subject": "100760425956888109905",
+      "url": null
+    },
+    "factory": {
+      "registryManifest": "b0e0f96111dd735d2df4c0f04cc89569fe45557376202c39fdf2f0ec745e4d95",
+      "secretVersions": {
+        "config": null,
+        "operational-ca": null,
+        "redis-ca": null,
+        "witness-ca": null
+      },
+      "subject": "110189356631809936437",
+      "url": null
+    },
+    "frontend": {
+      "registryManifest": "ccb7ae14347dce29a5a183cabd8e7bac3eac47f68103e537c0275e54841e81a6",
+      "secretVersions": {
+        "config": null,
+        "enrollment": null
+      },
+      "subject": "108465691715334887263",
+      "url": null
+    },
+    "recovery": {
+      "registryManifest": "8408d80c00e2bdbaa151772f01f5b98711b5e0f2c1967945487acd4a0ea5cec8",
+      "secretVersions": {
+        "config": null,
+        "witness-ca": null
+      },
+      "subject": "109880245111948748312",
+      "url": null
+    }
+  }
+}

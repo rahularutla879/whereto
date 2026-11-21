@@ -1,3 +1,7 @@
+## Finite network/storage enrollment projection
+
+`deployment/network_storage.py` reuses existing owner proof, published OCI receipts and compiler networking commands without changing the runtime/source cohort. It binds observed workload subjects and produces review-only N1/N2 batches; no cloud executor, migration engine, grant or secret loader is added. Hosted SQL/Redis ports and six-role topology remain unchanged. [Concrete enrollment boundary](docs/task53-network-storage-enrollment.md).
+
 ## Published-image deployment projection (offline only)
 
 `deployment/hosting_batch.py` wraps the existing owner-enrolled compiler/receipt verifier without changing the signed runtime/source cohort. It fills only actual published amd64 digests and renders a22-command identity/empty-secret foundation, with no network executor or service activation. Completed registry publication is excluded; existing six-role authentication, source/epoch, SQL/witness, Redis and provider gates are unchanged. [Commands and missing inputs](docs/task53-private-hosting-approval.md).

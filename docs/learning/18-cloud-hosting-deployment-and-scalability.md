@@ -1,5 +1,12 @@
 # 18 — Cloud Hosting Deployment and Scalability
 
+## Current network/storage enrollment boundary
+
+The foundation and six private registry images already exist. `deployment/network_storage.py` uses their actual identities through the existing owner-enrolled compiler. N1 creates only a custom VPC/subnet; N2 separately reserves a billed static IPv4 and router/manualNAT. Rendered commands and hashes are review material, never owner authorization; fresh cloud conflict checks remain mandatory. Existing default network/resources must remain intact.
+
+Operational/witness connections require direct TLS PostgreSQL and restricted session-affine users, not the older saved-plan pooler. Selected pool maximum 2 across four operational and five witness logins requires 18/22 clients including revision overlap and operator allowance; reserve additional platform/existing-app headroom and measure CPU under unchanged deadlines. A second database does not establish independent restore authority: administrator and backup owner must differ. Redis requires paid TLS, separate ACLs, exact Lua/CAS, absolute expiry and noeviction; loss of volatile evidence refuses continuation. Its actual regional quote remains missing while dashboards are signed out. [Exact executable proposals and owner actions](../task53-network-storage-enrollment.md). Older architecture/cost examples below are historical proposals, not current provisioning instructions.
+
+
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
 

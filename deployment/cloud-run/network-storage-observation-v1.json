@@ -1,0 +1,270 @@
+{
+  "identity": "53-network-storage-readonly-observation-v1",
+  "observedAtUTC": "2026-11-21T03:51:55.096615+00:00",
+  "baselineCommit": "61de32e04845a995ce5c09d91ed347496a39d611",
+  "project": "where-to-512422",
+  "region": "us-east4",
+  "existingNetworks": [
+    {
+      "name": "default",
+      "autoCreateSubnetworks": true,
+      "peerings": []
+    }
+  ],
+  "existingSubnetRanges": [
+    "10.128.0.0/20",
+    "10.132.0.0/20",
+    "10.138.0.0/20",
+    "10.140.0.0/20",
+    "10.142.0.0/20",
+    "10.146.0.0/20",
+    "10.148.0.0/20",
+    "10.150.0.0/20",
+    "10.152.0.0/20",
+    "10.154.0.0/20",
+    "10.156.0.0/20",
+    "10.158.0.0/20",
+    "10.160.0.0/20",
+    "10.162.0.0/20",
+    "10.164.0.0/20",
+    "10.166.0.0/20",
+    "10.168.0.0/20",
+    "10.170.0.0/20",
+    "10.172.0.0/20",
+    "10.174.0.0/20",
+    "10.178.0.0/20",
+    "10.180.0.0/20",
+    "10.182.0.0/20",
+    "10.184.0.0/20",
+    "10.186.0.0/20",
+    "10.188.0.0/20",
+    "10.190.0.0/20",
+    "10.192.0.0/20",
+    "10.194.0.0/20",
+    "10.198.0.0/20",
+    "10.200.0.0/20",
+    "10.202.0.0/20",
+    "10.204.0.0/20",
+    "10.206.0.0/20",
+    "10.208.0.0/20",
+    "10.210.0.0/20",
+    "10.212.0.0/20",
+    "10.214.0.0/20",
+    "10.218.0.0/20",
+    "10.224.0.0/20",
+    "10.226.0.0/20",
+    "10.232.0.0/20"
+  ],
+  "existingNonDefaultRoutes": [
+    "10.160.0.0/20",
+    "10.210.0.0/20",
+    "10.132.0.0/20",
+    "10.206.0.0/20",
+    "10.140.0.0/20",
+    "10.156.0.0/20",
+    "10.146.0.0/20",
+    "10.200.0.0/20",
+    "10.204.0.0/20",
+    "10.166.0.0/20",
+    "10.202.0.0/20",
+    "10.154.0.0/20",
+    "10.224.0.0/20",
+    "10.152.0.0/20",
+    "10.212.0.0/20",
+    "10.128.0.0/20",
+    "10.218.0.0/20",
+    "10.174.0.0/20",
+    "10.178.0.0/20",
+    "10.194.0.0/20",
+    "10.214.0.0/20",
+    "10.192.0.0/20",
+    "10.172.0.0/20",
+    "10.164.0.0/20",
+    "10.198.0.0/20",
+    "10.158.0.0/20",
+    "10.148.0.0/20",
+    "10.168.0.0/20",
+    "10.162.0.0/20",
+    "10.150.0.0/20",
+    "10.170.0.0/20",
+    "10.184.0.0/20",
+    "10.188.0.0/20",
+    "10.142.0.0/20",
+    "10.208.0.0/20",
+    "10.190.0.0/20",
+    "10.186.0.0/20",
+    "10.226.0.0/20",
+    "10.138.0.0/20",
+    "10.182.0.0/20",
+    "10.232.0.0/20",
+    "10.180.0.0/20"
+  ],
+  "proposedSubnetCidr": "10.92.0.0/26",
+  "overlapWithObservedGCPRanges": false,
+  "externalOrFutureVPNRangesVerified": false,
+  "routers": 0,
+  "reservedAddresses": 0,
+  "peerings": 0,
+  "VPNTunnels": 0,
+  "existingFirewallRules": 4,
+  "targetNetworkNamesAbsent": true,
+  "existingWorkloads": {
+    "backend": {
+      "email": "whereto-backend@where-to-512422.iam.gserviceaccount.com",
+      "subject": "105964849681916243453"
+    },
+    "counter": {
+      "email": "whereto-counter@where-to-512422.iam.gserviceaccount.com",
+      "subject": "105801550076177238453"
+    },
+    "dispatcher": {
+      "email": "whereto-dispatcher@where-to-512422.iam.gserviceaccount.com",
+      "subject": "100760425956888109905"
+    },
+    "factory": {
+      "email": "whereto-factory@where-to-512422.iam.gserviceaccount.com",
+      "subject": "110189356631809936437"
+    },
+    "frontend": {
+      "email": "whereto-frontend@where-to-512422.iam.gserviceaccount.com",
+      "subject": "108465691715334887263"
+    },
+    "recovery": {
+      "email": "whereto-recovery@where-to-512422.iam.gserviceaccount.com",
+      "subject": "109880245111948748312"
+    }
+  },
+  "secretContainers": 6,
+  "RunServices": 0,
+  "APIsEnabled": [
+    "analyticshub.googleapis.com",
+    "apptopology.googleapis.com",
+    "artifactregistry.googleapis.com",
+    "backupdr.googleapis.com",
+    "bigquery.googleapis.com",
+    "bigqueryconnection.googleapis.com",
+    "bigquerydatapolicy.googleapis.com",
+    "bigquerydatatransfer.googleapis.com",
+    "bigquerymigration.googleapis.com",
+    "bigqueryreservation.googleapis.com",
+    "bigquerystorage.googleapis.com",
+    "cloudapis.googleapis.com",
+    "cloudtrace.googleapis.com",
+    "compute.googleapis.com",
+    "containerregistry.googleapis.com",
+    "dataform.googleapis.com",
+    "dataplex.googleapis.com",
+    "datastore.googleapis.com",
+    "iam.googleapis.com",
+    "iamcredentials.googleapis.com",
+    "iap.googleapis.com",
+    "logging.googleapis.com",
+    "monitoring.googleapis.com",
+    "oslogin.googleapis.com",
+    "places.googleapis.com",
+    "pubsub.googleapis.com",
+    "routes.googleapis.com",
+    "run.googleapis.com",
+    "secretmanager.googleapis.com",
+    "servicemanagement.googleapis.com",
+    "servicenetworking.googleapis.com",
+    "serviceusage.googleapis.com",
+    "sql-component.googleapis.com",
+    "storage-api.googleapis.com",
+    "storage-component.googleapis.com",
+    "storage.googleapis.com",
+    "telemetry.googleapis.com"
+  ],
+  "repositoryPrivateCohortPreserved": true,
+  "EditorRemediationPreserved": true,
+  "cloudMutations": 0,
+  "calls": [
+    {
+      "name": "networks",
+      "exit": 0,
+      "stdoutSHA256": "a1b6ab6ca3f4ba55e643e84594efdd32b691654e55989848c2cf342bab55b9f3",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "subnets",
+      "exit": 0,
+      "stdoutSHA256": "5a87712a868e79411c5136295fbf921c84df6cf7617e9e04ee6e41069c949ca2",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "routes",
+      "exit": 0,
+      "stdoutSHA256": "cfc0d5edc79aea538c64a1705bde6c1ce036be57c1ecbaddf717e4fe88051913",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "routers",
+      "exit": 0,
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "addresses",
+      "exit": 0,
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "peerings",
+      "exit": 0,
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "vpn-tunnels",
+      "exit": 0,
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "firewalls",
+      "exit": 0,
+      "stdoutSHA256": "90d1a985317dddc11b04befa72ab5c4505b4d14861cbef335cab4a13985fef38",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "accounts",
+      "exit": 0,
+      "stdoutSHA256": "b9000e31479c00918a0ff8fdcb42d860d2c7db2041c68c882ded82afe2fb2e71",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "project-iam",
+      "exit": 0,
+      "stdoutSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "apis",
+      "exit": 0,
+      "stdoutSHA256": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "repository",
+      "exit": 0,
+      "stdoutSHA256": "39933f0dcec0847d4ff3b694d322454e5aadd53f312a0cd77f14d19a37568a0b",
+      "stderrSHA256": "10a0d0cc34df7749a9b08d81d2fd5316383d891da56b1b330e06604ee48e7bee"
+    },
+    {
+      "name": "secrets",
+      "exit": 0,
+      "stdoutSHA256": "f1e92ccef8e7b86c0420dfaede6bf97fd2612a6d9fa892d99ef8e8530ef4f9a2",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "name": "run",
+      "exit": 0,
+      "stdoutSHA256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570",
+      "stderrSHA256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  ],
+  "repositoryAndProjectPublicBindingsObserved": 0,
+  "repositoryIAMReadSHA256": "59355a3f3659de7928fa51903d3c3141428ec34a09dc035d41264551e5baa421",
+  "secretVersionsFreshlyListed": false
+}
