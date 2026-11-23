@@ -1,0 +1,218 @@
+{
+  "N1": {
+    "completionCommit": "fef21670ab0bb3dbe085c81e42f33bd0c6ccc031",
+    "originalEvidenceHashesReverified": true,
+    "rerun": false,
+    "scopeConsumed": true
+  },
+  "checks": {
+    "N1OriginalEvidenceHashes": "passed",
+    "changedFileSecretPatterns": "passed",
+    "existingPreparationAndRuntimeSourcePins": "passed",
+    "financialProfileSourcePins": "passed",
+    "handbookChanges": "none for these observation-only edits; chapter18 already updated in N1 commit",
+    "handbookChaptersPreserved": 20,
+    "notRun": [
+      "SQL queries or connections",
+      "actual managed Redis TLS/ACL/Lua/expiry tests",
+      "capacity/concurrency/restart drills",
+      "application/browser functional suites",
+      "image builds or scans",
+      "provider inference/Maps/count operations"
+    ],
+    "priceArithmetic": "passed"
+  },
+  "completedAtUTC": "2026-11-23T06:20:48Z",
+  "identity": "53-storage-account-readonly-observation-v1",
+  "limits": {
+    "AIAndMapsCalls": 0,
+    "N2Executed": false,
+    "SQLQueriesExecuted": 0,
+    "billingOrPermissionsChanges": 0,
+    "cloudSDKCalledThisCheckpoint": false,
+    "credentialDialogNote": "Supabase Connect initially defaulted to Framework and automatically displayed a publishable client identifier. No private/service key or database password was revealed or copied; subsequent observation selected Direct and emitted only nonsecret endpoint/IPv6 fields. No identifier value is retained in this record.",
+    "credentialFilesRead": false,
+    "databaseMutations": 0,
+    "financialGrants": 0,
+    "historicalHaltAndConsumedScopesUnchanged": true,
+    "historicalJournalOrPrivateEvidenceAccessed": false,
+    "publicIPReserved": false,
+    "resourcesCreated": 0,
+    "riskAccepted": false,
+    "secretCredentialsReadOrCopied": false
+  },
+  "nextDecisions": [
+    "Approve reuse/upgrade of current operational project: Pro, explicit Small recommended or Micro as cheapest capacity-gated trial, IPv4 and scoped enrollment; purchase not authorized by this record.",
+    "Name independent witness administrator/restore owner and approve its separate Pro/compute/IPv4 cost only after that owner reviews terms.",
+    "Separately approve creation of an empty quarantined Redis GCP us-east4 RAM250 database at the observed None-HA/None-persistence quote. Do not enroll application credentials or admit evidence until actual TLS/ACL/noeviction/backup/allowlist settings and exact commands are independently verified. No purchase is authorized by this record.",
+    "N2 and network/secret/SQL enrollment still require separate scoped authorization."
+  ],
+  "observationMethod": "Existing authenticated Chrome sessions through native accessibility UI; public official documentation. Observer transcription, not provider attestation or machine API export.",
+  "observedOnUTC": "2026-11-23",
+  "officialReferences": {
+    "redisACL": "https://redis.io/docs/latest/operate/rc/security/access-control/data-access-control/",
+    "redisAbsoluteExpiry": "https://redis.io/docs/latest/commands/pexpireat/",
+    "redisAllowlist": "https://redis.io/docs/latest/operate/rc/security/cidr-whitelist/",
+    "redisEVAL": "https://redis.io/docs/latest/commands/eval/",
+    "redisEviction": "https://redis.io/docs/latest/operate/rc/databases/configuration/data-eviction-policies/",
+    "redisTLS": "https://redis.io/docs/latest/operate/rc/security/database-security/tls-ssl/",
+    "supabaseBackups": "https://supabase.com/docs/guides/platform/backups",
+    "supabaseCompute": "https://supabase.com/docs/guides/platform/compute-and-disk",
+    "supabaseIPv4": "https://supabase.com/docs/guides/platform/manage-your-usage/ipv4",
+    "supabaseIPv4Eligibility": "https://supabase.com/docs/guides/platform/ipv4-address"
+  },
+  "pricingWorksheet": {
+    "accountInvoiceQuote": false,
+    "assumes": "One project per independently controlled Pro organization; full USD10 monthly compute credit available in each; IPv4 hourly; no tax or usage overages.",
+    "currency": "USD",
+    "eachProMicroIPv4USD": "29.10",
+    "eachProSmallIPv4USD": "34.42",
+    "existing180MonthlyProposalApproved": false,
+    "hours": 744,
+    "notIncluded": [
+      "NAT/IP/Cloud Run",
+      "registry/secrets/logging/other transfer",
+      "AI/Maps",
+      "tax",
+      "capacity upgrades",
+      "PITR"
+    ],
+    "operationalSmallWitnessMicroRedisNominal6USD": "69.52",
+    "redisHourlyVersusMonthly": "Console displays USD0.008/hour and USD6/month; exact invoice/proration and taxes must be confirmed before purchase. No subscription is active.",
+    "twoSmallRedisNominal6USD": "74.84"
+  },
+  "redis": {
+    "CIDRRulesMax": 4,
+    "cloud": "GCP",
+    "confirmPayClicked": false,
+    "connectionsMax": 256,
+    "databaseType": "Redis",
+    "displayedHourlyUSD": "0.008",
+    "existingDatabasesAfterCancel": 0,
+    "existingDatabasesBefore": 0,
+    "features": {
+      "IPAllowlisting": {
+        "actualRules": null,
+        "needed": "Actual future NAT IPv4 /32; do not use a guessed address or 0.0.0.0/0",
+        "quoteRules": 4
+      },
+      "LuaCAS": {
+        "documented": "Redis Cloud EVAL compatible; existing app uses atomic Lua CAS",
+        "executedAgainstService": false
+      },
+      "TLS": {
+        "enabled": null,
+        "supported": "official paid Essentials documentation and plan card"
+      },
+      "absoluteExpiry": {
+        "documented": "Redis Cloud PEXPIREAT compatible",
+        "executedAgainstService": false
+      },
+      "backups": {
+        "disabledVerified": false,
+        "needed": "Confirm no scheduled snapshot/export/restore of transient evidence; provider retention details still unverified",
+        "offered": "daily and instant backups listed as plan feature"
+      },
+      "customACLUsers": {
+        "accountUI": "Users/Roles/Redis ACLs visible; no users defined; role required before adding users",
+        "publisherAndReaderEnrolled": false
+      },
+      "noeviction": {
+        "actualSetting": null,
+        "documented": "no eviction available; default volatile-lru is unsuitable"
+      }
+    },
+    "memory": "RAM-only",
+    "networkIncludedGB": 100,
+    "operationalCompatibility": "Plan-level eligibility documented and account quote observed. No hosted TLS, ACL, Lua, expiry, capacity or restart test can pass without a separately authorized database.",
+    "opsPerSecondDisplayed": 1000,
+    "otherQuotes": {
+      "noHAWithAOF": {
+        "datasetMB": 250,
+        "hourlyDisplayedUSD": "0.01",
+        "monthlyUSD": "7"
+      },
+      "singleZoneHAWithAOF": {
+        "datasetMB": 125,
+        "hourlyDisplayedUSD": "0.014",
+        "monthlyUSD": "10",
+        "replicaMB": 125
+      }
+    },
+    "persistenceAccessibilityNote": "After draft persistence change, visible option child and checkout text became None and price became USD6; native combobox Value retained its prior AOF label. This is an unsubmitted quote, not proof of an enrolled database setting.",
+    "plan": "Essentials",
+    "quoteCancelled": true,
+    "quoteOnly": true,
+    "quotePaymentMethod": "Add payment method",
+    "quotedDataPersistence": "None",
+    "quotedHA": "None",
+    "quotedMonthlyUSD": "6",
+    "region": "us-east4 / Virginia",
+    "replicated250MBFinding": "125 MB dataset is below existing 128 MiB evidence ceiling before overhead; do not select this default without a separately reviewed smaller evidence limit or larger plan.",
+    "subscriptionPurchased": false,
+    "taxIncluded": false,
+    "totalMB": 250,
+    "versionOffered": "8.8"
+  },
+  "sourceCommit": "fef21670ab0bb3dbe085c81e42f33bd0c6ccc031",
+  "supabase": {
+    "IPv4OfferedNominalMonthlyUSD": "4.00",
+    "IPv4PublicHourlyUSD": "0.0055",
+    "IPv4Requires": "Pro or above",
+    "PITR": "disabled",
+    "SSLServerEnforcement": "off",
+    "accountPaymentMethod": "none shown",
+    "backupScreen": "Free Plan does not include project backups",
+    "capacityProof": "Not established. No database connection, SQL query, load test or role inspection performed.",
+    "clientVerifyFullStillRequired": true,
+    "compute": "Nano",
+    "currentNanoPaidUpgradeAutomatic": false,
+    "dedicatedIPv4": "disabled",
+    "directDefaultIPv6": true,
+    "directHostObserved": true,
+    "directHostSHA256": "72a140127a6601b143222466b23e60eaf3d95293a64bb1737e34662536576b51",
+    "directPort": 5432,
+    "diskDisplay": "0.25 GB used of 2 GB",
+    "displayedDatabaseMB": "28.1",
+    "displayedMaxConnections": 60,
+    "displayedSystemMB": "167.1",
+    "displayedWALMB": "80",
+    "healthObservations": [
+      "Coming up...",
+      "Unhealthy",
+      "Healthy"
+    ],
+    "lastObservedHealth": "Healthy",
+    "listedBackups": "none",
+    "memoryLimitDashboard": "Up to 0.5 GB (dashboard units)",
+    "monthlyBaseUSD": "0",
+    "networkRestrictions": "all IP addresses allowed",
+    "nominalUnusedConnections": 53,
+    "observedConnections": 7,
+    "offeredMicroHourlyUSD": "0.01344",
+    "offeredProBackupsDays": 7,
+    "offeredProBaseMonthlyUSD": "25.00",
+    "offeredSmallHourlyUSD": "0.0206",
+    "organizationName": "Where To",
+    "plan": "Free",
+    "poolerMaxClients": 200,
+    "poolerPoolSize": 15,
+    "projectName": "whereto",
+    "projectReferenceSHA256": "c534ed62b8901c017404671a77fce4521303f24ce76d55dbb5d3cbc52ce6ba59",
+    "region": "AWS us-east-1 / North Virginia",
+    "reservedAndPlatformHeadroomSeparatelyMeasured": false,
+    "reuseDecision": "Reuse existing project after separately approved Pro upgrade, explicit compute selection, IPv4, restricted roles/TLS/allowlists and unchanged-deadline capacity test. Free/Nano is not eligible for selected IPv4 direct hosted enrollment."
+  },
+  "witness": {
+    "administratorSelected": false,
+    "backupRestoreOwnerSelected": false,
+    "capacityVerified": false,
+    "currentTermsAndTaxForIndependentOwnerVerified": false,
+    "minimumComputePublishedConnections": 60,
+    "minimumConnectionsIncludingRevisionOverlapAndOperators": 22,
+    "operationalMinimumConnectionsIncludingRevisionOverlapAndOperators": 18,
+    "requirement": "Separately controlled organization/project with different administrator and backup/restore authority from operational project; different names/logins or a second project under the same restore controller do not establish independence. Workers have only restricted purpose logins, never database-owner credentials.",
+    "selectedTarget": null,
+    "smallestEligibleStartingPlan": "Supabase Pro, explicit Micro compute, direct IPv4, seven-day scheduled backups; conditional on actual capacity and restricted-role contract tests. Small remains an alternative if Micro misses unchanged deadlines."
+  }
+}
