@@ -1,5 +1,7 @@
 # Next private hosting actions — network and storage
 
+**Demo-first update:** [minimum-cost compatibility findings](task53-demo-storage-compatibility.md) now qualify Free/directIPv6 rather than automatically purchasing Pro/Small. Existing IPv4-only N1, all consumed batches, source manifests and approvals remain unchanged; poolers are still refused. The older purchasing recommendations below remain historical selected-topology proposals.
+
 ## November 23 authenticated account findings — no purchase
 
 N1 is complete, recorded in commit `fef21670ab0bb3dbe085c81e42f33bd0c6ccc031`; never rerun it. [Sanitized read-only account observation](../deployment/cloud-run/storage-account-observation-v1.json) supersedes the older signed-out/unknown-price observations below. This was dashboard inspection, not a database connection or hosted capacity test.

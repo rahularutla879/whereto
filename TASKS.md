@@ -1,3 +1,7 @@
+## Demo-first storage qualification, November 23
+
+Task52/53 remain incomplete. Supabase Free/directIPv6 is a locally tested candidate, not hosted capacity acceptance; keep pooler refusal and all financial/evidence controls. Redis Free is incompatible; actual noHA/noPersistence250MB quote remains$6 beforetax. No purchase/network/provider authority is granted. [Focused verification and decisions](docs/task53-demo-storage-compatibility.md).
+
 ## Authenticated storage inspection complete — prices observed, no purchase
 
 Existing Supabase `whereto` is Free/Nano in AWS us-east-1; status changed from coming up/unhealthy to Healthy, with7/60connections at final observation. Direct5432 is IPv6-only without the disabled Pro-only IPv4 add-on; backups excluded onFree, serverSSL enforcement off, allIPs allowed. Reuse is possible after approved Pro/explicitcompute/IPv4/security/role/capacity enrollment; no setting changed. Actual Redis quote: GCPus-east4 Essentials RAM250MB, noHA/noPersistence **$6/month ($.008/hour displayed)** beforetax; quote cancelled and zero databases verified. TLS/ACL/noeviction/allowlist and backup state remain unenrolled. Independent witness owner/target absent; ProMicro+IPv4 is the smallest eligible capacity-gated starting plan, Small recommended for operational trial. [Exact account facts, price arithmetic and decisions](deployment/cloud-run/storage-account-observation-v1.json). N1 remains consumed; no N2, private credential access, paid action, SQL mutation, grant or AI/Maps request. Historical evidence/halt unchanged.

@@ -1,3 +1,7 @@
+## 2026-11-23 — qualify the lowest-cost demo storage without relaxing authority
+
+Do not make Pro/Small an automatic demo requirement. Test existing direct TLS SQL over IPv6 before considering a separately approved dual-stack network amendment; retain the IPv4-only N1 enrollment and pooler ban until reviewed. Supavisor session affinity alone does not prove startup deadlines. Preserve128MiB encrypted evidence and paid TLS/named ACL requirements; Redis Free is rejected, while the observed$6 Essentials plan still needs live service enrollment/testing. Manual protected off-site backup and independent witness ownership are explicit gates, not invented substitutes for recovery verification. No hosting/provider/financial activation follows. [Evidence](docs/task53-demo-storage-compatibility.md).
+
 ## Separate free network preparation from paid egress/storage
 
 Reuse the owner-enrolled compiler unchanged; bind actual six subjects/manifests in an offline projection. Split original five network commands into N1(VPC/subnet) and N2(IP/router/NAT) so idle IPv4 charges require a separate decision. Do not infer direct PostgreSQL compatibility from the saved-plan pooler or witness independence from a second owner-controlled project. Exact Redis quote and account terms must precede purchases; the $180/month proposal is not approved or a hard cap.

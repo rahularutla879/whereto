@@ -3,6 +3,10 @@
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
 
+## Keep transport compatibility separate from hosted capacity
+
+[run_demo_ipv6](../../experiments/hosted_ports/run_demo_ipv6.py) reuses the existing real financial SQL/witness fixture and restricted SQLPool. It verifies server-observed IPv6, certificate/hostname checks, unchanged1500ms/250ms deadline refusals and Redis TLS/ACL/CAS behavior; authored prices/responses are fixtures. Fresh process helpers enforce the same loopback IPv6 guard. A bounded probe-specific observer preserves SQL errors because the frozen observer intentionally accepts only IPv4 fixture hostnames. Do not repin that historical observer, interpret a failed logger as financial permission, or call this Supabase/Supavisor/Cloud Run/Nano acceptance. Preserve every development failure in the [verification record](../../deployment/cloud-run/demo-storage-verification-v1.json).
+
 ## Real six-role local application boundary
 
 The real six-role local browser harness uses actual standalone Next.js, FastAPI and authenticated roles, verified local HTTPS provider transports, restricted SQL/witness roles and Redis TLS/ACL. Only the external fixture controller can use Docker; it is not part of the frontend. Mobile means Chromium emulation, not a physical handset. Preserve failed attempts: burst admission, stale emulated location, destination ambiguity and proven fixture OOM are distinct from the still-unattributed historical session_revision. Missing host crypto dependencies are errors, not passing tests. [Implementation and exact limits](../task52-real-six-role-browser.md).

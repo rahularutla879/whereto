@@ -1,0 +1,348 @@
+{
+  "baselineCommit": "9707b30077558dfc789985d9858ba83f5b076ff1",
+  "boundaries": {
+    "N1Reexecuted": false,
+    "N2Executed": false,
+    "cloudWrites": 0,
+    "credentialsRead": 0,
+    "imagesChanged": false,
+    "providerCalls": 0,
+    "purchases": 0,
+    "realGrants": 0,
+    "sourcePinsModified": false,
+    "sqlDeadlinesChanged": false
+  },
+  "checks": {
+    "currentDeploymentTests": {
+      "command": "PYTHONPATH=. backend/.venv/bin/python -m unittest deployment.test_cloud_run_real deployment.test_hosting_batch deployment.test_network_storage -v",
+      "errors": 0,
+      "failures": 0,
+      "logSHA256": "5972345aea6b1243898f8ce5ec089a7d7369070b469718810508906979925cf5",
+      "passed": 33,
+      "skipped": 0,
+      "tests": 33
+    },
+    "dependencies": {
+      "hostPackagesChanged": false,
+      "pipCheck": "passed",
+      "pythonDownloadAttempt": "Refused missing local CA chain; system curl verified TLS and all4 original wheel hashes. No disabled verification or host installation.",
+      "temporaryPinnedWheelsRestored": 4
+    },
+    "finalReview": {
+      "changedFiles": 10,
+      "diffScopeVerified": true,
+      "handbookChapters": 20,
+      "json": true,
+      "localLinks": true,
+      "privateCredentialFilesRead": false,
+      "productionAndHistoricalPathsUnchanged": true,
+      "secretPatternMatches": 0
+    },
+    "ipv6": {
+      "childIPv6Guards": true,
+      "cloudIPv6Verified": false,
+      "connectionCountScope": "parent process only; spawned helpers independently enforce IPv6/TLS",
+      "errors": 0,
+      "event": "demo_ipv6_result",
+      "excludedSpawnCases": [],
+      "failures": 0,
+      "liveSupabaseVerified": false,
+      "observed": [
+        {
+          "address": "::1",
+          "database": "whereto_synthetic"
+        },
+        {
+          "address": "::1",
+          "database": "whereto_witness"
+        }
+      ],
+      "seconds": 218.596,
+      "skipped": 0,
+      "tests": 31,
+      "verifiedSQLConnections": 2853
+    },
+    "legacyCompilerAttempt": {
+      "errors": 5,
+      "failures": 1,
+      "logSHA256": "e6884d269c43cbd15cf43061713cda355e0eb7b41c00096cfe4046f869b657f4",
+      "passed": 21,
+      "reason": "Frozen legacy compiler refuses newer deployment/frontend-private-entry.mjs; preserved, not repinned.",
+      "tests": 27
+    },
+    "localTestRuntime": {
+      "action": "Started existing unchanged whereto-task52 VM; normal Colima boot restored its Docker context; no host package installation/upgrade",
+      "cleanup": "All task-owned containers/volumes removed; original135 volumes and all images preserved; VM stopped afterward",
+      "initialState": "Stopped; Docker context absent"
+    },
+    "resources": {
+      "event": "real_finance_resource_cleanup",
+      "newVolumesRemaining": 0,
+      "preExistingPreserved": 135
+    },
+    "restoreCrashDrills": {
+      "operationalOutageRefusal": true,
+      "operationalRollbackQuarantine": true,
+      "passed": true,
+      "restartAndRedisLossRetainExposure": true,
+      "transport": "Existing unchanged IPv4 local harness, not IPv6 restore transport",
+      "witnessRollbackQuarantine": true
+    },
+    "sourceChecks": {
+      "allMatch": true,
+      "applicationInputFiles": 30,
+      "developmentAttempt": "verify_application invoked against development backend correctly refused backend/ai/ollama.py; correct projected-output verification then passed.",
+      "financialInputs": true,
+      "networkInputs": true,
+      "projectedBackendOutputFiles": 72
+    }
+  },
+  "dashboard": {
+    "credentialsAccessed": false,
+    "pauseAfterInactiveDays": 7,
+    "paymentEntered": false,
+    "redisCloud": "GCP",
+    "redisDatabasesAfterCancel": 0,
+    "redisHA": "None",
+    "redisMB": 250,
+    "redisMemory": "RAM-only",
+    "redisPersistence": "None",
+    "redisPlan": "Essentials",
+    "redisQuoteCancelled": true,
+    "redisRegion": "us-east4",
+    "redisReviewHourlyUSD": "0.008",
+    "redisReviewMonthlyUSD": "6",
+    "redisReviewTax": "May apply; actual all-in charge unknown",
+    "supabaseDatabaseAllowanceMB": 500,
+    "supabasePlan": "Free",
+    "supabasePlanUSD": "0"
+  },
+  "date": "2026-11-23",
+  "decision": {
+    "minimumCandidate": "Keep operational Free; paid Redis Essentials noHA/noPersistence250MB; independently controlled witness still required.",
+    "pooler": "Still prohibited; Supavisor drops most startup options; no Supavisor compatibility claimed.",
+    "redisFree": "Incompatible: no TLS and30MB below unchanged128MiB evidence ceiling.",
+    "supabaseFree": "Offline direct-IPv6 transport compatible; hosted connectivity, managed privileges/version, Nano capacity and backup not verified."
+  },
+  "developmentAttempts": [
+    {
+      "attempt": 1,
+      "disposition": "New probe parsed PostgreSQL inet text with /128 as a bare IP; corrected to host(inet_client_addr()).",
+      "evidenceFile": "whereto-demo-ipv6-attempt1.log",
+      "evidenceSHA256": "a70868958b2d21f2d5dbcf53c12cd76632e01a6eccf35d426224858090d99628",
+      "result": {
+        "cloudIPv6Verified": false,
+        "errors": 1,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [
+          "test_concurrent_workers_one_nonrenewing_grant",
+          "test_crash_after_count_intent_cannot_retry_from_new_process"
+        ],
+        "failures": 0,
+        "liveSupabaseVerified": false,
+        "observed": [],
+        "seconds": 0.086,
+        "skipped": 0,
+        "tests": 1,
+        "verifiedSQLConnections": 0
+      }
+    },
+    {
+      "attempt": 2,
+      "disposition": "New observer indexed a dict-row result numerically; corrected to an explicit tuple cursor.",
+      "evidenceFile": "whereto-demo-ipv6-attempt2.log",
+      "evidenceSHA256": "a83680a8d73ddd8356f364f0765cd5107d414163e43d4baeb4740d1789c254c1",
+      "result": {
+        "cloudIPv6Verified": false,
+        "errors": 1,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [
+          "test_concurrent_workers_one_nonrenewing_grant",
+          "test_crash_after_count_intent_cannot_retry_from_new_process"
+        ],
+        "failures": 0,
+        "liveSupabaseVerified": false,
+        "observed": [
+          {
+            "address": "::1",
+            "database": "whereto_synthetic"
+          },
+          {
+            "address": "::1",
+            "database": "whereto_witness"
+          }
+        ],
+        "seconds": 0.4,
+        "skipped": 0,
+        "tests": 1,
+        "verifiedSQLConnections": 6
+      }
+    },
+    {
+      "attempt": 3,
+      "disposition": "New negative test expected Denied after NOLOGIN; fresh login correctly refused as Unavailable. Corrected expected type; no authority change.",
+      "evidenceFile": "whereto-demo-ipv6-attempt3.log",
+      "evidenceSHA256": "3fb76663a67bf8e2f043cb01ebb89bbdfd00f36c3b8b13fab55e81bf6fd62c8e",
+      "result": {
+        "cloudIPv6Verified": false,
+        "errors": 1,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [
+          "test_concurrent_workers_one_nonrenewing_grant",
+          "test_crash_after_count_intent_cannot_retry_from_new_process"
+        ],
+        "failures": 0,
+        "liveSupabaseVerified": false,
+        "observed": [
+          {
+            "address": "::1",
+            "database": "whereto_synthetic"
+          },
+          {
+            "address": "::1",
+            "database": "whereto_witness"
+          }
+        ],
+        "seconds": 17.414,
+        "skipped": 0,
+        "tests": 3,
+        "verifiedSQLConnections": 203
+      }
+    },
+    {
+      "attempt": 4,
+      "disposition": "28 passed plus unchanged restore/crash drills; two fresh-process financial cases were explicitly excluded in this initial transport probe.",
+      "evidenceFile": "whereto-demo-ipv6-attempt4.log",
+      "evidenceSHA256": "2dea7063c3a65e0db2a59471ef99c448bc1137052eebae44639c0c8fff32dc55",
+      "result": {
+        "cloudIPv6Verified": false,
+        "errors": 0,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [
+          "test_concurrent_workers_one_nonrenewing_grant",
+          "test_crash_after_count_intent_cannot_retry_from_new_process"
+        ],
+        "failures": 0,
+        "liveSupabaseVerified": false,
+        "observed": [
+          {
+            "address": "::1",
+            "database": "whereto_synthetic"
+          },
+          {
+            "address": "::1",
+            "database": "whereto_witness"
+          }
+        ],
+        "seconds": 199.875,
+        "skipped": 0,
+        "tests": 28,
+        "verifiedSQLConnections": 2813
+      }
+    },
+    {
+      "attempt": 5,
+      "disposition": "Expected concurrent SQL denial was masked by frozen IPv4-only diagnostics raising nonfixture_diagnostic for localhost. New IPv6 metadata-only observer preserves/rethrows SQL errors; original observer unchanged.",
+      "evidenceFile": "whereto-demo-ipv6-attempt5.log",
+      "evidenceSHA256": "96ff7bd073fcc11fc799436c418dbd5b43f16c6cbf2e299dadb00b2a9bfe86b3",
+      "result": {
+        "childIPv6Guards": true,
+        "cloudIPv6Verified": false,
+        "connectionCountScope": "parent process only; spawned helpers independently enforce IPv6/TLS",
+        "errors": 0,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [],
+        "failures": 1,
+        "liveSupabaseVerified": false,
+        "observed": [
+          {
+            "address": "::1",
+            "database": "whereto_synthetic"
+          },
+          {
+            "address": "::1",
+            "database": "whereto_witness"
+          }
+        ],
+        "seconds": 48.375,
+        "skipped": 0,
+        "tests": 5,
+        "verifiedSQLConnections": 478
+      }
+    },
+    {
+      "attempt": 6,
+      "disposition": "All27 original financial cases plus4 port cases passed; same-lock/role/SQL contracts unchanged. Existing restore/crash drills also passed.",
+      "evidenceFile": "whereto-demo-ipv6-attempt6.log",
+      "evidenceSHA256": "a2dbe64c97e7f9ee0be243c180b2c272a033b1ec9f6f9fe9647c99fbac1530fc",
+      "result": {
+        "childIPv6Guards": true,
+        "cloudIPv6Verified": false,
+        "connectionCountScope": "parent process only; spawned helpers independently enforce IPv6/TLS",
+        "errors": 0,
+        "event": "demo_ipv6_result",
+        "excludedSpawnCases": [],
+        "failures": 0,
+        "liveSupabaseVerified": false,
+        "observed": [
+          {
+            "address": "::1",
+            "database": "whereto_synthetic"
+          },
+          {
+            "address": "::1",
+            "database": "whereto_witness"
+          }
+        ],
+        "seconds": 218.596,
+        "skipped": 0,
+        "tests": 31,
+        "verifiedSQLConnections": 2853
+      }
+    }
+  ],
+  "filesSHA256": {
+    "deployment/cloud-run/network-N1-enrollment-complete-v1.json": "3cad4891dbf3e30f75a9bab73831d62b112591d23a29832ec4e6ae6019ccc0c8",
+    "experiments/hosted_ports/run_demo_ipv6.py": "17363bc65d380f149061e5aa87ef1eec13f58f69b3d000eb51f8235a4b7501ba",
+    "experiments/hosted_ports/test_demo_ipv6.py": "bbfd0133004e5576c7b864be818c38a9a2ae58bbbf3ce6087c1d7a2d2b301403",
+    "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+    "private_runtime/real_application/sources.json": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+    "private_runtime/real_finance/run_sql.py": "30da04e251814d0bf8f7bdf98c1457ceb8a4541c6d3096edeb919530ca7545bd",
+    "private_runtime/real_finance/sources.json": "6260001ecaa5397ce50a68137ff381ee0d0880aef4a19d9332d6b9078968391d",
+    "private_runtime/real_finance/test_sql.py": "b807b9e3daf34eb994ca4b65990f676413e3ac0333d4ae466a1cf74c594157fe",
+    "private_runtime/redis_port.py": "416c6432935f44d972cf6945d6e1e6cca6c252ca21c740fdce0f4cdf32dabdb3"
+  },
+  "historical": {
+    "consumedScopesChanged": false,
+    "haltPreserved": true,
+    "journalMutations": 0,
+    "privateEvidenceAccessed": false,
+    "readinessOperations": 0,
+    "recordedAccountedUSD": "0.047366625",
+    "recordedPaidAttempts": 10,
+    "recordedPrivateFiles": 324
+  },
+  "notRun": [
+    "Live Supabase SQL/TLS/version/roles/catalog or capacity",
+    "Actual Supavisor runtime",
+    "Cloud Run IPv6/IAM/allowlist verification",
+    "Redis Cloud TLS/ACL/Lua/capacity/restart tests",
+    "Live owner backup/export or restore",
+    "Full backend/frontend/TypeScript/ESLint/build/browser regression suites",
+    "Image builds/scans or publication",
+    "Original324-file private inventory recount",
+    "Configured-value secret scan that would read private env credentials"
+  ],
+  "officialReferences": [
+    "https://docs.cloud.google.com/run/docs/configuring/vpc-dual-stack-subnet",
+    "https://supabase.com/docs/guides/database/connecting-to-postgres",
+    "https://github.com/supabase/supavisor/pull/1273",
+    "https://supabase.com/docs/guides/platform/backups",
+    "https://redis.io/docs/latest/operate/rc/security/database-security/tls-ssl/",
+    "https://redis.io/docs/latest/operate/rc/subscriptions/view-essentials-subscription/essentials-plan-details/",
+    "https://neon.com/docs/introduction/ip-allow",
+    "https://cloud.google.com/nat/pricing"
+  ],
+  "productionEnrolled": false,
+  "version": "53-demo-storage-compatibility-verification-v1"
+}
