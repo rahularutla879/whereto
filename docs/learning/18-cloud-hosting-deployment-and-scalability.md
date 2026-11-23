@@ -1,5 +1,10 @@
 # 18 — Cloud Hosting Deployment and Scalability
 
+## Observed N1 enrollment, November 23
+
+The owner-authorized custom VPC and `us-east4` subnet `10.92.0.0/26` now exist, with Private Google Access enabled. Two commands ran once and independent reads verified only the expected network/subnet/default-route/system-route additions. No NAT/public IP or Cloud Run service exists; previous resources and IAM remain intact. N1 must not be replayed. [Sanitized actual result](../../deployment/cloud-run/network-N1-enrollment-complete-v1.json). Subsequent storage/N2/runtime approvals remain separate; expected empty-network fixed charges are $0, not a verified posted invoice. No application/provider/financial authority was activated.
+
+
 ## Current network/storage enrollment boundary
 
 The foundation and six private registry images already exist. `deployment/network_storage.py` uses their actual identities through the existing owner-enrolled compiler. N1 creates only a custom VPC/subnet; N2 separately reserves a billed static IPv4 and router/manualNAT. Rendered commands and hashes are review material, never owner authorization; fresh cloud conflict checks remain mandatory. Existing default network/resources must remain intact.

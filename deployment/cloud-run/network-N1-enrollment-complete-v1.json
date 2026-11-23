@@ -1,0 +1,102 @@
+{
+  "N2Executed": false,
+  "NATCreated": 0,
+  "RunServicesCreated": 0,
+  "actualPostedInvoiceVerified": false,
+  "allExistingResourcesAndIAMUnchanged": true,
+  "atUTC": "2026-11-23T05:57:13.787059+00:00",
+  "baselineCommit": "e10ad45c2609e4ea403295fb42e0e0ac1b44315f",
+  "checks": {
+    "afterEachCreationFullMetadataComparison": "passed",
+    "allPreviousScopesPreserved": true,
+    "focusedTests": {
+      "errors": 0,
+      "failed": 0,
+      "passed": 39,
+      "skipped": 0
+    },
+    "freshPreflight": "passed",
+    "freshPrivateInventoryPerformed": false,
+    "historicalAndFinancialSourceChanged": false,
+    "historicalJournalAccessed": false,
+    "historicalRecordedAccountedNanodollars": 47366625,
+    "historicalRecordedAttempts": 10,
+    "historicalRecordedPrivateFiles": 324,
+    "independentNetworkAndSubnetDescribes": "passed",
+    "localDiagnosticNote": "Preliminary ls of a guessed repository-iam.stdout filename returned missing-file; the existing authoritative repository IAM hash was available and matched the fresh cloud read. No cloud failure or creation retry occurred.",
+    "ownerArtifactProofAndSixOCIReceipts": "passed before execution",
+    "persistentHaltUnchanged": true,
+    "rawDirectoryMode": "0700",
+    "rawFilesMode": "0600",
+    "sourcePinsAndExactN1Script": "passed"
+  },
+  "completedCommandRange": [
+    1,
+    2
+  ],
+  "creationCommandInvocations": 2,
+  "creationRetries": 0,
+  "doNotReplayN1": true,
+  "evidenceFilesSHA256": {
+    "after-network/snapshot.json": "650c83a4e16a7c86bc62e441ee3ebe574fe07c509ff07e31c8dbd46a8df445ff",
+    "after-subnet/snapshot.json": "cd475b6b2a67f21ad6599c6588a843c1e20e0bcb745bed19f27db775d3ec884d",
+    "before/snapshot.json": "76b09ad98ac5bc3e65711a35feceae39b1ec2322a1f2033c40dbb947728d9d50",
+    "completed.json": "39b109b0fdb2a6966af2ff403bd41a7acf1ef6969a22fe6ed09183612c168df3",
+    "network-verified.json": "225e40d3c1568131320765796d3b71454b2fb518b5da459f99df9e4ce866794b",
+    "owner-scope.json": "ec3b214e78e41aaa9c5da243063431c7103a792bfcc4a9afd477d37456b48016",
+    "preflight-passed.json": "5c1e09ea4146e312162ad5d22b9e16eda04bd7e3c41e090fa04a8e438209acd2"
+  },
+  "existingDefaultNetworkSubnetsFirewallsPreserved": true,
+  "expectedAutomaticRouteCount": 2,
+  "expectedAutomaticRoutes": [
+    "default internet route",
+    "10.92.0.0/26 system subnet route"
+  ],
+  "expectedIncrementalFixedChargesUSD": "0",
+  "financialGrantsIssued": 0,
+  "firewallChanges": 0,
+  "identity": "53-owner-authorized-N1-network-enrollment-v1",
+  "independentDescribeAndFullInventoriesVerified": true,
+  "network": {
+    "autoCreateSubnetworks": false,
+    "id": "1966744619709262697",
+    "name": "whereto-staging",
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/where-to-512422/global/networks/whereto-staging"
+  },
+  "notRun": [
+    "N2",
+    "firewall/IAM/API changes",
+    "database or Redis purchases",
+    "Cloud Run deployment",
+    "secret-value access or versions",
+    "provider calls",
+    "financial grants",
+    "image builds or scans",
+    "application/browser suites",
+    "posted billing-invoice verification"
+  ],
+  "operatorScriptsSHA256": {
+    "whereto-n1-execute.py": "e682d62304248cd16e5747217667c26a7d3d702318cdf086f13b8bf783396494",
+    "whereto-n1-preflight.py": "92bf076fa0c193b820fa9637ba4968a27e61a52ac0e33a444136e1fc2457a1d1"
+  },
+  "project": "where-to-512422",
+  "projectIAMAndEnabledAPIsPreserved": true,
+  "providerCalls": 0,
+  "publicIPsReserved": 0,
+  "publishedImagesAndRepositorySettingsIAMPreserved": true,
+  "rawEvidenceDirectory": "/private/tmp/whereto-n1-owner-e10ad45-20261123-v1",
+  "region": "us-east4",
+  "routersCreated": 0,
+  "scopeConsumed": true,
+  "secretValuesAccessed": false,
+  "sixWorkloadAccountsAndSecretContainersPreserved": true,
+  "softwareOrSDKConfigChangesAllowed": false,
+  "stopAfterN1": true,
+  "subnet": {
+    "CIDR": "10.92.0.0/26",
+    "id": "3084639502081092464",
+    "name": "whereto-staging",
+    "privateIpGoogleAccess": true,
+    "selfLink": "https://www.googleapis.com/compute/v1/projects/where-to-512422/regions/us-east4/subnetworks/whereto-staging"
+  }
+}
