@@ -1,3 +1,7 @@
+## Task 52/53 — next Free database enrollment scopes prepared
+
+Prepared one metadata-only direct IPv6/TLS preflight, encrypted off-site backup/restore-verification procedure and an inactive existing-subnet IPv6 amendment. Live database checks, backup, capacity acceptance, independent witness ownership and later IAM/network/resource/provider enrollment remain incomplete. Nothing is approved or executed by the preparation. [Exact next authorization and evidence](docs/task53-free-preflight-backup.md).
+
 ## Demo-first storage qualification, November 23
 
 Task52/53 remain incomplete. Supabase Free/directIPv6 is a locally tested candidate, not hosted capacity acceptance; keep pooler refusal and all financial/evidence controls. Redis Free is incompatible; actual noHA/noPersistence250MB quote remains$6 beforetax. No purchase/network/provider authority is granted. [Focused verification and decisions](docs/task53-demo-storage-compatibility.md).

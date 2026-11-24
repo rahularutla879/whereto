@@ -1,5 +1,9 @@
 # 18 — Cloud Hosting Deployment and Scalability
 
+## Existing-subnet IPv6 amendment remains inactive
+
+Fresh read-only observations confirm N1's custom subnet remains IPv4-only. The [inactive amendment](../../deployment/cloud-run/dual-stack-amendment-PROPOSED-v1.json) proposes updating that same subnet to external dual stack; Google assigns the /64. Never invent a range, replay N1 or infer permission to run N2. Cloud Run documents a broad publicIpAdmin role for its service agent when using external IPv6; granting it is a separate security/IAM decision, not an implicit part of a network update. Observe actual source addresses before approving Supabase CIDR restrictions. IPv4 Redis still requires separately authorized NAT/static egress. [Exact commands and owner scopes](../task53-free-preflight-backup.md). No network mutation or Run deployment occurred.
+
 ## Demo-first storage qualification
 
 A zero-cost operational database is a candidate, not a capacity guarantee. The test-only [IPv6 probe](../../experiments/hosted_ports/run_demo_ipv6.py) runs actual restricted PostgreSQL/independent-witness algorithms over local verified-TLS IPv6 without changing production ports or source pins. Cloud Run documents dual-stack support, but the existing N1 subnet remains IPv4-only: external IPv6 permissions/routes/allowlists need separate review and cloud verification. Redis still needs IPv4 NAT for its source allowlist. Supavisor ignores most startup options, including our deadline options; session affinity does not justify removing the pooler ban. Redis Free has no TLS and only30MB; the actual noHA/noPersistence250MB quote is$6 beforetax. Manual backups, independent witness control and real Nano capacity remain gates. [Exact scope, limitations and costs](../task53-demo-storage-compatibility.md).

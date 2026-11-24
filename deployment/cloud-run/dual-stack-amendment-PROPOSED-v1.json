@@ -1,0 +1,105 @@
+{
+  "baselineCommit": "0e7bcd0012902af29e6edecfc86836021e75a8ad",
+  "executionAuthorized": false,
+  "laterCloudRunRequirements": {
+    "documentedRole": "roles/compute.publicIpAdmin",
+    "iamApprovalAbsent": true,
+    "iamCommandForSeparateReview": [
+      "gcloud",
+      "projects",
+      "add-iam-policy-binding",
+      "where-to-512422",
+      "--member=serviceAccount:service-895186533714@serverless-robot-prod.iam.gserviceaccount.com",
+      "--role=roles/compute.publicIpAdmin",
+      "--condition=None"
+    ],
+    "ipv4Redis": "N2/static IPv4 remains separately gated; dual-stack does not replace allowlisted IPv4 egress",
+    "networkCompiler": "Existing signed compiler/source cohort unchanged. Bind actual observed IPv6 metadata in a separately reviewed amendment before runtime deployment.",
+    "noInternalULARequiredForPublicIPv6": true,
+    "roleCurrentlyPresent": false,
+    "roleHasBroadRegionalAndGlobalAddressPrefixManagement": true,
+    "runtimeEgress": "Existing Direct VPC all-traffic on same subnet; retain internal/IAM/IAP service boundaries",
+    "serviceAgent": "service-895186533714@serverless-robot-prod.iam.gserviceaccount.com",
+    "sourceRestriction": "Observe actual assigned /64 and Cloud Run source, then explicitly authorize exact Supabase IPv6 CIDR allowlist while preserving legitimate operator/IPv4 clients. No ::/0 or guessed per-instance address."
+  },
+  "minimalAmendment": {
+    "commandForSeparateApproval": [
+      "gcloud",
+      "compute",
+      "networks",
+      "subnets",
+      "update",
+      "whereto-staging",
+      "--project=where-to-512422",
+      "--region=us-east4",
+      "--stack-type=IPV4_IPV6",
+      "--ipv6-access-type=EXTERNAL",
+      "--quiet"
+    ],
+    "expectedAllocation": "Google-assigned external GUA /64; observe actual prefix after update; no chosen/invented address or delegated-prefix purchase",
+    "expectedAutomaticChanges": [
+      "IPv6 subnet allocation and associated system routing; independently read back, stop on unexpected changes"
+    ],
+    "expectedFixedAddressChargeUSD": "0; no workloads/NAT/IPv4 reservation authorized; posted account charges not verified",
+    "preExecutionConditions": [
+      "Fresh complete relevant network/subnet/route/firewall/usage/IAM and effective-policy checks",
+      "Owner approval for this new scope, not reuse of N1",
+      "Review any allocation/quota/API error; do not enable APIs or retry mutation",
+      "No route/firewall/IAM/API repair implicit"
+    ],
+    "preserve": [
+      "existing VPC/subnet and IPv4 /26",
+      "Private Google Access",
+      "all existing IPv4 routes/firewalls/IAM",
+      "consumed N1 scope",
+      "all six published images and foundation"
+    ]
+  },
+  "observationDate": "2026-11-24",
+  "originalN1EvidenceSHA256": "3cad4891dbf3e30f75a9bab73831d62b112591d23a29832ec4e6ae6019ccc0c8",
+  "project": "where-to-512422",
+  "readOnlyObservation": {
+    "customNetwork": true,
+    "effectivePolicies": {
+      "compute.disableAllIpv6": {
+        "booleanPolicy": {}
+      },
+      "compute.disableVpcExternalIpv6": {
+        "booleanPolicy": {}
+      }
+    },
+    "existingRoutes": [
+      "0.0.0.0/0",
+      "10.92.0.0/26"
+    ],
+    "externalIPv6Prefix": null,
+    "ipv4Range": "10.92.0.0/26",
+    "network": "whereto-staging",
+    "privateGoogleAccess": true,
+    "regionalIPv6Quotas": [
+      {
+        "limit": 200,
+        "metric": "STATIC_EXTERNAL_IPV6_ADDRESS_RANGES",
+        "usage": 0
+      },
+      {
+        "limit": 0,
+        "metric": "VARIABLE_IPV6_PUBLIC_DELEGATED_PREFIXES",
+        "usage": 0
+      }
+    ],
+    "regionalRunServices": 0,
+    "runAgentCurrentProjectRoles": [
+      "roles/run.serviceAgent"
+    ],
+    "stackType": "IPV4_ONLY",
+    "subnet": "whereto-staging"
+  },
+  "references": [
+    "https://docs.cloud.google.com/run/docs/configuring/vpc-dual-stack-subnet",
+    "https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks",
+    "https://docs.cloud.google.com/vpc/docs/subnets"
+  ],
+  "region": "us-east4",
+  "version": "53-N1-external-ipv6-amendment-PROPOSED-v1"
+}

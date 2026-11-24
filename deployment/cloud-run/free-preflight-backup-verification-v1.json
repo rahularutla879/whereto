@@ -1,0 +1,143 @@
+{
+  "backupOrRestoreExecuted": false,
+  "baselineCommit": "0e7bcd0012902af29e6edecfc86836021e75a8ad",
+  "checks": [
+    "deployment/sql/supabase-free-preflight-readonly-v1.sql: static read-only/deadline/mutation guards pass; SQL not executed",
+    "deployment/sql/backup-restore-verify-readonly-v1.sql: static read-only/deadline/mutation guards pass; SQL not executed",
+    "Exact inactive existing-subnet update; original N1 evidence hash matches",
+    "All 20 handbook chapters preserved",
+    "New files and complete added diff secret-pattern/path scan pass; private credential values not read",
+    "Procedure local references resolve; verification record created by this check"
+  ],
+  "cloudReadOnly": {
+    "customNetwork": true,
+    "effectivePolicies": {
+      "compute.disableAllIpv6": {
+        "booleanPolicy": {}
+      },
+      "compute.disableVpcExternalIpv6": {
+        "booleanPolicy": {}
+      }
+    },
+    "existingRoutes": [
+      "0.0.0.0/0",
+      "10.92.0.0/26"
+    ],
+    "externalIPv6Prefix": null,
+    "ipv4Range": "10.92.0.0/26",
+    "network": "whereto-staging",
+    "privateGoogleAccess": true,
+    "regionalIPv6Quotas": [
+      {
+        "limit": 200,
+        "metric": "STATIC_EXTERNAL_IPV6_ADDRESS_RANGES",
+        "usage": 0
+      },
+      {
+        "limit": 0,
+        "metric": "VARIABLE_IPV6_PUBLIC_DELEGATED_PREFIXES",
+        "usage": 0
+      }
+    ],
+    "regionalRunServices": 0,
+    "runAgentCurrentProjectRoles": [
+      "roles/run.serviceAgent"
+    ],
+    "stackType": "IPV4_ONLY",
+    "subnet": "whereto-staging"
+  },
+  "credentialBoundary": {
+    "CAParentPermissions": "0700",
+    "contentsRead": false,
+    "filePermissions": "0600",
+    "filesStatOnly": [
+      "backend/.env.database",
+      "backend/.env.persistence",
+      "backend/.local/supabase-ca.crt"
+    ],
+    "gitExclusionsVerified": true,
+    "passwordsAccessed": false,
+    "regularOwnerFiles": true
+  },
+  "date": "2026-11-24",
+  "dependencyCheck": "pip check: No broken requirements found; does not prove experimental dependency completeness",
+  "developmentChecks": [
+    "Initial overly broad whole-file secret regex matched pre-existing DECISIONS text; corrected to word-boundary secret patterns and changed/new contents. No secret values displayed."
+  ],
+  "filesSHA256": {
+    "DECISIONS.md": "9751a6a0068e31300344a43c8dd69201d3644540a28f94f87d641c841d22a49c",
+    "HANDOVER.md": "6ec543153a7891b5fe9d44d37b560269985fc8a00e414b59e28873e7fa7e77f5",
+    "TASKS.md": "d5b3ee1e2feb2a0146b6646e890b1bfbce1b176b6f08646264e5cefce1dff6ee",
+    "deployment/cloud-run/dual-stack-amendment-PROPOSED-v1.json": "99aab0f015109859b126b1adca7bc824afb8e970ab92b32651dc73af84d993be",
+    "deployment/sql/backup-restore-verify-readonly-v1.sql": "7a94beae22231f2057e356d34d5fba9657a39fa46693403dd1e2bc6cda5d3b9e",
+    "deployment/sql/supabase-free-preflight-readonly-v1.sql": "0d90b17e4c5d2c7ae9740f98e65714d9345c0e1c4a5e663c8812fb805a0bcbdf",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": "d00160d15a489afccc8d986d2e21b78bc1c92a68a2310c821487ab28cb45e1e3",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md": "28fa66dd12b67714ebcd96d34096bf942c698490bc2b5c626165c473520db7b6",
+    "docs/task53-free-preflight-backup.md": "da470842a2b471b08339acd72f00f5cbabe16bf699eb136583f0b219ea6794e6"
+  },
+  "financialGrantsIssued": 0,
+  "historical": {
+    "consumedScopesChanged": false,
+    "frozenSourcePinsChanged": false,
+    "haltUnchanged": true,
+    "journalReadOrMutated": false,
+    "recordedAccountedUSD": "0.047366625",
+    "recordedAttempts": 10,
+    "recordedPrivateFiles": 324,
+    "recordsNotRecounted": true
+  },
+  "liveSQLSessions": 0,
+  "networkMutations": 0,
+  "notRun": [
+    "Live Supabase DNS/TLS/SQL/version/roles/capacity",
+    "SQL parser/server validation of prepared scripts",
+    "Live export or disposable restore",
+    "Cloud Run IPv6 end-to-end",
+    "Redis post-purchase acceptance",
+    "Full backend/frontend/browser/build suites",
+    "Image builds/scans/publication",
+    "Private324-file recount and configured-secret-value scan"
+  ],
+  "preparationOnly": true,
+  "providerOperations": 0,
+  "references": [
+    "https://docs.cloud.google.com/run/docs/configuring/vpc-dual-stack-subnet",
+    "https://docs.cloud.google.com/vpc/docs/create-modify-vpc-networks",
+    "https://docs.cloud.google.com/vpc/docs/subnets",
+    "https://www.postgresql.org/docs/17/app-pgdump.html",
+    "https://www.postgresql.org/docs/17/app-pg-dumpall.html",
+    "https://www.postgresql.org/docs/17/app-pgrestore.html",
+    "https://raw.githubusercontent.com/postgres/postgres/REL_17_STABLE/src/bin/pg_dump/pg_dump.c",
+    "https://supabase.com/docs/guides/platform/migrating-within-supabase/backup-restore"
+  ],
+  "sourceChecks": {
+    "backendProjectionFiles": 72,
+    "backendProjectionMatch": true,
+    "financialInputs": 31,
+    "financialInputsMatch": true,
+    "networkInputsMatch": true,
+    "unprojectedVerifyApplication": "Expected refusal at backend/ai/ollama.py observed; negative test passes; no manifest repin"
+  },
+  "unitTests": [
+    {
+      "cohort": "deployment.test_cloud_run_real deployment.test_hosting_batch deployment.test_network_storage",
+      "errors": 0,
+      "failures": 0,
+      "interpreter": "backend/.venv/bin/python",
+      "passed": 33,
+      "seconds": 0.626,
+      "skipped": 0
+    },
+    {
+      "cause": "Three ClosedEntryTests cannot import cryptography, absent in ordinary backend venv; no installation attempted",
+      "cohort": "private_runtime.real_application.test_projection private_runtime.real_application.test_sources",
+      "errors": 3,
+      "failures": 0,
+      "interpreter": "backend/.venv/bin/python",
+      "passed": 8,
+      "seconds": 5.455,
+      "skipped": 0
+    }
+  ],
+  "version": "53-free-preflight-backup-preparation-verification-v1"
+}

@@ -1,5 +1,11 @@
 # 12 — PostgreSQL Supabase Sessions and Saved Plans
 
+## Free-project operator preflight and backup boundary
+
+The [prepared catalog SQL](../../deployment/sql/supabase-free-preflight-readonly-v1.sql) needs separate owner permission before loading existing private database credentials. It reads metadata only under 1500 ms statement/250 ms lock deadlines; verify-full TLS must also be enforced by the client. Catalog counts cannot qualify Nano CPU or restricted financial routines. A later workload test remains necessary.
+
+A logical backup needs separate data-read authority, encryption recipient, off-site recovery custodian and restore verification. pg_dump resets its SQL timeouts, so startup PGOPTIONS cannot silently preserve the application deadline; a finite backup-operator timing scope must be approved separately. Dumps exclude Storage object bytes and dashboard configuration; role passwords are intentionally excluded and require separate recovery enrollment. The [prepared comparison SQL](../../deployment/sql/backup-restore-verify-readonly-v1.sql) covers selected metadata, not complete restore correctness. [Exact procedure, exclusions and gates](../task53-free-preflight-backup.md). No live backup or restore has run.
+
 [Course contents](README.md) · [Glossary](GLOSSARY.md)
 
 ## Persistent data survives a process restart
