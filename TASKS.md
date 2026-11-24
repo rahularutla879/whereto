@@ -1,3 +1,7 @@
+## Task 52/53 — operational Free connection requirements verified
+
+One explicitly authorized direct IPv6 metadata session passed on PostgreSQL 17.11 with verify-full TLS, existing restricted identity and unchanged 1500 ms / 250 ms deadlines. P1 is consumed, not renewable permission. This establishes connectivity only; real-profile role/schema enrollment, protected SQL/witness workload capacity, encrypted backup/restore and actual Cloud Run IPv6 remain open. No purchase or upgrade is justified by the connection result. [Exact sanitized evidence](deployment/cloud-run/supabase-free-preflight-result-v1.json).
+
 ## Task 52/53 — next Free database enrollment scopes prepared
 
 Prepared one metadata-only direct IPv6/TLS preflight, encrypted off-site backup/restore-verification procedure and an inactive existing-subnet IPv6 amendment. Live database checks, backup, capacity acceptance, independent witness ownership and later IAM/network/resource/provider enrollment remain incomplete. Nothing is approved or executed by the preparation. [Exact next authorization and evidence](docs/task53-free-preflight-backup.md).

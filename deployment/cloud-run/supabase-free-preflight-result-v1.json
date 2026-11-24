@@ -1,0 +1,172 @@
+{
+  "TLS": {
+    "bits": 256,
+    "cipher": "TLS_AES_256_GCM_SHA384",
+    "ssl": true,
+    "version": "TLSv1.3"
+  },
+  "authorization": "Owner authorized exactly one metadata-only, direct IPv6 verify-full session; no retries or fallback. Scope consumed permanently.",
+  "boundaries": {
+    "applicationRowsOrFinancialRecordsRead": false,
+    "cloudResourceMutations": 0,
+    "credentialValuesLoggedOrPersisted": false,
+    "dataOrSchemaWrites": false,
+    "grantsIssued": 0,
+    "historicalEvidenceOrAccountingChanged": false,
+    "migrationsBackupsRestoresLoadTests": 0,
+    "operatorCredentialRead": false,
+    "providerCalls": 0,
+    "settingsChanges": "Only exact transaction-local reviewed deadlines and connection read-only defaults; no persistent settings or role changes"
+  },
+  "capacityLimitations": [
+    "Snapshot only: max_connections60, superuser_reserved_connections3, current-database7 and total pg_stat_activity14 include observer; restricted visibility/background workers mean no claim of53 usable runtime slots.",
+    "shared_buffers224MiB is configured cache, not physical RAM or CPU entitlement.",
+    "No load, six-service pools, revision overlap, financial routines, independent witness, rollout or concurrency tested.",
+    "Existing whereto_plan_runtime identity qualifies this metadata session only; new real-profile restricted logins, private_runtime contract and provider schemas are not enrolled.",
+    "No Cloud Run IPv6 path or new source allowlist tested."
+  ],
+  "completedUTC": "2026-11-24T06:08:20.188418+00:00",
+  "connection": {
+    "client_address_family": 6,
+    "current_user": "whereto_plan_runtime",
+    "database": "postgres",
+    "directHostSHA256": "72a140127a6601b143222466b23e60eaf3d95293a64bb1737e34662536576b51",
+    "hostnameAndCertificateValidation": "libpq sslmode=verify-full, existing owner-only CA, exact prior direct-host SHA256, single global IPv6 hostaddr while preserving DNS hostname",
+    "lock_timeout": "250ms",
+    "noPooler": true,
+    "read_only": "on",
+    "server_address_family": 6,
+    "server_major": 17,
+    "server_version": "17.11",
+    "session_user": "whereto_plan_runtime",
+    "statement_timeout": "1500ms"
+  },
+  "connectionAttempts": 1,
+  "databaseAggregateMetadata": {
+    "blks_hit": 8227109,
+    "blks_read": 1672,
+    "database_bytes": 14366387,
+    "deadlocks": 0,
+    "temp_bytes": 0,
+    "xact_commit": 77463,
+    "xact_rollback": 2720
+  },
+  "evidence": {
+    "SHA256": "16bb58884aa303edfae505d897f87de229c4d2eab64d759ef632aabce911d433",
+    "consumed": true,
+    "directoryPermissions": "0700",
+    "exclusiveCreationAndFsync": true,
+    "ownerOnlyRelativePath": "backend/.local/53-supabase-P1-owner-70de0b4-20261124-v1.jsonl",
+    "permissions": "0600",
+    "runnerOwnerOnlyCopy": "backend/.local/53-supabase-P1-owner-70de0b4-20261124-v1.runner.py"
+  },
+  "installedExtensions": [
+    {
+      "extname": "pg_stat_statements",
+      "extversion": "1.11"
+    },
+    {
+      "extname": "pgcrypto",
+      "extversion": "1.3"
+    },
+    {
+      "extname": "plpgsql",
+      "extversion": "1.0"
+    },
+    {
+      "extname": "supabase_vault",
+      "extversion": "0.3.1"
+    },
+    {
+      "extname": "uuid-ossp",
+      "extversion": "1.1"
+    }
+  ],
+  "matchingRoleMemberships": [],
+  "nextGate": "Separately authorized isolated protected SQL/witness capacity verification under unchanged1500/250ms deadlines, backup/restore readiness and independent witness control before demonstration acceptance. Retain Free for now; no technical connection reason to buy Pro or dedicatedIPv4 from this result.",
+  "observedConnections": {
+    "client_backends": 1,
+    "database_connections": 7,
+    "total_connections": 14,
+    "visible_active_connections": 1
+  },
+  "observedRestrictedRole": [
+    {
+      "can_connect": true,
+      "can_create": false,
+      "rolbypassrls": false,
+      "rolcanlogin": true,
+      "rolconnlimit": -1,
+      "rolcreatedb": false,
+      "rolcreaterole": false,
+      "rolname": "whereto_plan_runtime",
+      "rolreplication": false,
+      "rolsuper": false
+    }
+  ],
+  "offlineChecks": {
+    "credentialFilePermissionsAndGitIgnore": "PASS; existing restricted loader only",
+    "fixedRunnerSyntaxAndBounds": "PASS",
+    "negativeCredentialAndUnreviewedHostCasesPassed": 3,
+    "newUnitSuiteRun": false,
+    "sourcePinsAndDriver": "PASS; Python3.12/psycopg3.3.3"
+  },
+  "querySHA256": "0d90b17e4c5d2c7ae9740f98e65714d9345c0e1c4a5e663c8812fb805a0bcbdf",
+  "requiredBuiltins": {
+    "core_sha256": true,
+    "core_uuid": true,
+    "plpgsql": true
+  },
+  "result": "passed_connection_requirements_only",
+  "reviewedStatementsCompleted": 16,
+  "runnerSHA256": "ca63895540b3ca1b9d78c02c1cff1372a624c0e6cef586f381ac003066e0707b",
+  "scope": "53-supabase-P1-owner-70de0b4-20261124-v1",
+  "scopedSchemas": [
+    {
+      "nspname": "public",
+      "owner": "pg_database_owner"
+    },
+    {
+      "nspname": "whereto",
+      "owner": "postgres"
+    }
+  ],
+  "serverSettings": [
+    {
+      "name": "maintenance_work_mem",
+      "setting": "32768",
+      "unit": "kB"
+    },
+    {
+      "name": "max_connections",
+      "setting": "60",
+      "unit": null
+    },
+    {
+      "name": "shared_buffers",
+      "setting": "28672",
+      "unit": "8kB"
+    },
+    {
+      "name": "superuser_reserved_connections",
+      "setting": "3",
+      "unit": null
+    },
+    {
+      "name": "work_mem",
+      "setting": "2184",
+      "unit": "kB"
+    }
+  ],
+  "sourceCommit": "70de0b4366255c7c099c062bc291c4968de0720d",
+  "sourcePins": {
+    "backend/dev_start.py": "672c9f4f4f5deedc0ed4b97989cdeda3e3d5768f65d09f6405f63edcc7449b27",
+    "backend/persistence_setup.py": "30b3d7f4dac5cb25ce9d62caf90298bcf0689895c63b4003d908ec533da1b4b7",
+    "backend/requirements.txt": "29a4d46bb7b8b62f5aad5b14d138545292b00160d0fc08f7a1427cd073585983",
+    "deployment/sql/supabase-free-preflight-readonly-v1.sql": "0d90b17e4c5d2c7ae9740f98e65714d9345c0e1c4a5e663c8812fb805a0bcbdf",
+    "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7"
+  },
+  "startedUTC": "2026-11-24T06:08:19.840549+00:00",
+  "uniqueJSONContract": true,
+  "version": "53-supabase-free-P1-readonly-result-v1"
+}
