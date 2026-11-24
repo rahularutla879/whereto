@@ -1,5 +1,11 @@
 # 12 — PostgreSQL Supabase Sessions and Saved Plans
 
+## B1 application-only encrypted recovery preparation
+
+The [B1 workflow](../task53-b1-application-backup.md) keeps the six application tables and schema grants/RLS while excluding platform secret stores and role settings. A schema-selected dump does not automatically include external dependencies. The new baseline SQL is a future explicitly authorized data-read operation, not another catalog-only B0. Source before/after and fixture must match table hashes/counts, schema/policy/constraint/index/trigger fingerprints and relevant runtime permissions. Managed administrator membership recovery is explicitly outside the local application fixture.
+
+`deployment/b1_pipeline.py` has no CLI/credential loader; it provides bounded process groups and exclusive ciphertext output only after future operator approval. A successful pipe test is not an encryption/backup test. AES-GCM decryption can emit data before the authentication result; complete verification must precede pg_restore. PG17 tools and a genuine backup-only public recipient are not enrolled. No real baseline export or restore has run.
+
 ## Connection success is not protected-role capacity acceptance
 
 P1 verified the existing saved-plan identity on Free PostgreSQL 17.11 over direct verified-TLS IPv6. It did not install the real profile. `SQLPool._check()` calls `private_runtime.connection_identity()`, which measures actual protected policy as well as DDL/ACLs. Missing genuine policy/role enrollment cannot be replaced by another metadata probe or a test grant. The [next scopes](../task53-demo-qualification-next-actions.md) separate catalog-only backup inventory, encrypted recovery proof, independent witness custody, additive installation and a bounded actual-role pool test. That later test still does not authorize reservations, provider sends or a live financial workload. Review backup coverage before exporting managed/extension-owned objects; exclude credentials/Vault secrets explicitly and retain the existing backup timing gate.

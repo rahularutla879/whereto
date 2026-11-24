@@ -1,0 +1,83 @@
+{
+  "applicationRowsRead": false,
+  "backupOrRestoreRun": false,
+  "baselineCommit": "d3bf4a6873e1399e9adbdabbb955b6fa0af8d76f",
+  "checks": {
+    "baselineSQL": "Static review only; not server-parsed or executed",
+    "chaptersPreserved": 20,
+    "dependencyConsistency": "pip check PASS",
+    "focusedTests": {
+      "cohorts": [
+        "deployment.test_b1_pipeline",
+        "deployment.test_cloud_run_real",
+        "deployment.test_hosting_batch",
+        "deployment.test_network_storage"
+      ],
+      "errors": 0,
+      "failures": 0,
+      "passed": 40,
+      "seconds": 0.695,
+      "skipped": 0
+    },
+    "handbookReviewed": [
+      "12"
+    ],
+    "handbookUpdated": [
+      "12"
+    ],
+    "newPipeTests": 7,
+    "secretPatterns": "New files/added diff PASS; no configured private values scanned",
+    "shellBlocksSyntaxChecked": 3,
+    "sourceAndFinancialNetworkPins": "PASS;31 financial inputs"
+  },
+  "cloudChanges": false,
+  "credentialsLoaded": false,
+  "date": "2026-11-24",
+  "developmentAttempts": [
+    {
+      "afterCorrection": "Regression passes in final40-test cohort",
+      "beforeCorrection": "1 test failed: warning was not refused",
+      "correction": "Reject any stderr bytes before promotion; discard contents in memory without logging",
+      "test": "zero-exit warning refusal"
+    },
+    {
+      "inspection": "Initial local metadata field lookup used wrong name, corrected without SQL/secret access"
+    },
+    {
+      "inspection": "Docker inventory unavailable: daemon not running. No startup or retry."
+    }
+  ],
+  "filesSHA256": {
+    "DECISIONS.md": "9ca7f6ada62373f07180622fae051e74cac3f4112c416dacaa762b748059554f",
+    "HANDOVER.md": "641c221c5249e8d337e2b1d1084183358d142de9f5c732a6e0f85d46d7dff7fa",
+    "TASKS.md": "a1b845f021d753272a6f979dad9414c64658112cccd26b9ac4f2c7eb63068253",
+    "deployment/b1_pipeline.py": "d4e59989e6d638070251058f6a708d1bc3c083207b0321b9cd0c2733f17e858d",
+    "deployment/cloud-run/b1-application-backup-PROPOSED-v1.json": "57d2b0078e53025beb8e6c0a8cd904ff8d9c967f149bff40e544f1a658f497aa",
+    "deployment/sql/b1-application-baseline-readonly-v1.sql": "0886837c7f3277007685e87e41c56d639d9e55a3f9dc66fec7985bfc0298726f",
+    "deployment/sql/b1-fixture-roles-v1.sql": "45ce5123223c51f77a5fb680e4a6255557171618f2b695744a16cb608df0dd25",
+    "deployment/test_b1_pipeline.py": "b2983c36e7197363b1636564b92240a661b0a7008b4b3978bf66ff8a7435e123",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": "135d32275d59c20810fa8b2966ffdcee65fdadbeec340db12d6be9a11998f579",
+    "docs/task53-b1-application-backup.md": "e3b080801adea9fbbe8465d1b4df24af1f84985e91facb06a11812a742481e7b"
+  },
+  "historical": {
+    "haltPreserved": true,
+    "journalEvidenceOrConsumedScopesChanged": false,
+    "recordedAccountedUSD": "0.047366625",
+    "recordedAttempts": 10,
+    "recordedPrivateFiles": 324,
+    "runtimeImagesAndSourcePinsChanged": false
+  },
+  "keysCreatedOrRead": false,
+  "liveDatabaseConnections": 0,
+  "notRun": [
+    "Any pg_dump, SQL baseline, live credential load or source-data inspection",
+    "Any key generation, private-key read, CMS encryption/decryption round-trip",
+    "PostgreSQL17 installation or tool binary enrollment",
+    "Local PostgreSQL initdb/start/restore or actual locale/extension compatibility",
+    "Off-site account/quota/upload/download/custodian test",
+    "Full backend/frontend/browser/build/image/security suites",
+    "Original324-file recount or configured-secret-value scan"
+  ],
+  "softwareChanges": false,
+  "version": "53-B1-application-backup-preparation-verification-v1"
+}

@@ -1,3 +1,7 @@
+## B1 — scope recovery to application objects and use authenticated encryption
+
+Use schema-selected pg_dump and explicit safe role metadata, not a whole-project/global-role dump that may capture managed role settings/secrets. Treat public/platform routines and installed extensions as external dependencies requiring review, not implicit restore permission. Prefer the already installed OpenSSL CMS authenticated encryption with a new owner-controlled recipient; never reuse the frontend key or restore streamed unauthenticated plaintext. Pin trusted ciphertext receipts separately from cloud storage. A local application fixture does not recreate Supabase administrator control or independently restore the witness. [Commands and explicit approvals](docs/task53-b1-application-backup.md).
+
 ## November 24 — do not replace actual-role capacity with repeated saved-plan probes
 
 The successful P1 is connectivity evidence only. Skip a redundant saved-plan benchmark as the next milestone. Prepare backup coverage/recovery and independent witness custody before additive protected installation; later pool checks retain the actual policy-measuring connection contract and epoch/runtime approvals. Configuration/financial authority cannot be fabricated for a capacity test. Synthetic fixture installers and financial facts stay off live Supabase. [Separately authorizable scopes](docs/task53-demo-qualification-next-actions.md).

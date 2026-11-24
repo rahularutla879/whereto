@@ -1,3 +1,7 @@
+## Task 52/53 — B1 application recovery workflow prepared, not executed
+
+Application-only schema/data/ACL/RLS backup commands and baseline comparisons are prepared with a shared 60-second export scope and unchanged app deadlines. Six tables / 13 indexes, no platform secret/role-setting export; new dependency/sequence/financial-schema drift stops. Owner must select a separate backup recipient, off-site quota/custodian, approve PG17 tools, exact operator/data export and isolated recovery test. No key creation, backup, restore, software/cloud change or grant. [Finite B1 workflow](docs/task53-b1-application-backup.md).
+
 ## Task 52/53 — backup coverage and genuine capacity scopes prepared
 
 Next useful database action is separately authorized B0 backup inventory, not a repeat P1. B1 needs an owner-selected encryption recipient/off-site custodian and exact export/restore authority. Nominate the independent witness administrator in parallel; N1v6 can be separately approved without N2/IAM/deployment. Actual protected-role capacity requires separately approved additive enrollment and genuine policy/epoch/approval evidence; fake fixture installers are excluded from Supabase. [Exact finite bounds and owner actions](docs/task53-demo-qualification-next-actions.md). No live workload or hosting acceptance claimed.
