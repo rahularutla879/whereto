@@ -1,5 +1,9 @@
 # 12 — PostgreSQL Supabase Sessions and Saved Plans
 
+## Connection success is not protected-role capacity acceptance
+
+P1 verified the existing saved-plan identity on Free PostgreSQL 17.11 over direct verified-TLS IPv6. It did not install the real profile. `SQLPool._check()` calls `private_runtime.connection_identity()`, which measures actual protected policy as well as DDL/ACLs. Missing genuine policy/role enrollment cannot be replaced by another metadata probe or a test grant. The [next scopes](../task53-demo-qualification-next-actions.md) separate catalog-only backup inventory, encrypted recovery proof, independent witness custody, additive installation and a bounded actual-role pool test. That later test still does not authorize reservations, provider sends or a live financial workload. Review backup coverage before exporting managed/extension-owned objects; exclude credentials/Vault secrets explicitly and retain the existing backup timing gate.
+
 ## Free-project operator preflight and backup boundary
 
 The [prepared catalog SQL](../../deployment/sql/supabase-free-preflight-readonly-v1.sql) needs separate owner permission before loading existing private database credentials. It reads metadata only under 1500 ms statement/250 ms lock deadlines; verify-full TLS must also be enforced by the client. Catalog counts cannot qualify Nano CPU or restricted financial routines. A later workload test remains necessary.

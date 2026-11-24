@@ -1,3 +1,7 @@
+## Task 52/53 — backup coverage and genuine capacity scopes prepared
+
+Next useful database action is separately authorized B0 backup inventory, not a repeat P1. B1 needs an owner-selected encryption recipient/off-site custodian and exact export/restore authority. Nominate the independent witness administrator in parallel; N1v6 can be separately approved without N2/IAM/deployment. Actual protected-role capacity requires separately approved additive enrollment and genuine policy/epoch/approval evidence; fake fixture installers are excluded from Supabase. [Exact finite bounds and owner actions](docs/task53-demo-qualification-next-actions.md). No live workload or hosting acceptance claimed.
+
 ## Task 52/53 — operational Free connection requirements verified
 
 One explicitly authorized direct IPv6 metadata session passed on PostgreSQL 17.11 with verify-full TLS, existing restricted identity and unchanged 1500 ms / 250 ms deadlines. P1 is consumed, not renewable permission. This establishes connectivity only; real-profile role/schema enrollment, protected SQL/witness workload capacity, encrypted backup/restore and actual Cloud Run IPv6 remain open. No purchase or upgrade is justified by the connection result. [Exact sanitized evidence](deployment/cloud-run/supabase-free-preflight-result-v1.json).

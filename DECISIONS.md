@@ -1,3 +1,7 @@
+## November 24 — do not replace actual-role capacity with repeated saved-plan probes
+
+The successful P1 is connectivity evidence only. Skip a redundant saved-plan benchmark as the next milestone. Prepare backup coverage/recovery and independent witness custody before additive protected installation; later pool checks retain the actual policy-measuring connection contract and epoch/runtime approvals. Configuration/financial authority cannot be fabricated for a capacity test. Synthetic fixture installers and financial facts stay off live Supabase. [Separately authorizable scopes](docs/task53-demo-qualification-next-actions.md).
+
 ## November 24 — separate metadata qualification, backup timing and IPv6 authority
 
 Keep the operational Free project until actual direct TLS/version/role and unchanged-deadline capacity checks establish incompatibility. Metadata-only approval cannot authorize a dump or data reads. pg_dump resets its own timeouts: a proposed finite backup-operator scope must be explicitly approved, without changing application/witness financial deadlines. External IPv6 may amend the existing N1 subnet using Google's assigned /64; no invented range, N1 replay or implicit publicIpAdmin grant. The documented broad Run-agent role and eventual exact source allowlisting need separate review. Independent witness restore custody remains mandatory. [Prepared scopes](docs/task53-free-preflight-backup.md).

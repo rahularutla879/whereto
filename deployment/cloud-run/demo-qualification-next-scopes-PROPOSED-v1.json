@@ -1,0 +1,291 @@
+{
+  "B0backupInventory": {
+    "SQL": "deployment/sql/backup-baseline-catalog-readonly-v1.sql",
+    "approved": false,
+    "credential": "existing protected restricted loader; explicit operator authority only if restricted catalog visibility is insufficient, no automatic fallback",
+    "followup": "Owner approves exact B1 schema/table exclusions and extension/managed-role restore coverage from inventory; no export implied",
+    "limitsAreOverflowSentinels": true,
+    "maxConnections": 1,
+    "maximumWallSeconds": 30,
+    "noDataRowsOrPasswordCatalog": true,
+    "purpose": "Select explicit backup scope/dependencies without querying application rows or repeating P1 connectivity qualification",
+    "rawOutputOwnerOnly": true,
+    "requiresFreshOwnerAuthorization": true
+  },
+  "B1backup": {
+    "applicationDeadlinesUnchanged": true,
+    "approved": false,
+    "baseline": [
+      "PG17.11 and matching pg_dump17/client/source identities",
+      "Application-owned schemas/relations, owners, grants/default ACLs, RLS policies/flags, sequences, extensions/dependencies",
+      "Encrypted source baseline counts/content digests and sequence last_value/is_called only with explicit data-read authority",
+      "Known excluded managed objects, Storage bytes, dashboard settings, Auth/API/credential recovery, Supabase Vault/external encryption dependencies"
+    ],
+    "comparisonSQL": "deployment/sql/backup-restore-verify-readonly-v1.sql",
+    "credentialAndSecretExclusions": "No password hashes, API keys, decrypted Vault secrets or credential files. Do not run an unscoped whole-project dump before review; managed/schema dependency omissions require explicit coverage disposition, not silent success.",
+    "disposableRestoreAuthorized": false,
+    "initialTableLockWaitMS": 250,
+    "liveExportAuthorized": false,
+    "offSiteUploadAuthorized": false,
+    "operatorTotalSecondsProposed": 60,
+    "pgDumpResetsOwnTimeouts": true,
+    "procedureReference": "docs/task53-free-preflight-backup.md#b1--encrypted-off-site-logical-backup-separately-gated",
+    "recipientAndDestinationKnown": false,
+    "requiredOwnerInputs": [
+      "Named encryption public recipient/fingerprint; no private key to Codex/chat",
+      "Named off-site vault/account/path with approved quota/charges and independent recovery custodian",
+      "Owner-approved exact schema/table scope and platform exclusions after owner-private baseline review",
+      "Quiet no-write/no-DDL window and restore destination",
+      "Explicit operator credential/data-export/role-metadata authority and separately bounded backup timing"
+    ],
+    "restoreRequirements": [
+      "Matching PG17 and actual extension binaries; Supabase-specific extension/managed-role dependencies must be resolved before claiming restore readiness",
+      "Fresh isolated disposable DB, no source/witness credentials or outbound provider access",
+      "Preserve owners/ACL/RLS/sequence semantics; stop on permission/collision/warning/mismatch",
+      "Compare all approved schema/data/roles/grants/RLS/sequences; existing comparison helper alone is incomplete",
+      "Independent encrypted off-site download/decrypt/restore verification; never restore operational and witness together"
+    ]
+  },
+  "C2protectedPools": {
+    "allowedCalls": [
+      "Existing SQLPool role/membership query",
+      "SELECT private_runtime.connection_identity()",
+      "SELECT pg_backend_pid()",
+      "Existing commit/rollback and DISCARD ALL session cleanup",
+      "SELECT provider_witness.epoch() on enrolled witness pools",
+      "SELECT provider_witness.assert_runtime(configuration_hash,build,epoch,source) on enrolled witness pools"
+    ],
+    "approved": false,
+    "approvedReadOnlyEvidence": "Only the approved identity/current epoch/runtime assertion functions may read configuration/quarantine evidence. Do not query underlying financial/exposure/history tables or return their records.",
+    "capacityConclusion": "Qualifies exact-role connection reuse/contract-check overhead only. Cannot certify native write-path/SQL witness reservation or hosted full-demo performance. Existing 18 operational/22 witness planning slots for revision overlap/operators plus platform headroom remain; do not remove them based on a one-cohort test.",
+    "financialConfigurationReadIsNotReadOnlyMetadataApproval": true,
+    "forbidden": [
+      "Application/user row reads",
+      "Raw financial exposure/usage/history reads",
+      "Reservation/INTENT/dispatch/nonce/ticket writes",
+      "Provider counting/generation/Maps I/O",
+      "Test clock, test fixture, fake grant/rate/epoch",
+      "Reset/quarantine repair, automatic retry or increased SQL deadlines"
+    ],
+    "maximumLeaseChecks": 45,
+    "maximumPerPool": 2,
+    "maximumPhysicalConnections": {
+      "operational": 8,
+      "witness": 10
+    },
+    "maximumWallSeconds": 120,
+    "operationalPools": 4,
+    "poolImplementation": "private_runtime.connections.SQLPool",
+    "prerequisites": [
+      "I1 separately approved and completed",
+      "Exact per-role credentials/CA/contract/source/epoch enrolled by each administrator",
+      "Existing genuine policy/financial configuration approved; private_runtime.measure requires it and may not be bypassed",
+      "Explicit owner permission to read protected configuration through connection_identity; no usage/exposure-history queries",
+      "Genuine existing seven approval references for witness assert_runtime: qualification/pricing/financial/credentials/content/security/source; no fabricated review row"
+    ],
+    "proposedLoginsNotYetEnrolled": {
+      "backend": {
+        "witness": "real_backend_auth"
+      },
+      "counter": {
+        "database": "real_counter_client",
+        "witness": "real_counter_witness_client"
+      },
+      "dispatcher": {
+        "database": "real_dispatch_client",
+        "witness": "real_dispatch_witness"
+      },
+      "factory": {
+        "database": "whereto_real_worker",
+        "issuer": "real_issuer_client",
+        "witness": "real_factory_witness"
+      },
+      "recovery": {
+        "witness": "real_recovery_client"
+      }
+    },
+    "queryParallelism": 1,
+    "rolePurposes": {
+      "backend": {
+        "witness": "nonce"
+      },
+      "counter": {
+        "database": "counter",
+        "witness": "witness-counter"
+      },
+      "dispatcher": {
+        "database": "delivery",
+        "witness": "witness-delivery"
+      },
+      "factory": {
+        "database": "runtime",
+        "issuer": "issuer",
+        "witness": "witness-factory"
+      },
+      "recovery": {
+        "witness": "recovery"
+      }
+    },
+    "steps": [
+      "One six-role cohort only; frontend has no SQL pool. Initialize nine existing SQLPool instances with exact enrolled purposes/identities.",
+      "In each pool hold two leases to populate its two physical slots; a third same-pool lease must refuse locally without opening another connection. Release before next pool; leave existing idle pools open.",
+      "Perform three sequential leases per pool, validating existing role/contract/backend affinity and reuse; on witness leases verify exact current epoch and assert_runtime as existing Ports.start does. Close every pool in finally. No replacement/reconnection after error.",
+      "Record per-role connect, _check/contract verification, lease/transaction/cleanup latency and created-connection counts, sanitized SQLSTATE/stage only on refusal. Stop on first error/timeout/identity or history mismatch."
+    ],
+    "witnessPools": 5
+  },
+  "C3oneRealSequentialOuting": {
+    "approved": false,
+    "purpose": "Final actual protected SQL/witness/native-path capacity measurement; no fake financial or provider facts on live databases. Stop on first uncertainty; retain exposure, no retry/refund.",
+    "requires": [
+      "C2 acceptance and exact backup/recovery readiness",
+      "Independent witness and encrypted Redis enrollment",
+      "Model qualification, current count/prices, genuine finite application grants, provider credentials/retention/security approvals",
+      "Private Cloud Run identities/network/secrets/tester enrollment",
+      "Exact one-outing request/operation count and cost bounds; durable records/reservations and real provider requests separately authorized"
+    ]
+  },
+  "I1protectedInstallation": {
+    "approved": false,
+    "automaticGrant": false,
+    "fingerprintsAreNotAnInstallBatch": true,
+    "noFixtureInstaller": "Never run test_sql.fixture, test_hosted.enroll or run_grants against Supabase. They contain fabricated policies, DROP/clock/bootstrap/credential actions permitted only on disposable infrastructure.",
+    "projectedSQLSHA256": {
+      "RPC": {
+        "operational": "226ee84ecfabf57806da13a45d6604b00eac36b9fc5cfcdea23f8638478a8954",
+        "witness": "0a0cb135a020f4c11c9d4082fc5f35c0a7516cdd98f6bcd84df3db54e00ead2c"
+      },
+      "application": {
+        "operational": "39639cd5acc41b82792429f1dcdf65c0bab9dc97efbccbabab2ada518f30917c"
+      },
+      "checkpoint": {
+        "operational": "b0997b8d33008a5ca8775921fdd5e82d3640e4bb3d31ff359680c7442275fb31",
+        "witness": "05fbd1bce1e194efc2943bdc241cde5274d5069e04aefa9f960531631268954c"
+      },
+      "contracts": {
+        "operational": "98d45dd3be2f2efd5585a982ba976115a3fcc0abbccbd9a8cfda4b30285b5fd2",
+        "witness": "1d642eb40db7582cb6864e22052218ffa8a1d1c6dcaa2512bc3fb76381908950"
+      },
+      "financial": {
+        "operational": "372467700ca82bc4762698875e56e5434fada94a7dbc44ab03b3ebfbf907c5cc",
+        "witness": "0aa8f092188778e1642fdb85993669a2995c0aff0db44bd4aed29e9a2fcd7565"
+      }
+    },
+    "requires": [
+      "Verified B1 recoverable baseline before live protected schema/role installation",
+      "W1 independently controlled PG17/TLS witness and its separate installer approval",
+      "Exact installer privilege compatibility and additive DDL/ACL review; stop on pre-existing namespace/role conflict",
+      "Separate protected owner/operator and restricted login enrollment; no existing app/RLS changes",
+      "Separate real model qualification, current approved prices/count policy and genuine financial/configuration authority before contract enrollment"
+    ],
+    "syntheticFinancialFactsAllowedOnLive": false
+  },
+  "N1v6": {
+    "IAMIncluded": false,
+    "N1Replay": false,
+    "N2Included": false,
+    "allocation": "Google-assigned external /64 on existing subnet; no invented range",
+    "approved": false,
+    "commandForSeparateApproval": [
+      "gcloud",
+      "compute",
+      "networks",
+      "subnets",
+      "update",
+      "whereto-staging",
+      "--project=where-to-512422",
+      "--region=us-east4",
+      "--stack-type=IPV4_IPV6",
+      "--ipv6-access-type=EXTERNAL",
+      "--quiet"
+    ],
+    "freshReadOnlyPreflightRequired": true,
+    "laterIAMAndAllowlistApprovalRequired": true,
+    "proposalReference": "deployment/cloud-run/dual-stack-amendment-PROPOSED-v1.json"
+  },
+  "W1witness": {
+    "administratorSelected": false,
+    "ownerAction": "Nominate an independently controlled administrator/backup-and-restore custodian. They establish their own Free project/account/organization, then authorize their own TLS/version/roles/capacity and backup verification. No operational administrator access or correlated restore control.",
+    "paidPlanResearchAuthorized": false
+  },
+  "baselineCommit": "ae54a09dbecb115dfbaf5c24eff7854b89e958d8",
+  "completedP1": {
+    "consumed": true,
+    "repeatAuthorized": false,
+    "result": "PG17.11/directIPv6/verify-full/TLS1.3/restricted role/deadlines passed; not actual protected-role capacity",
+    "scope": "53-supabase-P1-owner-70de0b4-20261124-v1"
+  },
+  "date": "2026-11-24",
+  "executionAuthorized": false,
+  "filesSHA256": {
+    "deployment/cloud-run/dual-stack-amendment-PROPOSED-v1.json": "99aab0f015109859b126b1adca7bc824afb8e970ab92b32651dc73af84d993be",
+    "deployment/cloud-run/supabase-free-preflight-result-v1.json": "189cc5244a5da9a4913c8d5b8c16ede14919172bc40c6d17965807e155f13d18",
+    "deployment/sql/backup-baseline-catalog-readonly-v1.sql": "2194bb146cfaeae2b768a64fa91d4d074ad3d58c1bb2dbbaff3ccc5ddf7553ef",
+    "deployment/sql/backup-restore-verify-readonly-v1.sql": "7a94beae22231f2057e356d34d5fba9657a39fa46693403dd1e2bc6cda5d3b9e",
+    "deployment/sql/hosted-operational-contract-v1.sql": "f06fc9002cb7b86a05ec55787e188de70a3d08f6fb340696c9f3e60a5f31a7b3",
+    "deployment/sql/hosted-witness-contract-v1.sql": "6f6aa7a5547881ee5cf9a54a38b69a447ef1c530e29a4393301d01304c19768e",
+    "private_runtime/connections.py": "53e8b1f6e366a0006bb100b88859f758fe28c5d18706b97d2ce8b24559c79af7",
+    "private_runtime/real_application/checkpoint_sql.py": "68784571df1a98deb64f7931b6b0e4e825dd090ede6dd645b308861209ab99fe",
+    "private_runtime/real_application/enrollment.sql": "851fe1dfba86ad4c9fff2c11494844f4ed35dbe74088af21568f469e5ca2fb24",
+    "private_runtime/real_application/ports.py": "5f1ef8fb85f57049fa62bef9a957bb0c9ecf315678c52d0f759584b6e51fc04d",
+    "private_runtime/real_application/rpc_sql.py": "750cecef26f02bfb204a49701d45f9d4be5bed35377e649191568c6eed528845",
+    "private_runtime/real_application/sources.json": "4034932224292e77d604bb4e1dba69c147fedb15526279b883f8d6f402d68216",
+    "private_runtime/real_application/sql.py": "832309a2198e00acf47f3d9814241eaa3d2ce4e534420e5870cd2da2487a7570",
+    "private_runtime/real_finance/profile.py": "80694d2a045c5fab0b9879553b1dc5d8f29d4764d8fede835b3a22588452dd20",
+    "private_runtime/real_finance/sources.json": "6260001ecaa5397ce50a68137ff381ee0d0880aef4a19d9332d6b9078968391d",
+    "private_runtime/registry.py": "1773ced0bcdfbf1014589c2b0d512fd17368946b25af0b57f617463aa5fef27d"
+  },
+  "optionalReadOnlyExistingProject": {
+    "credential": "existing owner-only restricted saved-plan mechanism; never reuse consumed P1",
+    "maxConcurrentTransactions": 1,
+    "maxConnections": 2,
+    "maxTransactions": 20,
+    "maxWallSeconds": 30,
+    "noRowsOrFinancialHistory": true,
+    "protectedFinancialAcceptance": false,
+    "reason": "P1 already establishes the saved-plan identity; another catalog-only benchmark cannot qualify absent protected roles/contracts. Skip unless owner specifically wants a pool-reuse baseline.",
+    "recommendedNext": false,
+    "requiresFreshOwnerAuthorization": true,
+    "sqlPerTransaction": [
+      "BEGIN TRANSACTION READ ONLY",
+      "SET LOCAL statement_timeout='1500ms'",
+      "SET LOCAL lock_timeout='250ms'",
+      "SET LOCAL idle_in_transaction_session_timeout='1500ms'",
+      "SELECT pg_backend_pid(),session_user,current_user,current_setting('transaction_read_only'),current_setting('statement_timeout'),current_setting('lock_timeout')",
+      "ROLLBACK"
+    ]
+  },
+  "recommendedNext": [
+    "Owner may authorize B0 catalog-only backup inventory; supplies B1 recipient, off-site vault/custodian and exact data scope before separately approving export/restore",
+    "Owner nominates W1 administrator in parallel",
+    "Owner may separately approve existing N1v6 single update; no IAM/N2/Run/provider authority implied",
+    "After verified backup/witness, review exact I1 installation and genuine policy gates; then authorize C2 only",
+    "C3 is a later genuine one-outing acceptance operation, not permission from C2"
+  ],
+  "redis": {
+    "acceptanceStillRequired": [
+      "TLS/hostname",
+      "separate publisher/reader ACLs",
+      "Lua/CAS",
+      "absolute expiry",
+      "noeviction",
+      "128MiB evidence plus overhead capacity",
+      "actual NAT /32 allowlist",
+      "safe refusal on loss"
+    ],
+    "configuration": "GCP us-east4 Essentials RAM-only250MB; HA None; persistence None",
+    "purchaseAuthorized": false,
+    "quotedMonthlyUSD": "6",
+    "researchRepeated": false
+  },
+  "unchangedLimits": {
+    "automaticRetries": 0,
+    "connectSeconds": 2,
+    "idleInTransactionMS": 1500,
+    "lockMS": 250,
+    "poolMaximum": 2,
+    "poolerFallback": false,
+    "statementMS": 1500
+  },
+  "version": "53-demo-qualification-next-scopes-PROPOSED-v1"
+}

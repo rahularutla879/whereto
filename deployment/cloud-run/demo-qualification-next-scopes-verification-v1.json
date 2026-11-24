@@ -1,0 +1,64 @@
+{
+  "baselineCommit": "ae54a09dbecb115dfbaf5c24eff7854b89e958d8",
+  "credentialsRead": false,
+  "date": "2026-11-24",
+  "filesSHA256": {
+    "DECISIONS.md": "f0b31a94fb4ce70390f959c62b45ea07224ada194729af0651ec7d6cd6d1ff5e",
+    "HANDOVER.md": "8c4e62ae08b299b9246766ee63039a8dc729c47f67b8a194ecb71622c7708c5e",
+    "TASKS.md": "6c56f59738c6165c13fbecf2196cb107d49b7ff4640f1d84e42f2c84cd5a651a",
+    "deployment/cloud-run/demo-qualification-next-scopes-PROPOSED-v1.json": "82bcc7132bef9f524a50eb371a5430b6418283532d31205a4a675f32bce7c501",
+    "deployment/sql/backup-baseline-catalog-readonly-v1.sql": "2194bb146cfaeae2b768a64fa91d4d074ad3d58c1bb2dbbaff3ccc5ddf7553ef",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": "c2bb38fc9702f693c6bfbb645a39f655bc207b3be7e2088d7e2748d2d4ce79b3",
+    "docs/task53-demo-qualification-next-actions.md": "4dbf5a03f6760ba6bc81149475ea48c8fa15f4a3a24957035691a240c4bd6309"
+  },
+  "liveOperations": 0,
+  "notRun": [
+    "Any live Supabase SQL or credential loading",
+    "Actual protected capacity/load/reservation tests",
+    "Backup/export/upload/decryption or disposable restore",
+    "Independent witness setup",
+    "Network/IAM/cloud changes or provider requests",
+    "Full backend/frontend/browser/image suites",
+    "Previously unavailable cryptography-dependent startup tests; old missing-dependency limitation not claimed resolved",
+    "Original324-file private recount or configured-secret-value scan"
+  ],
+  "offlineCheckerSHA256": "9c0f7fe15466dadd7fcefbd9d49e7651b94609128391d92b1c30d8b1a4ee4161",
+  "offlineChecks": {
+    "actualRolePoolMapMatches": 9,
+    "backupSQLReadOnlyStaticChecks": "PASS; not server parsed or executed",
+    "dependencyConsistency": "pip check: No broken requirements found",
+    "deploymentUnitTests": {
+      "errors": 0,
+      "failures": 0,
+      "passed": 33,
+      "seconds": 0.686,
+      "skipped": 0
+    },
+    "financialInputHashes": 31,
+    "handbookChaptersPreserved": 20,
+    "handbookReviewed": [
+      "12",
+      "18"
+    ],
+    "handbookUpdated": [
+      "12"
+    ],
+    "localProcedureLinks": "PASS",
+    "negativeMutationsRejected": 3,
+    "planLimitsAndAuthority": "PASS",
+    "projectedSQLGroupsMatch": 5,
+    "secretPatternDiffAndNewFiles": "PASS; no configured secret reads"
+  },
+  "pastP1AndN1v6RecordsUnchanged": true,
+  "preserved": {
+    "consumedScopesTouched": false,
+    "haltUnchanged": true,
+    "historicalEvidenceTouched": false,
+    "recordedAccountedUSD": "0.047366625",
+    "recordedPaidAttempts": 10,
+    "recordedPrivateFiles": 324,
+    "redisCandidateMonthlyUSD": "6",
+    "runtimeSourceAndPublishedImagesChanged": false
+  },
+  "version": "53-demo-qualification-preparation-verification-v1"
+}
