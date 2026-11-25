@@ -1,0 +1,102 @@
+{
+  "version": "53-B1-G1-readonly-verification-stopped-v3",
+  "baselineCommit": "5f826f07fa13314f7c9806834c633272712d3e07",
+  "scope": "53-B1-G1-readonly-owner-5f826f0-20261125-v1",
+  "bucket": "where-to-512422-b1-backups-us-east4",
+  "G1FullyVerified": false,
+  "thisScopeCloudMutations": 0,
+  "thisScopeCreationAttempts": 0,
+  "successfulReadOnlyCommands": 5,
+  "commandErrors": 0,
+  "localValidatorErrors": 1,
+  "comparisons": {
+    "bucketMetadata": "byte-identical to post-create capture; exact settings remain verified",
+    "bucketIAM": "byte-identical to post-create default convenience policy; no public binding",
+    "projectIAM": "byte-identical to original pre-execution evidence",
+    "enabledAPIs": "exact full service records match original pre-execution evidence, sorted by service name",
+    "inheritedServiceAgentStorageAuthority": "unchanged; no new runtime grants; later data enrollment still separate"
+  },
+  "inventory": {
+    "liveAndNoncurrentCount": 0,
+    "softDeletedCount": null,
+    "allVersionsCommand": "gcloud storage ls gs://where-to-512422-b1-backups-us-east4 --json --recursive --all-versions --exhaustive --project=where-to-512422",
+    "exit": 0,
+    "stderrEmpty": true,
+    "capture": [
+      {
+        "url": "gs://where-to-512422-b1-backups-us-east4/",
+        "type": "unknown"
+      }
+    ],
+    "emptyInventoryInterpretation": "Established offline against installed SDK source after local validator stop; fixed bucket-root header is not an object",
+    "softDeletedCommandExecuted": false
+  },
+  "stoppingPoint": {
+    "error": "Local assertion expected [] but SDK recursive JSON includes bucket-root header",
+    "cloudStateUnexpected": false,
+    "automaticRetry": false,
+    "furtherCloudRequestsAfterError": 0,
+    "oldCreationScopePermanentlyConsumed": true
+  },
+  "offlineHeaderAnalysis": {
+    "scope": "53-B1-G1-readonly-owner-5f826f0-20261125-v1",
+    "analysisOnlyUTC": "2026-11-25T23:19:43.467469+00:00",
+    "furtherCloudRequests": 0,
+    "allVersionsCommandExit": 0,
+    "liveAndNoncurrentObjects": 0,
+    "capturedRootHeader": {
+      "url": "gs://where-to-512422-b1-backups-us-east4/",
+      "type": "unknown"
+    },
+    "softDeletedObjects": "NOT CHECKED",
+    "cause": "Validator wrongly treated SDK JSON bucket-header record as an object; source _recursion_helper emits _HeaderFormatWrapper, whose JSON is resource.get_json_dump",
+    "futureParser": "Accept empty stdout/list, or exactly one header equal to the fixed bucket-root {url,type:unknown}; reject any other entries, duplicate headers, malformed JSON or nonzero CLI status",
+    "offlineTests": {
+      "acceptedEmptyCases": 3,
+      "rejectedNonemptyOrMalformedCases": 5,
+      "failures": 0
+    },
+    "SDKSourceSHA256": {
+      "lib/surface/storage/ls.py": "233ac80b6d2caad6c86bbd7abb1d4274d74ad9e2facdf0da01ae2ac627eac4b5",
+      "lib/googlecloudsdk/command_lib/storage/ls_command_util.py": "da437006494e5294d473ce45ad21eff1588b8a1400ab986b041761b54dc75197",
+      "lib/googlecloudsdk/command_lib/storage/list_util.py": "ac37d9897c94a5bdd31aed6ace9fb0d926a455e4757ef05901ce04ff8b3b3dad",
+      "lib/googlecloudsdk/command_lib/storage/resources/resource_reference.py": "91638728d610d20c7663828ad209d6fae35511d79896b71eb38df189e440086f"
+    }
+  },
+  "privateEvidence": {
+    "directoryRelative": "backend/.local/53-B1-G1-readonly-owner-5f826f0-20261125-v1",
+    "mode": "0700 directory /0600 files; Git ignored",
+    "filesSHA256": {
+      "all-object-versions.intent.json": "fd1a42d62752ec74fa08693382131b7870f8336ac06af41278cf4f3d72d7c828",
+      "all-object-versions.result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "all-object-versions.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "all-object-versions.stdout": "c5890c97da52491eed2cb9b4b584252988b526baba6e097bb70438fc4cbfe8a8",
+      "apis.intent.json": "3c042bffb3d4a3bf063aef284c9ee538f2355f6b70d64905c2c8dd082a740a2f",
+      "apis.result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "apis.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "apis.stdout": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c",
+      "bucket-iam.intent.json": "5471db05ada197fdfd3b3ba5254333e3cf382a7cd94d8f95bf4b66e1d1fcca12",
+      "bucket-iam.result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "bucket-iam.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bucket-iam.stdout": "2340bb9004a93873dc49d924c7246360e5a6917387a6a5e278e0be5748871578",
+      "bucket-settings.intent.json": "917d8abe636cb357ef0661a83830ddaea7af0f12fce755a8fcefd1184d14616a",
+      "bucket-settings.result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "bucket-settings.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bucket-settings.stdout": "c43f09062c932fad3999b5343e29a4398862229210a5e4f48cf58a4b50dfc983",
+      "offline-header-analysis.json": "50ed2fc2fbcd66ffa57b69ae3cea67c57dbf76f1c5da153b4628df858d4e75a1",
+      "project-iam.intent.json": "d2bbad6cd87a01d6aac84891722725f5a7344a813be9698bc346513641c7cbee",
+      "project-iam.result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "project-iam.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "project-iam.stdout": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+      "runner.py": "2cd66af40adbe1f694c285e97f0a92c1e7c227f78e74846d88163c081908e315",
+      "scope.json": "3f374a8f5220a0506be500ad96b996b68f1c3829cc259eda401fb0b42365329e",
+      "stopped.json": "dc836c978423b34e0bbcf6c04dc4a4baae2d17efb402825f8812800078ff28c2"
+    }
+  },
+  "notRun": [
+    "Soft-deleted-object listing",
+    "Application/backend/frontend/browser/image scans; evidence-only checkpoint"
+  ],
+  "preserved": "Original private324 files, ten attempts/$0.047366625/halt/frozenpayloads and consumedscopes untouched; no secret/database/provider/grant/tool/resource operations",
+  "next": "Separate owner authorization for only the remaining read-only soft-deleted listing; use supported --json and exact root-header handling. Do not repeat creation, IAM, API or completed inventory operations."
+}

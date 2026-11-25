@@ -1,3 +1,7 @@
+## Task52/53 — G1 final soft-delete inventory remains
+
+Read-only metadata/bucket-IAM/project-IAM/API comparisons pass unchanged; live/noncurrent inventory0. Local parser mistook SDK recursive JSON root header for an object and stopped; source-attributed offline, no cloud retries. Soft-deleted-object check remains unexecuted; G1 not fully verified. [Exact remaining read-only operation](deployment/cloud-run/b1-gcs-G1-readonly-verification-stopped-v3.json). No G2/key/tools/backup authority.
+
 ## Task52/53 — G1 created; read-only completion still required
 
 Bucket creation succeeded once; settings/default nonpublic bucket IAM verified. Local SDK --format=json inventory error stopped verification. Do not rerun creation. Next authorize only supported --json object listing and final read-only project-IAM/API comparison; no IAM/upload or B1 authority. [Exact result](deployment/cloud-run/b1-gcs-G1-created-verification-stopped-v2.json).
