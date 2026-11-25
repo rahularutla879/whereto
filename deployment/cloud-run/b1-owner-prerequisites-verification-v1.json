@@ -1,0 +1,135 @@
+{
+  "baselineCommit": "e54d2cb2a9900fae0d0020df7b757d7f54d807b9",
+  "checks": {
+    "financialInputs": 31,
+    "handbookChaptersPreserved": 20,
+    "handbookUpdated": [
+      "12"
+    ],
+    "networkInputs": "PASS",
+    "newAndAddedSecretPatterns": "PASS; no configured secret values read",
+    "originalV1EvidenceBytesPreserved": true,
+    "pipConsistency": "No broken requirements found",
+    "shellSyntaxAndRelativeReferences": "PASS"
+  },
+  "cloudResourceChanges": 0,
+  "date": "2026-11-25",
+  "developmentAttempts": [
+    {
+      "SHA256": "e14d85bc52c5b159a2058b5170a59654d7694181f0a4ad92e0609d3d4e59af38",
+      "attempt": 1,
+      "file": "whereto-b1-fictional-attempt1.log",
+      "reason": "Pipeline refused before restore"
+    },
+    {
+      "SHA256": "f5490ef5c8c02e8bd58e866412f6719c4a2cd96e91a41e49dc5862c5a4d21525",
+      "attempt": 2,
+      "file": "whereto-b1-fictional-attempt2.log",
+      "reason": "Direct fixture probe attributes --file=- as literal output path on read-only filesystem"
+    },
+    {
+      "SHA256": "d6d4918aa119104c10294d6494fd6cf99332612af370d1a18a916ebe971adfbf",
+      "attempt": 3,
+      "file": "whereto-b1-fictional-attempt3.log",
+      "reason": "Raw ACL fingerprint mismatch after successful encrypted recovery"
+    },
+    {
+      "SHA256": "5c07351e04e8b676216e4c18834893a8500e828dc5b30bc5563943858d4996b6",
+      "attempt": 4,
+      "file": "whereto-b1-fictional-attempt4.log",
+      "reason": "Sanitized metadata diagnostic attributes mismatch to explicit-owner ACL versus equivalent default NULL ACL"
+    }
+  ],
+  "fictionalIntegration": {
+    "ACLMutationDetected": true,
+    "PG17Version": "pg_dump (PostgreSQL) 17.11 (Debian 17.11-1.pgdg12+2)",
+    "ciphertextBytes": 29885,
+    "cryptoRoundTrip": true,
+    "fictionalOnly": true,
+    "forcedRLSAndUncredentialedRefusal": true,
+    "forcedRLSMutationDetected": true,
+    "genuineKeysAccessed": false,
+    "image": "postgres:17-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994",
+    "liveDatabaseConnections": 0,
+    "metadataAndContentEqual": true,
+    "newContainers": 0,
+    "newVolumes": 0,
+    "originalVolumesPreserved": 135,
+    "rowsPerTable": 1,
+    "sourceBeforeAfterEqual": true,
+    "tablesRestored": 6,
+    "tamperRefused": true,
+    "wrongPassphraseRefused": true
+  },
+  "filesSHA256": {
+    "DECISIONS.md": "2045a260e6996439f763cf9b644f92d32a661d06c36205bd15e6cb91916959a1",
+    "HANDOVER.md": "7996234f41a9c357a764a308f0ab769092f7e7661eedd99265132f4aaee9a194",
+    "TASKS.md": "68ec6247f365bba19dcefa27608a5c6faef11185d5653b8c78d6e6e18edee611",
+    "deployment/check_b1_fixture.py": "807bacec39b954d284f40bb27bdf3cb70305fc6edb29bab2c453df1118af33ec",
+    "deployment/cloud-run/b1-application-backup-PROPOSED-v2.json": "c4f11f827846a352fa03dfd629d54c55433deb3cdc11ec5acacf42c2f0be0553",
+    "deployment/sql/b1-application-baseline-readonly-v2.sql": "87605bd924580fbc4b2b87f0258e135b855701960b483bd4daf167af6cc5ee4c",
+    "deployment/test_b1_prerequisites.py": "9e0cb3b00942051dac6695d1da2201b0ec9efd1d3a51e4c924e777f262b9d27a",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": "ddac91d49db2466cfc16889b67b8a8846e076cc3fe502c1d5f0026d055120ad5",
+    "docs/task53-b1-application-backup.md": "36ba35fc3bfc592842a9080b7f4e4bb08afb4afe7f277e28ae364a2fbeaf0e22",
+    "docs/task53-b1-owner-prerequisites.md": "1290591d7c3f4bb6dbf50468243d282a26a87e08b95391c7c751dc6786396fa8"
+  },
+  "genuineOwnerKeysCreatedOrRead": false,
+  "iCloud": {
+    "UIErrors": "Two CUA entry calls returned unknown/expired continuation; no account state captured",
+    "backupFolderCreated": false,
+    "budgetMiB": 300,
+    "directoryExists": true,
+    "folderApprovalAbsent": true,
+    "independentlyObservedQuota": false,
+    "providerFolderReservation": false,
+    "quotaSource": "Owner reply:3.3GB available"
+  },
+  "liveSQLConnections": 0,
+  "localRuntime": {
+    "DockerDefaultContext": "default",
+    "VMReturnedStopped": true,
+    "activateContextFlag": false,
+    "existingProfileTemporarilyStarted": true,
+    "explicitContextCleanupFoundAlreadyAbsent": true,
+    "fixturePullPolicy": "never",
+    "guestIPv6DefaultRouteObserved": "none",
+    "nativePG17Absent": true,
+    "noHostPackageManagerOrImagePullCommands": true,
+    "observedBootSideEffects": [
+      "guest binfmt emulator registration",
+      "Docker context recreated"
+    ],
+    "oldCachedImageIsNotApprovedForRealDataOrRuntimeRiskAcceptance": true,
+    "profile": "whereto-task52",
+    "saveConfigFlag": false,
+    "sshConfigFlag": false,
+    "temporaryContextRemovedByStop": true
+  },
+  "newFinancialGrants": 0,
+  "notRun": [
+    "Any live Supabase query or operator credential loading",
+    "Genuine backup key generation/public recipient enrollment",
+    "iCloud folder creation/upload/account sign-in or quota API",
+    "Software acquisition/native PG17 execution",
+    "Native locale or live export connectivity proof",
+    "Real application backup/off-site recovery or complete Supabase recovery",
+    "Full backend/frontend/browser/build/image scans",
+    "Private324-file recount or journal mutations"
+  ],
+  "providerCalls": 0,
+  "publicReferences": [
+    "https://postgresapp.com/downloads.html",
+    "https://postgresapp.com/documentation/cli-tools.html",
+    "https://www.postgresql.org/download/macosx/"
+  ],
+  "realDataExportsOrRestores": 0,
+  "testOnlyKeys": "Generated encrypted RSA3072 fixture keys, used only with fictional data and removed with task temporary directories",
+  "unitTests": {
+    "errors": 0,
+    "failures": 0,
+    "passed": 43,
+    "seconds": 0.716,
+    "skipped": 0
+  },
+  "version": "53-B1-owner-prerequisites-verification-v1"
+}

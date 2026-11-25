@@ -1,3 +1,7 @@
+## B1 fixture findings — correct stdout and compare actual ACL semantics
+
+pg_dump --file=- is a literal output file, so omit the option for a protected stdout stream. Preserve v1/e54 evidence and select only the new v2 proposal after review. Effective ACL comparison retains grantor/grantee/privilege/grantability and RLS flags, allowing PostgreSQL's equivalent NULL/default-owner ACL representation; real grant/RLS changes still fail. Use cached network-none PG17 for fictional recovery only. Its lack of VM IPv6 route does not justify weakening TLS or adding a proxy: prefer a separately approved self-contained native PG17 bundle, no Homebrew modifications. [Verified owner prerequisites](docs/task53-b1-owner-prerequisites.md).
+
 ## B1 — scope recovery to application objects and use authenticated encryption
 
 Use schema-selected pg_dump and explicit safe role metadata, not a whole-project/global-role dump that may capture managed role settings/secrets. Treat public/platform routines and installed extensions as external dependencies requiring review, not implicit restore permission. Prefer the already installed OpenSSL CMS authenticated encryption with a new owner-controlled recipient; never reuse the frontend key or restore streamed unauthenticated plaintext. Pin trusted ciphertext receipts separately from cloud storage. A local application fixture does not recreate Supabase administrator control or independently restore the witness. [Commands and explicit approvals](docs/task53-b1-application-backup.md).

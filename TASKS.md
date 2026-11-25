@@ -1,3 +1,7 @@
+## Task 52/53 — B1 prerequisites prepared and fictional encrypted recovery passes
+
+Current v2 backup proposal supersedes the preserved v1 command/comparator after executable fixture findings. Real backup/restore remains unapproved. Owner next selects/creates the separate key, approves empty iCloud folder/custody and native PG17 bundle verification, then authorizes exact bounded B1 export. Owner-reported 3.3 GB exceeds 300 MiB planned budget; this is not an enforced iCloud reservation. No Homebrew changes. [Commands and approvals](docs/task53-b1-owner-prerequisites.md).
+
 ## Task 52/53 — B1 application recovery workflow prepared, not executed
 
 Application-only schema/data/ACL/RLS backup commands and baseline comparisons are prepared with a shared 60-second export scope and unchanged app deadlines. Six tables / 13 indexes, no platform secret/role-setting export; new dependency/sequence/financial-schema drift stops. Owner must select a separate backup recipient, off-site quota/custodian, approve PG17 tools, exact operator/data export and isolated recovery test. No key creation, backup, restore, software/cloud change or grant. [Finite B1 workflow](docs/task53-b1-application-backup.md).

@@ -1,5 +1,9 @@
 # 12 — PostgreSQL Supabase Sessions and Saved Plans
 
+## Executable B1 fixture findings
+
+The [owner-prerequisite checkpoint](../task53-b1-owner-prerequisites.md) proves only fictional encrypted recovery. Use the new v2 proposal: pg_dump's default stdout requires omitting `--file=-`. ACL fingerprints compare effective privileges, grantors and grantability, not raw array representation; altered grants or forced RLS are still detected. The original v1 records remain historical. Cached isolated PG17 passed six-table recovery, but native Mac tools, real locale/account export and off-site restoration still need owner enrollment. No genuine backup key or live application data was used.
+
 ## B1 application-only encrypted recovery preparation
 
 The [B1 workflow](../task53-b1-application-backup.md) keeps the six application tables and schema grants/RLS while excluding platform secret stores and role settings. A schema-selected dump does not automatically include external dependencies. The new baseline SQL is a future explicitly authorized data-read operation, not another catalog-only B0. Source before/after and fixture must match table hashes/counts, schema/policy/constraint/index/trigger fingerprints and relevant runtime permissions. Managed administrator membership recovery is explicitly outside the local application fixture.
