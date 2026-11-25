@@ -1,3 +1,7 @@
+## Task52/53 — G1 not created; local launch failure
+
+G1 preflight passed but creation launcher could not import the repository package from /tmp. Zero create attempts/cloud mutations; no automatic retry. Corrected repository-aware import/command rendering passes offline. Ask for one fresh G1 attempt after renewed preflight; do not claim the bucket exists or run IAM/upload. [Exact result](deployment/cloud-run/b1-gcs-G1-stopped-before-create-v1.json).
+
 ## Task 52/53 — GCS backup destination ready for separate G1 approval
 
 No iCloud folder. Offline B1 destination policy, scoped IAM command generation, create-only object/version/hash validation and fictional recovery verified. Recovery/deletion owners remain unassigned; source B1 export and actual off-site recovery remain unapproved. Approve only the empty private bucket first; later named IAM enrollment, separate backup key/PG17 tool and actual B1 data-read/export/restore permissions. [Finite actions](docs/task53-b1-gcs-backups.md). No database/cloud/runtime/image change or financial authority.
