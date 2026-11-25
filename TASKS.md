@@ -1,3 +1,7 @@
+## Task52/53 — G1 created; read-only completion still required
+
+Bucket creation succeeded once; settings/default nonpublic bucket IAM verified. Local SDK --format=json inventory error stopped verification. Do not rerun creation. Next authorize only supported --json object listing and final read-only project-IAM/API comparison; no IAM/upload or B1 authority. [Exact result](deployment/cloud-run/b1-gcs-G1-created-verification-stopped-v2.json).
+
 ## Task52/53 — G1 not created; local launch failure
 
 G1 preflight passed but creation launcher could not import the repository package from /tmp. Zero create attempts/cloud mutations; no automatic retry. Corrected repository-aware import/command rendering passes offline. Ask for one fresh G1 attempt after renewed preflight; do not claim the bucket exists or run IAM/upload. [Exact result](deployment/cloud-run/b1-gcs-G1-stopped-before-create-v1.json).

@@ -1,0 +1,155 @@
+{
+  "version": "53-B1-G1-created-verification-stopped-v2",
+  "baselineCommit": "e9c57a161c42d3d031b726d663e6fb237d5b4822",
+  "reviewedConfigurationCommit": "0b139ceb78ad3678217546477d90b418918224e6",
+  "scope": "53-B1-G1-owner-e9c57a1-20261125-v2",
+  "bucket": "where-to-512422-b1-backups-us-east4",
+  "project": "where-to-512422",
+  "region": "us-east4",
+  "createdUTC": "2026-11-25T20:57:18.034000+00:00",
+  "creationCommandAttempts": 1,
+  "creationExit": 0,
+  "authorizationPermanentlyConsumed": true,
+  "retries": 0,
+  "state": "CREATED_VERIFICATION_STOPPED_LOCAL_INVENTORY_FLAG_ERROR",
+  "independentReadback": {
+    "nameAndProject": true,
+    "region": "US-EAST4",
+    "storageClass": "STANDARD",
+    "publicAccessPrevention": "enforced",
+    "uniformBucketLevelAccess": true,
+    "retentionSeconds": 604800,
+    "retentionLocked": false,
+    "softDeleteSeconds": 604800,
+    "versioning": false,
+    "autoclass": false,
+    "lifecycleDeletion": false,
+    "metageneration": "1",
+    "generation": "1795640237894069106",
+    "bucketIAM": "exactly four documented project convenience-role bindings; no individual/runtime/public principals",
+    "emptyObjectInventory": "NOT VERIFIED: local SDK format argument rejection",
+    "projectIAMAndAPIsAfterCreation": "NOT CHECKED: stopped immediately after error"
+  },
+  "bucketIAM": {
+    "bindings": [
+      {
+        "members": [
+          "projectEditor:where-to-512422",
+          "projectOwner:where-to-512422"
+        ],
+        "role": "roles/storage.legacyBucketOwner"
+      },
+      {
+        "members": [
+          "projectViewer:where-to-512422"
+        ],
+        "role": "roles/storage.legacyBucketReader"
+      },
+      {
+        "members": [
+          "projectEditor:where-to-512422",
+          "projectOwner:where-to-512422"
+        ],
+        "role": "roles/storage.legacyObjectOwner"
+      },
+      {
+        "members": [
+          "projectViewer:where-to-512422"
+        ],
+        "role": "roles/storage.legacyObjectReader"
+      }
+    ],
+    "etag": "CAE="
+  },
+  "preflight": {
+    "correctedRepositoryAwareLauncherOfflineCheck": "PASS, exact loaded source hash and command",
+    "focusedGCSTests": {
+      "passed": 12,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 0.197
+    },
+    "bucketAbsentBeforeCreate": "404",
+    "requiredAPIsAlreadyEnabled": true,
+    "projectIAMUnchanged": true,
+    "projectIAMSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+    "noOrganizationOrFolderParent": true,
+    "activeAccountMatchesExistingOwner": true,
+    "billingLinkedAndOpen": true,
+    "currency": "USD",
+    "masterBillingAccount": false,
+    "inheritedServiceAgentStorageAuthority": "Preserved as recorded in prior preflight; no new manual grants; must review before future backup upload"
+  },
+  "cost": {
+    "approvedOneTimeUSD": "1",
+    "approvedMonthlyUSD": "1",
+    "expectedFixedMonthlyStorageOrSubscriptionUSD": "0 while empty",
+    "operationFees": "Small published Standard metadata/create operation fees; expected below $0.001 before tax; exact invoice not independently measured",
+    "billingOrSubscriptionChanges": false,
+    "noProviderHardCapClaim": true,
+    "emptyBucketScenarioGiB": 0,
+    "actualStoredBytes": "UNVERIFIED: inventory command stopped locally"
+  },
+  "stop": {
+    "command": "gcloud storage ls gs://where-to-512422-b1-backups-us-east4 --project=where-to-512422 --format=json",
+    "error": "The only valid format value for ls and du is gsutil",
+    "category": "local SDK argument validation, not authentication/cloud failure",
+    "objectListingIssued": false,
+    "furtherCloudRequests": 0,
+    "noRetry": true,
+    "supportedCorrectionVerifiedOffline": "gcloud storage ls gs://where-to-512422-b1-backups-us-east4 --project=where-to-512422 --json",
+    "correctionEvidence": "Installed SDK590 source and local --help; corrected live listing NOT run"
+  },
+  "boundaries": {
+    "explicitIAMMutations": 0,
+    "newServiceAccounts": 0,
+    "APIsEnabled": 0,
+    "objectUploads": 0,
+    "keysGenerated": 0,
+    "SupabaseAccess": 0,
+    "softwareInstalled": 0,
+    "financialGrants": 0,
+    "CloudRunDeployments": 0,
+    "previousScopesPreserved": true,
+    "historicalAccountingEvidenceAndHaltUntouched": true
+  },
+  "privateEvidence": {
+    "directoryRelative": "backend/.local/53-B1-G1-owner-e9c57a1-20261125-v2",
+    "directoryMode": "0700",
+    "filesMode": "0600",
+    "gitIgnored": true,
+    "SHA256": {
+      "account.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "account.stdout": "e161185b7fd38e8d90f0ae8f2266fed6b83f2ae126251b4370e7fd922c2788ca",
+      "ancestors.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ancestors.stdout": "311926a24a6241959a52b505d787d57f737abda922f9dcc05a73bccbd59ceea5",
+      "apis.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "apis.stdout": "a7f98be6d574e32f642da5a3642ec02f546d0776882e18f439972fbe26f88a7c",
+      "billing-account.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "billing-account.stdout": "eb41df079b17ebdf70b4c83cba541d2d16dd4c96f16bf0a2b31ff727289ff1e4",
+      "billing-project.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "billing-project.stdout": "58cf2dc5a07f72baf35eaa06b9b2e1019264fcd55009d56816575224b2a812af",
+      "bucket-absence.stderr": "c97f89c1b4746718a0f95855f3e95bdc361912caa66e33fec439b8119bf1e8d3",
+      "bucket-absence.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bucket-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bucket-after.stdout": "c43f09062c932fad3999b5343e29a4398862229210a5e4f48cf58a4b50dfc983",
+      "bucket-iam-after.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "bucket-iam-after.stdout": "2340bb9004a93873dc49d924c7246360e5a6917387a6a5e278e0be5748871578",
+      "create.intent.json": "de23f836d9a1530fc9c6720b0a3504b8509bc89ecf2767f7ba76a576b6213317",
+      "create.result.json": "bff212d9759e4f5b1cca6697e4c2dbe2df0777b6f302a1830acf10e7b3e7265c",
+      "create.stderr": "0bac19d3e849c6def56b6b95971afdef7c96105fa8bde9d89fa330b9370170fd",
+      "create.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "launcher.py": "915d8ca7b353e7de42e47ccca6b357f5ccecf03077d812c4037d948fddfe0f47",
+      "objects-after.stderr": "cbadf5eba4b8fd4bc79aeb73386f50d624d94cd02a89634a2c942e51f436e314",
+      "objects-after.stdout": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "project-iam.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "project-iam.stdout": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+      "project.stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "project.stdout": "6fd28753204799cac5499d595c6a842989ff2cced2fad5408aaa80eef9066c0a",
+      "scope.json": "661df45d2182c540b5a9c4b4973ab412f8abf332f514bbe2c69e6d05851a01b2",
+      "terminal.json": "439db5ced5329b81026cddbd860ae8a97bf221520f3d5dace61c5d95220270de"
+    }
+  },
+  "next": "Only separately authorized read-only inventory and final IAM/API comparison. Never rerun creation or reuse this scope."
+}
