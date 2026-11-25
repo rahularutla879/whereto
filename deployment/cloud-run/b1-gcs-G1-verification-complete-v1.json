@@ -1,0 +1,98 @@
+{
+  "version": "53-B1-G1-verification-complete-v1",
+  "baselineCommit": "8ff614f838408305756a461d5eb4601d9d71fa1d",
+  "project": "where-to-512422",
+  "region": "us-east4",
+  "bucket": "where-to-512422-b1-backups-us-east4",
+  "G1FullyVerified": true,
+  "completedUTC": "2026-11-25T23:26:53.611051+00:00",
+  "thisAuthorization": {
+    "scope": "53-B1-G1-softdelete-owner-8ff614f-20261125-v1",
+    "listingCommandAttempts": 1,
+    "exit": 0,
+    "softDeletedObjects": 0,
+    "bucketHeaderRecords": 1,
+    "G1FullyVerified": true,
+    "cloudMutations": 0,
+    "retries": 0,
+    "UTC": "2026-11-25T23:26:53.611051+00:00"
+  },
+  "listingCommand": [
+    "/opt/homebrew/bin/gcloud",
+    "storage",
+    "ls",
+    "gs://where-to-512422-b1-backups-us-east4",
+    "--json",
+    "--recursive",
+    "--soft-deleted",
+    "--exhaustive",
+    "--project=where-to-512422"
+  ],
+  "listingCapture": [
+    {
+      "url": "gs://where-to-512422-b1-backups-us-east4/",
+      "type": "unknown"
+    }
+  ],
+  "inventory": {
+    "softDeletedObjects": 0,
+    "liveAndNoncurrentObjects": 0,
+    "liveAndNoncurrentEvidence": "Preserved prior successful all-versions listing; not repeated",
+    "softDeleteListingExit": 0,
+    "stderrEmpty": true,
+    "headerHandling": "Accept exactly fixed bucket-root header, empty JSON list or successful empty output; reject other records/malformed data",
+    "allChecksArePointInTime": true
+  },
+  "preservedComparisons": {
+    "bucketSettings": "Standard/us-east4/PAP enforced/UBLA/7day unlocked retention/7day soft delete; versioning,Autoclass,lifecycle deletion disabled",
+    "bucketIAM": "Unchanged documented project convenience bindings; no public principal",
+    "projectIAM": "Unchanged from original pre-execution evidence",
+    "APIs": "Unchanged from original pre-execution evidence",
+    "notRepeatedInThisScope": true,
+    "inheritedServiceAgentAuthority": "Unchanged; G1 verifies empty private storage only, no future data/G2 security approval"
+  },
+  "previousEvidenceSHA256": {
+    "deployment/cloud-run/b1-gcs-G1-created-verification-stopped-v2.json": "529a7b0a786c679b54b6d3a806f96b23bdbf208005602bfc3fd8085cb4087cae",
+    "deployment/cloud-run/b1-gcs-G1-readonly-verification-stopped-v3.json": "b7c7b67f140a45dedf041671383610d00ef9a25835a9aacf26914214d03842e9"
+  },
+  "offlineChecks": {
+    "acceptedEmptyCases": 3,
+    "rejectedInvalidCases": 6,
+    "failures": 0,
+    "previousPrivateEvidenceAndSDKSourceHashes": "PASS"
+  },
+  "privateEvidence": {
+    "directoryRelative": "backend/.local/53-B1-G1-softdelete-owner-8ff614f-20261125-v1",
+    "directoryMode": "0700",
+    "fileMode": "0600",
+    "gitIgnored": true,
+    "filesSHA256": {
+      "intent.json": "d4374b423c7fa005ae57bacc5111b5942b96cc9b96a54e70d8707631ed7f3c12",
+      "result.json": "769eeee53ad97740736371b400ef1ad1b664fdb4385e9c1ed5f9cbd49b203457",
+      "runner.py": "a0f394637b1c72805b877133d36321ab4d21c4afb231b892af1912a356a48c1a",
+      "stderr": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "stdout": "c5890c97da52491eed2cb9b4b584252988b526baba6e097bb70438fc4cbfe8a8",
+      "verified.json": "ed62d8b5c56fecdb3768dfab8ab02683d52f36a5b4c9461e38289ba55ccd340b"
+    }
+  },
+  "boundaries": {
+    "creationAttemptsThisScope": 0,
+    "cloudMutations": 0,
+    "listingCommandAttempts": 1,
+    "retries": 0,
+    "fallbackQueries": 0,
+    "credentialValuesReadOrRecordedByTaskCode": false,
+    "oldScopesAndHistoricalEvidencePreserved": true,
+    "G2Authorized": false,
+    "PG17InstallationAuthorized": false,
+    "ownerKeyCreationAuthorized": false,
+    "liveBackupAuthorized": false,
+    "newFinancialAuthority": false,
+    "furtherCloudOperations": 0
+  },
+  "notRun": [
+    "Repeated settings/IAM/API/live/noncurrent checks, per owner restriction",
+    "Application/backend/frontend/browser/build/image tests; evidence-only change"
+  ],
+  "stop": "G1 complete. G2, tools, genuine encryption key and live backup require separate approval."
+}
