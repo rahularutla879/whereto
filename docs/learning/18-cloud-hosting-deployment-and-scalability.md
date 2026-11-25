@@ -1,5 +1,10 @@
 # 18 — Cloud Hosting Deployment and Scalability
 
+## Backup destination enrollment is separate from application hosting
+
+The [GCS proposal](../task53-b1-gcs-backups.md) reuses B1 ciphertext and leaves all six application identities/images untouched. `deployment.b1_gcs` only validates policy/receipts and constructs fixed commands; it cannot apply cloud changes or load credentials. G1 creates one empty private regional Standard bucket only after approval. G2 requires distinct named writer operator, recovery reader and deletion operator; names are currently unset. A separate writer SA uses create-only objects and an access-token-only custom minter, never static keys or bucket administration. Retention is unlocked7days plus7day soft delete; project administration remains a trust boundary. Read-only recovery cannot restore soft-deleted objects; exceptional create/restore needs another approval. No automatic deletion or GCS byte-cost hard cap is claimed. Key/receipt/verified ciphertext custody outside the project remains required.
+
+
 ## Existing-subnet IPv6 amendment remains inactive
 
 Fresh read-only observations confirm N1's custom subnet remains IPv4-only. The [inactive amendment](../../deployment/cloud-run/dual-stack-amendment-PROPOSED-v1.json) proposes updating that same subnet to external dual stack; Google assigns the /64. Never invent a range, replay N1 or infer permission to run N2. Cloud Run documents a broad publicIpAdmin role for its service agent when using external IPv6; granting it is a separate security/IAM decision, not an implicit part of a network update. Observe actual source addresses before approving Supabase CIDR restrictions. IPv4 Redis still requires separately authorized NAT/static egress. [Exact commands and owner scopes](../task53-free-preflight-backup.md). No network mutation or Run deployment occurred.

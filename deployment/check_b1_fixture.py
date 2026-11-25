@@ -21,7 +21,7 @@ def run(argv,*,data=None):
 def inventory():
     return {k:set(run(D+a).decode().splitlines()) for k,a in {'volumes':['volume','ls','-q'],'containers':['ps','-aq'],'images':['image','ls','-q','--no-trunc']}.items()}
 
-def main():
+def main(*,transfer=None):
     before=inventory();created=[];result={'fictionalOnly':True,'liveDatabaseConnections':0,'genuineKeysAccessed':False,'image':PG}
     run(D+['image','inspect',PG]) # --pull=never below; refuse missing cache.
     def create():
@@ -48,11 +48,12 @@ INSERT INTO whereto.schema_migrations(version,checksum) VALUES('FICTIONAL',repea
         baseline=(ROOT/'deployment/sql/b1-application-baseline-readonly-v2.sql').read_text()
         initial=[json.loads(l) for l in sql(source,baseline,user='postgres').splitlines()]
         with TemporaryDirectory(prefix='whereto-b1-fictional-') as tmp:
-            p=Path(tmp);key=p/'fictional-private.pem';cert=p/'fictional-public.pem';cipher=p/'fictional.cms';plain=p/'fictional.dump';password=b'FICTIONAL-ONLY-NOT-OWNER-SECRET\n'
+            p=Path(tmp);key=p/'fictional-private.pem';cert=p/'fictional-public.pem';cipher=p/'application.dump.cms';plain=p/'fictional.dump';password=b'FICTIONAL-ONLY-NOT-OWNER-SECRET\n'
             run([SSL,'req','-new','-x509','-newkey','rsa:3072','-cipher','aes-256-cbc','-sha256','-days','1','-subj','/CN=FICTIONAL-B1-ONLY','-passout','stdin','-keyout',str(key),'-out',str(cert)],data=password)
             key.chmod(0o600);assert b'ENCRYPTED PRIVATE KEY' in key.read_bytes().splitlines()[0]
             enc=[SSL,'cms','-encrypt','-binary','-stream','-outform','DER','-aes-256-gcm','-recip',str(cert),'-keyopt','rsa_padding_mode:oaep','-keyopt','rsa_oaep_md:sha256','-keyopt','rsa_mgf1_md:sha256']
             receipt=stream(D+['exec',source,'pg_dump','-U','postgres','-d','whereto_b1_verify','--format=custom','--schema=whereto','--strict-names','--lock-wait-timeout=250ms','--no-password'],enc,cipher,producer_env={'HOME':str(Path.home()),'PATH':os.defpath})
+            if transfer is not None:cipher=transfer(cipher,receipt)
             dec=[SSL,'cms','-decrypt','-binary','-inform','DER','-in',str(cipher),'-recip',str(cert),'-inkey',str(key),'-passin','stdin']
             decrypted=run(dec,data=password);plain.write_bytes(decrypted);plain.chmod(0o600)
             # Authentication failure must never reach pg_restore.

@@ -1,0 +1,118 @@
+{
+  "version": "53-B1-GCS-destination-PROPOSED-v1",
+  "baselineCommit": "d995be06b881572b939d4c6952f8a5e17f455644",
+  "executionAuthorized": false,
+  "ownerDecision": "GCS replaces iCloud; no iCloud folder creation",
+  "project": "where-to-512422",
+  "region": "us-east4",
+  "bucket": {
+    "name": "where-to-512422-b1-backups-us-east4",
+    "class": "STANDARD",
+    "publicAccessPrevention": "enforced",
+    "uniformBucketLevelAccess": true,
+    "retentionDays": 7,
+    "retentionLocked": false,
+    "softDeleteDays": 7,
+    "versioning": false,
+    "autoclass": false,
+    "automaticDeletion": false,
+    "CMEK": false,
+    "ciphertextOnly": true
+  },
+  "parentBackup": {
+    "path": "deployment/cloud-run/b1-application-backup-PROPOSED-v2.json",
+    "sha256": "c4f11f827846a352fa03dfd629d54c55433deb3cdc11ec5acacf42c2f0be0553",
+    "historicalRecordNotEdited": true
+  },
+  "principals": {
+    "writerServiceAccountProposed": "whereto-backup-writer@where-to-512422.iam.gserviceaccount.com",
+    "writerOperator": null,
+    "recoveryReader": null,
+    "deletionOperator": null,
+    "recoveryCustodianReference": null
+  },
+  "iam": {
+    "runtimeServiceAccountsGranted": false,
+    "writer": "roles/storage.objectCreator on dedicated bucket only",
+    "operator": "custom iam.serviceAccounts.getAccessToken on backup writer only",
+    "recovery": "custom storage.buckets.get,storage.objects.get,storage.objects.list on bucket only",
+    "deletion": "custom storage.objects.delete on bucket only",
+    "allThreeHumanPrincipalsMustDiffer": true,
+    "softDeletedObjectRestoration": "Not initially granted: separate break-glass approval for objects.create and objects.restore",
+    "projectOwnerInheritance": "Not removed; controls cannot guarantee resistance to compromised project administrator",
+    "unexpectedDefaultBucketBindings": "Stop for review; do not silently strip or accept"
+  },
+  "limits": {
+    "completeGenerationMiB": 64,
+    "liveMiB": 300,
+    "totalBillableMiBIncludingSoftDeleted": 600,
+    "liveGenerations": 4,
+    "newGenerationsPerMonth": 8,
+    "downloadGiBPlanningCeiling": 1,
+    "classAOperations": 1000,
+    "classBOperations": 1000,
+    "providerEnforcedHardCap": false,
+    "noAutomaticLimitIncrease": true
+  },
+  "pricesUSD": {
+    "observedDate": "2026-11-25",
+    "regionSpecificMonthlyGiB": {
+      "STANDARD": ".023",
+      "NEARLINE": ".013",
+      "COLDLINE": ".006",
+      "ARCHIVE": ".0025"
+    },
+    "standardHourlyGiB": ".000031507",
+    "standardClassAPer1000": ".005",
+    "standardClassBPer1000": ".0004",
+    "ordinaryUSInternetEgressPerGiB": ".12",
+    "storage300MiBMonth": ".00673828125",
+    "storage600MiBMonth": ".0134765625",
+    "expectedLowUseBeforeTaxApprox": ".05",
+    "planningScenarioBeforeTaxLessThan": ".15",
+    "proposedGrossOneTimeCeiling": "1",
+    "proposedGrossMonthlyCeiling": "1",
+    "approved": false,
+    "accountTaxCurrencyAndInvoiceVerified": false,
+    "freeCreditsAssumed": false,
+    "publicPricingHTMLSHA256": "30ff46e11db80c7e89c33d1787f38694addd6363d3984de6a31274cdfdc368a3"
+  },
+  "recovery": {
+    "fourCMSObjects": [
+      "before.json.cms",
+      "application.dump.cms",
+      "after.json.cms",
+      "receipt.json.cms"
+    ],
+    "createOnlyPrecondition": "ifGenerationMatch=0",
+    "independentDownload": "Exact returned server generation; fresh recovery principal; compute SHA256 vs separately trusted receipt",
+    "authenticateBeforeRestore": true,
+    "independentKeyAndCiphertextCopyOutsideProjectRequired": true,
+    "actualGCSAcceptanceTestPerformed": false,
+    "softDeleteAndRetentionBytesBilled": true
+  },
+  "PG17": {
+    "installed": false,
+    "approvedDownload": false,
+    "source": "https://github.com/PostgresApp/PostgresApp/releases/download/v2.9.7/Postgres-2.9.7-17.dmg",
+    "bytes": 119766608,
+    "publishedSHA256": "e1f45cf63f2dfc4120e9ef3caae7ffe70dade56d54b9f0e00235dce347f847c9",
+    "actualPublisherSignatureVerified": false,
+    "actualNativeCompatibilityVerified": false,
+    "GUIOrPersistentServerAuthorized": false
+  },
+  "batches": {
+    "G1": "One empty bucket only, after explicit approval and fresh read-only conflict/IAM/billing checks",
+    "G2": "One backup writer SA, three custom role definitions, four exact bindings; all named principals and separate approval required",
+    "B1": "Separate actual operator data/export/key/transfer/disposable restore approval; original60s shared source scope/250ms initial lock unchanged"
+  },
+  "officialReferences": [
+    "https://cloud.google.com/storage/pricing",
+    "https://docs.cloud.google.com/storage/docs/access-control/iam-roles",
+    "https://docs.cloud.google.com/storage/docs/using-bucket-lock",
+    "https://docs.cloud.google.com/storage/docs/soft-delete",
+    "https://docs.cloud.google.com/storage/docs/use-soft-deleted-objects",
+    "https://postgresapp.com/downloads.html",
+    "https://api.github.com/repos/PostgresApp/PostgresApp/releases/tags/v2.9.7"
+  ]
+}

@@ -1,0 +1,183 @@
+{
+  "version": "53-B1-GCS-verification-v1",
+  "baselineCommit": "d995be06b881572b939d4c6952f8a5e17f455644",
+  "date": "2026-11-25",
+  "unitTests": {
+    "command": "backend/.venv/bin/python -m unittest deployment.test_b1_gcs deployment.test_b1_pipeline deployment.test_b1_prerequisites deployment.test_cloud_run_real deployment.test_hosting_batch deployment.test_network_storage -q",
+    "passed": 55,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "lastSeconds": 1.055
+  },
+  "fixture": {
+    "command": "backend/.venv/bin/python -m deployment.check_b1_gcs_fixture",
+    "result": [
+      {
+        "fakeGCS": "pinned version/hash roundtrip",
+        "realGCSRequests": 0
+      },
+      {
+        "ACLMutationDetected": true,
+        "PG17Version": "pg_dump (PostgreSQL) 17.11 (Debian 17.11-1.pgdg12+2)",
+        "ciphertextBytes": 29883,
+        "cryptoRoundTrip": true,
+        "fictionalOnly": true,
+        "forcedRLSAndUncredentialedRefusal": true,
+        "forcedRLSMutationDetected": true,
+        "genuineKeysAccessed": false,
+        "image": "postgres:17-bookworm@sha256:665dc7b37ac52a17e298511414c21d23ffa4e6a6ef6225b3e5d59c7afb35e994",
+        "liveDatabaseConnections": 0,
+        "metadataAndContentEqual": true,
+        "newContainers": 0,
+        "newVolumes": 0,
+        "originalVolumesPreserved": 135,
+        "rowsPerTable": 1,
+        "sourceBeforeAfterEqual": true,
+        "tablesRestored": 6,
+        "tamperRefused": true,
+        "wrongPassphraseRefused": true
+      }
+    ],
+    "logSHA256": "ef019c1d6e8779106109264adf32b0e40438e2cb758bd74beaf3f7d8e87bacc9",
+    "actualGCS": false,
+    "actualCachedPG17AndCMS": true,
+    "finalHelperAndDriverTested": true
+  },
+  "checks": {
+    "pip": "No broken requirements found",
+    "financialSourceHashes": {
+      "passed": 31,
+      "mismatches": []
+    },
+    "networkAndSixRoleSourcePins": "PASS",
+    "handbookChapters": 20,
+    "chaptersUpdated": [
+      "12",
+      "18"
+    ],
+    "syntax": "Python AST and owner-shell zsh -n PASS",
+    "secretPatterns": "PASS; changed/new files only; no configured credential values read",
+    "B1HistoricalV1V2AndVerificationBytes": "unchanged"
+  },
+  "readOnlyCloud": {
+    "authenticatedChecksAuthorizedPreviously": true,
+    "existingStorageAndIAMCredentialsAPIsEnabled": true,
+    "proposedBucketDescribe": "404, no creation",
+    "sixRuntimeAccounts": "existing; no project-level direct grants observed; no proposed backup writer present",
+    "publicProjectIAMBindings": false,
+    "projectPolicyPrivateSnapshotSHA256": "5f31bf69c3f89df5c034c84d0d3cadc77a88aaad52427ec8d71398bfb928cdef",
+    "projectAuditLogTypesObserved": [],
+    "personalPrincipalAndRawIAMInGit": false,
+    "actualBillingCurrencyTaxInvoiceVerified": false
+  },
+  "pricing": {
+    "officialHTMLSHA256": "30ff46e11db80c7e89c33d1787f38694addd6363d3984de6a31274cdfdc368a3",
+    "region": "us-east4",
+    "defaultRegionTableNotUsed": true,
+    "table": "Five-column regional selector, monthly prices; dual-region and Rapid Cache excluded",
+    "StandardGiBMonthUSD": ".023",
+    "maxIllustrated31DayBeforeTaxUSD": ".139136",
+    "proposedGrossOneTimeUSD": "1",
+    "proposedGrossMonthlyUSD": "1",
+    "approved": false,
+    "providerHardCap": false
+  },
+  "ownerDecision": {
+    "iCloudFolderNotCreated": true,
+    "GCSSelected": true,
+    "recoveryAndDeletionPrincipals": null,
+    "noPrincipalAssigned": true,
+    "independentOutsideProjectCustodyStillRequired": true
+  },
+  "tooling": {
+    "PostgresAppBinaryDownloaded": false,
+    "publishedAssetBytes": 119766608,
+    "publishedAssetSHA256": "e1f45cf63f2dfc4120e9ef3caae7ffe70dade56d54b9f0e00235dce347f847c9",
+    "actualPublisherSignatureAndMacCompatibility": "pending approved acquisition",
+    "hostSoftwareInstallCommands": 0,
+    "realKeysReadOrCreated": false,
+    "gcloud": "590.0.0",
+    "transferOverrides": "Verified via per-process get-value; no config set; max_retries0, process/thread1, no composite/sliced/resumable transfer for bounded64MiB files"
+  },
+  "localRuntime": {
+    "existingProfile": "whereto-task52",
+    "startedOnlyForFictionalFixture": true,
+    "profileStartsThisCheckpoint": 2,
+    "pulls": 0,
+    "newVolumes": 0,
+    "newContainersRemaining": 0,
+    "originalVolumes": 135,
+    "originalImageIDs": 82,
+    "resourceSetEqualityCheckedByFixture": true,
+    "contextActivation": false,
+    "saveConfig": false,
+    "sshConfig": false,
+    "bootSideEffects": [
+      "guest binfmt registration",
+      "temporary Docker context"
+    ],
+    "stopRequestedAfterFinalFixture": true,
+    "readOnlyFinalStoppedVerification": "PASS: Lima Stopped, errors null; SDK profile status not running",
+    "DNSForwardingConflictFirstBoot": "port53; not repaired; network-none fixture unaffected",
+    "VMReturnedStopped": true
+  },
+  "developmentAttempts": [
+    {
+      "result": "Initial GCS test cohort9pass/1error",
+      "cause": "Positive capacity fixture512MiB total/256MiB live plus64MiB exceeded300MiB live ceiling",
+      "correction": "Fixture live bytes192MiB; security ceiling unchanged"
+    },
+    {
+      "result": "Initial broad pattern scan false positives",
+      "cause": "Unanchored sk- matched historical task-prefixed paths; deliberately rejected test-only PEM header contained no private key body",
+      "correction": "Verified token boundaries/PEM body detection and inspected matches; no credential or runtime code excluded"
+    },
+    {
+      "result": "Public-document fetch default system CA verification failed",
+      "correction": "Used installed verified certifi CA; no insecure fallback or global changes"
+    },
+    {
+      "result": "Local SDK help/config spelling probes failed",
+      "correction": "Verified installed supported storage restore/get-value commands; no mutation attempted"
+    },
+    {
+      "result": "Colima list reported Broken after first stop",
+      "correction": "Read-only Lima status and host log confirmed Stopped; no repair"
+    }
+  ],
+  "notRun": [
+    "Actual GCS upload/download, token impersonation/IAM enforcement, soft-delete restoration or independent custodian recovery",
+    "Native PG17.12 signature/Gatekeeper/version/native locale verification",
+    "Any live SQL, B0 repeat, application data export/backup/restore or provider operation",
+    "Genuine backup key generation/private-key use",
+    "Full backend/frontend/browser/build/image/vulnerability scans; no application or image change",
+    "Private324-file recount or original journal reads/mutations"
+  ],
+  "boundaries": {
+    "cloudMutations": 0,
+    "GCSObjectRequests": 0,
+    "liveDatabaseSessions": 0,
+    "providerCalls": 0,
+    "newFinancialGrants": 0,
+    "actualFinancialOrWitnessRestore": false,
+    "historicalTenAttemptsAndUSD0047366625": "preserved, not rerun or re-accounted",
+    "private324FilesFrozenPayloadsConsumedScopesAndHalt": "untouched; no new access/recount"
+  },
+  "filesSHA256": {
+    "DECISIONS.md": "a22ec9fd76829198afcf6e27ade4eeb100b45d34f37fabb2925285cd7538556f",
+    "HANDOVER.md": "219c897d17f4df915bb3c7037fa328852ed5c15aa0175f39928ce7652ebf2e08",
+    "TASKS.md": "16f56fd5d48d1f4ff98dd6e993c0750176d35683a8590a0e8f736f3badc272b8",
+    "deployment/check_b1_fixture.py": "8df6e786bf771daac927edf4f2764aae4ee48d1b9804b54f6d21914127594f9d",
+    "docs/learning/12-postgresql-supabase-sessions-and-saved-plans.md": "c48c029177b00d4ca0d124df879832b4b926934b7b3c44f15ff23a7c043129dd",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md": "4708bbd9bceac87ae1f86fdc7bff399eb63b634fb363798d7b6a9b1c2b5bd1ee",
+    "docs/task53-b1-application-backup.md": "4552086c4497b91e327de60b6ef2dd8499ce3264bed014176923a1da1bbb7414",
+    "docs/task53-b1-owner-prerequisites.md": "adc5bb0de102f7ea0d5fcde3cf18b6fd3d5bbf05b75ad792beaf29a16a17acb4",
+    "deployment/b1_gcs.py": "30d23a182a9841cb5bbda9392ff3ae2569f7e6a7875f9c69e3d6ab96216aa8f4",
+    "deployment/check_b1_gcs_fixture.py": "ee1960b8b044a21b1a5e8b1e7f071da82f15638951deec7d346d8e60edb74f1e",
+    "deployment/cloud-run/b1-gcs-destination-PROPOSED-v1.json": "69a130e7dcb266336bfa216dc4899678860dda57a97cec8d4d19376120eb1a48",
+    "deployment/test_b1_gcs.py": "1134af5689bb4e33e1c926be9819be1b4ee57ba0af21789bda2c6973f28ff8fe",
+    "docs/task53-b1-gcs-backups.md": "191f84e7cff2d799a63830e2f77cd063d9895279ec1c2bc3a341c1700e3f8f22"
+  },
+  "next": "Separate G1 exact empty-bucket approval; no IAM/data upload/software/key/live B1 authority"
+}

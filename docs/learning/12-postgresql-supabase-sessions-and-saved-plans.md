@@ -1,5 +1,10 @@
 # 12 — PostgreSQL Supabase Sessions and Saved Plans
 
+## B1 destination seam: ciphertext only, exact recovery proof
+
+The owner replaced iCloud with a [proposed private GCS destination](../task53-b1-gcs-backups.md). Existing export/crypto/source-before-after/forced-RLS comparators are unchanged. `check_b1_fixture.main(transfer=...)` permits a fictional destination roundtrip before real isolated PG17 restore; it is not a production upload hook. `check_b1_gcs_fixture` checks object generation and downloaded SHA256 against the trusted B1 receipt, then reuses authenticated decryption and exact six-table recovery. In-memory GCS success does not verify actual IAM, network upload or cloud recovery. No genuine data/key was used. Existing60s export and1500/250ms app deadlines remain.
+
+
 ## Executable B1 fixture findings
 
 The [owner-prerequisite checkpoint](../task53-b1-owner-prerequisites.md) proves only fictional encrypted recovery. Use the new v2 proposal: pg_dump's default stdout requires omitting `--file=-`. ACL fingerprints compare effective privileges, grantors and grantability, not raw array representation; altered grants or forced RLS are still detected. The original v1 records remain historical. Cached isolated PG17 passed six-table recovery, but native Mac tools, real locale/account export and off-site restoration still need owner enrollment. No genuine backup key or live application data was used.

@@ -1,3 +1,7 @@
+## Task 52/53 — GCS backup destination ready for separate G1 approval
+
+No iCloud folder. Offline B1 destination policy, scoped IAM command generation, create-only object/version/hash validation and fictional recovery verified. Recovery/deletion owners remain unassigned; source B1 export and actual off-site recovery remain unapproved. Approve only the empty private bucket first; later named IAM enrollment, separate backup key/PG17 tool and actual B1 data-read/export/restore permissions. [Finite actions](docs/task53-b1-gcs-backups.md). No database/cloud/runtime/image change or financial authority.
+
 ## Task 52/53 — B1 prerequisites prepared and fictional encrypted recovery passes
 
 Current v2 backup proposal supersedes the preserved v1 command/comparator after executable fixture findings. Real backup/restore remains unapproved. Owner next selects/creates the separate key, approves empty iCloud folder/custody and native PG17 bundle verification, then authorizes exact bounded B1 export. Owner-reported 3.3 GB exceeds 300 MiB planned budget; this is not an enforced iCloud reservation. No Homebrew changes. [Commands and approvals](docs/task53-b1-owner-prerequisites.md).

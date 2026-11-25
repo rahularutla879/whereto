@@ -1,6 +1,6 @@
 # B1 owner prerequisites — no live export approval
 
-**Storage:** owner reported **3.3GB available** on November25. Automated System Settings inspection failed twice with an expired-continuation error; this is owner-confirmed capacity, not a tool-observed quota. The existing iCloud Drive directory is present; `WhereTo-Encrypted-Backups` does not exist and was not created.300MiB is a local planning budget, not an iCloud folder reservation. Approve creation of that empty folder separately. No application data/upload/storage purchase is authorized.
+**Storage:** the owner superseded iCloud with Google Cloud Storage. Do not create the previously proposed iCloud folder. The earlier 3.3GB owner statement remains historical only. Use the [GCS destination proposal](task53-b1-gcs-backups.md); no bucket, IAM, upload or live B1 authority exists. Recovery/deletion custodians are not selected and no identity is assigned.
 
 **Tools:** fictional encrypted dump/restore passed with the cached PG17.11 image, without pulling/building images or changing Homebrew. Existing Colima was started/stopped; guest emulators/context registration occurred during startup, and stop removed the context. All135 volumes,82 cached image IDs and the original default Docker selection were preserved; no test containers/volumes remain. The VM has **no IPv6 default route**: its cached client is not approved for live direct-IPv6 export.
 
@@ -41,7 +41,7 @@ The local test used disposable test-only encrypted RSA3072 keys and fictional ro
 
 ## Next exact approvals
 
-1. Approve creating the empty iCloud folder and its300MiB budget; confirm the recovery custodian and quota before upload. No data upload yet.
+1. Review the separate G1 empty-GCS-bucket proposal and cost envelope. Select distinct writer operator, recovery and deletion principals before later G2 IAM enrollment; no data upload yet.
 2. Approve the PG17.12 bundle acquisition/verification only, without Homebrew or server startup.
 3. Approve owner-manual key creation above, then provide only its public fingerprint and confirm recovery custody.
 4. After enrollment/tool/locale checks, authorize **one live B1 job**, at most3 operator source sessions sharing **60seconds total**, direct IPv6/verify-full TLS/2s connection timeout,250ms initial dump-lock wait, zero retries or fallback. Permit exact six-table schema/data/RLS/grants export and baseline reads using the protected operator; application1500/250ms deadlines unchanged. Separately specify upload and genuine-key/local-restore permissions. No key rotation, platform dump, grants, provider calls or correlated witness restore.
