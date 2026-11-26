@@ -1,0 +1,77 @@
+{
+  "version": "53-B1-G2-writer-only-v1",
+  "baselineCommit": "8377015bce19e0cdc660ad575472319f89c63632",
+  "executionAuthorized": false,
+  "G1PermanentlyComplete": true,
+  "G1SourceSHA256": "18acfb60c00a7bd693ee2abd7f547974214888ada37f6349340f4c1785666cf9",
+  "project": "where-to-512422",
+  "bucket": "where-to-512422-b1-backups-us-east4",
+  "writerAccountProposed": "whereto-backup-writer@where-to-512422.iam.gserviceaccount.com",
+  "operator": {
+    "selection": "Existing project owner from saved G1 nonsecret metadata; proposed, not enrolled",
+    "principalSHA256": "5fc5a2a624174781620bd545f290c505bbfe68cd955c55646c572672fb714897",
+    "explicitApprovalStillRequired": true,
+    "accountRecheckedLive": false
+  },
+  "recoveryOperator": null,
+  "deletionOperator": null,
+  "fourCommandScope": [
+    "Create one backup-writer service account",
+    "Create one custom token-minter role: iam.serviceAccounts.getAccessToken only",
+    "Bind that role on writer account to exact named owner operator only",
+    "Grant roles/storage.objectCreator on exact bucket to backup writer only"
+  ],
+  "newServiceAccounts": 1,
+  "newCustomRoles": 1,
+  "IAMBindings": 2,
+  "projectWideBindings": 0,
+  "applicationServiceAccountGrants": 0,
+  "staticServiceAccountKeys": 0,
+  "sourcePins": {
+    "deployment/b1_gcs.py": "30d23a182a9841cb5bbda9392ff3ae2569f7e6a7875f9c69e3d6ab96216aa8f4",
+    "deployment/cloud-run/b1-gcs-G1-created-verification-stopped-v2.json": "529a7b0a786c679b54b6d3a806f96b23bdbf208005602bfc3fd8085cb4087cae",
+    "deployment/cloud-run/b1-gcs-G1-verification-complete-v1.json": "18acfb60c00a7bd693ee2abd7f547974214888ada37f6349340f4c1785666cf9"
+  },
+  "ownerOnlyBatch": {
+    "relativePath": "backend/.local/53-B1-G2-writer-preparation-owner-8377015-20261126-v1/writer-only-PROPOSED.sh",
+    "SHA256": "7babcb669d4cd887c6d0df93de3ff491f8476e31a0403b6ccca3462fa110bb72",
+    "mode": "0600, not executable; Git ignored",
+    "commandsExecuted": 0
+  },
+  "laterAcceptance": [
+    "Fresh explicitly approved G2 identity/role/IAM conflict checks; no G1 replay or inventory",
+    "Stop if proposed SA or custom role already exists; do not overwrite/update automatically",
+    "Independent SA identity/enabled/no user-managed key and no project grants checks",
+    "Exact token-only role, SA operator binding and original bucket policy plus only writer objectCreator; preserve default/inherited bindings",
+    "Inherited project-owner/managed-agent permissions are not revoked and must be considered before real data upload",
+    "No credential creation, token minting, upload/download, API enablement, recovery or deletion enrollment"
+  ],
+  "additionalFixedMonthlyCostExpectedUSD": "0 for IAM identity/role enrollment; storage/API operation charges remain within separately approved envelope, not a hard cap",
+  "B1ExportStillDisabled": true,
+  "PG17Download": {
+    "authorized": false,
+    "URL": "https://github.com/PostgresApp/PostgresApp/releases/download/v2.9.7/Postgres-2.9.7-17.dmg",
+    "bytes": 119766608,
+    "publishedSHA256": "e1f45cf63f2dfc4120e9ef3caae7ffe70dade56d54b9f0e00235dce347f847c9",
+    "maxDownloadMiB": 120,
+    "automaticRetries": 0,
+    "source": "Previously reviewed official PostgresApp v2.9.7 release metadata",
+    "binaryDownloaded": false,
+    "readOnlyMountForContainedAppChecksRequiresExplicitApproval": true,
+    "actualDeveloperIDAndTeamIdentifier": "not yet measured or independently pinned; do not invent",
+    "noInstallNoExecuteNoGUI": true
+  },
+  "ownerKey": {
+    "genuineKeyAccessOrCreation": false,
+    "algorithm": "RSA3072 encrypted private PEM (AES256CBC), CMS AES256GCM/RSAOAEP SHA256 for backup data",
+    "manualInstructions": "docs/task53-b1-owner-prerequisites.md",
+    "publicFingerprintOnly": true,
+    "custodianSelected": false
+  },
+  "stop": "Separate approval for G2-W, PG17 download/inspection and owner key creation; no live B1 authority",
+  "implementationFilesSHA256": {
+    "deployment/b1_gcs_writer.py": "9d2adc8fadf86a75ab425c3a25da1bbc5763f4cb7bda4910deb0a276679ce253",
+    "deployment/test_b1_gcs_writer.py": "0d9ac7b9b97537b65bea54e2430ef5f16d5537dde3a4eed7f611a127c436e209",
+    "docs/task53-b1-writer-tools-key.md": "e1ba3764b8a20a4183172be8bf360fa24eb2841584f80e18969aa3905004cb42"
+  }
+}

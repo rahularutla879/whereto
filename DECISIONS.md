@@ -1,3 +1,7 @@
+## 2026-11-26 — stage backup writer separately from recovery/deletion
+
+Preserve original all-three-principal G2 and G1 evidence. A separate source-pinned G2-W renderer emits only one writer SA, one getAccessToken-only custom role and two narrow bindings, with exact policy-delta checks preserving the observed G1 convenience bindings. No fake recovery/deletion identities, runtime-SA grants or apply method. The saved project owner is proposed as writer operator; approval/fresh G2 conflict checks remain required. PG17 download/read-only signing inspection is separate from install/use; genuine RSA3072 key creation remains owner-manual. [Exact boundaries](docs/task53-b1-writer-tools-key.md).
+
 ## 2026-11-25 — GCS backup destination, with no implicit recovery authority
 
 Owner selected GCS instead of the uncreated iCloud folder and deferred recovery/deletion account selection. Propose regional Standard, create-only dedicated backup SA, distinct token-minter/read-only recovery/delete-only users; no six runtime SA receives bucket permissions. G1 empty-bucket creation is independently approvable; G2 refuses missing names. Seven-day unlocked retention plus soft delete protects against scoped writers/deleters, not project administrator compromise. Custodian key, trusted receipt and independently verified ciphertext copy outside project remain required; no irreversible retention lock or automatic deletion. Source/export/crypto/SQL financial and witness contracts stay unchanged. [Exact scope and costs](docs/task53-b1-gcs-backups.md).

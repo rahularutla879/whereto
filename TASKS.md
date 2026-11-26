@@ -1,3 +1,7 @@
+## Task52/53 — B1 three prerequisites prepared; approvals still needed
+
+G1 remains permanently complete. G2-W four-command writer-only enrollment can proceed after separate approval without inventing recovery/deletion users. Official PG17.12 download/inspection and owner-manual backup key are separately prepared.63offline tests pass; no real enrollment/acquisition/key/export executed. [Concise owner sequence](docs/task53-b1-writer-tools-key.md). Live B1 still requires verified tools/recipient/custody/operator and explicit export/transfer/disposable restore scope; no application financial authority.
+
 ## Task52/53 — G1 empty private backup destination fully verified
 
 Final authorized soft-delete listing returned zero, with no retry or other cloud operation. Earlier zero live/noncurrent inventory and unchanged settings/IAM/APIs remain preserved, not repeated. [G1 completion evidence](deployment/cloud-run/b1-gcs-G1-verification-complete-v1.json). G2,tools,keys and actual B1 export/recovery remain unapproved; Task52/53 deployment is not complete.

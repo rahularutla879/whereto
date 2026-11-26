@@ -1,12 +1,12 @@
-# B1 GCS destination — owner decision, no execution authority
+# B1 GCS destination — G1 complete; later enrollment separately gated
 
-GCS replaces the uncreated iCloud folder. Existing B1 export, encryption, exact comparisons and source deadlines remain unchanged. [Machine-readable proposal](../deployment/cloud-run/b1-gcs-destination-PROPOSED-v1.json). No resource, IAM, software installation, genuine key, live export or upload is authorized.
+GCS replaces the uncreated iCloud folder. Existing B1 export, encryption, exact comparisons and source deadlines remain unchanged. [Machine-readable proposal](../deployment/cloud-run/b1-gcs-destination-PROPOSED-v1.json). G1 bucket creation and verification are complete; do not replay them. No G2 IAM, software installation, genuine key, live export or upload is authorized. See the [three current owner actions](task53-b1-writer-tools-key.md).
 
-## G1: smallest next decision — one empty bucket
+## G1: historical recipe — permanently complete, do not rerun
 
 Proposed name `gs://where-to-512422-b1-backups-us-east4`, project `where-to-512422`, regional Standard. Public access prevention enforced; uniform bucket-level access. Seven-day **unlocked** retention and seven-day soft delete; versioning off with unique create-only object names. No Autoclass, automatic lifecycle deletion, website, public link, CMEK or application credentials. Retention lock is irreversible and is not proposed. An administrator can change unlocked policy: this does not establish independent custody. [Retention](https://docs.cloud.google.com/storage/docs/using-bucket-lock), [soft delete](https://docs.cloud.google.com/storage/docs/soft-delete).
 
-After explicit approval, fresh project/API/bucket-name/IAM/billing checks must pass. Create at most once, stop on errors/unexpected bindings or charges, then independently describe raw metadata and IAM. Do not enable APIs or silently remove default/inherited bindings.
+The historical G1 command below already ran once and its full verification is recorded in [G1 completion](../deployment/cloud-run/b1-gcs-G1-verification-complete-v1.json). It must never be executed again. No current approval is being requested for G1.
 
 ```sh
 cd /Users/rahularutla/Documents/whereto
@@ -18,13 +18,13 @@ cd /Users/rahularutla/Documents/whereto
   --retention-period=7d --no-enable-autoclass --quiet
 ```
 
-**Proposed approval wording:** “Authorize G1 only: create this one empty private Standard bucket with the exact settings above, maximum $1 one-time and $1/month gross, subject to verified account charges. No IAM enrollment, objects, API enablement, keys, live database access or provider operations. Stop if the envelope cannot be respected.” This proposal is **not approved**, and Google provides no bucket byte/billing hard cap. No further owner signature is invented or required by this preparation.
+**Historical consumed G1 approval wording (never reuse):** “Authorize G1 only: create this one empty private Standard bucket with the exact settings above, maximum $1 one-time and $1/month gross, subject to verified account charges. No IAM enrollment, objects, API enablement, keys, live database access or provider operations. Stop if the envelope cannot be respected.” G1 was subsequently approved and completed. Google provides no bucket byte/billing hard cap. No G2, key, tool or live-backup approval follows from G1.
 
 ## G2: scoped identities — separately approved later
 
 None of the six runtime identities is appropriate for manual backup writing. Propose one dedicated `whereto-backup-writer` service account, create-only on this bucket. No service-account keys. A named writer operator may mint access tokens for that account only, using a custom `iam.serviceAccounts.getAccessToken` role; no signBlob/signJwt authority.
 
-Recovery/deletion administrators are **not selected**. Per owner direction, leave both unassigned; this does not block preparing G1. Later choose three distinct named users:
+Recovery/deletion administrators are **not selected**. Current [G2-W](task53-b1-writer-tools-key.md) enrolls only the writer using a separate source-pinned four-command renderer; no invented custodians. The original eight-command all-principal renderer below remains unchanged for later separately reviewed enrollment. Later choose three distinct named users:
 
 | Principal | Exact scoped authority |
 | --- | --- |
@@ -50,7 +50,7 @@ Official regional `us-east4` prices observed November25,2026, USD, no credits/di
 
 Recommend Standard for short rolling backups and repeated recovery checks: no minimum-duration/early-deletion fee or retrieval charge. Colder classes can cost less for genuinely long-held copies; this is not a claim Standard is always cheapest. Upload ingress is free; operations are charged. Ordinary US internet recovery egress is $0.12/GiB. Live, noncurrent and soft-deleted bytes all bill. No versioning duplication is proposed.
 
-300MiB costs ~$0.00674/month storage;600MiB including deleted/restored copies ~$0.01348/month. Low-use estimate (600MiB,0.25GiB download,100A/100B) ~$0.05/month before tax. Conservative31-day scenario (600MiB,1GiB download,1,000A/1,000B) **$0.139136 before tax**. Account currency/tax, applicable discounts and actual invoices remain unverified; proposed gross $1/$1 ceilings are unapproved. No fixed compute/KMS charge or subscription is proposed; even an empty bucket can incur control-plane operations.
+300MiB costs ~$0.00674/month storage;600MiB including deleted/restored copies ~$0.01348/month. Low-use estimate (600MiB,0.25GiB download,100A/100B) ~$0.05/month before tax. Conservative31-day scenario (600MiB,1GiB download,1,000A/1,000B) **$0.139136 before tax**. USD billing was verified during G1; tax, applicable discounts and actual invoices remain unverified. The owner approved gross $1/$1 ceilings for G1 only; G2 and transfers remain separately gated. No fixed compute/KMS charge or subscription is proposed; even an empty bucket can incur control-plane operations.
 
 Limits:64MiB **combined** per complete four-object generation;300MiB live,600MiB total billable; latest three verified plus one pre-change generation; at most eight new generations/month. Fresh recovery-reader inventory must include soft-deleted versions/restored duplicates. Refuse if full; do not enlarge limits or delete protected copies automatically. These are client admission limits, not cloud-enforced quotas; a compromised writer/project administrator can exceed them. Monitoring/account oversight remains necessary.
 

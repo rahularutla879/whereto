@@ -1,0 +1,99 @@
+{
+  "version": "53-B1-G2-writer-tools-key-verification-v1",
+  "baselineCommit": "8377015bce19e0cdc660ad575472319f89c63632",
+  "date": "2026-11-26",
+  "scope": "Offline preparation only",
+  "tests": {
+    "command": "backend/.venv/bin/python -m unittest deployment.test_b1_gcs_writer deployment.test_b1_gcs deployment.test_b1_prerequisites deployment.test_b1_pipeline deployment.test_cloud_run_real deployment.test_hosting_batch deployment.test_network_storage -q",
+    "passed": 63,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "seconds": 1.068,
+    "newWriterPolicyTests": 8
+  },
+  "checks": {
+    "pip": "No broken requirements found",
+    "sourcePins": "Existing helper/G1 evidence and all new implementation hashes verified",
+    "protectedFinancialInputs": 31,
+    "networkAndSixRoleSourcePins": "PASS",
+    "privateFourCommandBatch": "0600/Git ignored/hash-bound/shell-syntax pass; no execute permission; not run",
+    "ownerPrincipal": "Bound to saved nonsecret G1 owner metadata; owner email not in public proposal/Git; current account status not refreshed",
+    "manualKeyCommand": "Byte-identical existing shell block; zsh -n pass; never run on genuine key",
+    "secretPatterns": "PASS; no configured credential values read",
+    "handbookChapters": 20,
+    "handbookReviewed": [
+      "12",
+      "18"
+    ],
+    "handbookUpdated": [
+      "18"
+    ],
+    "applicationRuntimeOrImageChanges": false
+  },
+  "G2Result": {
+    "originalRendererRequiresAllThreePrincipals": true,
+    "newProfile": "53-B1-G2-writer-only-v1",
+    "preparedCommands": 4,
+    "newSA": 1,
+    "newCustomRole": 1,
+    "scopedBindings": 2,
+    "executedCommands": 0,
+    "recoveryOperator": null,
+    "deletionOperator": null,
+    "grantAuthorityCreated": false
+  },
+  "toolsAndKey": {
+    "PG17BinaryDownloaded": false,
+    "PG17Installed": false,
+    "publishedAssetSizeAndSHA256": "Preserved from reviewed v2.9.7 asset evidence; no binary acquisition",
+    "actualPublisherIdentitySignatureGatekeeperAndMacCompatibility": "Pending separately approved acquisition/readonly inspection",
+    "publisherIssueInspected": "Official issue792 distinguishes historical container/app assessments; no inference that v2.9.7 is approved or affected",
+    "nativeBinariesExecuted": false,
+    "genuinePrivateKeyReadOrGenerated": false,
+    "fictionalKeys": "Existing focused GCS crypto unit test generated temporary fictional-only RSA3072 key; no genuine owner material accessed",
+    "ownerRecoveryCustodianSelected": false
+  },
+  "developmentAttempts": [
+    {
+      "attempt": "Direct /tmp preparation-script launch",
+      "result": "ModuleNotFoundError before any preparation mutation or external call",
+      "cause": "Direct file launch omitted repository package root from import path",
+      "correction": "Repository-aware python -c/runpy invocation; exact owner-only four-command render then succeeded. No cloud operation or authorization consumed."
+    }
+  ],
+  "boundaries": {
+    "authenticatedCloudCalls": 0,
+    "G1ChecksRepeated": 0,
+    "newCloudResources": 0,
+    "IAMChanges": 0,
+    "newProviderCalls": 0,
+    "newFinancialGrants": 0,
+    "liveSQLOrExportsOrRestores": 0,
+    "original324PrivateFilesOrJournalAccess": false,
+    "historicalAccountingFrozenPayloadsConsumedScopesHalt": "Untouched",
+    "softwareDownloadsOrInstalls": 0,
+    "genuineKeyGeneration": 0
+  },
+  "notRun": [
+    "Actual G2 IAM role/grant/readiness checks; no account mutation authorized",
+    "Software download/signature/Gatekeeper/native-version tests",
+    "Live B1 export/cloud upload/download/disposable real-data restore",
+    "Full backend/frontend/browser/container scans; unchanged application",
+    "Cached PG17 recovery repeat; prior fixture remains preserved and source exporter/crypto/SQL unchanged"
+  ],
+  "filesSHA256": {
+    "DECISIONS.md": "51f157de1ab261f53248d9424c2a1cc5f24d40c966bddde9002977854370c560",
+    "HANDOVER.md": "a33599445b69ea27b3c114dabcd4852b6b0c0904a79d9bec7a3339e0e5a880dd",
+    "TASKS.md": "83ac83fe5b562f052264bdd58774cf624429284964c721826f797f5d3b0a4006",
+    "docs/learning/18-cloud-hosting-deployment-and-scalability.md": "6afae1a4ffe3253f30ace88c4d1af10e4273faf32be506e6238555021f069a41",
+    "docs/task53-b1-application-backup.md": "63b40f9a27480dc9d76cc7faf0d44741db480b786fbdf1e47198fedd23523bd4",
+    "docs/task53-b1-gcs-backups.md": "346ceedb36b88ee7d79cb4ee05eb64076713cd7675c1eb84a2e2e77c152b2a5c",
+    "docs/task53-b1-owner-prerequisites.md": "1e7dceb7e53a5000670032c526bdd8f9affd12d919b4e8a7504b97e2e907b69d",
+    "deployment/b1_gcs_writer.py": "9d2adc8fadf86a75ab425c3a25da1bbc5763f4cb7bda4910deb0a276679ce253",
+    "deployment/cloud-run/b1-G2-writer-tools-key-PROPOSED-v1.json": "98e7eb0647b2d0215a1c4dac694737e0dea637b94c8b062205c43d8a70b70ac4",
+    "deployment/test_b1_gcs_writer.py": "0d9ac7b9b97537b65bea54e2430ef5f16d5537dde3a4eed7f611a127c436e209",
+    "docs/task53-b1-writer-tools-key.md": "e1ba3764b8a20a4183172be8bf360fa24eb2841584f80e18969aa3905004cb42"
+  },
+  "next": "Owner approves G2-W and/or exact PG17 download/read-only inspection, and manually creates separate key if chosen; custody and explicit live B1 scope still required."
+}
